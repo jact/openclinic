@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.12 2004/07/07 17:54:12 jact Exp $
+ * $Id: theme_preview.php,v 1.13 2004/07/29 19:08:36 jact Exp $
  */
 
 /**
@@ -205,54 +205,38 @@
   <?php echo sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]); ?>
 </p>
 
-<h3><?php echo _("Sample List:"); ?></h3>
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        <?php echo _("Table Heading"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr class="odd">
-      <td>
-        <?php echo sprintf(_("Sample data row %d"), 1); ?>
-      </td>
-    </tr>
-
-    <tr class="even">
-      <td>
-        <?php echo sprintf(_("Sample data row %d"), 2); ?>
-      </td>
-    </tr>
-
-    <tr class="odd">
-      <td>
-        <?php echo sprintf(_("Sample data row %d"), 3); ?>
-      </td>
-    </tr>
-
-    <tr class="even">
-      <td>
-        <?php showInputText("sample_text", 50, 50, _("Sample Input Text"), "", "text", true); ?>
-      </td>
-    </tr>
-
-    <tr class="center">
-      <td>
-        <?php showInputButton("sample_button", _("Sample Button"), "button"); ?>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
 <p>
   <a href="#top"><?php echo _("Sample Link"); ?></a>
 </p>
 
-<p class="error"><?php echo _("Sample Error"); ?></p>
+<h3><?php echo _("Sample List:"); ?></h3>
 
-<?php require_once("../shared/footer.php"); ?>
+<?php
+  $thead = array(
+    _("Table Heading")
+  );
+
+  $tbody = array();
+
+  $tbody[] = array(sprintf(_("Sample data row %d"), 1));
+
+  $tbody[] = array(sprintf(_("Sample data row %d"), 2));
+
+  $tbody[] = array(sprintf(_("Sample data row %d"), 3));
+
+  $tbody[] = array(htmlInputText("sample_text", 50, 50, _("Sample Input Text"), "", "text", true));
+
+  $options = array(
+    'tfoot' => array('align' => 'center')
+  );
+
+  $tfoot = array(
+    htmlInputButton("sample_button", _("Sample Button"), "button")
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
+
+  showMessage(_("Sample Error"), OPEN_MSG_ERROR);
+
+  require_once("../shared/footer.php");
+?>
