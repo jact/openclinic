@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: input_lib.php,v 1.6 2004/07/26 18:36:38 jact Exp $
+ * $Id: input_lib.php,v 1.7 2004/09/22 18:22:44 jact Exp $
  */
 
 /**
@@ -66,6 +66,7 @@ if (file_exists("../classes/Description_Query.php"))
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return string input html tag
  * @access public
+ * @since 0.7
  */
 function htmlInputText($name, $size, $max, $value = "", $error = "", $type = "text", $readOnly = false, $addendum = "")
 {
@@ -83,7 +84,7 @@ function htmlInputText($name, $size, $max, $value = "", $error = "", $type = "te
   {
     $html .= ' ' . $addendum;
   }
-  $html .= ' value="' . /*htmlspecialchars(*/$value/*)*/ . '" />' . "\n";
+  $html .= ' value="' . htmlspecialchars($value) . '" />' . "\n";
 
   if ($error != "")
   {
@@ -126,6 +127,7 @@ function showInputText($name, $size, $max, $value = "", $error = "", $type = "te
  * @param int $size (optional) size of the select html tag
  * @return string select html tag
  * @access public
+ * @since 0.7
  */
 function htmlSelect($tableName, $fieldCode, $defaultValue = "", $fieldDescription = "", $size = 0)
 {
@@ -162,7 +164,7 @@ function htmlSelect($tableName, $fieldCode, $defaultValue = "", $fieldDescriptio
     $html .= ">";
     if ($fieldDescription != "")
     {
-      $html .= /*htmlspecialchars(*/$aux->getDescription()/*)*/;
+      $html .= htmlspecialchars($aux->getDescription());
     }
     $html .= "</option>\n";
   }
@@ -205,6 +207,7 @@ function showSelect($tableName, $fieldCode, $defaultValue = "", $fieldDescriptio
  * @param string $error (optional) select error message
  * @return string select html tag
  * @access public
+ * @since 0.7
  */
 function htmlSelectArray($name, &$array, $defaultValue = "", $size = 0, $addendum = "", $error = "")
 {
@@ -223,7 +226,7 @@ function htmlSelectArray($name, &$array, $defaultValue = "", $size = 0, $addendu
     {
       $html .= ' selected="selected"';
     }
-    $html .= ">" . /*htmlspecialchars(*/$value/*)*/ . "</option>\n";
+    $html .= ">" . /*htmlspecialchars(*/$value/*)*/ . "</option>\n"; // FIXME
   }
   $html .= "</select>\n";
 
@@ -268,6 +271,7 @@ function showSelectArray($name, &$array, $defaultValue = "", $size = 0, $addendu
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return string textarea html tag
  * @access public
+ * @since 0.7
  */
 function htmlTextArea($name, $rows, $cols, $value = "", $error = "", $disabled = false, $addendum= "")
 {
@@ -283,7 +287,7 @@ function htmlTextArea($name, $rows, $cols, $value = "", $error = "", $disabled =
   {
     $html .= ' ' . $addendum;
   }
-  $html .= ">" . /*htmlspecialchars(*/$value/*)*/ . "</textarea>\n";
+  $html .= ">" . htmlspecialchars($value) . "</textarea>\n";
 
   if ($error != "")
   {
@@ -322,13 +326,14 @@ function showTextArea($name, $rows, $cols, $value = "", $error = "", $disabled =
  * @param string $value (optional) input value
  * @return string input html tag
  * @access public
+ * @since 0.7
  */
 function htmlInputHidden($name, $value = "")
 {
   $html = '<input type="hidden"';
   $html .= ' id="' . $name . '"';
   $html .= ' name="' . $name . '"';
-  $html .= ' value="' . /*htmlspecialchars(*/$value/*)*/ . '" />' . "\n";
+  $html .= ' value="' . htmlspecialchars($value) . '" />' . "\n";
 
   return $html;
 }
@@ -342,6 +347,7 @@ function htmlInputHidden($name, $value = "")
  * @param string $value (optional) input value
  * @return void
  * @access public
+ * @since 0.2
  */
 function showInputHidden($name, $value = "")
 {
@@ -362,13 +368,14 @@ function showInputHidden($name, $value = "")
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return string input html tag
  * @access public
+ * @since 0.7
  */
 function htmlCheckBox($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
 {
   $html = '<input type="checkbox"';
   $html .= ' id="' . $id . '"';
   $html .= ' name="' . $name . '"';
-  $html .= ' value="' . /*htmlspecialchars(*/$value/*)*/ . '"';
+  $html .= ' value="' . htmlspecialchars($value) . '"';
   if ($checked)
   {
     $html .= ' checked="checked"';
@@ -404,6 +411,7 @@ function htmlCheckBox($id, $name, $value, $checked = false, $readOnly = false, $
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return void
  * @access public
+ * @since 0.4
  */
 function showCheckBox($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
 {
@@ -421,6 +429,7 @@ function showCheckBox($id, $name, $value, $checked = false, $readOnly = false, $
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return string input html tag
  * @access public
+ * @since 0.7
  */
 function htmlInputButton($name, $value, $type = "submit", $addendum = "")
 {
@@ -448,6 +457,7 @@ function htmlInputButton($name, $value, $type = "submit", $addendum = "")
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return void
  * @access public
+ * @since 0.6
  */
 function showInputButton($name, $value, $type = "submit", $addendum = "")
 {
@@ -465,6 +475,7 @@ function showInputButton($name, $value, $type = "submit", $addendum = "")
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return string input html tag
  * @access public
+ * @since 0.7
  */
 function htmlInputFile($name, $value = "", $size = 0, $addendum = "")
 {
@@ -479,7 +490,7 @@ function htmlInputFile($name, $value = "", $size = 0, $addendum = "")
   {
     $html .= ' ' . $addendum;
   }
-  $html .= ' value="' . /*htmlspecialchars(*/$value/*)*/ . '" />' . "\n";
+  $html .= ' value="' . htmlspecialchars($value) . '" />' . "\n";
 
   return $html;
 }
@@ -495,6 +506,7 @@ function htmlInputFile($name, $value = "", $size = 0, $addendum = "")
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return void
  * @access public
+ * @since 0.6
  */
 function showInputFile($name, $value = "", $size = 0, $addendum = "")
 {
@@ -515,13 +527,14 @@ function showInputFile($name, $value = "", $size = 0, $addendum = "")
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return string input html tag
  * @access public
+ * @since 0.7
  */
 function htmlRadioButton($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
 {
   $html = '<input type="radio"';
   $html .= ' id="' . $id . '"';
   $html .= ' name="' . $name . '"';
-  $html .= ' value="' . /*htmlspecialchars(*/$value/*)*/ . '"';
+  $html .= ' value="' . htmlspecialchars($value) . '"';
   if ($checked)
   {
     $html .= ' checked="checked"';
@@ -557,6 +570,7 @@ function htmlRadioButton($id, $name, $value, $checked = false, $readOnly = false
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
  * @return void
  * @access public
+ * @since 0.6
  */
 function showRadioButton($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
 {
