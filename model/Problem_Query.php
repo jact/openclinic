@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.10 2004/10/16 14:48:46 jact Exp $
+ * $Id: Problem_Query.php,v 1.11 2004/11/05 12:35:18 jact Exp $
  */
 
 /**
@@ -167,7 +167,7 @@ class Problem_Query extends Query
     }
 
     // Building sql statements
-    $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
+    $sql = " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
     $sql .= " WHERE ";
 
     $num = sizeof($word);

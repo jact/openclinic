@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.12 2004/11/04 12:27:19 jact Exp $
+ * $Id: Patient_Query.php,v 1.13 2004/11/05 12:35:18 jact Exp $
  */
 
 /**
@@ -181,7 +181,7 @@ class Patient_Query extends Query
     }
 
     // Building sql statements
-    $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
+    $sql = " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
     $sql .= " WHERE ";
 
     $num = sizeof($word);
