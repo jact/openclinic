@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: parse_sql_file.php,v 1.6 2004/07/29 18:15:15 jact Exp $
+ * $Id: parse_sql_file.php,v 1.7 2004/08/01 08:06:04 jact Exp $
  */
 
 /**
@@ -30,7 +30,7 @@ require_once("../lib/error_lib.php");
  *  bool parseSQLFile(string $file, string $table, bool $drop = true)
  */
 
-// table array (16 elements)
+// table array (15 elements)
 $tables = array(
   "access_log_tbl",
   "connection_problem_tbl",
