@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.7 2004/07/29 18:56:10 jact Exp $
+ * $Id: theme_edit_form.php,v 1.8 2004/08/05 14:23:48 jact Exp $
  */
 
 /**
@@ -85,38 +85,11 @@
     else
     {
       $postVars["theme_name"] = $theme->getThemeName();
-
-      $postVars["title_bg_color"] = $theme->getTitleBgColor();
-      $postVars["title_font_family"] = $theme->getTitleFontFamily();
-      $postVars["title_font_size"] = $theme->getTitleFontSize();
-      $postVars["title_font_bold"] = ($theme->isTitleFontBold() ? "CHECKED" : "");
-      $postVars["title_font_color"] = $theme->getTitleFontColor();
-      $postVars["title_align"] = $theme->getTitleAlign();
-
-      $postVars["body_bg_color"] = $theme->getBodyBgColor();
-      $postVars["body_font_family"] = $theme->getBodyFontFamily();
-      $postVars["body_font_size"] = $theme->getBodyFontSize();
-      $postVars["body_font_color"] = $theme->getBodyFontColor();
-      $postVars["body_link_color"] = $theme->getBodyLinkColor();
-
-      $postVars["error_color"] = $theme->getErrorColor();
-
-      $postVars["navbar_bg_color"] = $theme->getNavbarBgColor();
-      $postVars["navbar_font_family"] = $theme->getNavbarFontFamily();
-      $postVars["navbar_font_size"] = $theme->getNavbarFontSize();
-      $postVars["navbar_font_color"] = $theme->getNavbarFontColor();
-      $postVars["navbar_link_color"] = $theme->getNavbarLinkColor();
-
-      $postVars["tab_bg_color"] = $theme->getTabBgColor();
-      $postVars["tab_font_family"] = $theme->getTabFontFamily();
-      $postVars["tab_font_size"] = $theme->getTabFontSize();
-      $postVars["tab_font_bold"] = ($theme->isTabFontBold() ? "CHECKED" : "");
-      $postVars["tab_font_color"] = $theme->getTabFontColor();
-      $postVars["tab_link_color"] = $theme->getTabLinkColor();
-
-      $postVars["table_border_color"] = $theme->getTableBorderColor();
-      $postVars["table_border_width"] = $theme->getTableBorderWidth();
-      $postVars["table_cell_padding"] = $theme->getTableCellPadding();
+      $postVars["css_file"] = $theme->getCSSFile();
+      $filename = "../css/" . $theme->getCSSFile();
+      $fp = fopen($filename, 'r');
+      $postVars["css_rules"] = fread($fp, filesize($filename));
+      fclose($fp);
     }
     $themeQ->freeResult();
     $themeQ->close();
@@ -147,7 +120,7 @@
 <!--/*--><![CDATA[/*<!--*/
 function previewTheme()
 {
-  var secondaryWin = window.open("", "secondary", "resizable=yes,scrollbars=yes,width=535,height=400");
+  var secondaryWin = window.open("", "secondary", "resizable=yes,scrollbars=yes,width=600,height=450");
 
   document.forms[0].action = "../admin/theme_preview.php";
   document.forms[0].target = "secondary";
@@ -164,7 +137,10 @@ function editTheme()
 </script>
 
 <?php
-  echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a></p>\n";
+  echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a>\n";
+  echo ' | <a href="../admin/theme_preload_css.php?key=' . $_GET["key"] . '">' . _("Preload CSS file") . "</a></p>\n";
+
+  echo "<hr />\n";
 
   require_once("../shared/form_errors_msg.php");
 ?>
@@ -179,4 +155,8 @@ function editTheme()
   </div>
 </form>
 
-<?php require_once("../shared/footer.php"); ?>
+<?php
+  showMessage('* ' . _("Note: The fields with * are required."));
+
+  require_once("../shared/footer.php");
+?>
