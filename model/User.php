@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User.php,v 1.3 2004/05/24 22:12:44 jact Exp $
+ * $Id: User.php,v 1.4 2004/06/16 19:09:47 jact Exp $
  */
 
 /**
@@ -15,8 +15,6 @@
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
-
-define("USER_PROFILE", 3); // doctor profile by default
 
 require_once("../lib/validator_lib.php");
 
@@ -64,7 +62,7 @@ class User
   var $_emailError = "";
   var $_actived = false;
   var $_idTheme = 1;
-  var $_idProfile = USER_PROFILE;
+  var $_idProfile = OPEN_PROFILE_DOCTOR; // by default doctor profile
 
   var $_trans; // to translate htmlspecialchars()
 
@@ -385,7 +383,7 @@ class User
   function setIdProfile($value)
   {
     $temp = intval($value);
-    $this->_idProfile = (($temp == 0) ? USER_PROFILE : $temp);
+    $this->_idProfile = (($temp == 0) ? OPEN_PROFILE_DOCTOR : $temp);
   }
 
   /**
