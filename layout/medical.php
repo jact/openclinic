@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: medical.php,v 1.4 2004/08/09 10:03:13 jact Exp $
+ * $Id: medical.php,v 1.5 2004/08/09 11:30:52 jact Exp $
  */
 
 /**
@@ -46,7 +46,9 @@
 
   if ($nav == "search")
   {
-    echo '<span class="selected subnavbar">' . _("Search Results") . "</span>\n";
+    echo '<div class="subnavbar">';
+    echo '<span class="selected">' . _("Search Results") . "</span>\n";
+    echo '</div>';
   }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
