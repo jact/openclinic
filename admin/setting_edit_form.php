@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.3 2004/04/24 18:02:35 jact Exp $
+ * $Id: setting_edit_form.php,v 1.4 2004/05/15 17:19:38 jact Exp $
  */
 
 /**
@@ -114,6 +114,7 @@
 
 <?php
   echo '<p class="advice">* ' . _("Note: The fields with * are required.") . "</p>\n";
+  echo '<p class="advice">** ' . _("Note: If zero, searchs return all results without pagination.") . "</p>\n";
 
   require_once("../shared/footer.php");
 ?>
