@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_fields.php,v 1.4 2004/07/31 19:46:57 jact Exp $
+ * $Id: patient_search_fields.php,v 1.5 2004/08/01 09:42:50 jact Exp $
  */
 
 /**
@@ -88,5 +88,5 @@
     'align' => 'center'
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  showTable($thead, $tbody, null, $options);
 ?>
