@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new.php,v 1.3 2004/07/07 17:22:28 jact Exp $
+ * $Id: connection_new.php,v 1.4 2004/07/10 16:20:29 jact Exp $
  */
 
 /**
@@ -93,37 +93,11 @@
   ////////////////////////////////////////////////////////////////////
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
-  $title = _("Add New Connection Problems");
-  require_once("../shared/header.php");
-  require_once("../medical/patient_header.php");
-  require_once("../medical/problem_header.php");
-
-  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
+  // To header, without &amp;
+  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient;
 
   ////////////////////////////////////////////////////////////////////
-  // Navigation links
+  // Redirect to connection problem list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Medical Problems Report") => "../medical/problem_list.php?key=" . $idPatient,
-    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient,
-    _("View Connection Problems") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "patient.png");
-  unset($links);
-
-  showPatientHeader($idPatient);
-  showProblemHeader($idProblem);
-
-  echo '<p>' . _("Connection problems have been added.") . "</p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to connection problem list") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation . "&added=Y");
 ?>
