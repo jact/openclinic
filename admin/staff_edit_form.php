@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit_form.php,v 1.7 2004/07/28 17:38:41 jact Exp $
+ * $Id: staff_edit_form.php,v 1.8 2004/10/03 11:17:20 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["key"]))
   {
-    $idMember = $_GET["key"];
+    $idMember = intval($_GET["key"]);
     $postVars["id_member"] = $idMember;
 
     include_once("../classes/Staff_Query.php");
