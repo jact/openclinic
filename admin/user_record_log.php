@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.7 2004/07/07 17:21:53 jact Exp $
+ * $Id: user_record_log.php,v 1.8 2004/07/14 18:25:48 jact Exp $
  */
 
 /**
@@ -49,15 +49,8 @@
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
   ////////////////////////////////////////////////////////////////////
-  if (isset($_POST["page"]))
-  {
-    $currentPageNmbr = $_POST["page"];
-  }
-  else
-  {
-    $currentPageNmbr = 1;
-  }
-  $limit = $_POST["limit"];
+  $currentPageNmbr = (isset($_POST["page"])) ? $_POST["page"] : 1;
+  $limit = (isset($_POST["limit"])) ? $_POST["limit"] : 0;
 
   ////////////////////////////////////////////////////////////////////
   // Search user operations
@@ -129,7 +122,7 @@ function changePage(page)
   <div>
 <?php
   showInputHidden("page", $currentPageNmbr);
-  showInputHidden("limit", $_POST["limit"]);
+  showInputHidden("limit", $limit);
 ?>
   </div>
 </form>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_stats.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: log_stats.php,v 1.3 2004/07/14 18:24:33 jact Exp $
  */
 
 /**
@@ -38,6 +38,7 @@
   {
     $table = $_GET['table'];
   }
+  $option = (isset($_GET["option"])) ? $_GET["option"] : "";
 
   ////////////////////////////////////////////////////////////////////
   // Show page
@@ -57,28 +58,28 @@
   unset($links);
 
   echo '<p>';
-  if ($_GET["table"] != 'access' && isset($_GET["table"]))
+  if (isset($_GET["table"]) && $_GET["table"] != 'access')
   {
     echo '<a href="../admin/log_stats.php?table=access">';
   }
   echo _("Access Logs");
-  if ($_GET["table"] != 'access' && isset($_GET["table"]))
+  if (isset($_GET["table"]) && $_GET["table"] != 'access')
   {
     echo '</a>';
   }
   echo ' | ';
-  if ($_GET["table"] != 'record')
+  if ( !isset($_GET["table"]) || $_GET["table"] != 'record' )
   {
     echo '<a href="../admin/log_stats.php?table=record">';
   }
   echo _("Record Logs");
-  if ($_GET["table"] != 'record')
+  if ( !isset($_GET["table"]) || $_GET["table"] != 'record' )
   {
     echo '</a>';
   }
   echo "</p>\n";
 
-  switch ($_GET['option'])
+  switch ($option)
   {
     case "yearly":
       showMonthStats($table, $_GET['year']);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.7 2004/07/10 15:09:27 jact Exp $
+ * $Id: staff_list.php,v 1.8 2004/07/14 18:24:58 jact Exp $
  */
 
 /**
@@ -131,22 +131,22 @@
     echo '</a>';
   }
   echo ' | ';
-  if ($_GET["type"] != 'A')
+  if ( !isset($_GET["type"]) || $_GET["type"] != 'A')
   {
     echo '<a href="../admin/staff_list.php?type=A">';
   }
   echo _("View only administratives");
-  if ($_GET["type"] != 'A')
+  if ( !isset($_GET["type"]) || $_GET["type"] != 'A')
   {
     echo '</a>';
   }
   echo ' | ';
-  if ($_GET["type"] != 'D')
+  if ( !isset($_GET["type"]) || $_GET["type"] != 'D')
   {
     echo '<a href="../admin/staff_list.php?type=D">';
   }
   echo _("View only doctors");
-  if ($_GET["type"] != 'D')
+  if ( !isset($_GET["type"]) || $_GET["type"] != 'D')
   {
     echo '</a>';
   }

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.7 2004/07/07 17:21:52 jact Exp $
+ * $Id: log_record_list.php,v 1.8 2004/07/14 18:24:21 jact Exp $
  */
 
 /**
@@ -40,10 +40,10 @@
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
-  $year = intval($_GET["year"]);
-  $month = intval($_GET["month"]);
-  $day = intval($_GET["day"]);
-  $hour = intval($_GET["hour"]);
+  $year = (isset($_GET["year"])) ? intval($_GET["year"]) : 0;
+  $month = (isset($_GET["month"])) ? intval($_GET["month"]) : 0;
+  $day = (isset($_GET["day"])) ? intval($_GET["day"]) : 0;
+  $hour = (isset($_GET["hour"])) ? intval($_GET["hour"]) : 0;
 
   $recordQ = new Record_Query();
   $recordQ->connect();

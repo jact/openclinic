@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_fields.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: staff_fields.php,v 1.3 2004/07/14 18:24:47 jact Exp $
  */
 
 /**
@@ -46,7 +46,7 @@
 <?php
   debug($postVars);
 
-  if ($memberType == "D" || substr($postVars["member_type"], 0, 1) == "D")
+  if ((isset($memberType) && $memberType == "D") || substr($postVars["member_type"], 0, 1) == "D")
   {
 ?>
     <tr>
