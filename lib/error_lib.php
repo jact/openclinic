@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: error_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
+ * $Id: error_lib.php,v 1.3 2004/07/05 18:33:09 jact Exp $
  */
 
 /**
@@ -100,9 +100,6 @@ function showConnError($conn, $goOut = true)
  * @return void
  * @access public
  */
-//define(FATAL, E_USER_ERROR);
-//define(ERROR, E_USER_WARNING);
-//define(WARNING, E_USER_NOTICE);
 function showErrorMsg($errorMsg, $errorType = E_USER_WARNING)
 {
   trigger_error($errorMsg, $errorType);
