@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: database_constants.php,v 1.1 2004/03/24 18:51:02 jact Exp $
+ * $Id: database_constants.php,v 1.2 2004/04/14 19:16:05 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Definition of database connection variables
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 24/03/04 19:51
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
