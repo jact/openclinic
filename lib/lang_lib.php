@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: lang_lib.php,v 1.10 2004/09/22 18:20:03 jact Exp $
+ * $Id: lang_lib.php,v 1.11 2004/10/04 21:30:13 jact Exp $
  */
 
 /**
@@ -263,21 +263,49 @@ function localDate($date = "")
       break;
 
     case 8: // Ymd
-      $local = date(_("Y-m-d"), mktime(0, 0, 0, substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
+      if ($date != str_repeat("0", 8))
+      {
+        $local = date(_("Y-m-d"), mktime(0, 0, 0, substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
+      }
+      else
+      {
+        $local = "";
+      }
       break;
 
     case 10: // Y-m-d
-      $parts = explode("-", $date);
-      $local = date(_("Y-m-d"), mktime(0, 0, 0, $parts[1], $parts[2], $parts[0]));
+      if ($date != "0000-00-00")
+      {
+        $parts = explode("-", $date);
+        $local = date(_("Y-m-d"), mktime(0, 0, 0, $parts[1], $parts[2], $parts[0]));
+      }
+      else
+      {
+        $local = "";
+      }
       break;
 
     case 14: // YmdHis
-      $local = date(_("Y-m-d H:i:s"), mktime(substr($date, 8, 2), substr($date, 10, 2), substr($date, 12, 2), substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
+      if ($date != str_repeat("0", 14))
+      {
+        $local = date(_("Y-m-d H:i:s"), mktime(substr($date, 8, 2), substr($date, 10, 2), substr($date, 12, 2), substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
+      }
+      else
+      {
+        $local = "";
+      }
       break;
 
     case 19: // Y-m-d H:i:s
-      $parts = sscanf($date, "%d-%d-%d %d:%d:%d");
-      $local = date(_("Y-m-d H:i:s"), mktime($parts[3], $parts[4], $parts[5], $parts[1], $parts[2], $parts[0]));
+      if ($date != "0000-00-00 00:00:00")
+      {
+        $parts = sscanf($date, "%d-%d-%d %d:%d:%d");
+        $local = date(_("Y-m-d H:i:s"), mktime($parts[3], $parts[4], $parts[5], $parts[1], $parts[2], $parts[0]));
+      }
+      else
+      {
+        $local = "";
+      }
       break;
 
     default:
