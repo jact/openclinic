@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_tbl.sql,v 1.5 2004/07/04 14:10:50 jact Exp $
+ * $Id: setting_tbl.sql,v 1.6 2004/08/12 11:37:39 jact Exp $
  */
 
 /**
@@ -41,7 +41,7 @@ INSERT INTO setting_tbl VALUES (
   'http://www.example.com',
   20,
   10,
-  '0.7.20040704',
+  '0.7.20040812',
   'en',
   1
 );
