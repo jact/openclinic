@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.6 2004/07/26 18:50:01 jact Exp $
+ * $Id: dump_process.php,v 1.7 2004/10/03 11:16:03 jact Exp $
  */
 
 /**
@@ -25,6 +25,7 @@
   require_once("../shared/read_settings.php");
   require_once("../admin/dump_defines.php");
   require_once("../lib/dump_lib.php");
+  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Increase time limit for script execution and initializes some variables
@@ -32,6 +33,7 @@
   @set_time_limit(OPEN_EXEC_TIME_LIMIT);
   $dumpBuffer = "";
   $crlf = DLIB_whichCrlf(); // defines the default <CR><LF> format
+  $_POST = safeArray($_POST);
 
   ////////////////////////////////////////////////////////////////////
   // Send headers depending on whether the user choosen to download a dump file or not
