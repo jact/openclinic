@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.5 2004/07/06 17:37:03 jact Exp $
+ * $Id: print_medical_record.php,v 1.6 2004/07/07 17:23:05 jact Exp $
  */
 
 /**
@@ -60,13 +60,13 @@
   ////////////////////////////////////////////////////////////////////
   $patQ = new Patient_Query();
   $patQ->connect();
-  if ($patQ->errorOccurred())
+  if ($patQ->isError())
   {
     showQueryError($patQ);
   }
 
   $numRows = $patQ->select($idPatient);
-  if ($patQ->errorOccurred())
+  if ($patQ->isError())
   {
     $patQ->close();
     showQueryError($patQ);
@@ -82,10 +82,10 @@
   }
 
   $pat = $patQ->fetch();
-  if ( !$pat )
+  if ($patQ->isError())
   {
     $patQ->close();
-    showFetchError();
+    showFetchError($patQ);
   }
   $patQ->freeResult();
   $patQ->close();
@@ -190,7 +190,7 @@
   {
     $staffQ = new Staff_Query();
     $staffQ->connect();
-    if ($staffQ->errorOccurred())
+    if ($staffQ->isError())
     {
       showQueryError($staffQ);
     }
@@ -220,13 +220,13 @@
   ////////////////////////////////////////////////////////////////////
   $problemQ = new Problem_Query();
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
 
   $count = $problemQ->selectProblems($idPatient);
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     $problemQ->close();
     showQueryError($problemQ);
@@ -251,7 +251,7 @@
     {
       $staffQ = new Staff_Query();
       $staffQ->connect();
-      if ($staffQ->errorOccurred())
+      if ($staffQ->isError())
       {
         showQueryError($staffQ);
       }
@@ -335,21 +335,22 @@
   ////////////////////////////////////////////////////////////////////
   $historyQ = new History_Query();
   $historyQ->connect();
-  if ($historyQ->errorOccurred())
+  if ($historyQ->isError())
   {
     showQueryError($historyQ);
   }
 
-  if ( !$historyQ->selectPersonal($idPatient) )
+  $historyQ->selectPersonal($idPatient);
+  if ($historyQ->isError())
   {
     $historyQ->close();
     showQueryError($historyQ);
   }
 
   $history = $historyQ->fetchPersonal();
-  if ( !$history )
+  if ($historyQ->isError())
   {
-    showQueryError($historyQ);
+    showFetchError($historyQ);
   }
 
   echo '<h2>' . _("Personal Antecedents") . "</h2>\n";
@@ -425,16 +426,17 @@
   ////////////////////////////////////////////////////////////////////
   // Show family antecedents
   ////////////////////////////////////////////////////////////////////
-  if ( !$historyQ->selectFamily($idPatient) )
+  $historyQ->selectFamily($idPatient);
+  if ( ! )
   {
     $historyQ->close();
     showQueryError($historyQ);
   }
 
   $history = $historyQ->fetchFamily();
-  if ( !$history )
+  if ($historyQ->isError())
   {
-    showQueryError($historyQ);
+    showFetchError($historyQ);
   }
   $historyQ->freeResult();
   $historyQ->close();
@@ -473,13 +475,13 @@
   ////////////////////////////////////////////////////////////////////
   $problemQ = new Problem_Query();
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
 
   $count = $problemQ->selectProblems($idPatient, true);
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     $problemQ->close();
     showQueryError($problemQ);
@@ -505,7 +507,7 @@
     {
       $auxQ = new Staff_Query();
       $auxQ->connect();
-      if ($auxQ->errorOccurred())
+      if ($auxQ->isError())
       {
         showQueryError($auxQ);
       }

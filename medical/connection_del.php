@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del.php,v 1.3 2004/04/24 17:06:10 jact Exp $
+ * $Id: connection_del.php,v 1.4 2004/07/07 17:22:41 jact Exp $
  */
 
 /**
@@ -56,12 +56,13 @@
   ////////////////////////////////////////////////////////////////////
   $connQ = new Connection_Query();
   $connQ->connect();
-  if ($connQ->errorOccurred())
+  if ($connQ->isError())
   {
     showQueryError($connQ);
   }
 
-  if ( !$connQ->delete($idProblem, $idConnection) )
+  $connQ->delete($idProblem, $idConnection);
+  if ($connQ->isError())
   {
     $connQ->close();
     showQueryError($connQ);

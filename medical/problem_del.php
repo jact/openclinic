@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.5 2004/07/06 17:37:03 jact Exp $
+ * $Id: problem_del.php,v 1.6 2004/07/07 17:23:05 jact Exp $
  */
 
 /**
@@ -57,7 +57,7 @@
   ////////////////////////////////////////////////////////////////////
   $connQ = new Connection_Query();
   $connQ->connect();
-  if ($connQ->errorOccurred())
+  if ($connQ->isError())
   {
     showQueryError($connQ);
   }
@@ -73,7 +73,8 @@
 
   while ($aux = array_shift($conn))
   {
-    if ( !$connQ->delete($idProblem, $aux[1]) )
+    $connQ->delete($idProblem, $aux[1]);
+    if ($connQ->isError())
     {
       $connQ->close();
       showQueryError($connQ);
@@ -88,7 +89,7 @@
   ////////////////////////////////////////////////////////////////////
   $problemQ = new Problem_Query();
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
@@ -96,7 +97,7 @@
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     $numRows = $problemQ->select($idProblem);
-    if ($problemQ->errorOccurred())
+    if ($problemQ->isError())
     {
       $problemQ->close();
       showQueryError($problemQ);
@@ -114,20 +115,21 @@
     }
 
     $problem = $problemQ->fetch();
-    if ( !$problem )
+    if ($problemQ->isError())
     {
       $problemQ->close();
-      showFetchError();
+      showFetchError($problemQ);
     }
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
-    if ($delProblemQ->errorOccurred())
+    if ($delProblemQ->isError())
     {
       showQueryError($delProblemQ);
     }
 
-    if ( !$delProblemQ->insert($problem, $_SESSION['userId'], $_SESSION['loginSession']) )
+    $delProblemQ->insert($problem, $_SESSION['userId'], $_SESSION['loginSession']);
+    if ($delProblemQ->isError())
     {
       $delProblemQ->close();
       showQueryError($delProblemQ);
@@ -136,7 +138,8 @@
     unset($problem);
   }
 
-  if ( !$problemQ->delete($idProblem) )
+  $problemQ->delete($idProblem);
+  if ($problemQ->isError())
   {
     $problemQ->close();
     showQueryError($problemQ);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.5 2004/06/16 19:10:30 jact Exp $
+ * $Id: staff_list.php,v 1.6 2004/07/07 17:21:52 jact Exp $
  */
 
 /**
@@ -29,7 +29,7 @@
 
   $staffQ = new Staff_Query();
   $staffQ->connect();
-  if ($staffQ->errorOccurred())
+  if ($staffQ->isError())
   {
     showQueryError($staffQ);
   }
@@ -73,7 +73,7 @@
     $viewType = true;
   }
 
-  if ($staffQ->errorOccurred())
+  if ($staffQ->isError())
   {
     $staffQ->close();
     showQueryError($staffQ);

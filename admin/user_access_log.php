@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.7 2004/06/20 17:20:23 jact Exp $
+ * $Id: user_access_log.php,v 1.8 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -65,13 +65,14 @@
   $accessQ = new Access_Query();
   $accessQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $accessQ->connect();
-  if ($accessQ->errorOccurred())
+  if ($accessQ->isError())
   {
     $accessQ->close();
     showQueryError($accessQ);
   }
 
-  if ( !$accessQ->searchUser($idUser, $currentPageNmbr, $limit) )
+  $accessQ->searchUser($idUser, $currentPageNmbr, $limit);
+  if ($accessQ->isError())
   {
     $accessQ->close();
     showQueryError($accessQ);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_new.php,v 1.2 2004/04/24 14:52:15 jact Exp $
+ * $Id: relative_new.php,v 1.3 2004/07/07 17:23:21 jact Exp $
  */
 
 /**
@@ -53,7 +53,7 @@
   ////////////////////////////////////////////////////////////////////
   $relQ = new Relative_Query();
   $relQ->connect();
-  if ($relQ->errorOccurred())
+  if ($relQ->isError())
   {
     showQueryError($relQ);
   }
@@ -67,7 +67,7 @@
     }
 
     $relQ->insert($idPatient, $_POST["check"][$i]);
-    if ($relQ->errorOccurred())
+    if ($relQ->isError())
     {
       if ($relQ->getDbErrno() == 1062) // duplicated key
       {

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.7 2004/07/05 18:35:59 jact Exp $
+ * $Id: index.php,v 1.8 2004/07/07 17:22:04 jact Exp $
  */
 
 /**
@@ -138,7 +138,7 @@
 
   $installQ = new Query();
   $installQ->connect();
-  if ($installQ->errorOccurred())
+  if ($installQ->isError())
   {
 ?>
     <p>
@@ -172,7 +172,7 @@
 <?php
     require_once("../install/footer.php");
     exit();
-  }
+  } // end if
   echo '<p>' . _("Database connection is good.") . "</p>\n";
 
   $installQ->close();

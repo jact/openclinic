@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
+ * $Id: User_Query.php,v 1.5 2004/07/07 17:23:54 jact Exp $
  */
 
 /**
@@ -232,10 +232,10 @@ class User_Query extends Query
    */
   function insert($user)
   {
-    if ($this->errorOccurred())
+    /*if ($this->isError())
     {
       return false;
-    }
+    }*/
 
     $sql = "INSERT INTO user_tbl ";
     $sql .= "(id_user, pwd, email, actived, id_theme, id_profile) VALUES (NULL, ";
@@ -277,13 +277,14 @@ class User_Query extends Query
   function update($user)
   {
     $isDupLogin = $this->existLogin($user->getLogin(), $user->getIdMember());
-    if ($this->errorOccurred())
+    if ($this->isError())
     {
       return false;
     }
 
     if ($isDupLogin)
     {
+      $this->_isError = true;
       $this->_error = "Login is already in use.";
       return false;
     }

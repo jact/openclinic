@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_header.php,v 1.4 2004/07/06 17:37:04 jact Exp $
+ * $Id: problem_header.php,v 1.5 2004/07/07 17:22:59 jact Exp $
  */
 
 /**
@@ -38,13 +38,13 @@
   {
     $problemQ = new Problem_Query();
     $problemQ->connect();
-    if ($problemQ->errorOccurred())
+    if ($problemQ->isError())
     {
       showQueryError($problemQ);
     }
 
     $numRows = $problemQ->select($idProblem);
-    if ($problemQ->errorOccurred())
+    if ($problemQ->isError())
     {
       $problemQ->close();
       showQueryError($problemQ);
@@ -56,10 +56,10 @@
     }
 
     $problem = $problemQ->fetch();
-    if ( !$problem )
+    if ($problemQ->isError())
     {
       $problemQ->close();
-      showFetchError();
+      showFetchError($problemQ);
     }
 
     $problemQ->freeResult();

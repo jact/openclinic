@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new.php,v 1.4 2004/06/16 19:10:30 jact Exp $
+ * $Id: user_new.php,v 1.5 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -51,7 +51,7 @@
   ////////////////////////////////////////////////////////////////////
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->errorOccurred())
+  if ($userQ->isError())
   {
     showQueryError($userQ);
   }
@@ -62,7 +62,8 @@
   }
   else
   {
-    if ( !$userQ->insert($user) )
+    $userQ->insert($user);
+    if ($userQ->isError())
     {
       $userQ->close();
       showQueryError($userQ);

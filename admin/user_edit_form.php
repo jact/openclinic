@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.7 2004/07/06 17:36:25 jact Exp $
+ * $Id: user_edit_form.php,v 1.8 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -56,13 +56,13 @@
 
     $userQ = new User_Query();
     $userQ->connect();
-    if ($userQ->errorOccurred())
+    if ($userQ->isError())
     {
       showQueryError($userQ);
     }
 
     $numRows = $userQ->select($idUser);
-    if ($userQ->errorOccurred())
+    if ($userQ->isError())
     {
       $userQ->close();
       showQueryError($userQ);
@@ -80,9 +80,9 @@
     }
 
     $user = $userQ->fetch();
-    if ( !$user )
+    if ($userQ->isError())
     {
-      showFetchError(false);
+      showFetchError($userQ, false);
     }
     else
     {

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.4 2004/06/16 19:10:30 jact Exp $
+ * $Id: theme_list.php,v 1.5 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -84,13 +84,13 @@
 <?php
   $themeQ = new Theme_Query();
   $themeQ->connect();
-  if ($themeQ->errorOccurred())
+  if ($themeQ->isError())
   {
     showQueryError($themeQ);
   }
 
   $numRows = $themeQ->selectWithStats();
-  if ($themeQ->errorOccurred())
+  if ($themeQ->isError())
   {
     $themeQ->close();
     showQueryError($themeQ);

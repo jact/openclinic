@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: user_pwd_reset.php,v 1.3 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -69,12 +69,13 @@
   ////////////////////////////////////////////////////////////////////
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->errorOccurred())
+  if ($userQ->isError())
   {
     showQueryError($userQ);
   }
 
-  if ( !$userQ->resetPwd($user) )
+  $userQ->resetPwd($user);
+  if ($userQ->isError())
   {
     $userQ->close();
     showQueryError($userQ);

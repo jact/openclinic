@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del.php,v 1.3 2004/04/24 16:46:05 jact Exp $
+ * $Id: user_del.php,v 1.4 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -49,12 +49,13 @@
   ////////////////////////////////////////////////////////////////////
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->errorOccurred())
+  if ($userQ->isError())
   {
     showQueryError($userQ);
   }
 
-  if ( !$userQ->delete($idUser) )
+  $userQ->delete($idUser);
+  if ($userQ->isError())
   {
     $userQ->close();
     showQueryError($userQ);

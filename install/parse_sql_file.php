@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: parse_sql_file.php,v 1.3 2004/06/20 15:16:04 jact Exp $
+ * $Id: parse_sql_file.php,v 1.4 2004/07/07 17:22:04 jact Exp $
  */
 
 /**
@@ -64,7 +64,7 @@ function parseSQLFile($file, $table, $drop = true)
 {
   $installQ = new Query();
   $installQ->connect();
-  if ($installQ->errorOccurred())
+  if ($installQ->isError())
   {
     showQueryError($installQ, false);
     return false;
@@ -74,7 +74,7 @@ function parseSQLFile($file, $table, $drop = true)
   {
     $sql = "DROP TABLE " . $table;
     @$result = $installQ->exec($sql);
-    if ($installQ->errorOccurred())
+    if ($installQ->isError())
     {
       showQueryError($installQ, false);
       $installQ->clearErrors();
@@ -107,7 +107,7 @@ function parseSQLFile($file, $table, $drop = true)
     if ($char == ";" && $outBracket)
     {
       $result = $installQ->exec($sqlSentence);
-      if ($installQ->errorOccurred())
+      if ($installQ->isError())
       {
         echo 'Process sql [' . $sqlSentence . ']<br />';
         $installQ->close();

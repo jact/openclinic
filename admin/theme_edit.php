@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: theme_edit.php,v 1.3 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -54,12 +54,13 @@
   ////////////////////////////////////////////////////////////////////
   $themeQ = new Theme_Query();
   $themeQ->connect();
-  if ($themeQ->errorOccurred())
+  if ($themeQ->isError())
   {
     showQueryError($themeQ);
   }
 
-  if ( !$themeQ->update($theme) )
+  $themeQ->update($theme);
+  if ($themeQ->isError())
   {
     $themeQ->close();
     showQueryError($themeQ);

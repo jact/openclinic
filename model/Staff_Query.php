@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
+ * $Id: Staff_Query.php,v 1.5 2004/07/07 17:23:54 jact Exp $
  */
 
 /**
@@ -203,14 +203,14 @@ class Staff_Query extends Query
   function insert($staff)
   {
     /*$isDupLogin = $this->existLogin($staff->getLogin());
-    if ($this->errorOccurred())
+    if ($this->isError())
     {
       return false;
     }
 
     if ($isDupLogin)
     {
-      $this->_errorOccurred = true;
+      $this->_isError = true;
       $this->_error = "Login is already in use.";
       return false;
     }*/
@@ -252,14 +252,14 @@ class Staff_Query extends Query
   {
     // If changing login check to see if it already exists.
     /*$isDupLogin = $this->existLogin($staff->getLogin(), $staff->getIdMember());
-    if ($this->errorOccurred())
+    if ($this->isError())
     {
       return false;
     }
 
     if ($isDupLogin)
     {
-      $this->_errorOccurred = true;
+      $this->_isError = true;
       $this->_error = "Login is already in use.";
       return false;
     }*/

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.5 2004/07/06 17:37:03 jact Exp $
+ * $Id: problem_edit_form.php,v 1.6 2004/07/07 17:22:58 jact Exp $
  */
 
 /**
@@ -56,13 +56,13 @@
 
   $problemQ = new problem_Query();
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
 
   $numRows = $problemQ->select($idProblem);
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     $problemQ->close();
     showQueryError($problemQ);
@@ -80,9 +80,9 @@
   }
 
   $problem = $problemQ->fetch();
-  if ( !$problem )
+  if ($problemQ->isError())
   {
-    showFetchError(false);
+    showFetchError($problemQ, false);
   }
   else
   {

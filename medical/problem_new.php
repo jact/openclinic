@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: problem_new.php,v 1.3 2004/07/07 17:22:59 jact Exp $
  */
 
 /**
@@ -62,19 +62,20 @@
   ////////////////////////////////////////////////////////////////////
   $problemQ = new Problem_Query();
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
 
-  if ( !$problemQ->insert($problem) )
+  $problemQ->insert($problem);
+  if ($problemQ->isError())
   {
     $problemQ->close();
     showQueryError($problemQ);
   }
 
   $idProblem = $problemQ->getLastId();
-  if ( !$idProblem )
+  if ($problemQ->isError())
   {
     $problemQ->close();
     showQueryError($problemQ);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new.php,v 1.2 2004/04/24 14:52:13 jact Exp $
+ * $Id: connection_new.php,v 1.3 2004/07/07 17:22:28 jact Exp $
  */
 
 /**
@@ -54,7 +54,7 @@
   ////////////////////////////////////////////////////////////////////
   $connQ = new Connection_Query();
   $connQ->connect();
-  if ($connQ->errorOccurred())
+  if ($connQ->isError())
   {
     showQueryError($connQ);
   }
@@ -68,7 +68,7 @@
     }
 
     $connQ->insert($idProblem, $_POST["check"][$i]);
-    if ($connQ->errorOccurred())
+    if ($connQ->isError())
     {
       if ($connQ->getDbErrno() == 1062) // duplicated key
       {

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
+ * $Id: Patient_Query.php,v 1.5 2004/07/07 17:23:53 jact Exp $
  */
 
 /**
@@ -384,13 +384,14 @@ class Patient_Query extends Query
   function insert($patient)
   {
     /*$isDupName = $this->existName($patient->getFirstName(), $patient->getSurname1(), $patient->getSurname2());
-    if ($this->errorOccurred())
+    if ($this->isError())
     {
       return false;
     }
 
     if ($isDupName)
     {
+      $this->_isError = true;
       $this->_error = "Patient name, " . $patient->getFirstName();
       $this->_error .= " " . $patient->getSurname1();
       $this->_error .= " " . $patient->getSurname2() . ", is already in use.";
@@ -453,14 +454,14 @@ class Patient_Query extends Query
   function update($patient)
   {
     /*$isDupName = $this->existName($patient->getFirstName(), $patient->getSurname1(), $patient->getSurname2(), $patient->getIdPatient());
-    if ($this->errorOccurred())
+    if ($this->isError())
     {
       return false;
     }
 
     if ($isDupName)
     {
-      $this->_errorOccurred = true;
+      $this->_isError = true;
       $this->_error = "Patient name, " . $patient->getFirstName();
       $this->_error .= " " . $patient->getSurname1();
       $this->_error .= " " . $patient->getSurname2() . ", is already in use.";

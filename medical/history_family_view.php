@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_view.php,v 1.2 2004/04/24 14:52:13 jact Exp $
+ * $Id: history_family_view.php,v 1.3 2004/07/07 17:22:34 jact Exp $
  */
 
 /**
@@ -48,13 +48,13 @@
   ////////////////////////////////////////////////////////////////////
   $historyQ = new History_Query();
   $historyQ->connect();
-  if ($historyQ->errorOccurred())
+  if ($historyQ->isError())
   {
     showQueryError($historyQ);
   }
 
   $numRows = $historyQ->selectFamily($idPatient);
-  if ($historyQ->errorOccurred())
+  if ($historyQ->isError())
   {
     $historyQ->close();
     showQueryError($historyQ);
@@ -72,10 +72,10 @@
   }
 
   $history = $historyQ->fetchFamily();
-  if ( !$history )
+  if ($historyQ->isError())
   {
     $historyQ->close();
-    showQueryError($historyQ);
+    showFetchError($historyQ);
   }
 
   $historyQ->freeResult();

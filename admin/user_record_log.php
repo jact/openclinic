@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.6 2004/06/20 17:20:23 jact Exp $
+ * $Id: user_record_log.php,v 1.7 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -65,13 +65,14 @@
   $recordQ = new Record_Query();
   $recordQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $recordQ->connect();
-  if ($recordQ->errorOccurred())
+  if ($recordQ->isError())
   {
     $recordQ->close();
     showQueryError($recordQ);
   }
 
-  if ( !$recordQ->searchUser($idUser, $currentPageNmbr, $limit) )
+  $recordQ->searchUser($idUser, $currentPageNmbr, $limit);
+  if ($recordQ->isError())
   {
     $recordQ->close();
     showQueryError($recordQ);

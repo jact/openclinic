@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: staff_new.php,v 1.3 2004/07/07 17:21:52 jact Exp $
  */
 
 /**
@@ -50,7 +50,7 @@
   ////////////////////////////////////////////////////////////////////
   $staffQ = new Staff_Query();
   $staffQ->connect();
-  if ($staffQ->errorOccurred())
+  if ($staffQ->isError())
   {
     showQueryError($staffQ);
   }
@@ -61,7 +61,8 @@
   }
   else
   {
-    if ( !$staffQ->insert($staff) )
+    $staffQ->insert($staff);
+    if ($staffQ->isError())
     {
       $staffQ->close();
       showQueryError($staffQ);

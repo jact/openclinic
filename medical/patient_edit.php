@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: patient_edit.php,v 1.3 2004/07/07 17:22:50 jact Exp $
  */
 
 /**
@@ -63,7 +63,7 @@
   ////////////////////////////////////////////////////////////////////
   $patQ = new Patient_Query();
   $patQ->connect();
-  if ($patQ->errorOccurred())
+  if ($patQ->isError())
   {
     showQueryError($patQ);
   }
@@ -81,7 +81,8 @@
     exit();
   }
 
-  if ( !$patQ->update($pat) )
+  $patQ->update($pat);
+  if ($patQ->isError())
   {
     $patQ->close();
     showQueryError($patQ);

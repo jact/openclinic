@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.4 2004/07/06 17:37:46 jact Exp $
+ * $Id: login.php,v 1.5 2004/07/07 17:23:37 jact Exp $
  */
 
 /**
@@ -57,13 +57,13 @@
   {
     $userQ = new User_Query();
     $userQ->connect();
-    if ($userQ->errorOccurred())
+    if ($userQ->isError())
     {
       showQueryError($userQ);
     }
 
     $result = $userQ->existLogin($loginSession);
-    if ($userQ->errorOccurred())
+    if ($userQ->isError())
     {
       $userQ->close();
       showQueryError($userQ);
@@ -78,14 +78,14 @@
     {
       @$lastLogin = $_SESSION["postVars"]["login_session"];
       $userQ->verifySignOn($loginSession, $pwdSession);
-      if ($userQ->errorOccurred())
+      if ($userQ->isError())
       {
         $userQ->close();
         showQueryError($userQ);
       }
 
       $user = $userQ->fetch();
-      if ( !$user )
+      if ($userQ->isError())
       {
         // Invalid password. Add one to login attempts.
         $errorFound = true;
@@ -109,7 +109,8 @@
         // Suspend user login if loginAttempts >= 3
         if ($sessLoginAttempts >= 3)
         {
-          if ( !$userQ->deactivate($loginSession) )
+          $userQ->deactivate($loginSession);
+          if ($userQ->isError())
           {
             $userQ->close();
             showQueryError($userQ);
@@ -151,13 +152,13 @@
   ////////////////////////////////////////////////////////////////////
   $sessionQ = new Session_Query();
   $sessionQ->connect();
-  if ($sessionQ->errorOccurred())
+  if ($sessionQ->isError())
   {
     showQueryError($sessionQ);
   }
 
   $token = $sessionQ->getToken($user->getLogin());
-  if ($token == false)
+  if ($sessionQ->isError())
   {
     $sessionQ->close();
     showQueryError($sessionQ);
@@ -170,12 +171,13 @@
   ////////////////////////////////////////////////////////////////////
   $accessQ = new Access_Query();
   $accessQ->connect();
-  if ($accessQ->errorOccurred())
+  if ($accessQ->isError())
   {
     showQueryError($accessQ);
   }
 
-  if ( !$accessQ->insert($user) )
+  $accessQ->insert($user);
+  if ($accessQ->isError())
   {
     $accessQ->close();
     showQueryError($accessQ);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.3 2004/05/15 16:35:15 jact Exp $
+ * $Id: login_check.php,v 1.4 2004/07/07 17:23:37 jact Exp $
  */
 
 /**
@@ -65,14 +65,14 @@
     ////////////////////////////////////////////////////////////////////
     $sessQ = new Session_Query();
     $sessQ->connect();
-    if ($sessQ->errorOccurred())
+    if ($sessQ->isError())
     {
       showQueryError($sessQ);
     }
 
     if ( !$sessQ->validToken($_SESSION['loginSession'], $_SESSION['token']) )
     {
-      if ($sessQ->errorOccurred())
+      if ($sessQ->isError())
       {
         $sessQ->close();
         showQueryError($sessQ);

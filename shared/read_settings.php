@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.6 2004/07/06 17:37:18 jact Exp $
+ * $Id: read_settings.php,v 1.7 2004/07/07 17:23:37 jact Exp $
  */
 
 /**
@@ -56,23 +56,23 @@
   ////////////////////////////////////////////////////////////////////
   $setQ = new Setting_Query();
   $setQ->connect();
-  if ($setQ->errorOccurred())
+  if ($setQ->isError())
   {
     showQueryError($setQ);
   }
 
   $setQ->select();
-  if ($setQ->errorOccurred())
+  if ($setQ->isError())
   {
     $setQ->close();
     showQueryError($setQ);
   }
 
   $set = $setQ->fetch();
-  if ( !$set )
+  if ($setQ->isError())
   {
     $setQ->close();
-    showFetchError();
+    showFetchError($setQ);
   }
 
   $setQ->freeResult();
@@ -105,7 +105,7 @@
   ////////////////////////////////////////////////////////////////////
   $themeQ = new Theme_Query();
   $themeQ->connect();
-  if ($themeQ->errorOccurred())
+  if ($themeQ->isError())
   {
     showQueryError($themeQ);
   }
@@ -118,17 +118,17 @@
   {
     $themeQ->select($set->getIdTheme());
   }
-  if ($themeQ->errorOccurred())
+  if ($themeQ->isError())
   {
     $themeQ->close();
     showQueryError($themeQ);
   }
 
   $theme = $themeQ->fetch();
-  if ( !$theme )
+  if ($themeQ->isError())
   {
     $themeQ->close();
-    showFetchError();
+    showFetchError($themeQ);
   }
 
   $themeQ->freeResult();

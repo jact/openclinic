@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.5 2004/06/16 19:33:19 jact Exp $
+ * $Id: log_access_list.php,v 1.6 2004/07/07 17:21:52 jact Exp $
  */
 
 /**
@@ -47,13 +47,13 @@
 
   $accessQ = new Access_Query();
   $accessQ->connect();
-  if ($accessQ->errorOccurred())
+  if ($accessQ->isError())
   {
     showQueryError($accessQ);
   }
 
   $total = $accessQ->select($year, $month, $day, $hour);
-  if ($accessQ->errorOccurred())
+  if ($accessQ->isError())
   {
     $accessQ->close();
     showQueryError($accessQ);

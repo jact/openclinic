@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.5 2004/07/06 17:37:03 jact Exp $
+ * $Id: patient_edit_form.php,v 1.6 2004/07/07 17:22:50 jact Exp $
  */
 
 /**
@@ -43,13 +43,13 @@
 
     $patQ = new Patient_Query();
     $patQ->connect();
-    if ($patQ->errorOccurred())
+    if ($patQ->isError())
     {
       showQueryError($patQ);
     }
 
     $numRows = $patQ->select($idPatient);
-    if ($patQ->errorOccurred())
+    if ($patQ->isError())
     {
       $patQ->close();
       showQueryError($patQ);
@@ -67,9 +67,9 @@
     }
 
     $pat = $patQ->fetch();
-    if ( !$pat )
+    if ($patQ->isError())
     {
-      showFetchError(false);
+      showFetchError($patQ, false);
     }
     else
     {

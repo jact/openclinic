@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.5 2004/06/20 17:23:32 jact Exp $
+ * $Id: problem_search.php,v 1.6 2004/07/07 17:22:59 jact Exp $
  */
 
 /**
@@ -67,12 +67,13 @@
   $problemQ = new Problem_Query();
   $problemQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
 
-  if ( !$problemQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit) )
+  $problemQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
+  if ($problemQ->isError())
   {
     $problemQ->close();
     showQueryError($problemQ);
@@ -244,14 +245,14 @@ function changePage(page)
 
     $patQ = new Patient_Query();
     $patQ->connect();
-    if ($patQ->errorOccurred())
+    if ($patQ->isError())
     {
       $patQ->close();
       showQueryError($patQ);
     }
 
     $numRows = $patQ->select($array[2]);
-    if ($patQ->errorOccurred())
+    if ($patQ->isError())
     {
       $patQ->close();
       showQueryError($patQ);
@@ -260,6 +261,11 @@ function changePage(page)
     if ($numRows)
     {
       $pat = $patQ->fetch();
+      if ($patQ->isError())
+      {
+        $patQ->close();
+        showFetchError($patQ);
+      }
 ?>
     <tr class="<?php echo $rowClass; ?>">
       <td class="number">

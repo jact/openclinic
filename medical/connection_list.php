@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.4 2004/07/06 17:37:03 jact Exp $
+ * $Id: connection_list.php,v 1.5 2004/07/07 17:22:28 jact Exp $
  */
 
 /**
@@ -78,13 +78,13 @@
 
   $connQ = new Connection_Query;
   $connQ->connect();
-  if ($connQ->errorOccurred())
+  if ($connQ->isError())
   {
     showQueryError($connQ);
   }
 
   $connQ->select($idProblem);
-  if ($connQ->errorOccurred())
+  if ($connQ->isError())
   {
     $connQ->close();
     showQueryError($connQ);
@@ -99,10 +99,11 @@
 
   if (count($connArray) == 0)
   {
+    $connQ->close();
     echo '<p>' . _("No connections defined for this medical problem.") . "</p>\n";
+    include_once("../shared/footer.php");
+    exit();
   }
-  else
-  {
 ?>
 
 <h3><?php echo _("Connection Problems List:"); ?></h3>
@@ -126,28 +127,29 @@
 
   <tbody>
 <?php
-    $problemQ = new Problem_Query();
-    $problemQ->connect();
-    if ($problemQ->errorOccurred())
+  $problemQ = new Problem_Query();
+  $problemQ->connect();
+  if ($problemQ->isError())
+  {
+    showQueryError($problemQ);
+  }
+
+  $rowClass = "odd";
+  for ($i = 0; $i < count($connArray); $i++)
+  {
+    $problemQ->select($connArray[$i]);
+    if ($problemQ->isError())
     {
-      showQueryError($problemQ);
+      showQueryError($problemQ, false);
+      continue;
     }
 
-    $rowClass = "odd";
-    for ($i = 0; $i < count($connArray); $i++)
+    $problem = $problemQ->fetch();
+    if ($problemQ->isError())
     {
-      if ( !$problemQ->select($connArray[$i]) )
-      {
-        showQueryError($problemQ, false);
-        continue;
-      }
-
-      $problem = $problemQ->fetch();
-      if ( !$problem )
-      {
-        $problemQ->close();
-        showFetchError();
-      }
+      $problemQ->close();
+      showFetchError($problemQ);
+    }
 ?>
     <tr class="<?php echo $rowClass; ?>">
       <td>
@@ -155,14 +157,14 @@
       </td>
 
 <?php
-      if ($hasMedicalAdminAuth)
-      {
+    if ($hasMedicalAdminAuth)
+    {
 ?>
       <td>
         <a href="../medical/connection_del_confirm.php?key=<?php echo $idProblem; ?>&amp;conn=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $idPatient; ?>&amp;wording=<?php echo fieldPreview($problem->getWording()); ?>"><?php echo _("del"); ?></a>
       </td>
 <?php
-      } // end if
+    } // end if
 ?>
 
       <td>
@@ -174,20 +176,18 @@
       </td>
     </tr>
 <?php
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
-    } // end while
-    $problemQ->freeResult();
-    $problemQ->close();
+    // swap row color
+    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+  } // end while
+  $problemQ->freeResult();
+  $problemQ->close();
 ?>
   </tbody>
 </table>
 
 <?php
-    unset($problemQ);
-    unset($problem);
-  } // end if-else
-  unset($connQ);
+  unset($problemQ);
+  unset($problem);
 
   require_once("../shared/footer.php");
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.5 2004/06/20 17:23:32 jact Exp $
+ * $Id: relative_search.php,v 1.6 2004/07/07 17:23:21 jact Exp $
  */
 
 /**
@@ -70,12 +70,13 @@
   $patQ = new Patient_Query();
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $patQ->connect();
-  if ($patQ->errorOccurred())
+  if ($patQ->isError())
   {
     showQueryError($patQ);
   }
 
-  if ( !$patQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit) )
+  $patQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
+  if ($patQ->isError())
   {
     $patQ->close();
     showQueryError($patQ);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.5 2004/07/06 17:36:42 jact Exp $
+ * $Id: install.php,v 1.6 2004/07/07 17:22:04 jact Exp $
  */
 
 /**
@@ -30,7 +30,7 @@
   // testing connection and current version
   $setQ = new Setting_Query();
   $setQ->connect();
-  if ($setQ->errorOccurred())
+  if ($setQ->isError())
   {
     showQueryError($setQ);
   }
@@ -38,17 +38,17 @@
 
   // show warning message if database exists
   $setQ->select();
-  if ($setQ->errorOccurred())
+  if ($setQ->isError())
   {
     echo '<p>' . _("Building OpenClinic tables...") . "</p>\n";
   }
   else
   {
     $set = $setQ->fetch();
-    if ( !$set )
+    if ($setQ->isError())
     {
       $setQ->close();
-      showFetchError();
+      showFetchError($setQ);
     }
 
     if ( !isset($_GET["confirm"]) || ($_GET["confirm"] != "yes") )

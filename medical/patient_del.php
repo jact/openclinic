@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.5 2004/07/06 17:37:03 jact Exp $
+ * $Id: patient_del.php,v 1.6 2004/07/07 17:22:41 jact Exp $
  */
 
 /**
@@ -59,7 +59,7 @@
   ////////////////////////////////////////////////////////////////////
   $relQ = new Relative_Query();
   $relQ->connect();
-  if ($relQ->errorOccurred())
+  if ($relQ->isError())
   {
     showQueryError($relQ);
   }
@@ -75,7 +75,8 @@
 
   while ($aux = array_shift($rel))
   {
-    if ( !$relQ->delete($idPatient, $aux[1]) )
+    $relQ->delete($idPatient, $aux[1]);
+    if ($relQ->isError())
     {
       $relQ->close();
       showQueryError($relQ);
@@ -90,7 +91,7 @@
   ////////////////////////////////////////////////////////////////////
   $patQ = new Patient_Query();
   $patQ->connect();
-  if ($patQ->errorOccurred())
+  if ($patQ->isError())
   {
     showQueryError($patQ);
   }
@@ -98,7 +99,7 @@
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     $numRows = $patQ->select($idPatient);
-    if ($patQ->errorOccurred())
+    if ($patQ->isError())
     {
       $patQ->close();
       showQueryError($patQ);
@@ -116,27 +117,29 @@
     }
 
     $patient = $patQ->fetch();
-    if ( !$patient )
+    if ($patQ->isError())
     {
       $patQ->close();
-      showFetchError();
+      showFetchError($patQ);
     }
 
     $historyQ = new History_Query();
     $historyQ->connect();
-    if ($historyQ->errorOccurred())
+    if ($historyQ->isError())
     {
       showQueryError($historyQ);
     }
 
-    if ( !$historyQ->selectPersonal($idPatient) )
+    $historyQ->selectPersonal($idPatient);
+    if ($historyQ->isError())
     {
       $historyQ->close();
       showQueryError($historyQ);
     }
     $historyP = $historyQ->fetchPersonal();
 
-    if ( !$historyQ->selectFamily($idPatient) )
+    $historyQ->selectFamily($idPatient);
+    if ($historyQ->isError())
     {
       $historyQ->close();
       showQueryError($historyQ);
@@ -146,12 +149,13 @@
 
     $delPatientQ = new DelPatient_Query();
     $delPatientQ->connect();
-    if ($delPatientQ->errorOccurred())
+    if ($delPatientQ->isError())
     {
       showQueryError($delPatientQ);
     }
 
-    if ( !$delPatientQ->insert($patient, $historyP, $historyF, $_SESSION['userId'], $_SESSION['loginSession']) )
+    $delPatientQ->insert($patient, $historyP, $historyF, $_SESSION['userId'], $_SESSION['loginSession']);
+    if ($delPatientQ->isError())
     {
       $delPatientQ->close();
       showQueryError($delPatientQ);
@@ -163,7 +167,8 @@
     unset($historyF);
   }
 
-  if ( !$patQ->delete($idPatient) )
+  $patQ->delete($idPatient);
+  if ($patQ->isError())
   {
     $patQ->close();
     showQueryError($patQ);
@@ -181,7 +186,7 @@
   ////////////////////////////////////////////////////////////////////
   $problemQ = new Problem_Query();
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
@@ -203,14 +208,15 @@
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
-    if ($delProblemQ->errorOccurred())
+    if ($delProblemQ->isError())
     {
       showQueryError($delProblemQ);
     }
 
     for ($i = 0; $i < $numRows; $i++)
     {
-      if ( !$delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']) )
+      $delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']);
+      if ($delProblemQ->isError())
       {
         $delProblemQ->close();
         showQueryError($delProblemQ);
@@ -221,14 +227,15 @@
 
     $problemQ = new Problem_Query();
     $problemQ->connect();
-    if ($problemQ->errorOccurred())
+    if ($problemQ->isError())
     {
       showQueryError($problemQ);
     }
 
     for ($i = 0; $i < $numRows; $i++)
     {
-      if ( !$problemQ->delete($array[$i]->_idProblem) )
+      $problemQ->delete($array[$i]->_idProblem);
+      if ($problemQ->isError())
       {
         $problemQ->close();
         showQueryError($problemQ);
@@ -249,7 +256,7 @@
   ////////////////////////////////////////////////////////////////////
   $problemQ = new Problem_Query();
   $problemQ->connect();
-  if ($problemQ->errorOccurred())
+  if ($problemQ->isError())
   {
     showQueryError($problemQ);
   }
@@ -268,14 +275,15 @@
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
-    if ($delProblemQ->errorOccurred())
+    if ($delProblemQ->isError())
     {
       showQueryError($delProblemQ);
     }
 
     for ($i = 0; $i < $numRows; $i++)
     {
-      if ( !$delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']) )
+      $delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']);
+      if ($delProblemQ->isError())
       {
         $delProblemQ->close();
         showQueryError($delProblemQ);
@@ -286,14 +294,15 @@
 
     $problemQ = new Problem_Query();
     $problemQ->connect();
-    if ($problemQ->errorOccurred())
+    if ($problemQ->isError())
     {
       showQueryError($problemQ);
     }
 
     for ($i = 0; $i < $numRows; $i++)
     {
-      if ( !$problemQ->delete($array[$i]->_idProblem) )
+      $problemQ->delete($array[$i]->_idProblem);
+      if ($problemQ->isError())
       {
         $problemQ->close();
         showQueryError($problemQ);

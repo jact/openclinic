@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del.php,v 1.5 2004/07/06 17:36:25 jact Exp $
+ * $Id: staff_del.php,v 1.6 2004/07/07 17:21:52 jact Exp $
  */
 
 /**
@@ -48,13 +48,13 @@
   ////////////////////////////////////////////////////////////////////
   $staffQ = new Staff_Query();
   $staffQ->connect();
-  if ($staffQ->errorOccurred())
+  if ($staffQ->isError())
   {
     showQueryError($staffQ);
   }
 
   $numRows = $staffQ->select($idMember);
-  if ($staffQ->errorOccurred())
+  if ($staffQ->isError())
   {
     $staffQ->close();
     showQueryError($staffQ);
@@ -72,13 +72,14 @@
   }
 
   $staff = $staffQ->fetch();
-  if ( !$staff)
+  if ($staffQ->isError())
   {
     $staffQ->close();
-    showFetchError();
+    showFetchError($staffQ);
   }
 
-  if ( !$staffQ->delete($staff->getIdMember(), $staff->getIdUser()) )
+  $staffQ->delete($staff->getIdMember(), $staff->getIdUser());
+  if ($staffQ->isError())
   {
     $staffQ->close();
     showQueryError($staffQ);

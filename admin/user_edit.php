@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.3 2004/04/24 16:46:36 jact Exp $
+ * $Id: user_edit.php,v 1.4 2004/07/07 17:21:53 jact Exp $
  */
 
 /**
@@ -57,7 +57,7 @@
   ////////////////////////////////////////////////////////////////////
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->errorOccurred())
+  if ($userQ->isError())
   {
     showQueryError($userQ);
   }
@@ -68,7 +68,8 @@
   }
   else
   {
-    if ( !$userQ->update($user) )
+    $userQ->update($user);
+    if ($userQ->isError())
     {
       $userQ->close();
       showQueryError($userQ);
@@ -77,7 +78,8 @@
 
   if ($changePwd && !$loginUsed)
   {
-    if ( !$userQ->verifySignOn($_POST["login"], $_POST["md5_old"], true) )
+    $userQ->verifySignOn($_POST["login"], $_POST["md5_old"], true);
+    if ($userQ->isError())
     {
       $userQ->close();
 
@@ -90,7 +92,9 @@
       header("Location: " . $errorLocation);
       exit();
     }
-    if ( !$userQ->resetPwd($user) )
+
+    $userQ->resetPwd($user);
+    if ($userQ->isError())
     {
       $userQ->close();
       showQueryError($userQ);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.6 2004/06/16 19:33:19 jact Exp $
+ * $Id: log_record_list.php,v 1.7 2004/07/07 17:21:52 jact Exp $
  */
 
 /**
@@ -47,13 +47,13 @@
 
   $recordQ = new Record_Query();
   $recordQ->connect();
-  if ($recordQ->errorOccurred())
+  if ($recordQ->isError())
   {
     showQueryError($recordQ);
   }
 
   $total = $recordQ->select($year, $month, $day, $hour);
-  if ($recordQ->errorOccurred())
+  if ($recordQ->isError())
   {
     $recordQ->close();
     showQueryError($recordQ);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.3 2004/06/16 19:11:02 jact Exp $
+ * $Id: test_list.php,v 1.4 2004/07/07 17:23:21 jact Exp $
  */
 
 /**
@@ -77,13 +77,13 @@
 
   $testQ = new Test_Query;
   $testQ->connect();
-  if ($testQ->errorOccurred())
+  if ($testQ->isError())
   {
     showQueryError($testQ);
   }
 
   $count = $testQ->select($idProblem);
-  if ($testQ->errorOccurred())
+  if ($testQ->isError())
   {
     $testQ->close();
     showQueryError($testQ);

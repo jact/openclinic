@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.2 2004/04/18 14:02:25 jact Exp $
+ * $Id: record_log.php,v 1.3 2004/07/07 17:23:37 jact Exp $
  */
 
 /**
@@ -45,12 +45,13 @@
 
     $recQ = new Record_Query();
     $recQ->connect();
-    if ($recQ->errorOccurred())
+    if ($recQ->isError())
     {
       showQueryError($recQ);
     }
 
-    if ( !$recQ->insert($_SESSION['userId'], $_SESSION['loginSession'], $tableName, $operation, $idKey1, $idKey2) )
+    $recQ->insert($_SESSION['userId'], $_SESSION['loginSession'], $tableName, $operation, $idKey1, $idKey2);
+    if ($recQ->isError())
     {
       $recQ->close();
       showQueryError($recQ);
