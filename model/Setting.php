@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting.php,v 1.6 2004/07/05 18:32:45 jact Exp $
+ * $Id: Setting.php,v 1.7 2004/08/25 17:52:46 jact Exp $
  */
 
 /**
@@ -32,30 +32,29 @@ require_once("../lib/validator_lib.php");
  *  string getClinicName(void)
  *  void setClinicName(string $value)
  *  string getClinicImageUrl(void)
+ *  void setClinicImageUrl(string $value)
  *  bool isUseImageSet(void)
+ *  void setUseImage(bool $value)
  *  string getClinicHours(void)
+ *  void setClinicHours(string $value)
  *  string getClinicAddress(void)
+ *  void setClinicAddress(string $value)
  *  string getClinicPhone(void)
+ *  void setClinicPhone(string $value)
  *  string getClinicUrl(void)
+ *  void setClinicUrl(string $value)
  *  int getSessionTimeout(void)
  *  string getSessionTimeoutError(void)
+ *  void setSessionTimeout(int $value)
  *  int getItemsPerPage(void)
  *  string getItemsPerPageError(void)
+ *  void setItemsPerPage(int $value)
  *  string getVersion(void)
- *  string getLanguage(void)
- *  int getIdTheme(void)
- *  void setClinicName(string $value)
- *  void setClinicImageUrl(string $value)
- *  void setUseImage(bool $value)
- *  void setClinicHours(string $value)
- *  void setClinicAddress(string $value)
- *  void setClinicPhone(string $value)
- *  void setClinicUrl(string $value)
- *  void setSessionTimeout(string $value)
- *  void setItemsPerPage(string $value)
  *  void setVersion(string $value)
+ *  string getLanguage(void)
  *  void setLanguage(string $value)
- *  void setIdTheme(string $value)
+ *  int getIdTheme(void)
+ *  void setIdTheme(int $value)
  */
 class Setting
 {
@@ -134,6 +133,18 @@ class Setting
   }
 
   /**
+   * void setClinicName(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setClinicName($value)
+  {
+    $this->_clinicName = safeText($value);
+  }
+
+  /**
    * string getClinicImageUrl(void)
    ********************************************************************
    * @return string
@@ -142,6 +153,18 @@ class Setting
   function getClinicImageUrl()
   {
     return stripslashes(strtr($this->_clinicImageUrl, $this->_trans));
+  }
+
+  /**
+   * void setClinicImageUrl(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setClinicImageUrl($value)
+  {
+    $this->_clinicImageUrl = '../images/' . safeText($value);
   }
 
   /**
@@ -156,6 +179,18 @@ class Setting
   }
 
   /**
+   * void setUseImage(bool $value)
+   ********************************************************************
+   * @param bool $value new value to set
+   * @return void
+   * @access public
+   */
+  function setUseImage($value)
+  {
+    $this->_useImageSet = ($value == true);
+  }
+
+  /**
    * string getClinicHours(void)
    ********************************************************************
    * @return string
@@ -164,6 +199,18 @@ class Setting
   function getClinicHours()
   {
     return stripslashes(strtr($this->_clinicHours, $this->_trans));
+  }
+
+  /**
+   * void setClinicHours(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setClinicHours($value)
+  {
+    $this->_clinicHours = safeText($value);
   }
 
   /**
@@ -178,6 +225,18 @@ class Setting
   }
 
   /**
+   * void setClinicAddress(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setClinicAddress($value)
+  {
+    $this->_clinicAddress = safeText($value);
+  }
+
+  /**
    * string getClinicPhone(void)
    ********************************************************************
    * @return string
@@ -189,6 +248,18 @@ class Setting
   }
 
   /**
+   * void setClinicPhone(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setClinicPhone($value)
+  {
+    $this->_clinicPhone = safeText($value);
+  }
+
+  /**
    * string getClinicUrl(void)
    ********************************************************************
    * @return string
@@ -197,6 +268,18 @@ class Setting
   function getClinicUrl()
   {
     return stripslashes(strtr($this->_clinicUrl, $this->_trans));
+  }
+
+  /**
+   * void setClinicUrl(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setClinicUrl($value)
+  {
+    $this->_clinicUrl = safeText($value);
   }
 
   /**
@@ -222,6 +305,19 @@ class Setting
   }
 
   /**
+   * void setSessionTimeout(int $value)
+   ********************************************************************
+   * @param int $value new value to set
+   * @return void
+   * @access public
+   */
+  function setSessionTimeout($value)
+  {
+    $temp = intval($value);
+    $this->_sessionTimeout = (($temp == 0) ? OPEN_SETTING_SESSION_TIMEOUT : $temp);
+  }
+
+  /**
    * int getItemsPerPage(void)
    ********************************************************************
    * @return int
@@ -244,6 +340,19 @@ class Setting
   }
 
   /**
+   * void setItemsPerPage(int $value)
+   ********************************************************************
+   * @param int $value new value to set
+   * @return void
+   * @access public
+   */
+  function setItemsPerPage($value)
+  {
+    $temp = intval($value);
+    $this->_itemsPerPage = (($temp < 0) ? OPEN_SETTING_ITEMS_PER_PAGE : $temp);
+  }
+
+  /**
    * string getVersion(void)
    ********************************************************************
    * @return string
@@ -252,138 +361,6 @@ class Setting
   function getVersion()
   {
     return stripslashes(strtr($this->_version, $this->_trans));
-  }
-
-  /**
-   * string getLanguage(void)
-   ********************************************************************
-   * @return string
-   * @access public
-   */
-  function getLanguage()
-  {
-    return stripslashes(strtr($this->_lang, $this->_trans));
-  }
-
-  /**
-   * int getIdTheme(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   */
-  function getIdTheme()
-  {
-    return intval($this->_idTheme);
-  }
-
-  /**
-   * void setClinicName(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setClinicName($value)
-  {
-    $this->_clinicName = safeText($value);
-  }
-
-  /**
-   * void setClinicImageUrl(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setClinicImageUrl($value)
-  {
-    $this->_clinicImageUrl = '../images/' . safeText($value);
-  }
-
-  /**
-   * void setUseImage(bool $value)
-   ********************************************************************
-   * @param bool $value new value to set
-   * @return void
-   * @access public
-   */
-  function setUseImage($value)
-  {
-    $this->_useImageSet = ($value == true);
-  }
-
-  /**
-   * void setClinicHours(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setClinicHours($value)
-  {
-    $this->_clinicHours = safeText($value);
-  }
-
-  /**
-   * void setClinicAddress(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setClinicAddress($value)
-  {
-    $this->_clinicAddress = safeText($value);
-  }
-
-  /**
-   * void setClinicPhone(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setClinicPhone($value)
-  {
-    $this->_clinicPhone = safeText($value);
-  }
-
-  /**
-   * void setClinicUrl(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setClinicUrl($value)
-  {
-    $this->_clinicUrl = safeText($value);
-  }
-
-  /**
-   * void setSessionTimeout(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setSessionTimeout($value)
-  {
-    $temp = intval($value);
-    $this->_sessionTimeout = (($temp == 0) ? OPEN_SETTING_SESSION_TIMEOUT : $temp);
-  }
-
-  /**
-   * void setItemsPerPage(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setItemsPerPage($value)
-  {
-    $temp = intval($value);
-    $this->_itemsPerPage = (($temp < 0) ? OPEN_SETTING_ITEMS_PER_PAGE : $temp);
   }
 
   /**
@@ -399,6 +376,17 @@ class Setting
   }
 
   /**
+   * string getLanguage(void)
+   ********************************************************************
+   * @return string
+   * @access public
+   */
+  function getLanguage()
+  {
+    return stripslashes(strtr($this->_lang, $this->_trans));
+  }
+
+  /**
    * void setLanguage(string $value)
    ********************************************************************
    * @param string $value new value to set
@@ -411,9 +399,20 @@ class Setting
   }
 
   /**
-   * void setIdTheme(string $value)
+   * int getIdTheme(void)
    ********************************************************************
-   * @param string $value new value to set
+   * @return int
+   * @access public
+   */
+  function getIdTheme()
+  {
+    return intval($this->_idTheme);
+  }
+
+  /**
+   * void setIdTheme(int $value)
+   ********************************************************************
+   * @param int $value new value to set
    * @return void
    * @access public
    */
