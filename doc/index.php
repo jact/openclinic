@@ -5,16 +5,15 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.1 2004/04/04 22:12:00 jact Exp $
+ * $Id: index.php,v 1.2 2004/04/18 14:10:45 jact Exp $
  */
 
 /**
  * index.php
  ********************************************************************
- * Change this
+ * Home page of documentation project
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 05/04/2004 0:11
  */
 
   /*if (count($_GET) == 0 || !isset($_GET['tab']) || !isset($_GET['nav']))
@@ -42,7 +41,7 @@
 
 <link rel="bookmark icon" type="image/png" href="../images/miniopc.png" />
 
-<style type="text/css">
+<style type="text/css" title="<?php echo STYLE_NAME; ?>">
 <!--
 <?php require_once("../css/style.php"); ?>
 -->
@@ -79,27 +78,41 @@
   </div><!-- End .linkList -->
 
   <div id="sideBarLogo">
-    <a href="http://openclinic.sourceforge.net">
-      <img src="../images/openclinic-2.png" width="130" height="29" alt="<?php echo _("Powered by OpenClinic"); ?>" title="<?php echo _("Powered by OpenClinic"); ?>" />
-    </a>
+    <p>
+      <a href="http://openclinic.sourceforge.net">
+        <img src="../images/openclinic-2.png" width="130" height="29" alt="<?php echo _("Powered by OpenClinic"); ?>" title="<?php echo _("Powered by OpenClinic"); ?>" />
+      </a>
+    </p>
 
-    <a href="http://www.coresis.com"><img src="../images/thank.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" /><img src="../images/coresis.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" /></a>
+    <p>
+      <a href="http://www.coresis.com">
+        <img src="../images/thank.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" /><img src="../images/coresis.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" />
+      </a>
+    </p>
 
-    <a href="http://sourceforge.net">
-      <img src="../images/sf-logo.png" width="130" height="37" alt="SourceForge.net Logo"  title="SourceForge.net Logo" />
-    </a>
+    <p>
+      <a href="http://sourceforge.net">
+        <img src="../images/sf-logo.png" width="130" height="37" alt="SourceForge.net Logo"  title="SourceForge.net Logo" />
+      </a>
+    </p>
 
-    <a href="http://www.php.net">
-      <img src="../images/php-logo.gif" alt="Powered by PHP" title="Powered by PHP" width="90" height="33" />
-    </a>
+    <p>
+      <a href="http://www.php.net">
+        <img src="../images/php-logo.gif" alt="Powered by PHP" title="Powered by PHP" width="90" height="33" />
+      </a>
+    </p>
 
-    <a href="http://www.mysql.com">
-      <img src="../images/mysql-logo.png" alt="Works with MySQL" title="Works with MySQL" width="84" height="44" />
-    </a>
+    <p>
+      <a href="http://www.mysql.com">
+        <img src="../images/mysql-logo.png" alt="Works with MySQL" title="Works with MySQL" width="84" height="44" />
+      </a>
+    </p>
 
-    <a href="http://validator.w3.org/check/referer">
-      <img src="../images/valid-xhtml11.png" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" width="88" height="31" />
-    </a>
+    <p>
+      <a href="http://validator.w3.org/check/referer">
+        <img src="../images/valid-xhtml11.png" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" width="88" height="31" />
+      </a>
+    </p>
   </div><!-- End #sidebarLogo -->
 </div><!-- End #sideBar -->
 <!-- End Side Bar -->
