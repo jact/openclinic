@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new_form.php,v 1.5 2004/10/04 21:36:54 jact Exp $
+ * $Id: problem_new_form.php,v 1.6 2004/10/16 14:59:16 jact Exp $
  */
 
 /**
@@ -50,7 +50,7 @@
 
   // after clean (get_form_vars.php)
   $postVars["id_patient"] = $idPatient;
-  //$postVars["collegiate_number"] = ???; // si no está vacía y es la primera vez que se accede aquí es igual al médico que le corresponde por cupo
+  //$postVars["id_member"] = ???; // si no está vacía y es la primera vez que se accede aquí es igual al médico que le corresponde por cupo?
   $postVars["order_number"] = $orderNumber + 1;
   $postVars["opening_date"] = date("Y-m-d"); // automatic date (ISO format)
   $postVars["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.10 2004/10/04 21:36:02 jact Exp $
+ * $Id: print_medical_record.php,v 1.11 2004/10/16 14:59:16 jact Exp $
  */
 
 /**
@@ -192,7 +192,7 @@
     echo '<p>' . $pat->getInsuranceCompany() . "</p>\n";
   }
 
-  if ($pat->getCollegiateNumber())
+  if ($pat->getIdMember())
   {
     $staffQ = new Staff_Query();
     $staffQ->connect();
@@ -201,7 +201,7 @@
       showQueryError($staffQ);
     }
 
-    $numRows = $staffQ->selectDoctor($pat->getCollegiateNumber());
+    $numRows = $staffQ->select($pat->getIdMember());
     if ($numRows)
     {
       $staff = $staffQ->fetch();
@@ -253,7 +253,7 @@
     echo '<h3>' . _("Order Number") . "</h3>\n";
     echo '<p>' . $problem->getOrderNumber() . "</p>\n";
 
-    if ($problem->getCollegiateNumber())
+    if ($problem->getIdMember())
     {
       $staffQ = new Staff_Query();
       $staffQ->connect();
@@ -262,7 +262,7 @@
         showQueryError($staffQ);
       }
 
-      $numRows = $staffQ->selectDoctor($problem->getCollegiateNumber());
+      $numRows = $staffQ->select($problem->getIdMember());
       if ($numRows)
       {
         $staff = $staffQ->fetch();
@@ -509,7 +509,7 @@
     echo '<h3>' . _("Order Number") . "</h3>\n";
     echo '<p>' . $problem->getOrderNumber() . "</p>\n";
 
-    if ($problem->getCollegiateNumber())
+    if ($problem->getIdMember())
     {
       $auxQ = new Staff_Query();
       $auxQ->connect();
@@ -518,7 +518,7 @@
         showQueryError($auxQ);
       }
 
-      $numRows = $auxQ->selectDoctor($problem->getCollegiateNumber());
+      $numRows = $auxQ->select($problem->getIdMember());
       if ($numRows)
       {
         $staff = $auxQ->fetch();

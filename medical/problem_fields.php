@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.7 2004/10/04 21:35:52 jact Exp $
+ * $Id: problem_fields.php,v 1.8 2004/10/16 14:59:16 jact Exp $
  */
 
 /**
@@ -46,7 +46,7 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="collegiate_number">' . _("Doctor who treated you") . ":" . "</label>\n";
+  $row = '<label for="id_member">' . _("Doctor who treated you") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
 
   $staffQ = new Staff_Query();
@@ -64,19 +64,19 @@
   }
 
   $array = null;
-  $array[""] = ""; // to permit null value
+  $array[0] = ""; // to permit null value
   if ($numRows)
   {
     while ($staff = $staffQ->fetch())
     {
-      $array[$staff->getCollegiateNumber()] = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
+      $array[$staff->getIdMember()] = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
     }
     $staffQ->freeResult();
   }
   $staffQ->close();
   unset($staffQ);
 
-  $row .= htmlSelectArray("collegiate_number", $array, $postVars["collegiate_number"]);
+  $row .= htmlSelectArray("id_member", $array, $postVars["id_member"]);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);

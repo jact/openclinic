@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.9 2004/10/04 21:32:56 jact Exp $
+ * $Id: patient_edit_form.php,v 1.10 2004/10/16 14:57:54 jact Exp $
  */
 
 /**
@@ -78,7 +78,7 @@
       ////////////////////////////////////////////////////////////////////
       $postVars["id_patient"] = $idPatient;
       //$postVars["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)
-      $postVars["collegiate_number"] = $pat->getCollegiateNumber();
+      $postVars["id_member"] = $pat->getIdMember();
       $postVars["nif"] = $pat->getNIF();
       $postVars["first_name"] = $pat->getFirstName();
       $postVars["surname1"] = $pat->getSurname1();

@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_tbl.sql,v 1.3 2004/04/24 15:12:21 jact Exp $
+ * $Id: patient_tbl.sql,v 1.4 2004/10/16 14:57:18 jact Exp $
  */
 
 /**
@@ -35,6 +35,6 @@ CREATE TABLE patient_tbl (
   labour_situation TEXT NULL, /* situación laboral */
   education TEXT NULL, /* estudios */
   insurance_company VARCHAR(30) NULL, /* entidad aseguradora */
-  collegiate_number VARCHAR(20) NULL, /* numero de colegiado (clave del médico al que pertenece por cupo) */
-  FOREIGN KEY (collegiate_number) REFERENCES staff_tbl(collegiate_number) ON DELETE SET NULL
+  id_member INT UNSIGNED NULL, /* clave del médico al que pertenece por cupo */
+  FOREIGN KEY (id_member) REFERENCES staff_tbl(id_member) ON DELETE SET NULL
 );

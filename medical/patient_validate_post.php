@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_validate_post.php,v 1.3 2004/09/22 18:20:26 jact Exp $
+ * $Id: patient_validate_post.php,v 1.4 2004/10/16 14:59:16 jact Exp $
  */
 
 /**
@@ -26,8 +26,8 @@
   //$pat->setLastUpdateDate($_POST["last_update_date"]);
   //$_POST["last_update_date"] = $pat->getLastUpdateDate();
 
-  $pat->setCollegiateNumber($_POST["collegiate_number"]);
-  $_POST["collegiate_number"] = $pat->getCollegiateNumber();
+  $pat->setIdMember($_POST["id_member"]);
+  $_POST["id_member"] = $pat->getIdMember();
 
   $pat->setNIF($_POST["nif"]);
   $_POST["nif"] = $pat->getNIF();

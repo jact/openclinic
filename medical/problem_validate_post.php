@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_validate_post.php,v 1.5 2004/10/04 21:43:30 jact Exp $
+ * $Id: problem_validate_post.php,v 1.6 2004/10/16 14:59:16 jact Exp $
  */
 
 /**
@@ -29,8 +29,8 @@
   $problem->setIdPatient($_POST["id_patient"]);
   //$_POST["id_patient"] = $problem->getIdPatient();
 
-  $problem->setCollegiateNumber($_POST["collegiate_number"]);
-  $_POST["collegiate_number"] = $problem->getCollegiateNumber();
+  $problem->setIdMember($_POST["id_member"]);
+  $_POST["id_member"] = $problem->getIdMember();
 
   $problem->setOrderNumber($_POST["order_number"]);
   //$_POST["order_number"] = $problem->getOrderNumber();

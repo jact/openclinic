@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.6 2004/10/04 21:38:03 jact Exp $
+ * $Id: problem_view.php,v 1.7 2004/10/16 14:59:16 jact Exp $
  */
 
 /**
@@ -132,7 +132,7 @@
 
   echo '<h2>' . _("Medical Problem Data") . "</h2>\n";
 
-  if ($problem->getCollegiateNumber())
+  if ($problem->getIdMember())
   {
     $staffQ = new Staff_Query();
     $staffQ->connect();
@@ -141,7 +141,7 @@
       showQueryError($staffQ);
     }
 
-    $numRows = $staffQ->selectDoctor($problem->getCollegiateNumber());
+    $numRows = $staffQ->select($problem->getIdMember());
     if ($numRows)
     {
       $staff = $staffQ->fetch();
