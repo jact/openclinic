@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.2 2004/04/18 14:02:25 jact Exp $
+ * $Id: footer.php,v 1.3 2004/07/07 17:53:12 jact Exp $
  */
 
 /**
@@ -24,6 +24,8 @@
 ?>
 </div><!-- End #mainZone -->
 <!-- End Main Zone -->
+
+<hr class="noPrint" />
 
 <!-- Footer -->
 <div id="footer">
