@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.8 2004/06/20 17:18:31 jact Exp $
+ * $Id: header.php,v 1.9 2004/07/07 17:52:59 jact Exp $
  */
 
 /**
@@ -63,6 +63,7 @@
 <div id="header">
   <div id="subHeader">
     <?php
+      echo '<h1>';
       if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
       {
         echo '<a href="' . OPEN_CLINIC_URL . '">';
@@ -73,14 +74,13 @@
       }
       else
       {
-        echo '<span class="headerTitle">';
         echo OPEN_CLINIC_NAME;
-        echo '</span>';
       }
       if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
       {
         echo "</a>\n";
       }
+      echo "</h1>\n";
     ?>
 
     <div id="headerInformation">
@@ -108,7 +108,9 @@
     </div><!-- End #headerInformation -->
   </div><!-- End #subHeader -->
 
-  <a class="skipLink" href="#mainZone" accesskey="2"><?php echo _("Skip over navigation"); ?></a>
+  <hr class="noPrint" />
+
+  <h1 class="skipLink"><a href="#mainZone" accesskey="2"><?php echo _("Skip over navigation"); ?></a></h1>
 
   <!-- Tabs -->
   <div class="menuBar">
@@ -166,6 +168,8 @@
 </div><!-- End #header -->
 <!-- End Header -->
 
+<hr class="noPrint" />
+
 <!-- Side Bar -->
 <div id="sideBar">
   <?php require_once("../navbars/" . $tab . ".php"); ?>
@@ -209,6 +213,8 @@
   </div><!-- End #sideBarLogo -->
 </div><!-- End #sideBar -->
 <!-- End Side Bar -->
+
+<hr class="noPrint" />
 
 <!-- Main Zone -->
 <div id="mainZone">
