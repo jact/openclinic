@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: dump_process.php,v 1.3 2004/06/16 15:58:15 jact Exp $
  */
 
 /**
@@ -170,20 +170,30 @@
                    . '# ' . _("PHP Version") . ": " . phpversion() . $crlf
                    . '# ' . _("Database") . ": " . OPEN_DATABASE . $crlf;
 
-      if (isset($_POST['use_dbname']))
-      {
-        $dumpBuffer .= '# ---------------------------------------------' . $crlf
-                     . $crlf . 'USE ' . OPEN_DATABASE . ';' . $crlf;
-      }
-
       if (isset($_POST['table_select']))
       {
+        $tableSelect = implode($_POST['table_select'], ', ');
         $tmpSelect = implode($_POST['table_select'], '|');
         $tmpSelect = '|' . $tmpSelect . '|';
       }
+      else
+      {
+        $tableSelect = _("All Tables");
+      }
+      $dumpBuffer .= '# ' . sprintf(_("Table Summary: %s"), $tableSelect) . $crlf
+                   . '# ---------------------------------------------' . $crlf;
 
-      $i = 0;
-      while ($i < $numTables)
+      if (isset($_POST['create_db']))
+      {
+        $dumpBuffer .= $crlf . 'CREATE DATABASE ' . OPEN_DATABASE . ';' . $crlf;
+      }
+
+      if (isset($_POST['use_dbname']))
+      {
+        $dumpBuffer .= $crlf . 'USE ' . OPEN_DATABASE . ';' . $crlf;
+      }
+
+      for ($i = 0; $i < $numTables; $i++)
       {
         $table = ($single ? $_POST['table_select'][$i] : $auxConn->tableName($i));
 
@@ -197,8 +207,7 @@
           // If only datas, no need to displays table name
           if ($_POST['what'] != 'dataonly')
           {
-            $dumpBuffer .= '# ---------------------------------------------' . $crlf
-                        . $crlf . '#' . $crlf
+            $dumpBuffer .= $crlf . '#' . $crlf
                         . '# ' . sprintf(_("Table structure for table %s"), $formattedTableName)
                         . $crlf . '#' . $crlf . $crlf
                         . DLIB_getTableDef(OPEN_DATABASE, $table, $crlf, $_POST)
@@ -227,8 +236,7 @@
             DLIB_getTableContent(OPEN_DATABASE, $table, $limitFrom, $limitTo, $crlf, $_POST);
           } // end if
         } // end if
-        $i++;
-      } // end while
+      } // end for
 
       // don't remove, it makes easier to select & copy from browser
       $dumpBuffer .= $crlf;
@@ -253,7 +261,19 @@
                   . '.' . substr(DLIB_MYSQL_INT_VERSION, 1, 2)
                   . '.' . substr(DLIB_MYSQL_INT_VERSION, 3) . $crlf
                   . '-- ' . _("PHP Version") . ": " . phpversion() . $crlf
-                  . '-- ' . _("Database") . ": " . OPEN_DATABASE . $crlf
+                  . '-- ' . _("Database") . ": " . OPEN_DATABASE . $crlf;
+
+      if (isset($_POST['table_select']))
+      {
+        $tableSelect = implode($_POST['table_select'], ', ');
+        $tmpSelect = implode($_POST['table_select'], '|');
+        $tmpSelect = '|' . $tmpSelect . '|';
+      }
+      else
+      {
+        $tableSelect = _("All Tables");
+      }
+      $dumpBuffer .= '-- ' . sprintf(_("Table Summary: %s"), $tableSelect) . $crlf
                   . '--' . $crlf
                   . '-->' . $crlf . $crlf;
 
@@ -271,8 +291,7 @@
         $limitFrom = $limitTo = 0;
       }
 
-      $i = 0;
-      while ($i < $numTables)
+      for ($i = 0; $i < $numTables; $i++)
       {
         $table = ($single ? $_POST['table_select'][$i] : $auxConn->tableName($i));
 
@@ -280,9 +299,8 @@
             || (!isset($tmpSelect) && !empty($table)))
         {
           $dumpBuffer .= DLIB_getTableXML(OPEN_DATABASE, $table, $limitFrom, $limitTo, $crlf, _("table") . " ", _("end of table") . " ");
-        }
-        $i++;
-      }
+        } // end if
+      } // end for
       $dumpBuffer .= '</' . OPEN_DATABASE . '>' . $crlf;
     } // end 'xml' case
 
@@ -319,8 +337,7 @@
         $limitFrom = $limitTo = 0;
       }
 
-      $i = 0;
-      while ($i < $numTables)
+      for ($i = 0; $i < $numTables; $i++)
       {
         $table = ($single ? $_POST['table_select'][$i] : $auxConn->tableName($i));
 
@@ -328,9 +345,8 @@
             || (!isset($tmpSelect) && !empty($table)))
         {
           $dumpBuffer .= DLIB_getTableCSV(OPEN_DATABASE, $table, $limitFrom, $limitTo, $separator, $enclosed, $escaped, $addCharacter, $_POST['what']);
-        }
-        $i++;
-      }
+        } // end if
+      } // end for
     } // end 'csv' case
   } // end building the dump
 
