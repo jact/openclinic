@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.6 2004/07/14 18:31:57 jact Exp $
+ * $Id: User_Query.php,v 1.7 2004/07/18 15:43:32 jact Exp $
  */
 
 /**
@@ -30,6 +30,7 @@ require_once("../classes/User.php");
  *  mixed selectLogins(void)
  *  bool existLogin(string $login, int $idMember = 0)
  *  mixed verifySignOn(string $login, string $pwd, bool $onlyCheck = false)
+ *  bool isActivated(string $login)
  *  bool deactivate(string $login)
  *  mixed fetch(void)
  *  bool insert(User $user)
@@ -153,6 +154,54 @@ class User_Query extends Query
   }
 
   /**
+   * bool isActivated(string $login)
+   ********************************************************************
+   * Verifies if a login user is activated or not
+   ********************************************************************
+   * @param string $login login of user to see if is deactivated
+   * @return boolean returns false, if error occurs or user is deactivated
+   * @access public
+   */
+  function isActivated($login)
+  {
+    $sql = "SELECT id_user FROM staff_tbl";
+    $sql .= " WHERE login='" . urlencode($login) . "';";
+
+    $result = $this->exec($sql);
+    if ($result == false)
+    {
+      $this->_error = "Error accessing staff member information.";
+      return false;
+    }
+
+    $result = $this->fetchRow();
+    if ( !$result )
+    {
+      return false;
+    }
+    $idUser = $result['id_user'];
+
+    $sql = "SELECT actived";
+    $sql .= " FROM user_tbl";
+    $sql .= " WHERE id_user=" . intval($idUser);
+
+    $result = $this->exec($sql);
+    if ($result == false)
+    {
+      $this->_error = "Error accessing user information.";
+      return false;
+    }
+
+    $result = $this->fetchRow();
+    if ( !$result )
+    {
+      return false;
+    }
+
+    return ($result['actived'] == "Y");
+  }
+
+  /**
    * bool deactivate(string $login)
    ********************************************************************
    * Updates an user and sets the actived flag to No.
@@ -258,7 +307,7 @@ class User_Query extends Query
   {
     /*if ($this->isError())
     {
-      return false;
+      return false; // or $this->clearErrors(); ???
     }*/
 
     $sql = "INSERT INTO user_tbl ";
