@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.8 2004/07/18 15:17:04 jact Exp $
+ * $Id: read_settings.php,v 1.9 2004/07/21 18:04:36 jact Exp $
  */
 
 /**
@@ -26,14 +26,20 @@
   // Application constants
   ////////////////////////////////////////////////////////////////////
   define("OPEN_DEMO",               false);
-  define("OPEN_DEBUG",              false);
+  define("OPEN_DEBUG",              false); // if false, no NOTICE messages
   define("OPEN_MAX_LOGIN_ATTEMPTS", 3);
 
-  (defined("OPEN_DEBUG") && OPEN_DEBUG)
-    ? error_reporting(E_ALL) // debug mode
-    : error_reporting(E_ALL & ~E_NOTICE); // normal mode
-
   require_once("../lib/debug_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Custom error handler constants
+  ////////////////////////////////////////////////////////////////////
+  define("OPEN_SCREEN_ERRORS", false); // Show errors to the screen?
+  define("OPEN_LOG_ERRORS",    false); // Save errors to a file?
+  define("OPEN_LOG_FILE",      "/tmp/error_log.txt"); // Allways use / separator (Win32 too)
+
+  require_once("../lib/error_lib.php");
+  set_error_handler("customErrorHandler");
 
   ////////////////////////////////////////////////////////////////////
   // Loading global constants
@@ -45,7 +51,6 @@
   ////////////////////////////////////////////////////////////////////
   require_once("../classes/Setting_Query.php");
   require_once("../classes/Theme_Query.php");
-  require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Making session user info available on all pages
