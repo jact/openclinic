@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Record_Query.php,v 1.5 2004/06/16 19:08:48 jact Exp $
+ * $Id: Record_Query.php,v 1.6 2004/07/14 18:26:49 jact Exp $
  */
 
 /**
@@ -151,7 +151,7 @@ class Record_Query extends Query
     $this->_rowCount = 0;
     $this->_pageCount = 0;
 
-    $sql.= " FROM record_log_tbl";
+    $sql = " FROM record_log_tbl";
     //$sql .= " WHERE access_log_tbl.id_profile=profile_tbl.id_profile";
     $sql .= " WHERE record_log_tbl.id_user=" . intval($idUser);
 

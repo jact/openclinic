@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Query.php,v 1.5 2004/06/16 19:32:48 jact Exp $
+ * $Id: Access_Query.php,v 1.6 2004/07/14 18:26:49 jact Exp $
  */
 
 /**
@@ -152,7 +152,7 @@ class Access_Query extends Query
     $this->_rowCount = 0;
     $this->_pageCount = 0;
 
-    $sql .= " FROM access_log_tbl";
+    $sql = " FROM access_log_tbl";
     $sql .= " WHERE access_log_tbl.id_user=" . intval($idUser);
 
     $sqlCount = "SELECT COUNT(*) AS row_count" . $sql;
