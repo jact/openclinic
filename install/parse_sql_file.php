@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: parse_sql_file.php,v 1.2 2004/04/18 14:18:15 jact Exp $
+ * $Id: parse_sql_file.php,v 1.3 2004/06/20 15:16:04 jact Exp $
  */
 
 /**
@@ -40,7 +40,6 @@ $tables = array(
   "medical_test_tbl",
   "patient_tbl",
   "problem_tbl",
-  "profile_tbl",
   "relative_tbl",
   "record_log_tbl",
   "session_tbl",
