@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new_form.php,v 1.4 2004/08/01 08:48:03 jact Exp $
+ * $Id: problem_new_form.php,v 1.5 2004/10/04 21:36:54 jact Exp $
  */
 
 /**
@@ -32,12 +32,6 @@
   $nav = "problems";
   $onlyDoctor = false;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = $_GET["key"];
-  $orderNumber = $_GET["num"];
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
@@ -48,12 +42,18 @@
   $focusFormName = "forms[0]";
   $focusFormField = "wording";
 
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_GET["key"]);
+  $orderNumber = intval($_GET["num"]);
+
   // after clean (get_form_vars.php)
   $postVars["id_patient"] = $idPatient;
   //$postVars["collegiate_number"] = ???; // si no está vacía y es la primera vez que se accede aquí es igual al médico que le corresponde por cupo
   $postVars["order_number"] = $orderNumber + 1;
-  $postVars["opening_date"] = date("d-m-Y"); //date("Y-m-d");
-  $postVars["last_update_date"] = date("d-m-Y"); //date("Y-m-d");
+  $postVars["opening_date"] = date("Y-m-d"); // automatic date (ISO format)
+  $postVars["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)
 
   ////////////////////////////////////////////////////////////////////
   // Show page
