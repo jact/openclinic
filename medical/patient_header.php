@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_header.php,v 1.6 2004/08/09 11:39:57 jact Exp $
+ * $Id: patient_header.php,v 1.7 2004/09/22 18:21:22 jact Exp $
  */
 
 /**
@@ -28,11 +28,11 @@
    * bool showPatientHeader(int $idPatient)
    ********************************************************************
    * Draws a header with patient information.
-   * TODO: suppress table
    ********************************************************************
    * @param int $idPatient key of patient to show header
    * @return boolean false if patient does not exist, true otherwise
    * @access public
+   * @todo suppress table
    */
   function showPatientHeader($idPatient)
   {
