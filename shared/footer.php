@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.8 2004/08/05 12:09:33 jact Exp $
+ * $Id: footer.php,v 1.9 2004/08/12 10:05:00 jact Exp $
  */
 
 /**
@@ -63,7 +63,9 @@
         echo ' ' . _("version") . ' ' . OPEN_VERSION;
       }
     ?>
-    <br />
+  </p>
+
+  <p>
     Copyright &copy; 2002-2004 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>
     <br />
     <?php echo _("under the"); ?>
