@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.5 2004/08/02 10:07:57 jact Exp $
+ * $Id: index.php,v 1.6 2004/08/28 16:27:29 jact Exp $
  */
 
 /**
@@ -80,7 +80,6 @@
 <ul>
   <li><?php echo _("Staff members"); ?></li>
   <li><?php echo _("Config settings"); ?></li>
-  <li><?php echo _("User profiles"); ?></li>
   <li><?php echo _("Clinic themes editor"); ?></li>
   <li><?php echo _("System users"); ?></li>
   <li><?php echo _("Dumps"); ?></li>
