@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.php,v 1.8 2004/07/26 18:40:45 jact Exp $
+ * $Id: style.php,v 1.9 2004/08/02 09:25:24 jact Exp $
  */
 
 /**
@@ -308,8 +308,6 @@ li#first a, li#first span {
 
 .subFooter {
   padding: 1ex 4mm;
-  margin-left: 150px;
-  text-align: center;
   line-height: 1.25em;
 }
 
