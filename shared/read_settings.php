@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.11 2004/08/03 08:31:44 jact Exp $
+ * $Id: read_settings.php,v 1.12 2004/09/23 18:54:20 jact Exp $
  */
 
 /**
@@ -23,11 +23,19 @@
   }
 
   ////////////////////////////////////////////////////////////////////
+  // Start server page generation time
+  ////////////////////////////////////////////////////////////////////
+  $microTime = explode(" ", microtime());
+  $startTime = $microTime[1] + $microTime[0];
+  unset($microTime);
+
+  ////////////////////////////////////////////////////////////////////
   // Application constants
   ////////////////////////////////////////////////////////////////////
   define("OPEN_DEMO",               false);
   define("OPEN_DEBUG",              false); // if false, no NOTICE messages
-  define("OPEN_MAX_LOGIN_ATTEMPTS", 3);
+  define("OPEN_BUFFER",             false); // if true, use ob_start(), ob_end_flush() functions
+  define("OPEN_MAX_LOGIN_ATTEMPTS", 3); // if zero, no limit login attempts
 
   require_once("../lib/debug_lib.php");
 
