@@ -34,6 +34,10 @@ html>body #header {
   right: 2ex;
 }
 
+#headerInformation p {
+  margin: 0;
+}
+
 .menuBar {
   clear: both;
   margin-top: 12px;
