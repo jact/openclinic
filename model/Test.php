@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test.php,v 1.3 2004/05/24 22:12:44 jact Exp $
+ * $Id: Test.php,v 1.4 2005/02/17 20:25:23 jact Exp $
  */
 
 /**
@@ -31,7 +31,7 @@ require_once("../lib/validator_lib.php");
  *  void setIdProblem(string $value)
  *  string getDocumentType(void)
  *  void setDocumentType(string $value)
- *  string getPathFilename(void)
+ *  string getPathFilename(boolean $withPath = true)
  *  string getPathFilenameError(void)
  *  void setPathFilename(string $value)
  */
@@ -140,12 +140,13 @@ class Test
   }
 
   /**
-   * string getPathFilename(void)
+   * string getPathFilename(boolean $withPath = true)
    ********************************************************************
+   * @param boolean $withPath indicates if path is also returned or not
    * @return string path file name
    * @access public
    */
-  function getPathFilename()
+  function getPathFilename($withPath = true)
   {
     /*if (eregi("\\\\", $this->_pathFilename))
     {
@@ -158,8 +159,15 @@ class Test
     //return((eregi("\\\\", $this->_pathFilename) ? stripslashes($this->_pathFilename) : $this->_pathFilename));
     //return $this->_pathFilename;
     //return htmlspecialchars(ereg_replace('\\+', '\\', $this->_pathFilename)); // be care with &
-    return strtr(ereg_replace('\\+', '\\', $this->_pathFilename), $this->_trans); // be care with &
     //return stripslashes($this->_pathFilename);
+
+    $value = strtr(ereg_replace('\\+', '\\', $this->_pathFilename), $this->_trans); // be care with &
+    if ( !$withPath )
+    {
+      $value = substr($value, strrpos($value, "/") + 1);
+    }
+
+    return $value;
   }
 
   /**
