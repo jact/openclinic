@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.10 2004/08/23 17:58:43 jact Exp $
+ * $Id: User_Query.php,v 1.11 2004/09/22 18:18:24 jact Exp $
  */
 
 /**
@@ -177,6 +177,7 @@ class User_Query extends Query
    * @param string $login login of user to see if is deactivated
    * @return boolean returns false, if error occurs or user is deactivated
    * @access public
+   * @since 0.7
    */
   function isActivated($login)
   {

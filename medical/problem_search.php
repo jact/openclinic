@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.8 2004/08/01 09:52:19 jact Exp $
+ * $Id: problem_search.php,v 1.9 2004/09/22 18:20:26 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Medical problems result set page
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.4
  */
 
   ////////////////////////////////////////////////////////////////////

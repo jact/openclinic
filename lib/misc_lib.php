@@ -5,15 +5,16 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: misc_lib.php,v 1.4 2004/07/05 17:42:36 jact Exp $
+ * $Id: misc_lib.php,v 1.5 2004/09/22 18:20:03 jact Exp $
  */
 
 /**
  * misc_lib.php
  ********************************************************************
- * Set of miscelanean functions
+ * Set of miscellanean functions
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.7
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: session_info.php,v 1.1 2004/06/20 12:00:00 jact Exp $
+ * $Id: session_info.php,v 1.2 2004/09/22 18:20:49 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Making session user info available on all pages
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.7
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log_tbl.sql,v 1.4 2004/07/24 16:22:04 jact Exp $
+ * $Id: record_log_tbl.sql,v 1.5 2004/09/22 18:19:08 jact Exp $
  */
 
 /**
@@ -13,6 +13,7 @@
  * Creation of record_log_tbl structure
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.3
  */
 
 CREATE TABLE record_log_tbl (

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: nls.php,v 1.6 2004/08/28 14:49:31 jact Exp $
+ * $Id: nls.php,v 1.7 2004/09/22 18:20:03 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * NLS (National Language System) array
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.6
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

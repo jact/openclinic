@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test_Query.php,v 1.6 2004/08/23 17:58:43 jact Exp $
+ * $Id: Test_Query.php,v 1.7 2004/09/22 18:18:24 jact Exp $
  */
 
 /**
@@ -56,6 +56,7 @@ class Test_Query extends Query
    ********************************************************************
    * @return mixed if error occurs returns false, else last insert id
    * @access public
+   * @since 0.3
    */
   function getLastId()
   {

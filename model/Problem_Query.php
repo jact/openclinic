@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.7 2004/08/23 17:58:43 jact Exp $
+ * $Id: Problem_Query.php,v 1.8 2004/09/22 18:18:24 jact Exp $
  */
 
 /**
@@ -68,6 +68,7 @@ class Problem_Query extends Query
    ********************************************************************
    * @param int $value
    * @access public
+   * @since 0.4
    */
   function setItemsPerPage($value)
   {
@@ -79,6 +80,7 @@ class Problem_Query extends Query
    ********************************************************************
    * @return int
    * @access public
+   * @since 0.4
    */
   function getCurrentRow()
   {
@@ -90,6 +92,7 @@ class Problem_Query extends Query
    ********************************************************************
    * @return int
    * @access public
+   * @since 0.4
    */
   function getRowCount()
   {
@@ -101,6 +104,7 @@ class Problem_Query extends Query
    ********************************************************************
    * @return int
    * @access public
+   * @since 0.4
    */
   function getPageCount()
   {
@@ -119,6 +123,7 @@ class Problem_Query extends Query
    * @param int $limitFrom (optional) maximum number of results
    * @return boolean returns false, if error occurs
    * @access public
+   * @since 0.4
    */
   function search($type, $word, $page, $logical, $limitFrom = 0)
   {
@@ -242,6 +247,7 @@ class Problem_Query extends Query
    ********************************************************************
    * @return mixed if error occurs returns false, else last insert id
    * @access public
+   * @since 0.3
    */
   function getLastId()
   {

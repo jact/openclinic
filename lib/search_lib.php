@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: search_lib.php,v 1.6 2004/08/23 18:12:18 jact Exp $
+ * $Id: search_lib.php,v 1.7 2004/09/22 18:20:03 jact Exp $
  */
 
 /**
@@ -77,13 +77,13 @@ function explodeQuoted($str)
  * void showResultPages(int $currentPage, int $pageCount)
  ********************************************************************
  * Creates the pagination string in result sets
- * TODO: optimize code with constants
- * TODO: make htmlResultPages() function
  ********************************************************************
  * @param int $currentPage
  * @param int $pageCount total pages
  * @return void
  * @access public
+ * @todo optimize code with constants
+ * @todo make htmlResultPages() function
  */
 function showResultPages($currentPage, $pageCount)
 {

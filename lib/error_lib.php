@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: error_lib.php,v 1.8 2004/08/23 17:59:08 jact Exp $
+ * $Id: error_lib.php,v 1.9 2004/09/22 18:20:03 jact Exp $
  */
 
 /**
@@ -105,6 +105,7 @@ function showConnError($conn, $goOut = true)
  * @param bool $goOut if true, execute an exit()
  * @return void
  * @access public
+ * @since 0.7
  */
 function showFetchError($query, $goOut = true)
 {
@@ -142,6 +143,7 @@ function showErrorMsg($errorMsg, $errorType = E_USER_WARNING)
  * @param array $context
  * @return string information about backtracing
  * @access public
+ * @since 0.7
  */
 function backTrace($context)
 {
@@ -179,6 +181,7 @@ function backTrace($context)
  * @param array $context
  * @return void
  * @access public
+ * @since 0.7
  */
 function customErrorHandler($number, $message, $file, $line, $context)
 {

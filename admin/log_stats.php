@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_stats.php,v 1.4 2004/08/02 10:47:33 jact Exp $
+ * $Id: log_stats.php,v 1.5 2004/09/22 18:18:40 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Log stats screen (access logins or record operations)
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.4
  */
 
   ////////////////////////////////////////////////////////////////////

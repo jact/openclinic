@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.3 2004/07/14 18:16:02 jact Exp $
+ * $Id: xhtml_start.php,v 1.4 2004/09/22 18:20:49 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Contains the common XHTML content of the web pages (XML prolog, DOCTYPE, title page and meta data)
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.7
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

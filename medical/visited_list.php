@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: visited_list.php,v 1.6 2004/07/07 17:23:21 jact Exp $
+ * $Id: visited_list.php,v 1.7 2004/09/22 18:20:26 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Set of functions to manage visited patients array
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.4
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

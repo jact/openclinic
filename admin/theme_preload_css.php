@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.2 2004/08/05 14:28:05 jact Exp $
+ * $Id: theme_preload_css.php,v 1.3 2004/09/22 18:18:40 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Upload a css file to preload contents
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.7
  */
 
   ////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Query.php,v 1.7 2004/07/24 16:32:02 jact Exp $
+ * $Id: Access_Query.php,v 1.8 2004/09/22 18:18:24 jact Exp $
  */
 
 /**
@@ -23,6 +23,7 @@ require_once("../classes/Query.php");
  ********************************************************************
  * @author jact <jachavar@terra.es>
  * @access public
+ * @since 0.3
  ********************************************************************
  * Methods:
  *  void setItemsPerPage(int $value)
@@ -111,6 +112,7 @@ class Access_Query extends Query
    * @param int $hour (optional)
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
+   * @since 0.4
    */
   function select($year = 0, $month = 0, $day = 0, $hour = 0)
   {
@@ -155,6 +157,7 @@ class Access_Query extends Query
    * @param int $limitFrom (optional) maximum number of results
    * @return boolean returns false, if error occurs
    * @access public
+   * @since 0.7
    */
   function searchUser($idUser, $page, $limitFrom = 0)
   {
@@ -224,6 +227,7 @@ class Access_Query extends Query
    ********************************************************************
    * @return array returns access log or false if no more logs to fetch
    * @access public
+   * @since 0.4
    */
   function fetch()
   {

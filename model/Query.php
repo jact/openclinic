@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.4 2004/07/24 16:30:33 jact Exp $
+ * $Id: Query.php,v 1.5 2004/09/22 18:18:24 jact Exp $
  */
 
 /**
@@ -119,6 +119,7 @@ class Query
    * @param string $sql SQL of query to execute
    * @return boolean returns false, if error occurs
    * @access public
+   * @since 0.6
    */
   function exec($sql)
   {
@@ -144,6 +145,7 @@ class Query
    * @param int $arrayType (optional) array type to return
    * @return array resulting array. Returns false, if no more rows to fetch.
    * @access public
+   * @since 0.4
    */
   function fetchRow($arrayType = MYSQL_ASSOC)
   {
@@ -165,6 +167,7 @@ class Query
    * @param int $arrayType (optional) array type to return
    * @return array resulting array. Returns false if there is an empty result
    * @access public
+   * @since 0.4
    */
   function fetchAll($arrayType = MYSQL_ASSOC)
   {
@@ -187,6 +190,7 @@ class Query
    ********************************************************************
    * @return int, number of rows in result
    * @access public
+   * @since 0.4
    */
   function numRows()
   {
@@ -220,6 +224,7 @@ class Query
    ********************************************************************
    * @return int number of affected rows or false if an error occurs
    * @access public
+   * @since 0.7
    */
   function affectedRows()
   {
@@ -234,6 +239,7 @@ class Query
    * @param string $table (optional) name of table (if empty, $this->_table)
    * @return mixed array with key fields or false if an error occurs
    * @access public
+   * @since 0.7
    */
   function getPrimaryKey($table = "")
   {
@@ -270,6 +276,7 @@ class Query
    * @param string $table (optional) name of table (if empty, $this->_table)
    * @return string serialized row data
    * @access public
+   * @since 0.7
    */
   function getRowData($key, $value, $table = "")
   {

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DbConnection.php,v 1.4 2004/07/21 18:06:11 jact Exp $
+ * $Id: DbConnection.php,v 1.5 2004/09/22 18:18:24 jact Exp $
  */
 
 /**
@@ -125,6 +125,7 @@ class DbConnection
    * @param string $host (optional)
    * @return void
    * @access public
+   * @since 0.7
    */
   function DbConnection($database = "", $user = "", $pwd = "", $host = "")
   {
@@ -282,6 +283,7 @@ class DbConnection
    ********************************************************************
    * @return int number of affected rows or false if an error occurs
    * @access public
+   * @since 0.2
    */
   function affectedRows()
   {
@@ -295,6 +297,7 @@ class DbConnection
    ********************************************************************
    * @return false, if no link, int otherwise.
    * @access public
+   * @since 0.2
    */
   function lastInsertId()
   {
@@ -322,6 +325,7 @@ class DbConnection
    * @param int $row (optional) row number
    * @return false, if no more rows to fetch, true otherwise.
    * @access public
+   * @since 0.2
    */
   function rowSeek($row = 0)
   {
@@ -485,6 +489,7 @@ class DbConnection
    ********************************************************************
    * @return bool false if an error occurs
    * @access public
+   * @since 0.4
    */
   function freeResult()
   {

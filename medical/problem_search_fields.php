@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search_fields.php,v 1.5 2004/08/01 08:35:38 jact Exp $
+ * $Id: problem_search_fields.php,v 1.6 2004/09/22 18:20:26 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Fields of medical problem's search
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.4
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

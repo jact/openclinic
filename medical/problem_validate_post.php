@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_validate_post.php,v 1.3 2004/05/24 22:13:21 jact Exp $
+ * $Id: problem_validate_post.php,v 1.4 2004/09/22 18:20:26 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Validate post data of a medical problem
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.6
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

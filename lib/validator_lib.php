@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: validator_lib.php,v 1.5 2004/07/05 17:40:33 jact Exp $
+ * $Id: validator_lib.php,v 1.6 2004/09/22 18:20:04 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Functions to validate data
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * @since 0.4
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
