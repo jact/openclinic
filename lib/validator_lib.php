@@ -5,13 +5,13 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: validator_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
+ * $Id: validator_lib.php,v 1.3 2004/05/24 22:12:06 jact Exp $
  */
 
 /**
  * validator_lib.php
  ********************************************************************
- * Functions to validate data (actually is not used in the project)
+ * Functions to validate data
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
@@ -26,7 +26,8 @@
  * Functions:
  *  bool hasMetas(string $text)
  *  mixed stripMetas(string $text)
- *  mixed customStrip(array $chars, string $text)
+ *  mixed customStrip(array $chars, string $text, bool $insensitive = false)
+ *  string safeText(string $text, bool $includeEvents = true)
  */
 
 /*
@@ -75,17 +76,18 @@ function stripMetas($text)
 }
 
 /*
- * mixed customStrip(array $chars, string $text)
+ * mixed customStrip(array $chars, string $text, bool $insensitive = false)
  ********************************************************************
  * $chars must be an array of characters to remove
  * This method is meta-character safe
  ********************************************************************
  * @param array (string) $chars
  * @param string $text
+ * @param bool $insensitive (optional)
  * @return mixed false if submitted string is empty, string otherwise
  * @access public
  */
-function customStrip($chars, $text)
+function customStrip($chars, $text, $insensitive = false)
 {
   if (empty($text))
   {
@@ -102,11 +104,59 @@ function customStrip($chars, $text)
   {
     if ( !empty($val) )
     {
-      // str_replace is meta-safe, ereg_replace is not
-      $text = str_replace($val, "", $text);
+      if ($insensitive)
+      {
+        if (function_exists('str_ireplace')) // in PHP 5.0, use str_ireplace()
+        {
+          $text = str_ireplace($val, "", $text);
+        }
+        else
+        {
+          $text = eregi_replace($val, "", $text);
+        }
+      }
+      else
+      {
+        // str_replace is meta-safe, ereg_replace is not
+        $text = str_replace($val, "", $text);
+      }
     }
   }
 
   return $text;
+}
+
+/*
+ * string safeText(string $text, bool $includeEvents = true)
+ ********************************************************************
+ * This function sanitize a string value of suspicious contents
+ ********************************************************************
+ * @param string $text
+ * @param bool $includeEvents (optional) to strip JavaScript event handlers
+ * @return string sanitized text
+ * @access public
+ * @see customStrip() for how they are removed
+ */
+function safeText($text, $includeEvents = true)
+{
+  $value = trim(htmlspecialchars(strip_tags($text, ALLOWED_HTML_TAGS)));
+
+  if ($includeEvents)
+  {
+    $events = array(
+      "onmousedown", "onmouseup", "onclick", "ondblclick", "onmouseover", "onmouseout", "onselect",
+      "onkeydown", "onkeypress", "onkeyup",
+      "onblur", "onfocus",
+      "onreset", "onsubmit",
+      "onload", "onunload", "onresize",
+      "onabort", "onchange", "onerror"
+    );
+    $value = customStrip($events, $value, true); // case insensitive
+    unset($events);
+  }
+
+  $value = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+
+  return $value;
 }
 ?>
