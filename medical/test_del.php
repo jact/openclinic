@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del.php,v 1.4 2004/07/07 17:23:21 jact Exp $
+ * $Id: test_del.php,v 1.5 2004/07/11 11:23:01 jact Exp $
  */
 
 /**
@@ -83,37 +83,12 @@
   ////////////////////////////////////////////////////////////////////
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
-  $title = _("Delete Medical Test");
-  require_once("../shared/header.php");
-  require_once("../medical/patient_header.php");
-  require_once("../medical/problem_header.php");
-
-  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
+  // To header, without &amp;
+  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&pat=" . $idPatient;
 
   ////////////////////////////////////////////////////////////////////
-  // Navigation links
+  // Redirect to medical test list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Medical Problems Report") => "../medical/problem_list.php?key=" . $idPatient,
-    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient,
-    _("View Medical Tests") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "patient.png");
-  unset($links);
-
-  showPatientHeader($idPatient);
-  showProblemHeader($idProblem);
-
-  echo '<p>' . sprintf(_("Medical test, %s, has been deleted."), $file) . "</p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to Medical Tests List") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  $info = urlencode($file);
+  header("Location: " . $returnLocation . "&deleted=Y&info=" . $info);
 ?>
