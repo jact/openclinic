@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.3 2004/05/20 19:16:02 jact Exp $
+ * $Id: wizard.php,v 1.4 2004/05/20 19:19:05 jact Exp $
  */
 
 /**
@@ -115,6 +115,8 @@
 <!-- Header -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo OPEN_LANGUAGE; ?>" dir="<?php echo OPEN_DIRECTION; ?>">
 <head>
+<title><?php echo _("OpenClinic Install Wizard"); ?></title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
 
 <meta http-equiv="Cache-Control" content="no-cache" />
@@ -128,8 +130,6 @@
 <meta name="robots" content="noindex,nofollow" />
 
 <meta name="MSSmartTagsPreventParsing" content="TRUE" />
-
-<title><?php echo _("OpenClinic Install Wizard"); ?></title>
 
 <link rel="stylesheet" href="../css/wizard.css" type="text/css" />
 
@@ -525,7 +525,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.3 2004/05/20 19:16:02 jact Exp $
+ * $Id: wizard.php,v 1.4 2004/05/20 19:19:05 jact Exp $
  */
 
 /**

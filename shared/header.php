@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.4 2004/05/16 18:11:34 jact Exp $
+ * $Id: header.php,v 1.5 2004/05/20 19:18:59 jact Exp $
  */
 
 /**
@@ -28,6 +28,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo str_replace("_", "-", OPEN_LANGUAGE); ?>" dir="<?php echo OPEN_DIRECTION; ?>">
 <head>
+<title>
+<?php
+  echo OPEN_CLINIC_NAME;
+  if (isset($title) && $title != "")
+  {
+    echo " : " . $title;
+  }
+?>
+</title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
 
 <meta http-equiv="Content-Style-Type" content="text/css2" />
@@ -71,16 +81,6 @@
 <?php
   } // end-if
 ?>
-
-<title>
-<?php
-  echo OPEN_CLINIC_NAME;
-  if (isset($title) && $title != "")
-  {
-    echo " : " . $title;
-  }
-?>
-</title>
 
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
 </head>
