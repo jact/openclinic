@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.11 2004/07/14 18:17:41 jact Exp $
+ * $Id: header.php,v 1.12 2004/07/21 18:03:36 jact Exp $
  */
 
 /**
@@ -145,12 +145,6 @@
   <!-- End Tabs -->
 
   <div id="sourceForgeLinks">
-    <?php
-      if (defined("OPEN_DEMO") && OPEN_DEMO)
-      {
-        echo '<div class="message">' . _("This is a demo version") . "</div>\n";
-      }
-    ?>
     <a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a> |
 
     <?php //<!--a href="http://sourceforge.net/mail/?group_id=70742">?><?php //echo _("Mailing Lists"); ?><?php //</a> | --> ?>
@@ -218,3 +212,9 @@
 
 <!-- Main Zone -->
 <div id="mainZone">
+<?php
+  if (defined("OPEN_DEMO") && OPEN_DEMO)
+  {
+    echo '<p class="message">' . _("This is a demo version") . "</p>\n";
+  }
+?>
