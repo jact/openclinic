@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.7 2004/08/04 15:21:53 jact Exp $
+ * $Id: user_new_form.php,v 1.8 2004/08/06 12:01:53 jact Exp $
  */
 
 /**
@@ -97,7 +97,7 @@
 </form>
 
 <?php
-  showMessage('* ' . _("Note: The changes in the fields * will be visible in the next session."));
+  showMessage('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");
 ?>
