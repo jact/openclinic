@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.3 2004/05/15 17:20:07 jact Exp $
+ * $Id: setting_fields.php,v 1.4 2004/05/15 17:39:54 jact Exp $
  */
 
 /**
@@ -21,6 +21,8 @@
     header("Location: ../index.php");
     exit();
   }
+
+  require_once("../lib/file_lib.php");
 ?>
 
 <table>
@@ -51,19 +53,8 @@
       <td>
         <?php
           $dir = "../images/";
-          $handle = opendir($dir);
-          $array = null;
           $ext = array("bmp", "gif", "jpe", "jpeg", "jpg", "png");
-          while (($file = readdir($handle)) != false)
-          {
-            $aux = explode(".", $file);
-            if (in_array($aux[1], $ext) && is_file($dir . $file))
-            {
-              $array["$file"] = $file;
-            }
-          }
-          closedir($handle);
-          asort($array);
+          $array = getFiles($dir, false, $ext);
 
           showSelectArray("clinic_image_url", $array, basename($postVars["clinic_image_url"]));
           unset($array);
@@ -146,6 +137,7 @@
             }
           }
           closedir($handle);
+
           showSelectArray("language", $array, $postVars["language"]);
           unset($array);
         ?>
