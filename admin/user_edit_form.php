@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: user_edit_form.php,v 1.3 2004/04/24 16:47:23 jact Exp $
  */
 
 /**
@@ -86,6 +86,7 @@
     }
     else
     {
+      $postVars["id_member"] = $user->getIdMember();
       $postVars["login"] = $user->getLogin();
       $postVars["email"] = $user->getEmail();
       $postVars["actived"] = ($user->isActived() ? "CHECKED" : "");
@@ -165,6 +166,7 @@ function md5Login(f)
 <?php
   showInputHidden("referer", "edit"); // to user_validate_post.php
   showInputHidden("id_user", $postVars["id_user"]);
+  showInputHidden("id_member", $postVars["id_member"]);
 
   if (isset($_GET["all"]))
   {
