@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.14 2004/08/05 14:29:42 jact Exp $
+ * $Id: theme_preview.php,v 1.15 2004/08/09 10:39:19 jact Exp $
  */
 
 /**
@@ -151,6 +151,10 @@
 <div id="header">
   <div id="subHeader">
     <h1><?php echo _("Clinic Name"); ?></h1>
+
+    <div id="headerInformation">
+      <?php echo _("Information"); ?>
+    </div>
   </div><!-- End #subHeader -->
 
   <!-- Tabs -->
@@ -179,6 +183,8 @@
     <span class="noPrint"> | </span>
     <a href="#top"><?php echo _("Sample Link"); ?></a>
   </div><!-- End .linkList -->
+
+  <hr />
 
   <div id="sideBarLogo">
     <p>
