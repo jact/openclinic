@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.15 2004/08/06 12:02:56 jact Exp $
+ * $Id: header.php,v 1.16 2004/08/09 10:03:58 jact Exp $
  */
 
 /**
@@ -171,6 +171,8 @@
 <!-- Side Bar -->
 <div id="sideBar">
   <?php require_once("../navbars/" . $tab . ".php"); ?>
+
+  <hr />
 
   <div id="sideBarLogo">
     <p>
