@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.8 2004/07/07 17:21:53 jact Exp $
+ * $Id: user_edit_form.php,v 1.9 2004/07/29 18:19:12 jact Exp $
  */
 
 /**
@@ -73,7 +73,7 @@
       $userQ->close();
       include_once("../shared/header.php");
 
-      echo '<p>' . _("That user does not exist.") . "</p>\n";
+      showMessage(_("That user does not exist."), OPEN_MSG_ERROR);
 
       include_once("../shared/footer.php");
       exit();
@@ -180,11 +180,11 @@ function md5Login(f)
 </form>
 
 <?php
-  echo '<p class="advice">* ' . _("Note: The changes in the fields * will be visible in the next session.") . "</p>\n";
+  showMessage('* ' . _("Note: The changes in the fields * will be visible in the next session."));
 
   if (isset($_GET["all"]))
   {
-    echo '<p class="message">' . _("Fill password fields only if you want to change it.") . "</p>\n";
+    showMessage(_("Fill password fields only if you want to change it."), OPEN_MSG_INFO);
   }
 
   require_once("../shared/footer.php");
