@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_use.php,v 1.1 2004/03/24 19:56:32 jact Exp $
+ * $Id: theme_use.php,v 1.2 2004/04/23 20:36:51 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Theme by default updating process
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 24/03/04 20:56
  */
 
   ////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.1 2004/03/20 20:43:04 jact Exp $
+ * $Id: user_fields.php,v 1.2 2004/04/23 20:36:51 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Fields of user data
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 20/03/04 21:43
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

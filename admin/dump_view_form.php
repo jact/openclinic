@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_view_form.php,v 1.1 2004/03/22 20:10:54 jact Exp $
+ * $Id: dump_view_form.php,v 1.2 2004/04/23 20:36:50 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Choice screen of database dump
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 22/03/04 21:10
  */
 
   ////////////////////////////////////////////////////////////////////

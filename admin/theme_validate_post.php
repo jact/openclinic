@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_validate_post.php,v 1.1 2004/02/19 18:46:04 jact Exp $
+ * $Id: theme_validate_post.php,v 1.2 2004/04/23 20:36:51 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Validate post data of a theme
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 19/02/04 19:46
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

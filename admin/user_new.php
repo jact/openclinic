@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new.php,v 1.1 2004/03/24 19:58:10 jact Exp $
+ * $Id: user_new.php,v 1.2 2004/04/23 20:36:51 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * User addition process
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 24/03/04 20:58
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -96,9 +95,11 @@
   showNavLinks($links, "users.png");
   unset($links);
 
+  echo '<p>';
   echo (isset($loginUsed) && $loginUsed)
-    ? '<p>' . sprintf(_("Login, %s, already exists. The changes have no effect."), $user->getLogin()) . "</p>\n"
-    : '<p>' . sprintf(_("User, %s, has been added."), $user->getLogin()) . "</p>\n";
+    ? sprintf(_("Login, %s, already exists. The changes have no effect."), $user->getLogin())
+    : sprintf(_("User, %s, has been added."), $user->getLogin());
+  echo "</p>\n";
 
   unset($user);
 

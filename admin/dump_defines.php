@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_defines.php,v 1.1 2004/01/29 14:05:42 jact Exp $
+ * $Id: dump_defines.php,v 1.2 2004/04/23 20:36:50 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Definition constants needed for the dump process
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 29/01/04 15:05
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

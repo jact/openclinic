@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.2 2004/04/18 14:28:44 jact Exp $
+ * $Id: theme_preview.php,v 1.3 2004/04/23 20:36:51 jact Exp $
  */
 
 /**
@@ -14,11 +14,13 @@
  * Preview page of an application theme
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 05/04/2004 0:11
  */
 
   error_reporting(55); // E_ALL & ~E_NOTICE - normal
 
+  ////////////////////////////////////////////////////////////////////
+  // Controlling vars
+  ////////////////////////////////////////////////////////////////////
   $tab = "admin";
 
   ////////////////////////////////////////////////////////////////////
@@ -136,8 +138,7 @@
 
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
 </head>
-<body>
-<a name="top"></a>
+<body id="top">
 
 <!-- Header -->
 <div id="header">
