@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Query.php,v 1.6 2004/07/14 18:26:49 jact Exp $
+ * $Id: Access_Query.php,v 1.7 2004/07/24 16:32:02 jact Exp $
  */
 
 /**
@@ -42,6 +42,19 @@ class Access_Query extends Query
   var $_currentPage = 0;
   var $_rowCount = 0;
   var $_pageCount = 0;
+
+  /**
+   * void Access_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Access_Query()
+  {
+    $this->_table = "access_log_tbl";
+  }
 
   /**
    * void setItemsPerPage(int $value)
@@ -102,7 +115,7 @@ class Access_Query extends Query
   function select($year = 0, $month = 0, $day = 0, $hour = 0)
   {
     $sql = "SELECT login,access_date,id_profile";
-    $sql .= " FROM access_log_tbl";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE 1";
     if ($year != "")
     {
@@ -148,12 +161,12 @@ class Access_Query extends Query
     // reset stats
     $this->_rowNumber = 0;
     $this->_currentRow = 0;
-    $this->_currentPage = intval($page);
+    $this->_currentPage = ($page > 1) ? intval($page) : 1;
     $this->_rowCount = 0;
     $this->_pageCount = 0;
 
-    $sql = " FROM access_log_tbl";
-    $sql .= " WHERE access_log_tbl.id_user=" . intval($idUser);
+    $sql = " FROM " . $this->_table;
+    $sql .= " WHERE id_user=" . intval($idUser);
 
     $sqlCount = "SELECT COUNT(*) AS row_count" . $sql;
 
@@ -243,8 +256,8 @@ class Access_Query extends Query
    */
   function insert($user)
   {
-    $sql = "INSERT INTO access_log_tbl ";
-    $sql .= "(id_user, login, access_date, id_profile) VALUES (";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_user, login, access_date, id_profile) VALUES (";
     $sql .= $user->getIdUser() . ", ";
     $sql .= "'" . urlencode($user->getLogin()) . "', ";
     $sql .= "NOW(), ";

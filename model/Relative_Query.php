@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Relative_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
+ * $Id: Relative_Query.php,v 1.4 2004/07/24 16:33:36 jact Exp $
  */
 
 /**
@@ -25,6 +25,7 @@ require_once("../classes/Query.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Relative_Query(void)
  *  mixed select(int $idPatient, int $idRelative = 0)
  *  mixed fetch(void)
  *  bool insert(int $idPatient, int $idRelative)
@@ -32,6 +33,19 @@ require_once("../classes/Query.php");
  */
 class Relative_Query extends Query
 {
+  /**
+   * void Relative_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Relative_Query()
+  {
+    $this->_table = "relative_tbl";
+  }
+
   /**
    * mixed select(int $idPatient, int $idRelative = 0)
    ********************************************************************
@@ -44,7 +58,8 @@ class Relative_Query extends Query
    */
   function select($idPatient, $idRelative = 0)
   {
-    $sql = "SELECT * FROM relative_tbl";
+    $sql = "SELECT *";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
     if ($idRelative > 0)
     {
@@ -88,8 +103,8 @@ class Relative_Query extends Query
    */
   function insert($idPatient, $idRelative)
   {
-    $sql = "INSERT INTO relative_tbl ";
-    $sql .= "(id_patient, id_relative) VALUES (";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_patient, id_relative) VALUES (";
     $sql .= intval($idPatient) . ", ";
     $sql .= intval($idRelative) . ");";
 
@@ -100,7 +115,8 @@ class Relative_Query extends Query
       return false;
     }
 
-    $sql = "INSERT INTO relative_tbl VALUES (";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_patient, id_relative) VALUES (";
     $sql .= intval($idRelative) . ", ";
     $sql .= intval($idPatient) . ");";
 
@@ -125,7 +141,7 @@ class Relative_Query extends Query
    */
   function delete($idPatient, $idRelative)
   {
-    $sql = "DELETE FROM relative_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
     $sql .= " AND id_relative=" . intval($idRelative);
 
@@ -136,7 +152,7 @@ class Relative_Query extends Query
       return false;
     }
 
-    $sql = "DELETE FROM relative_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idRelative);
     $sql .= " AND id_relative=" . intval($idPatient);
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Session_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Session_Query.php,v 1.3 2004/07/24 16:33:56 jact Exp $
  */
 
 /**
@@ -25,12 +25,26 @@ require_once("../classes/Query.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Session_Query(void)
  *  bool validToken(string $login, int $token)
  *  mixed getToken(string $login)
  *  bool _updateToken(int $token)
  */
 class Session_Query extends Query
 {
+  /**
+   * void Session_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Session_Query()
+  {
+    $this->_table = "session_tbl";
+  }
+
   /**
    * bool validToken(string $login, int $token)
    ********************************************************************
@@ -43,7 +57,8 @@ class Session_Query extends Query
    */
   function validToken($login, $token)
   {
-    $sql = "SELECT last_updated_date, token FROM session_tbl";
+    $sql = "SELECT last_updated_date, token";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE login='" . urlencode($login);
     $sql .= "' AND token=" . intval($token);
     $sql .= " AND last_updated_date >= date_sub(sysdate(), interval ";
@@ -83,7 +98,8 @@ class Session_Query extends Query
     // Only purpose of the delete is to clean up old session rows so that
     // the session table doesn't get too full.
     ////////////////////////////////////////////////////////////////////
-    $sql = "DELETE FROM session_tbl WHERE login='" . urlencode($login) . "'";
+    $sql = "DELETE FROM " . $this->_table;
+    $sql .= " WHERE login='" . urlencode($login) . "'";
     $sql .= " AND last_updated_date < date_sub(sysdate(), interval ";
     $sql .= OPEN_SESSION_TIMEOUT . " minute)";
 
@@ -97,8 +113,8 @@ class Session_Query extends Query
     srand((double) microtime() * 1000000);
     $token = rand(-10000, 10000);
 
-    $sql = "INSERT INTO session_tbl ";
-    $sql .= "(login, last_updated_date, token) VALUES (";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (login, last_updated_date, token) VALUES (";
     $sql .= "'" . urlencode($login) . "', sysdate(), ";
     $sql .= $token . ")";
 
@@ -123,7 +139,7 @@ class Session_Query extends Query
    */
   function _updateToken($token)
   {
-    $sql = "UPDATE session_tbl SET";
+    $sql = "UPDATE " . $this->_table . " SET";
     $sql .= " last_updated_date=sysdate()";
     $sql .= " WHERE token=" . intval($token) . ";";
 

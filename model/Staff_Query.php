@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.5 2004/07/07 17:23:54 jact Exp $
+ * $Id: Staff_Query.php,v 1.6 2004/07/24 16:34:22 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/Staff.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Staff_Query(void)
  *  mixed select(int $idMember = 0)
  *  bool selectDoctor(string $collegiateNumber)
  *  mixed selectType(string $type = 'A')
@@ -38,6 +39,19 @@ require_once("../classes/Staff.php");
 class Staff_Query extends Query
 {
   /**
+   * void Staff_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Staff_Query()
+  {
+    $this->_table = "staff_tbl";
+  }
+
+  /**
    * mixed select(int $idMember = 0)
    ********************************************************************
    * Executes a query
@@ -49,7 +63,7 @@ class Staff_Query extends Query
   function select($idMember = 0)
   {
     $sql = "SELECT *";
-    $sql .= " FROM staff_tbl";
+    $sql .= " FROM " . $this->_table;
     if ($idMember > 0)
     {
       $sql .= " WHERE id_member=" . intval($idMember);
@@ -78,7 +92,7 @@ class Staff_Query extends Query
   function selectDoctor($collegiateNumber)
   {
     $sql = "SELECT *";
-    $sql .= " FROM staff_tbl";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE collegiate_number='" . urlencode($collegiateNumber) . "'";
     //$sql .= " ORDER BY first_name, surname1";
 
@@ -114,7 +128,7 @@ class Staff_Query extends Query
     }
 
     $sql = "SELECT *";
-    $sql .= " FROM staff_tbl";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE member_type='" . $type . "'";
     $sql .= " ORDER BY first_name, surname1";
 
@@ -172,7 +186,8 @@ class Staff_Query extends Query
    */
   function existLogin($login, $idMember = 0)
   {
-    $sql = "SELECT COUNT(login) FROM staff_tbl";
+    $sql = "SELECT COUNT(login)";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE login='" . urlencode($login) . "'";
     if ($idMember > 0)
     {
@@ -216,8 +231,8 @@ class Staff_Query extends Query
     }*/
 
     //print_r($staff); exit(); // debug
-    $sql = "INSERT INTO staff_tbl ";
-    $sql .= "(id_member, member_type, collegiate_number, nif, first_name, surname1, ";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_member, member_type, collegiate_number, nif, first_name, surname1, ";
     $sql .= "surname2, address, phone_contact, id_user, login) VALUES (NULL, ";
     $sql .= "'" . $staff->getMemberType() . "', ";
     $sql .= (($staff->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($staff->getCollegiateNumber()) . "', ");
@@ -264,7 +279,7 @@ class Staff_Query extends Query
       return false;
     }*/
 
-    $sql = "UPDATE staff_tbl SET ";
+    $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "collegiate_number=" . (($staff->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($staff->getCollegiateNumber()) . "', ");
     $sql .= "nif='" . urlencode($staff->getNIF()) . "', ";
     $sql .= "first_name='" . urlencode($staff->getFirstName()) . "', ";
@@ -296,7 +311,8 @@ class Staff_Query extends Query
    */
   function delete($idMember, $idUser = 0)
   {
-    $sql = "DELETE FROM staff_tbl WHERE id_member=" . intval($idMember) . ";";
+    $sql = "DELETE FROM " . $this->_table;
+    $sql .= " WHERE id_member=" . intval($idMember) . ";";
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -310,7 +326,8 @@ class Staff_Query extends Query
       return $result;
     }
 
-    $sql = "DELETE FROM user_tbl WHERE id_user=" . intval($idUser) . ";";
+    $sql = "DELETE FROM user_tbl";
+    $sql .= " WHERE id_user=" . intval($idUser) . ";";
 
     $result = $this->exec($sql);
     if ($result == false)

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
+ * $Id: History_Query.php,v 1.4 2004/07/24 16:32:49 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/History.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void History_Query(void)
  *  mixed selectPersonal(int $idPatient = 0)
  *  mixed selectFamily(int $idPatient = 0)
  *  mixed fetchPersonal(void)
@@ -35,6 +36,19 @@ require_once("../classes/History.php");
  */
 class History_Query extends Query
 {
+  /**
+   * void History_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function History_Query()
+  {
+    $this->_table = "history_tbl";
+  }
+
   /**
    * mixed selectPersonal(int $idPatient = 0)
    ********************************************************************
@@ -49,7 +63,7 @@ class History_Query extends Query
     $sql = "SELECT id_patient,birth_growth,growth_sexuality,feed,habits,";
     $sql .= "peristaltic_conditions,psychological,children_complaint,venereal_disease,";
     $sql .= "accident_surgical_operation,medicinal_intolerance,mental_illness";
-    $sql .= " FROM history_tbl";
+    $sql .= " FROM " . $this->_table;
     if ($idPatient > 0)
     {
       $sql .= " WHERE id_patient=" . intval($idPatient);
@@ -79,7 +93,7 @@ class History_Query extends Query
   {
     $sql = "SELECT id_patient,parents_status_health,brothers_status_health,";
     $sql .= "spouse_childs_status_health,family_illness";
-    $sql .= " FROM history_tbl";
+    $sql .= " FROM " . $this->_table;
     if ($idPatient > 0)
     {
       $sql .= " WHERE id_patient=" . intval($idPatient);
@@ -168,7 +182,7 @@ class History_Query extends Query
    */
   function updatePersonal($history)
   {
-    $sql = "UPDATE history_tbl SET ";
+    $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "birth_growth=" . (($history->getBirthGrowth() == "") ? "NULL, " : "'" . urlencode($history->getBirthGrowth()) . "', ");
     $sql .= "growth_sexuality=" . (($history->getGrowthSexuality() == "") ? "NULL, " : "'" . urlencode($history->getGrowthSexuality()) . "', ");
     $sql .= "feed=" . (($history->getFeed() == "") ? "NULL, " : "'" . urlencode($history->getFeed()) . "', ");
@@ -202,7 +216,7 @@ class History_Query extends Query
    */
   function updateFamily($history)
   {
-    $sql = "UPDATE history_tbl SET ";
+    $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "parents_status_health=" . (($history->getParentsStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getParentsStatusHealth()) . "', ");
     $sql .= "brothers_status_health=" . (($history->getBrothersStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getBrothersStatusHealth()) . "', ");
     $sql .= "spouse_childs_status_health=" . (($history->getSpouseChildsStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getSpouseChildsStatusHealth()) . "', ");

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Connection_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
+ * $Id: Connection_Query.php,v 1.4 2004/07/24 16:32:14 jact Exp $
  */
 
 /**
@@ -25,6 +25,7 @@ require_once("../classes/Query.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Connection_Query(void)
  *  mixed select(int $idProblem, int $idConnection = 0)
  *  mixed fetch(void)
  *  bool insert(int $idProblem, int $idConnection)
@@ -32,6 +33,19 @@ require_once("../classes/Query.php");
  */
 class Connection_Query extends Query
 {
+  /**
+   * void Connection_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Connection_Query()
+  {
+    $this->_table = "connection_problem_tbl";
+  }
+
   /**
    * mixed select(int $idProblem, int $idConnection = 0)
    ********************************************************************
@@ -44,7 +58,8 @@ class Connection_Query extends Query
    */
   function select($idProblem, $idConnection = 0)
   {
-    $sql = "SELECT * FROM connection_problem_tbl";
+    $sql = "SELECT *";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem);
     if ($idConnection > 0)
     {
@@ -88,8 +103,8 @@ class Connection_Query extends Query
    */
   function insert($idProblem, $idConnection)
   {
-    $sql = "INSERT INTO connection_problem_tbl ";
-    $sql .= "(id_problem, id_connection) VALUES (";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_problem, id_connection) VALUES (";
     $sql .= intval($idProblem) . ", ";
     $sql .= intval($idConnection) . ");";
 
@@ -100,8 +115,8 @@ class Connection_Query extends Query
       return false;
     }
 
-    $sql = "INSERT INTO connection_problem_tbl ";
-    $sql .= "(id_problem, id_connection) VALUES (";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_problem, id_connection) VALUES (";
     $sql .= intval($idConnection) . ", ";
     $sql .= intval($idProblem) . ");";
 
@@ -126,7 +141,7 @@ class Connection_Query extends Query
    */
   function delete($idProblem, $idConnection)
   {
-    $sql = "DELETE FROM connection_problem_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem);
     $sql .= " AND id_connection=" . intval($idConnection);
 
@@ -137,7 +152,7 @@ class Connection_Query extends Query
       return false;
     }
 
-    $sql = "DELETE FROM connection_problem_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idConnection);
     $sql .= " AND id_connection=" . intval($idProblem);
 

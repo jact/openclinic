@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.6 2004/07/11 12:05:10 jact Exp $
+ * $Id: Patient_Query.php,v 1.7 2004/07/24 16:33:03 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/Patient.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Patient_Query(void)
  *  void setItemsPerPage(int $value)
  *  int getCurrentRow(void)
  *  int getRowCount(void)
@@ -47,6 +48,19 @@ class Patient_Query extends Query
   var $_currentPage = 0;
   var $_rowCount = 0;
   var $_pageCount = 0;
+
+  /**
+   * void Patient_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Patient_Query()
+  {
+    $this->_table = "patient_tbl";
+  }
 
   /**
    * void setItemsPerPage(int $value)
@@ -110,7 +124,7 @@ class Patient_Query extends Query
     // reset stats
     $this->_rowNumber = 0;
     $this->_currentRow = 0;
-    $this->_currentPage = intval($page);
+    $this->_currentPage = ($page > 1) ? intval($page) : 1;
     $this->_rowCount = 0;
     $this->_pageCount = 0;
 
@@ -167,7 +181,7 @@ class Patient_Query extends Query
     }
 
     // Building sql statements
-    $sql = "FROM patient_tbl WHERE ";
+    $sql = "FROM " . $this->_table . " WHERE ";
     $num = sizeof($word);
     if ($num > 1)
     {
@@ -251,7 +265,7 @@ class Patient_Query extends Query
   function getLastId()
   {
     $sql = "SELECT LAST_INSERT_ID() AS last_id";
-    $sql .= " FROM patient_tbl";
+    $sql .= " FROM " . $this->_table;
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -277,7 +291,7 @@ class Patient_Query extends Query
   {
     $sql = "SELECT *,";
     $sql .= "FLOOR((TO_DAYS(GREATEST(IF(decease_date='0000-00-00',CURRENT_DATE,decease_date),IFNULL(decease_date,CURRENT_DATE))) - TO_DAYS(birth_date)) / 365) AS age";
-    $sql .= " FROM patient_tbl";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
     $result = $this->exec($sql);
@@ -351,7 +365,7 @@ class Patient_Query extends Query
   function existName($firstName, $surname1, $surname2, $idPatient = 0)
   {
     $sql = "SELECT COUNT(id_patient)";
-    $sql .= " FROM patient_tbl";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE first_name='" . urlencode($firstName) . "'";
     $sql .= " AND surname1='" . urlencode($surname1) . "'";
     $sql .= " AND surname2='" . urlencode($surname2) . "'";
@@ -398,8 +412,8 @@ class Patient_Query extends Query
       return false;
     }*/
 
-    $sql = "INSERT INTO patient_tbl ";
-    $sql .= "(id_patient, nif, first_name, surname1, surname2, address, ";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_patient, nif, first_name, surname1, surname2, address, ";
     $sql .= "phone_contact, sex, race, birth_date, birth_place, decease_date, nts, nss, ";
     $sql .= "family_situation, labour_situation, education, insurance_company, ";
     $sql .= "collegiate_number) VALUES (NULL, ";
@@ -468,7 +482,7 @@ class Patient_Query extends Query
       return false;
     }*/
 
-    $sql = "UPDATE patient_tbl SET ";
+    $sql = "UPDATE " . $this->_table . " SET ";
     //$sql .= "last_update_date=curdate(), ";
     $sql .= "nif=" . (($patient->getNIF() == "") ? "NULL, " : "'" . urlencode($patient->getNIF()) . "', ");
     $sql .= "first_name='" . urlencode($patient->getFirstName()) . "', ";
@@ -510,7 +524,7 @@ class Patient_Query extends Query
    */
   function delete($idPatient)
   {
-    $sql = "DELETE FROM patient_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
     $result = $this->exec($sql);

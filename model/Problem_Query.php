@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
+ * $Id: Problem_Query.php,v 1.5 2004/07/24 16:33:20 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/Problem.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Problem_Query(void)
  *  void setItemsPerPage(int $value)
  *  int getCurrentRow(void)
  *  int getRowCount(void)
@@ -48,6 +49,19 @@ class Problem_Query extends Query
   var $_currentPage = 0;
   var $_rowCount = 0;
   var $_pageCount = 0;
+
+  /**
+   * void Problem_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Problem_Query()
+  {
+    $this->_table = "problem_tbl";
+  }
 
   /**
    * void setItemsPerPage(int $value)
@@ -111,7 +125,7 @@ class Problem_Query extends Query
     // reset stats
     $this->_rowNumber = 0;
     $this->_currentRow = 0;
-    $this->_currentPage = intval($page);
+    $this->_currentPage = ($page > 1) ? intval($page) : 1;
     $this->_rowCount = 0;
     $this->_pageCount = 0;
 
@@ -148,7 +162,7 @@ class Problem_Query extends Query
     }
 
     // Building sql statements
-    $sql = "FROM problem_tbl WHERE ";
+    $sql = "FROM " . $this->_table . " WHERE ";
     $num = sizeof($word);
     if ($num > 1)
     {
@@ -232,7 +246,7 @@ class Problem_Query extends Query
   function getLastId()
   {
     $sql = "SELECT LAST_INSERT_ID() AS last_id";
-    $sql .= " FROM problem_tbl";
+    $sql .= " FROM " . $this->_table;
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -256,7 +270,8 @@ class Problem_Query extends Query
    */
   function select($idProblem)
   {
-    $sql = "SELECT * FROM problem_tbl";
+    $sql = "SELECT *";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem);
 
     $result = $this->exec($sql);
@@ -281,7 +296,8 @@ class Problem_Query extends Query
    */
   function selectProblems($idPatient, $closed = false)
   {
-    $sql = "SELECT * FROM problem_tbl";
+    $sql = "SELECT *";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
     $sql .= ($closed ? " AND (closing_date IS NOT NULL AND closing_date != '0000-00-00')" : " AND (closing_date IS NULL OR closing_date='0000-00-00')");
     $sql .= " ORDER BY order_number;";
@@ -307,7 +323,8 @@ class Problem_Query extends Query
    */
   function getLastOrderNumber($idPatient)
   {
-    $sql = "SELECT MAX(order_number) AS last FROM problem_tbl";
+    $sql = "SELECT MAX(order_number) AS last";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
     $result = $this->exec($sql);
@@ -371,8 +388,8 @@ class Problem_Query extends Query
    */
   function insert($problem)
   {
-    $sql = "INSERT INTO problem_tbl ";
-    $sql .= "(id_problem, last_update_date, id_patient, collegiate_number, order_number, ";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_problem, last_update_date, id_patient, collegiate_number, order_number, ";
     $sql .= "opening_date, closing_date, meeting_place, wording, subjective, objective, ";
     $sql .= "appreciation, action_plan, prescription) VALUES (NULL, ";
     $sql .= "'" . $problem->getLastUpdateDate(false) . "', ";
@@ -409,7 +426,7 @@ class Problem_Query extends Query
    */
   function update($problem)
   {
-    $sql = "UPDATE problem_tbl SET";
+    $sql = "UPDATE " . $this->_table . " SET";
     $sql .= " last_update_date=curdate(),";
     $sql .= " collegiate_number=" . (($problem->getCollegiateNumber() == "") ? "NULL," : "'" . urlencode($problem->getCollegiateNumber()) . "',");
     $sql .= " closing_date=" . (($problem->getClosingDate(false) == "") ? "NULL," : "'" . urlencode($problem->getClosingDate(false)) . "',");
@@ -442,7 +459,7 @@ class Problem_Query extends Query
    */
   function delete($idProblem)
   {
-    $sql = "DELETE FROM problem_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem) . ";";
 
     $result = $this->exec($sql);

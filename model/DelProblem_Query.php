@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelProblem_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: DelProblem_Query.php,v 1.3 2004/07/24 16:32:36 jact Exp $
  */
 
 /**
@@ -25,10 +25,24 @@ require_once("../classes/Query.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void DelProblem_Query(void)
  *  bool insert(Problem $problem, int $idUser, string $login)
  */
 class DelProblem_Query extends Query
 {
+  /**
+   * void DelProblem_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function DelProblem_Query()
+  {
+    $this->_table = "deleted_problem_tbl";
+  }
+
   /**
    * bool insert(Problem $problem, int $idUser, string $login)
    ********************************************************************
@@ -42,8 +56,8 @@ class DelProblem_Query extends Query
    */
   function insert($problem, $idUser, $login)
   {
-    $sql = "INSERT INTO deleted_problem_tbl ";
-    $sql .= "(id_problem, last_update_date, id_patient, collegiate_number, order_number, ";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_problem, last_update_date, id_patient, collegiate_number, order_number, ";
     $sql .= "opening_date, closing_date, meeting_place, wording, subjective, objective, ";
     $sql .= "appreciation, action_plan, prescription, create_date, id_user, login) VALUES (";
     $sql .= $problem->getIdProblem() . ", ";

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
+ * $Id: Theme_Query.php,v 1.4 2004/07/24 16:34:23 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/Theme.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Theme_Query(void)
  *  mixed select(int $idTheme = 0)
  *  mixed selectWithStats(int $idTheme = 0)
  *  mixed fetch(void)
@@ -35,6 +36,19 @@ require_once("../classes/Theme.php");
  */
 class Theme_Query extends Query
 {
+  /**
+   * void Theme_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Theme_Query()
+  {
+    $this->_table = "theme_tbl";
+  }
+
   /**
    * mixed select(int $idTheme = 0)
    ********************************************************************
@@ -46,7 +60,8 @@ class Theme_Query extends Query
    */
   function select($idTheme = 0)
   {
-    $sql = "SELECT * FROM theme_tbl";
+    $sql = "SELECT *";
+    $sql .= " FROM " . $this->_table;
     if ($idTheme > 0)
     {
       $sql .= " WHERE id_theme=" . intval($idTheme);
@@ -74,14 +89,14 @@ class Theme_Query extends Query
    */
   function selectWithStats($idTheme = 0)
   {
-    $sql = "SELECT theme_tbl.*, count(user_tbl.id_user) AS row_count";
-    $sql .= " FROM theme_tbl LEFT JOIN user_tbl ON theme_tbl.id_theme=user_tbl.id_theme";
+    $sql = "SELECT " . $this->_table . ".*, count(user_tbl.id_user) AS row_count";
+    $sql .= " FROM " . $this->_table . " LEFT JOIN user_tbl ON " . $this->_table . ".id_theme=user_tbl.id_theme";
     if ($idTheme > 0)
     {
-      $sql .= " WHERE theme_tbl.id_theme=" . intval($idTheme);
+      $sql .= " WHERE " . $this->_table . ".id_theme=" . intval($idTheme);
     }
     $sql .= " GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27";
-    $sql .= " ORDER BY theme_tbl.theme_name;";
+    $sql .= " ORDER BY " . $this->_table . ".theme_name;";
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -164,7 +179,7 @@ class Theme_Query extends Query
    */
   function insert($theme)
   {
-    $sql = "INSERT INTO theme_tbl VALUES (NULL, ";
+    $sql = "INSERT INTO " . $this->_table . " VALUES (NULL, ";
     $sql .= "'" . urlencode($theme->getThemeName()) . "', ";
 
     $sql .= "'" . urlencode($theme->getTitleBgColor()) . "', ";
@@ -219,7 +234,7 @@ class Theme_Query extends Query
    */
   function update($theme)
   {
-    $sql = "UPDATE theme_tbl SET ";
+    $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "theme_name='" . urlencode($theme->getThemeName()) . "', ";
 
     $sql .= "title_bg_color='" . urlencode($theme->getTitleBgColor()) . "', ";
@@ -275,7 +290,7 @@ class Theme_Query extends Query
    */
   function delete($idTheme)
   {
-    $sql = "DELETE FROM theme_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_theme=" . intval($idTheme);
 
     $result = $this->exec($sql);

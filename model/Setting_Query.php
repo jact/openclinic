@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
+ * $Id: Setting_Query.php,v 1.4 2004/07/24 16:34:11 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/Setting.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Setting_Query(void)
  *  bool select(void)
  *  mixed fetch(void)
  *  bool update(Setting $set)
@@ -33,6 +34,19 @@ require_once("../classes/Setting.php");
  */
 class Setting_Query extends Query
 {
+  /**
+   * void Setting_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Setting_Query()
+  {
+    $this->_table = "setting_tbl";
+  }
+
   /**
    * bool select(void)
    ********************************************************************
@@ -43,7 +57,7 @@ class Setting_Query extends Query
    */
   function select()
   {
-    $sql = "SELECT * FROM setting_tbl";
+    $sql = "SELECT * FROM " . $this->_table;
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -98,7 +112,7 @@ class Setting_Query extends Query
    */
   function update($set)
   {
-    $sql = "UPDATE setting_tbl SET ";
+    $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "clinic_name='" . urlencode($set->getClinicName()) . "', ";
     $sql .= "clinic_image_url='" . urlencode($set->getClinicImageUrl()) . "', ";
     $sql .= "use_image=" . ($set->isUseImageSet() ? "'Y', " : "'N', ");
@@ -130,7 +144,7 @@ class Setting_Query extends Query
    */
   function updateTheme($idTheme)
   {
-    $sql = "UPDATE setting_tbl SET ";
+    $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "id_theme=" . intval($idTheme) . ";";
 
     $result = $this->exec($sql);

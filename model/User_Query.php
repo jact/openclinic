@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.7 2004/07/18 15:43:32 jact Exp $
+ * $Id: User_Query.php,v 1.8 2004/07/24 16:34:23 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/User.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void User_Query(void)
  *  mixed select(int $idUser = 0)
  *  mixed selectLogins(void)
  *  bool existLogin(string $login, int $idMember = 0)
@@ -41,6 +42,19 @@ require_once("../classes/User.php");
 class User_Query extends Query
 {
   /**
+   * void User_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function User_Query()
+  {
+    $this->_table = "user_tbl";
+  }
+
+  /**
    * mixed select(int $idUser = 0)
    ********************************************************************
    * Executes a query
@@ -51,12 +65,12 @@ class User_Query extends Query
    */
   function select($idUser = 0)
   {
-    $sql = "SELECT login,id_member,user_tbl.*";
-    $sql .= " FROM staff_tbl,user_tbl";
-    $sql .= " WHERE user_tbl.id_user=staff_tbl.id_user";
+    $sql = "SELECT login,id_member," . $this->_table . ".*";
+    $sql .= " FROM staff_tbl," . $this->_table;
+    $sql .= " WHERE " . $this->_table . ".id_user=staff_tbl.id_user";
     if ($idUser != "")
     {
-      $sql .= " AND user_tbl.id_user=" . intval($idUser);
+      $sql .= " AND " . $this->_table . ".id_user=" . intval($idUser);
     }
     $sql .= " ORDER BY login;";
 
@@ -107,7 +121,8 @@ class User_Query extends Query
    */
   function existLogin($login, $idMember = 0)
   {
-    $sql = "SELECT COUNT(login) FROM staff_tbl";
+    $sql = "SELECT COUNT(login)";
+    $sql .= " FROM staff_tbl";
     $sql .= " WHERE login='" . urlencode($login) . "'";
     if ($idMember > 0)
     {
@@ -139,8 +154,9 @@ class User_Query extends Query
    */
   function verifySignOn($login, $pwd, $onlyCheck = false)
   {
-    $sql = "SELECT login,id_member,user_tbl.* FROM user_tbl,staff_tbl";
-    $sql .= " WHERE user_tbl.id_user=staff_tbl.id_user";
+    $sql = "SELECT login,id_member," . $this->_table . ".*";
+    $sql .= " FROM staff_tbl," . $this->_table;
+    $sql .= " WHERE " . $this->_table . ".id_user=staff_tbl.id_user";
     $sql .= " AND login='" . urlencode($login) . "'";
     $sql .= " AND pwd='" . urlencode($pwd) . "'"; // md5 from form
 
@@ -164,7 +180,8 @@ class User_Query extends Query
    */
   function isActivated($login)
   {
-    $sql = "SELECT id_user FROM staff_tbl";
+    $sql = "SELECT id_user";
+    $sql .= " FROM staff_tbl";
     $sql .= " WHERE login='" . urlencode($login) . "';";
 
     $result = $this->exec($sql);
@@ -182,7 +199,7 @@ class User_Query extends Query
     $idUser = $result['id_user'];
 
     $sql = "SELECT actived";
-    $sql .= " FROM user_tbl";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_user=" . intval($idUser);
 
     $result = $this->exec($sql);
@@ -212,7 +229,8 @@ class User_Query extends Query
    */
   function deactivate($login)
   {
-    $sql = "SELECT id_user FROM staff_tbl";
+    $sql = "SELECT id_user";
+    $sql .= " FROM staff_tbl";
     $sql .= " WHERE login='" . urlencode($login) . "';";
 
     $result = $this->exec($sql);
@@ -229,7 +247,7 @@ class User_Query extends Query
     }
     $idUser = $result['id_user'];
 
-    $sql = "UPDATE user_tbl SET actived='N'";
+    $sql = "UPDATE " . $this->_table . " SET actived='N'";
     $sql .= " WHERE id_user=" . intval($idUser) . ";";
 
     $result = $this->exec($sql);
@@ -310,8 +328,8 @@ class User_Query extends Query
       return false; // or $this->clearErrors(); ???
     }*/
 
-    $sql = "INSERT INTO user_tbl ";
-    $sql .= "(id_user, pwd, email, actived, id_theme, id_profile) VALUES (NULL, ";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_user, pwd, email, actived, id_theme, id_profile) VALUES (NULL, ";
     $sql .= "'" . urlencode($user->getPwd()) . "', "; // md5 from form
     $sql .= ($user->getEmail() == "") ? "NULL, " : "'" . urlencode($user->getEmail()) . "', ";
     $sql .= ($user->isActived()) ? "'Y', " : "'N', ";
@@ -373,7 +391,7 @@ class User_Query extends Query
       return false;
     }
 
-    $sql = "UPDATE user_tbl SET"; //" last_updated_date = curdate(),";
+    $sql = "UPDATE " . $this->_table . " SET"; //" last_updated_date = curdate(),";
     $sql .= " email=" . (($user->getEmail() == "") ? "NULL," : "'" . urlencode($user->getEmail()) . "',");
     $sql .= " actived=" . ($user->isActived() ? "'Y', " : "'N', ");
     $sql .= " id_theme=" . $user->getIdTheme() . ", ";
@@ -400,7 +418,7 @@ class User_Query extends Query
    */
   function resetPwd($user)
   {
-    $sql = "UPDATE user_tbl SET";
+    $sql = "UPDATE " . $this->_table . " SET";
     $sql .= " pwd='" . urlencode($user->getPwd()) . "'"; // md5 from form
     $sql .= " WHERE id_user=" . $user->getIdUser() . ";";
 
@@ -424,7 +442,7 @@ class User_Query extends Query
    */
   function delete($idUser)
   {
-    $sql = "DELETE FROM user_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_user=" . intval($idUser) . ";";
 
     $result = $this->exec($sql);

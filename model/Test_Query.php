@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
+ * $Id: Test_Query.php,v 1.4 2004/07/24 16:34:23 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/Test.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Test_Query(void)
  *  mixed getLastId(void)
  *  mixed select(int $idProblem, int $idTest = 0)
  *  mixed fetch(void)
@@ -35,6 +36,19 @@ require_once("../classes/Test.php");
  */
 class Test_Query extends Query
 {
+  /**
+   * void Test_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Test_Query()
+  {
+    $this->_table = "medical_test_tbl";
+  }
+
   /**
    * mixed getLastId(void)
    ********************************************************************
@@ -46,7 +60,7 @@ class Test_Query extends Query
   function getLastId()
   {
     $sql = "SELECT LAST_INSERT_ID() AS last_id";
-    $sql .= " FROM medical_test_tbl";
+    $sql .= " FROM " . $this->_table;
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -71,7 +85,8 @@ class Test_Query extends Query
    */
   function select($idProblem, $idTest = 0)
   {
-    $sql = "SELECT * FROM medical_test_tbl";
+    $sql = "SELECT *";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem);
     if ($idTest > 0)
     {
@@ -124,8 +139,8 @@ class Test_Query extends Query
    */
   function insert($test)
   {
-    $sql = "INSERT INTO medical_test_tbl ";
-    $sql .= "(id_test, id_problem, document_type, path_filename) VALUES (NULL, ";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_test, id_problem, document_type, path_filename) VALUES (NULL, ";
     $sql .= $test->getIdProblem() . ", ";
     $sql .= ($test->getDocumentType() == "") ? "NULL, " : "'" . urlencode($test->getDocumentType()) . "', ";
     $sql .= "'" . urlencode($test->getPathFilename()) . "');";
@@ -150,7 +165,7 @@ class Test_Query extends Query
    */
   function update($test)
   {
-    $sql = "UPDATE medical_test_tbl SET";
+    $sql = "UPDATE " . $this->_table . " SET";
     $sql .= " document_type=" . (($test->getDocumentType() == "") ? "NULL," : "'" . urlencode($test->getDocumentType()) . "',");
     $sql .= " path_filename='" . urlencode($test->getPathFilename()) . "'";
     $sql .= " WHERE id_test=" . $test->getIdTest() . ";";
@@ -175,7 +190,7 @@ class Test_Query extends Query
    */
   function delete($idTest)
   {
-    $sql = "DELETE FROM medical_test_tbl";
+    $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_test=" . intval($idTest);
 
     $result = $this->exec($sql);

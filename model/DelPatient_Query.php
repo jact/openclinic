@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelPatient_Query.php,v 1.2 2004/04/18 14:40:45 jact Exp $
+ * $Id: DelPatient_Query.php,v 1.3 2004/07/24 16:32:28 jact Exp $
  */
 
 /**
@@ -25,10 +25,24 @@ require_once("../classes/Query.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void DelPatient_Query(void)
  *  bool insert(Patient $patient, History $historyP, History $historyF, int $idUser, string $login)
  */
 class DelPatient_Query extends Query
 {
+  /**
+   * void DelPatient_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function DelPatient_Query()
+  {
+    $this->_table = "deleted_patient_tbl";
+  }
+
   /**
    * bool insert(Patient $patient, History $historyP, History $historyF, int $idUser, string $login)
    ********************************************************************
@@ -44,8 +58,8 @@ class DelPatient_Query extends Query
    */
   function insert($patient, $historyP, $historyF, $idUser, $login)
   {
-    $sql = "INSERT INTO deleted_patient_tbl ";
-    $sql .= "(id_patient, nif, first_name, surname1, surname2, address, phone_contact, ";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_patient, nif, first_name, surname1, surname2, address, phone_contact, ";
     $sql .= "sex, race, birth_date, birth_place, decease_date, nts, nss, ";
     $sql .= "family_situation, labour_situation, education, insurance_company, ";
     $sql .= "collegiate_number, birth_growth, growth_sexuality, feed, habits, ";
