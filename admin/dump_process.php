@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.4 2004/07/05 17:40:45 jact Exp $
+ * $Id: dump_process.php,v 1.5 2004/07/08 16:36:40 jact Exp $
  */
 
 /**
@@ -278,7 +278,7 @@
                   . '-->' . $crlf . $crlf;
 
       // Now build the structure
-      // todo: Make db and table names XML compatible (designer responsability)
+      // TODO: Make db and table names XML compatible (designer responsability)
       $dumpBuffer .= '<' . OPEN_DATABASE . '>' . $crlf;
       if (isset($_POST['table_select']))
       {
