@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.2 2004/04/18 14:18:15 jact Exp $
+ * $Id: footer.php,v 1.3 2004/04/24 17:54:57 jact Exp $
  */
 
 /**
@@ -29,7 +29,7 @@
   </ul>
 </div><!-- End .links -->
 
-<div id="footer" class="small">
+<div id="footer">
   <?php echo _("Powered by OpenClinic"); ?>
   <br />
   Copyright &copy; 2002-2004 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>

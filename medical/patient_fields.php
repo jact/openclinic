@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: patient_fields.php,v 1.3 2004/04/24 17:57:07 jact Exp $
  */
 
 /**
@@ -55,8 +55,7 @@
 
     <tr>
       <td>
-        <span class="small">*</span>
-        <label for="first_name"><?php echo _("First Name") . ":"; ?></label>
+        * <label for="first_name"><?php echo _("First Name") . ":"; ?></label>
       </td>
 
       <td>
@@ -66,8 +65,7 @@
 
     <tr>
       <td>
-        <span class="small">*</span>
-        <label for="surname1"><?php echo _("Surname 1") . ":"; ?></label>
+        * <label for="surname1"><?php echo _("Surname 1") . ":"; ?></label>
       </td>
 
       <td>
@@ -77,8 +75,7 @@
 
     <tr>
       <td>
-        <span class="small">*</span>
-        <label for="surname2"><?php echo _("Surname 2") . ":"; ?></label>
+        * <label for="surname2"><?php echo _("Surname 2") . ":"; ?></label>
       </td>
 
       <td>

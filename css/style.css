@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.2 2004/04/18 14:05:40 jact Exp $
+ * $Id: style.css,v 1.3 2004/04/24 17:52:27 jact Exp $
  */
 
 /**
@@ -19,7 +19,7 @@ html {
   background: #fff;
 }
 body {
-  font-family: "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+  font-family: "Trebuchet MS", verdana, helvetica, arial, sans-serif;
   font-size: 14px;
   color: #000;
   background: #efefef;
@@ -53,9 +53,6 @@ h3 {
 #content a:hover, #footer a:hover {
   background: #00a;
   color: #fff;
-}
-.small {
-  font-size: 11px;
 }
 .note {
   color: crimson;
@@ -101,7 +98,7 @@ hr {
 }
 .links {
   margin-top: 30px;
-  font: normal normal 11px verdana, geneva, arial, helvetica, sans-serif;
+  font: normal normal 11px verdana, geneva, helvetica, arial, sans-serif;
 }
 .linkList {
   list-style: none outside none;
@@ -161,6 +158,7 @@ html > body .linkList li {
   right: 0;
 }
 #footer, .logos {
+  font-size: 11px;
   margin-top: 10px;
   text-align: center;
 }
