@@ -1,0 +1,38 @@
+/**
+ * This file is part of OpenClinic
+ *
+ * Copyright (c) 2002-2005 jact
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * $Id: print.css,v 1.1 2005/03/04 19:54:48 jact Exp $
+ */
+
+/**
+ * print.css
+ ********************************************************************
+ * Contains the css styles of OpenClinic doc pages for print media
+ ********************************************************************
+ * Author: jact <jachavar@terra.es>
+ */
+
+body {
+  font-family: "Trebuchet MS", trebuchet, verdana, helvetica, arial, sans-serif;
+  font-size: 10pt;
+  line-height: 160%;
+}
+#left, #right {
+  display: none;
+}
+#footer {
+  text-align: center;
+  font-size: 8pt;
+}
+#footer p {
+  margin: 0;
+}
+acronym:after {
+  content: " (" attr(title) ")";
+}
+/*a[href|="http"]:after*/ a:after {
+  content: " (link: " attr(href) ")";
+}
