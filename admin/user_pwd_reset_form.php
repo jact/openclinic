@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.7 2004/07/29 18:50:24 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.8 2004/08/03 11:18:52 jact Exp $
  */
 
 /**
@@ -87,7 +87,7 @@
       $postVars["login"] = $user->getLogin();
       $postVars["pwd"] = $postVars["pwd2"] = "";
       //$postVars["pwd"] = $postVars["pwd2"] = $user->getPwd(); // no because it's encoded
-      debug($user->getPwd());
+      //debug($user->getPwd());
     }
     $userQ->freeResult();
     $userQ->close();
