@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: error_lib.php,v 1.6 2004/07/21 18:07:45 jact Exp $
+ * $Id: error_lib.php,v 1.7 2004/07/21 18:16:02 jact Exp $
  */
 
 /**
@@ -161,7 +161,7 @@ function backTrace($context)
   // Use the $context to get variable information for the function with the error
   foreach ($context as $key => $value)
   {
-    $calls .= "\n " . $key . " is " . (( !empty($value) ) ? $value : "NULL");
+    $calls .= "\n " . $key . " is " . (( !empty($value) ) ? serialize($value) : "NULL");
   }
 
   return $calls;
