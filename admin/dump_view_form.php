@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_view_form.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: dump_view_form.php,v 1.3 2004/06/16 15:57:45 jact Exp $
  */
 
 /**
@@ -127,34 +127,34 @@
   echo "\n";
 ?>
           <td>
-            <?php showRadioButton("radio_dump_data", "what", "data", true, false, false, 'onclick="updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0));"'); ?>
+            <?php showRadioButton("radio_dump_data", "what", "data", true, false, false, 'onclick="updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0, 0));"'); ?>
             <label for="radio_dump_data"><?php echo _("Structure and data"); ?></label>
 
             <br />
 
-            <?php showRadioButton("radio_dump_structure", "what", "structure", false, false, false, 'onclick="updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0));"'); ?>
+            <?php showRadioButton("radio_dump_structure", "what", "structure", false, false, false, 'onclick="updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0, 0));"'); ?>
             <label for="radio_dump_structure"><?php echo _("Structure only"); ?></label>
 
             <br />
 
-            <?php showRadioButton("radio_dump_dataonly", "what", "dataonly", false, false, false, 'onclick="updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 0));"'); ?>
+            <?php showRadioButton("radio_dump_dataonly", "what", "dataonly", false, false, false, 'onclick="updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 1, 0));"'); ?>
             <label for="radio_dump_dataonly"><?php echo _("Data only"); ?></label>
 
             <br />
 
-            <?php showRadioButton("radio_dump_xml", "what", "xml", false, false, false, 'onclick="updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 0));"'); ?>
+            <?php showRadioButton("radio_dump_xml", "what", "xml", false, false, false, 'onclick="updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));"'); ?>
             <label for="radio_dump_xml"><?php echo _("Export to XML format"); ?></label>
 
             <br />
 
-            <?php showRadioButton("radio_dump_csv", "what", "excel", false, false, false, 'onclick="updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 0));"'); ?>
+            <?php showRadioButton("radio_dump_csv", "what", "excel", false, false, false, 'onclick="updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));"'); ?>
             <label for="radio_dump_csv"><?php echo _("Export to CSV format (data only)"); ?></label>
           </td>
         </tr>
 
         <tr>
           <td<?php echo $colspan; ?>>
-            <?php showCheckBox("drop", "drop", "1"); ?>
+            <?php showCheckBox("drop", "drop", "yes"); ?>
             <label for="drop"><?php echo _("Add 'DROP TABLE'"); ?></label>
           </td>
         </tr>
@@ -175,7 +175,7 @@
 
         <tr>
           <td<?php echo $colspan; ?>>
-            <?php showCheckBox("use_backquotes", "use_backquotes", "1"); ?>
+            <?php showCheckBox("use_backquotes", "use_backquotes", "yes"); ?>
             <label for="use_backquotes"><?php echo _("Enclose table and field names with backquotes"); ?></label>
           </td>
         </tr>
@@ -196,6 +196,13 @@
 
         <tr>
           <td<?php echo $colspan; ?>>
+            <?php showCheckBox("create_db", "create_db", "yes"); ?>
+            <label for="create_db"><?php echo _("Add 'CREATE DATABASE __dbname__'"); ?></label>
+          </td>
+        </tr>
+
+        <tr>
+          <td<?php echo $colspan; ?>>
             <?php showCheckBox("as_file", "as_file", "sendit"); ?>
             <label for="as_file"><?php echo _("Save as file"); ?></label>
           </td>
@@ -211,4 +218,8 @@
   </div>
 </form>
 
-<?php require_once("../shared/footer.php"); ?>
+<?php
+  echo '<div class="advice">' . _("Note: Some check options are exclusive. Be carefully!") . "</div>\n";
+
+  require_once("../shared/footer.php");
+?>
