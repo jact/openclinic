@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.6 2004/07/08 16:38:26 jact Exp $
+ * $Id: login.php,v 1.7 2004/07/18 15:16:50 jact Exp $
  */
 
 /**
@@ -105,9 +105,10 @@
             $sessLoginAttempts = 1;
           }
         }
+        $userQ->clearErrors(); // needed after empty fetch(), from verifySigOn()
 
-        // Suspend user login if loginAttempts >= 3
-        if ($sessLoginAttempts >= 3)
+        // Suspend user login if loginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS
+        if ($sessLoginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS)
         {
           $userQ->deactivate($loginSession);
           if ($userQ->isError())
@@ -128,7 +129,7 @@
   ////////////////////////////////////////////////////////////////////
   // Redirect back to form if an error occurred
   ////////////////////////////////////////////////////////////////////
-  if ($errorFound == true)
+  if ($errorFound)
   {
     $_SESSION["postVars"] = $_POST;
     $_SESSION["pageErrors"] = $pageErrors;
