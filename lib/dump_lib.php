@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_lib.php,v 1.5 2004/07/05 18:35:20 jact Exp $
+ * $Id: dump_lib.php,v 1.6 2004/07/14 18:29:39 jact Exp $
  */
 
 /**
@@ -53,7 +53,7 @@ if ( !defined('DLIB_INCLUDED') )
    */
   function DLIB_htmlFormat($string = '', $asFile = '')
   {
-    return(empty($asFile) ? htmlspecialchars(urldecode($string)) : urldecode($string));
+    return(empty($asFile) ? htmlspecialchars(urldecode($string)) : $string);
   } // end 'DLIB_htmlFormat()' function
 
   /**
@@ -328,8 +328,8 @@ if ( !defined('DLIB_INCLUDED') )
     // Checks whether the field is an integer or not
     for ($j = 0; $j < $numFields; $j++)
     {
-      $fieldSet[$j] = DLIB_backquote($localConn->fieldName($j), $postVars['use_backquotes']);
-      $type          = $localConn->fieldType($j);
+      $fieldSet[$j] = DLIB_backquote($localConn->fieldName($j), (isset($postVars['use_backquotes']) ? $postVars['use_backquotes'] : false));
+      $type         = $localConn->fieldType($j);
 
       $fieldNum[$j] = ($type == 'tinyint' || $type == 'smallint' || $type == 'mediumint' ||
                        $type == 'int' || $type == 'bigint' ||$type == 'timestamp');
@@ -402,7 +402,7 @@ if ( !defined('DLIB_INCLUDED') )
       unset($values);
 
       // Show sentence
-      echo DLIB_htmlFormat($insertLine . $crlf, $postVars['as_file']);
+      echo DLIB_htmlFormat($insertLine . $crlf, (isset($postVars['as_file']) ? $postVars['as_file'] : ''));
     } // end while
 
     if (isset($postVars['extended_inserts']))
