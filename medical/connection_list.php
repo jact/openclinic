@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.8 2004/09/29 20:56:17 jact Exp $
+ * $Id: connection_list.php,v 1.9 2004/10/04 18:27:23 jact Exp $
  */
 
 /**
@@ -32,12 +32,6 @@
   $nav = "problems";
   $onlyDoctor = true;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Connection_Query.php");
@@ -45,6 +39,14 @@
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/misc_lib.php");
+  require_once("../lib/validator_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idProblem = intval($_GET["key"]);
+  $idPatient = intval($_GET["pat"]);
+  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
 
   ////////////////////////////////////////////////////////////////////
   // Show page
@@ -82,9 +84,9 @@
   ////////////////////////////////////////////////////////////////////
   // Display deletion message if coming from del with a successful delete.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Connection with medical problem, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Connection with medical problem, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
