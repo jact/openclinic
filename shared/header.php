@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.7 2004/06/20 12:05:03 jact Exp $
+ * $Id: header.php,v 1.8 2004/06/20 17:18:31 jact Exp $
  */
 
 /**
@@ -25,7 +25,7 @@
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
   ////////////////////////////////////////////////////////////////////
-  $title = OPEN_CLINIC_NAME . ((isset($title) && $title != "") ? " : " . $title : "");
+  //$title = OPEN_CLINIC_NAME . ((isset($title) && $title != "") ? " : " . $title : "");
   require_once("../shared/xhtml_start.php");
 ?>
 
@@ -41,9 +41,9 @@
     //echo <!--link rel="stylesheet" type="text/css" href="../css/style.php" /-->
 ?>
 <style type="text/css" title="<?php echo STYLE_NAME; ?>">
-<!--
+<!--/*--><![CDATA[/*<!--*/
 <?php require_once("../css/style.php"); ?>
--->
+/*]]>*/-->
 </style>
 <?php
   } // end-if
