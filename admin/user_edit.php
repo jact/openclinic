@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.4 2004/07/07 17:21:53 jact Exp $
+ * $Id: user_edit.php,v 1.5 2004/07/08 18:11:57 jact Exp $
  */
 
 /**
@@ -33,7 +33,7 @@
     exit();
   }
 
-  $errorLocation = "../admin/user_edit_form.php" . ((isset($_POST["all"])) ? "?all=Y" : "");
+  $errorLocation = "../admin/user_edit_form.php?key=" . $_POST["id_user"] . ((isset($_POST["all"])) ? "&all=Y" : "");
 
   require_once("../shared/read_settings.php");
   if ( !isset($_POST["all"]) )
@@ -130,7 +130,7 @@
   else
   {
     $links = array(
-      _("Home") => $returnLocation,
+      _("Home") => "../home/index.php",
       $title => ""
     );
   }
