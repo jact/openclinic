@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.8 2004/07/14 18:24:58 jact Exp $
+ * $Id: staff_list.php,v 1.9 2004/07/28 17:40:00 jact Exp $
  */
 
 /**
@@ -56,7 +56,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Staff member, %s, has been added."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Staff member, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -64,7 +64,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Staff member, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Staff member, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -72,7 +72,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Staff member, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Staff member, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -80,7 +80,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["login"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   if (isset($_GET["type"]))
@@ -111,7 +111,7 @@
     showQueryError($staffQ);
   }
 
-  debug($_SESSION);
+  //debug($_SESSION);
 
   echo '<p>';
   echo '<a href="../admin/staff_new_form.php?reset=Y&amp;type=A">';
@@ -119,6 +119,10 @@
   echo '<a href="../admin/staff_new_form.php?reset=Y&amp;type=D">';
   echo _("Add New Doctor") . '</a>';
   echo "</p>\n";
+
+  echo "<hr />";
+
+  echo '<h3>' . $listTitle . "</h3>\n";
 
   echo '<p>';
   if (isset($_GET["type"]))
@@ -152,52 +156,29 @@
   }
   echo "</p>\n";
 
-  echo '<h3>' . $listTitle . "</h3>\n";
-
   if ( !$numRows )
   {
     $staffQ->close();
-    echo '<p>' . _("No results found.") . "</p>\n";
+    showMessage(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
-?>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3">
-        <?php echo _("Function"); ?>
-      </th>
+  $thead = array(
+    _("Function") => array('colspan' => 2),
+    _("First Name"),
+    _("Surname 1"),
+    _("Surname 2"),
+    _("Profile"),
+    _("Login")
+  );
 
-      <th>
-        <?php echo _("First Name"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Surname 1"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Surname 2"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Login"); ?>
-      </th>
-
-<?php
   if ($viewType)
   {
-    echo '<th>' . _("Type") . "</th>\n";
+    $thead[] = _("Type");
   }
-?>
-    </tr>
-  </thead>
 
-  <tbody>
-<?php
-  $rowClass = "odd";
+  $tbody = array();
   while ($staff = $staffQ->fetch())
   {
     // to protect admin users
@@ -205,97 +186,71 @@
     {
       continue;
     }
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td>
-        <a href="../admin/staff_edit_form.php?key=<?php echo $staff->getIdMember(); ?>&amp;reset=Y"><?php echo _("edit"); ?></a>
-      </td>
 
-      <td>
-        <?php
-          if ($staff->getIdMember() == $_SESSION["memberUser"])
-          {
-            echo "** " . _("del");
-          }
-          else
-          {
-        ?>
-            <a href="../admin/staff_del_confirm.php?key=<?php echo $staff->getIdMember(); ?>&amp;sur1=<?php echo urlencode($staff->getSurname1()); ?>&amp;sur2=<?php echo urlencode($staff->getSurname2()); ?>&amp;first=<?php echo urlencode($staff->getFirstName()); ?>"><?php echo _("del"); ?></a>
-        <?php
-        } // end if
-        ?>
-      </td>
+    $row = '<a href="../admin/staff_edit_form.php?key=' . $staff->getIdMember() . '&amp;reset=Y">' . _("edit") . '</a>';
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php
-          if ($staff->getIdUser() == 0 && $staff->getLogin() == "")
-          {
-            echo '* ' . _("create user");
-          }
-          elseif ($staff->getIdUser() == 0)
-          {
-        ?>
-            <a href="../admin/user_new_form.php?id_member=<?php echo $staff->getIdMember(); ?>&amp;login=<?php echo $staff->getLogin(); ?>"><?php echo _("create user"); ?></a>
-        <?php
-          }
-          else
-          {
-        ?>
-            <a href="../admin/user_edit_form.php?key=<?php echo $staff->getIdUser(); ?>&amp;reset=Y"><?php echo _("edit user"); ?></a>
-        <?php
-          } // end if
-        ?>
-      </td>
+    if ($staff->getIdMember() == $_SESSION["memberUser"])
+    {
+      $row .= "** " . _("del");
+    }
+    else
+    {
+      $row .= '<a href="../admin/staff_del_confirm.php?key=' . $staff->getIdMember() . '&amp;sur1=' . urlencode($staff->getSurname1()) . '&amp;sur2=' . urlencode($staff->getSurname2()) . '&amp;first=' . urlencode($staff->getFirstName()) . '">' . _("del") . '</a>';
+    } // end if
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $staff->getFirstName(); ?>
-      </td>
+    if ($staff->getIdUser() == 0 && $staff->getLogin() == "")
+    {
+      $row .= '* ' . _("create user");
+    }
+    elseif ($staff->getIdUser() == 0)
+    {
+      $row .= '<a href="../admin/user_new_form.php?id_member=' . $staff->getIdMember() . '&amp;login=' . $staff->getLogin() . '">' . _("create user") . '</a>';
+    }
+    else
+    {
+      $row .= '<a href="../admin/user_edit_form.php?key=' . $staff->getIdUser() . '&amp;reset=Y">' . _("edit user") . '</a>';
+    } // end if
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $staff->getSurname1(); ?>
-      </td>
+    $row .= $staff->getFirstName();
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $staff->getSurname2(); ?>
-      </td>
+    $row .= $staff->getSurname1();
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $staff->getLogin(); ?>
-      </td>
+    $row .= $staff->getSurname2();
+    $row .= OPEN_SEPARATOR;
 
-<?php
+    $row .= $staff->getLogin();
+
     if ($viewType)
     {
-      echo '<td>';
+      $row .= OPEN_SEPARATOR;
       switch ($staff->getMemberType())
       {
         case OPEN_ADMINISTRATIVE:
-          echo _("Administrative");
+          $row .= _("Administrative");
           break;
 
         case OPEN_DOCTOR:
-          echo _("Doctor");
+          $row .= _("Doctor");
           break;
       }
-      echo "</td>\n";
     }
 
-    echo "</tr>\n";
-
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
   $staffQ->freeResult();
   $staffQ->close();
   unset($staffQ);
   unset($staff);
-?>
-  </tbody>
-</table>
 
-<?php
-  echo '<p class="advice">* ' . _("Note: To the create user function must have a correct login.") . "</p>\n";
-  echo '<p class="advice">** ' . _("Note: The del function will not be applicated to the session user.") . "</p>\n";
+  showTable($thead, $tbody, null);
+
+  showMessage('* ' . _("Note: To the create user function must have a correct login."));
+  showMessage('** ' . _("Note: The del function will not be applicated to the session user."));
 
   require_once("../shared/footer.php");
 ?>
