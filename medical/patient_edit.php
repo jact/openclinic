@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.3 2004/07/07 17:22:50 jact Exp $
+ * $Id: patient_edit.php,v 1.4 2004/07/10 16:44:57 jact Exp $
  */
 
 /**
@@ -51,7 +51,8 @@
 
   require_once("../medical/patient_validate_post.php");
 
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y";
+  // To header, without &amp;
+  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&reset=Y";
 
   ////////////////////////////////////////////////////////////////////
   // Prevent user from aborting script
@@ -110,7 +111,7 @@
   ////////////////////////////////////////////////////////////////////
   // Show success page
   ////////////////////////////////////////////////////////////////////
-  $title = _("Edit Patient Social Data");
+/*  $title = _("Edit Patient Social Data");
   require_once("../shared/header.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -130,5 +131,10 @@
 
   echo '<p><a href="' . $returnLocation . '">' . _("Return to Patient Social Data") . "</a></p>\n";
 
-  require_once("../shared/footer.php");
+  require_once("../shared/footer.php");*/
+
+  ////////////////////////////////////////////////////////////////////
+  // Redirect to patient view to avoid reload problem
+  ////////////////////////////////////////////////////////////////////
+  header("Location: " . $returnLocation . "&updated=Y");
 ?>

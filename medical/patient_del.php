@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.6 2004/07/07 17:22:41 jact Exp $
+ * $Id: patient_del.php,v 1.7 2004/07/10 16:44:57 jact Exp $
  */
 
 /**
@@ -329,30 +329,11 @@
   ////////////////////////////////////////////////////////////////////
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
-  $title = _("Delete Patient");
-  require_once("../shared/header.php");
-
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y";
+  $returnLocation = "../medical/patient_search_form.php";
 
   ////////////////////////////////////////////////////////////////////
-  // Navigation links
+  // Redirect to patient search form to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "patient.png");
-  unset($links);
-
-  echo '<p>' . sprintf(_("Patient, %s, has been deleted."), $patName) . "</p>\n";
-
-  //echo '<p><a href="../medical/patient_search_form.php">' . _("Return to Patient Search") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  $info = urlencode($patName);
+  header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
 ?>

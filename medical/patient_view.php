@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.5 2004/07/07 17:23:05 jact Exp $
+ * $Id: patient_view.php,v 1.6 2004/07/10 16:44:57 jact Exp $
  */
 
 /**
@@ -106,6 +106,22 @@
   );
   showNavLinks($links, "patient.png");
   unset($links);
+
+  ////////////////////////////////////////////////////////////////////
+  // Display insertion message if coming from new with a successful insert.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["added"]))
+  {
+    echo '<p>' . _("Patient has been added.") . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display update message if coming from edit with a successful update.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["updated"]))
+  {
+    echo '<p>' . _("Patient has been updated.") . "</p>\n";
+  }
 
   echo '<p>';
   if ($hasMedicalAdminAuth)

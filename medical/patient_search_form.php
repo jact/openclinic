@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_form.php,v 1.3 2004/07/05 17:31:11 jact Exp $
+ * $Id: patient_search_form.php,v 1.4 2004/07/10 16:44:57 jact Exp $
  */
 
 /**
@@ -50,6 +50,14 @@
   );
   showNavLinks($links, "search.png");
   unset($links);
+
+  ////////////////////////////////////////////////////////////////////
+  // Display deletion message if coming from del with a successful delete.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Patient, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+  }
 ?>
 
 <form method="post" action="../medical/patient_search.php">

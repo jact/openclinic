@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_new.php,v 1.3 2004/07/07 17:22:50 jact Exp $
+ * $Id: patient_new.php,v 1.4 2004/07/10 16:44:57 jact Exp $
  */
 
 /**
@@ -107,29 +107,10 @@
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/header.php");
-
-  $returnLocation = "../medical/index.php";
+  $returnLocation = "../medical/patient_view.php?key=" . $idPatient;
 
   ////////////////////////////////////////////////////////////////////
-  // Navigation links
+  // Redirect to patient view to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Medical Records") => $returnLocation,
-    _("New Patient") => ""
-  );
-  showNavLinks($links, "patient.png");
-  unset($links);
-
-  echo '<p>' . sprintf(_("Patient, %s, has been added."), $patName) . "</p>\n";
-
-  echo '<p><a href="../medical/patient_view.php?key=' . $idPatient . '">' . _("View Social Data") . "</a></p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to Medical Records Summary") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation . "&added=Y");
 ?>
