@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.4 2004/05/15 17:39:54 jact Exp $
+ * $Id: setting_fields.php,v 1.5 2004/05/20 19:15:05 jact Exp $
  */
 
 /**
@@ -133,7 +133,15 @@
           {
             if ($file != 'CVS' && $file != '.' && $file != '..' && is_dir($dir . $file))
             {
-              $array["$file"] = $file;
+              /*if (function_exists('html_entity_decode'))
+              {
+                $array["$file"] = html_entity_decode($nls['language'][$file], ENT_COMPAT, OPEN_CHARSET);
+              }
+              else
+              {
+                $array["$file"] = strtr($nls['language'][$file], array_flip(get_html_translation_table(HTML_ENTITIES)));
+              }*/
+              $array["$file"] = $nls['language'][$file];
             }
           }
           closedir($handle);

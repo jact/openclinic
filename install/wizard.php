@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.2 2004/04/18 14:18:15 jact Exp $
+ * $Id: wizard.php,v 1.3 2004/05/20 19:16:02 jact Exp $
  */
 
 /**
@@ -102,9 +102,9 @@
   define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));
 
   $locale = array(
-    "en" => _("English"),
-    "es_ES" => _("Spanish"),
-    "bg_BG" => _("Bulgarian")
+    "en" => $nls['language']['en'],
+    "es_ES" => $nls['language']['es_ES'],
+    "bg_BG" => $nls['language']['bg_BG']
   );
   // end i18n l10n
 
@@ -525,7 +525,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.2 2004/04/18 14:18:15 jact Exp $
+ * $Id: wizard.php,v 1.3 2004/05/20 19:16:02 jact Exp $
  */
 
 /**
