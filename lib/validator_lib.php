@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: validator_lib.php,v 1.9 2004/10/18 17:24:04 jact Exp $
+ * $Id: validator_lib.php,v 1.10 2005/02/01 19:26:21 jact Exp $
  */
 
 /**
@@ -29,6 +29,7 @@
  *  mixed stripMetas(string $text)
  *  mixed customStrip(array $chars, string $text, bool $insensitive = false)
  *  string safeText(string $text, bool $allowTags = true, bool $includeEvents = true)
+ *  array safeArray(array &$array)
  */
 
 /*
