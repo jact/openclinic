@@ -4,13 +4,13 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_tbl.sql,v 1.2 2004/04/18 14:22:25 jact Exp $
+ * $Id: user_tbl.sql,v 1.3 2004/04/24 15:12:21 jact Exp $
  */
 
 /**
  * user_tbl.sql
  ********************************************************************
- * Change this
+ * Creation of user_tbl structure
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
