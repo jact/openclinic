@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.php,v 1.9 2004/08/02 09:25:24 jact Exp $
+ * $Id: style.php,v 1.10 2004/08/02 11:19:22 jact Exp $
  */
 
 /**
@@ -337,4 +337,8 @@ hr {
   color: <?php echo STYLE_TABLE_BORDER_COLOR; ?>;
   border: <?php echo STYLE_TABLE_BORDER_WIDTH; ?>px solid <?php echo STYLE_TABLE_BORDER_COLOR; ?>;
   margin: 10px 0;
+}
+
+.requiredField {
+  font-weight: bold;
 }
