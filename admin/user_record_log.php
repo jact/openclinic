@@ -5,13 +5,13 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.2 2004/06/01 17:55:44 jact Exp $
+ * $Id: user_record_log.php,v 1.3 2004/06/07 18:33:04 jact Exp $
  */
 
 /**
  * user_record_log.php
  ********************************************************************
- * Listado de operaciones realizadas por un usuario
+ * List of record's logs for an user
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
@@ -43,11 +43,27 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Record_Query.php");
   require_once("../lib/error_lib.php");
+  require_once("../lib/input_lib.php");
+  require_once("../lib/search_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving post vars and scrubbing the data
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_POST["page"]))
+  {
+    $currentPageNmbr = $_POST["page"];
+  }
+  else
+  {
+    $currentPageNmbr = 1;
+  }
+  $limit = $_POST["limit"];
 
   ////////////////////////////////////////////////////////////////////
   // Search user operations
   ////////////////////////////////////////////////////////////////////
   $recordQ = new Record_Query();
+  $recordQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $recordQ->connect();
   if ($recordQ->errorOccurred())
   {
@@ -55,8 +71,7 @@
     showQueryError($recordQ);
   }
 
-  $total = $recordQ->selectUser($idUser);
-  if ($recordQ->errorOccurred())
+  if ( !$recordQ->searchUser($idUser, $currentPageNmbr, $limit) )
   {
     $recordQ->close();
     showQueryError($recordQ);
@@ -82,14 +97,42 @@
 
   echo '<h3>' . sprintf(_("Record Logs List for user %s"), $login) . "</h3>\n";
 
-  if ($total == 0)
+  if ($recordQ->getRowCount() == 0)
   {
     echo '<p>' . _("No logs for this user.") . "</p>\n";
   }
   else
   {
-    echo '<p><strong>' . sprintf(_("%d transactions."), $total) . "</strong></p>\n";
+    // Printing result stats and page nav
+    echo '<p><strong>' . sprintf(_("%d transactions."), $recordQ->getRowCount()) . "</strong></p>\n";
+
+    $pageCount = $recordQ->getPageCount();
+    showResultPages($currentPageNmbr, $pageCount);
 ?>
+
+<!-- JavaScript to post back to this page -->
+<script type="text/javascript">
+<!--
+function changePage(page)
+{
+  document.forms[0].page.value = page;
+  document.forms[0].submit();
+
+  return false;
+}
+//-->
+</script>
+
+<!-- Form used by javascript to post back to this page -->
+<form method="post" action="../admin/user_record_log.php?key=<?php echo $idUser; ?>&amp;login=<?php echo $login; ?>">
+  <div>
+<?php
+  showInputHidden("page", $currentPageNmbr);
+  showInputHidden("limit", $_POST["limit"]);
+?>
+  </div>
+</form>
+
 <table>
   <thead>
     <tr>
@@ -125,7 +168,7 @@
     while ($row = $recordQ->fetchRecord())
     {
       echo '<tr class="' . $rowClass . ' center">';
-      echo '<td>' . $row["access_date"] . "</td>\n";
+      echo '<td>' . localDate($row["access_date"]) . "</td>\n";
       echo '<td>' . $row["login"] . "</td>\n";
       echo '<td>' . $row["table_name"] . "</td>\n";
       echo '<td>' . $row["operation"] . "</td>\n";
@@ -135,13 +178,14 @@
       // swap row color
       ($rowClass == "even") ? $rowClass = "odd" : $rowClass = "even";
     }
+    $recordQ->freeResult();
+    $recordQ->close();
 ?>
   </tbody>
 </table>
 <?php
+    showResultPages($currentPageNmbr, $pageCount);
   } // end if-else
-  $recordQ->freeResult();
-  $recordQ->close();
   unset($recordQ);
 
   echo '<p><a href="' . $returnLocation . '">' . _("Return to users list") . "</a></p>\n";
