@@ -5,16 +5,15 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_form.php,v 1.1 2004/03/20 20:06:46 jact Exp $
+ * $Id: patient_search_form.php,v 1.2 2004/04/24 14:52:14 jact Exp $
  */
 
 /**
  * patient_search_form.php
  ********************************************************************
- * Change this
+ * Search patient screen
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 20/03/04 21:06
  */
 
   ////////////////////////////////////////////////////////////////////

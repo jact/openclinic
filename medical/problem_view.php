@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.1 2004/03/24 19:34:38 jact Exp $
+ * $Id: problem_view.php,v 1.2 2004/04/24 14:52:15 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * View medical problem data screen
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 24/03/04 20:34
  */
 
   ////////////////////////////////////////////////////////////////////
