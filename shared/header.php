@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.2 2004/04/18 14:02:25 jact Exp $
+ * $Id: header.php,v 1.3 2004/04/18 14:12:03 jact Exp $
  */
 
 /**
@@ -208,7 +208,7 @@
       <a href="http://openclinic.sourceforge.net">
         <img src="../images/openclinic-2.png" width="130" height="29" alt="<?php echo _("Powered by OpenClinic"); ?>" title="<?php echo _("Powered by OpenClinic"); ?>" />
       </a>
-      </p>
+    </p>
 
     <p>
       <a href="http://www.coresis.com">
