@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: html_lib.php,v 1.1 2004/07/25 16:33:28 jact Exp $
+ * $Id: html_lib.php,v 1.2 2004/07/26 18:36:32 jact Exp $
  */
 
 /**
@@ -24,12 +24,14 @@
 
 /**
  * Functions:
- *  string showTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
- *  string showMessage(string $text, int $type = OPEN_MSG_WARNING)
+ *  string htmlTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
+ *  void showTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
+ *  string htmlMessage(string $text, int $type = OPEN_MSG_WARNING)
+ *  void showMessage(string $text, int $type = OPEN_MSG_WARNING)
  */
 
 /**
- * void showTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
+ * string htmlTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
  ********************************************************************
  * Returns html table
  * Options example:
@@ -49,7 +51,7 @@
  * @return string html table
  * @access public
  */
-function showTable(&$head, &$body, $foot = null, $options = null, $caption = "")
+function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
 {
   $html = "";
   if (count($head) == 0 && count($body) == 0)
@@ -173,7 +175,25 @@ function showTable(&$head, &$body, $foot = null, $options = null, $caption = "")
 }
 
 /**
- * string showMessage(string $text, int $type = OPEN_MSG_WARNING)
+ * void showTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
+ ********************************************************************
+ * Draws html table
+ ********************************************************************
+ * @param array &$head headers of table columns
+ * @param array &$body tabular data
+ * @param array $foot (optional) table footer
+ * @param array $options (optional) options of table and columns
+ * @param string $caption (optional)
+ * @return void
+ * @access public
+ */
+function showTable(&$head, &$body, $foot = null, $options = null, $caption = "")
+{
+  echo htmlTable($head, $body, $foot, $options, $caption);
+}
+
+/**
+ * string htmlMessage(string $text, int $type = OPEN_MSG_WARNING)
  ********************************************************************
  * Returns an html paragraph with a message
  ********************************************************************
@@ -182,7 +202,7 @@ function showTable(&$head, &$body, $foot = null, $options = null, $caption = "")
  * @return string html message
  * @access public
  */
-function showMessage($text, $type = OPEN_MSG_WARNING)
+function htmlMessage($text, $type = OPEN_MSG_WARNING)
 {
   if (empty($text))
   {
@@ -209,5 +229,20 @@ function showMessage($text, $type = OPEN_MSG_WARNING)
   $html .= "</p>\n";
 
   return $html;
+}
+
+/**
+ * void showMessage(string $text, int $type = OPEN_MSG_WARNING)
+ ********************************************************************
+ * Draws an html paragraph with a message
+ ********************************************************************
+ * @param string $text message
+ * @param int $type (optional) possible values: OPEN_MSG_ERROR, OPEN_MSG_WARNING (default), OPEN_MSG_INFO
+ * @return void
+ * @access public
+ */
+function showMessage($text, $type = OPEN_MSG_WARNING)
+{
+  echo htmlMessage($text, $type);
 }
 ?>
