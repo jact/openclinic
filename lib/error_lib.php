@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: error_lib.php,v 1.3 2004/07/05 18:33:09 jact Exp $
+ * $Id: error_lib.php,v 1.4 2004/07/06 17:38:19 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@
  * Functions:
  *  void showQueryError(Query $query, bool $goOut = true)
  *  void showConnError(DbConnection $conn, bool $goOut = true)
+ *  void showFetchError(bool $goOut = true)
  *  void showErrorMsg(string $errorMsg, int $errorType = E_USER_WARNING)
  */
 
@@ -87,6 +88,28 @@ function showConnError($conn, $goOut = true)
   if ($goOut)
   {
     exit($conn->getError());
+  }
+}
+
+/**
+ * void showFetchError(bool $goOut = true)
+ ********************************************************************
+ * Displays the fetch error page
+ ********************************************************************
+ * @param bool $goOut if true, execute an exit()
+ * @return void
+ * @access public
+ */
+function showFetchError($goOut = true)
+{
+  if ($query->getSQL() != "")
+  {
+    echo "\n<!-- _SQL = " . $query->getSQL() . "-->\n";
+  }
+
+  if ($goOut)
+  {
+    exit("Fetch failed."); // translate message???
   }
 }
 
