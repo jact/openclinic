@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.7 2004/10/18 17:24:05 jact Exp $
+ * $Id: xhtml_start.php,v 1.8 2005/02/01 19:34:59 jact Exp $
  */
 
 /**
@@ -23,12 +23,31 @@
     exit();
   }
 
-  $contentType = "application/xhtml+xml";
-  if ( !ereg(str_replace("+", "\+", $contentType), $_SERVER['HTTP_ACCEPT']) )
+  /**
+   * Content negotiation
+   *
+   * Author: Tommy Olsson <http://autisticcuckoo.net/>
+   */
+  $xhtml = false;
+  if (preg_match('/application\/xhtml\+xml(;q=(\d+\.\d+))?/i', $_SERVER['HTTP_ACCEPT'], $matches))
   {
-    $contentType = "text/html";
+    $xhtmlQ = isset($matches[2]) ? $matches[2] : 1;
+    if (preg_match('/text\/html(;q=(\d+\.\d+))?/i', $_SERVER['HTTP_ACCEPT'], $matches))
+    {
+      $htmlQ = isset($matches[2]) ? $matches[2] : 1;
+      $xhtml = ($xhtmlQ >= $htmlQ);
+    }
+    else
+    {
+      $xhtml = true;
+    }
   }
+
+  $contentType = ($xhtml) ? "application/xhtml+xml" : "text/html";
   $contentType .= "; charset=" . OPEN_CHARSET;
+
+  header("Content-Type: " . $contentType);
+  header('Vary: Accept');
 
   if (defined("OPEN_BUFFER") && OPEN_BUFFER)
   {
@@ -58,7 +77,7 @@
 
 <meta http-equiv="Content-Type" content="<?php echo $contentType; ?>" />
 
-<?php //echo <!--meta http-equiv="Content-Style-Type" content="text/css2" /--> ?>
+<?php //<!--meta http-equiv="Content-Style-Type" content="text/css2" /--> ?>
 
 <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
 
@@ -74,7 +93,7 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2004 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2005 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
