@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.9 2004/07/07 17:52:59 jact Exp $
+ * $Id: header.php,v 1.10 2004/07/08 16:41:18 jact Exp $
  */
 
 /**
@@ -51,8 +51,7 @@
 
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
 </head>
-<body
-<?php
+<body<?php
   if (isset($focusFormName) && isset($focusFormField) && ($focusFormName != "") && ($focusFormField != ""))
   {
     echo ' onload="self.focus(); document.' . $focusFormName . "." . $focusFormField . '.focus()"';
@@ -70,7 +69,8 @@
       }
       if (defined("OPEN_CLINIC_USE_IMAGE") && OPEN_CLINIC_USE_IMAGE)
       {
-        echo '<img src="' . OPEN_CLINIC_IMAGE_URL . '" alt="' . OPEN_CLINIC_NAME . '" title="' . OPEN_CLINIC_NAME . '" />';
+        list($width, $height, $type, $attr) = @getimagesize(OPEN_CLINIC_IMAGE_URL);
+        echo '<img src="' . OPEN_CLINIC_IMAGE_URL . '" alt="' . OPEN_CLINIC_NAME . '" title="' . OPEN_CLINIC_NAME . '" ' . $attr . ' />';
       }
       else
       {
@@ -78,7 +78,7 @@
       }
       if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
       {
-        echo "</a>\n";
+        echo '</a>';
       }
       echo "</h1>\n";
     ?>
@@ -110,7 +110,7 @@
 
   <hr class="noPrint" />
 
-  <h1 class="skipLink"><a href="#mainZone" accesskey="2"><?php echo _("Skip over navigation"); ?></a></h1>
+  <h1 class="noPrint"><a href="#mainZone" accesskey="2"><?php echo _("Skip over navigation"); ?></a></h1>
 
   <!-- Tabs -->
   <div class="menuBar">
@@ -153,17 +153,17 @@
     ?>
     <a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a> |
 
-    <!--a href="http://sourceforge.net/mail/?group_id=70742"><?php //echo _("Mailing Lists"); ?></a> | -->
+    <?php //<!--a href="http://sourceforge.net/mail/?group_id=70742">?><?php //echo _("Mailing Lists"); ?><?php //</a> | --> ?>
 
     <a href="http://sourceforge.net/project/showfiles.php?group_id=70742"><?php echo _("Downloads"); ?></a> |
 
     <a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857"><?php echo _("Report Bugs"); ?></a> |
 
-    <!--a href="http://sourceforge.net/pm/?group_id=70742"><?php //echo _("Tasks"); ?></a> | -->
+    <?php //<!--a href="http://sourceforge.net/pm/?group_id=70742">?><?php //echo _("Tasks"); ?><?php //</a> | --> ?>
 
     <a href="http://sourceforge.net/forum/?group_id=70742"><?php echo _("Forums"); ?></a>
 
-    <!--a href="http://sourceforge.net/project/memberlist.php?group_id=70742"><?php echo _("Developers"); ?></a-->
+    <?php //<!--a href="http://sourceforge.net/project/memberlist.php?group_id=70742">?><?php //echo _("Developers"); ?><?php //</a--> ?>
   </div><!-- End #sourceForgeLinks -->
 </div><!-- End #header -->
 <!-- End Header -->
