@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.9 2004/07/24 16:24:02 jact Exp $
+ * $Id: user_record_log.php,v 1.10 2004/07/28 18:09:48 jact Exp $
  */
 
 /**
@@ -93,7 +93,8 @@
 
   if ($recordQ->getRowCount() == 0)
   {
-    echo '<p>' . _("No logs for this user.") . "</p>\n";
+    $recordQ->close();
+    showMessage(_("No logs for this user."), OPEN_MSG_INFO);
   }
   else
   {
@@ -127,55 +128,46 @@ function changePage(page)
   </div>
 </form>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo _("Access Date"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Login"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Table"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Operation"); ?>
-      </th>
-
-      <th>
-        <?php echo ("Data"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
 <?php
-    $rowClass = "odd";
-    while ($row = $recordQ->fetch())
+    $thead = array(
+      _("Access Date") => array('colspan' => 2),
+      _("Login"),
+      _("Table"),
+      _("Operation"),
+      _("Data")
+    );
+
+    $options = array(
+      0 => array('align' => 'right'),
+      1 => array('align' => 'center'),
+      2 => array('align' => 'center'),
+      3 => array('align' => 'center'),
+      4 => array('align' => 'center'),
+      5 => array('align' => 'center')
+    );
+
+    $tbody = array();
+    while ($record = $recordQ->fetch())
     {
-      echo '<tr class="' . $rowClass . ' center">';
-      echo '<td class="number">' . $recordQ->getCurrentRow() . ".</td>\n";
-      echo '<td>' . localDate($row["access_date"]) . "</td>\n";
-      echo '<td>' . $row["login"] . "</td>\n";
-      echo '<td>' . $row["table_name"] . "</td>\n";
-      echo '<td>' . $row["operation"] . "</td>\n";
-      echo '<td>';
-      print_r(unserialize($row["affected_row"]));
-      echo "</td>\n";
-      echo "</tr>\n";
-      // swap row color
-      ($rowClass == "even") ? $rowClass = "odd" : $rowClass = "even";
+      $row = $recordQ->getCurrentRow() . ".";
+      $row .= OPEN_SEPARATOR;
+      $row .= localDate($record["access_date"]);
+      $row .= OPEN_SEPARATOR;
+      $row .= $record["login"];
+      $row .= OPEN_SEPARATOR;
+      $row .= $record["table_name"];
+      $row .= OPEN_SEPARATOR;
+      $row .= $record["operation"];
+      $row .= OPEN_SEPARATOR;
+      $row .= var_export(unserialize($record["affected_row"]), true);
+
+      $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
     $recordQ->freeResult();
     $recordQ->close();
-?>
-  </tbody>
-</table>
-<?php
+
+    showTable($thead, $tbody, null, $options);
+
     showResultPages($currentPageNmbr, $pageCount);
   } // end if-else
   unset($recordQ);

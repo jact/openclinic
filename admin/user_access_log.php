@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.9 2004/07/14 18:25:42 jact Exp $
+ * $Id: user_access_log.php,v 1.10 2004/07/28 18:09:48 jact Exp $
  */
 
 /**
@@ -94,7 +94,7 @@
   if ($accessQ->getRowCount() == 0)
   {
     $accessQ->close();
-    echo '<p>' . _("No logs for this user.") . "</p>\n";
+    showMessage(_("No logs for this user."), OPEN_MSG_INFO);
   }
   else
   {
@@ -128,24 +128,6 @@ function changePage(page)
   </div>
 </form>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo _("Access Date"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Login"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Profile"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
 <?php
     $profiles = array(
       OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
@@ -153,24 +135,36 @@ function changePage(page)
       OPEN_PROFILE_DOCTOR => _("Doctor")
     );
 
-    $rowClass = "odd";
+    $thead = array(
+      _("Access Date") => array('colspan' => 2),
+      _("Login"),
+      _("Profile")
+    );
+
+    $options = array(
+      0 => array('align' => 'right'),
+      2 => array('align' => 'center'),
+      3 => array('align' => 'center')
+    );
+
+    $tbody = array();
     while ($access = $accessQ->fetch())
     {
-      echo '<tr class="' . $rowClass . '">';
-      echo '<td class="number">' . $accessQ->getCurrentRow() . ".</td>\n";
-      echo '<td>' . localDate($access["access_date"]) . "</td>\n";
-      echo '<td class="center">' . $access["login"] . "</td>\n";
-      echo '<td class="center">' . $profiles[$access["id_profile"]] . "</td>\n";
-      echo "</tr>\n";
-      // swap row color
-      ($rowClass == "even") ? $rowClass = "odd" : $rowClass = "even";
+      $row = $accessQ->getCurrentRow() . ".";
+      $row .= OPEN_SEPARATOR;
+      $row .= localDate($access["access_date"]);
+      $row .= OPEN_SEPARATOR;
+      $row .= $access["login"];
+      $row .= OPEN_SEPARATOR;
+      $row .= $profiles[$access["id_profile"]];
+
+      $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
     $accessQ->freeResult();
     $accessQ->close();
-?>
-  </tbody>
-</table>
-<?php
+
+    showTable($thead, $tbody, null, $options);
+
     showResultPages($currentPageNmbr, $pageCount);
   } // end if-else
   unset($accessQ);
