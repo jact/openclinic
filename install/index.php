@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.5 2004/06/07 19:06:45 jact Exp $
+ * $Id: index.php,v 1.6 2004/06/08 18:52:48 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Index page of installation process
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * TODO: hacer función para limpiar contenido malicioso (ponerla en validator_lib.php)
  */
 
   error_reporting(55); // E_ALL & ~E_NOTICE - normal
@@ -25,6 +24,7 @@
   require_once("../lib/input_lib.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/debug_lib.php");
+  require_once("../lib/validator_lib.php");
 
   //debug($_POST);
 
@@ -33,16 +33,11 @@
     $table = basename($_POST['sql_file']);
     $table = str_replace('.sql', '', $table);
 
-    $_POST['sql_query'] = trim($_POST['sql_query']);
-    $_POST['sql_query'] = preg_replace("/<\?.*?\?>/is", "", $_POST['sql_query']); // strip php code
-    //$_POST['sql_query'] = preg_replace("/(<.*?)(=)(?!\"|\')(.*?)(>|[[:space:]])/is", "", $_POST['sql_query']); // strip html tags // does not work
-    //$_POST['sql_query'] = preg_replace("/<%.*?%>/is", "", $_POST['sql_query']); // strip asp, jsp code // does not work
-    $_POST['sql_query'] = preg_replace("/<script[^>].*?<\/script>/is", "", $_POST['sql_query']); // strip script code
-    //debug($_POST, "", true);
     if (get_magic_quotes_gpc())
     {
       $_POST['sql_query'] = stripslashes($_POST['sql_query']);
     }
+    $_POST['sql_query'] = safeText($_POST['sql_query'], false);
 
     $tmpFile = tempnam(dirname(realpath(__FILE__)), "foo");
     $handle = fopen($tmpFile, "w"); // as text, not binary
@@ -67,7 +62,9 @@
     }
   }
 
+  ////////////////////////////////////////////////////////////////////
   // To Opera navigators
+  ////////////////////////////////////////////////////////////////////
   if (isset($_POST['sql_file']))
   {
     $_POST['sql_file'] = str_replace('\"', '', $_POST['sql_file']);
@@ -77,7 +74,9 @@
     $_POST['secret_file'] = str_replace('\"', '', $_POST['secret_file']);
   }
 
+  ////////////////////////////////////////////////////////////////////
   // If JavaScript is actived and works fine, we prevent Mozilla's problem
+  ////////////////////////////////////////////////////////////////////
   if (isset($_POST['secret_file']))
   {
     if (strlen($_POST['secret_file']) > 0 && $_POST['secret_file'] != $_POST['sql_file'])
@@ -86,14 +85,13 @@
     }
   }
 
+  ////////////////////////////////////////////////////////////////////
   // In Mozilla there no path file, only name and extension. Why? Is it an error?
+  ////////////////////////////////////////////////////////////////////
   if (isset($_POST['view_file']) && !empty($_FILES['sql_file']['name']) && $_FILES['sql_file']['size'] > 0)
   {
     $sqlQuery = fread(fopen($_FILES['sql_file']['tmp_name'], 'r'), $_FILES['sql_file']['size']);
-    $sqlQuery = preg_replace("/<\?.*?\?>/is", "", $sqlQuery); // strip php code
-    $sqlQuery = preg_replace("/(<.*?)(=)(?!\"|\')(.*?)(>|[[:space:]])/is", "", $sqlQuery); // strip html tags // does not work
-    $sqlQuery = preg_replace("/<%.*?%>/is", "", $sqlQuery); // strip asp, jsp code
-    $sqlQuery = preg_replace("/<script[^>].*?<\/script>/is", "", $sqlQuery); // strip script code
+    $sqlQuery = safeText($sqlQuery, false);
 
     echo '<pre>';
     echo $sqlQuery;
@@ -105,7 +103,7 @@
       <div>
         <?php
           showInputHidden("sql_file", $_POST['sql_file']);
-          showInputHidden("sql_query", preg_replace("/<\?.*?\?>/is", "", $sqlQuery)); // strip php code
+          showInputHidden("sql_query", $sqlQuery);
         ?>
       </div>
 
