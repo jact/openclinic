@@ -1,0 +1,167 @@
+/**
+ * This file is part of OpenClinic
+ *
+ * Copyright (c) 2002-2004 jact
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * $Id: style.css,v 1.1 2004/03/19 16:54:08 jact Exp $
+ */
+
+/**
+ * style.css
+ ********************************************************************
+ * Contains the css styles of OpenClinic doc pages
+ ********************************************************************
+ * Author: jact <jachavar@terra.es>
+ * Last modified: 19/03/04 17:54
+ */
+
+html {
+  background: #fff;
+}
+body {
+  font-family: "Trebuchet MS", verdana, arial, helvetica, sans-serif;
+  font-size: 14px;
+  color: #000;
+  background: #efefef;
+  border: 1px solid #98aab1;
+  padding: 1em;
+  margin: 1em;
+  line-height: 150%;
+}
+img {
+  border: 0;
+}
+table {
+  font-size: 14px;
+}
+li {
+  padding-top: 1em;
+}
+h1 {
+  font-size: 22px;
+}
+h2 {
+  font-size: 18px;
+  font-weight: normal;
+}
+h3 {
+  font-size: 16px;
+}
+#content a:link, #content a:visited, #footer a:link, #footer a:visited {
+  color: #00a;
+}
+#content a:hover, #footer a:hover {
+  background: #00a;
+  color: #fff;
+}
+.small {
+  font-size: 11px;
+}
+.note {
+  color: crimson;
+  font-weight: bold;
+}
+.error {
+  font-size: 18px;
+  color: red;
+}
+.add {
+  color: #f30;
+}
+.fix {
+  color: #14a5f4;
+  font-weight: bold;
+}
+.change {
+  color: #13920d;
+}
+.note-code {
+  padding: 10px;
+  border: 2px solid crimson;
+}
+.programlisting {
+  padding-right: 10px;
+  padding-left: 20px;
+  background: #b0e0e6;
+  border: 1px solid #87ceeb;
+}
+hr {
+  color: #000;
+  background: #000;
+  border: 1px solid #000;
+}
+#header {
+  background: #000;
+  border: 1px solid #000;
+  text-align: right;
+  height: 58px;
+}
+.headerLHS {
+  float: left;
+}
+.links {
+  margin-top: 30px;
+  font: normal normal 11px verdana, geneva, arial, helvetica, sans-serif;
+}
+.linkList {
+  list-style: none outside none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.linkList li {
+  position: relative;
+  bottom: 11px;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  voice-family: "\"}\"";
+  voice-family:inherit;
+  line-height: 2.5em;
+}
+html > body .linkList li {
+  margin: 0 3px 0 0;
+  padding: 4px 0px;
+  voice-family: "\"}\"";
+  voice-family:inherit;
+  background: #98aab1;
+}
+.linkList a, .linkList a:link, .linkList a:visited,
+#content .linkList a, #content .linkList a:link, #content .linkList a:visited {
+  background: #98aab1;
+  color: #fff;
+  border: 1px solid white;
+  bottom: 2px;
+  cursor: pointer;
+  display: inline;
+  margin: 0;
+  padding: 3px 5px;
+  position: relative;
+  right: 2px;
+  height: 1em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.linkList li.bold a, .linkList li.bold a:link, .linkList li.bold a:visited {
+  font-weight: bold;
+  color: gold;
+}
+.linkList a:hover, #content .linkList a:hover {
+  background: #0000aa;
+  color: #fff;
+  bottom: 1px;
+  position: relative;
+  right: 1px;
+}
+.linkList a:active {
+  background: #999;
+  color: #fff;
+  bottom: 0;
+  position: relative;
+  right: 0;
+}
+#footer, .logos {
+  margin-top: 10px;
+  text-align: center;
+}
