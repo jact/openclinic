@@ -1,11 +1,14 @@
 /* CSS based in SuperfluousBanter.org site */
 
 /* Layout */
-body {
-  margin: 0;
-  padding: 0;
+html, body {
   background: #fff;
   color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: "trebuchet ms", verdana, helvetica, sans-serif;
   font-size: 12px;
 }
@@ -42,7 +45,6 @@ html>body #header {
   padding: 0 0 0 10px;
   margin: 0;
   clear: both;
-  /*margin-top: 12px;*/
   height: 0; /* IE 5.0 paranoid */
 }
 
@@ -114,14 +116,6 @@ li#first a, li#first span {
   margin-bottom: 2ex;
 }
 
-.linkList a:hover {
-  color: #000;
-}
-
-.linkList a:hover {
-  color: #999;
-}
-
 .sideBarLogin {
   margin: 10px;
 }
@@ -134,7 +128,7 @@ li#first a, li#first span {
 
 #footer {
   border-top: 1px solid #efefef;
-  padding: 1ex 4mm;
+  padding: 1ex 8px;
   margin-left: 150px;
   clear: right;
   text-align: center;
@@ -148,13 +142,13 @@ li#first a, li#first span {
 
 table {
   border-collapse: collapse;
-  padding: 2px;
   border: 1px solid #efefef;
+  padding: 2px;
 }
 
 th {
-  color: #94baa5;
   background: #eff7f7;
+  color: #94baa5;
   text-align: center;
 }
 
@@ -206,12 +200,13 @@ td {
 
 #mainZone a, #mainZone a:link, #mainZone a:visited,
 #footer a, #footer a:link, #footer a:visited {
+  background: inherit;
   color: #52b2ad;
 }
 
 /* Form styles */
 input, textarea, select {
-  font-family: verdana,sans-serif;
+  font-family: verdana, sans-serif;
   font-size: 12px;
   border-width: 1px;
   border-color: #000;
@@ -248,12 +243,13 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 #mainZone h1, #mainZone h2, #mainZone h3, #mainZone h4, #mainZone h5 {
+  background: inherit;
   color: #b5bab5;
 }
 
 .error {
-  color: #9c0000;
   background: #fff;
+  color: #9c0000;
   font-weight: bold;
 }
 
@@ -286,6 +282,7 @@ img {
 
 label {
   cursor: pointer;
+  background: inherit;
   color: #bdba8c;
 }
 
