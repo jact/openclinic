@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: lang_lib.php,v 1.4 2004/05/31 18:55:32 jact Exp $
+ * $Id: lang_lib.php,v 1.5 2004/06/03 18:23:53 jact Exp $
  */
 
 /**
@@ -88,7 +88,7 @@ function setLanguage($lang = "")
       $newLang = LANG_DEFAULT;
     }
   }
-  //putenv("LANG=" . $newLang);
+  putenv("LANG=" . $newLang);
 
   return $newLang;
 }
