@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.9 2004/07/28 16:36:23 jact Exp $
+ * $Id: wizard.php,v 1.10 2004/08/12 11:35:45 jact Exp $
  */
 
 /**
@@ -40,23 +40,10 @@
   require_once("../lib/validator_lib.php");
 
   $themes = array(
-    1 => "Metalic Grey",
-    2 => "Mossy Blue",
-    3 => "Arizona Dessert",
-    4 => "Blue and Yellow",
-    5 => "Dark Wood",
-    6 => "Midnight",
-    7 => "XP Style",
-    8 => "Autumn Violets",
-    9 => "Thai AppServ",
-    10 => "OpenClinic Wizard",
-    11 => "Izhal",
-    12 => "Invision",
-    13 => "LibXML",
-    14 => "SerialZ",
-    15 => "Closer",
-    16 => "GG Interactive",
-    17 => "mezzoblue"
+    1 => "SerialZ",
+    2 => "SuperfluousBanter",
+    3 => "Sinorca",
+    4 => "Gazetteer Alternate"
   );
 
   ////////////////////////////////////////////////////////////////////
@@ -77,7 +64,7 @@
     $_POST['clinicPhone'] = "";
     $_POST['timeout'] = 20;
     $_POST['itemsPage'] = 10;
-    $_POST['clinicTheme'] = 1; // Metalic Grey theme by default
+    $_POST['clinicTheme'] = 1; // SerialZ theme by default
 
     $_POST['firstName'] = "John";
     $_POST['surname1'] = "Doe";
@@ -86,7 +73,7 @@
     $_POST['adminPhone'] = "";
     $_POST['passwd'] = "";
     $_POST['email'] = "";
-    $_POST['adminTheme'] = 8; // Autumn Violets by default
+    $_POST['adminTheme'] = 3; // Sinorca by default
   } // end step 0
 
   ////////////////////////////////////////////////////////////////////
@@ -503,7 +490,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.9 2004/07/28 16:36:23 jact Exp $
+ * $Id: wizard.php,v 1.10 2004/08/12 11:35:45 jact Exp $
  */
 
 /**
