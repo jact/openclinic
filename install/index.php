@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.9 2004/07/14 18:28:08 jact Exp $
+ * $Id: index.php,v 1.10 2004/07/28 16:33:52 jact Exp $
  */
 
 /**
@@ -132,7 +132,7 @@
     exit();
   } // end if
 
-  echo '<h2>' . _("OpenClinic Installation:") . "</h2>\n";
+  echo '<h1>' . _("OpenClinic Installation:") . "</h1>\n";
 
   require_once("../classes/Query.php");
 
@@ -142,10 +142,12 @@
   {
 ?>
     <p>
-      <?php echo _("The connection to the database failed with the following error."); ?>
+      <?php echo _("The connection to the database failed with the following error:"); ?>
     </p>
 
-    <pre><?php echo $installQ->getDbError(); ?></pre>
+    <pre class="error"><?php echo $installQ->getDbError(); ?></pre>
+
+    <hr />
 
     <p>
       <?php echo _("Please make sure the following has been done before running this install script."); ?>
@@ -161,7 +163,7 @@
       </li>
 
       <li>
-        <?php echo sprintf(_("Update %sopenclinic/database_constants.php%s with your new database username and password (%sstep 8%s of the install instructions)"), "<strong>", "</strong>", '<a href="../install.html#step8">', "</a>"); ?>
+        <?php echo sprintf(_("Update %s with your new database username and password (%sstep 8%s of the install instructions)"), "<strong>openclinic/database_constants.php</strong>", '<a href="../install.html#step8">', "</a>"); ?>
       </li>
     </ol>
 
