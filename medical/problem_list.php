@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.6 2004/08/01 08:45:13 jact Exp $
+ * $Id: problem_list.php,v 1.7 2004/08/12 10:03:31 jact Exp $
  */
 
 /**
@@ -94,7 +94,14 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && isset($_GET["info"]))
   {
-    showMessage(sprintf(_("Medical problem, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    if (isset($_GET["closed"]) && $_GET["closed"])
+    {
+      showMessage(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    }
+    else
+    {
+      showMessage(sprintf(_("Medical problem, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    }
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -102,7 +109,14 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && isset($_GET["info"]))
   {
-    showMessage(sprintf(_("Medical problem, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    if (isset($_GET["closed"]) && $_GET["closed"])
+    {
+      showMessage(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    }
+    else
+    {
+      showMessage(sprintf(_("Medical problem, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    }
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -117,6 +131,8 @@
   {
     echo '<p><a href="../medical/problem_new_form.php?key=' . $idPatient . '&amp;num=' . $lastOrderNumber . '&amp;reset=Y">' . _("Add New Medical Problem") . "</a></p>\n";
   }
+
+  echo "<hr />\n";
 
   echo '<h3>' . _("Medical Problems List:") . "</h3>\n";
 
