@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.10 2004/10/04 21:37:41 jact Exp $
+ * $Id: problem_search.php,v 1.11 2004/11/05 12:37:14 jact Exp $
  */
 
 /**
@@ -137,7 +137,7 @@ function changePage(page)
   showInputHidden("search_text_problem", $_POST["search_text_problem"]);
   showInputHidden("page", $currentPageNmbr);
   showInputHidden("logical_problem", $_POST["logical_problem"]);
-  showInputHidden("limit_problem", $limit_problem);
+  showInputHidden("limit_problem", $_POST["limit_problem"]);
 ?>
   </div>
 </form>
