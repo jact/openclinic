@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: home.php,v 1.2 2004/04/18 14:30:07 jact Exp $
+ * $Id: home.php,v 1.3 2004/05/15 16:37:24 jact Exp $
  */
 
 /**
@@ -26,17 +26,17 @@
   {
     @$sessLogin = $_SESSION["loginSession"];
     echo '<div class="sideBarLogin">';
-    if ( !isset($sessLogin) || (isset($sessLogin) && $sessLogin == "") )
+    if (isset($sessLogin) && !empty($sessLogin) && !isset($_SESSION["invalidToken"]))
     {
-      echo '<a href="../shared/login_form.php?ret=../home/index.php">';
-      echo '<img src="../images/login.png" width="96" height="22" alt="login" title="login" />';
-      echo '</a>';
+      echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="' . _("logout") . '" title="logout" /></a>';
+      echo '<br />';
+      echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;reset=Y&amp;all=Y" title="' . _("manage your user account") . '">' . $sessLogin . '</a> ]';
     }
     else
     {
-      echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="logout" title="logout" /></a>';
-      echo '<br />';
-      echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;reset=Y&amp;all=Y" title="' . _("manage your user account") . '">' . $sessLogin . '</a> ]';
+      echo '<a href="../shared/login_form.php?ret=../home/index.php">';
+      echo '<img src="../images/login.png" width="96" height="22" alt="login" title="' . _("login") . '" />';
+      echo '</a>';
     }
     echo "</div>\n";
   }
