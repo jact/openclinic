@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.2 2004/04/18 14:18:15 jact Exp $
+ * $Id: index.php,v 1.3 2004/04/24 17:44:41 jact Exp $
  */
 
 /**
@@ -30,9 +30,10 @@
   if (isset($_POST['install_file']))
   {
     $table = basename($_POST['sql_file']);
-    $table = str_replace('.sql','', $table);
+    $table = str_replace('.sql', '', $table);
 
     $_POST['sql_query'] = trim($_POST['sql_query']);
+    $_POST['sql_query'] = preg_replace("/<\?php.*?\?>/is", "", $_POST['sql_query']); // strip php code
     if (get_magic_quotes_gpc())
     {
       $_POST['sql_query'] = stripslashes($_POST['sql_query']);
@@ -93,8 +94,10 @@
 
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <div>
-        <?php showInputHidden("sql_file", $_POST['sql_file']); ?>
-        <?php showInputHidden("sql_query", $sqlQuery); ?>
+        <?php
+          showInputHidden("sql_file", $_POST['sql_file']);
+          showInputHidden("sql_query", preg_replace("/<\?php.*?\?>/is", "", $sqlQuery)); // strip php code
+        ?>
       </div>
 
       <p>
