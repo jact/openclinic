@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenClinic 0.6\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2004-04-24 20:19+0100\n"
+"PO-Revision-Date: 2004-05-15 21:25+0100\n"
 "Last-Translator: jact <jachavar@terra.es>\n"
 "Language-Team:  <pazoff@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -558,7 +558,7 @@ msgid "Return to profiles list"
 msgstr ""
 
 #: admin/profile_fields.php:50
-#: admin/setting_fields.php:204
+#: admin/setting_fields.php:196
 #: admin/staff_fields.php:129
 #: admin/theme_fields.php:256
 #: admin/user_fields.php:177
@@ -632,73 +632,77 @@ msgstr ""
 msgid "Note: The fields with * are required."
 msgstr ""
 
-#: admin/setting_fields.php:30
+#: admin/setting_edit_form.php:117
+msgid "Note: If zero, searchs return all results without pagination."
+msgstr ""
+
+#: admin/setting_fields.php:32
 msgid "Edit Config Settings"
 msgstr ""
 
-#: admin/setting_fields.php:38
+#: admin/setting_fields.php:40
 #: admin/theme_preview.php:147
 #: install/wizard.php:287
 #: install/wizard.php:458
 msgid "Clinic Name"
 msgstr ""
 
-#: admin/setting_fields.php:48
+#: admin/setting_fields.php:50
 msgid "Clinic Image"
 msgstr ""
 
-#: admin/setting_fields.php:72
+#: admin/setting_fields.php:63
 msgid "(must be in /images/ directory)"
 msgstr ""
 
-#: admin/setting_fields.php:79
+#: admin/setting_fields.php:70
 msgid "Use Image in place of Name"
 msgstr ""
 
-#: admin/setting_fields.php:89
+#: admin/setting_fields.php:80
 #: install/wizard.php:293
 #: install/wizard.php:459
 msgid "Clinic Hours"
 msgstr ""
 
-#: admin/setting_fields.php:99
+#: admin/setting_fields.php:90
 #: install/wizard.php:299
 #: install/wizard.php:460
 msgid "Clinic Address"
 msgstr ""
 
-#: admin/setting_fields.php:109
+#: admin/setting_fields.php:100
 #: install/wizard.php:305
 #: install/wizard.php:461
 msgid "Clinic Phone"
 msgstr ""
 
-#: admin/setting_fields.php:119
+#: admin/setting_fields.php:110
 msgid "Clinic URL"
 msgstr ""
 
-#: admin/setting_fields.php:133
+#: admin/setting_fields.php:124
 #: install/wizard.php:281
 #: install/wizard.php:457
 msgid "Language"
 msgstr ""
 
-#: admin/setting_fields.php:166
+#: admin/setting_fields.php:158
 #: install/wizard.php:323
 #: install/wizard.php:464
 msgid "Theme by default"
 msgstr ""
 
-#: admin/setting_fields.php:176
+#: admin/setting_fields.php:168
 #: install/wizard.php:462
 msgid "Session Timeout"
 msgstr ""
 
-#: admin/setting_fields.php:182
+#: admin/setting_fields.php:174
 msgid "minutes"
 msgstr ""
 
-#: admin/setting_fields.php:189
+#: admin/setting_fields.php:181
 #: install/wizard.php:463
 #: medical/patient_search.php:96
 #: medical/problem_search.php:96
@@ -708,11 +712,11 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
-#: admin/setting_fields.php:195
+#: admin/setting_fields.php:187
 msgid "items per page"
 msgstr ""
 
-#: admin/setting_fields.php:203
+#: admin/setting_fields.php:195
 #: admin/theme_list.php:69
 #: medical/history_family_fields.php:67
 #: medical/history_personal_fields.php:116
@@ -1443,6 +1447,15 @@ msgstr ""
 msgid "Birth Date"
 msgstr ""
 
+#: classes/Patient.php:324
+#: classes/Patient.php:377
+#: classes/Problem.php:209
+#: classes/Problem.php:241
+#: classes/Problem.php:452
+#: shared/header.php:121
+msgid "Y-m-d"
+msgstr ""
+
 #: classes/Setting.php:96
 #: classes/Setting.php:112
 #: classes/Theme.php:313
@@ -1466,7 +1479,6 @@ msgid "This field must not contain a decimal point."
 msgstr ""
 
 #: classes/Setting.php:106
-#: classes/Setting.php:122
 #: classes/Theme.php:323
 #: classes/Theme.php:339
 #: classes/Theme.php:355
@@ -3112,7 +3124,7 @@ msgid "Medical test, %s, has been added."
 msgstr ""
 
 #: navbars/admin.php:30
-#: navbars/home.php:39
+#: navbars/home.php:33
 #: navbars/medical.php:30
 msgid "manage your user account"
 msgstr ""
@@ -3144,6 +3156,14 @@ msgstr ""
 #: navbars/medical.php:90
 #: shared/footer.php:34
 msgid "Help"
+msgstr ""
+
+#: navbars/home.php:31
+msgid "logout"
+msgstr ""
+
+#: navbars/home.php:38
+msgid "login"
 msgstr ""
 
 #: navbars/patient.php:52
