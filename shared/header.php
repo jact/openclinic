@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.6 2004/06/06 11:45:35 jact Exp $
+ * $Id: header.php,v 1.7 2004/06/20 12:05:03 jact Exp $
  */
 
 /**
@@ -22,45 +22,12 @@
     exit();
   }
 
-  // To prevent 'short_open_tag = On' mistake
-  echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
+  ////////////////////////////////////////////////////////////////////
+  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+  ////////////////////////////////////////////////////////////////////
+  $title = OPEN_CLINIC_NAME . ((isset($title) && $title != "") ? " : " . $title : "");
+  require_once("../shared/xhtml_start.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo str_replace("_", "-", OPEN_LANGUAGE); ?>" dir="<?php echo OPEN_DIRECTION; ?>">
-<head>
-<title>
-<?php
-  echo OPEN_CLINIC_NAME;
-  if (isset($title) && $title != "")
-  {
-    echo " : " . $title;
-  }
-?>
-</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
-
-<!--meta http-equiv="Content-Style-Type" content="text/css2" /-->
-
-<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
-
-<meta http-equiv="Pragma" content="no-cache" />
-
-<meta http-equiv="expires" content="-1" />
-
-<meta http-equiv="imagetoolbar" content="no" />
-
-<meta name="robots" content="noindex,nofollow" />
-
-<meta name="MSSmartTagsPreventParsing" content="TRUE" />
-
-<meta name="author" content="Jose Antonio Chavarría" />
-
-<meta name="copyright" content="2002-2004 Jose Antonio Chavarría" />
-
-<meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
-
-<meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
 
 <link rel="home" title="<?php echo _("Clinic Home"); ?>" href="../home/index.php" />
 
