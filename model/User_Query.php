@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: User_Query.php,v 1.3 2004/04/24 16:44:48 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@ require_once("../classes/User.php");
  * Methods:
  *  mixed select(int $idUser = 0)
  *  mixed selectLogins(void)
- *  bool existLogin(string $login, int $idUser = 0)
+ *  bool existLogin(string $login, int $idMember = 0)
  *  mixed verifySignOn(string $login, string $pwd, bool $onlyCheck = false)
  *  bool deactivate(string $login)
  *  mixed fetchUser(void)
@@ -95,22 +95,22 @@ class User_Query extends Query
   }
 
   /**
-   * bool existLogin(string $login, int $idUser = 0)
+   * bool existLogin(string $login, int $idMember = 0)
    ********************************************************************
    * Executes a query
    ********************************************************************
    * @param string $login login of user to know if exists
-   * @param int $idUser (optional) key of user
+   * @param int $idMember (optional) key of staff member
    * @return boolean returns true if login already exists or false if error occurs
    * @access public
    */
-  function existLogin($login, $idUser = 0)
+  function existLogin($login, $idMember = 0)
   {
     $sql = "SELECT COUNT(login) FROM staff_tbl";
     $sql .= " WHERE login='" . urlencode($login) . "'";
-    if ($idUser > 0)
+    if ($idMember > 0)
     {
-      $sql .= " AND id_user<>" . intval($idUser);
+      $sql .= " AND id_member<>" . intval($idMember);
     }
 
     $result = $this->exec($sql);
@@ -276,7 +276,7 @@ class User_Query extends Query
    */
   function update($user)
   {
-    $isDupLogin = $this->existLogin($user->getLogin(), $user->getIdUser());
+    $isDupLogin = $this->existLogin($user->getLogin(), $user->getIdMember());
     if ($this->errorOccurred())
     {
       return false;
