@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: html_lib.php,v 1.5 2004/08/01 08:52:34 jact Exp $
+ * $Id: html_lib.php,v 1.6 2004/08/02 11:06:54 jact Exp $
  */
 
 /**
@@ -93,65 +93,6 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
     $html .= "</thead>\n";
   }
 
-  if (count($body) > 0)
-  {
-    $rowClass = "odd";
-    $html .= "<tbody>\n";
-    $j = 0;
-    foreach ($body as $row)
-    {
-      if ( !isset($options['shaded']) || (isset($options['shaded']) && $options['shaded']))
-      {
-        $html .= '<tr class="' . $rowClass . '">' . "\n";
-      }
-      else
-      {
-        $html .= "<tr>\n";
-      }
-
-      $i = 0;
-      foreach ($row as $data)
-      {
-        $html .= '<td';
-
-        if (isset($options['r' . $j]['colspan']) && $options['r' . $j]['colspan'] > 0)
-        {
-          $html .= ' colspan="' . $options['r' . $j]['colspan'] . '"';
-        }
-
-        $class = array();
-        if (isset($options[$i]['align']) && $options[$i]['align'] == 'center')
-        {
-          $class[] = "center";
-        }
-        elseif (isset($options[$i]['align']) && $options[$i]['align'] == 'right')
-        {
-          $class[] = "right";
-        }
-
-        if (isset($options[$i]['nowrap']) && $options[$i]['nowrap'])
-        {
-          $class[] = "noWrap";
-        }
-
-        if (count($class) > 0)
-        {
-          $html .= ' class="' . implode(" ", $class) . '"';
-        }
-
-        $html .= '>';
-        $html .= $data;
-        $html .= "</td>\n";
-        $i++;
-      }
-      $html .= "</tr>\n";
-      $j++;
-      // swap row color
-      $rowClass = ($rowClass == "odd") ? "even" : "odd";
-    }
-    $html .= "</tbody>\n";
-  }
-
   if (count($foot) > 0)
   {
     $html .= "<tfoot>\n";
@@ -181,6 +122,65 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
       $html .= "</tr>\n";
     }
     $html .= "</tfoot>\n";
+  }
+
+  if (count($body) > 0)
+  {
+    $rowClass = "odd";
+    $html .= "<tbody>\n";
+    $numRow = 0;
+    foreach ($body as $row)
+    {
+      if ( !isset($options['shaded']) || (isset($options['shaded']) && $options['shaded']))
+      {
+        $html .= '<tr class="' . $rowClass . '">' . "\n";
+      }
+      else
+      {
+        $html .= "<tr>\n";
+      }
+
+      $numCol = 0;
+      foreach ($row as $data)
+      {
+        $html .= '<td';
+
+        if (isset($options['r' . $numRow]['colspan']) && $options['r' . $numRow]['colspan'] > 0)
+        {
+          $html .= ' colspan="' . $options['r' . $numRow]['colspan'] . '"';
+        }
+
+        $class = array();
+        if (isset($options[$numCol]['align']) && $options[$numCol]['align'] == 'center')
+        {
+          $class[] = "center";
+        }
+        elseif (isset($options[$numCol]['align']) && $options[$numCol]['align'] == 'right')
+        {
+          $class[] = "right";
+        }
+
+        if (isset($options[$numCol]['nowrap']) && $options[$numCol]['nowrap'])
+        {
+          $class[] = "noWrap";
+        }
+
+        if (count($class) > 0)
+        {
+          $html .= ' class="' . implode(" ", $class) . '"';
+        }
+
+        $html .= '>';
+        $html .= $data;
+        $html .= "</td>\n";
+        $numCol++;
+      }
+      $html .= "</tr>\n";
+      $numRow++;
+      // swap row color
+      $rowClass = ($rowClass == "odd") ? "even" : "odd";
+    }
+    $html .= "</tbody>\n";
   }
 
   $html .= "</table>\n";
