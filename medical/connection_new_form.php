@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.4 2004/07/07 17:22:28 jact Exp $
+ * $Id: connection_new_form.php,v 1.5 2004/07/31 16:39:21 jact Exp $
  */
 
 /**
@@ -93,7 +93,7 @@
   if ($count == 0)
   {
     $problemQ->close();
-    echo '<p>' . _("No medical problems defined for this patient.") . "</p>\n";
+    showMessage(_("No medical problems defined for this patient."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -103,54 +103,41 @@
 
 <form method="post" action="../medical/connection_new.php">
   <div>
-    <?php
-      showInputHidden("id_problem", $idProblem);
-      showInputHidden("id_patient", $idPatient);
-    ?>
-
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <?php echo _("Order Number"); ?>
-          </th>
-
-          <th width="100%">
-            <?php echo _("Wording"); ?>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
 <?php
+  showInputHidden("id_problem", $idProblem);
+  showInputHidden("id_patient", $idPatient);
+
+  $thead = array(
+    _("Order Number"),
+    _("Wording")
+  );
+
+  $tbody = array();
   while ($problem = $problemQ->fetch())
   {
-?>
-        <tr>
-          <td class="number">
-            <?php echo $problem->getOrderNumber();?>.
-            <input type="checkbox" name="check[]" value="<?php echo $problem->getIdProblem(); ?>" />
-          </td>
+    $row = $problem->getOrderNumber() . '.';
+    $row .= '<input type="checkbox" name="check[]" value="' . $problem->getIdProblem() . '" />';
+    $row .= OPEN_SEPARATOR;
+    $row .= $problem->getWording();
 
-          <td>
-            <!--a href="../medical/problem_view.php?key=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $idPatient; ?>&amp;reset=Y"--><?php echo $problem->getWording(); ?><!--/a-->
-          </td>
-        </tr>
-<?php
-  }
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
+  } // end while
   $problemQ->freeResult();
   $problemQ->close();
   unset($problemQ);
   unset($problem);
-?>
 
-        <tr>
-          <td colspan="2" class="center">
-            <?php showInputButton("button1", _("Add selected to Connection Problems List")); ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  $tfoot = array(
+    htmlInputButton("button1", _("Add selected to Connection Problems List"))
+  );
+
+  $options = array(
+    0 => array('align' => 'right'),
+    'tfoot' => array('align' => 'center')
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
+?>
   </div>
 </form>
 
