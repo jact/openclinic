@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.10 2004/10/03 14:24:33 jact Exp $
+ * $Id: staff_list.php,v 1.11 2005/03/28 18:03:04 jact Exp $
  */
 
 /**
@@ -172,11 +172,10 @@
   }
 
   $thead = array(
-    _("Function") => array('colspan' => 2),
+    _("Function") => array('colspan' => 3),
     _("First Name"),
     _("Surname 1"),
     _("Surname 2"),
-    _("Profile"),
     _("Login")
   );
 
