@@ -1,0 +1,7 @@
+AuthUserFile /home/groups/o/op/openclinic/.htpasswd
+AuthName openclinic
+AuthType Basic
+
+<Limit GET>
+  require valid-user
+</Limit>
