@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.6 2004/07/10 16:00:09 jact Exp $
+ * $Id: user_edit.php,v 1.7 2004/08/06 12:00:54 jact Exp $
  */
 
 /**
@@ -76,6 +76,10 @@
       $userQ->close();
       showQueryError($userQ);
     }
+
+    // updating session variables
+    $_SESSION['loginSession'] = $user->getLogin();
+    $_SESSION['userTheme'] = $user->getIdTheme();
   }
 
   if ($changePwd && !$loginUsed)
