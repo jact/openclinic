@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.php,v 1.6 2004/07/07 17:54:40 jact Exp $
+ * $Id: style.php,v 1.7 2004/07/08 16:45:00 jact Exp $
  */
 
 /**
@@ -307,7 +307,7 @@ li#first a, li#first span {
   line-height: 1.25em;
 }
 
-.skipLink, .noPrint {
+.noPrint {
   display: none;
 }
 
