@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: no_authorization.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: no_authorization.php,v 1.3 2004/07/26 18:48:59 jact Exp $
  */
 
 /**
@@ -31,8 +31,8 @@
   require_once("../shared/header.php");
 
   echo '<h1>' . $title . "</h1>\n";
-  echo '<p class="center">';
-  echo sprintf(_("You are not authorized to use %s tab."), _("Admin")) . "</p>\n";
+
+  showMessage(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
 
   require_once("../shared/footer.php");
 ?>

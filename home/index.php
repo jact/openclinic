@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.3 2004/07/10 16:01:38 jact Exp $
+ * $Id: index.php,v 1.4 2004/07/26 18:44:47 jact Exp $
  */
 
 /**
@@ -37,7 +37,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("User, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("User, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -45,11 +45,11 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["login"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
-?>
 
-<p><?php echo _("OpenClinic is an easy to use, open source, medical records system. When you select any of the following tabs you will be prompted to login."); ?></p>
+  showMessage(_("OpenClinic is an easy to use, open source, medical records system. When you select any of the following tabs you will be prompted to login."), OPEN_MSG_INFO);
+?>
 
 <table>
   <thead>

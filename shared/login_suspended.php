@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_suspended.php,v 1.3 2004/07/18 15:18:08 jact Exp $
+ * $Id: login_suspended.php,v 1.4 2004/07/26 18:45:47 jact Exp $
  */
 
 /**
@@ -28,8 +28,10 @@
   require_once("../shared/header.php");
 
   echo '<h1>' . $title . "</h1>\n";
-  echo '<p>' . _("Your user account has been suspended.") . "</p>\n";
-  echo '<p>' . _("Contact with administrator to resolve this problem.") . "</p>\n";
+
+  showMessage(_("Your user account has been suspended."));
+  showMessage(_("Contact with administrator to resolve this problem."), OPEN_MSG_INFO);
+
   //debug($_SESSION);
   //debug($user);
 

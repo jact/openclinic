@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: demo_msg.php,v 1.3 2004/06/28 16:44:44 jact Exp $
+ * $Id: demo_msg.php,v 1.4 2004/07/26 18:45:03 jact Exp $
  */
 
 /**
@@ -25,7 +25,8 @@
   require_once("../shared/header.php");
 
   echo '<h1>' . $title . "</h1>\n";
-  echo '<p>' . _("This function is not available in this demo version of OpenClinic.") . "</p>\n";
+
+  showMessage(_("This function is not available in this demo version of OpenClinic."), OPEN_MSG_INFO);
 
   require_once("../shared/footer.php");
 ?>
