@@ -1,6 +1,6 @@
 /* Feel free and change all what you want */
 
-/* Layout */
+/* --Layout-- */
 body {
   margin: 0;
   padding: 0;
@@ -18,6 +18,10 @@ body {
 
 html>body #header {
   height: auto;
+}
+
+#header h1 {
+  margin: 0;
 }
 
 #subHeader {
@@ -60,13 +64,13 @@ li#first a, li#first span {
   margin: 0;
   padding: 2px 10px;
   float: left;
+  background: #efefef;
 }
 
 #tabs span {
-  font-family: verdana,sans-serif;
-  background: #000;
-  color: #fff;
-  border-bottom: 1px solid #000;
+  background: #fff;
+  color: #000;
+  border-bottom: 1px solid #fff;
 }
 
 #sourceForgeLinks {
@@ -91,7 +95,6 @@ li#first a, li#first span {
   border-left: 1px solid #000;
   background: #fff;
   color: #000;
-  font-family: verdana,sans-serif;
   font-size: 10px;
 }
 
@@ -106,14 +109,8 @@ li#first a, li#first span {
   padding-left: 2.5ex;
 }
 
-.linkList .subnavbar a, .linkList .subnavbar {
+.linkList .subnavbar {
   margin-left: 2ex;
-  padding: 0 2px 0 2.5ex;
-}
-
-#sideBarLogo p {
-  margin-bottom: 2ex;
-  text-align: center;
 }
 
 .sideBarLogin {
@@ -134,11 +131,7 @@ li#first a, li#first span {
   text-align: center;
 }
 
-#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
-  vertical-align: middle;
-}
-
-/* Tables */
+/* --Tables-- */
 .center table {
   margin: 0 auto;
   text-align: left;
@@ -151,6 +144,7 @@ table {
 }
 
 th {
+  text-align: center;
 }
 
 td {
@@ -158,7 +152,7 @@ td {
   border: 1px solid #000;
 }
 
-/* Links */
+/* --Links-- */
 .linkList a, .linkList .subnavbar a {
   background: url(../images/bullet_normal.gif) no-repeat 0 3px;
   padding: 0 2px 0 2.5ex;
@@ -191,9 +185,8 @@ a:link, a:visited {
 .even a {
 }
 
-/* Form styles */
+/* --Form styles-- */
 input, textarea, select {
-  font-family: verdana,sans-serif;
   font-size: 10px;
   border-width: 1px;
   border-color: #000;
@@ -207,9 +200,27 @@ input[type="submit"], input[type="button"], input[type="reset"] {
 
 input[type="radio"], input[type="checkbox"] {
   background: #000;
+  color: inherit;
 }
 
-/* Miscellaneous */
+label {
+  cursor: pointer;
+}
+
+.requiredField {
+  font-weight: bold;
+}
+
+/* --Miscellaneous-- */
+#sideBarLogo p {
+  margin-bottom: 2ex;
+  text-align: center;
+}
+
+#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
+  vertical-align: middle;
+}
+
 .error {
   color: #f00;
   background: #fff;
@@ -223,8 +234,8 @@ input[type="radio"], input[type="checkbox"] {
 }
 
 .even {
-  background: #800000;
-  color: #fff;
+  background: #efefef;
+  color: #000;
 }
 
 img {
@@ -242,19 +253,11 @@ img {
   white-space: nowrap;
 }
 
-label {
-  cursor: pointer;
-}
-
 hr {
   background: #000;
   color: #000;
   border: 1px solid #000;
   margin: 10px 0; /* top-bottom right-left */
-}
-
-.requiredField {
-  font-weight: bold;
 }
 
 .noPrint {
