@@ -1,4 +1,4 @@
-$Id: README,v 1.4 2004/10/16 14:53:54 jact Exp $
+$Id: README,v 1.5 2005/01/31 19:57:43 jact Exp $
 
 OpenClinic: Web Medical Records System
 ======================================
@@ -56,7 +56,7 @@ Features
 
     * License: GNU General Public License (GPL)
 
-    * Natural Language: English, Spanish, Bulgarian
+    * Natural Language: English, Spanish, Bulgarian, Dutch, Traditional Chinese
 
     * Operating System: OS Independent
 
