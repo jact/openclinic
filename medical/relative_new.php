@@ -1,11 +1,11 @@
-<?php // add patient header?
+<?php
 /**
  * This file is part of OpenClinic
  *
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_new.php,v 1.3 2004/07/07 17:23:21 jact Exp $
+ * $Id: relative_new.php,v 1.4 2004/07/11 11:14:22 jact Exp $
  */
 
 /**
@@ -92,34 +92,10 @@
   ////////////////////////////////////////////////////////////////////
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
-  $title = _("New Relatives");
-  require_once("../shared/header.php");
-  require_once("../medical/patient_header.php");
-
   $returnLocation = "../medical/relative_list.php?key=" . $idPatient;
 
   ////////////////////////////////////////////////////////////////////
-  // Navigation links
+  // Redirect to relative list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => "../medical/patient_view.php?key=" . $idPatient,
-    _("View Relatives") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "patient.png");
-  unset($links);
-
-  showPatientHeader($idPatient);
-
-  echo '<p>' . _("Relatives have been added.") . "</p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to Relatives Patient List") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation . "&added=Y");
 ?>
