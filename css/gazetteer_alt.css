@@ -1,0 +1,285 @@
+/* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
+
+body {
+  color: gray;
+  background: #fff;
+  font-family: verdana, helvetica, arial, sans-serif;
+  font-size: 71%;
+  margin: 0;
+  padding: 0;
+}
+
+.noPrint {
+  display: none;
+}
+
+img {
+  border: none;
+}
+
+#header h1 {
+  margin: 0;
+}
+
+#header h1 a {
+  color: rgb(175,175,175);
+  background: transparent;
+  font-family: garamond, "times new roman", times, roman, serif;
+  font-size: 250%;
+  margin: 0;
+  padding: 1ex 0 0 0;
+}
+
+#headerInformation {
+  position: absolute;
+  top: 2mm;
+  right: 5mm;
+  border: 1px dotted gray;
+  padding: 3px;
+}
+
+#headerInformation p {
+  margin: 0;
+}
+
+#tabs {
+  list-style-type: none;
+  list-style-position: outside;
+  margin: 5mm 5mm 0 0;
+  padding: 0;
+  text-align: right;
+}
+
+#tabs li {
+  line-height: 1.75em;
+  margin: 0;
+  padding: 0;
+  display: inline;
+}
+
+#tabs li a, #tabs li span {
+  color: rgb(175,175,175);
+  background-color: rgb(248,248,248);
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0;
+  padding: 0.5ex 1.25em 1ex 1.25em;
+  border-top: 1px solid rgb(231,231,231);
+  border-right: 1px solid rgb(97,97,97);
+  border-left: 1px solid rgb(231,231,231);
+}
+
+#tabs li a:hover {
+  color: crimson !important;
+  background-color: rgb(248,248,248);
+  text-decoration: none;
+  padding-bottom: 0.8ex;
+  border-top: 1px solid rgb(97,97,97);
+  border-right: 1px solid rgb(231,231,231);
+  border-left: 1px solid rgb(97,97,97);
+  position: relative;
+  left: 1px;
+  top: 1px;
+}
+
+#tabs li span {
+  color: #fff;
+  background-color: crimson;
+  border-top-color: crimson;
+  border-right-color: crimson;
+  border-left-color: crimson;
+}
+
+#sourceForgeLinks {
+  margin: 2px 0 0 0;
+  background: crimson;
+  color: #fff;
+  padding: 5px;
+  font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
+  font-size: 120%;
+}
+
+#sourceForgeLinks a {
+  color: #fff;
+  background: transparent;
+}
+
+#sideBar {
+  margin: 1em 1em 1em 2em;
+  padding: 0;
+  border-bottom: 1px dotted gray;
+  width: 15.5em;
+  float: right;
+  font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
+}
+
+#sideBar hr {
+  display: none;
+}
+
+.linkList {
+  margin: 10px 0;
+  padding: 0 0 0 15px;
+  border-top: 1px dotted gray;
+  border-bottom: 1px dotted gray;
+}
+
+.linkList a, .linkList a:hover, .linkList .selected {
+  line-height: 2em;
+  display: list-item;
+  list-style-type: disc;
+}
+
+.linkList .selected {
+  list-style-type: circle;
+}
+
+.linkList a:hover, .sideBarLogin a:hover, #mainZone a, #mainZone a:visited {
+  color: crimson;
+  background: transparent;
+}
+
+#mainZone a:hover {
+  color: #000;
+  background: transparent;
+}
+
+.linkList .subnavbar {
+  margin-left: 2ex;
+}
+
+#mainZone {
+  margin: 1em 20em 0 2em;
+  line-height: 180%;
+}
+
+#mainZone h1, #mainZone h2, #mainZone h3, #mainZone h4, #mainZone h5 {
+  border-bottom: 1px dotted gray;
+  font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
+  margin: 0 0 0.75em 0;
+  padding: 0.5ex 0 0.5ex 0.5ex;
+}
+
+#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
+  vertical-align: middle;
+}
+
+#footer {
+  color: rgb(175,175,175);
+  background: rgb(250,250,250);
+  margin: 0;
+  padding: 0.25em 5mm 1.25ex 4mm;
+  clear: both;
+}
+
+#footerLinks {
+  text-align: center;
+}
+
+#footer a {
+  color: rgb(175,175,175);
+  background: transparent;
+  text-decoration: underline;
+}
+
+#footer a:hover {
+  color: crimson;
+  background: transparent;
+  text-decoration: none;
+}
+
+#footer br {
+  display: none;
+}
+
+#footer p {
+  float: left;
+}
+
+#footer p+p {
+  float: right;
+}
+
+.center table {
+  margin: 0 auto;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 3px;
+  border: 1px solid gray;
+}
+
+th {
+  text-align: left;
+  color: #fff;
+  background: gray;
+}
+
+td, th {
+  padding: 3px;
+  border: 1px solid gray;
+}
+
+.even {
+  background: rgb(250,250,250);
+  color: inherit;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.sqlcode {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 105%;
+  white-space: pre;
+  text-align: left;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+label {
+  cursor: pointer;
+}
+
+.requiredField {
+  font-weight: bold;
+}
+
+.error {
+  color: #d2691e;
+  background: transparent;
+  font-weight: bold;
+}
+
+.message {
+  background: rgb(250,250,250);
+  color: #000;
+  border: 1px solid #000;
+  margin: 3px 4em 1em 0;
+  padding: 3px;
+  font-weight: bold;
+}
+
+.advice {
+  font-weight: bold;
+}
+
+hr {
+  background: #9C9A9C;
+  color: #9C9A9C;
+  border: 1px solid #9C9A9C;
+  margin: 10px 0;
+}
