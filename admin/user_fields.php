@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.8 2004/10/18 17:24:03 jact Exp $
+ * $Id: user_fields.php,v 1.9 2004/11/04 12:17:32 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
 
   if (isset($_GET["all"]))
   {
-    $row = '<label for="old_pwd">' . _("Current Password") . ":" . "</label>\n";
+    $row = '* <label for="old_pwd" class="requiredField">' . _("Current Password") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
     $row .= htmlInputText("old_pwd", 20, 20, $postVars["old_pwd"], $pageErrors["old_pwd"], "password");
     $row .= htmlInputHidden("md5_old");
@@ -46,14 +46,14 @@
 
   if ($action == "new" || isset($_GET["all"]))
   {
-    $row = '<label for="pwd">' . _("Password") . ":" . "</label>\n";
+    $row = '* <label for="pwd" class="requiredField">' . _("Password") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
     $row .= htmlInputText("pwd", 20, 20, $postVars["pwd"], $pageErrors["pwd"], "password");
     $row .= htmlInputHidden("md5");
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    $row = '<label for="pw2">' . _("Re-enter Password") . ":" . "</label>\n";
+    $row = '* <label for="pw2" class="requiredField">' . _("Re-enter Password") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
     $row .= htmlInputText("pwd2", 20, 20, $postVars["pwd2"], $pageErrors["pwd2"], "password");
     $row .= htmlInputHidden("md5_confirm");
@@ -69,7 +69,7 @@
 
   if ( !isset($_GET["all"]) )
   {
-    $row = '* <label for="actived">' . _("Actived") . ":" . "</label>\n";
+    $row = '<label for="actived">' . _("Actived") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
     $row .= htmlCheckBox("actived", "actived", 1, $postVars["actived"] != "");
 
@@ -86,7 +86,7 @@
       OPEN_PROFILE_DOCTOR => _("Doctor")
     );
 
-    $row = '* <label for="id_profile">' . _("Profile") . ":" . "</label>\n";
+    $row = '* <label for="id_profile" class="requiredField">' . _("Profile") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
     $row .= htmlSelectArray("id_profile", $array, $postVars["id_profile"]);
     unset($array);
