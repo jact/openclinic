@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.10 2004/07/26 18:50:27 jact Exp $
+ * $Id: user_list.php,v 1.11 2004/10/04 18:03:30 jact Exp $
  */
 
 /**
@@ -27,6 +27,12 @@
   require_once("../classes/User_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
+  require_once("../lib/validator_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
 
   $userQ = new User_Query();
   $userQ->connect();
@@ -70,41 +76,41 @@
   ////////////////////////////////////////////////////////////////////
   // Display insertion message if coming from new with a successful insert.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["added"]) && isset($_GET["info"]))
+  if (isset($_GET["added"]) && !empty($info))
   {
-    showMessage(sprintf(_("User, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("User, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display update message if coming from edit with a successful update.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["updated"]) && isset($_GET["info"]))
+  if (isset($_GET["updated"]) && !empty($info))
   {
-    showMessage(sprintf(_("User, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("User, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display deletion message if coming from del with a successful delete.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("User, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("User, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display password reset message if coming from pwd_reset with a succesful update.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["password"]) && isset($_GET["info"]))
+  if (isset($_GET["password"]) && !empty($info))
   {
-    showMessage(sprintf(_("Password of user, %s, has been reset."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Password of user, %s, has been reset."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display login used message.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["login"]) && isset($_GET["info"]))
+  if (isset($_GET["login"]) && !empty($info))
   {
-    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
   $thead = array(
