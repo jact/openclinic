@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_header.php,v 1.5 2004/07/07 17:22:50 jact Exp $
+ * $Id: patient_header.php,v 1.6 2004/08/09 11:39:57 jact Exp $
  */
 
 /**
@@ -28,6 +28,7 @@
    * bool showPatientHeader(int $idPatient)
    ********************************************************************
    * Draws a header with patient information.
+   * TODO: suppress table
    ********************************************************************
    * @param int $idPatient key of patient to show header
    * @return boolean false if patient does not exist, true otherwise
@@ -51,7 +52,7 @@
 
     if ( !$numRows )
     {
-      return false;
+      return false; // maybe return showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
     }
 
     $pat = $patQ->fetch();
@@ -72,7 +73,7 @@
 
         <td><?php echo _("Sex") . ': ' . ($pat->getSex() == 'V' ? _("Male") : _("Female")); ?></td>
 
-        <td class="number"><?php echo _("Age") . ': ' . $pat->getAge(); ?></td>
+        <td class="right"><?php echo _("Age") . ': ' . $pat->getAge(); ?></td>
       </tr>
     </table>
 

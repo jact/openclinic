@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_header.php,v 1.5 2004/07/07 17:22:59 jact Exp $
+ * $Id: problem_header.php,v 1.6 2004/08/09 11:39:57 jact Exp $
  */
 
 /**
@@ -29,6 +29,7 @@
    * bool showProblemHeader(int $idProblem)
    ********************************************************************
    * Draws a header with medical problem information.
+   * TODO: suppress table
    ********************************************************************
    * @param int $idProblem key of medical problem to show header
    * @return boolean false if medical problem does not exist, true otherwise
@@ -52,7 +53,7 @@
 
     if ( !$numRows )
     {
-      return false;
+      return false; // maybe return showMessage(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     }
 
     $problem = $problemQ->fetch();
@@ -69,9 +70,9 @@
       <tr>
         <td><?php echo _("Wording") . ': ' . fieldPreview($problem->getWording()); ?></td>
 
-        <td class="number"><?php echo _("Opening Date") . ': ' . $problem->getOpeningDate(); ?></td>
+        <td class="right"><?php echo _("Opening Date") . ': ' . $problem->getOpeningDate(); ?></td>
 
-        <td class="number"><?php echo _("Last Update Date") . ': ' . $problem->getLastUpdateDate(); ?></td>
+        <td class="right"><?php echo _("Last Update Date") . ': ' . $problem->getLastUpdateDate(); ?></td>
       </tr>
     </table>
 
