@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: logout.php,v 1.1 2004/01/29 15:22:52 jact Exp $
+ * $Id: logout.php,v 1.2 2004/04/14 22:33:43 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Session destruction process
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 29/01/04 16:22
  */
 
   session_name("OpenClinic");
