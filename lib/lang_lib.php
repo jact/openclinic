@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: lang_lib.php,v 1.7 2004/06/20 17:22:42 jact Exp $
+ * $Id: lang_lib.php,v 1.8 2004/07/05 18:32:52 jact Exp $
  */
 
 /**
@@ -32,9 +32,9 @@
  *  string localDate(string $date)
  */
 
-define("LANG_DEFAULT",  "en");
-define("LANG_DIR",      "../locale/");
-define("LANG_FILENAME", "openclinic");
+define("OPEN_LANG_DEFAULT",  "en");
+define("OPEN_LANG_DIR",      "../locale/");
+define("OPEN_LANG_FILENAME", "openclinic");
 
 /**
  * string setLanguage(string $lang = "")
@@ -69,7 +69,7 @@ function setLanguage($lang = "")
       }
       else
       {
-        $newLang = LANG_DEFAULT;
+        $newLang = OPEN_LANG_DEFAULT;
       }
     }
   }
@@ -81,7 +81,7 @@ function setLanguage($lang = "")
     }
     else
     {
-      $newLang = LANG_DEFAULT;
+      $newLang = OPEN_LANG_DEFAULT;
     }
   }
   putenv("LANG=" . $newLang);
@@ -119,8 +119,8 @@ function initLanguage($lang)
   $check = (in_array("gettext", get_loaded_extensions()) && function_exists('gettext'));
   if ($check)
   {
-    $textDomain = $lang . "-" . LANG_FILENAME;
-    bindtextdomain($textDomain, realpath(LANG_DIR));
+    $textDomain = $lang . "-" . OPEN_LANG_FILENAME;
+    bindtextdomain($textDomain, realpath(OPEN_LANG_DIR));
     textdomain($textDomain);
   }
   else
@@ -181,7 +181,7 @@ function emulateGetText()
 /**
  * mixed poFilename(string $lang = "")
  ********************************************************************
- * PO file will be in LANG_DIR
+ * PO file will be in OPEN_LANG_DIR
  ********************************************************************
  * @param string $lang (optional)
  * @return mixed false if .po file doesn't exist or string with filename if it exists
@@ -194,19 +194,19 @@ function poFilename($lang = "")
     $lang = OPEN_LANGUAGE;
   }
 
-  $filename = LANG_DIR . $lang . "-" . LANG_FILENAME . ".po";
+  $filename = OPEN_LANG_DIR . $lang . "-" . OPEN_LANG_FILENAME . ".po";
   if (file_exists($filename))
   {
     return $filename;
   }
 
-  $filename = LANG_DIR . $lang . "/" . LANG_FILENAME . ".po";
+  $filename = OPEN_LANG_DIR . $lang . "/" . OPEN_LANG_FILENAME . ".po";
   if (file_exists($filename))
   {
     return $filename;
   }
 
-  $filename = LANG_DIR . $lang . "/" . $lang . "-" . LANG_FILENAME . ".po";
+  $filename = OPEN_LANG_DIR . $lang . "/" . $lang . "-" . OPEN_LANG_FILENAME . ".po";
   if (file_exists($filename))
   {
     return $filename;
@@ -226,7 +226,7 @@ function poFilename($lang = "")
  */
 function languageExists($lang)
 {
-  if ($lang == LANG_DEFAULT)
+  if ($lang == OPEN_LANG_DEFAULT)
   {
     return true;
   }
@@ -234,7 +234,7 @@ function languageExists($lang)
   $check = (in_array("gettext", get_loaded_extensions()) && function_exists('gettext'));
   if ($check)
   {
-    return (file_exists(LANG_DIR . $lang . "/LC_MESSAGES/" . $lang . "-" . LANG_FILENAME . ".mo"));
+    return (file_exists(OPEN_LANG_DIR . $lang . "/LC_MESSAGES/" . $lang . "-" . OPEN_LANG_FILENAME . ".mo"));
   }
   else
   {

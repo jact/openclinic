@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme.php,v 1.4 2004/06/07 17:45:22 jact Exp $
+ * $Id: Theme.php,v 1.5 2004/07/05 18:32:45 jact Exp $
  */
 
 /**
@@ -16,12 +16,12 @@
  * Author: jact <jachavar@terra.es>
  */
 
-define("THEME_TITLE_FONT_SIZE", 14);
-define("THEME_BODY_FONT_SIZE", 10);
-define("THEME_NAVBAR_FONT_SIZE", 10);
-define("THEME_TAB_FONT_SIZE", 12);
-define("THEME_TABLE_BORDER_WIDTH", 1);
-define("THEME_TABLE_CELL_PADDING", 1);
+define("OPEN_THEME_TITLE_FONT_SIZE", 14);
+define("OPEN_THEME_BODY_FONT_SIZE", 10);
+define("OPEN_THEME_NAVBAR_FONT_SIZE", 10);
+define("OPEN_THEME_TAB_FONT_SIZE", 12);
+define("OPEN_THEME_TABLE_BORDER_WIDTH", 1);
+define("OPEN_THEME_TABLE_CELL_PADDING", 1);
 
 require_once("../lib/validator_lib.php");
 
@@ -45,7 +45,7 @@ class Theme
   var $_titleBgColorError = "";
   var $_titleFontFamily = "";
   var $_titleFontFamilyError = "";
-  var $_titleFontSize = THEME_TITLE_FONT_SIZE;
+  var $_titleFontSize = OPEN_THEME_TITLE_FONT_SIZE;
   var $_titleFontSizeError = "";
   var $_titleFontBold = false;
   var $_titleFontColor = "";
@@ -56,7 +56,7 @@ class Theme
   var $_bodyBgColorError = "";
   var $_bodyFontFamily = "";
   var $_bodyFontFamilyError = "";
-  var $_bodyFontSize = THEME_BODY_FONT_SIZE;
+  var $_bodyFontSize = OPEN_THEME_BODY_FONT_SIZE;
   var $_bodyFontSizeError = "";
   var $_bodyFontColor = "";
   var $_bodyFontColorError = "";
@@ -70,7 +70,7 @@ class Theme
   var $_navbarBgColorError = "";
   var $_navbarFontFamily = "";
   var $_navbarFontFamilyError = "";
-  var $_navbarFontSize = THEME_NAVBAR_FONT_SIZE;
+  var $_navbarFontSize = OPEN_THEME_NAVBAR_FONT_SIZE;
   var $_navbarFontSizeError = "";
   var $_navbarFontColor = "";
   var $_navbarFontColorError = "";
@@ -81,7 +81,7 @@ class Theme
   var $_tabBgColorError = "";
   var $_tabFontFamily = "";
   var $_tabFontFamilyError = "";
-  var $_tabFontSize = THEME_TAB_FONT_SIZE;
+  var $_tabFontSize = OPEN_THEME_TAB_FONT_SIZE;
   var $_tabFontSizeError = "";
   var $_tabFontBold = false;
   var $_tabFontColor = "";
@@ -91,9 +91,9 @@ class Theme
 
   var $_tableBorderColor = "";
   var $_tableBorderColorError = "";
-  var $_tableBorderWidth = THEME_TABLE_BORDER_WIDTH;
+  var $_tableBorderWidth = OPEN_THEME_TABLE_BORDER_WIDTH;
   var $_tableBorderWidthError = "";
-  var $_tableCellPadding = THEME_TABLE_CELL_PADDING;
+  var $_tableCellPadding = OPEN_THEME_TABLE_CELL_PADDING;
   var $_tableCellPaddingError = "";
 
   var $_count = 0;
@@ -712,7 +712,7 @@ class Theme
   function setTitleFontSize($value)
   {
     $temp = intval($value);
-    $this->_titleFontSize = (($temp == 0) ? THEME_TITLE_FONT_SIZE : $temp);
+    $this->_titleFontSize = (($temp == 0) ? OPEN_THEME_TITLE_FONT_SIZE : $temp);
   }
 
   function setTitleFontBold($value)
@@ -745,7 +745,7 @@ class Theme
   function setBodyFontSize($value)
   {
     $temp = intval($value);
-    $this->_bodyFontSize = (($temp == 0) ? THEME_BODY_FONT_SIZE : $temp);
+    $this->_bodyFontSize = (($temp == 0) ? OPEN_THEME_BODY_FONT_SIZE : $temp);
   }
 
   function setBodyFontColor($value)
@@ -780,7 +780,7 @@ class Theme
   function setNavbarFontSize($value)
   {
     $temp = intval($value);
-    $this->_navbarFontSize = (($temp == 0) ? THEME_NAVBAR_FONT_SIZE : $temp);
+    $this->_navbarFontSize = (($temp == 0) ? OPEN_THEME_NAVBAR_FONT_SIZE : $temp);
   }
 
   function setNavbarFontColor($value)
@@ -809,7 +809,7 @@ class Theme
   function setTabFontSize($value)
   {
     $temp = intval($value);
-    $this->_tabFontSize = (($temp == 0) ? THEME_TAB_FONT_SIZE : $temp);
+    $this->_tabFontSize = (($temp == 0) ? OPEN_THEME_TAB_FONT_SIZE : $temp);
   }
 
   function setTabFontColor($value)
@@ -838,13 +838,13 @@ class Theme
   function setTableBorderWidth($value)
   {
     $temp = intval($value);
-    $this->_tableBorderWidth = (($temp == 0) ? THEME_TABLE_BORDER_WIDTH : $temp);
+    $this->_tableBorderWidth = (($temp == 0) ? OPEN_THEME_TABLE_BORDER_WIDTH : $temp);
   }
 
   function setTableCellPadding($value)
   {
     $temp = intval($value);
-    $this->_tableCellPadding = (($temp == 0) ? THEME_TABLE_CELL_PADDING : $temp);
+    $this->_tableCellPadding = (($temp == 0) ? OPEN_THEME_TABLE_CELL_PADDING : $temp);
   }
 
   function setCount($value)

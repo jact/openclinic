@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting.php,v 1.5 2004/06/07 17:45:22 jact Exp $
+ * $Id: Setting.php,v 1.6 2004/07/05 18:32:45 jact Exp $
  */
 
 /**
@@ -16,8 +16,8 @@
  * Author: jact <jachavar@terra.es>
  */
 
-define("SETTING_SESSION_TIMEOUT", 20);
-define("SETTING_ITEMS_PER_PAGE",  10);
+define("OPEN_SETTING_SESSION_TIMEOUT", 20);
+define("OPEN_SETTING_ITEMS_PER_PAGE",  10);
 
 require_once("../lib/validator_lib.php");
 
@@ -66,9 +66,9 @@ class Setting
   var $_clinicAddress = "";
   var $_clinicPhone = "";
   var $_clinicUrl = "";
-  var $_sessionTimeout = SETTING_SESSION_TIMEOUT;
+  var $_sessionTimeout = OPEN_SETTING_SESSION_TIMEOUT;
   var $_sessionTimeoutError = "";
-  var $_itemsPerPage = SETTING_ITEMS_PER_PAGE;
+  var $_itemsPerPage = OPEN_SETTING_ITEMS_PER_PAGE;
   var $_itemsPerPageError = "";
   var $_version = "";
   var $_lang = "en";
@@ -370,7 +370,7 @@ class Setting
   function setSessionTimeout($value)
   {
     $temp = intval($value);
-    $this->_sessionTimeout = (($temp == 0) ? SETTING_SESSION_TIMEOUT : $temp);
+    $this->_sessionTimeout = (($temp == 0) ? OPEN_SETTING_SESSION_TIMEOUT : $temp);
   }
 
   /**
@@ -383,7 +383,7 @@ class Setting
   function setItemsPerPage($value)
   {
     $temp = intval($value);
-    $this->_itemsPerPage = (($temp < 0) ? SETTING_ITEMS_PER_PAGE : $temp);
+    $this->_itemsPerPage = (($temp < 0) ? OPEN_SETTING_ITEMS_PER_PAGE : $temp);
   }
 
   /**
