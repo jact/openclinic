@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del_confirm.php,v 1.3 2004/04/24 16:46:06 jact Exp $
+ * $Id: user_del_confirm.php,v 1.4 2004/07/28 18:22:33 jact Exp $
  */
 
 /**
@@ -62,39 +62,18 @@
 ?>
 
 <form method="post" action="../admin/user_del.php">
-  <div class="center">
+  <h3><?php echo _("Delete User"); ?></h3>
+
+  <?php showMessage(sprintf(_("Are you sure you want to delete user, %s?"), $login)); ?>
+
+  <p>
     <?php
       showInputHidden("id_user", $idUser);
       showInputHidden("login", $login);
+      showInputButton("delete", _("Delete"));
+      //showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
     ?>
-
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <?php echo _("Delete User"); ?>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>
-            <?php echo sprintf(_("Are you sure you want to delete user, %s?"), $login); ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="center">
-            <?php
-              showInputButton("delete", _("Delete"));
-              showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-            ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  </p>
 </form>
 
 <?php require_once("../shared/footer.php"); ?>
