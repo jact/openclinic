@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.7 2004/08/01 09:18:01 jact Exp $
+ * $Id: relative_search.php,v 1.8 2004/08/01 09:20:23 jact Exp $
  */
 
 /**
@@ -194,6 +194,31 @@ function changePage(page)
       $val = "\$pat->getCollegiateNumber()";
       break;
   }
+
+  // Build query
+  $searchText = urldecode($searchText);
+  $word = explode(" ", $searchText);
+  $query = $key . " = (";
+  $num = sizeof($word);
+  if ($num > 1)
+  {
+    for ($i = 0; $i < ($num - 1); $i++)
+    {
+      if ($logical == OPEN_NOT)
+      {
+        $query .= " NOT " . $word[$i] . " AND ";
+      }
+      else
+      {
+        $query .= $word[$i] . " " . $logical . " ";
+      }
+    }
+  }
+  if ($logical == OPEN_NOT)
+  {
+    $query .= " NOT ";
+  }
+  $query .= $word[$num - 1] . ")";
 ?>
 
 <script type="text/javascript" src="../scripts/checkboxes.js" defer="defer"></script>
@@ -205,7 +230,7 @@ function changePage(page)
   showInputHidden("id_patient", $_POST["id_patient"]);
 
   $thead = array(
-    _("Search Results") => array('colspan' => 2)
+    sprintf(_("Search Results From Query: %s"), $query) => array('colspan' => 2)
   );
 
   $options = array(
