@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.11 2004/09/22 18:18:40 jact Exp $
+ * $Id: log_record_list.php,v 1.12 2005/02/01 19:29:13 jact Exp $
  */
 
 /**
@@ -130,7 +130,7 @@
 
   showTable($thead, $tbody, null, $options);
 
-  echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
+  echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? htmlspecialchars($_SERVER["HTTP_REFERER"]) : '../index.php') . '">';
   echo _("Back return") . "</a></p>\n";
 
   require_once("../shared/footer.php");
