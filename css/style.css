@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.8 2005/01/31 19:58:42 jact Exp $
+ * $Id: style.css,v 1.9 2005/01/31 20:07:26 jact Exp $
  */
 
 /**
@@ -30,7 +30,7 @@ body {
   line-height: 150%;
 }
 img {
-  border: 0;
+  border: none;
 }
 table {
   font-size: 14px;
@@ -53,6 +53,7 @@ h3 {
   color: #000;
 }
 #content a:link, #content a:visited, #footer a:link, #footer a:visited {
+  background: inherit;
   color: #00a;
 }
 #content a:hover, #footer a:hover {
@@ -60,21 +61,26 @@ h3 {
   color: #fff;
 }
 .note {
+  background: inherit;
   color: #dc143c;
   font-weight: bold;
 }
 .error {
-  font-size: 18px;
+  background: inherit;
   color: #f00;
+  font-size: 18px;
 }
 .add {
+  background: inherit;
   color: #f30;
 }
 .fix {
+  background: inherit;
   color: #14a5f4;
   font-weight: bold;
 }
 .change {
+  background: inherit;
   color: #13920d;
 }
 .noteCode {
@@ -88,8 +94,8 @@ h3 {
   border: 1px solid #87ceeb;
 }
 hr {
-  color: #000;
   background: #000;
+  color: #000;
   border: 1px solid #000;
 }
 #header {
@@ -103,7 +109,7 @@ hr {
 }
 .links {
   margin-top: 30px;
-  font: normal normal 11px verdana, geneva, helvetica, arial, sans-serif;
+  font: normal 11px verdana, geneva, helvetica, arial, sans-serif;
 }
 .linkList {
   list-style: none outside none;
@@ -141,8 +147,9 @@ html>body .linkList li {
   white-space: nowrap;
 }
 .linkList li.bold a, .linkList li.bold a:link, .linkList li.bold a:visited {
+  background: inherit;
+  color: #ffd700;
   font-weight: bold;
-  color: gold;
 }
 .linkList a:focus, #content .linkList a:focus {
   background: #00a;
