@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_optimize_db.php,v 1.3 2004/07/05 17:40:45 jact Exp $
+ * $Id: dump_optimize_db.php,v 1.4 2004/07/26 18:51:55 jact Exp $
  */
 
 /**
@@ -61,82 +61,91 @@
   showNavLinks($links, "dumps.png");
   unset($links);
 
-  echo '<table>';
-  echo '<thead><tr>';
-  echo '<th colspan="4">' . sprintf(_("Optimizing Database: %s"), OPEN_DATABASE) . '</th>';
-  echo "</tr>\n";
-  echo '<tr>';
-  echo '<th>' . _("Table Name") . '</th>';
-  echo '<th>' . _("Size") . '</th>';
-  echo '<th>' . _("Status") . '</th>';
-  echo '<th>' . _("Space Saved") . '</th>';
-  echo "</tr></thead><tbody>\n";
+  echo '<h3>' . sprintf(_("Optimizing Database: %s"), OPEN_DATABASE) . "</h3>\n";
+
+  $numTables = $auxConn->numRows();
+  if ( !$numTables )
+  {
+    $auxConn->close();
+    showMessage(_("Database is empty."), OPEN_MSG_ERROR);
+    include_once("../shared/footer.php");
+    exit();
+  }
+
+  $thead = array(
+    _("Table Name"),
+    _("Size"),
+    _("Status"),
+    _("Space Saved")
+  );
+
+  $options = array(
+    1 => array('align' => 'right'),
+    3 => array('align' => 'right')
+  );
 
   $totalData = 0;
   $totalIndex = 0;
   $totalAll = 0;
 
-  $numTables = $auxConn->numRows();
-  if ($numTables > 0)
+  $rows = null;
+  while ($row = $auxConn->fetchRow())
   {
-    $rows = null;
-    while ($row = $auxConn->fetchRow())
-    {
-      $rows[] = $row;
-    }
-    $auxConn->freeResult();
-
-    while ($row = array_shift($rows))
-    {
-      $totalData = $row['Data_length'];
-      $totalIndex = $row['Index_length'];
-      $total = $totalData + $totalIndex;
-      $total = $total / 1024;
-      $total = round($total, 3);
-      $totalAll += $total;
-      $gain= $row['Data_free'];
-      $gain = $gain / 1024;
-      $totalGain += $gain;
-      $gain = round($gain, 3);
-
-      $localQuery = 'OPTIMIZE TABLE ' . $row['Name'];
-      if ( !$auxConn->exec($localQuery) )
-      {
-        $auxConn->close();
-        showConnError($auxConn);
-      }
-
-      echo '<tr>';
-      echo '<td>' . $row['Name'] . '</td>';
-      echo '<td class="number">' . $total . ' KB</td>';
-      if ($gain == 0)
-      {
-        echo '<td>' . _("Already optimized") . '</td>';
-        echo '<td class="number">0 KB</td>';
-      }
-      else
-      {
-        echo '<td class="center"><strong>' . _("Optimized!") . '</strong></td>';
-        echo '<td class="number"><strong>' . $gain . ' KB</strong></td>';
-      }
-      echo "</tr>\n";
-    }
+    $rows[] = $row;
   }
-  echo "</tbody>\n";
+  $auxConn->freeResult();
+
+  $tbody = array();
+  while ($row = array_shift($rows))
+  {
+    $totalData = $row['Data_length'];
+    $totalIndex = $row['Index_length'];
+    $total = $totalData + $totalIndex;
+    $total = $total / 1024;
+    $total = round($total, 3);
+    $totalAll += $total;
+    $gain= $row['Data_free'];
+    $gain = $gain / 1024;
+    $totalGain += $gain;
+    $gain = round($gain, 3);
+
+    $localQuery = 'OPTIMIZE TABLE ' . $row['Name'];
+    if ( !$auxConn->exec($localQuery) )
+    {
+      $auxConn->close();
+      showConnError($auxConn);
+    }
+
+    $content = $row['Name'];
+    $content .= OPEN_SEPARATOR;
+    $content .= $total . ' KB';
+    $content .= OPEN_SEPARATOR;
+    if ($gain == 0)
+    {
+      $content .= _("Already optimized");
+      $content .= OPEN_SEPARATOR;
+      $content .= '0 KB';
+    }
+    else
+    {
+      $content .= _("Optimized!");
+      $content .= OPEN_SEPARATOR;
+      $content .= $gain . ' KB';
+    }
+    $tbody[] = explode(OPEN_SEPARATOR, $content);
+  }
   $auxConn->close();
   unset($auxConn);
   unset($rows);
   unset($row);
 
+  showTable($thead, $tbody, null, $options);
+
   $totalGain = round($totalGain, 3);
-  echo '<tfoot><tr>';
-  echo '<th colspan="4">' . _("Optimization Results") . '</th>';
-  echo "</tr>\n";
-  echo '<tr>';
-  echo '<th colspan="2">' . sprintf(_("Total Database Size: %d KB"), $totalAll) . '</th>';
-  echo '<th colspan="2">' . sprintf(_("Total Space Saved: %d KB"), $totalGain) . '</th>';
-  echo "</tr></tfoot>\n";
-  echo "</table>\n";
+  echo '<h4>' . _("Optimization Results") . ":</h4>\n";
+
+  showMessage(sprintf(_("Total Database Size: %d KB"), $totalAll), OPEN_MSG_INFO);
+  showMessage(sprintf(_("Total Space Saved: %d KB"), $totalGain), OPEN_MSG_INFO);
 
   echo '<p><a href="../admin/dump_view_form.php">';
   echo _("Back return");
