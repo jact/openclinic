@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.2 2004/04/18 14:10:45 jact Exp $
+ * $Id: index.php,v 1.3 2004/06/01 18:06:15 jact Exp $
  */
 
 /**
@@ -33,6 +33,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo OPEN_LANGUAGE; ?>" dir="<?php echo OPEN_DIRECTION; ?>">
 <head>
+<title><?php echo _("OpenClinic Help"); ?></title>
+
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
 
 <meta name="MSSmartTagsPreventParsing" content="TRUE" />
@@ -46,8 +48,6 @@
 <?php require_once("../css/style.php"); ?>
 -->
 </style>
-
-<title><?php echo _("OpenClinic Help"); ?></title>
 
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
 </head>
