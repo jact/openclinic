@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
+ * $Id: log_lib.php,v 1.3 2004/05/31 18:54:40 jact Exp $
  */
 
 /**
@@ -381,7 +381,7 @@ function stats($table)
   $auxConn->exec($query);
   list($total) = $auxConn->fetchRow(MYSQL_NUM);
 
-  $today = date("Y-m-d");
+  $today = date("Y-m-d"); // calculated date
   $arrToday = explode("-", $today);
 
   echo '<h3>';
