@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   background: #9ea985;
-  color: beige;
+  color: #f5f5dc;
   font-family: Trebuchet MS,arial,helvetica,sans-serif;
   font-size: 13px;
 }
@@ -73,7 +73,7 @@ li#first a, li#first span {
 
 #tabs span {
   background: #bbc2a9;
-  color: beige;
+  color: #f5f5dc;
   border-bottom: 1px solid #bbc2a9;
 }
 
@@ -81,7 +81,7 @@ li#first a, li#first span {
   clear: both;
   text-align: right;
   background: #bbc2a9;
-  color: beige;
+  color: #f5f5dc;
   padding: 0 2ex 4px 0;
   margin: -1px 0 0 0;
   border: 1px solid #dce0d3;
@@ -98,7 +98,7 @@ li#first a, li#first span {
   border-bottom: 1px solid #dce0d3;
   border-left: 1px solid #dce0d3;
   background: #bbc2a9;
-  color: beige;
+  color: #f5f5dc;
   font-size: 10pt;
 }
 
@@ -197,7 +197,7 @@ input, textarea, select {
   border-width: 1px;
   border-color: #dce0d3;
   background: #374611;
-  color: beige;
+  color: #f5f5dc;
 }
 
 input[type="submit"], input[type="button"], input[type="reset"] {
@@ -239,13 +239,13 @@ label {
 
 #sideBar, .even {
   background: #bbc2a9;
-  color: beige;
+  color: #f5f5dc;
   font-size: 10pt;
 }
 
 #tabs a, th {
   background: #374611;
-  color: beige;
+  color: #f5f5dc;
   font-size: 10pt;
   font-weight: bold;
 }
@@ -255,7 +255,7 @@ label {
 }
 
 .message {
-  background: beige;
+  background: #f5f5dc;
   color: #000;
   border: 1px solid #000;
   margin: 3px 4em 1em 0;
