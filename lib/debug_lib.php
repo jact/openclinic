@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: debug_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
+ * $Id: debug_lib.php,v 1.3 2004/07/21 18:06:49 jact Exp $
  */
 
 /**
@@ -51,7 +51,7 @@ function debug($expression, $message = "", $goOut = false)
   {
     echo $message . "\n";
   }
-  echo var_dump($expression);
+  var_dump($expression);
   echo "</pre>\n";
   echo "<!-- end debug -->\n";
 
