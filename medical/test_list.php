@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.5 2004/07/11 11:23:02 jact Exp $
+ * $Id: test_list.php,v 1.6 2004/08/01 09:42:26 jact Exp $
  */
 
 /**
@@ -75,7 +75,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Medical test, %s, has been added."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Medical test, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -83,7 +83,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Medical test, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Medical test, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -91,12 +91,13 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Medical test, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Medical test, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
   {
     echo '<p><a href="../medical/test_new_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '&amp;reset=Y">' . _("Add New Medical Test") . "</a></p>\n";
+    echo "<hr />\n";
   }
 
   $testQ = new Test_Query;
@@ -116,79 +117,52 @@
   if ($count == 0)
   {
     $testQ->close();
-    echo '<p>' . _("No medical tests defined for this medical problem.") . "</p>\n";
+    showMessage(_("No medical tests defined for this medical problem."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
-?>
 
-<h3><?php echo _("Medical Tests List:"); ?></h3>
+  echo '<h3>' . _("Medical Tests List:") . "</h3>\n";
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="<?php echo ($hasMedicalAdminAuth ? 3 : 1); ?>">
-        <?php echo _("Function"); ?>
-      </th>
+  $thead = array(
+    _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 3 : 1)),
+    _("Document Type"),
+    _("Path Filename")
+  );
 
-      <th>
-        <?php echo _("Document Type"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Path Filename"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
-  $rowClass = "odd";
+  $tbody = array();
   while ($test = $testQ->fetch())
   {
     $aux = $test->getPathFilename();
     $temp = ereg_replace("\\\\", "/", $aux);
     $temp = ereg_replace("//", "/", $temp);
     $temp = urlencode($temp);
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td>
-        <a href="<?php echo $temp; ?>" onclick="return popSecondary('<?php echo $temp; ?>')" onkeypress="return popSecondary('<?php echo $temp; ?>')"><?php echo _("view"); ?></a>
-      </td>
 
-<?php
+    $row = '<a href="' . $temp . '" onclick="return popSecondary(\'' . $temp . '\')">' . _("view") . '</a>';
+    $row .= OPEN_SEPARATOR;
+
     if ($hasMedicalAdminAuth)
     {
-?>
-      <td>
-        <a href="../medical/test_edit_form.php?key=<?php echo $test->getIdProblem(); ?>&amp;pat=<?php echo $idPatient; ?>&amp;test=<?php echo $test->getIdTest(); ?>&amp;reset=Y"><?php echo _("edit"); ?></a>
-      </td>
+      $row .= '<a href="../medical/test_edit_form.php?key=' . $test->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;test=' . $test->getIdTest() . '&amp;reset=Y">' . _("edit") . '</a>';
+      $row .= OPEN_SEPARATOR;
 
-      <td>
-        <a href="../medical/test_del_confirm.php?key=<?php echo $idProblem; ?>&amp;test=<?php echo $test->getIdTest(); ?>&amp;pat=<?php echo $idPatient; ?>&amp;file=<?php echo $test->getPathFilename(); ?>"><?php echo _("del"); ?></a>
-      </td>
-<?php
+      $row .= '<a href="../medical/test_del_confirm.php?key=' . $idProblem . '&amp;test=' . $test->getIdTest() . '&amp;pat=' . $idPatient . '&amp;file=' . $test->getPathFilename() . '">' . _("del") . '</a>';
+      $row .= OPEN_SEPARATOR;
     } // end if
-?>
 
-      <td>
-        <?php echo $test->getDocumentType(); ?>
-      </td>
+    $row .= $test->getDocumentType();
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $test->getPathFilename(); ?>
-      </td>
-    </tr>
-<?php
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+    $row .= $test->getPathFilename();
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
   $testQ->freeResult();
   $testQ->close();
   unset($testQ);
   unset($test);
-?>
-  </tbody>
-</table>
 
-<?php require_once("../shared/footer.php"); ?>
+  showTable($thead, $tbody);
+
+  require_once("../shared/footer.php");
+?>
