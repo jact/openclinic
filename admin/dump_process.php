@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.5 2004/07/08 16:36:40 jact Exp $
+ * $Id: dump_process.php,v 1.6 2004/07/26 18:50:01 jact Exp $
  */
 
 /**
@@ -173,8 +173,8 @@
       if (isset($_POST['table_select']))
       {
         $tableSelect = implode($_POST['table_select'], ', ');
-        $tmpSelect = implode($_POST['table_select'], '|');
-        $tmpSelect = '|' . $tmpSelect . '|';
+        $tmpSelect = implode($_POST['table_select'], OPEN_SEPARATOR);
+        $tmpSelect = OPEN_SEPARATOR . $tmpSelect . OPEN_SEPARATOR;
       }
       else
       {
@@ -197,7 +197,7 @@
       {
         $table = ($single ? $_POST['table_select'][$i] : $auxConn->tableName($i));
 
-        if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, '|' . $table . '|'))
+        if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, OPEN_SEPARATOR . $table . OPEN_SEPARATOR))
             || (!isset($tmpSelect) && !empty($table)))
         {
           $formattedTableName = (isset($_POST['use_backquotes']))
@@ -266,8 +266,8 @@
       if (isset($_POST['table_select']))
       {
         $tableSelect = implode($_POST['table_select'], ', ');
-        $tmpSelect = implode($_POST['table_select'], '|');
-        $tmpSelect = '|' . $tmpSelect . '|';
+        $tmpSelect = implode($_POST['table_select'], OPEN_SEPARATOR);
+        $tmpSelect = OPEN_SEPARATOR . $tmpSelect . OPEN_SEPARATOR;
       }
       else
       {
@@ -282,8 +282,8 @@
       $dumpBuffer .= '<' . OPEN_DATABASE . '>' . $crlf;
       if (isset($_POST['table_select']))
       {
-        $tmpSelect = implode($_POST['table_select'], '|');
-        $tmpSelect = '|' . $tmpSelect . '|';
+        $tmpSelect = implode($_POST['table_select'], OPEN_SEPARATOR);
+        $tmpSelect = OPEN_SEPARATOR . $tmpSelect . OPEN_SEPARATOR;
       }
 
       if ( !isset($limitFrom) || !isset($limitTo) )
@@ -295,7 +295,7 @@
       {
         $table = ($single ? $_POST['table_select'][$i] : $auxConn->tableName($i));
 
-        if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, '|' . $table . '|'))
+        if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, OPEN_SEPARATOR . $table . OPEN_SEPARATOR))
             || (!isset($tmpSelect) && !empty($table)))
         {
           $dumpBuffer .= DLIB_getTableXML(OPEN_DATABASE, $table, $limitFrom, $limitTo, $crlf, _("table") . " ", _("end of table") . " ");
@@ -328,8 +328,8 @@
 
       if (isset($_POST['table_select']))
       {
-        $tmpSelect = implode($_POST['table_select'], '|');
-        $tmpSelect = '|' . $tmpSelect . '|';
+        $tmpSelect = implode($_POST['table_select'], OPEN_SEPARATOR);
+        $tmpSelect = OPEN_SEPARATOR . $tmpSelect . OPEN_SEPARATOR;
       }
 
       if ( !isset($limitFrom) || !isset($limitTo) )
@@ -341,7 +341,7 @@
       {
         $table = ($single ? $_POST['table_select'][$i] : $auxConn->tableName($i));
 
-        if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, '|' . $table . '|'))
+        if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, OPEN_SEPARATOR . $table . OPEN_SEPARATOR))
             || (!isset($tmpSelect) && !empty($table)))
         {
           $dumpBuffer .= DLIB_getTableCSV(OPEN_DATABASE, $table, $limitFrom, $limitTo, $separator, $enclosed, $escaped, $addCharacter, $_POST['what']);
