@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.3 2004/04/24 18:02:35 jact Exp $
+ * $Id: staff_new_form.php,v 1.4 2004/06/06 11:38:17 jact Exp $
  */
 
 /**
@@ -40,14 +40,16 @@
 
   switch ($memberType)
   {
+    case "a":
     case "A":
       $title = _("Add New Administrative Information");
-      $typeValue = "Administrative";
+      $typeValue = OPEN_ADMINISTRATIVE;
       break;
 
+    case "d":
     case "D":
       $title = _("Add New Doctor Information");
-      $typeValue = "Doctor";
+      $typeValue = OPEN_DOCTOR;
       break;
   }
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff.php,v 1.3 2004/05/24 22:12:44 jact Exp $
+ * $Id: Staff.php,v 1.4 2004/06/06 11:38:30 jact Exp $
  */
 
 /**
@@ -210,7 +210,7 @@ class Staff
   function setMemberType($value)
   {
     $temp = trim($value);
-    $this->_memberType = (($temp == "") ? "Administrative" : $temp);
+    $this->_memberType = (($temp == "") ? OPEN_ADMINISTRATIVE : $temp);
   }
 
   /**

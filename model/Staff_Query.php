@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Staff_Query.php,v 1.3 2004/06/06 11:38:30 jact Exp $
  */
 
 /**
@@ -105,11 +105,11 @@ class Staff_Query extends Query
     switch ($type)
     {
       case 'A':
-        $type = "Administrative";
+        $type = OPEN_ADMINISTRATIVE;
         break;
 
       case 'D':
-        $type = "Doctor";
+        $type = OPEN_DOCTOR;
         break;
     }
 

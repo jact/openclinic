@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.3 2004/04/24 18:02:35 jact Exp $
+ * $Id: staff_list.php,v 1.4 2004/06/06 11:38:17 jact Exp $
  */
 
 /**
@@ -237,11 +237,11 @@
       echo '<td>';
       switch ($staff->getMemberType())
       {
-        case "Administrative":
+        case OPEN_ADMINISTRATIVE:
           echo _("Administrative");
           break;
 
-        case "Doctor":
+        case OPEN_DOCTOR:
           echo _("Doctor");
           break;
       }

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: global_constants.php,v 1.2 2004/04/18 14:02:25 jact Exp $
+ * $Id: global_constants.php,v 1.3 2004/06/06 11:38:01 jact Exp $
  */
 
 /**
@@ -73,6 +73,16 @@
   define("OPEN_AND", "AND");
   define("OPEN_OR", "OR");
   define("OPEN_NOT", "NOT");
+
+/**
+ ********************************************************************
+ * Staff types:
+ ********************************************************************
+ * OPEN_ADMINISTRATIVE
+ * OPEN_DOCTOR
+ */
+  define("OPEN_ADMINISTRATIVE", "Administrative");
+  define("OPEN_DOCTOR", "Doctor");
 
 /**
  ********************************************************************
