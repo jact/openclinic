@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: coding_guidelines.html,v 1.4 2004/07/03 21:15:51 jact Exp $ -->
+<!-- $Id: coding_guidelines.html,v 1.5 2004/07/27 15:55:29 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Coding Guidelines</title>
@@ -153,15 +153,15 @@
 <pre class="programlisting">
 if ((condition1) || (condition2))
 {
-action1;
+  action1;
 }
 elseif ((condition3) &amp;&amp; (condition4))
 {
-action2;
+  action2;
 }
 else
 {
-defaultaction;
+  defaultaction;
 }
 </pre>
 
@@ -176,17 +176,17 @@ defaultaction;
 <pre class="programlisting">
 switch (condition1)
 {
-case 1:
-  action1;
-  break;
+  case 1:
+    action1;
+    break;
 
-case 2:
-  action2;
-  break;
+  case 2:
+    action2;
+    break;
 
-default:
-  defaultaction;
-  break;
+  default:
+    defaultaction;
+    break;
 }
 </pre>
 
@@ -226,14 +226,14 @@ $longVariable = foo($other, $last);
 <pre class="programlisting">
 function fooFunction($arg1, $arg2 = '')
 {
-$var = false;
+  $var = false;
 
-if (condition)
-{
-  statement;
-}
+  if (condition)
+  {
+    statement;
+  }
 
-return $val;
+  return $val;
 }
 </pre>
 
@@ -265,24 +265,24 @@ return $val;
 
 <pre class="programlisting">
 /**
-* This file is part of Project Name
-*
-* Copyright (c) Year Author
-*
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or
-* (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-* GNU General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program; if not, write to the Free Software
-* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-*/
+ * This file is part of Project Name
+ *
+ * Copyright (c) Year Author
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 </pre>
 
   <p>
@@ -291,11 +291,11 @@ return $val;
 
 <pre class="programlisting">
 /**
-* This file is part of Project Name
-*
-* Copyright (c) Year Author
-* Licensed under the GNU GPL. For full terms see the file LICENSE.
-*/
+ * This file is part of Project Name
+ *
+ * Copyright (c) Year Author
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ */
 </pre>
 
   <p>
@@ -304,13 +304,13 @@ return $val;
 
 <pre class="programlisting">
 /**
-* file_name.php - Short description content (optional)
-********************************************************************
-* Long description (more detailed)
-********************************************************************
-* Author: Name &lt;e-mail address&gt; (optional)
-* Last modified: Date/Time
-*/
+ * file_name.php - Short description content (optional)
+ ********************************************************************
+ * Long description (more detailed)
+ ********************************************************************
+ * Author: Name &lt;e-mail address&gt; (optional)
+ * Last modified: Date/Time
+ */
 </pre>
 
   <p>
@@ -343,19 +343,19 @@ return $val;
 
 <pre class="programlisting">
 /**
-* Module name
-********************************************************************
-* Long description (more detailed)
-********************************************************************
-* Functions:
-*  int fileOpen(string $fileName)
-*  bool fileClose(int $fileHandle)
-*  int fileRead(int $fileHandle, int $bytes)
-*
-* Remarks:
-*  - remark1
-*  - remark2
-*/
+ * Module name
+ ********************************************************************
+ * Long description (more detailed)
+ ********************************************************************
+ * Functions:
+ *  int fileOpen(string $fileName)
+ *  bool fileClose(int $fileHandle)
+ *  int fileRead(int $fileHandle, int $bytes)
+ *
+ * Remarks:
+ *  - remark1
+ *  - remark2
+ */
 </pre>
 
   <p>
@@ -380,19 +380,19 @@ return $val;
 
 <pre class="programlisting">
 /**
-* Function prototype
-********************************************************************
-* Long description
-********************************************************************
-* Parameters:
-*  $name - description
-*
-* Return:
-*  description
-*
-* Global references:
-*  $name
-*/
+ * Function prototype
+ ********************************************************************
+ * Long description
+ ********************************************************************
+ * Parameters:
+ *  $name - description
+ *
+ * Return:
+ *  description
+ *
+ * Global references:
+ *  $name
+ */
 </pre>
 
   <div class="note-code">
@@ -404,22 +404,22 @@ return $val;
 
 <pre class="programlisting">
 /**
-* void showInputText(string $fieldName, string $size, string $max,
-* array &amp;$postVars, array &amp;$pageErrors, string $type = "text",
-* bool $readOnly = false)
-********************************************************************
-* Draws input html tag of type text or password.
-********************************************************************
-* @param string $fieldName name of input field
-* @param string $size size of text box
-* @param string $max max input length of text box
-* @param array_reference &amp;$postVars reference to array containing all input values
-* @param array_reference &amp;$pageErrors reference to array containing all input errors
-* @param string $type type of the input field (text by default)
-* @param bool $readOnly if the field is read only (false by default)
-* @return void
-* @access public
-*/
+ * void showInputText(string $fieldName, string $size, string $max,
+ * array &amp;$postVars, array &amp;$pageErrors, string $type = "text",
+ * bool $readOnly = false)
+ ********************************************************************
+ * Draws input html tag of type text or password.
+ ********************************************************************
+ * @param string $fieldName name of input field
+ * @param string $size size of text box
+ * @param string $max max input length of text box
+ * @param array_reference &amp;$postVars reference to array containing all input values
+ * @param array_reference &amp;$pageErrors reference to array containing all input errors
+ * @param string $type type of the input field (text by default)
+ * @param bool $readOnly if the field is read only (false by default)
+ * @return void
+ * @access public
+ */
 </pre>
   </div><!-- End .note-code -->
 
