@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.9 2004/08/07 11:06:14 jact Exp $
+ * $Id: print_medical_record.php,v 1.10 2004/10/04 21:36:02 jact Exp $
  */
 
 /**
@@ -279,15 +279,15 @@
     }
 
     echo '<h3>' . _("Opening Date") . "</h3>\n";
-    echo '<p>' . $problem->getOpeningDate() . "</p>\n";
+    echo '<p>' . localDate($problem->getOpeningDate()) . "</p>\n";
 
     echo '<h3>' . _("Last Update Date") . "</h3>\n";
-    echo '<p>' . $problem->getLastUpdateDate() . "</p>\n";
+    echo '<p>' . localDate($problem->getLastUpdateDate()) . "</p>\n";
 
-    if ($problem->getClosingDate() != "")
+    if (localDate($problem->getClosingDate()) != "")
     {
       echo '<h3>' . _("Closing Date") . "</h3>\n";
-      echo '<p>' . $problem->getClosingDate() . "</p>\n";
+      echo '<p>' . localDate($problem->getClosingDate()) . "</p>\n";
     }
 
     if ($problem->getMeetingPlace())
@@ -535,15 +535,15 @@
     }
 
     echo '<h3>' . _("Opening Date") . "</h3>\n";
-    echo '<p>' . $problem->getOpeningDate() . "</p>\n";
+    echo '<p>' . localDate($problem->getOpeningDate()) . "</p>\n";
 
     echo '<h3>' . _("Last Update Date") . "</h3>\n";
-    echo '<p>' . $problem->getLastUpdateDate() . "</p>\n";
+    echo '<p>' . localDate($problem->getLastUpdateDate()) . "</p>\n";
 
-    if ($problem->getClosingDate() != "")
+    if (localDate($problem->getClosingDate()) != "")
     {
       echo '<h3>' . _("Closing Date") . "</h3>\n";
-      echo '<p>' . $problem->getClosingDate() . "</p>\n";
+      echo '<p>' . localDate($problem->getClosingDate()) . "</p>\n";
     }
 
     if ($problem->getMeetingPlace())
