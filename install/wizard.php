@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.8 2004/06/20 17:21:53 jact Exp $
+ * $Id: wizard.php,v 1.9 2004/07/28 16:36:23 jact Exp $
  */
 
 /**
@@ -149,7 +149,7 @@
   <h1>
     <span><?php echo _("OpenClinic Install Wizard"); ?></span>
 
-    <img src="../images/install_software.png" />
+    <img src="../images/install_software.png" width="48" height="48" />
   </h1>
 <!-- End Header -->
 <?php
@@ -503,7 +503,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.8 2004/06/20 17:21:53 jact Exp $
+ * $Id: wizard.php,v 1.9 2004/07/28 16:36:23 jact Exp $
  */
 
 /**
@@ -574,11 +574,11 @@
   ////////////////////////////////////////////////////////////////////
   // Database creation
   ////////////////////////////////////////////////////////////////////
-  mysql_query('DROP DATABASE IF EXISTS ' . $_POST['dbName']);
+  mysql_query('DROP DATABASE IF EXISTS ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
   //mysql_create_db($_POST['dbName']);
-  mysql_query('CREATE DATABASE ' . $_POST['dbName']);
+  mysql_query('CREATE DATABASE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
   //mysql_select_db($_POST['dbName']);
-  mysql_query('USE ' . $_POST['dbName']);
+  mysql_query('USE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
 
   ////////////////////////////////////////////////////////////////////
   // Database tables creation
@@ -587,7 +587,7 @@
 
   foreach ($tables as $tableName)
   {
-    $result = parseSQLFile("sql/" . $tableName . ".sql", $tableName, true);
+    $result = parseSQLFile("./sql/" . $tableName . ".sql", $tableName, true);
 
     if ($result)
     {
@@ -605,8 +605,8 @@
   // Database tables update (setting_tbl, staff_tbl, user_tbl)
   ////////////////////////////////////////////////////////////////////
   //mysql_select_db($_POST['dbName']);
-  mysql_connect($_POST['dbHost'], $_POST['dbUser'], $_POST['dbPasswd']);
-  mysql_query('USE ' . $_POST['dbName']);
+  mysql_connect($_POST['dbHost'], $_POST['dbUser'], $_POST['dbPasswd']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
+  mysql_query('USE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
 
   $sql = "UPDATE setting_tbl SET ";
   $sql .= "clinic_name='" . $_POST['clinicName'] . "', ";
@@ -617,7 +617,7 @@
   $sql .= "session_timeout=" . intval($_POST['timeout']) . ", ";
   $sql .= "items_per_page=" . intval($_POST['itemsPage']) . ", ";
   $sql .= "id_theme=" . intval($_POST['clinicTheme']) . ";";
-  mysql_query($sql) or die("Instruction: " . $sql . " Error: " . mysql_error());
+  mysql_query($sql) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
 
   $sql = "UPDATE staff_tbl SET ";
   $sql .= "first_name='" . $_POST['firstName'] . "', ";
@@ -626,14 +626,14 @@
   $sql .= "address=" . (($_POST['adminAddress'] == "") ? "NULL, " : "'" . $_POST['adminAddress'] . "', ");
   $sql .= "phone_contact=" . (($_POST['adminPhone'] == "") ? "NULL " : "'" . $_POST['adminPhone'] . "' ");
   $sql .= " WHERE login='admin';";
-  mysql_query($sql) or die("Instruction: " . $sql . " Error: " . mysql_error());
+  mysql_query($sql) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
 
   $sql = "UPDATE user_tbl SET ";
   $sql .= "email=" . (($_POST['email'] == "") ? "NULL," : "'" . $_POST['email'] . "', ");
   $sql .= "id_theme=" . intval($_POST['adminTheme']) . ", ";
   $sql .= "pwd=md5('" . $_POST['passwd'] . "')";
   $sql .= " WHERE id_user=2;";
-  mysql_query($sql) or die("Instruction: " . $sql . " Error: " . mysql_error());
+  mysql_query($sql) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
 ?>
 
   <p>
