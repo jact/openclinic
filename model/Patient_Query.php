@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.10 2004/10/04 21:29:03 jact Exp $
+ * $Id: Patient_Query.php,v 1.11 2004/10/16 14:48:46 jact Exp $
  */
 
 /**
@@ -179,9 +179,12 @@ class Patient_Query extends Query
         $field = "no_field";
         break;
     }
+    $field = $this->_table . "." . $field;
 
     // Building sql statements
-    $sql = "FROM " . $this->_table . " WHERE ";
+    $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
+    $sql .= " WHERE ";
+
     $num = sizeof($word);
     if ($num > 1)
     {
@@ -208,8 +211,8 @@ class Patient_Query extends Query
 
     $sqlCount = "SELECT COUNT(*) AS row_count " . $sql;
 
-    $sql = "SELECT *,FLOOR((TO_DAYS(GREATEST(IF(decease_date='0000-00-00',CURRENT_DATE,decease_date),IFNULL(decease_date,CURRENT_DATE))) - TO_DAYS(birth_date)) / 365) AS age " . $sql;
-    $sql .= " ORDER BY surname1, surname2, first_name";
+    $sql = "SELECT " . $this->_table . ".*, staff_tbl.collegiate_number, FLOOR((TO_DAYS(GREATEST(IF(decease_date='0000-00-00',CURRENT_DATE,decease_date),IFNULL(decease_date,CURRENT_DATE))) - TO_DAYS(birth_date)) / 365) AS age " . $sql;
+    $sql .= " ORDER BY " . $this->_table . ".surname1, " . $this->_table . ".surname2, " . $this->_table . ".first_name";
     // setting limit so we can page through the results
     $offset = ($this->_currentPage - 1) * intval($this->_itemsPerPage);
     if ($offset >= $limitFrom && $limitFrom > 0)
@@ -289,9 +292,9 @@ class Patient_Query extends Query
    */
   function select($idPatient)
   {
-    $sql = "SELECT *,";
+    $sql = "SELECT " . $this->_table . ".*, staff_tbl.collegiate_number, ";
     $sql .= "FLOOR((TO_DAYS(GREATEST(IF(decease_date='0000-00-00',CURRENT_DATE,decease_date),IFNULL(decease_date,CURRENT_DATE))) - TO_DAYS(birth_date)) / 365) AS age";
-    $sql .= " FROM " . $this->_table;
+    $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
     $result = $this->exec($sql);
@@ -327,6 +330,7 @@ class Patient_Query extends Query
     $patient = new Patient();
     $patient->setIdPatient(intval($array["id_patient"]));
     //$patient->setLastUpdateDate(urldecode($array["last_update_date"]));
+    $patient->setIdMember(intval($array["id_member"]));
     $patient->setCollegiateNumber(urldecode($array["collegiate_number"]));
     $patient->setNIF(urldecode($array["nif"]));
     $patient->setFirstName(urldecode($array["first_name"]));
@@ -422,7 +426,7 @@ class Patient_Query extends Query
     $sql .= " (id_patient, nif, first_name, surname1, surname2, address, ";
     $sql .= "phone_contact, sex, race, birth_date, birth_place, decease_date, nts, nss, ";
     $sql .= "family_situation, labour_situation, education, insurance_company, ";
-    $sql .= "collegiate_number) VALUES (NULL, ";
+    $sql .= "id_member) VALUES (NULL, ";
     //$sql .= "'" . $patient->getLastUpdateDate() . "', ";
     $sql .= ($patient->getNIF() == "") ? "NULL, " : "'" . urlencode($patient->getNIF()) . "', ";
     $sql .= "'" . urlencode($patient->getFirstName()) . "', ";
@@ -441,7 +445,7 @@ class Patient_Query extends Query
     $sql .= ($patient->getLabourSituation() == "") ? "NULL, " : "'" . urlencode($patient->getLabourSituation()) . "', ";
     $sql .= ($patient->getEducation() == "") ? "NULL, " : "'" . urlencode($patient->getEducation()) . "', ";
     $sql .= ($patient->getInsuranceCompany() == "") ? "NULL, " : "'" . urlencode($patient->getInsuranceCompany()) . "', ";
-    $sql .= ($patient->getCollegiateNumber() == "") ? "NULL);" : "'" . urlencode($patient->getCollegiateNumber()) . "');";
+    $sql .= ($patient->getIdMember() == 0) ? "NULL);" : $patient->getIdMember() . ");";
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -513,7 +517,7 @@ class Patient_Query extends Query
     $sql .= "labour_situation=" . (($patient->getLabourSituation() == "") ? "NULL, " : "'" . urlencode($patient->getLabourSituation()) . "', ");
     $sql .= "education=" . (($patient->getEducation() == "") ? "NULL, " : "'" . urlencode($patient->getEducation()) . "', ");
     $sql .= "insurance_company=" . (($patient->getInsuranceCompany() == "") ? "NULL, " : "'" . urlencode($patient->getInsuranceCompany()) . "', ");
-    $sql .= "collegiate_number=" . (($patient->getCollegiateNumber() == "") ? "NULL " : "'" . urlencode($patient->getCollegiateNumber()) . "' ");
+    $sql .= "id_member=" . (($patient->getIdMember() == 0) ? "NULL " : $patient->getIdMember() . " ");
     $sql .= "WHERE id_patient=" . $patient->getIdPatient();
 
     $result = $this->exec($sql);

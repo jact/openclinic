@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelProblem_Query.php,v 1.4 2004/10/04 21:25:52 jact Exp $
+ * $Id: DelProblem_Query.php,v 1.5 2004/10/16 14:47:47 jact Exp $
  */
 
 /**
@@ -57,12 +57,13 @@ class DelProblem_Query extends Query
   function insert($problem, $idUser, $login)
   {
     $sql = "INSERT INTO " . $this->_table;
-    $sql .= " (id_problem, last_update_date, id_patient, collegiate_number, order_number, ";
+    $sql .= " (id_problem, last_update_date, id_patient, id_member, collegiate_number, order_number, ";
     $sql .= "opening_date, closing_date, meeting_place, wording, subjective, objective, ";
     $sql .= "appreciation, action_plan, prescription, create_date, id_user, login) VALUES (";
     $sql .= $problem->getIdProblem() . ", ";
     $sql .= "'" . $problem->getLastUpdateDate() . "', ";
     $sql .= $problem->getIdPatient() . ", ";
+    $sql .= ($problem->getIdMember() == 0) ? "NULL, " : $problem->getIdMember() . ", ";
     $sql .= ($problem->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($problem->getCollegiateNumber()) . "', ";
     $sql .= $problem->getOrderNumber() . ", ";
     $sql .= "'" . $problem->getOpeningDate() . "', ";

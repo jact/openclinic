@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelPatient_Query.php,v 1.3 2004/07/24 16:32:28 jact Exp $
+ * $Id: DelPatient_Query.php,v 1.4 2004/10/16 14:47:47 jact Exp $
  */
 
 /**
@@ -62,7 +62,7 @@ class DelPatient_Query extends Query
     $sql .= " (id_patient, nif, first_name, surname1, surname2, address, phone_contact, ";
     $sql .= "sex, race, birth_date, birth_place, decease_date, nts, nss, ";
     $sql .= "family_situation, labour_situation, education, insurance_company, ";
-    $sql .= "collegiate_number, birth_growth, growth_sexuality, feed, habits, ";
+    $sql .= "id_member, collegiate_number, birth_growth, growth_sexuality, feed, habits, ";
     $sql .= "peristaltic_conditions, psychological, children_complaint, venereal_disease, ";
     $sql .= "accident_surgical_operation, medicinal_intolerance, mental_illness, ";
     $sql .= "parents_status_health, brothers_status_health, spouse_childs_status_health, ";
@@ -85,6 +85,7 @@ class DelPatient_Query extends Query
     $sql .= ($patient->getLabourSituation() == "") ? "NULL, " : "'" . urlencode($patient->getLabourSituation()) . "', ";
     $sql .= ($patient->getEducation() == "") ? "NULL, " : "'" . urlencode($patient->getEducation()) . "', ";
     $sql .= ($patient->getInsuranceCompany() == "") ? "NULL, " : "'" . urlencode($patient->getInsuranceCompany()) . "', ";
+    $sql .= ($patient->getIdMember() == 0) ? "NULL, " : $patient->getIdMember() . ", ";
     $sql .= ($patient->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($patient->getCollegiateNumber()) . "', ";
 
     $sql .= (($historyP->getBirthGrowth() == "") ? "NULL, " : "'" . urlencode($historyP->getBirthGrowth()) . "', ");

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem.php,v 1.6 2004/10/04 21:26:05 jact Exp $
+ * $Id: Problem.php,v 1.7 2004/10/16 14:48:46 jact Exp $
  */
 
 /**
@@ -32,6 +32,8 @@ require_once("../lib/validator_lib.php");
  *  void setIdPatient(int $value)
  *  int getOrderNumber(void)
  *  void setOrderNumber(int $value)
+ *  int getIdMember(void)
+ *  void setIdMember(int $value)
  *  string getCollegiateNumber(void)
  *  void setCollegiateNumber(string $value)
  *  string getOpeningDate(void)
@@ -60,6 +62,7 @@ class Problem
 {
   var $_idProblem = 0;
   var $_idPatient = 0;
+  var $_idMember = 0;
   var $_collegiateNumber = "";
   var $_orderNumber = 0;
   var $_openingDate = "";
@@ -168,6 +171,29 @@ class Problem
   function setOrderNumber($value)
   {
     $this->_orderNumber = intval($value);
+  }
+
+  /**
+   * int getIdMember(void)
+   ********************************************************************
+   * @return string id member
+   * @access public
+   */
+  function getIdMember()
+  {
+    return intval($this->_idMember);
+  }
+
+  /**
+   * void setIdMember(int $value)
+   ********************************************************************
+   * @param int $value id member
+   * @return void
+   * @access public
+   */
+  function setIdMember($value)
+  {
+    $this->_idMember = intval($value);
   }
 
   /**

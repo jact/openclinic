@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.6 2004/10/04 21:29:02 jact Exp $
+ * $Id: Patient.php,v 1.7 2004/10/16 14:48:14 jact Exp $
  */
 
 /**
@@ -27,56 +27,59 @@ require_once("../lib/validator_lib.php");
  * Methods:
  *  bool validateData(void)
  *  int getIdPatient(void)
+ *  void setIdPatient(int $value)
+ *  int getIdMember(void)
+ *  void setIdMember(int $value)
  *  string getCollegiateNumber(void)
+ *  void setCollegiateNumber(string $value)
  *  string getNIF(void)
+ *  void setNIF(string $value)
  *  string getFirstName(void)
  *  string getFirstNameError(void)
+ *  void setFirstName(string $value)
  *  string getSurname1(void)
  *  string getSurname1Error(void)
+ *  void setSurname1(string $value)
  *  string getSurname2(void)
  *  string getSurname2Error(void)
+ *  void setSurname2(string $value)
  *  string getAddress(void)
+ *  void setAddress(string $value)
  *  string getPhone(void)
+ *  void setPhone(string $value)
  *  string getSex(void)
+ *  void setSex(string $value)
  *  string getRace(void)
+ *  void setRace(string $value)
  *  string getBirthDate(bool $view = true)
  *  string getBirthDateError(void)
- *  int getAge(void)
- *  string getBirthPlace(void)
- *  string getDeceaseDate(bool $view = true)
- *  string getDeceaseDateError(void)
- *  string getNTS(void)
- *  string getNSS(void)
- *  string getFamilySituation(void)
- *  string getLabourSituation(void)
- *  string getEducation(void)
- *  string getInsuranceCompany(void)
- *  void setIdPatient(int $value)
- *  void setCollegiateNumber(string $value)
- *  void setNIF(string $value)
- *  void setFirstName(string $value)
- *  void setSurname1(string $value)
- *  void setSurname2(string $value)
- *  void setAddress(string $value)
- *  void setPhone(string $value)
- *  void setSex(string $value)
- *  void setRace(string $value)
  *  void setBirthDate(string $value)
  *  void setBirthDateFromParts(string $month, string $day, string $year)
+ *  int getAge(void)
  *  void setAge(string $value)
+ *  string getBirthPlace(void)
  *  void setBirthPlace(string $value)
+ *  string getDeceaseDate(bool $view = true)
+ *  string getDeceaseDateError(void)
  *  void setDeceaseDate(string $value)
  *  void setDeceaseDateFromParts(string $month, string $day, string $year)
+ *  string getNTS(void)
  *  void setNTS(string $value)
+ *  string getNSS(void)
  *  void setNSS(string $value)
+ *  string getFamilySituation(void)
  *  void setFamilySituation(string $value)
+ *  string getLabourSituation(void)
  *  void setLabourSituation(string $value)
+ *  string getEducation(void)
  *  void setEducation(string $value)
+ *  string getInsuranceCompany(void)
  *  void setInsuranceCompany(string $value)
  */
 class Patient
 {
   var $_idPatient = 0;
+  var $_idMember = 0;
   var $_collegiateNumber = "";
   var $_nif = "";
   var $_firstName = "";
@@ -180,14 +183,61 @@ class Patient
   }
 
   /**
+   * void setIdPatient(int $value)
+   ********************************************************************
+   * @param int $value new value to set
+   * @return void
+   * @access public
+   */
+  function setIdPatient($value)
+  {
+    $this->_idPatient = intval($value);
+  }
+
+  /**
+   * int getIdMember(void)
+   ********************************************************************
+   * @return int
+   * @access public
+   */
+  function getIdMember()
+  {
+    return intval($this->_idMember);
+  }
+
+  /**
+   * void setIdMember(int $value)
+   ********************************************************************
+   * @param int $value new value to set
+   * @return void
+   * @access public
+   */
+  function setIdMember($value)
+  {
+    $this->_idMember = intval($value);
+  }
+
+  /**
    * string getCollegiateNumber(void)
    ********************************************************************
-   * @return string
+   * @return string collegiate number
    * @access public
    */
   function getCollegiateNumber()
   {
     return stripslashes(strtr($this->_collegiateNumber, $this->_trans));
+  }
+
+  /**
+   * void setCollegiateNumber(string $value)
+   ********************************************************************
+   * @param string $value collegiate number
+   * @return void
+   * @access public
+   */
+  function setCollegiateNumber($value)
+  {
+    $this->_collegiateNumber = safeText($value);
   }
 
   /**
@@ -199,6 +249,18 @@ class Patient
   function getNIF()
   {
     return stripslashes(strtr($this->_nif, $this->_trans));
+  }
+
+  /**
+   * void setNIF(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setNIF($value)
+  {
+    $this->_nif = safeText($value);
   }
 
   /**
@@ -224,6 +286,18 @@ class Patient
   }
 
   /**
+   * void setFirstName(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setFirstName($value)
+  {
+    $this->_firstName = safeText($value);
+  }
+
+  /**
    * string getSurname1(void)
    ********************************************************************
    * @return string
@@ -243,6 +317,18 @@ class Patient
   function getSurname1Error()
   {
     return $this->_surname1Error;
+  }
+
+  /**
+   * void setSurname1(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setSurname1($value)
+  {
+    $this->_surname1 = safeText($value);
   }
 
   /**
@@ -268,6 +354,18 @@ class Patient
   }
 
   /**
+   * void setSurname2(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setSurname2($value)
+  {
+    $this->_surname2 = safeText($value);
+  }
+
+  /**
    * string getAddress(void)
    ********************************************************************
    * @return string
@@ -276,6 +374,18 @@ class Patient
   function getAddress()
   {
     return stripslashes(strtr($this->_address, $this->_trans));
+  }
+
+  /**
+   * void setAddress(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setAddress($value)
+  {
+    $this->_address = safeText($value);
   }
 
   /**
@@ -290,6 +400,18 @@ class Patient
   }
 
   /**
+   * void setPhone(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setPhone($value)
+  {
+    $this->_phone = safeText($value);
+  }
+
+  /**
    * string getSex(void)
    ********************************************************************
    * @return string
@@ -301,6 +423,18 @@ class Patient
   }
 
   /**
+   * void setSex(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setSex($value)
+  {
+    $this->_sex = safeText($value);
+  }
+
+  /**
    * string getRace(void)
    ********************************************************************
    * @return string
@@ -309,6 +443,18 @@ class Patient
   function getRace()
   {
     return stripslashes(strtr($this->_race, $this->_trans));
+  }
+
+  /**
+   * void setRace(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setRace($value)
+  {
+    $this->_race = safeText($value);
   }
 
   /**
@@ -345,6 +491,36 @@ class Patient
   }
 
   /**
+   * void setBirthDate(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setBirthDate($value)
+  {
+    $this->_birthDate = safeText($value);
+  }
+
+  /**
+   * void setBirthDateFromParts(string $month, string $day, string $year)
+   ********************************************************************
+   * @param string $month
+   * @param string $day
+   * @param string $year
+   * @return void
+   * @access public
+   */
+  function setBirthDateFromParts($month, $day, $year)
+  {
+    if (strlen($year) > 1 && strlen($year) < 3)
+    {
+      $year = 1900 + intval($year);
+    }
+    $this->_birthDate = sprintf("%04d-%02d-%02d", intval($year), intval($month), intval($day));
+  }
+
+  /**
    * int getAge(void)
    ********************************************************************
    * @return int
@@ -356,6 +532,18 @@ class Patient
   }
 
   /**
+   * void setAge(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setAge($value)
+  {
+    $this->_age = intval($value);
+  }
+
+  /**
    * string getBirthPlace(void)
    ********************************************************************
    * @return string
@@ -364,6 +552,18 @@ class Patient
   function getBirthPlace()
   {
     return stripslashes(strtr($this->_birthPlace, $this->_trans));
+  }
+
+  /**
+   * void setBirthPlace(string $value)
+   ********************************************************************
+   * @param string $value new value to set
+   * @return void
+   * @access public
+   */
+  function setBirthPlace($value)
+  {
+    $this->_birthPlace = safeText($value);
   }
 
   /**
@@ -400,246 +600,6 @@ class Patient
   }
 
   /**
-   * string getNTS(void)
-   ********************************************************************
-   * @return string
-   * @access public
-   */
-  function getNTS()
-  {
-    return stripslashes(strtr($this->_nts, $this->_trans));
-  }
-
-  /**
-   * string getNSS(void)
-   ********************************************************************
-   * @return string
-   * @access public
-   */
-  function getNSS()
-  {
-    return stripslashes(strtr($this->_nss, $this->_trans));
-  }
-
-  /**
-   * string getFamilySituation(void)
-   ********************************************************************
-   * @return string
-   * @access public
-   */
-  function getFamilySituation()
-  {
-    return stripslashes(strtr($this->_familySituation, $this->_trans));
-  }
-
-  /**
-   * string getLabourSituation(void)
-   ********************************************************************
-   * @return string
-   * @access public
-   */
-  function getLabourSituation()
-  {
-    return stripslashes(strtr($this->_labourSituation, $this->_trans));
-  }
-
-  /**
-   * string getEducation(void)
-   ********************************************************************
-   * @return string
-   * @access public
-   */
-  function getEducation()
-  {
-    return stripslashes(strtr($this->_education, $this->_trans));
-  }
-
-  /**
-   * string getInsuranceCompany(void)
-   ********************************************************************
-   * @return string
-   * @access public
-   */
-  function getInsuranceCompany()
-  {
-    return stripslashes(strtr($this->_insuranceCompany, $this->_trans));
-  }
-
-  /**
-   * void setIdPatient(int $value)
-   ********************************************************************
-   * @param int $value new value to set
-   * @return void
-   * @access public
-   */
-  function setIdPatient($value)
-  {
-    $this->_idPatient = intval($value);
-  }
-
-  /**
-   * void setCollegiateNumber(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setCollegiateNumber($value)
-  {
-    $this->_collegiateNumber = safeText($value);
-  }
-
-  /**
-   * void setNIF(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setNIF($value)
-  {
-    $this->_nif = safeText($value);
-  }
-
-  /**
-   * void setFirstName(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setFirstName($value)
-  {
-    $this->_firstName = safeText($value);
-  }
-
-  /**
-   * void setSurname1(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setSurname1($value)
-  {
-    $this->_surname1 = safeText($value);
-  }
-
-  /**
-   * void setSurname2(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setSurname2($value)
-  {
-    $this->_surname2 = safeText($value);
-  }
-
-  /**
-   * void setAddress(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setAddress($value)
-  {
-    $this->_address = safeText($value);
-  }
-
-  /**
-   * void setPhone(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setPhone($value)
-  {
-    $this->_phone = safeText($value);
-  }
-
-  /**
-   * void setSex(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setSex($value)
-  {
-    $this->_sex = safeText($value);
-  }
-
-  /**
-   * void setRace(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setRace($value)
-  {
-    $this->_race = safeText($value);
-  }
-
-  /**
-   * void setBirthDate(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setBirthDate($value)
-  {
-    $this->_birthDate = safeText($value);
-  }
-
-  /**
-   * void setBirthDateFromParts(string $month, string $day, string $year)
-   ********************************************************************
-   * @param string $month
-   * @param string $day
-   * @param string $year
-   * @return void
-   * @access public
-   */
-  function setBirthDateFromParts($month, $day, $year)
-  {
-    if (strlen($year) > 1 && strlen($year) < 3)
-    {
-      $year = 1900 + intval($year);
-    }
-    $this->_birthDate = sprintf("%04d-%02d-%02d", intval($year), intval($month), intval($day));
-  }
-
-  /**
-   * void setAge(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setAge($value)
-  {
-    $this->_age = intval($value);
-  }
-
-  /**
-   * void setBirthPlace(string $value)
-   ********************************************************************
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setBirthPlace($value)
-  {
-    $this->_birthPlace = safeText($value);
-  }
-
-  /**
    * void setDeceaseDate(string $value)
    ********************************************************************
    * @param string $value new value to set
@@ -670,6 +630,17 @@ class Patient
   }
 
   /**
+   * string getNTS(void)
+   ********************************************************************
+   * @return string
+   * @access public
+   */
+  function getNTS()
+  {
+    return stripslashes(strtr($this->_nts, $this->_trans));
+  }
+
+  /**
    * void setNTS(string $value)
    ********************************************************************
    * @param string $value new value to set
@@ -679,6 +650,17 @@ class Patient
   function setNTS($value)
   {
     $this->_nts = safeText($value);
+  }
+
+  /**
+   * string getNSS(void)
+   ********************************************************************
+   * @return string
+   * @access public
+   */
+  function getNSS()
+  {
+    return stripslashes(strtr($this->_nss, $this->_trans));
   }
 
   /**
@@ -694,6 +676,17 @@ class Patient
   }
 
   /**
+   * string getFamilySituation(void)
+   ********************************************************************
+   * @return string
+   * @access public
+   */
+  function getFamilySituation()
+  {
+    return stripslashes(strtr($this->_familySituation, $this->_trans));
+  }
+
+  /**
    * void setFamilySituation(string $value)
    ********************************************************************
    * @param string $value new value to set
@@ -703,6 +696,17 @@ class Patient
   function setFamilySituation($value)
   {
     $this->_familySituation = safeText($value);
+  }
+
+  /**
+   * string getLabourSituation(void)
+   ********************************************************************
+   * @return string
+   * @access public
+   */
+  function getLabourSituation()
+  {
+    return stripslashes(strtr($this->_labourSituation, $this->_trans));
   }
 
   /**
@@ -718,6 +722,17 @@ class Patient
   }
 
   /**
+   * string getEducation(void)
+   ********************************************************************
+   * @return string
+   * @access public
+   */
+  function getEducation()
+  {
+    return stripslashes(strtr($this->_education, $this->_trans));
+  }
+
+  /**
    * void setEducation(string $value)
    ********************************************************************
    * @param string $value new value to set
@@ -727,6 +742,17 @@ class Patient
   function setEducation($value)
   {
     $this->_education = safeText($value);
+  }
+
+  /**
+   * string getInsuranceCompany(void)
+   ********************************************************************
+   * @return string
+   * @access public
+   */
+  function getInsuranceCompany()
+  {
+    return stripslashes(strtr($this->_insuranceCompany, $this->_trans));
   }
 
   /**

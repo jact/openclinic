@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.9 2004/10/04 21:26:05 jact Exp $
+ * $Id: Problem_Query.php,v 1.10 2004/10/16 14:48:46 jact Exp $
  */
 
 /**
@@ -167,7 +167,9 @@ class Problem_Query extends Query
     }
 
     // Building sql statements
-    $sql = "FROM " . $this->_table . " WHERE ";
+    $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
+    $sql .= " WHERE ";
+
     $num = sizeof($word);
     if ($num > 1)
     {
@@ -194,7 +196,7 @@ class Problem_Query extends Query
 
     $sqlCount = "SELECT COUNT(*) AS row_count " . $sql;
 
-    $sql = "SELECT * " . $sql;
+    $sql = "SELECT " . $this->_table . ".*, staff_tbl.collegiate_number " . $sql;
     $sql .= " ORDER BY " . $field;
     // setting limit so we can page through the results
     $offset = ($this->_currentPage - 1) * intval($this->_itemsPerPage);
@@ -276,8 +278,8 @@ class Problem_Query extends Query
    */
   function select($idProblem)
   {
-    $sql = "SELECT *";
-    $sql .= " FROM " . $this->_table;
+    $sql = "SELECT " . $this->_table . ".*, staff_tbl.collegiate_number";
+    $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
     $sql .= " WHERE id_problem=" . intval($idProblem);
 
     $result = $this->exec($sql);
@@ -302,8 +304,8 @@ class Problem_Query extends Query
    */
   function selectProblems($idPatient, $closed = false)
   {
-    $sql = "SELECT *";
-    $sql .= " FROM " . $this->_table;
+    $sql = "SELECT " . $this->_table . ".*, staff_tbl.collegiate_number";
+    $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
     $sql .= " WHERE id_patient=" . intval($idPatient);
     $sql .= ($closed ? " AND (closing_date IS NOT NULL AND closing_date != '0000-00-00')" : " AND (closing_date IS NULL OR closing_date='0000-00-00')");
     $sql .= " ORDER BY order_number;";
@@ -368,6 +370,7 @@ class Problem_Query extends Query
     $problem->setIdProblem(intval($array["id_problem"]));
     $problem->setLastUpdateDate(urldecode($array["last_update_date"]));
     $problem->setIdPatient(intval($array["id_patient"]));
+    $problem->setIdMember(intval($array["id_member"]));
     $problem->setCollegiateNumber(urldecode($array["collegiate_number"]));
     $problem->setOrderNumber(intval($array["order_number"]));
     $problem->setOpeningDate(urldecode($array["opening_date"]));
@@ -401,12 +404,12 @@ class Problem_Query extends Query
     }
 
     $sql = "INSERT INTO " . $this->_table;
-    $sql .= " (id_problem, last_update_date, id_patient, collegiate_number, order_number, ";
+    $sql .= " (id_problem, last_update_date, id_patient, id_member, order_number, ";
     $sql .= "opening_date, closing_date, meeting_place, wording, subjective, objective, ";
     $sql .= "appreciation, action_plan, prescription) VALUES (NULL, ";
     $sql .= "'" . $problem->getLastUpdateDate() . "', ";
     $sql .= $problem->getIdPatient() . ", ";
-    $sql .= ($problem->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($problem->getCollegiateNumber()) . "', ";
+    $sql .= ($problem->getIdMember() == 0) ? "NULL, " : $problem->getIdMember() . ", ";
     $sql .= $problem->getOrderNumber() . ", ";
     $sql .= "'" . $problem->getOpeningDate() . "', ";
     $sql .= "'" . $problem->getClosingDate() . "', ";
@@ -446,7 +449,7 @@ class Problem_Query extends Query
 
     $sql = "UPDATE " . $this->_table . " SET";
     $sql .= " last_update_date=curdate(),";
-    $sql .= " collegiate_number=" . (($problem->getCollegiateNumber() == "") ? "NULL," : "'" . urlencode($problem->getCollegiateNumber()) . "',");
+    $sql .= " id_member=" . (($problem->getIdMember() == 0) ? "NULL," : $problem->getIdMember() . ",");
     $sql .= " closing_date=" . (($problem->getClosingDate(false) == "") ? "NULL," : "'" . urlencode($problem->getClosingDate(false)) . "',");
     $sql .= " meeting_place=" . (($problem->getMeetingPlace() == "") ? "NULL," : "'" . urlencode($problem->getMeetingPlace()) . "',");
     $sql .= " wording='" . urlencode($problem->getWording()) . "',";
