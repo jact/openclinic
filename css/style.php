@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.php,v 1.7 2004/07/08 16:45:00 jact Exp $
+ * $Id: style.php,v 1.8 2004/07/26 18:40:45 jact Exp $
  */
 
 /**
@@ -100,6 +100,12 @@ table {
   border: <?php echo STYLE_TABLE_BORDER_WIDTH; ?>px solid <?php echo STYLE_TABLE_BORDER_COLOR; ?>;
 }
 
+/*table caption {
+  margin-bottom: 20px;
+  text-align: left;
+  font-weight: bold;
+}*/
+
 td, th, td.odd {
   padding: <?php echo STYLE_TABLE_CELL_PADDING; ?>px;
   border: <?php echo STYLE_TABLE_BORDER_WIDTH; ?>px solid <?php echo STYLE_TABLE_BORDER_COLOR; ?>;
@@ -169,7 +175,7 @@ label {
   height: 1px; /* Holly hack */
 }
 
-html > body #header {
+html>body #header {
   height: auto;
 }
 
@@ -315,11 +321,22 @@ li#first a, li#first span {
   text-align: center;
 }
 
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
 .center table {
   margin: 0 auto;
   text-align: left;
 }
 
-.number {
-  text-align: right;
+hr {
+  background: <?php echo STYLE_TABLE_BORDER_COLOR; ?>;
+  color: <?php echo STYLE_TABLE_BORDER_COLOR; ?>;
+  border: <?php echo STYLE_TABLE_BORDER_WIDTH; ?>px solid <?php echo STYLE_TABLE_BORDER_COLOR; ?>;
+  margin: 10px 0;
 }
