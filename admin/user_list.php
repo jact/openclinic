@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.11 2004/10/04 18:03:30 jact Exp $
+ * $Id: user_list.php,v 1.12 2004/11/04 12:17:09 jact Exp $
  */
 
 /**
@@ -220,7 +220,7 @@
     $row .= OPEN_SEPARATOR;
     $row .= $user->getEmail();
     $row .= OPEN_SEPARATOR;
-    $row .= (($user->isActived()) ? _("yes") : _("no"));
+    $row .= (($user->isActived()) ? _("yes") : '<strong>' . _("no") . '</strong>');
     $row .= OPEN_SEPARATOR;
     $row .= $profiles[$user->getIdProfile()];
 
