@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.7 2004/07/31 16:30:03 jact Exp $
+ * $Id: connection_list.php,v 1.8 2004/09/29 20:56:17 jact Exp $
  */
 
 /**
@@ -99,7 +99,7 @@
     showQueryError($connQ);
   }
 
-  $connQ->select($idProblem);
+  $numRows = $connQ->select($idProblem);
   if ($connQ->isError())
   {
     $connQ->close();
@@ -107,15 +107,19 @@
   }
 
   $connArray = array();
-  while ($conn = $connQ->fetch())
+  if ($numRows)
   {
-    $connArray[] = $conn[1];
+    while ($conn = $connQ->fetch())
+    {
+      $connArray[] = $conn[1];
+    }
+    $connQ->freeResult();
   }
-  $connQ->freeResult();
+  $connQ->close();
+  unset($connQ);
 
   if (count($connArray) == 0)
   {
-    $connQ->close();
     showMessage(_("No connections defined for this medical problem."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
