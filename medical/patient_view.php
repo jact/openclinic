@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.7 2004/07/31 19:03:55 jact Exp $
+ * $Id: patient_view.php,v 1.8 2004/08/12 10:58:53 jact Exp $
  */
 
 /**
@@ -131,6 +131,8 @@
   }
   echo '<a href="../medical/relative_list.php?key=' . $idPatient . '">' . _("View Relatives") . '</a>';
   echo "</p>\n";
+
+  echo "<hr />\n";
 
   echo '<h3>' . _("Patient") . "</h3>\n";
   echo '<p>' . $pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName() . "</p>\n";
