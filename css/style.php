@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.php,v 1.4 2004/06/30 18:48:15 jact Exp $
+ * $Id: style.php,v 1.5 2004/07/03 15:43:55 jact Exp $
  */
 
 /**
@@ -222,7 +222,6 @@ li#first a, li#first span {
 }
 
 #sourceForgeLinks {
-  position: relative; /* IE hack */
   clear: both;
   text-align: right;
   background: <?php echo STYLE_NAVBAR_BG_COLOR; ?>;
