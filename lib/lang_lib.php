@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: lang_lib.php,v 1.5 2004/06/03 18:23:53 jact Exp $
+ * $Id: lang_lib.php,v 1.6 2004/06/06 11:42:36 jact Exp $
  */
 
 /**
@@ -65,12 +65,10 @@ function setLanguage($lang = "")
       }
       if (languageExists($browserLanguage))
       {
-        setlocale(LC_ALL, $browserLanguage);
         $newLang = $browserLanguage;
       }
       else
       {
-        setlocale(LC_ALL, LANG_DEFAULT);
         $newLang = LANG_DEFAULT;
       }
     }
@@ -79,16 +77,26 @@ function setLanguage($lang = "")
   {
     if (languageExists($lang))
     {
-      setlocale(LC_ALL, $lang);
       $newLang = $lang;
     }
     else
     {
-      setlocale(LC_ALL, LANG_DEFAULT);
       $newLang = LANG_DEFAULT;
     }
   }
   putenv("LANG=" . $newLang);
+  setlocale(LC_ALL, $newLang);
+
+  /*global $nls;
+  if (defined("PHP_OS") && eregi("win", PHP_OS))
+  {
+    setlocale(LC_ALL, (isset($nls['win32'][$newLang]) ? $nls['win32'][$newLang] : $newLang));
+    //echo $nls['win32'][$newLang]; echo $newLang; exit(); // debug
+  }
+  else
+  {
+    setlocale(LC_ALL, $newLang);
+  }*/
 
   return $newLang;
 }
