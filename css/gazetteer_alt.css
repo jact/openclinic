@@ -1,7 +1,7 @@
 /* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
 
 body {
-  color: gray;
+  color: #848484;
   background: #fff;
   font-family: verdana, helvetica, arial, sans-serif;
   font-size: 71%;
@@ -22,7 +22,7 @@ img {
 }
 
 #header h1 a {
-  color: rgb(175,175,175);
+  color: #afafaf;
   background: transparent;
   font-family: garamond, "times new roman", times, roman, serif;
   font-size: 250%;
@@ -34,7 +34,7 @@ img {
   position: absolute;
   top: 2mm;
   right: 5mm;
-  border: 1px dotted gray;
+  border: 1px dotted #848484;
   padding: 3px;
 }
 
@@ -58,25 +58,25 @@ img {
 }
 
 #tabs li a, #tabs li span {
-  color: rgb(175,175,175);
-  background-color: rgb(248,248,248);
+  color: #afafaf;
+  background: #f8f8f8;
   text-decoration: none;
   font-weight: bold;
   margin: 0;
   padding: 0.5ex 1.25em 1ex 1.25em;
-  border-top: 1px solid rgb(231,231,231);
-  border-right: 1px solid rgb(97,97,97);
-  border-left: 1px solid rgb(231,231,231);
+  border-top: 1px solid #e7e7e7;
+  border-right: 1px solid #616161;
+  border-left: 1px solid #e7e7e7;
 }
 
 #tabs li a:hover {
-  color: crimson !important;
-  background-color: rgb(248,248,248);
+  color: #dc143c;
+  background: #f8f8f8;
   text-decoration: none;
   padding-bottom: 0.8ex;
-  border-top: 1px solid rgb(97,97,97);
-  border-right: 1px solid rgb(231,231,231);
-  border-left: 1px solid rgb(97,97,97);
+  border-top: 1px solid #616161;
+  border-right: 1px solid #e7e7e7;
+  border-left: 1px solid #616161;
   position: relative;
   left: 1px;
   top: 1px;
@@ -84,15 +84,15 @@ img {
 
 #tabs li span {
   color: #fff;
-  background-color: crimson;
-  border-top-color: crimson;
-  border-right-color: crimson;
-  border-left-color: crimson;
+  background: #dc143c;
+  border-top-color: #dc143c;
+  border-right-color: #dc143c;
+  border-left-color: #dc143c;
 }
 
 #sourceForgeLinks {
   margin: 2px 0 0 0;
-  background: crimson;
+  background: #dc143c;
   color: #fff;
   padding: 5px;
   font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
@@ -107,7 +107,7 @@ img {
 #sideBar {
   margin: 1em 1em 1em 2em;
   padding: 0;
-  border-bottom: 1px dotted gray;
+  border-bottom: 1px dotted #848484;
   width: 15.5em;
   float: right;
   font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
@@ -120,8 +120,8 @@ img {
 .linkList {
   margin: 10px 0;
   padding: 0 0 0 15px;
-  border-top: 1px dotted gray;
-  border-bottom: 1px dotted gray;
+  border-top: 1px dotted #848484;
+  border-bottom: 1px dotted #848484;
 }
 
 .linkList a, .linkList a:hover, .linkList .selected {
@@ -135,7 +135,7 @@ img {
 }
 
 .linkList a:hover, .sideBarLogin a:hover, #mainZone a, #mainZone a:visited {
-  color: crimson;
+  color: #dc143c;
   background: transparent;
 }
 
@@ -154,7 +154,7 @@ img {
 }
 
 #mainZone h1, #mainZone h2, #mainZone h3, #mainZone h4, #mainZone h5 {
-  border-bottom: 1px dotted gray;
+  border-bottom: 1px dotted #848484;
   font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
   margin: 0 0 0.75em 0;
   padding: 0.5ex 0 0.5ex 0.5ex;
@@ -165,8 +165,8 @@ img {
 }
 
 #footer {
-  color: rgb(175,175,175);
-  background: rgb(250,250,250);
+  color: #afafaf;
+  background: #fafafa;
   margin: 0;
   padding: 0.25em 5mm 1.25ex 4mm;
   clear: both;
@@ -176,14 +176,19 @@ img {
   text-align: center;
 }
 
+#footer #footerLinks p {
+  float: right;
+  margin: 10px 0;
+}
+
 #footer a {
-  color: rgb(175,175,175);
+  color: #afafaf;
   background: transparent;
   text-decoration: underline;
 }
 
 #footer a:hover {
-  color: crimson;
+  color: #dc143c;
   background: transparent;
   text-decoration: none;
 }
@@ -208,22 +213,22 @@ img {
 table {
   border-collapse: collapse;
   padding: 3px;
-  border: 1px solid gray;
+  border: 1px solid #848484;
 }
 
 th {
   text-align: left;
   color: #fff;
-  background: gray;
+  background: #848484;
 }
 
 td, th {
   padding: 3px;
-  border: 1px solid gray;
+  border: 1px solid #848484;
 }
 
 .even {
-  background: rgb(250,250,250);
+  background: #fafafa;
   color: inherit;
 }
 
@@ -265,7 +270,7 @@ label {
 }
 
 .message {
-  background: rgb(250,250,250);
+  background: #fafafa;
   color: #000;
   border: 1px solid #000;
   margin: 3px 4em 1em 0;
