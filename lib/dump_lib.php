@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
+ * $Id: dump_lib.php,v 1.3 2004/05/31 18:54:10 jact Exp $
  */
 
 /**
@@ -839,15 +839,15 @@ if ( !defined('DUMP_LIB_INCLUDED') )
    ********************************************************************
    * Writes localised date
    ********************************************************************
-   * @param   int      the current timestamp
-   * @return  string   the formatted date
-   * @access  public
+   * @param  int    the current timestamp
+   * @return string the formated date
+   * @access public
    */
   function DLIB_localisedDate($timestamp = -1)
   {
     //$dayOfWeek = array('Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab');
     //$month = array('Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic');
-    $dateFmt = '%d-%m-%Y %H:%M:%S';
+    ///$dateFmt = '%d-%m-%Y %H:%M:%S';
 
     if ($timestamp == -1)
     {
@@ -858,7 +858,8 @@ if ( !defined('DUMP_LIB_INCLUDED') )
     //$date = ereg_replace('%[aA]', $dayOfWeek[(int)strftime('%w', $timestamp)], $dateFmt);
     //$date = ereg_replace('%[bB]', $month[(int)strftime('%m', $timestamp) - 1], $date);
 
-    return strftime($dateFmt, $timestamp);
+    ///return strftime($dateFmt, $timestamp);
+    return date(_("Y-m-d H:i:s"), $timestamp);
   } // end of the 'DLIB_localisedDate()' function
 } // $__DUMP_LIB__
 ?>
