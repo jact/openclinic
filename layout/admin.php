@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: admin.php,v 1.1 2004/04/04 22:05:56 jact Exp $
+ * $Id: admin.php,v 1.2 2004/04/18 14:30:07 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Navbar to the Admin tab
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 05/04/2004 0:05
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
