@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.5 2004/07/07 17:22:28 jact Exp $
+ * $Id: connection_list.php,v 1.6 2004/07/10 16:21:06 jact Exp $
  */
 
 /**
@@ -71,6 +71,22 @@
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
 
+  ////////////////////////////////////////////////////////////////////
+  // Display insertion message if coming from new with a successful insert.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["added"]))
+  {
+    echo '<p>' . _("Connection problems have been added.") . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display deletion message if coming from del with a successful delete.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Connection with medical problem, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
   if ($hasMedicalAdminAuth)
   {
     echo '<p><a href="../medical/connection_new_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '">' . _("Add New Connection Problems") . "</a></p>\n";
@@ -91,7 +107,7 @@
   }
 
   $connArray = array();
-  while ($conn = $connQ->fetchConn())
+  while ($conn = $connQ->fetch())
   {
     $connArray[] = $conn[1];
   }
