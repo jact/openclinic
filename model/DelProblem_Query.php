@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelProblem_Query.php,v 1.3 2004/07/24 16:32:36 jact Exp $
+ * $Id: DelProblem_Query.php,v 1.4 2004/10/04 21:25:52 jact Exp $
  */
 
 /**
@@ -61,12 +61,12 @@ class DelProblem_Query extends Query
     $sql .= "opening_date, closing_date, meeting_place, wording, subjective, objective, ";
     $sql .= "appreciation, action_plan, prescription, create_date, id_user, login) VALUES (";
     $sql .= $problem->getIdProblem() . ", ";
-    $sql .= "'" . $problem->getLastUpdateDate(false) . "', ";
+    $sql .= "'" . $problem->getLastUpdateDate() . "', ";
     $sql .= $problem->getIdPatient() . ", ";
     $sql .= ($problem->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($problem->getCollegiateNumber()) . "', ";
     $sql .= $problem->getOrderNumber() . ", ";
-    $sql .= "'" . $problem->getOpeningDate(false) . "', ";
-    $sql .= "'" . $problem->getClosingDate(false) . "', ";
+    $sql .= "'" . $problem->getOpeningDate() . "', ";
+    $sql .= "'" . $problem->getClosingDate() . "', ";
     $sql .= ($problem->getMeetingPlace() == "") ? "NULL, " : "'" . urlencode($problem->getMeetingPlace()) . "', ";
     $sql .= "'" . $problem->getWording() . "', ";
     $sql .= ($problem->getSubjective() == "") ? "NULL, " : "'" . urlencode($problem->getSubjective()) . "', ";
