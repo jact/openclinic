@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: global_constants.php,v 1.3 2004/06/06 11:38:01 jact Exp $
+ * $Id: global_constants.php,v 1.4 2004/06/16 19:15:33 jact Exp $
  */
 
 /**
@@ -44,22 +44,22 @@
  * OPEN_SEARCH_ACTIONPLAN
  * OPEN_SEARCH_PRESCRIPTION
  */
-  define("OPEN_SEARCH_SURNAME1", 1);
-  define("OPEN_SEARCH_SURNAME2", 2);
-  define("OPEN_SEARCH_FIRSTNAME", 3);
-  define("OPEN_SEARCH_NIF", 4);
-  define("OPEN_SEARCH_NTS", 5);
-  define("OPEN_SEARCH_NSS", 6);
-  define("OPEN_SEARCH_BIRTHPLACE", 7);
-  define("OPEN_SEARCH_ADDRESS", 8);
-  define("OPEN_SEARCH_PHONE", 9);
-  define("OPEN_SEARCH_INSURANCE", 10);
-  define("OPEN_SEARCH_COLLEGIATE", 11);
-  define("OPEN_SEARCH_WORDING", 12);
-  define("OPEN_SEARCH_SUBJECTIVE", 13);
-  define("OPEN_SEARCH_OBJECTIVE", 14);
+  define("OPEN_SEARCH_SURNAME1",      1);
+  define("OPEN_SEARCH_SURNAME2",      2);
+  define("OPEN_SEARCH_FIRSTNAME",     3);
+  define("OPEN_SEARCH_NIF",           4);
+  define("OPEN_SEARCH_NTS",           5);
+  define("OPEN_SEARCH_NSS",           6);
+  define("OPEN_SEARCH_BIRTHPLACE",    7);
+  define("OPEN_SEARCH_ADDRESS",       8);
+  define("OPEN_SEARCH_PHONE",         9);
+  define("OPEN_SEARCH_INSURANCE",    10);
+  define("OPEN_SEARCH_COLLEGIATE",   11);
+  define("OPEN_SEARCH_WORDING",      12);
+  define("OPEN_SEARCH_SUBJECTIVE",   13);
+  define("OPEN_SEARCH_OBJECTIVE",    14);
   define("OPEN_SEARCH_APPRECIATION", 15);
-  define("OPEN_SEARCH_ACTIONPLAN", 16);
+  define("OPEN_SEARCH_ACTIONPLAN",   16);
   define("OPEN_SEARCH_PRESCRIPTION", 17);
 
 /**
@@ -71,7 +71,7 @@
  * OPEN_NOT
  */
   define("OPEN_AND", "AND");
-  define("OPEN_OR", "OR");
+  define("OPEN_OR",  "OR");
   define("OPEN_NOT", "NOT");
 
 /**
@@ -82,7 +82,19 @@
  * OPEN_DOCTOR
  */
   define("OPEN_ADMINISTRATIVE", "Administrative");
-  define("OPEN_DOCTOR", "Doctor");
+  define("OPEN_DOCTOR",         "Doctor");
+
+/**
+ ********************************************************************
+ * Profile constants:
+ ********************************************************************
+ * OPEN_PROFILE_ADMINISTRATOR
+ * OPEN_PROFILE_ADMINISTRATIVE
+ * OPEN_PROFILE_DOCTOR
+ */
+  define("OPEN_PROFILE_ADMINISTRATOR",  1);
+  define("OPEN_PROFILE_ADMINISTRATIVE", 2);
+  define("OPEN_PROFILE_DOCTOR",         3);
 
 /**
  ********************************************************************
