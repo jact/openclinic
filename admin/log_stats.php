@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_stats.php,v 1.5 2004/09/22 18:18:40 jact Exp $
+ * $Id: log_stats.php,v 1.6 2004/10/03 11:16:33 jact Exp $
  */
 
 /**
@@ -27,6 +27,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/log_lib.php");
+  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -37,9 +38,13 @@
   }
   else
   {
-    $table = $_GET['table'];
+    $table = safeText($_GET['table']);
   }
-  $option = (isset($_GET["option"])) ? $_GET["option"] : "";
+  if ($table != "access" && $table != "record")
+  {
+    $table = "access";
+  }
+  $option = (isset($_GET["option"])) ? safeText($_GET["option"]) : "";
 
   ////////////////////////////////////////////////////////////////////
   // Show page
@@ -59,22 +64,22 @@
   unset($links);
 
   echo '<p>';
-  if (isset($_GET["table"]) && $_GET["table"] != 'access')
+  if ($table != 'access')
   {
     echo '<a href="../admin/log_stats.php?table=access">';
   }
   echo _("Access Logs");
-  if (isset($_GET["table"]) && $_GET["table"] != 'access')
+  if ($table != 'access')
   {
     echo '</a>';
   }
   echo ' | ';
-  if ( !isset($_GET["table"]) || $_GET["table"] != 'record' )
+  if ($table != 'record')
   {
     echo '<a href="../admin/log_stats.php?table=record">';
   }
   echo _("Record Logs");
-  if ( !isset($_GET["table"]) || $_GET["table"] != 'record' )
+  if ($table != 'record')
   {
     echo '</a>';
   }
@@ -85,17 +90,17 @@
   switch ($option)
   {
     case "yearly":
-      showMonthStats($table, $_GET['year']);
+      showMonthStats($table, intval($_GET['year']));
       showLinks($table);
       break;
 
     case "monthly":
-      showDailyStats($table, $_GET['year'], $_GET['month']);
+      showDailyStats($table, intval($_GET['year']), intval($_GET['month']));
       showLinks($table);
       break;
 
     case "daily":
-      showHourlyStats($table, $_GET['year'], $_GET['month'], $_GET['day']);
+      showHourlyStats($table, intval($_GET['year']), intval($_GET['month']), intval($_GET['day']));
       showLinks($table);
       break;
 
