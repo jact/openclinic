@@ -1,4 +1,4 @@
-$Id: README,v 1.3 2004/08/07 11:13:42 jact Exp $
+$Id: README,v 1.4 2004/10/16 14:53:54 jact Exp $
 
 OpenClinic: Web Medical Records System
 ======================================
@@ -43,7 +43,7 @@ Requirements
 
     * MySQL (tested with versions 3.23.36, 3.23.49, 3.23.51, 3.23.52, 3.23.54, 3.23.55, 4.0.16 and 4.0.18);
 
-    * a web server prepared to execute PHP code;
+    * a web server prepared to execute PHP code (recommended Apache);
 
     * and, of course, a web browser (with JavaScript and good CSS2 support).
 
