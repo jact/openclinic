@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_del_confirm.php,v 1.2 2004/04/24 14:52:15 jact Exp $
+ * $Id: relative_del_confirm.php,v 1.3 2004/04/24 17:06:10 jact Exp $
  */
 
 /**
@@ -19,7 +19,7 @@
   ////////////////////////////////////////////////////////////////////
   // Checking for get vars. Go back to form if none found.
   ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["rel"]) || empty($_GET["name"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["rel"]) || empty($_GET["name"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
@@ -70,8 +70,14 @@
   echo "<br />\n";
 ?>
 
-<form method="post" action="../medical/relative_del.php?key=<?php echo $idPatient; ?>&rel=<?php echo $idRelative; ?>&name=<?php echo $relName; ?>">
+<form method="post" action="../medical/relative_del.php">
   <div class="center">
+    <?php
+      showInputHidden("id_patient", $idPatient);
+      showInputHidden("id_relative", $idRelative);
+      showInputHidden("name", $relName);
+    ?>
+
     <table>
       <thead>
         <tr>

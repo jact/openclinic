@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del_confirm.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: patient_del_confirm.php,v 1.3 2004/04/24 17:06:10 jact Exp $
  */
 
 /**
@@ -19,7 +19,7 @@
   ////////////////////////////////////////////////////////////////////
   // Checking for get vars. Go back to form if none found.
   ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["name"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
@@ -64,8 +64,13 @@
   unset($links);
 ?>
 
-<form method="post" action="../medical/patient_del.php?key=<?php echo $idPatient; ?>&amp;name=<?php echo urlencode($patName); ?>">
+<form method="post" action="../medical/patient_del.php">
   <div class="center">
+    <?php
+      showInputHidden("id_patient", $idPatient);
+      showInputHidden("name", $patName);
+    ?>
+
     <table>
       <thead>
         <tr>

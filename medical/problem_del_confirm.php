@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del_confirm.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: problem_del_confirm.php,v 1.3 2004/04/24 17:06:10 jact Exp $
  */
 
 /**
@@ -19,7 +19,7 @@
   ////////////////////////////////////////////////////////////////////
   // Checking for query string. Go back to form if none found.
   ////////////////////////////////////////////////////////////////////
-  if ( !isset($_GET["key"]) )
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["pat"]) || empty($_GET["wording"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
@@ -70,8 +70,14 @@
   echo "<br />\n";
 ?>
 
-<form method="post" action="../medical/problem_del.php?key=<?php echo $idProblem; ?>&pat=<?php echo $idPatient; ?>&wording=<?php echo $wording; ?>">
+<form method="post" action="../medical/problem_del.php">
   <div class="center">
+    <?php
+      showInputHidden("id_problem", $idProblem);
+      showInputHidden("id_patient", $idPatient);
+      showInputHidden("wording", $wording);
+    ?>
+
     <table>
       <thead>
         <tr>

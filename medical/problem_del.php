@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: problem_del.php,v 1.3 2004/04/24 17:06:10 jact Exp $
  */
 
 /**
@@ -17,9 +17,9 @@
  */
 
   ////////////////////////////////////////////////////////////////////
-  // Checking for query string. Go back to form if none found.
+  // Checking for post vars. Go back to form if none found.
   ////////////////////////////////////////////////////////////////////
-  if ( !isset($_GET["key"]) )
+  if (count($_POST) == 0)
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
@@ -41,11 +41,11 @@
   require_once("../shared/record_log.php"); // record log
 
   ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
+  // Retrieving post vars
   ////////////////////////////////////////////////////////////////////
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
-  $wording = $_GET["wording"];
+  $idProblem = intval($_POST["id_problem"]);
+  $idPatient = intval($_POST["id_patient"]);
+  $wording = $_POST["wording"];
 
   ////////////////////////////////////////////////////////////////////
   // Prevent user from aborting script
