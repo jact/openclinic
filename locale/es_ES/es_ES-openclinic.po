@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenClinic 0.6\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2004-05-15 21:25+0100\n"
+"PO-Revision-Date: 2004-05-20 21:20+0100\n"
 "Last-Translator: jact <jachavar@terra.es>\n"
 "Language-Team:  <jachavar@terra.es>\n"
 "MIME-Version: 1.0\n"
@@ -558,7 +558,7 @@ msgid "Return to profiles list"
 msgstr "Volver a la lista de perfiles"
 
 #: admin/profile_fields.php:50
-#: admin/setting_fields.php:196
+#: admin/setting_fields.php:204
 #: admin/staff_fields.php:129
 #: admin/theme_fields.php:256
 #: admin/user_fields.php:177
@@ -687,22 +687,22 @@ msgstr "URL Clínica"
 msgid "Language"
 msgstr "Idioma"
 
-#: admin/setting_fields.php:158
+#: admin/setting_fields.php:166
 #: install/wizard.php:323
 #: install/wizard.php:464
 msgid "Theme by default"
 msgstr "Tema por defecto"
 
-#: admin/setting_fields.php:168
+#: admin/setting_fields.php:176
 #: install/wizard.php:462
 msgid "Session Timeout"
 msgstr "Límite de tiempo de sesión"
 
-#: admin/setting_fields.php:174
+#: admin/setting_fields.php:182
 msgid "minutes"
 msgstr "minutos"
 
-#: admin/setting_fields.php:181
+#: admin/setting_fields.php:189
 #: install/wizard.php:463
 #: medical/patient_search.php:96
 #: medical/problem_search.php:96
@@ -712,11 +712,11 @@ msgstr "minutos"
 msgid "Search Results"
 msgstr "Resultados de la búsqueda"
 
-#: admin/setting_fields.php:187
+#: admin/setting_fields.php:195
 msgid "items per page"
 msgstr "(elementos por página)"
 
-#: admin/setting_fields.php:195
+#: admin/setting_fields.php:203
 #: admin/theme_list.php:69
 #: medical/history_family_fields.php:67
 #: medical/history_personal_fields.php:116
@@ -1786,19 +1786,7 @@ msgstr "¡Las tablas de la base de datos de OpenClinic han sido creadas correctam
 msgid "Start using OpenClinic"
 msgstr "Usar OpenClinic"
 
-#: install/wizard.php:105
-msgid "English"
-msgstr "Inglés"
-
-#: install/wizard.php:106
-msgid "Spanish"
-msgstr "Español"
-
-#: install/wizard.php:107
-msgid "Bulgarian"
-msgstr "Búlgaro"
-
-#: install/wizard.php:132
+#: install/wizard.php:118
 #: install/wizard.php:172
 msgid "OpenClinic Install Wizard"
 msgstr "Asistente de configuración de OpenClinic"
@@ -3182,7 +3170,7 @@ msgid "This function is not available in this demo version of OpenClinic."
 msgstr "Esta opción no está disponible en esta demostración de OpenClinic."
 
 #: shared/footer.php:30
-#: shared/header.php:55
+#: shared/header.php:65
 msgid "Clinic Home"
 msgstr "Inicio"
 
