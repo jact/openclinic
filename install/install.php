@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.6 2004/07/07 17:22:04 jact Exp $
+ * $Id: install.php,v 1.7 2004/07/28 16:35:06 jact Exp $
  */
 
 /**
@@ -27,7 +27,9 @@
 
   echo '<h1>' . _("OpenClinic Installation:") . "</h1>\n";
 
-  // testing connection and current version
+  ////////////////////////////////////////////////////////////////////
+  // Testing connection and current version
+  ////////////////////////////////////////////////////////////////////
   $setQ = new Setting_Query();
   $setQ->connect();
   if ($setQ->isError())
@@ -36,7 +38,9 @@
   }
   echo '<p>' . _("Database connection is good.") . "</p>\n";
 
-  // show warning message if database exists
+  ////////////////////////////////////////////////////////////////////
+  // Show warning message if database exists
+  ////////////////////////////////////////////////////////////////////
   $setQ->select();
   if ($setQ->isError())
   {
@@ -85,10 +89,12 @@
   unset($setQ);
   unset($set);
 
-  // creating each table listed in the $tables array
+  ////////////////////////////////////////////////////////////////////
+  // Creating each table listed in the $tables array
+  ////////////////////////////////////////////////////////////////////
   foreach ($tables as $tableName)
   {
-    $result = parseSQLFile("sql/" . $tableName . ".sql", $tableName, true);
+    $result = parseSQLFile("./sql/" . $tableName . ".sql", $tableName, true);
 
     if ($result)
     {
