@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DbConnection.php,v 1.5 2004/09/22 18:18:24 jact Exp $
+ * $Id: DbConnection.php,v 1.6 2004/11/05 12:34:37 jact Exp $
  */
 
 /**
@@ -79,7 +79,7 @@ class DbConnection
   var $_dbName;
 
   /**
-   * @var int
+   * @var mixed
    * @access private
    */
   var $_link;
@@ -146,7 +146,9 @@ class DbConnection
    */
   function connect($persistency = false)
   {
-    $this->_link = ($persistency) ? mysql_pconnect($this->_host, $this->_userName, $this->_passwd) : mysql_connect($this->_host, $this->_userName, $this->_passwd);
+    $this->_link = ($persistency)
+                     ? mysql_pconnect($this->_host, $this->_userName, $this->_passwd)
+                     : mysql_connect($this->_host, $this->_userName, $this->_passwd, true); // always open new link
     if ($this->_link == false)
     {
       $this->_error = "Unable to connect to host.";
