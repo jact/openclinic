@@ -134,11 +134,6 @@ li#first a, li#first span {
   text-align: center;
 }
 
-.subFooter {
-  padding: 1ex 4mm;
-  line-height: 1.25em;
-}
-
 #mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
   vertical-align: middle;
 }

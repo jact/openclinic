@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.7 2004/08/02 09:24:19 jact Exp $
+ * $Id: footer.php,v 1.8 2004/08/05 12:09:33 jact Exp $
  */
 
 /**
@@ -55,7 +55,7 @@
     ?>
   </div><!-- End #footerLinks -->
 
-  <div class="subFooter">
+  <p>
     <?php
       echo _("Powered by OpenClinic");
       if (defined("OPEN_VERSION"))
@@ -68,7 +68,7 @@
     <br />
     <?php echo _("under the"); ?>
     <a href="../home/license.php">GNU General Public License</a>
-  </div><!-- End .subFooter -->
+  </p>
 </div><!-- End #footer -->
 <!-- End Footer -->
 </body>
