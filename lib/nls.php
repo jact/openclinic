@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: nls.php,v 1.11 2005/01/22 19:09:44 jact Exp $
+ * $Id: nls.php,v 1.12 2005/01/30 15:32:48 jact Exp $
  */
 
 /**
@@ -53,7 +53,7 @@ function getNLS()
 {
   $nls['language']['bg_BG'] = '&#x0411;&#x044a;&#x043b;&#x0433;&#x0430;&#x0440;&#x0441;&#x043a;&#x0438;';
   //$nls['language']['zh_CN'] = 'Simplified Chinese (&#31616;&#20307;&#20013;&#25991;)';
-  //$nls['language']['zh_TW'] = 'Traditional Chinese (&#32321;&#39636;&#20013;&#25991;)';
+  $nls['language']['zh_TW'] = 'Traditional Chinese (&#32321;&#39636;&#20013;&#25991;)';
   //$nls['language']['zh_TW.utf8'] = 'Traditional Chinese (&#32321;&#39636;&#20013;&#25991;) (UTF-8)';
   //$nls['language']['cs_CZ'] = '&#x010c;esky';
   //$nls['language']['da_DK'] = 'Dansk';
@@ -116,6 +116,7 @@ function getNLS()
   $nls['win32']['en']    = 'eng';
   $nls['win32']['es_ES'] = 'esp';
   $nls['win32']['nl_BE'] = 'nld';
+  $nls['win32']['zh_TW'] = 'chn';
 
   ////////////////////////////////////////////////////////////////////
   // Charsets
@@ -136,7 +137,7 @@ function getNLS()
   //$nls['charset']['tr_TR'] =    'ISO-8859-9';
   //$nls['charset']['uk_UA'] =    'KOI8-U';
   //$nls['charset']['zh_CN'] =    'GB2312';
-  //$nls['charset']['zh_TW'] =    'BIG5';
+  $nls['charset']['zh_TW'] =    'BIG5';
   //$nls['charset']['zh_TW.utf8'] = 'UTF-8';
 
   //$nls['charset']['de_DE'] =    'de_DE.ISO-8859-15@euro';
@@ -172,7 +173,7 @@ function getNLS()
   // Flags "alias"
   ////////////////////////////////////////////////////////////////////
   //$nls['flag']['ru_RU.koi8r'] = 'ru_RU';
-  //$nls['flag']['zh_TW.utf8'] =  'zh_TW';
+  //$nls['flag']['zh_TW.utf8']  =  'zh_TW';
 
   return $nls;
 }
