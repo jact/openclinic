@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.6 2004/07/08 18:46:59 jact Exp $
+ * $Id: theme_list.php,v 1.7 2004/07/29 19:24:49 jact Exp $
  */
 
 /**
@@ -50,7 +50,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Theme, %s, has been added."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Theme, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Theme, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Theme, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -66,42 +66,42 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Theme, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Theme, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
+
+  $thead = array(
+    _("Change Theme by default")
+  );
+
+  $content = '<label for="id_theme">';
+  $content .= _("Choose a New Theme:");
+  $content .= "</label>\n";
+
+  $content .= htmlSelect("theme_tbl", "id_theme", OPEN_THEMEID, "theme_name");
+  $content .= htmlInputButton("button1", _("Update"));
+
+  $tbody = array(
+    0 => array($content)
+  );
+
+  $options = array(
+    'shaded' => false
+  );
 ?>
 
 <form method="post" action="../admin/theme_use.php">
   <div>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <?php echo _("Change Theme by default"); ?>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>
-            <?php
-              echo '<label for="id_theme">';
-              echo _("Choose a New Theme:");
-              echo "</label>\n";
-
-              showSelect("theme_tbl", "id_theme", OPEN_THEMEID, "theme_name");
-              showInputButton("button1", _("Update"));
-            ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<?php showTable($thead, $tbody, null, $options); ?>
   </div>
 </form>
+
+<hr />
 
 <p>
   <a href="../admin/theme_new_form.php?reset=Y"><?php echo _("Add New Theme"); ?></a>
 </p>
+
+<hr />
 
 <h3><?php echo _("Themes List:"); ?></h3>
 
@@ -123,90 +123,62 @@
   if ($numRows == 0)
   {
     $themeQ->close();
-    echo '<p>' . _("No results found.") . "</p>\n";
+    showMessage(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
-?>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3">
-        <?php echo _("Function"); ?>
-      </th>
+  $thead = array(
+    _("Function") => array('colspan' => 3),
+    _("Theme Name"),
+    _("Usage")
+  );
 
-      <th>
-        <?php echo _("Theme Name"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Usage"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
-  $rowClass = "odd";
+  $tbody = array();
   while ($theme = $themeQ->fetch())
   {
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td>
-        <a href="../admin/theme_edit_form.php?key=<?php echo $theme->getIdTheme(); ?>&amp;reset=Y"><?php echo _("edit"); ?></a>
-      </td>
+    ////////////////////////////////////////////////////////////////////
+    // Row construction
+    ////////////////////////////////////////////////////////////////////
+    $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getIdTheme() . '&amp;reset=Y">' . _("edit") . '</a>';
+    $row .= OPEN_SEPARATOR;
+    $row .= '<a href="../admin/theme_new_form.php?key=' . $theme->getIdTheme() . '&amp;reset=Y">' . _("copy") . '</a>';
+    $row .= OPEN_SEPARATOR;
+    if ($theme->getIdTheme() == OPEN_THEMEID || $theme->getCount() > 0)
+    {
+      $row .= "* " . _("del");
+    }
+    else
+    {
+      $row .= '<a href="../admin/theme_del_confirm.php?key=' . $theme->getIdTheme() . '&amp;name=' . urlencode($theme->getThemeName()) . '">' . _("del") . '</a>';
+    } // end if
+    $row .= OPEN_SEPARATOR;
+    $row .= $theme->getThemeName();
+    $row .= OPEN_SEPARATOR;
+    if ($theme->getIdTheme() == OPEN_THEMEID)
+    {
+      $row .= _("in use") . " (" . _("by application") . ")";
+    }
+    if ($theme->getCount() > 0)
+    {
+      $row .= _("in use") . " (" . sprintf(_("%d user(s)"), $theme->getCount()) . ")";
+    }
+    else
+    {
+      $row .= "";
+    }
 
-      <td>
-        <a href="../admin/theme_new_form.php?key=<?php echo $theme->getIdTheme(); ?>&amp;reset=Y"><?php echo _("copy"); ?></a>
-      </td>
-
-      <td>
-        <?php
-          if ($theme->getIdTheme() == OPEN_THEMEID || $theme->getCount() > 0)
-          {
-            echo "* " . _("del");
-          }
-          else
-          {
-        ?>
-            <a href="../admin/theme_del_confirm.php?key=<?php echo $theme->getIdTheme(); ?>&amp;name=<?php echo urlencode($theme->getThemeName()); ?>"><?php echo _("del"); ?></a>
-        <?php
-          } // end if
-        ?>
-      </td>
-
-      <td>
-        <?php echo $theme->getThemeName();?>
-      </td>
-
-      <td>
-        <?php
-          if ($theme->getIdTheme() == OPEN_THEMEID)
-          {
-            echo _("in use") . " (" . _("by application") . ")";
-          }
-          if ($theme->getCount() > 0)
-          {
-            echo _("in use") . " (" . sprintf(_("%d user(s)"), $theme->getCount()) . ")";
-          }
-        ?>
-      </td>
-    </tr>
-<?php
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
   $themeQ->freeResult();
   $themeQ->close();
+
+  showTable($thead, $tbody, null);
+
   unset($themeQ);
   unset($theme);
-?>
-  </tbody>
-</table>
 
-<?php
-  echo '<p class="advice">* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application.") . "</p>\n";
+  showMessage('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
 
   require_once("../shared/footer.php");
 ?>
