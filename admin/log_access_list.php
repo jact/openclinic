@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.4 2004/06/16 19:10:30 jact Exp $
+ * $Id: log_access_list.php,v 1.5 2004/06/16 19:33:19 jact Exp $
  */
 
 /**
@@ -106,14 +106,19 @@
 
   <tbody>
 <?php
-    $i = 1;
+    $profiles = array(
+      OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
+      OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
+      OPEN_PROFILE_DOCTOR => _("Doctor")
+    );
+
     $rowClass = "odd";
-    while ($access = $accessQ->fetch())
+    for ($i = 1; $access = $accessQ->fetch(); $i++)
     {
 ?>
     <tr class="<?php echo $rowClass; ?>">
       <td class="number">
-        <?php echo $i++ . "."; ?>
+        <?php echo $i . "."; ?>
       </td>
 
       <td>
@@ -125,14 +130,13 @@
       </td>
 
       <td class="center">
-        <?php echo $access["profile"]; ?>
+        <?php echo $profiles[$access["id_profile"]]; ?>
       </td>
     </tr>
 <?php
       // swap row color
       ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
-    } // end while
-    unset($access);
+    } // end for
 ?>
   </tbody>
 </table>
@@ -142,6 +146,8 @@
   $accessQ->freeResult();
   $accessQ->close();
   unset($accessQ);
+  unset($access);
+  unset($profiles);
 
   echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
   echo _("Back return") . "</a></p>\n";

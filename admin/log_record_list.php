@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.5 2004/06/16 19:10:30 jact Exp $
+ * $Id: log_record_list.php,v 1.6 2004/06/16 19:33:19 jact Exp $
  */
 
 /**
@@ -118,14 +118,13 @@
 
   <tbody>
 <?php
-    $i = 1;
     $rowClass = "odd";
-    while ($record = $recordQ->fetch())
+    for ($i = 1; $record = $recordQ->fetch(); $i++)
     {
 ?>
     <tr class="<?php echo $rowClass; ?> center">
       <td class="number">
-        <?php echo $i++ . "."; ?>
+        <?php echo $i . "."; ?>
       </td>
 
       <td>
@@ -149,14 +148,13 @@
       </td>
 
       <td>
-        <?php echo $record["id_key2"]; ?>
+        <?php echo (($record["id_key2"]) ? $record["id_key2"] : ""); ?>
       </td>
     </tr>
 <?php
       // swap row color
       ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
-    } // end while
-    unset($record);
+    } // end for
 ?>
   </tbody>
 </table>
@@ -166,6 +164,7 @@
   $recordQ->freeResult();
   $recordQ->close();
   unset($recordQ);
+  unset($record);
 
   echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
   echo _("Back return") . "</a></p>\n";

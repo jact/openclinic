@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Query.php,v 1.4 2004/06/16 19:08:47 jact Exp $
+ * $Id: Access_Query.php,v 1.5 2004/06/16 19:32:48 jact Exp $
  */
 
 /**
@@ -101,8 +101,9 @@ class Access_Query extends Query
    */
   function select($year = 0, $month = 0, $day = 0, $hour = 0)
   {
-    $sql = "SELECT login,access_date,description FROM access_log_tbl,profile_tbl";
-    $sql .= " WHERE access_log_tbl.id_profile=profile_tbl.id_profile";
+    $sql = "SELECT login,access_date,id_profile";
+    $sql .= " FROM access_log_tbl";
+    $sql .= " WHERE 1";
     if ($year != "")
     {
       $sql .= " AND YEAR(access_date)=" . intval($year);
@@ -151,13 +152,12 @@ class Access_Query extends Query
     $this->_rowCount = 0;
     $this->_pageCount = 0;
 
-    $sql .= " FROM access_log_tbl,profile_tbl";
-    $sql .= " WHERE access_log_tbl.id_profile=profile_tbl.id_profile";
-    $sql .= " AND access_log_tbl.id_user=" . intval($idUser);
+    $sql .= " FROM access_log_tbl";
+    $sql .= " WHERE access_log_tbl.id_user=" . intval($idUser);
 
     $sqlCount = "SELECT COUNT(*) AS row_count" . $sql;
 
-    $sql = "SELECT login,access_date,description" . $sql;
+    $sql = "SELECT login,access_date,id_profile" . $sql;
     $sql .= " ORDER BY access_date DESC";
 
     // setting limit so we can page through the results
@@ -227,7 +227,7 @@ class Access_Query extends Query
     $access = array();
     $access["login"] = urldecode($array["login"]);
     $access["access_date"] = urldecode($array["access_date"]);
-    $access["profile"] = urldecode($array["description"]);
+    $access["id_profile"] = intval($array["id_profile"]);
 
     return $access;
   }
