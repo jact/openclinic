@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: nls.php,v 1.5 2004/06/20 15:16:32 jact Exp $
+ * $Id: nls.php,v 1.6 2004/08/28 14:49:31 jact Exp $
  */
 
 /**
@@ -71,6 +71,7 @@ function getNLS()
   //$nls['language']['no_NO'] = 'Norsk bokm&#229;l';
   //$nls['language']['pl_PL'] = 'Polski';
   //$nls['language']['pt_PT'] = 'Portugu&#234;s';
+  //$nls['language']['pt_BR'] = 'Portugu&#234;s Brasileiro';
   //$nls['language']['ru_RU'] = '&#x0420;&#x0443;&#x0441;&#x0441;&#x043a;&#x0438;&#x0439; (Windows)';
   //$nls['language']['ru_RU.koi8r'] = '&#x0420;&#x0443;&#x0441;&#x0441;&#x043a;&#x0438;&#x0439; (KOI8-R)';
   //$nls['language']['sl_SI'] = 'Sloven&#x0161;&#x010d;ina';
