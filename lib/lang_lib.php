@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: lang_lib.php,v 1.13 2004/10/18 17:24:04 jact Exp $
+ * $Id: lang_lib.php,v 1.14 2004/12/07 11:27:15 jact Exp $
  */
 
 /**
@@ -31,6 +31,7 @@
  *  mixed poFilename(string $lang = "")
  *  bool languageExists(string $lang)
  *  string localDate(string $date)
+ *  mixed languageList(void)
  */
 
 define("OPEN_LANG_DEFAULT",  "en");
@@ -314,5 +315,42 @@ function localDate($date = "")
   }
 
   return $local;
+}
+
+/**
+ * mixed languageList(void)
+ ********************************************************************
+ * Returns an array with available languages
+ ********************************************************************
+ * @global array $nls
+ * @return mixed array with available languages or null if empty
+ * @access public
+ * @since 0.7
+ */
+function languageList()
+{
+  global $nls;
+
+  $array = null;
+  $handle = opendir(OPEN_LANG_DIR);
+
+  while (($file = readdir($handle)) !== false)
+  {
+    if ($file != 'CVS' && $file != '.' && $file != '..' && is_dir(OPEN_LANG_DIR . $file))
+    {
+      /*if (function_exists('html_entity_decode'))
+      {
+        $array["$file"] = html_entity_decode($nls['language'][$file], ENT_COMPAT, OPEN_CHARSET);
+      }
+      else
+      {
+        $array["$file"] = strtr($nls['language'][$file], array_flip(get_html_translation_table(HTML_ENTITIES)));
+      }*/
+      $array["$file"] = $nls['language'][$file];
+    }
+  }
+  closedir($handle);
+
+  return $array;
 }
 ?>
