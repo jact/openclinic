@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.3 2004/06/06 11:46:12 jact Exp $
+ * $Id: read_settings.php,v 1.4 2004/06/16 19:31:54 jact Exp $
  */
 
 /**
@@ -70,7 +70,7 @@
     showQueryError($setQ);
   }
 
-  $set = $setQ->fetchSettings();
+  $set = $setQ->fetch();
   if ( !$set )
   {
     $setQ->close();
@@ -135,7 +135,7 @@
     showQueryError($themeQ);
   }
 
-  $theme = $themeQ->fetchTheme();
+  $theme = $themeQ->fetch();
   if ( !$theme )
   {
     $themeQ->close();
