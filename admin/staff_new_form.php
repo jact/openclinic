@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.4 2004/06/06 11:38:17 jact Exp $
+ * $Id: staff_new_form.php,v 1.5 2004/07/14 18:25:21 jact Exp $
  */
 
 /**
@@ -34,9 +34,7 @@
   ////////////////////////////////////////////////////////////////////
   // Show page
   ////////////////////////////////////////////////////////////////////
-  (isset($_GET["type"]))
-    ? $memberType = $_GET["type"]
-    : $memberType = "A"; // Administrative by default
+  $memberType = (isset($_GET["type"])) ? $_GET["type"] : "A"; // Administrative by default
 
   switch ($memberType)
   {
