@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: nls.php,v 1.3 2004/05/16 18:12:29 jact Exp $
+ * $Id: nls.php,v 1.4 2004/06/06 11:43:34 jact Exp $
  */
 
 /**
@@ -109,7 +109,9 @@ function getNLS()
   ////////////////////////////////////////////////////////////////////
   // Aliases for languages in win32 systems (ISO 3166-Alpha-3)
   ////////////////////////////////////////////////////////////////////
-  //$nls['win32']['es_ES'] = 'esp';
+  //$nls['win32']['bg_BG'] = 'bg';
+  //$nls['win32']['en'] = 'en';
+  $nls['win32']['es_ES'] = 'esp';
 
   ////////////////////////////////////////////////////////////////////
   // Charsets
@@ -143,6 +145,12 @@ function getNLS()
   $nls['multibyte']['EUC-JP'] = true;
   $nls['multibyte']['GB2312'] = true;
   $nls['multibyte']['UTF-8'] =  true;
+
+  ////////////////////////////////////////////////////////////////////
+  // Encoding
+  ////////////////////////////////////////////////////////////////////
+  $nls['default']['encoding'] = 'ISO-8859-1';
+  //$nls['encoding']['bg_BG'] = 'UTF-8';
 
   ////////////////////////////////////////////////////////////////////
   // Direction
