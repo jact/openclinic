@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: html_lib.php,v 1.6 2004/08/02 11:06:54 jact Exp $
+ * $Id: html_lib.php,v 1.7 2004/08/03 11:19:43 jact Exp $
  */
 
 /**
@@ -93,6 +93,15 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
     $html .= "</thead>\n";
   }
 
+  $maxCol = 1;
+  foreach ($body as $row)
+  {
+    if (count($row) > $maxCol)
+    {
+      $maxCol = count($row);
+    }
+  }
+
   if (count($foot) > 0)
   {
     $html .= "<tfoot>\n";
@@ -100,9 +109,9 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
     {
       $html .= "<tr>\n";
       $html .= '<td';
-      if (count($body[0]) > 1)
+      if ($maxCol > 1)
       {
-        $html .= ' colspan="' . count($body[0]) . '"';
+        $html .= ' colspan="' . $maxCol . '"';
       }
       if (isset($options['tfoot']['align']) && $options['tfoot']['align'] == 'left')
       {
