@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.8 2004/07/14 18:24:21 jact Exp $
+ * $Id: log_record_list.php,v 1.9 2004/07/24 16:23:55 jact Exp $
  */
 
 /**
@@ -107,11 +107,7 @@
       </th>
 
       <th>
-        <?php echo sprintf(_("Key %d"), 1); ?>
-      </th>
-
-      <th>
-        <?php echo sprintf(_("Key %d"), 2); ?>
+        <?php echo _("Data"); ?>
       </th>
     </tr>
   </thead>
@@ -144,11 +140,7 @@
       </td>
 
       <td>
-        <?php echo $record["id_key1"]; ?>
-      </td>
-
-      <td>
-        <?php echo (($record["id_key2"]) ? $record["id_key2"] : ""); ?>
+        <?php print_r(unserialize($record["affected_row"])); ?>
       </td>
     </tr>
 <?php

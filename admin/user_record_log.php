@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.8 2004/07/14 18:25:48 jact Exp $
+ * $Id: user_record_log.php,v 1.9 2004/07/24 16:24:02 jact Exp $
  */
 
 /**
@@ -147,11 +147,7 @@ function changePage(page)
       </th>
 
       <th>
-        <?php echo sprintf(_("Key %d"), 1); ?>
-      </th>
-
-      <th>
-        <?php echo sprintf(_("Key %d"), 2); ?>
+        <?php echo ("Data"); ?>
       </th>
     </tr>
   </thead>
@@ -167,8 +163,9 @@ function changePage(page)
       echo '<td>' . $row["login"] . "</td>\n";
       echo '<td>' . $row["table_name"] . "</td>\n";
       echo '<td>' . $row["operation"] . "</td>\n";
-      echo '<td>' . $row["id_key1"] . "</td>\n";
-      echo '<td>' . $row["id_key2"] . "</td>\n";
+      echo '<td>';
+      print_r(unserialize($row["affected_row"]));
+      echo "</td>\n";
       echo "</tr>\n";
       // swap row color
       ($rowClass == "even") ? $rowClass = "odd" : $rowClass = "even";
