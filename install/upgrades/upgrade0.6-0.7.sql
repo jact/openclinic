@@ -15,7 +15,7 @@ ALTER TABLE record_log_tbl CHANGE id_key1 affected_row TEXT NOT NULL;
 ALTER TABLE record_log_tbl DROP id_key2;
 UPDATE record_log_tbl SET affected_row='';
 
-UPDATE setting_tbl SET version='0.7.20041104';
+UPDATE setting_tbl SET version='0.7.20041105';
 
 DROP TABLE IF EXISTS profile_tbl;
 
