@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.5 2004/06/06 11:41:19 jact Exp $
+ * $Id: wizard.php,v 1.6 2004/06/08 18:53:30 jact Exp $
  */
 
 /**
@@ -37,6 +37,7 @@
 
   require_once("../lib/input_lib.php");
   require_once("../lib/debug_lib.php");
+  require_once("../lib/validator_lib.php");
 
   $themes = array(
     1 => "Metalic Grey",
@@ -144,28 +145,28 @@
   showInputHidden("alreadyVisited", 1);
   showInputHidden("buttonPressed");
 
-  showInputHidden("dbHost", ereg_replace(" ", "", $_POST['dbHost']));
-  showInputHidden("dbUser", ereg_replace(" ", "", $_POST['dbUser']));
-  showInputHidden("dbPasswd", trim($_POST['dbPasswd']));
-  showInputHidden("dbName", ereg_replace(" ", "", $_POST['dbName']));
+  showInputHidden("dbHost", ereg_replace(" ", "", safeText($_POST['dbHost'])));
+  showInputHidden("dbUser", ereg_replace(" ", "", safeText($_POST['dbUser'])));
+  showInputHidden("dbPasswd", safeText($_POST['dbPasswd']));
+  showInputHidden("dbName", ereg_replace(" ", "", safeText($_POST['dbName'])));
 
-  showInputHidden("clinicLanguage", trim($_POST['clinicLanguage']));
-  showInputHidden("clinicName", trim($_POST['clinicName']));
-  showInputHidden("clinicHours", trim($_POST['clinicHours']));
-  showInputHidden("clinicAddress", trim($_POST['clinicAddress']));
-  showInputHidden("clinicPhone", trim($_POST['clinicPhone']));
-  showInputHidden("timeout", ereg_replace(" ", "", $_POST['timeout']));
-  showInputHidden("itemsPage", ereg_replace(" ", "", $_POST['itemsPage']));
-  showInputHidden("clinicTheme", trim($_POST['clinicTheme']));
+  showInputHidden("clinicLanguage", safeText($_POST['clinicLanguage']));
+  showInputHidden("clinicName", safeText($_POST['clinicName']));
+  showInputHidden("clinicHours", safeText($_POST['clinicHours']));
+  showInputHidden("clinicAddress", safeText($_POST['clinicAddress']));
+  showInputHidden("clinicPhone", safeText($_POST['clinicPhone']));
+  showInputHidden("timeout", intval($_POST['timeout']));
+  showInputHidden("itemsPage", intval($_POST['itemsPage']));
+  showInputHidden("clinicTheme", safeText($_POST['clinicTheme']));
 
-  showInputHidden("firstName", trim($_POST['firstName']));
-  showInputHidden("surname1", trim($_POST['surname1']));
-  showInputHidden("surname2", trim($_POST['surname2']));
-  showInputHidden("adminAddress", trim($_POST['adminAddress']));
-  showInputHidden("adminPhone", trim($_POST['adminPhone']));
-  showInputHidden("passwd", trim($_POST['passwd']));
-  showInputHidden("email", ereg_replace(" ", "", $_POST['email']));
-  showInputHidden("adminTheme", trim($_POST['adminTheme']));
+  showInputHidden("firstName", safeText($_POST['firstName']));
+  showInputHidden("surname1", safeText($_POST['surname1']));
+  showInputHidden("surname2", safeText($_POST['surname2']));
+  showInputHidden("adminAddress", safeText($_POST['adminAddress']));
+  showInputHidden("adminPhone", safeText($_POST['adminPhone']));
+  showInputHidden("passwd", safeText($_POST['passwd']));
+  showInputHidden("email", ereg_replace(" ", "", safeText($_POST['email'])));
+  showInputHidden("adminTheme", safeText($_POST['adminTheme']));
   echo "</div>\n";
 ?>
 <div id="window">
@@ -526,7 +527,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.5 2004/06/06 11:41:19 jact Exp $
+ * $Id: wizard.php,v 1.6 2004/06/08 18:53:30 jact Exp $
  */
 
 /**
@@ -694,7 +695,7 @@
     <?php echo sprintf(_("The file %s already exists in your system! This script INSTALLS and does not UPGRADE. It will remove all OpenClinic data. If this is what you want, you can go on. If you want upgrade go to the %supgrade script%s."), "<tt>'database_constants.php'</tt>", '<a href="./index.php">', '</a>'); ?>
   </blockquote>
 
-  <h3><?php echo _("Read Thouroughly"); ?></h3>
+  <h3><?php echo _("Read Thouroughly") . ":"; ?></h3>
 
   <p>
     <?php echo _("For OpenClinic to work, you need the following on the server:"); ?>
@@ -797,11 +798,11 @@ function _showButton($name, $value, $type = "next")
   if ($type == "next")
   {
     echo '<span>' . $value . '</span>';
-    echo '<img src="../images/arrow_right.png" />';
+    echo '<img src="../images/arrow_right.png" width="22" height="22" />';
   }
   elseif ($type == "back")
   {
-    echo '<img src="../images/arrow_left.png" />';
+    echo '<img src="../images/arrow_left.png" width="22" height="22" />';
     echo '<span>' . $value . '</span>';
   }
 
