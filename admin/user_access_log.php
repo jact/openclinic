@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.1 2004/05/31 19:45:39 jact Exp $
+ * $Id: user_access_log.php,v 1.2 2004/06/01 17:55:44 jact Exp $
  */
 
 /**
@@ -16,23 +16,22 @@
  * Author: jact <jachavar@terra.es>
  */
 
-  $locationError = "../admin/user_list.php";
-
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0)
-  {
-    header("Location: " . $locationError);
-    exit();
-  }
-
   ////////////////////////////////////////////////////////////////////
   // Controlling vars
   ////////////////////////////////////////////////////////////////////
   $tab = "admin";
   $nav = "users";
   $restrictInDemo = true; // There are not logs in demo version
+  $returnLocation = "../admin/user_list.php";
+
+  ////////////////////////////////////////////////////////////////////
+  // Checking for get vars. Go back to form if none found.
+  ////////////////////////////////////////////////////////////////////
+  if (count($_GET) == 0)
+  {
+    header("Location: " . $returnLocation);
+    exit();
+  }
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -68,8 +67,6 @@
   ////////////////////////////////////////////////////////////////////
   $title = _("Access Logs");
   require_once("../shared/header.php");
-
-  $returnLocation = "../admin/user_list.php";
 
   ////////////////////////////////////////////////////////////////////
   // Navigation links
@@ -132,8 +129,7 @@
   $accessQ->close();
   unset($accessQ);
 
-  echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
-  echo _("Back return") . "</a></p>\n";
+  echo '<p><a href="' . $returnLocation . '">' . _("Return to users list") . "</a></p>\n";
 
   require_once("../shared/footer.php");
 ?>
