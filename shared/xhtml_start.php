@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.8 2005/02/01 19:34:59 jact Exp $
+ * $Id: xhtml_start.php,v 1.9 2005/03/06 12:19:40 jact Exp $
  */
 
 /**
@@ -47,7 +47,7 @@
   $contentType .= "; charset=" . OPEN_CHARSET;
 
   header("Content-Type: " . $contentType);
-  header('Vary: Accept');
+  header("Vary: Accept");
 
   if (defined("OPEN_BUFFER") && OPEN_BUFFER)
   {
@@ -61,8 +61,11 @@
     }
   }
 
-  // To prevent 'short_open_tag = On' mistake
-  echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
+  if (strpos($contentType, "application/xhtml+xml") !== false)
+  {
+    // To prevent 'short_open_tag = On' mistake
+    echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
+  }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo str_replace("_", "-", OPEN_LANGUAGE); ?>" dir="<?php echo OPEN_DIRECTION; ?>">
