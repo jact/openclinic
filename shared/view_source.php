@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: view_source.php,v 1.3 2004/06/20 17:19:50 jact Exp $
+ * $Id: view_source.php,v 1.4 2004/07/26 18:46:07 jact Exp $
  */
 
 /**
@@ -18,6 +18,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
+  require_once("../lib/html_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
@@ -32,6 +33,7 @@
 <!--/*--><![CDATA[/*<!--*/
 body {
   background: #fff;
+  color: inherit;
   border: 0;
   padding: 0;
 }
@@ -61,13 +63,14 @@ body {
     }
     else
     {
-      echo '<p>' . _("No file found.") . "</p>\n";
+      showMessage(_("No file found."), OPEN_MSG_ERROR);
+
       echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
     }
   }
   else
   {
-    echo sprintf(_("You are not authorized to use %s tab."), _("Admin")); // maybe change
+    showMessage(sprintf(_("You are not authorized to use %s tab."), _("Admin"))); // maybe change
   }
 ?>
 </body>

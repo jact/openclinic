@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.12 2004/07/21 18:03:36 jact Exp $
+ * $Id: header.php,v 1.13 2004/07/26 18:45:39 jact Exp $
  */
 
 /**
@@ -22,10 +22,11 @@
     exit();
   }
 
+  require_once("../lib/html_lib.php");
+
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
   ////////////////////////////////////////////////////////////////////
-  //$title = OPEN_CLINIC_NAME . ((isset($title) && $title != "") ? " : " . $title : "");
   require_once("../shared/xhtml_start.php");
 ?>
 
@@ -215,6 +216,6 @@
 <?php
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    echo '<p class="message">' . _("This is a demo version") . "</p>\n";
+    showMessage(_("This is a demo version"), OPEN_MSG_INFO);
   }
 ?>
