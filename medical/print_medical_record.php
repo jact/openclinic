@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.8 2004/07/31 19:05:44 jact Exp $
+ * $Id: print_medical_record.php,v 1.9 2004/08/07 11:06:14 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Medical record of a patient screen
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * TODO: xhtml_start.php
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -30,19 +29,18 @@
   require_once("../classes/Staff_Query.php");
   require_once("../classes/Problem_Query.php");
   require_once("../classes/History_Query.php");
+  require_once("../lib/html_lib.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Show medical record
-  ////////////////////////////////////////////////////////////////////
-  echo '<html><head>' . "\n";
-  echo '<link rel="stylesheet" type="text/css" href="../css/style.css" />' . "\n";
-  echo '<style type="text/css"><!--/*--><![CDATA[/*<!--*/' . "body {background: #fff; border: 0; padding: 0; }" . "/*]]>*/--></style>\n";
+  $style = '<link rel="stylesheet" type="text/css" href="../css/style.css" />' . "\n";
+  $style .= '<style type="text/css"><!--/*--><![CDATA[/*<!--*/' . "body {background: #fff; border: 0; padding: 0; }" . "/*]]>*/--></style>\n";
 
   ////////////////////////////////////////////////////////////////////
   // Checking for get vars. Close window if none found.
   ////////////////////////////////////////////////////////////////////
   if (count($_GET) == 0 || empty($_GET["key"]))
   {
+    include_once("../shared/xhtml_start.php");
+    echo $style;
     echo "</head><body>\n";
     showMessage(_("No patient selected."), OPEN_MSG_ERROR);
     echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
@@ -75,8 +73,11 @@
   if ( !$numRows )
   {
     $patQ->close();
+    include_once("../shared/xhtml_start.php");
+    echo $style;
     echo "</head><body>\n";
     showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
+    echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
     echo "</body></html>\n";
     exit();
   }
@@ -92,7 +93,12 @@
   unset($patQ);
   $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
-  echo '<title>' . $patName . " " . date(_("Y-m-d H:i:s")) . "</title>\n";
+  ////////////////////////////////////////////////////////////////////
+  // Show medical record
+  ////////////////////////////////////////////////////////////////////
+  $title = $patName . " " . date(_("Y-m-d H:i:s"));
+  require_once("../shared/xhtml_start.php");
+  echo $style;
   echo "</head><body>\n";
 
   ////////////////////////////////////////////////////////////////////
