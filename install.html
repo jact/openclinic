@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!-- $Id: install.html,v 1.1 2004/04/03 17:59:22 jact Exp $ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<meta http-equiv="imagetoolbar" content="no" />
+
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+
+<meta name="author" content="Jose Antonio Chavarría" />
+
+<meta name="copyright" content="2002-2004 Jose Antonio Chavarría" />
+
+<meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
+
+<meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
+
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+
+<link rel="shortcut icon" type="image/png" href="./images/miniopc.png" />
+
+<link rel="bookmark icon" type="image/png" href="./images/miniopc.png" />
+
+<title>OpenClinic Install Instructions</title>
+</head>
+<body id="top">
+<!-- OpenClinic logo and black background -->
+<div id="header"><span class="headerLHS"><a href="http://openclinic.sourceforge.net"><img src="./images/openclinic-1.png" width="291" height="58" alt="Link to OpenClinic site" title="Link to OpenClinic site" /></a></span><!-- End .headerLHS --><a href="http://sourceforge.net" title="SourceForge.net Logo"><img src="./images/sf-logo2.png" width="210" height="58" alt="SourceForge.net Logo" /></a></div><!-- End #header -->
+
+<div class="links">
+  <ul class="linkList">
+    <li><a href="./index.html">OpenClinic Readme</a></li>
+
+    <li><a href="./changelog.html">OpenClinic Changelog</a></li>
+
+    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
+
+    <li><a href="./coding_guidelines.html">OpenClinic Coding Guidelines</a></li>
+
+    <li><a href="./demo_version.html">Demo Version Features</a></li>
+  </ul>
+</div><!-- End .links -->
+
+<div id="content">
+  <h1>Install Instructions</h1>
+
+  <h2>Table of contents</h2>
+
+  <div class="links">
+    <ul class="linkList">
+      <li><a href="#update">Updating an Older Version of OpenClinic</a></li>
+
+      <li><a href="#install">Installing OpenClinic for the First Time</a></li>
+    </ul>
+  </div><!-- End .links -->
+
+  <hr />
+
+  <h2 id="update"><a href="#top" title="To top of the page">Updating an Older Version of OpenClinic</a></h2>
+
+  <p>
+    If you have already created the OpenClinic database when installing an older version, follow these steps:
+  </p>
+
+  <ol type="1">
+    <li>
+      Go to the <a href="./install/index.php">install php script</a>.
+    </li>
+
+    <li>
+      In the section <span class="note">Install a SQL File</span>, choose the right file in <tt class="literal">install/upgrades/</tt> directory.
+    </li>
+
+    <li>
+      If does not exist a correct upgrade file, <a href="#step7">skip to step 7 of next section</a>.
+    </li>
+  </ol>
+
+  <hr />
+
+  <h2 id="install"><a href="#top" title="To top of the page">Installing OpenClinic for the First Time</a></h2>
+
+  <ol type="1">
+    <li>
+      Install a web server such as <a href="http://httpd.apache.org">Apache</a> that can execute cgi applications. If you install Apache, get familiar with starting and stopping your Apache Web Server. If you are running Windows 95 or Windows 98 there will be "Start Apache" and "Stop Apache" icons that will help you start and stop your web server. You may want to consider adding the "Start Apache" icon to your startup folder. If you are running NT you can add Apache as a service which will be running, even if you are logged off. If you are running Linux your Apache server should be packaged with your Linux installation and will start when you start Linux.
+    </li>
+
+    <li>
+      <p>
+        Install the MySQL database from <a href="http://www.mysql.com">http://www.mysql.com</a>. Get familiar with starting and stopping your MySQL Server. See <a href="http://www.mysql.com/doc/W/i/Win95_start.html">Starting MySQL on Windows 95 or Windows 98</a> for more information. <span class="note">Version recommended: &gt;= 3.23.36.</span>
+      </p>
+
+      <p>
+        If you are running NT, setup MySQL as a service so it starts whenever the machine powers up. See <a href="http://www.mysql.com/doc/N/T/NT_start.html">Starting MySQL on Windows NT or Windows 2000</a> for more information on starting MySQL as a service.
+      </p>
+
+      <p>
+        If you are running Linux, MySQL should be packaged with your Linux installation and will start when you start Linux.
+      </p>
+    </li>
+
+    <li>
+      Get familiar with logging into MySQL with your admin account within a DOS prompt window. You can use the following command sequence as a test.
+
+<blockquote><pre>
+C:\&gt;<strong>c:\mysql\bin\mysql -uadmin -p mysql</strong>
+Enter password: <strong>*********</strong>
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 1 to server version: 3.23.52-max-debug
+
+Type 'help;' or '\h' for help. Type '\c' to clear the buffer
+
+mysql&gt; <strong>show databases;</strong>
++--------------+
+| Database     |
++--------------+
+| mysql        |
+| test         |
++--------------+
+2 rows in set (0.00 sec)
+
+mysql&gt; <strong>exit</strong>
+Bye
+
+C:\&gt;
+</pre></blockquote>
+    </li>
+
+    <li id="step4">
+      Create an openclinic database. To do this, log into MySQL with your admin account and run the following SQL command.
+
+<blockquote><pre>
+mysql&gt; <strong>create database openclinic;</strong>
+</pre>
+
+      <p>
+        To check to make sure the openclinic database was created properly run the following command.
+      </p>
+<pre>
+mysql&gt; <strong>show databases;</strong>
++--------------+
+| Database     |
++--------------+
+| mysql        |
+| openclinic   |
+| test         |
++--------------+
+3 rows in set (0.00 sec)
+</pre></blockquote>
+    </li>
+
+    <li id="step5">
+      Create an openclinic database user. To do this login to MySQL under the admin userid and run the following SQL command, substituting <em>openclinic_user</em> and <em>openclinic_password</em> with the userid and password of your choice.
+
+<blockquote><pre>
+mysql&gt; <strong>grant all privileges on openclinic.* to <em>openclinic_user</em>@localhost</strong>
+  -&gt; <strong>identified by '<em>openclinic_password</em>' with grant option;</strong>
+</pre></blockquote>
+    </li>
+
+    <li>
+      Verify your openclinic database and user by logging into the new MySQL database under the new user.
+
+<blockquote><pre>
+C:\&gt;<strong>C:\mysql\bin\mysql -u <em>openclinic_user</em> -p<em>openclinic_password</em> openclinic</strong>
+</pre></blockquote>
+    </li>
+
+    <li id="step7">
+      Copy the openclinic directory and all of its contents into your web server's htdocs root or any subdirectory within the htdocs root.
+    </li>
+
+    <li id="step8">
+      Edit the <span class="note"><tt class="literal">database_constants.php</tt></span> file (located in the main openclinic directory) with the text editor of your choice. Change the username and password to match the new MySQL user and password that you created in the previous steps.
+    </li>
+
+    <li>
+      Create the openclinic database tables. To do this run the <a href="./install/index.php">install php script</a>.
+    </li>
+
+    <li>
+      Access your new <a href="./index.php">clinic system</a>. Enter <span class="note">admin</span> for both, the login and password whenever you are prompted to sign on. You can change the admin password from the <span class="note">Admin &raquo; Users</span>.
+    </li>
+  </ol>
+</div><!-- End #content -->
+
+<div class="links">
+  <ul class="linkList">
+    <li><a href="./index.html">OpenClinic Readme</a></li>
+
+    <li><a href="./changelog.html">OpenClinic Changelog</a></li>
+
+    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
+
+    <li><a href="./coding_guidelines.html">OpenClinic Coding Guidelines</a></li>
+
+    <li><a href="./demo_version.html">Demo Version Features</a></li>
+  </ul>
+</div><!-- End .links -->
+
+<div id="footer" class="small">
+  Powered by OpenClinic
+  <br />
+  Copyright &copy; 2002-2004 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>
+  <br />
+  under the <a href="./LICENSE">GNU General Public License</a>
+</div><!-- End #footer -->
+
+<div class="logos">
+  <a href="http://validator.w3.org/check/referer"><img src="./images/valid-xhtml11.png" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" width="88" height="31" /></a>
+</div><!-- End .logos -->
+</body>
+</html>

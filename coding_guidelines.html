@@ -1,0 +1,630 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+
+<!-- $Id: coding_guidelines.html,v 1.1 2004/04/03 17:58:42 jact Exp $ -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+<meta http-equiv="imagetoolbar" content="no" />
+
+<meta name="MSSmartTagsPreventParsing" content="TRUE" />
+
+<meta name="author" content="Jose Antonio Chavarría" />
+
+<meta name="copyright" content="2002-2004 Jose Antonio Chavarría" />
+
+<meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
+
+<meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
+
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
+
+<link rel="shortcut icon" type="image/png" href="./images/miniopc.png" />
+
+<link rel="bookmark icon" type="image/png" href="./images/miniopc.png" />
+
+<title>OpenClinic Coding Guidelines</title>
+</head>
+<body id="top">
+<!-- OpenClinic logo and black background -->
+<div id="header"><span class="headerLHS"><a href="http://openclinic.sourceforge.net"><img src="./images/openclinic-1.png" width="291" height="58" alt="Link to OpenClinic site" title="Link to OpenClinic site" /></a></span><!-- End .headerLHS --><a href="http://sourceforge.net" title="SourceForge.net Logo"><img src="./images/sf-logo2.png" width="210" height="58" alt="SourceForge.net Logo" /></a></div><!-- End #header -->
+
+<div class="links">
+  <ul class="linkList">
+    <li><a href="./index.html">OpenClinic Readme</a></li>
+
+    <li><a href="./install.html">Install Instructions</a></li>
+
+    <li><a href="./changelog.html">OpenClinic Changelog</a></li>
+
+    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
+
+    <li><a href="./demo_version.html">Demo Version Features</a></li>
+  </ul>
+</div><!-- End .links -->
+
+<div id="content">
+  <h1>OpenClinic Coding Guidelines</h1>
+
+  <h2 id="contents">Table of contents</h2>
+
+  <dl>
+    <dt>1. <a href="#d0e7">Code Files Format</a></dt>
+
+    <dt>2. <a href="#d0e32">Indentation</a></dt>
+
+    <dt>3. <a href="#d0e37">Control Structures</a></dt>
+
+    <dt>4. <a href="#d0e72">Functions Callings</a></dt>
+
+    <dt>5. <a href="#d0e85">Functions Definition</a></dt>
+
+    <dt>6. <a href="#d0e95">Comments</a></dt>
+
+    <dd>
+      <dl>
+        <dt>6.1. <a href="#d0e122">Head File Comments</a></dt>
+
+        <dt>6.2. <a href="#d0e173">Head Module Comments</a></dt>
+
+        <dt>6.3. <a href="#d0e196">Head Function Comments</a></dt>
+
+        <dt>6.4. <a href="#d0e243">Line Comments</a></dt>
+      </dl>
+    </dd>
+
+    <dt>7. <a href="#d0e272">Including Code</a></dt>
+
+    <dt>8. <a href="#d0e292">PHP Code Marks</a></dt>
+
+    <dt>9. <a href="#d0e300">Example URLs</a></dt>
+
+    <dt>10. <a href="#d0e308">Names Convention</a></dt>
+
+    <dd>
+      <dl>
+        <dt>10.1. <a href="#d0e313">Clases</a></dt>
+
+        <dt>10.2. <a href="#d0e321">Functions and Methods</a></dt>
+
+        <dt>10.3. <a href="#d0e343">Constants</a></dt>
+
+        <dt>10.4. <a href="#d0e355">Variables</a></dt>
+
+        <dt>10.5. <a href="#d0e363">Global Variables</a></dt>
+
+        <dt>10.6. <a href="#d0e368">Predefined Values</a></dt>
+
+        <dt>10.7. <a href="#d0e369">Database Fields and Tables Naming</a></dt>
+
+        <dt>10.8. <a href="#d0e370">HTML Forms Tag Names</a></dt>
+
+        <dt>10.9. <a href="#d0e371">Identifiers Names and HTML Tags Classes</a></dt>
+      </dl>
+    </dd>
+
+    <dt>11. <a href="#d0e382">Code Internationalization</a></dt>
+  </dl>
+
+  <hr />
+
+  <h2 id="d0e7"><a href="#top" title="To top of the page">1. Code Files Format</a></h2>
+
+  <p>
+    Even it seems that is beside the point this section in this document, it is important know what is the norm we are going to use to write the project source code. It has been adopted the use of 8 bits ASCII code for the code files. The format of the end-of-line character will be UNIX (/10). The reasons for this elections are related to the main idea of promoting the working plataform independence. This format is native for Linux/UNIX users and you can work with this format in Windows too.
+  </p>
+
+  <p>
+    Another important thing is knowing which name criteria are going to be followed for file naming.
+  </p>
+
+  <ul type="disc">
+    <li>It is going to be used lower-case letters in english language and numbers.</li>
+
+    <li>It is not going to be used whitespaces as word separator. Instead it is going to be used hyphens (-), lower-hyphens (_) or dots (we recommend use dots only for distinguish between the name and the extension).</li>
+
+    <li>It is not going to be used accent vowels.</li>
+
+    <li>Remember that a file name can not have this set of characters: \ / : * ? " &lt; &gt; |</li>
+
+    <li>About the name length, it should not be more longer than 128 characters (it is more than needed).</li>
+  </ul>
+
+  <p>
+    All these guidelines are being done for making possible cross-plataform files without loosing names for a different code page or language.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e32"><a href="#top" title="To top of the page">2. Indentation</a></h2>
+
+  <p>
+    It is going to be used 2 spaces (not tabs) for every indentation level. This is to avoid different code display in different tabs configuration. The number 2 is used because it is usually needed a big amount of levels in the source files.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e37"><a href="#top" title="To top of the page">3. Control Structures</a></h2>
+
+  <p>
+    Set of control structures: <tt class="literal">if</tt>, <tt class="literal">for</tt>, <tt class="literal">while</tt>, <tt class="literal">switch</tt>, etc. Right down there is an <tt class="literal">if</tt> structure code example:
+  </p>
+
+<pre class="programlisting">
+if ((condition1) || (condition2))
+{
+action1;
+}
+elseif ((condition3) &amp;&amp; (condition4))
+{
+action2;
+}
+else
+{
+defaultaction;
+}
+</pre>
+
+  <p>
+    The control structures will have a white-space beteewn the reserved word and the opening parenthesis in order to distinguish from a function calling.
+  </p>
+
+  <p>
+    Always are going to be used opening and closing keys in the code. Even if their were optional. This rises the clearness of the code and reduces logical errors that are used when there are added new code-lines. An example of a <tt class="literal">switch</tt> structure:
+  </p>
+
+<pre class="programlisting">
+switch (condition1)
+{
+case 1:
+  action1;
+  break;
+
+case 2:
+  action2;
+  break;
+
+default:
+  defaultaction;
+  break;
+}
+</pre>
+
+  <p>
+    The opening and close keys will be always alone in their own line. This is so for code clearness.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e72"><a href="#top" title="To top of the page">4. Functions Callings</a></h2>
+
+  <p>
+    Functions callings will be coded with no spaces between name function and the opening parenthesis for paremeters list, neither between the parenthesis named and the first parameter. There will be a white-space between the commas and the the other parameters. There are not going to be spaces between the last parameter and the last parenthesis, neither between this closing parenthesis and the semicolon at the end of the instruction. Here it is an example:
+  </p>
+
+<pre class="programlisting">
+$var = foo($bar, $other, $last);
+</pre>
+
+  <p>
+    As it appears in the last example there is a space at the both sides of the equal symbol. In case of there will be more than one assigment it will be right including more spaces (never tabs) for increasing the clearness:
+  </p>
+
+<pre class="programlisting">
+$short        = foo($bar);
+$longVariable = foo($other, $last);
+</pre>
+
+  <hr />
+
+  <h2 id="d0e85"><a href="#top" title="To top of the page">5. Functions Definition</a></h2>
+
+  <p>
+    The functions statements follow the same convention than the control structures: The open and close keys goes in separate lines, as you can see in the following example:
+  </p>
+
+<pre class="programlisting">
+function fooFunction($arg1, $arg2 = '')
+{
+$var = false;
+
+if (condition)
+{
+  statement;
+}
+
+return $val;
+}
+</pre>
+
+  <p>
+    The arguments with default values will go at the end of the argumets list, before the one's they have not. If the function gives any response at the end of the code, it will go separately from the rest of the code for, al least one blank line. Therefore, if the function declares any variable, this declaration will be done at the begining of the function code and separately from the rest of the code for at least one blank line.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e95"><a href="#top" title="To top of the page">6. Comments</a></h2>
+
+  <p>
+    The classes on-line documentation will follow the PHPDoc convention, that it is alike the Javadoc convention. More information about this convention see: <a href="http://www.phpdoc.de">http://www.phpdoc.de</a>
+  </p>
+
+  <p>
+    The rest of te comments (there are never enought) will use the C style (<tt class="literal">/* */</tt>) and the C++ standard (<tt class="literal">//</tt>). It is not recommended the Perl style (<tt class="literal">#</tt>).
+  </p>
+
+  <p>
+    There will co-exist two kind of comments: the <strong>head comments</strong> (such as comments in the head of a file, a module or a function) and the <strong>line comments</strong>. The head comments should be used as an introduction, informing the reader about file general things or about the next piece of code. The line comments should be used inside the functions, right between the code, explaining what is really does this line or part of the source code.
+  </p>
+
+  <h3 id="d0e122"><a href="#top" title="To top of the page">6.1. Head File Comments</a></h3>
+
+  <p>
+    All PHP source files will include the next head block comment:
+  </p>
+
+<pre class="programlisting">
+/**
+* This file is part of Project Name
+*
+* Copyright (c) Year Author
+*
+* This program is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 2 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+</pre>
+
+  <p>
+    Or instead of this, a smaller version. But this reduced version should always include a file with the kind of license used in the distribution of the program. Just like the next example:
+  </p>
+
+<pre class="programlisting">
+/**
+* This file is part of Project Name
+*
+* Copyright (c) Year Author
+* Licensed under the GNU GPL. For full terms see the file LICENSE.
+*/
+</pre>
+
+  <p>
+    It would be a good idea to have a head comment like this next one (it could be include <a href="http://www.phpdoc.de">PHPDoc</a> directives):
+  </p>
+
+<pre class="programlisting">
+/**
+* file_name.php - Short description content (optional)
+********************************************************************
+* Long description (more detailed)
+********************************************************************
+* Author: Name &lt;e-mail address&gt; (optional)
+* Last modified: Date/Time
+*/
+</pre>
+
+  <p>
+    The last example could be followed word for word, but you are free to change the style (between the said ones) and to add more information. Next list shows information suggested by and the order it should be follow (not all the fields are appropiate in all circumstances, of course):
+  </p>
+
+  <ol type="1">
+    <li>File name.</li>
+
+    <li>Short description of the archive contents (one line).</li>
+
+    <li>Long description (more detailed) of the file.</li>
+
+    <li>Notes about how to use, requirements, adverts, etc.</li>
+
+    <li>Author name and contact information.</li>
+
+    <li>Creation and last modification date of the file.</li>
+
+    <li><em>Copyright</em> review.</li>
+
+    <li>License review.</li>
+  </ol>
+
+  <h3 id="d0e173"><a href="#top" title="To top of the page">6.2. Head Module Comments</a></h3>
+
+  <p>
+    They sould be an informative head right before the first function.
+  </p>
+
+<pre class="programlisting">
+/**
+* Module name
+********************************************************************
+* Long description (more detailed)
+********************************************************************
+* Functions:
+*  int fileOpen(string $fileName)
+*  bool fileClose(int $fileHandle)
+*  int fileRead(int $fileHandle, int $bytes)
+*
+* Remarks:
+*  - remark1
+*  - remark2
+*/
+</pre>
+
+  <p>
+    Again, there is no matter about the style. Equally there can be included the next elements, in the order they are shown:
+  </p>
+
+  <ol type="1">
+    <li>Short description of the module.</li>
+
+    <li>Module detailed description.</li>
+
+    <li>List of function prototypes.</li>
+
+    <li>Notes, remarks and adverts.</li>
+  </ol>
+
+  <h3 id="d0e196"><a href="#top" title="To top of the page">6.3. Head Function Comments</a></h3>
+
+  <p>
+    The head of a function should describe the sintax, the object and the client information so enough detailed for every function. These comments have to give a quick information to the programmer about needings and specializations of every function during the module developing and extension. They are specially needed for <em>"foreign"</em> developers that do not create the functions originally. Not writting head function comments produces the needing for the new programmer to read all the code looking for information required. This normally produces mistakes because usually you can see all <em>special tricks</em> hide into the code.
+  </p>
+
+<pre class="programlisting">
+/**
+* Function prototype
+********************************************************************
+* Long description
+********************************************************************
+* Parameters:
+*  $name - description
+*
+* Return:
+*  description
+*
+* Global references:
+*  $name
+*/
+</pre>
+
+  <div class="note-code">
+    <h3>Note</h3>
+
+    <p>
+      It would be a good idea follow the <a href="http://www.phpdoc.de">PHPDoc</a> guidelines. Look this example of these guidelines.
+    </p>
+
+<pre class="programlisting">
+/**
+* void showInputText(string $fieldName, string $size, string $max,
+* array &amp;$postVars, array &amp;$pageErrors, string $type = "text",
+* bool $readOnly = false)
+********************************************************************
+* Draws input html tag of type text or password.
+********************************************************************
+* @param string $fieldName name of input field
+* @param string $size size of text box
+* @param string $max max input length of text box
+* @param array_reference &amp;$postVars reference to array containing all input values
+* @param array_reference &amp;$pageErrors reference to array containing all input errors
+* @param string $type type of the input field (text by default)
+* @param bool $readOnly if the field is read only (false by default)
+* @return void
+* @access public
+*/
+</pre>
+  </div><!-- End .note-code -->
+
+  <p>
+    A head function comment should have a set of elements like:
+  </p>
+
+  <ol type="1">
+    <li>Function prototype.</li>
+
+    <li>Detailed function description.</li>
+
+    <li>Notes, remarks and adverts.</li>
+
+    <li>Parameters description.</li>
+
+    <li>Returned value description.</li>
+
+    <li>Global references.</li>
+
+    <li>Author and last change date.</li>
+  </ol>
+
+  <h3 id="d0e243"><a href="#top" title="To top of the page">6.4. Line Comments</a></h3>
+
+  <p>
+    The line comments are located right inside the code and they should explain the facts right there where they were.
+  </p>
+
+  <p>
+    When you should comment a code, the comment should answer the next list of questions:
+  </p>
+
+  <ul type="disc">
+    <li>What is it doing so?</li>
+
+    <li>Why is it doing so?</li>
+
+    <li>Why does it do this in that way?</li>
+
+    <li>Why does it right in this moment?</li>
+
+    <li>How does it affect to other part of the program?</li>
+
+    <li>What are the needings of this code?</li>
+
+    <li>Does the method have any inconvenience?</li>
+  </ul>
+
+  <hr />
+
+  <h2 id="d0e272"><a href="#top" title="To top of the page">7. Including Code</a></h2>
+
+  <p>
+    Wherever a class file is included, it will be used the sentence <tt class="literal">require_once()</tt>. Wherever a class file is included <em>conditionally</em>, it will be used; <tt class="literal">include_once()</tt>. In both cases, the class file will be included only once. Therefore an included file with <tt class="literal">require_once()</tt>, will not be included again wiht <tt class="literal">include_once()</tt>.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e292"><a href="#top" title="To top of the page">8. PHP Code Marks</a></h2>
+
+  <p>
+    There will be used always the maks <tt class="literal">&lt;?php ?&gt;</tt> as delimiters the PHP code. This makes the code more portable between different operating systems and configurations.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e300"><a href="#top" title="To top of the page">9. Example URLs</a></h2>
+
+  <p>
+    It will be used the URL <tt class="literal">example.com</tt> for every example direction, such us it is said in <a href="http://www.faqs.org/rfcs/rfc2606.html">RFC 2606</a>.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e308"><a href="#top" title="To top of the page">10. Names Convention</a></h2>
+
+  <p>
+    The class, function and variable names would be as much descriptives as possible ever in order to make easiest the reading and the comprehension of the code.
+  </p>
+
+  <h3 id="d0e313"><a href="#top" title="To top of the page">10.1. Classes</a></h3>
+
+  <p>
+    It would be right the use of abbreviations in the name if they do not missunderstood the code. Classes names will always begin with a capital letter. If the are a class hierarchy, every hierarchy level will be separated with a low hyphen (_). Let see some examples:
+  </p>
+
+<pre class="programlisting">
+Log, Net_Finger, HTML_Upload_Error
+</pre>
+
+  <h3 id="d0e321"><a href="#top" title="To top of the page">10.2. Functions and Methods</a></h3>
+
+  <p>
+    Functions and methods will be named using the <em>"studly caps"</em> style (also called <em>"bumpy case"</em> or <em>"camel caps"</em>). The methods will include as a prefix their name, the package name they owns to in order to avoid name collisions between different packages. The name first character (after the prefix) will be a capital letter, the rest will go in lower case. Some examples:
+  </p>
+
+<pre class="programlisting">
+connect(), getData(), buildSomeWidget(), XML_RPC_serializeData()
+</pre>
+
+  <p>
+    Private class methods and attributes will be preceded in their name by a lower hyphen (_). This is for clearness reasons because PHP does not support private name-spacing yet. Some examples:
+  </p>
+
+<pre class="programlisting">
+_sort(), _initTree(), $this-&gt;_status
+</pre>
+
+  <h3 id="d0e343"><a href="#top" title="To top of the page">10.3. Constants</a></h3>
+
+  <p>
+    Constans will go always in capital letters, with low hyphens separateing words. The package prefixes will be writeing in capitals too. For example, the constants used in the package <tt class="literal">DB::</tt> will began "<tt class="literal">DB_</tt>".
+  </p>
+
+  <h3 id="d0e355"><a href="#top" title="To top of the page">10.4. Variables</a></h3>
+
+  <p>
+    The right election of a function or variable name is an esencial question at programming time. Generally, when a name is sellected for a variable, it is significant determinate if the variable is global or local. If it is local to a function, the name will be short and precise to express the content or the meaning of this variable. It should have two words maximum, splited by a capital letter. For a looping variable it could be used tipical names, such as (<tt>$i</tt>, <tt>$j</tt>, <tt>$k</tt>, etc.) meanwhile they do not hide information from the code.
+  </p>
+
+<pre class="programlisting">
+$counter, $nextIndex, $nrOptions, $cookieName
+</pre>
+
+  <h3 id="d0e363"><a href="#top" title="To top of the page">10.5. Global Variables</a></h3>
+
+  <p>
+    If any package needs to define global variables, their name will begin with a low hyphen, followed by the package name, another low hyphen and at last the assigned name. For example, <tt>$_PEAR_destructorObjectList</tt>.
+  </p>
+
+  <h3 id="d0e368"><a href="#top" title="To top of the page">10.6. Predefined Values</a></h3>
+
+  <p>
+    Predefined PHP values <tt class="literal">true</tt>, <tt class="literal">false</tt> and <tt class="literal">null</tt> will go written always in small letters.
+  </p>
+
+  <h3 id="d0e369"><a href="#top" title="To top of the page">10.7. Database Fields and Tables Naming</a></h3>
+
+  <p>
+    Database fields and tables names will go written always in small letters and it will use the symbol <tt class="literal">_</tt> to separate words. Therefore, table names will have the <tt class="literal">_tbl</tt> subfix. So it will be easy view them between the text.
+  </p>
+
+<pre class="programlisting">
+theme_tbl, session_timeout, items_per_page, id_user
+</pre>
+
+  <h3 id="d0e370"><a href="#top" title="To top of the page">10.8. HTML Forms Tag Names</a></h3>
+
+  <p>
+    They will go always in small letters and it will use the <tt class="literal">_</tt> sign as a separator character. This style has been chosen to make more distinguisable the database fields from the class method names whom manages them.
+  </p>
+
+<pre class="programlisting">
+collegiate_number, first_name, phone_contact, login
+</pre>
+
+  <h3 id="d0e371"><a href="#top" title="To top of the page">10.9. Identifiers Names and HTML Tags Classes</a></h3>
+
+  <p>
+    Are going to be used the same rules than in variable naming to name identifiers. As class attributes values, it is valid the use of blank space but only as separator. In this way it is possible to add more than one class at the same time at the same element.
+  </p>
+
+  <p>
+    One advice: not mix styles. Or you use the symbol <tt class="literal">-</tt> to separate words (symbol <tt class="literal">_</tt> is forbidden to name identifiers ans class names) or you follow the rules for <a href="#d0e355">variable naming</a> (except the symbol <tt class="literal">$</tt>).
+  </p>
+
+  <p>
+    This is extensible to the files which have <acronym>HTML</acronym> styles (.css files) or incrusted stylesheets in the code.
+  </p>
+
+  <hr />
+
+  <h2 id="d0e382"><a href="#top" title="To top of the page">11. Code Internacionalization</a></h2>
+
+  <p>
+    One of the most normal critics to the source codes are about the <em>"localization"</em>. The mix between the programming language (that normally has an english background) with another language. As this project will be GPL licensed and english is the in fact an international standard and more or less understanded by most of the community, we should try to use the english language as naming standard for variables, functions, classes, methods, constants and comments. We hope with this make the code more understable for people from other languages.
+  </p>
+</div><!-- End #content -->
+
+<div class="links">
+  <ul class="linkList">
+    <li><a href="./index.html">OpenClinic Readme</a></li>
+
+    <li><a href="./install.html">Install Instructions</a></li>
+
+    <li><a href="./changelog.html">OpenClinic Changelog</a></li>
+
+    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
+
+    <li><a href="./demo_version.html">Demo Version Features</a></li>
+  </ul>
+</div><!-- End .links -->
+
+<div id="footer" class="small">
+  Powered by OpenClinic
+  <br />
+  Copyright &copy; 2002-2004 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>
+  <br />
+  under the <a href="./LICENSE">GNU General Public License</a>
+</div><!-- End #footer -->
+
+<div class="logos">
+  <a href="http://validator.w3.org/check/referer"><img src="./images/valid-xhtml11.png" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" width="88" height="31" /></a>
+</div><!-- End .logos -->
+</body>
+</html>
