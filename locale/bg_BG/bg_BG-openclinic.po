@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenClinic 0.7\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2004-10-16 17:03+0100\n"
+"PO-Revision-Date: 2004-11-04 13:32+0100\n"
 "Last-Translator: jact <jachavar@terra.es>\n"
 "Language-Team:  <pazoff@yahoo.com>\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: home/index.php:81
 #: shared/header.php:130
 #: shared/header.php:131
-#: shared/view_source.php:73
+#: shared/view_source.php:76
 msgid "Admin"
 msgstr ""
 
@@ -553,7 +553,7 @@ msgstr ""
 
 #: admin/no_authorization.php:35
 #: medical/no_authorization.php:35
-#: shared/view_source.php:73
+#: shared/view_source.php:76
 #, php-format
 msgid "You are not authorized to use %s tab."
 msgstr ""
@@ -1105,7 +1105,7 @@ msgstr ""
 #: doc/index.php:59
 #: medical/print_medical_record.php:46
 #: medical/print_medical_record.php:80
-#: shared/view_source.php:68
+#: shared/view_source.php:71
 msgid "Close Window"
 msgstr ""
 
@@ -1179,7 +1179,7 @@ msgstr ""
 msgid "Are you sure you want to delete user, %s?"
 msgstr ""
 
-#: admin/user_edit.php:93
+#: admin/user_edit.php:96
 #: classes/Description.php:61
 #: classes/Patient.php:130
 #: classes/Patient.php:136
@@ -1199,7 +1199,7 @@ msgstr ""
 msgid "This is a required field."
 msgstr ""
 
-#: admin/user_edit.php:93
+#: admin/user_edit.php:96
 #: classes/Patient.php:151
 #: classes/Patient.php:161
 msgid "This field is not correct."
@@ -1603,7 +1603,7 @@ msgid "Install file"
 msgstr ""
 
 #: install/index.php:128
-#: install/install.php:77
+#: install/install.php:79
 msgid "Cancel"
 msgstr ""
 
@@ -1661,41 +1661,41 @@ msgstr ""
 msgid "OpenClinic (version %s) is already installed."
 msgstr ""
 
-#: install/install.php:67
+#: install/install.php:69
 msgid "Are you sure you want to delete all clinic data and create new OpenClinic tables?"
 msgstr ""
 
-#: install/install.php:71
+#: install/install.php:73
 msgid "If you continue all data will be lost."
 msgstr ""
 
-#: install/install.php:76
+#: install/install.php:78
 msgid "Continue"
 msgstr ""
 
-#: install/install.php:101
+#: install/install.php:103
 #: install/wizard.php:582
 #, php-format
 msgid "Table %s dropped."
 msgstr ""
 
-#: install/install.php:102
+#: install/install.php:104
 #: install/wizard.php:583
 #, php-format
 msgid "Table %s created."
 msgstr ""
 
-#: install/install.php:111
+#: install/install.php:113
 #: install/wizard.php:587
 msgid "Last instruction failed"
 msgstr ""
 
-#: install/install.php:117
+#: install/install.php:119
 #: install/wizard.php:628
 msgid "OpenClinic tables have been created successfully!"
 msgstr ""
 
-#: install/install.php:119
+#: install/install.php:121
 #: install/wizard.php:474
 msgid "Start using OpenClinic"
 msgstr ""
@@ -3156,7 +3156,7 @@ msgstr ""
 msgid "Source file: %s"
 msgstr ""
 
-#: shared/view_source.php:66
+#: shared/view_source.php:69
 msgid "No file found."
 msgstr ""
 
