@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del.php,v 1.4 2004/07/07 17:21:52 jact Exp $
+ * $Id: theme_del.php,v 1.5 2004/07/08 18:46:59 jact Exp $
  */
 
 /**
@@ -64,26 +64,8 @@
   unset($themeQ);
 
   ////////////////////////////////////////////////////////////////////
-  // Show success page
+  // Redirect to theme list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  $title = _("Delete Theme");
-  require_once("../shared/header.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Admin") => "../admin/index.php",
-    _("Themes") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "themes.png");
-  unset($links);
-
-  echo '<p>' . sprintf(_("Theme, %s, has been deleted."), $name) . "</p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to themes list") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  $info = urlencode($name);
+  header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
 ?>
