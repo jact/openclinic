@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: debug_lib.php,v 1.3 2004/07/21 18:06:49 jact Exp $
+ * $Id: debug_lib.php,v 1.4 2004/08/05 14:31:50 jact Exp $
  */
 
 /**
@@ -40,10 +40,10 @@
  */
 function debug($expression, $message = "", $goOut = false)
 {
-  if ( defined("OPEN_DEBUG") && !OPEN_DEBUG )
+  /*if ( defined("OPEN_DEBUG") && !OPEN_DEBUG )
   {
     return;
-  }
+  }*/
 
   echo "\n<!-- debug -->\n";
   echo "<pre>\n";
