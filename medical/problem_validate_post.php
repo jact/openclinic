@@ -5,13 +5,13 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_validate_post.php,v 1.2 2004/04/24 14:52:15 jact Exp $
+ * $Id: problem_validate_post.php,v 1.3 2004/05/24 22:13:21 jact Exp $
  */
 
 /**
  * problem_validate_post.php
  ********************************************************************
- * Validate post data of a patient
+ * Validate post data of a medical problem
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
