@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: input_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
+ * $Id: input_lib.php,v 1.3 2004/05/20 19:14:19 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@
  * Functions:
  *  void showInputText(string $name, int $size, int $max, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
  *  void showSelect(string $tableName, string $fieldCode, string $defaultValue = "", string $fieldDescription = "", int $size = 0)
- *  void showSelectArray(string $name, array &$array, string $defaultValue = "", int $size = 0, string $addendum = "")
+ *  void showSelectArray(string $name, array &$array, string $defaultValue = "", int $size = 0, string $addendum = "", string $error = "")
  *  void showTextArea(string $name, int $rows, int $cols, string $value = "", string $error = "", bool $disabled = false, string $addendum = "")
  *  void showInputHidden(string $name, string $value = "")
  *  void showCheckBox(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
@@ -73,7 +73,7 @@ function showInputText($name, $size, $max, $value = "", $error = "", $type = "te
   {
     echo ' ' . $addendum;
   }
-  echo ' value="' . htmlspecialchars($value) . '" />' . "\n";
+  echo ' value="' . /*htmlspecialchars(*/$value/*)*/ . '" />' . "\n";
 
   if ($error != "")
   {
@@ -124,7 +124,7 @@ function showSelect($tableName, $fieldCode, $defaultValue = "", $fieldDescriptio
     echo ">";
     if ($fieldDescription != "")
     {
-      echo htmlspecialchars($aux->getDescription());
+      echo /*htmlspecialchars(*/$aux->getDescription()/*)*/;
     }
     echo "</option>\n";
   }
@@ -133,7 +133,7 @@ function showSelect($tableName, $fieldCode, $defaultValue = "", $fieldDescriptio
 }
 
 /**
- * void showSelectArray(string $name, array &$array, string $defaultValue = "", int $size = 0, string $addendum = "")
+ * void showSelectArray(string $name, array &$array, string $defaultValue = "", int $size = 0, string $addendum = "", string $error = "")
  ********************************************************************
  * Draws select html tag based in an array.
  ********************************************************************
@@ -142,10 +142,11 @@ function showSelect($tableName, $fieldCode, $defaultValue = "", $fieldDescriptio
  * @param string $defaultValue (optional)
  * @param int $size (optional) size of the select html tag
  * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+ * @param string $error (optional) select error message
  * @return void
  * @access public
  */
-function showSelectArray($name, &$array, $defaultValue = "", $size = 0, $addendum = "")
+function showSelectArray($name, &$array, $defaultValue = "", $size = 0, $addendum = "", $error = "")
 {
   echo '<select id="' . $name . '"';
   if ($addendum)
@@ -162,9 +163,14 @@ function showSelectArray($name, &$array, $defaultValue = "", $size = 0, $addendu
     {
       echo ' selected="selected"';
     }
-    echo ">" . htmlspecialchars($value) . "</option>\n";
+    echo ">" . /*htmlspecialchars(*/$value/*)*/ . "</option>\n";
   }
   echo "</select>\n";
+
+  if ($error != "")
+  {
+    echo '<div class="error">' . $error . "</div>\n";
+  }
 }
 
 /**
@@ -196,7 +202,7 @@ function showTextArea($name, $rows, $cols, $value = "", $error = "", $disabled =
   {
     echo ' ' . $addendum;
   }
-  echo ">" . htmlspecialchars($value) . "</textarea>\n";
+  echo ">" . /*htmlspecialchars(*/$value/*)*/ . "</textarea>\n";
 
   if ($error != "")
   {
@@ -219,7 +225,7 @@ function showInputHidden($name, $value = "")
   echo '<input type="hidden"';
   echo ' id="' . $name . '"';
   echo ' name="' . $name . '"';
-  echo ' value="' . htmlspecialchars($value) . '" />' . "\n";
+  echo ' value="' . /*htmlspecialchars(*/$value/*)*/ . '" />' . "\n";
 }
 
 /**
@@ -242,7 +248,7 @@ function showCheckBox($id, $name, $value, $checked = false, $readOnly = false, $
   echo '<input type="checkbox"';
   echo ' id="' . $id . '"';
   echo ' name="' . $name . '"';
-  echo ' value="' . htmlspecialchars($value) . '"';
+  echo ' value="' . /*htmlspecialchars(*/$value/*)*/ . '"';
   if ($checked)
   {
     echo ' checked="checked"';
@@ -312,7 +318,7 @@ function showInputFile($name, $value = "", $size = 0, $addendum = "")
   {
     echo ' ' . $addendum;
   }
-  echo ' value="' . htmlspecialchars($value) . '" />' . "\n";
+  echo ' value="' . /*htmlspecialchars(*/$value/*)*/ . '" />' . "\n";
 }
 
 /**
@@ -335,7 +341,7 @@ function showRadioButton($id, $name, $value, $checked = false, $readOnly = false
   echo '<input type="radio"';
   echo ' id="' . $id . '"';
   echo ' name="' . $name . '"';
-  echo ' value="' . htmlspecialchars($value) . '"';
+  echo ' value="' . /*htmlspecialchars(*/$value/*)*/ . '"';
   if ($checked)
   {
     echo ' checked="checked"';
