@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.10 2004/07/28 18:09:48 jact Exp $
+ * $Id: user_record_log.php,v 1.11 2004/07/28 18:19:04 jact Exp $
  */
 
 /**
@@ -139,7 +139,7 @@ function changePage(page)
 
     $options = array(
       0 => array('align' => 'right'),
-      1 => array('align' => 'center'),
+      1 => array('align' => 'center', 'nowrap' => 1),
       2 => array('align' => 'center'),
       3 => array('align' => 'center'),
       4 => array('align' => 'center'),
