@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
+ * $Id: Description_Query.php,v 1.4 2004/07/27 18:47:55 jact Exp $
  */
 
 /**
@@ -129,6 +129,12 @@ class Description_Query extends Query
    */
   function update($tableName, $des)
   {
+    if ( !is_a($des, "Description") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $sql = "UPDATE " . $tableName . " SET ";
     $sql .= "description='" . urlencode($des->getDescription()) . "' ";
     if ($tableName == "profile_tbl")

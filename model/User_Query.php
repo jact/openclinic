@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.8 2004/07/24 16:34:23 jact Exp $
+ * $Id: User_Query.php,v 1.9 2004/07/27 18:47:55 jact Exp $
  */
 
 /**
@@ -323,6 +323,12 @@ class User_Query extends Query
    */
   function insert($user)
   {
+    if ( !is_a($user, "User") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     /*if ($this->isError())
     {
       return false; // or $this->clearErrors(); ???
@@ -367,6 +373,12 @@ class User_Query extends Query
    */
   function update($user)
   {
+    if ( !is_a($user, "User") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $isDupLogin = $this->existLogin($user->getLogin(), $user->getIdMember());
     if ($this->isError())
     {
@@ -418,6 +430,12 @@ class User_Query extends Query
    */
   function resetPwd($user)
   {
+    if ( !is_a($user, "User") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $sql = "UPDATE " . $this->_table . " SET";
     $sql .= " pwd='" . urlencode($user->getPwd()) . "'"; // md5 from form
     $sql .= " WHERE id_user=" . $user->getIdUser() . ";";

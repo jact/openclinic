@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting_Query.php,v 1.4 2004/07/24 16:34:11 jact Exp $
+ * $Id: Setting_Query.php,v 1.5 2004/07/27 18:47:55 jact Exp $
  */
 
 /**
@@ -112,6 +112,12 @@ class Setting_Query extends Query
    */
   function update($set)
   {
+    if ( !is_a($set, "Setting") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "clinic_name='" . urlencode($set->getClinicName()) . "', ";
     $sql .= "clinic_image_url='" . urlencode($set->getClinicImageUrl()) . "', ";

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History_Query.php,v 1.4 2004/07/24 16:32:49 jact Exp $
+ * $Id: History_Query.php,v 1.5 2004/07/27 18:47:55 jact Exp $
  */
 
 /**
@@ -182,6 +182,12 @@ class History_Query extends Query
    */
   function updatePersonal($history)
   {
+    if ( !is_a($history, "History") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "birth_growth=" . (($history->getBirthGrowth() == "") ? "NULL, " : "'" . urlencode($history->getBirthGrowth()) . "', ");
     $sql .= "growth_sexuality=" . (($history->getGrowthSexuality() == "") ? "NULL, " : "'" . urlencode($history->getGrowthSexuality()) . "', ");
@@ -216,6 +222,12 @@ class History_Query extends Query
    */
   function updateFamily($history)
   {
+    if ( !is_a($history, "History") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "parents_status_health=" . (($history->getParentsStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getParentsStatusHealth()) . "', ");
     $sql .= "brothers_status_health=" . (($history->getBrothersStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getBrothersStatusHealth()) . "', ");

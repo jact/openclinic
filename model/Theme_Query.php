@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.4 2004/07/24 16:34:23 jact Exp $
+ * $Id: Theme_Query.php,v 1.5 2004/07/27 18:47:55 jact Exp $
  */
 
 /**
@@ -179,6 +179,12 @@ class Theme_Query extends Query
    */
   function insert($theme)
   {
+    if ( !is_a($theme, "Theme") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $sql = "INSERT INTO " . $this->_table . " VALUES (NULL, ";
     $sql .= "'" . urlencode($theme->getThemeName()) . "', ";
 
@@ -234,6 +240,12 @@ class Theme_Query extends Query
    */
   function update($theme)
   {
+    if ( !is_a($theme, "Theme") )
+    {
+      $this->_error = "Argument is an inappropriate object.";
+      return false;
+    }
+
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "theme_name='" . urlencode($theme->getThemeName()) . "', ";
 
