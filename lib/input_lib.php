@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: input_lib.php,v 1.9 2004/10/18 17:24:04 jact Exp $
+ * $Id: input_lib.php,v 1.10 2005/02/24 20:14:13 jact Exp $
  */
 
 /**
@@ -24,8 +24,8 @@
 
 /**
  * Functions:
- *  string htmlInputText(string $name, int $size, int $max, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
- *  void showInputText(string $name, int $size, int $max, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
+ *  string htmlInputText(string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
+ *  void showInputText(string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
  *  string htmlSelect(string $tableName, string $fieldCode, string $defaultValue = "", string $fieldDescription = "", int $size = 0)
  *  void showSelect(string $tableName, string $fieldCode, string $defaultValue = "", string $fieldDescription = "", int $size = 0)
  *  string htmlSelectArray(string $name, array &$array, string $defaultValue = "", int $size = 0, string $addendum = "", string $error = "")
@@ -52,13 +52,13 @@ if (file_exists("../classes/Description_Query.php"))
 }
 
 /**
- * string htmlInputText(string $name, int $size, int $max, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
+ * string htmlInputText(string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
  ********************************************************************
  * Returns input html tag of type text or password.
  ********************************************************************
  * @param string $name name of input field
  * @param int $size size of text box
- * @param int $max max input length of text box
+ * @param int $max (optional) max input length of text box
  * @param string $value (optional) input value
  * @param string $error (optional) input error
  * @param string $type (optional) type of the input field (text by default)
@@ -68,14 +68,17 @@ if (file_exists("../classes/Description_Query.php"))
  * @access public
  * @since 0.7
  */
-function htmlInputText($name, $size, $max, $value = "", $error = "", $type = "text", $readOnly = false, $addendum = "")
+function htmlInputText($name, $size, $max = 0, $value = "", $error = "", $type = "text", $readOnly = false, $addendum = "")
 {
   $html = '<input';
   $html .= ' type="' . $type . '"';
   $html .= ' id="' . $name . '"';
   $html .= ' name="' . $name . '"';
   $html .= ' size="' . intval($size) . '"';
-  $html .= ' maxlength="' . intval($max) . '"';
+  if (intval($max) > 0)
+  {
+    $html .= ' maxlength="' . intval($max) . '"';
+  }
   if ($readOnly)
   {
     $html .= ' readonly="readonly"';
@@ -95,13 +98,13 @@ function htmlInputText($name, $size, $max, $value = "", $error = "", $type = "te
 }
 
 /**
- * void showInputText(string $name, int $size, int $max, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
+ * void showInputText(string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
  ********************************************************************
  * Draws input html tag of type text or password.
  ********************************************************************
  * @param string $name name of input field
  * @param int $size size of text box
- * @param int $max max input length of text box
+ * @param int $max (optional) max input length of text box
  * @param string $value (optional) input value
  * @param string $error (optional) input error
  * @param string $type (optional) type of the input field (text by default)
@@ -110,7 +113,7 @@ function htmlInputText($name, $size, $max, $value = "", $error = "", $type = "te
  * @return void
  * @access public
  */
-function showInputText($name, $size, $max, $value = "", $error = "", $type = "text", $readOnly = false, $addendum = "")
+function showInputText($name, $size, $max = 0, $value = "", $error = "", $type = "text", $readOnly = false, $addendum = "")
 {
   echo htmlInputText($name, $size, $max, $value, $error, $type, $readOnly, $addendum);
 }
