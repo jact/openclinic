@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.5 2004/07/07 17:23:53 jact Exp $
+ * $Id: Patient_Query.php,v 1.6 2004/07/11 12:05:10 jact Exp $
  */
 
 /**
@@ -320,7 +320,7 @@ class Patient_Query extends Query
     $patient->setSurname2(urldecode($array["surname2"]));
     $patient->setAddress(urldecode($array["address"]));
     $patient->setPhone(urldecode($array["phone_contact"]));
-    $patient->setSex(intval($array["sex"]));
+    $patient->setSex(urlencode($array["sex"]));
     $patient->setRace(urldecode($array["race"]));
     $patient->setBirthDate(urldecode($array["birth_date"]));
     $patient->setAge(intval($array["age"]));
