@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: changelog.html,v 1.11 2004/09/22 18:25:18 jact Exp $ -->
+<!-- $Id: changelog.html,v 1.12 2004/10/16 14:55:07 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Changelog</title>
@@ -121,7 +121,7 @@
 
     <li class="change">Changes in connect method of Query class to permit connection parameters</li>
 
-    <li class="change">In $returnPage variable saves GET parameters also</li>
+    <li class="change">In $returnPage variable saves GET and POST parameters also</li>
 
     <li class="change">DTD XHTML 1.1 in all project pages</li>
 
@@ -143,7 +143,7 @@
 
     <li class="fix">Fixed problem with NULL closing_date in medical problems</li>
 
-    <li class="fix">Fixed XSS attacks with JavaScript event handlers in input fields</li>
+    <li class="fix">Fixed XSS attacks with JavaScript event handlers in input fields and GET and POST vars</li>
 
     <li class="add">Added localDate() function to lang_lib.php file</li>
 
@@ -188,6 +188,10 @@
     <li class="change">CSS2 table less based themes, changes in theme_tbl table and admin/theme_*.php files (new file admin/theme_preload_css.php)</li>
 
     <li class="fix">Changes in current user are made immediately</li>
+
+    <li class="add">New constant OPEN_BUFFER in read_settings.php file to use ob_*() functions (but by default, value is false) (experimental support)</li>
+
+    <li class="change">Field collegiate_number has been replaced with id_member in patient_tbl and problem_tbl tables. Field id_member has been added in deleted_patient_tbl, deleted_problem_tbl tables too. After upgrade OpenClinic from 0.6 version is recommended check all patients and problems information (doctor you are assigned to, doctor who treated you)</li>
   </ol>
 
   <hr />
