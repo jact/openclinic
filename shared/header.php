@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.5 2004/05/20 19:18:59 jact Exp $
+ * $Id: header.php,v 1.6 2004/06/06 11:45:35 jact Exp $
  */
 
 /**
@@ -40,9 +40,9 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
 
-<meta http-equiv="Content-Style-Type" content="text/css2" />
+<!--meta http-equiv="Content-Style-Type" content="text/css2" /-->
 
-<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
 
 <meta http-equiv="Pragma" content="no-cache" />
 
@@ -96,11 +96,11 @@
 <div id="header">
   <div id="subHeader">
     <?php
-      if (defined("OPEN_CLINIC_URL"))
+      if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
       {
         echo '<a href="' . OPEN_CLINIC_URL . '">';
       }
-      if (OPEN_CLINIC_USE_IMAGE)
+      if (defined("OPEN_CLINIC_USE_IMAGE") && OPEN_CLINIC_USE_IMAGE)
       {
         echo '<img src="' . OPEN_CLINIC_IMAGE_URL . '" alt="' . OPEN_CLINIC_NAME . '" title="' . OPEN_CLINIC_NAME . '" />';
       }
@@ -110,7 +110,7 @@
         echo OPEN_CLINIC_NAME;
         echo '</span>';
       }
-      if (defined("OPEN_CLINIC_URL"))
+      if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
       {
         echo "</a>\n";
       }
@@ -121,19 +121,19 @@
         echo sprintf(_("Today's date: %s"), date(_("Y-m-d")));
         echo "<br />\n";
 
-        if (defined("OPEN_CLINIC_HOURS"))
+        if (defined("OPEN_CLINIC_HOURS") && OPEN_CLINIC_HOURS)
         {
           echo sprintf(_("Clinic hours: %s"), OPEN_CLINIC_HOURS);
+          echo "<br />\n";
         }
-        echo "<br />\n";
 
-        if (defined("OPEN_CLINIC_ADDRESS"))
+        if (defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
         {
           echo sprintf(_("Clinic address: %s"), OPEN_CLINIC_ADDRESS);
+          echo "<br />\n";
         }
-        echo "<br />\n";
 
-        if (defined("OPEN_CLINIC_PHONE"))
+        if (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE)
         {
           echo sprintf(_("Clinic phone: %s"), OPEN_CLINIC_PHONE);
         }
@@ -224,19 +224,19 @@
 
     <p>
       <a href="http://www.php.net">
-        <img src="../images/php-logo.gif" alt="Powered by PHP" title="Powered by PHP" width="90" height="33" />
+        <img src="../images/php-logo.gif" width="90" height="33" alt="Powered by PHP" title="Powered by PHP" />
       </a>
     </p>
 
     <p>
       <a href="http://www.mysql.com">
-        <img src="../images/mysql-logo.png" alt="Works with MySQL" title="Works with MySQL" width="84" height="44" />
+        <img src="../images/mysql-logo.png" width="84" height="44" alt="Works with MySQL" title="Works with MySQL" />
       </a>
     </p>
 
     <p>
       <a href="http://validator.w3.org/check/referer">
-        <img src="../images/valid-xhtml11.png" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" width="88" height="31" />
+        <img src="../images/valid-xhtml11.png" width="88" height="31" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" />
       </a>
     </p>
   </div><!-- End #sideBarLogo -->
