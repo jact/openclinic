@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: staff_del.php,v 1.3 2004/04/24 16:45:46 jact Exp $
  */
 
 /**
@@ -25,9 +25,9 @@
   $returnLocation = "../admin/staff_list.php";
 
   ////////////////////////////////////////////////////////////////////
-  // Checking for query string. Go back to staff list if none found.
+  // Checking for post vars. Go back to staff list if none found.
   ////////////////////////////////////////////////////////////////////
-  if ( !isset($_GET["key"]) )
+  if (count($_POST) == 0)
   {
     header("Location: " . $returnLocation);
     exit();
@@ -39,9 +39,9 @@
   require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
+  // Retrieving post var
   ////////////////////////////////////////////////////////////////////
-  $idMember = intval($_GET["key"]);
+  $idMember = intval($_POST["id_member"]);
 
   ////////////////////////////////////////////////////////////////////
   // Delete staff member

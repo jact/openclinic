@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: theme_del.php,v 1.3 2004/04/24 16:45:55 jact Exp $
  */
 
 /**
@@ -25,9 +25,9 @@
   $returnLocation = "../admin/theme_list.php";
 
   ////////////////////////////////////////////////////////////////////
-  // Checking for query string. Go back to theme list if none found.
+  // Checking for post vars. Go back to theme list if none found.
   ////////////////////////////////////////////////////////////////////
-  if ( !isset($_GET["key"]) )
+  if (count($_POST) == 0)
   {
     header("Location: " . $returnLocation);
     exit();
@@ -39,10 +39,10 @@
   require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
+  // Retrieving post vars
   ////////////////////////////////////////////////////////////////////
-  $idTheme = intval($_GET["key"]);
-  $name = $_GET["name"];
+  $idTheme = intval($_POST["id_theme"]);
+  $name = $_POST["name"];
 
   ////////////////////////////////////////////////////////////////////
   // Delete theme

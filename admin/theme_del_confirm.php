@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del_confirm.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: theme_del_confirm.php,v 1.3 2004/04/24 16:45:55 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@
   ////////////////////////////////////////////////////////////////////
   // Checking for query string. Go back to theme list if none found.
   ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["name"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -61,8 +61,13 @@
   unset($links);
 ?>
 
-<form method="post" action="../admin/theme_del.php?key=<?php echo $idTheme; ?>&amp;name=<?php echo urlencode($name); ?>">
+<form method="post" action="../admin/theme_del.php">
   <div class="center">
+    <?php
+      showInputHidden("id_theme", $idTheme);
+      showInputHidden("name", $name);
+    ?>
+
     <table>
       <thead>
         <tr>

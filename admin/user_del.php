@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: user_del.php,v 1.3 2004/04/24 16:46:05 jact Exp $
  */
 
 /**
@@ -30,19 +30,19 @@
   require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
-  // Checking for query string. Go back to users list if none found.
+  // Checking for post vars. Go back to users list if none found.
   ////////////////////////////////////////////////////////////////////
-  if ( !isset($_GET["key"]) )
+  if (count($_POST) == 0)
   {
     header("Location: " . $returnLocation);
     exit();
   }
 
   ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
+  // Retrieving post vars
   ////////////////////////////////////////////////////////////////////
-  $idUser = intval($_GET["key"]);
-  $login = $_GET["login"];
+  $idUser = intval($_POST["id_user"]);
+  $login = $_POST["login"];
 
   ////////////////////////////////////////////////////////////////////
   // Delete user

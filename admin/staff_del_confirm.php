@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del_confirm.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: staff_del_confirm.php,v 1.3 2004/04/24 16:45:46 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@
   ////////////////////////////////////////////////////////////////////
   // Checking for query string. Go back to staff list if none found.
   ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["sur1"]) || empty($_GET["sur2"]) || empty($_GET["first"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["sur1"]) || empty($_GET["sur2"]) || empty($_GET["first"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -63,8 +63,10 @@
   unset($links);
 ?>
 
-<form method="post" action="../admin/staff_del.php?key=<?php echo $idMember; ?>">
+<form method="post" action="../admin/staff_del.php">
   <div class="center">
+    <?php showInputHidden("id_member", $idMember); ?>
+
     <table>
       <thead>
         <tr>
