@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: html_lib.php,v 1.4 2004/07/31 19:47:25 jact Exp $
+ * $Id: html_lib.php,v 1.5 2004/08/01 08:52:34 jact Exp $
  */
 
 /**
@@ -116,7 +116,7 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
 
         if (isset($options['r' . $j]['colspan']) && $options['r' . $j]['colspan'] > 0)
         {
-          $html .= ' colspan="' . $options['r' . $j]['colspan'] . '"' . $j;
+          $html .= ' colspan="' . $options['r' . $j]['colspan'] . '"';
         }
 
         $class = array();
