@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.8 2004/08/23 17:58:43 jact Exp $
+ * $Id: Staff_Query.php,v 1.9 2004/10/16 14:49:50 jact Exp $
  */
 
 /**
@@ -28,7 +28,6 @@ require_once("../classes/Staff.php");
  * Methods:
  *  void Staff_Query(void)
  *  mixed select(int $idMember = 0)
- *  bool selectDoctor(string $collegiateNumber)
  *  mixed selectType(string $type = 'A')
  *  mixed fetch(void)
  *  bool existLogin(string $login, int $idMember = 0)
@@ -78,31 +77,6 @@ class Staff_Query extends Query
     }
 
     return $this->numRows();
-  }
-
-  /**
-   * bool selectDoctor(string $collegiateNumber)
-   ********************************************************************
-   * Executes a query
-   ********************************************************************
-   * @param string $collegiateNumber of staff member to select
-   * @return boolean returns false, if error occurs
-   * @access public
-   */
-  function selectDoctor($collegiateNumber)
-  {
-    $sql = "SELECT *";
-    $sql .= " FROM " . $this->_table;
-    $sql .= " WHERE collegiate_number='" . urlencode($collegiateNumber) . "'";
-    //$sql .= " ORDER BY first_name, surname1";
-
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing staff member information.";
-    }
-
-    return $result;
   }
 
   /**
