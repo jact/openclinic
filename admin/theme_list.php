@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.9 2004/08/23 17:59:36 jact Exp $
+ * $Id: theme_list.php,v 1.10 2004/08/28 16:24:47 jact Exp $
  */
 
 /**
@@ -115,9 +115,7 @@
 <!--/*--><![CDATA[/*<!--*/
 function previewTheme(key)
 {
-  var secondaryWin = window.open("../admin/theme_preview.php?key=" + key, "secondary", "resizable=yes,scrollbars=yes,width=600,height=450");
-
-  return false;
+  return popSecondary("../admin/theme_preview.php?key=" + key);
 }
 /*]]>*///-->
 </script>
