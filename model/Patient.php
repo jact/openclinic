@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.5 2004/06/20 17:20:58 jact Exp $
+ * $Id: Patient.php,v 1.6 2004/10/04 21:29:02 jact Exp $
  */
 
 /**
@@ -742,25 +742,16 @@ class Patient
   }
 
   /**
-   * string getLastUpdateDate(bool $view = true)
+   * string getLastUpdateDate(void)
    ********************************************************************
-   * @param bool $view if true, value is showed in program, else, value is saved in db
    * @return string last update date of the patient data
    * @access public
    */
-/*  function getLastUpdateDate($view = true)
+/*  function getLastUpdateDate()
   {
-    if ($view)
-    {
-      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_lastUpdateDate);
-      return ($this->_lastUpdateDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
-    }
-    else
-    {
-      return $this->_lastUpdateDate;
-    }
-  }
-*/
+    return stripslashes(strtr($this->_lastUpdateDate, $this->_trans));
+  }*/
+
   /**
    * void setLastUpdateDate(string $value)
    ********************************************************************
@@ -768,9 +759,9 @@ class Patient
    * @return void
    * @access public
    */
-  /*function setLastUpdateDate($value)
+/*  function setLastUpdateDate($value)
   {
-    $this->_lastUpdateDate = ereg_replace('^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$', '\3-\2-\1', trim($value));
+    $this->_lastUpdateDate = safeText($value);
   }*/
 } // end class
 ?>

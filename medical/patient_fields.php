@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.8 2004/08/02 11:19:01 jact Exp $
+ * $Id: patient_fields.php,v 1.9 2004/10/04 21:33:34 jact Exp $
  */
 
 /**
@@ -30,7 +30,7 @@
 
   //$row = _("Last Update Date") . ":";
   //$row .= OPEN_SEPARATOR;
-  //$row .= $postVars["last_update_date"];
+  //$row .= localDate($postVars["last_update_date"]);
 
   //$tbody[] = explode(OPEN_SEPARATOR, $row);
 
