@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.7 2004/08/23 18:34:44 jact Exp $
+ * $Id: style.css,v 1.8 2005/01/31 19:58:42 jact Exp $
  */
 
 /**
@@ -47,6 +47,10 @@ h2 {
 }
 h3 {
   font-size: 16px;
+}
+#header img {
+  background: #fff;
+  color: #000;
 }
 #content a:link, #content a:visited, #footer a:link, #footer a:visited {
   color: #00a;
