@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.php,v 1.3 2004/04/24 18:02:50 jact Exp $
+ * $Id: style.php,v 1.4 2004/06/30 18:48:15 jact Exp $
  */
 
 /**
@@ -165,6 +165,11 @@ label {
 #header {
   background: <?php echo STYLE_TITLE_BG_COLOR; ?>;
   color: <?php echo STYLE_TITLE_FONT_COLOR; ?>;
+  height: 1px; /* Holly hack */
+}
+
+html > body #header {
+  height: auto;
 }
 
 #subHeader {
@@ -217,6 +222,7 @@ li#first a, li#first span {
 }
 
 #sourceForgeLinks {
+  position: relative; /* IE hack */
   clear: both;
   text-align: right;
   background: <?php echo STYLE_NAVBAR_BG_COLOR; ?>;
@@ -227,6 +233,7 @@ li#first a, li#first span {
 }
 
 #sideBar {
+  position: relative; /* IE hack */
   padding-left: 1ex;
   margin-top: -<?php echo STYLE_TABLE_BORDER_WIDTH; ?>px;
   width: 150px;
