@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.9 2004/08/03 11:25:49 jact Exp $
+ * $Id: index.php,v 1.10 2004/08/09 11:37:19 jact Exp $
  */
 
 /**
@@ -59,6 +59,8 @@
     <span class="noPrint"> | </span>
     <a href="#"><?php echo _("Help Topic"); ?></a>
   </div><!-- End .linkList -->
+
+  <hr />
 
   <div id="sideBarLogo">
     <p>
