@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search_fields.php,v 1.4 2004/07/05 17:32:29 jact Exp $
+ * $Id: problem_search_fields.php,v 1.5 2004/08/01 08:35:38 jact Exp $
  */
 
 /**
@@ -21,85 +21,67 @@
     header("Location: ../index.php");
     exit();
   }
+
+  $thead = array(
+    $headerWording2 => array('colspan' => 2)
+  );
+
+  $tbody = array();
+
+  $row = '<label for="search_type_problem">' . _("Field") . ': ' . "</label>\n";
+
+  $array = null;
+  $array[OPEN_SEARCH_WORDING] = _("Wording");
+  $array[OPEN_SEARCH_SUBJECTIVE] = _("Subjective");
+  $array[OPEN_SEARCH_OBJECTIVE] = _("Objective");
+  $array[OPEN_SEARCH_APPRECIATION] = _("Appreciation");
+  $array[OPEN_SEARCH_ACTIONPLAN] = _("Action Plan");
+  $array[OPEN_SEARCH_PRESCRIPTION] = _("Prescription");
+
+  $row .= htmlSelectArray("search_type_problem", $array, OPEN_SEARCH_WORDING);
+  unset($array);
+
+  $tbody[] = array($row);
+
+  $row = '* ' . htmlInputText("search_text_problem", 40, 120);
+  $row .= htmlInputButton("submit_problem", _("Search"));
+  $row .= htmlInputButton("reset_problem", _("Clear Search"), "reset");
+
+  $tbody[] = array($row);
+
+  $row = '<label for="logical_problem">' . _("Logical") . ': ' . "</label>\n";
+
+  $array = null;
+  $array[OPEN_OR] = "OR";
+  $array[OPEN_NOT] = "NOT";
+  $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
+
+  $row .= htmlSelectArray("logical_problem", $array, OPEN_OR);
+  unset($array);
+
+  $row .= OPEN_SEPARATOR;
+  $row .= '<label for="limit_problem">' . _("Limit") . ': ' . "</label>\n";
+
+  $array = null;
+  $array["0"] = _("All");
+  $array["10"] = 10;
+  $array["20"] = 20;
+  $array["50"] = 50;
+  $array["100"] = 100;
+
+  $row .= htmlSelectArray("limit_problem", $array);
+  unset($array);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $options = array(
+    0 => array('align' => 'center'),
+    1 => array('align' => 'center'),
+    'r0' => array('colspan' => 2),
+    'r1' => array('colspan' => 2),
+    'shaded' => false,
+    'align' => 'center'
+  );
+
+  showTable($thead, $tbody, null, $options);
 ?>
-
-<div class="center">
-  <table>
-    <thead>
-      <tr>
-        <th colspan="2">
-          <?php echo $headerWording2; ?>
-        </th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <tr>
-        <td colspan="2" class="center">
-          <?php
-            echo '<label for="search_type_problem">';
-            echo _("Field") . ': ';
-            echo "</label>\n";
-
-            $array = null;
-            $array[OPEN_SEARCH_WORDING] = _("Wording");
-            $array[OPEN_SEARCH_SUBJECTIVE] = _("Subjective");
-            $array[OPEN_SEARCH_OBJECTIVE] = _("Objective");
-            $array[OPEN_SEARCH_APPRECIATION] = _("Appreciation");
-            $array[OPEN_SEARCH_ACTIONPLAN] = _("Action Plan");
-            $array[OPEN_SEARCH_PRESCRIPTION] = _("Prescription");
-
-            showSelectArray("search_type_problem", $array, OPEN_SEARCH_WORDING);
-            unset($array);
-          ?>
-        </td>
-      </tr>
-
-      <tr>
-        <td colspan="2">*
-          <?php
-            showInputText("search_text_problem", 40, 120);
-            showInputButton("submit_problem", _("Search"));
-            showInputButton("reset_problem", _("Clear Search"), "reset");
-          ?>
-        </td>
-      </tr>
-
-      <tr class="center">
-        <td>
-          <?php
-            echo '<label for="logical_problem">';
-            echo _("Logical") . ': ';
-            echo "</label>\n";
-
-            $array = null;
-            $array[OPEN_OR] = "OR";
-            $array[OPEN_NOT] = "NOT";
-            $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
-
-            showSelectArray("logical_problem", $array, OPEN_OR);
-            unset($array);
-          ?>
-        </td>
-
-        <td>
-          <?php
-            echo '<label for="limit_problem">';
-            echo _("Limit") . ': ';
-            echo "</label>\n";
-
-            $array = null;
-            $array["0"] = _("All");
-            $array["10"] = 10;
-            $array["20"] = 20;
-            $array["50"] = 50;
-            $array["100"] = 100;
-
-            showSelectArray("limit_problem", $array);
-            unset($array);
-          ?>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
