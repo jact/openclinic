@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: coding_guidelines.html,v 1.5 2004/07/27 15:55:29 jact Exp $ -->
+<!-- $Id: coding_guidelines.html,v 1.6 2004/08/23 18:32:27 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Coding Guidelines</title>
@@ -147,7 +147,7 @@
   <h2 id="d0e37"><a href="#top" title="To top of the page">3. Control Structures</a></h2>
 
   <p>
-    Set of control structures: <tt class="literal">if</tt>, <tt class="literal">for</tt>, <tt class="literal">while</tt>, <tt class="literal">switch</tt>, etc. Right down there is an <tt class="literal">if</tt> structure code example:
+    Set of control structures: <tt>if</tt>, <tt>for</tt>, <tt>while</tt>, <tt>switch</tt>, etc. Right down there is an <tt>if</tt> structure code example:
   </p>
 
 <pre class="programlisting">
@@ -170,7 +170,7 @@ else
   </p>
 
   <p>
-    Always are going to be used opening and closing keys in the code. Even if their were optional. This rises the clearness of the code and reduces logical errors that are used when there are added new code-lines. An example of a <tt class="literal">switch</tt> structure:
+    Always are going to be used opening and closing keys in the code. Even if their were optional. This rises the clearness of the code and reduces logical errors that are used when there are added new code-lines. An example of a <tt>switch</tt> structure:
   </p>
 
 <pre class="programlisting">
@@ -250,7 +250,7 @@ function fooFunction($arg1, $arg2 = '')
   </p>
 
   <p>
-    The rest of te comments (there are never enought) will use the C style (<tt class="literal">/* */</tt>) and the C++ standard (<tt class="literal">//</tt>). It is not recommended the Perl style (<tt class="literal">#</tt>).
+    The rest of te comments (there are never enought) will use the C style (<tt>/* */</tt>) and the C++ standard (<tt>//</tt>). It is not recommended the Perl style (<tt>#</tt>).
   </p>
 
   <p>
@@ -395,7 +395,7 @@ function fooFunction($arg1, $arg2 = '')
  */
 </pre>
 
-  <div class="note-code">
+  <div class="noteCode">
     <h3>Note</h3>
 
     <p>
@@ -421,7 +421,7 @@ function fooFunction($arg1, $arg2 = '')
  * @access public
  */
 </pre>
-  </div><!-- End .note-code -->
+  </div><!-- End .noteCode -->
 
   <p>
     A head function comment should have a set of elements like:
@@ -474,7 +474,7 @@ function fooFunction($arg1, $arg2 = '')
   <h2 id="d0e272"><a href="#top" title="To top of the page">7. Including Code</a></h2>
 
   <p>
-    Wherever a class file is included, it will be used the sentence <tt class="literal">require_once()</tt>. Wherever a class file is included <em>conditionally</em>, it will be used; <tt class="literal">include_once()</tt>. In both cases, the class file will be included only once. Therefore an included file with <tt class="literal">require_once()</tt>, will not be included again wiht <tt class="literal">include_once()</tt>.
+    Wherever a class file is included, it will be used the sentence <tt>require_once()</tt>. Wherever a class file is included <em>conditionally</em>, it will be used; <tt>include_once()</tt>. In both cases, the class file will be included only once. Therefore an included file with <tt>require_once()</tt>, will not be included again wiht <tt>include_once()</tt>.
   </p>
 
   <hr />
@@ -482,7 +482,7 @@ function fooFunction($arg1, $arg2 = '')
   <h2 id="d0e292"><a href="#top" title="To top of the page">8. PHP Code Marks</a></h2>
 
   <p>
-    There will be used always the maks <tt class="literal">&lt;?php ?&gt;</tt> as delimiters the PHP code. This makes the code more portable between different operating systems and configurations.
+    There will be used always the marks <tt>&lt;?php ?&gt;</tt> as delimiters the PHP code. This makes the code more portable between different operating systems and configurations.
   </p>
 
   <hr />
@@ -490,7 +490,7 @@ function fooFunction($arg1, $arg2 = '')
   <h2 id="d0e300"><a href="#top" title="To top of the page">9. Example URLs</a></h2>
 
   <p>
-    It will be used the URL <tt class="literal">example.com</tt> for every example direction, such us it is said in <a href="http://www.faqs.org/rfcs/rfc2606.html">RFC 2606</a>.
+    It will be used the URL <tt>example.com</tt> for every example direction, such us it is said in <a href="http://www.faqs.org/rfcs/rfc2606.html">RFC 2606</a>.
   </p>
 
   <hr />
@@ -532,7 +532,7 @@ _sort(), _initTree(), $this-&gt;_status
   <h3 id="d0e343"><a href="#top" title="To top of the page">10.3. Constants</a></h3>
 
   <p>
-    Constans will go always in capital letters, with low hyphens separateing words. The package prefixes will be writeing in capitals too. For example, the constants used in the package <tt class="literal">DB::</tt> will began "<tt class="literal">DB_</tt>".
+    Constans will go always in capital letters, with low hyphens separateing words. The package prefixes will be writeing in capitals too. For example, the constants used in the package <tt>DB::</tt> will began "<tt>DB_</tt>".
   </p>
 
   <h3 id="d0e355"><a href="#top" title="To top of the page">10.4. Variables</a></h3>
@@ -554,13 +554,13 @@ $counter, $nextIndex, $nrOptions, $cookieName
   <h3 id="d0e368"><a href="#top" title="To top of the page">10.6. Predefined Values</a></h3>
 
   <p>
-    Predefined PHP values <tt class="literal">true</tt>, <tt class="literal">false</tt> and <tt class="literal">null</tt> will go written always in small letters.
+    Predefined PHP values <tt>true</tt>, <tt>false</tt> and <tt>null</tt> will go written always in small letters.
   </p>
 
   <h3 id="d0e369"><a href="#top" title="To top of the page">10.7. Database Fields and Tables Naming</a></h3>
 
   <p>
-    Database fields and tables names will go written always in small letters and it will use the symbol <tt class="literal">_</tt> to separate words. Therefore, table names will have the <tt class="literal">_tbl</tt> subfix. So it will be easy view them between the text.
+    Database fields and tables names will go written always in small letters and it will use the symbol <tt>_</tt> to separate words. Therefore, table names will have the <tt>_tbl</tt> subfix. So it will be easy view them between the text.
   </p>
 
 <pre class="programlisting">
@@ -570,7 +570,7 @@ theme_tbl, session_timeout, items_per_page, id_user
   <h3 id="d0e370"><a href="#top" title="To top of the page">10.8. HTML Forms Tag Names</a></h3>
 
   <p>
-    They will go always in small letters and it will use the <tt class="literal">_</tt> sign as a separator character. This style has been chosen to make more distinguisable the database fields from the class method names whom manages them.
+    They will go always in small letters and it will use the <tt>_</tt> sign as a separator character. This style has been chosen to make more distinguisable the database fields from the class method names whom manages them.
   </p>
 
 <pre class="programlisting">
@@ -584,7 +584,7 @@ collegiate_number, first_name, phone_contact, login
   </p>
 
   <p>
-    One advice: not mix styles. Or you use the symbol <tt class="literal">-</tt> to separate words (symbol <tt class="literal">_</tt> is forbidden to name identifiers ans class names) or you follow the rules for <a href="#d0e355">variable naming</a> (except the symbol <tt class="literal">$</tt>).
+    One advice: not mix styles. Or you use the symbol <tt>-</tt> to separate words (symbol <tt>_</tt> is forbidden to name identifiers ans class names) or you follow the rules for <a href="#d0e355">variable naming</a> (except the symbol <tt>$</tt>).
   </p>
 
   <p>
