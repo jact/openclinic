@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.6 2004/07/29 18:43:02 jact Exp $
+ * $Id: user_new_form.php,v 1.7 2004/08/04 15:21:53 jact Exp $
  */
 
 /**
@@ -81,32 +81,7 @@
 
 <script src="../scripts/md5.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-<!--/*--><![CDATA[/*<!--*/
-function md5Login(f)
-{
-  if (f['md5_old'] != null)
-  {
-    f['md5_old'].value = hex_md5(f['old_pwd'].value);
-    f['old_pwd'].value = '';
-  }
-
-  if (f['md5'] != null)
-  {
-    f['md5'].value = hex_md5(f['pwd'].value);
-    f['pwd'].value = '';
-  }
-
-  if (f['md5_confirm'] != null)
-  {
-    f['md5_confirm'].value = hex_md5(f['pwd2'].value);
-    f['pwd2'].value = '';
-  }
-
-  return true;
-}
-/*]]>*///-->
-</script>
+<script src="../scripts/password.php" type="text/javascript"></script>
 
 <form method="post" action="../admin/user_new.php" onsubmit="return md5Login(this);">
   <div>
