@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.6 2004/07/08 16:37:46 jact Exp $
+ * $Id: setting_fields.php,v 1.7 2004/07/27 19:43:52 jact Exp $
  */
 
 /**
@@ -28,181 +28,121 @@
   {
     showInputHidden("language", "en");
   }
-?>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo _("Edit Config Settings"); ?>
-      </th>
-    </tr>
-  </thead>
+  $thead = array(
+    _("Edit Config Settings") => array('colspan' => 2)
+  );
 
-  <tbody>
-    <tr>
-      <td>
-        <label for="clinic_name"><?php echo _("Clinic Name") . ":"; ?></label>
-      </td>
+  $tbody = array();
 
-      <td>
-        <?php showInputText("clinic_name", 40, 128, $postVars["clinic_name"], $pageErrors["clinic_name"]); ?>
-      </td>
-    </tr>
+  $row = '<label for="clinic_name">' . _("Clinic Name") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("clinic_name", 40, 128, $postVars["clinic_name"], $pageErrors["clinic_name"]);
 
-    <tr>
-      <td>
-        <label for="clinic_image_url"><?php echo _("Clinic Image") . ":"; ?></label>
-      </td>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-      <td>
-        <?php
-          $dir = "../images/";
-          $ext = array("bmp", "gif", "jpe", "jpeg", "jpg", "png");
-          $array = getFiles($dir, false, $ext);
+  $row = '<label for="clinic_image_url">' . _("Clinic Image") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
 
-          showSelectArray("clinic_image_url", $array, basename($postVars["clinic_image_url"]));
-          unset($array);
-          unset($ext);
+  $dir = "../images/";
+  $ext = array("bmp", "gif", "jpe", "jpeg", "jpg", "png");
+  $array = getFiles($dir, false, $ext);
 
-          echo '<br />' . _("(must be in /images/ directory)");
-        ?>
-      </td>
-    </tr>
+  $row .= htmlSelectArray("clinic_image_url", $array, basename($postVars["clinic_image_url"]));
+  unset($array);
+  unset($ext);
 
-    <tr>
-      <td>
-        <label for="use_image"><?php echo _("Use Image in place of Name") . ":"; ?></label>
-      </td>
+  $row .= '<br />' . _("(must be in /images/ directory)");
 
-      <td>
-        <?php showCheckBox("use_image", "use_image", 1, $postVars["use_image"] != ""); ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    <tr>
-      <td>
-        <label for="clinic_hours"><?php echo _("Clinic Hours") . ":"; ?></label>
-      </td>
+  $row = '<label for="use_image">' . _("Use Image in place of Name") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlCheckBox("use_image", "use_image", 1, $postVars["use_image"] != "");
 
-      <td>
-        <?php showInputText("clinic_hours", 40, 128, $postVars["clinic_hours"], $pageErrors["clinic_hours"]); ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    <tr>
-      <td>
-        <label for="clinic_address"><?php echo _("Clinic Address") . ":"; ?></label>
-      </td>
+  $row = '<label for="clinic_hours">' . _("Clinic Hours") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("clinic_hours", 40, 128, $postVars["clinic_hours"], $pageErrors["clinic_hours"]);
 
-      <td>
-        <?php showTextArea("clinic_address", 3, 30, $postVars["clinic_address"]); ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    <tr>
-      <td>
-        <label for="clinic_phone"><?php echo _("Clinic Phone") . ":"; ?></label>
-      </td>
+  $row = '<label for="clinic_address">' . _("Clinic Address") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlTextArea("clinic_address", 3, 30, $postVars["clinic_address"]);
 
-      <td>
-        <?php showInputText("clinic_phone", 40, 40, $postVars["clinic_phone"], $pageErrors["clinic_phone"]); ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    <tr>
-      <td>
-        <label for="clinic_url"><?php echo _("Clinic URL") . ":"; ?></label>
-      </td>
+  $row = '<label for="clinic_phone">' . _("Clinic Phone") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("clinic_phone", 40, 40, $postVars["clinic_phone"], $pageErrors["clinic_phone"]);
 
-      <td>
-        <?php showInputText("clinic_url", 40, 300, $postVars["clinic_url"], $pageErrors["clinic_url"]); ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  <?php
-    if (defined("OPEN_DEMO") && !OPEN_DEMO)
+  $row = '<label for="clinic_url">' . _("Clinic URL") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("clinic_url", 40, 300, $postVars["clinic_url"], $pageErrors["clinic_url"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  if (defined("OPEN_DEMO") && !OPEN_DEMO)
+  {
+    $row = '<label for="language">' . _("Language") . ":" . "</label>\n";
+    $row .= OPEN_SEPARATOR;
+
+    $dir = "../locale/";
+    $handle = opendir($dir);
+    $array = null;
+    while (($file = readdir($handle)) != false)
     {
-  ?>
-    <tr>
-      <td>
-        <label for="language"><?php echo _("Language") . ":"; ?></label>
-      </td>
+      if ($file != 'CVS' && $file != '.' && $file != '..' && is_dir($dir . $file))
+      {
+        /*if (function_exists('html_entity_decode'))
+        {
+          $array["$file"] = html_entity_decode($nls['language'][$file], ENT_COMPAT, OPEN_CHARSET);
+        }
+        else
+        {
+          $array["$file"] = strtr($nls['language'][$file], array_flip(get_html_translation_table(HTML_ENTITIES)));
+        }*/
+        $array["$file"] = $nls['language'][$file];
+      }
+    }
+    closedir($handle);
 
-      <td>
-        <?php
-          $dir = "../locale/";
-          $handle = opendir($dir);
-          $array = null;
-          while (($file = readdir($handle)) != false)
-          {
-            if ($file != 'CVS' && $file != '.' && $file != '..' && is_dir($dir . $file))
-            {
-              /*if (function_exists('html_entity_decode'))
-              {
-                $array["$file"] = html_entity_decode($nls['language'][$file], ENT_COMPAT, OPEN_CHARSET);
-              }
-              else
-              {
-                $array["$file"] = strtr($nls['language'][$file], array_flip(get_html_translation_table(HTML_ENTITIES)));
-              }*/
-              $array["$file"] = $nls['language'][$file];
-            }
-          }
-          closedir($handle);
+    $row .= htmlSelectArray("language", $array, $postVars["language"]);
+    unset($array);
 
-          showSelectArray("language", $array, $postVars["language"]);
-          unset($array);
-        ?>
-      </td>
-    </tr>
-  <?php
-    } // end if
-  ?>
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
+  }
 
-    <tr>
-      <td>
-        <label for="id_theme"><?php echo _("Theme by default") . ":"; ?></label>
-      </td>
+  $row = '<label for="id_theme">' . _("Theme by default") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlSelect("theme_tbl", "id_theme", $postVars["id_theme"], "theme_name");
 
-      <td>
-        <?php showSelect("theme_tbl", "id_theme", $postVars["id_theme"], "theme_name"); ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    <tr>
-      <td>
-        * <label for="session_timeout"><?php echo _("Session Timeout") . ":"; ?></label>
-      </td>
+  $row = '* <label for="session_timeout">' . _("Session Timeout") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("session_timeout", 3, 3, $postVars["session_timeout"], $pageErrors["session_timeout"]);
+  $row .= _("minutes");
 
-      <td>
-        <?php
-          showInputText("session_timeout", 3, 3, $postVars["session_timeout"], $pageErrors["session_timeout"]);
-          echo _("minutes");
-        ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    <tr>
-      <td>
-        * <label for="items_per_page"><?php echo _("Search Results") . ":"; ?></label>
-      </td>
+  $row = '* <label for="items_per_page">' . _("Search Results") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("items_per_page", 2, 2, $postVars["items_per_page"], $pageErrors["items_per_page"]);
+  $row .= _("items per page") . "**";
 
-      <td>
-        <?php
-          showInputText("items_per_page", 2, 2, $postVars["items_per_page"], $pageErrors["items_per_page"]);
-          echo _("items per page") . "**";
-        ?>
-      </td>
-    </tr>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    <tr>
-      <td class="center" colspan="2">
-        <?php
-          showInputButton("button1", _("Update"));
-          showInputButton("button2", _("Reset"), "reset");
-        ?>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  $tfoot = array(htmlInputButton("button1", _("Update")) . htmlInputButton("button2", _("Reset"), "reset"));
+
+  $options = array(
+    'shaded' => false,
+    'tfoot' => array('align' => 'center')
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
+?>
