@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.4 2004/04/24 18:02:35 jact Exp $
+ * $Id: user_list.php,v 1.5 2004/05/31 19:46:38 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * List of defined users screen
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * TODO: 2 acciones más: accesos y operaciones
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -134,7 +133,7 @@
 <table>
   <thead>
     <tr>
-      <th colspan="4">
+      <th colspan="6">
         <?php echo _("Function"); ?>
       </th>
 
@@ -193,6 +192,18 @@
 
       <td>
         <a href="../admin/staff_edit_form.php?key=<?php echo $user->getIdMember(); ?>&amp;reset=Y"><?php echo _("edit member"); ?></a>
+      </td>
+
+      <td>
+        <a href="../admin/user_access_log.php?key=<?php echo $user->getIdUser(); ?>&amp;login=<?php echo $user->getLogin(); ?>">
+          <?php echo _("accesses"); ?>
+        </a>
+      </td>
+
+      <td>
+        <a href="../admin/user_record_log.php?key=<?php echo $user->getIdUser(); ?>&amp;login=<?php echo $user->getLogin(); ?>">
+          <?php echo _("transactions"); ?>
+        </a>
       </td>
 
       <td>
