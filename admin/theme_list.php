@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.8 2004/08/05 14:21:47 jact Exp $
+ * $Id: theme_list.php,v 1.9 2004/08/23 17:59:36 jact Exp $
  */
 
 /**
@@ -151,6 +151,11 @@ function previewTheme(key)
     _("Usage")
   );
 
+  $validateLink = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'];
+  $validateLink = str_replace("/admin/", "/css/", $validateLink);
+  $validateLink = substr($validateLink, 0, strrpos($validateLink, "/") + 1);
+  $validateLink = "http://jigsaw.w3.org/css-validator/validator?uri=" . $validateLink;
+
   $tbody = array();
   while ($theme = $themeQ->fetch())
   {
@@ -173,7 +178,7 @@ function previewTheme(key)
     $row .= '<a href="../admin/theme_preview.php?key=' . $theme->getIdTheme() . '" onclick="return previewTheme(' . $theme->getIdTheme() . ')">' . _("preview") . '</a>';
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="http://jigsaw.w3.org/css-validator?uri=' . '../css/' . $theme->getCSSFile() . '">' . _("validate") . '</a>';
+    $row .= '<a href="' . $validateLink . $theme->getCSSFile() . '">' . _("validate") . '</a>';
     $row .= OPEN_SEPARATOR;
 
     if (in_array($theme->getCSSFile(), $reservedCSSFiles))
