@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.2 2004/04/18 14:18:15 jact Exp $
+ * $Id: header.php,v 1.3 2004/04/24 17:44:12 jact Exp $
  */
 
 /**
@@ -35,9 +35,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo OPEN_LANGUAGE; ?>" dir="<?php echo OPEN_DIRECTION; ?>">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
+<title><?php echo _("OpenClinic Install"); ?></title>
 
-<meta http-equiv="Content-Style-Type" content="text/css2" />
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
 
 <meta http-equiv="Cache-Control" content="no-cache" />
 
@@ -59,11 +59,7 @@
 
 <link rel="bookmark icon" type="image/png" href="../images/miniopc.png" />
 
-<style type="text/css">
-<?php require_once("../css/style.css"); ?>
-</style>
-
-<title><?php echo _("OpenClinic Install"); ?></title>
+<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" title="OpenClinic" />
 </head>
 <body>
 <!-- OpenClinic logo and black background -->
