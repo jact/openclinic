@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.2 2004/04/14 20:59:39 jact Exp $
+ * $Id: read_settings.php,v 1.3 2004/06/06 11:46:12 jact Exp $
  */
 
 /**
@@ -103,13 +103,13 @@
   require_once("../lib/lang_lib.php");
   require_once("../lib/nls.php");
 
+  $nls = getNLS();
   setLanguage(OPEN_LANGUAGE);
   initLanguage(OPEN_LANGUAGE);
 
-  $nls = getNLS();
   define("OPEN_CHARSET", (isset($nls['charset'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['charset']));
   define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));
-  define("OPEN_ENCODING", "ISO-8859-1"); // (isset($nls['encoding'][OPEN_LANGUAGE]) ? $nls['encoding'][OPEN_LANGUAGE] : $nls['default']['encoding']) // it isn't yet
+  define("OPEN_ENCODING", (isset($nls['encoding'][OPEN_LANGUAGE]) ? $nls['encoding'][OPEN_LANGUAGE] : $nls['default']['encoding']));
 
   ////////////////////////////////////////////////////////////////////
   // Reading theme settings
