@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: admin.php,v 1.3 2004/06/16 19:37:27 jact Exp $
+ * $Id: admin.php,v 1.4 2004/08/09 10:03:13 jact Exp $
  */
 
 /**
@@ -29,6 +29,7 @@
     echo '<br />';
     echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;reset=Y&amp;all=Y" title="' . _("manage your user account") . '">' . $_SESSION["loginSession"] . "</a> ]\n";
     echo "</div>\n";
+    echo "<hr />\n";
   }
 
   echo '<div class="linkList">';

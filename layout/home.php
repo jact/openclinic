@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: home.php,v 1.4 2004/07/21 18:05:29 jact Exp $
+ * $Id: home.php,v 1.5 2004/08/09 10:03:13 jact Exp $
  */
 
 /**
@@ -39,6 +39,7 @@
       echo '</a>';
     }
     echo "</div>\n";
+    echo "<hr />\n";
   }
 
   echo '<div class="linkList">';
