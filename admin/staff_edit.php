@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit.php,v 1.4 2004/07/10 15:09:27 jact Exp $
+ * $Id: staff_edit.php,v 1.5 2004/07/10 16:00:50 jact Exp $
  */
 
 /**
@@ -81,18 +81,18 @@
   unset($_SESSION["pageErrors"]);
 
   ////////////////////////////////////////////////////////////////////
-  // Redirect to theme list to avoid reload problem
+  // Redirect to staff list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
   if (isset($loginUsed) && $loginUsed)
   {
     $info = urlencode($staff->getLogin());
-    $getStr = "?login=Y&info=" . $info;
+    $returnLocation .= "?login=Y&info=" . $info;
   }
   else
   {
     $info = urlencode($staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2());
-    $getStr = "?updated=Y&info=" . $info;
+    $returnLocation .= "?updated=Y&info=" . $info;
   }
   unset($staff);
-  header("Location: " . $returnLocation . $getStr);
+  header("Location: " . $returnLocation);
 ?>
