@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.1 2004/08/03 11:20:45 jact Exp $
+ * $Id: theme_preload_css.php,v 1.2 2004/08/05 14:28:05 jact Exp $
  */
 
 /**
@@ -72,7 +72,7 @@
 <form method="post" action="<?php echo $_SERVER['PHP_SELF'] . ((isset($_GET['key'])) ? "?key=" . $_GET['key'] : ""); ?>" enctype="multipart/form-data">
 <?php
   $thead = array(
-    _("Preload a CSS file") => array('colspan' => 2)
+    $title => array('colspan' => 2)
   );
 
   $tbody = array();
