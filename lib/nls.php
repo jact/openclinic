@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: nls.php,v 1.10 2005/01/22 19:06:38 jact Exp $
+ * $Id: nls.php,v 1.11 2005/01/22 19:09:44 jact Exp $
  */
 
 /**
@@ -115,7 +115,7 @@ function getNLS()
   $nls['win32']['bg_BG'] = 'bgr';
   $nls['win32']['en']    = 'eng';
   $nls['win32']['es_ES'] = 'esp';
-  $nls['win32']['nl_BE'] = 'bel';
+  $nls['win32']['nl_BE'] = 'nld';
 
   ////////////////////////////////////////////////////////////////////
   // Charsets
