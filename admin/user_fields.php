@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.9 2004/11/04 12:17:32 jact Exp $
+ * $Id: user_fields.php,v 1.10 2005/02/01 19:30:36 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@
 
   $tbody = array();
 
-  $row = ($action == "new") ? _("Login") . ":" : '* <label for="login" class="requiredField">' . _("Login") . ":" . "<label>\n";
+  $row = ($action == "new") ? _("Login") . ":" : '* <label for="login" class="requiredField">' . _("Login") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
   $row .= ($action == "new") ? $postVars["login"] : htmlInputText("login", 20, 20, $postVars["login"], $pageErrors["login"]);
 
