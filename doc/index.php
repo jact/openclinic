@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.8 2004/07/07 17:54:04 jact Exp $
+ * $Id: index.php,v 1.9 2004/08/03 11:25:49 jact Exp $
  */
 
 /**
@@ -32,13 +32,9 @@
   ////////////////////////////////////////////////////////////////////
   $title = _("OpenClinic Help");
   require_once("../shared/xhtml_start.php");
-?>
 
-<style type="text/css" title="<?php echo STYLE_NAME; ?>">
-<!--/*--><![CDATA[/*<!--*/
-<?php require_once("../css/style.php"); ?>
-/*]]>*/-->
-</style>
+  echo '<link rel="stylesheet" type="text/css" href="../css/' . OPEN_THEME_CSS_FILE . '" title="' . OPEN_THEME_NAME . '" />';
+?>
 
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
 </head>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.13 2004/07/26 18:45:39 jact Exp $
+ * $Id: header.php,v 1.14 2004/08/03 11:26:11 jact Exp $
  */
 
 /**
@@ -39,14 +39,7 @@
 <?php
   if ( !(isset($_GET['css']) && $_GET['css'] == "off") )
   {
-    //echo <!--link rel="stylesheet" type="text/css" href="../css/style.php" /-->
-?>
-<style type="text/css" title="<?php echo STYLE_NAME; ?>">
-<!--/*--><![CDATA[/*<!--*/
-<?php require_once("../css/style.php"); ?>
-/*]]>*/-->
-</style>
-<?php
+    echo '<link rel="stylesheet" type="text/css" href="../css/' . OPEN_THEME_CSS_FILE . '" title="' . OPEN_THEME_NAME . '" />';
   } // end-if
 ?>
 
