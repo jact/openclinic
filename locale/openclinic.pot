@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenClinic 0.7\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2004-11-05 13:38+0100\n"
+"PO-Revision-Date: 2004-12-07 11:54+0100\n"
 "Last-Translator: jact <jachavar@terra.es>\n"
 "Language-Team:  <jachavar@terra.es>\n"
 "MIME-Version: 1.0\n"
@@ -3145,6 +3145,10 @@ msgstr ""
 
 #: shared/login_form.php:99
 msgid "Enter"
+msgstr ""
+
+#: shared/login_form.php:112
+msgid "You must have cookies enabled to access your account."
 msgstr ""
 
 #: shared/login_suspended.php:27
