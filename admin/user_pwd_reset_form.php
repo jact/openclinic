@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.6 2004/07/07 17:21:53 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.7 2004/07/29 18:50:24 jact Exp $
  */
 
 /**
@@ -71,7 +71,7 @@
       $userQ->close();
       include_once("../shared/header.php");
 
-      echo '<p>' . _("That user does not exist.") . "</p>\n";
+      showMessage(_("That user does not exist."), OPEN_MSG_ERROR);
 
       include_once("../shared/footer.php");
       exit();
@@ -141,64 +141,49 @@ function md5Login(f)
 
 <form method="post" action="../admin/user_pwd_reset.php" onsubmit="return md5Login(this);">
   <div class="center">
-    <?php
-      showInputHidden("id_user", $postVars["id_user"]);
-      showInputHidden("login", $postVars["login"]);
+<?php
+  showInputHidden("id_user", $postVars["id_user"]);
+  showInputHidden("login", $postVars["login"]);
 
-      showInputHidden("md5");
-      showInputHidden("md5_confirm");
-    ?>
+  showInputHidden("md5");
+  showInputHidden("md5_confirm");
 
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2">
-            <?php echo _("Reset User Password"); ?>
-          </th>
-        </tr>
-      </thead>
+  $thead = array(
+    _("Reset User Password") => array('colspan' => 2)
+  );
 
-      <tbody>
-        <tr>
-          <td>
-            <?php echo _("Login") . ":"; ?>
-          </td>
+  $tbody = array();
 
-          <td>
-            <?php echo $postVars["login"]; ?>
-          </td>
-        </tr>
+  $row = _("Login") . ":";
+  $row .= OPEN_SEPARATOR;
+  $row .= $postVars["login"];
 
-        <tr>
-          <td>
-            <label for="pwd"><?php echo _("Password") . ":"; ?></label>
-          </td>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-          <td>
-            <?php showInputText("pwd", 20, 20, $postVars["pwd"], $pageErrors["pwd"], "password"); ?>
-          </td>
-        </tr>
+  $row = '<label for="pwd">' . _("Password") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("pwd", 20, 20, $postVars["pwd"], $pageErrors["pwd"], "password");
 
-        <tr>
-          <td>
-            <label for="pwd2"><?php echo _("Re-enter Password") . ":"; ?></label>
-          </td>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-          <td>
-            <?php showInputText("pwd2", 20, 20, $postVars["pwd2"], $pageErrors["pwd2"], "password"); ?>
-          </td>
-        </tr>
+  $row = '<label for="pwd2">' . _("Re-enter Password") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("pwd2", 20, 20, $postVars["pwd2"], $pageErrors["pwd2"], "password");
 
-        <tr>
-          <td class="center" colspan="2">
-            <?php
-              showInputButton("button1", _("Submit"));
-              showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-            ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $tfoot = array(
+    htmlInputButton("button1", _("Submit"))
+    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+  );
+
+  $options = array(
+    'shaded' => false,
+    'tfoot' => array('align' => 'center')
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
+?>
   </div>
 </form>
 
