@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: parse_sql_file.php,v 1.5 2004/07/28 16:34:33 jact Exp $
+ * $Id: parse_sql_file.php,v 1.6 2004/07/29 18:15:15 jact Exp $
  */
 
 /**
@@ -72,7 +72,7 @@ function parseSQLFile($file, $table, $drop = true)
 
   if ($drop)
   {
-    $sql = "DROP TABLE " . $table;
+    $sql = "DROP TABLE IF EXISTS " . $table;
     @$result = $installQ->exec($sql);
     if ($installQ->isError())
     {
