@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.3 2004/04/24 17:44:12 jact Exp $
+ * $Id: header.php,v 1.4 2004/06/06 11:39:47 jact Exp $
  */
 
 /**
@@ -22,15 +22,16 @@
   require_once("../lib/lang_lib.php");
   require_once("../lib/nls.php");
 
+  $nls = getNLS();
   define("OPEN_LANGUAGE", setLanguage());
   initLanguage(OPEN_LANGUAGE);
 
-  $nls = getNLS();
   define("OPEN_CHARSET", (isset($nls['charset'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['charset']));
   define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));
+  define("OPEN_ENCODING", (isset($nls['encoding'][OPEN_LANGUAGE]) ? $nls['encoding'][OPEN_LANGUAGE] : $nls['default']['encoding']));
 
   // To prevent 'short_open_tag = On' mistake
-  echo '<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>' . "\n";
+  echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo OPEN_LANGUAGE; ?>" dir="<?php echo OPEN_DIRECTION; ?>">
@@ -39,7 +40,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
 
-<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
 
 <meta http-equiv="Pragma" content="no-cache" />
 

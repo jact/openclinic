@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.4 2004/06/01 18:06:09 jact Exp $
+ * $Id: theme_preview.php,v 1.5 2004/06/06 11:39:20 jact Exp $
  */
 
 /**
@@ -73,13 +73,13 @@
   require_once("../lib/lang_lib.php");
   require_once("../lib/nls.php");
 
+  $nls = getNLS();
   setLanguage(OPEN_LANGUAGE);
   initLanguage(OPEN_LANGUAGE);
 
-  $nls = getNLS();
   define("OPEN_CHARSET", (isset($nls['charset'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['charset']));
   define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));
-  define("OPEN_ENCODING", "ISO-8859-1"); // getNLS()?
+  define("OPEN_ENCODING", (isset($nls['encoding'][OPEN_LANGUAGE]) ? $nls['encoding'][OPEN_LANGUAGE] : $nls['default']['encoding']));
 
   ////////////////////////////////////////////////////////////////////
   // Theme related constants.
@@ -125,6 +125,16 @@
 <title><?php echo sprintf(_("%s Theme Preview"), $_POST["theme_name"]); ?></title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
+
+<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
+
+<meta http-equiv="Pragma" content="no-cache" />
+
+<meta http-equiv="expires" content="-1" />
+
+<meta http-equiv="imagetoolbar" content="no" />
+
+<meta name="robots" content="noindex,nofollow" />
 
 <meta name="MSSmartTagsPreventParsing" content="TRUE" />
 

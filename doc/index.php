@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.3 2004/06/01 18:06:15 jact Exp $
+ * $Id: index.php,v 1.4 2004/06/06 11:39:31 jact Exp $
  */
 
 /**
@@ -36,6 +36,16 @@
 <title><?php echo _("OpenClinic Help"); ?></title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
+
+<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
+
+<meta http-equiv="Pragma" content="no-cache" />
+
+<meta http-equiv="expires" content="-1" />
+
+<meta http-equiv="imagetoolbar" content="no" />
+
+<meta name="robots" content="noindex,nofollow" />
 
 <meta name="MSSmartTagsPreventParsing" content="TRUE" />
 
