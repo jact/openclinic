@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.10 2004/09/23 18:52:14 jact Exp $
+ * $Id: login.php,v 1.11 2004/11/05 12:36:19 jact Exp $
  */
 
 /**
@@ -84,7 +84,7 @@
         exit();
       }
 
-      @$lastLogin = $_SESSION["postVars"]["login_session"];
+      $lastLogin = (isset($_SESSION["postVars"]["login_session"])) ? $_SESSION["postVars"]["login_session"] : "";
       $userQ->verifySignOn($loginSession, $pwdSession);
       if ($userQ->isError())
       {
@@ -205,7 +205,10 @@
   $_SESSION["memberUser"] = $user->getIdMember();
   $_SESSION["loginSession"] = $user->getLogin();
   $_SESSION["token"] = $token;
-  @$_SESSION["loginAttempts"] = $sessLoginAttempts;
+  if (isset($sessLoginAttempts))
+  {
+    $_SESSION["loginAttempts"] = $sessLoginAttempts;
+  }
   $_SESSION["hasAdminAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
   $_SESSION["hasMedicalAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
   $_SESSION["hasStatsAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR);
