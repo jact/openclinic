@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new.php,v 1.5 2004/07/07 17:21:53 jact Exp $
+ * $Id: user_new.php,v 1.6 2004/07/10 16:00:09 jact Exp $
  */
 
 /**
@@ -79,32 +79,10 @@
   unset($_SESSION["pageErrors"]);
 
   ////////////////////////////////////////////////////////////////////
-  // Show success page
+  // Redirect to user list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  $title = _("Add New User");
-  require_once("../shared/header.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Admin") => "../admin/index.php",
-    _("Users") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "users.png");
-  unset($links);
-
-  echo '<p>';
-  echo (isset($loginUsed) && $loginUsed)
-    ? sprintf(_("Login, %s, already exists. The changes have no effect."), $user->getLogin())
-    : sprintf(_("User, %s, has been added."), $user->getLogin());
-  echo "</p>\n";
-
+  $info = urlencode($user->getLogin());
+  $returnLocation .= ((isset($loginUsed) && $loginUsed) ? "?login" : "?added") . "=Y&info=" . $info;
   unset($user);
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to users list") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation);
 ?>

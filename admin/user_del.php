@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del.php,v 1.4 2004/07/07 17:21:53 jact Exp $
+ * $Id: user_del.php,v 1.5 2004/07/10 16:00:08 jact Exp $
  */
 
 /**
@@ -64,26 +64,8 @@
   unset($userQ);
 
   ////////////////////////////////////////////////////////////////////
-  // Show success page
+  // Redirect to user list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  $title = _("Delete User");
-  require_once("../shared/header.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Admin") => "../admin/index.php",
-    _("Users") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "users.png");
-  unset($links);
-
-  echo '<p>' . sprintf(_("User, %s, has been deleted."), $login) . "</p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to users list") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  $info = urlencode($login);
+  header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
 ?>

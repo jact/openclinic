@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.8 2004/07/08 16:44:07 jact Exp $
+ * $Id: user_list.php,v 1.9 2004/07/10 16:00:09 jact Exp $
  */
 
 /**
@@ -66,6 +66,46 @@
   );
   showNavLinks($links, "users.png");
   unset($links);
+
+  ////////////////////////////////////////////////////////////////////
+  // Display insertion message if coming from new with a successful insert.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["added"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("User, %s, has been added."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display update message if coming from edit with a successful update.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["updated"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("User, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display deletion message if coming from del with a successful delete.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("User, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display password reset message if coming from pwd_reset with a succesful update.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["password"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Password of user, %s, has been reset."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display login used message.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["login"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])) . "</p>\n";
+  }
 ?>
 
 <form method="post" action="../admin/user_new_form.php?reset=Y">

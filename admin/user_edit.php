@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.5 2004/07/08 18:11:57 jact Exp $
+ * $Id: user_edit.php,v 1.6 2004/07/10 16:00:09 jact Exp $
  */
 
 /**
@@ -34,6 +34,8 @@
   }
 
   $errorLocation = "../admin/user_edit_form.php?key=" . $_POST["id_user"] . ((isset($_POST["all"])) ? "&all=Y" : "");
+  // Redefinition if it is needed after count($_POST)
+  $returnLocation = ((isset($_POST["all"])) ? "../home/index.php" : "../admin/user_list.php");
 
   require_once("../shared/read_settings.php");
   if ( !isset($_POST["all"]) )
@@ -110,46 +112,10 @@
   unset($_SESSION["pageErrors"]);
 
   ////////////////////////////////////////////////////////////////////
-  // Show success page
+  // Redirect to $returnLocation to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  $title = ((isset($_POST["all"])) ? _("Change User Data") : _("Edit User"));
-  require_once("../shared/header.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  if ( !isset($_POST["all"]) )
-  {
-    $links = array(
-      _("Admin") => "../admin/index.php",
-      _("Users") => $returnLocation,
-      $title => ""
-    );
-  }
-  else
-  {
-    $links = array(
-      _("Home") => "../home/index.php",
-      $title => ""
-    );
-  }
-  showNavLinks($links, "users.png");
-  unset($links);
-
-  echo '<p>';
-  echo (isset($loginUsed) && $loginUsed)
-    ? sprintf(_("Login, %s, already exists. The changes have no effect."), $user->getLogin())
-    : sprintf(_("User, %s, has been updated."), $user->getLogin());
-  echo "</p>\n";
-
+  $info = urlencode($user->getLogin());
+  $returnLocation .= ((isset($loginUsed) && $loginUsed) ? "?login" : "?updated") . "=Y&info=" . $info;
   unset($user);
-
-  echo '<p>';
-  echo (isset($_POST["all"]))
-    ? '<a href="../home/index.php">' . _("Return to home page")
-    : '<a href="' . $returnLocation . '">' . _("Return to users list");
-  echo "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation);
 ?>

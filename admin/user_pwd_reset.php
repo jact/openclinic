@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset.php,v 1.3 2004/07/07 17:21:53 jact Exp $
+ * $Id: user_pwd_reset.php,v 1.4 2004/07/10 16:00:09 jact Exp $
  */
 
 /**
@@ -90,27 +90,9 @@
   unset($_SESSION["pageErrors"]);
 
   ////////////////////////////////////////////////////////////////////
-  // Show success page
+  // Redirect to user list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  $title = _("Reset User Password");
-  require_once("../shared/header.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Admin") => "../admin/index.php",
-    _("Users") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "users.png");
-  unset($links);
-
-  echo '<p>' . sprintf(_("Password of user, %s, has been reset."), $user->getLogin()) . "</p>\n";
+  $info = urlencode($user->getLogin());
   unset($user);
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to users list") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation . "?password=Y&info=" . $info);
 ?>
