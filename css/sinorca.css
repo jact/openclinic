@@ -1,10 +1,13 @@
 /* CSS based in Sinorca (haran's design in oswd.org) */
 
-body {
-  margin: 0;
-  padding: 0;
+html, body {
   background: #fff;
   color: #000;
+  margin: 0;
+  padding: 0;
+}
+
+body {
   font-family: verdana, tahoma, helvetica, arial, sans-serif;
   font-size: 82%;
 }
@@ -98,6 +101,7 @@ li#first a, li#first span {
 }
 
 #tabs span {
+  background: inherit;
   color: #ffebcd;
 }
 
@@ -133,11 +137,11 @@ li#first a, li#first span {
 }
 
 .linkList a:before {
-  content: "> ";
+  content: "> \0020";
 }
 
 .linkList .selected:before {
-  content: ">> ";
+  content: "\00bb \0020";
 }
 
 .linkList a, .linkList a:visited, .linkList .subnavbar a {

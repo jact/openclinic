@@ -1,12 +1,15 @@
 /* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
 
-body {
-  color: #848484;
+html, body {
   background: #fff;
-  font-family: verdana, helvetica, arial, sans-serif;
-  font-size: 71%;
+  color: #848484;
   margin: 0;
   padding: 0;
+}
+
+body {
+  font-family: verdana, helvetica, arial, sans-serif;
+  font-size: 71%;
 }
 
 .noPrint {
@@ -32,8 +35,8 @@ img {
 
 #headerInformation {
   position: absolute;
-  top: 2mm;
-  right: 5mm;
+  top: 8px;
+  right: 18px;
   border: 1px dotted #848484;
   padding: 3px;
 }
@@ -45,7 +48,7 @@ img {
 #tabs {
   list-style-type: none;
   list-style-position: outside;
-  margin: 5mm 5mm 0 0;
+  margin: 18px 18px 0 0;
   padding: 0;
   text-align: right;
 }
@@ -168,7 +171,7 @@ img {
   color: #afafaf;
   background: #fafafa;
   margin: 0;
-  padding: 0.25em 5mm 1.25ex 4mm;
+  padding: 0.25em 18px 1.25ex 15px;
   clear: both;
 }
 
