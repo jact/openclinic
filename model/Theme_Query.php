@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.6 2004/08/03 11:22:25 jact Exp $
+ * $Id: Theme_Query.php,v 1.7 2004/08/05 14:18:51 jact Exp $
  */
 
 /**
@@ -30,6 +30,7 @@ require_once("../classes/Theme.php");
  *  mixed select(int $idTheme = 0)
  *  mixed selectWithStats(int $idTheme = 0)
  *  mixed fetch(void)
+ *  bool existCSSFile(string $file, int $idTheme = 0)
  *  bool insert(Theme $theme)
  *  bool update(Theme $theme)
  *  bool delete(int $idTheme)
@@ -138,6 +139,70 @@ class Theme_Query extends Query
   }
 
   /**
+   * bool existCSSFile(string $file, int $idTheme = 0)
+   ********************************************************************
+   * Executes a query
+   ********************************************************************
+   * @param string $file filename to know if exists
+   * @param int $idTheme (optional) key of theme
+   * @global array $reservedCSSFiles
+   * @return boolean returns true if file already exists or false if error occurs
+   * @access public
+   */
+  function existCSSFile($file, $idTheme = 0)
+  {
+    global $reservedCSSFiles;
+
+    if (in_array($file, $reservedCSSFiles))
+    {
+      $this->_error = "That filename is reserved for internal use.";
+      return false;
+    }
+
+    $sql = "SELECT COUNT(css_file)";
+    $sql .= " FROM " . $this->_table;
+    $sql .= " WHERE css_file='" . urlencode($file) . "'";
+    if ($idTheme > 0)
+    {
+      $sql .= " AND id_theme<>" . intval($idTheme);
+    }
+
+    $result = $this->exec($sql);
+    if ($result == false)
+    {
+      $this->_error = "Error checking for dup file.";
+      return false;
+    }
+
+    $array = $this->fetchRow(MYSQL_NUM);
+
+    return ($array[0] > 0);
+  }
+
+  function _writeCSSFile($cssFile, $cssRules)
+  {
+    $filename = '../css/' . $cssFile;
+    $fp = fopen($filename, 'wb');
+    if ( !$fp )
+    {
+      $this->_error = "Error creating css file.";
+      return false;
+    }
+
+    $size = strlen($cssRules);
+    if ( !fwrite($fp, $cssRules, $size) )
+    {
+      $this->_error = "Error writting css file.";
+      return false;
+    }
+    fclose($fp);
+
+    @chmod($filename, 0644); // without execution permissions if it is possible
+
+    return true;
+  }
+
+  /**
    * bool insert(Theme $theme)
    ********************************************************************
    * Inserts a new theme into the theme table.
@@ -154,23 +219,10 @@ class Theme_Query extends Query
       return false;
     }
 
-    $filename = '../css/' . $theme->getCSSFile();
-    $fp = fopen($filename, 'wb');
-    if ( !$fp )
+    if ( !$this->_writeCSSFile($theme->getCSSFile(), $theme->getCSSRules()) )
     {
-      $this->_error = "Error creating css file.";
       return false;
     }
-
-    $size = strlen($theme->getCSSRules());
-    if ( !fwrite($fp, $theme->getCSSRules(), $size) )
-    {
-      $this->_error = "Error writting css file.";
-      return false;
-    }
-    fclose($fp);
-
-    @chmod($filename, 0644); // without execution permissions if it is possible
 
     $sql = "INSERT INTO " . $this->_table . " VALUES (NULL, ";
     $sql .= "'" . urlencode($theme->getThemeName()) . "', ";
@@ -202,9 +254,28 @@ class Theme_Query extends Query
       return false;
     }
 
+    $isDupFile = $this->existCSSFile($theme->getCSSFile(), $theme->getIdTheme());
+    if ($this->isError())
+    {
+      return false;
+    }
+
+    if ($isDupFile)
+    {
+      $this->_isError = true;
+      $this->_error = "File is already in use.";
+      return false;
+    }
+
+    if ( !$this->_writeCSSFile($theme->getCSSFile(), $theme->getCSSRules()) )
+    {
+      return false;
+    }
+
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "theme_name='" . urlencode($theme->getThemeName()) . "', ";
-    $sql .= "css_file='" . urlencode($theme->getCSSFile()) . "';";
+    $sql .= "css_file='" . urlencode($theme->getCSSFile()) . "'";
+    $sql .= " WHERE id_theme=" . $theme->getIdTheme();
 
     $result = $this->exec($sql);
     if ($result == false)
