@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Query.php,v 1.3 2004/07/07 17:28:11 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@ require_once("../classes/DbConnection.php");
  *  bool freeResult(void)
  *  mixed affectedRows(void)
  *  void clearErrors(void)
- *  bool errorOccurred(void)
+ *  bool isError(void)
  *  string getError(void)
  *  int getDbErrno(void)
  *  string getDbError(void)
@@ -44,7 +44,7 @@ require_once("../classes/DbConnection.php");
 class Query
 {
   var $_conn;
-  var $_errorOccurred = false;
+  var $_isError = false;
   var $_error = ""; // so it could change the error message
   var $_dbErrno = 0; // it is not superfluous
   var $_dbError = ""; // it is not superfluous
@@ -74,9 +74,9 @@ class Query
     }
 
     $result = $this->_conn->connect();
-    if ($result == false)
+    if ($result === false)
     {
-      $this->_errorOccurred = true;
+      $this->_isError = true;
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
@@ -96,9 +96,9 @@ class Query
   function close()
   {
     $result = $this->_conn->close();
-    if ($result == false)
+    if ($result === false)
     {
-      $this->_errorOccurred = true;
+      $this->_isError = true;
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
@@ -122,9 +122,9 @@ class Query
     $this->_SQL = $sql;
 
     $result = $this->_conn->exec($sql);
-    if ($result == false)
+    if ($result === false)
     {
-      $this->_errorOccurred = true;
+      $this->_isError = true;
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
@@ -144,7 +144,14 @@ class Query
    */
   function fetchRow($arrayType = MYSQL_ASSOC)
   {
-    return $this->_conn->fetchRow($arrayType);
+    $result = $this->_conn->fetchRow($arrayType);
+    if ($result === false)
+    {
+      $this->_isError = true;
+      $this->_error = $this->_conn->getError();
+    }
+
+    return $result;
   }
 
   /**
@@ -159,9 +166,9 @@ class Query
   function fetchAll($arrayType = MYSQL_ASSOC)
   {
     $result = $this->_conn->fetchAll($arrayType);
-    if ($result == false)
+    if ($result === false)
     {
-      $this->_errorOccurred = true;
+      $this->_isError = true;
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
@@ -225,7 +232,7 @@ class Query
    */
   function clearErrors()
   {
-    $this->_errorOccurred = false;
+    $this->_isError = false;
     $this->_error = "";
     $this->_dbErrno = 0;
     $this->_dbError = "";
@@ -233,14 +240,14 @@ class Query
   }
 
   /**
-   * bool errorOccurred(void)
+   * bool isError(void)
    ********************************************************************
    * @return boolean true if error occurred
    * @access public
    */
-  function errorOccurred()
+  function isError()
   {
-    return $this->_errorOccurred;
+    return $this->_isError;
   }
 
   /**
