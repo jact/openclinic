@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.16 2004/08/09 11:33:07 jact Exp $
+ * $Id: theme_preview.php,v 1.17 2004/08/09 14:32:16 jact Exp $
  */
 
 /**
@@ -232,7 +232,9 @@
 
 <p><a href="#top"><?php echo _("Sample Link"); ?></a></p>
 
-<h3><?php echo _("Sample List:"); ?></h3>
+<hr />
+
+<h3><?php echo _("Subtitle Sample:"); ?></h3>
 
 <?php
   $thead = array(
