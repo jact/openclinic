@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.5 2004/07/26 18:47:25 jact Exp $
+ * $Id: login_form.php,v 1.6 2004/09/23 18:52:14 jact Exp $
  */
 
 /**
@@ -52,7 +52,8 @@
   unset($links);
 
   // Warning message if loginAttempts == (OPEN_MAX_LOGIN_ATTEMPTS - 1)
-  if (isset($_SESSION["loginAttempts"]) && $_SESSION["loginAttempts"] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
+  if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION["loginAttempts"])
+      && $_SESSION["loginAttempts"] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
   {
     showMessage(_("Last attempt to type correct password before suspend this user account."));
   }

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.9 2004/08/09 14:21:01 jact Exp $
+ * $Id: login.php,v 1.10 2004/09/23 18:52:14 jact Exp $
  */
 
 /**
@@ -116,7 +116,7 @@
         $userQ->clearErrors(); // needed after empty fetch(), from verifySigOn()
 
         // Suspend user login if loginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS
-        if ($sessLoginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS)
+        if (OPEN_MAX_LOGIN_ATTEMPTS && $sessLoginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS)
         {
           $userQ->deactivate($loginSession);
           if ($userQ->isError())
