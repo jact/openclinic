@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log_tbl.sql,v 1.3 2004/04/24 15:12:21 jact Exp $
+ * $Id: record_log_tbl.sql,v 1.4 2004/07/24 16:22:04 jact Exp $
  */
 
 /**
@@ -21,7 +21,6 @@ CREATE TABLE record_log_tbl (
   access_date DATETIME NOT NULL,
   table_name VARCHAR(25) NOT NULL,
   operation VARCHAR(10) NOT NULL,
-  id_key1 INT UNSIGNED NOT NULL,
-  id_key2 INT UNSIGNED NULL,
+  affected_row TEXT NOT NULL,
   KEY id_user (id_user)
 );
