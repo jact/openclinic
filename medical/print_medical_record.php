@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.7 2004/07/08 16:43:01 jact Exp $
+ * $Id: print_medical_record.php,v 1.8 2004/07/31 19:05:44 jact Exp $
  */
 
 /**
@@ -44,7 +44,7 @@
   if (count($_GET) == 0 || empty($_GET["key"]))
   {
     echo "</head><body>\n";
-    echo '<p>' . _("No patient selected.") . "</p>\n";
+    showMessage(_("No patient selected."), OPEN_MSG_ERROR);
     echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
     echo "</body></html>\n";
     exit();
@@ -76,7 +76,7 @@
   {
     $patQ->close();
     echo "</head><body>\n";
-    echo '<p>' . _("That patient does not exist.") . "</p>\n";
+    showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
     echo "</body></html>\n";
     exit();
   }

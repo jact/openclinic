@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.6 2004/07/10 16:44:57 jact Exp $
+ * $Id: patient_view.php,v 1.7 2004/07/31 19:03:55 jact Exp $
  */
 
 /**
@@ -66,7 +66,7 @@
     $patQ->close();
     include_once("../shared/header.php");
 
-    echo '<p>' . _("That patient does not exist.") . "</p>\n";
+    showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
 
     include_once("../shared/footer.php");
     exit();
@@ -112,7 +112,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]))
   {
-    echo '<p>' . _("Patient has been added.") . "</p>\n";
+    showMessage(_("Patient has been added."), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -120,7 +120,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]))
   {
-    echo '<p>' . _("Patient has been updated.") . "</p>\n";
+    showMessage(_("Patient has been updated."), OPEN_MSG_INFO);
   }
 
   echo '<p>';

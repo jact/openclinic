@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_form.php,v 1.4 2004/07/10 16:44:57 jact Exp $
+ * $Id: patient_search_form.php,v 1.5 2004/07/31 19:02:33 jact Exp $
  */
 
 /**
@@ -56,7 +56,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Patient, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Patient, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 ?>
 
@@ -64,12 +64,14 @@
 <?php require_once("../medical/patient_search_fields.php"); ?>
 </form>
 
+<hr />
+
 <form method="post" action="../medical/problem_search.php">
 <?php require_once("../medical/problem_search_fields.php"); ?>
 </form>
 
 <?php
-  echo '<p class="advice center">* ' . _("Note: Empty search to see all results.") . "</p>\n";
+  showMessage('* ' . _("Note: Empty search to see all results."));
 
   require_once("../shared/footer.php");
 ?>
