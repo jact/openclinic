@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.5 2004/07/14 18:18:54 jact Exp $
+ * $Id: login_check.php,v 1.6 2004/08/09 14:21:42 jact Exp $
  */
 
 /**
@@ -55,6 +55,20 @@
     if ( !isset($_SESSION['token']) || $_SESSION['token'] == "" )
     {
       header("Location: ../shared/login_form.php");
+      exit();
+    }
+
+    ////////////////////////////////////////////////////////////////////
+    // Checking if the request is from a different IP to previously
+    ////////////////////////////////////////////////////////////////////
+    if (isset($_SESSION['loginIP']) && $_SESSION['loginIP'] != $_SERVER['REMOTE_ADDR'])
+    {
+      // This is possibly a session hijack attempt
+      //$_SESSION = array(); // deregister all current session variables
+      //session_destroy(); // clean up session ID
+
+      //header("Location: ../shared/login_form.php");
+      include_once("../shared/logout.php");
       exit();
     }
 
