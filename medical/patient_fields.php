@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.4 2004/06/16 19:11:02 jact Exp $
+ * $Id: patient_fields.php,v 1.5 2004/06/20 17:24:16 jact Exp $
  */
 
 /**
@@ -138,20 +138,18 @@
       <td>
         <?php
           $aux = explode("-", $postVars["birth_date"]);
-          showInputText("day", 2, 2, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
-          echo " / ";
+          showInputText("year", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
+          echo " - ";
           showInputText("month", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
-          echo " / ";
-          showInputText("year", 4, 4, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
-          echo " (dd/mm/yyyy)";
+          echo " - ";
+          showInputText("day", 2, 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
+          echo " " . _("(yyyy-mm-dd)");
           unset($aux);
 
           if ($pageErrors["birth_date"] != "")
           {
             echo '<br /><span class="error">' . $pageErrors["birth_date"] . "</span>\n";
           }
-
-          showInputHidden("birth_date");
         ?>
       </td>
     </tr>
@@ -174,20 +172,18 @@
       <td>
         <?php
           $aux = explode("-", $postVars["decease_date"]);
-          showInputText("dday", 2, 2, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
-          echo " / ";
+          showInputText("dyear", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
+          echo " - ";
           showInputText("dmonth", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
-          echo " / ";
-          showInputText("dyear", 4, 4, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
-          echo " (dd/mm/yyyy)";
+          echo " - ";
+          showInputText("dday", 2, 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
+          echo " " . _("(yyyy-mm-dd)");
           unset($aux);
 
           if ($pageErrors["decease_date"] != "")
           {
             echo '<br /><span class="error">' . $pageErrors["decease_date"] . "</span>\n";
           }
-
-          showInputHidden("decease_date");
         ?>
       </td>
     </tr>
