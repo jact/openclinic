@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del.php,v 1.6 2004/07/07 17:21:52 jact Exp $
+ * $Id: staff_del.php,v 1.7 2004/07/10 15:09:27 jact Exp $
  */
 
 /**
@@ -88,27 +88,9 @@
   unset($staffQ);
 
   ////////////////////////////////////////////////////////////////////
-  // Show success page
+  // Redirect to theme list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  $title = _("Delete Staff Member");
-  require_once("../shared/header.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Admin") => "../admin/index.php",
-    _("Staff Members") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "staff.png");
-  unset($links);
-
-  echo '<p>' . sprintf(_("Staff member, %s %s %s, has been deleted."), $staff->getFirstName(), $staff->getSurname1(), $staff->getSurname2()) . "</p>\n";
+  $info = urlencode($staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2());
   unset($staff);
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to staff list") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
 ?>

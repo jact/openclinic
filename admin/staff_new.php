@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new.php,v 1.3 2004/07/07 17:21:52 jact Exp $
+ * $Id: staff_new.php,v 1.4 2004/07/10 15:09:27 jact Exp $
  */
 
 /**
@@ -23,6 +23,7 @@
   $nav = "staff";
   //$restrictInDemo = true;
   $errorLocation = "../admin/staff_new_form.php?type=" . $_GET['type'];
+  $returnLocation = "../admin/staff_list.php";
 
   ////////////////////////////////////////////////////////////////////
   // Checking for post vars. Go back to form if none found.
@@ -78,34 +79,18 @@
   unset($_SESSION["pageErrors"]);
 
   ////////////////////////////////////////////////////////////////////
-  // Show success page
+  // Redirect to theme list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  $title = _("Staff Members");
-  require_once("../shared/header.php");
-
-  $returnLocation = "../admin/staff_list.php";
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Admin") => "../admin/index.php",
-    _("Staff Members") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "staff.png");
-  unset($links);
-
-  echo '<p>';
-  echo (isset($loginUsed) && $loginUsed)
-    ? sprintf(_("Login, %s, already exists. The changes have no effect."), $staff->getLogin())
-    : sprintf(_("Staff member, %s %s %s, has been added."), $staff->getFirstName(), $staff->getSurname1(), $staff->getSurname2());
-  echo "</p>\n";
-
+  if (isset($loginUsed) && $loginUsed)
+  {
+    $info = urlencode($staff->getLogin());
+    $getStr = "?login=Y&info=" . $info;
+  }
+  else
+  {
+    $info = urlencode($staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2());
+    $getStr = "?added=Y&info=" . $info;
+  }
   unset($staff);
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to staff list") . "</a></p>\n";
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation . $getStr);
 ?>
