@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_use.php,v 1.3 2004/07/07 17:21:53 jact Exp $
+ * $Id: theme_use.php,v 1.4 2004/10/04 18:02:24 jact Exp $
  */
 
 /**
@@ -40,7 +40,7 @@
   ////////////////////////////////////////////////////////////////////
   // Update theme in use
   ////////////////////////////////////////////////////////////////////
-  $idTheme = $_POST["id_theme"];
+  $idTheme = intval($_POST["id_theme"]);
 
   $setQ = new Setting_Query();
   $setQ->connect();
