@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem.php,v 1.3 2004/05/16 18:11:14 jact Exp $
+ * $Id: Problem.php,v 1.4 2004/05/23 10:47:50 jact Exp $
  */
 
 /**
@@ -255,7 +255,7 @@ class Problem
    */
   function setClosingDate($value)
   {
-    $this->_closingDate = (trim($value) == "NULL") ? "" : ereg_replace('^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$', '\3-\2-\1', trim($value));
+    $this->_closingDate = ((trim($value) == "") || trim($value) == "0000-00-00") ? "0000-00-00" : ereg_replace('^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$', '\3-\2-\1', trim($value));
   }
 
   /**
