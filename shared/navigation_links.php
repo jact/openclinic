@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: navigation_links.php,v 1.4 2004/09/22 18:20:49 jact Exp $
+ * $Id: navigation_links.php,v 1.5 2004/10/17 14:57:35 jact Exp $
  */
 
 /**
@@ -18,7 +18,7 @@
  * @todo include htmlNavLinks() function (or htmlBreadCrumb)
  */
 
-  if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
+  if (str_replace("\\", "/", __FILE__) == $_SERVER['PATH_TRANSLATED'])
   {
     header("Location: ../index.php");
     exit();

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: error_lib.php,v 1.10 2004/09/29 20:54:15 jact Exp $
+ * $Id: error_lib.php,v 1.11 2004/10/17 14:56:39 jact Exp $
  */
 
 /**
@@ -16,7 +16,7 @@
  * Author: jact <jachavar@terra.es>
  */
 
-  if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
+  if (str_replace("\\", "/", __FILE__) == $_SERVER['PATH_TRANSLATED'])
   {
     header("Location: ../index.php");
     exit();

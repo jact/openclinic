@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del.php,v 1.7 2004/10/04 18:00:31 jact Exp $
+ * $Id: theme_del.php,v 1.8 2004/10/17 14:56:03 jact Exp $
  */
 
 /**
@@ -67,7 +67,7 @@
 
   if ( !in_array($file, $reservedCSSFiles) )
   {
-    @unlink(dirname($_SERVER['SCRIPT_FILENAME']) . '/../css/' . basename($file));
+    @unlink(dirname($_SERVER['PATH_TRANSLATED']) . '/../css/' . basename($file));
   }
 
   ////////////////////////////////////////////////////////////////////
