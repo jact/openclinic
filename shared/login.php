@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.7 2004/07/18 15:16:50 jact Exp $
+ * $Id: login.php,v 1.8 2004/07/18 15:45:35 jact Exp $
  */
 
 /**
@@ -76,6 +76,14 @@
     }
     else
     {
+      if ( !$userQ->isActivated($loginSession) )
+      {
+        $userQ->close();
+
+        header("Location: ../shared/login_suspended.php");
+        exit();
+      }
+
       @$lastLogin = $_SESSION["postVars"]["login_session"];
       $userQ->verifySignOn($loginSession, $pwdSession);
       if ($userQ->isError())
