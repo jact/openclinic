@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.5 2004/07/07 17:23:20 jact Exp $
+ * $Id: problem_view.php,v 1.6 2004/10/04 21:38:03 jact Exp $
  */
 
 /**
@@ -32,18 +32,18 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
   require_once("../classes/Problem_Query.php");
   require_once("../classes/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idProblem = intval($_GET["key"]);
+  $idPatient = intval($_GET["pat"]);
 
   ////////////////////////////////////////////////////////////////////
   // Search database for problem
@@ -158,15 +158,18 @@
   }
 
   echo '<h3>' . _("Opening Date") . "</h3>\n";
-  echo '<p>' . $problem->getOpeningDate() . "</p>\n";
+  echo '<p>' . localDate($problem->getOpeningDate()) . "</p>\n";
 
-  echo '<h3>' . _("Last Update Date") . "</h3>\n";
-  echo '<p>' . $problem->getLastUpdateDate() . "</p>\n";
+  if (localDate($problem->getLastUpdateDate()) != "") // backwards compatibility
+  {
+    echo '<h3>' . _("Last Update Date") . "</h3>\n";
+    echo '<p>' . localDate($problem->getLastUpdateDate()) . "</p>\n";
+  }
 
-  if ($problem->getClosingDate() != "")
+  if (localDate($problem->getClosingDate()) != "")
   {
     echo '<h3>' . _("Closing Date") . "</h3>\n";
-    echo '<p>' . $problem->getClosingDate() . "</p>\n";
+    echo '<p>' . localDate($problem->getClosingDate()) . "</p>\n";
   }
 
   if ($problem->getMeetingPlace())

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.8 2004/08/12 10:58:53 jact Exp $
+ * $Id: patient_view.php,v 1.9 2004/10/04 21:34:33 jact Exp $
  */
 
 /**
@@ -32,17 +32,17 @@
   $nav = "social";
   $onlyDoctor = true;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = intval($_GET["key"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
   require_once("../classes/Patient_Query.php");
   require_once("../classes/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get var
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_GET["key"]);
 
   ////////////////////////////////////////////////////////////////////
   // Search database for patient
@@ -138,7 +138,7 @@
   echo '<p>' . $pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName() . "</p>\n";
 
   //echo '<h3>' . _("Last Update Date") . "</h3>\n";
-  //echo '<p>' . $pat->getLastUpdateDate() . "</p>\n";
+  //echo '<p>' . localDate($pat->getLastUpdateDate()) . "</p>\n";
 
   if ($pat->getNIF())
   {

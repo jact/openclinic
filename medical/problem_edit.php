@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit.php,v 1.6 2004/08/12 10:03:31 jact Exp $
+ * $Id: problem_edit.php,v 1.7 2004/10/04 21:35:16 jact Exp $
  */
 
 /**
@@ -32,18 +32,17 @@
   $nav = "problems";
   $onlyDoctor = false;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post var
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = intval($_POST["id_patient"]);
-
-  $errorLocation = "../medical/problem_edit_form.php?key=" . $_POST["id_problem"] . "&pat=" . $idPatient;
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Problem_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving post vars
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_POST["id_patient"]);
+  $idProblem = intval($_POST["id_problem"]);
 
   ////////////////////////////////////////////////////////////////////
   // Validate data
@@ -84,7 +83,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog($table, "UPDATE", array($_POST["id_problem"]));
+  recordLog($table, "UPDATE", array($idProblem));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

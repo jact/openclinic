@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.7 2004/07/31 19:08:54 jact Exp $
+ * $Id: problem_edit_form.php,v 1.8 2004/10/04 21:35:31 jact Exp $
  */
 
 /**
@@ -32,12 +32,6 @@
   $nav = "problems";
   $onlyDoctor = false;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Problem_Query.php");
@@ -49,6 +43,12 @@
   // after login_check inclusion to avoid JavaScript mistakes in demo version
   $focusFormName = "forms[0]";
   $focusFormField = "wording";
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idProblem = intval($_GET["key"]);
+  $idPatient = intval($_GET["pat"]);
 
   // after clean (get_form_vars.php)
   $postVars["id_problem"] = $idProblem;
@@ -86,13 +86,13 @@
   }
   else
   {
-    $postVars["last_update_date"] = date("d-m-Y"); //date("Y-m-d");
     $postVars["order_number"] = $problem->getOrderNumber();
     $postVars["opening_date"] = $problem->getOpeningDate();
     if (isset($_GET["reset"]))
     {
+      $postVars["last_update_date"] = $problem->getLastUpdateDate();
       $postVars["collegiate_number"] = $problem->getCollegiateNumber();
-      $postVars["closed_problem"] = (($problem->getClosingDate() != "") ? "checked" : "");
+      $postVars["closed_problem"] = ((localDate($problem->getClosingDate()) != "") ? "checked" : "");
       $postVars["meeting_place"] = $problem->getMeetingPlace();
       $postVars["wording"] = $problem->getWording();
       $postVars["subjective"] = $problem->getSubjective();
@@ -131,7 +131,7 @@
   unset($links);
 
   showPatientHeader($idPatient);
-  echo "<br />\n"; // should be deleted
+  echo "<br />\n"; // FIXME: should be deleted
 
   require_once("../shared/form_errors_msg.php");
 ?>

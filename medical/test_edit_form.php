@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit_form.php,v 1.7 2004/08/01 09:23:09 jact Exp $
+ * $Id: test_edit_form.php,v 1.8 2004/10/04 21:41:56 jact Exp $
  */
 
 /**
@@ -33,13 +33,6 @@
   $onlyDoctor = false;
   $restrictInDemo = true; // To prevent users' malice
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
-  $idTest = intval($_GET["test"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Test_Query.php");
@@ -50,6 +43,13 @@
   // after login_check inclusion to avoid JavaScript mistakes in demo version
   $focusFormName = "forms[0]";
   $focusFormField = "document_type";
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idProblem = intval($_GET["key"]);
+  $idPatient = intval($_GET["pat"]);
+  $idTest = intval($_GET["test"]);
 
   $testQ = new Test_Query();
   $testQ->connect();
