@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenClinic 0.7\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2004-08-12 11:55+0100\n"
+"PO-Revision-Date: 2004-08-28 18:34+0100\n"
 "Last-Translator: jact <jachavar@terra.es>\n"
 "Language-Team:  <jachavar@terra.es>\n"
 "MIME-Version: 1.0\n"
@@ -53,7 +53,7 @@ msgstr "Administración"
 #: admin/dump_view_form.php:61
 #: admin/index.php:101
 #: admin/index.php:102
-#: home/index.php:86
+#: home/index.php:85
 #: navbars/admin.php:68
 #: navbars/admin.php:69
 msgid "Dumps"
@@ -416,7 +416,7 @@ msgstr "optimizar la base de datos"
 #: admin/log_access_list.php:74
 #: admin/log_record_list.php:74
 #: admin/log_stats.php:46
-#: home/index.php:87
+#: home/index.php:86
 msgid "Logs"
 msgstr "Logs"
 
@@ -721,7 +721,7 @@ msgstr "Editar Información del Médico"
 #: medical/patient_fields.php:37
 #: medical/patient_search.php:165
 #: medical/patient_search_fields.php:37
-#: medical/patient_view.php:143
+#: medical/patient_view.php:145
 #: medical/print_medical_record.php:113
 #: medical/relative_search.php:158
 msgid "Tax Identification Number (TIN)"
@@ -773,7 +773,7 @@ msgstr "Segundo apellido"
 #: medical/patient_fields.php:61
 #: medical/patient_search.php:185
 #: medical/patient_search_fields.php:41
-#: medical/patient_view.php:149
+#: medical/patient_view.php:151
 #: medical/print_medical_record.php:119
 #: medical/relative_search.php:178
 msgid "Address"
@@ -785,7 +785,7 @@ msgstr "Dirección"
 #: medical/patient_fields.php:67
 #: medical/patient_search.php:190
 #: medical/patient_search_fields.php:42
-#: medical/patient_view.php:155
+#: medical/patient_view.php:157
 #: medical/print_medical_record.php:125
 #: medical/relative_search.php:183
 msgid "Phone Contact"
@@ -855,7 +855,7 @@ msgid "View only doctors"
 msgstr "Ver sólo los médicos"
 
 #: admin/staff_list.php:162
-#: admin/theme_list.php:143
+#: admin/theme_list.php:141
 #: admin/user_list.php:158
 #: medical/patient_search.php:109
 #: medical/problem_search.php:111
@@ -864,7 +864,7 @@ msgid "No results found."
 msgstr "No se han encontrado coincidencias."
 
 #: admin/staff_list.php:168
-#: admin/theme_list.php:149
+#: admin/theme_list.php:147
 #: admin/user_list.php:170
 #: medical/connection_list.php:127
 #: medical/history_list.php:106
@@ -875,8 +875,8 @@ msgid "Function"
 msgstr "Acción"
 
 #: admin/staff_list.php:190
-#: admin/theme_list.php:162
-#: admin/theme_list.php:166
+#: admin/theme_list.php:165
+#: admin/theme_list.php:169
 #: admin/user_list.php:194
 #: medical/problem_list.php:167
 #: medical/test_list.php:146
@@ -885,9 +885,9 @@ msgstr "editar"
 
 #: admin/staff_list.php:195
 #: admin/staff_list.php:199
-#: admin/theme_list.php:181
-#: admin/theme_list.php:185
-#: admin/theme_list.php:189
+#: admin/theme_list.php:184
+#: admin/theme_list.php:188
+#: admin/theme_list.php:192
 #: admin/user_list.php:200
 #: admin/user_list.php:204
 #: medical/connection_list.php:161
@@ -955,7 +955,7 @@ msgid "Preload CSS file"
 msgstr "Precargar fichero CSS"
 
 #: admin/theme_fields.php:31
-#: admin/theme_list.php:150
+#: admin/theme_list.php:148
 msgid "Theme Name"
 msgstr "Nombre"
 
@@ -1005,41 +1005,41 @@ msgstr "Añadir un Nuevo Tema"
 msgid "Themes List:"
 msgstr "Lista de temas:"
 
-#: admin/theme_list.php:151
+#: admin/theme_list.php:149
 msgid "Usage"
 msgstr "Uso"
 
-#: admin/theme_list.php:170
+#: admin/theme_list.php:173
 msgid "copy"
 msgstr "copiar"
 
-#: admin/theme_list.php:173
+#: admin/theme_list.php:176
 msgid "preview"
 msgstr "previsualizar"
 
-#: admin/theme_list.php:176
+#: admin/theme_list.php:179
 msgid "validate"
 msgstr "validar"
 
-#: admin/theme_list.php:198
-#: admin/theme_list.php:202
+#: admin/theme_list.php:201
+#: admin/theme_list.php:205
 msgid "in use"
 msgstr "en uso"
 
-#: admin/theme_list.php:198
+#: admin/theme_list.php:201
 msgid "by application"
 msgstr "aplicación"
 
-#: admin/theme_list.php:202
+#: admin/theme_list.php:205
 #, php-format
 msgid "%d user(s)"
 msgstr "%d usuario(s)"
 
-#: admin/theme_list.php:219
+#: admin/theme_list.php:222
 msgid "Note: The delete function is not available on the themes that are currently in use by some user or by the application."
 msgstr "Nota: La acción borrar no está disponible para los temas que están actualmente en uso por algún usuario o por la aplicación."
 
-#: admin/theme_list.php:220
+#: admin/theme_list.php:223
 msgid "Note: The functions edit and delete are not available on the application themes."
 msgstr "Nota: La acciones editar y borrar no serán aplicables a los temas reservados para la aplicación."
 
@@ -1099,7 +1099,7 @@ msgid "Medical Records"
 msgstr "Historias Clínicas"
 
 #: admin/theme_preview.php:174
-#: doc/index.php:50
+#: doc/index.php:58
 #: medical/print_medical_record.php:46
 #: medical/print_medical_record.php:80
 #: shared/view_source.php:68
@@ -1111,58 +1111,58 @@ msgid "Theme Preview"
 msgstr "Previsualización del Tema"
 
 #: admin/theme_preview.php:184
-#: admin/theme_preview.php:233
+#: admin/theme_preview.php:239
 msgid "Sample Link"
 msgstr "Enlace de ejemplo"
 
 #: admin/theme_preview.php:192
-#: doc/index.php:68
+#: doc/index.php:76
 #: install/footer.php:33
 #: shared/footer.php:60
 #: shared/header.php:177
 msgid "Powered by OpenClinic"
 msgstr "Powered by OpenClinic"
 
-#: admin/theme_preview.php:231
+#: admin/theme_preview.php:237
 #, php-format
 msgid "This is a preview of the %s theme."
 msgstr "Esta es una previsualización del tema %s."
 
-#: admin/theme_preview.php:237
+#: admin/theme_preview.php:243
 msgid "Subtitle Sample:"
 msgstr "Subtítulo de ejemplo:"
 
-#: admin/theme_preview.php:241
+#: admin/theme_preview.php:247
 msgid "Table Heading"
 msgstr "Encabezado de Tabla"
 
-#: admin/theme_preview.php:246
-#: admin/theme_preview.php:248
+#: admin/theme_preview.php:252
+#: admin/theme_preview.php:254
 #, php-format
 msgid "Sample data row %d"
 msgstr "Datos de la fila %d"
 
-#: admin/theme_preview.php:250
+#: admin/theme_preview.php:256
 msgid "Required Field"
 msgstr "Campo imprescindible"
 
-#: admin/theme_preview.php:252
+#: admin/theme_preview.php:258
 msgid "Sample Input Text"
 msgstr "Texto de ejemplo"
 
-#: admin/theme_preview.php:263
+#: admin/theme_preview.php:269
 msgid "Sample Button"
 msgstr "Botón de ejemplo"
 
-#: admin/theme_preview.php:268
+#: admin/theme_preview.php:274
 msgid "Sample Error"
 msgstr "Ejemplo de Error"
 
-#: admin/theme_preview.php:270
+#: admin/theme_preview.php:276
 msgid "Sample Info"
 msgstr "Ejemplo de información"
 
-#: admin/theme_preview.php:272
+#: admin/theme_preview.php:278
 msgid "Sample Warning"
 msgstr "Ejemplo de aviso"
 
@@ -1361,14 +1361,14 @@ msgstr "%s debe ser mayor o igual que %s."
 
 #: classes/Patient.php:165
 #: medical/patient_fields.php:116
-#: medical/patient_view.php:185
+#: medical/patient_view.php:187
 #: medical/print_medical_record.php:155
 msgid "Decease Date"
 msgstr "Fecha de defunción"
 
 #: classes/Patient.php:165
 #: medical/patient_fields.php:91
-#: medical/patient_view.php:170
+#: medical/patient_view.php:172
 #: medical/print_medical_record.php:140
 msgid "Birth Date"
 msgstr "Fecha de nacimiento"
@@ -1384,17 +1384,17 @@ msgstr "Fecha de nacimiento"
 msgid "Y-m-d"
 msgstr "d-m-Y"
 
-#: classes/Setting.php:98
-#: classes/Setting.php:114
+#: classes/Setting.php:97
+#: classes/Setting.php:113
 msgid "This field must be numeric."
 msgstr "Este campo debe contener sólo números."
 
-#: classes/Setting.php:103
-#: classes/Setting.php:119
+#: classes/Setting.php:102
+#: classes/Setting.php:118
 msgid "This field must not contain a decimal point."
 msgstr "Este campo no debe contener decimales."
 
-#: classes/Setting.php:108
+#: classes/Setting.php:107
 msgid "This field must be greater than zero."
 msgstr "Este campo debe ser mayor que cero."
 
@@ -1446,12 +1446,20 @@ msgstr "Las contraseñas no coinciden."
 msgid "OpenClinic Help"
 msgstr "Ayuda de OpenClinic"
 
-#: doc/index.php:58
-#: doc/index.php:60
+#: doc/index.php:52
+#: navbars/admin.php:78
+#: navbars/home.php:59
+#: navbars/medical.php:93
+#: shared/footer.php:40
+msgid "Help"
+msgstr "Ayuda"
+
+#: doc/index.php:66
+#: doc/index.php:68
 msgid "Help Topic"
 msgstr "Tema de Ayuda"
 
-#: doc/index.php:108
+#: doc/index.php:122
 msgid "Sample Help Page:"
 msgstr "Página de ayuda de ejemplo:"
 
@@ -1518,14 +1526,10 @@ msgid "Staff members"
 msgstr "Miembros del personal"
 
 #: home/index.php:83
-msgid "User profiles"
-msgstr "Perfiles de usuario"
-
-#: home/index.php:84
 msgid "Clinic themes editor"
 msgstr "Editor de temas"
 
-#: home/index.php:85
+#: home/index.php:84
 msgid "System users"
 msgstr "Usuarios"
 
@@ -2170,15 +2174,15 @@ msgstr "Hora más concurrida: %1$s el día %3$d de %2$s de %4$d (%5$d entradas)"
 msgid "Back to Main Statistics"
 msgstr "Volver a las estadísticas principales"
 
-#: lib/search_lib.php:158
+#: lib/search_lib.php:166
 msgid "prev"
 msgstr "anterior"
 
-#: lib/search_lib.php:163
+#: lib/search_lib.php:171
 msgid "next"
 msgstr "siguiente"
 
-#: lib/search_lib.php:166
+#: lib/search_lib.php:174
 msgid "Result Pages"
 msgstr "Páginas de resultados"
 
@@ -2577,27 +2581,27 @@ msgstr "Editar Datos Sociales del Paciente"
 
 #: medical/patient_fields.php:73
 #: medical/patient_header.php:74
-#: medical/patient_view.php:159
+#: medical/patient_view.php:161
 #: medical/print_medical_record.php:129
 msgid "Sex"
 msgstr "Sexo"
 
 #: medical/patient_fields.php:77
 #: medical/patient_header.php:74
-#: medical/patient_view.php:160
+#: medical/patient_view.php:162
 #: medical/print_medical_record.php:130
 msgid "Male"
 msgstr "Varón"
 
 #: medical/patient_fields.php:78
 #: medical/patient_header.php:74
-#: medical/patient_view.php:160
+#: medical/patient_view.php:162
 #: medical/print_medical_record.php:130
 msgid "Female"
 msgstr "Hembra"
 
 #: medical/patient_fields.php:85
-#: medical/patient_view.php:164
+#: medical/patient_view.php:166
 #: medical/print_medical_record.php:134
 msgid "Race"
 msgstr "Raza"
@@ -2610,7 +2614,7 @@ msgstr "(aaaa-mm-dd)"
 #: medical/patient_fields.php:110
 #: medical/patient_search.php:180
 #: medical/patient_search_fields.php:40
-#: medical/patient_view.php:179
+#: medical/patient_view.php:181
 #: medical/print_medical_record.php:149
 #: medical/relative_search.php:173
 msgid "Birth Place"
@@ -2619,7 +2623,7 @@ msgstr "Lugar de nacimiento"
 #: medical/patient_fields.php:135
 #: medical/patient_search.php:170
 #: medical/patient_search_fields.php:38
-#: medical/patient_view.php:191
+#: medical/patient_view.php:193
 #: medical/print_medical_record.php:161
 #: medical/relative_search.php:163
 msgid "Sanitary Card Number (SCN)"
@@ -2628,26 +2632,26 @@ msgstr "Número de Tarjeta Sanitaria (NTS)"
 #: medical/patient_fields.php:141
 #: medical/patient_search.php:175
 #: medical/patient_search_fields.php:39
-#: medical/patient_view.php:197
+#: medical/patient_view.php:199
 #: medical/print_medical_record.php:167
 #: medical/relative_search.php:168
 msgid "National Health Service Number (NHSN)"
 msgstr "Número de la Seguridad Social (NSS)"
 
 #: medical/patient_fields.php:147
-#: medical/patient_view.php:203
+#: medical/patient_view.php:205
 #: medical/print_medical_record.php:173
 msgid "Family Situation"
 msgstr "Situación Familiar"
 
 #: medical/patient_fields.php:153
-#: medical/patient_view.php:209
+#: medical/patient_view.php:211
 #: medical/print_medical_record.php:179
 msgid "Labour Situation"
 msgstr "Situación Laboral"
 
 #: medical/patient_fields.php:159
-#: medical/patient_view.php:215
+#: medical/patient_view.php:217
 #: medical/print_medical_record.php:185
 msgid "Education"
 msgstr "Educación"
@@ -2655,26 +2659,26 @@ msgstr "Educación"
 #: medical/patient_fields.php:165
 #: medical/patient_search.php:195
 #: medical/patient_search_fields.php:43
-#: medical/patient_view.php:221
+#: medical/patient_view.php:223
 #: medical/print_medical_record.php:191
 #: medical/relative_search.php:188
 msgid "Insurance Company"
 msgstr "Compañía de Seguros"
 
 #: medical/patient_fields.php:171
-#: medical/patient_view.php:240
+#: medical/patient_view.php:242
 #: medical/print_medical_record.php:210
 msgid "Doctor you are assigned to"
 msgstr "Médico al que está asignado por cupo"
 
 #: medical/patient_header.php:72
-#: medical/patient_view.php:135
+#: medical/patient_view.php:137
 #: medical/print_medical_record.php:108
 msgid "Patient"
 msgstr "Paciente"
 
 #: medical/patient_header.php:76
-#: medical/patient_view.php:173
+#: medical/patient_view.php:175
 #: medical/print_medical_record.php:143
 msgid "Age"
 msgstr "Edad"
@@ -3015,13 +3019,6 @@ msgstr "Estadísticas de los Logs"
 msgid "Opens a new window"
 msgstr "Abre una nueva ventana"
 
-#: navbars/admin.php:78
-#: navbars/home.php:59
-#: navbars/medical.php:93
-#: shared/footer.php:40
-msgid "Help"
-msgstr "Ayuda"
-
 #: navbars/home.php:31
 msgid "logout"
 msgstr "salir"
@@ -3047,7 +3044,7 @@ msgstr "La confirmación de la contraseña debe tener como mínimo %d caracteres."
 
 #: shared/demo_msg.php:24
 #: shared/footer.php:53
-#: shared/header.php:221
+#: shared/header.php:227
 msgid "This is a demo version"
 msgstr "Esta es una versión de demostración"
 
