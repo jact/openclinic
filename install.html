@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: install.html,v 1.8 2005/02/19 12:53:44 jact Exp $ -->
+<!-- $Id: install.html,v 1.9 2005/03/04 19:57:21 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Install Instructions</title>
@@ -19,7 +19,9 @@
 
 <meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
 
-<link rel="stylesheet" type="text/css" href="./css/style.css" title="OpenClinic" />
+<link rel="stylesheet" type="text/css" href="./css/style.css" media="screen" title="OpenClinic" />
+
+<link rel="stylesheet" type="text/css" href="./css/print.css" media="print" />
 
 <link rel="shortcut icon" type="image/png" href="./images/miniopc.png" />
 
@@ -35,13 +37,13 @@
     If you have already created the OpenClinic database when installing an older version, follow these steps:
   </p>
 
-  <ol type="1">
+  <ol>
     <li>
-      Go to the <a href="./install/index.php">install php script</a>.
+      Go to the <a href="./install/index.php">install <acronym title="PHP: Hypertext Preprocessor">PHP</acronym> script</a>.
     </li>
 
     <li>
-      In the section <span class="note">Install a SQL File</span>, choose the right file in <tt>install/upgrades/</tt> directory.
+      In the section <span class="note">Install a SQL File</span>, choose the right file in <code>install/upgrades/</code> directory.
     </li>
 
     <li>
@@ -53,14 +55,14 @@
 
   <h2 id="install"><a href="#top" title="To top of the page">Installing OpenClinic for the First Time</a></h2>
 
-  <ol type="1">
+  <ol>
     <li>
       Install a web server such as <a href="http://httpd.apache.org">Apache</a> that can execute cgi applications. If you install Apache, get familiar with starting and stopping your Apache Web Server. If you are running Windows 95 or Windows 98 there will be "Start Apache" and "Stop Apache" icons that will help you start and stop your web server. You may want to consider adding the "Start Apache" icon to your startup folder. If you are running NT you can add Apache as a service which will be running, even if you are logged off. If you are running Linux your Apache server should be packaged with your Linux installation and will start when you start Linux.
     </li>
 
     <li>
       <p>
-        Install the MySQL database from <a href="http://www.mysql.com">http://www.mysql.com</a>. Get familiar with starting and stopping your MySQL Server. See <a href="http://www.mysql.com/doc/W/i/Win95_start.html">Starting MySQL on Windows 95 or Windows 98</a> for more information. <span class="note">Version recommended: &gt;= 3.23.36.</span>
+        Install the MySQL database from <a href="http://www.mysql.com">MySQL web site</a>. Get familiar with starting and stopping your MySQL Server. See <a href="http://www.mysql.com/doc/W/i/Win95_start.html">Starting MySQL on Windows 95 or Windows 98</a> for more information. <span class="note">Version recommended: &gt;= 3.23.36.</span>
       </p>
 
       <p>
@@ -76,14 +78,14 @@
       Get familiar with logging into MySQL with your admin account within a DOS prompt window. You can use the following command sequence as a test.
 
 <blockquote><pre>
-C:\&gt;<strong>c:\mysql\bin\mysql -uadmin -p mysql</strong>
-Enter password: <strong>*********</strong>
+C:\&gt;<kbd>c:\mysql\bin\mysql -uadmin -p mysql</kbd>
+Enter password: <kbd>*********</kbd>
 Welcome to the MySQL monitor.  Commands end with ; or \g.
 Your MySQL connection id is 1 to server version: 3.23.52-max-debug
 
 Type 'help;' or '\h' for help. Type '\c' to clear the buffer
 
-mysql&gt; <strong>show databases;</strong>
+mysql&gt; <kbd>show databases;</kbd>
 +--------------+
 | Database     |
 +--------------+
@@ -92,7 +94,7 @@ mysql&gt; <strong>show databases;</strong>
 +--------------+
 2 rows in set (0.00 sec)
 
-mysql&gt; <strong>exit</strong>
+mysql&gt; <kbd>exit</kbd>
 Bye
 
 C:\&gt;
@@ -103,14 +105,14 @@ C:\&gt;
       Create an openclinic database. To do this, log into MySQL with your admin account and run the following SQL command.
 
 <blockquote><pre>
-mysql&gt; <strong>create database openclinic;</strong>
+mysql&gt; <kbd>create database openclinic;</kbd>
 </pre>
 
       <p>
         To check to make sure the openclinic database was created properly run the following command.
       </p>
 <pre>
-mysql&gt; <strong>show databases;</strong>
+mysql&gt; <kbd>show databases;</kbd>
 +--------------+
 | Database     |
 +--------------+
@@ -123,11 +125,11 @@ mysql&gt; <strong>show databases;</strong>
     </li>
 
     <li id="step5">
-      Create an openclinic database user. To do this login to MySQL under the admin userid and run the following SQL command, substituting <em>openclinic_user</em> and <em>openclinic_password</em> with the userid and password of your choice.
+      Create an openclinic database user. To do this login to MySQL under the admin userid and run the following SQL command, substituting <var>openclinic_user</var> and <var>openclinic_password</var> with the userid and password of your choice.
 
 <blockquote><pre>
-mysql&gt; <strong>grant all privileges on openclinic.* to <em>openclinic_user</em>@localhost</strong>
-  -&gt; <strong>identified by '<em>openclinic_password</em>' with grant option;</strong>
+mysql&gt; <kbd>grant all privileges on openclinic.* to <var>openclinic_user</var>@localhost</kbd>
+    -&gt; <kbd>identified by '<var>openclinic_password</var>' with grant option;</kbd>
 </pre></blockquote>
     </li>
 
@@ -135,7 +137,7 @@ mysql&gt; <strong>grant all privileges on openclinic.* to <em>openclinic_user</e
       Verify your openclinic database and user by logging into the new MySQL database under the new user.
 
 <blockquote><pre>
-C:\&gt;<strong>C:\mysql\bin\mysql -u <em>openclinic_user</em> -p<em>openclinic_password</em> openclinic</strong>
+C:\&gt;<kbd>C:\mysql\bin\mysql -u <var>openclinic_user</var> -p<var>openclinic_password</var> openclinic</kbd>
 </pre></blockquote>
     </li>
 
@@ -144,19 +146,19 @@ C:\&gt;<strong>C:\mysql\bin\mysql -u <em>openclinic_user</em> -p<em>openclinic_p
     </li>
 
     <li id="step8">
-      Edit the <tt class="note">database_constants.php</tt> file (located in the main openclinic directory) with the text editor of your choice. Change the username and password to match the new MySQL user and password that you created in the previous steps.
+      Edit the <code class="note">database_constants.php</code> file (located in the main openclinic directory) with the text editor of your choice. Change the username and password to match the new MySQL user and password that you created in the previous steps.
     </li>
 
     <li>
-      Create the openclinic database tables. To do this run the <a href="./install/index.php">install php script</a>.
+      Create the openclinic database tables. To do this run the <a href="./install/index.php">install <acronym title="PHP: Hypertext Preprocessor">PHP</acronym> script</a>.
     </li>
 
     <li>
-      Make <tt>css</tt> and <tt>test</tt> directories writtable for Apache user to allow upload files.
+      Make <code>css</code> and <code>test</code> directories writtable for Apache user to allow upload files.
     </li>
 
     <li>
-      Access your new <a href="./index.php">clinic system</a>. Enter <span class="note">admin</span> for both, the login and password whenever you are prompted to sign on. You can change the admin password from the <span class="note">Admin &raquo; Users</span>.
+      Access your new <a href="./index.php">clinic system</a>. Enter <kbd class="note">admin</kbd> for both, the login and password whenever you are prompted to sign on. You can change the admin password from the <span class="note">Admin &raquo; Users</span>.
     </li>
   </ol>
 </div><!-- End #content -->
