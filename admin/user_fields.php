@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.7 2004/10/17 14:56:03 jact Exp $
+ * $Id: user_fields.php,v 1.8 2004/10/18 17:24:03 jact Exp $
  */
 
 /**
@@ -16,7 +16,7 @@
  * Author: jact <jachavar@terra.es>
  */
 
-  if (str_replace("\\", "/", __FILE__) == $_SERVER['PATH_TRANSLATED'])
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
   {
     header("Location: ../index.php");
     exit();
