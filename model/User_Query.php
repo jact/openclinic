@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.9 2004/07/27 18:47:55 jact Exp $
+ * $Id: User_Query.php,v 1.10 2004/08/23 17:58:43 jact Exp $
  */
 
 /**
@@ -323,7 +323,7 @@ class User_Query extends Query
    */
   function insert($user)
   {
-    if ( !is_a($user, "User") )
+    if (function_exists("is_a") && !is_a($user, "User") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -373,7 +373,7 @@ class User_Query extends Query
    */
   function update($user)
   {
-    if ( !is_a($user, "User") )
+    if (function_exists("is_a") && !is_a($user, "User") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -430,7 +430,7 @@ class User_Query extends Query
    */
   function resetPwd($user)
   {
-    if ( !is_a($user, "User") )
+    if (function_exists("is_a") && !is_a($user, "User") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -470,7 +470,6 @@ class User_Query extends Query
       return false;
     }
 
-    // si esto no funciona pasar además como argumento idMember
     $sql = "UPDATE staff_tbl SET";
     $sql .= " id_user=NULL";
     $sql .= " WHERE id_user=" . intval($idUser) . ";";

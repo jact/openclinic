@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.7 2004/07/27 18:47:55 jact Exp $
+ * $Id: Staff_Query.php,v 1.8 2004/08/23 17:58:43 jact Exp $
  */
 
 /**
@@ -217,7 +217,7 @@ class Staff_Query extends Query
    */
   function insert($staff)
   {
-    if ( !is_a($staff, "Staff") )
+    if (function_exists("is_a") && !is_a($staff, "Staff") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -271,7 +271,7 @@ class Staff_Query extends Query
    */
   function update($staff)
   {
-    if ( !is_a($staff, "Staff") )
+    if (function_exists("is_a") && !is_a($staff, "Staff") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.7 2004/08/05 14:18:51 jact Exp $
+ * $Id: Theme_Query.php,v 1.8 2004/08/23 17:58:43 jact Exp $
  */
 
 /**
@@ -213,7 +213,7 @@ class Theme_Query extends Query
    */
   function insert($theme)
   {
-    if ( !is_a($theme, "Theme") )
+    if (function_exists("is_a") && !is_a($theme, "Theme") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -248,7 +248,7 @@ class Theme_Query extends Query
    */
   function update($theme)
   {
-    if ( !is_a($theme, "Theme") )
+    if (function_exists("is_a") && !is_a($theme, "Theme") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
