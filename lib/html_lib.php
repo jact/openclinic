@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: html_lib.php,v 1.3 2004/07/28 18:19:30 jact Exp $
+ * $Id: html_lib.php,v 1.4 2004/07/31 19:47:25 jact Exp $
  */
 
 /**
@@ -37,10 +37,11 @@
  * Options example:
  *   $options = array(
  *     'align' => 'center', // table align
- *     'shaded' => false, // even odd difference
+ *     'shaded' => false, // even odd difference style
  *     'tfoot' => array('align' => 'right'), // tfoot align
  *     8 => array('align' => 'center', 'nowrap' => 1), // col number of tbody align (starts in zero)
- *     9 => array('align' => 'right')
+ *     9 => array('align' => 'right'),
+ *    'r1' => array('colspan' => 2), // row number (starts in zero)
  *   );
  ********************************************************************
  * @param array &$head headers of table columns
@@ -96,6 +97,7 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
   {
     $rowClass = "odd";
     $html .= "<tbody>\n";
+    $j = 0;
     foreach ($body as $row)
     {
       if ( !isset($options['shaded']) || (isset($options['shaded']) && $options['shaded']))
@@ -111,6 +113,11 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
       foreach ($row as $data)
       {
         $html .= '<td';
+
+        if (isset($options['r' . $j]['colspan']) && $options['r' . $j]['colspan'] > 0)
+        {
+          $html .= ' colspan="' . $options['r' . $j]['colspan'] . '"' . $j;
+        }
 
         $class = array();
         if (isset($options[$i]['align']) && $options[$i]['align'] == 'center')
@@ -138,6 +145,7 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
         $i++;
       }
       $html .= "</tr>\n";
+      $j++;
       // swap row color
       $rowClass = ($rowClass == "odd") ? "even" : "odd";
     }
