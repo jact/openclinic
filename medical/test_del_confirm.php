@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del_confirm.php,v 1.5 2004/10/03 10:26:49 jact Exp $
+ * $Id: test_del_confirm.php,v 1.6 2005/02/17 20:27:32 jact Exp $
  */
 
 /**
@@ -73,10 +73,10 @@
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
-  echo "<br />\n"; // should be deleted
+  echo "<br />\n"; // @todo: should be deleted
 ?>
 
-<form method="post" action="../medical/test_del.php?key=<?php echo $idProblem; ?>&test=<?php echo $idTest; ?>&pat=<?php echo $idPatient; ?>&file=<?php echo $file; ?>">
+<form method="post" action="../medical/test_del.php?key=<?php echo $idProblem; ?>&amp;test=<?php echo $idTest; ?>&amp;pat=<?php echo $idPatient; ?>&amp;file=<?php echo $file; ?>">
   <h3><?php echo $title; ?></h3>
 
   <?php showMessage(sprintf(_("Are you sure you want to delete medical test, %s, from list?"), $file)); ?>
