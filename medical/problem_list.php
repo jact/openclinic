@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.7 2004/08/12 10:03:31 jact Exp $
+ * $Id: problem_list.php,v 1.8 2004/10/04 21:36:32 jact Exp $
  */
 
 /**
@@ -32,17 +32,18 @@
   $nav = "problems";
   $onlyDoctor = true;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = intval($_GET["key"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Problem_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/misc_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_GET["key"]);
+  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
 
   $problemQ = new Problem_Query();
   $problemQ->connect();
@@ -92,39 +93,39 @@
   ////////////////////////////////////////////////////////////////////
   // Display insertion message if coming from new with a successful insert.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["added"]) && isset($_GET["info"]))
+  if (isset($_GET["added"]) && !empty($info))
   {
     if (isset($_GET["closed"]) && $_GET["closed"])
     {
-      showMessage(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+      showMessage(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), $info), OPEN_MSG_INFO);
     }
     else
     {
-      showMessage(sprintf(_("Medical problem, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+      showMessage(sprintf(_("Medical problem, %s, has been added."), $info), OPEN_MSG_INFO);
     }
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display update message if coming from edit with a successful update.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["updated"]) && isset($_GET["info"]))
+  if (isset($_GET["updated"]) && !empty($info))
   {
     if (isset($_GET["closed"]) && $_GET["closed"])
     {
-      showMessage(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+      showMessage(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), $info), OPEN_MSG_INFO);
     }
     else
     {
-      showMessage(sprintf(_("Medical problem, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+      showMessage(sprintf(_("Medical problem, %s, has been updated."), $info), OPEN_MSG_INFO);
     }
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display deletion message if coming from del with a successful delete.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Medical problem, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Medical problem, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
@@ -183,10 +184,10 @@
     $row .= fieldPreview($problem->getWording());
     $row .= OPEN_SEPARATOR;
 
-    $row .= $problem->getOpeningDate();
+    $row .= localDate($problem->getOpeningDate());
     $row .= OPEN_SEPARATOR;
 
-    $row .= $problem->getLastUpdateDate();
+    $row .= localDate($problem->getLastUpdateDate());
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while

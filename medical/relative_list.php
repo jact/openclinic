@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.9 2004/09/29 20:56:50 jact Exp $
+ * $Id: relative_list.php,v 1.10 2004/10/04 21:40:08 jact Exp $
  */
 
 /**
@@ -32,17 +32,19 @@
   $nav = "social";
   $onlyDoctor = true;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = intval($_GET["key"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Relative_Query.php");
   require_once("../classes/Patient_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
+  require_once("../lib/validator_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_GET["key"]);
+  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
 
   $relQ = new Relative_Query;
   $relQ->connect();
@@ -103,9 +105,9 @@
   ////////////////////////////////////////////////////////////////////
   // Display deletion message if coming from del with a successful delete.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Relative, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Relative, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)

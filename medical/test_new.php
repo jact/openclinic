@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_new.php,v 1.5 2004/07/24 16:17:31 jact Exp $
+ * $Id: test_new.php,v 1.6 2004/10/04 21:42:40 jact Exp $
  */
 
 /**
@@ -33,19 +33,17 @@
   $onlyDoctor = false;
   $restrictInDemo = true; // To prevent users' malice
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post vars
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = intval($_POST["id_patient"]);
-  $idProblem = intval($_POST["id_problem"]);
-
-  $errorLocation = "../medical/test_new_form.php?key=" . $idProblem . "&pat=" . $idPatient;
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Test_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving post vars
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_POST["id_patient"]);
+  $idProblem = intval($_POST["id_problem"]);
 
   ////////////////////////////////////////////////////////////////////
   // Validate data
