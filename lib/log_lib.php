@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.4 2004/07/08 16:45:52 jact Exp $
+ * $Id: log_lib.php,v 1.5 2004/08/02 10:46:51 jact Exp $
  */
 
 /**
@@ -72,7 +72,7 @@ function percBar($pperc, $width = 100, $xecho = true, $label = "")
 /*
  * void showYearStats(string $table)
  ********************************************************************
- * Change this
+ * Draws a table with yearly stats
  ********************************************************************
  * @param string $table
  * @return void
@@ -88,41 +88,44 @@ function showYearStats($table)
   $auxConn->exec($query);
   list($totalHitsYear) = $auxConn->fetchRow(MYSQL_NUM);
 
-  echo '<p class="center"><strong>' . _("Yearly Stats") . "</strong></p>\n";
+  echo '<h4>' . _("Yearly Stats") . "</h4>\n";
 
   if ($totalHitsYear > 0)
   {
-    echo '<div class="center">';
-    echo '<table>';
-    echo '<thead><tr><th width="25%">' . _("Year") . "</th>\n";
-    echo '<th>' . _("Hits") . "</th></tr></thead>\n";
+    $thead = array(
+      _("Year"),
+      _("Hits")
+    );
+
+    $options = array(
+      //'align' => 'center',
+      1 => array('nowrap' => 1)
+    );
 
     $query = "SELECT YEAR(access_date),COUNT(*) FROM " . $table . "_log_tbl";
     $query .= " GROUP BY 1 ORDER BY 1";
     $auxConn->exec($query);
 
-    echo "<tbody>\n";
-    $rowClass = "odd";
+    $tbody = array();
     while (list($year, $hits) = $auxConn->fetchRow(MYSQL_NUM))
     {
-      echo '<tr class="' . $rowClass . '"><td>';
-      echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=yearly&amp;year=' . $year . '">' . $year . '</a>';
-      echo '</td><td class="noWrap">';
+      $row = '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=yearly&amp;year=' . $year . '">' . $year . '</a>';
+      $row .= OPEN_SEPARATOR;
       $widthImage = round(100 * $hits / $totalHitsYear, 0);
-      percBar($widthImage, 200);
-      echo ' (<a href="../admin/log_' . $table . '_list.php?year=' . $year . '">' . $hits . '</a>)</td></tr>';
+      $row .= percBar($widthImage, 200, false);
+      $row .= ' (<a href="../admin/log_' . $table . '_list.php?year=' . $year . '">' . $hits . '</a>)';
 
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+      $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    echo "</tbody></table></div>\n";
+    showTable($thead, $tbody, null, $options);
+
+    $auxConn->freeResult();
   }
   else
   {
-    echo '<p class="center">' . _("There are not statistics") . "</p>\n";
+    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
   }
 
-  $auxConn->freeResult();
   $auxConn->close();
   unset($auxConn);
 }
@@ -130,7 +133,7 @@ function showYearStats($table)
 /*
  * void showMonthStats(string $table, int $year)
  ********************************************************************
- * Change this
+ * Draws a table with monthly stats
  ********************************************************************
  * @param string $table
  * @param int $year
@@ -147,14 +150,19 @@ function showMonthStats($table, $year)
   $auxConn->exec($query);
   list($totalHitsMonth) = $auxConn->fetchRow(MYSQL_NUM);
 
-  echo '<p class="center"><strong>' . sprintf(_("Monthly Stats for %d"), intval($year)) . "</strong></p>\n";
+  echo '<h4>' . sprintf(_("Monthly Stats for %d"), intval($year)) . "</h4>\n";
 
   if ($totalHitsMonth > 0)
   {
-    echo '<div class="center">';
-    echo '<table>';
-    echo '<thead><tr><th width="25%">' . _("Month") . "</th>\n";
-    echo '<th>' . _("Hits") . "</th></tr></thead>\n";
+    $thead = array(
+      _("Month"),
+      _("Hits")
+    );
+
+    $options = array(
+      //'align' => 'center',
+      1 => array('nowrap' => 1)
+    );
 
     $query = "SELECT MONTH(access_date),COUNT(*) FROM " . $table . "_log_tbl";
     $query .= " WHERE YEAR(access_date)='" . $year . "'";
@@ -163,28 +171,25 @@ function showMonthStats($table, $year)
 
     $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-    echo "<tbody>\n";
-    $rowClass = "odd";
+    $tbody = array();
     while (list($month, $hits) = $auxConn->fetchRow(MYSQL_NUM))
     {
-      echo '<tr class="' . $rowClass . '"><td>';
-      echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=monthly&amp;year=' . $year . '&amp;month=' . $month . '">' . $months[intval($month) - 1] . '</a>';
-      echo '</td><td class="noWrap">';
+      $row = '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=monthly&amp;year=' . $year . '&amp;month=' . $month . '">' . $months[intval($month) - 1] . '</a>';
+      $row .= OPEN_SEPARATOR;
       $widthImage = round(100 * $hits / $totalHitsMonth, 0);
-      percBar($widthImage, 200);
-      echo ' (<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '">' . $hits . '</a>)</td></tr>';
+      $row .= percBar($widthImage, 200, false);
+      $row .= ' (<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '">' . $hits . '</a>)';
 
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+      $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    echo "</tbody></table></div>\n";
+    showTable($thead, $tbody, null, $options);
+
+    $auxConn->freeResult();
   }
   else
   {
-    echo '<p class="center">' . _("There are not statistics") . "</p>\n";
+    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
   }
-
-  $auxConn->freeResult();
   $auxConn->close();
   unset($auxConn);
 }
@@ -192,7 +197,7 @@ function showMonthStats($table, $year)
 /*
  * void showDailyStats(string $table, int $year, int $month)
  ********************************************************************
- * Change this
+ * Draws a table with daily stats
  ********************************************************************
  * @param string $table
  * @param int $year
@@ -212,14 +217,21 @@ function showDailyStats($table, $year, $month)
   list($totalHitsDay) = $auxConn->fetchRow(MYSQL_NUM);
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
-  echo '<p class="center"><strong>' . sprintf(_("Daily Stats for %s, %d"), $months[intval($month) - 1], intval($year)) . "</strong></p>\n";
+
+  echo '<h4>' . sprintf(_("Daily Stats for %s, %d"), $months[intval($month) - 1], intval($year)) . "</h4>\n";
 
   if ($totalHitsDay > 0)
   {
-    echo '<div class="center">';
-    echo '<table>';
-    echo '<thead><tr><th width="25%">' . _("Day") . "</th>\n";
-    echo '<th>' . _("Hits") . "</th></tr></thead>\n";
+    $thead = array(
+      _("Day"),
+      _("Hits")
+    );
+
+    $options = array(
+      //'align' => 'center',
+      0 => array('align' => 'right'),
+      1 => array('nowrap' => 1)
+    );
 
     $query = "SELECT YEAR(access_date),MONTH(access_date),DATE_FORMAT(access_date, '%d'),COUNT(*)";
     $query .= " FROM " . $table . "_log_tbl";
@@ -229,13 +241,11 @@ function showDailyStats($table, $year, $month)
     $auxConn->exec($query);
     //$totalHitsDay = $auxConn->numRows();
 
-    echo "<tbody>\n";
-    $rowClass = "odd";
+    $tbody = array();
     while (list($year, $month, $day, $hits) = $auxConn->fetchRow(MYSQL_NUM))
     {
-      echo '<tr class="' . $rowClass . '"><td>';
-      echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=daily&amp;year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '">' . $day . '</a>';
-      echo '</td><td class="noWrap">';
+      $row = '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=daily&amp;year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '">' . intval($day) . '</a>';
+      $row .= OPEN_SEPARATOR;
       if ($hits == 0)
       {
         $widthImage = 0;
@@ -247,20 +257,20 @@ function showDailyStats($table, $year, $month)
         $percent = substr(100 * $hits / $totalHitsDay, 0, 5);
         $hits = '<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '">' . $hits . '</a>';
       }
-      percBar($widthImage, 200);
-      echo ' ' . $percent . '% (' . $hits . ')</td></tr>';
+      $row .= percBar($widthImage, 200, false);
+      $row .= ' ' . $percent . '% (' . $hits . ')';
 
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+      $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    echo "</tbody></table></div>\n";
+    showTable($thead, $tbody, null, $options);
+
+    $auxConn->freeResult();
   }
   else
   {
-    echo '<p class="center">' . _("There are not statistics") . "</p>\n";
+    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
   }
 
-  $auxConn->freeResult();
   $auxConn->close();
   unset($auxConn);
 }
@@ -268,7 +278,7 @@ function showDailyStats($table, $year, $month)
 /*
  * void showHourlyStats(string $table, int $year, int $month, int $day)
  ********************************************************************
- * Change this
+ * Draws a table with hourly stats
  ********************************************************************
  * @param string $table
  * @param int $year
@@ -290,17 +300,22 @@ function showHourlyStats($table, $year, $month, $day)
   list($totalHitsHour) = $auxConn->fetchRow(MYSQL_NUM);
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
-  echo '<p class="center"><strong>' . sprintf(_("Hourly Stats for %s %d, %d"), $months[intval($month) - 1], intval($day), intval($year)) . "</strong></p>\n";
+
+  echo '<h4>' . sprintf(_("Hourly Stats for %s %d, %d"), $months[intval($month) - 1], intval($day), intval($year)) . "</h4>\n";
 
   if ($totalHitsHour > 0)
   {
-    echo '<div class="center">';
-    echo '<table>';
-    echo '<thead><tr><th width="25%">' . _("Hour") . "</th>\n";
-    echo '<th>' . _("Hits") . "</th></tr></thead>\n";
+    $thead = array(
+      _("Hour"),
+      _("Hits")
+    );
 
-    echo "<tbody>\n";
-    $rowClass = "odd";
+    $options = array(
+      //'align' => 'center',
+      1 => array('nowrap' => 1)
+    );
+
+    $tbody = array();
     for ($k = 0; $k <= 23; $k++)
     {
       $query = "SELECT HOUR(access_date),COUNT(*) FROM " . $table . "_log_tbl";
@@ -309,44 +324,40 @@ function showHourlyStats($table, $year, $month, $day)
       $query .= " AND DATE_FORMAT(access_date, '%d')='" . $day . "'";
       $query .= " AND HOUR(access_date)='" . $k . "'";
       $query .= " GROUP BY DATE_FORMAT(access_date, '%Y-%m-%d')";
+
       $auxConn->exec($query);
-      if ($auxConn->numRows() == 0)
-      {
-        $hits = 0;
-      }
-      else
+      if ($auxConn->numRows() > 0)
       {
         list($hour, $hits) = $auxConn->fetchRow(MYSQL_NUM);
-      }
-      echo '<tr class="' . $rowClass . '"><td>';
-      $a = (($k < 10) ? "0$k" : $k);
-      echo "$a:00 - $a:59";
-      echo '</td><td class="noWrap">';
-      if ($hits == 0)
-      {
-        $widthImage = 0;
-        $percent = 0;
-      }
-      else
-      {
-        $widthImage = round(100 * $hits / $totalHitsHour, 0);
-        $percent = substr(100 * $hits / $totalHitsHour, 0, 5);
-        $hits = '<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '&amp;hour=' . $k . '">' . $hits . '</a>';
-      }
-      percBar($widthImage, 200);
-      echo ' ' . $percent . '% (' . $hits . ')</td></tr>';
 
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+        $row = sprintf("%02d:00 - %02d:59", $k, $k);
+        $row .= OPEN_SEPARATOR;
+        if ($hits == 0)
+        {
+          $widthImage = 0;
+          $percent = 0;
+        }
+        else
+        {
+          $widthImage = round(100 * $hits / $totalHitsHour, 0);
+          $percent = substr(100 * $hits / $totalHitsHour, 0, 5);
+          $hits = '<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '&amp;hour=' . $k . '">' . $hits . '</a>';
+        }
+        $row .= percBar($widthImage, 200, false);
+        $row .= ' ' . $percent . '% (' . $hits . ')';
+
+        $tbody[] = explode(OPEN_SEPARATOR, $row);
+      }
     }
-    echo "</tbody></table></div>\n";
+    showTable($thead, $tbody, null, $options);
+
+    $auxConn->freeResult();
   }
   else
   {
-    echo '<p class="center">' . _("There are not statistics") . "</p>\n";
+    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
   }
 
-  $auxConn->freeResult();
   $auxConn->close();
   unset($auxConn);
 }
@@ -396,8 +407,7 @@ function stats($table)
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-  echo sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits);
-  echo "<br />\n";
+  echo '<p>' . sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits) . "</p>\n";
 
   $query = "SELECT YEAR(access_date), MONTH(access_date), DATE_FORMAT(access_date, '%d'), COUNT(*)";
   $query .= " FROM " . $table . "_log_tbl";
@@ -407,8 +417,7 @@ function stats($table)
   $auxConn->exec($query);
   list($year, $month, $day, $hits) = $auxConn->fetchRow(MYSQL_NUM);
 
-  echo sprintf(_("Busiest Day: %d %s %d (%d hits)"), intval($day), $months[intval($month) - 1], intval($year), $hits);
-  echo "<br />\n";
+  echo '<p>' . sprintf(_("Busiest Day: %d %s %d (%d hits)"), intval($day), $months[intval($month) - 1], intval($year), $hits) . "</p>\n";
 
   $query = "SELECT YEAR(access_date), MONTH(access_date), DATE_FORMAT(access_date, '%d'), HOUR(access_date), COUNT(*)";
   $query .= " FROM " . $table . "_log_tbl";
@@ -422,27 +431,23 @@ function stats($table)
   $auxConn->close();
   unset($auxConn);
 
-  if ($hour < 10)
-  {
-    $hour = "0$hour:00 - 0$hour:59";
-  }
-  else
-  {
-    $hour = "$hour:00 - $hour:59";
-  }
-  echo sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"), $hour, $months[intval($month) - 1], intval($day), intval($year), $hits);
-  echo "<br /><br />\n";
+  $hour = sprintf("%02d:00 - %02d:59", $hour, $hour);
+  echo '<p>' . sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"), $hour, $months[intval($month) - 1], intval($day), intval($year), $hits) . "</p>\n";
 
+  echo "<hr />\n";
   showYearStats($table);
+  echo "<hr />\n";
   showMonthStats($table, intval($arrToday[0]));
+  echo "<hr />\n";
   showDailyStats($table, intval($arrToday[0]), intval($arrToday[1]));
+  echo "<hr />\n";
   showHourlyStats($table, intval($arrToday[0]), intval($arrToday[1]), $arrToday[2]);
 }
 
 /*
  * void showLinks(string $table)
  ********************************************************************
- * Change this
+ * Displays navigation log links
  ********************************************************************
  * @param string $table
  * @return void
@@ -450,7 +455,7 @@ function stats($table)
  */
 function showLinks($table)
 {
-  echo '<p class="center">';
+  echo '<p>';
   echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">';
   echo _("Back to Main Statistics");
   echo '</a> | <a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
