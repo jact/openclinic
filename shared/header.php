@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.10 2004/07/08 16:41:18 jact Exp $
+ * $Id: header.php,v 1.11 2004/07/14 18:17:41 jact Exp $
  */
 
 /**
@@ -148,7 +148,7 @@
     <?php
       if (defined("OPEN_DEMO") && OPEN_DEMO)
       {
-        echo '<div class="error">' . _("This is a demo version") . "</div>\n";
+        echo '<div class="message">' . _("This is a demo version") . "</div>\n";
       }
     ?>
     <a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a> |

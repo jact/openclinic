@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.3 2004/07/07 17:53:12 jact Exp $
+ * $Id: footer.php,v 1.4 2004/07/14 18:17:53 jact Exp $
  */
 
 /**
@@ -21,6 +21,9 @@
     header("Location: ../index.php");
     exit();
   }
+
+  //debug($_SESSION);
+  //debug($_SERVER);
 ?>
 </div><!-- End #mainZone -->
 <!-- End Main Zone -->
@@ -46,7 +49,7 @@
     if (defined("OPEN_DEMO") && OPEN_DEMO)
     {
       echo ' | <a href="../demo_version.html">' . _("Demo version features") . "</a>\n";
-      echo '<div class="error">' . _("This is a demo version") . "</div>\n";
+      echo '<div class="message">' . _("This is a demo version") . "</div>\n";
     }
   ?>
 </div><!-- End #footer -->
