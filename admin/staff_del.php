@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del.php,v 1.7 2004/07/10 15:09:27 jact Exp $
+ * $Id: staff_del.php,v 1.8 2004/07/10 16:01:07 jact Exp $
  */
 
 /**
@@ -88,7 +88,7 @@
   unset($staffQ);
 
   ////////////////////////////////////////////////////////////////////
-  // Redirect to theme list to avoid reload problem
+  // Redirect to staff list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
   $info = urlencode($staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2());
   unset($staff);
