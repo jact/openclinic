@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.6 2004/07/07 17:22:50 jact Exp $
+ * $Id: patient_edit_form.php,v 1.7 2004/07/31 17:23:29 jact Exp $
  */
 
 /**
@@ -60,7 +60,7 @@
       $patQ->close();
       include_once("../shared/header.php");
 
-      echo '<p>' . _("That patient does not exist.") . "</p>\n";
+      showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
 
       include_once("../shared/footer.php");
       exit();
@@ -149,7 +149,7 @@
 </form>
 
 <?php
-  echo '<p class="advice">* ' . _("Note: The fields with * are required.") . "</p>\n";
+  showMessage('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");
 ?>
