@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.3 2004/07/07 17:28:11 jact Exp $
+ * $Id: Query.php,v 1.4 2004/07/24 16:30:33 jact Exp $
  */
 
 /**
@@ -34,6 +34,8 @@ require_once("../classes/DbConnection.php");
  *  bool resetResult(void)
  *  bool freeResult(void)
  *  mixed affectedRows(void)
+ *  mixed getPrimaryKey(string $table = "")
+ *  string getRowData(array $key, array $value, string $table = "")
  *  void clearErrors(void)
  *  bool isError(void)
  *  string getError(void)
@@ -49,6 +51,7 @@ class Query
   var $_dbErrno = 0; // it is not superfluous
   var $_dbError = ""; // it is not superfluous
   var $_SQL = ""; // it is not superfluous
+  var $_table = ""; // to extends classes
 
   /**
    * bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "")
@@ -224,6 +227,76 @@ class Query
   }
 
   /**
+   * mixed getPrimaryKey(string $table = "")
+   ********************************************************************
+   * Returns the key fields of a table
+   ********************************************************************
+   * @param string $table (optional) name of table (if empty, $this->_table)
+   * @return mixed array with key fields or false if an error occurs
+   * @access public
+   */
+  function getPrimaryKey($table = "")
+  {
+    if (empty($this->_table) && empty($table))
+    {
+      return false;
+    }
+
+    $sql = "SHOW FIELDS FROM " . (( !empty($table) ) ? trim($table) : $this->_table);
+
+    $this->exec($sql);
+    $result = $this->fetchAll();
+
+    $key = array();
+    foreach ($result as $k => $value)
+    {
+      if ($value["Key"] == "PRI")
+      {
+        //$key[$value["Field"]] = $value["Field"];
+        $key[] = $value["Field"];
+      }
+    }
+
+    return (count($key)) ? $key : false;
+  }
+
+  /**
+   * string getRowData(array $key, array $value, string $table = "")
+   ********************************************************************
+   * Returns serialized row data of a table
+   ********************************************************************
+   * @param array $key key fields of table
+   * @param array $value values of key fields of table
+   * @param string $table (optional) name of table (if empty, $this->_table)
+   * @return string serialized row data
+   * @access public
+   */
+  function getRowData($key, $value, $table = "")
+  {
+    if (count($key) == 0 || count($value) == 0)
+    {
+      return;
+    }
+
+    $sql = "SELECT *";
+    $sql .= " FROM " . (( !empty($table) ) ? trim($table) : $this->_table);
+    $sql .= " WHERE ";
+    for ($i = 0; $i < count($key); $i++)
+    {
+      $sql .= $key[$i] . "=" . ((gettype($value[$i]) == "string") ? "'" . $value[$i] . "'" : $value[$i]) . " AND ";
+    }
+    $sql = substr($sql, 0, -5); // to delete last " AND "
+
+    $this->exec($sql);
+    $result = $this->fetchRow();
+
+    $result = array_values($result);
+    $result = serialize($result);
+
+    return $result;
+  }
+
+  /**
    * void clearErrors(void)
    ********************************************************************
    * clears error info
@@ -292,6 +365,17 @@ class Query
   function getSQL()
   {
     return $this->_SQL;
+  }
+
+  /**
+   * string getTableName(void)
+   ********************************************************************
+   * @return string table name
+   * @access public
+   */
+  function getTableName()
+  {
+    return $this->_table;
   }
 } // end class
 ?>
