@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.4 2004/06/20 17:20:23 jact Exp $
+ * $Id: theme_new_form.php,v 1.5 2004/07/06 17:36:25 jact Exp $
  */
 
 /**
@@ -58,7 +58,7 @@
     $theme = $themeQ->fetch();
     if ( !$theme )
     {
-      showQueryError($themeQ, false);
+      showFetchError(false);
     }
     else
     {

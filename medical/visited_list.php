@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: visited_list.php,v 1.4 2004/07/05 17:40:16 jact Exp $
+ * $Id: visited_list.php,v 1.5 2004/07/06 17:37:04 jact Exp $
  */
 
 /**
@@ -63,6 +63,12 @@
     }
 
     $pat = $patQ->fetch();
+    if ( !$pat )
+    {
+      $patQ->close();
+      showFetchError();
+    }
+
     $patQ->freeResult();
 
     $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.4 2004/07/05 17:31:22 jact Exp $
+ * $Id: relative_list.php,v 1.5 2004/07/06 17:37:04 jact Exp $
  */
 
 /**
@@ -161,6 +161,12 @@
       }
 
       $pat = $patQ->fetch();
+      if ( !$pat )
+      {
+        $patQ->close();
+        showFetchError();
+      }
+
       $relName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 ?>
     <tr class="<?php echo $rowClass; ?>">

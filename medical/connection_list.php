@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.3 2004/06/16 19:11:02 jact Exp $
+ * $Id: connection_list.php,v 1.4 2004/07/06 17:37:03 jact Exp $
  */
 
 /**
@@ -143,6 +143,11 @@
       }
 
       $problem = $problemQ->fetch();
+      if ( !$problem )
+      {
+        $problemQ->close();
+        showFetchError();
+      }
 ?>
     <tr class="<?php echo $rowClass; ?>">
       <td>

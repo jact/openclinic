@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.6 2004/06/20 17:20:23 jact Exp $
+ * $Id: user_edit_form.php,v 1.7 2004/07/06 17:36:25 jact Exp $
  */
 
 /**
@@ -82,7 +82,7 @@
     $user = $userQ->fetch();
     if ( !$user )
     {
-      showQueryError($userQ, false);
+      showFetchError(false);
     }
     else
     {

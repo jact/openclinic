@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.4 2004/06/20 15:15:44 jact Exp $
+ * $Id: install.php,v 1.5 2004/07/06 17:36:42 jact Exp $
  */
 
 /**
@@ -45,6 +45,12 @@
   else
   {
     $set = $setQ->fetch();
+    if ( !$set )
+    {
+      $setQ->close();
+      showFetchError();
+    }
+
     if ( !isset($_GET["confirm"]) || ($_GET["confirm"] != "yes") )
     {
 ?>
