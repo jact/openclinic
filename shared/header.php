@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.1 2004/04/04 22:51:24 jact Exp $
+ * $Id: header.php,v 1.2 2004/04/18 14:02:25 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the common header of the web pages
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 05/04/2004 0:51
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
@@ -53,7 +52,7 @@
 
 <meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
 
-<?php echo '<link rel="home" title="' . _("Clinic Home") . '" href="../home/index.php" />'; ?>
+<link rel="home" title="<?php echo _("Clinic Home"); ?>" href="../home/index.php" />
 
 <link rel="shortcut icon" type="image/png" href="../images/miniopc.png" />
 

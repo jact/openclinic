@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.1 2004/03/24 19:01:18 jact Exp $
+ * $Id: login_check.php,v 1.2 2004/04/18 14:02:25 jact Exp $
  */
 
 /**
@@ -15,7 +15,6 @@
  * Redirects to the login page if token not valid.
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 24/03/04 20:01
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

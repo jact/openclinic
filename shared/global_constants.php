@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: global_constants.php,v 1.1 2004/02/22 12:21:54 jact Exp $
+ * $Id: global_constants.php,v 1.2 2004/04/18 14:02:25 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the global constants of the project
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 22/02/04 13:21
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
