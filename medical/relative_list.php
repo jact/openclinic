@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.8 2004/08/01 09:04:53 jact Exp $
+ * $Id: relative_list.php,v 1.9 2004/09/29 20:56:50 jact Exp $
  */
 
 /**
@@ -67,6 +67,8 @@
     }
     $relQ->freeResult();
   }
+  $relQ->close();
+  unset($relQ);
 
   ////////////////////////////////////////////////////////////////////
   // Show page
@@ -129,7 +131,6 @@
 
   if (count($relArray) == 0)
   {
-    $relQ->close();
     showMessage(_("No relatives defined for this patient."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
@@ -195,7 +196,6 @@
   $patQ->close();
   unset($patQ);
   unset($pat);
-  unset($relQ);
 
   showTable($thead, $tbody);
 
