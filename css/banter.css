@@ -146,6 +146,10 @@ table {
   padding: 2px;
 }
 
+* html body table {
+  width: auto;
+}
+
 th {
   background: #eff7f7;
   color: #94baa5;
@@ -155,6 +159,7 @@ th {
 td {
   padding: 2px;
   border: 1px solid #efefef;
+  font-size: 12px;
 }
 
 /* Links */

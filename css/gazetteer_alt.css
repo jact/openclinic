@@ -219,6 +219,10 @@ table {
   border: 1px solid #848484;
 }
 
+* html body table {
+  width: auto;
+}
+
 th {
   text-align: left;
   color: #fff;
@@ -228,6 +232,7 @@ th {
 td, th {
   padding: 3px;
   border: 1px solid #848484;
+  font-size: 71%;
 }
 
 .even {

@@ -137,6 +137,10 @@ table {
   border: 1px solid #dce0d3;
 }
 
+* html body table {
+  width: auto;
+}
+
 td, th, td.odd {
   padding: 3px;
   border: 1px solid #dce0d3;
