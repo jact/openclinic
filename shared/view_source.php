@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: view_source.php,v 1.4 2004/07/26 18:46:07 jact Exp $
+ * $Id: view_source.php,v 1.5 2004/11/04 11:30:23 jact Exp $
  */
 
 /**
@@ -36,6 +36,9 @@ body {
   color: inherit;
   border: 0;
   padding: 0;
+}
+code {
+  white-space: pre;
 }
 /*]]>*/-->
 </style>
