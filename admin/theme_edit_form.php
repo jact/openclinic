@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.10 2004/08/28 16:23:50 jact Exp $
+ * $Id: theme_edit_form.php,v 1.11 2004/10/04 18:00:51 jact Exp $
  */
 
 /**
@@ -46,7 +46,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["key"]))
   {
-    $idTheme = $_GET["key"];
+    $idTheme = intval($_GET["key"]);
     $postVars["id_theme"] = $idTheme;
 
     include_once("../classes/Theme_Query.php");
@@ -139,7 +139,7 @@ function editTheme()
 <?php
   echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a>\n";
   echo ' | <a href="../admin/theme_preload_css.php?key=' . $_GET["key"] . '">' . _("Preload CSS file") . "</a></p>\n";
-  //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n";
+  //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // TODO
 
   echo "<hr />\n";
 

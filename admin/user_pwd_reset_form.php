@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.9 2004/08/04 15:21:53 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.10 2004/10/04 18:04:18 jact Exp $
  */
 
 /**
@@ -46,7 +46,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["key"]))
   {
-    $idUser = $_GET["key"];
+    $idUser = intval($_GET["key"]);
     $postVars["id_user"] = $idUser;
 
     include_once("../classes/User_Query.php");

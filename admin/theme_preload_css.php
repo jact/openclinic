@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.3 2004/09/22 18:18:40 jact Exp $
+ * $Id: theme_preload_css.php,v 1.4 2004/10/04 18:01:57 jact Exp $
  */
 
 /**
@@ -18,13 +18,18 @@
  */
 
   ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idTheme = ((isset($_GET["key"]) && intval($_GET["key"]) > 0) ? intval($_GET["key"]) : 0);
+
+  ////////////////////////////////////////////////////////////////////
   // Controlling vars
   ////////////////////////////////////////////////////////////////////
   $tab = "admin";
   $nav = "themes";
   $restrictInDemo = true; // To prevent users' malice // ya veremos
-  $returnLocation = (isset($_GET["key"]) && intval($_GET["key"]) > 0)
-    ? '../admin/theme_edit_form.php?key=' . $_GET["key"]
+  $returnLocation = ($idTheme > 0)
+    ? '../admin/theme_edit_form.php?key=' . $idTheme
     : '../admin/theme_new_form.php';
 
   require_once("../shared/read_settings.php");
@@ -70,7 +75,7 @@
   unset($links);
 ?>
 
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . ((isset($_GET['key'])) ? "?key=" . $_GET['key'] : ""); ?>" enctype="multipart/form-data">
+<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . (($idTheme) ? "?key=" . $idTheme : ""); ?>" enctype="multipart/form-data">
 <?php
   $thead = array(
     $title => array('colspan' => 2)
