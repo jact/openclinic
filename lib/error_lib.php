@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: error_lib.php,v 1.9 2004/09/22 18:20:03 jact Exp $
+ * $Id: error_lib.php,v 1.10 2004/09/29 20:54:15 jact Exp $
  */
 
 /**
@@ -46,11 +46,14 @@ function showQueryError($query, $goOut = true)
 {
   showErrorMsg($query->getError() . " " . $query->getDbErrno() . " - " . $query->getDbError() . "." . $query->getSQL());
 
-  echo "\n<!-- _dbErrno = " . $query->getDbErrno() . "-->\n";
-  echo "<!-- _dbError = " . $query->getDbError() . "-->\n";
-  if ($query->getSQL() != "")
+  if (defined("OPEN_DEBUG") && OPEN_DEBUG)
   {
-    echo "<!-- _SQL = " . $query->getSQL() . "-->\n";
+    echo "\n<!-- _dbErrno = " . $query->getDbErrno() . "-->\n";
+    echo "<!-- _dbError = " . $query->getDbError() . "-->\n";
+    if ($query->getSQL() != "")
+    {
+      echo "<!-- _SQL = " . $query->getSQL() . "-->\n";
+    }
   }
 
   if ($query->getDbErrno() == 1049) // Unable to connect to database
@@ -78,12 +81,15 @@ function showConnError($conn, $goOut = true)
 {
   showErrorMsg($conn->getError() . " " . $conn->getDbErrno() . " - " . $conn->getDbError() . "." . $conn->getSQL());
 
-  echo "\n<!-- _dbErrno = " . $conn->getDbErrno() . "-->\n";
-  echo "<!-- _dbError = " . $conn->getDbError() . "-->\n";
-  echo "<!-- _error = " . $conn->getError() . "-->\n";
-  if ($conn->getSQL() != "")
+  if (defined("OPEN_DEBUG") && OPEN_DEBUG)
   {
-    echo "<!-- _SQL = " . $conn->getSQL() . "-->\n";
+    echo "\n<!-- _dbErrno = " . $conn->getDbErrno() . "-->\n";
+    echo "<!-- _dbError = " . $conn->getDbError() . "-->\n";
+    echo "<!-- _error = " . $conn->getError() . "-->\n";
+    if ($conn->getSQL() != "")
+    {
+      echo "<!-- _SQL = " . $conn->getSQL() . "-->\n";
+    }
   }
 
   if ($conn->getDbErrno() == 1049) // Unable to connect to database
@@ -158,7 +164,7 @@ function backTrace($context)
     $calls .= " (line " . $trace[$x]["line"] . " in " . $trace[$x]["file"] . ")";
   }
 
-  $calls .= "\nVariables in " . $trace[2]["function"] . "():";
+  $calls .= "\nVariables in " . (isset($trace[2]["function"]) ? $trace[2]["function"] : "UNKNOWN") . "():";
 
   // Use the $context to get variable information for the function with the error
   foreach ($context as $key => $value)
