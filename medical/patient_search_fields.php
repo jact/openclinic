@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_fields.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: patient_search_fields.php,v 1.3 2004/07/05 17:32:28 jact Exp $
  */
 
 /**
@@ -61,7 +61,7 @@
       </tr>
 
       <tr>
-        <td colspan="2">
+        <td colspan="2">*
           <?php
             showInputText("search_text", 40, 80);
             showInputButton("button1", _("Search"));
@@ -94,7 +94,7 @@
             echo "</label>\n";
 
             $array = null;
-            $array["0"] = "";
+            $array["0"] = _("All");
             $array["10"] = 10;
             $array["20"] = 20;
             $array["50"] = 50;
