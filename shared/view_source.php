@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: view_source.php,v 1.2 2004/04/14 22:05:33 jact Exp $
+ * $Id: view_source.php,v 1.3 2004/06/20 17:19:50 jact Exp $
  */
 
 /**
@@ -18,22 +18,25 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+  ////////////////////////////////////////////////////////////////////
+  $title = sprintf(_("Source file: %s"), $_GET["file"]);
+  require_once("../shared/xhtml_start.php");
 ?>
-<html>
-<head>
+
 <link rel="stylesheet" type="text/css" href="../css/style.css" />
 
 <style type="text/css">
-<!--
+<!--/*--><![CDATA[/*<!--*/
 body {
   background: #fff;
   border: 0;
   padding: 0;
 }
--->
+/*]]>*/-->
 </style>
-
-<title><?php echo _("Source file:") . ' ' . $_GET["file"]; ?></title>
 </head>
 <body
 <?php
