@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.3 2004/06/20 17:19:04 jact Exp $
+ * $Id: login_form.php,v 1.4 2004/07/14 18:16:58 jact Exp $
  */
 
 /**
@@ -117,7 +117,7 @@ function md5Login(f)
 </form>
 
 <?php
-  debug($_SESSION, "session variables:", true);
+  //debug($_SESSION, "session variables:", true);
 
   require_once("../shared/footer.php");
 ?>
