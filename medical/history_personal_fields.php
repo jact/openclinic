@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_fields.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: history_personal_fields.php,v 1.3 2004/07/31 17:16:47 jact Exp $
  */
 
 /**
@@ -21,103 +21,78 @@
     header("Location: ../index.php");
     exit();
   }
+
+  $thead = array(
+    $title
+  );
+
+  $tbody = array();
+
+  $row = '<label for="birth_growth">' . _("Birth and Growth") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("birth_growth", 4, 90, $postVars["birth_growth"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="growth_sexuality">' . _("Growth and Sexuality") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("growth_sexuality", 4, 90, $postVars["growth_sexuality"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="feed">' . _("Feed") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("feed", 4, 90, $postVars["feed"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="habits">' . _("Habits") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("habits", 4, 90, $postVars["habits"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="peristaltic_conditions">' . _("Peristaltic Conditions") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("peristaltic_conditions", 4, 90, $postVars["peristaltic_conditions"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="psychological">' . _("Psychological Conditions") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("psychological", 4, 90, $postVars["psychological"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="children_complaint">' . _("Children Complaint") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("children_complaint", 4, 90, $postVars["children_complaint"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="venereal_disease">' . _("Venereal Disease") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("venereal_disease", 4, 90, $postVars["venereal_disease"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="accident_surgical_operation">' . _("Accidents and Surgical Operations") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("accident_surgical_operation", 4, 90, $postVars["accident_surgical_operation"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="medicinal_intolerance">' . _("Medicinal Intolerance") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("medicinal_intolerance", 4, 90, $postVars["medicinal_intolerance"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="mental_illness">' . _("Mental Illness") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("mental_illness", 4, 90, $postVars["mental_illness"]);
+
+  $tbody[] = array($row);
+
+  $tfoot = array(
+    htmlInputButton("button1", _("Update"))
+    . htmlInputButton("button2", _("Reset"), "reset")
+    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+  );
+
+  $options = array(
+    'shaded' => false,
+    'tfoot' => array('align' => 'center')
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
 ?>
-
-<table>
-  <thead>
-    <tr>
-      <th>
-        <?php echo $title; ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>
-        <label for="birth_growth"><?php echo _("Birth and Growth") . ":"; ?></label><br />
-        <?php showTextArea("birth_growth", 4, 90, $postVars["birth_growth"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="growth_sexuality"><?php echo _("Growth and Sexuality") . ":"; ?></label><br />
-        <?php showTextArea("growth_sexuality", 4, 90, $postVars["growth_sexuality"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="feed"><?php echo _("Feed") . ":"; ?></label><br />
-        <?php showTextArea("feed", 4, 90, $postVars["feed"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="habits"><?php echo _("Habits") . ":"; ?></label><br />
-        <?php showTextArea("habits", 4, 90, $postVars["habits"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="peristaltic_conditions"><?php echo _("Peristaltic Conditions") . ":"; ?></label><br />
-        <?php showTextArea("peristaltic_conditions", 4, 90, $postVars["peristaltic_conditions"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="psychological"><?php echo _("Psychological Conditions") . ":"; ?></label><br />
-        <?php showTextArea("psychological", 4, 90, $postVars["psychological"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="children_complaint"><?php echo _("Children Complaint") . ":"; ?></label><br />
-        <?php showTextArea("children_complaint", 4, 90, $postVars["children_complaint"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="venereal_disease"><?php echo _("Venereal Disease") . ":"; ?></label><br />
-        <?php showTextArea("venereal_disease", 4, 90, $postVars["venereal_disease"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="accident_surgical_operation"><?php echo _("Accidents and Surgical Operations") . ":"; ?></label><br />
-        <?php showTextArea("accident_surgical_operation", 4, 90, $postVars["accident_surgical_operation"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="medicinal_intolerance"><?php echo _("Medicinal Intolerance") . ":"; ?></label><br />
-        <?php showTextArea("medicinal_intolerance", 4, 90, $postVars["medicinal_intolerance"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="mental_illness"><?php echo _("Mental Illness") . ":"; ?></label><br />
-        <?php showTextArea("mental_illness", 4, 90, $postVars["mental_illness"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td class="center" colspan="2">
-        <?php
-          showInputButton("button1", _("Update"));
-          showInputButton("button2", _("Reset"), "reset");
-          showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-        ?>
-      </td>
-    </tr>
-  </tbody>
-</table>
