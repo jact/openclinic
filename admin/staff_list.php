@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.9 2004/07/28 17:40:00 jact Exp $
+ * $Id: staff_list.php,v 1.10 2004/10/03 14:24:33 jact Exp $
  */
 
 /**
@@ -26,6 +26,13 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Staff_Query.php");
   require_once("../lib/error_lib.php");
+  require_once("../lib/validator_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $memberType = (isset($_GET["type"]) ? safeText($_GET["type"]) : "");
+  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
 
   $staffQ = new Staff_Query();
   $staffQ->connect();
@@ -54,39 +61,39 @@
   ////////////////////////////////////////////////////////////////////
   // Display insertion message if coming from new with a successful insert.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["added"]) && isset($_GET["info"]))
+  if (isset($_GET["added"]) && !empty($info))
   {
-    showMessage(sprintf(_("Staff member, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Staff member, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display update message if coming from edit with a successful update.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["updated"]) && isset($_GET["info"]))
+  if (isset($_GET["updated"]) && !empty($info))
   {
-    showMessage(sprintf(_("Staff member, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Staff member, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display deletion message if coming from del with a successful delete.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Staff member, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Staff member, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
   // Display login used message.
   ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["login"]) && isset($_GET["info"]))
+  if (isset($_GET["login"]) && !empty($info))
   {
-    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
-  if (isset($_GET["type"]))
+  if ( !empty($memberType) )
   {
-    $numRows = $staffQ->selectType($_GET["type"]);
-    switch ($_GET["type"])
+    $numRows = $staffQ->selectType($memberType);
+    switch ($memberType)
     {
       case 'A':
         $listTitle = _("Administratives:");
@@ -125,32 +132,32 @@
   echo '<h3>' . $listTitle . "</h3>\n";
 
   echo '<p>';
-  if (isset($_GET["type"]))
+  if ( !empty($memberType) )
   {
     echo '<a href="../admin/staff_list.php">';
   }
   echo _("View all staff members");
-  if (isset($_GET["type"]))
+  if ( !empty($memberType) )
   {
     echo '</a>';
   }
   echo ' | ';
-  if ( !isset($_GET["type"]) || $_GET["type"] != 'A')
+  if ($memberType != 'A')
   {
     echo '<a href="../admin/staff_list.php?type=A">';
   }
   echo _("View only administratives");
-  if ( !isset($_GET["type"]) || $_GET["type"] != 'A')
+  if ($memberType != 'A')
   {
     echo '</a>';
   }
   echo ' | ';
-  if ( !isset($_GET["type"]) || $_GET["type"] != 'D')
+  if ($memberType != 'D')
   {
     echo '<a href="../admin/staff_list.php?type=D">';
   }
   echo _("View only doctors");
-  if ( !isset($_GET["type"]) || $_GET["type"] != 'D')
+  if ($memberType != 'D')
   {
     echo '</a>';
   }
