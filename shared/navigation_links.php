@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: navigation_links.php,v 1.1 2004/04/03 18:23:06 jact Exp $
+ * $Id: navigation_links.php,v 1.2 2004/04/14 22:28:27 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains showNavLinks function
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 03/04/2004 20:23
  * TODO: change name (bread crumb), image class
  */
 
