@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: log_record_list.php,v 1.3 2004/05/31 19:47:53 jact Exp $
  */
 
 /**
@@ -122,28 +122,28 @@
     while ($record = $recordQ->fetchRecord())
     {
 ?>
-    <tr class="<?php echo $rowClass; ?>">
+    <tr class="<?php echo $rowClass; ?> center">
       <td>
         <?php echo $record["access_date"]; ?>
       </td>
 
-      <td class="center">
+      <td>
         <?php echo $record["login"]; ?>
       </td>
 
-      <td class="center">
+      <td>
         <?php echo $record["table_name"]; ?>
       </td>
 
-      <td class="center">
+      <td>
         <?php echo $record["operation"]; ?>
       </td>
 
-      <td class="center">
+      <td>
         <?php echo $record["id_key1"]; ?>
       </td>
 
-      <td class="center">
+      <td>
         <?php echo $record["id_key2"]; ?>
       </td>
     </tr>
