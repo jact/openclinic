@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem.php,v 1.5 2004/05/24 22:12:44 jact Exp $
+ * $Id: Problem.php,v 1.6 2004/10/04 21:26:05 jact Exp $
  */
 
 /**
@@ -34,9 +34,9 @@ require_once("../lib/validator_lib.php");
  *  void setOrderNumber(int $value)
  *  string getCollegiateNumber(void)
  *  void setCollegiateNumber(string $value)
- *  string getOpeningDate(bool $view = true)
+ *  string getOpeningDate(void)
  *  void setOpeningDate(string $value)
- *  string getClosingDate(bool $view = true)
+ *  string getClosingDate(void)
  *  void setClosingDate(string $value)
  *  string getMeetingPlace(void)
  *  void setMeetingPlace(string $value)
@@ -53,7 +53,7 @@ require_once("../lib/validator_lib.php");
  *  void setActionPlan(string $value)
  *  string getPrescription(void)
  *  void setPrescription(string $value)
- *  string getLastUpdateDate(bool $view = true)
+ *  string getLastUpdateDate(void)
  *  void setLastUpdateDate(string $value)
  */
 class Problem
@@ -194,23 +194,14 @@ class Problem
   }
 
   /**
-   * string getOpeningDate(bool $view = true)
+   * string getOpeningDate(void)
    ********************************************************************
-   * @param bool $view if true, value is showed in program, else, value is saved in db
    * @return string opening date of the medical problem
    * @access public
    */
   function getOpeningDate($view = true)
   {
-    if ($view)
-    {
-      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_openingDate);
-      return ($this->_openingDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
-    }
-    else
-    {
-      return $this->_openingDate;
-    }
+    return stripslashes(strtr($this->_openingDate, $this->_trans));
   }
 
   /**
@@ -222,27 +213,18 @@ class Problem
    */
   function setOpeningDate($value)
   {
-    $this->_openingDate = ereg_replace('^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$', '\3-\2-\1', trim($value));
+    $this->_openingDate = safeText($value);
   }
 
   /**
-   * string getClosingDate(bool $view = true)
+   * string getClosingDate(void)
    ********************************************************************
-   * @param bool $view if true, value is showed in program, else, value is saved in db
    * @return string closing date of the medical problem
    * @access public
    */
-  function getClosingDate($view = true)
+  function getClosingDate()
   {
-    if ($view)
-    {
-      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_closingDate);
-      return ($this->_closingDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
-    }
-    else
-    {
-      return $this->_closingDate;
-    }
+    return stripslashes(strtr($this->_closingDate, $this->_trans));
   }
 
   /**
@@ -254,7 +236,8 @@ class Problem
    */
   function setClosingDate($value)
   {
-    $this->_closingDate = ((trim($value) == "") || trim($value) == "0000-00-00") ? "0000-00-00" : ereg_replace('^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$', '\3-\2-\1', trim($value));
+    $temp = safeText($value);
+    $this->_closingDate = (($temp == "" || $temp == "0000-00-00") ? "0000-00-00" : $temp);
   }
 
   /**
@@ -430,23 +413,14 @@ class Problem
   }
 
   /**
-   * string getLastUpdateDate(bool $view = true)
+   * string getLastUpdateDate(void)
    ********************************************************************
-   * @param bool $view if true, value is showed in program, else, value is saved in db
    * @return string last update date of the medical problem
    * @access public
    */
-  function getLastUpdateDate($view = true)
+  function getLastUpdateDate()
   {
-    if ($view)
-    {
-      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_lastUpdateDate);
-      return ($this->_lastUpdateDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
-    }
-    else
-    {
-      return $this->_lastUpdateDate;
-    }
+    return stripslashes(strtr($this->_lastUpdateDate, $this->_trans));
   }
 
   /**
@@ -458,7 +432,7 @@ class Problem
    */
   function setLastUpdateDate($value)
   {
-    $this->_lastUpdateDate = ereg_replace('^([0-9]{1,2})-([0-9]{1,2})-([0-9]{2,4})$', '\3-\2-\1', trim($value));
+    $this->_lastUpdateDate = safeText($value);
   }
 } // end class
 ?>

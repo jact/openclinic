@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_list.php,v 1.7 2004/10/04 18:29:40 jact Exp $
+ * $Id: history_list.php,v 1.8 2004/10/04 21:30:53 jact Exp $
  */
 
 /**
@@ -139,10 +139,10 @@
     $row .= fieldPreview($problem->getWording());
     $row .= OPEN_SEPARATOR;
 
-    $row .= $problem->getOpeningDate();
+    $row .= localDate($problem->getOpeningDate());
     $row .= OPEN_SEPARATOR;
 
-    $row .= $problem->getClosingDate();
+    $row .= localDate($problem->getClosingDate());
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
