@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.16 2004/08/09 10:03:58 jact Exp $
+ * $Id: header.php,v 1.17 2004/08/09 11:33:40 jact Exp $
  */
 
 /**
@@ -79,24 +79,21 @@
 
     <div id="headerInformation">
       <?php
-        echo sprintf(_("Today's date: %s"), date(_("Y-m-d")));
-        echo "<br />\n";
+        echo '<p>' . sprintf(_("Today's date: %s"), date(_("Y-m-d"))) . "</p>\n";
 
         if (defined("OPEN_CLINIC_HOURS") && OPEN_CLINIC_HOURS)
         {
-          echo sprintf(_("Clinic hours: %s"), OPEN_CLINIC_HOURS);
-          echo "<br />\n";
+          echo '<p>' . sprintf(_("Clinic hours: %s"), OPEN_CLINIC_HOURS) . "</p>\n";
         }
 
         if (defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
         {
-          echo sprintf(_("Clinic address: %s"), OPEN_CLINIC_ADDRESS);
-          echo "<br />\n";
+          echo '<p>' . sprintf(_("Clinic address: %s"), OPEN_CLINIC_ADDRESS) . "</p>\n";
         }
 
         if (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE)
         {
-          echo sprintf(_("Clinic phone: %s"), OPEN_CLINIC_PHONE);
+          echo '<p>' . sprintf(_("Clinic phone: %s"), OPEN_CLINIC_PHONE) . "</p>\n";
         }
       ?>
     </div><!-- End #headerInformation -->
