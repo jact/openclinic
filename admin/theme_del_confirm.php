@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del_confirm.php,v 1.4 2004/07/29 18:54:49 jact Exp $
+ * $Id: theme_del_confirm.php,v 1.5 2004/08/05 14:26:31 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@
   ////////////////////////////////////////////////////////////////////
   // Checking for query string. Go back to theme list if none found.
   ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]) || empty($_GET["file"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -37,6 +37,7 @@
   ////////////////////////////////////////////////////////////////////
   $idTheme = intval($_GET["key"]);
   $name = $_GET["name"];
+  $file = $_GET["file"];
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
@@ -70,6 +71,7 @@
     <?php
       showInputHidden("id_theme", $idTheme);
       showInputHidden("name", $name);
+      showInputHidden("file", $file);
       showInputButton("delete", _("Delete"));
       //showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
     ?>
