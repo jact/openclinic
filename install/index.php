@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.8 2004/07/07 17:22:04 jact Exp $
+ * $Id: index.php,v 1.9 2004/07/14 18:28:08 jact Exp $
  */
 
 /**
@@ -108,7 +108,7 @@
       </div>
 
       <?php
-        $filename = explode(".", $_FILES['sql_file']['name']);
+        $filename = explode("-", $_FILES['sql_file']['name']);
         if (in_array($filename[0], $tables))
         {
       ?>
