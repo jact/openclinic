@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.7 2004/10/16 14:48:14 jact Exp $
+ * $Id: Patient.php,v 1.8 2005/02/17 20:26:17 jact Exp $
  */
 
 /**
