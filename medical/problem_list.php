@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.4 2004/07/07 17:22:59 jact Exp $
+ * $Id: problem_list.php,v 1.5 2004/07/10 16:59:23 jact Exp $
  */
 
 /**
@@ -85,6 +85,30 @@
 
     include_once("../shared/footer.php");
     exit();
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display insertion message if coming from new with a successful insert.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["added"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Medical problem, %s, has been added."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display update message if coming from edit with a successful update.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["updated"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Medical problem, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display deletion message if coming from del with a successful delete.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["deleted"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Medical problem, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
   }
 
   if ($hasMedicalAdminAuth)

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit.php,v 1.3 2004/07/07 17:22:58 jact Exp $
+ * $Id: problem_edit.php,v 1.4 2004/07/10 16:59:23 jact Exp $
  */
 
 /**
@@ -94,34 +94,12 @@
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
-  $title = _("Edit Medical Problem");
-  require_once("../shared/header.php");
-  require_once("../medical/patient_header.php");
-
   $returnLocation = "../medical/problem_list.php?key=" . $idPatient;
 
   ////////////////////////////////////////////////////////////////////
-  // Navigation links
+  // Redirect to problem list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Medical Problems Report") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "patient.png");
-  unset($links);
-
-  showPatientHeader($idPatient);
-
-  echo '<p>' . sprintf(_("Medical problem, %s, has been updated."), $problem->getWording()) . "</p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to Medical Problems List") . "</a></p>\n";
+  $info = urlencode($problem->getWording());
   unset($problem);
-
-  require_once("../shared/footer.php");
+  header("Location: " . $returnLocation . "&updated=Y&info=" . $info);
 ?>
