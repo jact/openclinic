@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: staff_list.php,v 1.3 2004/04/24 18:02:35 jact Exp $
  */
 
 /**
@@ -262,8 +262,8 @@
 </table>
 
 <?php
-  echo '<p class="small">* ' . _("Note: To the create user function must have a correct login.") . "</p>\n";
-  echo '<p class="small">** ' . _("Note: The del function will not be applicated to the session user.") . "</p>\n";
+  echo '<p class="advice">* ' . _("Note: To the create user function must have a correct login.") . "</p>\n";
+  echo '<p class="advice">** ' . _("Note: The del function will not be applicated to the session user.") . "</p>\n";
 
   require_once("../shared/footer.php");
 ?>

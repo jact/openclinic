@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: theme_list.php,v 1.3 2004/04/24 18:02:35 jact Exp $
  */
 
 /**
@@ -182,7 +182,7 @@
 </table>
 
 <?php
-  echo '<p class="small">* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application.") . "</p>\n";
+  echo '<p class="advice">* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application.") . "</p>\n";
 
   require_once("../shared/footer.php");
 ?>

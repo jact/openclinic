@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.3 2004/04/24 17:56:58 jact Exp $
+ * $Id: user_list.php,v 1.4 2004/04/24 18:02:35 jact Exp $
  */
 
 /**
@@ -239,7 +239,7 @@
 </table>
 
 <?php
-  echo '<p class="small">* ' . _("Note: The del function will not be applicated to the session user.") . "</p>\n";
+  echo '<p class="advice">* ' . _("Note: The del function will not be applicated to the session user.") . "</p>\n";
 
   require_once("../shared/footer.php");
 ?>
