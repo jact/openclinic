@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Record_Query.php,v 1.6 2004/07/14 18:26:49 jact Exp $
+ * $Id: Record_Query.php,v 1.7 2004/07/24 16:35:40 jact Exp $
  */
 
 /**
@@ -25,6 +25,7 @@ require_once("../classes/Query.php");
  * @access public
  ********************************************************************
  * Methods:
+ *  void Record_Query(void)
  *  void setItemsPerPage(int $value)
  *  int getCurrentRow(void)
  *  int getRowCount(void)
@@ -32,7 +33,7 @@ require_once("../classes/Query.php");
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
  *  mixed fetch(void)
- *  bool insert(int $idUser, string $login, string $tableName, string $operation, int $idKey1, int $idKey2 = 0)
+ *  bool insert(int $idUser, string $login, string $tableName, string $operation, string $affectedRow)
  */
 class Record_Query extends Query
 {
@@ -42,6 +43,19 @@ class Record_Query extends Query
   var $_currentPage = 0;
   var $_rowCount = 0;
   var $_pageCount = 0;
+
+  /**
+   * void Record_Query(void)
+   ********************************************************************
+   * Constructor function
+   ********************************************************************
+   * @return void
+   * @access public
+   */
+  function Record_Query()
+  {
+    $this->_table = "record_log_tbl";
+  }
 
   /**
    * void setItemsPerPage(int $value)
@@ -101,7 +115,8 @@ class Record_Query extends Query
    */
   function select($year = 0, $month = 0, $day = 0, $hour = 0)
   {
-    $sql = "SELECT * FROM record_log_tbl";
+    $sql = "SELECT *";
+    $sql .= " FROM " . $this->_table;
     $sql .= " WHERE 1";
     if ($year != "")
     {
@@ -147,13 +162,13 @@ class Record_Query extends Query
     // reset stats
     $this->_rowNumber = 0;
     $this->_currentRow = 0;
-    $this->_currentPage = intval($page);
+    $this->_currentPage = ($page > 1) ? intval($page) : 1;
     $this->_rowCount = 0;
     $this->_pageCount = 0;
 
-    $sql = " FROM record_log_tbl";
-    //$sql .= " WHERE access_log_tbl.id_profile=profile_tbl.id_profile";
-    $sql .= " WHERE record_log_tbl.id_user=" . intval($idUser);
+    $sql = " FROM " . $this->_table;
+    //$sql .= " WHERE id_profile=profile_tbl.id_profile";
+    $sql .= " WHERE id_user=" . intval($idUser);
 
     $sqlCount = "SELECT COUNT(*) AS row_count" . $sql;
 
@@ -229,14 +244,13 @@ class Record_Query extends Query
     $record["access_date"] = urldecode($array["access_date"]);
     $record["table_name"] = urldecode($array["table_name"]);
     $record["operation"] = urldecode($array["operation"]);
-    $record["id_key1"] = intval($array["id_key1"]);
-    $record["id_key2"] = intval($array["id_key2"]);
+    $record["affected_row"] = urldecode($array["affected_row"]);
 
     return $record;
   }
 
   /**
-   * bool insert(int $idUser, string $login, string $tableName, string $operation, int $idKey1, int $idKey2 = 0)
+   * bool insert(int $idUser, string $login, string $tableName, string $operation, string $affectedRow)
    ********************************************************************
    * Inserts a new record log into the database.
    ********************************************************************
@@ -244,22 +258,21 @@ class Record_Query extends Query
    * @param string $login login of user that makes the operation
    * @param string $tableName
    * @param string $operation one between INSERT, UPDATE, DELETE
-   * @param int $idKey1 principal key of the record
-   * @param int $idKey2 (optional) second principal key of the record
+   * @param string $affectedRow serialized row data
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function insert($idUser, $login, $tableName, $operation, $idKey1, $idKey2 = 0)
+  function insert($idUser, $login, $tableName, $operation, $affectedRow)
   {
-    $sql = "INSERT INTO record_log_tbl ";
-    $sql .= "(id_user, login, access_date, table_name, operation, id_key1, id_key2) VALUES (";
+    $sql = "INSERT INTO " . $this->_table;
+    $sql .= " (id_user, login, access_date, table_name, operation, affected_row) VALUES (";
     $sql .= intval($idUser) . ", ";
     $sql .= "'" . urlencode($login) . "', ";
     $sql .= "NOW(), ";
     $sql .= "'" . urlencode($tableName) . "', ";
     $sql .= "'" . urlencode($operation) . "', ";
-    $sql .= ($idKey1 == 0) ? "LAST_INSERT_ID(), " : intval($idKey1) . ", ";
-    $sql .= ($idKey2 == 0) ? "NULL);" : intval($idKey2) . ");";
+    //$sql .= ($idKey1 == 0) ? "LAST_INSERT_ID(), " : intval($idKey1) . ", ";
+    $sql .= "'" . urlencode($affectedRow) . "')";
     //echo $sql; exit(); // debug
 
     $result = $this->exec($sql);
