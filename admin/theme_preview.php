@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.7 2004/06/20 12:05:49 jact Exp $
+ * $Id: theme_preview.php,v 1.8 2004/06/20 17:20:23 jact Exp $
  */
 
 /**
@@ -117,9 +117,9 @@
 <link rel="shortcut icon" href="../images/miniopc.png" type="image/png" />
 
 <style type="text/css" title="<?php echo $_POST['theme_name']; ?>">
-<!--
+<!--/*--><![CDATA[/*<!--*/
 <?php require_once("../css/style.php"); ?>
--->
+/*]]>*/-->
 </style>
 
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>

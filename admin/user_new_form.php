@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.3 2004/04/24 18:02:35 jact Exp $
+ * $Id: user_new_form.php,v 1.4 2004/06/20 17:20:23 jact Exp $
  */
 
 /**
@@ -82,7 +82,7 @@
 <script src="../scripts/md5.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-<!--
+<!--/*--><![CDATA[/*<!--*/
 function md5Login(f)
 {
   if (f['md5_old'] != null)
@@ -105,7 +105,7 @@ function md5Login(f)
 
   return true;
 }
-//-->
+/*]]>*///-->
 </script>
 
 <form method="post" action="../admin/user_new.php" onsubmit="return md5Login(this);">
