@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DbConnection.php,v 1.6 2004/11/05 12:34:37 jact Exp $
+ * $Id: DbConnection.php,v 1.7 2004/12/07 11:25:34 jact Exp $
  */
 
 /**
@@ -45,7 +45,7 @@ if (file_exists("../database_constants.php"))
  *  string tableName(int $index = 0)
  *  bool listFields(string $table)
  *  string fieldName(int $index = 0)
- *  int getLink(void)
+ *  mixed getLink(void)
  *  string getError(void)
  *  int getDbErrno(void)
  *  string getDbError(void)
@@ -430,9 +430,9 @@ class DbConnection
   }
 
   /**
-   * int getLink(void)
+   * mixed getLink(void)
    ********************************************************************
-   * @return int connection link
+   * @return mixed connection link or false
    * @access public
    */
   function getLink()
