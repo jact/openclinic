@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: coding_guidelines.html,v 1.8 2005/01/31 19:56:51 jact Exp $ -->
+<!-- $Id: coding_guidelines.html,v 1.9 2005/02/19 12:53:44 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Coding Guidelines</title>
@@ -26,27 +26,8 @@
 <link rel="bookmark icon" type="image/png" href="./images/miniopc.png" />
 </head>
 <body id="top">
-<!-- OpenClinic logo and black background -->
-<div id="header"><span class="headerLHS"><a href="http://openclinic.sourceforge.net"><img src="./images/openclinic-1.png" width="291" height="58" alt="OpenClinic site" title="OpenClinic site" /></a></span><!-- End .headerLHS --><a href="http://sourceforge.net" title="SourceForge.net Logo"><img src="./images/sf-logo2.png" width="210" height="58" alt="SourceForge.net Logo" /></a></div><!-- End #header -->
-
-<div class="links">
-  <ul class="linkList">
-    <li><a href="./index.html">OpenClinic Readme</a></li>
-
-    <li><a href="./install.html">Install Instructions</a></li>
-
-    <li><a href="./changelog.html">OpenClinic Changelog</a></li>
-
-    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
-
-    <li><a href="./demo_version.html">Demo Version Features</a></li>
-  </ul>
-</div><!-- End .links -->
-
 <div id="content">
   <h1>OpenClinic Coding Guidelines</h1>
-
-  <h2 id="contents">Table of contents</h2>
 
   <dl>
     <dt>1. <a href="#d0e7">Code Files Format</a></dt>
@@ -118,7 +99,7 @@
     Another important thing is knowing which name criteria are going to be followed for file naming.
   </p>
 
-  <ul type="disc">
+  <ul>
     <li>It is going to be used lower-case letters in english language and numbers.</li>
 
     <li>It is not going to be used whitespaces as word separator. Instead it is going to be used hyphens (-), lower-hyphens (_) or dots (we recommend use dots only for distinguish between the name and the extension).</li>
@@ -147,7 +128,7 @@
   <h2 id="d0e37"><a href="#top" title="To top of the page">3. Control Structures</a></h2>
 
   <p>
-    Set of control structures: <tt>if</tt>, <tt>for</tt>, <tt>while</tt>, <tt>switch</tt>, etc. Right down there is an <tt>if</tt> structure code example:
+    Set of control structures: <code>if</code>, <code>for</code>, <code>while</code>, <code>switch</code>, etc. Right down there is an <code>if</code> structure code example:
   </p>
 
 <pre class="programlisting">
@@ -170,7 +151,7 @@ else
   </p>
 
   <p>
-    Always are going to be used opening and closing keys in the code. Even if their were optional. This rises the clearness of the code and reduces logical errors that are used when there are added new code-lines. An example of a <tt>switch</tt> structure:
+    Always are going to be used opening and closing keys in the code. Even if their were optional. This rises the clearness of the code and reduces logical errors that are used when there are added new code-lines. An example of a <code>switch</code> structure:
   </p>
 
 <pre class="programlisting">
@@ -250,7 +231,7 @@ function fooFunction($arg1, $arg2 = '')
   </p>
 
   <p>
-    The rest of te comments (there are never enought) will use the C style (<tt>/* */</tt>) and the C++ standard (<tt>//</tt>). It is not recommended the Perl style (<tt>#</tt>).
+    The rest of te comments (there are never enought) will use the C style (<code>/* */</code>) and the C++ standard (<code>//</code>). It is not recommended the Perl style (<code>#</code>).
   </p>
 
   <p>
@@ -317,7 +298,7 @@ function fooFunction($arg1, $arg2 = '')
     The last example could be followed word for word, but you are free to change the style (between the said ones) and to add more information. Next list shows information suggested by and the order it should be follow (not all the fields are appropiate in all circumstances, of course):
   </p>
 
-  <ol type="1">
+  <ol>
     <li>File name.</li>
 
     <li>Short description of the archive contents (one line).</li>
@@ -362,7 +343,7 @@ function fooFunction($arg1, $arg2 = '')
     Again, there is no matter about the style. Equally there can be included the next elements, in the order they are shown:
   </p>
 
-  <ol type="1">
+  <ol>
     <li>Short description of the module.</li>
 
     <li>Module detailed description.</li>
@@ -427,7 +408,7 @@ function fooFunction($arg1, $arg2 = '')
     A head function comment should have a set of elements like:
   </p>
 
-  <ol type="1">
+  <ol>
     <li>Function prototype.</li>
 
     <li>Detailed function description.</li>
@@ -453,7 +434,7 @@ function fooFunction($arg1, $arg2 = '')
     When you should comment a code, the comment should answer the next list of questions:
   </p>
 
-  <ul type="disc">
+  <ul>
     <li>What is it doing so?</li>
 
     <li>Why is it doing so?</li>
@@ -474,7 +455,7 @@ function fooFunction($arg1, $arg2 = '')
   <h2 id="d0e272"><a href="#top" title="To top of the page">7. Including Code</a></h2>
 
   <p>
-    Wherever a class file is included, it will be used the sentence <tt>require_once()</tt>. Wherever a class file is included <em>conditionally</em>, it will be used; <tt>include_once()</tt>. In both cases, the class file will be included only once. Therefore an included file with <tt>require_once()</tt>, will not be included again wiht <tt>include_once()</tt>.
+    Wherever a class file is included, it will be used the sentence <code>require_once()</code>. Wherever a class file is included <em>conditionally</em>, it will be used; <code>include_once()</code>. In both cases, the class file will be included only once. Therefore an included file with <code>require_once()</code>, will not be included again wiht <code>include_once()</code>.
   </p>
 
   <hr />
@@ -482,7 +463,7 @@ function fooFunction($arg1, $arg2 = '')
   <h2 id="d0e292"><a href="#top" title="To top of the page">8. PHP Code Marks</a></h2>
 
   <p>
-    There will be used always the marks <tt>&lt;?php ?&gt;</tt> as delimiters the PHP code. This makes the code more portable between different operating systems and configurations.
+    There will be used always the marks <code>&lt;?php ?&gt;</code> as delimiters the PHP code. This makes the code more portable between different operating systems and configurations.
   </p>
 
   <hr />
@@ -490,7 +471,7 @@ function fooFunction($arg1, $arg2 = '')
   <h2 id="d0e300"><a href="#top" title="To top of the page">9. Example URLs</a></h2>
 
   <p>
-    It will be used the URL <tt>example.com</tt> for every example direction, such us it is said in <a href="http://www.faqs.org/rfcs/rfc2606.html">RFC 2606</a>.
+    It will be used the URL <code>example.com</code> for every example direction, such us it is said in <a href="http://www.faqs.org/rfcs/rfc2606.html">RFC 2606</a>.
   </p>
 
   <hr />
@@ -532,13 +513,13 @@ _sort(), _initTree(), $this-&gt;_status
   <h3 id="d0e343"><a href="#top" title="To top of the page">10.3. Constants</a></h3>
 
   <p>
-    Constans will go always in capital letters, with low hyphens separateing words. The package prefixes will be writeing in capitals too. For example, the constants used in the package <tt>DB::</tt> will began "<tt>DB_</tt>".
+    Constans will go always in capital letters, with low hyphens separateing words. The package prefixes will be writeing in capitals too. For example, the constants used in the package <code>DB::</code> will began "<code>DB_</code>".
   </p>
 
   <h3 id="d0e355"><a href="#top" title="To top of the page">10.4. Variables</a></h3>
 
   <p>
-    The right election of a function or variable name is an esencial question at programming time. Generally, when a name is sellected for a variable, it is significant determinate if the variable is global or local. If it is local to a function, the name will be short and precise to express the content or the meaning of this variable. It should have two words maximum, splited by a capital letter. For a looping variable it could be used tipical names, such as (<tt>$i</tt>, <tt>$j</tt>, <tt>$k</tt>, etc.) meanwhile they do not hide information from the code.
+    The right election of a function or variable name is an esencial question at programming time. Generally, when a name is sellected for a variable, it is significant determinate if the variable is global or local. If it is local to a function, the name will be short and precise to express the content or the meaning of this variable. It should have two words maximum, splited by a capital letter. For a looping variable it could be used tipical names, such as (<code>$i</code>, <code>$j</code>, <code>$k</code>, etc.) meanwhile they do not hide information from the code.
   </p>
 
 <pre class="programlisting">
@@ -548,19 +529,19 @@ $counter, $nextIndex, $nrOptions, $cookieName
   <h3 id="d0e363"><a href="#top" title="To top of the page">10.5. Global Variables</a></h3>
 
   <p>
-    If any package needs to define global variables, their name will begin with a low hyphen, followed by the package name, another low hyphen and at last the assigned name. For example, <tt>$_PEAR_destructorObjectList</tt>.
+    If any package needs to define global variables, their name will begin with a low hyphen, followed by the package name, another low hyphen and at last the assigned name. For example, <code>$_PEAR_destructorObjectList</code>.
   </p>
 
   <h3 id="d0e368"><a href="#top" title="To top of the page">10.6. Predefined Values</a></h3>
 
   <p>
-    Predefined PHP values <tt>true</tt>, <tt>false</tt> and <tt>null</tt> will go written always in small letters.
+    Predefined PHP values <code>true</code>, <code>false</code> and <code>null</code> will go written always in small letters.
   </p>
 
   <h3 id="d0e369"><a href="#top" title="To top of the page">10.7. Database Fields and Tables Naming</a></h3>
 
   <p>
-    Database fields and tables names will go written always in small letters and it will use the symbol <tt>_</tt> to separate words. Therefore, table names will have the <tt>_tbl</tt> subfix. So it will be easy view them between the text.
+    Database fields and tables names will go written always in small letters and it will use the symbol <code>_</code> to separate words. Therefore, table names will have the <code>_tbl</code> subfix. So it will be easy view them between the text.
   </p>
 
 <pre class="programlisting">
@@ -570,7 +551,7 @@ theme_tbl, session_timeout, items_per_page, id_user
   <h3 id="d0e370"><a href="#top" title="To top of the page">10.8. HTML Forms Tag Names</a></h3>
 
   <p>
-    They will go always in small letters and it will use the <tt>_</tt> sign as a separator character. This style has been chosen to make more distinguisable the database fields from the class method names whom manages them.
+    They will go always in small letters and it will use the <code>_</code> sign as a separator character. This style has been chosen to make more distinguisable the database fields from the class method names whom manages them.
   </p>
 
 <pre class="programlisting">
@@ -584,7 +565,7 @@ collegiate_number, first_name, phone_contact, login
   </p>
 
   <p>
-    One advice: not mix styles. Or you use the symbol <tt>-</tt> to separate words (symbol <tt>_</tt> is forbidden to name identifiers ans class names) or you follow the rules for <a href="#d0e355">variable naming</a> (except the symbol <tt>$</tt>).
+    One advice: not mix styles. Or you use the symbol <code>-</code> to separate words (symbol <code>_</code> is forbidden to name identifiers ans class names) or you follow the rules for <a href="#d0e355">variable naming</a> (except the symbol <code>$</code>).
   </p>
 
   <p>
@@ -600,30 +581,68 @@ collegiate_number, first_name, phone_contact, login
   </p>
 </div><!-- End #content -->
 
-<div class="links">
+<div id="left">
+  <p>
+    <a href="http://openclinic.sourceforge.net" id="logo" title="OpenClinic web site">OpenClinic web site</a>
+  </p>
+
+  <h2>Table of contents</h2>
+
   <ul class="linkList">
-    <li><a href="./index.html">OpenClinic Readme</a></li>
+    <li><a href="#d0e7">1. Code Files Format</a></li>
+
+    <li><a href="#d0e32">2. Indentation</a></li>
+
+    <li><a href="#d0e37">3. Control Structures</a></li>
+
+    <li><a href="#d0e72">4. Functions Callings</a></li>
+
+    <li><a href="#d0e85">5. Functions Definition</a></li>
+
+    <li><a href="#d0e95">6. Comments</a></li>
+
+    <li><a href="#d0e272">7. Including Code</a></li>
+
+    <li><a href="#d0e292">8. PHP Code Marks</a></li>
+
+    <li><a href="#d0e300">9. Example URLs</a></li>
+
+    <li><a href="#d0e308">10. Names Convention</a></li>
+
+    <li><a href="#d0e382">11. Code Internationalization</a></li>
+  </ul>
+</div><!-- End #left -->
+
+<div id="right">
+  <h2>Related links</h2>
+
+  <ul class="linkList">
+    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
+
+    <li><a href="./index.html">Readme</a></li>
 
     <li><a href="./install.html">Install Instructions</a></li>
 
-    <li><a href="./changelog.html">OpenClinic Changelog</a></li>
-
-    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
+    <li><a href="./changelog.html">Changelog</a></li>
 
     <li><a href="./demo_version.html">Demo Version Features</a></li>
   </ul>
-</div><!-- End .links -->
+
+  <p>
+    <a href="http://sourceforge.net" id="hosting" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
+  </p>
+</div><!-- End #right -->
 
 <div id="footer">
-  Powered by OpenClinic
-  <br />
-  Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>
-  <br />
-  under the <a href="./LICENSE">GNU General Public License</a>
-</div><!-- End #footer -->
+  <p>Powered by OpenClinic</p>
 
-<div class="logos">
-  <a href="http://validator.w3.org/check/referer"><img src="./images/valid-xhtml11.png" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" width="80" height="15" /></a>
-</div><!-- End .logos -->
+  <p>Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a></p>
+
+  <p>under the <a href="./LICENSE">GNU General Public License</a></p>
+
+  <p>
+    <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
+  </p>
+</div><!-- End #footer -->
 </body>
 </html>
