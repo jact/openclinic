@@ -1,10 +1,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.9 2005/01/31 20:07:26 jact Exp $
+ * $Id: style.css,v 1.10 2005/02/19 12:52:28 jact Exp $
  */
 
 /**
@@ -47,10 +47,6 @@ h2 {
 }
 h3 {
   font-size: 16px;
-}
-#header img {
-  background: #fff;
-  color: #000;
 }
 #content a:link, #content a:visited, #footer a:link, #footer a:visited {
   background: inherit;
@@ -98,56 +94,39 @@ hr {
   color: #000;
   border: 1px solid #000;
 }
-#header {
-  background: #000;
-  border: 1px solid #000;
-  text-align: right;
-  height: 58px;
-}
-.headerLHS {
-  float: left;
-}
-.links {
-  margin-top: 30px;
-  font: normal 11px verdana, geneva, helvetica, arial, sans-serif;
-}
 .linkList {
   list-style: none outside none;
-  margin: 0;
+  margin: 0 0 0 3px;
   padding: 0;
-  text-align: center;
 }
 .linkList li {
   position: relative;
   bottom: 11px;
-  display: inline;
   margin: 0;
   padding: 0;
 }
 html>body .linkList li {
   margin: 0 3px 0 0;
-  padding: 4px 0px;
-  line-height: 2.5em;
-  background: #98aab1;
+  padding: 2px 0px;
+  line-height: 1.5em;
 }
 .linkList a, .linkList a:link, .linkList a:visited,
 #content .linkList a, #content .linkList a:link, #content .linkList a:visited {
   background: #98aab1;
   color: #fff;
   border: 1px solid #fff;
-  bottom: 2px;
   cursor: pointer;
-  display: inline;
+  display: block;
   margin: 0;
-  padding: 3px 5px;
+  padding: 0px 5px;
   position: relative;
+  bottom: 2px;
   right: 2px;
-  height: 1em;
+  width: 11em;
   text-decoration: none;
-  white-space: nowrap;
 }
 .linkList li.bold a, .linkList li.bold a:link, .linkList li.bold a:visited {
-  background: inherit;
+  background: #98aab1;
   color: #ffd700;
   font-weight: bold;
 }
@@ -165,8 +144,75 @@ html>body .linkList li {
   position: relative;
   right: 0;
 }
-#footer, .logos {
+#footer {
   font-size: 11px;
   margin-top: 10px;
   text-align: center;
+}
+#footer p {
+  margin: 0;
+}
+/* -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~ */
+#content {
+  padding: 0em 14em 1em 14em;
+}
+#left {
+  position: fixed;
+  top: 1.1em;
+  left: 1.8em;
+  width: 12em;
+  background: #eee;
+}
+#right {
+  position: fixed;
+  top: 1.1em;
+  right: 1.8em;
+  width: 12em;
+  background: #eee;
+}
+/* MSIE only rules */
+* html #left, * html #right {
+  position: absolute;
+}
+* html #left {
+  left: 1.1em;
+}
+* html #left h2 {
+  margin-left: 0.7em;
+}
+* html #left .linkList {
+  margin-left: 1em;
+}
+* html .linkList li {
+  margin-bottom: 2px;
+}
+/* All done. */
+/* Images replacements */
+#logo { /* variation of phark ir method */
+  display: block;
+  border: 1px solid #000;
+  text-indent: -5000px;
+  text-decoration: none;
+  background: url(../images/openclinic-3.png) no-repeat;
+  width: 190px;
+  height: 38px;
+}
+#hosting { /* variation of phark ir method */
+  display: block;
+  text-indent: -5000px;
+  text-decoration: none;
+  background: url(../images/sf-logo.png) no-repeat;
+  width: 125px;
+  height: 37px;
+}
+#footer a#xhtml11, #footer a#xhtml11:hover { /* variation of phark ir method */
+  display: block;
+  text-indent: -5000px;
+  text-decoration: none;
+  background: url(../images/valid-xhtml11.png) no-repeat;
+  width: 80px;
+  height: 15px;
+}
+html>body a#xhtml11 { /* gecko browsers */
+  margin-left: 46%;
 }
