@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_del_confirm.php,v 1.3 2004/04/24 17:06:10 jact Exp $
+ * $Id: relative_del_confirm.php,v 1.4 2004/08/01 08:53:02 jact Exp $
  */
 
 /**
@@ -67,44 +67,23 @@
   unset($links);
 
   showPatientHeader($idPatient);
-  echo "<br />\n";
 ?>
 
 <form method="post" action="../medical/relative_del.php">
-  <div class="center">
+  <h3><?php echo _("Delete Relative from list"); ?></h3>
+
+  <?php showMessage(sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relName)); ?>
+
+  <p>
     <?php
       showInputHidden("id_patient", $idPatient);
       showInputHidden("id_relative", $idRelative);
       showInputHidden("name", $relName);
+
+      showInputButton("delete", _("Delete"));
+      //showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
     ?>
-
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <?php echo _("Delete Relative from list"); ?>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>
-            <?php echo sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relName); ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="center">
-            <?php
-              showInputButton("delete", _("Delete"));
-              showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-            ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  </p>
 </form>
 
 <?php require_once("../shared/footer.php"); ?>
