@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.6 2004/07/07 17:23:05 jact Exp $
+ * $Id: print_medical_record.php,v 1.7 2004/07/08 16:43:01 jact Exp $
  */
 
 /**
@@ -427,7 +427,7 @@
   // Show family antecedents
   ////////////////////////////////////////////////////////////////////
   $historyQ->selectFamily($idPatient);
-  if ( ! )
+  if ($historyQ->isError())
   {
     $historyQ->close();
     showQueryError($historyQ);
