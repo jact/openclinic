@@ -5,13 +5,13 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.2 2004/06/20 17:18:26 jact Exp $
+ * $Id: xhtml_start.php,v 1.3 2004/07/14 18:16:02 jact Exp $
  */
 
 /**
  * xhtml_start.php
  ********************************************************************
- * Contains the common XHTML content of the web pages (xml prolog, DOCTYPE, title page and meta data)
+ * Contains the common XHTML content of the web pages (XML prolog, DOCTYPE, title page and meta data)
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
@@ -21,6 +21,13 @@
     header("Location: ../index.php");
     exit();
   }
+
+  $contentType = "application/xhtml+xml";
+  if ( !ereg(str_replace("+", "\+", $contentType), $_SERVER['HTTP_ACCEPT']) )
+  {
+    $contentType = "text/html";
+  }
+  $contentType .= "; charset=" . OPEN_CHARSET;
 
   // To prevent 'short_open_tag = On' mistake
   echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
@@ -36,7 +43,7 @@
   echo ((isset($title) && $title != "") ? $title : "");
 ?></title>
 
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
+<meta http-equiv="Content-Type" content="<?php echo $contentType; ?>" />
 
 <?php //echo <!--meta http-equiv="Content-Style-Type" content="text/css2" /--> ?>
 
@@ -48,7 +55,7 @@
 
 <meta http-equiv="imagetoolbar" content="no" />
 
-<meta name="robots" content="noindex,nofollow" />
+<meta name="robots" content="noindex,nofollow,noarchive" />
 
 <meta name="MSSmartTagsPreventParsing" content="TRUE" />
 
