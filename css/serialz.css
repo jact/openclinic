@@ -107,6 +107,10 @@ li#first a, li#first span {
   margin-bottom: 3ex;
 }
 
+.linkList {
+  position: relative; /* IE bug fixed */
+}
+
 #mainZone {
   line-height: 1.5em;
   margin-left: 150px;

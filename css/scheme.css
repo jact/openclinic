@@ -102,6 +102,10 @@ li#first a, li#first span {
   font-size: 10px;
 }
 
+.linkList {
+  position: relative; /* IE bug fixed */
+}
+
 .linkList a, .linkList a:hover, .linkList .selected {
   line-height: 1.25em;
   display: block;
