@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: deleted_patient_tbl.sql,v 1.4 2004/09/22 18:19:08 jact Exp $
+ * $Id: deleted_patient_tbl.sql,v 1.5 2004/10/16 14:56:03 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@ CREATE TABLE deleted_patient_tbl (
   labour_situation TEXT NULL, /* situación laboral */
   education TEXT NULL, /* estudios */
   insurance_company VARCHAR(30) NULL, /* entidad aseguradora */
-  collegiate_number VARCHAR(20) NULL, /* numero de colegiado (clave del médico al que pertenece por cupo) */
+  id_member INT UNSIGNED NULL, /* clave del médico al que pertenece por cupo */
   birth_growth TEXT NULL, /* nacimiento y crecimiento (desarrollo) */
   growth_sexuality TEXT NULL, /* desarrollo y vida sexual */
   feed TEXT NULL, /* alimentación */

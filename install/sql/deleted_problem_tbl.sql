@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: deleted_problem_tbl.sql,v 1.4 2004/09/22 18:19:08 jact Exp $
+ * $Id: deleted_problem_tbl.sql,v 1.5 2004/10/16 14:56:03 jact Exp $
  */
 
 /**
@@ -20,7 +20,7 @@ CREATE TABLE deleted_problem_tbl (
   id_problem INT UNSIGNED NOT NULL,
   last_update_date DATE NOT NULL, /* fecha de última actualización */
   id_patient INT UNSIGNED NOT NULL,
-  collegiate_number VARCHAR(20) NULL, /* número de colegiado (clave del médico que anota el problema) */
+  id_member INT UNSIGNED NULL, /* clave del médico que atiende el problema */
   order_number TINYINT UNSIGNED NOT NULL, /* número de orden relativo a cada paciente */
   opening_date DATE NOT NULL, /* fecha de apertura */
   closing_date DATE NULL, /* fecha de cierre */
