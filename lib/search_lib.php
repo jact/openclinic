@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: search_lib.php,v 1.3 2004/04/24 15:27:52 jact Exp $
+ * $Id: search_lib.php,v 1.4 2004/07/14 18:30:50 jact Exp $
  */
 
 /**
@@ -77,6 +77,7 @@ function explodeQuoted($str)
  * void showResultPages(int $currentPage, int $pageCount)
  ********************************************************************
  * Creates the pagination string in result sets
+ * TODO: optimize code with constants
  ********************************************************************
  * @param int $currentPage
  * @param int $pageCount total pages
@@ -100,7 +101,7 @@ function showResultPages($currentPage, $pageCount)
       $pageString .= ($i == $currentPage) ? '<strong>' . $i . "</strong>\n" : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
       if ($i < $initPageMax)
       {
-        $pageString .= " ";
+        $pageString .= ' | ';
       }
     }
 
@@ -108,7 +109,7 @@ function showResultPages($currentPage, $pageCount)
     {
       if ($currentPage > 1 && $currentPage < $pageCount)
       {
-        $pageString .= ( $currentPage > 5 ) ? ' ... ' : ' ';
+        $pageString .= ( $currentPage > 5 ) ? ' ... ' : ' | ';
 
         $initPageMin = ($currentPage > 4) ? $currentPage : 5;
         $initPageMax = ($currentPage < ($pageCount - 4)) ? $currentPage : $pageCount - 4;
@@ -118,11 +119,11 @@ function showResultPages($currentPage, $pageCount)
           $pageString .= ($i == $currentPage) ? '<strong>' . $i . "</strong>\n" : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
           if ($i < ($initPageMax + 1))
           {
-            $pageString .= ' ';
+            $pageString .= ' | ';
           }
         }
 
-        $pageString .= ($currentPage < ($pageCount - 4)) ? ' ... ' : ' ';
+        $pageString .= ($currentPage < ($pageCount - 4)) ? ' ... ' : ' | ';
       }
       else
       {
@@ -134,7 +135,7 @@ function showResultPages($currentPage, $pageCount)
         $pageString .= ($i == $currentPage) ? '<strong>' . $i . "</strong>\n" : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
         if ($i < $pageCount)
         {
-          $pageString .= " ";
+          $pageString .= ' | ';
         }
       }
     }
@@ -146,19 +147,19 @@ function showResultPages($currentPage, $pageCount)
       $pageString .= ($i == $currentPage) ? '<strong>' . $i . "</strong>\n" : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
       if ($i < $pageCount)
       {
-        $pageString .= ' ';
+        $pageString .= ' | ';
       }
     }
   }
 
   if ($currentPage > 1)
   {
-    $pageString = ' <a href="#" onclick="changePage(' . ($currentPage - 1) . ');">&laquo;' . _("prev") . '</a>&nbsp;&nbsp;' . $pageString;
+    $pageString = ' <a href="#" onclick="changePage(' . ($currentPage - 1) . ');">&laquo;' . _("prev") . '</a> | ' . $pageString;
   }
 
   if ($currentPage < $pageCount)
   {
-    $pageString .= '&nbsp;&nbsp;<a href="#" onclick="changePage(' . ($currentPage + 1) . ');">' . _("next") . '&raquo;</a>';
+    $pageString .= ' | <a href="#" onclick="changePage(' . ($currentPage + 1) . ');">' . _("next") . '&raquo;</a>';
   }
 
   $pageString = '<p>' . _("Result Pages") . ': ' . $pageString . "</p>\n";
