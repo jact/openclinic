@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.5 2004/05/20 19:15:05 jact Exp $
+ * $Id: setting_fields.php,v 1.6 2004/07/08 16:37:46 jact Exp $
  */
 
 /**
@@ -23,6 +23,11 @@
   }
 
   require_once("../lib/file_lib.php");
+
+  if (defined("OPEN_DEMO") && OPEN_DEMO)
+  {
+    showInputHidden("language", "en");
+  }
 ?>
 
 <table>
@@ -152,12 +157,6 @@
       </td>
     </tr>
   <?php
-    }
-    else
-    {
-      echo '<tr><td colspan="2">';
-      showInputHidden("language", "en");
-      echo "</td></tr>\n";
     } // end if
   ?>
 
