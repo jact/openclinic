@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.7 2004/07/07 17:23:37 jact Exp $
+ * $Id: read_settings.php,v 1.8 2004/07/18 15:17:04 jact Exp $
  */
 
 /**
@@ -25,8 +25,9 @@
   ////////////////////////////////////////////////////////////////////
   // Application constants
   ////////////////////////////////////////////////////////////////////
-  define("OPEN_DEMO",  false);
-  define("OPEN_DEBUG", false);
+  define("OPEN_DEMO",               false);
+  define("OPEN_DEBUG",              false);
+  define("OPEN_MAX_LOGIN_ATTEMPTS", 3);
 
   (defined("OPEN_DEBUG") && OPEN_DEBUG)
     ? error_reporting(E_ALL) // debug mode
