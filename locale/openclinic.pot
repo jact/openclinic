@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenClinic 0.7\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2004-12-07 11:54+0100\n"
+"PO-Revision-Date: 2004-12-08 11:30+0100\n"
 "Last-Translator: jact <jachavar@terra.es>\n"
 "Language-Team:  <jachavar@terra.es>\n"
 "MIME-Version: 1.0\n"
@@ -508,8 +508,8 @@ msgstr ""
 #: admin/user_pwd_reset_form.php:138
 #: admin/user_access_log.php:141
 #: admin/user_record_log.php:135
-#: install/wizard.php:354
-#: install/wizard.php:443
+#: install/wizard.php:350
+#: install/wizard.php:439
 #: shared/login_form.php:87
 msgid "Login"
 msgstr ""
@@ -597,8 +597,8 @@ msgstr ""
 
 #: admin/setting_fields.php:38
 #: admin/theme_preview.php:153
-#: install/wizard.php:253
-#: install/wizard.php:424
+#: install/wizard.php:249
+#: install/wizard.php:420
 msgid "Clinic Name"
 msgstr ""
 
@@ -615,20 +615,20 @@ msgid "Use Image in place of Name"
 msgstr ""
 
 #: admin/setting_fields.php:65
-#: install/wizard.php:259
-#: install/wizard.php:425
+#: install/wizard.php:255
+#: install/wizard.php:421
 msgid "Clinic Hours"
 msgstr ""
 
 #: admin/setting_fields.php:71
-#: install/wizard.php:265
-#: install/wizard.php:426
+#: install/wizard.php:261
+#: install/wizard.php:422
 msgid "Clinic Address"
 msgstr ""
 
 #: admin/setting_fields.php:77
-#: install/wizard.php:271
-#: install/wizard.php:427
+#: install/wizard.php:267
+#: install/wizard.php:423
 msgid "Clinic Phone"
 msgstr ""
 
@@ -637,28 +637,28 @@ msgid "Clinic URL"
 msgstr ""
 
 #: admin/setting_fields.php:91
-#: install/wizard.php:247
-#: install/wizard.php:423
+#: install/wizard.php:243
+#: install/wizard.php:419
 msgid "Language"
 msgstr ""
 
-#: admin/setting_fields.php:120
-#: install/wizard.php:289
-#: install/wizard.php:430
+#: admin/setting_fields.php:99
+#: install/wizard.php:285
+#: install/wizard.php:426
 msgid "Theme by default"
 msgstr ""
 
-#: admin/setting_fields.php:126
-#: install/wizard.php:428
+#: admin/setting_fields.php:105
+#: install/wizard.php:424
 msgid "Session Timeout"
 msgstr ""
 
-#: admin/setting_fields.php:129
+#: admin/setting_fields.php:108
 msgid "minutes"
 msgstr ""
 
-#: admin/setting_fields.php:133
-#: install/wizard.php:429
+#: admin/setting_fields.php:112
+#: install/wizard.php:425
 #: medical/patient_search.php:91
 #: medical/problem_search.php:92
 #: medical/relative_search.php:81
@@ -666,18 +666,18 @@ msgstr ""
 msgid "Search Results"
 msgstr ""
 
-#: admin/setting_fields.php:136
+#: admin/setting_fields.php:115
 msgid "items per page"
 msgstr ""
 
-#: admin/setting_fields.php:140
+#: admin/setting_fields.php:119
 #: admin/theme_list.php:93
 #: medical/history_family_fields.php:52
 #: medical/history_personal_fields.php:87
 msgid "Update"
 msgstr ""
 
-#: admin/setting_fields.php:140
+#: admin/setting_fields.php:119
 #: admin/staff_fields.php:86
 #: admin/theme_fields.php:51
 #: admin/user_fields.php:105
@@ -747,8 +747,8 @@ msgstr ""
 
 #: admin/staff_fields.php:48
 #: admin/staff_list.php:176
-#: install/wizard.php:324
-#: install/wizard.php:438
+#: install/wizard.php:320
+#: install/wizard.php:434
 #: medical/patient_fields.php:43
 #: medical/patient_search.php:162
 #: medical/patient_search_fields.php:36
@@ -758,8 +758,8 @@ msgstr ""
 
 #: admin/staff_fields.php:54
 #: admin/staff_list.php:177
-#: install/wizard.php:330
-#: install/wizard.php:439
+#: install/wizard.php:326
+#: install/wizard.php:435
 #: medical/patient_fields.php:49
 #: medical/patient_search.php:154
 #: medical/patient_search_fields.php:34
@@ -769,8 +769,8 @@ msgstr ""
 
 #: admin/staff_fields.php:60
 #: admin/staff_list.php:178
-#: install/wizard.php:336
-#: install/wizard.php:440
+#: install/wizard.php:332
+#: install/wizard.php:436
 #: medical/patient_fields.php:55
 #: medical/patient_search.php:158
 #: medical/patient_search_fields.php:35
@@ -779,8 +779,8 @@ msgid "Surname 2"
 msgstr ""
 
 #: admin/staff_fields.php:66
-#: install/wizard.php:342
-#: install/wizard.php:441
+#: install/wizard.php:338
+#: install/wizard.php:437
 #: medical/patient_fields.php:61
 #: medical/patient_search.php:186
 #: medical/patient_search_fields.php:41
@@ -791,8 +791,8 @@ msgid "Address"
 msgstr ""
 
 #: admin/staff_fields.php:72
-#: install/wizard.php:348
-#: install/wizard.php:442
+#: install/wizard.php:344
+#: install/wizard.php:438
 #: medical/patient_fields.php:67
 #: medical/patient_search.php:191
 #: medical/patient_search_fields.php:42
@@ -1236,8 +1236,8 @@ msgstr ""
 
 #: admin/user_fields.php:49
 #: admin/user_pwd_reset_form.php:144
-#: install/wizard.php:360
-#: install/wizard.php:444
+#: install/wizard.php:356
+#: install/wizard.php:440
 #: shared/login_form.php:93
 msgid "Password"
 msgstr ""
@@ -1249,8 +1249,8 @@ msgstr ""
 
 #: admin/user_fields.php:64
 #: admin/user_list.php:178
-#: install/wizard.php:366
-#: install/wizard.php:445
+#: install/wizard.php:362
+#: install/wizard.php:441
 msgid "Email"
 msgstr ""
 
@@ -1260,8 +1260,8 @@ msgid "Actived"
 msgstr ""
 
 #: admin/user_fields.php:97
-#: install/wizard.php:372
-#: install/wizard.php:446
+#: install/wizard.php:368
+#: install/wizard.php:442
 msgid "Theme"
 msgstr ""
 
@@ -1386,8 +1386,8 @@ msgstr ""
 
 #: classes/Patient.php:473
 #: classes/Patient.php:582
-#: lib/lang_lib.php:268
-#: lib/lang_lib.php:280
+#: lib/lang_lib.php:269
+#: lib/lang_lib.php:281
 #: shared/header.php:82
 msgid "Y-m-d"
 msgstr ""
@@ -1542,7 +1542,7 @@ msgid "System users"
 msgstr ""
 
 #: home/license.php:30
-#: install/wizard.php:152
+#: install/wizard.php:148
 #: navbars/home.php:54
 #: navbars/home.php:55
 msgid "License"
@@ -1577,7 +1577,7 @@ msgid "OpenClinic Readme"
 msgstr ""
 
 #: install/footer.php:28
-#: install/wizard.php:636
+#: install/wizard.php:632
 msgid "Start OpenClinic"
 msgstr ""
 
@@ -1682,29 +1682,29 @@ msgid "Continue"
 msgstr ""
 
 #: install/install.php:103
-#: install/wizard.php:582
+#: install/wizard.php:578
 #, php-format
 msgid "Table %s dropped."
 msgstr ""
 
 #: install/install.php:104
-#: install/wizard.php:583
+#: install/wizard.php:579
 #, php-format
 msgid "Table %s created."
 msgstr ""
 
 #: install/install.php:113
-#: install/wizard.php:587
+#: install/wizard.php:583
 msgid "Last instruction failed"
 msgstr ""
 
 #: install/install.php:119
-#: install/wizard.php:628
+#: install/wizard.php:624
 msgid "OpenClinic tables have been created successfully!"
 msgstr ""
 
 #: install/install.php:121
-#: install/wizard.php:474
+#: install/wizard.php:470
 msgid "Start using OpenClinic"
 msgstr ""
 
@@ -1718,294 +1718,294 @@ msgstr ""
 msgid "Error: %s"
 msgstr ""
 
-#: install/wizard.php:95
-#: install/wizard.php:138
+#: install/wizard.php:91
+#: install/wizard.php:134
 msgid "OpenClinic Install Wizard"
 msgstr ""
 
-#: install/wizard.php:152
-#: install/wizard.php:183
-#: install/wizard.php:238
-#: install/wizard.php:317
-#: install/wizard.php:400
-#: install/wizard.php:474
-#: install/wizard.php:652
+#: install/wizard.php:148
+#: install/wizard.php:179
+#: install/wizard.php:234
+#: install/wizard.php:313
+#: install/wizard.php:396
+#: install/wizard.php:470
+#: install/wizard.php:648
 #, php-format
 msgid "Step %d of %d: "
 msgstr ""
 
-#: install/wizard.php:155
+#: install/wizard.php:151
 msgid "OpenClinic is free software, distributed under GNU General Public License (GPL). Please read the license and, if you agree, click on 'I accept' button."
 msgstr ""
 
-#: install/wizard.php:164
-#: install/wizard.php:219
-#: install/wizard.php:298
-#: install/wizard.php:381
-#: install/wizard.php:452
+#: install/wizard.php:160
+#: install/wizard.php:215
+#: install/wizard.php:294
+#: install/wizard.php:377
+#: install/wizard.php:448
 msgid "Back"
 msgstr ""
 
-#: install/wizard.php:166
+#: install/wizard.php:162
 msgid "I accept"
 msgstr ""
 
-#: install/wizard.php:171
+#: install/wizard.php:167
 msgid "Read the license before continue"
 msgstr ""
 
-#: install/wizard.php:183
-#: install/wizard.php:408
+#: install/wizard.php:179
+#: install/wizard.php:404
 msgid "MySQL Database Settings"
 msgstr ""
 
-#: install/wizard.php:186
+#: install/wizard.php:182
 #, php-format
 msgid "Install script create OpenClinic database. These following values will be written in %s file. All fields are required."
 msgstr ""
 
-#: install/wizard.php:192
-#: install/wizard.php:412
-#: install/wizard.php:554
+#: install/wizard.php:188
+#: install/wizard.php:408
+#: install/wizard.php:550
 msgid "Database Host:"
 msgstr ""
 
-#: install/wizard.php:194
-#: install/wizard.php:200
-#: install/wizard.php:206
-#: install/wizard.php:212
-#: install/wizard.php:255
-#: install/wizard.php:261
-#: install/wizard.php:267
-#: install/wizard.php:273
-#: install/wizard.php:279
-#: install/wizard.php:285
-#: install/wizard.php:326
-#: install/wizard.php:332
-#: install/wizard.php:338
+#: install/wizard.php:190
+#: install/wizard.php:196
+#: install/wizard.php:202
+#: install/wizard.php:208
+#: install/wizard.php:251
+#: install/wizard.php:257
+#: install/wizard.php:263
+#: install/wizard.php:269
+#: install/wizard.php:275
+#: install/wizard.php:281
+#: install/wizard.php:322
+#: install/wizard.php:328
+#: install/wizard.php:334
 msgid "e. g."
 msgstr ""
 
-#: install/wizard.php:198
-#: install/wizard.php:413
-#: install/wizard.php:555
+#: install/wizard.php:194
+#: install/wizard.php:409
+#: install/wizard.php:551
 msgid "Database User:"
 msgstr ""
 
-#: install/wizard.php:204
-#: install/wizard.php:414
-#: install/wizard.php:556
+#: install/wizard.php:200
+#: install/wizard.php:410
+#: install/wizard.php:552
 msgid "Database Password:"
 msgstr ""
 
-#: install/wizard.php:210
-#: install/wizard.php:415
+#: install/wizard.php:206
+#: install/wizard.php:411
 msgid "Database Name:"
 msgstr ""
 
-#: install/wizard.php:221
-#: install/wizard.php:300
-#: install/wizard.php:383
-#: install/wizard.php:719
+#: install/wizard.php:217
+#: install/wizard.php:296
+#: install/wizard.php:379
+#: install/wizard.php:715
 msgid "Next"
 msgstr ""
 
-#: install/wizard.php:226
+#: install/wizard.php:222
 msgid "Check data before continue"
 msgstr ""
 
-#: install/wizard.php:238
-#: install/wizard.php:419
+#: install/wizard.php:234
+#: install/wizard.php:415
 msgid "Config Settings"
 msgstr ""
 
-#: install/wizard.php:241
+#: install/wizard.php:237
 msgid "These are OpenClinic config settings."
 msgstr ""
 
-#: install/wizard.php:277
+#: install/wizard.php:273
 msgid "Session Timeout (minutes):"
 msgstr ""
 
-#: install/wizard.php:283
+#: install/wizard.php:279
 msgid "Search Results (items per page):"
 msgstr ""
 
-#: install/wizard.php:305
+#: install/wizard.php:301
 msgid "Customize your site"
 msgstr ""
 
-#: install/wizard.php:317
-#: install/wizard.php:434
+#: install/wizard.php:313
+#: install/wizard.php:430
 msgid "Admin Data"
 msgstr ""
 
-#: install/wizard.php:362
+#: install/wizard.php:358
 msgid "required"
 msgstr ""
 
-#: install/wizard.php:388
+#: install/wizard.php:384
 msgid "Password is the most important field"
 msgstr ""
 
-#: install/wizard.php:400
+#: install/wizard.php:396
 msgid "Last Check before Install"
 msgstr ""
 
-#: install/wizard.php:403
+#: install/wizard.php:399
 #, php-format
 msgid "Here are the values you entered. %sPrint this page%s to remember your admin password and other settings."
 msgstr ""
 
-#: install/wizard.php:456
+#: install/wizard.php:452
 msgid "Install"
 msgstr ""
 
-#: install/wizard.php:462
+#: install/wizard.php:458
 msgid "If you are not sure in any value, go back before install"
 msgstr ""
 
-#: install/wizard.php:483
+#: install/wizard.php:479
 #, php-format
 msgid "Incorrect permissions of %s file. Continue is impossible."
 msgstr ""
 
-#: install/wizard.php:528
+#: install/wizard.php:524
 msgid "Error in writing proccess. Continue is impossible."
 msgstr ""
 
-#: install/wizard.php:551
+#: install/wizard.php:547
 msgid "The MySQL server does not work or login pass is false."
 msgstr ""
 
-#: install/wizard.php:552
+#: install/wizard.php:548
 msgid "Please check these values and if any is wrong back to step 2:"
 msgstr ""
 
+#: install/wizard.php:561
+#: install/wizard.php:563
 #: install/wizard.php:565
-#: install/wizard.php:567
-#: install/wizard.php:569
-#: install/wizard.php:596
-#: install/wizard.php:597
-#: install/wizard.php:608
-#: install/wizard.php:617
-#: install/wizard.php:624
+#: install/wizard.php:592
+#: install/wizard.php:593
+#: install/wizard.php:604
+#: install/wizard.php:613
+#: install/wizard.php:620
 #, php-format
 msgid "Instruction: %s Error: %s"
 msgstr ""
 
-#: install/wizard.php:632
+#: install/wizard.php:628
 #, php-format
 msgid "%sSecurity advice:%s To protect your site, make %s and <tt>'openclinic/install/'</tt> files read only (chmod 400)."
 msgstr ""
 
-#: install/wizard.php:640
+#: install/wizard.php:636
 msgid "That's folks!!!"
 msgstr ""
 
-#: install/wizard.php:652
+#: install/wizard.php:648
 msgid "Requirements"
 msgstr ""
 
-#: install/wizard.php:655
+#: install/wizard.php:651
 #, php-format
 msgid "This script will configure OpenClinic database and %s file."
 msgstr ""
 
-#: install/wizard.php:659
+#: install/wizard.php:655
 #, php-format
 msgid "The file %s already exists in your system! This script INSTALLS and does not UPGRADE. It will remove all OpenClinic data. If this is what you want, you can go on. If you want upgrade go to the %supgrade script%s."
 msgstr ""
 
-#: install/wizard.php:662
+#: install/wizard.php:658
 msgid "Read Thouroughly"
 msgstr ""
 
-#: install/wizard.php:665
+#: install/wizard.php:661
 msgid "For OpenClinic to work, you need the following on the server:"
 msgstr ""
 
-#: install/wizard.php:669
+#: install/wizard.php:665
 #, php-format
 msgid "Webserver (you have <strong>%s</strong>)"
 msgstr ""
 
-#: install/wizard.php:671
+#: install/wizard.php:667
 #, php-format
 msgid "PHP >= 4.2 (you have <strong>PHP %s</strong>)"
 msgstr ""
 
-#: install/wizard.php:687
+#: install/wizard.php:683
 #, php-format
 msgid "Write access to %s file"
 msgstr ""
 
-#: install/wizard.php:691
+#: install/wizard.php:687
 msgid "This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."
 msgstr ""
 
-#: install/wizard.php:694
+#: install/wizard.php:690
 #, php-format
 msgid "Deactivate read-only mode in the file properties of %s."
 msgstr ""
 
-#: install/wizard.php:698
+#: install/wizard.php:694
 #, php-format
 msgid "Open a shell, go to <tt>openclinic</tt> directory and type <tt>chmod 666 %s</tt>."
 msgstr ""
 
-#: install/wizard.php:700
+#: install/wizard.php:696
 msgid "Once made it, click in Next button."
 msgstr ""
 
-#: install/wizard.php:704
-#: install/wizard.php:796
+#: install/wizard.php:700
+#: install/wizard.php:792
 msgid "ok"
 msgstr ""
 
-#: install/wizard.php:711
+#: install/wizard.php:707
 #, php-format
 msgid "To install OpenClinic on a Windows machine for test, you just need to install %sAppServ%s before."
 msgstr ""
 
-#: install/wizard.php:715
+#: install/wizard.php:711
 #, php-format
 msgid "For more details, see %sInstall Instructions%s."
 msgstr ""
 
-#: install/wizard.php:723
+#: install/wizard.php:719
 msgid "Press Next button to continue"
 msgstr ""
 
-#: install/wizard.php:803
+#: install/wizard.php:799
 msgid "is missing!!"
 msgstr ""
 
-#: install/wizard.php:823
+#: install/wizard.php:819
 msgid "Database Host is empty."
 msgstr ""
 
-#: install/wizard.php:827
+#: install/wizard.php:823
 msgid "Database User is empty."
 msgstr ""
 
-#: install/wizard.php:831
+#: install/wizard.php:827
 msgid "Database Name is empty."
 msgstr ""
 
-#: install/wizard.php:835
+#: install/wizard.php:831
 msgid "Session Timeout must be great than zero."
 msgstr ""
 
-#: install/wizard.php:839
+#: install/wizard.php:835
 msgid "Items per page must be great than zero."
 msgstr ""
 
-#: install/wizard.php:843
+#: install/wizard.php:839
 msgid "Admin password must be at least 4 characters."
 msgstr ""
 
-#: install/wizard.php:848
+#: install/wizard.php:844
 msgid "There were some errors"
 msgstr ""
 
@@ -2022,9 +2022,9 @@ msgid "Check Time"
 msgstr ""
 
 #: lib/dump_lib.php:862
-#: lib/lang_lib.php:262
-#: lib/lang_lib.php:291
-#: lib/lang_lib.php:303
+#: lib/lang_lib.php:263
+#: lib/lang_lib.php:292
+#: lib/lang_lib.php:304
 #: medical/print_medical_record.php:99
 msgid "Y-m-d H:i:s"
 msgstr ""
