@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.8 2005/02/17 20:29:20 jact Exp $
+ * $Id: test_list.php,v 1.9 2005/02/19 10:51:23 jact Exp $
  */
 
 /**
@@ -39,6 +39,7 @@
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/validator_lib.php");
+  require_once("../lib/misc_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -135,12 +136,8 @@
   $tbody = array();
   while ($test = $testQ->fetch())
   {
-    $temp = ereg_replace("\\\\", "/", $test->getPathFilename());
-    $temp = ereg_replace("//", "/", $temp);
-
-    // alternative method
-    /*$aux = "http://" . $_SERVER['HTTP_HOST'] . ":" . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']);
-    $temp = substr($aux, 0, strrpos($aux, "/")) . "/tests/" . $test->getPathFilename(false);*/
+    $temp = "http://" . $_SERVER['HTTP_HOST'] . ":" . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']);
+    $temp = substr($temp, 0, strrpos($temp, "/")) . "/tests/" . translateBrowser($test->getPathFilename(false));
 
     $row = '<a href="' . $temp . '" onclick="return popSecondary(\'' . $temp . '\')">' . _("view") . '</a>';
     $row .= OPEN_SEPARATOR;
