@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_edit_form.php,v 1.3 2004/07/07 17:22:34 jact Exp $
+ * $Id: history_personal_edit_form.php,v 1.4 2004/07/31 17:05:32 jact Exp $
  */
 
 /**
@@ -61,7 +61,7 @@
       $historyQ->close();
       include_once("../shared/header.php");
 
-      echo '<p>' . _("That patient does not exist.") . "</p>\n";
+      showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
 
       include_once("../shared/footer.php");
       exit();
@@ -121,7 +121,7 @@
   unset($links);
 
   showPatientHeader($idPatient);
-  echo "<br />\n";
+  echo "<br />\n"; // should be deleted
 
   require_once("../shared/form_errors_msg.php");
 
@@ -130,7 +130,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]))
   {
-    echo '<p class="error">' . _("Personal Antecedents have been updated.") . "</p>\n";
+    showMessage(_("Personal Antecedents have been updated."), OPEN_MSG_INFO);
   }
 ?>
 
