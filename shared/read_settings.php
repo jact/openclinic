@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.9 2004/07/21 18:04:36 jact Exp $
+ * $Id: read_settings.php,v 1.10 2004/07/24 16:18:36 jact Exp $
  */
 
 /**
@@ -101,6 +101,8 @@
   define("OPEN_CLINIC_USE_IMAGE", $set->isUseImageSet());
   define("OPEN_CLINIC_IMAGE_URL", $set->getClinicImageUrl());
 
+  unset($set);
+
   ////////////////////////////////////////////////////////////////////
   // i18n l10n (after OPEN_LANGUAGE is defined)
   ////////////////////////////////////////////////////////////////////
@@ -122,7 +124,7 @@
   }
   else
   {
-    $themeQ->select($set->getIdTheme());
+    $themeQ->select(OPEN_THEMEID);
   }
   if ($themeQ->isError())
   {
@@ -179,5 +181,4 @@
   define("STYLE_TABLE_CELL_PADDING", $theme->getTableCellPadding());
 
   unset($theme);
-  unset($set); // $theme needs $set->getIdTheme()
 ?>
