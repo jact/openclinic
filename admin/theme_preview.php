@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.13 2004/07/29 19:08:36 jact Exp $
+ * $Id: theme_preview.php,v 1.14 2004/08/05 14:29:42 jact Exp $
  */
 
 /**
@@ -24,9 +24,9 @@
   $tab = "admin";
 
   ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
+  // Checking for get and post vars. Go back to form if none found.
   ////////////////////////////////////////////////////////////////////
-  if (count($_POST) == 0)
+  if (count($_POST) == 0 && count($_GET) == 0)
   {
     header("Location: ../admin/theme_edit_form.php");
     exit();
@@ -72,53 +72,74 @@
   ////////////////////////////////////////////////////////////////////
   require_once("../shared/i18n.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Theme related constants
-  ////////////////////////////////////////////////////////////////////
-  define("STYLE_TITLE_BG_COLOR", $_POST["title_bg_color"]);
-  define("STYLE_TITLE_FONT_FAMILY", $_POST["title_font_family"]);
-  define("STYLE_TITLE_FONT_SIZE", $_POST["title_font_size"]);
-  define("STYLE_TITLE_FONT_BOLD", isset($_POST["title_font_bold"]));
-  define("STYLE_TITLE_TEXT_ALIGN", $_POST["title_align"]);
-  define("STYLE_TITLE_FONT_COLOR", $_POST["title_font_color"]);
+  if (isset($_GET["key"]) && intval($_GET["key"]) > 0)
+  {
+    include_once("../classes/Theme_Query.php");
 
-  define("STYLE_BODY_BG_COLOR", $_POST["body_bg_color"]);
-  define("STYLE_BODY_FONT_FAMILY", $_POST["body_font_family"]);
-  define("STYLE_BODY_FONT_SIZE", $_POST["body_font_size"]);
-  define("STYLE_BODY_FONT_COLOR", $_POST["body_font_color"]);
-  define("STYLE_BODY_LINK_COLOR", $_POST["body_link_color"]);
+    ////////////////////////////////////////////////////////////////////
+    // Reading theme settings
+    ////////////////////////////////////////////////////////////////////
+    $themeQ = new Theme_Query();
+    $themeQ->connect();
+    if ($themeQ->isError())
+    {
+      showQueryError($themeQ);
+    }
 
-  define("STYLE_ERROR_COLOR", $_POST["error_color"]);
+    $themeQ->select(intval($_GET["key"]));
+    if ($themeQ->isError())
+    {
+      $themeQ->close();
+      showQueryError($themeQ);
+    }
 
-  define("STYLE_NAVBAR_BG_COLOR", $_POST["navbar_bg_color"]);
-  define("STYLE_NAVBAR_FONT_FAMILY", $_POST["navbar_font_family"]);
-  define("STYLE_NAVBAR_FONT_SIZE", $_POST["navbar_font_size"]);
-  define("STYLE_NAVBAR_FONT_COLOR", $_POST["navbar_font_color"]);
-  define("STYLE_NAVBAR_LINK_COLOR", $_POST["navbar_link_color"]);
+    $theme = $themeQ->fetch();
+    if ($themeQ->isError())
+    {
+      $themeQ->close();
+      showFetchError($themeQ);
+    }
 
-  define("STYLE_TAB_BG_COLOR", $_POST["tab_bg_color"]);
-  define("STYLE_TAB_FONT_FAMILY", $_POST["tab_font_family"]);
-  define("STYLE_TAB_FONT_SIZE", $_POST["tab_font_size"]);
-  define("STYLE_TAB_FONT_COLOR", $_POST["tab_font_color"]);
-  define("STYLE_TAB_LINK_COLOR", $_POST["tab_link_color"]);
-  define("STYLE_TAB_FONT_BOLD", isset($_POST["tab_font_bold"]));
+    $themeQ->freeResult();
+    $themeQ->close();
+    unset($themeQ);
 
-  define("STYLE_TABLE_BORDER_COLOR", $_POST["table_border_color"]);
-  define("STYLE_TABLE_BORDER_WIDTH", $_POST["table_border_width"]);
-  define("STYLE_TABLE_CELL_PADDING", $_POST["table_cell_padding"]);
+    $_POST["theme_name"] = $theme->getThemeName();
+    $filename = '../css/' . $theme->getCSSFile();
+    $size = filesize($filename);
+    $fp = fopen($filename, 'r');
+    $_POST["css_rules"] = fread($fp, $size);
+    fclose($fp);
+
+    unset($theme);
+  }
+
+  if (isset($_POST["theme_name"]) && isset($_POST["css_rules"]))
+  {
+    ////////////////////////////////////////////////////////////////////
+    // Theme related constants
+    ////////////////////////////////////////////////////////////////////
+    define("OPEN_THEME_NAME",      $_POST["theme_name"]);
+    define("OPEN_THEME_CSS_RULES", $_POST["css_rules"]);
+  }
+  else
+  {
+    header("Location: ../admin/theme_edit_form.php");
+    exit();
+  }
 
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
   ////////////////////////////////////////////////////////////////////
-  $title = sprintf(_("%s Theme Preview"), $_POST["theme_name"]);
+  $title = sprintf(_("%s Theme Preview"), OPEN_THEME_NAME);
   require_once("../shared/xhtml_start.php");
 ?>
 
 <link rel="shortcut icon" href="../images/miniopc.png" type="image/png" />
 
-<style type="text/css" title="<?php echo $_POST['theme_name']; ?>">
+<style type="text/css" title="<?php echo OPEN_THEME_NAME; ?>">
 <!--/*--><![CDATA[/*<!--*/
-<?php require_once("../css/style.php"); ?>
+<?php echo OPEN_THEME_CSS_RULES; ?>
 /*]]>*/-->
 </style>
 
@@ -201,19 +222,15 @@
 
 <!-- Main Zone -->
 <div id="mainZone">
-<p>
-  <?php echo sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]); ?>
-</p>
+<h2><?php echo sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]); ?></h2>
 
-<p>
-  <a href="#top"><?php echo _("Sample Link"); ?></a>
-</p>
+<p><a href="#top"><?php echo _("Sample Link"); ?></a></p>
 
 <h3><?php echo _("Sample List:"); ?></h3>
 
 <?php
   $thead = array(
-    _("Table Heading")
+    _("Table Heading") => array('colspan' => 2)
   );
 
   $tbody = array();
@@ -222,12 +239,16 @@
 
   $tbody[] = array(sprintf(_("Sample data row %d"), 2));
 
-  $tbody[] = array(sprintf(_("Sample data row %d"), 3));
+  $row = '* <label for="sample_text" class="requiredField">' . _("Required Field") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("sample_text", 50, 50, _("Sample Input Text"), "", "text", true);
 
-  $tbody[] = array(htmlInputText("sample_text", 50, 50, _("Sample Input Text"), "", "text", true));
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $options = array(
-    'tfoot' => array('align' => 'center')
+    'tfoot' => array('align' => 'center'),
+    'r0' => array('colspan' => 2),
+    'r1' => array('colspan' => 2)
   );
 
   $tfoot = array(
@@ -237,6 +258,10 @@
   showTable($thead, $tbody, $tfoot, $options);
 
   showMessage(_("Sample Error"), OPEN_MSG_ERROR);
+
+  showMessage(_("Sample Info"), OPEN_MSG_INFO);
+
+  showMessage(_("Sample Warning"));
 
   require_once("../shared/footer.php");
 ?>
