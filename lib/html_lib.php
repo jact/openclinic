@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: html_lib.php,v 1.2 2004/07/26 18:36:32 jact Exp $
+ * $Id: html_lib.php,v 1.3 2004/07/28 18:19:30 jact Exp $
  */
 
 /**
@@ -39,7 +39,7 @@
  *     'align' => 'center', // table align
  *     'shaded' => false, // even odd difference
  *     'tfoot' => array('align' => 'right'), // tfoot align
- *     8 => array('align' => 'center'), // col number of tbody align (starts in zero)
+ *     8 => array('align' => 'center', 'nowrap' => 1), // col number of tbody align (starts in zero)
  *     9 => array('align' => 'right')
  *   );
  ********************************************************************
@@ -111,14 +111,27 @@ function htmlTable(&$head, &$body, $foot = null, $options = null, $caption = "")
       foreach ($row as $data)
       {
         $html .= '<td';
+
+        $class = array();
         if (isset($options[$i]['align']) && $options[$i]['align'] == 'center')
         {
-          $html .= ' class="center"';
+          $class[] = "center";
         }
         elseif (isset($options[$i]['align']) && $options[$i]['align'] == 'right')
         {
-          $html .= ' class="right"';
+          $class[] = "right";
         }
+
+        if (isset($options[$i]['nowrap']) && $options[$i]['nowrap'])
+        {
+          $class[] = "noWrap";
+        }
+
+        if (count($class) > 0)
+        {
+          $html .= ' class="' . implode(" ", $class) . '"';
+        }
+
         $html .= '>';
         $html .= $data;
         $html .= "</td>\n";
