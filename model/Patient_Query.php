@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.11 2004/10/16 14:48:46 jact Exp $
+ * $Id: Patient_Query.php,v 1.12 2004/11/04 12:27:19 jact Exp $
  */
 
 /**
@@ -132,54 +132,53 @@ class Patient_Query extends Query
     switch ($type)
     {
       case OPEN_SEARCH_SURNAME1:
-        $field = "surname1";
+        $field = $this->_table . "." . "surname1";
         break;
 
       case OPEN_SEARCH_SURNAME2:
-        $field = "surname2";
+        $field = $this->_table . "." . "surname2";
         break;
 
       case OPEN_SEARCH_FIRSTNAME:
-        $field = "first_name";
+        $field = $this->_table . "." . "first_name";
         break;
 
       case OPEN_SEARCH_NIF:
-        $field = "nif";
+        $field = $this->_table . "." . "nif";
         break;
 
       case OPEN_SEARCH_NTS:
-        $field = "nts";
+        $field = $this->_table . "." . "nts";
         break;
 
       case OPEN_SEARCH_NSS:
-        $field = "nss";
+        $field = $this->_table . "." . "nss";
         break;
 
       case OPEN_SEARCH_BIRTHPLACE:
-        $field = "birth_place";
+        $field = $this->_table . "." . "birth_place";
         break;
 
       case OPEN_SEARCH_ADDRESS:
-        $field = "address";
+        $field = $this->_table . "." . "address";
         break;
 
       case OPEN_SEARCH_PHONE:
-        $field = "phone_contact";
+        $field = $this->_table . "." . "phone_contact";
         break;
 
       case OPEN_SEARCH_INSURANCE:
-        $field = "insurance_company";
+        $field = $this->_table . "." . "insurance_company";
         break;
 
       case OPEN_SEARCH_COLLEGIATE:
-        $field = "collegiate_number";
+        $field = "staff_tbl.collegiate_number";
         break;
 
       default:
         $field = "no_field";
         break;
     }
-    $field = $this->_table . "." . $field;
 
     // Building sql statements
     $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
