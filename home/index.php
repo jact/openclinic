@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.2 2004/04/18 14:11:24 jact Exp $
+ * $Id: index.php,v 1.3 2004/07/10 16:01:38 jact Exp $
  */
 
 /**
@@ -29,9 +29,25 @@
   ////////////////////////////////////////////////////////////////////
   $title = _("Welcome to OpenClinic");
   require_once("../shared/header.php");
-?>
 
-<h1><?php echo $title; ?></h1>
+  echo '<h1>' . $title . "</h1>\n";
+
+  ////////////////////////////////////////////////////////////////////
+  // Display update message if coming from edit with a successful update.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["updated"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("User, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+  }
+
+  ////////////////////////////////////////////////////////////////////
+  // Display login used message.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["login"]) && isset($_GET["info"]))
+  {
+    echo '<p>' . sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])) . "</p>\n";
+  }
+?>
 
 <p><?php echo _("OpenClinic is an easy to use, open source, medical records system. When you select any of the following tabs you will be prompted to login."); ?></p>
 
