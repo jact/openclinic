@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.3 2004/05/31 18:54:40 jact Exp $
+ * $Id: log_lib.php,v 1.4 2004/07/08 16:45:52 jact Exp $
  */
 
 /**
@@ -49,6 +49,10 @@
  */
 function percBar($pperc, $width = 100, $xecho = true, $label = "")
 {
+  //$leftSize = getimagesize("../images/leftbar.gif");
+  //$mainSize = getimagesize("../images/mainbar.gif");
+  //$rightSize = getimagesize("../images/rightbar.gif");
+
   $perc = round(($width * ($pperc / 100)), 0);
 
   $what = '<img src="../images/leftbar.gif" height="14" width="7" alt="' . $label . '">';
@@ -76,10 +80,6 @@ function percBar($pperc, $width = 100, $xecho = true, $label = "")
  */
 function showYearStats($table)
 {
-  //$leftSize = getimagesize("../images/leftbar.gif");
-  //$mainSize = getimagesize("../images/mainbar.gif");
-  //$rightSize = getimagesize("../images/rightbar.gif");
-
   $auxConn = new DbConnection();
   $auxConn->connect();
 
@@ -139,10 +139,6 @@ function showYearStats($table)
  */
 function showMonthStats($table, $year)
 {
-  //$leftSize = getimagesize("../images/leftbar.gif");
-  //$mainSize = getimagesize("../images/mainbar.gif");
-  //$rightSize = getimagesize("../images/rightbar.gif");
-
   $auxConn = new DbConnection();
   $auxConn->connect();
 
@@ -206,10 +202,6 @@ function showMonthStats($table, $year)
  */
 function showDailyStats($table, $year, $month)
 {
-  //$leftSize = getimagesize("../images/leftbar.gif");
-  //$mainSize = getimagesize("../images/mainbar.gif");
-  //$rightSize = getimagesize("../images/rightbar.gif");
-
   $auxConn = new DbConnection();
   $auxConn->connect();
 
@@ -287,10 +279,6 @@ function showDailyStats($table, $year, $month)
  */
 function showHourlyStats($table, $year, $month, $day)
 {
-  //$leftSize = getimagesize("../images/leftbar.gif");
-  //$mainSize = getimagesize("../images/mainbar.gif");
-  //$rightSize = getimagesize("../images/rightbar.gif");
-
   $auxConn = new DbConnection();
   $auxConn->connect();
 
