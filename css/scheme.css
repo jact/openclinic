@@ -1,0 +1,279 @@
+/* Feel free and change all what you want */
+
+/* Layout */
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #000;
+  font-family: verdana, sans-serif;
+  font-size: 10px;
+}
+
+#header {
+  background: #fff;
+  color: #000;
+  height: 1px; /* Holly hack */
+}
+
+html>body #header {
+  height: auto;
+}
+
+#subHeader {
+  height: 5em;
+}
+
+#headerInformation {
+  position: absolute;
+  top: 0;
+  right: 2ex;
+}
+
+.menuBar {
+  clear: both;
+  margin-top: 12px;
+  height: 0; /* IE 5.0 paranoid */
+}
+
+#tabs {
+  margin: 0;
+  padding: 0;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#tabs li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li#first a, li#first span {
+  border-left: 1px solid #000;
+}
+
+#tabs a, #tabs span {
+  border-right: 1px solid #000;
+  border-top: 1px solid #000;
+  margin: 0;
+  padding: 2px 10px;
+  float: left;
+}
+
+#tabs span {
+  font-family: verdana,sans-serif;
+  background: #000;
+  color: #fff;
+  border-bottom: 1px solid #000;
+}
+
+#sourceForgeLinks {
+  clear: both;
+  text-align: right;
+  background: #fff;
+  color: #0ff;
+  padding: 0 2ex 4px 0;
+  margin: -1px 0 0 0;
+  border: 1px solid #000;
+}
+
+#sideBar {
+  position: relative; /* IE hack */
+  padding-left: 1ex;
+  margin-top: -1px;
+  width: 150px;
+  float: left;
+  clear: left;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  border-left: 1px solid #000;
+  background: #fff;
+  color: #000;
+  font-family: verdana,sans-serif;
+  font-size: 10px;
+}
+
+.linkList a, .linkList a:hover, .linkList .selected {
+  line-height: 1.25em;
+  display: block;
+  margin-bottom: 2ex;
+}
+
+.linkList .selected {
+  background: url(../images/bullet_selected.gif) no-repeat 0 3px;
+  padding-left: 2.5ex;
+}
+
+.linkList .subnavbar a, .linkList .subnavbar {
+  margin-left: 2ex;
+  padding: 0 2px 0 2.5ex;
+}
+
+#sideBarLogo p {
+  margin-bottom: 2ex;
+  text-align: center;
+}
+
+.sideBarLogin {
+  margin-top: 0;
+  margin-bottom: 3ex !important;
+}
+
+#mainZone {
+  line-height: 1.5em;
+  margin-left: 150px;
+  padding: 1ex 1em 1ex 2em; /* top right bottom left */
+}
+
+#footer {
+  padding: 1ex 4mm;
+  margin-left: 150px;
+  clear: right;
+  text-align: center;
+}
+
+.subFooter {
+  padding: 1ex 4mm;
+  line-height: 1.25em;
+}
+
+#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
+  vertical-align: middle;
+}
+
+/* Tables */
+.center table {
+  margin: 0 auto;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 2px;
+  border: 1px solid #000;
+}
+
+th {
+}
+
+td {
+  padding: 2px;
+  border: 1px solid #000;
+}
+
+/* Links */
+.linkList a, .linkList .subnavbar a {
+  background: url(../images/bullet_normal.gif) no-repeat 0 3px;
+  padding: 0 2px 0 2.5ex;
+}
+
+.sideBarLogin a {
+  display: inline;
+}
+
+#tabs a {
+}
+
+a:link, a:visited {
+  color: #00f;
+}
+
+#sideBar a:link, #sideBar a:visited, #sourceForgeLinks a {
+  color: #00f;
+}
+
+#tabs a:link, #tabs a:visited {
+  color: #00f;
+  text-decoration: none;
+}
+
+#tabs a:hover {
+  text-decoration: underline;
+}
+
+.even a {
+}
+
+/* Form styles */
+input, textarea, select {
+  font-family: verdana,sans-serif;
+  font-size: 10px;
+  border-width: 1px;
+  border-color: #000;
+  background: #fff;
+  color: #00f;
+}
+input[type="submit"], input[type="button"], input[type="reset"] {
+  border-width: 1px;
+  font-weight: bold;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  background: #000;
+}
+
+/* Miscellaneous */
+.error {
+  color: #f00;
+  background: #fff;
+  font-weight: bold;
+}
+
+.advice {
+}
+
+.message {
+}
+
+.even {
+  background: #800000;
+  color: #fff;
+}
+
+img {
+  border: none;
+}
+
+.sqlcode {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  white-space: pre;
+  text-align: left;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+label {
+  cursor: pointer;
+}
+
+hr {
+  background: #000;
+  color: #000;
+  border: 1px solid #000;
+  margin: 10px 0; /* top-bottom right-left */
+}
+
+.requiredField {
+  font-weight: bold;
+}
+
+.noPrint {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
