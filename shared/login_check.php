@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.4 2004/07/07 17:23:37 jact Exp $
+ * $Id: login_check.php,v 1.5 2004/07/14 18:18:54 jact Exp $
  */
 
 /**
@@ -40,10 +40,8 @@
   ////////////////////////////////////////////////////////////////////
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    $returnPage = urlencode($_SERVER['REQUEST_URI']);
-
     //works in PHP >= 4.1
-    $_SESSION['returnPage'] = $returnPage;
+    $_SESSION['returnPage'] = urlencode($_SERVER['REQUEST_URI']);
 
     ////////////////////////////////////////////////////////////////////
     // Checking to see if session variables exist
@@ -80,7 +78,7 @@
       $sessQ->close();
 
       $_SESSION['invalidToken'] = true;
-      header("Location: ../shared/login_form.php?ret=" . $returnPage);
+      header("Location: ../shared/login_form.php?ret=" . $_SESSION['returnPage']);
       exit();
     }
     $sessQ->close();
@@ -94,28 +92,31 @@
     // Checking authorization for this tab
     // The session authorization flags were set at login in login.php
     ////////////////////////////////////////////////////////////////////
-    if ($tab == "medical")
+    if (isset($tab))
     {
-      if ( !$_SESSION['hasMedicalAuth'] && (isset($onlyDoctor) && !$onlyDoctor) )
+      if ($tab == "medical")
       {
-        header("Location: ../medical/no_authorization.php");
-        exit();
+        if ( !$_SESSION['hasMedicalAuth'] && (isset($onlyDoctor) && !$onlyDoctor) )
+        {
+          header("Location: ../medical/no_authorization.php");
+          exit();
+        }
       }
-    }
-    /*elseif ($tab == "stats")
-    {
-      if ( !$_SESSION['hasStatsAuth'] )
+      /*elseif ($tab == "stats")
       {
-        header("Location: ../stats/no_authorization.php");
-        exit();
-      }
-    }*/
-    elseif ($tab == "admin")
-    {
-      if ( !$_SESSION['hasAdminAuth'] )
+        if ( !$_SESSION['hasStatsAuth'] )
+        {
+          header("Location: ../stats/no_authorization.php");
+          exit();
+        }
+      }*/
+      elseif ($tab == "admin")
       {
-        header("Location: ../admin/no_authorization.php");
-        exit();
+        if ( !$_SESSION['hasAdminAuth'] )
+        {
+          header("Location: ../admin/no_authorization.php");
+          exit();
+        }
       }
     }
 
