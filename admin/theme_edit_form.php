@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.6 2004/07/07 17:21:53 jact Exp $
+ * $Id: theme_edit_form.php,v 1.7 2004/07/29 18:56:10 jact Exp $
  */
 
 /**
@@ -71,7 +71,7 @@
       $themeQ->close();
       include_once("../shared/header.php");
 
-      echo '<p>' . _("That theme does not exist.") . "</p>\n";
+      showMessage(_("That theme does not exist."), OPEN_MSG_ERROR);
 
       include_once("../shared/footer.php");
       exit();
