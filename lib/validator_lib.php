@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: validator_lib.php,v 1.3 2004/05/24 22:12:06 jact Exp $
+ * $Id: validator_lib.php,v 1.4 2004/06/08 18:54:53 jact Exp $
  */
 
 /**
@@ -27,7 +27,7 @@
  *  bool hasMetas(string $text)
  *  mixed stripMetas(string $text)
  *  mixed customStrip(array $chars, string $text, bool $insensitive = false)
- *  string safeText(string $text, bool $includeEvents = true)
+ *  string safeText(string $text, bool $allowTags = true, bool $includeEvents = true)
  */
 
 /*
@@ -127,19 +127,27 @@ function customStrip($chars, $text, $insensitive = false)
 }
 
 /*
- * string safeText(string $text, bool $includeEvents = true)
+ * string safeText(string $text, bool $allowTags = true, bool $includeEvents = true)
  ********************************************************************
  * This function sanitize a string value of suspicious contents
  ********************************************************************
  * @param string $text
+ * @param bool $allowTags (optional) to allow allowed tags
  * @param bool $includeEvents (optional) to strip JavaScript event handlers
  * @return string sanitized text
  * @access public
  * @see customStrip() for how they are removed
  */
-function safeText($text, $includeEvents = true)
+function safeText($text, $allowTags = true, $includeEvents = true)
 {
-  $value = trim(htmlspecialchars(strip_tags($text, ALLOWED_HTML_TAGS)));
+  if ($allowTags)
+  {
+    $value = trim(htmlspecialchars(strip_tags($text, ALLOWED_HTML_TAGS)));
+  }
+  else
+  {
+    $value = trim(htmlspecialchars(strip_tags($text)));
+  }
 
   if ($includeEvents)
   {
