@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.4 2004/07/07 17:22:59 jact Exp $
+ * $Id: problem_fields.php,v 1.5 2004/08/01 08:28:34 jact Exp $
  */
 
 /**
@@ -21,160 +21,124 @@
     header("Location: ../index.php");
     exit();
   }
+
+  $thead = array(
+    $title => array('colspan' => 2)
+  );
+
+  $tbody = array();
+
+  $row = _("Order Number") . ":";
+  $row .= OPEN_SEPARATOR;
+  $row .= $postVars["order_number"];
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = _("Opening Date") . ":";
+  $row .= OPEN_SEPARATOR;
+  $row .= $postVars["opening_date"];
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = _("Last Update Date") . ":";
+  $row .= OPEN_SEPARATOR;
+  $row .= $postVars["last_update_date"];
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '<label for="collegiate_number">' . _("Doctor who treated you") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+
+  $staffQ = new Staff_Query();
+  $staffQ->connect();
+  if ($staffQ->isError())
+  {
+    showQueryError($staffQ);
+  }
+
+  $numRows = $staffQ->selectType('D');
+  if ($staffQ->isError())
+  {
+    $staffQ->close();
+    showQueryError($staffQ);
+  }
+
+  $array = null;
+  $array[""] = ""; // to permit null value
+  if ($numRows)
+  {
+    while ($staff = $staffQ->fetch())
+    {
+      $array[$staff->getCollegiateNumber()] = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
+    }
+    $staffQ->freeResult();
+  }
+  $staffQ->close();
+  unset($staffQ);
+
+  $row .= htmlSelectArray("collegiate_number", $array, $postVars["collegiate_number"]);
+  unset($array);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '<label for="meeting_place">' . _("Meeting Place") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("meeting_place", 40, 40, $postVars["meeting_place"], $pageErrors["meeting_place"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '* <label for="wording">' . _("Wording") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("wording", 4, 90, $postVars["wording"], $pageErrors["wording"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="subjective">' . _("Subjective") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("subjective", 4, 90, $postVars["subjective"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="objective">' . _("Objective") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("objective", 4, 90, $postVars["objective"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="appreciation">' . _("Appreciation") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("appreciation", 4, 90, $postVars["appreciation"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="action_plan">' . _("Action Plan") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("action_plan", 4, 90, $postVars["action_plan"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="prescription">' . _("Prescription") . ":" . "</label><br />\n";
+  $row .= htmlTextArea("prescription", 4, 90, $postVars["prescription"]);
+
+  $tbody[] = array($row);
+
+  $row = '<label for="closed_problem">' . _("Closed Problem") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlCheckBox("closed_problem", "closed_problem", "closed", $postVars["closed_problem"] != "");
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $tfoot = array(
+    htmlInputButton("button1", _("Submit"))
+    . htmlInputButton("button2", _("Reset"), "reset")
+    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+  );
+
+  $options = array(
+    'r5' => array('colspan' => 2),
+    'r6' => array('colspan' => 2),
+    'r7' => array('colspan' => 2),
+    'r8' => array('colspan' => 2),
+    'r9' => array('colspan' => 2),
+    'r10' => array('colspan' => 2),
+    'shaded' => false,
+    'tfoot' => array('align' => 'center')
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
 ?>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo $title; ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <tr>
-      <td>
-        <?php echo _("Order Number") . ":"; ?>
-      </td>
-
-      <td>
-        <?php echo $postVars["order_number"]; ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <?php echo _("Opening Date") . ":"; ?>
-      </td>
-
-      <td>
-        <?php echo $postVars["opening_date"]; ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <?php echo _("Last Update Date") . ":"; ?>
-      </td>
-
-      <td>
-        <?php echo $postVars["last_update_date"]; ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="collegiate_number"><?php echo _("Doctor who treated you") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php
-          $staffQ = new Staff_Query();
-          $staffQ->connect();
-          if ($staffQ->isError())
-          {
-            showQueryError($staffQ);
-          }
-
-          $numRows = $staffQ->selectType('D');
-          if ($staffQ->isError())
-          {
-            $staffQ->close();
-            showQueryError($staffQ);
-          }
-
-          $array = null;
-          $array[""] = ""; // to permit null value
-          if ($numRows)
-          {
-            while ($staff = $staffQ->fetch())
-            {
-              $array[$staff->getCollegiateNumber()] = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
-            }
-            $staffQ->freeResult();
-          }
-          $staffQ->close();
-          unset($staffQ);
-
-          showSelectArray("collegiate_number", $array, $postVars["collegiate_number"]);
-          unset($array);
-        ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="meeting_place"><?php echo _("Meeting Place") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showInputText("meeting_place", 40, 40, $postVars["meeting_place"], $pageErrors["meeting_place"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2">
-        * <label for="wording"><?php echo _("Wording") . ":"; ?></label><br />
-        <?php
-          showTextArea("wording", 4, 90, $postVars["wording"], $pageErrors["wording"]);
-        ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2">
-        <label for="subjective"><?php echo _("Subjective") . ":"; ?></label><br />
-        <?php showTextArea("subjective", 4, 90, $postVars["subjective"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2">
-        <label for="objective"><?php echo _("Objective") . ":"; ?></label><br />
-        <?php showTextArea("objective", 4, 90, $postVars["objective"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2">
-        <label for="appreciation"><?php echo _("Appreciation") . ":"; ?></label><br />
-        <?php showTextArea("appreciation", 4, 90, $postVars["appreciation"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2">
-        <label for="action_plan"><?php echo _("Action Plan") . ":"; ?></label><br />
-        <?php showTextArea("action_plan", 4, 90, $postVars["action_plan"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td colspan="2">
-        <label for="prescription"><?php echo _("Prescription") . ":"; ?></label><br />
-        <?php showTextArea("prescription", 4, 90, $postVars["prescription"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="closed_problem"><?php echo _("Closed Problem") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showCheckBox("closed_problem", "closed_problem", "closed", $postVars["closed_problem"] != ""); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td class="center" colspan="2">
-        <?php
-          showInputButton("button1", _("Submit"));
-          showInputButton("button2", _("Reset"), "reset");
-          showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-        ?>
-      </td>
-    </tr>
-  </tbody>
-</table>
