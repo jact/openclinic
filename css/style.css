@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.11 2005/03/04 19:55:30 jact Exp $
+ * $Id: style.css,v 1.12 2005/03/05 11:39:03 jact Exp $
  */
 
 /**
@@ -99,9 +99,10 @@ hr {
   margin: 0 0 0 3px;
   padding: 0;
 }
+html>body .linkList { /* be nice with Opera */
+  list-style: none;
+}
 .linkList li {
-  position: relative;
-  bottom: 11px;
   margin: 0;
   padding: 0;
 }
@@ -173,6 +174,9 @@ kbd {
   width: 12em;
   background: #eee;
 }
+#left h2, #right h2 {
+  margin: 10px 0 3px 0;
+}
 /* MSIE only rules */
 * html #left, * html #right {
   position: absolute;
@@ -202,6 +206,7 @@ kbd {
 }
 #hosting { /* variation of phark ir method */
   display: block;
+  border: 1px solid #fff;
   text-indent: -5000px;
   text-decoration: none;
   background: url(../images/sf-logo.png) no-repeat;
@@ -218,4 +223,5 @@ kbd {
 }
 html>body a#xhtml11 { /* gecko browsers */
   margin-left: 46%;
+  border: 1px solid #000;
 }
