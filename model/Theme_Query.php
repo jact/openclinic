@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.5 2004/07/27 18:47:55 jact Exp $
+ * $Id: Theme_Query.php,v 1.6 2004/08/03 11:22:25 jact Exp $
  */
 
 /**
@@ -95,7 +95,7 @@ class Theme_Query extends Query
     {
       $sql .= " WHERE " . $this->_table . ".id_theme=" . intval($idTheme);
     }
-    $sql .= " GROUP BY 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27";
+    $sql .= " GROUP BY 1,2,3";
     $sql .= " ORDER BY " . $this->_table . ".theme_name;";
 
     $result = $this->exec($sql);
@@ -127,38 +127,7 @@ class Theme_Query extends Query
     $theme = new Theme();
     $theme->setIdTheme(intval($array["id_theme"]));
     $theme->setThemeName(urldecode($array["theme_name"]));
-
-    $theme->setTitleBgColor(urldecode($array["title_bg_color"]));
-    $theme->setTitleFontFamily(urldecode($array["title_font_family"]));
-    $theme->setTitleFontSize(intval($array["title_font_size"]));
-    $theme->setTitleFontBold($array["title_font_bold"] == "Y");
-    $theme->setTitleFontColor(urldecode($array["title_font_color"]));
-    $theme->setTitleAlign(urldecode($array["title_align"]));
-
-    $theme->setBodyBgColor(urldecode($array["body_bg_color"]));
-    $theme->setBodyFontFamily(urldecode($array["body_font_family"]));
-    $theme->setBodyFontSize(intval($array["body_font_size"]));
-    $theme->setBodyFontColor(urldecode($array["body_font_color"]));
-    $theme->setBodyLinkColor(urldecode($array["body_link_color"]));
-
-    $theme->setErrorColor(urldecode($array["error_color"]));
-
-    $theme->setNavbarBgColor(urldecode($array["navbar_bg_color"]));
-    $theme->setNavbarFontFamily(urldecode($array["navbar_font_family"]));
-    $theme->setNavbarFontSize(intval($array["navbar_font_size"]));
-    $theme->setNavbarFontColor(urldecode($array["navbar_font_color"]));
-    $theme->setNavbarLinkColor(urldecode($array["navbar_link_color"]));
-
-    $theme->setTabBgColor(urldecode($array["tab_bg_color"]));
-    $theme->setTabFontFamily(urldecode($array["tab_font_family"]));
-    $theme->setTabFontSize(intval($array["tab_font_size"]));
-    $theme->setTabFontColor(urldecode($array["tab_font_color"]));
-    $theme->setTabLinkColor(urldecode($array["tab_link_color"]));
-    $theme->setTabFontBold($array["tab_font_bold"] == "Y");
-
-    $theme->setTableBorderColor(urldecode($array["table_border_color"]));
-    $theme->setTableBorderWidth(intval($array["table_border_width"]));
-    $theme->setTableCellPadding(intval($array["table_cell_padding"]));
+    $theme->setCSSFile(urldecode($array["css_file"]));
 
     if (isset($array["row_count"]))
     {
@@ -185,40 +154,27 @@ class Theme_Query extends Query
       return false;
     }
 
+    $filename = '../css/' . $theme->getCSSFile();
+    $fp = fopen($filename, 'wb');
+    if ( !$fp )
+    {
+      $this->_error = "Error creating css file.";
+      return false;
+    }
+
+    $size = strlen($theme->getCSSRules());
+    if ( !fwrite($fp, $theme->getCSSRules(), $size) )
+    {
+      $this->_error = "Error writting css file.";
+      return false;
+    }
+    fclose($fp);
+
+    @chmod($filename, 0644); // without execution permissions if it is possible
+
     $sql = "INSERT INTO " . $this->_table . " VALUES (NULL, ";
     $sql .= "'" . urlencode($theme->getThemeName()) . "', ";
-
-    $sql .= "'" . urlencode($theme->getTitleBgColor()) . "', ";
-    $sql .= "'" . urlencode($theme->getTitleFontFamily()) . "', ";
-    $sql .= $theme->getTitleFontSize() . ", ";
-    $sql .= ($theme->isTitleFontBold() ? "'Y', " : "'N', ");
-    $sql .= "'" . urlencode($theme->getTitleFontColor()) . "', ";
-    $sql .= "'" . $theme->getTitleAlign() . "', ";
-
-    $sql .= "'" . urlencode($theme->getBodyBgColor()) . "', ";
-    $sql .= "'" . urlencode($theme->getBodyFontFamily()) . "', ";
-    $sql .= $theme->getBodyFontSize() . ", ";
-    $sql .= "'" . urlencode($theme->getBodyFontColor()) . "', ";
-    $sql .= "'" . urlencode($theme->getBodyLinkColor()) . "', ";
-
-    $sql .= "'" . urlencode($theme->getErrorColor()) . "', ";
-
-    $sql .= "'" . urlencode($theme->getNavbarBgColor()) . "', ";
-    $sql .= "'" . urlencode($theme->getNavbarFontFamily()) . "', ";
-    $sql .= $theme->getNavbarFontSize() . ", ";
-    $sql .= "'" . urlencode($theme->getNavbarFontColor()) . "', ";
-    $sql .= "'" . urlencode($theme->getNavbarLinkColor()) . "', ";
-
-    $sql .= "'" . urlencode($theme->getTabBgColor()) . "', ";
-    $sql .= "'" . urlencode($theme->getTabFontFamily()) . "', ";
-    $sql .= $theme->getTabFontSize() . ", ";
-    $sql .= ($theme->isTabFontBold() ? "'Y', " : "'N', ");
-    $sql .= "'" . urlencode($theme->getTabFontColor()) . "', ";
-    $sql .= "'" . urlencode($theme->getTabLinkColor()) . "', ";
-
-    $sql .= "'" . urlencode($theme->getTableBorderColor()) . "', ";
-    $sql .= $theme->getTableBorderWidth() . ", ";
-    $sql .= $theme->getTableCellPadding() . ");";
+    $sql .= "'" . urlencode($theme->getCSSFile()) . "');";
 
     $result = $this->exec($sql);
     if ($result == false)
@@ -248,39 +204,7 @@ class Theme_Query extends Query
 
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "theme_name='" . urlencode($theme->getThemeName()) . "', ";
-
-    $sql .= "title_bg_color='" . urlencode($theme->getTitleBgColor()) . "', ";
-    $sql .= "title_font_family='" . urlencode($theme->getTitleFontFamily()) . "', ";
-    $sql .= "title_font_size=" . $theme->getTitleFontSize() . ", ";
-    $sql .= "title_font_bold=" . ($theme->isTitleFontBold() ? "'Y', " : "'N', ");
-    $sql .= "title_font_color='" . urlencode($theme->getTitleFontColor()) . "', ";
-    $sql .= "title_align='" . $theme->getTitleAlign() . "', ";
-
-    $sql .= "body_bg_color='" . urlencode($theme->getBodyBgColor()) . "', ";
-    $sql .= "body_font_family='" . urlencode($theme->getBodyFontFamily()) . "', ";
-    $sql .= "body_font_size=" . $theme->getBodyFontSize() . ", ";
-    $sql .= "body_font_color='" . urlencode($theme->getBodyFontColor()) . "', ";
-    $sql .= "body_link_color='" . urlencode($theme->getBodyLinkColor()) . "', ";
-
-    $sql .= "error_color='" . urlencode($theme->getErrorColor()) . "', ";
-
-    $sql .= "navbar_bg_color='" . urlencode($theme->getNavbarBgColor()) . "', ";
-    $sql .= "navbar_font_family='" . urlencode($theme->getNavbarFontFamily()) . "', ";
-    $sql .= "navbar_font_size=" . $theme->getNavbarFontSize() . ", ";
-    $sql .= "navbar_font_color='" . urlencode($theme->getNavbarFontColor()) . "', ";
-    $sql .= "navbar_link_color='" . urlencode($theme->getNavbarLinkColor()) . "', ";
-
-    $sql .= "tab_bg_color='" . urlencode($theme->getTabBgColor()) . "', ";
-    $sql .= "tab_font_family='" . urlencode($theme->getTabFontFamily()) . "', ";
-    $sql .= "tab_font_size=" . $theme->getTabFontSize() . ", ";
-    $sql .= "tab_font_bold=" . ($theme->isTabFontBold() ? "'Y', " : "'N', ");
-    $sql .= "tab_font_color='" . urlencode($theme->getTabFontColor()) . "', ";
-    $sql .= "tab_link_color='" . urlencode($theme->getTabLinkColor()) . "', ";
-
-    $sql .= "table_border_color='" . urlencode($theme->getTableBorderColor()) . "', ";
-    $sql .= "table_border_width=" . $theme->getTableBorderWidth() . ", ";
-    $sql .= "table_cell_padding=" . $theme->getTableCellPadding();
-    $sql .= " WHERE id_theme=" . $theme->getIdTheme() . ";";
+    $sql .= "css_file='" . urlencode($theme->getCSSFile()) . "';";
 
     $result = $this->exec($sql);
     if ($result == false)
