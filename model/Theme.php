@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme.php,v 1.6 2004/08/03 11:22:25 jact Exp $
+ * $Id: Theme.php,v 1.7 2004/08/05 14:16:54 jact Exp $
  */
 
 /**
@@ -17,6 +17,13 @@
  */
 
 require_once("../lib/validator_lib.php");
+
+$reservedCSSFiles = array(
+  "style.css",
+  "wizard.css",
+  "scheme.css",
+  "serialz.css"
+);
 
 /*
  * Theme represents a look and feel theme.
@@ -62,11 +69,14 @@ class Theme
   /*
    * bool validateData(void)
    ********************************************************************
+   * @global array $reservedCSSFiles
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
   function validateData()
   {
+    global $reservedCSSFiles;
+
     $valid = true;
 
     if ($this->_themeName == "")
@@ -79,6 +89,11 @@ class Theme
     {
       $valid = false;
       $this->_cssFileError = _("This is a required field.");
+    }
+    elseif (in_array($this->_cssFile, $reservedCSSFiles))
+    {
+      $valid = false;
+      $this->_cssFileError = _("That filename is reserved for internal use.");
     }
 
     if ($this->_cssRules == "")
