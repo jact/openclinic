@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme.php,v 1.3 2004/05/24 22:12:44 jact Exp $
+ * $Id: Theme.php,v 1.4 2004/06/07 17:45:22 jact Exp $
  */
 
 /**
@@ -314,7 +314,7 @@ class Theme
       $valid = false;
       $this->_titleFontSizeError = _("This field must be numeric.");
     }
-    elseif (strrpos($this->_titleFontSize, "."))
+    elseif (strrpos($this->_titleFontSize, ".") || strrpos($this->_titleFontSize, ","))
     {
       $valid = false;
       $this->_titleFontSizeError = _("This field must not contain a decimal point.");
@@ -330,7 +330,7 @@ class Theme
       $valid = false;
       $this->_bodyFontSizeError = _("This field must be numeric.");
     }
-    elseif (strrpos($this->_bodyFontSize, "."))
+    elseif (strrpos($this->_bodyFontSize, ".") || strrpos($this->_bodyFontSize, ","))
     {
       $valid = false;
       $this->_bodyFontSizeError = _("This field must not contain a decimal point.");
@@ -346,7 +346,7 @@ class Theme
       $valid = false;
       $this->_navbarFontSizeError = _("This field must be numeric.");
     }
-    elseif (strrpos($this->_navbarFontSize, "."))
+    elseif (strrpos($this->_navbarFontSize, ".") || strrpos($this->_navbarFontSize, ","))
     {
       $valid = false;
       $this->_navbarFontSizeError = _("This field must not contain a decimal point.");
@@ -362,7 +362,7 @@ class Theme
       $valid = false;
       $this->_tabFontSizeError = _("This field must be numeric.");
     }
-    elseif (strrpos($this->_tabFontSize, "."))
+    elseif (strrpos($this->_tabFontSize, ".") || strrpos($this->_tabFontSize, ","))
     {
       $valid = false;
       $this->_tabFontSizeError = _("This field must not contain a decimal point.");
@@ -378,7 +378,7 @@ class Theme
       $valid = false;
       $this->_tableBorderWidthError = _("This field must be numeric.");
     }
-    elseif (strrpos($this->_tableBorderWidth, "."))
+    elseif (strrpos($this->_tableBorderWidth, ".") || strrpos($this->_tableBorderWidth, ","))
     {
       $valid = false;
       $this->_tableBorderWidthError = _("This field must not contain a decimal point.");
@@ -394,7 +394,7 @@ class Theme
       $valid = false;
       $this->_tablePaddingCellError = _("This field must be numeric.");
     }
-    elseif (strrpos($this->_tableCellPadding, "."))
+    elseif (strrpos($this->_tableCellPadding, ".") || strrpos($this->_tableCellPadding, ","))
     {
       $valid = false;
       $this->_tableCellPaddingError = _("This field must not contain a decimal point.");
