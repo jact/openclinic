@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Problem_Query.php,v 1.3 2004/05/15 17:22:18 jact Exp $
  */
 
 /**
@@ -178,13 +178,16 @@ class Problem_Query extends Query
     $sql = "SELECT * " . $sql;
     $sql .= " ORDER BY " . $field;
     // setting limit so we can page through the results
-    $offset = ($this->_currentPage - 1) * $this->_itemsPerPage;
+    $offset = ($this->_currentPage - 1) * intval($this->_itemsPerPage);
     if ($offset >= $limitFrom && $limitFrom > 0)
     {
       $offset = 0;
     }
-    $limitTo = $this->_itemsPerPage;
-    $sql .= " LIMIT " . $offset . "," . $limitTo . ";";
+    $limitTo = intval($this->_itemsPerPage);
+    if ($limitTo > 0)
+    {
+      $sql .= " LIMIT " . $offset . "," . $limitTo . ";";
+    }
 
     //echo "limitFrom=[" . $limitFrom . "]<br />\n"; // debug
     //echo "offset=[" . $offset . "]<br />\n"; // debug
@@ -205,7 +208,7 @@ class Problem_Query extends Query
     {
       $this->_rowCount = $limitFrom;
     }
-    $this->_pageCount = ceil($this->_rowCount / intval($this->_itemsPerPage));
+    $this->_pageCount = (intval($this->_itemsPerPage) > 0) ? ceil($this->_rowCount / $this->_itemsPerPage) : 1;
 
     // Running search sql statement
     $result = $this->exec($sql);

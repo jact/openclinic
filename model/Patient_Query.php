@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Patient_Query.php,v 1.3 2004/05/15 17:22:06 jact Exp $
  */
 
 /**
@@ -203,7 +203,10 @@ class Patient_Query extends Query
       $offset = 0;
     }
     $limitTo = intval($this->_itemsPerPage);
-    $sql .= " LIMIT " . $offset . "," . $limitTo . ";";
+    if ($limitTo > 0)
+    {
+      $sql .= " LIMIT " . $offset . "," . $limitTo . ";";
+    }
 
     //echo "limitFrom=[" . $limitFrom . "]<br />\n"; // debug
     //echo "offset=[" . $offset . "]<br />\n"; // debug
@@ -224,7 +227,7 @@ class Patient_Query extends Query
     {
       $this->_rowCount = $limitFrom;
     }
-    $this->_pageCount = ceil($this->_rowCount / intval($this->_itemsPerPage));
+    $this->_pageCount = (intval($this->_itemsPerPage) > 0) ? ceil($this->_rowCount / $this->_itemsPerPage) : 1;
 
     // Running search sql statement
     $result = $this->exec($sql);
