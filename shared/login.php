@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.5 2004/07/07 17:23:37 jact Exp $
+ * $Id: login.php,v 1.6 2004/07/08 16:38:26 jact Exp $
  */
 
 /**
@@ -212,5 +212,4 @@
   // Redirect to return page
   ////////////////////////////////////////////////////////////////////
   header("Location: " . urldecode($_SESSION["returnPage"]));
-  exit();
 ?>
