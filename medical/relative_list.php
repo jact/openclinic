@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.7 2004/07/11 11:14:22 jact Exp $
+ * $Id: relative_list.php,v 1.8 2004/08/01 09:04:53 jact Exp $
  */
 
 /**
@@ -95,7 +95,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]))
   {
-    echo '<p>' . _("Relatives have been added.") . "</p>\n";
+    showMessage(_("Relatives have been added."), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -103,7 +103,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Relative, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Relative, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
@@ -124,111 +124,80 @@
 </form>
 
 <?php
-    echo '<p class="advice center">* ' . _("Note: Empty search to see all results.") . "</p>\n";
+    showMessage('* ' . _("Note: Empty search to see all results."));
   } // end if
 
   if (count($relArray) == 0)
   {
-    echo '<p>' . _("No relatives defined for this patient.") . "</p>\n";
+    $relQ->close();
+    showMessage(_("No relatives defined for this patient."), OPEN_MSG_INFO);
+    include_once("../shared/footer.php");
+    exit();
   }
-  else
+
+  echo "<hr />\n";
+
+  echo '<h3>' . _("Relatives List:") . "</h3>\n";
+
+  $thead = array(
+    _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),
+    _("Surname 1"),
+    _("Surname 2"),
+    _("First Name")
+  );
+
+  $patQ = new Patient_Query();
+  $patQ->connect();
+  if ($patQ->isError())
   {
-?>
+    showQueryError($patQ);
+  }
 
-<h3><?php echo _("Relatives List:"); ?></h3>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="<?php echo ($hasMedicalAdminAuth ? 2 : 1); ?>">
-        <?php echo _("Function"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Surname 1"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Surname 2"); ?>
-      </th>
-
-      <th>
-        <?php echo _("First Name"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
-    $patQ = new Patient_Query();
-    $patQ->connect();
+  $tbody = array();
+  for ($i = 0; $i < count($relArray); $i++)
+  {
+    $patQ->select($relArray[$i]);
     if ($patQ->isError())
     {
-      showQueryError($patQ);
+      showQueryError($patQ, false);
+      continue;
     }
 
-    $rowClass = "odd";
-    for ($i = 0; $i < count($relArray); $i++)
+    $pat = $patQ->fetch();
+    if ($patQ->isError())
     {
-      $patQ->select($relArray[$i]);
-      if ($patQ->isError())
-      {
-        showQueryError($patQ, false);
-        continue;
-      }
+      $patQ->close();
+      showFetchError($patQ);
+    }
 
-      $pat = $patQ->fetch();
-      if ($patQ->isError())
-      {
-        $patQ->close();
-        showFetchError($patQ);
-      }
+    $relName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
-      $relName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td>
-        <a href="../medical/patient_view.php?key=<?php echo $pat->getIdPatient(); ?>"><?php echo _("view"); ?></a>
-      </td>
+    $row = '<a href="../medical/patient_view.php?key=' . $pat->getIdPatient() . '">' . _("view") . '</a>';
+    $row .= OPEN_SEPARATOR;
 
-<?php
-      if ($hasMedicalAdminAuth)
-      {
-?>
-      <td>
-        <a href="../medical/relative_del_confirm.php?key=<?php echo $idPatient; ?>&amp;rel=<?php echo $pat->getIdPatient(); ?>&amp;name=<?php echo $relName; ?>"><?php echo _("del"); ?></a>
-      </td>
-<?php
-      } // end if
-?>
+    if ($hasMedicalAdminAuth)
+    {
+      $row .= '<a href="../medical/relative_del_confirm.php?key=' . $idPatient . '&amp;rel=' . $pat->getIdPatient() . '&amp;name=' . $relName . '">' . _("del") . '</a>';
+      $row .= OPEN_SEPARATOR;
+    } // end if
 
-      <td>
-        <?php echo $pat->getSurname1(); ?>
-      </td>
+    $row .= $pat->getSurname1();
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $pat->getSurname2(); ?>
-      </td>
+    $row .= $pat->getSurname2();
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $pat->getFirstName(); ?>
-      </td>
-    </tr>
-<?php
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
-    } // end while
-    $patQ->freeResult();
-    $patQ->close();
-?>
-  </tbody>
-</table>
+    $row .= $pat->getFirstName();
 
-<?php
-    unset($patQ);
-    unset($pat);
-  } // end if-else
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
+  } // end for
+  $patQ->freeResult();
+  $patQ->close();
+  unset($patQ);
+  unset($pat);
   unset($relQ);
+
+  showTable($thead, $tbody);
 
   require_once("../shared/footer.php");
 ?>
