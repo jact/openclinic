@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.17 2004/08/09 11:33:40 jact Exp $
+ * $Id: header.php,v 1.18 2004/08/28 16:24:57 jact Exp $
  */
 
 /**
@@ -192,19 +192,25 @@
 
     <p>
       <a href="http://www.php.net">
-        <img src="../images/php-logo.gif" width="90" height="33" alt="Powered by PHP" title="Powered by PHP" />
+        <img src="../images/php-logo.gif" width="80" height="15" alt="Powered by PHP" title="Powered by PHP" />
       </a>
     </p>
 
     <p>
       <a href="http://www.mysql.com">
-        <img src="../images/mysql-logo.png" width="84" height="44" alt="Works with MySQL" title="Works with MySQL" />
+        <img src="../images/mysql-logo.png" width="80" height="15" alt="Works with MySQL" title="Works with MySQL" />
       </a>
     </p>
 
     <p>
       <a href="http://validator.w3.org/check/referer">
-        <img src="../images/valid-xhtml11.png" width="88" height="31" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" />
+        <img src="../images/valid-xhtml11.png" width="80" height="15" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" />
+      </a>
+    </p>
+
+    <p>
+      <a href="http://jigsaw.w3.org/css-validator?uri=<?php echo "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']; ?>">
+        <img src="../images/valid-css.png" width="80" height="15" alt="Valid CSS" title="Valid CSS" />
       </a>
     </p>
   </div><!-- End #sideBarLogo -->
