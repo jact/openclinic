@@ -1,0 +1,27 @@
+$Id: README,v 1.1 2003/10/25 19:45:44 jact Exp $
+
+This README gives you a very short view how to make your own translation
+
+- If necessary, create a new openclinic.pot file
+  Normally this is not needed, because the .pot that comes with the newest openclinic should be actual
+
+- copy openclinic.pot (po template) to your own .po file
+
+- Your .po Translation-File has to be named language_COUNTRY-openclinic.po
+
+  For example : spanish, Argentine -> es_AR-openclinic.po (or es_MX-openclinic.po for Mexican), de, Deutschland -> de_DE-openclinic.po
+
+- Don't forget to change the header information correctly (charset, etc.)
+  Note: A good tool to edit .po files is poEdit works on Windows Systems, too.
+  Available from http://poedit.sourceforge.net/
+
+- Note:
+  If you see something like: msgid "Upgrading item %d of %d . . . " or msgid "%s (%s), %s on %s" then leave the %d or %s in your translation. They are place holder for things like "time" or "times" or numbers.
+  If you see something like \" leave it, too. its a quoted " the %s are important! Check that you have the same count of % in msgid and msgstr
+
+- Steps:
+  copy your .po file into the locale folder.
+  use poEdit and create a language_COUNTRY-openclinic.mo file from your .po file
+  copy this .mo into locale/language_COUNTRY/LC_MESSAGES/
+
+- Add your new language to getNLS in lib/nls.php
