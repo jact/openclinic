@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.9 2004/07/10 16:00:09 jact Exp $
+ * $Id: user_list.php,v 1.10 2004/07/26 18:50:27 jact Exp $
  */
 
 /**
@@ -45,7 +45,7 @@
   $array = null;
   while ($user = $userQ->fetch())
   {
-    $array[$user->getIdMember() . '|' . $user->getLogin()] = $user->getLogin();
+    $array[$user->getIdMember() . OPEN_SEPARATOR . $user->getLogin()] = $user->getLogin();
   }
   $userQ->freeResult();
   $userQ->clearErrors(); // needed after empty fetch()
@@ -72,7 +72,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("User, %s, has been added."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("User, %s, has been added."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -80,7 +80,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("User, %s, has been updated."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("User, %s, has been updated."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -88,7 +88,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("User, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("User, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -96,7 +96,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["password"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Password of user, %s, has been reset."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Password of user, %s, has been reset."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -104,45 +104,43 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["login"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
+
+  $thead = array(
+    _("Create New User")
+  );
+
+  if (empty($array))
+  {
+    $content = _("There no more users to create. You must create more staff members first.");
+  }
+  else
+  {
+    $content = '<label for="id_member_login">';
+    $content .= _("Select a login to create a new user") . ": ";
+    $content .= "</label>\n";
+
+    $content .= htmlSelectArray("id_member_login", $array);
+    $content .= htmlInputButton("button1", _("Create"));
+  }
+
+  $tbody = array(
+    0 => array($content)
+  );
+
+  $options = array(
+    'shaded' => false
+  );
 ?>
 
 <form method="post" action="../admin/user_new_form.php?reset=Y">
   <div>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <?php echo _("Create New User"); ?>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>
-            <?php
-              if (empty($array))
-              {
-                echo _("There no more users to create. You must create more staff members first.");
-              }
-              else
-              {
-                echo '<label for="id_member_login">';
-                echo _("Select a login to create a new user") . ": ";
-                echo "</label>\n";
-
-                showSelectArray("id_member_login", $array);
-                showInputButton("button1", _("Create"));
-              }
-            ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+<?php showTable($thead, $tbody, null, $options); ?>
   </div>
 </form>
+
+<hr />
 
 <?php
   $numRows = $userQ->select();
@@ -157,46 +155,31 @@
   if ($numRows == 0)
   {
     $userQ->close();
-    echo '<p>' . _("No results found.") . "</p>\n";
+    showMessage(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
-?>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="6">
-        <?php echo _("Function"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Login"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Email"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Actived"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Profile"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
   $profiles = array(
     OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
     OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
     OPEN_PROFILE_DOCTOR => _("Doctor")
   );
 
-  $rowClass = "odd";
+  $thead = array(
+    _("Function") => array('colspan' => 6),
+    _("Login"),
+    _("Email"),
+    _("Actived"),
+    _("Profile")
+  );
+
+  $options = array(
+    8 => array('align' => 'center'),
+    9 => array('align' => 'center')
+  );
+
+  $tbody = array();
   while ($user = $userQ->fetch())
   {
     // to protect 'big brother' user
@@ -204,78 +187,49 @@
     {
       continue;
     }
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td>
-        <a href="../admin/user_edit_form.php?key=<?php echo $user->getIdUser(); ?>&amp;reset=Y"><?php echo _("edit"); ?></a>
-      </td>
 
-      <td>
-        <a href="../admin/user_pwd_reset_form.php?key=<?php echo $user->getIdUser(); ?>&amp;reset=Y"><?php echo _("pwd"); ?></a>
-      </td>
+    ////////////////////////////////////////////////////////////////////
+    // Row construction
+    ////////////////////////////////////////////////////////////////////
+    $row = '<a href="../admin/user_edit_form.php?key=' . $user->getIdUser(). '&amp;reset=Y">' . _("edit") . '</a>';
+    $row .= OPEN_SEPARATOR;
+    $row .= '<a href="../admin/user_pwd_reset_form.php?key=' . $user->getIdUser() . '&amp;reset=Y">' . _("pwd") . '</a>';
+    $row .= OPEN_SEPARATOR;
+    if (isset($_SESSION["userId"]) && $user->getIdUser() == $_SESSION["userId"])
+    {
+      $row .= '*' . _("del");
+    }
+    else
+    {
+      $row .= '<a href="../admin/user_del_confirm.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("del") . '</a>';
+    }
+    $row .= OPEN_SEPARATOR;
+    $row .= '<a href="../admin/staff_edit_form.php?key=' . $user->getIdMember() . '&amp;reset=Y">' . _("edit member") . '</a>';
+    $row .= OPEN_SEPARATOR;
+    $row .= '<a href="../admin/user_access_log.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("accesses"). '</a>';
+    $row .= OPEN_SEPARATOR;
+    $row .= '<a href="../admin/user_record_log.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("transactions") . '</a>';
+    $row .= OPEN_SEPARATOR;
+    $row .= $user->getLogin();
+    $row .= OPEN_SEPARATOR;
+    $row .= $user->getEmail();
+    $row .= OPEN_SEPARATOR;
+    $row .= (($user->isActived()) ? _("yes") : _("no"));
+    $row .= OPEN_SEPARATOR;
+    $row .= $profiles[$user->getIdProfile()];
 
-      <td>
-        <?php
-          if (isset($_SESSION["userId"]) && $user->getIdUser() == $_SESSION["userId"])
-          {
-            echo '*' . _("del");
-          }
-          else
-          {
-        ?>
-            <a href="../admin/user_del_confirm.php?key=<?php echo $user->getIdUser(); ?>&amp;login=<?php echo $user->getLogin(); ?>"><?php echo _("del"); ?></a>
-        <?php
-          } // end if
-        ?>
-      </td>
-
-      <td>
-        <a href="../admin/staff_edit_form.php?key=<?php echo $user->getIdMember(); ?>&amp;reset=Y"><?php echo _("edit member"); ?></a>
-      </td>
-
-      <td>
-        <a href="../admin/user_access_log.php?key=<?php echo $user->getIdUser(); ?>&amp;login=<?php echo $user->getLogin(); ?>">
-          <?php echo _("accesses"); ?>
-        </a>
-      </td>
-
-      <td>
-        <a href="../admin/user_record_log.php?key=<?php echo $user->getIdUser(); ?>&amp;login=<?php echo $user->getLogin(); ?>">
-          <?php echo _("transactions"); ?>
-        </a>
-      </td>
-
-      <td>
-        <?php echo $user->getLogin(); ?>
-      </td>
-
-      <td>
-        <?php echo $user->getEmail(); ?>
-      </td>
-
-      <td class="center">
-        <?php echo ($user->isActived()) ? _("yes") : _("no"); ?>
-      </td>
-
-      <td class="center">
-        <?php echo $profiles[$user->getIdProfile()]; ?>
-      </td>
-    </tr>
-<?php
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
   $userQ->freeResult();
   $userQ->close();
+
+  showTable($thead, $tbody, null, $options);
+
   unset($user);
   unset($userQ);
   unset($profiles);
-?>
-  </tbody>
-</table>
 
-<?php
-  echo '<p class="advice">* ' . _("Note: The del function will not be applicated to the session user.") . "</p>\n";
+  showMessage('* ' . _("Note: The del function will not be applicated to the session user."));
 
   require_once("../shared/footer.php");
 ?>
