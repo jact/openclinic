@@ -1,0 +1,3389 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenClinic 0.7\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2004-04-04 23:14+0100\n"
+"Last-Translator: jact <jachavar@terra.es>\n"
+"Language-Team:  <jachavar@terra.es>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=iso-8859-1\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: admin/staff_new_form.php:45
+msgid "Add New Administrative Information"
+msgstr ""
+
+#: admin/staff_new_form.php:50
+msgid "Add New Doctor Information"
+msgstr ""
+
+#: admin/staff_new_form.php:64
+#: admin/theme_edit_form.php:139
+#: admin/index.php:32
+#: admin/setting_edit_form.php:93
+#: admin/staff_del.php:95
+#: admin/staff_del_confirm.php:59
+#: admin/staff_edit.php:94
+#: admin/staff_edit_form.php:121
+#: admin/staff_list.php:49
+#: admin/staff_new.php:93
+#: admin/profile_edit_form.php:88
+#: admin/theme_del.php:77
+#: admin/theme_del_confirm.php:57
+#: admin/theme_edit.php:88
+#: admin/theme_list.php:43
+#: admin/theme_new.php:85
+#: admin/theme_new_form.php:117
+#: admin/theme_preview.php:161
+#: admin/user_del_confirm.php:57
+#: admin/user_edit.php:122
+#: admin/user_edit_form.php:117
+#: admin/user_list.php:73
+#: admin/user_new.php:92
+#: admin/user_new_form.php:73
+#: admin/user_pwd_reset.php:103
+#: admin/user_del.php:77
+#: admin/dump_process.php:54
+#: admin/dump_view_form.php:70
+#: admin/user_pwd_reset_form.php:110
+#: admin/profile_edit.php:99
+#: admin/profile_list.php:53
+#: admin/dump_optimize_db.php:58
+#: admin/log_stats.php:54
+#: admin/log_access_list.php:74
+#: admin/log_record_list.php:74
+#: admin/no_authorization.php:36
+#: home/index.php:96
+#: home/index.php:98
+#: shared/header.php:171
+#: shared/header.php:172
+#: shared/view_source.php:68
+msgid "Admin"
+msgstr ""
+
+#: admin/staff_new_form.php:65
+#: admin/index.php:92
+#: admin/index.php:94
+#: admin/staff_del.php:96
+#: admin/staff_del_confirm.php:60
+#: admin/staff_edit.php:86
+#: admin/staff_edit.php:95
+#: admin/staff_edit_form.php:122
+#: admin/staff_list.php:41
+#: admin/staff_list.php:73
+#: admin/staff_new.php:83
+#: admin/staff_new.php:94
+#: navbars/admin.php:55
+#: navbars/admin.php:56
+msgid "Staff Members"
+msgstr ""
+
+#: admin/staff_new_form.php:85
+#: admin/setting_edit_form.php:117
+#: admin/staff_edit_form.php:143
+#: medical/patient_edit_form.php:153
+#: medical/patient_new_form.php:73
+#: medical/problem_new_form.php:109
+#: medical/problem_edit_form.php:153
+#: medical/test_edit_form.php:141
+#: medical/test_new_form.php:103
+msgid "Note: The fields with * are required."
+msgstr ""
+
+#: admin/theme_edit_form.php:75
+msgid "That theme does not exist."
+msgstr ""
+
+#: admin/theme_edit_form.php:131
+#: admin/theme_edit.php:80
+msgid "Edit Theme"
+msgstr ""
+
+#: admin/theme_edit_form.php:140
+#: admin/index.php:71
+#: admin/index.php:73
+#: admin/theme_del.php:78
+#: admin/theme_del_confirm.php:58
+#: admin/theme_edit.php:89
+#: admin/theme_list.php:35
+#: admin/theme_new.php:86
+#: admin/theme_new_form.php:118
+#: navbars/admin.php:49
+#: navbars/admin.php:50
+msgid "Themes"
+msgstr ""
+
+#: admin/theme_edit_form.php:168
+#: admin/theme_new_form.php:146
+msgid "Preview Theme"
+msgstr ""
+
+#: admin/theme_fields.php:39
+#: admin/theme_list.php:117
+msgid "Theme Name"
+msgstr ""
+
+#: admin/theme_fields.php:49
+msgid "Error Color"
+msgstr ""
+
+#: admin/theme_fields.php:59
+msgid "Table Border Color"
+msgstr ""
+
+#: admin/theme_fields.php:69
+msgid "Table Border Width"
+msgstr ""
+
+#: admin/theme_fields.php:79
+msgid "Table Cell Padding"
+msgstr ""
+
+#: admin/theme_fields.php:93
+msgid "Title"
+msgstr ""
+
+#: admin/theme_fields.php:97
+msgid "Tabs"
+msgstr ""
+
+#: admin/theme_fields.php:101
+msgid "Navigation"
+msgstr ""
+
+#: admin/theme_fields.php:105
+msgid "Body"
+msgstr ""
+
+#: admin/theme_fields.php:111
+msgid "Font Family"
+msgstr ""
+
+#: admin/theme_fields.php:133
+msgid "Font Size"
+msgstr ""
+
+#: admin/theme_fields.php:141
+#: admin/theme_fields.php:150
+msgid "bold"
+msgstr ""
+
+#: admin/theme_fields.php:165
+msgid "Background Color"
+msgstr ""
+
+#: admin/theme_fields.php:187
+msgid "Font Color"
+msgstr ""
+
+#: admin/theme_fields.php:209
+msgid "Link Color"
+msgstr ""
+
+#: admin/theme_fields.php:231
+msgid "Text Align"
+msgstr ""
+
+#: admin/theme_fields.php:256
+#: admin/profile_fields.php:50
+#: admin/staff_fields.php:129
+#: admin/user_fields.php:177
+#: admin/dump_view_form.php:207
+#: admin/user_pwd_reset_form.php:196
+#: medical/patient_fields.php:302
+#: medical/problem_fields.php:174
+#: medical/test_fields.php:76
+msgid "Submit"
+msgstr ""
+
+#: admin/theme_fields.php:257
+#: admin/setting_fields.php:205
+#: admin/profile_fields.php:51
+#: admin/staff_fields.php:130
+#: admin/user_fields.php:178
+#: medical/patient_fields.php:303
+#: medical/problem_fields.php:175
+#: medical/test_fields.php:77
+#: medical/history_family_fields.php:69
+#: medical/history_personal_fields.php:118
+msgid "Reset"
+msgstr ""
+
+#: admin/theme_fields.php:258
+#: admin/staff_del_confirm.php:89
+#: admin/profile_fields.php:52
+#: admin/theme_del_confirm.php:87
+#: admin/staff_fields.php:131
+#: admin/user_del_confirm.php:87
+#: admin/user_fields.php:179
+#: admin/user_pwd_reset_form.php:197
+#: medical/problem_del_confirm.php:96
+#: medical/patient_fields.php:304
+#: medical/problem_fields.php:176
+#: medical/patient_del_confirm.php:90
+#: medical/relative_del_confirm.php:96
+#: medical/connection_del_confirm.php:101
+#: medical/test_del_confirm.php:101
+#: medical/test_fields.php:78
+#: medical/history_family_fields.php:70
+#: medical/history_personal_fields.php:119
+msgid "Return"
+msgstr ""
+
+#: admin/index.php:41
+msgid "Use the following functions located in the left hand navigation area to manage your clinic's staff and administrative records."
+msgstr ""
+
+#: admin/index.php:47
+#: medical/index.php:48
+msgid "Option"
+msgstr ""
+
+#: admin/index.php:51
+#: admin/profile_fields.php:39
+#: admin/profile_list.php:70
+#: home/index.php:47
+#: medical/index.php:52
+msgid "Description"
+msgstr ""
+
+#: admin/index.php:59
+#: admin/index.php:61
+#: admin/setting_edit_form.php:85
+#: home/index.php:106
+#: navbars/admin.php:43
+#: navbars/admin.php:44
+msgid "Config settings"
+msgstr ""
+
+#: admin/index.php:65
+msgid "Update config settings."
+msgstr ""
+
+#: admin/index.php:77
+msgid "View the list of site look and feel themes."
+msgstr ""
+
+#: admin/index.php:79
+#: admin/index.php:100
+#: admin/index.php:121
+#: admin/index.php:145
+msgid "From this list you can:"
+msgstr ""
+
+#: admin/index.php:82
+msgid "set the theme in use by default for your site"
+msgstr ""
+
+#: admin/index.php:83
+msgid "build a new site theme"
+msgstr ""
+
+#: admin/index.php:84
+msgid "edit an existing theme"
+msgstr ""
+
+#: admin/index.php:85
+msgid "delete a theme"
+msgstr ""
+
+#: admin/index.php:98
+msgid "View the clinic staff member list."
+msgstr ""
+
+#: admin/index.php:103
+msgid "build a new staff member"
+msgstr ""
+
+#: admin/index.php:104
+#: admin/index.php:126
+msgid "edit the staff member information"
+msgstr ""
+
+#: admin/index.php:105
+msgid "build or edit the clinic user associated"
+msgstr ""
+
+#: admin/index.php:106
+msgid "delete a staff member"
+msgstr ""
+
+#: admin/index.php:113
+#: admin/index.php:115
+#: admin/user_del_confirm.php:58
+#: admin/user_edit.php:123
+#: admin/user_edit_form.php:118
+#: admin/user_list.php:65
+#: admin/user_new.php:93
+#: admin/user_new_form.php:74
+#: admin/user_pwd_reset.php:104
+#: admin/user_del.php:78
+#: admin/user_pwd_reset_form.php:111
+#: navbars/admin.php:61
+#: navbars/admin.php:62
+msgid "Users"
+msgstr ""
+
+#: admin/index.php:119
+msgid "View the list of clinic users."
+msgstr ""
+
+#: admin/index.php:124
+msgid "build a new clinic user"
+msgstr ""
+
+#: admin/index.php:125
+msgid "edit a existing clinic user"
+msgstr ""
+
+#: admin/index.php:127
+msgid "reset a user's password"
+msgstr ""
+
+#: admin/index.php:128
+msgid "delete a clinic user"
+msgstr ""
+
+#: admin/index.php:135
+#: admin/index.php:137
+#: admin/profile_edit_form.php:89
+#: admin/profile_edit.php:100
+#: admin/profile_list.php:45
+#: navbars/admin.php:67
+#: navbars/admin.php:68
+msgid "Profiles"
+msgstr ""
+
+#: admin/index.php:141
+msgid "View the list of user profiles."
+msgstr ""
+
+#: admin/index.php:143
+msgid "A profile describes the set of permissions for a particular user."
+msgstr ""
+
+#: admin/index.php:148
+msgid "edit a profile to translate it"
+msgstr ""
+
+#: admin/index.php:155
+#: admin/index.php:157
+#: admin/dump_process.php:55
+#: admin/dump_view_form.php:62
+#: admin/dump_optimize_db.php:59
+#: home/index.php:110
+#: navbars/admin.php:73
+#: navbars/admin.php:74
+msgid "Dumps"
+msgstr ""
+
+#: admin/index.php:161
+msgid "From this option you can:"
+msgstr ""
+
+#: admin/index.php:164
+msgid "install dump from file"
+msgstr ""
+
+#: admin/index.php:165
+#: admin/index.php:166
+#: admin/index.php:167
+#, php-format
+msgid "export database dump to %s format"
+msgstr ""
+
+#: admin/index.php:168
+msgid "optimize database"
+msgstr ""
+
+#: admin/index.php:175
+#: admin/index.php:177
+#: admin/log_stats.php:46
+#: admin/log_access_list.php:75
+#: admin/log_record_list.php:75
+#: home/index.php:111
+msgid "Logs"
+msgstr ""
+
+#: admin/index.php:181
+msgid "View logs generated by the program:"
+msgstr ""
+
+#: admin/index.php:184
+msgid "user's accesses logs"
+msgstr ""
+
+#: admin/index.php:185
+msgid "operations with medical records logs"
+msgstr ""
+
+#: admin/index.php:186
+msgid "statistics for years, months, days and hours"
+msgstr ""
+
+#: admin/setting_edit_form.php:106
+msgid "Data has been updated."
+msgstr ""
+
+#: admin/setting_fields.php:31
+msgid "Edit Config Settings"
+msgstr ""
+
+#: admin/setting_fields.php:39
+#: admin/theme_preview.php:146
+#: install/wizard.php:288
+#: install/wizard.php:459
+msgid "Clinic Name"
+msgstr ""
+
+#: admin/setting_fields.php:49
+msgid "Clinic Image"
+msgstr ""
+
+#: admin/setting_fields.php:73
+msgid "(must be in /images/ directory)"
+msgstr ""
+
+#: admin/setting_fields.php:80
+msgid "Use Image in place of Name"
+msgstr ""
+
+#: admin/setting_fields.php:90
+#: install/wizard.php:294
+#: install/wizard.php:460
+msgid "Clinic Hours"
+msgstr ""
+
+#: admin/setting_fields.php:100
+#: install/wizard.php:300
+#: install/wizard.php:461
+msgid "Clinic Address"
+msgstr ""
+
+#: admin/setting_fields.php:110
+#: install/wizard.php:306
+#: install/wizard.php:462
+msgid "Clinic Phone"
+msgstr ""
+
+#: admin/setting_fields.php:120
+msgid "Clinic URL"
+msgstr ""
+
+#: admin/setting_fields.php:134
+#: install/wizard.php:282
+#: install/wizard.php:458
+msgid "Language"
+msgstr ""
+
+#: admin/setting_fields.php:167
+#: install/wizard.php:324
+#: install/wizard.php:465
+msgid "Theme by default"
+msgstr ""
+
+#: admin/setting_fields.php:177
+#: install/wizard.php:463
+msgid "Session Timeout"
+msgstr ""
+
+#: admin/setting_fields.php:183
+msgid "minutes"
+msgstr ""
+
+#: admin/setting_fields.php:190
+#: install/wizard.php:464
+#: medical/patient_search.php:97
+#: medical/relative_search.php:88
+#: medical/relative_search.php:216
+#: medical/problem_search.php:97
+#: navbars/medical.php:49
+msgid "Search Results"
+msgstr ""
+
+#: admin/setting_fields.php:196
+msgid "items per page"
+msgstr ""
+
+#: admin/setting_fields.php:204
+#: admin/theme_list.php:70
+#: medical/history_family_fields.php:68
+#: medical/history_personal_fields.php:117
+msgid "Update"
+msgstr ""
+
+#: admin/staff_del.php:69
+#: admin/staff_edit_form.php:65
+msgid "That staff member does not exist."
+msgstr ""
+
+#: admin/staff_del.php:87
+#: admin/staff_del_confirm.php:51
+#: admin/staff_del_confirm.php:73
+msgid "Delete Staff Member"
+msgstr ""
+
+#: admin/staff_del.php:102
+#, php-format
+msgid "Staff member, %s %s %s, has been deleted."
+msgstr ""
+
+#: admin/staff_del.php:105
+#: admin/staff_edit.php:107
+#: admin/staff_new.php:106
+msgid "Return to staff list"
+msgstr ""
+
+#: admin/staff_del_confirm.php:81
+#, php-format
+msgid "Are you sure you want to delete staff member, %s %s %s?"
+msgstr ""
+
+#: admin/staff_del_confirm.php:88
+#: admin/theme_del_confirm.php:86
+#: admin/user_del_confirm.php:86
+#: medical/problem_del_confirm.php:95
+#: medical/patient_del_confirm.php:89
+#: medical/relative_del_confirm.php:95
+#: medical/connection_del_confirm.php:100
+#: medical/test_del_confirm.php:100
+msgid "Delete"
+msgstr ""
+
+#: admin/staff_del_confirm.php:99
+msgid "Note: The del function will delete the related user too (if exists)."
+msgstr ""
+
+#: admin/staff_edit.php:102
+#: admin/staff_new.php:101
+#: admin/user_edit.php:138
+#: admin/user_new.php:100
+#, php-format
+msgid "Login, %s, already exists. The changes have no effect."
+msgstr ""
+
+#: admin/staff_edit.php:103
+#, php-format
+msgid "Staff member, %s %s %s, has been updated."
+msgstr ""
+
+#: admin/staff_edit_form.php:100
+msgid "Edit Administrative Information"
+msgstr ""
+
+#: admin/staff_edit_form.php:104
+msgid "Edit Doctor Information"
+msgstr ""
+
+#: admin/staff_list.php:61
+msgid "Administratives:"
+msgstr ""
+
+#: admin/staff_list.php:65
+msgid "Doctors:"
+msgstr ""
+
+#: admin/staff_list.php:87
+msgid "Add New Administrative"
+msgstr ""
+
+#: admin/staff_list.php:89
+msgid "Add New Doctor"
+msgstr ""
+
+#: admin/staff_list.php:97
+msgid "View all staff members"
+msgstr ""
+
+#: admin/staff_list.php:107
+msgid "View only administratives"
+msgstr ""
+
+#: admin/staff_list.php:117
+msgid "View only doctors"
+msgstr ""
+
+#: admin/staff_list.php:129
+#: admin/theme_list.php:103
+#: admin/user_list.php:129
+#: medical/patient_search.php:116
+#: medical/relative_search.php:114
+#: medical/problem_search.php:118
+msgid "No results found."
+msgstr ""
+
+#: admin/staff_list.php:139
+#: admin/theme_list.php:113
+#: admin/user_list.php:139
+#: admin/profile_list.php:66
+#: medical/test_list.php:108
+#: medical/relative_list.php:128
+#: medical/problem_list.php:115
+#: medical/connection_list.php:115
+#: medical/history_list.php:112
+msgid "Function"
+msgstr ""
+
+#: admin/staff_list.php:143
+#: admin/staff_fields.php:68
+#: install/wizard.php:359
+#: install/wizard.php:473
+#: medical/patient_fields.php:60
+#: medical/patient_search.php:166
+#: medical/patient_search_fields.php:48
+#: medical/relative_list.php:140
+msgid "First Name"
+msgstr ""
+
+#: admin/staff_list.php:147
+#: admin/staff_fields.php:78
+#: install/wizard.php:365
+#: install/wizard.php:474
+#: medical/patient_fields.php:71
+#: medical/patient_search.php:158
+#: medical/patient_search_fields.php:46
+#: medical/relative_list.php:132
+msgid "Surname 1"
+msgstr ""
+
+#: admin/staff_list.php:151
+#: admin/staff_fields.php:88
+#: install/wizard.php:371
+#: install/wizard.php:475
+#: medical/patient_fields.php:82
+#: medical/patient_search.php:162
+#: medical/patient_search_fields.php:47
+#: medical/relative_list.php:136
+msgid "Surname 2"
+msgstr ""
+
+#: admin/staff_list.php:155
+#: admin/staff_fields.php:118
+#: admin/user_fields.php:41
+#: admin/user_fields.php:42
+#: admin/user_list.php:143
+#: admin/user_pwd_reset_form.php:165
+#: admin/log_access_list.php:99
+#: admin/log_record_list.php:99
+#: install/wizard.php:389
+#: install/wizard.php:478
+msgid "Login"
+msgstr ""
+
+#: admin/staff_list.php:161
+#: admin/dump_process.php:164
+msgid "Type"
+msgstr ""
+
+#: admin/staff_list.php:180
+#: admin/theme_list.php:134
+#: admin/user_list.php:173
+#: admin/profile_list.php:83
+#: medical/test_list.php:141
+#: medical/problem_list.php:148
+msgid "edit"
+msgstr ""
+
+#: admin/staff_list.php:187
+#: admin/staff_list.php:192
+#: admin/theme_list.php:145
+#: admin/theme_list.php:150
+#: admin/user_list.php:184
+#: admin/user_list.php:189
+#: medical/test_list.php:145
+#: medical/relative_list.php:176
+#: medical/problem_list.php:152
+#: medical/connection_list.php:158
+#: medical/history_list.php:155
+msgid "del"
+msgstr ""
+
+#: admin/staff_list.php:202
+#: admin/staff_list.php:207
+msgid "create user"
+msgstr ""
+
+#: admin/staff_list.php:213
+msgid "edit user"
+msgstr ""
+
+#: admin/staff_list.php:242
+msgid "Administrative"
+msgstr ""
+
+#: admin/staff_list.php:246
+msgid "Doctor"
+msgstr ""
+
+#: admin/staff_list.php:266
+msgid "Note: To the create user function must have a correct login."
+msgstr ""
+
+#: admin/staff_list.php:267
+#: admin/user_list.php:243
+msgid "Note: The del function will not be applicated to the session user."
+msgstr ""
+
+#: admin/staff_new.php:102
+#, php-format
+msgid "Staff member, %s %s %s, has been added."
+msgstr ""
+
+#: admin/profile_edit_form.php:78
+#: admin/profile_edit.php:89
+msgid "Edit Profile"
+msgstr ""
+
+#: admin/theme_del.php:69
+#: admin/theme_del_confirm.php:49
+#: admin/theme_del_confirm.php:71
+msgid "Delete Theme"
+msgstr ""
+
+#: admin/theme_del.php:84
+#, php-format
+msgid "Theme, %s, has been deleted."
+msgstr ""
+
+#: admin/theme_del.php:86
+#: admin/theme_edit.php:98
+#: admin/theme_new.php:95
+msgid "Return to themes list"
+msgstr ""
+
+#: admin/theme_del_confirm.php:79
+#, php-format
+msgid "Are you sure you want to delete theme, %s?"
+msgstr ""
+
+#: admin/theme_edit.php:95
+#, php-format
+msgid "Theme, %s, has been updated."
+msgstr ""
+
+#: admin/theme_list.php:56
+msgid "Change Theme by default"
+msgstr ""
+
+#: admin/theme_list.php:66
+msgid "Choose a New Theme:"
+msgstr ""
+
+#: admin/theme_list.php:80
+#: admin/theme_new.php:77
+#: admin/theme_new_form.php:107
+msgid "Add New Theme"
+msgstr ""
+
+#: admin/theme_list.php:83
+msgid "Themes List:"
+msgstr ""
+
+#: admin/theme_list.php:121
+msgid "Usage"
+msgstr ""
+
+#: admin/theme_list.php:138
+msgid "copy"
+msgstr ""
+
+#: admin/theme_list.php:164
+#: admin/theme_list.php:168
+msgid "in use"
+msgstr ""
+
+#: admin/theme_list.php:164
+msgid "by application"
+msgstr ""
+
+#: admin/theme_list.php:168
+#, php-format
+msgid "%d user(s)"
+msgstr ""
+
+#: admin/theme_list.php:186
+msgid "Note: The delete function is not available on the themes that are currently in use by some user or by the application."
+msgstr ""
+
+#: admin/theme_new.php:92
+#, php-format
+msgid "Theme, %s, has been added."
+msgstr ""
+
+#: admin/theme_preview.php:135
+#, php-format
+msgid "%s Theme Preview"
+msgstr ""
+
+#: admin/theme_preview.php:150
+#: doc/index.php:63
+#: medical/print_medical_record.php:48
+#: shared/view_source.php:63
+msgid "Close Window"
+msgstr ""
+
+#: admin/theme_preview.php:158
+#: admin/user_edit.php:130
+#: admin/user_edit_form.php:125
+#: home/license.php:39
+#: shared/header.php:153
+#: shared/header.php:154
+#: shared/login_form.php:49
+msgid "Home"
+msgstr ""
+
+#: admin/theme_preview.php:159
+#: home/index.php:55
+#: home/index.php:57
+#: medical/problem_del_confirm.php:61
+#: medical/problem_edit.php:111
+#: medical/index.php:33
+#: medical/patient_edit.php:121
+#: medical/patient_edit_form.php:130
+#: medical/patient_new.php:122
+#: medical/patient_new_form.php:53
+#: medical/patient_search.php:105
+#: medical/patient_search_form.php:49
+#: medical/patient_view.php:103
+#: medical/test_list.php:62
+#: medical/patient_del.php:332
+#: medical/patient_del_confirm.php:59
+#: medical/relative_list.php:84
+#: medical/relative_del_confirm.php:61
+#: medical/problem_list.php:76
+#: medical/relative_del.php:96
+#: medical/relative_search.php:99
+#: medical/relative_new.php:110
+#: medical/problem_del.php:167
+#: medical/problem_new_form.php:73
+#: medical/problem_edit_form.php:125
+#: medical/problem_new.php:116
+#: medical/problem_view.php:105
+#: medical/connection_del_confirm.php:63
+#: medical/connection_del.php:98
+#: medical/connection_new_form.php:80
+#: medical/connection_new.php:112
+#: medical/connection_list.php:63
+#: medical/history_list.php:74
+#: medical/test_del_confirm.php:64
+#: medical/test_new.php:119
+#: medical/test_del.php:101
+#: medical/test_edit_form.php:110
+#: medical/test_edit.php:115
+#: medical/test_new_form.php:71
+#: medical/history_personal_edit_form.php:115
+#: medical/history_family_edit_form.php:108
+#: medical/history_family_view.php:98
+#: medical/history_personal_view.php:98
+#: medical/problem_search.php:105
+#: medical/no_authorization.php:36
+#: shared/header.php:159
+#: shared/header.php:160
+msgid "Medical Records"
+msgstr ""
+
+#: admin/theme_preview.php:175
+msgid "Theme Preview"
+msgstr ""
+
+#: admin/theme_preview.php:176
+#: admin/theme_preview.php:255
+msgid "Sample Link"
+msgstr ""
+
+#: admin/theme_preview.php:180
+#: doc/index.php:80
+#: install/footer.php:34
+#: shared/footer.php:57
+#: shared/header.php:209
+msgid "Powered by OpenClinic"
+msgstr ""
+
+#: admin/theme_preview.php:207
+#, php-format
+msgid "This is a preview of the %s theme."
+msgstr ""
+
+#: admin/theme_preview.php:210
+msgid "Sample List:"
+msgstr ""
+
+#: admin/theme_preview.php:216
+msgid "Table Heading"
+msgstr ""
+
+#: admin/theme_preview.php:224
+#: admin/theme_preview.php:230
+#: admin/theme_preview.php:236
+#, php-format
+msgid "Sample data row %d"
+msgstr ""
+
+#: admin/theme_preview.php:242
+msgid "Sample Input Text"
+msgstr ""
+
+#: admin/theme_preview.php:248
+msgid "Sample Button"
+msgstr ""
+
+#: admin/theme_preview.php:258
+msgid "Sample Error"
+msgstr ""
+
+#: admin/staff_fields.php:39
+#: medical/patient_fields.php:49
+#: medical/patient_search.php:170
+#: medical/patient_view.php:127
+#: medical/patient_search_fields.php:49
+#: medical/relative_search.php:164
+#: medical/print_medical_record.php:106
+msgid "Tax Identification Number (TIN)"
+msgstr ""
+
+#: admin/staff_fields.php:55
+#: medical/patient_search.php:205
+#: medical/patient_search_fields.php:56
+#: medical/relative_search.php:199
+msgid "Collegiate Number"
+msgstr ""
+
+#: admin/staff_fields.php:98
+#: install/wizard.php:377
+#: install/wizard.php:476
+#: medical/patient_fields.php:92
+#: medical/patient_search.php:190
+#: medical/patient_view.php:133
+#: medical/patient_search_fields.php:53
+#: medical/relative_search.php:184
+#: medical/print_medical_record.php:112
+msgid "Address"
+msgstr ""
+
+#: admin/staff_fields.php:108
+#: install/wizard.php:383
+#: install/wizard.php:477
+#: medical/patient_fields.php:102
+#: medical/patient_search.php:195
+#: medical/patient_view.php:139
+#: medical/patient_search_fields.php:54
+#: medical/relative_search.php:189
+#: medical/print_medical_record.php:118
+msgid "Phone Contact"
+msgstr ""
+
+#: admin/user_del_confirm.php:49
+#: admin/user_del_confirm.php:71
+#: admin/user_del.php:69
+msgid "Delete User"
+msgstr ""
+
+#: admin/user_del_confirm.php:79
+#, php-format
+msgid "Are you sure you want to delete user, %s?"
+msgstr ""
+
+#: admin/user_edit.php:86
+#: classes/Test.php:66
+#: classes/Problem.php:98
+#: classes/Patient.php:127
+#: classes/Patient.php:133
+#: classes/Patient.php:139
+#: classes/Staff.php:105
+#: classes/Staff.php:111
+#: classes/Staff.php:117
+#: classes/Staff.php:140
+#: classes/Theme.php:141
+#: classes/Theme.php:147
+#: classes/Theme.php:158
+#: classes/Theme.php:164
+#: classes/Theme.php:175
+#: classes/Theme.php:186
+#: classes/Theme.php:192
+#: classes/Theme.php:203
+#: classes/Theme.php:214
+#: classes/Theme.php:225
+#: classes/Theme.php:236
+#: classes/Theme.php:242
+#: classes/Theme.php:253
+#: classes/Theme.php:264
+#: classes/Theme.php:275
+#: classes/Theme.php:281
+#: classes/Theme.php:292
+#: classes/Theme.php:303
+#: classes/User.php:89
+#: classes/Description.php:61
+#: shared/login.php:45
+#: shared/login.php:55
+msgid "This is a required field."
+msgstr ""
+
+#: admin/user_edit.php:86
+#: classes/Patient.php:148
+#: classes/Patient.php:158
+#: classes/Theme.php:152
+#: classes/Theme.php:169
+#: classes/Theme.php:180
+#: classes/Theme.php:197
+#: classes/Theme.php:208
+#: classes/Theme.php:219
+#: classes/Theme.php:230
+#: classes/Theme.php:247
+#: classes/Theme.php:258
+#: classes/Theme.php:269
+#: classes/Theme.php:286
+#: classes/Theme.php:297
+#: classes/Theme.php:308
+msgid "This field is not correct."
+msgstr ""
+
+#: admin/user_edit.php:112
+#: admin/user_edit_form.php:105
+msgid "Change User Data"
+msgstr ""
+
+#: admin/user_edit.php:112
+#: admin/user_edit_form.php:105
+msgid "Edit User"
+msgstr ""
+
+#: admin/user_edit.php:139
+#, php-format
+msgid "User, %s, has been updated."
+msgstr ""
+
+#: admin/user_edit.php:144
+msgid "Return to home page"
+msgstr ""
+
+#: admin/user_edit.php:145
+#: admin/user_new.php:105
+#: admin/user_pwd_reset.php:113
+#: admin/user_del.php:86
+msgid "Return to users list"
+msgstr ""
+
+#: admin/user_edit_form.php:77
+#: admin/user_pwd_reset_form.php:75
+msgid "That user does not exist."
+msgstr ""
+
+#: admin/user_edit_form.php:182
+#: admin/user_new_form.php:126
+msgid "Note: The changes in the fields * will be visible in the next session."
+msgstr ""
+
+#: admin/user_edit_form.php:186
+msgid "Fill password fields only if you want to change it."
+msgstr ""
+
+#: admin/user_fields.php:61
+msgid "Current Password"
+msgstr ""
+
+#: admin/user_fields.php:79
+#: admin/user_pwd_reset_form.php:175
+#: install/wizard.php:395
+#: install/wizard.php:479
+msgid "Password"
+msgstr ""
+
+#: admin/user_fields.php:92
+#: admin/user_pwd_reset_form.php:185
+msgid "Re-enter Password"
+msgstr ""
+
+#: admin/user_fields.php:108
+#: admin/user_list.php:147
+#: install/wizard.php:401
+#: install/wizard.php:480
+msgid "Email"
+msgstr ""
+
+#: admin/user_fields.php:122
+#: admin/user_list.php:151
+msgid "Actived"
+msgstr ""
+
+#: admin/user_fields.php:139
+#: install/wizard.php:407
+#: install/wizard.php:481
+msgid "Theme"
+msgstr ""
+
+#: admin/user_fields.php:153
+#: admin/user_list.php:155
+#: admin/log_access_list.php:103
+msgid "Profile"
+msgstr ""
+
+#: admin/user_list.php:86
+msgid "Create New User"
+msgstr ""
+
+#: admin/user_list.php:97
+msgid "There no more users to create. You must create more staff members first."
+msgstr ""
+
+#: admin/user_list.php:102
+msgid "Select a login to create a new user"
+msgstr ""
+
+#: admin/user_list.php:106
+msgid "Create"
+msgstr ""
+
+#: admin/user_list.php:124
+msgid "Users List:"
+msgstr ""
+
+#: admin/user_list.php:177
+msgid "pwd"
+msgstr ""
+
+#: admin/user_list.php:196
+msgid "edit member"
+msgstr ""
+
+#: admin/user_list.php:208
+msgid "yes"
+msgstr ""
+
+#: admin/user_list.php:208
+msgid "no"
+msgstr ""
+
+#: admin/user_new.php:84
+#: admin/user_new_form.php:63
+msgid "Add New User"
+msgstr ""
+
+#: admin/user_new.php:101
+#, php-format
+msgid "User, %s, has been added."
+msgstr ""
+
+#: admin/user_pwd_reset.php:95
+#: admin/user_pwd_reset_form.php:102
+#: admin/user_pwd_reset_form.php:157
+msgid "Reset User Password"
+msgstr ""
+
+#: admin/user_pwd_reset.php:110
+#, php-format
+msgid "Password of user, %s, has been reset."
+msgstr ""
+
+#: admin/user_del.php:84
+#, php-format
+msgid "User, %s, has been deleted."
+msgstr ""
+
+#: admin/dump_process.php:46
+msgid "Dump result"
+msgstr ""
+
+#: admin/dump_process.php:137
+msgid "No tables found in database."
+msgstr ""
+
+#: admin/dump_process.php:148
+#: admin/dump_view_form.php:132
+msgid "Structure and data"
+msgstr ""
+
+#: admin/dump_process.php:152
+#: admin/dump_view_form.php:137
+msgid "Structure only"
+msgstr ""
+
+#: admin/dump_process.php:156
+#: admin/dump_view_form.php:142
+msgid "Data only"
+msgstr ""
+
+#: admin/dump_process.php:165
+#: admin/dump_process.php:250
+msgid "Host"
+msgstr ""
+
+#: admin/dump_process.php:166
+#: admin/dump_process.php:251
+msgid "Generation Time"
+msgstr ""
+
+#: admin/dump_process.php:167
+#: admin/dump_process.php:252
+msgid "Server Version"
+msgstr ""
+
+#: admin/dump_process.php:171
+#: admin/dump_process.php:256
+msgid "PHP Version"
+msgstr ""
+
+#: admin/dump_process.php:172
+#: admin/dump_process.php:257
+msgid "Database"
+msgstr ""
+
+#: admin/dump_process.php:203
+#, php-format
+msgid "Table structure for table %s"
+msgstr ""
+
+#: admin/dump_process.php:213
+#, php-format
+msgid "Dumping data for table %s"
+msgstr ""
+
+#: admin/dump_process.php:283
+msgid "table"
+msgstr ""
+
+#: admin/dump_process.php:283
+msgid "end of table"
+msgstr ""
+
+#: admin/dump_process.php:358
+#: admin/dump_optimize_db.php:143
+#: admin/log_access_list.php:143
+#: admin/log_record_list.php:167
+#: lib/log_lib.php:470
+msgid "Back return"
+msgstr ""
+
+#: admin/dump_view_form.php:77
+msgid "Install dump from file"
+msgstr ""
+
+#: admin/dump_view_form.php:78
+#: admin/dump_optimize_db.php:50
+msgid "Optimize Database"
+msgstr ""
+
+#: admin/dump_view_form.php:96
+msgid "View dump of database"
+msgstr ""
+
+#: admin/dump_view_form.php:120
+#: medical/relative_search.php:256
+msgid "Select all"
+msgstr ""
+
+#: admin/dump_view_form.php:124
+#: medical/relative_search.php:260
+msgid "Unselect all"
+msgstr ""
+
+#: admin/dump_view_form.php:147
+msgid "Export to XML format"
+msgstr ""
+
+#: admin/dump_view_form.php:152
+msgid "Export to CSV format (data only)"
+msgstr ""
+
+#: admin/dump_view_form.php:159
+msgid "Add 'DROP TABLE'"
+msgstr ""
+
+#: admin/dump_view_form.php:166
+msgid "Complete 'INSERTs'"
+msgstr ""
+
+#: admin/dump_view_form.php:173
+msgid "Extended 'INSERTs'"
+msgstr ""
+
+#: admin/dump_view_form.php:180
+msgid "Enclose table and field names with backquotes"
+msgstr ""
+
+#: admin/dump_view_form.php:187
+msgid "Add 'DELETE * FROM __table__'"
+msgstr ""
+
+#: admin/dump_view_form.php:194
+msgid "Add 'USE __dbname__'"
+msgstr ""
+
+#: admin/dump_view_form.php:201
+msgid "Save as file"
+msgstr ""
+
+#: admin/profile_edit.php:106
+#, php-format
+msgid "Profile, %s, has been updated."
+msgstr ""
+
+#: admin/profile_edit.php:109
+msgid "Return to profiles list"
+msgstr ""
+
+#: admin/profile_list.php:60
+msgid "Profiles List:"
+msgstr ""
+
+#: admin/dump_optimize_db.php:67
+#, php-format
+msgid "Optimizing Database: %s"
+msgstr ""
+
+#: admin/dump_optimize_db.php:70
+msgid "Table Name"
+msgstr ""
+
+#: admin/dump_optimize_db.php:71
+msgid "Size"
+msgstr ""
+
+#: admin/dump_optimize_db.php:72
+msgid "Status"
+msgstr ""
+
+#: admin/dump_optimize_db.php:73
+msgid "Space Saved"
+msgstr ""
+
+#: admin/dump_optimize_db.php:115
+msgid "Already optimized"
+msgstr ""
+
+#: admin/dump_optimize_db.php:120
+msgid "Optimized!"
+msgstr ""
+
+#: admin/dump_optimize_db.php:134
+msgid "Optimization Results"
+msgstr ""
+
+#: admin/dump_optimize_db.php:137
+#, php-format
+msgid "Total Database Size: %d KB"
+msgstr ""
+
+#: admin/dump_optimize_db.php:138
+#, php-format
+msgid "Total Space Saved: %d KB"
+msgstr ""
+
+#: admin/log_stats.php:65
+#: admin/log_access_list.php:66
+#: lib/log_lib.php:392
+msgid "Access Logs"
+msgstr ""
+
+#: admin/log_stats.php:75
+#: admin/log_record_list.php:66
+#: lib/log_lib.php:396
+msgid "Record Logs"
+msgstr ""
+
+#: admin/log_access_list.php:83
+#: admin/log_record_list.php:83
+msgid "No logs in this date."
+msgstr ""
+
+#: admin/log_access_list.php:89
+msgid "Access Logs List:"
+msgstr ""
+
+#: admin/log_access_list.php:95
+#: admin/log_record_list.php:95
+msgid "Access Date"
+msgstr ""
+
+#: admin/log_record_list.php:89
+msgid "Record Logs List:"
+msgstr ""
+
+#: admin/log_record_list.php:103
+msgid "Table"
+msgstr ""
+
+#: admin/log_record_list.php:107
+msgid "Operation"
+msgstr ""
+
+#: admin/log_record_list.php:111
+#: admin/log_record_list.php:115
+#, php-format
+msgid "Key %d"
+msgstr ""
+
+#: admin/no_authorization.php:31
+#: medical/no_authorization.php:31
+msgid "Not Authorization"
+msgstr ""
+
+#: admin/no_authorization.php:36
+#: medical/no_authorization.php:36
+#: shared/view_source.php:68
+#, php-format
+msgid "You are not authorized to use %s tab."
+msgstr ""
+
+# c:\www\openclinic\classes/Patient.php:165
+#: classes/Patient.php:165
+#, php-format
+msgid "%s must be greater or equal than %s."
+msgstr ""
+
+#: classes/Patient.php:165
+#: medical/patient_fields.php:175
+#: medical/patient_view.php:169
+#: medical/print_medical_record.php:148
+msgid "Decease Date"
+msgstr ""
+
+#: classes/Patient.php:165
+#: medical/patient_fields.php:139
+#: medical/patient_view.php:154
+#: medical/print_medical_record.php:133
+msgid "Birth Date"
+msgstr ""
+
+# c:\www\openclinic\classes/Staff.php:123
+# c:\www\openclinic\classes/User.php:95
+#: classes/Staff.php:123
+#: classes/User.php:95
+#, php-format
+msgid "This field must be at least %d characters."
+msgstr ""
+
+# c:\www\openclinic\classes/Staff.php:128
+# c:\www\openclinic\classes/User.php:100
+#: classes/Staff.php:128
+#: classes/User.php:100
+msgid "This field must not contain any spaces."
+msgstr ""
+
+# c:\www\openclinic\classes/Staff.php:133
+# c:\www\openclinic\classes/User.php:105
+#: classes/Staff.php:133
+#: classes/User.php:105
+#, php-format
+msgid "This field can't contain the symbols %s"
+msgstr ""
+
+# c:\www\openclinic\classes/Theme.php:315
+# c:\www\openclinic\classes/Theme.php:331
+# c:\www\openclinic\classes/Theme.php:347
+# c:\www\openclinic\classes/Theme.php:363
+# c:\www\openclinic\classes/Theme.php:379
+# c:\www\openclinic\classes/Theme.php:395
+# c:\www\openclinic\classes/Setting.php:98
+# c:\www\openclinic\classes/Setting.php:114
+#: classes/Theme.php:315
+#: classes/Theme.php:331
+#: classes/Theme.php:347
+#: classes/Theme.php:363
+#: classes/Theme.php:379
+#: classes/Theme.php:395
+#: classes/Setting.php:98
+#: classes/Setting.php:114
+msgid "This field must be numeric."
+msgstr ""
+
+# c:\www\openclinic\classes/Theme.php:320
+# c:\www\openclinic\classes/Theme.php:336
+# c:\www\openclinic\classes/Theme.php:352
+# c:\www\openclinic\classes/Theme.php:368
+# c:\www\openclinic\classes/Theme.php:384
+# c:\www\openclinic\classes/Theme.php:400
+# c:\www\openclinic\classes/Setting.php:103
+# c:\www\openclinic\classes/Setting.php:119
+#: classes/Theme.php:320
+#: classes/Theme.php:336
+#: classes/Theme.php:352
+#: classes/Theme.php:368
+#: classes/Theme.php:384
+#: classes/Theme.php:400
+#: classes/Setting.php:103
+#: classes/Setting.php:119
+msgid "This field must not contain a decimal point."
+msgstr ""
+
+# c:\www\openclinic\classes/Theme.php:325
+# c:\www\openclinic\classes/Theme.php:341
+# c:\www\openclinic\classes/Theme.php:357
+# c:\www\openclinic\classes/Theme.php:373
+# c:\www\openclinic\classes/Theme.php:389
+# c:\www\openclinic\classes/Theme.php:405
+# c:\www\openclinic\classes/Setting.php:108
+# c:\www\openclinic\classes/Setting.php:124
+#: classes/Theme.php:325
+#: classes/Theme.php:341
+#: classes/Theme.php:357
+#: classes/Theme.php:373
+#: classes/Theme.php:389
+#: classes/Theme.php:405
+#: classes/Setting.php:108
+#: classes/Setting.php:124
+msgid "This field must be greater than zero."
+msgstr ""
+
+# c:\www\openclinic\classes/User.php:113
+#: classes/User.php:113
+msgid "Invalid email, no @ symbol in string."
+msgstr ""
+
+# c:\www\openclinic\classes/User.php:122
+#: classes/User.php:122
+#, php-format
+msgid "Missing data [%s]@[%s]"
+msgstr ""
+
+# c:\www\openclinic\classes/User.php:128
+#: classes/User.php:128
+#, php-format
+msgid "Whitespace in [%s]@[%s]"
+msgstr ""
+
+# c:\www\openclinic\classes/User.php:149
+#: classes/User.php:149
+msgid "This field can't be empty if you want to change password."
+msgstr ""
+
+# c:\www\openclinic\classes/User.php:164
+#: classes/User.php:164
+msgid "Passwords do not match."
+msgstr ""
+
+#: doc/index.php:51
+#: doc/index.php:60
+msgid "OpenClinic Help"
+msgstr ""
+
+#: doc/index.php:75
+#: doc/index.php:76
+msgid "Help Topic"
+msgstr ""
+
+#: doc/index.php:107
+msgid "Sample Help Page:"
+msgstr ""
+
+#: home/index.php:31
+#: install/header.php:71
+msgid "Welcome to OpenClinic"
+msgstr ""
+
+#: home/index.php:37
+msgid "OpenClinic is an easy to use, open source, medical records system. When you select any of the following tabs you will be prompted to login."
+msgstr ""
+
+#: home/index.php:43
+msgid "Tab"
+msgstr ""
+
+#: home/index.php:61
+msgid "Use this tab to manage your patient's medical records."
+msgstr ""
+
+#: home/index.php:65
+msgid "Patient's Administration:"
+msgstr ""
+
+#: home/index.php:68
+msgid "Search, new, delete, edit"
+msgstr ""
+
+#: home/index.php:69
+#: medical/patient_edit.php:123
+#: medical/patient_edit_form.php:132
+#: medical/patient_view.php:95
+#: medical/patient_del.php:334
+#: medical/patient_del_confirm.php:61
+#: medical/relative_list.php:86
+#: medical/relative_del_confirm.php:63
+#: medical/relative_del.php:98
+#: medical/relative_search.php:101
+#: medical/relative_new.php:112
+#: medical/print_medical_record.php:100
+#: navbars/patient.php:28
+#: navbars/patient.php:29
+msgid "Social Data"
+msgstr ""
+
+#: home/index.php:70
+#: medical/problem_view.php:107
+#: medical/history_list.php:65
+#: medical/history_personal_edit_form.php:117
+#: medical/history_family_edit_form.php:110
+#: medical/history_family_view.php:100
+#: medical/history_personal_view.php:100
+#: navbars/patient.php:41
+#: navbars/patient.php:42
+msgid "Clinic History"
+msgstr ""
+
+#: home/index.php:71
+msgid "Problem Reports"
+msgstr ""
+
+#: home/index.php:102
+msgid "Use this tab to manage administrative options."
+msgstr ""
+
+#: home/index.php:105
+msgid "Staff members"
+msgstr ""
+
+#: home/index.php:107
+msgid "User profiles"
+msgstr ""
+
+#: home/index.php:108
+msgid "Clinic themes editor"
+msgstr ""
+
+#: home/index.php:109
+msgid "System users"
+msgstr ""
+
+#: home/license.php:31
+#: install/wizard.php:187
+#: navbars/home.php:53
+#: navbars/home.php:54
+msgid "License"
+msgstr ""
+
+#: install/cancel_msg.php:22
+#: install/index.php:117
+#: install/install.php:29
+msgid "OpenClinic Installation:"
+msgstr ""
+
+#: install/cancel_msg.php:24
+msgid "OpenClinic install process has been cancelled."
+msgstr ""
+
+#: install/cancel_msg.php:26
+msgid "View Install Instructions"
+msgstr ""
+
+#: install/cancel_msg.php:28
+#: install/index.php:51
+msgid "Back to installation main page"
+msgstr ""
+
+#: install/footer.php:25
+msgid "Install Instructions"
+msgstr ""
+
+#: install/footer.php:27
+#: shared/footer.php:33
+msgid "OpenClinic Readme"
+msgstr ""
+
+#: install/footer.php:29
+#: install/wizard.php:671
+msgid "Start OpenClinic"
+msgstr ""
+
+#: install/footer.php:38
+#: shared/footer.php:66
+msgid "under the"
+msgstr ""
+
+#: install/header.php:67
+msgid "OpenClinic Install"
+msgstr ""
+
+#: install/index.php:50
+msgid "Parse failed."
+msgstr ""
+
+#: install/index.php:58
+msgid "File installed correctly."
+msgstr ""
+
+#: install/index.php:59
+msgid "Go to OpenClinic"
+msgstr ""
+
+#: install/index.php:103
+msgid "Add 'DROP table' sentence"
+msgstr ""
+
+#: install/index.php:107
+msgid "Install file"
+msgstr ""
+
+#: install/index.php:109
+#: install/install.php:68
+msgid "Cancel"
+msgstr ""
+
+#: install/index.php:127
+msgid "The connection to the database failed with the following error."
+msgstr ""
+
+#: install/index.php:133
+msgid "Please make sure the following has been done before running this install script."
+msgstr ""
+
+#: install/index.php:138
+#, php-format
+msgid "Create OpenClinic database (%sstep 4%s of the install instructions)"
+msgstr ""
+
+#: install/index.php:142
+#, php-format
+msgid "Create OpenClinic database user (%sstep 5%s of the install instructions)"
+msgstr ""
+
+#: install/index.php:146
+#, php-format
+msgid "Update %sopenclinic/database_constants.php%s with your new database username and password (%sstep 8%s of the install instructions)"
+msgstr ""
+
+#: install/index.php:151
+#, php-format
+msgid "See %sInstall Instructions%s for more details."
+msgstr ""
+
+#: install/index.php:158
+#: install/install.php:38
+msgid "Database connection is good."
+msgstr ""
+
+#: install/index.php:163
+msgid "Create OpenClinic tables"
+msgstr ""
+
+#: install/index.php:167
+msgid "Install a SQL file:"
+msgstr ""
+
+#: install/index.php:176
+msgid "View file"
+msgstr ""
+
+#: install/install.php:44
+msgid "Building OpenClinic tables..."
+msgstr ""
+
+#: install/install.php:54
+#, php-format
+msgid "OpenClinic (version %s) is already installed."
+msgstr ""
+
+#: install/install.php:58
+msgid "Are you sure you want to delete all clinic data and create new OpenClinic tables?"
+msgstr ""
+
+#: install/install.php:62
+msgid "If you continue all data will be lost."
+msgstr ""
+
+#: install/install.php:66
+msgid "Continue"
+msgstr ""
+
+#: install/install.php:90
+#: install/wizard.php:617
+#, php-format
+msgid "Table %s dropped."
+msgstr ""
+
+#: install/install.php:91
+#: install/wizard.php:618
+#, php-format
+msgid "Table %s created."
+msgstr ""
+
+#: install/install.php:100
+#: install/wizard.php:622
+msgid "Last instruction failed"
+msgstr ""
+
+#: install/install.php:106
+#: install/wizard.php:663
+msgid "OpenClinic tables have been created successfully!"
+msgstr ""
+
+#: install/install.php:108
+#: install/wizard.php:509
+msgid "Start using OpenClinic"
+msgstr ""
+
+#: install/wizard.php:106
+msgid "English"
+msgstr ""
+
+#: install/wizard.php:107
+msgid "Spanish"
+msgstr ""
+
+#: install/wizard.php:108
+msgid "Bulgarian"
+msgstr ""
+
+#: install/wizard.php:133
+#: install/wizard.php:173
+msgid "OpenClinic Install Wizard"
+msgstr ""
+
+#: install/wizard.php:187
+#: install/wizard.php:218
+#: install/wizard.php:273
+#: install/wizard.php:352
+#: install/wizard.php:435
+#: install/wizard.php:509
+#: install/wizard.php:687
+#, php-format
+msgid "Step %d of %d: "
+msgstr ""
+
+#: install/wizard.php:190
+msgid "OpenClinic is free software, distributed under GNU General Public License (GPL). Please read the license and, if you agree, click on 'I accept' button."
+msgstr ""
+
+#: install/wizard.php:199
+#: install/wizard.php:254
+#: install/wizard.php:333
+#: install/wizard.php:416
+#: install/wizard.php:487
+msgid "Back"
+msgstr ""
+
+#: install/wizard.php:201
+msgid "I accept"
+msgstr ""
+
+#: install/wizard.php:206
+msgid "Read the license before continue"
+msgstr ""
+
+#: install/wizard.php:218
+#: install/wizard.php:443
+msgid "MySQL Database Settings"
+msgstr ""
+
+#: install/wizard.php:221
+#, php-format
+msgid "Install script create OpenClinic database. These following values will be written in %s file. All fields are required."
+msgstr ""
+
+#: install/wizard.php:227
+#: install/wizard.php:447
+#: install/wizard.php:589
+msgid "Database Host:"
+msgstr ""
+
+#: install/wizard.php:229
+#: install/wizard.php:235
+#: install/wizard.php:241
+#: install/wizard.php:247
+#: install/wizard.php:290
+#: install/wizard.php:296
+#: install/wizard.php:302
+#: install/wizard.php:308
+#: install/wizard.php:314
+#: install/wizard.php:320
+#: install/wizard.php:361
+#: install/wizard.php:367
+#: install/wizard.php:373
+msgid "e. g."
+msgstr ""
+
+#: install/wizard.php:233
+#: install/wizard.php:448
+#: install/wizard.php:590
+msgid "Database User:"
+msgstr ""
+
+#: install/wizard.php:239
+#: install/wizard.php:449
+#: install/wizard.php:591
+msgid "Database Password:"
+msgstr ""
+
+#: install/wizard.php:245
+#: install/wizard.php:450
+msgid "Database Name:"
+msgstr ""
+
+#: install/wizard.php:256
+#: install/wizard.php:335
+#: install/wizard.php:418
+#: install/wizard.php:754
+msgid "Next"
+msgstr ""
+
+#: install/wizard.php:261
+msgid "Check data before continue"
+msgstr ""
+
+#: install/wizard.php:273
+#: install/wizard.php:454
+msgid "Config Settings"
+msgstr ""
+
+#: install/wizard.php:276
+msgid "These are OpenClinic config settings."
+msgstr ""
+
+#: install/wizard.php:312
+msgid "Session Timeout (minutes):"
+msgstr ""
+
+#: install/wizard.php:318
+msgid "Search Results (items per page):"
+msgstr ""
+
+#: install/wizard.php:340
+msgid "Customize your site"
+msgstr ""
+
+#: install/wizard.php:352
+#: install/wizard.php:469
+msgid "Admin Data"
+msgstr ""
+
+#: install/wizard.php:397
+msgid "required"
+msgstr ""
+
+#: install/wizard.php:423
+msgid "Password is the most important field"
+msgstr ""
+
+#: install/wizard.php:435
+msgid "Last Check before Install"
+msgstr ""
+
+#: install/wizard.php:438
+#, php-format
+msgid "Here are the values you entered. %sPrint this page%s to remember your admin password and other settings."
+msgstr ""
+
+#: install/wizard.php:491
+msgid "Install"
+msgstr ""
+
+#: install/wizard.php:497
+msgid "If you are not sure in any value, go back before install"
+msgstr ""
+
+#: install/wizard.php:518
+#, php-format
+msgid "Incorrect permissions of %s file. Continue is impossible."
+msgstr ""
+
+#: install/wizard.php:563
+msgid "Error in writing proccess. Continue is impossible."
+msgstr ""
+
+#: install/wizard.php:586
+msgid "The MySQL server does not work or login pass is false."
+msgstr ""
+
+#: install/wizard.php:587
+msgid "Please check these values and if any is wrong back to step 2:"
+msgstr ""
+
+#: install/wizard.php:667
+#, php-format
+msgid "%sSecurity advice:%s To protect your site, make %s and <tt>'openclinic/install/'</tt> files read only (chmod 400)."
+msgstr ""
+
+#: install/wizard.php:675
+msgid "That's folks!!!"
+msgstr ""
+
+#: install/wizard.php:687
+msgid "Requirements"
+msgstr ""
+
+#: install/wizard.php:690
+#, php-format
+msgid "This script will configure OpenClinic database and %s file."
+msgstr ""
+
+#: install/wizard.php:694
+#, php-format
+msgid "The file %s already exists in your system! This script INSTALLS and does not UPGRADE. It will remove all OpenClinic data. If this is what you want, you can go on. If you want upgrade go to the %supgrade script%s."
+msgstr ""
+
+#: install/wizard.php:697
+msgid "Read Thouroughly"
+msgstr ""
+
+#: install/wizard.php:700
+msgid "For OpenClinic to work, you need the following on the server:"
+msgstr ""
+
+#: install/wizard.php:704
+#, php-format
+msgid "Webserver (you have <strong>%s</strong>)"
+msgstr ""
+
+#: install/wizard.php:706
+#, php-format
+msgid "PHP >= 4.2 (you have <strong>PHP %s</strong>)"
+msgstr ""
+
+#: install/wizard.php:722
+#, php-format
+msgid "Write access to %s file"
+msgstr ""
+
+#: install/wizard.php:726
+msgid "This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."
+msgstr ""
+
+#: install/wizard.php:729
+#, php-format
+msgid "Deactivate read-only mode in the file properties of %s."
+msgstr ""
+
+#: install/wizard.php:733
+#, php-format
+msgid "Open a shell, go to <tt>openclinic</tt> directory and type <tt>chmod 666 %s</tt>."
+msgstr ""
+
+#: install/wizard.php:735
+msgid "Once made it, click in Next button."
+msgstr ""
+
+#: install/wizard.php:739
+#: install/wizard.php:831
+msgid "ok"
+msgstr ""
+
+#: install/wizard.php:746
+#, php-format
+msgid "To install OpenClinic on a Windows machine for test, you just need to install %sAppServ%s before."
+msgstr ""
+
+#: install/wizard.php:750
+#, php-format
+msgid "For more details, see %sInstall Instructions%s."
+msgstr ""
+
+#: install/wizard.php:758
+msgid "Press Next button to continue"
+msgstr ""
+
+#: install/wizard.php:838
+msgid "is missing!!"
+msgstr ""
+
+#: install/wizard.php:858
+msgid "Database Host is empty."
+msgstr ""
+
+#: install/wizard.php:862
+msgid "Database User is empty."
+msgstr ""
+
+#: install/wizard.php:866
+msgid "Database Name is empty."
+msgstr ""
+
+#: install/wizard.php:870
+msgid "Session Timeout must be great than zero."
+msgstr ""
+
+#: install/wizard.php:874
+msgid "Items per page must be great than zero."
+msgstr ""
+
+#: install/wizard.php:878
+msgid "Admin password must be at least 4 characters."
+msgstr ""
+
+#: install/wizard.php:883
+msgid "There were some errors"
+msgstr ""
+
+# c:\www\openclinic\lib/search_lib.php:157
+#: lib/search_lib.php:157
+msgid "prev"
+msgstr ""
+
+# c:\www\openclinic\lib/search_lib.php:162
+#: lib/search_lib.php:162
+msgid "next"
+msgstr ""
+
+# c:\www\openclinic\lib/search_lib.php:165
+#: lib/search_lib.php:165
+msgid "Result Pages"
+msgstr ""
+
+# c:\www\openclinic\lib/dump_lib.php:160
+#: lib/dump_lib.php:160
+msgid "Create Time"
+msgstr ""
+
+# c:\www\openclinic\lib/dump_lib.php:165
+#: lib/dump_lib.php:165
+msgid "Update Time"
+msgstr ""
+
+# c:\www\openclinic\lib/dump_lib.php:170
+#: lib/dump_lib.php:170
+msgid "Check Time"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:92
+#: lib/log_lib.php:92
+msgid "Yearly Stats"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:98
+#: lib/log_lib.php:98
+msgid "Year"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:99
+# c:\www\openclinic\lib/log_lib.php:162
+# c:\www\openclinic\lib/log_lib.php:231
+# c:\www\openclinic\lib/log_lib.php:313
+# c:\www\openclinic\lib/log_lib.php:400
+#: lib/log_lib.php:99
+#: lib/log_lib.php:162
+#: lib/log_lib.php:231
+#: lib/log_lib.php:313
+#: lib/log_lib.php:400
+msgid "Hits"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:123
+# c:\www\openclinic\lib/log_lib.php:189
+# c:\www\openclinic\lib/log_lib.php:269
+# c:\www\openclinic\lib/log_lib.php:359
+#: lib/log_lib.php:123
+#: lib/log_lib.php:189
+#: lib/log_lib.php:269
+#: lib/log_lib.php:359
+msgid "There are not statistics"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:155
+#: lib/log_lib.php:155
+#, php-format
+msgid "Monthly Stats for %d"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:161
+#: lib/log_lib.php:161
+msgid "Month"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "January"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "February"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "March"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "April"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "May"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "June"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "July"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "August"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "September"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "October"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "November"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:169
+# c:\www\openclinic\lib/log_lib.php:223
+# c:\www\openclinic\lib/log_lib.php:305
+# c:\www\openclinic\lib/log_lib.php:410
+#: lib/log_lib.php:169
+#: lib/log_lib.php:223
+#: lib/log_lib.php:305
+#: lib/log_lib.php:410
+msgid "December"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:224
+#: lib/log_lib.php:224
+#, php-format
+msgid "Daily Stats for %s, %d"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:230
+#: lib/log_lib.php:230
+msgid "Day"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:306
+#: lib/log_lib.php:306
+#, php-format
+msgid "Hourly Stats for %s %d, %d"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:312
+#: lib/log_lib.php:312
+msgid "Hour"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:412
+#: lib/log_lib.php:412
+#, php-format
+msgid "Busiest Month: %s %d (%d hits)"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:423
+#: lib/log_lib.php:423
+#, php-format
+msgid "Busiest Day: %d %s %d (%d hits)"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:446
+#: lib/log_lib.php:446
+#, php-format
+msgid "Busiest Hour: %s on %s %d, %d (%d hits)"
+msgstr ""
+
+# c:\www\openclinic\lib/log_lib.php:468
+#: lib/log_lib.php:468
+msgid "Back to Main Statistics"
+msgstr ""
+
+#: medical/problem_del_confirm.php:50
+#: medical/problem_del_confirm.php:80
+#: medical/problem_del.php:156
+#: medical/problem_view.php:122
+msgid "Delete Medical Problem"
+msgstr ""
+
+#: medical/problem_del_confirm.php:62
+#: medical/problem_edit.php:112
+#: medical/index.php:60
+#: medical/index.php:62
+#: medical/patient_edit.php:122
+#: medical/patient_edit_form.php:131
+#: medical/patient_search.php:106
+#: medical/patient_search_form.php:38
+#: medical/patient_view.php:104
+#: medical/test_list.php:63
+#: medical/patient_del.php:333
+#: medical/patient_del_confirm.php:60
+#: medical/relative_list.php:85
+#: medical/relative_del_confirm.php:62
+#: medical/problem_list.php:77
+#: medical/relative_del.php:97
+#: medical/relative_search.php:100
+#: medical/relative_new.php:111
+#: medical/problem_del.php:168
+#: medical/problem_new_form.php:74
+#: medical/problem_edit_form.php:126
+#: medical/problem_new.php:117
+#: medical/problem_view.php:106
+#: medical/connection_del_confirm.php:64
+#: medical/connection_del.php:99
+#: medical/connection_new_form.php:81
+#: medical/connection_new.php:113
+#: medical/connection_list.php:64
+#: medical/history_list.php:75
+#: medical/test_del_confirm.php:65
+#: medical/test_new.php:120
+#: medical/test_del.php:102
+#: medical/test_edit_form.php:111
+#: medical/test_edit.php:116
+#: medical/test_new_form.php:72
+#: medical/history_personal_edit_form.php:116
+#: medical/history_family_edit_form.php:109
+#: medical/history_family_view.php:99
+#: medical/history_personal_view.php:99
+#: medical/problem_search.php:106
+#: navbars/medical.php:43
+#: navbars/medical.php:44
+msgid "Search Patient"
+msgstr ""
+
+#: medical/problem_del_confirm.php:63
+#: medical/problem_edit.php:113
+#: medical/test_list.php:64
+#: medical/problem_list.php:67
+#: medical/problem_del.php:169
+#: medical/problem_new_form.php:75
+#: medical/problem_edit_form.php:127
+#: medical/problem_new.php:118
+#: medical/problem_view.php:107
+#: medical/connection_del_confirm.php:65
+#: medical/connection_del.php:100
+#: medical/connection_new_form.php:82
+#: medical/connection_new.php:114
+#: medical/connection_list.php:65
+#: medical/test_del_confirm.php:66
+#: medical/test_new.php:121
+#: medical/test_del.php:103
+#: medical/test_edit_form.php:112
+#: medical/test_edit.php:117
+#: medical/test_new_form.php:73
+#: navbars/patient.php:47
+#: navbars/patient.php:48
+msgid "Medical Problems Report"
+msgstr ""
+
+#: medical/problem_del_confirm.php:64
+#: medical/test_list.php:65
+#: medical/problem_edit_form.php:128
+#: medical/problem_view.php:96
+#: medical/connection_del_confirm.php:66
+#: medical/connection_del.php:101
+#: medical/connection_new_form.php:83
+#: medical/connection_new.php:115
+#: medical/connection_list.php:66
+#: medical/test_del_confirm.php:67
+#: medical/test_new.php:122
+#: medical/test_del.php:104
+#: medical/test_edit_form.php:113
+#: medical/test_edit.php:118
+#: medical/test_new_form.php:74
+msgid "View Medical Problem"
+msgstr ""
+
+#: medical/problem_del_confirm.php:88
+#, php-format
+msgid "Are you sure you want to delete medical problem, %s, from list?"
+msgstr ""
+
+#: medical/problem_edit.php:100
+#: medical/problem_edit_form.php:114
+msgid "Edit Medical Problem"
+msgstr ""
+
+#: medical/problem_edit.php:121
+#, php-format
+msgid "Medical problem, %s, has been updated."
+msgstr ""
+
+#: medical/problem_edit.php:123
+#: medical/problem_del.php:179
+#: medical/problem_new.php:128
+msgid "Return to Medical Problems List"
+msgstr ""
+
+#: medical/index.php:42
+msgid "Use the following functions located in the left hand navigation area to manage your medical records."
+msgstr ""
+
+#: medical/index.php:66
+msgid "Search and view patients. Once a patient is selected you can:"
+msgstr ""
+
+#: medical/index.php:69
+msgid "manage social data"
+msgstr ""
+
+#: medical/index.php:70
+msgid "manage clinic history"
+msgstr ""
+
+#: medical/index.php:71
+msgid "manage problems report"
+msgstr ""
+
+#: medical/index.php:72
+msgid "print medical record"
+msgstr ""
+
+#: medical/index.php:83
+#: medical/index.php:85
+#: medical/patient_new.php:123
+#: medical/patient_new_form.php:54
+#: navbars/medical.php:87
+#: navbars/medical.php:88
+msgid "New Patient"
+msgstr ""
+
+#: medical/index.php:89
+msgid "Build a new patient information"
+msgstr ""
+
+#: medical/patient_edit.php:77
+#: medical/patient_new.php:72
+#, php-format
+msgid "Patient name, %s, is already in use. The changes have no effect."
+msgstr ""
+
+#: medical/patient_edit.php:79
+#: medical/patient_edit.php:131
+msgid "Return to Patient Social Data"
+msgstr ""
+
+#: medical/patient_edit.php:113
+#: medical/patient_edit_form.php:119
+msgid "Edit Patient Social Data"
+msgstr ""
+
+#: medical/patient_edit.php:129
+#, php-format
+msgid "Patient, %s, has been updated."
+msgstr ""
+
+#: medical/patient_edit_form.php:64
+#: medical/patient_view.php:70
+#: medical/patient_del.php:113
+#: medical/problem_list.php:85
+#: medical/problem_new_form.php:83
+#: medical/history_list.php:84
+#: medical/history_personal_edit_form.php:65
+#: medical/print_medical_record.php:79
+#: medical/history_family_edit_form.php:65
+#: medical/history_family_view.php:69
+#: medical/history_personal_view.php:69
+#: medical/visited_list.php:63
+msgid "That patient does not exist."
+msgstr ""
+
+#: medical/patient_fields.php:112
+#: medical/patient_view.php:143
+#: medical/patient_header.php:68
+#: medical/print_medical_record.php:122
+msgid "Sex"
+msgstr ""
+
+#: medical/patient_fields.php:118
+#: medical/patient_view.php:144
+#: medical/patient_header.php:68
+#: medical/print_medical_record.php:123
+msgid "Male"
+msgstr ""
+
+#: medical/patient_fields.php:119
+#: medical/patient_view.php:144
+#: medical/patient_header.php:68
+#: medical/print_medical_record.php:123
+msgid "Female"
+msgstr ""
+
+#: medical/patient_fields.php:129
+#: medical/patient_view.php:148
+#: medical/print_medical_record.php:127
+msgid "Race"
+msgstr ""
+
+#: medical/patient_fields.php:165
+#: medical/patient_search.php:185
+#: medical/patient_view.php:163
+#: medical/patient_search_fields.php:52
+#: medical/relative_search.php:179
+#: medical/print_medical_record.php:142
+msgid "Birth Place"
+msgstr ""
+
+#: medical/patient_fields.php:201
+#: medical/patient_search.php:175
+#: medical/patient_view.php:175
+#: medical/patient_search_fields.php:50
+#: medical/relative_search.php:169
+#: medical/print_medical_record.php:154
+msgid "Sanitary Card Number (SCN)"
+msgstr ""
+
+#: medical/patient_fields.php:211
+#: medical/patient_search.php:180
+#: medical/patient_view.php:181
+#: medical/patient_search_fields.php:51
+#: medical/relative_search.php:174
+#: medical/print_medical_record.php:160
+msgid "National Health Service Number (NHSN)"
+msgstr ""
+
+#: medical/patient_fields.php:221
+#: medical/patient_view.php:187
+#: medical/print_medical_record.php:166
+msgid "Family Situation"
+msgstr ""
+
+#: medical/patient_fields.php:231
+#: medical/patient_view.php:193
+#: medical/print_medical_record.php:172
+msgid "Labour Situation"
+msgstr ""
+
+#: medical/patient_fields.php:241
+#: medical/patient_view.php:199
+#: medical/print_medical_record.php:178
+msgid "Education"
+msgstr ""
+
+#: medical/patient_fields.php:251
+#: medical/patient_search.php:200
+#: medical/patient_view.php:205
+#: medical/patient_search_fields.php:55
+#: medical/relative_search.php:194
+#: medical/print_medical_record.php:184
+msgid "Insurance Company"
+msgstr ""
+
+#: medical/patient_fields.php:261
+#: medical/patient_view.php:224
+#: medical/print_medical_record.php:203
+msgid "Doctor you are assigned to"
+msgstr ""
+
+#: medical/patient_new.php:128
+#, php-format
+msgid "Patient, %s, has been added."
+msgstr ""
+
+#: medical/patient_new.php:130
+msgid "View Social Data"
+msgstr ""
+
+#: medical/patient_new.php:132
+msgid "Return to Medical Records Summary"
+msgstr ""
+
+#: medical/patient_new_form.php:43
+msgid "Add New Patient"
+msgstr ""
+
+#: medical/patient_search.php:148
+#: medical/relative_search.php:155
+#: medical/problem_search.php:150
+#, php-format
+msgid "%d matches found."
+msgstr ""
+
+#: medical/patient_search.php:241
+#: medical/problem_search.php:221
+#, php-format
+msgid "Search Results From Query: %s"
+msgstr ""
+
+#: medical/patient_search_form.php:41
+msgid "Search Patient by Medical Problem"
+msgstr ""
+
+#: medical/patient_view.php:113
+msgid "Edit Social Data"
+msgstr ""
+
+#: medical/patient_view.php:114
+#: medical/patient_del.php:322
+#: medical/patient_del_confirm.php:49
+msgid "Delete Patient"
+msgstr ""
+
+#: medical/patient_view.php:116
+#: medical/relative_list.php:75
+#: medical/relative_del_confirm.php:64
+#: medical/relative_del.php:99
+#: medical/relative_search.php:102
+#: medical/relative_new.php:113
+msgid "View Relatives"
+msgstr ""
+
+#: medical/patient_view.php:119
+#: medical/patient_header.php:66
+#: medical/print_medical_record.php:101
+msgid "Patient"
+msgstr ""
+
+#: medical/patient_view.php:157
+#: medical/patient_header.php:70
+#: medical/print_medical_record.php:136
+msgid "Age"
+msgstr ""
+
+#: medical/test_list.php:52
+#: medical/problem_view.php:125
+#: medical/test_del_confirm.php:68
+#: medical/test_new.php:123
+#: medical/test_del.php:105
+#: medical/test_edit_form.php:114
+#: medical/test_edit.php:119
+#: medical/test_new_form.php:75
+msgid "View Medical Tests"
+msgstr ""
+
+#: medical/test_list.php:76
+msgid "Add New Medical Test"
+msgstr ""
+
+#: medical/test_list.php:96
+msgid "No medical tests defined for this medical problem."
+msgstr ""
+
+#: medical/test_list.php:102
+msgid "Medical Tests List:"
+msgstr ""
+
+#: medical/test_list.php:112
+#: medical/test_fields.php:39
+msgid "Document Type"
+msgstr ""
+
+#: medical/test_list.php:116
+#: medical/test_fields.php:49
+msgid "Path Filename"
+msgstr ""
+
+#: medical/test_list.php:133
+#: medical/relative_list.php:168
+#: medical/problem_list.php:159
+#: medical/connection_list.php:150
+#: medical/history_list.php:147
+msgid "view"
+msgstr ""
+
+#: medical/problem_fields.php:39
+#: medical/problem_list.php:111
+#: medical/connection_new_form.php:116
+#: medical/history_list.php:108
+#: medical/print_medical_record.php:246
+#: medical/print_medical_record.php:500
+msgid "Order Number"
+msgstr ""
+
+#: medical/problem_fields.php:49
+#: medical/problem_list.php:123
+#: medical/problem_view.php:155
+#: medical/problem_header.php:67
+#: medical/connection_list.php:119
+#: medical/history_list.php:120
+#: medical/print_medical_record.php:274
+#: medical/print_medical_record.php:525
+#: medical/problem_search.php:273
+msgid "Opening Date"
+msgstr ""
+
+#: medical/problem_fields.php:59
+#: medical/problem_list.php:127
+#: medical/problem_view.php:158
+#: medical/problem_header.php:69
+#: medical/print_medical_record.php:277
+#: medical/print_medical_record.php:528
+msgid "Last Update Date"
+msgstr ""
+
+#: medical/problem_fields.php:69
+#: medical/problem_view.php:145
+#: medical/print_medical_record.php:264
+#: medical/print_medical_record.php:516
+msgid "Doctor who treated you"
+msgstr ""
+
+#: medical/problem_fields.php:109
+#: medical/problem_view.php:169
+#: medical/print_medical_record.php:288
+#: medical/print_medical_record.php:539
+msgid "Meeting Place"
+msgstr ""
+
+#: medical/problem_fields.php:119
+#: medical/problem_list.php:119
+#: medical/problem_view.php:173
+#: medical/problem_header.php:65
+#: medical/connection_new_form.php:120
+#: medical/connection_list.php:123
+#: medical/history_list.php:116
+#: medical/print_medical_record.php:292
+#: medical/print_medical_record.php:543
+#: medical/problem_search_fields.php:46
+#: medical/problem_search.php:160
+msgid "Wording"
+msgstr ""
+
+#: medical/problem_fields.php:128
+#: medical/problem_view.php:178
+#: medical/print_medical_record.php:297
+#: medical/print_medical_record.php:548
+#: medical/problem_search_fields.php:47
+#: medical/problem_search.php:165
+msgid "Subjective"
+msgstr ""
+
+#: medical/problem_fields.php:135
+#: medical/problem_view.php:184
+#: medical/print_medical_record.php:303
+#: medical/print_medical_record.php:554
+#: medical/problem_search_fields.php:48
+#: medical/problem_search.php:170
+msgid "Objective"
+msgstr ""
+
+#: medical/problem_fields.php:142
+#: medical/problem_view.php:190
+#: medical/print_medical_record.php:309
+#: medical/print_medical_record.php:560
+#: medical/problem_search_fields.php:49
+#: medical/problem_search.php:175
+msgid "Appreciation"
+msgstr ""
+
+#: medical/problem_fields.php:149
+#: medical/problem_view.php:196
+#: medical/print_medical_record.php:315
+#: medical/print_medical_record.php:566
+#: medical/problem_search_fields.php:50
+#: medical/problem_search.php:180
+msgid "Action Plan"
+msgstr ""
+
+#: medical/problem_fields.php:156
+#: medical/problem_view.php:202
+#: medical/print_medical_record.php:321
+#: medical/print_medical_record.php:572
+#: medical/problem_search_fields.php:51
+#: medical/problem_search.php:185
+msgid "Prescription"
+msgstr ""
+
+#: medical/problem_fields.php:163
+msgid "Closed Problem"
+msgstr ""
+
+#: medical/patient_del.php:340
+#, php-format
+msgid "Patient, %s, has been deleted."
+msgstr ""
+
+#: medical/patient_del_confirm.php:82
+#, php-format
+msgid "Are you sure you want to delete patient, %s?"
+msgstr ""
+
+#: medical/patient_search_fields.php:42
+#: medical/problem_search_fields.php:42
+msgid "Field"
+msgstr ""
+
+#: medical/patient_search_fields.php:68
+#: medical/problem_search_fields.php:63
+msgid "Search"
+msgstr ""
+
+#: medical/patient_search_fields.php:69
+#: medical/problem_search_fields.php:64
+msgid "Clear Search"
+msgstr ""
+
+#: medical/patient_search_fields.php:78
+#: medical/problem_search_fields.php:73
+msgid "Logical"
+msgstr ""
+
+#: medical/patient_search_fields.php:94
+#: medical/problem_search_fields.php:89
+msgid "Limit"
+msgstr ""
+
+#: medical/relative_list.php:96
+msgid "Search Relatives to add to list"
+msgstr ""
+
+#: medical/relative_list.php:116
+msgid "No relatives defined for this patient."
+msgstr ""
+
+#: medical/relative_list.php:122
+msgid "Relatives List:"
+msgstr ""
+
+#: medical/relative_del_confirm.php:50
+#: medical/relative_del_confirm.php:80
+#: medical/relative_del.php:85
+msgid "Delete Relative from list"
+msgstr ""
+
+#: medical/relative_del_confirm.php:88
+#, php-format
+msgid "Are you sure you want to delete relative, %s, from list?"
+msgstr ""
+
+#: medical/problem_list.php:93
+#: medical/problem_new_form.php:62
+#: medical/problem_new.php:105
+msgid "Add New Medical Problem"
+msgstr ""
+
+#: medical/problem_list.php:96
+#: medical/connection_new_form.php:102
+#: medical/print_medical_record.php:237
+msgid "Medical Problems List:"
+msgstr ""
+
+#: medical/problem_list.php:101
+#: medical/connection_new_form.php:97
+#: medical/print_medical_record.php:241
+msgid "No medical problems defined for this patient."
+msgstr ""
+
+#: medical/problem_list.php:163
+#: medical/history_list.php:162
+msgid "tests"
+msgstr ""
+
+#: medical/problem_list.php:167
+#: medical/history_list.php:166
+msgid "connect"
+msgstr ""
+
+#: medical/relative_del.php:107
+#, php-format
+msgid "Relative, %s, has been deleted."
+msgstr ""
+
+#: medical/relative_del.php:109
+#: medical/relative_new.php:123
+msgid "Return to Relatives Patient List"
+msgstr ""
+
+#: medical/relative_search.php:266
+msgid "Add selected to Relatives List"
+msgstr ""
+
+#: medical/relative_new.php:99
+msgid "New Relatives"
+msgstr ""
+
+#: medical/relative_new.php:121
+msgid "Relatives have been added."
+msgstr ""
+
+#: medical/problem_del.php:111
+#: medical/problem_edit_form.php:77
+#: medical/problem_view.php:71
+msgid "That medical problem does not exist."
+msgstr ""
+
+#: medical/problem_del.php:177
+#, php-format
+msgid "Medical problem, %s, has been deleted."
+msgstr ""
+
+#: medical/problem_new.php:126
+#, php-format
+msgid "Medical problem, %s, has been added."
+msgstr ""
+
+#: medical/problem_view.php:120
+msgid "Edit Medical Problem Data"
+msgstr ""
+
+#: medical/problem_view.php:124
+#: medical/connection_del_confirm.php:67
+#: medical/connection_del.php:102
+#: medical/connection_new_form.php:84
+#: medical/connection_new.php:116
+#: medical/connection_list.php:53
+msgid "View Connection Problems"
+msgstr ""
+
+#: medical/problem_view.php:128
+msgid "Medical Problem Data"
+msgstr ""
+
+#: medical/problem_view.php:163
+#: medical/history_list.php:124
+#: medical/print_medical_record.php:282
+#: medical/print_medical_record.php:533
+#: medical/problem_search.php:276
+msgid "Closing Date"
+msgstr ""
+
+#: medical/connection_del_confirm.php:51
+#: medical/connection_del.php:86
+msgid "Delete Connection with Medical Problem"
+msgstr ""
+
+#: medical/connection_del_confirm.php:93
+#, php-format
+msgid "Are you sure you want to delete connection, %s, from list?"
+msgstr ""
+
+#: medical/connection_del.php:111
+#, php-format
+msgid "Connection with medical problem, %s, has been deleted."
+msgstr ""
+
+#: medical/connection_del.php:113
+#: medical/connection_new.php:127
+msgid "Return to connection problem list"
+msgstr ""
+
+#: medical/connection_new_form.php:68
+#: medical/connection_new.php:100
+#: medical/connection_list.php:77
+msgid "Add New Connection Problems"
+msgstr ""
+
+#: medical/connection_new_form.php:150
+msgid "Add selected to Connection Problems List"
+msgstr ""
+
+#: medical/connection_new.php:125
+msgid "Connection problems have been added."
+msgstr ""
+
+#: medical/connection_list.php:103
+msgid "No connections defined for this medical problem."
+msgstr ""
+
+#: medical/connection_list.php:109
+msgid "Connection Problems List:"
+msgstr ""
+
+#: medical/history_list.php:90
+#: medical/history_personal_edit_form.php:118
+#: medical/history_personal_view.php:89
+msgid "View Personal Antecedents"
+msgstr ""
+
+#: medical/history_list.php:91
+#: medical/history_family_edit_form.php:111
+#: medical/history_family_view.php:89
+msgid "View Family Antecedents"
+msgstr ""
+
+#: medical/history_list.php:93
+#: medical/print_medical_record.php:490
+msgid "Closed Medical Problems List:"
+msgstr ""
+
+#: medical/history_list.php:98
+#: medical/print_medical_record.php:494
+msgid "No closed medical problems defined for this patient."
+msgstr ""
+
+#: medical/test_del_confirm.php:52
+#: medical/test_del.php:89
+msgid "Delete Medical Test"
+msgstr ""
+
+#: medical/test_del_confirm.php:93
+#, php-format
+msgid "Are you sure you want to delete medical test, %s, from list?"
+msgstr ""
+
+#: medical/test_new.php:107
+#: medical/test_new_form.php:59
+msgid "Add Medical Test"
+msgstr ""
+
+#: medical/test_new.php:132
+#, php-format
+msgid "Medical test, %s, has been added."
+msgstr ""
+
+#: medical/test_new.php:134
+#: medical/test_del.php:116
+#: medical/test_edit.php:130
+msgid "Return to Medical Tests List"
+msgstr ""
+
+#: medical/test_del.php:114
+#, php-format
+msgid "Medical test, %s, has been deleted."
+msgstr ""
+
+#: medical/test_edit_form.php:74
+msgid "That medical test does not exist"
+msgstr ""
+
+#: medical/test_edit_form.php:98
+#: medical/test_edit.php:103
+msgid "Edit Medical Test"
+msgstr ""
+
+#: medical/test_edit.php:128
+#, php-format
+msgid "Medical test, %s, has been updated."
+msgstr ""
+
+#: medical/history_family_fields.php:39
+#: medical/print_medical_record.php:446
+#: medical/history_family_view.php:120
+msgid "Parents Status Health"
+msgstr ""
+
+#: medical/history_family_fields.php:46
+#: medical/print_medical_record.php:452
+#: medical/history_family_view.php:126
+msgid "Brothers and Sisters Status Health"
+msgstr ""
+
+#: medical/history_family_fields.php:53
+#: medical/print_medical_record.php:458
+#: medical/history_family_view.php:132
+msgid "Spouse and Childs Status Health"
+msgstr ""
+
+#: medical/history_family_fields.php:60
+#: medical/print_medical_record.php:464
+#: medical/history_family_view.php:138
+msgid "Family Illness"
+msgstr ""
+
+#: medical/history_personal_fields.php:39
+#: medical/print_medical_record.php:358
+#: medical/history_personal_view.php:120
+msgid "Birth and Growth"
+msgstr ""
+
+#: medical/history_personal_fields.php:46
+#: medical/print_medical_record.php:364
+#: medical/history_personal_view.php:126
+msgid "Growth and Sexuality"
+msgstr ""
+
+#: medical/history_personal_fields.php:53
+#: medical/print_medical_record.php:370
+#: medical/history_personal_view.php:132
+msgid "Feed"
+msgstr ""
+
+#: medical/history_personal_fields.php:60
+#: medical/print_medical_record.php:376
+#: medical/history_personal_view.php:138
+msgid "Habits"
+msgstr ""
+
+#: medical/history_personal_fields.php:67
+#: medical/print_medical_record.php:382
+#: medical/history_personal_view.php:144
+msgid "Peristaltic Conditions"
+msgstr ""
+
+#: medical/history_personal_fields.php:74
+#: medical/print_medical_record.php:388
+#: medical/history_personal_view.php:150
+msgid "Psychological Conditions"
+msgstr ""
+
+#: medical/history_personal_fields.php:81
+#: medical/print_medical_record.php:394
+#: medical/history_personal_view.php:156
+msgid "Children Complaint"
+msgstr ""
+
+#: medical/history_personal_fields.php:88
+#: medical/print_medical_record.php:400
+#: medical/history_personal_view.php:162
+msgid "Venereal Disease"
+msgstr ""
+
+#: medical/history_personal_fields.php:95
+#: medical/print_medical_record.php:406
+#: medical/history_personal_view.php:168
+msgid "Accidents and Surgical Operations"
+msgstr ""
+
+#: medical/history_personal_fields.php:102
+#: medical/print_medical_record.php:412
+#: medical/history_personal_view.php:174
+msgid "Medicinal Intolerance"
+msgstr ""
+
+#: medical/history_personal_fields.php:109
+#: medical/print_medical_record.php:418
+#: medical/history_personal_view.php:180
+msgid "Mental Illness"
+msgstr ""
+
+#: medical/history_personal_edit_form.php:104
+#: medical/history_personal_view.php:110
+msgid "Edit Personal Antecedents"
+msgstr ""
+
+#: medical/history_personal_edit_form.php:134
+msgid "Personal Antecedents have been updated."
+msgstr ""
+
+#: medical/print_medical_record.php:47
+msgid "No patient selected."
+msgstr ""
+
+#: medical/print_medical_record.php:354
+#: medical/history_personal_view.php:116
+msgid "Personal Antecedents"
+msgstr ""
+
+#: medical/print_medical_record.php:442
+#: medical/history_family_view.php:116
+msgid "Family Antecedents"
+msgstr ""
+
+#: medical/history_family_edit_form.php:97
+#: medical/history_family_view.php:110
+msgid "Edit Family Antecedents"
+msgstr ""
+
+#: medical/history_family_edit_form.php:127
+msgid "Family Antecedents have been updated."
+msgstr ""
+
+#: navbars/admin.php:31
+#: navbars/home.php:40
+#: navbars/medical.php:31
+msgid "manage your user account"
+msgstr ""
+
+#: navbars/admin.php:37
+#: navbars/admin.php:38
+#: navbars/home.php:47
+#: navbars/home.php:48
+#: navbars/medical.php:37
+#: navbars/medical.php:38
+msgid "Summary"
+msgstr ""
+
+#: navbars/admin.php:79
+#: navbars/admin.php:80
+msgid "Log Statistics"
+msgstr ""
+
+# c:\www\openclinic\navbars/admin.php:85
+# c:\www\openclinic\navbars/home.php:59
+# c:\www\openclinic\navbars/medical.php:94
+# c:\www\openclinic\shared/footer.php:35
+# c:\www\openclinic\shared/footer.php:41
+#: navbars/admin.php:85
+#: navbars/home.php:59
+#: navbars/medical.php:94
+#: shared/footer.php:35
+#: shared/footer.php:41
+msgid "Opens a new window"
+msgstr ""
+
+#: navbars/admin.php:85
+#: navbars/home.php:59
+#: navbars/medical.php:94
+#: shared/footer.php:35
+msgid "Help"
+msgstr ""
+
+#: navbars/patient.php:53
+#: navbars/patient.php:54
+msgid "Print Medical Record"
+msgstr ""
+
+#: shared/form_errors_msg.php:22
+msgid "ERROR: Some fields have been incorrectly filled. Please fix the fields and send the form again. Each incorrectly filled field is marked with specific error message."
+msgstr ""
+
+#: shared/demo_msg.php:25
+#: shared/footer.php:48
+#: shared/header.php:183
+msgid "This is a demo version"
+msgstr ""
+
+#: shared/demo_msg.php:29
+msgid "This function is not available in this demo version of OpenClinic."
+msgstr ""
+
+#: shared/footer.php:31
+#: shared/header.php:56
+msgid "Clinic Home"
+msgstr ""
+
+#: shared/footer.php:41
+msgid "View source code"
+msgstr ""
+
+#: shared/footer.php:47
+msgid "Demo version features"
+msgstr ""
+
+#: shared/footer.php:60
+msgid "version"
+msgstr ""
+
+#: shared/header.php:122
+#, php-format
+msgid "Today's date: %s"
+msgstr ""
+
+#: shared/header.php:127
+#, php-format
+msgid "Clinic hours: %s"
+msgstr ""
+
+#: shared/header.php:133
+#, php-format
+msgid "Clinic address: %s"
+msgstr ""
+
+#: shared/header.php:139
+#, php-format
+msgid "Clinic phone: %s"
+msgstr ""
+
+#: shared/header.php:145
+msgid "Skip over navigation"
+msgstr ""
+
+#: shared/header.php:186
+msgid "Project Page"
+msgstr ""
+
+#: shared/header.php:190
+msgid "Downloads"
+msgstr ""
+
+#: shared/header.php:192
+msgid "Report Bugs"
+msgstr ""
+
+#: shared/header.php:196
+msgid "Forums"
+msgstr ""
+
+#: shared/header.php:198
+msgid "Developers"
+msgstr ""
+
+#: shared/view_source.php:37
+msgid "Source file:"
+msgstr ""
+
+#: shared/view_source.php:62
+msgid "No file found."
+msgstr ""
+
+#: shared/login.php:76
+msgid "Login unknown."
+msgstr ""
+
+#: shared/login.php:93
+msgid "Invalid sign on."
+msgstr ""
+
+#: shared/login_form.php:41
+#: shared/login_form.php:84
+msgid "User Login"
+msgstr ""
+
+#: shared/login_form.php:58
+msgid "Last attempt to type correct password before suspend this user account."
+msgstr ""
+
+#: shared/login_form.php:92
+msgid "Login:"
+msgstr ""
+
+#: shared/login_form.php:102
+msgid "Password:"
+msgstr ""
+
+#: shared/login_form.php:112
+msgid "Enter"
+msgstr ""
+
+#: shared/login_suspended.php:28
+msgid "User account suspended"
+msgstr ""
+
+#: shared/login_suspended.php:32
+msgid "Your user account has been suspended. Contact with administrator to resolve this problem."
+msgstr ""
+
