@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.3 2004/06/16 15:58:15 jact Exp $
+ * $Id: dump_process.php,v 1.4 2004/07/05 17:40:45 jact Exp $
  */
 
 /**
@@ -29,7 +29,7 @@
   ////////////////////////////////////////////////////////////////////
   // Increase time limit for script execution and initializes some variables
   ////////////////////////////////////////////////////////////////////
-  @set_time_limit(EXEC_TIME_LIMIT);
+  @set_time_limit(OPEN_EXEC_TIME_LIMIT);
   $dumpBuffer = "";
   $crlf = DLIB_whichCrlf(); // defines the default <CR><LF> format
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_lib.php,v 1.3 2004/05/31 18:54:10 jact Exp $
+ * $Id: dump_lib.php,v 1.4 2004/07/05 17:40:33 jact Exp $
  */
 
 /**
@@ -352,7 +352,7 @@ if ( !defined('DUMP_LIB_INCLUDED') )
     $replace    = array('\0', '\n', '\r', '\Z');
     $currentRow = 0;
 
-    @set_time_limit(EXEC_TIME_LIMIT);
+    @set_time_limit(OPEN_EXEC_TIME_LIMIT);
 
     while ($row = $localConn->fetchRow(MYSQL_NUM))
     {
@@ -446,7 +446,7 @@ if ( !defined('DUMP_LIB_INCLUDED') )
     $numFields = $localConn->numFields();
     $numRows   = $localConn->numRows();
 
-    @set_time_limit(EXEC_TIME_LIMIT); // HaRa
+    @set_time_limit(OPEN_EXEC_TIME_LIMIT); // HaRa
 
     while ($row = $localConn->fetchRow(MYSQL_NUM))
     {
@@ -663,7 +663,7 @@ if ( !defined('DUMP_LIB_INCLUDED') )
     $buffer = '';
     $buffer = trim($fnames) . $addCharacter;
 
-    @set_time_limit(EXEC_TIME_LIMIT);
+    @set_time_limit(OPEN_EXEC_TIME_LIMIT);
 
     // Format the data
     $i = 0;

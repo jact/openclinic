@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: visited_list.php,v 1.3 2004/06/16 19:11:02 jact Exp $
+ * $Id: visited_list.php,v 1.4 2004/07/05 17:40:16 jact Exp $
  */
 
 /**
@@ -139,7 +139,7 @@
     $_SESSION["visitedPatients"] = array_unique($_SESSION["visitedPatients"]);
 
     $size = sizeof($_SESSION["visitedPatients"]);
-    if ($size > VISITED_ITEMS)
+    if ($size > OPEN_VISITED_ITEMS)
     {
       reset($_SESSION["visitedPatients"]);
       $aux = array_keys($_SESSION["visitedPatients"], current($_SESSION["visitedPatients"]));

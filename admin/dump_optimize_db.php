@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_optimize_db.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: dump_optimize_db.php,v 1.3 2004/07/05 17:40:45 jact Exp $
  */
 
 /**
@@ -27,7 +27,7 @@
   require_once("../shared/login_check.php");
   require_once("../lib/dump_lib.php"); // DLIB_backquote()
 
-  @set_time_limit(EXEC_TIME_LIMIT);
+  @set_time_limit(OPEN_EXEC_TIME_LIMIT);
 
   $auxConn = new DbConnection();
   if ( !$auxConn->connect() )

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: validator_lib.php,v 1.4 2004/06/08 18:54:53 jact Exp $
+ * $Id: validator_lib.php,v 1.5 2004/07/05 17:40:33 jact Exp $
  */
 
 /**
@@ -142,7 +142,7 @@ function safeText($text, $allowTags = true, $includeEvents = true)
 {
   if ($allowTags)
   {
-    $value = trim(htmlspecialchars(strip_tags($text, ALLOWED_HTML_TAGS)));
+    $value = trim(htmlspecialchars(strip_tags($text, OPEN_ALLOWED_HTML_TAGS)));
   }
   else
   {
