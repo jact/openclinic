@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: History.php,v 1.3 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -15,6 +15,8 @@
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
+
+require_once("../lib/validator_lib.php");
 
 /*
  * History represents personal and family antecedents of a patient.
@@ -296,8 +298,7 @@ class History
    */
   function setBirthGrowth($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_birthGrowth = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_birthGrowth = safeText($value);
   }
 
   /**
@@ -309,8 +310,7 @@ class History
    */
   function setGrowthSexuality($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_growthSexuality = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_growthSexuality = safeText($value);
   }
 
   /**
@@ -322,8 +322,7 @@ class History
    */
   function setFeed($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_feed = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_feed = safeText($value);
   }
 
   /**
@@ -335,8 +334,7 @@ class History
    */
   function setHabits($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_habits = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_habits = safeText($value);
   }
 
   /**
@@ -348,8 +346,7 @@ class History
    */
   function setPeristalticConditions($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_peristalticConditions = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_peristalticConditions = safeText($value);
   }
 
   /**
@@ -361,8 +358,7 @@ class History
    */
   function setPsychological($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_psychological = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_psychological = safeText($value);
   }
 
   /**
@@ -374,8 +370,7 @@ class History
    */
   function setChildrenComplaint($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_childrenComplaint = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_childrenComplaint = safeText($value);
   }
 
   /**
@@ -387,8 +382,7 @@ class History
    */
   function setVenerealDisease($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_venerealDisease = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_venerealDisease = safeText($value);
   }
 
   /**
@@ -400,8 +394,7 @@ class History
    */
   function setAccidentSurgicalOperation($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_accidentSurgicalOperation = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_accidentSurgicalOperation = safeText($value);
   }
 
   /**
@@ -413,8 +406,7 @@ class History
    */
   function setMedicinalIntolerance($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_medicinalIntolerance = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_medicinalIntolerance = safeText($value);
   }
 
   /**
@@ -426,8 +418,7 @@ class History
    */
   function setMentalIllness($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_mentalIllness = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_mentalIllness = safeText($value);
   }
 
   /**
@@ -439,8 +430,7 @@ class History
    */
   function setParentsStatusHealth($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_parentsStatusHealth = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_parentsStatusHealth = safeText($value);
   }
 
   /**
@@ -452,8 +442,7 @@ class History
    */
   function setBrothersStatusHealth($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_brothersStatusHealth = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_brothersStatusHealth = safeText($value);
   }
 
   /**
@@ -465,8 +454,7 @@ class History
    */
   function setSpouseChildsStatusHealth($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_spouseChildsStatusHealth = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_spouseChildsStatusHealth = safeText($value);
   }
 
   /**
@@ -478,8 +466,7 @@ class History
    */
   function setFamilyIllness($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_familyIllness = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_familyIllness = safeText($value);
   }
 } // end class
 ?>

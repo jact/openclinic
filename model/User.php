@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: User.php,v 1.3 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -17,6 +17,8 @@
  */
 
 define("USER_PROFILE", 3); // doctor profile by default
+
+require_once("../lib/validator_lib.php");
 
 /*
  * User represents an application user.
@@ -242,22 +244,20 @@ class User
    */
   function setLogin($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value); // sure?
-    $this->_login = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_login = safeText($value);
   }
 
   /**
    * void setPwd(string $value)
    ********************************************************************
-   * @param string $value Password of user
+   * @param string $value user's password
    * @return void
    * @access public
    */
   function setPwd($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_pwd = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_pwd = safeText($value);
   }
 
   /**
@@ -291,14 +291,13 @@ class User
    */
   function setPwd2($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_pwd2 = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_pwd2 = safeText($value);
   }
 
   /**
    * string getPwd2(void)
    ********************************************************************
-   * @return string User password confirmation
+   * @return string user's password confirmation
    * @access public
    */
   function getPwd2()
@@ -309,7 +308,7 @@ class User
   /**
    * string getEmail(void)
    ********************************************************************
-   * @return string User email
+   * @return string user email
    * @access public
    */
   function getEmail()
@@ -320,7 +319,7 @@ class User
   /**
    * string getEmailError(void)
    ********************************************************************
-   * @return string Last name error text
+   * @return string email error text
    * @access public
    */
   function getEmailError()
@@ -337,8 +336,7 @@ class User
    */
   function setEmail($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_email = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_email = safeText($value);
   }
 
   /**

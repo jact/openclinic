@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Theme.php,v 1.3 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -22,6 +22,8 @@ define("THEME_NAVBAR_FONT_SIZE", 10);
 define("THEME_TAB_FONT_SIZE", 12);
 define("THEME_TABLE_BORDER_WIDTH", 1);
 define("THEME_TABLE_CELL_PADDING", 1);
+
+require_once("../lib/validator_lib.php");
 
 /*
  * Theme represents a look and feel theme.
@@ -106,7 +108,7 @@ class Theme
   /**
    * bool _isCorrectColor(string $color)
    ********************************************************************
-   * Verify if a hex color is correct
+   * Verify if an hex color is correct
    ********************************************************************
    * @param string $color
    * @return bool false if is not a correct hex color, true otherwise
@@ -693,21 +695,18 @@ class Theme
 
   function setThemeName($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_themeName = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_themeName = safeText($value);
   }
 
   function setTitleBgColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_titleBgColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_titleBgColor = safeText($value);
   }
 
   function setTitleFontFamily($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_titleFontFamily = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_titleFontFamily = safeText($value);
   }
 
   function setTitleFontSize($value)
@@ -723,28 +722,24 @@ class Theme
 
   function setTitleFontColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_titleFontColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_titleFontColor = safeText($value);
   }
 
   function setTitleAlign($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_titleAlign = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_titleAlign = safeText($value);
   }
 
   function setBodyBgColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_bodyBgColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_bodyBgColor = safeText($value);
   }
 
   function setBodyFontFamily($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_bodyFontFamily = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_bodyFontFamily = safeText($value);
   }
 
   function setBodyFontSize($value)
@@ -755,36 +750,31 @@ class Theme
 
   function setBodyFontColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_bodyFontColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_bodyFontColor = safeText($value);
   }
 
   function setBodyLinkColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_bodyLinkColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_bodyLinkColor = safeText($value);
   }
 
   function setErrorColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_errorColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_errorColor = safeText($value);
   }
 
   function setNavbarBgColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_navbarBgColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_navbarBgColor = safeText($value);
   }
 
   function setNavbarFontFamily($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_navbarFontFamily = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_navbarFontFamily = safeText($value);
   }
 
   function setNavbarFontSize($value)
@@ -795,29 +785,25 @@ class Theme
 
   function setNavbarFontColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_navbarFontColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_navbarFontColor = safeText($value);
   }
 
   function setNavbarLinkColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_navbarLinkColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_navbarLinkColor = safeText($value);
   }
 
   function setTabBgColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_tabBgColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_tabBgColor = safeText($value);
   }
 
   function setTabFontFamily($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_tabFontFamily = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_tabFontFamily = safeText($value);
   }
 
   function setTabFontSize($value)
@@ -828,16 +814,14 @@ class Theme
 
   function setTabFontColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_tabFontColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_tabFontColor = safeText($value);
   }
 
   function setTabLinkColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_tabLinkColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_tabLinkColor = safeText($value);
   }
 
   function setTabFontBold($value)
@@ -847,9 +831,8 @@ class Theme
 
   function setTableBorderColor($value)
   {
-    $value = trim(htmlentities(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value);
-    $this->_tableBorderColor = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_tableBorderColor = safeText($value);
   }
 
   function setTableBorderWidth($value)

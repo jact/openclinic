@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting.php,v 1.3 2004/05/15 17:21:12 jact Exp $
+ * $Id: Setting.php,v 1.4 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -18,6 +18,8 @@
 
 define("SETTING_SESSION_TIMEOUT", 20);
 define("SETTING_ITEMS_PER_PAGE",  10);
+
+require_once("../lib/validator_lib.php");
 
 /**
  * Setting represents the config settings.
@@ -283,8 +285,7 @@ class Setting
    */
   function setClinicName($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_clinicName = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_clinicName = safeText($value);
   }
 
   /**
@@ -296,7 +297,7 @@ class Setting
    */
   function setClinicImageUrl($value)
   {
-    $this->_clinicImageUrl = '../images/' . trim($value);
+    $this->_clinicImageUrl = '../images/' . safeText($value);
   }
 
   /**
@@ -320,8 +321,7 @@ class Setting
    */
   function setClinicHours($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_clinicHours = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_clinicHours = safeText($value);
   }
 
   /**
@@ -333,8 +333,7 @@ class Setting
    */
   function setClinicAddress($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_clinicAddress = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_clinicAddress = safeText($value);
   }
 
   /**
@@ -346,8 +345,7 @@ class Setting
    */
   function setClinicPhone($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_clinicPhone = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_clinicPhone = safeText($value);
   }
 
   /**
@@ -359,8 +357,7 @@ class Setting
    */
   function setClinicUrl($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_clinicUrl = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_clinicUrl = safeText($value);
   }
 
   /**
@@ -398,7 +395,7 @@ class Setting
    */
   function setVersion($value)
   {
-    $this->_version = trim($value);
+    $this->_version = safeText($value);
   }
 
   /**
@@ -410,7 +407,7 @@ class Setting
    */
   function setLanguage($value)
   {
-    $this->_lang = trim($value);
+    $this->_lang = safeText($value);
   }
 
   /**

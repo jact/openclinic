@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Staff.php,v 1.3 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -15,6 +15,8 @@
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
+
+require_once("../lib/validator_lib.php");
 
 /*
  * Staff represents a clinic staff member.
@@ -242,8 +244,7 @@ class Staff
    */
   function setCollegiateNumber($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_collegiateNumber = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_collegiateNumber = safeText($value);
   }
 
   /**
@@ -277,14 +278,13 @@ class Staff
    */
   function setNIF($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_nif = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_nif = safeText($value);
   }
 
   /**
    * string getFirstName(void)
    ********************************************************************
-   * @return string Staff firstname
+   * @return string Staff first name
    * @access public
    */
   function getFirstName()
@@ -295,7 +295,7 @@ class Staff
   /**
    * string getFirstNameError(void)
    ********************************************************************
-   * @return string firstname error text
+   * @return string first name error text
    * @access public
    */
   function getFirstNameError()
@@ -306,14 +306,13 @@ class Staff
   /**
    * void setFirstName(string $value)
    ********************************************************************
-   * @param string $value firstname of staff member
+   * @param string $value first name of staff member
    * @return void
    * @access public
    */
   function setFirstName($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_firstName = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_firstName = safeText($value);
   }
 
   /**
@@ -347,8 +346,7 @@ class Staff
    */
   function setSurname1($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_surname1 = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_surname1 = safeText($value);
   }
 
   /**
@@ -382,8 +380,7 @@ class Staff
    */
   function setSurname2($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_surname2 = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_surname2 = safeText($value);
   }
 
   /**
@@ -417,9 +414,8 @@ class Staff
    */
   function setLogin($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
     $value = strtolower($value); // sure?
-    $this->_login = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_login = safeText($value);
   }
 
   /**
@@ -442,8 +438,7 @@ class Staff
    */
   function setAddress($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_address = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_address = safeText($value);
   }
 
   /**
@@ -466,8 +461,7 @@ class Staff
    */
   function setPhone($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_phone = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_phone = safeText($value);
   }
 } // end class
 ?>

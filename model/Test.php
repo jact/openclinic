@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Test.php,v 1.3 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -15,6 +15,8 @@
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
+
+require_once("../lib/validator_lib.php");
 
 /*
  ********************************************************************
@@ -133,9 +135,8 @@ class Test
    */
   function setDocumentType($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
     //$value = strtolower($value);
-    $this->_documentType = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_documentType = safeText($value);
   }
 
   /**

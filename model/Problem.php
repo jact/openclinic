@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem.php,v 1.4 2004/05/23 10:47:50 jact Exp $
+ * $Id: Problem.php,v 1.5 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -15,6 +15,8 @@
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
+
+require_once("../lib/validator_lib.php");
 
 /*
  * Problem represents a medical problem.
@@ -165,8 +167,6 @@ class Problem
    */
   function setOrderNumber($value)
   {
-    //$value = intval($value);
-    //$this->_orderNumber = ((get_magic_quotes_gpc()) ? $value : addslashes($value)); // int value
     $this->_orderNumber = intval($value);
   }
 
@@ -190,8 +190,7 @@ class Problem
    */
   function setCollegiateNumber($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_collegiateNumber = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_collegiateNumber = safeText($value);
   }
 
   /**
@@ -278,8 +277,7 @@ class Problem
    */
   function setMeetingPlace($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_meetingPlace = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_meetingPlace = safeText($value);
   }
 
   /**
@@ -302,8 +300,7 @@ class Problem
    */
   function setWording($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_wording = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_wording = safeText($value);
   }
 
   /**
@@ -337,8 +334,7 @@ class Problem
    */
   function setSubjective($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_subjective = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_subjective = safeText($value);
   }
 
   /**
@@ -361,8 +357,7 @@ class Problem
    */
   function setObjective($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_objective = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_objective = safeText($value);
   }
 
   /**
@@ -385,8 +380,7 @@ class Problem
    */
   function setAppreciation($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_appreciation = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_appreciation = safeText($value);
   }
 
   /**
@@ -409,8 +403,7 @@ class Problem
    */
   function setActionPlan($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_actionPlan = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_actionPlan = safeText($value);
   }
 
   /**
@@ -433,8 +426,7 @@ class Problem
    */
   function setPrescription($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_prescription = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_prescription = safeText($value);
   }
 
   /**

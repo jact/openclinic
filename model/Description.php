@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Description.php,v 1.3 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -15,6 +15,8 @@
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
+
+require_once("../lib/validator_lib.php");
 
 /*
  * Description ...
@@ -104,8 +106,7 @@ class Description
    */
   function setCode($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_code = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_code = safeText($value);
   }
 
   /**
@@ -117,8 +118,7 @@ class Description
    */
   function setDescription($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_description = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_description = safeText($value);
   }
 } // end class
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.3 2004/05/16 18:11:05 jact Exp $
+ * $Id: Patient.php,v 1.4 2004/05/24 22:12:44 jact Exp $
  */
 
 /**
@@ -15,6 +15,8 @@
  ********************************************************************
  * Author: jact <jachavar@terra.es>
  */
+
+require_once("../lib/validator_lib.php");
 
 /*
  * Patient contains business rules for patient data validation.
@@ -480,8 +482,7 @@ class Patient
    */
   function setCollegiateNumber($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_collegiateNumber = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_collegiateNumber = safeText($value);
   }
 
   /**
@@ -493,8 +494,7 @@ class Patient
    */
   function setNIF($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_nif = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_nif = safeText($value);
   }
 
   /**
@@ -506,8 +506,7 @@ class Patient
    */
   function setFirstName($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_firstName = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_firstName = safeText($value);
   }
 
   /**
@@ -519,8 +518,7 @@ class Patient
    */
   function setSurname1($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_surname1 = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_surname1 = safeText($value);
   }
 
   /**
@@ -532,8 +530,7 @@ class Patient
    */
   function setSurname2($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_surname2 = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_surname2 = safeText($value);
   }
 
   /**
@@ -545,8 +542,7 @@ class Patient
    */
   function setAddress($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_address = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_address = safeText($value);
   }
 
   /**
@@ -558,8 +554,7 @@ class Patient
    */
   function setPhone($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_phone = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_phone = safeText($value);
   }
 
   /**
@@ -571,8 +566,7 @@ class Patient
    */
   function setSex($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_sex = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_sex = safeText($value);
   }
 
   /**
@@ -584,8 +578,7 @@ class Patient
    */
   function setRace($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_race = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_race = safeText($value);
   }
 
   /**
@@ -597,8 +590,7 @@ class Patient
    */
   function setBirthDate($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_birthDate = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_birthDate = safeText($value);
   }
 
   /**
@@ -640,8 +632,7 @@ class Patient
    */
   function setBirthPlace($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_birthPlace = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_birthPlace = safeText($value);
   }
 
   /**
@@ -653,8 +644,7 @@ class Patient
    */
   function setDeceaseDate($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_deceaseDate = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_deceaseDate = safeText($value);
   }
 
   /**
@@ -684,8 +674,7 @@ class Patient
    */
   function setNTS($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_nts = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_nts = safeText($value);
   }
 
   /**
@@ -697,8 +686,7 @@ class Patient
    */
   function setNSS($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_nss = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_nss = safeText($value);
   }
 
   /**
@@ -710,8 +698,7 @@ class Patient
    */
   function setFamilySituation($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_familySituation = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_familySituation = safeText($value);
   }
 
   /**
@@ -723,8 +710,7 @@ class Patient
    */
   function setLabourSituation($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_labourSituation = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_labourSituation = safeText($value);
   }
 
   /**
@@ -736,8 +722,7 @@ class Patient
    */
   function setEducation($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_education = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_education = safeText($value);
   }
 
   /**
@@ -749,8 +734,7 @@ class Patient
    */
   function setInsuranceCompany($value)
   {
-    $value = trim(htmlspecialchars(strip_tags($value, ALLOWED_HTML_TAGS)));
-    $this->_insuranceCompany = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
+    $this->_insuranceCompany = safeText($value);
   }
 
   /**
