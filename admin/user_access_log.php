@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.3 2004/06/07 18:33:04 jact Exp $
+ * $Id: user_access_log.php,v 1.4 2004/06/07 18:47:14 jact Exp $
  */
 
 /**
@@ -95,7 +95,7 @@
   showNavLinks($links, "users.png");
   unset($links);
 
-  echo '<h3>' . sprintf(_("Access Logs List for user %s"), $login) . "</h3>\n";
+  echo '<h3>' . sprintf(_("Access Logs List for user %s"), $login) . ":</h3>\n";
 
   if ($accessQ->getRowCount() == 0)
   {
@@ -137,7 +137,7 @@ function changePage(page)
 <table>
   <thead>
     <tr>
-      <th>
+      <th colspan="2">
         <?php echo _("Access Date"); ?>
       </th>
 
@@ -157,6 +157,7 @@ function changePage(page)
     while ($access = $accessQ->fetchAccess())
     {
       echo '<tr class="' . $rowClass . '">';
+      echo '<td class="number">' . $accessQ->getCurrentRow() . ".</td>\n";
       echo '<td>' . localDate($access["access_date"]) . "</td>\n";
       echo '<td class="center">' . $access["login"] . "</td>\n";
       echo '<td class="center">' . $access["profile"] . "</td>\n";

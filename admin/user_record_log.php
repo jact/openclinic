@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.3 2004/06/07 18:33:04 jact Exp $
+ * $Id: user_record_log.php,v 1.4 2004/06/07 18:47:14 jact Exp $
  */
 
 /**
@@ -95,7 +95,7 @@
   showNavLinks($links, "users.png");
   unset($links);
 
-  echo '<h3>' . sprintf(_("Record Logs List for user %s"), $login) . "</h3>\n";
+  echo '<h3>' . sprintf(_("Record Logs List for user %s"), $login) . ":</h3>\n";
 
   if ($recordQ->getRowCount() == 0)
   {
@@ -136,7 +136,7 @@ function changePage(page)
 <table>
   <thead>
     <tr>
-      <th>
+      <th colspan="2">
         <?php echo _("Access Date"); ?>
       </th>
 
@@ -168,6 +168,7 @@ function changePage(page)
     while ($row = $recordQ->fetchRecord())
     {
       echo '<tr class="' . $rowClass . ' center">';
+      echo '<td class="number">' . $recordQ->getCurrentRow() . ".</td>\n";
       echo '<td>' . localDate($row["access_date"]) . "</td>\n";
       echo '<td>' . $row["login"] . "</td>\n";
       echo '<td>' . $row["table_name"] . "</td>\n";
