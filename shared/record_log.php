@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.3 2004/07/07 17:23:37 jact Exp $
+ * $Id: record_log.php,v 1.4 2004/07/24 16:19:52 jact Exp $
  */
 
 /**
@@ -25,23 +25,45 @@
   require_once("../classes/Record_Query.php");
 
   /**
-   * void recordLog(string $tableName, string, $operation, int $idKey1, int $idKey2 = 0)
+   * void recordLog(string $table, string, $operation, array $key)
    ********************************************************************
    * Inserts a new record in log operations table if it is possible
    ********************************************************************
-   * @param string $tableName
+   * @param string $table
    * @param string $operation one between INSERT, UPDATE, DELETE
-   * @param int $idKey1 principal key of the record
-   * @param int $idKey2 (optional) second principal key of the record
+   * @param array $key primary key of the record
    * @return void
    * @access public
    */
-  function recordLog($tableName, $operation, $idKey1, $idKey2 = 0)
+  function recordLog($table, $operation, $key)
   {
     if (defined("OPEN_DEMO") && OPEN_DEMO)
     {
       return; // disabled in demo version
     }
+
+    $queryQ = new Query();
+    $queryQ->connect();
+    if ($queryQ->isError())
+    {
+      showQueryError($queryQ);
+    }
+
+    $tableKey = $queryQ->getPrimaryKey($table);
+    if ($queryQ->isError())
+    {
+      $queryQ->close();
+      showQueryError($queryQ);
+    }
+
+    $data = $queryQ->getRowData($tableKey, $key, $table);
+    if ($queryQ->isError())
+    {
+      $queryQ->close();
+      showQueryError($queryQ);
+    }
+    //$queryQ->close(); // don't remove comment mark (fails in relative_new.php)
+    unset($queryQ);
 
     $recQ = new Record_Query();
     $recQ->connect();
@@ -50,13 +72,15 @@
       showQueryError($recQ);
     }
 
-    $recQ->insert($_SESSION['userId'], $_SESSION['loginSession'], $tableName, $operation, $idKey1, $idKey2);
+    $recQ->insert($_SESSION['userId'], $_SESSION['loginSession'], $table, $operation, $data);
     if ($recQ->isError())
     {
       $recQ->close();
       showQueryError($recQ);
     }
-    if ($idKey2 == 0) // attention!!!
+
+    if ($operation != "DELETE") // because log process is before deleting process
+    //if ($idKey2 == 0) // attention!!! if (count($key) > 1)
     {
       $recQ->close();
     }
