@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.6 2004/06/08 18:52:48 jact Exp $
+ * $Id: index.php,v 1.7 2004/07/05 18:35:59 jact Exp $
  */
 
 /**
@@ -16,8 +16,8 @@
  * Author: jact <jachavar@terra.es>
  */
 
-  error_reporting(55); // E_ALL & ~E_NOTICE - normal
-  //error_reporting(63); // E_ALL - debug
+  error_reporting(E_ALL & ~E_NOTICE); // normal mode
+  //error_reporting(E_ALL); // debug mode
 
   require_once("../install/header.php"); // i18n l10n
   require_once("../install/parse_sql_file.php");
