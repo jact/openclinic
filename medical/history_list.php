@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_list.php,v 1.4 2004/07/07 17:22:34 jact Exp $
+ * $Id: history_list.php,v 1.5 2004/07/31 17:04:32 jact Exp $
  */
 
 /**
@@ -80,7 +80,7 @@
   if ( !showPatientHeader($idPatient) )
   {
     $problemQ->close();
-    echo '<p>' . _("That patient does not exist.") . "</p>\n";
+    showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
 
     include_once("../shared/footer.php");
     exit();
@@ -94,99 +94,62 @@
   if ($count == 0)
   {
     $problemQ->close();
-    echo '<p>' . _("No closed medical problems defined for this patient.") . "</p>\n";
+    showMessage(_("No closed medical problems defined for this patient."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
-?>
 
-<table>
-  <thead>
-    <tr>
-      <th>
-        <?php echo _("Order Number"); ?>
-      </th>
+  $thead = array(
+    _("Order Number"),
+    _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 4 : 3)),
+    _("Wording"),
+    _("Opening Date"),
+    _("Closing Date")
+  );
 
-      <th colspan="<?php echo ($hasMedicalAdminAuth ? 4 : 3); ?>">
-        <?php echo _("Function"); ?>
-      </th>
+  $options = array(
+    0 => array('align' => 'right')
+  );
 
-      <th>
-        <?php echo _("Wording"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Opening Date"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Closing Date"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
-  $rowClass = "odd";
+  $tbody = array();
   while ($problem = $problemQ->fetch())
   {
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td class="center">
-        <?php echo $problem->getOrderNumber(); ?>
-      </td>
+    $row = $problem->getOrderNumber();
+    $row .= OPEN_SEPARATOR;
 
-<?php /* a closed medical problem is not editable
-      <td>
-        <a href="../medical/problem_edit_form.php?key=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $problem->getIdPatient(); ?>&amp;reset=Y"><?php echo _("edit"); ?></a>
-      </td>
-*/?>
+    // a closed medical problem is not editable
 
-      <td>
-        <a href="../medical/problem_view.php?key=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $problem->getIdPatient(); ?>"><?php echo _("view"); ?></a>
-      </td>
+    $row .= '<a href="../medical/problem_view.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("view") . '</a>';
+    $row .= OPEN_SEPARATOR;
 
-<?php
     if ($hasMedicalAdminAuth)
     {
-?>
-      <td>
-        <a href="../medical/problem_del_confirm.php?key=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $problem->getIdPatient(); ?>&amp;wording=<?php echo fieldPreview($problem->getWording()); ?>"><?php echo _("del"); ?></a>
-      </td>
-<?php
+      $row .= '<a href="../medical/problem_del_confirm.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '&amp;wording=' . fieldPreview($problem->getWording()) . '">' . _("del") . '</a>';
+      $row .= OPEN_SEPARATOR;
     } // end if
-?>
 
-      <td>
-        <a href="../medical/test_list.php?key=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $problem->getIdPatient(); ?>"><?php echo _("tests"); ?></a>
-      </td>
+    $row .= '<a href="../medical/test_list.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("tests") . '</a>';
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <a href="../medical/connection_list.php?key=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $problem->getIdPatient(); ?>"><?php echo _("connect"); ?></a>
-      </td>
+    $row .= '<a href="../medical/connection_list.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("connect") . '</a>';
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo fieldPreview($problem->getWording()); ?>
-      </td>
+    $row .= fieldPreview($problem->getWording());
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $problem->getOpeningDate(); ?>
-      </td>
+    $row .= $problem->getOpeningDate();
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo $problem->getClosingDate(); ?>
-      </td>
-    </tr>
-<?php
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+    $row .= $problem->getClosingDate();
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
   $problemQ->freeResult();
   $problemQ->close();
   unset($problemQ);
   unset($problem);
-?>
-  </tbody>
-</table>
 
-<?php require_once("../shared/footer.php"); ?>
+  showTable($thead, $tbody, null, $options);
+
+  require_once("../shared/footer.php");
+?>
