@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: install.html,v 1.4 2004/07/03 21:15:52 jact Exp $ -->
+<!-- $Id: install.html,v 1.5 2004/08/23 18:33:42 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Install Instructions</title>
@@ -70,7 +70,7 @@
     </li>
 
     <li>
-      In the section <span class="note">Install a SQL File</span>, choose the right file in <tt class="literal">install/upgrades/</tt> directory.
+      In the section <span class="note">Install a SQL File</span>, choose the right file in <tt>install/upgrades/</tt> directory.
     </li>
 
     <li>
@@ -173,11 +173,15 @@ C:\&gt;<strong>C:\mysql\bin\mysql -u <em>openclinic_user</em> -p<em>openclinic_p
     </li>
 
     <li id="step8">
-      Edit the <span class="note"><tt class="literal">database_constants.php</tt></span> file (located in the main openclinic directory) with the text editor of your choice. Change the username and password to match the new MySQL user and password that you created in the previous steps.
+      Edit the <tt class="note">database_constants.php</tt> file (located in the main openclinic directory) with the text editor of your choice. Change the username and password to match the new MySQL user and password that you created in the previous steps.
     </li>
 
     <li>
       Create the openclinic database tables. To do this run the <a href="./install/index.php">install php script</a>.
+    </li>
+
+    <li>
+      Make <tt>css</tt> and <tt>test</tt> directories writtable for Apache user to allow upload files.
     </li>
 
     <li>
