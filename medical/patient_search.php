@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.7 2004/07/14 18:31:27 jact Exp $
+ * $Id: patient_search.php,v 1.8 2004/07/31 19:00:27 jact Exp $
  */
 
 /**
@@ -106,7 +106,7 @@
   if ($patQ->getRowCount() == 0)
   {
     $patQ->close();
-    echo '<p>' . _("No results found.") . "</p>\n";
+    showMessage(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -226,53 +226,36 @@ function changePage(page)
     $query .= " NOT ";
   }
   $query .= $word[$num - 1] . ")";
-?>
 
-<!-- Printing result table -->
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo sprintf(_("Search Results From Query: %s"), $query); ?>
-      </th>
-    </tr>
-  </thead>
+  $thead = array(
+    sprintf(_("Search Results From Query: %s"), $query) => array('colspan' => 2)
+  );
 
-  <tbody>
-<?php
-  $rowClass = "odd";
+  $options = array(
+    0 => array('align' => 'right')
+  );
+
+  $tbody = array();
   while ($pat = $patQ->fetch())
   {
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td class="number">
-        <?php echo $patQ->getCurrentRow(); ?>.
-      </td>
+    $row = $patQ->getCurrentRow() . '.';
+    $row .= OPEN_SEPARATOR;
+    $row .= '<a href="../medical/patient_view.php?key=' . $pat->getIdPatient() . '&amp;reset=Y">' . $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName() . '</a>';
 
-      <td>
-        <a href="../medical/patient_view.php?key=<?php echo $pat->getIdPatient(); ?>&amp;reset=Y"><?php echo $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName(); ?></a>
-        <?php
-          if ($val != "")
-          {
-            echo "<br />" . $key . " ";
-            eval("print($val);");
-            echo "<br />\n";
-          }
-        ?>
-      </td>
-    </tr>
-<?php
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+    if ($val != "")
+    {
+      $row .= "<br />" . $key . " ";
+      eval("\$row .= $val;");
+    }
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
   $patQ->freeResult();
   $patQ->close();
   unset($patQ);
-?>
-  </tbody>
-</table>
 
-<?php
+  showTable($thead, $tbody, null, $options);
+
   showResultPages($currentPageNmbr, $pageCount);
 
   require_once("../shared/footer.php");
