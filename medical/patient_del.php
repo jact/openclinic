@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.7 2004/07/10 16:44:57 jact Exp $
+ * $Id: patient_del.php,v 1.8 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -167,19 +167,20 @@
     unset($historyF);
   }
 
+  ////////////////////////////////////////////////////////////////////
+  // Record log process (before deleting process)
+  ////////////////////////////////////////////////////////////////////
+  recordLog($patQ->getTableName(), "DELETE", array($idPatient));
+
   $patQ->delete($idPatient);
   if ($patQ->isError())
   {
     $patQ->close();
     showQueryError($patQ);
   }
+
   $patQ->close();
   unset($patQ);
-
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
-  recordLog("patient_tbl", "DELETE", $idPatient);
 
   ////////////////////////////////////////////////////////////////////
   // Delete asociated problems
@@ -232,9 +233,19 @@
       showQueryError($problemQ);
     }
 
+    $table = $problemQ->getTableName();
+
+    ////////////////////////////////////////////////////////////////////
+    // Record log process (before deleting process)
+    ////////////////////////////////////////////////////////////////////
     for ($i = 0; $i < $numRows; $i++)
     {
-      $problemQ->delete($array[$i]->_idProblem);
+      recordLog($table, "DELETE", array($array[$i]->getIdProblem()));
+    }
+
+    for ($i = 0; $i < $numRows; $i++)
+    {
+      $problemQ->delete($array[$i]->getIdProblem());
       if ($problemQ->isError())
       {
         $problemQ->close();
@@ -243,11 +254,6 @@
     }
     $problemQ->close();
     unset($problemQ);
-
-    for ($i = 0; $i < $numRows; $i++)
-    {
-      recordLog("problem_tbl", "DELETE", $array[$i]->_idProblem);
-    }
     unset($array);
   }
 
@@ -299,9 +305,19 @@
       showQueryError($problemQ);
     }
 
+    $table = $problemQ->getTableName();
+
+    ////////////////////////////////////////////////////////////////////
+    // Record log process (before deleting process)
+    ////////////////////////////////////////////////////////////////////
     for ($i = 0; $i < $numRows; $i++)
     {
-      $problemQ->delete($array[$i]->_idProblem);
+      recordLog($table, "DELETE", array($array[$i]->getIdProblem()));
+    }
+
+    for ($i = 0; $i < $numRows; $i++)
+    {
+      $problemQ->delete($array[$i]->getIdProblem());
       if ($problemQ->isError())
       {
         $problemQ->close();
@@ -310,11 +326,6 @@
     }
     $problemQ->close();
     unset($problemQ);
-
-    for ($i = 0; $i < $numRows; $i++)
-    {
-      recordLog("problem_tbl", "DELETE", $array[$i]->_idProblem);
-    }
     unset($array);
   }
 

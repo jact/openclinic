@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del.php,v 1.6 2004/07/10 16:45:05 jact Exp $
+ * $Id: connection_del.php,v 1.7 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -61,19 +61,20 @@
     showQueryError($connQ);
   }
 
+  ////////////////////////////////////////////////////////////////////
+  // Record log process (before deleting process)
+  ////////////////////////////////////////////////////////////////////
+  recordLog($connQ->getTableName(), "DELETE", array($idProblem, $idConnection));
+
   $connQ->delete($idProblem, $idConnection);
   if ($connQ->isError())
   {
     $connQ->close();
     showQueryError($connQ);
   }
+
   $connQ->close();
   unset($connQ);
-
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
-  recordLog("connection_problem_tbl", "DELETE", $idProblem, $idConnection);
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

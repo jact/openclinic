@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.7 2004/07/10 16:59:23 jact Exp $
+ * $Id: problem_del.php,v 1.8 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -138,6 +138,11 @@
     unset($problem);
   }
 
+  ////////////////////////////////////////////////////////////////////
+  // Record log process (before deleting process)
+  ////////////////////////////////////////////////////////////////////
+  recordLog($problemQ->getTableName(), "DELETE", array($idProblem));
+
   $problemQ->delete($idProblem);
   if ($problemQ->isError())
   {
@@ -146,11 +151,6 @@
   }
   $problemQ->close();
   unset($problemQ);
-
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
-  recordLog("problem_tbl", "DELETE", $idProblem);
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

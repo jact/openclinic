@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del.php,v 1.5 2004/07/11 11:23:01 jact Exp $
+ * $Id: test_del.php,v 1.6 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -62,6 +62,11 @@
     showQueryError($testQ);
   }
 
+  ////////////////////////////////////////////////////////////////////
+  // Record log process (before deleting process)
+  ////////////////////////////////////////////////////////////////////
+  recordLog($testQ->getTableName(), "DELETE", array($idTest));
+
   $testQ->delete($idTest);
   if ($testQ->isError())
   {
@@ -70,11 +75,6 @@
   }
   $testQ->close();
   unset($testQ);
-
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
-  recordLog("medical_test_tbl", "DELETE", $idTest);
 
   //@unlink($file); // do not remove the file because LORTAD
 

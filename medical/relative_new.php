@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_new.php,v 1.4 2004/07/11 11:14:22 jact Exp $
+ * $Id: relative_new.php,v 1.5 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -79,10 +79,13 @@
         showQueryError($relQ);
       }
     }
-    ////////////////////////////////////////////////////////////////////
-    // Record log process
-    ////////////////////////////////////////////////////////////////////
-    recordLog("relative_tbl", "INSERT", $idPatient, $_POST["check"][$i]);
+    else
+    {
+      ////////////////////////////////////////////////////////////////////
+      // Record log process
+      ////////////////////////////////////////////////////////////////////
+      recordLog($relQ->getTableName(), "INSERT", array($idPatient, $_POST["check"][$i]));
+    }
   }
   $relQ->close();
   unset($relQ);

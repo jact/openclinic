@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.4 2004/07/10 16:44:57 jact Exp $
+ * $Id: patient_edit.php,v 1.5 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -88,6 +88,9 @@
     $patQ->close();
     showQueryError($patQ);
   }
+
+  $table = $patQ->getTableName();
+
   $patQ->close();
   unset($patQ);
   unset($pat);
@@ -95,7 +98,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog("patient_tbl", "UPDATE", $idPatient);
+  recordLog($table, "UPDATE", array($idPatient));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

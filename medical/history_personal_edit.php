@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_edit.php,v 1.3 2004/07/07 17:22:34 jact Exp $
+ * $Id: history_personal_edit.php,v 1.4 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -116,13 +116,16 @@
     $historyQ->close();
     showQueryError($historyQ);
   }
+
+  $table = $historyQ->getTableName();
+
   $historyQ->close();
   unset($historyQ);
 
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog("history_tbl", "UPDATE", $_POST["id_patient"]);
+  recordLog($table, "UPDATE", array($_POST["id_patient"]));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

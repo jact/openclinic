@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit.php,v 1.4 2004/07/11 11:23:01 jact Exp $
+ * $Id: test_edit.php,v 1.5 2004/07/24 16:17:30 jact Exp $
  */
 
 /**
@@ -78,13 +78,16 @@
     $testQ->close();
     showQueryError($testQ);
   }
+
+  $table = $testQ->getTableName();
+
   $testQ->close();
   unset($testQ);
 
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog("medical_test_tbl", "UPDATE", $test->getIdTest());
+  recordLog($table, "UPDATE", array($test->getIdTest()));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting
