@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.8 2004/07/31 19:00:27 jact Exp $
+ * $Id: patient_search.php,v 1.9 2004/10/04 21:33:58 jact Exp $
  */
 
 /**
@@ -37,17 +37,18 @@
   require_once("../classes/Patient_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/search_lib.php");
+  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
   ////////////////////////////////////////////////////////////////////
-  $currentPageNmbr = (isset($_POST["page"])) ? $_POST["page"] : 1;
-  $searchType = $_POST["search_type"];
-  $logical = $_POST["logical"];
-  $limit = (isset($_POST["limit"])) ? $_POST["limit"] : 0;
+  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $searchType = safeText($_POST["search_type"]);
+  $logical = safeText($_POST["logical"]);
+  $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
 
   // remove slashes added by form post
-  $searchText = stripslashes(trim($_POST["search_text"]));
+  $searchText = stripslashes(safeText($_POST["search_text"]));
   // remove redundant whitespace
   $searchText = eregi_replace("[[:space:]]+", " ", $searchText);
   // transform string in array of strings

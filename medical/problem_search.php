@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.9 2004/09/22 18:20:26 jact Exp $
+ * $Id: problem_search.php,v 1.10 2004/10/04 21:37:41 jact Exp $
  */
 
 /**
@@ -39,17 +39,18 @@
   require_once("../classes/Problem_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/search_lib.php");
+  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
   ////////////////////////////////////////////////////////////////////
-  $currentPageNmbr = (isset($_POST["page"])) ? $_POST["page"] : 1;
-  $searchType = $_POST["search_type_problem"];
-  $logical = $_POST["logical_problem"];
-  $limit = (isset($_POST["limit_problem"])) ? $_POST["limit_problem"] : 0;
+  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $searchType = safeText($_POST["search_type_problem"]);
+  $logical = safeText($_POST["logical_problem"]);
+  $limit = (isset($_POST["limit_problem"])) ? intval($_POST["limit_problem"]) : 0;
 
   // remove slashes added by form post
-  $searchText = stripslashes(trim($_POST["search_text_problem"]));
+  $searchText = stripslashes(safeText($_POST["search_text_problem"]));
   // remove redundant whitespace
   $searchText = eregi_replace("[[:space:]]+", " ", $searchText);
   // transform string in array of strings
@@ -221,7 +222,7 @@ function changePage(page)
   {
     $row = $problemQ->getCurrentRow();
     eval("\$aux = $val;");
-    $recordset[$row] = $row . OPEN_SEPARATOR . $problem->getIdProblem() . OPEN_SEPARATOR . $problem->getIdPatient() . OPEN_SEPARATOR . $aux . OPEN_SEPARATOR . $problem->getOpeningDate() . OPEN_SEPARATOR . $problem->getClosingDate();
+    $recordset[$row] = $row . OPEN_SEPARATOR . $problem->getIdProblem() . OPEN_SEPARATOR . $problem->getIdPatient() . OPEN_SEPARATOR . $aux . OPEN_SEPARATOR . localDate($problem->getOpeningDate()) . OPEN_SEPARATOR . localDate($problem->getClosingDate());
   } // end while
   $problemQ->freeResult();
   $problemQ->close();

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.5 2004/07/24 16:17:30 jact Exp $
+ * $Id: patient_edit.php,v 1.6 2004/10/04 21:31:42 jact Exp $
  */
 
 /**
@@ -38,12 +38,13 @@
   require_once("../classes/Patient_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
+  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Validate data
   ////////////////////////////////////////////////////////////////////
   $idPatient = intval($_POST["id_patient"]);
-  $patName = urldecode($_POST["first_name"] . " " . $_POST["surname1"] . " " . $_POST["surname2"]);
+  $patName = urldecode(safeText($_POST["first_name"] . " " . $_POST["surname1"] . " " . $_POST["surname2"]));
 
   $pat = new Patient();
 
