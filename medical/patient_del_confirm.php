@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del_confirm.php,v 1.4 2004/07/31 17:22:01 jact Exp $
+ * $Id: patient_del_confirm.php,v 1.5 2004/10/03 10:26:49 jact Exp $
  */
 
 /**
@@ -32,15 +32,16 @@
   $nav = "social";
   $onlyDoctor = false;
 
+  require_once("../shared/read_settings.php");
+  require_once("../shared/login_check.php");
+  require_once("../lib/input_lib.php");
+  require_once("../lib/validator_lib.php");
+
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idPatient = intval($_GET["key"]);
-  $patName = $_GET["name"];
-
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  $patName = safeText($_GET["name"]);
 
   ////////////////////////////////////////////////////////////////////
   // Show confirm page

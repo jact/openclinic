@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del_confirm.php,v 1.4 2004/07/28 18:22:33 jact Exp $
+ * $Id: user_del_confirm.php,v 1.5 2004/10/03 10:27:03 jact Exp $
  */
 
 /**
@@ -32,15 +32,16 @@
     exit();
   }
 
+  require_once("../shared/read_settings.php");
+  require_once("../shared/login_check.php");
+  require_once("../lib/input_lib.php");
+  require_once("../lib/validator_lib.php");
+
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idUser = intval($_GET["key"]);
-  $login = $_GET["login"];
-
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  $login = safeText($_GET["login"]);
 
   ////////////////////////////////////////////////////////////////////
   // Show confirm page

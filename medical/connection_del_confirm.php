@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del_confirm.php,v 1.4 2004/07/31 16:19:53 jact Exp $
+ * $Id: connection_del_confirm.php,v 1.5 2004/10/03 10:26:49 jact Exp $
  */
 
 /**
@@ -32,17 +32,18 @@
   $nav = "problems";
   $onlyDoctor = false;
 
+  require_once("../shared/read_settings.php");
+  require_once("../shared/login_check.php");
+  require_once("../lib/input_lib.php");
+  require_once("../lib/validator_lib.php");
+
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idProblem = intval($_GET["key"]);
   $idConnection = intval($_GET["conn"]);
   $idPatient = intval($_GET["pat"]);
-  $wording = $_GET["wording"];
-
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  $wording = safeText($_GET["wording"]);
 
   ////////////////////////////////////////////////////////////////////
   // Show confirm page
