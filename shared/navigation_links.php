@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: navigation_links.php,v 1.2 2004/04/14 22:28:27 jact Exp $
+ * $Id: navigation_links.php,v 1.3 2004/08/09 11:35:55 jact Exp $
  */
 
 /**
@@ -14,7 +14,8 @@
  * Contains showNavLinks function
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * TODO: change name (bread crumb), image class
+ * TODO: change name (bread crumb)
+ * TODO: include htmlNavLinks() function (or htmlBreadCrumb)
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
@@ -27,6 +28,7 @@
    * void showNavLinks(array &$links, string $image = "")
    ********************************************************************
    * Draws a header with navigation links.
+   * TODO: <hn class="something">sfjdfjsf</hn> without img tag (all in css, background-image)
    ********************************************************************
    * @param array (associative - strings) $links texts and links to show in header
    * @param string $image (optional) logo to show in header
