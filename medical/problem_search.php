@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: problem_search.php,v 1.3 2004/04/24 15:28:33 jact Exp $
  */
 
 /**
@@ -127,6 +127,8 @@ function changePage(page)
 {
   document.forms[0].page.value = page;
   document.forms[0].submit();
+
+  return false;
 }
 //-->
 </script>
