@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: global_constants.php,v 1.5 2004/07/05 17:39:59 jact Exp $
+ * $Id: global_constants.php,v 1.6 2004/07/26 18:48:27 jact Exp $
  */
 
 /**
@@ -98,15 +98,29 @@
 
 /**
  ********************************************************************
+ * Messages constants:
+ ********************************************************************
+ * OPEN_MSG_INFO
+ * OPEN_MSG_WARNING
+ * OPEN_MSG_ERROR
+ */
+  define("OPEN_MSG_INFO",    1);
+  define("OPEN_MSG_WARNING", 2);
+  define("OPEN_MSG_ERROR",   3);
+
+/**
+ ********************************************************************
  * Others constants:
  ********************************************************************
  * OPEN_EXEC_TIME_LIMIT - to dump proccesses
  * OPEN_VISITED_ITEMS - number of items of visited patients list
  * OPEN_ALLOWED_HTML_TAGS - tags which should not be stripped by strip_tags() function
  * OPEN_FIELD_PREVIEW_LIMIT - max lenght to preview text fields
+ * OPEN_SEPARATOR - separation character in explode() implode() functions
  */
   define("OPEN_EXEC_TIME_LIMIT", 300);
   define("OPEN_VISITED_ITEMS", 3);
   define("OPEN_ALLOWED_HTML_TAGS", "<a><b><blockquote><br><code><div><em><i><li><ol><p><pre><strike><strong><sub><sup><tt><u><ul><hr>");
   define("OPEN_FIELD_PREVIEW_LIMIT", 30);
+  define("OPEN_SEPARATOR", "|");
 ?>
