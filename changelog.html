@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: changelog.html,v 1.8 2004/07/11 11:28:21 jact Exp $ -->
+<!-- $Id: changelog.html,v 1.9 2004/08/12 11:43:43 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Changelog</title>
@@ -115,15 +115,13 @@
 
     <li class="add">New file lib/misc_lib.php: new global constant OPEN_FIELD_PREVIEW_LIMIT</li>
 
-    <li class="add">Added new theme to the project: mezzoblue</li>
-
-    <li class="add">Addition of bread crumb in all pages</li>
+    <li class="add">Addition of bread crumb in all pages than need it</li>
 
     <li class="fix">Fixed problems with inexistent things</li>
 
-    <li class="change">Changed connect() method of Query class to permit connection parameters</li>
+    <li class="change">Changes in connect method of Query class to permit connection parameters</li>
 
-    <li class="change">In $returnPage variable saves get parameters also</li>
+    <li class="change">In $returnPage variable saves GET parameters also</li>
 
     <li class="change">DTD XHTML 1.1 in all project pages</li>
 
@@ -131,7 +129,7 @@
 
     <li class="change">Changes in input_lib.php file (new parameter $disabled in showCheckBox and showRadioButton functions, $events paremeter becomes $addendum, new parameter $error in showSelectArray function)</li>
 
-    <li class="change">No GET values to *_del.php files</li>
+    <li class="change">No GET values to *_del.php files (via POST now)</li>
 
     <li class="change">existLogin() method has changed idUser parameter for idMember</li>
 
@@ -151,8 +149,6 @@
 
     <li class="change">All methods named fetch*() have been renamed to fetch()</li>
 
-    <li class="change">Administration option Profiles has been removed</li>
-
     <li class="add">New option CREATE DATABASE __dbname__ in MySQL dumps and table summary</li>
 
     <li class="add">Three new files in directory shared to clear code: i18n.php, session_info.php, xhtml_start.php</li>
@@ -161,7 +157,7 @@
 
     <li class="fix">MSIE bugs relationship with table less design</li>
 
-    <li class="fix">All application constants have OPEN_ or STYLE_ or DLIB_ prefix to avoid interferences with PHP constants</li>
+    <li class="fix">All application constants have OPEN_ or DLIB_ prefix to avoid interferences with PHP constants</li>
 
     <li class="add">New function showFetchError() in lib/error_lib.php file (changes in DbConnection and Query classes)</li>
 
@@ -170,6 +166,28 @@
     <li class="fix">user_edit.php redirects correctly now to user_edit_form.php in case of error</li>
 
     <li class="fix">Redirections to avoid reload problem in insertions, updates or deletions processes</li>
+
+    <li class="fix">Problems with dumps as files (urldecode of data is unnecessary)</li>
+
+    <li class="add">New method isActivated() in User_Query class to know if a login is activated or not</li>
+
+    <li class="fix">If an user is deactivated, is redirected to login suspended page at first time</li>
+
+    <li class="add">Custom error handler for log to screen or/and to a file (new constants in read_settings.php file: OPEN_SCREEN_ERRORS, OPEN_LOG_ERRORS, OPEN_LOG_FILE)</li>
+
+    <li class="add">New methods in Query class: getPrimaryKey(), getRowData()</li>
+
+    <li class="change">Record log process improvements: now is saved entire record data</li>
+
+    <li class="add">New constant in global_constants.php file: OPEN_SEPARATOR for implode(), explode() functions; OPEN_MSG_INFO, OPEN_MSG_WARNING, OPEN_MSG_ERROR for messages</li>
+
+    <li class="add">New functions html*() in input_lib.php file</li>
+
+    <li class="add">Added html_lib.php file in lib directory: htmlTable(), showTable(), htmlMessage(), showMessage() functions</li>
+
+    <li class="change">CSS2 table less based themes, changes in theme_tbl table and admin/theme_*.php files (new file admin/theme_preload_css.php)</li>
+
+    <li class="fix">Changes in current user are made immediately</li>
   </ol>
 
   <hr />
