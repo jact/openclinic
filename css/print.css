@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print.css,v 1.1 2005/03/04 19:54:48 jact Exp $
+ * $Id: print.css,v 1.2 2005/03/05 18:46:25 jact Exp $
  */
 
 /**
@@ -33,6 +33,6 @@ body {
 acronym:after {
   content: " (" attr(title) ")";
 }
-/*a[href|="http"]:after*/ a:after {
+a[href^="http"]:after, a[href^="mailto"]:after {
   content: " (link: " attr(href) ")";
 }
