@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: lang_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
+ * $Id: lang_lib.php,v 1.3 2004/05/20 18:31:21 jact Exp $
  */
 
 /**
@@ -30,6 +30,10 @@
  *  mixed poFilename(string $lang = "")
  *  bool languageExists(string $lang)
  */
+
+define("LANG_DEFAULT",  "en");
+define("LANG_DIR",      "../locale/");
+define("LANG_FILENAME", "openclinic");
 
 /**
  * string setLanguage(string $lang = "")
@@ -65,8 +69,8 @@ function setLanguage($lang = "")
       }
       else
       {
-        setlocale(LC_ALL, "en");
-        $newLang = "en";
+        setlocale(LC_ALL, LANG_DEFAULT);
+        $newLang = LANG_DEFAULT;
       }
     }
   }
@@ -79,8 +83,8 @@ function setLanguage($lang = "")
     }
     else
     {
-      setlocale(LC_ALL, "en");
-      $newLang = "en";
+      setlocale(LC_ALL, LANG_DEFAULT);
+      $newLang = LANG_DEFAULT;
     }
   }
   //putenv("LANG=" . $newLang);
@@ -106,8 +110,8 @@ function initLanguage($lang)
   $check = (in_array("gettext", get_loaded_extensions()) && function_exists('gettext'));
   if ($check)
   {
-    $textDomain = $lang . "-openclinic";
-    bindtextdomain($textDomain, realpath("../locale/"));
+    $textDomain = $lang . "-" . LANG_FILENAME;
+    bindtextdomain($textDomain, realpath(LANG_DIR));
     textdomain($textDomain);
   }
   else
@@ -181,19 +185,19 @@ function poFilename($lang = "")
     $lang = OPEN_LANGUAGE;
   }
 
-  $filename = "../locale/" . $lang . "-openclinic.po";
+  $filename = LANG_DIR . $lang . "-" . LANG_FILENAME . ".po";
   if (file_exists($filename))
   {
     return $filename;
   }
 
-  $filename = "../locale/" . $lang . "/openclinic.po";
+  $filename = LANG_DIR . $lang . "/" . LANG_FILENAME . ".po";
   if (file_exists($filename))
   {
     return $filename;
   }
 
-  $filename = "../locale/" . $lang . "/" . $lang . "-openclinic.po";
+  $filename = LANG_DIR . $lang . "/" . $lang . "-" . LANG_FILENAME . ".po";
   if (file_exists($filename))
   {
     return $filename;
@@ -213,7 +217,7 @@ function poFilename($lang = "")
  */
 function languageExists($lang)
 {
-  if ($lang == 'en')
+  if ($lang == LANG_DEFAULT)
   {
     return true;
   }
@@ -221,7 +225,7 @@ function languageExists($lang)
   $check = (in_array("gettext", get_loaded_extensions()) && function_exists('gettext'));
   if ($check)
   {
-    return (file_exists("../locale/" . $lang . "/LC_MESSAGES/" . $lang . "-openclinic.mo"));
+    return (file_exists(LANG_DIR . $lang . "/LC_MESSAGES/" . $lang . "-" . LANG_FILENAME . ".mo"));
   }
   else
   {
