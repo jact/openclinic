@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.8 2004/08/03 11:19:10 jact Exp $
+ * $Id: patient_edit_form.php,v 1.9 2004/10/04 21:32:56 jact Exp $
  */
 
 /**
@@ -77,7 +77,7 @@
       // load up post vars
       ////////////////////////////////////////////////////////////////////
       $postVars["id_patient"] = $idPatient;
-      //$postVars["last_update_date"] = date("d-m-Y"); //date("Y-m-d");
+      //$postVars["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)
       $postVars["collegiate_number"] = $pat->getCollegiateNumber();
       $postVars["nif"] = $pat->getNIF();
       $postVars["first_name"] = $pat->getFirstName();
@@ -87,9 +87,9 @@
       $postVars["phone_contact"] = $pat->getPhone();
       $postVars["sex"] = $pat->getSex();
       $postVars["race"] = $pat->getRace();
-      $postVars["birth_date"] = $pat->getBirthDate();
+      $postVars["birth_date"] = $pat->getBirthDate(false);
       $postVars["birth_place"] = $pat->getBirthPlace();
-      $postVars["decease_date"] = $pat->getDeceaseDate();
+      $postVars["decease_date"] = $pat->getDeceaseDate(false);
       $postVars["nts"] = $pat->getNTS();
       $postVars["nss"] = $pat->getNSS();
       $postVars["family_situation"] = $pat->getFamilySituation();
