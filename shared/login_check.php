@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.2 2004/04/18 14:02:25 jact Exp $
+ * $Id: login_check.php,v 1.3 2004/05/15 16:35:15 jact Exp $
  */
 
 /**
@@ -79,10 +79,16 @@
       }
       $sessQ->close();
 
+      $_SESSION['invalidToken'] = true;
       header("Location: ../shared/login_form.php?ret=" . $returnPage);
       exit();
     }
     $sessQ->close();
+
+    if (isset($_SESSION['invalidToken']))
+    {
+      unset($_SESSION['invalidToken']);
+    }
 
     ////////////////////////////////////////////////////////////////////
     // Checking authorization for this tab
