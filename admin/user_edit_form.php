@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.12 2004/10/04 18:03:09 jact Exp $
+ * $Id: user_edit_form.php,v 1.13 2004/10/04 21:29:35 jact Exp $
  */
 
 /**
@@ -89,7 +89,7 @@
       $postVars["id_member"] = $user->getIdMember();
       $postVars["login"] = $user->getLogin();
       $postVars["email"] = $user->getEmail();
-      $postVars["actived"] = ($user->isActived() ? "CHECKED" : "");
+      $postVars["actived"] = ($user->isActived() ? "checked" : "");
       $postVars["id_theme"] = $user->getIdTheme();
       $postVars["id_profile"] = $user->getIdProfile();
     }
