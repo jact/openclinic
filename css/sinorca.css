@@ -41,6 +41,11 @@ body {
   font-size: 235%;
 }
 
+#header h1 a {
+  color: #fff;
+  background: transparent;
+}
+
 #headerInformation {
   position: absolute;
   top: 0;
@@ -158,7 +163,7 @@ li#first a, li#first span {
 }
 
 #mainZone {
-  margin: 130px 0 0 210px;
+  margin: 130px 10px 0 210px;
 }
 
 a, a:visited {
