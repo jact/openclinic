@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.9 2004/08/12 10:05:00 jact Exp $
+ * $Id: footer.php,v 1.10 2004/09/23 18:55:36 jact Exp $
  */
 
 /**
@@ -71,7 +71,27 @@
     <?php echo _("under the"); ?>
     <a href="../home/license.php">GNU General Public License</a>
   </p>
+
+<?php
+  ////////////////////////////////////////////////////////////////////
+  // End server page generation time
+  ////////////////////////////////////////////////////////////////////
+  $microTime = explode(" ", microtime());
+  $endTime = $microTime[1] + $microTime[0];
+  $totalTime = sprintf(_("Page generation: %s seconds"), substr(($endTime - $startTime), 0, 6));
+
+  if (defined("OPEN_DEBUG") && OPEN_DEBUG)
+  {
+    echo '<p>' . $totalTime . "</p>\n";
+  }
+?>
 </div><!-- End #footer -->
 <!-- End Footer -->
 </body>
 </html>
+<?php
+  if (defined("OPEN_BUFFER") && OPEN_BUFFER)
+  {
+    ob_end_flush();
+  }
+?>
