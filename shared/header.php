@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.14 2004/08/03 11:26:11 jact Exp $
+ * $Id: header.php,v 1.15 2004/08/06 12:02:56 jact Exp $
  */
 
 /**
@@ -139,15 +139,25 @@
   <!-- End Tabs -->
 
   <div id="sourceForgeLinks">
-    <a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a> |
+    <a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a>
 
-    <?php //<!--a href="http://sourceforge.net/mail/?group_id=70742">?><?php //echo _("Mailing Lists"); ?><?php //</a> | --> ?>
+    <span class="separator">|</span>
 
-    <a href="http://sourceforge.net/project/showfiles.php?group_id=70742"><?php echo _("Downloads"); ?></a> |
+    <?php //<a href="http://sourceforge.net/mail/?group_id=70742">?><?php //echo _("Mailing Lists"); ?><?php //</a>
 
-    <a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857"><?php echo _("Report Bugs"); ?></a> |
+    //<span class="separator">|</span> ?>
 
-    <?php //<!--a href="http://sourceforge.net/pm/?group_id=70742">?><?php //echo _("Tasks"); ?><?php //</a> | --> ?>
+    <a href="http://sourceforge.net/project/showfiles.php?group_id=70742"><?php echo _("Downloads"); ?></a>
+
+    <span class="separator">|</span>
+
+    <a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857"><?php echo _("Report Bugs"); ?></a>
+
+    <span class="separator">|</span>
+
+    <?php //<a href="http://sourceforge.net/pm/?group_id=70742">?><?php //echo _("Tasks"); ?><?php //</a>
+
+    //<span class="separator">|</span> ?>
 
     <a href="http://sourceforge.net/forum/?group_id=70742"><?php echo _("Forums"); ?></a>
 
