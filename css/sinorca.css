@@ -1,0 +1,318 @@
+/* CSS based in Sinorca (haran's design in oswd.org) */
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #000;
+  font-family: verdana, tahoma, helvetica, arial, sans-serif;
+  font-size: 82%;
+}
+
+#sourceForgeLinks {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2em;
+  width: 100%;
+  background: #6386DE;
+  color: #fff;
+  text-align: right;
+}
+
+#sourceForgeLinks a {
+  color: #fff;
+  background: transparent;
+  padding: 0 4px;
+}
+
+#subHeader {
+  position: absolute;
+  top: 2em;
+  left: 0;
+  height: 5em;
+  width: 100%;
+  background: #8CAAE7;
+  color: #000;
+}
+
+#header h1 {
+  margin: 0;
+  font-size: 235%;
+}
+
+#headerInformation {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  color: #fff;
+  background: transparent;
+  border-left: 1px solid #fff;
+  padding: 0 4px;
+}
+
+#headerInformation p {
+  margin: 0;
+}
+
+#tabs {
+  position: absolute;
+  top: 7em;
+  right: 0;
+  width: 100%;
+  height: 2em;
+  border-top: 1px solid #fff;
+  background: #000;
+  color: #fff;
+}
+
+html>body #tabs {
+  top: 6em;
+  height: 1.92em;
+}
+
+#tabs li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li#first a, li#first span {
+  border-left: 1px solid #fff;
+}
+
+#tabs a, #tabs span {
+  border-right: 1px solid #fff;
+  margin: 2px 0;
+  padding: 3px 10px;
+  float: left;
+  color: #fff;
+  background: transparent;
+  font-weight: bold;
+}
+
+#tabs span {
+  color: #ffebcd;
+}
+
+#sideBar {
+  position: absolute;
+  top: 9em;
+  left: 0;
+  width: 200px;
+  background: #F7F3F7;
+  color: #000;
+  border-right: 1px solid #9C9A9C;
+  border-bottom: 1px solid #9C9A9C;
+}
+
+#sideBar hr {
+  display: none;
+}
+
+.sideBarLogin {
+  margin: 10px 0 10px 10px;
+}
+
+.linkList {
+  background: #fff;
+  color: #000;
+  border-top: 1px solid #9C9A9C;
+  border-bottom: 1px solid #9C9A9C;
+}
+
+.linkList a, .linkList a:hover, .linkList .selected {
+  line-height: 1.6em;
+  display: block;
+}
+
+.linkList a:before {
+  content: "> ";
+}
+
+.linkList .selected:before {
+  content: ">> ";
+}
+
+.linkList a, .linkList a:visited, .linkList .subnavbar a {
+  padding: 3px 2px 3px 2.5ex;
+  text-decoration: none;
+}
+
+.linkList a:hover {
+  background: #6386DE;
+  color: #fff;
+}
+
+.linkList .selected {
+  padding-left: 2.5ex;
+}
+
+.linkList .subnavbar {
+  margin-left: 2ex;
+}
+
+#sideBarLogo p {
+  text-align: center;
+}
+
+#mainZone {
+  margin: 130px 0 0 210px;
+}
+
+a, a:visited {
+  color: #0065CE;
+  background: inherit;
+}
+
+#mainZone h1, #mainZone h2, #mainZone h3, #mainZone h4, #mainZone h5 {
+  background: #6386DE;
+  color: #fff;
+  padding: 3px;
+  font-size: 110%;
+}
+
+#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
+  vertical-align: middle;
+  border: 1px solid #fff;
+}
+
+#mainZone h1 a, #mainZone h2 a, #mainZone h3 a, #mainZone h4 a, #mainZone h5 a {
+  color: #fff8dc;
+  background: transparent;
+}
+
+#mainZone p, #mainZone li {
+  line-height: 150%;
+}
+
+#footer {
+  clear: left;
+  background: #6386DE;
+  color: #fff;
+  border-top: 1px solid #fff;
+  font-size: 80%;
+  height: 1px; /* Holly hack */
+}
+
+html>body #footer {
+  position: fixed;
+  bottom: 0;
+  height: auto;
+}
+
+#footerLinks {
+  text-align: center;
+}
+
+#footer a, #footer a:visited {
+  color: #fff8dc;
+  background: transparent;
+}
+
+#footer p {
+  margin: 3px;
+  float: right;
+}
+
+#footer p+p {
+  float: left;
+}
+
+#footer br {
+  display: none;
+}
+
+img {
+  border: none;
+}
+
+.noPrint {
+  display: none;
+}
+
+.center table {
+  margin: 0 auto;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 3px;
+  border: 1px solid #9C9A9C;
+}
+
+th {
+  text-align: left;
+  color: #fff;
+  background: #8CAAE7;
+}
+
+td, th {
+  padding: 3px;
+  border: 1px solid #9C9A9C;
+  font-size: 82%;
+}
+
+.even {
+  background: #F7F3F7;
+  color: inherit;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.sqlcode {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 105%;
+  white-space: pre;
+  text-align: left;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+label {
+  cursor: pointer;
+}
+
+.requiredField {
+  font-weight: bold;
+}
+
+.error {
+  color: #d2691e;
+  background: transparent;
+  font-weight: bold;
+}
+
+.message {
+  background: #F7F3F7;
+  color: #000;
+  border: 1px solid #000;
+  margin: 3px 4em 1em 0;
+  padding: 3px;
+  font-weight: bold;
+}
+
+.advice {
+  font-weight: bold;
+}
+
+hr {
+  background: #9C9A9C;
+  color: #9C9A9C;
+  border: 1px solid #9C9A9C;
+  margin: 10px 0;
+}

@@ -1,0 +1,306 @@
+/* CSS based in www.serialz.to site */
+
+/* Layout */
+body {
+  margin: 0;
+  padding: 0;
+  background: #9ea985;
+  color: beige;
+  font-family: Trebuchet MS,arial,helvetica,sans-serif;
+  font-size: 13px;
+}
+
+#header {
+  background: #9ea985;
+  color: #fff;
+  height: 1px; /* Holly hack */
+}
+
+html>body #header {
+  height: auto;
+}
+
+#header h1 {
+  background: #9ea985;
+  color: #fff;
+  font-size: 18pt;
+  text-align: left;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+#subHeader {
+  height: 5em;
+}
+
+#headerInformation {
+  position: absolute;
+  top: 0;
+  right: 2ex;
+}
+
+.menuBar {
+  clear: both;
+  margin-top: 12px;
+  height: 0; /* IE 5.0 paranoid */
+}
+
+#tabs {
+  margin: 0;
+  padding: 0;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+#tabs li {
+  display: inline;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li#first a, li#first span {
+  border-left: 1px solid #dce0d3;
+}
+
+#tabs a, #tabs span {
+  border-right: 1px solid #dce0d3;
+  border-top: 1px solid #dce0d3;
+  margin: 0;
+  padding: 3px 10px;
+  float: left;
+}
+
+#tabs span {
+  background: #bbc2a9;
+  color: beige;
+  border-bottom: 1px solid #bbc2a9;
+}
+
+#sourceForgeLinks {
+  clear: both;
+  text-align: right;
+  background: #bbc2a9;
+  color: beige;
+  padding: 0 2ex 4px 0;
+  margin: -1px 0 0 0;
+  border: 1px solid #dce0d3;
+}
+
+#sideBar {
+  position: relative; /* IE hack */
+  padding-left: 1ex;
+  margin-top: -1px;
+  width: 150px;
+  float: left;
+  clear: left;
+  border-right: 1px solid #dce0d3;
+  border-bottom: 1px solid #dce0d3;
+  border-left: 1px solid #dce0d3;
+  background: #bbc2a9;
+  color: beige;
+  font-size: 10pt;
+}
+
+.sideBarLogin {
+  margin-top: 0;
+  margin-bottom: 3ex;
+}
+
+#mainZone {
+  line-height: 1.5em;
+  margin-left: 150px;
+  padding: 1ex 1em 1ex 2em; /* top right bottom left */
+}
+
+#footer {
+  padding: 1ex 4mm;
+  margin-left: 150px;
+  clear: right;
+  text-align: center;
+}
+
+/* Tables */
+.center table {
+  margin: 0 auto;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 3px;
+  border: 1px solid #dce0d3;
+}
+
+td, th, td.odd {
+  padding: 3px;
+  border: 1px solid #dce0d3;
+  font-size: 10pt;
+}
+
+td.odd {
+  font-size: 10pt;
+}
+
+/* Links */
+#sourceForgeLinks a {
+  color: #fff;
+}
+
+.linkList a, .linkList a:hover, .linkList .selected {
+  line-height: 1.25em;
+  display: block;
+  margin-bottom: 2ex;
+}
+
+.linkList a, .linkList a:visited, .linkList .subnavbar a {
+  color: #fff;
+  background: url(../images/bullet_normal.gif) no-repeat 0 3px;
+  padding: 0 2px 0 2.5ex;
+}
+
+.linkList .selected {
+  background: url(../images/bullet_selected.gif) no-repeat 0 3px;
+  padding-left: 2.5ex;
+}
+
+.linkList .subnavbar {
+  margin-left: 2ex;
+}
+
+.sideBarLogin a {
+  display: inline;
+}
+
+a:link, a:visited {
+  color: #fff;
+}
+
+#tabs a:link, #tabs a:visited {
+  color: #fff;
+  background: transparent;
+  text-decoration: none;
+}
+
+#tabs a:hover {
+  text-decoration: underline;
+}
+
+.even a {
+  font-size: 10pt;
+}
+
+/* Form styles */
+input, textarea, select {
+  font-family: Trebuchet MS,arial,helvetica,sans-serif;
+  font-size: 10pt;
+  border-width: 1px;
+  border-color: #dce0d3;
+  background: #374611;
+  color: beige;
+}
+
+input[type="submit"], input[type="button"], input[type="reset"] {
+  border-width: 1px;
+  font-weight: bold;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  background: #9ea985;
+  color: inherit;
+}
+
+label {
+  cursor: pointer;
+}
+
+.requiredField {
+  font-weight: bold;
+}
+
+/* Miscellaneous */
+#sideBarLogo p {
+  margin-bottom: 2ex;
+  text-align: center;
+}
+
+#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
+  vertical-align: middle;
+}
+
+#headerInformation p {
+  margin: 0;
+}
+
+.error {
+  color: #fff;
+  font-weight: bold;
+}
+
+#sideBar, .even {
+  background: #bbc2a9;
+  color: beige;
+  font-size: 10pt;
+}
+
+#tabs a, th {
+  background: #374611;
+  color: beige;
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.advice, .message {
+  font-size: 13px;
+}
+
+.message {
+  background: beige;
+  color: #000;
+  border: 1px solid #000;
+  margin: 3px 4em 1em 0;
+  padding: 3px;
+  font-weight: bold;
+}
+
+.advice {
+  font-weight: bold;
+}
+
+img {
+  border: none;
+}
+
+.sqlcode {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 10pt;
+  white-space: pre;
+  text-align: left;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+.noPrint, #sideBar hr {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+hr {
+  background: #dce0d3;
+  color: #dce0d3;
+  border: 1px solid #dce0d3;
+  margin: 10px 0;
+}

@@ -1,0 +1,323 @@
+/* CSS based in SuperfluousBanter.org site */
+
+/* Layout */
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  color: #000;
+  font-family: "trebuchet ms", verdana, helvetica, sans-serif;
+  font-size: 12px;
+}
+
+#header {
+  border-top: 13px solid #95bbae;
+  background: #fff;
+  color: #000;
+  height: 1px; /* Holly hack */
+}
+
+html>body #header {
+  height: auto;
+}
+
+#header h1 {
+  margin: 0;
+}
+
+#subHeader {
+  height: 5.8em;
+}
+
+#headerInformation {
+  position: absolute;
+  top: 2ex;
+  right: 2ex;
+}
+
+.menuBar {
+  border-top: 1px solid #e0ede9;
+  border-bottom: 1px solid #e0ede9;
+  background: #eef4f1;
+  padding: 0 0 0 10px;
+  margin: 0;
+  clear: both;
+  /*margin-top: 12px;*/
+  height: 0; /* IE 5.0 paranoid */
+}
+
+#tabs {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  white-space: nowrap;
+}
+
+#tabs li {
+  float: left;
+  font-family: verdana, arial, sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  margin: 0;
+  padding: 5px 0 4px 0;
+}
+
+li#first a, li#first span {
+  border-left: 1px dashed #d1e3db;
+}
+
+#tabs span {
+  color: #95bbae;
+  background: #deebe5;
+  padding: 5px 4px 4px 4px;
+}
+
+#sourceForgeLinks {
+  clear: both;
+  text-align: right;
+  background: #eef4f1;
+  color: #0ff;
+  padding: 4px 2ex 4px 0;
+  margin: 6px 0 0 0;
+  border-bottom: 1px solid #e0ede9;
+}
+
+#sideBar {
+  border-style: solid;
+  border-color: #efefef;
+  border-width: 0 1px 5px 1px;
+  background: #f8f8f8;
+  color: #bbb;
+  padding-bottom: 8px;
+  margin: 0 0 -6px 0;
+  font-family: helvetica, arial, sans-serif;
+  width: 150px;
+  float: left;
+}
+
+.linkList {
+  font-size: 11px;
+  list-style: none;
+  line-height: 13px;
+  margin: 0 8px 14px 11px;
+  padding: 0;
+}
+
+.linkList li {
+  padding-left: 13px;
+  margin-bottom: 2px;
+}
+
+.linkList a, .linkList a:hover, .linkList .selected {
+  line-height: 1.25em;
+  display: block;
+  margin-bottom: 2ex;
+}
+
+.linkList a:hover {
+  color: #000;
+}
+
+.linkList a:hover {
+  color: #999;
+}
+
+.sideBarLogin {
+  margin: 10px;
+}
+
+#mainZone {
+  line-height: 1.5em;
+  margin-left: 150px;
+  padding: 1ex 1em 1ex 2em; /* top right bottom left */
+}
+
+#footer {
+  border-top: 1px solid #efefef;
+  padding: 1ex 4mm;
+  margin-left: 150px;
+  clear: right;
+  text-align: center;
+}
+
+/* Tables */
+.center table {
+  margin: 0 auto;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  padding: 2px;
+  border: 1px solid #efefef;
+}
+
+th {
+  color: #94baa5;
+  background: #eff7f7;
+  text-align: center;
+}
+
+td {
+  padding: 2px;
+  border: 1px solid #efefef;
+}
+
+/* Links */
+#sideBar a, #sideBar a:link {
+  color: #000;
+}
+
+.linkList a, .linkList .subnavbar a {
+  background: url(../images/bullet_normal_grey.gif) no-repeat 0 2px;
+  padding: 0 2px 0 2.5ex;
+}
+
+.linkList .selected {
+  background: url(../images/bullet_selected_grey.gif) no-repeat 1px 2px;
+  padding-left: 2.5ex;
+}
+
+.linkList .subnavbar {
+  margin-left: 2ex;
+}
+
+.sideBarLogin a {
+  display: inline;
+}
+
+#tabs a, #tabs a:link, #sourceForgeLinks a, #sourceForgeLinks a:link {
+  color: #95bbae;
+  background: transparent;
+  margin: 0;
+  padding: 5px 9px 4px 9px;
+  border-right: 1px dashed #d1e3db;
+  text-decoration: none;
+}
+
+#tabs a:hover {
+  color: #74a893;
+  background: #d1e3db;
+}
+
+#sourceForgeLinks a:hover {
+  text-decoration: underline;
+}
+
+#mainZone a, #mainZone a:link, #mainZone a:visited,
+#footer a, #footer a:link, #footer a:visited {
+  color: #52b2ad;
+}
+
+/* Form styles */
+input, textarea, select {
+  font-family: verdana,sans-serif;
+  font-size: 12px;
+  border-width: 1px;
+  border-color: #000;
+  background: #fff;
+  color: #000;
+}
+input[type="submit"], input[type="button"], input[type="reset"] {
+  border-width: 1px;
+  font-weight: bold;
+  background: #eff7f7;
+}
+
+input[type="radio"], input[type="checkbox"] {
+  background: #000;
+  color: inherit;
+}
+
+/* Miscellaneous */
+#headerInformation p {
+  margin: 0;
+}
+
+#sideBarLogo p {
+  margin-bottom: 2ex;
+  text-align: center;
+}
+
+#header h1 img {
+  border-bottom: 1px solid #95bbae;
+}
+
+#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
+  vertical-align: middle;
+}
+
+#mainZone h1, #mainZone h2, #mainZone h3, #mainZone h4, #mainZone h5 {
+  color: #b5bab5;
+}
+
+.error {
+  color: #9c0000;
+  background: #fff;
+  font-weight: bold;
+}
+
+.advice {
+}
+
+.message {
+  font-weight: bold;
+}
+
+.even {
+  background: #fffbff;
+  color: #000;
+}
+
+img {
+  border: none;
+}
+
+.sqlcode {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 11px;
+  white-space: pre;
+  text-align: left;
+}
+
+.noWrap {
+  white-space: nowrap;
+}
+
+label {
+  cursor: pointer;
+  color: #bdba8c;
+}
+
+#sideBar hr {
+  background: #efefef;
+  color: #efefef;
+  border: 2px solid #efefef;
+}
+
+hr {
+  background: #b5bab5;
+  color: #b5bab5;
+  border: 1px solid #b5bab5;
+  margin: 10px 0; /* top-bottom right-left */
+}
+
+.requiredField {
+  font-weight: bold;
+}
+
+.noPrint, .separator {
+  display: none;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
