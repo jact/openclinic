@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: home.php,v 1.3 2004/05/15 16:37:24 jact Exp $
+ * $Id: home.php,v 1.4 2004/07/21 18:05:29 jact Exp $
  */
 
 /**
@@ -24,9 +24,9 @@
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    @$sessLogin = $_SESSION["loginSession"];
+    $sessLogin = isset($_SESSION["loginSession"]) ? $_SESSION["loginSession"] : "";
     echo '<div class="sideBarLogin">';
-    if (isset($sessLogin) && !empty($sessLogin) && !isset($_SESSION["invalidToken"]))
+    if ( !empty($sessLogin) && !isset($_SESSION["invalidToken"]) )
     {
       echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="' . _("logout") . '" title="logout" /></a>';
       echo '<br />';
