@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.1 2004/03/24 19:09:56 jact Exp $
+ * $Id: index.php,v 1.2 2004/04/18 14:18:15 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Index page of installation process
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 24/03/04 20:09
  */
 
   error_reporting(55); // E_ALL & ~E_NOTICE - normal
@@ -104,9 +103,10 @@
       </p>
 
       <div>
-        <?php showInputButton("install_file", _("Install file")); ?>
-
-        <?php showInputButton("cancel_install", _("Cancel"), "button", 'onclick="parent.location=\'./index.php\'"'); ?>
+        <?php
+          showInputButton("install_file", _("Install file"));
+          showInputButton("cancel_install", _("Cancel"), "button", 'onclick="parent.location=\'./index.php\'"');
+        ?>
       </div>
     </form>
 <?php

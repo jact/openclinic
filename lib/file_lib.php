@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: file_lib.php,v 1.1 2004/01/29 15:03:30 jact Exp $
+ * $Id: file_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Set of functions connected to files management
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 29/01/04 16:03
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

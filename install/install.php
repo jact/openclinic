@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.1 2004/03/24 19:13:58 jact Exp $
+ * $Id: install.php,v 1.2 2004/04/18 14:18:15 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Installation process screen
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 24/03/04 20:13
  */
 
   error_reporting(55); // E_ALL & ~E_NOTICE - normal
@@ -63,12 +62,12 @@
         </p>
 
         <div>
-          <?php showInputButton("continue", _("Continue")); ?>
-
-          <?php showInputButton("cancel", _("Cancel"), "button", 'onclick="parent.location=\'../install/cancel_msg.php\'"'); ?>
+          <?php
+            showInputButton("continue", _("Continue"));
+            showInputButton("cancel", _("Cancel"), "button", 'onclick="parent.location=\'../install/cancel_msg.php\'"');
+          ?>
         </div>
       </form>
-
 <?php
       $setQ->close();
       include_once("../install/footer.php");

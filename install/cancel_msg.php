@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: cancel_msg.php,v 1.1 2004/01/29 14:56:22 jact Exp $
+ * $Id: cancel_msg.php,v 1.2 2004/04/18 14:18:15 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Installation cancelled screen
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 29/01/04 15:56
  */
 
   require_once("../install/header.php"); // i18n l10n

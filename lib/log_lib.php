@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.1 2004/03/20 20:45:10 jact Exp $
+ * $Id: log_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Set of log stats functions
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 20/03/04 21:45
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

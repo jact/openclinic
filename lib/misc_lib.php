@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: misc_lib.php,v 1.1 2004/02/28 17:27:54 jact Exp $
+ * $Id: misc_lib.php,v 1.2 2004/04/18 14:25:40 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Set of miscelanean functions
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 28/02/04 18:27
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])

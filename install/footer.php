@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.1 2004/03/19 17:57:26 jact Exp $
+ * $Id: footer.php,v 1.2 2004/04/18 14:18:15 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the common foot of the installation pages
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 19/03/04 18:57
  */
 ?>
 
