@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_new_form.php,v 1.3 2004/04/24 18:02:18 jact Exp $
+ * $Id: test_new_form.php,v 1.4 2004/08/01 09:24:04 jact Exp $
  */
 
 /**
@@ -79,9 +79,9 @@
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
-  echo "<br />\n";
+  echo "<br />\n"; // should be deleted
 
-  debug($postVars);
+  //debug($postVars);
 
   require_once("../shared/form_errors_msg.php");
 ?>
@@ -99,7 +99,7 @@
 </form>
 
 <?php
-  echo '<p class="advice">* ' . _("Note: The fields with * are required.") . "</p>\n";
+  showMessage('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");
 ?>
