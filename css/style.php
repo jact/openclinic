@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.php,v 1.5 2004/07/03 15:43:55 jact Exp $
+ * $Id: style.php,v 1.6 2004/07/07 17:54:40 jact Exp $
  */
 
 /**
@@ -35,13 +35,14 @@ body {
   font-size: <?php echo STYLE_BODY_FONT_SIZE; ?>pt;
 }
 
-.headerTitle {
+#header h1 {
   background: <?php echo STYLE_TITLE_BG_COLOR; ?>;
   color: <?php echo STYLE_TITLE_FONT_COLOR; ?>;
   font-family: <?php echo preg_replace("/;$/", "", STYLE_TITLE_FONT_FAMILY); ?>;
   font-size: <?php echo STYLE_TITLE_FONT_SIZE; ?>pt;
   text-align: <?php echo STYLE_TITLE_TEXT_ALIGN; ?>;
   font-weight: <?php echo (STYLE_TITLE_FONT_BOLD ? "bold" : "normal"); ?>;
+  margin-top: 0;
 }
 
 .error {
@@ -173,7 +174,7 @@ html > body #header {
 }
 
 #subHeader {
-  height: <?php echo (($tab == "doc") ? "4" : "5"); ?>em;
+  height: 5em;
 }
 
 #headerInformation {
