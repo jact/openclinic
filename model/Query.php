@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.1 2004/03/22 19:29:30 jact Exp $
+ * $Id: Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the class Query
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 22/03/04 20:29
  */
 
 require_once("../classes/DbConnection.php");
@@ -23,7 +22,6 @@ require_once("../classes/DbConnection.php");
  * Query parent data access component class for all data access components
  ********************************************************************
  * @author jact <jachavar@terra.es>
- * @version 0.5
  * @access public
  ********************************************************************
  * Methods:

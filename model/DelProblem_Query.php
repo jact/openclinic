@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelProblem_Query.php,v 1.1 2004/01/29 14:25:06 jact Exp $
+ * $Id: DelProblem_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the class DelProblem_Query
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 29/01/04 15:25
  */
 
 require_once("../classes/Query.php");
@@ -23,7 +22,6 @@ require_once("../classes/Query.php");
  * DelProblem_Query data access component for deleted medical problems
  ********************************************************************
  * @author jact <jachavar@terra.es>
- * @version 0.2
  * @access public
  ********************************************************************
  * Methods:

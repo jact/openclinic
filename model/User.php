@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User.php,v 1.1 2004/02/28 15:55:42 jact Exp $
+ * $Id: User.php,v 1.2 2004/04/18 14:40:46 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the class User
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 28/02/04 16:55
  */
 
 define("USER_PROFILE", 3); // doctor profile by default
@@ -23,7 +22,6 @@ define("USER_PROFILE", 3); // doctor profile by default
  * User represents an application user.
  ********************************************************************
  * @author jact <jachavar@terra.es>
- * @version 0.6
  * @access public
  ********************************************************************
  * Methods:

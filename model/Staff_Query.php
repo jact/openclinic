@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.1 2004/02/29 12:27:34 jact Exp $
+ * $Id: Staff_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the class Staff_Query
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 29/02/04 13:27
  */
 
 require_once("../classes/Query.php");
@@ -24,7 +23,6 @@ require_once("../classes/Staff.php");
  * Staff_Query data access component for clinic staff members
  ********************************************************************
  * @author jact <jachavar@terra.es>
- * @version 0.3
  * @access public
  ********************************************************************
  * Methods:

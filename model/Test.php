@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test.php,v 1.1 2004/02/18 19:44:10 jact Exp $
+ * $Id: Test.php,v 1.2 2004/04/18 14:40:46 jact Exp $
  */
 
 /**
@@ -14,13 +14,11 @@
  * Contains the class Medical Test
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 18/02/04 20:44
  */
 
 /*
  ********************************************************************
  * @author jact <jachavar@terra.es>
- * @version 0.5
  * @access public
  ********************************************************************
  * Methods:

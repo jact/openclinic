@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.1 2004/01/29 14:26:48 jact Exp $
+ * $Id: Problem_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains the class Problem_Query
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 29/01/04 15:26
  */
 
 require_once("../classes/Query.php");
@@ -24,7 +23,6 @@ require_once("../classes/Problem.php");
  * Problem_Query data access component for medical problems
  ********************************************************************
  * @author jact <jachavar@terra.es>
- * @version 0.4
  * @access public
  ********************************************************************
  * Methods:
