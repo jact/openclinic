@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.10 2004/07/28 16:33:52 jact Exp $
+ * $Id: index.php,v 1.11 2004/08/05 14:14:28 jact Exp $
  */
 
 /**
@@ -90,7 +90,9 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_POST['view_file']) && !empty($_FILES['sql_file']['name']) && $_FILES['sql_file']['size'] > 0)
   {
-    $sqlQuery = fread(fopen($_FILES['sql_file']['tmp_name'], 'r'), $_FILES['sql_file']['size']);
+    $fp = fopen($_FILES['sql_file']['tmp_name'], 'r');
+    $sqlQuery = fread($fp, $_FILES['sql_file']['size']);
+    fclose($fp);
     $sqlQuery = safeText($sqlQuery, false);
 
     echo '<pre>';
