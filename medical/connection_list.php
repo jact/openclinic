@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.6 2004/07/10 16:21:06 jact Exp $
+ * $Id: connection_list.php,v 1.7 2004/07/31 16:30:03 jact Exp $
  */
 
 /**
@@ -76,7 +76,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]))
   {
-    echo '<p>' . _("Connection problems have been added.") . "</p>\n";
+    showMessage(_("Connection problems have been added."), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    echo '<p>' . sprintf(_("Connection with medical problem, %s, has been deleted."), urldecode($_GET["info"])) . "</p>\n";
+    showMessage(sprintf(_("Connection with medical problem, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
@@ -116,33 +116,19 @@
   if (count($connArray) == 0)
   {
     $connQ->close();
-    echo '<p>' . _("No connections defined for this medical problem.") . "</p>\n";
+    showMessage(_("No connections defined for this medical problem."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
-?>
 
-<h3><?php echo _("Connection Problems List:"); ?></h3>
+  echo '<h3>' . _("Connection Problems List:") . "</h3>\n";
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="<?php echo ($hasMedicalAdminAuth ? 2 : 1); ?>">
-        <?php echo _("Function"); ?>
-      </th>
+  $thead = array(
+    _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),
+    _("Opening Date"),
+    _("Wording")
+  );
 
-      <th>
-        <?php echo _("Opening Date"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Wording"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
   $problemQ = new Problem_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -150,7 +136,7 @@
     showQueryError($problemQ);
   }
 
-  $rowClass = "odd";
+  $tbody = array();
   for ($i = 0; $i < count($connArray); $i++)
   {
     $problemQ->select($connArray[$i]);
@@ -166,44 +152,29 @@
       $problemQ->close();
       showFetchError($problemQ);
     }
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td>
-        <a href="../medical/problem_view.php?key=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $idPatient; ?>"><?php echo _("view"); ?></a>
-      </td>
 
-<?php
+    $row = '<a href="../medical/problem_view.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $idPatient . '">' . _("view") . '</a>';
+    $row .= OPEN_SEPARATOR;
+
     if ($hasMedicalAdminAuth)
     {
-?>
-      <td>
-        <a href="../medical/connection_del_confirm.php?key=<?php echo $idProblem; ?>&amp;conn=<?php echo $problem->getIdProblem(); ?>&amp;pat=<?php echo $idPatient; ?>&amp;wording=<?php echo fieldPreview($problem->getWording()); ?>"><?php echo _("del"); ?></a>
-      </td>
-<?php
+      $row .= '<a href="../medical/connection_del_confirm.php?key=' . $idProblem . '&amp;conn=' . $problem->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;wording=' . fieldPreview($problem->getWording()) . '">' . _("del") . '</a>';
+      $row .= OPEN_SEPARATOR;
     } // end if
-?>
 
-      <td>
-        <?php echo $problem->getOpeningDate(); ?>
-      </td>
+    $row .= $problem->getOpeningDate();
+    $row .= OPEN_SEPARATOR;
 
-      <td>
-        <?php echo fieldPreview($problem->getWording()); ?>
-      </td>
-    </tr>
-<?php
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
-  } // end while
+    $row .= fieldPreview($problem->getWording());
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
+  } // end for
   $problemQ->freeResult();
   $problemQ->close();
-?>
-  </tbody>
-</table>
-
-<?php
   unset($problemQ);
   unset($problem);
+
+  showTable($thead, $tbody, null);
 
   require_once("../shared/footer.php");
 ?>
