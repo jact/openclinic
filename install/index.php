@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.4 2004/06/06 11:40:23 jact Exp $
+ * $Id: index.php,v 1.5 2004/06/07 19:06:45 jact Exp $
  */
 
 /**
@@ -14,6 +14,7 @@
  * Index page of installation process
  ********************************************************************
  * Author: jact <jachavar@terra.es>
+ * TODO: hacer función para limpiar contenido malicioso (ponerla en validator_lib.php)
  */
 
   error_reporting(55); // E_ALL & ~E_NOTICE - normal
@@ -33,7 +34,7 @@
     $table = str_replace('.sql', '', $table);
 
     $_POST['sql_query'] = trim($_POST['sql_query']);
-    $_POST['sql_query'] = preg_replace("/<\?php.*?\?>/is", "", $_POST['sql_query']); // strip php code
+    $_POST['sql_query'] = preg_replace("/<\?.*?\?>/is", "", $_POST['sql_query']); // strip php code
     //$_POST['sql_query'] = preg_replace("/(<.*?)(=)(?!\"|\')(.*?)(>|[[:space:]])/is", "", $_POST['sql_query']); // strip html tags // does not work
     //$_POST['sql_query'] = preg_replace("/<%.*?%>/is", "", $_POST['sql_query']); // strip asp, jsp code // does not work
     $_POST['sql_query'] = preg_replace("/<script[^>].*?<\/script>/is", "", $_POST['sql_query']); // strip script code
@@ -89,6 +90,10 @@
   if (isset($_POST['view_file']) && !empty($_FILES['sql_file']['name']) && $_FILES['sql_file']['size'] > 0)
   {
     $sqlQuery = fread(fopen($_FILES['sql_file']['tmp_name'], 'r'), $_FILES['sql_file']['size']);
+    $sqlQuery = preg_replace("/<\?.*?\?>/is", "", $sqlQuery); // strip php code
+    $sqlQuery = preg_replace("/(<.*?)(=)(?!\"|\')(.*?)(>|[[:space:]])/is", "", $sqlQuery); // strip html tags // does not work
+    $sqlQuery = preg_replace("/<%.*?%>/is", "", $sqlQuery); // strip asp, jsp code
+    $sqlQuery = preg_replace("/<script[^>].*?<\/script>/is", "", $sqlQuery); // strip script code
 
     echo '<pre>';
     echo $sqlQuery;
@@ -100,14 +105,22 @@
       <div>
         <?php
           showInputHidden("sql_file", $_POST['sql_file']);
-          showInputHidden("sql_query", preg_replace("/<\?php.*?\?>/is", "", $sqlQuery)); // strip php code
+          showInputHidden("sql_query", preg_replace("/<\?.*?\?>/is", "", $sqlQuery)); // strip php code
         ?>
       </div>
 
+      <?php
+        $filename = explode(".", $_FILES['sql_file']['name']);
+        if (in_array($filename[0], $tables))
+        {
+      ?>
       <p>
         <?php showCheckBox("drop", "drop", "true"); ?>
         <label for="drop"><?php echo _("Add 'DROP table' sentence"); ?></label>
       </p>
+      <?php
+      } //end if
+      ?>
 
       <div>
         <?php
