@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: cancel_msg.php,v 1.2 2004/04/18 14:18:15 jact Exp $
+ * $Id: cancel_msg.php,v 1.3 2004/07/28 16:33:08 jact Exp $
  */
 
 /**
@@ -20,7 +20,7 @@
 
   echo '<h1>' . _("OpenClinic Installation:") . "</h1>\n";
 
-  echo '<p>' . _("OpenClinic install process has been cancelled.") . "</p>\n";
+  echo '<p class="note">' . _("OpenClinic install process has been cancelled.") . "</p>\n";
 
   echo '<p><a href="../install.html">' . _("View Install Instructions") . "</a></p>\n";
 
