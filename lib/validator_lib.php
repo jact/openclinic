@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: validator_lib.php,v 1.6 2004/09/22 18:20:04 jact Exp $
+ * $Id: validator_lib.php,v 1.7 2004/10/03 11:18:20 jact Exp $
  */
 
 /**
@@ -167,5 +167,39 @@ function safeText($text, $allowTags = true, $includeEvents = true)
   $value = ((get_magic_quotes_gpc()) ? $value : addslashes($value));
 
   return $value;
+}
+
+/*
+ * array safeArray(array &$array)
+ ********************************************************************
+ * This function sanitize an array values of suspicious contents
+ ********************************************************************
+ * @param array &$array
+ * @return array sanitized array
+ * @access public
+ * @see safeText() for how they are removed
+ * @since 0.7
+ */
+function safeArray(&$array)
+{
+  if ( !is_array($array) )
+  {
+    return null;
+  }
+
+  $safeArray = array();
+  foreach ($array as $key => $value)
+  {
+    if (is_array($value))
+    {
+      $safeArray[$key] = safeArray($value);
+    }
+    else
+    {
+      $safeArray[$key] = safeText($value, false, false);
+    }
+  }
+
+  return $safeArray;
 }
 ?>
