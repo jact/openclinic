@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del.php,v 1.5 2004/07/10 16:00:08 jact Exp $
+ * $Id: user_del.php,v 1.6 2004/10/04 18:02:47 jact Exp $
  */
 
 /**
@@ -24,11 +24,6 @@
   //$restrictInDemo = true;
   $returnLocation = "../admin/user_list.php";
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/User_Query.php");
-  require_once("../lib/error_lib.php");
-
   ////////////////////////////////////////////////////////////////////
   // Checking for post vars. Go back to users list if none found.
   ////////////////////////////////////////////////////////////////////
@@ -38,11 +33,17 @@
     exit();
   }
 
+  require_once("../shared/read_settings.php");
+  require_once("../shared/login_check.php");
+  require_once("../classes/User_Query.php");
+  require_once("../lib/error_lib.php");
+  require_once("../lib/validator_lib.php");
+
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars
   ////////////////////////////////////////////////////////////////////
   $idUser = intval($_POST["id_user"]);
-  $login = $_POST["login"];
+  $login = safeText($_POST["login"]);
 
   ////////////////////////////////////////////////////////////////////
   // Delete user

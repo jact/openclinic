@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del.php,v 1.6 2004/08/05 14:27:07 jact Exp $
+ * $Id: theme_del.php,v 1.7 2004/10/04 18:00:31 jact Exp $
  */
 
 /**
@@ -37,13 +37,14 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Theme_Query.php");
   require_once("../lib/error_lib.php");
+  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars
   ////////////////////////////////////////////////////////////////////
   $idTheme = intval($_POST["id_theme"]);
-  $name = $_POST["name"];
-  $file = $_POST["file"];
+  $name = safeText($_POST["name"]);
+  $file = safeText($_POST["file"]);
 
   ////////////////////////////////////////////////////////////////////
   // Delete theme
@@ -66,7 +67,7 @@
 
   if ( !in_array($file, $reservedCSSFiles) )
   {
-    @unlink(dirname($_SERVER['SCRIPT_FILENAME']) . '/../css/' . $file);
+    @unlink(dirname($_SERVER['SCRIPT_FILENAME']) . '/../css/' . basename($file));
   }
 
   ////////////////////////////////////////////////////////////////////
