@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.6 2004/07/07 17:23:21 jact Exp $
+ * $Id: relative_search.php,v 1.7 2004/08/01 09:18:01 jact Exp $
  */
 
 /**
@@ -42,18 +42,10 @@
   // Retrieving post vars and scrubbing the data
   ////////////////////////////////////////////////////////////////////
   $idPatient = $_POST["id_patient"];
-
-  if (isset($_POST["page"]))
-  {
-    $currentPageNmbr = $_POST["page"];
-  }
-  else
-  {
-    $currentPageNmbr = 1;
-  }
+  $currentPageNmbr = (isset($_POST["page"])) ? $_POST["page"] : 1;
   $searchType = $_POST["search_type"];
   $logical = $_POST["logical"];
-  $limit = $_POST["limit"];
+  $limit = (isset($_POST["limit"])) ? $_POST["limit"] : 0;
 
   // remove slashes added by form post
   $searchText = stripslashes(trim($_POST["search_text"]));
@@ -111,12 +103,12 @@
   if ($patQ->getRowCount() == 0)
   {
     $patQ->close();
-    echo '<p>' . _("No results found.") . "</p>\n";
+    showMessage(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
 
-  debug($_POST);
+  //debug($_POST);
 ?>
 
 <!-- JavaScript to post back to this page -->
@@ -209,67 +201,45 @@ function changePage(page)
 <!-- Printing result table -->
 <form method="post" action="../medical/relative_new.php">
   <div>
-    <?php showInputHidden("id_patient", $_POST["id_patient"]); ?>
-
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2">
-            <?php echo _("Search Results"); ?>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
 <?php
-  $rowClass = "odd";
+  showInputHidden("id_patient", $_POST["id_patient"]);
+
+  $thead = array(
+    _("Search Results") => array('colspan' => 2)
+  );
+
+  $options = array(
+    0 => array('align' => 'right')
+  );
+
+  $tbody = array();
   while ($pat = $patQ->fetch())
   {
-?>
-        <tr class="<?php echo $rowClass; ?>">
-          <td class="number">
-            <?php echo $patQ->getCurrentRow(); ?>.
-            <input type="checkbox" name="check[]" value="<?php echo $pat->getIdPatient(); ?>" />
-          </td>
+    $row = $patQ->getCurrentRow() . '.';
+    $row .= '<input type="checkbox" name="check[]" value="' . $pat->getIdPatient() . '" />';
+    $row .= OPEN_SEPARATOR;
 
-          <td>
-            <!--a href="../medical/patient_view.php?key=<?php echo $pat->getIdPatient(); ?>&amp;reset=Y"--><?php echo $pat->getSurname1(); ?> <?php echo $pat->getSurname2(); ?>, <?php echo $pat->getFirstName();?><!--/a-->
-            <?php
-              if ($val != "")
-              {
-                echo "<br />" . $key . " ";
-                eval("print($val);");
-                echo "<br />\n";
-              }
-            ?>
-          </td>
-        </tr>
-<?php
-    // swap row color
-    ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+    $row .= $pat->getSurname1() . ' ' . $pat->getSurname2() . ' ' . $pat->getFirstName();
+
+    if ($val != "")
+    {
+      $row .= "<br />" . $key . " ";
+      eval("\$row .= $val;");
+    }
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end while
   $patQ->freeResult();
   $patQ->close();
   unset($patQ);
+
+  $tfoot = array(
+    0 => '<a href="#" onclick="setCheckboxes(1, \'check[]\', true); return false;">' . _("Select all") . '</a>' . ' / ' . '<a href="#" onclick="setCheckboxes(1, \'check[]\', false); return false;">' . _("Unselect all") . '</a>',
+    1 => htmlInputButton("button1", _("Add selected to Relatives List"))
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
 ?>
-
-        <tr class="<?php echo $rowClass; ?>">
-          <td colspan="2" class="center">
-            <a href="#" onclick="setCheckboxes(1, 'check[]', true); return false;"><?php echo _("Select all"); ?></a>
-
-            &nbsp;/&nbsp;
-
-            <a href="#" onclick="setCheckboxes(1, 'check[]', false); return false;"><?php echo _("Unselect all"); ?></a>
-          </td>
-        </tr>
-
-        <tr>
-          <td colspan="2" class="center">
-            <?php showInputButton("button1", _("Add selected to Relatives List")); ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
   </div>
 </form>
 
