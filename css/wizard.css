@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.css,v 1.2 2004/04/18 14:05:41 jact Exp $
+ * $Id: wizard.css,v 1.3 2004/08/18 16:19:20 jact Exp $
  */
 
 /**
@@ -29,8 +29,8 @@ body {
 h1 {
   font-family: helvetica, arial, verdana, sans-serif;
   font-size: 24px;
-  color: #fff;
   border-bottom: 2px solid #3cb371;
+  color: #fff;
   background: #99cc32;
   margin: 0;
   padding: 0;
@@ -117,11 +117,13 @@ button {
 }
 .note {
   font-weight: bold;
-  color: crimson;
+  color: #dc143c;
+  background: transparent;
 }
 .error {
   font-size: 16px;
-  color: crimson;
+  color: #dc143c;
+  background: transparent;
 }
 .center {
   text-align: center;

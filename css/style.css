@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.5 2004/07/28 16:56:03 jact Exp $
+ * $Id: style.css,v 1.6 2004/08/18 16:19:20 jact Exp $
  */
 
 /**
@@ -56,7 +56,7 @@ h3 {
   color: #fff;
 }
 .note {
-  color: crimson;
+  color: #dc143c;
   font-weight: bold;
 }
 .error {
@@ -75,7 +75,7 @@ h3 {
 }
 .note-code {
   padding: 10px;
-  border: 2px solid crimson;
+  border: 2px solid #dc143c;
 }
 .programlisting {
   padding-right: 10px;
@@ -124,7 +124,7 @@ html>body .linkList li {
 #content .linkList a, #content .linkList a:link, #content .linkList a:visited {
   background: #98aab1;
   color: #fff;
-  border: 1px solid white;
+  border: 1px solid #fff;
   bottom: 2px;
   cursor: pointer;
   display: inline;
@@ -141,7 +141,7 @@ html>body .linkList li {
   color: gold;
 }
 .linkList a:focus, #content .linkList a:focus {
-  background: #0000aa;
+  background: #00a;
   color: #fff;
   bottom: 1px;
   position: relative;
