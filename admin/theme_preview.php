@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.8 2004/06/20 17:20:23 jact Exp $
+ * $Id: theme_preview.php,v 1.9 2004/06/30 18:49:56 jact Exp $
  */
 
 /**
@@ -132,10 +132,6 @@
     <span class="headerTitle">
       <?php echo _("Clinic Name"); ?>
     </span>
-
-    <div id="headerInformation">
-      <a href="#" onclick="window.close(); return false;"><?php echo _("Close Window"); ?></a>
-    </div><!-- End #headerInformation -->
   </div><!-- End #subHeader -->
 
   <!-- Tabs -->
@@ -152,7 +148,7 @@
   <!-- End Tabs -->
 
   <div id="sourceForgeLinks">
-    &nbsp;
+    <a href="#" onclick="window.close(); return false;"><?php echo _("Close Window"); ?></a>
   </div><!-- End #sourceForgeLinks -->
 </div><!-- End #header -->
 <!-- End Header -->
