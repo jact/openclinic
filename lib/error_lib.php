@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: error_lib.php,v 1.7 2004/07/21 18:16:02 jact Exp $
+ * $Id: error_lib.php,v 1.8 2004/08/23 17:59:08 jact Exp $
  */
 
 /**
@@ -146,7 +146,7 @@ function showErrorMsg($errorMsg, $errorType = E_USER_WARNING)
 function backTrace($context)
 {
   $calls = "\nBacktrace:";
-  $trace = debug_backtrace();
+  $trace = (function_exists("debug_backtrace") ? debug_backtrace() : null); // SF.net DEMO version PHP 4.1.2
 
   // Start at 2 -- ignore this function (0) and the customHandler() (1)
   for ($x = 2; $x < count($trace); $x++)
