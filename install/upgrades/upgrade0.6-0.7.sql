@@ -1,7 +1,7 @@
 # File to upgrade OpenClinic from 0.6 to 0.7
 # After use this, you can delete it
 
-UPDATE setting_tbl SET version='0.7.20040515';
+UPDATE setting_tbl SET version='0.7.20040704';
 
 INSERT INTO theme_tbl VALUES (
   NULL, 'mezzoblue',
@@ -11,3 +11,5 @@ INSERT INTO theme_tbl VALUES (
   '#7da4d4', 'verdana,tahoma,sans-serif', 9, 'N', '#fff', '#e5ecf8',
   '#a5baf7', 1, 3
 );
+
+DROP TABLE IF EXISTS profile_tbl;
