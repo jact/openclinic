@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.1 2004/04/04 21:30:26 jact Exp $
+ * $Id: read_settings.php,v 1.2 2004/04/14 20:59:39 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * Contains general, i18n, theme and system constants of the program
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 04/04/2004 23:30
  */
 
   if (str_replace("\\", "/", __FILE__) == $_SERVER['SCRIPT_FILENAME'])
