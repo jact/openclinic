@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: misc_lib.php,v 1.3 2004/05/24 21:15:29 jact Exp $
+ * $Id: misc_lib.php,v 1.4 2004/07/05 17:42:36 jact Exp $
  */
 
 /**
@@ -38,17 +38,16 @@
  */
 function fieldPreview($field)
 {
-  $preview = "";
-  if ( !defined("FIELD_PREVIEW_LIMIT") )
+  if ( !defined("OPEN_FIELD_PREVIEW_LIMIT") )
   {
-    return $preview; // global_constants.php is not included
+    return $field; // global_constants.php is not included
   }
 
   $array = explode(" ", $field);
   $preview = array_shift($array); // first word at least
   foreach ($array as $value)
   {
-    if (strlen($preview . $value) < FIELD_PREVIEW_LIMIT)
+    if (strlen($preview . $value) < OPEN_FIELD_PREVIEW_LIMIT)
     {
       $preview .= " " . $value;
     }
