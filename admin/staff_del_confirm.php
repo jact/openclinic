@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del_confirm.php,v 1.4 2004/04/24 18:02:35 jact Exp $
+ * $Id: staff_del_confirm.php,v 1.5 2004/07/28 17:38:15 jact Exp $
  */
 
 /**
@@ -64,40 +64,23 @@
 ?>
 
 <form method="post" action="../admin/staff_del.php">
-  <div class="center">
-    <?php showInputHidden("id_member", $idMember); ?>
+  <h3><?php echo _("Delete Staff Member"); ?></h3>
 
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <?php echo _("Delete Staff Member"); ?>
-          </th>
-        </tr>
-      </thead>
+  <?php showMessage(sprintf(_("Are you sure you want to delete staff member, %s %s %s?"), $firstName, $surname1, $surname2)); ?>
 
-      <tbody>
-        <tr>
-          <td>
-          <?php echo sprintf(_("Are you sure you want to delete staff member, %s %s %s?"), $firstName, $surname1, $surname2); ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="center">
-            <?php
-              showInputButton("delete", _("Delete"));
-              showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-            ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <p>
+    <?php
+      showInputHidden("id_member", $idMember);
+      showInputButton("delete", _("Delete"));
+      //showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
+    ?>
+  </p>
 </form>
 
+<hr />
+
 <?php
-  echo '<p class="advice">* ' . _("Note: The del function will delete the related user too (if exists).") . "</p>\n";
+  showMessage('* ' . _("Note: The del function will delete the related user too (if exists)."));
 
   require_once("../shared/footer.php");
 ?>
