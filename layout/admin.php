@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: admin.php,v 1.2 2004/04/18 14:30:07 jact Exp $
+ * $Id: admin.php,v 1.3 2004/06/16 19:37:27 jact Exp $
  */
 
 /**
@@ -58,10 +58,10 @@
     : '<a href="../admin/user_list.php">' . _("Users") . '</a>';
   echo "<span class='noPrint'> | </span>\n";
 
-  echo ($nav == "profiles")
+  /*echo ($nav == "profiles")
     ? '<span class="selected">' . _("Profiles") . '</span>'
     : '<a href="../admin/profile_list.php">' . _("Profiles") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+  echo "<span class='noPrint'> | </span>\n";*/ // for better chance
 
   echo ($nav == "dump")
     ? '<span class="selected">' . _("Dumps") . '</span>'
