@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.4 2004/05/24 22:12:44 jact Exp $
+ * $Id: Patient.php,v 1.5 2004/06/20 17:20:58 jact Exp $
  */
 
 /**
@@ -323,7 +323,9 @@ class Patient
     if ($view)
     {
       $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_birthDate);
-      return ($this->_birthDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
+      return ($this->_birthDate != "0000-00-00")
+               ? (($this->_birthDate >= "1970-01-01") ? date(_("Y-m-d"), strtotime($temp)) : $this->_birthDate)
+               : "";
     }
     else
     {
@@ -376,7 +378,9 @@ class Patient
     if ($view)
     {
       $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_deceaseDate);
-      return ($this->_deceaseDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
+      return ($this->_deceaseDate != "0000-00-00")
+               ? (($this->_deceaseDate >= "1970-01-01") ? date(_("Y-m-d"), strtotime($temp)) : $this->_deceaseDate)
+               : "";
     }
     else
     {
