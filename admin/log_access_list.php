@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: log_access_list.php,v 1.3 2004/06/07 18:48:28 jact Exp $
  */
 
 /**
@@ -83,14 +83,14 @@
   }
   else
   {
+    echo '<h3>' . _("Access Logs List:") . "</h3>\n";
+    echo '<p><strong>' . sprintf(_("%d accesses."), $total) . "</strong></p>\n";
 ?>
-
-<h3><?php echo _("Access Logs List:"); ?></h3>
 
 <table>
   <thead>
     <tr>
-      <th>
+      <th colspan="2">
         <?php echo _("Access Date"); ?>
       </th>
 
@@ -106,13 +106,18 @@
 
   <tbody>
 <?php
+    $i = 1;
     $rowClass = "odd";
     while ($access = $accessQ->fetchAccess())
     {
 ?>
     <tr class="<?php echo $rowClass; ?>">
+      <td class="number">
+        <?php echo $i++ . "."; ?>
+      </td>
+
       <td>
-        <?php echo $access["access_date"]; ?>
+        <?php echo localDate($access["access_date"]); ?>
       </td>
 
       <td class="center">

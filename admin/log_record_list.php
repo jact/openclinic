@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.3 2004/05/31 19:47:53 jact Exp $
+ * $Id: log_record_list.php,v 1.4 2004/06/07 18:48:29 jact Exp $
  */
 
 /**
@@ -83,14 +83,14 @@
   }
   else
   {
+    echo '<h3>' . _("Record Logs List:") . "</h3>\n";
+    echo '<p><strong>' . sprintf(_("%d transactions."), $total) . "</strong></p>\n";
 ?>
-
-<h3><?php echo _("Record Logs List:"); ?></h3>
 
 <table>
   <thead>
     <tr>
-      <th>
+      <th colspan="2">
         <?php echo _("Access Date"); ?>
       </th>
 
@@ -118,13 +118,18 @@
 
   <tbody>
 <?php
+    $i = 1;
     $rowClass = "odd";
     while ($record = $recordQ->fetchRecord())
     {
 ?>
     <tr class="<?php echo $rowClass; ?> center">
+      <td class="number">
+        <?php echo $i++ . "."; ?>
+      </td>
+
       <td>
-        <?php echo $record["access_date"]; ?>
+        <?php echo localDate($record["access_date"]); ?>
       </td>
 
       <td>
