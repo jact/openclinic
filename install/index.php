@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.3 2004/04/24 17:44:41 jact Exp $
+ * $Id: index.php,v 1.4 2004/06/06 11:40:23 jact Exp $
  */
 
 /**
@@ -34,6 +34,10 @@
 
     $_POST['sql_query'] = trim($_POST['sql_query']);
     $_POST['sql_query'] = preg_replace("/<\?php.*?\?>/is", "", $_POST['sql_query']); // strip php code
+    //$_POST['sql_query'] = preg_replace("/(<.*?)(=)(?!\"|\')(.*?)(>|[[:space:]])/is", "", $_POST['sql_query']); // strip html tags // does not work
+    //$_POST['sql_query'] = preg_replace("/<%.*?%>/is", "", $_POST['sql_query']); // strip asp, jsp code // does not work
+    $_POST['sql_query'] = preg_replace("/<script[^>].*?<\/script>/is", "", $_POST['sql_query']); // strip script code
+    //debug($_POST, "", true);
     if (get_magic_quotes_gpc())
     {
       $_POST['sql_query'] = stripslashes($_POST['sql_query']);
