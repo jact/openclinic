@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.7 2004/07/14 18:31:33 jact Exp $
+ * $Id: problem_search.php,v 1.8 2004/08/01 09:52:19 jact Exp $
  */
 
 /**
@@ -108,7 +108,7 @@
   if ($problemQ->getRowCount() == 0)
   {
     $problemQ->close();
-    echo '<p>' . _("No results found.") . "</p>\n";
+    showMessage(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -206,35 +206,30 @@ function changePage(page)
     $query .= " NOT ";
   }
   $query .= $word[$num - 1] . ")";
-?>
 
-<!-- Printing result table -->
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo sprintf(_("Search Results From Query: %s"), $query); ?>
-      </th>
-    </tr>
-  </thead>
+  $thead = array(
+    sprintf(_("Search Results From Query: %s"), $query) => array('colspan' => 2)
+  );
 
-  <tbody>
-<?php
+  $options = array(
+    0 => array('align' => 'right')
+  );
+
   $recordset = null;
   while ($problem = $problemQ->fetch())
   {
     $row = $problemQ->getCurrentRow();
     eval("\$aux = $val;");
-    $recordset[$row] = $row . "|" . $problem->getIdProblem() . "|" . $problem->getIdPatient() . "|" . $aux . "|" . $problem->getOpeningDate() . "|" . $problem->getClosingDate();
-  }
+    $recordset[$row] = $row . OPEN_SEPARATOR . $problem->getIdProblem() . OPEN_SEPARATOR . $problem->getIdPatient() . OPEN_SEPARATOR . $aux . OPEN_SEPARATOR . $problem->getOpeningDate() . OPEN_SEPARATOR . $problem->getClosingDate();
+  } // end while
   $problemQ->freeResult();
   $problemQ->close();
   unset($problemQ);
 
-  $rowClass = "odd";
+  $tbody = array();
   foreach ($recordset as $arrKey => $arrValue)
   {
-    $array = split("\|", $arrValue, 6);
+    $array = explode(OPEN_SEPARATOR, $arrValue, 6);
 
     $patQ = new Patient_Query();
     $patQ->connect();
@@ -259,28 +254,19 @@ function changePage(page)
         $patQ->close();
         showFetchError($patQ);
       }
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td class="number">
-        <?php echo $array[0]; ?>.
-      </td>
 
-      <td>
-        <a href="../medical/problem_view.php?key=<?php echo $array[1]; ?>&amp;pat=<?php echo $array[2]; ?>&amp;reset=Y"><?php echo $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName(); ?></a>
-        <br />
-        <?php
-          echo $key . " " . $array[3] . "<br />\n";
-          echo _("Opening Date") . ": " . $array[4];
-          if ($array[5] != "")
-          {
-            echo "<br />" . _("Closing Date") . ": " . $array[5];
-          }
-        ?>
-      </td>
-    </tr>
-<?php
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
+      $row = $array[0] . '.';
+      $row .= OPEN_SEPARATOR;
+
+      $row .= '<a href="../medical/problem_view.php?key=' . $array[1] . '&amp;pat=' . $array[2] . '&amp;reset=Y">' . $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName() . '</a>';
+      $row .= "<br />\n" . $key . " " . $array[3] . "<br />\n";
+      $row .= _("Opening Date") . ": " . $array[4];
+      if ($array[5] != "")
+      {
+        $row .= "<br />" . _("Closing Date") . ": " . $array[5];
+      }
+
+      $tbody[] = explode(OPEN_SEPARATOR, $row);
     } // end if
   } // end while
   $patQ->freeResult();
@@ -288,11 +274,9 @@ function changePage(page)
   unset($patQ);
   unset($recordset);
   unset($array);
-?>
-  </tbody>
-</table>
 
-<?php
+  showTable($thead, $tbody, null, $options);
+
   showResultPages($currentPageNmbr, $pageCount);
 
   require_once("../shared/footer.php");
