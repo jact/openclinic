@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.2 2004/04/18 14:02:25 jact Exp $
+ * $Id: login_form.php,v 1.3 2004/06/20 17:19:04 jact Exp $
  */
 
 /**
@@ -61,7 +61,7 @@
 <script src="../scripts/md5.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-<!--
+<!--/*--><![CDATA[/*<!--*/
 function md5Login(f)
 {
   f['md5'].value = hex_md5(f['pwd_session'].value);
@@ -69,7 +69,7 @@ function md5Login(f)
 
   return true;
 }
-//-->
+/*]]>*///-->
 </script>
 
 <form method="post" action="../shared/login.php" onsubmit="return md5Login(this);">

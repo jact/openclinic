@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.4 2004/06/16 19:11:02 jact Exp $
+ * $Id: relative_search.php,v 1.5 2004/06/20 17:23:32 jact Exp $
  */
 
 /**
@@ -120,7 +120,7 @@
 
 <!-- JavaScript to post back to this page -->
 <script type="text/javascript">
-<!--
+<!--/*--><![CDATA[/*<!--*/
 function changePage(page)
 {
   document.forms[0].page.value = page;
@@ -128,7 +128,7 @@ function changePage(page)
 
   return false;
 }
-//-->
+/*]]>*///-->
 </script>
 
 <!-- Form used by javascript to post back to this page -->
