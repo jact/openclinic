@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.4 2004/06/06 11:39:47 jact Exp $
+ * $Id: header.php,v 1.5 2004/06/20 12:06:31 jact Exp $
  */
 
 /**
@@ -19,42 +19,14 @@
   ////////////////////////////////////////////////////////////////////
   // i18n l10n
   ////////////////////////////////////////////////////////////////////
-  require_once("../lib/lang_lib.php");
-  require_once("../lib/nls.php");
+  require_once("../shared/i18n.php");
 
-  $nls = getNLS();
-  define("OPEN_LANGUAGE", setLanguage());
-  initLanguage(OPEN_LANGUAGE);
-
-  define("OPEN_CHARSET", (isset($nls['charset'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['charset']));
-  define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));
-  define("OPEN_ENCODING", (isset($nls['encoding'][OPEN_LANGUAGE]) ? $nls['encoding'][OPEN_LANGUAGE] : $nls['default']['encoding']));
-
-  // To prevent 'short_open_tag = On' mistake
-  echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
+  ////////////////////////////////////////////////////////////////////
+  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+  ////////////////////////////////////////////////////////////////////
+  $title = _("OpenClinic Install");
+  require_once("../shared/xhtml_start.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo OPEN_LANGUAGE; ?>" dir="<?php echo OPEN_DIRECTION; ?>">
-<head>
-<title><?php echo _("OpenClinic Install"); ?></title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
-
-<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
-
-<meta http-equiv="Pragma" content="no-cache" />
-
-<meta http-equiv="expires" content="-1" />
-
-<meta http-equiv="imagetoolbar" content="no" />
-
-<meta name="robots" content="noindex,nofollow" />
-
-<meta name="MSSmartTagsPreventParsing" content="TRUE" />
-
-<meta name="author" content="Jose Antonio Chavarría" />
-
-<meta name="copyright" content="2002-2004 Jose Antonio Chavarría" />
 
 <link rel="shortcut icon" type="image/png" href="../images/miniopc.png" />
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.6 2004/06/16 19:10:30 jact Exp $
+ * $Id: theme_preview.php,v 1.7 2004/06/20 12:05:49 jact Exp $
  */
 
 /**
@@ -68,21 +68,12 @@
   unset($set);
 
   ////////////////////////////////////////////////////////////////////
-  // i18n l10n
+  // i18n l10n (after OPEN_LANGUAGE is defined)
   ////////////////////////////////////////////////////////////////////
-  require_once("../lib/lang_lib.php");
-  require_once("../lib/nls.php");
-
-  $nls = getNLS();
-  setLanguage(OPEN_LANGUAGE);
-  initLanguage(OPEN_LANGUAGE);
-
-  define("OPEN_CHARSET", (isset($nls['charset'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['charset']));
-  define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));
-  define("OPEN_ENCODING", (isset($nls['encoding'][OPEN_LANGUAGE]) ? $nls['encoding'][OPEN_LANGUAGE] : $nls['default']['encoding']));
+  require_once("../shared/i18n.php");
 
   ////////////////////////////////////////////////////////////////////
-  // Theme related constants.
+  // Theme related constants
   ////////////////////////////////////////////////////////////////////
   define("STYLE_TITLE_BG_COLOR", $_POST["title_bg_color"]);
   define("STYLE_TITLE_FONT_FAMILY", $_POST["title_font_family"]);
@@ -116,27 +107,12 @@
   define("STYLE_TABLE_BORDER_WIDTH", $_POST["table_border_width"]);
   define("STYLE_TABLE_CELL_PADDING", $_POST["table_cell_padding"]);
 
-  // To prevent 'short_open_tag = On' mistake
-  echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
+  ////////////////////////////////////////////////////////////////////
+  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+  ////////////////////////////////////////////////////////////////////
+  $title = sprintf(_("%s Theme Preview"), $_POST["theme_name"]);
+  require_once("../shared/xhtml_start.php");
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo OPEN_LANGUAGE; ?>" dir="<?php echo OPEN_DIRECTION; ?>">
-<head>
-<title><?php echo sprintf(_("%s Theme Preview"), $_POST["theme_name"]); ?></title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=<?php echo OPEN_CHARSET; ?>" />
-
-<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
-
-<meta http-equiv="Pragma" content="no-cache" />
-
-<meta http-equiv="expires" content="-1" />
-
-<meta http-equiv="imagetoolbar" content="no" />
-
-<meta name="robots" content="noindex,nofollow" />
-
-<meta name="MSSmartTagsPreventParsing" content="TRUE" />
 
 <link rel="shortcut icon" href="../images/miniopc.png" type="image/png" />
 
