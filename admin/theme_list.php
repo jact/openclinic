@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.7 2004/07/29 19:24:49 jact Exp $
+ * $Id: theme_list.php,v 1.8 2004/08/05 14:21:47 jact Exp $
  */
 
 /**
@@ -69,15 +69,21 @@
     showMessage(sprintf(_("Theme, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
+  ////////////////////////////////////////////////////////////////////
+  // Display file used message.
+  ////////////////////////////////////////////////////////////////////
+  if (isset($_GET["file"]) && isset($_GET["info"]))
+  {
+    showMessage(sprintf(_("Filename of theme, %s, already exists. The changes have no effect."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+  }
+
   $thead = array(
-    _("Change Theme by default")
+    _("Change Theme by default in application")
   );
 
-  $content = '<label for="id_theme">';
-  $content .= _("Choose a New Theme:");
-  $content .= "</label>\n";
+  $content = '<label for="id_theme">' . _("Choose a New Theme:") . "</label>\n";
 
-  $content .= htmlSelect("theme_tbl", "id_theme", OPEN_THEMEID, "theme_name");
+  $content .= htmlSelect("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
   $content .= htmlInputButton("button1", _("Update"));
 
   $tbody = array(
@@ -105,6 +111,17 @@
 
 <h3><?php echo _("Themes List:"); ?></h3>
 
+<script type="text/javascript" defer="defer">
+<!--/*--><![CDATA[/*<!--*/
+function previewTheme(key)
+{
+  var secondaryWin = window.open("../admin/theme_preview.php?key=" + key, "secondary", "resizable=yes,scrollbars=yes,width=600,height=450");
+
+  return false;
+}
+/*]]>*///-->
+</script>
+
 <?php
   $themeQ = new Theme_Query();
   $themeQ->connect();
@@ -129,7 +146,7 @@
   }
 
   $thead = array(
-    _("Function") => array('colspan' => 3),
+    _("Function") => array('colspan' => 5),
     _("Theme Name"),
     _("Usage")
   );
@@ -140,24 +157,45 @@
     ////////////////////////////////////////////////////////////////////
     // Row construction
     ////////////////////////////////////////////////////////////////////
-    $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getIdTheme() . '&amp;reset=Y">' . _("edit") . '</a>';
+    if (in_array($theme->getCSSFile(), $reservedCSSFiles))
+    {
+      $row = "** " . _("edit");
+    }
+    else
+    {
+      $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getIdTheme() . '&amp;reset=Y">' . _("edit") . '</a>';
+    }
     $row .= OPEN_SEPARATOR;
+
     $row .= '<a href="../admin/theme_new_form.php?key=' . $theme->getIdTheme() . '&amp;reset=Y">' . _("copy") . '</a>';
     $row .= OPEN_SEPARATOR;
-    if ($theme->getIdTheme() == OPEN_THEMEID || $theme->getCount() > 0)
+
+    $row .= '<a href="../admin/theme_preview.php?key=' . $theme->getIdTheme() . '" onclick="return previewTheme(' . $theme->getIdTheme() . ')">' . _("preview") . '</a>';
+    $row .= OPEN_SEPARATOR;
+
+    $row .= '<a href="http://jigsaw.w3.org/css-validator?uri=' . '../css/' . $theme->getCSSFile() . '">' . _("validate") . '</a>';
+    $row .= OPEN_SEPARATOR;
+
+    if (in_array($theme->getCSSFile(), $reservedCSSFiles))
+    {
+      $row .= "** " . _("del");
+    }
+    elseif ($theme->getIdTheme() == OPEN_THEME_ID || $theme->getCount() > 0)
     {
       $row .= "* " . _("del");
     }
     else
     {
-      $row .= '<a href="../admin/theme_del_confirm.php?key=' . $theme->getIdTheme() . '&amp;name=' . urlencode($theme->getThemeName()) . '">' . _("del") . '</a>';
+      $row .= '<a href="../admin/theme_del_confirm.php?key=' . $theme->getIdTheme() . '&amp;name=' . urlencode($theme->getThemeName()) . '&amp;file=' . urlencode($theme->getCSSFile()) . '">' . _("del") . '</a>';
     } // end if
     $row .= OPEN_SEPARATOR;
+
     $row .= $theme->getThemeName();
     $row .= OPEN_SEPARATOR;
-    if ($theme->getIdTheme() == OPEN_THEMEID)
+
+    if ($theme->getIdTheme() == OPEN_THEME_ID)
     {
-      $row .= _("in use") . " (" . _("by application") . ")";
+      $row .= _("in use") . " (" . _("by application") . ") ";
     }
     if ($theme->getCount() > 0)
     {
@@ -179,6 +217,7 @@
   unset($theme);
 
   showMessage('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
+  showMessage('** ' . _("Note: The functions edit and delete are not available on the application themes."));
 
   require_once("../shared/footer.php");
 ?>
