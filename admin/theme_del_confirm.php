@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del_confirm.php,v 1.3 2004/04/24 16:45:55 jact Exp $
+ * $Id: theme_del_confirm.php,v 1.4 2004/07/29 18:54:49 jact Exp $
  */
 
 /**
@@ -62,39 +62,18 @@
 ?>
 
 <form method="post" action="../admin/theme_del.php">
-  <div class="center">
+  <h3><?php echo _("Delete Theme"); ?></h3>
+
+  <?php showMessage(sprintf(_("Are you sure you want to delete theme, %s?"), $name)); ?>
+
+  <p>
     <?php
       showInputHidden("id_theme", $idTheme);
       showInputHidden("name", $name);
+      showInputButton("delete", _("Delete"));
+      //showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
     ?>
-
-    <table>
-      <thead>
-        <tr>
-          <th>
-            <?php echo _("Delete Theme"); ?>
-          </th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-          <td>
-            <?php echo sprintf(_("Are you sure you want to delete theme, %s?"), $name); ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td class="center">
-            <?php
-              showInputButton("delete", _("Delete"));
-              showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-            ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  </p>
 </form>
 
 <?php require_once("../shared/footer.php"); ?>
