@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit.php,v 1.4 2004/07/08 18:46:59 jact Exp $
+ * $Id: theme_edit.php,v 1.5 2004/08/05 14:24:29 jact Exp $
  */
 
 /**
@@ -59,11 +59,18 @@
     showQueryError($themeQ);
   }
 
-  $themeQ->update($theme);
-  if ($themeQ->isError())
+  if ($themeQ->existCSSFile($theme->getCSSFile(), $theme->getIdTheme()))
   {
-    $themeQ->close();
-    showQueryError($themeQ);
+    $fileUsed = true;
+  }
+  else
+  {
+    $themeQ->update($theme);
+    if ($themeQ->isError())
+    {
+      $themeQ->close();
+      showQueryError($themeQ);
+    }
   }
   $themeQ->close();
   unset($themeQ);
@@ -78,6 +85,7 @@
   // Redirect to theme list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
   $info = urlencode($theme->getThemeName());
+  $returnLocation .= ((isset($fileUsed) && $fileUsed) ? "?file" : "?updated") . "=Y&info=" . $info;
   unset($theme);
-  header("Location: " . $returnLocation . "?updated=Y&info=" . $info);
+  header("Location: " . $returnLocation);
 ?>

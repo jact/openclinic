@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new.php,v 1.4 2004/07/08 18:46:59 jact Exp $
+ * $Id: theme_new.php,v 1.5 2004/08/05 14:24:35 jact Exp $
  */
 
 /**
@@ -56,11 +56,18 @@
     showQueryError($themeQ);
   }
 
-  $themeQ->insert($theme);
-  if ($themeQ->isError())
+  if ($themeQ->existCSSFile($theme->getCSSFile()))
   {
-    $themeQ->close();
-    showQueryError($themeQ);
+    $fileUsed = true;
+  }
+  else
+  {
+    $themeQ->insert($theme);
+    if ($themeQ->isError())
+    {
+      $themeQ->close();
+      showQueryError($themeQ);
+    }
   }
   $themeQ->close();
   unset($themeQ);
@@ -75,6 +82,7 @@
   // Redirect to theme list to avoid reload problem
   ////////////////////////////////////////////////////////////////////
   $info = urlencode($theme->getThemeName());
+  $returnLocation .= ((isset($fileUsed) && $fileUsed) ? "?file" : "?added") . "=Y&info=" . $info;
   unset($theme);
-  header("Location: " . $returnLocation . "?added=Y&info=" . $info);
+  header("Location: " . $returnLocation);
 ?>
