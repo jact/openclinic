@@ -1,7 +1,7 @@
 # File to upgrade OpenClinic from 0.6 to 0.7
 # After use this, you can delete it
 
-UPDATE setting_tbl SET version='0.7.20040424';
+UPDATE setting_tbl SET version='0.7.20040515';
 
 INSERT INTO theme_tbl VALUES (
   NULL, 'mezzoblue',
