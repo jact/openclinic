@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_lib.php,v 1.4 2004/07/05 17:40:33 jact Exp $
+ * $Id: dump_lib.php,v 1.5 2004/07/05 18:35:20 jact Exp $
  */
 
 /**
@@ -36,9 +36,9 @@
  *  string DLIB_whichCrlf(void)
  *  string DLIB_localisedDate(int $timestamp = -1)
  */
-if ( !defined('DUMP_LIB_INCLUDED') )
+if ( !defined('DLIB_INCLUDED') )
 {
-  define('DUMP_LIB_INCLUDED', 1);
+  define('DLIB_INCLUDED', 1);
 
   /**
    * string DLIB_htmlFormat(string $string = '', string $asFile = '')
