@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: problem_fields.php,v 1.3 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -88,7 +88,7 @@
           $array[""] = ""; // to permit null value
           if ($numRows)
           {
-            while ($staff = $staffQ->fetchStaff())
+            while ($staff = $staffQ->fetch())
             {
               $array[$staff->getCollegiateNumber()] = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
             }

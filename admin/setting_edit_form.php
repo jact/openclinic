@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.4 2004/05/15 17:19:38 jact Exp $
+ * $Id: setting_edit_form.php,v 1.5 2004/06/16 19:10:30 jact Exp $
  */
 
 /**
@@ -53,7 +53,7 @@
       showQueryError($setQ);
     }
 
-    $set = $setQ->fetchSettings();
+    $set = $setQ->fetch();
     if ( !$set )
     {
       showQueryError($setQ, false);

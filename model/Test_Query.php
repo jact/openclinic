@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Test_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@ require_once("../classes/Test.php");
  * Methods:
  *  mixed getLastId(void)
  *  mixed select(int $idProblem, int $idTest = 0)
- *  mixed fetchTest(void)
+ *  mixed fetch(void)
  *  bool insert(Test $test)
  *  bool update(Test $test)
  *  bool delete(int $idTest)
@@ -89,14 +89,14 @@ class Test_Query extends Query
   }
 
   /**
-   * mixed fetchTest(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the Test object.
    ********************************************************************
    * @return Test returns medical test or false if no more tests to fetch
    * @access public
    */
-  function fetchTest()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -105,8 +105,8 @@ class Test_Query extends Query
     }
 
     $test = new Test();
-    $test->setIdTest($array["id_test"]);
-    $test->setIdProblem($array["id_problem"]);
+    $test->setIdTest(intval($array["id_test"]));
+    $test->setIdProblem(intval($array["id_problem"]));
     $test->setDocumentType(urldecode($array["document_type"]));
     $test->setPathFilename(urldecode($array["path_filename"]));
 

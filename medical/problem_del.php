@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.3 2004/04/24 17:06:10 jact Exp $
+ * $Id: problem_del.php,v 1.4 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -67,7 +67,7 @@
   $conn = array();
   for ($i = 0; $i < $numRows; $i++)
   {
-    $conn[] = $connQ->fetchConn();
+    $conn[] = $connQ->fetch();
   }
   $connQ->freeResult();
 
@@ -113,7 +113,7 @@
       exit();
     }
 
-    $problem = $problemQ->fetchProblem();
+    $problem = $problemQ->fetch();
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();

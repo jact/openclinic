@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.3 2004/05/15 17:22:18 jact Exp $
+ * $Id: Problem_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@ require_once("../classes/Problem.php");
  *  mixed select(int $idProblem)
  *  mixed selectProblems(int $idPatient, bool $closed = false)
  *  mixed getLastOrderNumber(int $idPatient)
- *  mixed fetchProblem(void)
+ *  mixed fetch(void)
  *  bool insert(Problem $problem)
  *  bool update(Problem $problem)
  *  bool delete(int $idProblem)
@@ -322,14 +322,14 @@ class Problem_Query extends Query
   }
 
   /**
-   * mixed fetchProblem(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the Problem object.
    ********************************************************************
    * @return Problem returns user or false if no more problems to fetch
    * @access public
    */
-  function fetchProblem()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -342,13 +342,13 @@ class Problem_Query extends Query
     $this->_currentRow = $this->_rowNumber + (($this->_currentPage - 1) * $this->_itemsPerPage);
 
     $problem = new Problem();
-    $problem->setIdProblem($array["id_problem"]);
-    $problem->setLastUpdateDate($array["last_update_date"]);
-    $problem->setIdPatient($array["id_patient"]);
+    $problem->setIdProblem(intval($array["id_problem"]));
+    $problem->setLastUpdateDate(urldecode($array["last_update_date"]));
+    $problem->setIdPatient(intval($array["id_patient"]));
     $problem->setCollegiateNumber(urldecode($array["collegiate_number"]));
-    $problem->setOrderNumber($array["order_number"]);
-    $problem->setOpeningDate($array["opening_date"]);
-    $problem->setClosingDate($array["closing_date"]);
+    $problem->setOrderNumber(intval($array["order_number"]));
+    $problem->setOpeningDate(urldecode($array["opening_date"]));
+    $problem->setClosingDate(urldecode($array["closing_date"]));
     $problem->setMeetingPlace(urldecode($array["meeting_place"]));
     $problem->setWording(urldecode($array["wording"]));
     $problem->setSubjective(urldecode($array["subjective"]));

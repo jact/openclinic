@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.5 2004/06/06 11:39:20 jact Exp $
+ * $Id: theme_preview.php,v 1.6 2004/06/16 19:10:30 jact Exp $
  */
 
 /**
@@ -53,7 +53,7 @@
     showQueryError($setQ);
   }
 
-  $set = $setQ->fetchSettings();
+  $set = $setQ->fetch();
   if ( !$set )
   {
     $setQ->close();

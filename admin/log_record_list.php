@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.4 2004/06/07 18:48:29 jact Exp $
+ * $Id: log_record_list.php,v 1.5 2004/06/16 19:10:30 jact Exp $
  */
 
 /**
@@ -120,7 +120,7 @@
 <?php
     $i = 1;
     $rowClass = "odd";
-    while ($record = $recordQ->fetchRecord())
+    while ($record = $recordQ->fetch())
     {
 ?>
     <tr class="<?php echo $rowClass; ?> center">

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.2 2004/04/18 14:02:25 jact Exp $
+ * $Id: login.php,v 1.3 2004/06/16 19:12:31 jact Exp $
  */
 
 /**
@@ -84,7 +84,7 @@
         showQueryError($userQ);
       }
 
-      $user = $userQ->fetchUser();
+      $user = $userQ->fetch();
       if ($user == false)
       {
         // Invalid password. Add one to login attempts.
@@ -195,9 +195,9 @@
   $_SESSION["loginSession"] = $user->getLogin();
   $_SESSION["token"] = $token;
   @$_SESSION["loginAttempts"] = $sessLoginAttempts;
-  $_SESSION["hasAdminAuth"] = ($user->getIdProfile() <= 1);
-  $_SESSION["hasMedicalAuth"] = ($user->getIdProfile() <= 2);
-  $_SESSION["hasStatsAuth"] = ($user->getIdProfile() <= 3);
+  $_SESSION["hasAdminAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
+  $_SESSION["hasMedicalAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
+  $_SESSION["hasStatsAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR);
   $_SESSION["userTheme"] = $user->getIdTheme();
   $_SESSION["userId"] = $user->getIdUser();
 

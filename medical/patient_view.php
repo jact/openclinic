@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: patient_view.php,v 1.3 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -72,7 +72,7 @@
     exit();
   }
 
-  $pat = $patQ->fetchPatient();
+  $pat = $patQ->fetch();
   if ( !$pat )
   {
     showQueryError($patQ);
@@ -217,7 +217,7 @@
     $numRows = $staffQ->selectDoctor($pat->getCollegiateNumber());
     if ($numRows)
     {
-      $staff = $staffQ->fetchStaff();
+      $staff = $staffQ->fetch();
       if ($staff)
       {
         echo '<h3>' . _("Doctor you are assigned to") . "</h3>\n";

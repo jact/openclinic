@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: input_lib.php,v 1.3 2004/05/20 19:14:19 jact Exp $
+ * $Id: input_lib.php,v 1.4 2004/06/16 19:12:19 jact Exp $
  */
 
 /**
@@ -114,7 +114,7 @@ function showSelect($tableName, $fieldCode, $defaultValue = "", $fieldDescriptio
   echo ' name="' . $fieldCode;
   echo (($size > 0) ? '[]" multiple="multiple" size="' . intval($size) . '">' : '">');
   echo "\n";
-  while ($aux = $desQ->fetchDescription())
+  while ($aux = $desQ->fetch())
   {
     echo '<option value="' . $aux->getCode() . '"';
     if ($aux->getCode() == $defaultValue)

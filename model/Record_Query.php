@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Record_Query.php,v 1.4 2004/06/07 18:32:41 jact Exp $
+ * $Id: Record_Query.php,v 1.5 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -31,7 +31,7 @@ require_once("../classes/Query.php");
  *  int getPageCount(void)
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
- *  mixed fetchRecord(void)
+ *  mixed fetch(void)
  *  bool insert(int $idUser, string $login, string $tableName, string $operation, int $idKey1, int $idKey2 = 0)
  */
 class Record_Query extends Query
@@ -205,14 +205,14 @@ class Record_Query extends Query
   }
 
   /**
-   * mixed fetchRecord(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates an array object.
    ********************************************************************
    * @return array returns record log or false if no more logs to fetch
    * @access public
    */
-  function fetchRecord()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -226,11 +226,11 @@ class Record_Query extends Query
 
     $record = array();
     $record["login"] = urldecode($array["login"]);
-    $record["access_date"] = $array["access_date"];
+    $record["access_date"] = urldecode($array["access_date"]);
     $record["table_name"] = urldecode($array["table_name"]);
     $record["operation"] = urldecode($array["operation"]);
-    $record["id_key1"] = $array["id_key1"];
-    $record["id_key2"] = $array["id_key2"];
+    $record["id_key1"] = intval($array["id_key1"]);
+    $record["id_key2"] = intval($array["id_key2"]);
 
     return $record;
   }

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit_form.php,v 1.3 2004/04/24 18:02:18 jact Exp $
+ * $Id: test_edit_form.php,v 1.4 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -76,7 +76,7 @@
     exit();
   }
 
-  $test = $testQ->fetchTest();
+  $test = $testQ->fetch();
   if ( !$test )
   {
     showQueryError($testQ, false);

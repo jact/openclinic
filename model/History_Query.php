@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: History_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -113,7 +113,7 @@ class History_Query extends Query
     }
 
     $history = new History();
-    $history->setIdPatient($array["id_patient"]);
+    $history->setIdPatient(intval($array["id_patient"]));
 
     $history->setBirthGrowth(urldecode($array["birth_growth"]));
     $history->setGrowthSexuality(urldecode($array["growth_sexuality"]));
@@ -147,7 +147,7 @@ class History_Query extends Query
     }
 
     $history = new History();
-    $history->setIdPatient($array["id_patient"]);
+    $history->setIdPatient(intval($array["id_patient"]));
 
     $history->setParentsStatusHealth(urldecode($array["parents_status_health"]));
     $history->setBrothersStatusHealth(urldecode($array["brothers_status_health"]));

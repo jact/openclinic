@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.3 2004/04/24 16:44:48 jact Exp $
+ * $Id: User_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -31,7 +31,7 @@ require_once("../classes/User.php");
  *  bool existLogin(string $login, int $idMember = 0)
  *  mixed verifySignOn(string $login, string $pwd, bool $onlyCheck = false)
  *  bool deactivate(string $login)
- *  mixed fetchUser(void)
+ *  mixed fetch(void)
  *  bool insert(User $user)
  *  bool update(User $user)
  *  bool resetPwd(User $user)
@@ -193,14 +193,14 @@ class User_Query extends Query
   }
 
   /**
-   * mixed fetchUser(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the User object
    ********************************************************************
    * @return User returns user or false if no more users to fetch
    * @access public
    */
-  function fetchUser()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -209,14 +209,14 @@ class User_Query extends Query
     }
 
     $user = new User();
-    $user->setIdUser($array["id_user"]);
-    $user->setIdMember($array["id_member"]);
+    $user->setIdUser(intval($array["id_user"]));
+    $user->setIdMember(intval($array["id_member"]));
     $user->setLogin(urldecode($array["login"]));
     $user->setPwd(urldecode($array["pwd"]));
     $user->setEmail(urldecode($array["email"]));
     $user->setActived($array["actived"] == "Y");
-    $user->setIdTheme($array["id_theme"]);
-    $user->setIdProfile($array["id_profile"]);
+    $user->setIdTheme(intval($array["id_theme"]));
+    $user->setIdProfile(intval($array["id_profile"]));
 
     return $user;
   }

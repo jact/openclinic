@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Connection_Query.php,v 1.2 2004/04/18 14:40:45 jact Exp $
+ * $Id: Connection_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@ require_once("../classes/Query.php");
  ********************************************************************
  * Methods:
  *  mixed select(int $idProblem, int $idConnection = 0)
- *  mixed fetchConn(void)
+ *  mixed fetch(void)
  *  bool insert(int $idProblem, int $idConnection)
  *  bool delete(int $idProblem, int $idConnection)
  */
@@ -62,14 +62,14 @@ class Connection_Query extends Query
   }
 
   /**
-   * mixed fetchConn(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result.
    ********************************************************************
    * @return array returns array or false if no more rows to fetch
    * @access public
    */
-  function fetchConn()
+  function fetch()
   {
     $array = $this->fetchRow(MYSQL_NUM);
 

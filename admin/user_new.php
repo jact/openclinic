@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new.php,v 1.3 2004/04/24 16:46:36 jact Exp $
+ * $Id: user_new.php,v 1.4 2004/06/16 19:10:30 jact Exp $
  */
 
 /**
@@ -56,7 +56,6 @@
     showQueryError($userQ);
   }
 
-  print_r($user);
   if ($userQ->existLogin($user->getLogin(), $user->getIdMember()))
   {
     $loginUsed = true;

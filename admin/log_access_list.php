@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.3 2004/06/07 18:48:28 jact Exp $
+ * $Id: log_access_list.php,v 1.4 2004/06/16 19:10:30 jact Exp $
  */
 
 /**
@@ -108,7 +108,7 @@
 <?php
     $i = 1;
     $rowClass = "odd";
-    while ($access = $accessQ->fetchAccess())
+    while ($access = $accessQ->fetch())
     {
 ?>
     <tr class="<?php echo $rowClass; ?>">

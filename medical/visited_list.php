@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: visited_list.php,v 1.2 2004/04/24 14:52:15 jact Exp $
+ * $Id: visited_list.php,v 1.3 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -62,7 +62,7 @@
       return _("That patient does not exist.");
     }
 
-    $pat = $patQ->fetchPatient();
+    $pat = $patQ->fetch();
     $patQ->freeResult();
 
     $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();

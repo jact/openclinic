@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.2 2004/04/24 14:52:15 jact Exp $
+ * $Id: problem_view.php,v 1.3 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -73,7 +73,7 @@
     exit();
   }
 
-  $problem = $problemQ->fetchProblem();
+  $problem = $problemQ->fetch();
   $problemQ->freeResult();
   $problemQ->close();
   unset($problemQ);
@@ -138,7 +138,7 @@
     $numRows = $staffQ->selectDoctor($problem->getCollegiateNumber());
     if ($numRows)
     {
-      $staff = $staffQ->fetchStaff();
+      $staff = $staffQ->fetch();
       if ($staff)
       {
         echo '<h3>' . _("Doctor who treated you") . "</h3>\n";

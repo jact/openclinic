@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.2 2004/04/24 14:52:15 jact Exp $
+ * $Id: test_list.php,v 1.3 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -120,7 +120,7 @@
   <tbody>
 <?php
   $rowClass = "odd";
-  while ($test = $testQ->fetchTest())
+  while ($test = $testQ->fetch())
   {
     $aux = $test->getPathFilename();
     $temp = ereg_replace("\\\\", "/", $aux);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Setting_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -27,7 +27,7 @@ require_once("../classes/Setting.php");
  ********************************************************************
  * Methods:
  *  bool select(void)
- *  mixed fetchSettings(void)
+ *  mixed fetch(void)
  *  bool update(Setting $set)
  *  bool updateTheme(int $idTheme)
  */
@@ -55,14 +55,14 @@ class Setting_Query extends Query
   }
 
   /**
-   * mixed fetchSettings(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the Setting object.
    ********************************************************************
    * @return Setting returns settings object or false if no more rows to fetch
    * @access public
    */
-  function fetchSettings()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -78,11 +78,11 @@ class Setting_Query extends Query
     $set->setClinicAddress(urldecode($array["clinic_address"]));
     $set->setClinicPhone(urldecode($array["clinic_phone"]));
     $set->setClinicUrl(urldecode($array["clinic_url"]));
-    $set->setSessionTimeout($array["session_timeout"]);
-    $set->setItemsPerPage($array["items_per_page"]);
-    $set->setVersion($array["version"]);
-    $set->setLanguage($array["language"]);
-    $set->setIdTheme($array["id_theme"]);
+    $set->setSessionTimeout(intval($array["session_timeout"]));
+    $set->setItemsPerPage(intval($array["items_per_page"]));
+    $set->setVersion(urldecode($array["version"]));
+    $set->setLanguage(urldecode($array["language"]));
+    $set->setIdTheme(intval($array["id_theme"]));
 
     return $set;
   }

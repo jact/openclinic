@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Theme_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@ require_once("../classes/Theme.php");
  * Methods:
  *  mixed select(int $idTheme = 0)
  *  mixed selectWithStats(int $idTheme = 0)
- *  mixed fetchTheme(void)
+ *  mixed fetch(void)
  *  bool insert(Theme $theme)
  *  bool update(Theme $theme)
  *  bool delete(int $idTheme)
@@ -94,14 +94,14 @@ class Theme_Query extends Query
   }
 
   /**
-   * mixed fetchTheme(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the Theme object.
    ********************************************************************
    * @return Theme returns theme or false if no more themes to fetch
    * @access public
    */
-  function fetchTheme()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -110,19 +110,19 @@ class Theme_Query extends Query
     }
 
     $theme = new Theme();
-    $theme->setIdTheme($array["id_theme"]);
+    $theme->setIdTheme(intval($array["id_theme"]));
     $theme->setThemeName(urldecode($array["theme_name"]));
 
     $theme->setTitleBgColor(urldecode($array["title_bg_color"]));
     $theme->setTitleFontFamily(urldecode($array["title_font_family"]));
-    $theme->setTitleFontSize($array["title_font_size"]);
+    $theme->setTitleFontSize(intval($array["title_font_size"]));
     $theme->setTitleFontBold($array["title_font_bold"] == "Y");
     $theme->setTitleFontColor(urldecode($array["title_font_color"]));
-    $theme->setTitleAlign($array["title_align"]);
+    $theme->setTitleAlign(urldecode($array["title_align"]));
 
     $theme->setBodyBgColor(urldecode($array["body_bg_color"]));
     $theme->setBodyFontFamily(urldecode($array["body_font_family"]));
-    $theme->setBodyFontSize($array["body_font_size"]);
+    $theme->setBodyFontSize(intval($array["body_font_size"]));
     $theme->setBodyFontColor(urldecode($array["body_font_color"]));
     $theme->setBodyLinkColor(urldecode($array["body_link_color"]));
 
@@ -130,24 +130,24 @@ class Theme_Query extends Query
 
     $theme->setNavbarBgColor(urldecode($array["navbar_bg_color"]));
     $theme->setNavbarFontFamily(urldecode($array["navbar_font_family"]));
-    $theme->setNavbarFontSize($array["navbar_font_size"]);
+    $theme->setNavbarFontSize(intval($array["navbar_font_size"]));
     $theme->setNavbarFontColor(urldecode($array["navbar_font_color"]));
     $theme->setNavbarLinkColor(urldecode($array["navbar_link_color"]));
 
     $theme->setTabBgColor(urldecode($array["tab_bg_color"]));
     $theme->setTabFontFamily(urldecode($array["tab_font_family"]));
-    $theme->setTabFontSize($array["tab_font_size"]);
+    $theme->setTabFontSize(intval($array["tab_font_size"]));
     $theme->setTabFontColor(urldecode($array["tab_font_color"]));
     $theme->setTabLinkColor(urldecode($array["tab_link_color"]));
     $theme->setTabFontBold($array["tab_font_bold"] == "Y");
 
     $theme->setTableBorderColor(urldecode($array["table_border_color"]));
-    $theme->setTableBorderWidth($array["table_border_width"]);
-    $theme->setTableCellPadding($array["table_cell_padding"]);
+    $theme->setTableBorderWidth(intval($array["table_border_width"]));
+    $theme->setTableCellPadding(intval($array["table_cell_padding"]));
 
     if (isset($array["row_count"]))
     {
-      $theme->setCount($array["row_count"]);
+      $theme->setCount(intval($array["row_count"]));
     }
 
     return $theme;

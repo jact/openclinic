@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: print_medical_record.php,v 1.3 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -80,7 +80,7 @@
     exit();
   }
 
-  $pat = $patQ->fetchPatient();
+  $pat = $patQ->fetch();
   if ( !$pat )
   {
     showQueryError($patQ);
@@ -196,7 +196,7 @@
     $numRows = $staffQ->selectDoctor($pat->getCollegiateNumber());
     if ($numRows)
     {
-      $staff = $staffQ->fetchStaff();
+      $staff = $staffQ->fetch();
       if ($staff)
       {
         echo '<h3>' . _("Doctor you are assigned to") . "</h3>\n";
@@ -240,7 +240,7 @@
     echo '<p>' . _("No medical problems defined for this patient.") . "</p>\n";
   }
 
-  while ($problem = $problemQ->fetchProblem())
+  while ($problem = $problemQ->fetch())
   {
     echo '<h3>' . _("Order Number") . "</h3>\n";
     echo '<p>' . $problem->getOrderNumber() . "</p>\n";
@@ -257,7 +257,7 @@
       $numRows = $staffQ->selectDoctor($problem->getCollegiateNumber());
       if ($numRows)
       {
-        $staff = $staffQ->fetchStaff();
+        $staff = $staffQ->fetch();
         if ($staff)
         {
           echo '<h3>' . _("Doctor who treated you") . "</h3>\n";
@@ -494,7 +494,7 @@
     echo '<hr />' . "\n";
   }
 
-  while ($problem = $problemQ->fetchProblem())
+  while ($problem = $problemQ->fetch())
   {
     echo '<h3>' . _("Order Number") . "</h3>\n";
     echo '<p>' . $problem->getOrderNumber() . "</p>\n";
@@ -511,7 +511,7 @@
       $numRows = $auxQ->selectDoctor($problem->getCollegiateNumber());
       if ($numRows)
       {
-        $staff = $auxQ->fetchStaff();
+        $staff = $auxQ->fetch();
         echo '<h3>' . _("Doctor who treated you") . "</h3>\n";
         echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
         $auxQ->freeResult();

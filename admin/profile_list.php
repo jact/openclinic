@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: profile_list.php,v 1.2 2004/04/23 20:36:50 jact Exp $
+ * $Id: profile_list.php,v 1.3 2004/06/16 19:10:30 jact Exp $
  */
 
 /**
@@ -77,7 +77,7 @@
   <tbody>
 <?php
   $rowClass = "odd";
-  while ($des = $desQ->fetchDescription())
+  while ($des = $desQ->fetch())
   {
 ?>
     <tr class="<?php echo $rowClass; ?>">

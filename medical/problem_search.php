@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.3 2004/04/24 15:28:33 jact Exp $
+ * $Id: problem_search.php,v 1.4 2004/06/16 19:11:02 jact Exp $
  */
 
 /**
@@ -83,7 +83,7 @@
   ////////////////////////////////////////////////////////////////////
   if ($problemQ->getRowCount() == 1)
   {
-    $problem = $problemQ->fetchProblem();
+    $problem = $problemQ->fetch();
     $problemQ->close();
 
     header("Location: ../medical/problem_view.php?key=" . $problem->getIdProblem() . "&pat=" . $problem->getIdPatient() . "&reset=Y");
@@ -227,7 +227,7 @@ function changePage(page)
   <tbody>
 <?php
   $recordset = null;
-  while ($problem = $problemQ->fetchProblem())
+  while ($problem = $problemQ->fetch())
   {
     $row = $problemQ->getCurrentRow();
     eval("\$aux = $val;");
@@ -259,7 +259,7 @@ function changePage(page)
 
     if ($numRows)
     {
-      $pat = $patQ->fetchPatient();
+      $pat = $patQ->fetch();
 ?>
     <tr class="<?php echo $rowClass; ?>">
       <td class="number">

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Query.php,v 1.3 2004/06/07 18:32:41 jact Exp $
+ * $Id: Access_Query.php,v 1.4 2004/06/16 19:08:47 jact Exp $
  */
 
 /**
@@ -31,7 +31,7 @@ require_once("../classes/Query.php");
  *  int getPageCount(void)
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
- *  mixed fetchAccess(void)
+ *  mixed fetch(void)
  *  bool insert(User $user)
  */
 class Access_Query extends Query
@@ -205,14 +205,14 @@ class Access_Query extends Query
   }
 
   /**
-   * mixed fetchAccess(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates an array object.
    ********************************************************************
    * @return array returns access log or false if no more logs to fetch
    * @access public
    */
-  function fetchAccess()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -226,7 +226,7 @@ class Access_Query extends Query
 
     $access = array();
     $access["login"] = urldecode($array["login"]);
-    $access["access_date"] = $array["access_date"];
+    $access["access_date"] = urldecode($array["access_date"]);
     $access["profile"] = urldecode($array["description"]);
 
     return $access;

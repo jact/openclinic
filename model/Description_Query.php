@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Description_Query.php,v 1.3 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -27,7 +27,7 @@ require_once("../classes/Description.php");
  ********************************************************************
  * Methods:
  *  bool select(string $tableName, string $fieldCode, string $fieldDescription = "", string $keyValue = "")
- *  mixed fetchDescription(void)
+ *  mixed fetch(void)
  *  array fetchRows(string $col = "")
  *  bool update(string $tableName, Description $des)
  */
@@ -69,14 +69,14 @@ class Description_Query extends Query
   }
 
   /**
-   * mixed fetchDescription(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the Description object.
    ********************************************************************
    * @return List returns list object or false if no more list rows to fetch
    * @access public
    */
-  function fetchDescription()
+  function fetch()
   {
     $array = $this->fetchRow(MYSQL_NUM);
     if ($array == false)

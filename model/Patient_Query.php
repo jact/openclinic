@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.3 2004/05/15 17:22:06 jact Exp $
+ * $Id: Patient_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -33,7 +33,7 @@ require_once("../classes/Patient.php");
  *  bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
  *  mixed getLastId(void)
  *  mixed select(int $idPatient)
- *  mixed fetchPatient(void)
+ *  mixed fetch(void)
  *  bool existName(string $firstName, string $surname1, string $surname2, int $idPatient = 0)
  *  bool insert(Patient $patient)
  *  bool update(Patient $patient)
@@ -291,14 +291,14 @@ class Patient_Query extends Query
   }
 
   /**
-   * mixed fetchPatient(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the Patient object.
    ********************************************************************
    * @return mixed returns patient or false if no more patients to fetch
    * @access public
    */
-  function fetchPatient()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -311,8 +311,8 @@ class Patient_Query extends Query
     $this->_currentRow = $this->_rowNumber + (($this->_currentPage - 1) * $this->_itemsPerPage);
 
     $patient = new Patient();
-    $patient->setIdPatient($array["id_patient"]);
-    //$patient->setLastUpdateDate($array["last_update_date"]);
+    $patient->setIdPatient(intval($array["id_patient"]));
+    //$patient->setLastUpdateDate(urldecode($array["last_update_date"]));
     $patient->setCollegiateNumber(urldecode($array["collegiate_number"]));
     $patient->setNIF(urldecode($array["nif"]));
     $patient->setFirstName(urldecode($array["first_name"]));
@@ -320,12 +320,12 @@ class Patient_Query extends Query
     $patient->setSurname2(urldecode($array["surname2"]));
     $patient->setAddress(urldecode($array["address"]));
     $patient->setPhone(urldecode($array["phone_contact"]));
-    $patient->setSex($array["sex"]);
+    $patient->setSex(intval($array["sex"]));
     $patient->setRace(urldecode($array["race"]));
-    $patient->setBirthDate($array["birth_date"]);
-    $patient->setAge($array["age"]);
+    $patient->setBirthDate(urldecode($array["birth_date"]));
+    $patient->setAge(intval($array["age"]));
     $patient->setBirthPlace(urldecode($array["birth_place"]));
-    $patient->setDeceaseDate($array["decease_date"]);
+    $patient->setDeceaseDate(urldecode($array["decease_date"]));
     $patient->setNTS(urldecode($array["nts"]));
     $patient->setNSS(urldecode($array["nss"]));
     $patient->setFamilySituation(urldecode($array["family_situation"]));

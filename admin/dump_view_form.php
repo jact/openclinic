@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_view_form.php,v 1.3 2004/06/16 15:57:45 jact Exp $
+ * $Id: dump_view_form.php,v 1.4 2004/06/16 19:10:29 jact Exp $
  */
 
 /**
@@ -219,7 +219,7 @@
 </form>
 
 <?php
-  echo '<div class="advice">' . _("Note: Some check options are exclusive. Be carefully!") . "</div>\n";
+  echo '<p class="advice">' . _("Note: Some check options are exclusive. Be carefully!") . "</p>\n";
 
   require_once("../shared/footer.php");
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.3 2004/06/06 11:38:30 jact Exp $
+ * $Id: Staff_Query.php,v 1.4 2004/06/16 19:08:48 jact Exp $
  */
 
 /**
@@ -29,7 +29,7 @@ require_once("../classes/Staff.php");
  *  mixed select(int $idMember = 0)
  *  bool selectDoctor(string $collegiateNumber)
  *  mixed selectType(string $type = 'A')
- *  mixed fetchStaff(void)
+ *  mixed fetch(void)
  *  bool existLogin(string $login, int $idMember = 0)
  *  bool insert(Staff $staff)
  *  bool update(Staff $staff)
@@ -129,14 +129,14 @@ class Staff_Query extends Query
   }
 
   /**
-   * mixed fetchStaff(void)
+   * mixed fetch(void)
    ********************************************************************
    * Fetches a row from the query result and populates the Staff object.
    ********************************************************************
    * @return mixed returns staff member or false if no more staff members to fetch
    * @access public
    */
-  function fetchStaff()
+  function fetch()
   {
     $array = $this->fetchRow();
     if ($array == false)
@@ -145,8 +145,8 @@ class Staff_Query extends Query
     }
 
     $staff = new Staff();
-    $staff->setIdMember($array["id_member"]);
-    $staff->setMemberType($array["member_type"]);
+    $staff->setIdMember(intval($array["id_member"]));
+    $staff->setMemberType(urldecode($array["member_type"]));
     $staff->setCollegiateNumber(urldecode($array["collegiate_number"]));
     $staff->setNIF(urldecode($array["nif"]));
     $staff->setFirstName(urldecode($array["first_name"]));
@@ -155,7 +155,7 @@ class Staff_Query extends Query
     $staff->setAddress(urldecode($array["address"]));
     $staff->setPhone(urldecode($array["phone_contact"]));
     $staff->setLogin(urldecode($array["login"]));
-    $staff->setIdUser($array["id_user"]);
+    $staff->setIdUser(intval($array["id_user"]));
 
     return $staff;
   }

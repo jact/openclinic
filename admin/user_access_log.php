@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.4 2004/06/07 18:47:14 jact Exp $
+ * $Id: user_access_log.php,v 1.5 2004/06/16 19:10:30 jact Exp $
  */
 
 /**
@@ -154,7 +154,7 @@ function changePage(page)
   <tbody>
 <?php
     $rowClass = "odd";
-    while ($access = $accessQ->fetchAccess())
+    while ($access = $accessQ->fetch())
     {
       echo '<tr class="' . $rowClass . '">';
       echo '<td class="number">' . $accessQ->getCurrentRow() . ".</td>\n";
