@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: nls.php,v 1.9 2004/10/18 17:24:04 jact Exp $
+ * $Id: nls.php,v 1.10 2005/01/22 19:06:38 jact Exp $
  */
 
 /**
@@ -69,6 +69,7 @@ function getNLS()
   //$nls['language']['ja_JP'] = '&#x65e5;&#x672c;&#x8a9e; (EUC-JP)';
   //$nls['language']['lt_LT'] = 'Lietuvi&#x0173;';
   //$nls['language']['nl_NL'] = 'Nederlands';
+  $nls['language']['nl_BE'] = 'Nederlands (Belgium)';
   //$nls['language']['no_NO'] = 'Norsk bokm&#229;l';
   //$nls['language']['pl_PL'] = 'Polski';
   //$nls['language']['pt_PT'] = 'Portugu&#234;s';
@@ -112,8 +113,9 @@ function getNLS()
   // Aliases for languages in win32 systems (ISO 3166-Alpha-3)
   ////////////////////////////////////////////////////////////////////
   $nls['win32']['bg_BG'] = 'bgr';
-  $nls['win32']['en'] = 'eng';
+  $nls['win32']['en']    = 'eng';
   $nls['win32']['es_ES'] = 'esp';
+  $nls['win32']['nl_BE'] = 'bel';
 
   ////////////////////////////////////////////////////////////////////
   // Charsets
