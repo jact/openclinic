@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: misc_lib.php,v 1.7 2004/10/18 17:24:04 jact Exp $
+ * $Id: misc_lib.php,v 1.8 2005/02/19 10:50:24 jact Exp $
  */
 
 /**
@@ -26,6 +26,8 @@
 /**
  * Functions:
  *  string fieldPreview(string $field)
+ *  string translateBrowser(string $text)
+ *  string unTranslateBrowser(string $text)
  */
 
 /**
@@ -59,5 +61,35 @@ function fieldPreview($field)
   }
 
   return $preview;
+}
+
+/*
+ * string translateBrowser(string $text)
+ ********************************************************************
+ * Returns a string ready to see in a web browser
+ ********************************************************************
+ * @param string $text
+ * @return string
+ * @access public
+ * @since 0.8
+ */
+function translateBrowser($text)
+{
+  return ((strpos($_SERVER["HTTP_USER_AGENT"], "Gecko") === false) ? $text : utf8_encode($text));
+}
+
+/*
+ * string unTranslateBrowser(string $text)
+ ********************************************************************
+ * Returns a string ready to insert it in a database
+ ********************************************************************
+ * @param string $text
+ * @return string
+ * @access public
+ * @since 0.8
+ */
+function unTranslateBrowser($text)
+{
+  return ((strpos($_SERVER["HTTP_USER_AGENT"], "Gecko") === false) ? $text : utf8_decode($text));
 }
 ?>
