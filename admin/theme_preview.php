@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.11 2004/07/07 17:21:53 jact Exp $
+ * $Id: theme_preview.php,v 1.12 2004/07/07 17:54:12 jact Exp $
  */
 
 /**
@@ -16,7 +16,7 @@
  * Author: jact <jachavar@terra.es>
  */
 
-  error_reporting(55); // E_ALL & ~E_NOTICE - normal
+  error_reporting(E_ALL & ~E_NOTICE); // normal mode
 
   ////////////////////////////////////////////////////////////////////
   // Controlling vars
@@ -129,9 +129,7 @@
 <!-- Header -->
 <div id="header">
   <div id="subHeader">
-    <span class="headerTitle">
-      <?php echo _("Clinic Name"); ?>
-    </span>
+    <h1><?php echo _("Clinic Name"); ?></h1>
   </div><!-- End #subHeader -->
 
   <!-- Tabs -->

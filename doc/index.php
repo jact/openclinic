@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.7 2004/06/30 18:46:50 jact Exp $
+ * $Id: index.php,v 1.8 2004/07/07 17:54:04 jact Exp $
  */
 
 /**
@@ -47,7 +47,7 @@
 <!-- Header -->
 <div id="header">
   <div id="subHeader">
-    <span class="headerTitle"><?php echo _("OpenClinic Help"); ?></span>
+    <h1><?php echo _("OpenClinic Help"); ?></h1>
   </div><!-- End #subHeader -->
 
   <div id="sourceForgeLinks">
