@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DbConnection.php,v 1.3 2004/07/07 17:27:05 jact Exp $
+ * $Id: DbConnection.php,v 1.4 2004/07/21 18:06:11 jact Exp $
  */
 
 /**
@@ -148,7 +148,7 @@ class DbConnection
     $this->_link = ($persistency) ? mysql_pconnect($this->_host, $this->_userName, $this->_passwd) : mysql_connect($this->_host, $this->_userName, $this->_passwd);
     if ($this->_link == false)
     {
-      $this->_error = "Unable to connect to database.";
+      $this->_error = "Unable to connect to host.";
       $this->_dbErrno = mysql_errno();
       $this->_dbError = mysql_error();
 
