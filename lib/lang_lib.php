@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: lang_lib.php,v 1.6 2004/06/06 11:42:36 jact Exp $
+ * $Id: lang_lib.php,v 1.7 2004/06/20 17:22:42 jact Exp $
  */
 
 /**
@@ -247,7 +247,7 @@ function languageExists($lang)
  ********************************************************************
  * Returns a date in a local format
  ********************************************************************
- * @param string $date ISO date (Ymd or Y-m-d or YmdHis or Y-m-d H:i:s)
+ * @param string $date (optional) ISO date (Ymd or Y-m-d or YmdHis or Y-m-d H:i:s)
  * @return string returns local formated date
  * @access public
  */
