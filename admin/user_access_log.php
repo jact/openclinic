@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.5 2004/06/16 19:10:30 jact Exp $
+ * $Id: user_access_log.php,v 1.6 2004/06/16 19:36:28 jact Exp $
  */
 
 /**
@@ -153,6 +153,12 @@ function changePage(page)
 
   <tbody>
 <?php
+    $profiles = array(
+      OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
+      OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
+      OPEN_PROFILE_DOCTOR => _("Doctor")
+    );
+
     $rowClass = "odd";
     while ($access = $accessQ->fetch())
     {
@@ -160,7 +166,7 @@ function changePage(page)
       echo '<td class="number">' . $accessQ->getCurrentRow() . ".</td>\n";
       echo '<td>' . localDate($access["access_date"]) . "</td>\n";
       echo '<td class="center">' . $access["login"] . "</td>\n";
-      echo '<td class="center">' . $access["profile"] . "</td>\n";
+      echo '<td class="center">' . $profiles[$access["id_profile"]] . "</td>\n";
       echo "</tr>\n";
       // swap row color
       ($rowClass == "even") ? $rowClass = "odd" : $rowClass = "even";
@@ -174,6 +180,8 @@ function changePage(page)
     showResultPages($currentPageNmbr, $pageCount);
   } // end if-else
   unset($accessQ);
+  unset($access);
+  unset($profiles);
 
   echo '<p><a href="' . $returnLocation . '">' . _("Return to users list") . "</a></p>\n";
 

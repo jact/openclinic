@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.5 2004/05/31 19:46:38 jact Exp $
+ * $Id: user_list.php,v 1.6 2004/06/16 19:36:28 jact Exp $
  */
 
 /**
@@ -24,17 +24,9 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Description_Query.php");
   require_once("../classes/User_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
-
-  $desQ = new Description_Query();
-  $desQ->connect();
-  if ($desQ->errorOccurred())
-  {
-    showQueryError($desQ);
-  }
 
   $userQ = new User_Query();
   $userQ->connect();
@@ -51,7 +43,7 @@
   }
 
   $array = null;
-  while ($user = $userQ->fetchUser())
+  while ($user = $userQ->fetch())
   {
     $array[$user->getIdMember() . '|' . $user->getLogin()] = $user->getLogin();
   }
@@ -157,11 +149,17 @@
 
   <tbody>
 <?php
+  $profiles = array(
+    OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
+    OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
+    OPEN_PROFILE_DOCTOR => _("Doctor")
+  );
+
   $rowClass = "odd";
-  while ($user = $userQ->fetchUser())
+  while ($user = $userQ->fetch())
   {
     // to protect 'big brother' user
-    if ($user->getIdProfile() == 1 && $user->getIdUser() == 1)
+    if ($user->getIdProfile() == OPEN_PROFILE_ADMINISTRATOR && $user->getIdUser() == 1)
     {
       continue;
     }
@@ -219,20 +217,7 @@
       </td>
 
       <td class="center">
-        <?php
-          $desQ->select("profile_tbl", "id_profile", "description", $user->getIdProfile());
-          if ($desQ->errorOccurred())
-          {
-            $desQ->close();
-            showQueryError($desQ);
-          }
-
-          $des = $desQ->fetchDescription();
-          if ($des)
-          {
-            echo $des->getDescription();
-          }
-        ?>
+        <?php echo $profiles[$user->getIdProfile()]; ?>
       </td>
     </tr>
 <?php
@@ -241,10 +226,9 @@
   } // end while
   $userQ->freeResult();
   $userQ->close();
-  unset($des);
-  unset($desQ);
   unset($user);
   unset($userQ);
+  unset($profiles);
 ?>
   </tbody>
 </table>

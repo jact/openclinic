@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.2 2004/04/23 20:36:51 jact Exp $
+ * $Id: user_fields.php,v 1.3 2004/06/16 19:34:25 jact Exp $
  */
 
 /**
@@ -156,9 +156,17 @@
         <?php
           if ($postVars["id_profile"] == "")
           {
-            $postVars["id_profile"] = 3; // by default doctor profile
+            $postVars["id_profile"] = OPEN_PROFILE_DOCTOR; // by default doctor profile
           }
-          showSelect("profile_tbl", "id_profile", $postVars["id_profile"], "description");
+
+          $array = array(
+            OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
+            OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
+            OPEN_PROFILE_DOCTOR => _("Doctor")
+          );
+
+          showSelectArray("id_profile", $array, $postVars["id_profile"]);
+          unset($array);
         ?>
       </td>
     </tr>
