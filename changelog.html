@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: changelog.html,v 1.6 2004/05/20 19:16:26 jact Exp $ -->
+<!-- $Id: changelog.html,v 1.7 2004/07/03 21:16:44 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Changelog</title>
@@ -143,6 +142,24 @@
     <li class="change">Function getFiles() has a new parameter to indicate allowed extensions of files</li>
 
     <li class="change">Better i18n of dates</li>
+
+    <li class="fix">Problem with NULL closing_date in medical problems</li>
+
+    <li class="fix">XSS attacks with JavaScript event handlers in input fields</li>
+
+    <li class="add">Added localDate() function to lang_lib.php file</li>
+
+    <li class="change">All methods named fetch*() have been renamed to fetch()</li>
+
+    <li class="change">Administration option Profiles has been removed</li>
+
+    <li class="add">New option CREATE DATABASE __dbname__ in MySQL dumps and table summary</li>
+
+    <li class="add">Three new files in directory shared to clear code: i18n.php, session_info.php, xhtml_start.php</li>
+
+    <li class="change">Profiles option in admin tab has been removed (and profile_tbl from database too)</li>
+
+    <li class="fix">MSIE bugs relationship with table less design</li>
   </ul>
 
   <hr />
