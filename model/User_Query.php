@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.5 2004/07/07 17:23:54 jact Exp $
+ * $Id: User_Query.php,v 1.6 2004/07/14 18:31:57 jact Exp $
  */
 
 /**
@@ -209,14 +209,38 @@ class User_Query extends Query
     }
 
     $user = new User();
-    $user->setIdUser(intval($array["id_user"]));
-    $user->setIdMember(intval($array["id_member"]));
-    $user->setLogin(urldecode($array["login"]));
-    $user->setPwd(urldecode($array["pwd"]));
-    $user->setEmail(urldecode($array["email"]));
-    $user->setActived($array["actived"] == "Y");
-    $user->setIdTheme(intval($array["id_theme"]));
-    $user->setIdProfile(intval($array["id_profile"]));
+    if (isset($array["id_user"]))
+    {
+      $user->setIdUser(intval($array["id_user"]));
+    }
+    if (isset($array["id_member"]))
+    {
+      $user->setIdMember(intval($array["id_member"]));
+    }
+    if (isset($array["login"]))
+    {
+      $user->setLogin(urldecode($array["login"]));
+    }
+    if (isset($array["pwd"]))
+    {
+      $user->setPwd(urldecode($array["pwd"]));
+    }
+    if (isset($array["email"]))
+    {
+      $user->setEmail(urldecode($array["email"]));
+    }
+    if (isset($array["actived"]))
+    {
+      $user->setActived($array["actived"] == "Y");
+    }
+    if (isset($array["id_theme"]))
+    {
+      $user->setIdTheme(intval($array["id_theme"]));
+    }
+    if (isset($array["id_profile"]))
+    {
+      $user->setIdProfile(intval($array["id_profile"]));
+    }
 
     return $user;
   }

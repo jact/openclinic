@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.6 2004/07/07 17:22:59 jact Exp $
+ * $Id: problem_search.php,v 1.7 2004/07/14 18:31:33 jact Exp $
  */
 
 /**
@@ -42,17 +42,10 @@
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
   ////////////////////////////////////////////////////////////////////
-  if (isset($_POST["page"]))
-  {
-    $currentPageNmbr = $_POST["page"];
-  }
-  else
-  {
-    $currentPageNmbr = 1;
-  }
+  $currentPageNmbr = (isset($_POST["page"])) ? $_POST["page"] : 1;
   $searchType = $_POST["search_type_problem"];
   $logical = $_POST["logical_problem"];
-  $limit = $_POST["limit_problem"];
+  $limit = (isset($_POST["limit_problem"])) ? $_POST["limit_problem"] : 0;
 
   // remove slashes added by form post
   $searchText = stripslashes(trim($_POST["search_text_problem"]));
@@ -142,7 +135,7 @@ function changePage(page)
   showInputHidden("search_text_problem", $_POST["search_text_problem"]);
   showInputHidden("page", $currentPageNmbr);
   showInputHidden("logical_problem", $_POST["logical_problem"]);
-  showInputHidden("limit_problem", $_POST["limit_problem"]);
+  showInputHidden("limit_problem", $limit_problem);
 ?>
   </div>
 </form>

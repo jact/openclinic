@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: medical.php,v 1.2 2004/04/18 14:30:07 jact Exp $
+ * $Id: medical.php,v 1.3 2004/07/14 18:31:04 jact Exp $
  */
 
 /**
@@ -54,7 +54,7 @@
     {
       foreach ($_SESSION["visitedPatients"] as $arrKey => $arrValue)
       {
-        if ($arrKey == $idPatient)
+        if (isset($idPatient) && $arrKey == $idPatient)
         {
           echo '<span class="selected"><em>' . $arrValue . "</em></span>\n";
           if ($nav == "social" || $nav == "history" || $nav == "problems" || $nav == "print")
