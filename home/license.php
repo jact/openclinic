@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: license.php,v 1.2 2004/04/18 14:11:25 jact Exp $
+ * $Id: license.php,v 1.3 2005/02/17 19:26:17 jact Exp $
  */
 
 /**
@@ -23,6 +23,12 @@
   $nav = "license";
 
   require_once("../shared/read_settings.php");
+
+  $licenseFile = (is_file("../locale/" . OPEN_LANGUAGE . "/copying.txt"))
+    ? "../locale/" . OPEN_LANGUAGE . "/copying.txt"
+    : "../LICENSE";
+
+  $lines = file($licenseFile);
 
   ////////////////////////////////////////////////////////////////////
   // Show page
@@ -42,11 +48,31 @@
   unset($links);
 
   echo '<pre>';
+  if ($lines === false)
+  {
+    echo <<<END
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or
+  (at your option) any later version.
 
-  (is_file("../locale/" . OPEN_LANGUAGE . "/copying.txt"))
-    ? include_once("../locale/" . OPEN_LANGUAGE . "/copying.txt")
-    : include_once("../LICENSE");
-
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+ 
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+END;
+  }
+  else
+  {
+    foreach ($lines as $line)
+    {
+      echo htmlspecialchars($line);
+    }
+  }
   echo "</pre>\n";
 
   require_once("../shared/footer.php");
