@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.10 2004/08/09 11:37:19 jact Exp $
+ * $Id: index.php,v 1.11 2004/08/12 10:01:31 jact Exp $
  */
 
 /**
@@ -45,6 +45,14 @@
   <div id="subHeader">
     <h1><?php echo _("OpenClinic Help"); ?></h1>
   </div><!-- End #subHeader -->
+
+  <!-- Tabs -->
+  <div class="menuBar">
+    <ul id="tabs">
+      <li id="first"><span><?php echo _("Help"); ?></span></li>
+    </ul>
+  </div><!-- End .menuBar -->
+  <!-- End Tabs -->
 
   <div id="sourceForgeLinks">
     <a href="#" onclick="window.close(); return false;"><?php echo _("Close Window"); ?></a>
