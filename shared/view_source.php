@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: view_source.php,v 1.1 2004/03/22 19:45:26 jact Exp $
+ * $Id: view_source.php,v 1.2 2004/04/14 22:05:33 jact Exp $
  */
 
 /**
@@ -14,7 +14,6 @@
  * View source code of a file screen
  ********************************************************************
  * Author: jact <jachavar@terra.es>
- * Last modified: 22/03/04 20:45
  */
 
   require_once("../shared/read_settings.php");
