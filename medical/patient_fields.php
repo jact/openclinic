@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.7 2004/07/31 18:46:46 jact Exp $
+ * $Id: patient_fields.php,v 1.8 2004/08/02 11:19:01 jact Exp $
  */
 
 /**
@@ -40,19 +40,19 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="first_name">' . _("First Name") . ":" . "</label>\n";
+  $row = '* <label for="first_name" class="requiredField">' . _("First Name") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
   $row .= htmlInputText("first_name", 25, 25, $postVars["first_name"], $pageErrors["first_name"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="surname1">' . _("Surname 1") . ":" . "</label>\n";
+  $row = '* <label for="surname1" class="requiredField">' . _("Surname 1") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
   $row .= htmlInputText("surname1", 30, 30, $postVars["surname1"], $pageErrors["surname1"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="surname2">' . _("Surname 2") . ":" . "</label>\n";
+  $row = '* <label for="surname2" class="requiredField">' . _("Surname 2") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
   $row .= htmlInputText("surname2", 30, 30, $postVars["surname2"], $pageErrors["surname2"]);
 

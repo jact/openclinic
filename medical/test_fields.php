@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_fields.php,v 1.3 2004/08/01 09:31:51 jact Exp $
+ * $Id: test_fields.php,v 1.4 2004/08/02 11:19:01 jact Exp $
  */
 
 /**
@@ -34,7 +34,7 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="path_filename">' . _("Path Filename") . ":" . "</label>\n";
+  $row = '* <label for="path_filename" class="requiredField">' . _("Path Filename") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
 
   //$row .= htmlInputHidden("MAX_FILE_SIZE", "70000");

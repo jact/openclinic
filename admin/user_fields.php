@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.4 2004/07/29 18:41:26 jact Exp $
+ * $Id: user_fields.php,v 1.5 2004/08/02 11:18:46 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@
 
   $tbody = array();
 
-  $row = ($action == "new") ? _("Login") . ":" : '* <label for="login">' . _("Login") . ":" . "<label>\n";
+  $row = ($action == "new") ? _("Login") . ":" : '* <label for="login" class="requiredField">' . _("Login") . ":" . "<label>\n";
   $row .= OPEN_SEPARATOR;
   $row .= ($action == "new") ? $postVars["login"] : htmlInputText("login", 20, 20, $postVars["login"], $pageErrors["login"]);
 

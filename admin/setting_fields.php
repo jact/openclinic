@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.7 2004/07/27 19:43:52 jact Exp $
+ * $Id: setting_fields.php,v 1.8 2004/08/02 11:18:46 jact Exp $
  */
 
 /**
@@ -123,14 +123,14 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="session_timeout">' . _("Session Timeout") . ":" . "</label>\n";
+  $row = '* <label for="session_timeout" class="requiredField">' . _("Session Timeout") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
   $row .= htmlInputText("session_timeout", 3, 3, $postVars["session_timeout"], $pageErrors["session_timeout"]);
   $row .= _("minutes");
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="items_per_page">' . _("Search Results") . ":" . "</label>\n";
+  $row = '* <label for="items_per_page" class="requiredField">' . _("Search Results") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
   $row .= htmlInputText("items_per_page", 2, 2, $postVars["items_per_page"], $pageErrors["items_per_page"]);
   $row .= _("items per page") . "**";

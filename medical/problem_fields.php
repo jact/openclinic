@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.5 2004/08/01 08:28:34 jact Exp $
+ * $Id: problem_fields.php,v 1.6 2004/08/02 11:19:01 jact Exp $
  */
 
 /**
@@ -87,7 +87,7 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="wording">' . _("Wording") . ":" . "</label><br />\n";
+  $row = '* <label for="wording" class="requiredField">' . _("Wording") . ":" . "</label><br />\n";
   $row .= htmlTextArea("wording", 4, 90, $postVars["wording"], $pageErrors["wording"]);
 
   $tbody[] = array($row);
