@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.4 2004/07/26 18:44:47 jact Exp $
+ * $Id: index.php,v 1.5 2004/08/02 10:07:57 jact Exp $
  */
 
 /**
@@ -48,86 +48,43 @@
     showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 
-  showMessage(_("OpenClinic is an easy to use, open source, medical records system. When you select any of the following tabs you will be prompted to login."), OPEN_MSG_INFO);
+  echo '<p>' . _("OpenClinic is an easy to use, open source, medical records system.") . "</p>\n";
+  echo '<p>' . _("When you select any of the following tabs you will be prompted to login.") . "</p>\n";
 ?>
 
-<table>
-  <thead>
-    <tr>
-      <th>
-        <?php echo _("Tab"); ?>
-      </th>
+<h2>
+  <a href="../medical/index.php"><img src="../images/medical.png" width="60" height="60" alt="<?php echo _("Medical Records"); ?>" title="<?php echo _("Medical Records"); ?>" /></a>
+  <a href="../medical/index.php"><?php echo _("Medical Records"); ?></a>
+</h2>
 
-      <th>
-        <?php echo _("Description"); ?>
-      </th>
-    </tr>
-  </thead>
+<p><?php echo _("Use this tab to manage your patient's medical records."); ?></p>
 
-  <tbody>
-    <tr>
-      <td class="center">
-        <a href="../medical/index.php"><?php echo _("Medical Records"); ?></a>
+<p><?php echo _("Patient's Administration:"); ?></p>
 
-        <p><a href="../medical/index.php"><img src="../images/medical.png" width="60" height="60" alt="<?php echo _("Medical Records"); ?>" title="<?php echo _("Medical Records"); ?>" /></a></p>
-      </td>
+<ul>
+  <li><?php echo _("Search, new, delete, edit"); ?></li>
+  <li><?php echo _("Social Data"); ?></li>
+  <li><?php echo _("Clinic History"); ?></li>
+  <li><?php echo _("Problem Reports"); ?></li>
+</ul>
 
-      <td>
-        <?php echo _("Use this tab to manage your patient's medical records."); ?>
+<hr />
 
-        <ul>
-          <li>
-            <p><?php echo _("Patient's Administration:"); ?></p>
+<h2>
+  <a href="../admin/index.php"><img src="../images/admin.png" width="60" height="60" alt="<?php echo _("Admin"); ?>" title="<?php echo _("Admin"); ?>" /></a>
+  <a href="../admin/index.php"><?php echo _("Admin"); ?></a>
+</h2>
 
-            <ul>
-              <li><?php echo _("Search, new, delete, edit"); ?></li>
-              <li><?php echo _("Social Data"); ?></li>
-              <li><?php echo _("Clinic History"); ?></li>
-              <li><?php echo _("Problem Reports"); ?></li>
-            </ul>
-          </li>
-        </ul>
-      </td>
-    </tr>
+<p><?php echo _("Use this tab to manage administrative options."); ?></p>
 
-    <!--tr>
-      <td class="center">
-        <a href=""><?php //echo _("Stats"); ?></a>
-
-        <p><a href=""><img src="../images/stats.png" width="60" height="60" alt="<?php //echo _("Stats"); ?>" title="<?php //echo _("Stats"); ?>" /></a></p>
-      </td>
-
-      <td>
-        <?php //echo _("indexStatsDesc1"); ?>
-
-        <ul>
-          <li><?php //echo _("indexStatsDesc2"); ?></li>
-        </ul>
-      </td>
-    </tr-->
-
-    <tr>
-      <td class="center">
-        <a href="../admin/index.php"><?php echo _("Admin"); ?></a>
-
-        <p><a href="../admin/index.php"><img src="../images/admin.png" width="60" height="60" alt="<?php echo _("Admin"); ?>" title="<?php echo _("Admin"); ?>" /></a></p>
-      </td>
-
-      <td>
-        <?php echo _("Use this tab to manage administrative options."); ?>
-
-        <ul>
-          <li><?php echo _("Staff members"); ?></li>
-          <li><?php echo _("Config settings"); ?></li>
-          <li><?php echo _("User profiles"); ?></li>
-          <li><?php echo _("Clinic themes editor"); ?></li>
-          <li><?php echo _("System users"); ?></li>
-          <li><?php echo _("Dumps"); ?></li>
-          <li><?php echo _("Logs"); ?></li>
-        </ul>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<ul>
+  <li><?php echo _("Staff members"); ?></li>
+  <li><?php echo _("Config settings"); ?></li>
+  <li><?php echo _("User profiles"); ?></li>
+  <li><?php echo _("Clinic themes editor"); ?></li>
+  <li><?php echo _("System users"); ?></li>
+  <li><?php echo _("Dumps"); ?></li>
+  <li><?php echo _("Logs"); ?></li>
+</ul>
 
 <?php require_once("../shared/footer.php"); ?>
