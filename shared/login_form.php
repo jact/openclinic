@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.4 2004/07/14 18:16:58 jact Exp $
+ * $Id: login_form.php,v 1.5 2004/07/26 18:47:25 jact Exp $
  */
 
 /**
@@ -51,10 +51,10 @@
   showNavLinks($links, "users.png");
   unset($links);
 
-  // Advice message if loginAttempts == 2
-  if (isset($_SESSION["loginAttempts"]) && $_SESSION["loginAttempts"] == 2)
+  // Warning message if loginAttempts == (OPEN_MAX_LOGIN_ATTEMPTS - 1)
+  if (isset($_SESSION["loginAttempts"]) && $_SESSION["loginAttempts"] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
   {
-    echo '<p class="error">' . _("Last attempt to type correct password before suspend this user account.") . "</p>\n";
+    showMessage(_("Last attempt to type correct password before suspend this user account."));
   }
 ?>
 
@@ -74,45 +74,36 @@ function md5Login(f)
 
 <form method="post" action="../shared/login.php" onsubmit="return md5Login(this);">
   <div class="center">
-    <?php showInputHidden("md5"); ?>
+<?php
+  showInputHidden("md5");
 
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2">
-            <?php echo _("User Login"); ?>
-          </th>
-        </tr>
-      </thead>
+  $thead = array(
+    _("User Login") => array('colspan' => 2)
+  );
 
-      <tbody>
-        <tr>
-          <td>
-            <label for="login_session"><?php echo _("Login:"); ?></label>
-          </td>
+  $tbody = array();
 
-          <td>
-            <?php showInputText("login_session", 20, 20, $postVars["login_session"], $pageErrors["login_session"]); ?>
-          </td>
-        </tr>
+  $row = '<label for="login_session">' . _("Login") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("login_session", 20, 20, $postVars["login_session"], $pageErrors["login_session"]);
 
-        <tr>
-          <td>
-            <label for="pwd_session"><?php echo _("Password:"); ?></label>
-          </td>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-          <td>
-            <?php showInputText("pwd_session", 20, 20, $postVars["pwd_session"], $pageErrors["pwd_session"], "password"); ?>
-          </td>
-        </tr>
+  $row = '<label for="pwd_session">' . _("Password") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("pwd_session", 20, 20, $postVars["pwd_session"], $pageErrors["pwd_session"], "password");
 
-        <tr>
-          <td colspan="2" class="center">
-            <?php showInputButton("button1", _("Enter")); ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $tfoot = array(htmlInputButton("button1", _("Enter")));
+
+  $options = array(
+    'shaded' => false,
+    'tfoot' => array('align' => 'center')
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
+?>
   </div>
 </form>
 
