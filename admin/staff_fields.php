@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_fields.php,v 1.3 2004/07/14 18:24:47 jact Exp $
+ * $Id: staff_fields.php,v 1.4 2004/07/28 17:39:17 jact Exp $
  */
 
 /**
@@ -21,115 +21,76 @@
     header("Location: ../index.php");
     exit();
   }
-?>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo $title; ?>
-      </th>
-    </tr>
-  </thead>
+  //debug($postVars);
 
-  <tbody>
-    <tr>
-      <td>
-        <label for="nif"><?php echo _("Tax Identification Number (TIN)") . ":"; ?></label>
-      </td>
+  $thead = array(
+    $title => array('colspan' => 2)
+  );
 
-      <td>
-        <?php showInputText("nif", 20, 20, $postVars["nif"], $pageErrors["nif"]); ?>
-      </td>
-    </tr>
+  $tbody = array();
 
-<?php
-  debug($postVars);
+  $row = '<label for="nif">' . _("Tax Identification Number (TIN)") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("nif", 20, 20, $postVars["nif"], $pageErrors["nif"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   if ((isset($memberType) && $memberType == "D") || substr($postVars["member_type"], 0, 1) == "D")
   {
-?>
-    <tr>
-      <td>
-        * <label for="collegiate_number"><?php echo _("Collegiate Number") . ":"; ?></label>
-      </td>
+    $row = '* <label for="collegiate_number">' . _("Collegiate Number") . ":" . "</label>\n";
+    $row .= OPEN_SEPARATOR;
+    $row .= htmlInputText("collegiate_number", 20, 20, $postVars["collegiate_number"], $pageErrors["collegiate_number"]);
 
-      <td>
-        <?php showInputText("collegiate_number", 20, 20, $postVars["collegiate_number"], $pageErrors["collegiate_number"]); ?>
-      </td>
-    </tr>
-<?php
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   }
+
+  $row = '* <label for="first_name">' . _("First Name") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("first_name", 25, 25, $postVars["first_name"], $pageErrors["first_name"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '* <label for="surname1">' . _("Surname 1") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("surname1", 30, 30, $postVars["surname1"], $pageErrors["surname1"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '* <label for="surname2">' . _("Surname 2") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("surname2", 30, 30, $postVars["surname2"], $pageErrors["surname2"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '<label for="address">' . _("Address") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlTextArea("address", 2, 30, $postVars["address"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '<label for="phone_contact">' . _("Phone Contact") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlTextArea("phone_contact", 2, 30, $postVars["phone_contact"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $row = '<label for="login">' . _("Login") . ":" . "</label>\n";
+  $row .= OPEN_SEPARATOR;
+  $row .= htmlInputText("login", 20, 20, $postVars["login"], $pageErrors["login"]);
+
+  $tbody[] = explode(OPEN_SEPARATOR, $row);
+
+  $tfoot = array(
+    htmlInputButton("button1", _("Submit"))
+    . htmlInputButton("button2", _("Reset"), "reset")
+    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+  );
+
+  $options = array(
+    'shaded' => false,
+    'tfoot' => array('align' => 'center')
+  );
+
+  showTable($thead, $tbody, $tfoot, $options);
 ?>
-
-    <tr>
-      <td>
-        * <label for="first_name"><?php echo _("First Name") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showInputText("first_name", 25, 25, $postVars["first_name"], $pageErrors["first_name"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        * <label for="surname1"><?php echo _("Surname 1") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showInputText("surname1", 30, 30, $postVars["surname1"], $pageErrors["surname1"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        * <label for="surname2"><?php echo _("Surname 2") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showInputText("surname2", 30, 30, $postVars["surname2"], $pageErrors["surname2"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="address"><?php echo _("Address") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showTextArea("address", 2, 30, $postVars["address"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="phone_contact"><?php echo _("Phone Contact") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showTextArea("phone_contact", 2, 30, $postVars["phone_contact"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td>
-        <label for="login"><?php echo _("Login") . ":"; ?></label>
-      </td>
-
-      <td>
-        <?php showInputText("login", 20, 20, $postVars["login"], $pageErrors["login"]); ?>
-      </td>
-    </tr>
-
-    <tr>
-      <td class="center" colspan="2">
-        <?php
-          showInputButton("button1", _("Submit"));
-          showInputButton("button2", _("Reset"), "reset");
-          showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-        ?>
-      </td>
-    </tr>
-  </tbody>
-</table>
