@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.12 2004/08/28 16:26:44 jact Exp $
+ * $Id: index.php,v 1.13 2004/10/16 14:52:27 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@
   $tab = "doc";
 
   require_once("../shared/read_settings.php");
+  require_once("../lib/html_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
