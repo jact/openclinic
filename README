@@ -1,0 +1,87 @@
+$Id: README,v 1.1 2003/12/04 22:13:14 jact Exp $
+
+OpenClinic: Web Medical Records System
+======================================
+
+Welcome to OpenClinic!
+
+First of all, thanks a lot to download this software, I hope that you can enjoy it.
+
+OpenClinic is free software, released under GNU GPL Licence version 2.0 (see LICENSE file for details)
+
+Introduction
+============
+
+OpenClinic is an easy to use, open source, medical records system written in PHP. It has been mainly thougth for private clinics, surgeries and private doctors. It is platform independent and it has multilanguage architecture.
+
+Currently OpenClinic has the following options:
+
+    * Medical Records
+
+      Use this option to manage your patient's medical records.
+          o Patient's Administration:
+                + Search, new, delete, edit
+                + Social Data
+                + Clinic History
+                + Problem Reports
+
+    * Admin
+
+      Use this option to manage administrative options.
+          o Config settings
+          o Theme editor
+          o Staff members
+          o System Users
+          o User profiles
+          o Dumps
+          o Log Statistics
+
+Requirements
+============
+
+    * PHP4 >= 4.2 (due to session variable changes in PHP 4.2) compiled with MySQL support (tested with versions 4.2.1, 4.2.2, 4.2.3, 4.3, 4.3.1, 4.3.2, 4.3.3 and 4.3.4);
+
+    * MySQL (tested with versions 3.23.36, 3.23.49, 3.23.51, 3.23.52, 3.23.54 and 3.23.55);
+
+    * a web server prepared to execute PHP code;
+
+    * and, of course, a web browser (with JavaScript and good CSS2 support).
+
+Features
+========
+
+    * Environment: Web Environment
+
+    * Intended Audience: Education, Healthcare industry
+
+    * License: GNU General Public License (GPL)
+
+    * Natural Language: English, Spanish, Bulgarian
+
+    * Operating System: OS Independent
+
+    * Programming Language: PHP
+
+    * Topic: Dynamic Content
+
+Multilingual Support
+====================
+
+OpenClinic offers multilingual support, so anyone who wants to contribute a language can create a new .po file (portable object) and enjoy his/her own language. Every language that it send to me will be included in the next release.
+
+Download
+========
+
+You can get the newest version at http://sourceforge.net/projects/showfiles.php?group_id=70742
+
+Farewell
+========
+
+Please, enjoy OpenClinic and remember that this is free GPL software and comes without any warranty and without technical support, so please don't email me asking how to make this or that, I'll ignore that type of emails.
+
+OpenClinic isn't perfect, but your suggestions, feedback and bug reports can help us to have a very well done medical records system!
+
+PS: Please, excuse my English, I'm not a native speaker. Also, remember I receive too many emails, so I can't answer to all you, but for sure I'll read all emails I receive.
+
+
+-- Jose Antonio Chavarría <jachavar@terra.es>
