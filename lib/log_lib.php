@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.7 2004/10/18 17:24:04 jact Exp $
+ * $Id: log_lib.php,v 1.8 2005/02/01 19:27:52 jact Exp $
  */
 
 /**
@@ -55,9 +55,9 @@ function percBar($pperc, $width = 100, $xecho = true, $label = "")
 
   $perc = round(($width * ($pperc / 100)), 0);
 
-  $what = '<img src="../images/leftbar.gif" height="14" width="7" alt="' . $label . '">';
-  $what .= '<img src="../images/mainbar.gif" height="14" width="' . $perc . '" alt="' . $label . '">';
-  $what .= '<img src="../images/rightbar.gif" height="14" width="7" alt="' . $label . '">';
+  $what = '<img src="../images/leftbar.gif" height="14" width="7" alt="' . $label . '" />';
+  $what .= '<img src="../images/mainbar.gif" height="14" width="' . $perc . '" alt="' . $label . '" />';
+  $what .= '<img src="../images/rightbar.gif" height="14" width="7" alt="' . $label . '" />';
 
   if ($xecho)
   {
