@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Patient.php,v 1.3 2004/05/16 18:11:05 jact Exp $
  */
 
 /**
@@ -320,7 +320,8 @@ class Patient
   {
     if ($view)
     {
-      return ($this->_birthDate != "0000-00-00") ? ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\3-\2-\1', $this->_birthDate) : "";
+      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_birthDate);
+      return ($this->_birthDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
     }
     else
     {
@@ -372,7 +373,8 @@ class Patient
   {
     if ($view)
     {
-      return ($this->_deceaseDate != "0000-00-00") ? ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\3-\2-\1', $this->_deceaseDate) : "";
+      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_deceaseDate);
+      return ($this->_deceaseDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
     }
     else
     {
@@ -762,7 +764,8 @@ class Patient
   {
     if ($view)
     {
-      return ($this->_lastUpdateDate != "0000-00-00") ? ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\3-\2-\1', $this->_lastUpdateDate) : "";
+      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_lastUpdateDate);
+      return ($this->_lastUpdateDate != "0000-00-00") ? date(_("Y-m-d"), strtotime($temp)) : "";
     }
     else
     {

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.3 2004/04/18 14:12:03 jact Exp $
+ * $Id: header.php,v 1.4 2004/05/16 18:11:34 jact Exp $
  */
 
 /**
@@ -118,7 +118,7 @@
 
     <div id="headerInformation">
       <?php
-        echo sprintf(_("Today's date: %s"), date("d-m-Y"));
+        echo sprintf(_("Today's date: %s"), date(_("Y-m-d")));
         echo "<br />\n";
 
         if (defined("OPEN_CLINIC_HOURS"))
