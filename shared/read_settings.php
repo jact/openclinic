@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.10 2004/07/24 16:18:36 jact Exp $
+ * $Id: read_settings.php,v 1.11 2004/08/03 08:31:44 jact Exp $
  */
 
 /**
@@ -96,7 +96,7 @@
   define("OPEN_SESSION_TIMEOUT",  $set->getSessionTimeout());
   define("OPEN_ITEMS_PER_PAGE",   $set->getItemsPerPage());
   define("OPEN_VERSION",          $set->getVersion());
-  define("OPEN_THEMEID",          $set->getIdTheme());
+  define("OPEN_THEME_ID",         $set->getIdTheme());
   define("OPEN_LANGUAGE",         $set->getLanguage());
   define("OPEN_CLINIC_USE_IMAGE", $set->isUseImageSet());
   define("OPEN_CLINIC_IMAGE_URL", $set->getClinicImageUrl());
@@ -124,7 +124,7 @@
   }
   else
   {
-    $themeQ->select(OPEN_THEMEID);
+    $themeQ->select(OPEN_THEME_ID);
   }
   if ($themeQ->isError())
   {
@@ -146,39 +146,8 @@
   ////////////////////////////////////////////////////////////////////
   // Theme related constants
   ////////////////////////////////////////////////////////////////////
-  define("STYLE_NAME",               $theme->getThemeName());
-
-  define("STYLE_TITLE_BG_COLOR",     $theme->getTitleBgColor());
-  define("STYLE_TITLE_FONT_FAMILY",  $theme->getTitleFontFamily());
-  define("STYLE_TITLE_FONT_SIZE",    $theme->getTitleFontSize());
-  define("STYLE_TITLE_FONT_BOLD",    $theme->isTitleFontBold());
-  define("STYLE_TITLE_TEXT_ALIGN",   $theme->getTitleAlign());
-  define("STYLE_TITLE_FONT_COLOR",   $theme->getTitleFontColor());
-
-  define("STYLE_BODY_BG_COLOR",      $theme->getBodyBgColor());
-  define("STYLE_BODY_FONT_FAMILY",   $theme->getBodyFontFamily());
-  define("STYLE_BODY_FONT_SIZE",     $theme->getBodyFontSize());
-  define("STYLE_BODY_FONT_COLOR",    $theme->getBodyFontColor());
-  define("STYLE_BODY_LINK_COLOR",    $theme->getBodyLinkColor());
-
-  define("STYLE_ERROR_COLOR",        $theme->getErrorColor());
-
-  define("STYLE_NAVBAR_BG_COLOR",    $theme->getNavbarBgColor());
-  define("STYLE_NAVBAR_FONT_FAMILY", $theme->getNavbarFontFamily());
-  define("STYLE_NAVBAR_FONT_SIZE",   $theme->getNavbarFontSize());
-  define("STYLE_NAVBAR_FONT_COLOR",  $theme->getNavbarFontColor());
-  define("STYLE_NAVBAR_LINK_COLOR",  $theme->getNavbarLinkColor());
-
-  define("STYLE_TAB_BG_COLOR",       $theme->getTabBgColor());
-  define("STYLE_TAB_FONT_FAMILY",    $theme->getTabFontFamily());
-  define("STYLE_TAB_FONT_SIZE",      $theme->getTabFontSize());
-  define("STYLE_TAB_FONT_COLOR",     $theme->getTabFontColor());
-  define("STYLE_TAB_LINK_COLOR",     $theme->getTabLinkColor());
-  define("STYLE_TAB_FONT_BOLD",      $theme->isTabFontBold());
-
-  define("STYLE_TABLE_BORDER_COLOR", $theme->getTableBorderColor());
-  define("STYLE_TABLE_BORDER_WIDTH", $theme->getTableBorderWidth());
-  define("STYLE_TABLE_CELL_PADDING", $theme->getTableCellPadding());
+  define("OPEN_THEME_NAME",     $theme->getThemeName());
+  define("OPEN_THEME_CSS_FILE", $theme->getCSSFile());
 
   unset($theme);
 ?>
