@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_view.php,v 1.4 2004/07/31 17:17:21 jact Exp $
+ * $Id: history_personal_view.php,v 1.5 2004/10/04 18:29:40 jact Exp $
  */
 
 /**
@@ -32,16 +32,16 @@
   $nav = "history";
   $onlyDoctor = true;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = intval($_GET["key"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
   require_once("../classes/History_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get var
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_GET["key"]);
 
   ////////////////////////////////////////////////////////////////////
   // Search database for problem

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.5 2004/07/31 16:39:21 jact Exp $
+ * $Id: connection_new_form.php,v 1.6 2004/10/04 18:29:40 jact Exp $
  */
 
 /**
@@ -32,17 +32,17 @@
   $nav = "problems";
   $onlyDoctor = false;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Problem_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/search_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get vars
+  ////////////////////////////////////////////////////////////////////
+  $idProblem = intval($_GET["key"]);
+  $idPatient = intval($_GET["pat"]);
 
   ////////////////////////////////////////////////////////////////////
   // Search database

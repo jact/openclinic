@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_list.php,v 1.6 2004/08/12 10:02:52 jact Exp $
+ * $Id: history_list.php,v 1.7 2004/10/04 18:29:40 jact Exp $
  */
 
 /**
@@ -32,17 +32,17 @@
   $nav = "history";
   $onlyDoctor = true;
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
-  $idPatient = intval($_GET["key"]);
-
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Problem_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/misc_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Retrieving get var
+  ////////////////////////////////////////////////////////////////////
+  $idPatient = intval($_GET["key"]);
 
   $problemQ = new Problem_Query();
   $problemQ->connect();
