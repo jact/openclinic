@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.4 2004/06/30 19:02:41 jact Exp $
+ * $Id: style.css,v 1.5 2004/07/28 16:56:03 jact Exp $
  */
 
 /**
@@ -17,6 +17,7 @@
 
 html {
   background: #fff;
+  color: #000;
 }
 body {
   font-family: "Trebuchet MS", verdana, helvetica, arial, sans-serif;
@@ -113,7 +114,7 @@ hr {
   margin: 0;
   padding: 0;
 }
-html > body .linkList li {
+html>body .linkList li {
   margin: 0 3px 0 0;
   padding: 4px 0px;
   line-height: 2.5em;
@@ -139,7 +140,7 @@ html > body .linkList li {
   font-weight: bold;
   color: gold;
 }
-.linkList a:hover, #content .linkList a:hover {
+.linkList a:focus, #content .linkList a:focus {
   background: #0000aa;
   color: #fff;
   bottom: 1px;
