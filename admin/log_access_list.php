@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.7 2004/07/14 18:24:11 jact Exp $
+ * $Id: log_access_list.php,v 1.8 2004/07/27 19:10:00 jact Exp $
  */
 
 /**
@@ -79,75 +79,54 @@
 
   if ($total == 0)
   {
-    echo '<p>' . _("No logs in this date.") . "</p>\n";
+    $accessQ->close();
+    showMessage(_("No logs in this date."), OPEN_MSG_INFO);
+    include_once("../shared/footer.php");
+    exit();
   }
-  else
+
+  echo '<h3>' . _("Access Logs List:") . "</h3>\n";
+  echo '<p><strong>' . sprintf(_("%d accesses."), $total) . "</strong></p>\n";
+
+  $profiles = array(
+    OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
+    OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
+    OPEN_PROFILE_DOCTOR => _("Doctor")
+  );
+
+  $thead = array(
+    _("Access Date") => array('colspan' => 2),
+    _("Login"),
+    _("Profile")
+  );
+
+  $options = array(
+    0 => array('align' => 'right'),
+    2 => array('align' => 'center'),
+    3 => array('align' => 'center')
+  );
+
+  $tbody = array();
+  for ($i = 1; $access = $accessQ->fetch(); $i++)
   {
-    echo '<h3>' . _("Access Logs List:") . "</h3>\n";
-    echo '<p><strong>' . sprintf(_("%d accesses."), $total) . "</strong></p>\n";
-?>
+    $row = $i . '.';
+    $row .= OPEN_SEPARATOR;
+    $row .= localDate($access["access_date"]);
+    $row .= OPEN_SEPARATOR;
+    $row .= $access["login"];
+    $row .= OPEN_SEPARATOR;
+    $row .= $profiles[$access["id_profile"]];
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo _("Access Date"); ?>
-      </th>
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
+  } // end for
 
-      <th>
-        <?php echo _("Login"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Profile"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
-    $profiles = array(
-      OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
-      OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
-      OPEN_PROFILE_DOCTOR => _("Doctor")
-    );
-
-    $rowClass = "odd";
-    for ($i = 1; $access = $accessQ->fetch(); $i++)
-    {
-?>
-    <tr class="<?php echo $rowClass; ?>">
-      <td class="number">
-        <?php echo $i . "."; ?>
-      </td>
-
-      <td>
-        <?php echo localDate($access["access_date"]); ?>
-      </td>
-
-      <td class="center">
-        <?php echo $access["login"]; ?>
-      </td>
-
-      <td class="center">
-        <?php echo $profiles[$access["id_profile"]]; ?>
-      </td>
-    </tr>
-<?php
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
-    } // end for
-?>
-  </tbody>
-</table>
-
-<?php
-  } // end if-else
   $accessQ->freeResult();
   $accessQ->close();
   unset($accessQ);
   unset($access);
   unset($profiles);
+
+  showTable($thead, $tbody, null, $options);
 
   echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
   echo _("Back return") . "</a></p>\n";

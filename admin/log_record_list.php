@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.9 2004/07/24 16:23:55 jact Exp $
+ * $Id: log_record_list.php,v 1.10 2004/07/27 19:10:00 jact Exp $
  */
 
 /**
@@ -79,84 +79,55 @@
 
   if ($total == 0)
   {
-    echo '<p>' . _("No logs in this date.") . "</p>\n";
+    $recordQ->close();
+    showMessage(_("No logs in this date."), OPEN_MSG_INFO);
+    include_once("../shared/footer.php");
+    exit();
   }
-  else
+
+  echo '<h3>' . _("Record Logs List:") . "</h3>\n";
+  echo '<p><strong>' . sprintf(_("%d transactions."), $total) . "</strong></p>\n";
+
+  $thead = array(
+    _("Access Date") => array('colspan' => 2),
+    _("Login"),
+    _("Table"),
+    _("Operation"),
+    _("Data")
+  );
+
+  $options = array(
+    0 => array('align' => 'right'),
+    1 => array('align' => 'center'),
+    2 => array('align' => 'center'),
+    3 => array('align' => 'center'),
+    4 => array('align' => 'center')
+  );
+
+  $tbody = array();
+  for ($i = 1; $record = $recordQ->fetch(); $i++)
   {
-    echo '<h3>' . _("Record Logs List:") . "</h3>\n";
-    echo '<p><strong>' . sprintf(_("%d transactions."), $total) . "</strong></p>\n";
-?>
+    $row = $i . '.';
+    $row .= OPEN_SEPARATOR;
+    $row .= localDate($record["access_date"]);
+    $row .= OPEN_SEPARATOR;
+    $row .= $record["login"];
+    $row .= OPEN_SEPARATOR;
+    $row .= $record["table_name"];
+    $row .= OPEN_SEPARATOR;
+    $row .= $record["operation"];
+    $row .= OPEN_SEPARATOR;
+    $row .= var_export(unserialize($record["affected_row"]), true);
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="2">
-        <?php echo _("Access Date"); ?>
-      </th>
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
+  } // end for
 
-      <th>
-        <?php echo _("Login"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Table"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Operation"); ?>
-      </th>
-
-      <th>
-        <?php echo _("Data"); ?>
-      </th>
-    </tr>
-  </thead>
-
-  <tbody>
-<?php
-    $rowClass = "odd";
-    for ($i = 1; $record = $recordQ->fetch(); $i++)
-    {
-?>
-    <tr class="<?php echo $rowClass; ?> center">
-      <td class="number">
-        <?php echo $i . "."; ?>
-      </td>
-
-      <td>
-        <?php echo localDate($record["access_date"]); ?>
-      </td>
-
-      <td>
-        <?php echo $record["login"]; ?>
-      </td>
-
-      <td>
-        <?php echo $record["table_name"]; ?>
-      </td>
-
-      <td>
-        <?php echo $record["operation"]; ?>
-      </td>
-
-      <td>
-        <?php print_r(unserialize($record["affected_row"])); ?>
-      </td>
-    </tr>
-<?php
-      // swap row color
-      ($rowClass == "odd") ? $rowClass = "even" : $rowClass = "odd";
-    } // end for
-?>
-  </tbody>
-</table>
-
-<?php
-  } // end if-else
   $recordQ->freeResult();
   $recordQ->close();
   unset($recordQ);
   unset($record);
+
+  showTable($thead, $tbody, null, $options);
 
   echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
   echo _("Back return") . "</a></p>\n";
