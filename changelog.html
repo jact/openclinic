@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: changelog.html,v 1.10 2004/08/28 16:32:59 jact Exp $ -->
+<!-- $Id: changelog.html,v 1.11 2004/09/22 18:25:18 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <title>OpenClinic Changelog</title>
@@ -107,7 +107,7 @@
 
     <li class="add">New file lib/debug_lib.php: new application constant OPEN_DEBUG (true | false)</li>
 
-    <li class="add">Added selectUser() method to Access_Query class</li>
+    <li class="add">Added searchUser() method to Access_Query class</li>
 
     <li class="add">Added Id CVS variable in header of all SQL files</li>
 
@@ -133,7 +133,7 @@
 
     <li class="change">existLogin() method has changed idUser parameter for idMember</li>
 
-    <li class="fix">Logout link in timeout session</li>
+    <li class="fix">Fixed logout link in timeout session</li>
 
     <li class="change">If items per page equal to zero, searchs return all results without pagination</li>
 
@@ -141,9 +141,9 @@
 
     <li class="change">Better i18n of dates</li>
 
-    <li class="fix">Problem with NULL closing_date in medical problems</li>
+    <li class="fix">Fixed problem with NULL closing_date in medical problems</li>
 
-    <li class="fix">XSS attacks with JavaScript event handlers in input fields</li>
+    <li class="fix">Fixed XSS attacks with JavaScript event handlers in input fields</li>
 
     <li class="add">Added localDate() function to lang_lib.php file</li>
 
@@ -155,7 +155,7 @@
 
     <li class="change">Profiles option in admin tab has been removed (and profile_tbl from database too)</li>
 
-    <li class="fix">MSIE bugs relationship with table less design</li>
+    <li class="fix">Fixed MSIE bugs relationship with table less design</li>
 
     <li class="fix">All application constants have OPEN_ or DLIB_ prefix to avoid interferences with PHP constants</li>
 
@@ -331,7 +331,7 @@
 
     <li class="change">Improvements in search engine (medical/patient_fields.php, medical/patient_search.php, classes/Patient_Query.php)</li>
 
-    <li class="add">Added getCurrentRow(), getRowCount(), getPageCount(), search() methods to Problem_Query class</li>
+    <li class="add">Added setItemsPerPage(), getCurrentRow(), getRowCount(), getPageCount(), search() methods to Problem_Query class</li>
 
     <li class="add">Added medical/problem_search.php, medical/problem_search_fields.php files to the project</li>
 
@@ -361,7 +361,7 @@
 
     <li class="fix">Fixed stranger characters introduction in login_form.php (urlencode in login.php)</li>
 
-    <li class="add">Added classes/validator_lib.php file to the project</li>
+    <li class="add">Added lib/validator_lib.php file to the project</li>
 
     <li class="add">Added fetchAll() method to DbConnection class</li>
 
