@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search_fields.php,v 1.2 2004/04/24 14:52:14 jact Exp $
+ * $Id: problem_search_fields.php,v 1.3 2004/05/20 19:15:48 jact Exp $
  */
 
 /**
@@ -94,6 +94,7 @@
             $array["20"] = 20;
             $array["50"] = 50;
             $array["100"] = 100;
+
             showSelectArray("limit_problem", $array);
             unset($array);
           ?>
