@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Record_Query.php,v 1.2 2004/04/18 14:40:46 jact Exp $
+ * $Id: Record_Query.php,v 1.3 2004/05/31 19:47:14 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@ require_once("../classes/Query.php");
  ********************************************************************
  * Methods:
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
+ *  mixed selectUser(int $idUser)
  *  mixed fetchRecord(void)
  *  bool insert(int $idUser, string $login, string $tableName, string $operation, int $idKey1, int $idKey2 = 0)
  */
@@ -64,6 +65,31 @@ class Record_Query extends Query
       $sql .= " AND DATE_FORMAT(access_date, '%H')=" . intval($hour);
     }
     $sql .= " ORDER BY access_date;";
+
+    $result = $this->exec($sql);
+    if ($result == false)
+    {
+      $this->_error = "Error accessing record log information.";
+      return false;
+    }
+
+    return $this->numRows();
+  }
+
+  /**
+   * mixed selectUser(int $idUser)
+   ********************************************************************
+   * Executes a query
+   ********************************************************************
+   * @param int $idUser
+   * @return mixed if error occurs returns false, else number of rows in the result
+   * @access public
+   */
+  function selectUser($idUser)
+  {
+    $sql = "SELECT *";
+    $sql.= " FROM record_log_tbl";
+    $sql .= " ORDER BY access_date";
 
     $result = $this->exec($sql);
     if ($result == false)
