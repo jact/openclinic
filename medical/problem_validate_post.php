@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_validate_post.php,v 1.4 2004/09/22 18:20:26 jact Exp $
+ * $Id: problem_validate_post.php,v 1.5 2004/10/04 21:43:30 jact Exp $
  */
 
 /**
@@ -40,7 +40,7 @@
 
   if (isset($_POST["closed_problem"]))
   {
-    $problem->setClosingDate(date("Y-m-d"));
+    $problem->setClosingDate(date("Y-m-d")); // automatic date (ISO format)
     $_POST["closing_date"] = $problem->getClosingDate();
   }
 
