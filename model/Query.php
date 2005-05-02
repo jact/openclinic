@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.5 2004/09/22 18:18:24 jact Exp $
+ * $Id: Query.php,v 1.6 2005/05/02 11:20:08 jact Exp $
  */
 
 /**
@@ -287,12 +287,19 @@ class Query
 
     $sql = "SELECT *";
     $sql .= " FROM " . (( !empty($table) ) ? trim($table) : $this->_table);
-    $sql .= " WHERE ";
-    for ($i = 0; $i < count($key); $i++)
+    if ($key !== false)
     {
-      $sql .= $key[$i] . "=" . ((gettype($value[$i]) == "string") ? "'" . $value[$i] . "'" : $value[$i]) . " AND ";
+      $sql .= " WHERE ";
+      for ($i = 0; $i < count($key); $i++)
+      {
+        $sql .= $key[$i] . "=" . ((gettype($value[$i]) == "string") ? "'" . $value[$i] . "'" : $value[$i]) . " AND ";
+      }
+      $sql = substr($sql, 0, -5); // to delete last " AND "
     }
-    $sql = substr($sql, 0, -5); // to delete last " AND "
+    else // if $key is false, only one row will be retrieved
+    {
+      $sql .= " LIMIT 1";
+    }
 
     $this->exec($sql);
     $result = $this->fetchRow();
