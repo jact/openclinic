@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.15 2005/02/01 20:07:26 jact Exp $
+ * $Id: footer.php,v 1.16 2005/05/24 18:45:49 jact Exp $
  */
 
 /**
@@ -70,7 +70,7 @@
     Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>
     <br />
     <?php echo _("under the"); ?>
-    <a href="../home/license.php">GNU General Public License</a>
+    <a href="../home/license.php" rel="license">GNU General Public License</a>
   </p>
 
 <?php
