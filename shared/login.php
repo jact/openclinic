@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.11 2004/11/05 12:36:19 jact Exp $
+ * $Id: login.php,v 1.12 2005/05/24 18:47:02 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  ********************************************************************
  * User login process
  ********************************************************************
- * Author: jact <jachavar@terra.es>
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -30,6 +30,7 @@
   require_once("../classes/Session_Query.php");
   require_once("../classes/Access_Query.php");
   require_once("../lib/error_lib.php");
+  require_once("../lib/validator_lib.php");
 
   unset($pageErrors); // to clean previous errors
 
@@ -37,7 +38,7 @@
   // Login edits
   ////////////////////////////////////////////////////////////////////
   $errorFound = false;
-  $loginSession = urlencode($_POST["login_session"]);
+  $loginSession = urlencode(safeText($_POST["login_session"]));
   if ($loginSession == "")
   {
     $errorFound = true;
@@ -47,7 +48,7 @@
   ////////////////////////////////////////////////////////////////////
   // Password edits
   ////////////////////////////////////////////////////////////////////
-  $pwdSession = $_POST["md5"];
+  $pwdSession = safeText($_POST["md5"]);
   if ($pwdSession == "")
   {
     $errorFound = true;
@@ -139,9 +140,12 @@
   ////////////////////////////////////////////////////////////////////
   if ($errorFound)
   {
-    $_SESSION["postVars"] = $_POST;
+    $_SESSION["postVars"] = safeArray($_POST);
     $_SESSION["pageErrors"] = $pageErrors;
-    $_SESSION["loginAttempts"] = $sessLoginAttempts;
+    if (isset($sessLoginAttempts))
+    {
+      $_SESSION["loginAttempts"] = $sessLoginAttempts;
+    }
 
     header("Location: ../shared/login_form.php");
     exit();
