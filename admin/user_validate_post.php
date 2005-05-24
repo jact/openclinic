@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_validate_post.php,v 1.5 2004/10/18 17:24:03 jact Exp $
+ * $Id: user_validate_post.php,v 1.6 2005/05/24 18:45:04 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  ********************************************************************
  * Validate post data of an user
  ********************************************************************
- * Author: jact <jachavar@terra.es>
+ * Author: jact <jachavar@gmail.com>
  * @since 0.6
  */
 
@@ -29,11 +29,17 @@
   $user->setLogin($_POST["login"]);
   $_POST["login"] = $user->getLogin();
 
-  $user->setPwd($_POST["md5"]);
-  $_POST["pwd"] = "";
+  if (isset($_POST["md5"]))
+  {
+    $user->setPwd($_POST["md5"]);
+    $_POST["pwd"] = "";
+  }
 
-  $user->setPwd2($_POST["md5_confirm"]);
-  $_POST["pwd2"] = "";
+  if (isset($_POST["md5_confirm"]))
+  {
+    $user->setPwd2($_POST["md5_confirm"]);
+    $_POST["pwd2"] = "";
+  }
 
   $user->setEmail($_POST["email"]);
   $_POST["email"] = $user->getEmail();
