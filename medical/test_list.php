@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.9 2005/02/19 10:51:23 jact Exp $
+ * $Id: test_list.php,v 1.10 2005/05/24 18:50:23 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  ********************************************************************
  * Medical tests screen
  ********************************************************************
- * Author: jact <jachavar@terra.es>
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -136,7 +136,7 @@
   $tbody = array();
   while ($test = $testQ->fetch())
   {
-    $temp = "http://" . $_SERVER['HTTP_HOST'] . ":" . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']);
+    $temp = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
     $temp = substr($temp, 0, strrpos($temp, "/")) . "/tests/" . translateBrowser($test->getPathFilename(false));
 
     $row = '<a href="' . $temp . '" onclick="return popSecondary(\'' . $temp . '\')">' . _("view") . '</a>';
