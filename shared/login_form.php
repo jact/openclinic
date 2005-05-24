@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.7 2004/12/07 11:28:06 jact Exp $
+ * $Id: login_form.php,v 1.8 2005/05/24 18:48:55 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  ********************************************************************
  * User login form
  ********************************************************************
- * Author: jact <jachavar@terra.es>
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -86,13 +86,20 @@ function md5Login(f)
 
   $row = '<label for="login_session">' . _("Login") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("login_session", 20, 20, $postVars["login_session"], $pageErrors["login_session"]);
+  $row .= htmlInputText("login_session", 20, 20,
+    isset($postVars["login_session"]) ? $postVars["login_session"] : null,
+    isset($pageErrors["login_session"]) ? $pageErrors["login_session"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = '<label for="pwd_session">' . _("Password") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("pwd_session", 20, 20, $postVars["pwd_session"], $pageErrors["pwd_session"], "password");
+  $row .= htmlInputText("pwd_session", 20, 20,
+    isset($postVars["pwd_session"]) ? $postVars["pwd_session"] : null,
+    isset($pageErrors["pwd_session"]) ? $pageErrors["pwd_session"] : null,
+    "password"
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
