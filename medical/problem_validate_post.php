@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_validate_post.php,v 1.8 2004/10/18 17:24:04 jact Exp $
+ * $Id: problem_validate_post.php,v 1.9 2005/06/13 19:03:23 jact Exp $
  */
 
 /**
  * problem_validate_post.php
- ********************************************************************
+ *
  * Validate post data of a medical problem
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.6
  */
 
@@ -32,11 +32,17 @@
   $problem->setIdMember($_POST["id_member"]);
   $_POST["id_member"] = $problem->getIdMember();
 
-  $problem->setOrderNumber($_POST["order_number"]);
-  //$_POST["order_number"] = $problem->getOrderNumber();
+  if (isset($_POST["order_number"]))
+  {
+    $problem->setOrderNumber($_POST["order_number"]);
+    //$_POST["order_number"] = $problem->getOrderNumber();
+  }
 
-  $problem->setOpeningDate($_POST["opening_date"]);
-  $_POST["opening_date"] = $problem->getOpeningDate();
+  if (isset($_POST["opening_date"]))
+  {
+    $problem->setOpeningDate($_POST["opening_date"]);
+    $_POST["opening_date"] = $problem->getOpeningDate();
+  }
 
   if (isset($_POST["closed_problem"]))
   {

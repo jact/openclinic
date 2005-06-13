@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.10 2004/10/18 17:24:04 jact Exp $
+ * $Id: problem_fields.php,v 1.11 2005/06/13 19:03:07 jact Exp $
  */
 
 /**
  * problem_fields.php
- ********************************************************************
+ *
  * Fields of medical problem data
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -76,50 +76,56 @@
   $staffQ->close();
   unset($staffQ);
 
-  $row .= htmlSelectArray("id_member", $array, $postVars["id_member"]);
+  $row .= htmlSelectArray("id_member", $array, isset($postVars["id_member"]) ? $postVars["id_member"] : null);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = '<label for="meeting_place">' . _("Meeting Place") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("meeting_place", 40, 40, $postVars["meeting_place"], $pageErrors["meeting_place"]);
+  $row .= htmlInputText("meeting_place", 40, 40,
+    isset($postVars["meeting_place"]) ? $postVars["meeting_place"] : null,
+    isset($pageErrors["meeting_place"]) ? $pageErrors["meeting_place"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = '* <label for="wording" class="requiredField">' . _("Wording") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("wording", 4, 90, $postVars["wording"], $pageErrors["wording"]);
+  $row .= htmlTextArea("wording", 4, 90,
+    isset($postVars["wording"]) ? $postVars["wording"] : null,
+    isset($pageErrors["wording"]) ? $pageErrors["wording"] : null
+  );
 
   $tbody[] = array($row);
 
   $row = '<label for="subjective">' . _("Subjective") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("subjective", 4, 90, $postVars["subjective"]);
+  $row .= htmlTextArea("subjective", 4, 90, isset($postVars["subjective"]) ? $postVars["subjective"] : null);
 
   $tbody[] = array($row);
 
   $row = '<label for="objective">' . _("Objective") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("objective", 4, 90, $postVars["objective"]);
+  $row .= htmlTextArea("objective", 4, 90, isset($postVars["objective"]) ? $postVars["objective"] : null);
 
   $tbody[] = array($row);
 
   $row = '<label for="appreciation">' . _("Appreciation") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("appreciation", 4, 90, $postVars["appreciation"]);
+  $row .= htmlTextArea("appreciation", 4, 90, isset($postVars["appreciation"]) ? $postVars["appreciation"] : null);
 
   $tbody[] = array($row);
 
   $row = '<label for="action_plan">' . _("Action Plan") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("action_plan", 4, 90, $postVars["action_plan"]);
+  $row .= htmlTextArea("action_plan", 4, 90, isset($postVars["action_plan"]) ? $postVars["action_plan"] : null);
 
   $tbody[] = array($row);
 
   $row = '<label for="prescription">' . _("Prescription") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("prescription", 4, 90, $postVars["prescription"]);
+  $row .= htmlTextArea("prescription", 4, 90, isset($postVars["prescription"]) ? $postVars["prescription"] : null);
 
   $tbody[] = array($row);
 
   $row = '<label for="closed_problem">' . _("Closed Problem") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlCheckBox("closed_problem", "closed_problem", "closed", $postVars["closed_problem"] != "");
+  $row .= htmlCheckBox("closed_problem", "closed_problem", "closed", isset($postVars["closed_problem"]) ? $postVars["closed_problem"] != "" : false);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 

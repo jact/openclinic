@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.12 2004/10/18 17:24:04 jact Exp $
+ * $Id: patient_fields.php,v 1.13 2005/06/13 19:02:52 jact Exp $
  */
 
 /**
  * patient_fields.php
- ********************************************************************
+ *
  * Fields of patient data
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -36,7 +36,10 @@
 
   $row = '<label for="nif">' . _("Tax Identification Number (TIN)") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("nif", 20, 20, $postVars["nif"], $pageErrors["nif"]);
+  $row .= htmlInputText("nif", 20, 20,
+    isset($postVars["nif"]) ? $postVars["nif"] : null,
+    isset($pageErrors["nif"]) ? $pageErrors["nif"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -84,14 +87,17 @@
 
   $row = '<label for="race">' . _("Race") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("race", 25, 25, $postVars["race"], $pageErrors["race"]);
+  $row .= htmlInputText("race", 25, 25,
+    isset($postVars["race"]) ? $postVars["race"] : null,
+    isset($pageErrors["race"]) ? $pageErrors["race"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = '<label for="day">' . _("Birth Date") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
 
-  $aux = explode("-", $postVars["birth_date"]);
+  $aux = explode("-", ( !empty($postVars["birth_date"]) ) ? $postVars["birth_date"] : '0000-00-00');
   $row .= htmlInputText("year", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
   $row .= " - ";
   $row .= htmlInputText("month", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
@@ -109,14 +115,17 @@
 
   $row = '<label for="birth_place">' . _("Birth Place") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("birth_place", 40, 40, $postVars["birth_place"], $pageErrors["birth_place"]);
+  $row .= htmlInputText("birth_place", 40, 40,
+    isset($postVars["birth_place"]) ? $postVars["birth_place"] : null,
+    isset($pageErrors["birth_place"]) ? $pageErrors["birth_place"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = '<label for="dday">' . _("Decease Date") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
 
-  $aux = explode("-", $postVars["decease_date"]);
+  $aux = explode("-", ( !empty($postVars["decease_date"]) ) ? $postVars["decease_date"] : '0000-00-00');
   $row .= htmlInputText("dyear", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
   $row .= " - ";
   $row .= htmlInputText("dmonth", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
@@ -134,13 +143,19 @@
 
   $row = '<label for="nts">' . _("Sanitary Card Number (SCN)") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("nts", 30, 30, $postVars["nts"], $pageErrors["nts"]);
+  $row .= htmlInputText("nts", 30, 30,
+    isset($postVars["nts"]) ? $postVars["nts"] : null,
+    isset($pageErrors["nts"]) ? $pageErrors["nts"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = '<label for="nss">' . _("National Health Service Number (NHSN)") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("nss", 30, 30, $postVars["nss"], $pageErrors["nss"]);
+  $row .= htmlInputText("nss", 30, 30,
+    isset($postVars["nss"]) ? $postVars["nss"] : null,
+    isset($pageErrors["nss"]) ? $pageErrors["nss"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -164,7 +179,10 @@
 
   $row = '<label for="insurance_company">' . _("Insurance Company") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("insurance_company", 30, 30, $postVars["insurance_company"], $pageErrors["insurance_company"]);
+  $row .= htmlInputText("insurance_company", 30, 30,
+    isset($postVars["insurance_company"]) ? $postVars["insurance_company"] : null,
+    isset($pageErrors["insurance_company"]) ? $pageErrors["insurance_company"] : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_validate_post.php,v 1.5 2004/10/18 17:24:03 jact Exp $
+ * $Id: staff_validate_post.php,v 1.6 2005/06/13 18:59:51 jact Exp $
  */
 
 /**
  * staff_validate_post.php
- ********************************************************************
+ *
  * Validate post data of a staff member
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.6
  */
 
@@ -26,8 +26,11 @@
   $staff->setMemberType($_POST["member_type"]);
   $_POST["member_type"] = $staff->getMemberType();
 
-  $staff->setCollegiateNumber($_POST["collegiate_number"]);
-  $_POST["collegiate_number"] = $staff->getCollegiateNumber();
+  if (isset($_POST["collegiate_number"]))
+  {
+    $staff->setCollegiateNumber($_POST["collegiate_number"]);
+    $_POST["collegiate_number"] = $staff->getCollegiateNumber();
+  }
 
   $staff->setNIF($_POST["nif"]);
   $_POST["nif"] = $staff->getNIF();

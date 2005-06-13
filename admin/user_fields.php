@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.10 2005/02/01 19:30:36 jact Exp $
+ * $Id: user_fields.php,v 1.11 2005/06/13 19:00:26 jact Exp $
  */
 
 /**
  * user_fields.php
- ********************************************************************
+ *
  * Fields of user data
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -48,14 +48,14 @@
   {
     $row = '* <label for="pwd" class="requiredField">' . _("Password") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
-    $row .= htmlInputText("pwd", 20, 20, $postVars["pwd"], $pageErrors["pwd"], "password");
+    $row .= htmlInputText("pwd", 20, 20, isset($postVars["pwd"]) ? $postVars["pwd"] : null, $pageErrors["pwd"], "password");
     $row .= htmlInputHidden("md5");
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
 
     $row = '* <label for="pw2" class="requiredField">' . _("Re-enter Password") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
-    $row .= htmlInputText("pwd2", 20, 20, $postVars["pwd2"], $pageErrors["pwd2"], "password");
+    $row .= htmlInputText("pwd2", 20, 20, isset($postVars["pwd2"]) ? $postVars["pwd2"] : null, $pageErrors["pwd2"], "password");
     $row .= htmlInputHidden("md5_confirm");
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -63,7 +63,7 @@
 
   $row = '<label for="email">' . _("Email") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("email", 40, 40, $postVars["email"], $pageErrors["email"]);
+  $row .= htmlInputText("email", 40, 40, isset($postVars["email"]) ? $postVars["email"] : null, $pageErrors["email"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -71,11 +71,11 @@
   {
     $row = '<label for="actived">' . _("Actived") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
-    $row .= htmlCheckBox("actived", "actived", 1, $postVars["actived"] != "");
+    $row .= htmlCheckBox("actived", "actived", 1, isset($postVars["actived"]) ? $postVars["actived"] != "" : false);
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-    if ($postVars["id_profile"] == "")
+    if ( !isset($postVars["id_profile"]) || $postVars["id_profile"] == "" )
     {
       $postVars["id_profile"] = OPEN_PROFILE_DOCTOR; // by default doctor profile
     }
@@ -96,7 +96,7 @@
 
   $row = '<label for="id_theme">' . _("Theme") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlSelect("theme_tbl", "id_theme", $postVars["id_theme"], "theme_name");
+  $row .= htmlSelect("theme_tbl", "id_theme", isset($postVars["id_theme"]) ? $postVars["id_theme"] : null, "theme_name");
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
