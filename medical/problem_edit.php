@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit.php,v 1.7 2004/10/04 21:35:16 jact Exp $
+ * $Id: problem_edit.php,v 1.8 2005/06/13 19:04:33 jact Exp $
  */
 
 /**
  * problem_edit.php
- ********************************************************************
+ *
  * Medical Problem edition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -43,6 +43,8 @@
   ////////////////////////////////////////////////////////////////////
   $idPatient = intval($_POST["id_patient"]);
   $idProblem = intval($_POST["id_problem"]);
+
+  $errorLocation = "../medical/problem_edit_form.php?key=" . $idProblem . "&pat=" . $idPatient;
 
   ////////////////////////////////////////////////////////////////////
   // Validate data

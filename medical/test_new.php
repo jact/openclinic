@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_new.php,v 1.7 2005/02/17 20:28:16 jact Exp $
+ * $Id: test_new.php,v 1.8 2005/06/13 19:04:44 jact Exp $
  */
 
 /**
  * test_new.php
- ********************************************************************
+ *
  * Medical test addition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -44,6 +44,8 @@
   ////////////////////////////////////////////////////////////////////
   $idPatient = intval($_POST["id_patient"]);
   $idProblem = intval($_POST["id_problem"]);
+
+  $errorLocation = "../medical/test_new_form.php?key=" . $idProblem . "&pat=" . $idPatient;
 
   ////////////////////////////////////////////////////////////////////
   // Validate data
