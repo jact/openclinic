@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.10 2004/10/04 21:40:08 jact Exp $
+ * $Id: relative_list.php,v 1.11 2005/06/14 18:59:51 jact Exp $
  */
 
 /**
  * relative_list.php
- ********************************************************************
+ *
  * List of defined relation between patients screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,8 +35,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Relative_Query.php");
-  require_once("../classes/Patient_Query.php");
-  require_once("../lib/error_lib.php");
+  require_once("../classes/Patient_Page_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/validator_lib.php");
 
@@ -149,7 +148,7 @@
     _("First Name")
   );
 
-  $patQ = new Patient_Query();
+  $patQ = new Patient_Page_Query();
   $patQ->connect();
   if ($patQ->isError())
   {

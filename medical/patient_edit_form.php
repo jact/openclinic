@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.10 2004/10/16 14:57:54 jact Exp $
+ * $Id: patient_edit_form.php,v 1.11 2005/06/14 18:59:19 jact Exp $
  */
 
 /**
  * patient_edit_form.php
- ********************************************************************
+ *
  * Edition screen of a patient
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -39,9 +39,9 @@
   {
     $idPatient = intval($_GET["key"]);
 
-    include_once("../classes/Patient_Query.php");
+    include_once("../classes/Patient_Page_Query.php");
 
-    $patQ = new Patient_Query();
+    $patQ = new Patient_Page_Query();
     $patQ->connect();
     if ($patQ->isError())
     {

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_new.php,v 1.5 2004/07/24 16:17:30 jact Exp $
+ * $Id: patient_new.php,v 1.6 2005/06/14 18:59:19 jact Exp $
  */
 
 /**
  * patient_new.php
- ********************************************************************
+ *
  * Patient addition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Patient_Query.php");
+  require_once("../classes/Patient_Page_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
 
@@ -56,7 +56,7 @@
   ////////////////////////////////////////////////////////////////////
   // Insert new patient
   ////////////////////////////////////////////////////////////////////
-  $patQ = new Patient_Query();
+  $patQ = new Patient_Page_Query();
   $patQ->connect();
   if ($patQ->isError())
   {

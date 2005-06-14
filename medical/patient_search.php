@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.9 2004/10/04 21:33:58 jact Exp $
+ * $Id: patient_search.php,v 1.10 2005/06/14 18:59:33 jact Exp $
  */
 
 /**
  * patient_search.php
- ********************************************************************
+ *
  * Patient result set page
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -34,7 +34,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Patient_Query.php");
+  require_once("../classes/Patient_Page_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/search_lib.php");
   require_once("../lib/validator_lib.php");
@@ -57,7 +57,7 @@
   ////////////////////////////////////////////////////////////////////
   // Search database
   ////////////////////////////////////////////////////////////////////
-  $patQ = new Patient_Query();
+  $patQ = new Patient_Page_Query();
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $patQ->connect();
   if ($patQ->isError())

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: visited_list.php,v 1.9 2004/10/18 17:24:04 jact Exp $
+ * $Id: visited_list.php,v 1.10 2005/06/14 19:00:26 jact Exp $
  */
 
 /**
  * visited_list.php
- ********************************************************************
+ *
  * Set of functions to manage visited patients array
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.4
  */
 
@@ -31,20 +31,20 @@
  *  void deletePatient(int $idPatient)
  */
 
-  require_once("../classes/Patient_Query.php");
+  require_once("../classes/Patient_Page_Query.php");
 
   /**
    * string getPatientName(int $idPatient)
-   ********************************************************************
+   *
    * Returns a patient name.
-   ********************************************************************
+   *
    * @param int $idPatient key of patient to show header
    * @return string patient name
    * @access public
    */
   function getPatientName($idPatient)
   {
-    $patQ = new Patient_Query();
+    $patQ = new Patient_Page_Query();
     $patQ->connect();
     if ($patQ->isError())
     {
@@ -71,6 +71,7 @@
     }
 
     $patQ->freeResult();
+    $patQ->close();
 
     $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
@@ -82,9 +83,9 @@
 
   /**
    * array deleteItemArray(mixed $key, array &$array)
-   ********************************************************************
+   *
    * Delete a item from a associative array.
-   ********************************************************************
+   *
    * @param mixed $key key of element to delete of the array
    * @param array &$array array to transform
    * @return array
@@ -111,13 +112,14 @@
 
   /**
    * void addPatient(int $idPatient, string $patientName = "")
-   ********************************************************************
+   *
    * Add a visited patient to the list.
-   ********************************************************************
+   *
    * @param int $idPatient key of patient to show header
    * @param string $patientName (optional) name of patient
    * @return void
    * @access public
+   * @see OPEN_DEMO, OPEN_VISITED_ITEMS
    */
   function addPatient($idPatient, $patientName = "")
   {
@@ -156,12 +158,13 @@
 
   /**
    * void deletePatient(int $idPatient)
-   ********************************************************************
+   *
    * Delete a visited patient from the list.
-   ********************************************************************
+   *
    * @param int $idPatient key of patient to show header
    * @return void
    * @access public
+   * @see OPEN_DEMO
    */
   function deletePatient($idPatient)
   {
