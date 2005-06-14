@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.8 2004/11/04 11:41:57 jact Exp $
+ * $Id: install.php,v 1.9 2005/06/14 18:49:32 jact Exp $
  */
 
 /**
  * install.php
- ********************************************************************
+ *
  * Installation process screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
@@ -102,11 +102,7 @@
     {
       echo sprintf(_("Table %s dropped."), $tableName) . "<br />\n";
       echo sprintf(_("Table %s created."), $tableName) . "<br />\n";
-      for ($i = 0; $i < 50; $i++)
-      {
-        echo '.';
-      }
-      echo "<br />\n";
+      echo str_repeat(".", 50) . "<br />\n";
     }
     else
     {
