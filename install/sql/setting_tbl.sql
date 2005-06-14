@@ -1,18 +1,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_tbl.sql,v 1.10 2004/12/07 11:28:28 jact Exp $
+ * $Id: setting_tbl.sql,v 1.11 2005/06/14 18:03:30 jact Exp $
  */
 
 /**
  * setting_tbl.sql
- ********************************************************************
+ *
  * Creation of setting_tbl structure
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 CREATE TABLE setting_tbl (
@@ -41,7 +41,7 @@ INSERT INTO setting_tbl VALUES (
   'http://www.example.com',
   20,
   10,
-  '0.7.20041207',
+  '0.8.20050614',
   'en',
   1
 );
