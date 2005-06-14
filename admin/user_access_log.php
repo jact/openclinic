@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.11 2004/10/03 10:27:03 jact Exp $
+ * $Id: user_access_log.php,v 1.12 2005/06/14 18:53:33 jact Exp $
  */
 
 /**
  * user_access_log.php
- ********************************************************************
+ *
  * List of user's accesses
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Access_Query.php");
+  require_once("../classes/Access_Page_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/search_lib.php");
@@ -56,12 +56,11 @@
   ////////////////////////////////////////////////////////////////////
   // Search user accesses
   ////////////////////////////////////////////////////////////////////
-  $accessQ = new Access_Query();
+  $accessQ = new Access_Page_Query();
   $accessQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $accessQ->connect();
   if ($accessQ->isError())
   {
-    $accessQ->close();
     showQueryError($accessQ);
   }
 

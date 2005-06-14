@@ -5,14 +5,14 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.12 2005/05/24 18:47:02 jact Exp $
+ * $Id: login.php,v 1.13 2005/06/14 18:55:04 jact Exp $
  */
 
 /**
  * login.php
- ********************************************************************
+ *
  * User login process
- ********************************************************************
+ *
  * Author: jact <jachavar@gmail.com>
  */
 
@@ -28,7 +28,7 @@
   require_once("../shared/read_settings.php");
   require_once("../classes/User_Query.php");
   require_once("../classes/Session_Query.php");
-  require_once("../classes/Access_Query.php");
+  require_once("../classes/Access_Page_Query.php");
   require_once("../lib/error_lib.php");
   require_once("../lib/validator_lib.php");
 
@@ -182,7 +182,7 @@
   ////////////////////////////////////////////////////////////////////
   // Insert new user access
   ////////////////////////////////////////////////////////////////////
-  $accessQ = new Access_Query();
+  $accessQ = new Access_Page_Query();
   $accessQ->connect();
   if ($accessQ->isError())
   {

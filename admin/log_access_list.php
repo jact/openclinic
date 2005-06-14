@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.9 2004/09/22 18:18:40 jact Exp $
+ * $Id: log_access_list.php,v 1.10 2005/06/14 18:52:08 jact Exp $
  */
 
 /**
  * log_access_list.php
- ********************************************************************
+ *
  * List of user's accesses in a date
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.4
  */
 
@@ -35,7 +35,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Access_Query.php");
+  require_once("../classes/Access_Page_Query.php");
   require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@
   $day = (isset($_GET["day"])) ? intval($_GET["day"]) : 0;
   $hour = (isset($_GET["hour"])) ? intval($_GET["hour"]) : 0;
 
-  $accessQ = new Access_Query();
+  $accessQ = new Access_Page_Query();
   $accessQ->connect();
   if ($accessQ->isError())
   {
