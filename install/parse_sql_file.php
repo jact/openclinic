@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: parse_sql_file.php,v 1.9 2004/10/18 17:24:03 jact Exp $
+ * $Id: parse_sql_file.php,v 1.10 2005/06/14 18:48:48 jact Exp $
  */
 
 /**
  * parse_sql_file.php
- ********************************************************************
+ *
  * Contains the function parseSQLFile() and the array with OpenClinic table names
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -51,9 +51,9 @@ $tables = array(
 
 /**
  * bool parseSQLFile(string $file, string $table, bool $drop = true)
- ********************************************************************
+ *
  * Parses a SQL file
- ********************************************************************
+ *
  * @param string $file name of the file to parse
  * @param string $table name of the table
  * @param bool $drop if true, execute a DROP TABLE sentence
