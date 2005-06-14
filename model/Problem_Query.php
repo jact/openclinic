@@ -2,35 +2,31 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Query.php,v 1.11 2004/11/05 12:35:18 jact Exp $
+ * $Id: Problem_Query.php,v 1.12 2005/06/14 17:22:30 jact Exp $
  */
 
 /**
  * Problem_Query.php
- ********************************************************************
+ *
  * Contains the class Problem_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../classes/Query.php");
+require_once("../classes/Page_Query.php");
 require_once("../classes/Problem.php");
 
 /**
  * Problem_Query data access component for medical problems
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Problem_Query(void)
- *  void setItemsPerPage(int $value)
- *  int getCurrentRow(void)
- *  int getRowCount(void)
- *  int getPageCount(void)
  *  bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
  *  mixed getLastId(void)
  *  mixed select(int $idProblem)
@@ -41,20 +37,13 @@ require_once("../classes/Problem.php");
  *  bool update(Problem $problem)
  *  bool delete(int $idProblem)
  */
-class Problem_Query extends Query
+class Problem_Query extends Page_Query
 {
-  var $_itemsPerPage = 10;
-  var $_rowNumber = 0;
-  var $_currentRow = 0;
-  var $_currentPage = 0;
-  var $_rowCount = 0;
-  var $_pageCount = 0;
-
   /**
    * void Problem_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -64,58 +53,10 @@ class Problem_Query extends Query
   }
 
   /**
-   * void setItemsPerPage(int $value)
-   ********************************************************************
-   * @param int $value
-   * @access public
-   * @since 0.4
-   */
-  function setItemsPerPage($value)
-  {
-    $this->_itemsPerPage = intval($value);
-  }
-
-  /**
-   * int getCurrentRow(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   * @since 0.4
-   */
-  function getCurrentRow()
-  {
-    return intval($this->_currentRow);
-  }
-
-  /**
-   * int getRowCount(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   * @since 0.4
-   */
-  function getRowCount()
-  {
-    return intval($this->_rowCount);
-  }
-
-  /**
-   * int getPageCount(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   * @since 0.4
-   */
-  function getPageCount()
-  {
-    return intval($this->_pageCount);
-  }
-
-  /**
    * bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
-   ********************************************************************
+   *
    * Executes a query search
-   ********************************************************************
+   *
    * @param int $type one of the global constants
    * @param array (string) $word string(s) to search for
    * @param int $page What page should be returned if results are more than one page
@@ -244,9 +185,9 @@ class Problem_Query extends Query
 
   /**
    * mixed getLastId(void)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @return mixed if error occurs returns false, else last insert id
    * @access public
    * @since 0.3
@@ -269,9 +210,9 @@ class Problem_Query extends Query
 
   /**
    * mixed select(int $idProblem)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idProblem key of problem to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -294,9 +235,9 @@ class Problem_Query extends Query
 
   /**
    * mixed selectProblems(int $idPatient, bool $closed = false)
-   ********************************************************************
+   *
    * Executes a query to get the problems of a determinate patient
-   ********************************************************************
+   *
    * @param int $idPatient key of patient to select medical problems
    * @param bool $closed (optional) indicate if the problems are closed or not
    * @return mixed if error occurs returns false, else number of rows in the result
@@ -322,9 +263,9 @@ class Problem_Query extends Query
 
   /**
    * mixed getLastOrderNumber(int $idPatient)
-   ********************************************************************
+   *
    * Executes a query to get the last order number of the problem of a patient.
-   ********************************************************************
+   *
    * @param int $idPatient key of patient to select order number
    * @return mixed if error occurs returns false, else last order number
    * @access public
@@ -348,9 +289,9 @@ class Problem_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the Problem object.
-   ********************************************************************
+   *
    * @return Problem returns user or false if no more problems to fetch
    * @access public
    */
@@ -388,9 +329,9 @@ class Problem_Query extends Query
 
   /**
    * bool insert(Problem $problem)
-   ********************************************************************
+   *
    * Inserts a new medical problem into the problems table.
-   ********************************************************************
+   *
    * @param Problem $problem medical problem to insert
    * @return boolean returns false, if error occurs
    * @access public
@@ -432,9 +373,9 @@ class Problem_Query extends Query
 
   /**
    * bool update(Problem $problem)
-   ********************************************************************
+   *
    * Update a medical problem in the problems table.
-   ********************************************************************
+   *
    * @param Problem $problem medical problem to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -471,9 +412,9 @@ class Problem_Query extends Query
 
   /**
    * bool delete(int $idProblem)
-   ********************************************************************
+   *
    * Deletes a medical problem from the problems table.
-   ********************************************************************
+   *
    * @param string $idProblem key of medical problem to delete
    * @return boolean returns false, if error occurs
    * @access public

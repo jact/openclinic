@@ -2,53 +2,42 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Query.php,v 1.8 2004/09/22 18:18:24 jact Exp $
+ * $Id: Access_Query.php,v 1.9 2005/06/14 17:22:30 jact Exp $
  */
 
 /**
  * Access_Query.php
- ********************************************************************
+ *
  * Contains the class Access_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../classes/Query.php");
+require_once("../classes/Page_Query.php");
 
 /**
  * Access_Query data access component for application users accesses
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
  * @since 0.3
- ********************************************************************
+ *
  * Methods:
- *  void setItemsPerPage(int $value)
- *  int getCurrentRow(void)
- *  int getRowCount(void)
- *  int getPageCount(void)
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
  *  mixed fetch(void)
  *  bool insert(User $user)
  */
-class Access_Query extends Query
+class Access_Query extends Page_Query
 {
-  var $_itemsPerPage = 10;
-  var $_rowNumber = 0;
-  var $_currentRow = 0;
-  var $_currentPage = 0;
-  var $_rowCount = 0;
-  var $_pageCount = 0;
-
   /**
    * void Access_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -58,54 +47,10 @@ class Access_Query extends Query
   }
 
   /**
-   * void setItemsPerPage(int $value)
-   ********************************************************************
-   * @param int $value
-   * @access public
-   */
-  function setItemsPerPage($value)
-  {
-    $this->_itemsPerPage = intval($value);
-  }
-
-  /**
-   * int getCurrentRow(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   */
-  function getCurrentRow()
-  {
-    return intval($this->_currentRow);
-  }
-
-  /**
-   * int getRowCount(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   */
-  function getRowCount()
-  {
-    return intval($this->_rowCount);
-  }
-
-  /**
-   * int getPageCount(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   */
-  function getPageCount()
-  {
-    return intval($this->_pageCount);
-  }
-
-  /**
    * mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $year (optional)
    * @param int $month (optional)
    * @param int $day (optional)
@@ -149,9 +94,9 @@ class Access_Query extends Query
 
   /**
    * bool searchUser(int $idUser, int $page, int $limitFrom = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idUser
    * @param int $page What page should be returned if results are more than one page
    * @param int $limitFrom (optional) maximum number of results
@@ -222,9 +167,9 @@ class Access_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates an array object.
-   ********************************************************************
+   *
    * @return array returns access log or false if no more logs to fetch
    * @access public
    * @since 0.4
@@ -251,9 +196,9 @@ class Access_Query extends Query
 
   /**
    * bool insert(User $user)
-   ********************************************************************
+   *
    * Inserts a new application user access into the database.
-   ********************************************************************
+   *
    * @param User $user application user data
    * @return boolean returns false, if error occurs
    * @access public

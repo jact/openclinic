@@ -2,35 +2,31 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Query.php,v 1.13 2004/11/05 12:35:18 jact Exp $
+ * $Id: Patient_Query.php,v 1.14 2005/06/14 17:22:30 jact Exp $
  */
 
 /**
  * Patient_Query.php
- ********************************************************************
+ *
  * Contains the class Patient_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../classes/Query.php");
+require_once("../classes/Page_Query.php");
 require_once("../classes/Patient.php");
 
 /**
  * Patient_Query data access component for patients
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Patient_Query(void)
- *  void setItemsPerPage(int $value)
- *  int getCurrentRow(void)
- *  int getRowCount(void)
- *  int getPageCount(void)
  *  bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
  *  mixed getLastId(void)
  *  mixed select(int $idPatient)
@@ -40,20 +36,13 @@ require_once("../classes/Patient.php");
  *  bool update(Patient $patient)
  *  bool delete(int $idPatient)
  */
-class Patient_Query extends Query
+class Patient_Query extends Page_Query
 {
-  var $_itemsPerPage = 10;
-  var $_rowNumber = 0;
-  var $_currentRow = 0;
-  var $_currentPage = 0;
-  var $_rowCount = 0;
-  var $_pageCount = 0;
-
   /**
    * void Patient_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -63,54 +52,10 @@ class Patient_Query extends Query
   }
 
   /**
-   * void setItemsPerPage(int $value)
-   ********************************************************************
-   * @param int $value
-   * @access public
-   */
-  function setItemsPerPage($value)
-  {
-    $this->_itemsPerPage = intval($value);
-  }
-
-  /**
-   * int getCurrentRow(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   */
-  function getCurrentRow()
-  {
-    return intval($this->_currentRow);
-  }
-
-  /**
-   * int getRowCount(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   */
-  function getRowCount()
-  {
-    return intval($this->_rowCount);
-  }
-
-  /**
-   * int getPageCount(void)
-   ********************************************************************
-   * @return int
-   * @access public
-   */
-  function getPageCount()
-  {
-    return intval($this->_pageCount);
-  }
-
-  /**
    * bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
-   ********************************************************************
+   *
    * Executes a query search
-   ********************************************************************
+   *
    * @param int $type one of the global constants
    * @param array (string) $word string(s) to search for
    * @param int $page What page should be returned if results are more than one page
@@ -258,9 +203,9 @@ class Patient_Query extends Query
 
   /**
    * mixed getLastId(void)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @return mixed if error occurs returns false, else last insert id
    * @access public
    */
@@ -282,9 +227,9 @@ class Patient_Query extends Query
 
   /**
    * mixed select(int $idPatient)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idPatient key of patient to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -308,9 +253,9 @@ class Patient_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the Patient object.
-   ********************************************************************
+   *
    * @return mixed returns patient or false if no more patients to fetch
    * @access public
    */
@@ -355,9 +300,9 @@ class Patient_Query extends Query
 
   /**
    * bool existName(string $firstName, string $surname1, string $surname2, int $idPatient = 0)
-   ********************************************************************
+   *
    * Returns true if patient name already exists
-   ********************************************************************
+   *
    * @param string $firstName
    * @param string $surname1
    * @param string $surname2
@@ -391,9 +336,9 @@ class Patient_Query extends Query
 
   /**
    * bool insert(Patient $patient)
-   ********************************************************************
+   *
    * Inserts a new patient into the database.
-   ********************************************************************
+   *
    * @param Patient $patient patient to insert
    * @return boolean returns false, if error occurs
    * @access public
@@ -467,9 +412,9 @@ class Patient_Query extends Query
 
   /**
    * bool update(Patient $patient)
-   ********************************************************************
+   *
    * Update a patient in the database.
-   ********************************************************************
+   *
    * @param Patient $patient patient to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -530,9 +475,9 @@ class Patient_Query extends Query
 
   /**
    * bool delete(int $idPatient)
-   ********************************************************************
+   *
    * Deletes a patient from the database.
-   ********************************************************************
+   *
    * @param int $idPatient key of patient to delete
    * @return boolean returns false, if error occurs
    * @access public
