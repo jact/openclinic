@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.11 2004/08/05 14:14:28 jact Exp $
+ * $Id: index.php,v 1.12 2005/06/14 18:51:23 jact Exp $
  */
 
 /**
  * index.php
- ********************************************************************
+ *
  * Index page of installation process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
@@ -37,6 +37,7 @@
     {
       $_POST['sql_query'] = stripslashes($_POST['sql_query']);
     }
+    // @fixme gecko browsers (Mozilla 1.7.8) cause to disappear CR/LF (and I don't know why)
     $_POST['sql_query'] = safeText($_POST['sql_query'], false);
 
     $tmpFile = tempnam(dirname(realpath(__FILE__)), "foo");
@@ -174,7 +175,7 @@
     </p>
 
 <?php
-    require_once("../install/footer.php");
+    include_once("../install/footer.php");
     exit();
   } // end if
   echo '<p>' . _("Database connection is good.") . "</p>\n";
