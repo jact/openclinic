@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.11 2004/10/16 14:59:16 jact Exp $
+ * $Id: print_medical_record.php,v 1.12 2005/06/14 19:00:45 jact Exp $
  */
 
 /**
  * print_medical_record.php
- ********************************************************************
+ *
  * Medical record of a patient screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -25,9 +25,9 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Patient_Query.php");
+  require_once("../classes/Patient_Page_Query.php");
   require_once("../classes/Staff_Query.php");
-  require_once("../classes/Problem_Query.php");
+  require_once("../classes/Problem_Page_Query.php");
   require_once("../classes/History_Query.php");
   require_once("../lib/html_lib.php");
 
@@ -56,7 +56,7 @@
   ////////////////////////////////////////////////////////////////////
   // Search database for patient
   ////////////////////////////////////////////////////////////////////
-  $patQ = new Patient_Query();
+  $patQ = new Patient_Page_Query();
   $patQ->connect();
   if ($patQ->isError())
   {
@@ -224,7 +224,7 @@
   ////////////////////////////////////////////////////////////////////
   // Show medical problems
   ////////////////////////////////////////////////////////////////////
-  $problemQ = new Problem_Query();
+  $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
   {
@@ -479,7 +479,7 @@
   ////////////////////////////////////////////////////////////////////
   // Show closed medical problems
   ////////////////////////////////////////////////////////////////////
-  $problemQ = new Problem_Query();
+  $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
   {
