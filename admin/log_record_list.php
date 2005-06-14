@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.12 2005/02/01 19:29:13 jact Exp $
+ * $Id: log_record_list.php,v 1.13 2005/06/14 18:52:32 jact Exp $
  */
 
 /**
  * log_record_list.php
- ********************************************************************
+ *
  * List of record's logs in a date
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.4
  */
 
@@ -35,7 +35,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Record_Query.php");
+  require_once("../classes/Record_Page_Query.php");
   require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -46,7 +46,7 @@
   $day = (isset($_GET["day"])) ? intval($_GET["day"]) : 0;
   $hour = (isset($_GET["hour"])) ? intval($_GET["hour"]) : 0;
 
-  $recordQ = new Record_Query();
+  $recordQ = new Record_Page_Query();
   $recordQ->connect();
   if ($recordQ->isError())
   {

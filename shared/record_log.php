@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.7 2004/10/18 17:24:05 jact Exp $
+ * $Id: record_log.php,v 1.8 2005/06/14 18:54:40 jact Exp $
  */
 
 /**
  * record_log.php
- ********************************************************************
+ *
  * Contains recordLog function
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.3
  */
 
@@ -23,13 +23,13 @@
     exit();
   }
 
-  require_once("../classes/Record_Query.php");
+  require_once("../classes/Record_Page_Query.php");
 
   /**
    * void recordLog(string $table, string, $operation, array $key)
-   ********************************************************************
+   *
    * Inserts a new record in log operations table if it is possible
-   ********************************************************************
+   *
    * @param string $table
    * @param string $operation one between INSERT, UPDATE, DELETE
    * @param array $key primary key of the record
@@ -66,7 +66,7 @@
     //$queryQ->close(); // don't remove comment mark (fails in relative_new.php)
     unset($queryQ);
 
-    $recQ = new Record_Query();
+    $recQ = new Record_Page_Query();
     $recQ->connect();
     if ($recQ->isError())
     {
