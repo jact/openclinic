@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new.php,v 1.6 2004/08/12 10:03:31 jact Exp $
+ * $Id: problem_new.php,v 1.7 2005/06/14 18:58:11 jact Exp $
  */
 
 /**
  * problem_new.php
- ********************************************************************
+ *
  * Medical Problem addition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -34,8 +34,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Problem_Query.php");
-  require_once("../lib/error_lib.php");
+  require_once("../classes/Problem_Page_Query.php");
   require_once("../shared/record_log.php"); // record log
 
   ////////////////////////////////////////////////////////////////////
@@ -60,7 +59,7 @@
   ////////////////////////////////////////////////////////////////////
   // Insert new medical problem
   ////////////////////////////////////////////////////////////////////
-  $problemQ = new Problem_Query();
+  $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
   {

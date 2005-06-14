@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.7 2004/10/16 14:59:16 jact Exp $
+ * $Id: problem_view.php,v 1.8 2005/06/14 18:58:35 jact Exp $
  */
 
 /**
  * problem_view.php
- ********************************************************************
+ *
  * View medical problem data screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
-  require_once("../classes/Problem_Query.php");
+  require_once("../classes/Problem_Page_Query.php");
   require_once("../classes/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
@@ -48,7 +48,7 @@
   ////////////////////////////////////////////////////////////////////
   // Search database for problem
   ////////////////////////////////////////////////////////////////////
-  $problemQ = new Problem_Query();
+  $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
   {

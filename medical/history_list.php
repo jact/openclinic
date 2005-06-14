@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_list.php,v 1.8 2004/10/04 21:30:53 jact Exp $
+ * $Id: history_list.php,v 1.9 2005/06/14 18:57:25 jact Exp $
  */
 
 /**
  * history_list.php
- ********************************************************************
+ *
  * Closed medical problems screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -34,8 +34,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Problem_Query.php");
-  require_once("../lib/error_lib.php");
+  require_once("../classes/Problem_Page_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/misc_lib.php");
 
@@ -44,7 +43,7 @@
   ////////////////////////////////////////////////////////////////////
   $idPatient = intval($_GET["key"]);
 
-  $problemQ = new Problem_Query();
+  $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
   {

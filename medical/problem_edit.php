@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit.php,v 1.8 2005/06/13 19:04:33 jact Exp $
+ * $Id: problem_edit.php,v 1.9 2005/06/14 18:57:49 jact Exp $
  */
 
 /**
@@ -34,8 +34,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Problem_Query.php");
-  require_once("../lib/error_lib.php");
+  require_once("../classes/Problem_Page_Query.php");
   require_once("../shared/record_log.php"); // record log
 
   ////////////////////////////////////////////////////////////////////
@@ -63,7 +62,7 @@
   ////////////////////////////////////////////////////////////////////
   // Update problem
   ////////////////////////////////////////////////////////////////////
-  $problemQ = new Problem_Query();
+  $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
   {

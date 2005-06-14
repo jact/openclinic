@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_header.php,v 1.11 2004/10/18 17:24:04 jact Exp $
+ * $Id: problem_header.php,v 1.12 2005/06/14 18:58:11 jact Exp $
  */
 
 /**
  * problem_header.php
- ********************************************************************
+ *
  * Contains showProblemHeader function
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -22,14 +22,14 @@
     exit();
   }
 
-  require_once("../classes/Problem_Query.php");
+  require_once("../classes/Problem_Page_Query.php");
   require_once("../lib/misc_lib.php");
 
   /**
    * bool showProblemHeader(int $idProblem)
-   ********************************************************************
+   *
    * Draws a header with medical problem information.
-   ********************************************************************
+   *
    * @param int $idProblem key of medical problem to show header
    * @return boolean false if medical problem does not exist, true otherwise
    * @access public
@@ -37,7 +37,7 @@
    */
   function showProblemHeader($idProblem)
   {
-    $problemQ = new Problem_Query();
+    $problemQ = new Problem_Page_Query();
     $problemQ->connect();
     if ($problemQ->isError())
     {

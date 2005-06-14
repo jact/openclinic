@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.9 2004/10/04 21:34:52 jact Exp $
+ * $Id: problem_del.php,v 1.10 2005/06/14 18:57:43 jact Exp $
  */
 
 /**
  * problem_del.php
- ********************************************************************
+ *
  * Medical Problem deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -34,10 +34,9 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Problem_Query.php");
+  require_once("../classes/Problem_Page_Query.php");
   require_once("../classes/Connection_Query.php"); /* referencial integrity */
   require_once("../classes/DelProblem_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/validator_lib.php");
 
@@ -88,7 +87,7 @@
   ////////////////////////////////////////////////////////////////////
   // Delete problem
   ////////////////////////////////////////////////////////////////////
-  $problemQ = new Problem_Query();
+  $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
   {
