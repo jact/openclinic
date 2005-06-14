@@ -2,24 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.4 2004/11/04 11:41:36 jact Exp $
+ * $Id: footer.php,v 1.5 2005/06/14 18:48:22 jact Exp $
  */
 
 /**
  * footer.php
- ********************************************************************
+ *
  * Contains the common foot of the installation pages
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 ?>
 
 </div><!-- End #content -->
 
-<div class="links">
+<div id="left">
+  <p>
+    <a href="http://openclinic.sourceforge.net" id="logo" title="OpenClinic web site">OpenClinic web site</a>
+  </p>
+
   <ul class="linkList">
     <li><a href="../install.html"><?php echo _("Install Instructions"); ?></a></li>
 
@@ -27,19 +31,18 @@
 
     <li class="bold"><a href="../home/index.php"><?php echo _("Start OpenClinic"); ?></a></li>
   </ul>
-</div><!-- End .links -->
+</div><!-- End #left -->
 
 <div id="footer">
-  <?php echo _("Powered by OpenClinic"); ?>
-  <br />
-  Copyright &copy; 2002-2004 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>
-  <br />
-  <?php echo _("under the"); ?>
-  <a href="../home/license.php">GNU General Public License</a>
-</div><!-- End #footer -->
+  <p><?php echo _("Powered by OpenClinic"); ?></p>
 
-<div class="logos">
-  <a href="http://validator.w3.org/check/referer"><img src="../images/valid-xhtml11.png" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" width="80" height="15" /></a>
-</div><!-- End .logos -->
+  <p>Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;gmail.com" accesskey="9">Jose Antonio Chavarría</a></p>
+
+  <p><?php echo _("under the"); ?> <a href="../home/license.php">GNU General Public License</a></p>
+
+  <p>
+    <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
+  </p>
+</div><!-- End #footer -->
 </body>
 </html>
