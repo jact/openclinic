@@ -5,13 +5,13 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Page_Query.php,v 1.1 2005/06/14 16:49:55 jact Exp $
+ * $Id: Page_Query.php,v 1.2 2005/06/14 16:51:08 jact Exp $
  */
 
 /**
  * Page_Query.php
  *
- * Contains the class QueryPage (pagination methods)
+ * Contains the class Page_Query (pagination methods)
  *
  * Author: jact <jachavar@gmail.com>
  * Author: Jorge López Herranz <lopez.herranz@gmail.com>
