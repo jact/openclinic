@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.8 2005/02/01 19:27:52 jact Exp $
+ * $Id: log_lib.php,v 1.9 2005/06/14 18:54:22 jact Exp $
  */
 
 /**
  * log_lib.php
- ********************************************************************
+ *
  * Set of log stats functions
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -37,9 +37,9 @@
 
 /*
  * void percBar(int $pperc, int $width = 100, bool $xecho = true, string $label = "")
- ********************************************************************
- * Change this
- ********************************************************************
+ *
+ * Makes a percentage bar
+ *
  * @param int $pperc
  * @param int $width (optional)
  * @param bool $xecho (optional) indicate if it's printed or returned
@@ -71,9 +71,9 @@ function percBar($pperc, $width = 100, $xecho = true, $label = "")
 
 /*
  * void showYearStats(string $table)
- ********************************************************************
+ *
  * Draws a table with yearly stats
- ********************************************************************
+ *
  * @param string $table
  * @return void
  * @access public
@@ -132,9 +132,9 @@ function showYearStats($table)
 
 /*
  * void showMonthStats(string $table, int $year)
- ********************************************************************
+ *
  * Draws a table with monthly stats
- ********************************************************************
+ *
  * @param string $table
  * @param int $year
  * @return void
@@ -196,9 +196,9 @@ function showMonthStats($table, $year)
 
 /*
  * void showDailyStats(string $table, int $year, int $month)
- ********************************************************************
+ *
  * Draws a table with daily stats
- ********************************************************************
+ *
  * @param string $table
  * @param int $year
  * @param int $month
@@ -277,9 +277,9 @@ function showDailyStats($table, $year, $month)
 
 /*
  * void showHourlyStats(string $table, int $year, int $month, int $day)
- ********************************************************************
+ *
  * Draws a table with hourly stats
- ********************************************************************
+ *
  * @param string $table
  * @param int $year
  * @param int $month
@@ -364,9 +364,9 @@ function showHourlyStats($table, $year, $month, $day)
 
 /*
  * void stats(string $table)
- ********************************************************************
- * Change this
- ********************************************************************
+ *
+ * Draws tables with stats
+ *
  * @param string $table
  * @return void
  * @access public
@@ -446,9 +446,9 @@ function stats($table)
 
 /*
  * void showLinks(string $table)
- ********************************************************************
+ *
  * Displays navigation log links
- ********************************************************************
+ *
  * @param string $table
  * @return void
  * @access public
@@ -458,7 +458,7 @@ function showLinks($table)
   echo '<p>';
   echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">';
   echo _("Back to Main Statistics");
-  echo '</a> | <a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
+  echo '</a> | <a href="' . (isset($_SERVER["HTTP_REFERER"]) ? htmlspecialchars($_SERVER["HTTP_REFERER"]) : '../index.php') . '">';
   echo _("Back return");
   echo "</a></p>\n";
 }
