@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.12 2005/06/14 19:00:45 jact Exp $
+ * $Id: print_medical_record.php,v 1.13 2005/06/21 18:24:46 jact Exp $
  */
 
 /**
@@ -268,7 +268,7 @@
         $staff = $staffQ->fetch();
         if ($staff)
         {
-          echo '<h3>' . _("Doctor who treated you") . "</h3>\n";
+          echo '<h3>' . _("Attending Physician") . "</h3>\n";
           echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
         }
         $staffQ->freeResult();
@@ -524,7 +524,7 @@
         $staff = $auxQ->fetch();
         if ($staff)
         {
-          echo '<h3>' . _("Doctor who treated you") . "</h3>\n";
+          echo '<h3>' . _("Attending Physician") . "</h3>\n";
           echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
         }
         $auxQ->freeResult();

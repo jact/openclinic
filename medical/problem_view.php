@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.8 2005/06/14 18:58:35 jact Exp $
+ * $Id: problem_view.php,v 1.9 2005/06/21 18:25:01 jact Exp $
  */
 
 /**
@@ -147,7 +147,7 @@
       $staff = $staffQ->fetch();
       if ($staff)
       {
-        echo '<h3>' . _("Doctor who treated you") . "</h3>\n";
+        echo '<h3>' . _("Attending Physician") . "</h3>\n";
         echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
       }
       $staffQ->freeResult();
