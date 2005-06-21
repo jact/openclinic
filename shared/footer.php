@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.16 2005/05/24 18:45:49 jact Exp $
+ * $Id: footer.php,v 1.17 2005/06/21 18:27:29 jact Exp $
  */
 
 /**
  * footer.php
- ********************************************************************
+ *
  * Contains the common foot of the web pages
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -32,29 +32,28 @@
 
 <!-- Footer -->
 <div id="footer">
-  <div id="footerLinks">
-    <?php echo '<a href="../home/index.php" accesskey="1">' . _("Clinic Home") . '</a> |'; ?>
+  <ul id="footerLinks">
+    <li><a href="../home/index.php" accesskey="1"><?php echo _("Clinic Home"); ?></a></li>
 
-    <a href="../index.html"><?php echo _("OpenClinic Readme"); ?></a>
+    <li><a href="../index.html"><?php echo _("OpenClinic Readme"); ?></a></li>
 
 <?php
   if (isset($tab) && isset($nav))
   {
-    echo '| <a href="../doc/index.php?tab=' . $tab . '&amp;nav=' . $nav . '" title="' . _("Opens a new window") . '" onclick="return popSecondary(\'../doc/index.php?tab=' . $tab . '&amp;nav=' . $nav . '\')">' . _("Help") . "</a>\n";
+    echo '<li><a href="../doc/index.php?tab=' . $tab . '&amp;nav=' . $nav . '" title="' . _("Opens a new window") . '" onclick="return popSecondary(\'../doc/index.php?tab=' . $tab . '&amp;nav=' . $nav . '\')">' . _("Help") . "</a></li>\n";
   }
 
   if (isset($_SESSION["userId"]) && ($_SESSION["userId"] == 1 || ($_SESSION["userId"] > 0 && $_SESSION["userId"] < 3 && !OPEN_DEMO)))
   {
-    echo '| <a href="../shared/view_source.php?file=' . $_SERVER['PHP_SELF'] . '&amp;tab=' . $tab . '" title="' . _("Opens a new window") . '" onclick="return popSecondary(\'../shared/view_source.php?file=' . $_SERVER['PHP_SELF'] . '&amp;tab=' . $tab . '\')">' . _("View source code") . "</a>\n";
+    echo '<li><a href="../shared/view_source.php?file=' . $_SERVER['PHP_SELF'] . '&amp;tab=' . $tab . '" title="' . _("Opens a new window") . '" onclick="return popSecondary(\'../shared/view_source.php?file=' . $_SERVER['PHP_SELF'] . '&amp;tab=' . $tab . '\')">' . _("View source code") . "</a></li>\n";
   }
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    echo ' | <a href="../demo_version.html">' . _("Demo version features") . "</a>\n";
-    showMessage(_("This is a demo version"), OPEN_MSG_INFO);
+    echo '<li><a href="../demo_version.html">' . _("Demo version features") . "</a></li>\n";
   }
 ?>
-  </div><!-- End #footerLinks -->
+  </ul><!-- End #footerLinks -->
 
   <p>
     <?php
@@ -67,13 +66,18 @@
   </p>
 
   <p>
-    Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;terra.es" accesskey="9">Jose Antonio Chavarría</a>
+    Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;gmail.com" accesskey="9">Jose Antonio Chavarría</a>
     <br />
     <?php echo _("under the"); ?>
     <a href="../home/license.php" rel="license">GNU General Public License</a>
   </p>
 
 <?php
+  if (defined("OPEN_DEMO") && OPEN_DEMO)
+  {
+    showMessage(_("This is a demo version"), OPEN_MSG_INFO);
+  }
+
   ////////////////////////////////////////////////////////////////////
   // End server page generation time
   ////////////////////////////////////////////////////////////////////
