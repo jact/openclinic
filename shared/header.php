@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.20 2004/10/18 17:24:05 jact Exp $
+ * $Id: header.php,v 1.21 2005/06/21 18:29:46 jact Exp $
  */
 
 /**
  * header.php
- ********************************************************************
+ *
  * Contains the common header of the web pages
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -56,7 +56,7 @@
 <div id="header">
   <div id="subHeader">
     <?php
-      echo '<h1>';
+      echo '<p id="logo">';
       if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
       {
         echo '<a href="' . OPEN_CLINIC_URL . '">';
@@ -74,7 +74,7 @@
       {
         echo '</a>';
       }
-      echo "</h1>\n";
+      echo "</p>\n";
     ?>
 
     <div id="headerInformation">
@@ -88,12 +88,12 @@
 
         if (defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
         {
-          echo '<p>' . sprintf(_("Clinic address: %s"), OPEN_CLINIC_ADDRESS) . "</p>\n";
+          echo '<address>' . sprintf(_("Clinic address: %s"), OPEN_CLINIC_ADDRESS) . "</address>\n";
         }
 
         if (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE)
         {
-          echo '<p>' . sprintf(_("Clinic phone: %s"), OPEN_CLINIC_PHONE) . "</p>\n";
+          echo '<address>' . sprintf(_("Clinic phone: %s"), OPEN_CLINIC_PHONE) . "</address>\n";
         }
       ?>
     </div><!-- End #headerInformation -->
@@ -101,65 +101,56 @@
 
   <hr class="noPrint" />
 
-  <h1 class="noPrint"><a href="#mainZone" accesskey="2"><?php echo _("Skip over navigation"); ?></a></h1>
+  <p class="noPrint"><a href="#mainZone" accesskey="2"><?php echo _("Skip over navigation"); ?></a></p>
 
   <!-- Tabs -->
   <div class="menuBar">
     <ul id="tabs">
     <?php
-      echo '<li id="first">';
-      echo ($tab == "home")
-        ? '<span>' . _("Home") . "</span>"
-        : '<a href="../home/index.php">' . _("Home") . "</a>";
-      echo "</li>\n";
+      $mainNav = array(
+        "home" => array(_("Home"), "../home/index.php"),
+        "medical" => array(_("Medical Records"), "../medical/index.php"),
+        //"stats" => array("Statistics", "../stats/index.php"),
+        "admin" => array(_("Admin"), "../admin/index.php")
+      );
 
-      echo '<li>';
-      echo ($tab == "medical")
-        ? '<span>' . _("Medical Records") . "</span>"
-        : '<a href="../medical/index.php">' . _("Medical Records") . "</a>";
-      echo "</li>\n";
+      $sentinel = true;
+      foreach ($mainNav as $key => $value)
+      {
+        echo '<li';
+        if ($sentinel)
+        {
+          $sentinel = false;
+          echo ' id="first"';
+        }
+        echo '>';
 
-      /*echo '<li>';
-      echo ($tab == "stats")
-        ? '<span>' . "Statistics" . "</span>"
-        : '<a href="../stats/index.php">' . "Statistics" . "</a>";
-      echo "</li>\n";*/
-
-      echo '<li>';
-      echo ($tab == "admin")
-        ? '<span>' . _("Admin") . "</span>"
-        : '<a href="../admin/index.php">' . _("Admin") . "</a>";
-      echo "</li>\n";
+        echo ($tab == $key)
+          ? '<span>' . $value[0] . '</span>'
+          : '<a href="' . $value[1] . '">' . $value[0] . "</a>";
+        echo "</li>\n";
+      }
+      unset($mainNav);
     ?>
     </ul>
   </div><!-- End .menuBar -->
   <!-- End Tabs -->
 
-  <div id="sourceForgeLinks">
-    <a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a>
+  <ul id="sourceForgeLinks">
+    <li><a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a></li>
 
-    <span class="separator">|</span>
+    <?php //<li><a href="http://sourceforge.net/mail/?group_id=70742">?><?php //echo _("Mailing Lists"); ?><?php //</a></li> ?>
 
-    <?php //<a href="http://sourceforge.net/mail/?group_id=70742">?><?php //echo _("Mailing Lists"); ?><?php //</a>
+    <li><a href="http://sourceforge.net/project/showfiles.php?group_id=70742"><?php echo _("Downloads"); ?></a></li>
 
-    //<span class="separator">|</span> ?>
+    <li><a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857"><?php echo _("Report Bugs"); ?></a></li>
 
-    <a href="http://sourceforge.net/project/showfiles.php?group_id=70742"><?php echo _("Downloads"); ?></a>
+    <?php //<li><a href="http://sourceforge.net/pm/?group_id=70742">?><?php //echo _("Tasks"); ?><?php //</a></li> ?>
 
-    <span class="separator">|</span>
+    <li><a href="http://sourceforge.net/forum/?group_id=70742"><?php echo _("Forums"); ?></a></li>
 
-    <a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857"><?php echo _("Report Bugs"); ?></a>
-
-    <span class="separator">|</span>
-
-    <?php //<a href="http://sourceforge.net/pm/?group_id=70742">?><?php //echo _("Tasks"); ?><?php //</a>
-
-    //<span class="separator">|</span> ?>
-
-    <a href="http://sourceforge.net/forum/?group_id=70742"><?php echo _("Forums"); ?></a>
-
-    <?php //<!--a href="http://sourceforge.net/project/memberlist.php?group_id=70742">?><?php //echo _("Developers"); ?><?php //</a--> ?>
-  </div><!-- End #sourceForgeLinks -->
+    <?php //<li><a href="http://sourceforge.net/project/memberlist.php?group_id=70742">?><?php //echo _("Developers"); ?><?php //</a></li> ?>
+  </ul><!-- End #sourceForgeLinks -->
 </div><!-- End #header -->
 <!-- End Header -->
 
@@ -186,7 +177,7 @@
 
     <p>
       <a href="http://sourceforge.net">
-        <img src="../images/sf-logo.png" width="130" height="37" alt="SourceForge.net Logo" title="SourceForge.net Logo" />
+        <img src="../images/sf-logo.png" width="130" height="37" alt="Project hosted in SourceForge.net" title="Project hosted in SourceForge.net" />
       </a>
     </p>
 
