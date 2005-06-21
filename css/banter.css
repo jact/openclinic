@@ -1,4 +1,5 @@
 /* CSS based in SuperfluousBanter.org site */
+/* $id$ */
 
 /* Layout */
 html, body {
@@ -24,7 +25,7 @@ html>body #header {
   height: auto;
 }
 
-#header h1 {
+#logo {
   margin: 0;
 }
 
@@ -84,6 +85,11 @@ li#first a, li#first span {
   border-bottom: 1px solid #e0ede9;
 }
 
+#sourceForgeLinks li {
+  display: inline;
+  list-style-type: none;
+}
+
 #sideBar {
   border-style: solid;
   border-color: #efefef;
@@ -132,6 +138,17 @@ li#first a, li#first span {
   margin-left: 150px;
   clear: right;
   text-align: center;
+}
+
+#footerLinks {
+  margin: 0;
+  padding: 0;
+}
+
+#footerLinks li {
+  list-style-type: none;
+  display: inline;
+  padding: 0 4px;
 }
 
 /* Tables */
@@ -218,6 +235,12 @@ input, textarea, select {
   background: #fff;
   color: #000;
 }
+
+input:focus, textarea:focus, select:focus {
+  background: #fffbff;
+  color: #000;
+}
+
 input[type="submit"], input[type="button"], input[type="reset"] {
   border-width: 1px;
   font-weight: bold;
@@ -239,7 +262,7 @@ input[type="radio"], input[type="checkbox"] {
   text-align: center;
 }
 
-#header h1 img {
+#logo img {
   border-bottom: 1px solid #95bbae;
 }
 
@@ -308,7 +331,7 @@ hr {
   font-weight: bold;
 }
 
-.noPrint, .separator {
+.noPrint {
   display: none;
 }
 

@@ -1,4 +1,5 @@
 /* CSS based in www.serialz.to site */
+/* $id$ */
 
 /* Layout */
 html, body {
@@ -23,7 +24,7 @@ html>body #header {
   height: auto;
 }
 
-#header h1 {
+#logo {
   background: #9ea985;
   color: #fff;
   font-size: 28px;
@@ -85,9 +86,20 @@ li#first a, li#first span {
   text-align: right;
   background: #bbc2a9;
   color: #f5f5dc;
-  padding: 0 2ex 4px 0;
+  padding: 4px 2ex 4px 0;
   margin: -1px 0 0 0;
   border: 1px solid #dce0d3;
+}
+
+#sourceForgeLinks li {
+  display: inline;
+  list-style-type: none;
+  padding: 0 8px;
+  border-left: 1px solid #dce0d3;
+}
+
+#sourceForgeLinks li:first-child {
+  border: none;
 }
 
 #sideBar {
@@ -123,6 +135,22 @@ li#first a, li#first span {
   margin-left: 150px;
   clear: right;
   text-align: center;
+}
+
+#footerLinks {
+  margin: 0;
+  padding: 0;
+}
+
+#footerLinks li {
+  list-style-type: none;
+  display: inline;
+  padding: 0 4px 2px 8px;
+  border-left: 2px solid #dce0d3;
+}
+
+#footerLinks li:first-child {
+  border: none;
 }
 
 /* Tables */
@@ -204,6 +232,11 @@ input, textarea, select {
   border-color: #dce0d3;
   background: #374611;
   color: #f5f5dc;
+}
+
+input:focus, textarea:focus, select:focus {
+  background: #eff3d6;
+  color: #374611;
 }
 
 input[type="submit"], input[type="button"], input[type="reset"] {

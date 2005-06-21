@@ -1,4 +1,5 @@
 /* CSS based in Sinorca (haran's design in oswd.org) */
+/* $Id: sinorca.css,v 1.4 2005/06/21 18:23:49 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -15,12 +16,18 @@ body {
 #sourceForgeLinks {
   position: absolute;
   top: 0;
-  left: 0;
+  right: 0;
   height: 2em;
   width: 100%;
   background: #6386DE;
   color: #fff;
   text-align: right;
+  margin: 0;
+}
+
+#sourceForgeLinks li {
+  display: inline;
+  list-style-type: none;
 }
 
 #sourceForgeLinks a {
@@ -39,12 +46,12 @@ body {
   color: #000;
 }
 
-#header h1 {
+#logo {
   margin: 0;
   font-size: 235%;
 }
 
-#header h1 a {
+#logo a {
   color: #fff;
   background: transparent;
 }
@@ -212,7 +219,15 @@ html>body #footer {
 }
 
 #footerLinks {
+  margin: 0;
+  padding: 0;
   text-align: center;
+}
+
+#footerLinks li {
+  list-style-type: none;
+  display: inline;
+  padding: 0 4px;
 }
 
 #footer a, #footer a:visited {
@@ -290,6 +305,24 @@ td, th {
 
 .noWrap {
   white-space: nowrap;
+}
+
+/* Form styles */
+input, textarea, select {
+  border-width: 1px;
+  border-color: #dce0d3;
+  background: #000;
+  color: #fff;
+}
+
+input:focus, textarea:focus, select:focus {
+  background: #fff;
+  color: #000;
+}
+
+input[type="submit"], input[type="button"], input[type="reset"] {
+  border-width: 1px;
+  font-weight: bold;
 }
 
 label {
