@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_fields.php,v 1.5 2004/10/18 17:24:04 jact Exp $
+ * $Id: history_family_fields.php,v 1.6 2005/06/21 18:24:21 jact Exp $
  */
 
 /**
  * history_family_fields.php
- ********************************************************************
+ *
  * Fields of family antecedents
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -50,7 +50,6 @@
 
   $tfoot = array(
     htmlInputButton("button1", _("Update"))
-    . htmlInputButton("button2", _("Reset"), "reset")
     . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_fields.php,v 1.7 2004/10/18 17:24:03 jact Exp $
+ * $Id: staff_fields.php,v 1.8 2005/06/21 18:21:02 jact Exp $
  */
 
 /**
  * staff_fields.php
- ********************************************************************
+ *
  * Fields of staff member data
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -83,7 +83,6 @@
 
   $tfoot = array(
     htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("button2", _("Reset"), "reset")
     . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 

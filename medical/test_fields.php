@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_fields.php,v 1.7 2005/06/13 19:03:38 jact Exp $
+ * $Id: test_fields.php,v 1.8 2005/06/21 18:23:53 jact Exp $
  */
 
 /**
@@ -59,7 +59,6 @@
 
   $tfoot = array(
     htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("button2", _("Reset"), "reset")
     . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 

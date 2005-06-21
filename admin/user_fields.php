@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.11 2005/06/13 19:00:26 jact Exp $
+ * $Id: user_fields.php,v 1.12 2005/06/21 18:23:17 jact Exp $
  */
 
 /**
@@ -38,7 +38,7 @@
   {
     $row = '* <label for="old_pwd" class="requiredField">' . _("Current Password") . ":" . "</label>\n";
     $row .= OPEN_SEPARATOR;
-    $row .= htmlInputText("old_pwd", 20, 20, $postVars["old_pwd"], $pageErrors["old_pwd"], "password");
+    $row .= htmlInputText("old_pwd", 20, 20, isset($postVars["old_pwd"]) ? $postVars["old_pwd"] : null, $pageErrors["old_pwd"], "password");
     $row .= htmlInputHidden("md5_old");
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -102,7 +102,6 @@
 
   $tfoot = array(
     htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("button2", _("Reset"), "reset")
     . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 

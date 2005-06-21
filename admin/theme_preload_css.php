@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.4 2004/10/04 18:01:57 jact Exp $
+ * $Id: theme_preload_css.php,v 1.5 2005/06/21 18:23:02 jact Exp $
  */
 
 /**
  * theme_preload_css.php
- ********************************************************************
+ *
  * Upload a css file to preload contents
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.7
  */
 
@@ -98,7 +98,6 @@
 
   $tfoot = array(
     htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("button2", _("Reset"), "reset")
     . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 

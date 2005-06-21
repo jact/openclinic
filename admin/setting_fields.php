@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.11 2004/12/07 11:24:41 jact Exp $
+ * $Id: setting_fields.php,v 1.12 2005/06/21 18:20:25 jact Exp $
  */
 
 /**
  * setting_fields.php
- ********************************************************************
+ *
  * Fields of config settings data
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -116,7 +116,7 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $tfoot = array(htmlInputButton("button1", _("Update")) . htmlInputButton("button2", _("Reset"), "reset"));
+  $tfoot = array(htmlInputButton("button1", _("Update")));
 
   $options = array(
     'shaded' => false,

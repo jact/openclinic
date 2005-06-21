@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_fields.php,v 1.6 2005/06/13 19:00:06 jact Exp $
+ * $Id: theme_fields.php,v 1.7 2005/06/21 18:22:46 jact Exp $
  */
 
 /**
@@ -48,13 +48,12 @@
 
   $row = '* <label for="css_rules" class="requiredField">' . _("CSS Rules") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("css_rules", 25, 80, $postVars["css_rules"], $pageErrors["css_rules"]);
+  $row .= htmlTextArea("css_rules", 25, 80, isset($postVars["css_rules"]) ? $postVars["css_rules"] : null, $pageErrors["css_rules"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
     htmlInputButton("button1", _("Submit"), "button", 'onclick="editTheme()"')
-    . htmlInputButton("button2", _("Reset"), "reset")
     . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 

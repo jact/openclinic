@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.11 2005/06/13 19:03:07 jact Exp $
+ * $Id: problem_fields.php,v 1.12 2005/06/21 18:23:41 jact Exp $
  */
 
 /**
@@ -46,7 +46,7 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="id_member">' . _("Doctor who treated you") . ":" . "</label>\n";
+  $row = '<label for="id_member">' . _("Attending Physician") . ":" . "</label>\n";
   $row .= OPEN_SEPARATOR;
 
   $staffQ = new Staff_Query();
@@ -131,7 +131,6 @@
 
   $tfoot = array(
     htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("button2", _("Reset"), "reset")
     . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
