@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: admin.php,v 1.6 2004/10/18 17:24:04 jact Exp $
+ * $Id: admin.php,v 1.7 2005/06/21 18:25:58 jact Exp $
  */
 
 /**
  * admin.php
- ********************************************************************
+ *
  * Navbar to the Admin tab
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -24,11 +24,11 @@
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    echo '<div class="sideBarLogin">';
+    echo '<p class="sideBarLogin">';
     echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="logout" title="logout" /></a>';
     echo '<br />';
     echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;reset=Y&amp;all=Y" title="' . _("manage your user account") . '">' . $_SESSION["loginSession"] . "</a> ]\n";
-    echo "</div>\n";
+    echo "</p>\n";
     echo "<hr />\n";
   }
 

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: home.php,v 1.7 2004/10/18 17:24:04 jact Exp $
+ * $Id: home.php,v 1.8 2005/06/21 18:26:03 jact Exp $
  */
 
 /**
  * home.php
- ********************************************************************
+ *
  * Navbar to the Home tab
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -25,7 +25,7 @@
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     $sessLogin = isset($_SESSION["loginSession"]) ? $_SESSION["loginSession"] : "";
-    echo '<div class="sideBarLogin">';
+    echo '<p class="sideBarLogin">';
     if ( !empty($sessLogin) && !isset($_SESSION["invalidToken"]) )
     {
       echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="' . _("logout") . '" title="logout" /></a>';
@@ -38,7 +38,7 @@
       echo '<img src="../images/login.png" width="96" height="22" alt="login" title="' . _("login") . '" />';
       echo '</a>';
     }
-    echo "</div>\n";
+    echo "</p>\n";
     echo "<hr />\n";
   }
 
