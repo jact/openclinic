@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.9 2005/03/06 12:19:40 jact Exp $
+ * $Id: xhtml_start.php,v 1.10 2005/06/26 16:44:23 jact Exp $
  */
 
 /**
@@ -70,6 +70,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo str_replace("_", "-", OPEN_LANGUAGE); ?>" dir="<?php echo OPEN_DIRECTION; ?>">
 <head>
+<meta http-equiv="Content-Type" content="<?php echo $contentType; ?>" />
+
 <title><?php
   if (defined("OPEN_CLINIC_NAME") && OPEN_CLINIC_NAME)
   {
@@ -78,10 +80,7 @@
   echo ((isset($title) && $title != "") ? $title : "");
 ?></title>
 
-<meta http-equiv="Content-Type" content="<?php echo $contentType; ?>" />
-
-<?php //<!--meta http-equiv="Content-Style-Type" content="text/css2" /--> ?>
-
+<?php //<meta http-equiv="Content-Style-Type" content="text/css2" /> ?>
 <meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
 
 <meta http-equiv="Pragma" content="no-cache" />
