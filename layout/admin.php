@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: admin.php,v 1.7 2005/06/21 18:25:58 jact Exp $
+ * $Id: admin.php,v 1.8 2005/07/18 19:15:05 jact Exp $
  */
 
 /**
@@ -32,48 +32,25 @@
     echo "<hr />\n";
   }
 
-  echo '<div class="linkList">';
+  $linkList = array(
+    "summary" => array(_("Summary"), "../admin/index.php"),
+    "settings" => array(_("Config settings"), "../admin/setting_edit_form.php?reset=Y"),
+    "themes" => array(_("Themes"), "../admin/theme_list.php"),
+    "staff" => array(_("Staff Members"), "../admin/staff_list.php"),
+    "users" => array(_("Users"), "../admin/user_list.php"),
+    //"profiles" => array(_("Profiles"), "../admin/profile_list.php"), // for better chance
+    "dump" => array(_("Dumps"), "../admin/dump_view_form.php"),
+    "logs" => array(_("Log Statistics"), "../admin/log_stats.php")
+  );
 
-  echo ($nav == "summary")
-    ? '<span class="selected">' . _("Summary") . '</span>'
-    : '<a href="../admin/index.php">' . _("Summary") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+  echo '<ul class="linkList">';
 
-  echo ($nav == "settings")
-    ? '<span class="selected">' . _("Config settings") . '</span>'
-    : '<a href="../admin/setting_edit_form.php?reset=Y">' . _("Config settings") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
-
-  echo ($nav == "themes")
-    ? '<span class="selected">' . _("Themes") . '</span>'
-    : '<a href="../admin/theme_list.php">' . _("Themes") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
-
-  echo ($nav == "staff")
-    ? '<span class="selected">' . _("Staff Members") . '</span>'
-    : '<a href="../admin/staff_list.php">' . _("Staff Members") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
-
-  echo ($nav == "users")
-    ? '<span class="selected">' . _("Users") . '</span>'
-    : '<a href="../admin/user_list.php">' . _("Users") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
-
-  /*echo ($nav == "profiles")
-    ? '<span class="selected">' . _("Profiles") . '</span>'
-    : '<a href="../admin/profile_list.php">' . _("Profiles") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";*/ // for better chance
-
-  echo ($nav == "dump")
-    ? '<span class="selected">' . _("Dumps") . '</span>'
-    : '<a href="../admin/dump_view_form.php">' . _("Dumps") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
-
-  echo ($nav == "logs")
-    ? '<span class="selected">' . _("Log Statistics") . '</span>'
-    : '<a href="../admin/log_stats.php">' . _("Log Statistics") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+  foreach ($linkList as $key => $value)
+  {
+    echo '<li' . (($nav == $key) ? ' class="selected">' . $value[0] : '><a href="' . $value[1] . '">' . $value[0] . '</a>') . "</li>\n";
+  }
+  unset($linkList);
 ?>
 
-  <a href="../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>" title="<?php echo _("Opens a new window"); ?>" onclick="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')" onkeypress="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')"><?php echo _("Help"); ?></a>
-</div><!-- End .linkList -->
+  <li><a href="../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>" title="<?php echo _("Opens a new window"); ?>" onclick="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')" onkeypress="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')"><?php echo _("Help"); ?></a></li>
+</ul><!-- End .linkList -->
