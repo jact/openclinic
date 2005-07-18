@@ -1,5 +1,5 @@
 /* CSS based in Sinorca (haran's design in oswd.org) */
-/* $Id: sinorca.css,v 1.4 2005/06/21 18:23:49 jact Exp $ */
+/* $Id: sinorca.css,v 1.5 2005/07/18 19:16:42 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -136,11 +136,14 @@ li#first a, li#first span {
   color: #000;
   border-top: 1px solid #9C9A9C;
   border-bottom: 1px solid #9C9A9C;
+  margin: 0;
+  padding: 0;
 }
 
-.linkList a, .linkList a:hover, .linkList .selected {
+.linkList li {
+  list-style-type: none;
   line-height: 1.6em;
-  display: block;
+  margin-bottom: 7px;
 }
 
 .linkList a:before {
@@ -152,6 +155,7 @@ li#first a, li#first span {
 }
 
 .linkList a, .linkList a:visited, .linkList .subnavbar a {
+  display: block;
   padding: 3px 2px 3px 2.5ex;
   text-decoration: none;
 }
@@ -162,11 +166,16 @@ li#first a, li#first span {
 }
 
 .linkList .selected {
-  padding-left: 2.5ex;
+  padding: 3px 2px 3px 2.5ex;
 }
 
 .linkList .subnavbar {
-  margin-left: 2ex;
+  margin-top: 2ex;
+  padding-left: 1ex;
+}
+
+* html .linkList .subnavbar {
+  margin-left: -1.5ex;
 }
 
 #sideBarLogo p {

@@ -1,5 +1,5 @@
 /* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
-/* $Id: gazetteer_alt.css,v 1.5 2005/06/21 18:23:49 jact Exp $ */
+/* $Id: gazetteer_alt.css,v 1.6 2005/07/18 19:16:42 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -134,10 +134,9 @@ img {
   border-bottom: 1px dotted #848484;
 }
 
-.linkList a, .linkList a:hover, .linkList .selected {
-  line-height: 2em;
-  display: list-item;
+.linkList li {
   list-style-type: disc;
+  line-height: 2em;
 }
 
 .linkList .selected {
@@ -152,10 +151,6 @@ img {
 #mainZone a:hover {
   color: #000;
   background: transparent;
-}
-
-.linkList .subnavbar {
-  margin-left: 2ex;
 }
 
 #mainZone {

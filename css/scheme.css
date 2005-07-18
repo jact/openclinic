@@ -1,5 +1,5 @@
 /* Feel free and change all what you want */
-/* $Id: scheme.css,v 1.6 2005/06/21 18:23:49 jact Exp $ */
+/* $Id: scheme.css,v 1.7 2005/07/18 19:16:42 jact Exp $ */
 
 /* --Layout-- */
 html, body {
@@ -110,22 +110,27 @@ li#first a, li#first span {
 }
 
 .linkList {
+  margin: 0 0 0 4ex;
+  padding: 0;
   position: relative; /* IE bug fixed */
 }
 
-.linkList a, .linkList a:hover, .linkList .selected {
+.linkList li {
+  list-style-image: url(../images/bullet_normal.gif);
   line-height: 1.25em;
-  display: block;
-  margin-bottom: 2ex;
+  margin-bottom: 4ex;
 }
 
 .linkList .selected {
-  background: url(../images/bullet_selected.gif) no-repeat 0 3px;
-  padding-left: 2.5ex;
+  list-style-image: url(../images/bullet_selected.gif);
 }
 
 .linkList .subnavbar {
-  margin-left: 2ex;
+  margin: 4ex 0 0 -2ex;
+}
+
+* html .linkList .subnavbar {
+  margin-left: 3ex;
 }
 
 .sideBarLogin {
@@ -180,8 +185,7 @@ td {
 
 /* --Links-- */
 .linkList a, .linkList .subnavbar a {
-  background: url(../images/bullet_normal.gif) no-repeat 0 3px;
-  padding: 0 2px 0 2.5ex;
+  padding: 0 2px 0 0;
 }
 
 .sideBarLogin a {

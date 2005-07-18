@@ -105,21 +105,28 @@ li#first a, li#first span {
 
 .linkList {
   font-size: 11px;
-  list-style: none;
   line-height: 13px;
-  margin: 0 8px 14px 11px;
+  margin: 0 8px 14px 30px;
   padding: 0;
 }
 
 .linkList li {
-  padding-left: 13px;
-  margin-bottom: 2px;
+  line-height: 1.25em;
+  margin-bottom: 14px;
+  list-style-image: url(../images/bullet_normal_grey.gif);
+  padding: 0 2px 0 0;
 }
 
-.linkList a, .linkList a:hover, .linkList .selected {
-  line-height: 1.25em;
-  display: block;
-  margin-bottom: 2ex;
+.linkList .selected {
+  list-style-image: url(../images/bullet_selected_grey.gif);
+}
+
+.linkList .subnavbar {
+  margin: 2.5ex 0 0 -2ex;
+}
+
+* html .linkList .subnavbar {
+  margin-left: 2ex;
 }
 
 .sideBarLogin {
@@ -182,20 +189,6 @@ td {
 /* Links */
 #sideBar a, #sideBar a:link {
   color: #000;
-}
-
-.linkList a, .linkList .subnavbar a {
-  background: url(../images/bullet_normal_grey.gif) no-repeat 0 2px;
-  padding: 0 2px 0 2.5ex;
-}
-
-.linkList .selected {
-  background: url(../images/bullet_selected_grey.gif) no-repeat 1px 2px;
-  padding-left: 2.5ex;
-}
-
-.linkList .subnavbar {
-  margin-left: 2ex;
 }
 
 .sideBarLogin a {

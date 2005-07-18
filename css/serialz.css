@@ -120,8 +120,25 @@ li#first a, li#first span {
   margin-bottom: 3ex;
 }
 
-.linkList {
+.linkList, .subnavbar {
+  margin-left: 2.6ex;
+  padding: 0;
+  list-style-type: none;
   position: relative; /* IE bug fixed */
+}
+
+.subnavbar {
+  margin-top: 2ex;
+}
+
+.linkList li {
+  line-height: 1.25em;
+  margin-bottom: 2ex;
+  list-style-image: url(../images/bullet_normal.gif);
+}
+
+.linkList .selected {
+  list-style-image: url(../images/bullet_selected.gif);
 }
 
 #mainZone {
@@ -181,25 +198,8 @@ td, th, td.odd {
   color: #fff;
 }
 
-.linkList a, .linkList a:hover, .linkList .selected {
-  line-height: 1.25em;
-  display: block;
-  margin-bottom: 2ex;
-}
-
 .linkList a, .linkList a:visited, .linkList .subnavbar a {
-  color: #fff;
-  background: url(../images/bullet_normal.gif) no-repeat 0 3px;
-  padding: 0 2px 0 2.5ex;
-}
-
-.linkList .selected {
-  background: url(../images/bullet_selected.gif) no-repeat 0 3px;
-  padding-left: 2.5ex;
-}
-
-.linkList .subnavbar {
-  margin-left: 2ex;
+  padding: 0 2px 0 0;
 }
 
 .sideBarLogin a {
