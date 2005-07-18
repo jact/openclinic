@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: global_constants.php,v 1.8 2004/10/18 17:24:05 jact Exp $
+ * $Id: global_constants.php,v 1.9 2005/07/18 17:12:20 jact Exp $
  */
 
 /**
  * global_constants.php
- ********************************************************************
+ *
  * Contains the global constants of the project
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -22,28 +22,30 @@
     exit();
   }
 
-/**
- ********************************************************************
- * Search types:
- ********************************************************************
- * OPEN_SEARCH_SURNAME1
- * OPEN_SEARCH_SURNAME2
- * OPEN_SEARCH_FIRSTNAME
- * OPEN_SEARCH_NIF
- * OPEN_SEARCH_NTS
- * OPEN_SEARCH_NSS
- * OPEN_SEARCH_BIRTHPLACE
- * OPEN_SEARCH_ADDRESS
- * OPEN_SEARCH_PHONE
- * OPEN_SEARCH_INSURANCE
- * OPEN_SEARCH_COLLEGIATE
- * OPEN_SEARCH_WORDING
- * OPEN_SEARCH_SUBJECTIVE
- * OPEN_SEARCH_OBJECTIVE
- * OPEN_SEARCH_APPRECIATION
- * OPEN_SEARCH_ACTIONPLAN
- * OPEN_SEARCH_PRESCRIPTION
- */
+  ////////////////////////////////////////////////////////////////////
+  // Application constants
+  ////////////////////////////////////////////////////////////////////
+  define("OPEN_DEMO",               false);
+  define("OPEN_DEBUG",              false); // if false, no NOTICE messages
+  define("OPEN_BUFFER",             false); // if true, use ob_start(), ob_end_flush() functions
+  define("OPEN_XML_ACTIVED",        false); // if true and is possible, application/xhtml+xml, otherwise text/html
+  define("OPEN_MAX_LOGIN_ATTEMPTS", 3); // if zero, no limit login attempts
+
+  require_once("../lib/debug_lib.php");
+
+  ////////////////////////////////////////////////////////////////////
+  // Custom error handler constants
+  ////////////////////////////////////////////////////////////////////
+  define("OPEN_SCREEN_ERRORS", false); // Show errors to the screen?
+  define("OPEN_LOG_ERRORS",    false); // Save errors to a file?
+  define("OPEN_LOG_FILE",      "/tmp/error_log.txt"); // Allways use / separator (Win32 too)
+
+  require_once("../lib/error_lib.php");
+  set_error_handler("customErrorHandler");
+
+  ////////////////////////////////////////////////////////////////////
+  // Search types
+  ////////////////////////////////////////////////////////////////////
   define("OPEN_SEARCH_SURNAME1",      1);
   define("OPEN_SEARCH_SURNAME2",      2);
   define("OPEN_SEARCH_FIRSTNAME",     3);
@@ -62,48 +64,29 @@
   define("OPEN_SEARCH_ACTIONPLAN",   16);
   define("OPEN_SEARCH_PRESCRIPTION", 17);
 
-/**
- ********************************************************************
- * Logical operators:
- ********************************************************************
- * OPEN_AND
- * OPEN_OR
- * OPEN_NOT
- */
+  ////////////////////////////////////////////////////////////////////
+  // Logical operators
+  ////////////////////////////////////////////////////////////////////
   define("OPEN_AND", "AND");
   define("OPEN_OR",  "OR");
   define("OPEN_NOT", "NOT");
 
-/**
- ********************************************************************
- * Staff types:
- ********************************************************************
- * OPEN_ADMINISTRATIVE
- * OPEN_DOCTOR
- */
+  ////////////////////////////////////////////////////////////////////
+  // Staff types
+  ////////////////////////////////////////////////////////////////////
   define("OPEN_ADMINISTRATIVE", "Administrative");
   define("OPEN_DOCTOR",         "Doctor");
 
-/**
- ********************************************************************
- * Profile constants:
- ********************************************************************
- * OPEN_PROFILE_ADMINISTRATOR
- * OPEN_PROFILE_ADMINISTRATIVE
- * OPEN_PROFILE_DOCTOR
- */
+  ////////////////////////////////////////////////////////////////////
+  // Profile constants
+  ////////////////////////////////////////////////////////////////////
   define("OPEN_PROFILE_ADMINISTRATOR",  1);
   define("OPEN_PROFILE_ADMINISTRATIVE", 2);
   define("OPEN_PROFILE_DOCTOR",         3);
 
-/**
- ********************************************************************
- * Messages constants:
- ********************************************************************
- * OPEN_MSG_INFO
- * OPEN_MSG_WARNING
- * OPEN_MSG_ERROR
- */
+  ////////////////////////////////////////////////////////////////////
+  // Messages constants:
+  ////////////////////////////////////////////////////////////////////
   define("OPEN_MSG_INFO",    1);
   define("OPEN_MSG_WARNING", 2);
   define("OPEN_MSG_ERROR",   3);
