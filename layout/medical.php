@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: medical.php,v 1.8 2005/06/21 18:26:03 jact Exp $
+ * $Id: medical.php,v 1.9 2005/07/18 19:16:04 jact Exp $
  */
 
 /**
@@ -32,43 +32,42 @@
     echo "<hr />\n";
   }
 
-  echo '<div class="linkList">';
+  echo '<ul class="linkList">';
 
   echo ($nav == "summary")
-    ? '<span class="selected">' . _("Summary") . '</span>'
-    : '<a href="../medical/index.php">' . _("Summary") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+    ? '<li class="selected">' . _("Summary") . '</li>'
+    : '<li><a href="../medical/index.php">' . _("Summary") . '</a></li>';
 
   echo ($nav == "searchform")
-    ? '<span class="selected">' . _("Search Patient") . '</span>'
-    : '<a href="../medical/patient_search_form.php">' . _("Search Patient") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+    ? '<li class="selected">' . _("Search Patient")
+    : '<li><a href="../medical/patient_search_form.php">' . _("Search Patient") . '</a>';
 
   if ($nav == "search")
   {
-    echo '<div class="subnavbar">';
-    echo '<span class="selected">' . _("Search Results") . "</span>\n";
-    echo '</div>';
+    echo '<ul class="subnavbar">';
+    echo '<li class="selected">' . _("Search Results") . "</li>\n";
+    echo "</ul>\n";
   }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     if (isset($_SESSION["visitedPatients"]))
     {
+      echo "</li>\n"; // end searchform
       foreach ($_SESSION["visitedPatients"] as $arrKey => $arrValue)
       {
         if (isset($idPatient) && $arrKey == $idPatient)
         {
-          echo '<span class="selected"><em>' . $arrValue . "</em></span>\n";
+          echo '<li class="selected"><em>' . $arrValue . '</em>';
           if ($nav == "social" || $nav == "history" || $nav == "problems" || $nav == "print")
           {
             include_once("../navbars/patient.php");
           }
+          echo "</li>\n";
         }
         else
         {
-          echo '<a href="../medical/patient_view.php?key=' . $arrKey . '"><em>' . $arrValue . '</em></a>';
-          echo "<span class='noPrint'> | </span>\n";
+          echo '<li><a href="../medical/patient_view.php?key=' . $arrKey . '"><em>' . $arrValue . '</em></a></li>';
         }
       }
     }
@@ -79,16 +78,16 @@
     {
       include_once("../navbars/patient.php");
     }
+    echo "</li>\n"; // end searchform
   }
 
   if ($hasMedicalAdminAuth)
   {
     echo ($nav == "new")
-      ? '<span class="selected">' . _("New Patient") . '</span>'
-      : '<a href="../medical/patient_new_form.php?reset=Y">' . _("New Patient") . '</a>';
-    echo "<span class='noPrint'> | </span>\n";
+      ? '<li class="selected">' . _("New Patient") . '</li>'
+      : '<li><a href="../medical/patient_new_form.php?reset=Y">' . _("New Patient") . '</a></li>';
   }
 ?>
 
-  <a href="../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>" title="<?php echo _("Opens a new window"); ?>" onclick="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')" onkeypress="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')"><?php echo _("Help"); ?></a>
-</div><!-- End .linkList -->
+  <li><a href="../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>" title="<?php echo _("Opens a new window"); ?>" onclick="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')" onkeypress="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')"><?php echo _("Help"); ?></a></li>
+</ul><!-- End .linkList -->

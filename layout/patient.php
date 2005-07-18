@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient.php,v 1.5 2004/10/18 17:24:04 jact Exp $
+ * $Id: patient.php,v 1.6 2005/07/18 19:16:16 jact Exp $
  */
 
 /**
  * patient.php
- ********************************************************************
+ *
  * Subnavbar to the Medical Records tab
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -22,33 +22,24 @@
     exit();
   }
 
-  echo '<div class="subnavbar">';
+  $linkList = array(
+    "social" => array(_("Social Data"), "../medical/patient_view.php?key=" . $idPatient),
+    //"preventive" => array(_("Datos Preventivos"), ""), // I don't know how implement it
+    "history" => array(_("Clinic History"), "../medical/history_list.php?key=" . $idPatient),
+    "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php?key=" . $idPatient)
+  );
 
-  echo ($nav == "social")
-    ? '<span class="selected">' . _("Social Data") . '</span>'
-    : '<a href="../medical/patient_view.php?key=' . $idPatient . '">' . _("Social Data") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+  echo '<ul class="subnavbar">';
 
-  // I don't know how implement it
-  /*echo ($nav == "preventive")
-    ? '<span class="selected">' . "Datos Preventivos" . '</span>'
-    : '<a href="">' . "Datos Preventivos" . '</a>';
-  echo "<span class='noPrint'> | </span>\n";*/
-
-  echo ($nav == "history")
-    ? '<span class="selected">' . _("Clinic History") . '</span>'
-    : '<a href="../medical/history_list.php?key=' . $idPatient . '">' . _("Clinic History") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
-
-  echo ($nav == "problems")
-    ? '<span class="selected">' . _("Medical Problems Report") . '</span>'
-    : '<a href="../medical/problem_list.php?key=' . $idPatient . '">' . _("Medical Problems Report") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+  foreach ($linkList as $key => $value)
+  {
+    echo '<li' . (($nav == $key) ? ' class="selected">' . $value[0] : '><a href="' . $value[1] . '">' . $value[0] . '</a>') . "</li>\n";
+  }
+  unset($linkList);
 
   echo ($nav == "print")
-    ? '<span class="selected">' . _("Print Medical Record") . '</span>'
-    : '<a href="../medical/print_medical_record.php?key=' . $idPatient . '" onclick="return popSecondary(\'../medical/print_medical_record.php?key=' . $idPatient . '\')" onkeypress="return popSecondary(\'../medical/print_medical_record.php?key=' . $idPatient . '\')">' . _("Print Medical Record") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+    ? '<li class="selected">' . _("Print Medical Record") . '</li>'
+    : '<li><a href="../medical/print_medical_record.php?key=' . $idPatient . '" onclick="return popSecondary(\'../medical/print_medical_record.php?key=' . $idPatient . '\')" onkeypress="return popSecondary(\'../medical/print_medical_record.php?key=' . $idPatient . '\')">' . _("Print Medical Record") . '</a></li>';
 
-  echo "</div>\n"; // end .subnavbar
+  echo "</ul>\n"; // end .subnavbar
 ?>

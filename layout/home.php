@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: home.php,v 1.8 2005/06/21 18:26:03 jact Exp $
+ * $Id: home.php,v 1.9 2005/07/18 19:15:51 jact Exp $
  */
 
 /**
@@ -42,19 +42,16 @@
     echo "<hr />\n";
   }
 
-  echo '<div class="linkList">';
+  echo '<ul class="linkList">';
 
   echo ($nav == "home")
-    ? '<span class="selected">' . _("Summary") . '</span>'
-    : '<a href="../home/index.php">' . _("Summary") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+    ? '<li class="selected">' . _("Summary") . '</li>'
+    : '<li><a href="../home/index.php">' . _("Summary") . '</a></li>';
 
-  echo '';
   echo ($nav == "license")
-    ? '<span class="selected">' . _("License") . '</span>'
-    : '<a href="../home/license.php">' . _("License") . '</a>';
-  echo "<span class='noPrint'> | </span>\n";
+    ? '<li class="selected">' . _("License") . '</li>'
+    : '<li><a href="../home/license.php">' . _("License") . '</a></li>';
 ?>
 
-  <a href="../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>" title="<?php echo _("Opens a new window"); ?>" onclick="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')" onkeypress="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')"><?php echo _("Help"); ?></a>
-</div><!-- End .linkList -->
+  <li><a href="../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>" title="<?php echo _("Opens a new window"); ?>" onclick="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')" onkeypress="return popSecondary('../doc/index.php?tab=<?php echo $tab; ?>&amp;nav=<?php echo $nav; ?>')"><?php echo _("Help"); ?></a></li>
+</ul><!-- End .linkList -->
