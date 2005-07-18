@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.14 2004/10/18 17:24:05 jact Exp $
+ * $Id: read_settings.php,v 1.15 2005/07/18 17:09:57 jact Exp $
  */
 
 /**
  * read_settings.php
- ********************************************************************
+ *
  * Contains general, i18n, theme and system constants of the program
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -28,26 +28,6 @@
   $microTime = explode(" ", microtime());
   $startTime = $microTime[1] + $microTime[0];
   unset($microTime);
-
-  ////////////////////////////////////////////////////////////////////
-  // Application constants
-  ////////////////////////////////////////////////////////////////////
-  define("OPEN_DEMO",               false);
-  define("OPEN_DEBUG",              false); // if false, no NOTICE messages
-  define("OPEN_BUFFER",             false); // if true, use ob_start(), ob_end_flush() functions
-  define("OPEN_MAX_LOGIN_ATTEMPTS", 3); // if zero, no limit login attempts
-
-  require_once("../lib/debug_lib.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Custom error handler constants
-  ////////////////////////////////////////////////////////////////////
-  define("OPEN_SCREEN_ERRORS", false); // Show errors to the screen?
-  define("OPEN_LOG_ERRORS",    false); // Save errors to a file?
-  define("OPEN_LOG_FILE",      "/tmp/error_log.txt"); // Allways use / separator (Win32 too)
-
-  require_once("../lib/error_lib.php");
-  set_error_handler("customErrorHandler");
 
   ////////////////////////////////////////////////////////////////////
   // Loading global constants
