@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.10 2005/06/26 16:44:23 jact Exp $
+ * $Id: xhtml_start.php,v 1.11 2005/07/18 17:14:21 jact Exp $
  */
 
 /**
  * xhtml_start.php
- ********************************************************************
+ *
  * Contains the common XHTML content of the web pages (XML prolog, DOCTYPE, title page and meta data)
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.7
  */
 
@@ -42,6 +42,7 @@
       $xhtml = true;
     }
   }
+  $xhtml = ($xhtml && OPEN_XML_ACTIVED);
 
   $contentType = ($xhtml) ? "application/xhtml+xml" : "text/html";
   $contentType .= "; charset=" . OPEN_CHARSET;
@@ -66,8 +67,16 @@
     // To prevent 'short_open_tag = On' mistake
     echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
   }
+
+  if ($xhtml)
+  {
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' . "\n";
+  }
+  else
+  {
+    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . "\n";
+  }
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo str_replace("_", "-", OPEN_LANGUAGE); ?>" dir="<?php echo OPEN_DIRECTION; ?>">
 <head>
 <meta http-equiv="Content-Type" content="<?php echo $contentType; ?>" />
