@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.10 2005/06/14 18:57:43 jact Exp $
+ * $Id: problem_del.php,v 1.11 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -59,7 +59,7 @@
   $connQ->connect();
   if ($connQ->isError())
   {
-    showQueryError($connQ);
+    Error::query($connQ);
   }
 
   $numRows = $connQ->select($idProblem);
@@ -77,7 +77,7 @@
     if ($connQ->isError())
     {
       $connQ->close();
-      showQueryError($connQ);
+      Error::query($connQ);
     }
   }
   $connQ->close();
@@ -91,7 +91,7 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
@@ -100,7 +100,7 @@
     if ($problemQ->isError())
     {
       $problemQ->close();
-      showQueryError($problemQ);
+      Error::query($problemQ);
     }
 
     if ( !$numRows )
@@ -118,21 +118,21 @@
     if ($problemQ->isError())
     {
       $problemQ->close();
-      showFetchError($problemQ);
+      Error::fetch($problemQ);
     }
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
     if ($delProblemQ->isError())
     {
-      showQueryError($delProblemQ);
+      Error::query($delProblemQ);
     }
 
     $delProblemQ->insert($problem, $_SESSION['userId'], $_SESSION['loginSession']);
     if ($delProblemQ->isError())
     {
       $delProblemQ->close();
-      showQueryError($delProblemQ);
+      Error::query($delProblemQ);
     }
     unset($delProblemQ);
     unset($problem);
@@ -147,7 +147,7 @@
   if ($problemQ->isError())
   {
     $problemQ->close();
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
   $problemQ->close();
   unset($problemQ);

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit_form.php,v 1.8 2004/10/03 11:17:20 jact Exp $
+ * $Id: staff_edit_form.php,v 1.9 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * staff_edit_form.php
- ********************************************************************
+ *
  * Edition screen of a staff member
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -40,20 +40,19 @@
     $postVars["id_member"] = $idMember;
 
     include_once("../classes/Staff_Query.php");
-    include_once("../lib/error_lib.php");
 
     $staffQ = new Staff_Query();
     $staffQ->connect();
     if ($staffQ->isError())
     {
-      showQueryError($staffQ);
+      Error::query($staffQ);
     }
 
     $numRows = $staffQ->select($idMember);
     if ($staffQ->isError())
     {
       $staffQ->close();
-      showQueryError($staffQ);
+      Error::query($staffQ);
     }
 
     if ( !$numRows )
@@ -70,7 +69,7 @@
     $staff = $staffQ->fetch();
     if ($staffQ->isError())
     {
-      showFetchError($staffQ, false);
+      Error::fetch($staffQ, false);
     }
     else
     {

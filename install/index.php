@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.12 2005/06/14 18:51:23 jact Exp $
+ * $Id: index.php,v 1.13 2005/07/19 19:51:35 jact Exp $
  */
 
 /**
@@ -22,7 +22,6 @@
   require_once("../install/header.php"); // i18n l10n
   require_once("../install/parse_sql_file.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/debug_lib.php");
   require_once("../lib/validator_lib.php");
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new.php,v 1.7 2005/06/14 18:58:11 jact Exp $
+ * $Id: problem_new.php,v 1.8 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
@@ -63,21 +63,21 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $problemQ->insert($problem);
   if ($problemQ->isError())
   {
     $problemQ->close();
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $idProblem = $problemQ->getLastId();
   if ($problemQ->isError())
   {
     $problemQ->close();
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $table = $problemQ->getTableName();

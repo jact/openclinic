@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_use.php,v 1.4 2004/10/04 18:02:24 jact Exp $
+ * $Id: theme_use.php,v 1.5 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * theme_use.php
- ********************************************************************
+ *
  * Theme by default updating process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Setting_Query.php");
-  require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Update theme in use
@@ -46,14 +45,14 @@
   $setQ->connect();
   if ($setQ->isError())
   {
-    showQueryError($setQ);
+    Error::query($setQ);
   }
 
   $setQ->updateTheme($idTheme);
   if ($setQ->isError())
   {
     $setQ->close();
-    showQueryError($setQ);
+    Error::query($setQ);
   }
   $setQ->close();
   unset($setQ);

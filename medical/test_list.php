@@ -5,14 +5,14 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.10 2005/05/24 18:50:23 jact Exp $
+ * $Id: test_list.php,v 1.11 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
  * test_list.php
- ********************************************************************
+ *
  * Medical tests screen
- ********************************************************************
+ *
  * Author: jact <jachavar@gmail.com>
  */
 
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Test_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/validator_lib.php");
   require_once("../lib/misc_lib.php");
@@ -107,14 +106,14 @@
   $testQ->connect();
   if ($testQ->isError())
   {
-    showQueryError($testQ);
+    Error::query($testQ);
   }
 
   $count = $testQ->select($idProblem);
   if ($testQ->isError())
   {
     $testQ->close();
-    showQueryError($testQ);
+    Error::query($testQ);
   }
 
   if ($count == 0)

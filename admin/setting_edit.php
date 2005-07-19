@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit.php,v 1.3 2004/07/07 17:21:52 jact Exp $
+ * $Id: setting_edit.php,v 1.4 2005/07/19 19:50:03 jact Exp $
  */
 
 /**
  * setting_edit.php
- ********************************************************************
+ *
  * Config settings edition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Setting_Query.php");
-  require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Validate data
@@ -90,14 +89,14 @@
   $setQ->connect();
   if ($setQ->isError())
   {
-    showQueryError($setQ);
+    Error::query($setQ);
   }
 
   $setQ->update($set);
   if ($setQ->isError())
   {
     $setQ->close();
-    showQueryError($setQ);
+    Error::query($setQ);
   }
 
   if (isset($_POST["id_theme"]))
@@ -105,7 +104,7 @@
     if ( !$setQ->updateTheme($_POST["id_theme"]) )
     {
       $setQ->close();
-      showQueryError($setQ);
+      Error::query($setQ);
     }
   }
   $setQ->close();

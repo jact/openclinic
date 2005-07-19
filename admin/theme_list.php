@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.11 2004/10/04 18:01:14 jact Exp $
+ * $Id: theme_list.php,v 1.12 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * theme_list.php
- ********************************************************************
+ *
  * List of defined themes screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -25,7 +25,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Theme_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/validator_lib.php");
 
@@ -131,14 +130,14 @@ function previewTheme(key)
   $themeQ->connect();
   if ($themeQ->isError())
   {
-    showQueryError($themeQ);
+    Error::query($themeQ);
   }
 
   $numRows = $themeQ->selectWithStats();
   if ($themeQ->isError())
   {
     $themeQ->close();
-    showQueryError($themeQ);
+    Error::query($themeQ);
   }
 
   if ($numRows == 0)

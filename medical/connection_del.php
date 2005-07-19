@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del.php,v 1.8 2004/10/04 18:26:58 jact Exp $
+ * $Id: connection_del.php,v 1.9 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
  * connection_del.php
- ********************************************************************
+ *
  * Connection between medical problems deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Connection_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/validator_lib.php");
 
@@ -59,7 +58,7 @@
   $connQ->connect();
   if ($connQ->isError())
   {
-    showQueryError($connQ);
+    Error::query($connQ);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -71,7 +70,7 @@
   if ($connQ->isError())
   {
     $connQ->close();
-    showQueryError($connQ);
+    Error::query($connQ);
   }
 
   $connQ->close();

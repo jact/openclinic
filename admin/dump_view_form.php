@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_view_form.php,v 1.5 2004/07/26 18:52:24 jact Exp $
+ * $Id: dump_view_form.php,v 1.6 2005/07/19 19:50:03 jact Exp $
  */
 
 /**
  * dump_view_form.php
- ********************************************************************
+ *
  * Choice screen of database dump
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -33,14 +33,14 @@
   if ( !$auxConn->connect() )
   {
     $auxConn->close();
-    showConnError($auxConn);
+    Error::connection($auxConn);
   }
 
   $localQuery = 'SHOW TABLES FROM ' . DLIB_backquote(OPEN_DATABASE);
   if ( !$auxConn->exec($localQuery) )
   {
     $auxConn->close();
-    showConnError($auxConn);
+    Error::connection($auxConn);
   }
 
   $numTables = $auxConn->numRows();

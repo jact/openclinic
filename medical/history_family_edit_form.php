@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit_form.php,v 1.4 2004/07/31 16:41:45 jact Exp $
+ * $Id: history_family_edit_form.php,v 1.5 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
  * history_family_edit_form.php
- ********************************************************************
+ *
  * Edition screen of a patient family antecedents
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -40,20 +40,19 @@
     $idPatient = intval($_GET["key"]);
 
     include_once("../classes/History_Query.php");
-    include_once("../lib/error_lib.php");
 
     $historyQ = new History_Query();
     $historyQ->connect();
     if ($historyQ->isError())
     {
-      showQueryError($historyQ);
+      Error::query($historyQ);
     }
 
     $numRows = $historyQ->selectFamily($idPatient);
     if ($historyQ->isError())
     {
       $historyQ->close();
-      showQueryError($historyQ);
+      Error::query($historyQ);
     }
 
     if ( !$numRows )
@@ -70,7 +69,7 @@
     $history = $historyQ->fetchFamily();
     if ($historyQ->isError())
     {
-      showFetchError($historyQ, false);
+      Error::fetch($historyQ, false);
     }
     else
     {
@@ -114,7 +113,7 @@
   unset($links);
 
   showPatientHeader($idPatient);
-  echo "<br />\n"; // should be deleted
+  echo "<br />\n"; // @fixme should be deleted
 
   require_once("../shared/form_errors_msg.php");
 

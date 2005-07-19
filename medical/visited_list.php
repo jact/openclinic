@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: visited_list.php,v 1.10 2005/06/14 19:00:26 jact Exp $
+ * $Id: visited_list.php,v 1.11 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
@@ -48,14 +48,14 @@
     $patQ->connect();
     if ($patQ->isError())
     {
-      showQueryError($patQ);
+      Error::query($patQ);
     }
 
     $numRows = $patQ->select($idPatient);
     if ($patQ->isError())
     {
       $patQ->close();
-      showQueryError($patQ);
+      Error::query($patQ);
     }
 
     if ( !$numRows )
@@ -67,7 +67,7 @@
     if ($patQ->isError())
     {
       $patQ->close();
-      showFetchError($patQ);
+      Error::fetch($patQ);
     }
 
     $patQ->freeResult();

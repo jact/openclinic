@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_del.php,v 1.7 2004/10/04 21:38:26 jact Exp $
+ * $Id: relative_del.php,v 1.8 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
  * relative_del.php
- ********************************************************************
+ *
  * Relation between patients deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Relative_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/validator_lib.php");
 
@@ -58,7 +57,7 @@
   $relQ->connect();
   if ($relQ->isError())
   {
-    showQueryError($relQ);
+    Error::query($relQ);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -70,7 +69,7 @@
   if ($relQ->isError())
   {
     $relQ->close();
-    showQueryError($relQ);
+    Error::query($relQ);
   }
   $relQ->close();
   unset($relQ);

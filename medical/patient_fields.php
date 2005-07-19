@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.14 2005/06/21 18:24:32 jact Exp $
+ * $Id: patient_fields.php,v 1.15 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -193,14 +193,14 @@
   $staffQ->connect();
   if ($staffQ->isError())
   {
-    showQueryError($staffQ);
+    Error::query($staffQ);
   }
 
   $numRows = $staffQ->selectType('D');
   if ($staffQ->isError())
   {
     $staffQ->close();
-    showQueryError($staffQ);
+    Error::query($staffQ);
   }
 
   $array = null;

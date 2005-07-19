@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.12 2005/06/21 18:22:21 jact Exp $
+ * $Id: theme_edit_form.php,v 1.13 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
@@ -50,20 +50,19 @@
     $postVars["id_theme"] = $idTheme;
 
     include_once("../classes/Theme_Query.php");
-    include_once("../lib/error_lib.php");
 
     $themeQ = new Theme_Query();
     $themeQ->connect();
     if ($themeQ->isError())
     {
-      showQueryError($themeQ);
+      Error::query($themeQ);
     }
 
     $numRows = $themeQ->select($idTheme);
     if ($themeQ->isError())
     {
       $themeQ->close();
-      showQueryError($themeQ);
+      Error::query($themeQ);
     }
 
     if ( !$numRows )
@@ -80,7 +79,7 @@
     $theme = $themeQ->fetch();
     if ($themeQ->isError())
     {
-      showFetchError($themeQ, false);
+      Error::fetch($themeQ, false);
     }
     else
     {
@@ -142,7 +141,7 @@ function editTheme()
 <?php
   echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a>\n";
   echo ' | <a href="../admin/theme_preload_css.php?key=' . $_GET["key"] . '">' . _("Preload CSS file") . "</a></p>\n";
-  //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // TODO
+  //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // @todo
 
   echo "<hr />\n";
 

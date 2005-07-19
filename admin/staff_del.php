@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del.php,v 1.8 2004/07/10 16:01:07 jact Exp $
+ * $Id: staff_del.php,v 1.9 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * staff_del.php
- ********************************************************************
+ *
  * Staff member deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Staff_Query.php");
-  require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post var
@@ -50,14 +49,14 @@
   $staffQ->connect();
   if ($staffQ->isError())
   {
-    showQueryError($staffQ);
+    Error::query($staffQ);
   }
 
   $numRows = $staffQ->select($idMember);
   if ($staffQ->isError())
   {
     $staffQ->close();
-    showQueryError($staffQ);
+    Error::query($staffQ);
   }
 
   if ( !$numRows )
@@ -75,14 +74,14 @@
   if ($staffQ->isError())
   {
     $staffQ->close();
-    showFetchError($staffQ);
+    Error::fetch($staffQ);
   }
 
   $staffQ->delete($staff->getIdMember(), $staff->getIdUser());
   if ($staffQ->isError())
   {
     $staffQ->close();
-    showQueryError($staffQ);
+    Error::query($staffQ);
   }
   $staffQ->close();
   unset($staffQ);

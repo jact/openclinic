@@ -2,19 +2,19 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.8 2004/10/18 17:24:05 jact Exp $
+ * $Id: login_check.php,v 1.9 2005/07/19 19:52:03 jact Exp $
  */
 
 /**
  * login_check.php
- ********************************************************************
+ *
  * Used to verify sign on token on every secured page.
  * Redirects to the login page if token not valid.
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
@@ -33,7 +33,7 @@
   }
 
   require_once("../classes/Session_Query.php");
-  require_once("../lib/error_lib.php");
+  require_once("../lib/Error.php");
 
   ////////////////////////////////////////////////////////////////////
   // Disabling users control for demo
@@ -79,7 +79,7 @@
     $sessQ->connect();
     if ($sessQ->isError())
     {
-      showQueryError($sessQ);
+      Error::query($sessQ);
     }
 
     if ( !$sessQ->validToken($_SESSION['loginSession'], $_SESSION['token']) )
@@ -87,7 +87,7 @@
       if ($sessQ->isError())
       {
         $sessQ->close();
-        showQueryError($sessQ);
+        Error::query($sessQ);
       }
       $sessQ->close();
 

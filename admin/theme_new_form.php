@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.10 2004/10/04 18:01:32 jact Exp $
+ * $Id: theme_new_form.php,v 1.11 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * theme_new_form.php
- ********************************************************************
+ *
  * Addition screen of a theme
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -40,26 +40,25 @@
     $idTheme = intval($_GET["key"]);
 
     include_once("../classes/Theme_Query.php");
-    include_once("../lib/error_lib.php");
 
     $themeQ = new Theme_Query();
     $themeQ->connect();
     if ($themeQ->isError())
     {
-      showQueryError($themeQ);
+      Error::query($themeQ);
     }
 
     $themeQ->select($idTheme);
     if ($themeQ->isError())
     {
       $themeQ->close();
-      showQueryError($themeQ);
+      Error::query($themeQ);
     }
 
     $theme = $themeQ->fetch();
     if ($themeQ->isError())
     {
-      showFetchError($themeQ, false);
+      Error::fetch($themeQ, false);
     }
     else
     {
@@ -126,7 +125,7 @@ function editTheme()
 <?php
   echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a>\n";
   echo ' | <a href="../admin/theme_preload_css.php">' . _("Preload CSS file") . "</a></p>\n";
-  //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // TODO
+  //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // @todo
 
   echo "<hr />\n";
 

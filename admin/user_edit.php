@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.8 2004/11/04 12:16:36 jact Exp $
+ * $Id: user_edit.php,v 1.9 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * user_edit.php
- ********************************************************************
+ *
  * User edition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -43,7 +43,6 @@
     include_once("../shared/login_check.php");
   }
   require_once("../classes/User_Query.php");
-  require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Validate data
@@ -61,7 +60,7 @@
   $userQ->connect();
   if ($userQ->isError())
   {
-    showQueryError($userQ);
+    Error::query($userQ);
   }
 
   if ($userQ->existLogin($user->getLogin(), $user->getIdMember()))
@@ -74,7 +73,7 @@
     if ($userQ->isError())
     {
       $userQ->close();
-      showQueryError($userQ);
+      Error::query($userQ);
     }
 
     if (isset($_POST["all"]))
@@ -106,7 +105,7 @@
     if ($userQ->isError())
     {
       $userQ->close();
-      showQueryError($userQ);
+      Error::query($userQ);
     }
   }
   $userQ->close();

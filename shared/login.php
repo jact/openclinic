@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.13 2005/06/14 18:55:04 jact Exp $
+ * $Id: login.php,v 1.14 2005/07/19 19:52:03 jact Exp $
  */
 
 /**
@@ -29,7 +29,6 @@
   require_once("../classes/User_Query.php");
   require_once("../classes/Session_Query.php");
   require_once("../classes/Access_Page_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/validator_lib.php");
 
   unset($pageErrors); // to clean previous errors
@@ -60,14 +59,14 @@
     $userQ->connect();
     if ($userQ->isError())
     {
-      showQueryError($userQ);
+      Error::query($userQ);
     }
 
     $result = $userQ->existLogin($loginSession);
     if ($userQ->isError())
     {
       $userQ->close();
-      showQueryError($userQ);
+      Error::query($userQ);
     }
 
     if ( !$result )
@@ -90,7 +89,7 @@
       if ($userQ->isError())
       {
         $userQ->close();
-        showQueryError($userQ);
+        Error::query($userQ);
       }
 
       $user = $userQ->fetch();
@@ -123,7 +122,7 @@
           if ($userQ->isError())
           {
             $userQ->close();
-            showQueryError($userQ);
+            Error::query($userQ);
           }
           $userQ->close();
 
@@ -167,14 +166,14 @@
   $sessionQ->connect();
   if ($sessionQ->isError())
   {
-    showQueryError($sessionQ);
+    Error::query($sessionQ);
   }
 
   $token = $sessionQ->getToken($user->getLogin());
   if ($sessionQ->isError())
   {
     $sessionQ->close();
-    showQueryError($sessionQ);
+    Error::query($sessionQ);
   }
   $sessionQ->close();
   unset($sessionQ);
@@ -186,14 +185,14 @@
   $accessQ->connect();
   if ($accessQ->isError())
   {
-    showQueryError($accessQ);
+    Error::query($accessQ);
   }
 
   $accessQ->insert($user);
   if ($accessQ->isError())
   {
     $accessQ->close();
-    showQueryError($accessQ);
+    Error::query($accessQ);
   }
   $accessQ->close();
   unset($accessQ);

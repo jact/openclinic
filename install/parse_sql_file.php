@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: parse_sql_file.php,v 1.10 2005/06/14 18:48:48 jact Exp $
+ * $Id: parse_sql_file.php,v 1.11 2005/07/19 19:51:35 jact Exp $
  */
 
 /**
@@ -23,7 +23,7 @@
   }
 
 require_once("../classes/Query.php");
-require_once("../lib/error_lib.php");
+require_once("../lib/Error.php");
 
 /**
  * Functions:
@@ -66,7 +66,7 @@ function parseSQLFile($file, $table, $drop = true)
   $installQ->connect();
   if ($installQ->isError())
   {
-    showQueryError($installQ, false);
+    Error::query($installQ, false);
     return false;
   }
 
@@ -76,7 +76,7 @@ function parseSQLFile($file, $table, $drop = true)
     @$result = $installQ->exec($sql);
     if ($installQ->isError())
     {
-      showQueryError($installQ, false);
+      Error::query($installQ, false);
       $installQ->clearErrors();
     }
     else
@@ -111,7 +111,7 @@ function parseSQLFile($file, $table, $drop = true)
       {
         echo sprintf(_("Process sql [%s]"), $sqlSentence) . '<br />';
         $installQ->close();
-        showQueryError($installQ, false);
+        Error::query($installQ, false);
         echo '<p class="error">' . sprintf(_("Error: %s"), $installQ->getDbError()) . "</p>\n";
         return false;
       }

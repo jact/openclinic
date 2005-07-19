@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.18 2004/08/28 16:24:27 jact Exp $
+ * $Id: theme_preview.php,v 1.19 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * theme_preview.php
- ********************************************************************
+ *
  * Preview page of an application theme
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
@@ -34,7 +34,7 @@
 
   require_once("../classes/Setting_Query.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/error_lib.php");
+  require_once("../lib/Error.php");
 
   ////////////////////////////////////////////////////////////////////
   // Reading general settings
@@ -43,21 +43,21 @@
   $setQ->connect();
   if ($setQ->isError())
   {
-    showQueryError($setQ);
+    Error::query($setQ);
   }
 
   $setQ->select();
   if ($setQ->isError())
   {
     $setQ->close();
-    showQueryError($setQ);
+    Error::query($setQ);
   }
 
   $set = $setQ->fetch();
   if ($setQ->isError())
   {
     $setQ->close();
-    showFetchError($setQ);
+    Error::fetch($setQ);
   }
 
   $setQ->freeResult();
@@ -83,21 +83,21 @@
     $themeQ->connect();
     if ($themeQ->isError())
     {
-      showQueryError($themeQ);
+      Error::query($themeQ);
     }
 
     $themeQ->select(intval($_GET["key"]));
     if ($themeQ->isError())
     {
       $themeQ->close();
-      showQueryError($themeQ);
+      Error::query($themeQ);
     }
 
     $theme = $themeQ->fetch();
     if ($themeQ->isError())
     {
       $themeQ->close();
-      showFetchError($themeQ);
+      Error::fetch($themeQ);
     }
 
     $themeQ->freeResult();
@@ -178,11 +178,10 @@
 
 <!-- Side Bar -->
 <div id="sideBar">
-  <div class="linkList">
-    <span class="selected"><?php echo _("Theme Preview"); ?></span>
-    <span class="noPrint"> | </span>
-    <a href="#top"><?php echo _("Sample Link"); ?></a>
-  </div><!-- End .linkList -->
+  <ul class="linkList">
+    <li class="selected"><?php echo _("Theme Preview"); ?></li>
+    <li><a href="#top"><?php echo _("Sample Link"); ?></a></li>
+  </ul><!-- End .linkList -->
 
   <hr />
 

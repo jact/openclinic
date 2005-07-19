@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del.php,v 1.8 2004/10/17 14:56:03 jact Exp $
+ * $Id: theme_del.php,v 1.9 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * theme_del.php
- ********************************************************************
+ *
  * Theme deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Theme_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -53,14 +52,14 @@
   $themeQ->connect();
   if ($themeQ->isError())
   {
-    showQueryError($themeQ);
+    Error::query($themeQ);
   }
 
   $themeQ->delete($idTheme);
   if ($themeQ->isError())
   {
     $themeQ->close();
-    showQueryError($themeQ);
+    Error::query($themeQ);
   }
   $themeQ->close();
   unset($themeQ);

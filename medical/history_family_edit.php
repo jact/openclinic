@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit.php,v 1.4 2004/07/24 16:17:30 jact Exp $
+ * $Id: history_family_edit.php,v 1.5 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
  * history_family_edit.php
- ********************************************************************
+ *
  * Family antecedents of a patient edition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/History_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
 
   ////////////////////////////////////////////////////////////////////
@@ -86,14 +85,14 @@
   $historyQ->connect();
   if ($historyQ->isError())
   {
-    showQueryError($historyQ);
+    Error::query($historyQ);
   }
 
   $historyQ->updateFamily($history);
   if ($historyQ->isError())
   {
     $historyQ->close();
-    showQueryError($historyQ);
+    Error::query($historyQ);
   }
 
   $table = $historyQ->getTableName();

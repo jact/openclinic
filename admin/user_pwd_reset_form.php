@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.10 2004/10/04 18:04:18 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.11 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * user_pwd_reset_form.php
- ********************************************************************
+ *
  * Reset screen of a password's user
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -50,20 +50,19 @@
     $postVars["id_user"] = $idUser;
 
     include_once("../classes/User_Query.php");
-    include_once("../lib/error_lib.php");
 
     $userQ = new User_Query();
     $userQ->connect();
     if ($userQ->isError())
     {
-      showQueryError($userQ);
+      Error::query($userQ);
     }
 
     $numRows = $userQ->select($idUser);
     if ($userQ->isError())
     {
       $userQ->close();
-      showQueryError($userQ);
+      Error::query($userQ);
     }
 
     if ( !$numRows )
@@ -80,7 +79,7 @@
     $user = $userQ->fetch();
     if ($userQ->isError())
     {
-      showFetchError($userQ, false);
+      Error::fetch($userQ, false);
     }
     else
     {

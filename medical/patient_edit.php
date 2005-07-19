@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.7 2005/06/14 18:59:19 jact Exp $
+ * $Id: patient_edit.php,v 1.8 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Patient_Page_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/validator_lib.php");
 
@@ -67,7 +66,7 @@
   $patQ->connect();
   if ($patQ->isError())
   {
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   if ($patQ->existName($pat->getFirstName(), $pat->getSurname1(), $pat->getSurname2(), $pat->getIdPatient()))
@@ -87,7 +86,7 @@
   if ($patQ->isError())
   {
     $patQ->close();
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   $table = $patQ->getTableName();
@@ -111,31 +110,6 @@
   ////////////////////////////////////////////////////////////////////
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
-
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
-/*  $title = _("Edit Patient Social Data");
-  require_once("../shared/header.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
-  $links = array(
-    _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => $returnLocation,
-    $title => ""
-  );
-  showNavLinks($links, "patient.png");
-  unset($links);
-
-  echo '<p>' . sprintf(_("Patient, %s, has been updated."), $patName) . "</p>\n";
-
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to Patient Social Data") . "</a></p>\n";
-
-  require_once("../shared/footer.php");*/
 
   ////////////////////////////////////////////////////////////////////
   // Redirect to patient view to avoid reload problem

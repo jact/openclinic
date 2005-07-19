@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_new.php,v 1.5 2004/07/24 16:17:30 jact Exp $
+ * $Id: relative_new.php,v 1.6 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
  * relative_new.php
- ********************************************************************
+ *
  * Relation between patients addition process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Relative_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
 
   ////////////////////////////////////////////////////////////////////
@@ -55,7 +54,7 @@
   $relQ->connect();
   if ($relQ->isError())
   {
-    showQueryError($relQ);
+    Error::query($relQ);
   }
 
   $n = count($_POST["check"]);
@@ -76,7 +75,7 @@
       else
       {
         $relQ->close();
-        showQueryError($relQ);
+        Error::query($relQ);
       }
     }
     else

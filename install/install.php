@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.9 2005/06/14 18:49:32 jact Exp $
+ * $Id: install.php,v 1.10 2005/07/19 19:51:35 jact Exp $
  */
 
 /**
@@ -23,7 +23,7 @@
   require_once("../install/parse_sql_file.php");
   require_once("../classes/Setting_Query.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/error_lib.php");
+  require_once("../lib/Error.php");
 
   echo '<h1>' . _("OpenClinic Installation:") . "</h1>\n";
 
@@ -34,7 +34,7 @@
   $setQ->connect();
   if ($setQ->isError())
   {
-    showQueryError($setQ);
+    Error::query($setQ);
   }
   echo '<p>' . _("Database connection is good.") . "</p>\n";
 
@@ -52,7 +52,7 @@
     if ($setQ->isError())
     {
       $setQ->close();
-      showFetchError($setQ);
+      Error::fetch($setQ);
     }
 
     if ( !isset($_GET["confirm"]) || ($_GET["confirm"] != "yes") )
@@ -73,12 +73,12 @@
           <?php echo _("If you continue all data will be lost."); ?>
         </p>
 
-        <div>
+        <p>
           <?php
             showInputButton("continue", _("Continue"));
             showInputButton("cancel", _("Cancel"), "button", 'onclick="parent.location=\'../install/cancel_msg.php\'"');
           ?>
-        </div>
+        </p>
       </form>
 <?php
       $setQ->close();

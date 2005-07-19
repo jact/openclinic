@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.12 2004/11/04 12:17:09 jact Exp $
+ * $Id: user_list.php,v 1.13 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * user_list.php
- ********************************************************************
+ *
  * List of defined users screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -25,7 +25,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/User_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/validator_lib.php");
 
@@ -38,14 +37,14 @@
   $userQ->connect();
   if ($userQ->isError())
   {
-    showQueryError($userQ);
+    Error::query($userQ);
   }
 
   $userQ->selectLogins();
   if ($userQ->isError())
   {
     $userQ->close();
-    showQueryError($userQ);
+    Error::query($userQ);
   }
 
   $array = null;
@@ -153,7 +152,7 @@
   if ($userQ->isError())
   {
     $userQ->close();
-    showQueryError($userQ);
+    Error::query($userQ);
   }
 
   echo '<h3>' . _("Users List:") . "</h3>\n";

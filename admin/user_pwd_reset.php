@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset.php,v 1.4 2004/07/10 16:00:09 jact Exp $
+ * $Id: user_pwd_reset.php,v 1.5 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
  * user_pwd_reset.php
- ********************************************************************
+ *
  * Password's user reset process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/User_Query.php");
-  require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Validate data
@@ -71,14 +70,14 @@
   $userQ->connect();
   if ($userQ->isError())
   {
-    showQueryError($userQ);
+    Error::query($userQ);
   }
 
   $userQ->resetPwd($user);
   if ($userQ->isError())
   {
     $userQ->close();
-    showQueryError($userQ);
+    Error::query($userQ);
   }
   $userQ->close();
   unset($userQ);

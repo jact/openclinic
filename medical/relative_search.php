@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.11 2005/06/14 19:00:06 jact Exp $
+ * $Id: relative_search.php,v 1.12 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
@@ -65,14 +65,14 @@
   $patQ->connect();
   if ($patQ->isError())
   {
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   $patQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
   if ($patQ->isError())
   {
     $patQ->close();
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   ////////////////////////////////////////////////////////////////////

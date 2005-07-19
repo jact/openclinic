@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.8 2005/06/14 18:54:40 jact Exp $
+ * $Id: record_log.php,v 1.9 2005/07/19 19:52:03 jact Exp $
  */
 
 /**
@@ -47,21 +47,21 @@
     $queryQ->connect();
     if ($queryQ->isError())
     {
-      showQueryError($queryQ);
+      Error::query($queryQ);
     }
 
     $tableKey = $queryQ->getPrimaryKey($table);
     if ($queryQ->isError())
     {
       $queryQ->close();
-      showQueryError($queryQ);
+      Error::query($queryQ);
     }
 
     $data = $queryQ->getRowData($tableKey, $key, $table);
     if ($queryQ->isError())
     {
       $queryQ->close();
-      showQueryError($queryQ);
+      Error::query($queryQ);
     }
     //$queryQ->close(); // don't remove comment mark (fails in relative_new.php)
     unset($queryQ);
@@ -70,14 +70,14 @@
     $recQ->connect();
     if ($recQ->isError())
     {
-      showQueryError($recQ);
+      Error::query($recQ);
     }
 
     $recQ->insert($_SESSION['userId'], $_SESSION['loginSession'], $table, $operation, $data);
     if ($recQ->isError())
     {
       $recQ->close();
-      showQueryError($recQ);
+      Error::query($recQ);
     }
 
     if ($operation != "DELETE") // because log process is before deleting process

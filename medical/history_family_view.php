@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_view.php,v 1.5 2004/10/04 18:29:40 jact Exp $
+ * $Id: history_family_view.php,v 1.6 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
  * history_family_view.php
- ********************************************************************
+ *
  * Family antecedents screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -50,14 +50,14 @@
   $historyQ->connect();
   if ($historyQ->isError())
   {
-    showQueryError($historyQ);
+    Error::query($historyQ);
   }
 
   $numRows = $historyQ->selectFamily($idPatient);
   if ($historyQ->isError())
   {
     $historyQ->close();
-    showQueryError($historyQ);
+    Error::query($historyQ);
   }
 
   if ( !$numRows )
@@ -75,7 +75,7 @@
   if ($historyQ->isError())
   {
     $historyQ->close();
-    showFetchError($historyQ);
+    Error::fetch($historyQ);
   }
 
   $historyQ->freeResult();

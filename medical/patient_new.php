@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_new.php,v 1.6 2005/06/14 18:59:19 jact Exp $
+ * $Id: patient_new.php,v 1.7 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Patient_Page_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
 
   ////////////////////////////////////////////////////////////////////
@@ -60,7 +59,7 @@
   $patQ->connect();
   if ($patQ->isError())
   {
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   if ($patQ->existName($pat->getFirstName(), $pat->getSurname1(), $pat->getSurname2()))
@@ -78,14 +77,14 @@
   if ($patQ->isError())
   {
     $patQ->close();
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   $idPatient = $patQ->getLastId();
   if ($patQ->isError())
   {
     $patQ->close();
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   $table = $patQ->getTableName();

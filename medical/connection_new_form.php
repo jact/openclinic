@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.7 2005/06/14 18:57:10 jact Exp $
+ * $Id: connection_new_form.php,v 1.8 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -51,14 +51,14 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $count = $problemQ->selectProblems($idPatient);
   if ($problemQ->isError())
   {
     $problemQ->close();
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   ////////////////////////////////////////////////////////////////////

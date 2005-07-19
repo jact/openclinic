@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.10 2004/10/04 21:29:35 jact Exp $
+ * $Id: setting_edit_form.php,v 1.11 2005/07/19 19:50:03 jact Exp $
  */
 
 /**
  * setting_edit_form.php
- ********************************************************************
+ *
  * Edition screen of config settings
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -37,26 +37,25 @@
   if (isset($_GET["reset"]))
   {
     include_once("../classes/Setting_Query.php");
-    include_once("../lib/error_lib.php");
 
     $setQ = new Setting_Query();
     $setQ->connect();
     if ($setQ->isError())
     {
-      showQueryError($setQ);
+      Error::query($setQ);
     }
 
     $setQ->select();
     if ($setQ->isError())
     {
       $setQ->close();
-      showQueryError($setQ);
+      Error::query($setQ);
     }
 
     $set = $setQ->fetch();
     if ($setQ->isError())
     {
-      showFetchError($setQ, false);
+      Error::fetch($setQ, false);
     }
     else
     {

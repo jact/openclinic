@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.13 2005/06/21 18:24:46 jact Exp $
+ * $Id: print_medical_record.php,v 1.14 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -60,14 +60,14 @@
   $patQ->connect();
   if ($patQ->isError())
   {
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   $numRows = $patQ->select($idPatient);
   if ($patQ->isError())
   {
     $patQ->close();
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   if ( !$numRows )
@@ -86,7 +86,7 @@
   if ($patQ->isError())
   {
     $patQ->close();
-    showFetchError($patQ);
+    Error::fetch($patQ);
   }
   $patQ->freeResult();
   $patQ->close();
@@ -198,7 +198,7 @@
     $staffQ->connect();
     if ($staffQ->isError())
     {
-      showQueryError($staffQ);
+      Error::query($staffQ);
     }
 
     $numRows = $staffQ->select($pat->getIdMember());
@@ -228,14 +228,14 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $count = $problemQ->selectProblems($idPatient);
   if ($problemQ->isError())
   {
     $problemQ->close();
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -259,7 +259,7 @@
       $staffQ->connect();
       if ($staffQ->isError())
       {
-        showQueryError($staffQ);
+        Error::query($staffQ);
       }
 
       $numRows = $staffQ->select($problem->getIdMember());
@@ -343,20 +343,20 @@
   $historyQ->connect();
   if ($historyQ->isError())
   {
-    showQueryError($historyQ);
+    Error::query($historyQ);
   }
 
   $historyQ->selectPersonal($idPatient);
   if ($historyQ->isError())
   {
     $historyQ->close();
-    showQueryError($historyQ);
+    Error::query($historyQ);
   }
 
   $history = $historyQ->fetchPersonal();
   if ($historyQ->isError())
   {
-    showFetchError($historyQ);
+    Error::fetch($historyQ);
   }
 
   echo '<h2>' . _("Personal Antecedents") . "</h2>\n";
@@ -436,13 +436,13 @@
   if ($historyQ->isError())
   {
     $historyQ->close();
-    showQueryError($historyQ);
+    Error::query($historyQ);
   }
 
   $history = $historyQ->fetchFamily();
   if ($historyQ->isError())
   {
-    showFetchError($historyQ);
+    Error::fetch($historyQ);
   }
   $historyQ->freeResult();
   $historyQ->close();
@@ -483,14 +483,14 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $count = $problemQ->selectProblems($idPatient, true);
   if ($problemQ->isError())
   {
     $problemQ->close();
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -515,7 +515,7 @@
       $auxQ->connect();
       if ($auxQ->isError())
       {
-        showQueryError($auxQ);
+        Error::query($auxQ);
       }
 
       $numRows = $auxQ->select($problem->getIdMember());

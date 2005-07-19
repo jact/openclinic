@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.11 2005/06/14 18:59:51 jact Exp $
+ * $Id: relative_list.php,v 1.12 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
@@ -49,14 +49,14 @@
   $relQ->connect();
   if ($relQ->isError())
   {
-    showQueryError($relQ);
+    Error::query($relQ);
   }
 
   $numRows = $relQ->select($idPatient);
   if ($relQ->isError())
   {
     $relQ->close();
-    showQueryError($relQ);
+    Error::query($relQ);
   }
 
   $relArray = array();
@@ -152,7 +152,7 @@
   $patQ->connect();
   if ($patQ->isError())
   {
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   $tbody = array();
@@ -161,7 +161,7 @@
     $patQ->select($relArray[$i]);
     if ($patQ->isError())
     {
-      showQueryError($patQ, false);
+      Error::query($patQ, false);
       continue;
     }
 
@@ -169,7 +169,7 @@
     if ($patQ->isError())
     {
       $patQ->close();
-      showFetchError($patQ);
+      Error::fetch($patQ);
     }
 
     $relName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();

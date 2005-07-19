@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.10 2005/06/14 18:56:57 jact Exp $
+ * $Id: connection_list.php,v 1.11 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -97,14 +97,14 @@
   $connQ->connect();
   if ($connQ->isError())
   {
-    showQueryError($connQ);
+    Error::query($connQ);
   }
 
   $numRows = $connQ->select($idProblem);
   if ($connQ->isError())
   {
     $connQ->close();
-    showQueryError($connQ);
+    Error::query($connQ);
   }
 
   $connArray = array();
@@ -138,7 +138,7 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $tbody = array();
@@ -147,7 +147,7 @@
     $problemQ->select($connArray[$i]);
     if ($problemQ->isError())
     {
-      showQueryError($problemQ, false);
+      Error::query($problemQ, false);
       continue;
     }
 
@@ -155,7 +155,7 @@
     if ($problemQ->isError())
     {
       $problemQ->close();
-      showFetchError($problemQ);
+      Error::fetch($problemQ);
     }
 
     $row = '<a href="../medical/problem_view.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $idPatient . '">' . _("view") . '</a>';

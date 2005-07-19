@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.13 2005/06/14 18:52:32 jact Exp $
+ * $Id: log_record_list.php,v 1.14 2005/07/19 19:50:03 jact Exp $
  */
 
 /**
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Record_Page_Query.php");
-  require_once("../lib/error_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -50,14 +49,14 @@
   $recordQ->connect();
   if ($recordQ->isError())
   {
-    showQueryError($recordQ);
+    Error::query($recordQ);
   }
 
   $total = $recordQ->select($year, $month, $day, $hour);
   if ($recordQ->isError())
   {
     $recordQ->close();
-    showQueryError($recordQ);
+    Error::query($recordQ);
   }
 
   ////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.15 2005/07/18 17:09:57 jact Exp $
+ * $Id: read_settings.php,v 1.16 2005/07/19 19:52:03 jact Exp $
  */
 
 /**
@@ -52,21 +52,21 @@
   $setQ->connect();
   if ($setQ->isError())
   {
-    showQueryError($setQ);
+    Error::query($setQ);
   }
 
   $setQ->select();
   if ($setQ->isError())
   {
     $setQ->close();
-    showQueryError($setQ);
+    Error::query($setQ);
   }
 
   $set = $setQ->fetch();
   if ($setQ->isError())
   {
     $setQ->close();
-    showFetchError($setQ);
+    Error::fetch($setQ);
   }
 
   $setQ->freeResult();
@@ -103,7 +103,7 @@
   $themeQ->connect();
   if ($themeQ->isError())
   {
-    showQueryError($themeQ);
+    Error::query($themeQ);
   }
 
   if (isset($_SESSION["userTheme"]))
@@ -117,14 +117,14 @@
   if ($themeQ->isError())
   {
     $themeQ->close();
-    showQueryError($themeQ);
+    Error::query($themeQ);
   }
 
   $theme = $themeQ->fetch();
   if ($themeQ->isError())
   {
     $themeQ->close();
-    showFetchError($themeQ);
+    Error::fetch($themeQ);
   }
 
   $themeQ->freeResult();

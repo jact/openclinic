@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.14 2005/07/19 16:33:58 jact Exp $
+ * $Id: user_record_log.php,v 1.15 2005/07/19 19:50:04 jact Exp $
  */
 
 /**
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Record_Page_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/search_lib.php");
   require_once("../lib/validator_lib.php");
@@ -61,14 +60,14 @@
   $recordQ->connect();
   if ($recordQ->isError())
   {
-    showQueryError($recordQ);
+    Error::query($recordQ);
   }
 
   $recordQ->searchUser($idUser, $currentPageNmbr, $limit);
   if ($recordQ->isError())
   {
     $recordQ->close();
-    showQueryError($recordQ);
+    Error::query($recordQ);
   }
 
   ////////////////////////////////////////////////////////////////////

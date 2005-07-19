@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit_form.php,v 1.8 2004/10/04 21:41:56 jact Exp $
+ * $Id: test_edit_form.php,v 1.9 2005/07/19 19:51:14 jact Exp $
  */
 
 /**
  * test_edit_form.php
- ********************************************************************
+ *
  * Edition screen of a medical test
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -36,7 +36,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Test_Query.php");
-  require_once("../lib/error_lib.php");
   require_once("../lib/input_lib.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
@@ -55,14 +54,14 @@
   $testQ->connect();
   if ($testQ->isError())
   {
-    showQueryError($testQ);
+    Error::query($testQ);
   }
 
   $numRows = $testQ->select($idProblem, $idTest);
   if ($testQ->isError())
   {
     $testQ->close();
-    showQueryError($testQ);
+    Error::query($testQ);
   }
 
   if ( !$numRows )
@@ -79,7 +78,7 @@
   $test = $testQ->fetch();
   if ($testQ->isError())
   {
-    showFetchError($testQ, false);
+    Error::fetch($testQ, false);
   }
   else
   {
@@ -118,7 +117,7 @@
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
-  echo "<br />\n"; // should be deleted
+  echo "<br />\n"; // @fixme should be deleted
 
   require_once("../shared/form_errors_msg.php");
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.11 2005/06/14 18:59:19 jact Exp $
+ * $Id: patient_del.php,v 1.12 2005/07/19 19:51:13 jact Exp $
  */
 
 /**
@@ -40,7 +40,6 @@
   require_once("../classes/DelPatient_Query.php");
   require_once("../classes/Problem_Page_Query.php"); /* referencial integrity */
   require_once("../classes/DelProblem_Query.php"); /* referencial integrity */
-  require_once("../lib/error_lib.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/validator_lib.php");
 
@@ -62,7 +61,7 @@
   $relQ->connect();
   if ($relQ->isError())
   {
-    showQueryError($relQ);
+    Error::query($relQ);
   }
 
   $numRows = $relQ->select($idPatient);
@@ -80,7 +79,7 @@
     if ($relQ->isError())
     {
       $relQ->close();
-      showQueryError($relQ);
+      Error::query($relQ);
     }
   }
   $relQ->close();
@@ -94,7 +93,7 @@
   $patQ->connect();
   if ($patQ->isError())
   {
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
@@ -103,7 +102,7 @@
     if ($patQ->isError())
     {
       $patQ->close();
-      showQueryError($patQ);
+      Error::query($patQ);
     }
 
     if ( !$numRows )
@@ -121,21 +120,21 @@
     if ($patQ->isError())
     {
       $patQ->close();
-      showFetchError($patQ);
+      Error::fetch($patQ);
     }
 
     $historyQ = new History_Query();
     $historyQ->connect();
     if ($historyQ->isError())
     {
-      showQueryError($historyQ);
+      Error::query($historyQ);
     }
 
     $historyQ->selectPersonal($idPatient);
     if ($historyQ->isError())
     {
       $historyQ->close();
-      showQueryError($historyQ);
+      Error::query($historyQ);
     }
     $historyP = $historyQ->fetchPersonal();
 
@@ -143,7 +142,7 @@
     if ($historyQ->isError())
     {
       $historyQ->close();
-      showQueryError($historyQ);
+      Error::query($historyQ);
     }
     $historyF = $historyQ->fetchFamily();
     //debug($patient); debug($historyP); debug($historyF, "", true);
@@ -152,14 +151,14 @@
     $delPatientQ->connect();
     if ($delPatientQ->isError())
     {
-      showQueryError($delPatientQ);
+      Error::query($delPatientQ);
     }
 
     $delPatientQ->insert($patient, $historyP, $historyF, $_SESSION['userId'], $_SESSION['loginSession']);
     if ($delPatientQ->isError())
     {
       $delPatientQ->close();
-      showQueryError($delPatientQ);
+      Error::query($delPatientQ);
     }
     unset($delPatientQ);
     unset($patient);
@@ -177,7 +176,7 @@
   if ($patQ->isError())
   {
     $patQ->close();
-    showQueryError($patQ);
+    Error::query($patQ);
   }
 
   $patQ->close();
@@ -190,7 +189,7 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -212,7 +211,7 @@
     $delProblemQ->connect();
     if ($delProblemQ->isError())
     {
-      showQueryError($delProblemQ);
+      Error::query($delProblemQ);
     }
 
     for ($i = 0; $i < $numRows; $i++)
@@ -221,7 +220,7 @@
       if ($delProblemQ->isError())
       {
         $delProblemQ->close();
-        showQueryError($delProblemQ);
+        Error::query($delProblemQ);
       }
     }
     $delProblemQ->close();
@@ -231,7 +230,7 @@
     $problemQ->connect();
     if ($problemQ->isError())
     {
-      showQueryError($problemQ);
+      Error::query($problemQ);
     }
 
     $table = $problemQ->getTableName();
@@ -250,7 +249,7 @@
       if ($problemQ->isError())
       {
         $problemQ->close();
-        showQueryError($problemQ);
+        Error::query($problemQ);
       }
     }
     $problemQ->close();
@@ -265,7 +264,7 @@
   $problemQ->connect();
   if ($problemQ->isError())
   {
-    showQueryError($problemQ);
+    Error::query($problemQ);
   }
 
   $numRows = $problemQ->selectProblems($idPatient, true);
@@ -284,7 +283,7 @@
     $delProblemQ->connect();
     if ($delProblemQ->isError())
     {
-      showQueryError($delProblemQ);
+      Error::query($delProblemQ);
     }
 
     for ($i = 0; $i < $numRows; $i++)
@@ -293,7 +292,7 @@
       if ($delProblemQ->isError())
       {
         $delProblemQ->close();
-        showQueryError($delProblemQ);
+        Error::query($delProblemQ);
       }
     }
     $delProblemQ->close();
@@ -303,7 +302,7 @@
     $problemQ->connect();
     if ($problemQ->isError())
     {
-      showQueryError($problemQ);
+      Error::query($problemQ);
     }
 
     $table = $problemQ->getTableName();
@@ -322,7 +321,7 @@
       if ($problemQ->isError())
       {
         $problemQ->close();
-        showQueryError($problemQ);
+        Error::query($problemQ);
       }
     }
     $problemQ->close();
