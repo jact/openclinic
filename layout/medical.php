@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: medical.php,v 1.9 2005/07/18 19:16:04 jact Exp $
+ * $Id: medical.php,v 1.10 2005/07/19 16:33:31 jact Exp $
  */
 
 /**
@@ -70,6 +70,10 @@
           echo '<li><a href="../medical/patient_view.php?key=' . $arrKey . '"><em>' . $arrValue . '</em></a></li>';
         }
       }
+    }
+    else
+    {
+      echo "</li>\n"; // end searchform
     }
   }
   else
