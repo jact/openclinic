@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.13 2005/06/14 18:53:42 jact Exp $
+ * $Id: user_record_log.php,v 1.14 2005/07/19 16:33:58 jact Exp $
  */
 
 /**
@@ -50,8 +50,8 @@
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
   ////////////////////////////////////////////////////////////////////
-  $currentPageNmbr = (isset($_POST["page"])) ? $_POST["page"] : 1;
-  $limit = (isset($_POST["limit"])) ? $_POST["limit"] : 0;
+  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
 
   ////////////////////////////////////////////////////////////////////
   // Search user operations
