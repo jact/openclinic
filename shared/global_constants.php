@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: global_constants.php,v 1.9 2005/07/18 17:12:20 jact Exp $
+ * $Id: global_constants.php,v 1.10 2005/07/20 20:56:40 jact Exp $
  */
 
 /**
@@ -40,8 +40,8 @@
   define("OPEN_LOG_ERRORS",    false); // Save errors to a file?
   define("OPEN_LOG_FILE",      "/tmp/error_log.txt"); // Allways use / separator (Win32 too)
 
-  require_once("../lib/error_lib.php");
-  set_error_handler("customErrorHandler");
+  require_once("../lib/Error.php");
+  set_error_handler(array("Error", "customHandler")); // Error::customHandler
 
   ////////////////////////////////////////////////////////////////////
   // Search types
