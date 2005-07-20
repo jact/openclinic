@@ -2,31 +2,31 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting.php,v 1.7 2004/08/25 17:52:46 jact Exp $
+ * $Id: Setting.php,v 1.8 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * Setting.php
- ********************************************************************
+ *
  * Contains the class Setting
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 define("OPEN_SETTING_SESSION_TIMEOUT", 20);
 define("OPEN_SETTING_ITEMS_PER_PAGE",  10);
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /**
  * Setting represents the config settings.
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  string getClinicName(void)
@@ -82,10 +82,9 @@ class Setting
 
   /**
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
-   ********************************************************************
    */
   function validateData()
   {
@@ -123,7 +122,7 @@ class Setting
 
   /**
    * string getClinicName(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -134,19 +133,19 @@ class Setting
 
   /**
    * void setClinicName(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setClinicName($value)
   {
-    $this->_clinicName = safeText($value);
+    $this->_clinicName = Check::safeText($value);
   }
 
   /**
    * string getClinicImageUrl(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -157,19 +156,19 @@ class Setting
 
   /**
    * void setClinicImageUrl(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setClinicImageUrl($value)
   {
-    $this->_clinicImageUrl = '../images/' . safeText($value);
+    $this->_clinicImageUrl = '../images/' . Check::safeText($value);
   }
 
   /**
    * bool isUseImageSet(void)
-   ********************************************************************
+   *
    * @return bool
    * @access public
    */
@@ -180,7 +179,7 @@ class Setting
 
   /**
    * void setUseImage(bool $value)
-   ********************************************************************
+   *
    * @param bool $value new value to set
    * @return void
    * @access public
@@ -192,7 +191,7 @@ class Setting
 
   /**
    * string getClinicHours(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -203,19 +202,19 @@ class Setting
 
   /**
    * void setClinicHours(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setClinicHours($value)
   {
-    $this->_clinicHours = safeText($value);
+    $this->_clinicHours = Check::safeText($value);
   }
 
   /**
    * string getClinicAddress(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -226,19 +225,19 @@ class Setting
 
   /**
    * void setClinicAddress(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setClinicAddress($value)
   {
-    $this->_clinicAddress = safeText($value);
+    $this->_clinicAddress = Check::safeText($value);
   }
 
   /**
    * string getClinicPhone(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -249,19 +248,19 @@ class Setting
 
   /**
    * void setClinicPhone(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setClinicPhone($value)
   {
-    $this->_clinicPhone = safeText($value);
+    $this->_clinicPhone = Check::safeText($value);
   }
 
   /**
    * string getClinicUrl(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -272,19 +271,19 @@ class Setting
 
   /**
    * void setClinicUrl(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setClinicUrl($value)
   {
-    $this->_clinicUrl = safeText($value);
+    $this->_clinicUrl = Check::safeText($value);
   }
 
   /**
    * int getSessionTimeout(void)
-   ********************************************************************
+   *
    * @return int
    * @access public
    */
@@ -295,7 +294,7 @@ class Setting
 
   /**
    * string getSessionTimeoutError(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -306,7 +305,7 @@ class Setting
 
   /**
    * void setSessionTimeout(int $value)
-   ********************************************************************
+   *
    * @param int $value new value to set
    * @return void
    * @access public
@@ -319,7 +318,7 @@ class Setting
 
   /**
    * int getItemsPerPage(void)
-   ********************************************************************
+   *
    * @return int
    * @access public
    */
@@ -330,7 +329,7 @@ class Setting
 
   /**
    * string getItemsPerPageError(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -341,7 +340,7 @@ class Setting
 
   /**
    * void setItemsPerPage(int $value)
-   ********************************************************************
+   *
    * @param int $value new value to set
    * @return void
    * @access public
@@ -354,7 +353,7 @@ class Setting
 
   /**
    * string getVersion(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -365,19 +364,19 @@ class Setting
 
   /**
    * void setVersion(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setVersion($value)
   {
-    $this->_version = safeText($value);
+    $this->_version = Check::safeText($value);
   }
 
   /**
    * string getLanguage(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -388,19 +387,19 @@ class Setting
 
   /**
    * void setLanguage(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setLanguage($value)
   {
-    $this->_lang = safeText($value);
+    $this->_lang = Check::safeText($value);
   }
 
   /**
    * int getIdTheme(void)
-   ********************************************************************
+   *
    * @return int
    * @access public
    */
@@ -411,7 +410,7 @@ class Setting
 
   /**
    * void setIdTheme(int $value)
-   ********************************************************************
+   *
    * @param int $value new value to set
    * @return void
    * @access public

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del_confirm.php,v 1.5 2004/10/03 10:27:03 jact Exp $
+ * $Id: user_del_confirm.php,v 1.6 2005/07/20 20:24:33 jact Exp $
  */
 
 /**
  * user_del_confirm.php
- ********************************************************************
+ *
  * Confirmation screen of an user deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,13 +35,13 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idUser = intval($_GET["key"]);
-  $login = safeText($_GET["login"]);
+  $login = Check::safeText($_GET["login"]);
 
   ////////////////////////////////////////////////////////////////////
   // Show confirm page

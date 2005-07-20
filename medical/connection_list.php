@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.11 2005/07/19 19:51:13 jact Exp $
+ * $Id: connection_list.php,v 1.12 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
@@ -38,14 +38,13 @@
   require_once("../classes/Problem_Page_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/misc_lib.php");
-  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
-  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
+  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   ////////////////////////////////////////////////////////////////////
   // Show page

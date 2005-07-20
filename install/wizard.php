@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.14 2004/12/07 11:25:59 jact Exp $
+ * $Id: wizard.php,v 1.15 2005/07/20 20:25:04 jact Exp $
  */
 
 /**
  * wizard.php
- ********************************************************************
+ *
  * OpenClinic Install Wizard
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.5
  */
 
@@ -38,7 +38,7 @@
 
   require_once("../lib/input_lib.php");
   require_once("../lib/debug_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   $themes = array(
     1 => "SerialZ",
@@ -105,28 +105,28 @@
   showInputHidden("alreadyVisited", 1);
   showInputHidden("buttonPressed");
 
-  showInputHidden("dbHost", ereg_replace(" ", "", safeText($_POST['dbHost'])));
-  showInputHidden("dbUser", ereg_replace(" ", "", safeText($_POST['dbUser'])));
-  showInputHidden("dbPasswd", safeText($_POST['dbPasswd']));
-  showInputHidden("dbName", ereg_replace(" ", "", safeText($_POST['dbName'])));
+  showInputHidden("dbHost", ereg_replace(" ", "", Check::safeText($_POST['dbHost'])));
+  showInputHidden("dbUser", ereg_replace(" ", "", Check::safeText($_POST['dbUser'])));
+  showInputHidden("dbPasswd", Check::safeText($_POST['dbPasswd']));
+  showInputHidden("dbName", ereg_replace(" ", "", Check::safeText($_POST['dbName'])));
 
-  showInputHidden("clinicLanguage", safeText($_POST['clinicLanguage']));
-  showInputHidden("clinicName", safeText($_POST['clinicName']));
-  showInputHidden("clinicHours", safeText($_POST['clinicHours']));
-  showInputHidden("clinicAddress", safeText($_POST['clinicAddress']));
-  showInputHidden("clinicPhone", safeText($_POST['clinicPhone']));
+  showInputHidden("clinicLanguage", Check::safeText($_POST['clinicLanguage']));
+  showInputHidden("clinicName", Check::safeText($_POST['clinicName']));
+  showInputHidden("clinicHours", Check::safeText($_POST['clinicHours']));
+  showInputHidden("clinicAddress", Check::safeText($_POST['clinicAddress']));
+  showInputHidden("clinicPhone", Check::safeText($_POST['clinicPhone']));
   showInputHidden("timeout", intval($_POST['timeout']));
   showInputHidden("itemsPage", intval($_POST['itemsPage']));
-  showInputHidden("clinicTheme", safeText($_POST['clinicTheme']));
+  showInputHidden("clinicTheme", Check::safeText($_POST['clinicTheme']));
 
-  showInputHidden("firstName", safeText($_POST['firstName']));
-  showInputHidden("surname1", safeText($_POST['surname1']));
-  showInputHidden("surname2", safeText($_POST['surname2']));
-  showInputHidden("adminAddress", safeText($_POST['adminAddress']));
-  showInputHidden("adminPhone", safeText($_POST['adminPhone']));
-  showInputHidden("passwd", safeText($_POST['passwd']));
-  showInputHidden("email", ereg_replace(" ", "", safeText($_POST['email'])));
-  showInputHidden("adminTheme", safeText($_POST['adminTheme']));
+  showInputHidden("firstName", Check::safeText($_POST['firstName']));
+  showInputHidden("surname1", Check::safeText($_POST['surname1']));
+  showInputHidden("surname2", Check::safeText($_POST['surname2']));
+  showInputHidden("adminAddress", Check::safeText($_POST['adminAddress']));
+  showInputHidden("adminPhone", Check::safeText($_POST['adminPhone']));
+  showInputHidden("passwd", Check::safeText($_POST['passwd']));
+  showInputHidden("email", ereg_replace(" ", "", Check::safeText($_POST['email'])));
+  showInputHidden("adminTheme", Check::safeText($_POST['adminTheme']));
   echo "</div>\n";
 ?>
 <div id="window">
@@ -487,7 +487,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.14 2004/12/07 11:25:59 jact Exp $
+ * $Id: wizard.php,v 1.15 2005/07/20 20:25:04 jact Exp $
  */
 
 /**
@@ -740,9 +740,9 @@
 <?php
 /**
  * void _showButton(string $name, string $value, string $type = "next")
- ********************************************************************
+ *
  * Draws button html tag of type submit.
- ********************************************************************
+ *
  * @param string $name name of input field
  * @param string $value button value
  * @param string $type (optional) values: "next" (default), "back"
@@ -771,9 +771,9 @@ function _showButton($name, $value, $type = "next")
 
 /**
  * string _warnIfExtNotLoaded(string $extensionName, bool $echoWhenOk = false)
- ********************************************************************
+ *
  * Checks extension and returns a message
- ********************************************************************
+ *
  * @author Christophe Gesché
  * @param string $extensionName name of php extension to be checked
  * @param boolean $echoWhenOk true => show ok when extension exists
@@ -794,7 +794,7 @@ function _warnIfExtNotLoaded($extensionName, $echoWhenOk = false)
   }
   else
   {
-    $msg = '<strong><a href="http://www.php.net/' . $extensionName . '">';
+    $msg = '<a href="http://www.php.net/' . $extensionName . '"><strong>';
     $msg .= $extensionName . '</strong></a>';
     $msg .= ' - <span class="note">' . _("is missing!!") . '</span>';
   }
@@ -804,9 +804,9 @@ function _warnIfExtNotLoaded($extensionName, $echoWhenOk = false)
 
 /**
  * bool _validateSettings(void)
- ********************************************************************
+ *
  * Validates settings of install wizard
- ********************************************************************
+ *
  * @return boolean true if all settings are ok, false otherwise
  * @access private
  *

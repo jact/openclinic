@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff.php,v 1.4 2004/06/06 11:38:30 jact Exp $
+ * $Id: Staff.php,v 1.5 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * Staff.php
- ********************************************************************
+ *
  * Contains the class Staff
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /*
  * Staff represents a clinic staff member.
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  int getIdMember(void)
@@ -85,7 +85,7 @@ class Staff
 
   /**
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
@@ -145,7 +145,7 @@ class Staff
 
   /**
    * int getIdMember(void)
-   ********************************************************************
+   *
    * @return int Staff Id Member
    * @access public
    */
@@ -156,7 +156,7 @@ class Staff
 
   /**
    * void setIdMember(int $value)
-   ********************************************************************
+   *
    * @param int $value
    * @return void
    * @access public
@@ -168,7 +168,7 @@ class Staff
 
   /**
    * int getIdUser(void)
-   ********************************************************************
+   *
    * @return int Id User
    * @access public
    */
@@ -179,7 +179,7 @@ class Staff
 
   /**
    * void setIdUser(int $value)
-   ********************************************************************
+   *
    * @param int $value
    * @return void
    * @access public
@@ -191,7 +191,7 @@ class Staff
 
   /**
    * string getMemberType(void)
-   ********************************************************************
+   *
    * @return string Staff Member Type
    * @access public
    */
@@ -202,7 +202,7 @@ class Staff
 
   /**
    * void setMemberType(string $value)
-   ********************************************************************
+   *
    * @param string $value
    * @return void
    * @access public
@@ -215,7 +215,7 @@ class Staff
 
   /**
    * string getCollegiateNumber(void)
-   ********************************************************************
+   *
    * @return string doctor collegiate number
    * @access public
    */
@@ -226,7 +226,7 @@ class Staff
 
   /**
    * string getCollegiateNumberError(void)
-   ********************************************************************
+   *
    * @return string Collegiate Number error text
    * @access public
    */
@@ -237,19 +237,19 @@ class Staff
 
   /**
    * void setCollegiateNumber(string $value)
-   ********************************************************************
+   *
    * @param string $value Collegiate Number of a doctor
    * @return void
    * @access public
    */
   function setCollegiateNumber($value)
   {
-    $this->_collegiateNumber = safeText($value);
+    $this->_collegiateNumber = Check::safeText($value);
   }
 
   /**
    * string getNIF(void)
-   ********************************************************************
+   *
    * @return string Staff NIF
    * @access public
    */
@@ -260,7 +260,7 @@ class Staff
 
   /**
    * string getNIFError(void)
-   ********************************************************************
+   *
    * @return string NIF error text
    * @access public
    */
@@ -271,19 +271,19 @@ class Staff
 
   /**
    * void setNIF(string $value)
-   ********************************************************************
+   *
    * @param string $value NIF of staff member
    * @return void
    * @access public
    */
   function setNIF($value)
   {
-    $this->_nif = safeText($value);
+    $this->_nif = Check::safeText($value);
   }
 
   /**
    * string getFirstName(void)
-   ********************************************************************
+   *
    * @return string Staff first name
    * @access public
    */
@@ -294,7 +294,7 @@ class Staff
 
   /**
    * string getFirstNameError(void)
-   ********************************************************************
+   *
    * @return string first name error text
    * @access public
    */
@@ -305,19 +305,19 @@ class Staff
 
   /**
    * void setFirstName(string $value)
-   ********************************************************************
+   *
    * @param string $value first name of staff member
    * @return void
    * @access public
    */
   function setFirstName($value)
   {
-    $this->_firstName = safeText($value);
+    $this->_firstName = Check::safeText($value);
   }
 
   /**
    * string getSurname1(void)
-   ********************************************************************
+   *
    * @return string surname1 of staff member
    * @access public
    */
@@ -328,7 +328,7 @@ class Staff
 
   /**
    * string getSurname1Error(void)
-   ********************************************************************
+   *
    * @return string surname1 error text
    * @access public
    */
@@ -339,19 +339,19 @@ class Staff
 
   /**
    * void setSurname1(string $value)
-   ********************************************************************
+   *
    * @param string $value surname1 of staff member
    * @return void
    * @access public
    */
   function setSurname1($value)
   {
-    $this->_surname1 = safeText($value);
+    $this->_surname1 = Check::safeText($value);
   }
 
   /**
    * string getSurname2(void)
-   ********************************************************************
+   *
    * @return string surname2 of staff member
    * @access public
    */
@@ -362,7 +362,7 @@ class Staff
 
   /**
    * string getSurname2Error(void)
-   ********************************************************************
+   *
    * @return string surname2 error text
    * @access public
    */
@@ -373,19 +373,19 @@ class Staff
 
   /**
    * void setSurname2(string $value)
-   ********************************************************************
+   *
    * @param string $value surname2 of staff member
    * @return void
    * @access public
    */
   function setSurname2($value)
   {
-    $this->_surname2 = safeText($value);
+    $this->_surname2 = Check::safeText($value);
   }
 
   /**
    * string getLogin(void)
-   ********************************************************************
+   *
    * @return string Staff login
    * @access public
    */
@@ -396,7 +396,7 @@ class Staff
 
   /**
    * string getLoginError(void)
-   ********************************************************************
+   *
    * @return string Login error text
    * @access public
    */
@@ -407,7 +407,7 @@ class Staff
 
   /**
    * void setLogin(string $value)
-   ********************************************************************
+   *
    * @param string $value login of staff member
    * @return void
    * @access public
@@ -415,12 +415,12 @@ class Staff
   function setLogin($value)
   {
     $value = strtolower($value); // sure?
-    $this->_login = safeText($value);
+    $this->_login = Check::safeText($value);
   }
 
   /**
    * string getAddress(void)
-   ********************************************************************
+   *
    * @return string Staff address
    * @access public
    */
@@ -431,19 +431,19 @@ class Staff
 
   /**
    * void setAddress(string $value)
-   ********************************************************************
+   *
    * @param string $value address of staff member
    * @return void
    * @access public
    */
   function setAddress($value)
   {
-    $this->_address = safeText($value);
+    $this->_address = Check::safeText($value);
   }
 
   /**
    * string getPhone(void)
-   ********************************************************************
+   *
    * @return string Staff phone contact
    * @access public
    */
@@ -454,14 +454,14 @@ class Staff
 
   /**
    * void setPhone(string $value)
-   ********************************************************************
+   *
    * @param string $value phone contact of staff member
    * @return void
    * @access public
    */
   function setPhone($value)
   {
-    $this->_phone = safeText($value);
+    $this->_phone = Check::safeText($value);
   }
 } // end class
 ?>

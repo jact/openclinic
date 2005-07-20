@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description.php,v 1.3 2004/05/24 22:12:44 jact Exp $
+ * $Id: Description.php,v 1.4 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * Description.php
- ********************************************************************
+ *
  * Contains the class Description
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /*
  * Description ...
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  string getCode(void)
@@ -47,7 +47,7 @@ class Description
 
   /**
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
@@ -66,7 +66,7 @@ class Description
 
   /**
    * string getCode(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -77,7 +77,7 @@ class Description
 
   /**
    * string getDescription(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -88,7 +88,7 @@ class Description
 
   /**
    * string getDescriptionError(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -99,26 +99,26 @@ class Description
 
   /**
    * void setCode(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setCode($value)
   {
-    $this->_code = safeText($value);
+    $this->_code = Check::safeText($value);
   }
 
   /**
    * void setDescription(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setDescription($value)
   {
-    $this->_description = safeText($value);
+    $this->_description = Check::safeText($value);
   }
 } // end class
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.13 2005/07/19 19:51:14 jact Exp $
+ * $Id: problem_search.php,v 1.14 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
@@ -39,18 +39,17 @@
   require_once("../classes/Problem_Page_Query.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/search_lib.php");
-  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
   ////////////////////////////////////////////////////////////////////
   $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
-  $searchType = safeText($_POST["search_type_problem"]);
-  $logical = safeText($_POST["logical_problem"]);
+  $searchType = Check::safeText($_POST["search_type_problem"]);
+  $logical = Check::safeText($_POST["logical_problem"]);
   $limit = (isset($_POST["limit_problem"])) ? intval($_POST["limit_problem"]) : 0;
 
   // remove slashes added by form post
-  $searchText = stripslashes(safeText($_POST["search_text_problem"]));
+  $searchText = stripslashes(Check::safeText($_POST["search_text_problem"]));
   // remove redundant whitespace
   $searchText = eregi_replace("[[:space:]]+", " ", $searchText);
   // transform string in array of strings

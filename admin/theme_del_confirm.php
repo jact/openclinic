@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del_confirm.php,v 1.6 2004/10/03 10:27:03 jact Exp $
+ * $Id: theme_del_confirm.php,v 1.7 2005/07/20 20:24:33 jact Exp $
  */
 
 /**
  * theme_del_confirm.php
- ********************************************************************
+ *
  * Confirmation screen of a theme deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,14 +35,14 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idTheme = intval($_GET["key"]);
-  $name = safeText($_GET["name"]);
-  $file = safeText($_GET["file"]);
+  $name = Check::safeText($_GET["name"]);
+  $file = Check::safeText($_GET["file"]);
 
   ////////////////////////////////////////////////////////////////////
   // Show confirm page

@@ -5,25 +5,25 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.8 2005/02/17 20:26:17 jact Exp $
+ * $Id: Patient.php,v 1.9 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * Patient.php
- ********************************************************************
+ *
  * Contains the class Patient
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /*
  * Patient contains business rules for patient data validation.
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  int getIdPatient(void)
@@ -116,7 +116,7 @@ class Patient
 
   /**
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
@@ -173,7 +173,7 @@ class Patient
 
   /**
    * int getIdPatient(void)
-   ********************************************************************
+   *
    * @return int
    * @access public
    */
@@ -184,7 +184,7 @@ class Patient
 
   /**
    * void setIdPatient(int $value)
-   ********************************************************************
+   *
    * @param int $value new value to set
    * @return void
    * @access public
@@ -196,7 +196,7 @@ class Patient
 
   /**
    * int getIdMember(void)
-   ********************************************************************
+   *
    * @return int
    * @access public
    */
@@ -207,7 +207,7 @@ class Patient
 
   /**
    * void setIdMember(int $value)
-   ********************************************************************
+   *
    * @param int $value new value to set
    * @return void
    * @access public
@@ -219,7 +219,7 @@ class Patient
 
   /**
    * string getCollegiateNumber(void)
-   ********************************************************************
+   *
    * @return string collegiate number
    * @access public
    */
@@ -230,19 +230,19 @@ class Patient
 
   /**
    * void setCollegiateNumber(string $value)
-   ********************************************************************
+   *
    * @param string $value collegiate number
    * @return void
    * @access public
    */
   function setCollegiateNumber($value)
   {
-    $this->_collegiateNumber = safeText($value);
+    $this->_collegiateNumber = Check::safeText($value);
   }
 
   /**
    * string getNIF(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -253,19 +253,19 @@ class Patient
 
   /**
    * void setNIF(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setNIF($value)
   {
-    $this->_nif = safeText($value);
+    $this->_nif = Check::safeText($value);
   }
 
   /**
    * string getFirstName(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -276,7 +276,7 @@ class Patient
 
   /**
    * string getFirstNameError(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -287,19 +287,19 @@ class Patient
 
   /**
    * void setFirstName(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setFirstName($value)
   {
-    $this->_firstName = safeText($value);
+    $this->_firstName = Check::safeText($value);
   }
 
   /**
    * string getSurname1(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -310,7 +310,7 @@ class Patient
 
   /**
    * string getSurname1Error(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -321,19 +321,19 @@ class Patient
 
   /**
    * void setSurname1(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setSurname1($value)
   {
-    $this->_surname1 = safeText($value);
+    $this->_surname1 = Check::safeText($value);
   }
 
   /**
    * string getSurname2(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -344,7 +344,7 @@ class Patient
 
   /**
    * string getSurname2Error(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -355,19 +355,19 @@ class Patient
 
   /**
    * void setSurname2(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setSurname2($value)
   {
-    $this->_surname2 = safeText($value);
+    $this->_surname2 = Check::safeText($value);
   }
 
   /**
    * string getAddress(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -378,19 +378,19 @@ class Patient
 
   /**
    * void setAddress(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setAddress($value)
   {
-    $this->_address = safeText($value);
+    $this->_address = Check::safeText($value);
   }
 
   /**
    * string getPhone(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -401,19 +401,19 @@ class Patient
 
   /**
    * void setPhone(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setPhone($value)
   {
-    $this->_phone = safeText($value);
+    $this->_phone = Check::safeText($value);
   }
 
   /**
    * string getSex(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -424,19 +424,19 @@ class Patient
 
   /**
    * void setSex(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setSex($value)
   {
-    $this->_sex = safeText($value);
+    $this->_sex = Check::safeText($value);
   }
 
   /**
    * string getRace(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -447,22 +447,23 @@ class Patient
 
   /**
    * void setRace(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setRace($value)
   {
-    $this->_race = safeText($value);
+    $this->_race = Check::safeText($value);
   }
 
   /**
    * string getBirthDate(bool $view = true)
-   ********************************************************************
+   *
    * @param bool $view (optional) to view in screen or to save in database
    * @return string
    * @access public
+   * @fixme $view argument
    */
   function getBirthDate($view = true)
   {
@@ -481,7 +482,7 @@ class Patient
 
   /**
    * string getBirthDateError(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -492,19 +493,19 @@ class Patient
 
   /**
    * void setBirthDate(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setBirthDate($value)
   {
-    $this->_birthDate = safeText($value);
+    $this->_birthDate = Check::safeText($value);
   }
 
   /**
    * void setBirthDateFromParts(string $month, string $day, string $year)
-   ********************************************************************
+   *
    * @param string $month
    * @param string $day
    * @param string $year
@@ -522,7 +523,7 @@ class Patient
 
   /**
    * int getAge(void)
-   ********************************************************************
+   *
    * @return int
    * @access public
    */
@@ -533,7 +534,7 @@ class Patient
 
   /**
    * void setAge(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
@@ -545,7 +546,7 @@ class Patient
 
   /**
    * string getBirthPlace(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -556,22 +557,23 @@ class Patient
 
   /**
    * void setBirthPlace(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setBirthPlace($value)
   {
-    $this->_birthPlace = safeText($value);
+    $this->_birthPlace = Check::safeText($value);
   }
 
   /**
    * string getDeceaseDate(bool $view = true)
-   ********************************************************************
+   *
    * @param bool $view (optional) to view in screen or to save in database
    * @return string
    * @access public
+   * @fixme $view argument
    */
   function getDeceaseDate($view = true)
   {
@@ -590,7 +592,7 @@ class Patient
 
   /**
    * string getDeceaseDateError(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -601,19 +603,19 @@ class Patient
 
   /**
    * void setDeceaseDate(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setDeceaseDate($value)
   {
-    $this->_deceaseDate = safeText($value);
+    $this->_deceaseDate = Check::safeText($value);
   }
 
   /**
    * void setDeceaseDateFromParts(string $month, string $day, string $year)
-   ********************************************************************
+   *
    * @param string $month
    * @param string $day
    * @param string $year
@@ -631,7 +633,7 @@ class Patient
 
   /**
    * string getNTS(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -642,19 +644,19 @@ class Patient
 
   /**
    * void setNTS(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setNTS($value)
   {
-    $this->_nts = safeText($value);
+    $this->_nts = Check::safeText($value);
   }
 
   /**
    * string getNSS(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -665,19 +667,19 @@ class Patient
 
   /**
    * void setNSS(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setNSS($value)
   {
-    $this->_nss = safeText($value);
+    $this->_nss = Check::safeText($value);
   }
 
   /**
    * string getFamilySituation(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -688,19 +690,19 @@ class Patient
 
   /**
    * void setFamilySituation(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setFamilySituation($value)
   {
-    $this->_familySituation = safeText($value);
+    $this->_familySituation = Check::safeText($value);
   }
 
   /**
    * string getLabourSituation(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -711,19 +713,19 @@ class Patient
 
   /**
    * void setLabourSituation(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setLabourSituation($value)
   {
-    $this->_labourSituation = safeText($value);
+    $this->_labourSituation = Check::safeText($value);
   }
 
   /**
    * string getEducation(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -734,19 +736,19 @@ class Patient
 
   /**
    * void setEducation(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setEducation($value)
   {
-    $this->_education = safeText($value);
+    $this->_education = Check::safeText($value);
   }
 
   /**
    * string getInsuranceCompany(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -757,19 +759,19 @@ class Patient
 
   /**
    * void setInsuranceCompany(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setInsuranceCompany($value)
   {
-    $this->_insuranceCompany = safeText($value);
+    $this->_insuranceCompany = Check::safeText($value);
   }
 
   /**
    * string getLastUpdateDate(void)
-   ********************************************************************
+   *
    * @return string last update date of the patient data
    * @access public
    */
@@ -780,14 +782,14 @@ class Patient
 
   /**
    * void setLastUpdateDate(string $value)
-   ********************************************************************
+   *
    * @param string $value last update date of the patient data
    * @return void
    * @access public
    */
 /*  function setLastUpdateDate($value)
   {
-    $this->_lastUpdateDate = safeText($value);
+    $this->_lastUpdateDate = Check::safeText($value);
   }*/
 } // end class
 ?>

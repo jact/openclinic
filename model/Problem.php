@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem.php,v 1.7 2004/10/16 14:48:46 jact Exp $
+ * $Id: Problem.php,v 1.8 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * Problem.php
- ********************************************************************
+ *
  * Contains the class Problem
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /*
  * Problem represents a medical problem.
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  int getIdProblem(void)
@@ -106,7 +106,7 @@ class Problem
 
   /**
    * int getIdProblem(void)
-   ********************************************************************
+   *
    * @return int id problem
    * @access public
    */
@@ -117,7 +117,7 @@ class Problem
 
   /**
    * void setIdProblem(int $value)
-   ********************************************************************
+   *
    * @param int $value id problem
    * @return void
    * @access public
@@ -129,7 +129,7 @@ class Problem
 
   /**
    * int getIdPatient(void)
-   ********************************************************************
+   *
    * @return string id patient
    * @access public
    */
@@ -140,7 +140,7 @@ class Problem
 
   /**
    * void setIdPatient(int $value)
-   ********************************************************************
+   *
    * @param int $value id patient
    * @return void
    * @access public
@@ -152,7 +152,7 @@ class Problem
 
   /**
    * int getOrderNumber(void)
-   ********************************************************************
+   *
    * @return int order number problem relative to the id patient
    * @access public
    */
@@ -163,7 +163,7 @@ class Problem
 
   /**
    * void setOrderNumber(int $value)
-   ********************************************************************
+   *
    * @param int $value order number problem relative to the id patient
    * @return void
    * @access public
@@ -175,7 +175,7 @@ class Problem
 
   /**
    * int getIdMember(void)
-   ********************************************************************
+   *
    * @return string id member
    * @access public
    */
@@ -186,7 +186,7 @@ class Problem
 
   /**
    * void setIdMember(int $value)
-   ********************************************************************
+   *
    * @param int $value id member
    * @return void
    * @access public
@@ -198,7 +198,7 @@ class Problem
 
   /**
    * string getCollegiateNumber(void)
-   ********************************************************************
+   *
    * @return string collegiate number
    * @access public
    */
@@ -209,19 +209,19 @@ class Problem
 
   /**
    * void setCollegiateNumber(string $value)
-   ********************************************************************
+   *
    * @param string $value collegiate number
    * @return void
    * @access public
    */
   function setCollegiateNumber($value)
   {
-    $this->_collegiateNumber = safeText($value);
+    $this->_collegiateNumber = Check::safeText($value);
   }
 
   /**
    * string getOpeningDate(void)
-   ********************************************************************
+   *
    * @return string opening date of the medical problem
    * @access public
    */
@@ -232,19 +232,19 @@ class Problem
 
   /**
    * void setOpeningDate(string $value)
-   ********************************************************************
+   *
    * @param string $value opening date of the medical problem
    * @return void
    * @access public
    */
   function setOpeningDate($value)
   {
-    $this->_openingDate = safeText($value);
+    $this->_openingDate = Check::safeText($value);
   }
 
   /**
    * string getClosingDate(void)
-   ********************************************************************
+   *
    * @return string closing date of the medical problem
    * @access public
    */
@@ -255,20 +255,20 @@ class Problem
 
   /**
    * void setClosingDate(string $value)
-   ********************************************************************
+   *
    * @param string $value closing date of the medical problem
    * @return void
    * @access public
    */
   function setClosingDate($value)
   {
-    $temp = safeText($value);
+    $temp = Check::safeText($value);
     $this->_closingDate = (($temp == "" || $temp == "0000-00-00") ? "0000-00-00" : $temp);
   }
 
   /**
    * string getMeetingPlace(void)
-   ********************************************************************
+   *
    * @return string meeting place of the medical problem
    * @access public
    */
@@ -279,19 +279,19 @@ class Problem
 
   /**
    * void setMeetingPlace(string $value)
-   ********************************************************************
+   *
    * @param string $value meeting place of the medical problem
    * @return void
    * @access public
    */
   function setMeetingPlace($value)
   {
-    $this->_meetingPlace = safeText($value);
+    $this->_meetingPlace = Check::safeText($value);
   }
 
   /**
    * string getWording(void)
-   ********************************************************************
+   *
    * @return string wording of the medical problem
    * @access public
    */
@@ -301,20 +301,8 @@ class Problem
   }
 
   /**
-   * void setWording(string $value)
-   ********************************************************************
-   * @param string $value wording of the medical problem
-   * @return void
-   * @access public
-   */
-  function setWording($value)
-  {
-    $this->_wording = safeText($value);
-  }
-
-  /**
    * string getWordingError(void)
-   ********************************************************************
+   *
    * @return string wording error of the medical problem
    * @access public
    */
@@ -324,8 +312,20 @@ class Problem
   }
 
   /**
+   * void setWording(string $value)
+   *
+   * @param string $value wording of the medical problem
+   * @return void
+   * @access public
+   */
+  function setWording($value)
+  {
+    $this->_wording = Check::safeText($value);
+  }
+
+  /**
    * string getSubjective(void)
-   ********************************************************************
+   *
    * @return string subjective of the medical problem
    * @access public
    */
@@ -336,19 +336,19 @@ class Problem
 
   /**
    * void setSubjective(string $value)
-   ********************************************************************
+   *
    * @param string $value subjective of the medical problem
    * @return void
    * @access public
    */
   function setSubjective($value)
   {
-    $this->_subjective = safeText($value);
+    $this->_subjective = Check::safeText($value);
   }
 
   /**
    * string getObjective(void)
-   ********************************************************************
+   *
    * @return string objective of the medical problem
    * @access public
    */
@@ -359,19 +359,19 @@ class Problem
 
   /**
    * void setObjective(string $value)
-   ********************************************************************
+   *
    * @param string $value objective of the medical problem
    * @return void
    * @access public
    */
   function setObjective($value)
   {
-    $this->_objective = safeText($value);
+    $this->_objective = Check::safeText($value);
   }
 
   /**
    * string getAppreciation(void)
-   ********************************************************************
+   *
    * @return string appreciation of the medical problem
    * @access public
    */
@@ -382,19 +382,19 @@ class Problem
 
   /**
    * void setAppreciation(string $value)
-   ********************************************************************
+   *
    * @param string $value appreciation of the medical problem
    * @return void
    * @access public
    */
   function setAppreciation($value)
   {
-    $this->_appreciation = safeText($value);
+    $this->_appreciation = Check::safeText($value);
   }
 
   /**
    * string getActionPlan(void)
-   ********************************************************************
+   *
    * @return string action plan of the medical problem
    * @access public
    */
@@ -405,19 +405,19 @@ class Problem
 
   /**
    * void setActionPlan(string $value)
-   ********************************************************************
+   *
    * @param string $value action plan of the medical problem
    * @return void
    * @access public
    */
   function setActionPlan($value)
   {
-    $this->_actionPlan = safeText($value);
+    $this->_actionPlan = Check::safeText($value);
   }
 
   /**
    * string getPrescription(void)
-   ********************************************************************
+   *
    * @return string prescription of the medical problem
    * @access public
    */
@@ -428,19 +428,19 @@ class Problem
 
   /**
    * void setPrescription(string $value)
-   ********************************************************************
+   *
    * @param string $value prescription of the medical problem
    * @return void
    * @access public
    */
   function setPrescription($value)
   {
-    $this->_prescription = safeText($value);
+    $this->_prescription = Check::safeText($value);
   }
 
   /**
    * string getLastUpdateDate(void)
-   ********************************************************************
+   *
    * @return string last update date of the medical problem
    * @access public
    */
@@ -451,14 +451,14 @@ class Problem
 
   /**
    * void setLastUpdateDate(string $value)
-   ********************************************************************
+   *
    * @param string $value last update date of the medical problem
    * @return void
    * @access public
    */
   function setLastUpdateDate($value)
   {
-    $this->_lastUpdateDate = safeText($value);
+    $this->_lastUpdateDate = Check::safeText($value);
   }
 } // end class
 ?>

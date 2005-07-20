@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.9 2004/10/04 18:03:57 jact Exp $
+ * $Id: user_new_form.php,v 1.10 2005/07/20 20:24:33 jact Exp $
  */
 
 /**
  * user_new_form.php
- ********************************************************************
+ *
  * Addition screen of an user
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -26,7 +26,7 @@
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   // after login_check inclusion to avoid JavaScript mistakes in demo version
   $focusFormName = "forms[0]";
@@ -37,7 +37,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_POST["id_member_login"]))
   {
-    $array = explode(OPEN_SEPARATOR, safeText($_POST["id_member_login"]), 2);
+    $array = explode(OPEN_SEPARATOR, Check::safeText($_POST["id_member_login"]), 2);
     $idMember = $array[0];
     $postVars["id_member"] = $idMember;
     $login = $array[1];
@@ -48,7 +48,7 @@
   {
     $idMember = intval($_GET["id_member"]);
     $postVars["id_member"] = $idMember;
-    $login = safeText($_GET["login"]);
+    $login = Check::safeText($_GET["login"]);
     $postVars["login"] = $login;
   }
   else

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.14 2005/07/19 19:52:03 jact Exp $
+ * $Id: login.php,v 1.15 2005/07/20 20:25:38 jact Exp $
  */
 
 /**
@@ -29,7 +29,6 @@
   require_once("../classes/User_Query.php");
   require_once("../classes/Session_Query.php");
   require_once("../classes/Access_Page_Query.php");
-  require_once("../lib/validator_lib.php");
 
   unset($pageErrors); // to clean previous errors
 
@@ -37,7 +36,7 @@
   // Login edits
   ////////////////////////////////////////////////////////////////////
   $errorFound = false;
-  $loginSession = urlencode(safeText($_POST["login_session"]));
+  $loginSession = urlencode(Check::safeText($_POST["login_session"]));
   if ($loginSession == "")
   {
     $errorFound = true;
@@ -47,7 +46,7 @@
   ////////////////////////////////////////////////////////////////////
   // Password edits
   ////////////////////////////////////////////////////////////////////
-  $pwdSession = safeText($_POST["md5"]);
+  $pwdSession = Check::safeText($_POST["md5"]);
   if ($pwdSession == "")
   {
     $errorFound = true;
@@ -139,7 +138,7 @@
   ////////////////////////////////////////////////////////////////////
   if ($errorFound)
   {
-    $_SESSION["postVars"] = safeArray($_POST);
+    $_SESSION["postVars"] = Check::safeArray($_POST);
     $_SESSION["pageErrors"] = $pageErrors;
     if (isset($sessLoginAttempts))
     {

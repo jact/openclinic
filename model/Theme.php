@@ -2,21 +2,21 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme.php,v 1.8 2004/08/12 11:39:00 jact Exp $
+ * $Id: Theme.php,v 1.9 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * Theme.php
- ********************************************************************
+ *
  * Contains the class Theme
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 $reservedCSSFiles = array(
   "style.css",
@@ -30,10 +30,10 @@ $reservedCSSFiles = array(
 
 /*
  * Theme represents a look and feel theme.
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  int getIdTheme(void)
@@ -71,7 +71,7 @@ class Theme
 
   /*
    * bool validateData(void)
-   ********************************************************************
+   *
    * @global array $reservedCSSFiles
    * @return boolean true if data is valid, otherwise false.
    * @access public
@@ -110,7 +110,7 @@ class Theme
 
   /**
    * int getIdTheme(void)
-   ********************************************************************
+   *
    * @return int id theme
    * @access public
    */
@@ -121,7 +121,7 @@ class Theme
 
   /**
    * void setIdTheme(int $value)
-   ********************************************************************
+   *
    * @param int $value id theme
    * @return void
    * @access public
@@ -133,7 +133,7 @@ class Theme
 
   /**
    * string getThemeName(void)
-   ********************************************************************
+   *
    * @return string theme name
    * @access public
    */
@@ -144,7 +144,7 @@ class Theme
 
   /**
    * string getThemeNameError(void)
-   ********************************************************************
+   *
    * @return string theme name error text
    * @access public
    */
@@ -155,19 +155,19 @@ class Theme
 
   /**
    * void setThemeName(string $value)
-   ********************************************************************
+   *
    * @param string $value theme name
    * @return void
    * @access public
    */
   function setThemeName($value)
   {
-    $this->_themeName = safeText($value);
+    $this->_themeName = Check::safeText($value);
   }
 
   /**
    * string getCSSFile(void)
-   ********************************************************************
+   *
    * @return string css file
    * @access public
    */
@@ -178,7 +178,7 @@ class Theme
 
   /**
    * string getCSSFileError(void)
-   ********************************************************************
+   *
    * @return string css file error text
    * @access public
    */
@@ -189,7 +189,7 @@ class Theme
 
   /**
    * void setCSSFile(string $value)
-   ********************************************************************
+   *
    * @param string $value css file
    * @return void
    * @access public
@@ -197,12 +197,12 @@ class Theme
   function setCSSFile($value)
   {
     $value = strtolower($value); // sure?
-    $this->_cssFile = safeText($value);
+    $this->_cssFile = Check::safeText($value);
   }
 
   /**
    * string getCSSRules(void)
-   ********************************************************************
+   *
    * @return string css rules
    * @access public
    */
@@ -213,7 +213,7 @@ class Theme
 
   /**
    * string getCSSRulesError(void)
-   ********************************************************************
+   *
    * @return string css rules error text
    * @access public
    */
@@ -224,19 +224,19 @@ class Theme
 
   /**
    * void setCSSRules(string $value)
-   ********************************************************************
+   *
    * @param string $value css rules
    * @return void
    * @access public
    */
   function setCSSRules($value)
   {
-    $this->_cssRules = safeText($value);
+    $this->_cssRules = Check::safeText($value);
   }
 
   /**
    * int getCount(void)
-   ********************************************************************
+   *
    * @return int count
    * @access public
    */
@@ -247,15 +247,14 @@ class Theme
 
   /**
    * void setCount(int $value)
-   ********************************************************************
+   *
    * @param int $value count
    * @return void
    * @access public
    */
   function setCount($value)
   {
-    $value = intval($value);
-    $this->_count = $value;
+    $this->_count = intval($value);
   }
 } // end class
 ?>

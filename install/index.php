@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.13 2005/07/19 19:51:35 jact Exp $
+ * $Id: index.php,v 1.14 2005/07/20 20:25:04 jact Exp $
  */
 
 /**
@@ -23,7 +23,7 @@
   require_once("../install/parse_sql_file.php");
   require_once("../lib/input_lib.php");
   require_once("../lib/debug_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   //debug($_POST);
 
@@ -37,7 +37,7 @@
       $_POST['sql_query'] = stripslashes($_POST['sql_query']);
     }
     // @fixme gecko browsers (Mozilla 1.7.8) cause to disappear CR/LF (and I don't know why)
-    $_POST['sql_query'] = safeText($_POST['sql_query'], false);
+    $_POST['sql_query'] = Check::safeText($_POST['sql_query'], false);
 
     $tmpFile = tempnam(dirname(realpath(__FILE__)), "foo");
     $handle = fopen($tmpFile, "w"); // as text, not binary
@@ -93,7 +93,7 @@
     $fp = fopen($_FILES['sql_file']['tmp_name'], 'r');
     $sqlQuery = fread($fp, $_FILES['sql_file']['size']);
     fclose($fp);
-    $sqlQuery = safeText($sqlQuery, false);
+    $sqlQuery = Check::safeText($sqlQuery, false);
 
     echo '<pre>';
     echo $sqlQuery;

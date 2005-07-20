@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.5 2005/06/21 18:23:02 jact Exp $
+ * $Id: theme_preload_css.php,v 1.6 2005/07/20 20:24:33 jact Exp $
  */
 
 /**
@@ -35,11 +35,12 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
+  require_once("../lib/Check.php");
 
   if (!empty($_FILES['css_filename']['name']) && $_FILES['css_filename']['size'] > 0)
   {
     $cssRules = fread(fopen($_FILES['css_filename']['tmp_name'], 'r'), $_FILES['css_filename']['size']);
-    $cssRules = safeText($cssRules, false);
+    $cssRules = Check::safeText($cssRules, false);
 
     //debug($cssRules);
     $_POST['css_file'] = $_FILES['css_filename']['name'];

@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User.php,v 1.4 2004/06/16 19:09:47 jact Exp $
+ * $Id: User.php,v 1.5 2005/07/20 20:24:48 jact Exp $
  */
 
 /**
  * User.php
- ********************************************************************
+ *
  * Contains the class User
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /*
  * User represents an application user.
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  bool validatePwd(void)
@@ -34,20 +34,20 @@ require_once("../lib/validator_lib.php");
  *  string getLogin(void)
  *  string getLoginError(void)
  *  void setLogin(string $value)
- *  void setPwd(string $value)
  *  string getPwd(void)
  *  string getPwdError(void)
- *  void setPwd2(string $value)
+ *  void setPwd(string $value)
  *  string getPwd2(void)
+ *  void setPwd2(string $value)
  *  string getEmail(void)
  *  string getEmailError(void)
  *  void setEmail(string $value)
  *  bool isActived(void)
  *  void setActived(bool $value)
- *  void setIdTheme(int $value)
- *  void setIdProfile(int $value)
  *  int getIdTheme(void)
+ *  void setIdTheme(int $value)
  *  int getIdProfile(void)
+ *  void setIdProfile(int $value)
  */
 class User
 {
@@ -73,7 +73,7 @@ class User
 
   /*
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
@@ -133,7 +133,7 @@ class User
 
   /**
    * bool validatePwd(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
@@ -167,7 +167,7 @@ class User
 
   /**
    * int getIdUser(void)
-   ********************************************************************
+   *
    * @return int id user
    * @access public
    */
@@ -178,7 +178,7 @@ class User
 
   /**
    * void setIdUser(int $value)
-   ********************************************************************
+   *
    * @param int $value id user
    * @return void
    * @access public
@@ -190,7 +190,7 @@ class User
 
   /**
    * int getIdMember(void)
-   ********************************************************************
+   *
    * @return int id member user
    * @access public
    */
@@ -201,7 +201,7 @@ class User
 
   /**
    * void setIdMember(int $value)
-   ********************************************************************
+   *
    * @param int $value id member user
    * @return void
    * @access public
@@ -213,7 +213,7 @@ class User
 
   /**
    * string getLogin(void)
-   ********************************************************************
+   *
    * @return string User login
    * @access public
    */
@@ -224,7 +224,7 @@ class User
 
   /**
    * string getLoginError(void)
-   ********************************************************************
+   *
    * @return string login error text
    * @access public
    */
@@ -235,7 +235,7 @@ class User
 
   /**
    * void setLogin(string $value)
-   ********************************************************************
+   *
    * @param string $value login user
    * @return void
    * @access public
@@ -243,24 +243,12 @@ class User
   function setLogin($value)
   {
     $value = strtolower($value); // sure?
-    $this->_login = safeText($value);
-  }
-
-  /**
-   * void setPwd(string $value)
-   ********************************************************************
-   * @param string $value user's password
-   * @return void
-   * @access public
-   */
-  function setPwd($value)
-  {
-    $this->_pwd = safeText($value);
+    $this->_login = Check::safeText($value);
   }
 
   /**
    * string getPwd(void)
-   ********************************************************************
+   *
    * @return string User password
    * @access public
    */
@@ -271,7 +259,7 @@ class User
 
   /**
    * string getPwdError(void)
-   ********************************************************************
+   *
    * @return string password error text
    * @access public
    */
@@ -281,20 +269,20 @@ class User
   }
 
   /**
-   * void setPwd2(string $value)
-   ********************************************************************
-   * @param string $value password confirmation
+   * void setPwd(string $value)
+   *
+   * @param string $value user's password
    * @return void
    * @access public
    */
-  function setPwd2($value)
+  function setPwd($value)
   {
-    $this->_pwd2 = safeText($value);
+    $this->_pwd = Check::safeText($value);
   }
 
   /**
    * string getPwd2(void)
-   ********************************************************************
+   *
    * @return string user's password confirmation
    * @access public
    */
@@ -304,8 +292,20 @@ class User
   }
 
   /**
+   * void setPwd2(string $value)
+   *
+   * @param string $value password confirmation
+   * @return void
+   * @access public
+   */
+  function setPwd2($value)
+  {
+    $this->_pwd2 = Check::safeText($value);
+  }
+
+  /**
    * string getEmail(void)
-   ********************************************************************
+   *
    * @return string user email
    * @access public
    */
@@ -316,7 +316,7 @@ class User
 
   /**
    * string getEmailError(void)
-   ********************************************************************
+   *
    * @return string email error text
    * @access public
    */
@@ -327,19 +327,19 @@ class User
 
   /**
    * void setEmail(string $value)
-   ********************************************************************
+   *
    * @param string $value email of user
    * @return void
    * @access public
    */
   function setEmail($value)
   {
-    $this->_email = safeText($value);
+    $this->_email = Check::safeText($value);
   }
 
   /**
    * bool isActived(void)
-   ********************************************************************
+   *
    * @return boolean user is actived?
    * @access public
    */
@@ -350,7 +350,7 @@ class User
 
   /**
    * void setActived(bool $value)
-   ********************************************************************
+   *
    * @param boolean $value true if user is actived
    * @return void
    * @access public
@@ -361,8 +361,19 @@ class User
   }
 
   /**
+   * int getIdTheme(void)
+   *
+   * @return int id theme
+   * @access public
+   */
+  function getIdTheme()
+  {
+    return intval($this->_idTheme);
+  }
+
+  /**
    * void setIdTheme(int $value)
-   ********************************************************************
+   *
    * @param int $value
    * @return void
    * @access public
@@ -374,8 +385,19 @@ class User
   }
 
   /**
+   * int getIdProfile(void)
+   *
+   * @return int id profile
+   * @access public
+   */
+  function getIdProfile()
+  {
+    return intval($this->_idProfile);
+  }
+
+  /**
    * void setIdProfile(int $value)
-   ********************************************************************
+   *
    * @param int $value
    * @return void
    * @access public
@@ -384,28 +406,6 @@ class User
   {
     $temp = intval($value);
     $this->_idProfile = (($temp == 0) ? OPEN_PROFILE_DOCTOR : $temp);
-  }
-
-  /**
-   * int getIdTheme(void)
-   ********************************************************************
-   * @return int id theme
-   * @access public
-   */
-  function getIdTheme()
-  {
-    return intval($this->_idTheme);
-  }
-
-  /**
-   * int getIdProfile(void)
-   ********************************************************************
-   * @return int id profile
-   * @access public
-   */
-  function getIdProfile()
-  {
-    return intval($this->_idProfile);
   }
 } // end class
 ?>

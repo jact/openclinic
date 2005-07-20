@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_stats.php,v 1.6 2004/10/03 11:16:33 jact Exp $
+ * $Id: log_stats.php,v 1.7 2005/07/20 20:24:33 jact Exp $
  */
 
 /**
  * log_stats.php
- ********************************************************************
+ *
  * Log stats screen (access logins or record operations)
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.4
  */
 
@@ -27,7 +27,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/log_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -38,13 +38,13 @@
   }
   else
   {
-    $table = safeText($_GET['table']);
+    $table = Check::safeText($_GET['table']);
   }
   if ($table != "access" && $table != "record")
   {
     $table = "access";
   }
-  $option = (isset($_GET["option"])) ? safeText($_GET["option"]) : "";
+  $option = (isset($_GET["option"])) ? Check::safeText($_GET["option"]) : "";
 
   ////////////////////////////////////////////////////////////////////
   // Show page

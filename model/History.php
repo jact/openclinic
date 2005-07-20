@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History.php,v 1.3 2004/05/24 22:12:44 jact Exp $
+ * $Id: History.php,v 1.4 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * History.php
- ********************************************************************
+ *
  * Contains the class History
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /*
  * History represents personal and family antecedents of a patient.
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  int getIdPatient(void)
@@ -90,7 +90,7 @@ class History
 
   /*
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
@@ -103,7 +103,7 @@ class History
 
   /**
    * int getIdPatient(void)
-   ********************************************************************
+   *
    * @return int
    * @access public
    */
@@ -114,7 +114,7 @@ class History
 
   /**
    * string getBirthGrowth(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -125,7 +125,7 @@ class History
 
   /**
    * string getGrowthSexuality(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -136,7 +136,7 @@ class History
 
   /**
    * string getFeed(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -147,7 +147,7 @@ class History
 
   /**
    * string getHabits(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -158,7 +158,7 @@ class History
 
   /**
    * string getPeristalticConditions(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -169,7 +169,7 @@ class History
 
   /**
    * string getPsychological(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -180,7 +180,7 @@ class History
 
   /**
    * string getChildrenComplaint(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -191,7 +191,7 @@ class History
 
   /**
    * string getVenerealDisease(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -202,7 +202,7 @@ class History
 
   /**
    * string getAccidentSurgicalOperation(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -213,7 +213,7 @@ class History
 
   /**
    * string getMedicinalIntolerance(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -224,7 +224,7 @@ class History
 
   /**
    * string getMentalIllness(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -235,7 +235,7 @@ class History
 
   /**
    * string getParentsStatusHealth(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -246,7 +246,7 @@ class History
 
   /**
    * string getBrothersStatusHealth(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -257,7 +257,7 @@ class History
 
   /**
    * string getSpouseChildsStatusHealth(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -268,7 +268,7 @@ class History
 
   /**
    * string getFamilyIllness(void)
-   ********************************************************************
+   *
    * @return string
    * @access public
    */
@@ -279,7 +279,7 @@ class History
 
   /**
    * void setIdPatient(int $value)
-   ********************************************************************
+   *
    * @param int $value new value to set
    * @return void
    * @access public
@@ -291,182 +291,182 @@ class History
 
   /**
    * void setBirthGrowth(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setBirthGrowth($value)
   {
-    $this->_birthGrowth = safeText($value);
+    $this->_birthGrowth = Check::safeText($value);
   }
 
   /**
    * void setGrowthSexuality(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setGrowthSexuality($value)
   {
-    $this->_growthSexuality = safeText($value);
+    $this->_growthSexuality = Check::safeText($value);
   }
 
   /**
    * void setFeed(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setFeed($value)
   {
-    $this->_feed = safeText($value);
+    $this->_feed = Check::safeText($value);
   }
 
   /**
    * void setHabits(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setHabits($value)
   {
-    $this->_habits = safeText($value);
+    $this->_habits = Check::safeText($value);
   }
 
   /**
    * void setPeristalticConditions(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setPeristalticConditions($value)
   {
-    $this->_peristalticConditions = safeText($value);
+    $this->_peristalticConditions = Check::safeText($value);
   }
 
   /**
    * void setPsychological(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setPsychological($value)
   {
-    $this->_psychological = safeText($value);
+    $this->_psychological = Check::safeText($value);
   }
 
   /**
    * void setChildrenComplaint(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setChildrenComplaint($value)
   {
-    $this->_childrenComplaint = safeText($value);
+    $this->_childrenComplaint = Check::safeText($value);
   }
 
   /**
    * void setVenerealDisease(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setVenerealDisease($value)
   {
-    $this->_venerealDisease = safeText($value);
+    $this->_venerealDisease = Check::safeText($value);
   }
 
   /**
    * void setAccidentSurgicalOperation(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setAccidentSurgicalOperation($value)
   {
-    $this->_accidentSurgicalOperation = safeText($value);
+    $this->_accidentSurgicalOperation = Check::safeText($value);
   }
 
   /**
    * void setMedicinalIntolerance(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setMedicinalIntolerance($value)
   {
-    $this->_medicinalIntolerance = safeText($value);
+    $this->_medicinalIntolerance = Check::safeText($value);
   }
 
   /**
    * void setMentalIllness(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setMentalIllness($value)
   {
-    $this->_mentalIllness = safeText($value);
+    $this->_mentalIllness = Check::safeText($value);
   }
 
   /**
    * void setParentsStatusHealth(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setParentsStatusHealth($value)
   {
-    $this->_parentsStatusHealth = safeText($value);
+    $this->_parentsStatusHealth = Check::safeText($value);
   }
 
   /**
    * void setBrothersStatusHealth(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setBrothersStatusHealth($value)
   {
-    $this->_brothersStatusHealth = safeText($value);
+    $this->_brothersStatusHealth = Check::safeText($value);
   }
 
   /**
    * void setSpouseChildsStatusHealth(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setSpouseChildsStatusHealth($value)
   {
-    $this->_spouseChildsStatusHealth = safeText($value);
+    $this->_spouseChildsStatusHealth = Check::safeText($value);
   }
 
   /**
    * void setFamilyIllness(string $value)
-   ********************************************************************
+   *
    * @param string $value new value to set
    * @return void
    * @access public
    */
   function setFamilyIllness($value)
   {
-    $this->_familyIllness = safeText($value);
+    $this->_familyIllness = Check::safeText($value);
   }
 } // end class
 ?>

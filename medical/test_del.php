@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del.php,v 1.9 2005/07/19 19:51:14 jact Exp $
+ * $Id: test_del.php,v 1.10 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
@@ -37,7 +37,6 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Test_Query.php");
   require_once("../shared/record_log.php"); // record log
-  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars
@@ -45,7 +44,7 @@
   $idProblem = intval($_POST["id_problem"]);
   $idTest = intval($_POST["id_test"]);
   $idPatient = intval($_POST["id_patient"]);
-  $file = safeText($_POST["file"]);
+  $file = Check::safeText($_POST["file"]);
 
   ////////////////////////////////////////////////////////////////////
   // Prevent user from aborting script

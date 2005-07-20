@@ -5,24 +5,25 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test.php,v 1.4 2005/02/17 20:25:23 jact Exp $
+ * $Id: Test.php,v 1.5 2005/07/20 20:24:47 jact Exp $
  */
 
 /**
  * Test.php
- ********************************************************************
+ *
  * Contains the class Medical Test
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-require_once("../lib/validator_lib.php");
+require_once("../lib/Check.php");
 
 /*
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ * Test represents a medical test for a medical problem
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool validateData(void)
  *  int getIdTest(void)
@@ -52,7 +53,7 @@ class Test
 
   /*
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
@@ -71,7 +72,7 @@ class Test
 
   /**
    * int getIdTest(void)
-   ********************************************************************
+   *
    * @return int id medical test
    * @access public
    */
@@ -82,7 +83,7 @@ class Test
 
   /**
    * void setIdTest(int $value)
-   ********************************************************************
+   *
    * @param int $value id medical test
    * @return void
    * @access public
@@ -94,7 +95,7 @@ class Test
 
   /**
    * int getIdProblem(void)
-   ********************************************************************
+   *
    * @return int id medical problem
    * @access public
    */
@@ -105,7 +106,7 @@ class Test
 
   /**
    * void setIdProblem(int $value)
-   ********************************************************************
+   *
    * @param int $value id medical problem
    * @return void
    * @access public
@@ -117,7 +118,7 @@ class Test
 
   /**
    * string getDocumentType(void)
-   ********************************************************************
+   *
    * @return string Document Type
    * @access public
    */
@@ -128,7 +129,7 @@ class Test
 
   /**
    * void setDocumentType(string $value)
-   ********************************************************************
+   *
    * @param string $value Document Type
    * @return void
    * @access public
@@ -136,12 +137,12 @@ class Test
   function setDocumentType($value)
   {
     //$value = strtolower($value);
-    $this->_documentType = safeText($value);
+    $this->_documentType = Check::safeText($value);
   }
 
   /**
    * string getPathFilename(boolean $withPath = true)
-   ********************************************************************
+   *
    * @param boolean $withPath indicates if path is also returned or not
    * @return string path file name
    * @access public
@@ -172,7 +173,7 @@ class Test
 
   /**
    * string getPathFilenameError(void)
-   ********************************************************************
+   *
    * @return string path file name error text
    * @access public
    */
@@ -183,7 +184,7 @@ class Test
 
   /**
    * void setPathFilename(string $value)
-   ********************************************************************
+   *
    * @param string $value path file name
    * @return void
    * @access public

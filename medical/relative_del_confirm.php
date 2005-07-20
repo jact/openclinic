@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_del_confirm.php,v 1.5 2004/10/03 10:26:49 jact Exp $
+ * $Id: relative_del_confirm.php,v 1.6 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
  * relative_del_confirm.php
- ********************************************************************
+ *
  * Confirmation screen of a relation between patients deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -35,14 +35,14 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idPatient = intval($_GET["key"]);
   $idRelative = intval($_GET["rel"]);
-  $relName = safeText($_GET["name"]);
+  $relName = Check::safeText($_GET["name"]);
 
   ////////////////////////////////////////////////////////////////////
   // Show confirm page

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.7 2004/10/03 11:16:03 jact Exp $
+ * $Id: dump_process.php,v 1.8 2005/07/20 20:24:33 jact Exp $
  */
 
 /**
  * dump_process.php
- ********************************************************************
+ *
  * Contains database dump process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -25,7 +25,7 @@
   require_once("../shared/read_settings.php");
   require_once("../admin/dump_defines.php");
   require_once("../lib/dump_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
   // Increase time limit for script execution and initializes some variables
@@ -33,7 +33,7 @@
   @set_time_limit(OPEN_EXEC_TIME_LIMIT);
   $dumpBuffer = "";
   $crlf = DLIB_whichCrlf(); // defines the default <CR><LF> format
-  $_POST = safeArray($_POST);
+  $_POST = Check::safeArray($_POST);
 
   ////////////////////////////////////////////////////////////////////
   // Send headers depending on whether the user choosen to download a dump file or not

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.12 2005/07/19 19:51:14 jact Exp $
+ * $Id: relative_list.php,v 1.13 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
@@ -37,13 +37,12 @@
   require_once("../classes/Relative_Query.php");
   require_once("../classes/Patient_Page_Query.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
   ////////////////////////////////////////////////////////////////////
   $idPatient = intval($_GET["key"]);
-  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
+  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   $relQ = new Relative_Query;
   $relQ->connect();

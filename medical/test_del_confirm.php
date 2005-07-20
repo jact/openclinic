@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del_confirm.php,v 1.6 2005/02/17 20:27:32 jact Exp $
+ * $Id: test_del_confirm.php,v 1.7 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
  * test_del_confirm.php
- ********************************************************************
+ *
  * Confirmation screen of a medical test deletion process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   ////////////////////////////////////////////////////////////////////
@@ -36,7 +36,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/validator_lib.php");
+  require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -44,7 +44,7 @@
   $idProblem = intval($_GET["key"]);
   $idTest = intval($_GET["test"]);
   $idPatient = intval($_GET["pat"]);
-  $file = safeText($_GET["file"]);
+  $file = Check::safeText($_GET["file"]);
 
   ////////////////////////////////////////////////////////////////////
   // Show confirm page

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.11 2005/07/19 19:51:14 jact Exp $
+ * $Id: test_list.php,v 1.12 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
@@ -37,7 +37,6 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Test_Query.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/validator_lib.php");
   require_once("../lib/misc_lib.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -45,7 +44,7 @@
   ////////////////////////////////////////////////////////////////////
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
-  $info = (isset($_GET["info"]) ? urldecode(safeText($_GET["info"])) : "");
+  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   ////////////////////////////////////////////////////////////////////
   // Show page

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.11 2005/07/19 19:51:13 jact Exp $
+ * $Id: problem_del.php,v 1.12 2005/07/20 20:25:24 jact Exp $
  */
 
 /**
@@ -38,14 +38,13 @@
   require_once("../classes/Connection_Query.php"); /* referencial integrity */
   require_once("../classes/DelProblem_Query.php");
   require_once("../shared/record_log.php"); // record log
-  require_once("../lib/validator_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars
   ////////////////////////////////////////////////////////////////////
   $idProblem = intval($_POST["id_problem"]);
   $idPatient = intval($_POST["id_patient"]);
-  $wording = safeText($_POST["wording"]);
+  $wording = Check::safeText($_POST["wording"]);
 
   ////////////////////////////////////////////////////////////////////
   // Prevent user from aborting script
