@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.14 2005/07/20 20:25:24 jact Exp $
+ * $Id: problem_search.php,v 1.15 2005/07/20 20:54:05 jact Exp $
  */
 
 /**
@@ -221,7 +221,9 @@ function changePage(page)
   {
     $row = $problemQ->getCurrentRow();
     eval("\$aux = $val;");
-    $recordset[$row] = $row . OPEN_SEPARATOR . $problem->getIdProblem() . OPEN_SEPARATOR . $problem->getIdPatient() . OPEN_SEPARATOR . $aux . OPEN_SEPARATOR . localDate($problem->getOpeningDate()) . OPEN_SEPARATOR . localDate($problem->getClosingDate());
+    $recordset[$row] = $row . OPEN_SEPARATOR . $problem->getIdProblem() . OPEN_SEPARATOR . $problem->getIdPatient()
+                     . OPEN_SEPARATOR . $aux . OPEN_SEPARATOR . I18n::localDate($problem->getOpeningDate())
+                     . OPEN_SEPARATOR . I18n::localDate($problem->getClosingDate());
   } // end while
   $problemQ->freeResult();
   $problemQ->close();

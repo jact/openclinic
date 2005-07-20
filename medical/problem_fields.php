@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.13 2005/07/19 19:51:14 jact Exp $
+ * $Id: problem_fields.php,v 1.14 2005/07/20 20:54:05 jact Exp $
  */
 
 /**
@@ -36,13 +36,13 @@
 
   $row = _("Opening Date") . ":";
   $row .= OPEN_SEPARATOR;
-  $row .= localDate($postVars["opening_date"]);
+  $row .= I18n::localDate($postVars["opening_date"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = _("Last Update Date") . ":";
   $row .= OPEN_SEPARATOR;
-  $row .= localDate($postVars["last_update_date"]);
+  $row .= I18n::localDate($postVars["last_update_date"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 

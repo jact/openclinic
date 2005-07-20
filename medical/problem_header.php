@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_header.php,v 1.13 2005/07/19 19:51:14 jact Exp $
+ * $Id: problem_header.php,v 1.14 2005/07/20 20:54:05 jact Exp $
  */
 
 /**
@@ -71,9 +71,9 @@
       <tr>
         <td><?php echo _("Wording") . ': ' . fieldPreview($problem->getWording()); ?></td>
 
-        <td class="right"><?php echo _("Opening Date") . ': ' . localDate($problem->getOpeningDate()); ?></td>
+        <td class="right"><?php echo _("Opening Date") . ': ' . I18n::localDate($problem->getOpeningDate()); ?></td>
 
-        <td class="right"><?php echo _("Last Update Date") . ': ' . localDate($problem->getLastUpdateDate()); ?></td>
+        <td class="right"><?php echo _("Last Update Date") . ': ' . I18n::localDate($problem->getLastUpdateDate()); ?></td>
       </tr>
     </table>
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.11 2005/07/19 19:51:14 jact Exp $
+ * $Id: problem_edit_form.php,v 1.12 2005/07/20 20:54:05 jact Exp $
  */
 
 /**
@@ -91,7 +91,7 @@
     {
       $postVars["last_update_date"] = $problem->getLastUpdateDate();
       $postVars["id_member"] = $problem->getIdMember();
-      $postVars["closed_problem"] = ((localDate($problem->getClosingDate()) != "") ? "checked" : "");
+      $postVars["closed_problem"] = ((I18n::localDate($problem->getClosingDate()) != "") ? "checked" : "");
       $postVars["meeting_place"] = $problem->getMeetingPlace();
       $postVars["wording"] = $problem->getWording();
       $postVars["subjective"] = $problem->getSubjective();

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: i18n.php,v 1.4 2004/10/18 17:24:05 jact Exp $
+ * $Id: i18n.php,v 1.5 2005/07/20 20:54:40 jact Exp $
  */
 
 /**
@@ -23,19 +23,19 @@
     exit();
   }
 
-  require_once("../lib/lang_lib.php");
+  require_once("../lib/I18n.php");
   require_once("../lib/nls.php");
 
   $nls = getNLS();
   if ( !defined("OPEN_LANGUAGE") )
   {
-    define("OPEN_LANGUAGE", setLanguage());
+    define("OPEN_LANGUAGE", I18n::setLanguage());
   }
   else
   {
-    setLanguage(OPEN_LANGUAGE);
+    I18n::setLanguage(OPEN_LANGUAGE);
   }
-  initLanguage(OPEN_LANGUAGE);
+  I18n::initLanguage(OPEN_LANGUAGE);
 
   define("OPEN_CHARSET", (isset($nls['charset'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['charset']));
   define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));

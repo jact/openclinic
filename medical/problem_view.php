@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.10 2005/07/19 19:51:14 jact Exp $
+ * $Id: problem_view.php,v 1.11 2005/07/20 20:54:05 jact Exp $
  */
 
 /**
@@ -158,18 +158,18 @@
   }
 
   echo '<h3>' . _("Opening Date") . "</h3>\n";
-  echo '<p>' . localDate($problem->getOpeningDate()) . "</p>\n";
+  echo '<p>' . I18n::localDate($problem->getOpeningDate()) . "</p>\n";
 
-  if (localDate($problem->getLastUpdateDate()) != "") // backwards compatibility
+  if (I18n::localDate($problem->getLastUpdateDate()) != "") // backwards compatibility
   {
     echo '<h3>' . _("Last Update Date") . "</h3>\n";
-    echo '<p>' . localDate($problem->getLastUpdateDate()) . "</p>\n";
+    echo '<p>' . I18n::localDate($problem->getLastUpdateDate()) . "</p>\n";
   }
 
-  if (localDate($problem->getClosingDate()) != "")
+  if (I18n::localDate($problem->getClosingDate()) != "")
   {
     echo '<h3>' . _("Closing Date") . "</h3>\n";
-    echo '<p>' . localDate($problem->getClosingDate()) . "</p>\n";
+    echo '<p>' . I18n::localDate($problem->getClosingDate()) . "</p>\n";
   }
 
   if ($problem->getMeetingPlace())

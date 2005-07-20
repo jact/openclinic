@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.15 2005/07/20 20:25:04 jact Exp $
+ * $Id: wizard.php,v 1.16 2005/07/20 20:53:46 jact Exp $
  */
 
 /**
@@ -82,7 +82,7 @@
   ////////////////////////////////////////////////////////////////////
   require_once("../shared/i18n.php");
 
-  $locale = languageList();
+  $locale = I18n::languageList();
   // end i18n l10n
 
   ////////////////////////////////////////////////////////////////////
@@ -487,7 +487,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.15 2005/07/20 20:25:04 jact Exp $
+ * $Id: wizard.php,v 1.16 2005/07/20 20:53:46 jact Exp $
  */
 
 /**

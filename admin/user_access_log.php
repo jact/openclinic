@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.15 2005/07/20 20:24:33 jact Exp $
+ * $Id: user_access_log.php,v 1.16 2005/07/20 20:53:32 jact Exp $
  */
 
 /**
@@ -151,7 +151,7 @@ function changePage(page)
     {
       $row = $accessQ->getCurrentRow() . ".";
       $row .= OPEN_SEPARATOR;
-      $row .= localDate($access["access_date"]);
+      $row .= I18n::localDate($access["access_date"]);
       $row .= OPEN_SEPARATOR;
       $row .= $access["login"];
       $row .= OPEN_SEPARATOR;

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.12 2005/07/19 19:51:13 jact Exp $
+ * $Id: patient_view.php,v 1.13 2005/07/20 20:54:05 jact Exp $
  */
 
 /**
@@ -138,7 +138,7 @@
   echo '<p>' . $pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName() . "</p>\n";
 
   //echo '<h3>' . _("Last Update Date") . "</h3>\n";
-  //echo '<p>' . localDate($pat->getLastUpdateDate()) . "</p>\n";
+  //echo '<p>' . I18n::localDate($pat->getLastUpdateDate()) . "</p>\n";
 
   if ($pat->getNIF())
   {
