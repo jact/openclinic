@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_optimize_db.php,v 1.6 2005/07/20 21:09:23 jact Exp $
+ * $Id: dump_optimize_db.php,v 1.7 2005/07/20 21:12:50 jact Exp $
  */
 
 /**
@@ -25,6 +25,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
+  require_once("../admin/dump_defines.php");
   require_once("../lib/dump_lib.php"); // DLIB_backquote()
 
   @set_time_limit(OPEN_EXEC_TIME_LIMIT);
