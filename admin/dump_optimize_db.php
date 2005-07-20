@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_optimize_db.php,v 1.5 2005/07/19 19:50:03 jact Exp $
+ * $Id: dump_optimize_db.php,v 1.6 2005/07/20 21:09:23 jact Exp $
  */
 
 /**
@@ -87,6 +87,7 @@
   $totalData = 0;
   $totalIndex = 0;
   $totalAll = 0;
+  $totalGain = 0;
 
   $rows = null;
   while ($row = $auxConn->fetchRow())
