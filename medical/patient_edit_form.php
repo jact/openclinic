@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.12 2005/07/19 19:51:13 jact Exp $
+ * $Id: patient_edit_form.php,v 1.13 2005/07/21 16:00:48 jact Exp $
  */
 
 /**
@@ -119,7 +119,7 @@
   require_once("../shared/header.php");
 
   $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y";
-  //debug($postVars);
+  //Error::debug($postVars);
 
   ////////////////////////////////////////////////////////////////////
   // Navigation links

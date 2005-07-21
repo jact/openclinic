@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_new_form.php,v 1.5 2004/10/04 21:43:04 jact Exp $
+ * $Id: test_new_form.php,v 1.6 2005/07/21 16:00:48 jact Exp $
  */
 
 /**
@@ -81,7 +81,7 @@
   showProblemHeader($idProblem);
   echo "<br />\n"; // should be deleted
 
-  //debug($postVars);
+  //Error::debug($postVars);
 
   require_once("../shared/form_errors_msg.php");
 ?>

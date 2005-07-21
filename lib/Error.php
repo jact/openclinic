@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Error.php,v 1.1 2005/07/19 19:50:20 jact Exp $
+ * $Id: Error.php,v 1.2 2005/07/21 15:59:03 jact Exp $
  */
 
 /**
@@ -17,7 +17,7 @@
  */
 
 /**
- * Error set of show error functions
+ * Error set of show error and debug functions
  *
  * @author jact <jachavar@gmail.com>
  * @access public
@@ -30,6 +30,8 @@
  *  void message(string $errorMsg, int $errorType = E_USER_WARNING)
  *  string backTrace(array $context)
  *  void customHandler(int $number, string $message, string $file, int $line, array $context)
+ *  void debug(mixed $expression, string $message = "", bool $goOut = false)
+ *  void trace(mixed $expression, string $message = "", bool $goOut = false)
  */
 class Error
 {
@@ -233,7 +235,7 @@ class Error
 
     if ( !defined("OPEN_SCREEN_ERRORS") || OPEN_SCREEN_ERRORS )
     {
-      echo '<pre>' . $error . "</pre>\n";
+      echo '<pre>' . wordwrap($error, 78, "\n", true) . "</pre>\n";
     }
 
     if (defined("OPEN_LOG_ERRORS") && OPEN_LOG_ERRORS)
@@ -246,10 +248,69 @@ class Error
       }
     }
 
+    // @todo by argument or by default
+    /*if ($number == E_USER_ERROR)
+    {
+      mail("xxx@example.com", "Critical User Error", $error);
+    }*/
+
     if ($goOut)
     {
       $_SESSION = array();
       session_destroy();
+      exit();
+    }
+  }
+
+  /**
+   * void debug(mixed $expression, string $message = "", bool $goOut = false)
+   *
+   * Displays the content of $expression (depends of OPEN_DEBUG == true)
+   *
+   * @param mixed $expression
+   * @param string $message (optional)
+   * @param bool $goOut (optional) if true, execute an exit()
+   * @return void
+   * @access public
+   * @since 0.7
+   */
+  function debug($expression, $message = "", $goOut = false)
+  {
+    if ( defined("OPEN_DEBUG") && !OPEN_DEBUG )
+    {
+      return;
+    }
+
+    trace($expression, isset($message) ? $message : "", isset($goOut) ? $goOut : false);
+  }
+
+  /**
+   * void trace(mixed $expression, string $message = "", bool $goOut = false)
+   *
+   * Displays the content of $expression
+   *
+   * @param mixed $expression
+   * @param string $message (optional)
+   * @param bool $goOut (optional) if true, execute an exit()
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function trace($expression, $message = "", $goOut = false)
+  {
+    echo "\n<!-- debug -->\n";
+    echo "<pre>\n";
+    if ( !empty($message) )
+    {
+      echo $message . "\n";
+    }
+    $output = var_export($expression, true);
+    echo htmlspecialchars($output);
+    echo "</pre>\n";
+    echo "<!-- end debug -->\n";
+
+    if ($goOut)
+    {
       exit();
     }
   }

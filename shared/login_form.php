@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.8 2005/05/24 18:48:55 jact Exp $
+ * $Id: login_form.php,v 1.9 2005/07/21 16:01:20 jact Exp $
  */
 
 /**
@@ -118,7 +118,7 @@ function md5Login(f)
 <?php
   showMessage(_("You must have cookies enabled to access your account."));
 
-  //debug($_SESSION, "session variables:", true);
+  //Error::debug($_SESSION, "session variables:", true);
 
   require_once("../shared/footer.php");
 ?>

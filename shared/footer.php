@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.17 2005/06/21 18:27:29 jact Exp $
+ * $Id: footer.php,v 1.18 2005/07/21 16:01:19 jact Exp $
  */
 
 /**
@@ -22,8 +22,8 @@
     exit();
   }
 
-  //debug($_SESSION);
-  //debug($_SERVER);
+  //Error::debug($_SESSION);
+  //Error::debug($_SERVER);
 ?>
 </div><!-- End #mainZone -->
 <!-- End Main Zone -->

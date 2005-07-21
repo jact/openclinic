@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.16 2005/07/20 20:53:46 jact Exp $
+ * $Id: wizard.php,v 1.17 2005/07/21 16:00:33 jact Exp $
  */
 
 /**
@@ -37,7 +37,7 @@
   } // end step 8
 
   require_once("../lib/input_lib.php");
-  require_once("../lib/debug_lib.php");
+  require_once("../lib/Error.php");
   require_once("../lib/Check.php");
 
   $themes = array(
@@ -101,7 +101,7 @@
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" onsubmit="return validateInstall();">
 <?php
   echo "<div>\n";
-  //debug($_POST);
+  //Error::debug($_POST);
   showInputHidden("alreadyVisited", 1);
   showInputHidden("buttonPressed");
 
@@ -143,7 +143,7 @@
   if ($_POST['buttonPressed'] == "next1" || $_POST['buttonPressed'] == "back2")
   {
     $focusFormField = "license";
-    //debug(OPEN_LANGUAGE);
+    //Error::debug(OPEN_LANGUAGE);
 ?>
   <h2><?php echo sprintf(_("Step %d of %d: "), 2, 7) . _("License"); ?></h2>
 
@@ -487,7 +487,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.16 2005/07/20 20:53:46 jact Exp $
+ * $Id: wizard.php,v 1.17 2005/07/21 16:00:33 jact Exp $
  */
 
 /**

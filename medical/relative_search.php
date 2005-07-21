@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.13 2005/07/20 20:25:24 jact Exp $
+ * $Id: relative_search.php,v 1.14 2005/07/21 16:00:48 jact Exp $
  */
 
 /**
@@ -108,7 +108,7 @@
     exit();
   }
 
-  //debug($_POST);
+  //Error::debug($_POST);
 ?>
 
 <!-- JavaScript to post back to this page -->
