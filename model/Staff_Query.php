@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.9 2004/10/16 14:49:50 jact Exp $
+ * $Id: Staff_Query.php,v 1.10 2005/07/21 15:59:46 jact Exp $
  */
 
 /**
@@ -210,7 +210,7 @@ class Staff_Query extends Query
       return false;
     }*/
 
-    //print_r($staff); exit(); // debug
+    //Error::debug($staff, "", true); // debug
     $sql = "INSERT INTO " . $this->_table;
     $sql .= " (id_member, member_type, collegiate_number, nif, first_name, surname1, ";
     $sql .= "surname2, address, phone_contact, id_user, login) VALUES (NULL, ";

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Page_Query.php,v 1.1 2005/06/14 17:26:48 jact Exp $
+ * $Id: Access_Page_Query.php,v 1.2 2005/07/21 15:59:46 jact Exp $
  */
 
 /**
@@ -134,9 +134,9 @@ class Access_Page_Query extends Page_Query
       $sql .= " LIMIT " . $offset . "," . $limitTo . ";";
     }
 
-    //echo "limitFrom=[" . $limitFrom . "]<br />\n"; // debug
-    //echo "offset=[" . $offset . "]<br />\n"; // debug
-    //echo "sql=[" . $sql . "]<br />\n"; // debug
+    //Error::debug($limitFrom, "limitFrom"); // debug
+    //Error::debug($offset, "offset"); // debug
+    //Error::debug($sql, "sql"); // debug
 
     // Running row count sql statement
     $countResult = $this->exec($sqlCount);

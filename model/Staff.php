@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff.php,v 1.5 2005/07/20 20:24:47 jact Exp $
+ * $Id: Staff.php,v 1.6 2005/07/21 15:59:46 jact Exp $
  */
 
 /**
@@ -133,7 +133,7 @@ class Staff
       $this->_loginError = sprintf(_("This field can't contain the symbols %s"), "'\\");
     }
 
-    //print_r($this); exit(); // debug
+    //Error::debug($this, "", true); // debug
     if ($this->_memberType == "Doctor" && $this->_collegiateNumber == "")
     {
       $valid = false;
