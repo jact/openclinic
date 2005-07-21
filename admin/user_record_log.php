@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.17 2005/07/20 20:53:32 jact Exp $
+ * $Id: user_record_log.php,v 1.18 2005/07/21 16:55:57 jact Exp $
  */
 
 /**
@@ -93,7 +93,7 @@
   if ($recordQ->getRowCount() == 0)
   {
     $recordQ->close();
-    showMessage(_("No logs for this user."), OPEN_MSG_INFO);
+    HTML::message(_("No logs for this user."), OPEN_MSG_INFO);
   }
   else
   {
@@ -165,7 +165,7 @@ function changePage(page)
     $recordQ->freeResult();
     $recordQ->close();
 
-    showTable($thead, $tbody, null, $options);
+    HTML::table($thead, $tbody, null, $options);
 
     showResultPages($currentPageNmbr, $pageCount);
   } // end if-else

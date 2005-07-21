@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_suspended.php,v 1.4 2004/07/26 18:45:47 jact Exp $
+ * $Id: login_suspended.php,v 1.5 2005/07/21 16:57:13 jact Exp $
  */
 
 /**
  * login_suspended.php
- ********************************************************************
+ *
  * Screen with user login suspended message
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   $tab = "home";
@@ -29,11 +29,11 @@
 
   echo '<h1>' . $title . "</h1>\n";
 
-  showMessage(_("Your user account has been suspended."));
-  showMessage(_("Contact with administrator to resolve this problem."), OPEN_MSG_INFO);
+  HTML::message(_("Your user account has been suspended."));
+  HTML::message(_("Contact with administrator to resolve this problem."), OPEN_MSG_INFO);
 
-  //debug($_SESSION);
-  //debug($user);
+  //Error::debug($_SESSION);
+  //Error::debug($user);
 
   ////////////////////////////////////////////////////////////////////
   // Destroy session values

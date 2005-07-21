@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.8 2005/07/19 19:51:13 jact Exp $
+ * $Id: connection_new_form.php,v 1.9 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -93,7 +93,7 @@
   if ($count == 0)
   {
     $problemQ->close();
-    showMessage(_("No medical problems defined for this patient."), OPEN_MSG_INFO);
+    HTML::message(_("No medical problems defined for this patient."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -136,7 +136,7 @@
     'tfoot' => array('align' => 'center')
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 ?>
   </div>
 </form>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.14 2005/07/21 16:00:48 jact Exp $
+ * $Id: relative_search.php,v 1.15 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -103,7 +103,7 @@
   if ($patQ->getRowCount() == 0)
   {
     $patQ->close();
-    showMessage(_("No results found."), OPEN_MSG_INFO);
+    HTML::message(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -267,7 +267,7 @@ function changePage(page)
     1 => htmlInputButton("button1", _("Add selected to Relatives List"))
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 ?>
   </div>
 </form>

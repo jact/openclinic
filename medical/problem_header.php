@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_header.php,v 1.14 2005/07/20 20:54:05 jact Exp $
+ * $Id: problem_header.php,v 1.15 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -53,7 +53,7 @@
 
     if ( !$numRows )
     {
-      return false; // maybe return showMessage(_("That medical problem does not exist."), OPEN_MSG_ERROR);
+      return false; // maybe return HTML::message(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     }
 
     $problem = $problemQ->fetch();

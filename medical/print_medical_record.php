@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.15 2005/07/20 20:54:05 jact Exp $
+ * $Id: print_medical_record.php,v 1.16 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -29,7 +29,7 @@
   require_once("../classes/Staff_Query.php");
   require_once("../classes/Problem_Page_Query.php");
   require_once("../classes/History_Query.php");
-  require_once("../lib/html_lib.php");
+  require_once("../lib/HTML.php");
 
   $style = '<link rel="stylesheet" type="text/css" href="../css/style.css" />' . "\n";
   $style .= '<style type="text/css"><!--/*--><![CDATA[/*<!--*/' . "body {background: #fff; border: 0; padding: 0; }" . "/*]]>*/--></style>\n";
@@ -42,7 +42,7 @@
     include_once("../shared/xhtml_start.php");
     echo $style;
     echo "</head><body>\n";
-    showMessage(_("No patient selected."), OPEN_MSG_ERROR);
+    HTML::message(_("No patient selected."), OPEN_MSG_ERROR);
     echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
     echo "</body></html>\n";
     exit();
@@ -76,7 +76,7 @@
     include_once("../shared/xhtml_start.php");
     echo $style;
     echo "</head><body>\n";
-    showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
+    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
     echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
     echo "</body></html>\n";
     exit();

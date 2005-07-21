@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.21 2005/06/21 18:29:46 jact Exp $
+ * $Id: header.php,v 1.22 2005/07/21 16:57:13 jact Exp $
  */
 
 /**
@@ -22,7 +22,7 @@
     exit();
   }
 
-  require_once("../lib/html_lib.php");
+  require_once("../lib/HTML.php");
 
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
@@ -215,6 +215,6 @@
 <?php
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    showMessage(_("This is a demo version"), OPEN_MSG_INFO);
+    HTML::message(_("This is a demo version"), OPEN_MSG_INFO);
   }
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.13 2005/07/20 20:24:33 jact Exp $
+ * $Id: theme_list.php,v 1.14 2005/07/21 16:55:57 jact Exp $
  */
 
 /**
@@ -54,7 +54,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && !empty($info))
   {
-    showMessage(sprintf(_("Theme, %s, has been added."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Theme, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && !empty($info))
   {
-    showMessage(sprintf(_("Theme, %s, has been updated."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Theme, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -70,7 +70,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Theme, %s, has been deleted."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Theme, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -78,7 +78,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["file"]) && !empty($info))
   {
-    showMessage(sprintf(_("Filename of theme, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Filename of theme, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
   $thead = array(
@@ -101,7 +101,7 @@
 
 <form method="post" action="../admin/theme_use.php">
   <div>
-<?php showTable($thead, $tbody, null, $options); ?>
+<?php HTML::table($thead, $tbody, null, $options); ?>
   </div>
 </form>
 
@@ -142,7 +142,7 @@ function previewTheme(key)
   if ($numRows == 0)
   {
     $themeQ->close();
-    showMessage(_("No results found."), OPEN_MSG_INFO);
+    HTML::message(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -218,13 +218,13 @@ function previewTheme(key)
   $themeQ->freeResult();
   $themeQ->close();
 
-  showTable($thead, $tbody, null);
+  HTML::table($thead, $tbody, null);
 
   unset($themeQ);
   unset($theme);
 
-  showMessage('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
-  showMessage('** ' . _("Note: The functions edit and delete are not available on the application themes."));
+  HTML::message('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
+  HTML::message('** ' . _("Note: The functions edit and delete are not available on the application themes."));
 
   require_once("../shared/footer.php");
 ?>

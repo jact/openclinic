@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_view.php,v 1.6 2005/07/19 19:51:13 jact Exp $
+ * $Id: history_family_view.php,v 1.7 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -65,7 +65,7 @@
     $historyQ->close();
     include_once("../shared/header.php");
 
-    showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
+    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
     include_once("../shared/footer.php");
     exit();

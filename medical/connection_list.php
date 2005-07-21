@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.12 2005/07/20 20:25:24 jact Exp $
+ * $Id: connection_list.php,v 1.13 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -76,7 +76,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]))
   {
-    showMessage(_("Connection problems have been added."), OPEN_MSG_INFO);
+    HTML::message(_("Connection problems have been added."), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Connection with medical problem, %s, has been deleted."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Connection with medical problem, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
@@ -120,7 +120,7 @@
 
   if (count($connArray) == 0)
   {
-    showMessage(_("No connections defined for this medical problem."), OPEN_MSG_INFO);
+    HTML::message(_("No connections defined for this medical problem."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -178,7 +178,7 @@
   unset($problemQ);
   unset($problem);
 
-  showTable($thead, $tbody, null);
+  HTML::table($thead, $tbody, null);
 
   require_once("../shared/footer.php");
 ?>

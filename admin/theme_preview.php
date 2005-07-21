@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.19 2005/07/19 19:50:04 jact Exp $
+ * $Id: theme_preview.php,v 1.20 2005/07/21 16:55:57 jact Exp $
  */
 
 /**
@@ -268,13 +268,13 @@
     htmlInputButton("sample_button", _("Sample Button"), "button")
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 
-  showMessage(_("Sample Error"), OPEN_MSG_ERROR);
+  HTML::message(_("Sample Error"), OPEN_MSG_ERROR);
 
-  showMessage(_("Sample Info"), OPEN_MSG_INFO);
+  HTML::message(_("Sample Info"), OPEN_MSG_INFO);
 
-  showMessage(_("Sample Warning"));
+  HTML::message(_("Sample Warning"));
 
   require_once("../shared/footer.php");
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_form.php,v 1.5 2004/07/31 19:02:33 jact Exp $
+ * $Id: patient_search_form.php,v 1.6 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -56,7 +56,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && isset($_GET["info"]))
   {
-    showMessage(sprintf(_("Patient, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Patient, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
 ?>
 
@@ -71,7 +71,7 @@
 </form>
 
 <?php
-  showMessage('* ' . _("Note: Empty search to see all results."));
+  HTML::message('* ' . _("Note: Empty search to see all results."));
 
   require_once("../shared/footer.php");
 ?>

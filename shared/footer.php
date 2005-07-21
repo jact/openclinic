@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.18 2005/07/21 16:01:19 jact Exp $
+ * $Id: footer.php,v 1.19 2005/07/21 16:57:13 jact Exp $
  */
 
 /**
@@ -75,7 +75,7 @@
 <?php
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    showMessage(_("This is a demo version"), OPEN_MSG_INFO);
+    HTML::message(_("This is a demo version"), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////

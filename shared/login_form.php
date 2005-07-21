@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.9 2005/07/21 16:01:20 jact Exp $
+ * $Id: login_form.php,v 1.10 2005/07/21 16:57:13 jact Exp $
  */
 
 /**
@@ -55,7 +55,7 @@
   if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION["loginAttempts"])
       && $_SESSION["loginAttempts"] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
   {
-    showMessage(_("Last attempt to type correct password before suspend this user account."));
+    HTML::message(_("Last attempt to type correct password before suspend this user account."));
   }
 ?>
 
@@ -110,13 +110,13 @@ function md5Login(f)
     'tfoot' => array('align' => 'center')
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 ?>
   </div>
 </form>
 
 <?php
-  showMessage(_("You must have cookies enabled to access your account."));
+  HTML::message(_("You must have cookies enabled to access your account."));
 
   //Error::debug($_SESSION, "session variables:", true);
 

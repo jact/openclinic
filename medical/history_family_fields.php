@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_fields.php,v 1.6 2005/06/21 18:24:21 jact Exp $
+ * $Id: history_family_fields.php,v 1.7 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -58,5 +58,5 @@
     'tfoot' => array('align' => 'center')
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 ?>

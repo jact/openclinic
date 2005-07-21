@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.12 2005/07/21 15:59:15 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.13 2005/07/21 16:55:57 jact Exp $
  */
 
 /**
@@ -70,7 +70,7 @@
       $userQ->close();
       include_once("../shared/header.php");
 
-      showMessage(_("That user does not exist."), OPEN_MSG_ERROR);
+      HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
 
       include_once("../shared/footer.php");
       exit();
@@ -162,7 +162,7 @@
     'tfoot' => array('align' => 'center')
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 ?>
   </div>
 </form>

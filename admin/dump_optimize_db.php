@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_optimize_db.php,v 1.7 2005/07/20 21:12:50 jact Exp $
+ * $Id: dump_optimize_db.php,v 1.8 2005/07/21 16:55:56 jact Exp $
  */
 
 /**
@@ -68,7 +68,7 @@
   if ( !$numTables )
   {
     $auxConn->close();
-    showMessage(_("Database is empty."), OPEN_MSG_ERROR);
+    HTML::message(_("Database is empty."), OPEN_MSG_ERROR);
     include_once("../shared/footer.php");
     exit();
   }
@@ -141,13 +141,13 @@
   unset($rows);
   unset($row);
 
-  showTable($thead, $tbody, null, $options);
+  HTML::table($thead, $tbody, null, $options);
 
   $totalGain = round($totalGain, 3);
   echo '<h4>' . _("Optimization Results") . ":</h4>\n";
 
-  showMessage(sprintf(_("Total Database Size: %d KB"), $totalAll), OPEN_MSG_INFO);
-  showMessage(sprintf(_("Total Space Saved: %d KB"), $totalGain), OPEN_MSG_INFO);
+  HTML::message(sprintf(_("Total Database Size: %d KB"), $totalAll), OPEN_MSG_INFO);
+  HTML::message(sprintf(_("Total Space Saved: %d KB"), $totalGain), OPEN_MSG_INFO);
 
   echo '<p><a href="../admin/dump_view_form.php">';
   echo _("Back return");

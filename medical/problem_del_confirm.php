@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del_confirm.php,v 1.6 2005/07/20 20:25:24 jact Exp $
+ * $Id: problem_del_confirm.php,v 1.7 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -74,7 +74,7 @@
 <form method="post" action="../medical/problem_del.php">
   <h3><?php echo _("Delete Medical Problem"); ?></h3>
 
-  <?php showMessage(sprintf(_("Are you sure you want to delete medical problem, %s, from list?"), $wording)); ?>
+  <?php HTML::message(sprintf(_("Are you sure you want to delete medical problem, %s, from list?"), $wording)); ?>
 
   <p>
     <?php

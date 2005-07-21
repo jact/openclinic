@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new_form.php,v 1.7 2005/07/21 16:00:48 jact Exp $
+ * $Id: problem_new_form.php,v 1.8 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -79,12 +79,12 @@
 
   if ( !showPatientHeader($idPatient) )
   {
-    showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
+    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
     include_once("../shared/footer.php");
     exit();
   }
-  echo "<br />\n"; // should be deleted
+  echo "<br />\n"; // @fixme should be deleted
 
   //Error::debug($postVars);
 
@@ -105,7 +105,7 @@
 </form>
 
 <?php
-  showMessage('* ' . _("Note: The fields with * are required."));
+  HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");
 ?>

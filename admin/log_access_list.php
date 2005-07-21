@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.12 2005/07/20 20:53:32 jact Exp $
+ * $Id: log_access_list.php,v 1.13 2005/07/21 16:55:57 jact Exp $
  */
 
 /**
@@ -80,7 +80,7 @@
   if ($total == 0)
   {
     $accessQ->close();
-    showMessage(_("No logs in this date."), OPEN_MSG_INFO);
+    HTML::message(_("No logs in this date."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -126,7 +126,7 @@
   unset($access);
   unset($profiles);
 
-  showTable($thead, $tbody, null, $options);
+  HTML::table($thead, $tbody, null, $options);
 
   echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php') . '">';
   echo _("Back return") . "</a></p>\n";

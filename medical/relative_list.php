@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.13 2005/07/20 20:25:24 jact Exp $
+ * $Id: relative_list.php,v 1.14 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -97,7 +97,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]))
   {
-    showMessage(_("Relatives have been added."), OPEN_MSG_INFO);
+    HTML::message(_("Relatives have been added."), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -105,7 +105,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Relative, %s, has been deleted."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Relative, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
@@ -113,7 +113,7 @@
     $title = _("Search Relatives to add to list");
 ?>
 
-<p>&nbsp;</p>
+<p>&nbsp;</p> <!-- // @fixme should be deleted -->
 
 <form method="post" action="../medical/relative_search.php">
   <div>
@@ -126,12 +126,12 @@
 </form>
 
 <?php
-    showMessage('* ' . _("Note: Empty search to see all results."));
+    HTML::message('* ' . _("Note: Empty search to see all results."));
   } // end if
 
   if (count($relArray) == 0)
   {
-    showMessage(_("No relatives defined for this patient."), OPEN_MSG_INFO);
+    HTML::message(_("No relatives defined for this patient."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -197,7 +197,7 @@
   unset($patQ);
   unset($pat);
 
-  showTable($thead, $tbody);
+  HTML::table($thead, $tbody);
 
   require_once("../shared/footer.php");
 ?>

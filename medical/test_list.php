@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.12 2005/07/20 20:25:24 jact Exp $
+ * $Id: test_list.php,v 1.13 2005/07/21 16:56:59 jact Exp $
  */
 
 /**
@@ -76,7 +76,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && !empty($info))
   {
-    showMessage(sprintf(_("Medical test, %s, has been added."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Medical test, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -84,7 +84,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && !empty($info))
   {
-    showMessage(sprintf(_("Medical test, %s, has been updated."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Medical test, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -92,7 +92,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Medical test, %s, has been deleted."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Medical test, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   if ($hasMedicalAdminAuth)
@@ -118,7 +118,7 @@
   if ($count == 0)
   {
     $testQ->close();
-    showMessage(_("No medical tests defined for this medical problem."), OPEN_MSG_INFO);
+    HTML::message(_("No medical tests defined for this medical problem."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -161,7 +161,7 @@
   unset($testQ);
   unset($test);
 
-  showTable($thead, $tbody);
+  HTML::table($thead, $tbody);
 
   require_once("../shared/footer.php");
 ?>

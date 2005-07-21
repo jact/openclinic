@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.14 2005/07/21 15:59:15 jact Exp $
+ * $Id: staff_list.php,v 1.15 2005/07/21 16:55:57 jact Exp $
  */
 
 /**
@@ -61,7 +61,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["added"]) && !empty($info))
   {
-    showMessage(sprintf(_("Staff member, %s, has been added."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Staff member, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && !empty($info))
   {
-    showMessage(sprintf(_("Staff member, %s, has been updated."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Staff member, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -77,7 +77,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["deleted"]) && !empty($info))
   {
-    showMessage(sprintf(_("Staff member, %s, has been deleted."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Staff member, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -85,7 +85,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["login"]) && !empty($info))
   {
-    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
   if ( !empty($memberType) )
@@ -164,7 +164,7 @@
   if ( !$numRows )
   {
     $staffQ->close();
-    showMessage(_("No results found."), OPEN_MSG_INFO);
+    HTML::message(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -251,10 +251,10 @@
   unset($staffQ);
   unset($staff);
 
-  showTable($thead, $tbody, null);
+  HTML::table($thead, $tbody, null);
 
-  showMessage('* ' . _("Note: To the create user function must have a correct login."));
-  showMessage('** ' . _("Note: The del function will not be applicated to the session user."));
+  HTML::message('* ' . _("Note: To the create user function must have a correct login."));
+  HTML::message('** ' . _("Note: The del function will not be applicated to the session user."));
 
   require_once("../shared/footer.php");
 ?>

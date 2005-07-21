@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_fields.php,v 1.8 2005/06/21 18:23:53 jact Exp $
+ * $Id: test_fields.php,v 1.9 2005/07/21 16:56:59 jact Exp $
  */
 
 /**
@@ -52,7 +52,7 @@
 
   if (isset($pageErrors["path_filename"]))
   {
-    $row .= htmlMessage($pageErrors["path_filename"], OPEN_MSG_ERROR);
+    $row .= HTML::strMessage($pageErrors["path_filename"], OPEN_MSG_ERROR);
   }
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -67,5 +67,5 @@
     'tfoot' => array('align' => 'center')
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 ?>

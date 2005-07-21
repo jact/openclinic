@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.15 2005/07/20 20:54:05 jact Exp $
+ * $Id: problem_search.php,v 1.16 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -109,7 +109,7 @@
   if ($problemQ->getRowCount() == 0)
   {
     $problemQ->close();
-    showMessage(_("No results found."), OPEN_MSG_INFO);
+    HTML::message(_("No results found."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -277,7 +277,7 @@ function changePage(page)
   unset($recordset);
   unset($array);
 
-  showTable($thead, $tbody, null, $options);
+  HTML::table($thead, $tbody, null, $options);
 
   showResultPages($currentPageNmbr, $pageCount);
 

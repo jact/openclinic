@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_fields.php,v 1.9 2005/07/21 15:59:15 jact Exp $
+ * $Id: staff_fields.php,v 1.10 2005/07/21 16:55:57 jact Exp $
  */
 
 /**
@@ -91,5 +91,5 @@
     'tfoot' => array('align' => 'center')
   );
 
-  showTable($thead, $tbody, $tfoot, $options);
+  HTML::table($thead, $tbody, $tfoot, $options);
 ?>

@@ -2,23 +2,23 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: view_source.php,v 1.5 2004/11/04 11:30:23 jact Exp $
+ * $Id: view_source.php,v 1.6 2005/07/21 16:57:13 jact Exp $
  */
 
 /**
  * view_source.php
- ********************************************************************
+ *
  * View source code of a file screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/html_lib.php");
+  require_once("../lib/HTML.php");
 
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
@@ -66,14 +66,14 @@ code {
     }
     else
     {
-      showMessage(_("No file found."), OPEN_MSG_ERROR);
+      HTML::message(_("No file found."), OPEN_MSG_ERROR);
 
       echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
     }
   }
   else
   {
-    showMessage(sprintf(_("You are not authorized to use %s tab."), _("Admin"))); // maybe change
+    HTML::message(sprintf(_("You are not authorized to use %s tab."), _("Admin"))); // maybe change
   }
 ?>
 </body>

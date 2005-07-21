@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit_form.php,v 1.9 2005/07/19 19:51:14 jact Exp $
+ * $Id: test_edit_form.php,v 1.10 2005/07/21 16:56:59 jact Exp $
  */
 
 /**
@@ -69,7 +69,7 @@
     $testQ->close();
     include_once("../shared/header.php");
 
-    showMessage(_("That medical test does not exist"), OPEN_MSG_ERROR);
+    HTML::message(_("That medical test does not exist"), OPEN_MSG_ERROR);
 
     include_once("../shared/footer.php");
     exit();
@@ -136,7 +136,7 @@
 </form>
 
 <?php
-  showMessage('* ' . _("Note: The fields with * are required."));
+  HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");
 ?>

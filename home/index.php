@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.8 2005/07/20 20:24:57 jact Exp $
+ * $Id: index.php,v 1.9 2005/07/21 16:56:13 jact Exp $
  */
 
 /**
@@ -43,7 +43,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["updated"]) && !empty($info))
   {
-    showMessage(sprintf(_("User, %s, has been updated."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("User, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
   ////////////////////////////////////////////////////////////////////
@@ -51,7 +51,7 @@
   ////////////////////////////////////////////////////////////////////
   if (isset($_GET["login"]) && !empty($info))
   {
-    showMessage(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
+    HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
   echo '<p>' . _("OpenClinic is an easy to use, open source, medical records system.") . "</p>\n";

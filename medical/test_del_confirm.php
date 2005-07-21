@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del_confirm.php,v 1.7 2005/07/20 20:25:24 jact Exp $
+ * $Id: test_del_confirm.php,v 1.8 2005/07/21 16:56:59 jact Exp $
  */
 
 /**
@@ -79,7 +79,7 @@
 <form method="post" action="../medical/test_del.php?key=<?php echo $idProblem; ?>&amp;test=<?php echo $idTest; ?>&amp;pat=<?php echo $idPatient; ?>&amp;file=<?php echo $file; ?>">
   <h3><?php echo $title; ?></h3>
 
-  <?php showMessage(sprintf(_("Are you sure you want to delete medical test, %s, from list?"), $file)); ?>
+  <?php HTML::message(sprintf(_("Are you sure you want to delete medical test, %s, from list?"), $file)); ?>
 
   <p>
     <?php

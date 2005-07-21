@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.9 2005/06/14 18:54:22 jact Exp $
+ * $Id: log_lib.php,v 1.10 2005/07/21 16:56:24 jact Exp $
  */
 
 /**
@@ -117,13 +117,13 @@ function showYearStats($table)
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    showTable($thead, $tbody, null, $options);
+    HTML::table($thead, $tbody, null, $options);
 
     $auxConn->freeResult();
   }
   else
   {
-    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
+    HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
   }
 
   $auxConn->close();
@@ -182,13 +182,13 @@ function showMonthStats($table, $year)
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    showTable($thead, $tbody, null, $options);
+    HTML::table($thead, $tbody, null, $options);
 
     $auxConn->freeResult();
   }
   else
   {
-    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
+    HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
   }
   $auxConn->close();
   unset($auxConn);
@@ -262,13 +262,13 @@ function showDailyStats($table, $year, $month)
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    showTable($thead, $tbody, null, $options);
+    HTML::table($thead, $tbody, null, $options);
 
     $auxConn->freeResult();
   }
   else
   {
-    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
+    HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
   }
 
   $auxConn->close();
@@ -349,13 +349,13 @@ function showHourlyStats($table, $year, $month, $day)
         $tbody[] = explode(OPEN_SEPARATOR, $row);
       }
     }
-    showTable($thead, $tbody, null, $options);
+    HTML::table($thead, $tbody, null, $options);
 
     $auxConn->freeResult();
   }
   else
   {
-    showMessage(_("There are not statistics"), OPEN_MSG_INFO);
+    HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
   }
 
   $auxConn->close();

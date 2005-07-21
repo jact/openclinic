@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.13 2004/10/16 14:52:27 jact Exp $
+ * $Id: index.php,v 1.14 2005/07/21 16:56:07 jact Exp $
  */
 
 /**
  * index.php
- ********************************************************************
+ *
  * Home page of documentation project
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   /*if (count($_GET) == 0 || !isset($_GET['tab']) || !isset($_GET['nav']))
@@ -26,7 +26,6 @@
   $tab = "doc";
 
   require_once("../shared/read_settings.php");
-  require_once("../lib/html_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
@@ -122,6 +121,6 @@
 
 <h3><?php echo _("Sample Help Page:"); ?></h3>
 
-<?php print_r($_GET); // debug ?>
+<?php Error::trace($_GET); // debug ?>
 
 <?php require_once("../shared/footer.php"); ?>

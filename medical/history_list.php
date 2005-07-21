@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_list.php,v 1.11 2005/07/20 20:54:05 jact Exp $
+ * $Id: history_list.php,v 1.12 2005/07/21 16:56:58 jact Exp $
  */
 
 /**
@@ -79,7 +79,7 @@
   if ( !showPatientHeader($idPatient) )
   {
     $problemQ->close();
-    showMessage(_("That patient does not exist."), OPEN_MSG_ERROR);
+    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
     include_once("../shared/footer.php");
     exit();
@@ -95,7 +95,7 @@
   if ($count == 0)
   {
     $problemQ->close();
-    showMessage(_("No closed medical problems defined for this patient."), OPEN_MSG_INFO);
+    HTML::message(_("No closed medical problems defined for this patient."), OPEN_MSG_INFO);
     include_once("../shared/footer.php");
     exit();
   }
@@ -150,7 +150,7 @@
   unset($problemQ);
   unset($problem);
 
-  showTable($thead, $tbody, null, $options);
+  HTML::table($thead, $tbody, null, $options);
 
   require_once("../shared/footer.php");
 ?>
