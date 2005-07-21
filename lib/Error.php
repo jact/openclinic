@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Error.php,v 1.2 2005/07/21 15:59:03 jact Exp $
+ * $Id: Error.php,v 1.3 2005/07/21 17:11:54 jact Exp $
  */
 
 /**
@@ -281,7 +281,7 @@ class Error
       return;
     }
 
-    trace($expression, isset($message) ? $message : "", isset($goOut) ? $goOut : false);
+    Error::trace($expression, isset($message) ? $message : "", isset($goOut) ? $goOut : false);
   }
 
   /**
