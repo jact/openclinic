@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: global_constants.php,v 1.11 2005/07/21 16:02:10 jact Exp $
+ * $Id: global_constants.php,v 1.12 2005/07/21 16:58:12 jact Exp $
  */
 
 /**
@@ -81,13 +81,6 @@
   define("OPEN_PROFILE_ADMINISTRATOR",  1);
   define("OPEN_PROFILE_ADMINISTRATIVE", 2);
   define("OPEN_PROFILE_DOCTOR",         3);
-
-  ////////////////////////////////////////////////////////////////////
-  // Messages constants:
-  ////////////////////////////////////////////////////////////////////
-  define("OPEN_MSG_INFO",    1);
-  define("OPEN_MSG_WARNING", 2);
-  define("OPEN_MSG_ERROR",   3);
 
 /**
  *
