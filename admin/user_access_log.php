@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.17 2005/07/21 16:55:57 jact Exp $
+ * $Id: user_access_log.php,v 1.18 2005/07/21 17:56:51 jact Exp $
  */
 
 /**
@@ -37,7 +37,7 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Access_Page_Query.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/search_lib.php");
+  require_once("../lib/Search.php");
   require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -101,7 +101,7 @@
     echo '<p><strong>' . sprintf(_("%d accesses."), $accessQ->getRowCount()) . "</strong></p>\n";
 
     $pageCount = $accessQ->getPageCount();
-    showResultPages($currentPageNmbr, $pageCount);
+    Search::pageLinks($currentPageNmbr, $pageCount);
 ?>
 
 <!-- JavaScript to post back to this page -->
@@ -164,7 +164,7 @@ function changePage(page)
 
     HTML::table($thead, $tbody, null, $options);
 
-    showResultPages($currentPageNmbr, $pageCount);
+    Search::pageLinks($currentPageNmbr, $pageCount);
   } // end if-else
   unset($accessQ);
   unset($access);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.15 2005/07/21 16:56:58 jact Exp $
+ * $Id: relative_search.php,v 1.16 2005/07/21 17:57:02 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Patient_Page_Query.php");
   require_once("../lib/input_lib.php");
-  require_once("../lib/search_lib.php");
+  require_once("../lib/Search.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
@@ -149,7 +149,7 @@ function changePage(page)
   echo '<p><strong>' . sprintf(_("%d matches found."), $patQ->getRowCount()) . "</strong></p>\n";
 
   $pageCount = $patQ->getPageCount();
-  showResultPages($currentPageNmbr, $pageCount);
+  Search::pageLinks($currentPageNmbr, $pageCount);
 
   $val = "";
   switch ($_POST["search_type"])
@@ -273,7 +273,7 @@ function changePage(page)
 </form>
 
 <?php
-  showResultPages($currentPageNmbr, $pageCount);
+  Search::pageLinks($currentPageNmbr, $pageCount);
 
   require_once("../shared/footer.php");
 ?>
