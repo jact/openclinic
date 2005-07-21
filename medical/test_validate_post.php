@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_validate_post.php,v 1.6 2005/06/13 19:03:51 jact Exp $
+ * $Id: test_validate_post.php,v 1.7 2005/07/21 17:42:01 jact Exp $
  */
 
 /**
@@ -23,7 +23,7 @@
     exit();
   }
 
-  require_once("../lib/file_lib.php");
+  require_once("../lib/File.php");
 
   $test->setIdProblem($_POST["id_problem"]);
   $_POST["id_problem"] = $test->getIdProblem();
@@ -45,7 +45,7 @@
     // upload file
     if (trim($_FILES['path_filename']['name']))
     {
-      if (uploadFile($_FILES['path_filename'], dirname(realpath(__FILE__)) . '/../tests'))
+      if (File::upload($_FILES['path_filename'], dirname(realpath(__FILE__)) . '/../tests'))
       {
         $test->setPathFilename('../tests/' . $_FILES['path_filename']['name']);
       }

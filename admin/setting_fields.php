@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.14 2005/07/21 16:55:57 jact Exp $
+ * $Id: setting_fields.php,v 1.15 2005/07/21 17:41:51 jact Exp $
  */
 
 /**
@@ -22,7 +22,7 @@
     exit();
   }
 
-  require_once("../lib/file_lib.php");
+  require_once("../lib/File.php");
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
@@ -46,7 +46,7 @@
 
   $dir = "../images/";
   $ext = array("bmp", "gif", "jpe", "jpeg", "jpg", "png");
-  $array = getFiles($dir, false, $ext);
+  $array = File::getDirContent($dir, false, $ext);
 
   $row .= htmlSelectArray("clinic_image_url", $array, basename($postVars["clinic_image_url"]));
   unset($array);
