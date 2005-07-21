@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.8 2005/07/20 20:24:33 jact Exp $
+ * $Id: dump_process.php,v 1.9 2005/07/21 17:24:30 jact Exp $
  */
 
 /**
@@ -118,7 +118,7 @@
   // Builds the dump
   ////////////////////////////////////////////////////////////////////
   // Gets the number of tables if a dump of a database has been required
-  if (count($_POST['table_select']) != 1)
+  if ( !isset($_POST['table_select']) || count($_POST['table_select']) != 1 )
   {
     $auxConn = new DbConnection();
     $auxConn->connect();
@@ -362,7 +362,7 @@
   ////////////////////////////////////////////////////////////////////
   // "Displays" the dump...
   ////////////////////////////////////////////////////////////////////
-  echo DLIB_htmlFormat($dumpBuffer, $_POST['as_file']);
+  echo DLIB_htmlFormat($dumpBuffer, isset($_POST['as_file']) ? $_POST['as_file'] : false);
 
   ////////////////////////////////////////////////////////////////////
   // Close the html tags and add the footers in dump is displayed on screen

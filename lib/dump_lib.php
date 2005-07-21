@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_lib.php,v 1.8 2004/10/18 17:24:03 jact Exp $
+ * $Id: dump_lib.php,v 1.9 2005/07/21 17:24:24 jact Exp $
  */
 
 /**
@@ -189,9 +189,9 @@ if ( !defined('DLIB_INCLUDED') )
         $tmpRes    = $localConn->fetchRow(MYSQL_NUM);
         $pos       = strpos($tmpRes[1], ' (');
         $tmpRes[1] = substr($tmpRes[1], 0, 13)
-                   . (($postVars['use_backquotes']) ? DLIB_backquote($tmpRes[0]) : $tmpRes[0])
+                   . ((isset($postVars['use_backquotes']) && $postVars['use_backquotes']) ? DLIB_backquote($tmpRes[0]) : $tmpRes[0])
                    . substr($tmpRes[1], $pos);
-        $schemaCreate .= str_replace("\n", $crlf, DLIB_htmlFormat($tmpRes[1], $postVars['as_file']));
+        $schemaCreate .= str_replace("\n", $crlf, DLIB_htmlFormat($tmpRes[1], isset($postVars['as_file']) ? $postVars['as_file'] : false));
       }
       //$localConn->close(); // don't remove the comment mark
       return $schemaCreate;
@@ -344,7 +344,7 @@ if ( !defined('DLIB_INCLUDED') )
     }
     else
     {
-      $schemaInsert = 'INSERT INTO ' . DLIB_backquote(DLIB_htmlFormat($table, $postVars['as_file']), $postVars['use_backquotes'])
+      $schemaInsert = 'INSERT INTO ' . DLIB_backquote(DLIB_htmlFormat($table, isset($postVars['as_file']) ? $postVars['as_file'] : false), isset($postVars['use_backquotes']) ? $postVars['use_backquotes'] : false)
                      . ' VALUES (';
     }
 
