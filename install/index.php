@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.15 2005/07/21 16:00:33 jact Exp $
+ * $Id: index.php,v 1.16 2005/07/28 17:46:48 jact Exp $
  */
 
 /**
@@ -21,7 +21,7 @@
 
   require_once("../install/header.php"); // i18n l10n
   require_once("../install/parse_sql_file.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Error.php");
   require_once("../lib/Check.php");
 
@@ -47,7 +47,7 @@
 
     if ( !parseSQLFile($tmpFile, $table, isset($_POST['drop'])) )
     {
-      echo '<p class="error">' . _("Parse failed.") . "</p>\n";
+      HTML::message(_("Parse failed."), OPEN_MSG_ERROR);
       echo '<p><a href="' . $_SERVER['PHP_SELF'] . '">' . _("Back to installation main page") . "</a></p>\n";
       include_once("../install/footer.php");
       unlink($tmpFile);
@@ -55,7 +55,7 @@
     }
     else
     {
-      echo '<p>' . _("File installed correctly.") . "</p>\n";
+      HTML::message(_("File installed correctly."), OPEN_MSG_INFO);
       echo '<p><a href="../home/index.php">' . _("Go to OpenClinic") . "</a></p>\n";
       echo "<hr />\n";
       unlink($tmpFile);
@@ -104,8 +104,8 @@
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <div>
         <?php
-          showInputHidden("sql_file", $_POST['sql_file']);
-          showInputHidden("sql_query", $sqlQuery);
+          Form::hidden("sql_file", "sql_file", Check::safeText($_POST['sql_file']));
+          Form::hidden("sql_query", "sql_query", $sqlQuery);
         ?>
       </div>
 
@@ -113,21 +113,19 @@
         $filename = explode("-", $_FILES['sql_file']['name']);
         if (in_array($filename[0], $tables))
         {
-      ?>
-      <p>
-        <?php showCheckBox("drop", "drop", "true"); ?>
-        <label for="drop"><?php echo _("Add 'DROP table' sentence"); ?></label>
-      </p>
-      <?php
-      } //end if
+          echo '<p>';
+          Form::checkBox("drop", "drop", "true");
+          Form::label("drop", _("Add 'DROP table' sentence"));
+          echo "</p>\n";
+        }
       ?>
 
-      <div>
+      <p>
         <?php
-          showInputButton("install_file", _("Install file"));
-          showInputButton("cancel_install", _("Cancel"), "button", 'onclick="parent.location=\'./index.php\'"');
+          Form::button("install_file", "install_file", _("Install file"));
+          Form::button("cancel_install", "cancel_install", _("Cancel"), "button", 'onclick="parent.location=\'./index.php\'"');
         ?>
-      </div>
+      </p>
     </form>
 <?php
     include_once("../install/footer.php");
@@ -190,12 +188,12 @@
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data" onsubmit="this.secret_file.value = this.sql_file.value; return true;">
   <div>
-    <?php showInputHidden("secret_file"); ?>
+    <?php Form::hidden("secret_file", "secret_file"); ?>
   </div>
 
-  <p><?php showInputFile("sql_file", "", 50); ?></p>
+  <p><?php Form::file("sql_file", "sql_file", "", 50); ?></p>
 
-  <p><?php showInputButton("view_file", _("View file")); ?></p>
+  <p><?php Form::button("view_file", "view_file", _("View file")); ?></p>
 </form>
 
 <hr />

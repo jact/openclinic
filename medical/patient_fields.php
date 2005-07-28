@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.17 2005/07/21 16:56:58 jact Exp $
+ * $Id: patient_fields.php,v 1.18 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -34,75 +34,75 @@
 
   //$tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="nif">' . _("Tax Identification Number (TIN)") . ":" . "</label>\n";
+  $row = Form::strLabel("nif", _("Tax Identification Number (TIN)") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("nif", 20, 20,
+  $row .= Form::strText("nif", "nif", 20, 20,
     isset($postVars["nif"]) ? $postVars["nif"] : null,
     isset($pageErrors["nif"]) ? $pageErrors["nif"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="first_name" class="requiredField">' . _("First Name") . ":" . "</label>\n";
+  $row = Form::strLabel("first_name", _("First Name") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("first_name", 25, 25, $postVars["first_name"], $pageErrors["first_name"]);
+  $row .= Form::strText("first_name", "first_name", 25, 25, $postVars["first_name"], $pageErrors["first_name"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="surname1" class="requiredField">' . _("Surname 1") . ":" . "</label>\n";
+  $row = Form::strLabel("surname1", _("Surname 1") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("surname1", 30, 30, $postVars["surname1"], $pageErrors["surname1"]);
+  $row .= Form::strText("surname1", "surname1", 30, 30, $postVars["surname1"], $pageErrors["surname1"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="surname2" class="requiredField">' . _("Surname 2") . ":" . "</label>\n";
+  $row = Form::strLabel("surname2", _("Surname 2") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("surname2", 30, 30, $postVars["surname2"], $pageErrors["surname2"]);
+  $row .= Form::strText("surname2", "surname2", 30, 30, $postVars["surname2"], $pageErrors["surname2"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="address">' . _("Address") . ":" . "</label>\n";
+  $row = Form::strLabel("address", _("Address") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("address", 3, 30, $postVars["address"]);
+  $row .= Form::strTextArea("address", "address", 3, 30, $postVars["address"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="phone_contact">' . _("Phone Contact") . ":" . "</label>\n";
+  $row = Form::strLabel("phone_contact", _("Phone Contact") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("phone_contact", 3, 30, $postVars["phone_contact"]);
+  $row .= Form::strTextArea("phone_contact", "phone_contact", 3, 30, $postVars["phone_contact"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="sex">' . _("Sex") . ":" . "</label>\n";
+  $row = Form::strLabel("sex", _("Sex") . ":");
   $row .= OPEN_SEPARATOR;
 
   $array = null;
   $array['V'] = _("Male");
   $array['H'] = _("Female");
 
-  $row .= htmlSelectArray("sex", $array, $postVars["sex"]);
+  $row .= Form::strSelect("sex", "sex", $array, $postVars["sex"]);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="race">' . _("Race") . ":" . "</label>\n";
+  $row = Form::strLabel("race", _("Race") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("race", 25, 25,
+  $row .= Form::strText("race", "race", 25, 25,
     isset($postVars["race"]) ? $postVars["race"] : null,
     isset($pageErrors["race"]) ? $pageErrors["race"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="day">' . _("Birth Date") . ":" . "</label>\n";
+  $row = Form::strLabel("year", _("Birth Date") . ":");
   $row .= OPEN_SEPARATOR;
 
   $aux = explode("-", ( !empty($postVars["birth_date"]) ) ? $postVars["birth_date"] : '0000-00-00');
-  $row .= htmlInputText("year", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
+  $row .= Form::strText("year", "year", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
   $row .= " - ";
-  $row .= htmlInputText("month", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
+  $row .= Form::strText("month", "month", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
   $row .= " - ";
-  $row .= htmlInputText("day", 2, 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
+  $row .= Form::strText("day", "day", 2, 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
   $row .= " " . _("(yyyy-mm-dd)");
   unset($aux);
 
@@ -113,24 +113,24 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="birth_place">' . _("Birth Place") . ":" . "</label>\n";
+  $row = Form::strLabel("birth_place", _("Birth Place") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("birth_place", 40, 40,
+  $row .= Form::strText("birth_place", "birth_place", 40, 40,
     isset($postVars["birth_place"]) ? $postVars["birth_place"] : null,
     isset($pageErrors["birth_place"]) ? $pageErrors["birth_place"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="dday">' . _("Decease Date") . ":" . "</label>\n";
+  $row = Form::strLabel("dyear", _("Decease Date") . ":");
   $row .= OPEN_SEPARATOR;
 
   $aux = explode("-", ( !empty($postVars["decease_date"]) ) ? $postVars["decease_date"] : '0000-00-00');
-  $row .= htmlInputText("dyear", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
+  $row .= Form::strText("dyear", "dyear", 4, 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
   $row .= " - ";
-  $row .= htmlInputText("dmonth", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
+  $row .= Form::strText("dmonth", "dmonth", 2, 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
   $row .= " - ";
-  $row .= htmlInputText("dday", 2, 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
+  $row .= Form::strText("dday", "dday", 2, 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
   $row .= " " . _("(yyyy-mm-dd)");
   unset($aux);
 
@@ -141,52 +141,52 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="nts">' . _("Sanitary Card Number (SCN)") . ":" . "</label>\n";
+  $row = Form::strLabel("nts", _("Sanitary Card Number (SCN)") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("nts", 30, 30,
+  $row .= Form::strText("nts", "nts", 30, 30,
     isset($postVars["nts"]) ? $postVars["nts"] : null,
     isset($pageErrors["nts"]) ? $pageErrors["nts"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="nss">' . _("National Health Service Number (NHSN)") . ":" . "</label>\n";
+  $row = Form::strLabel("nss", _("National Health Service Number (NHSN)") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("nss", 30, 30,
+  $row .= Form::strText("nss", "nss", 30, 30,
     isset($postVars["nss"]) ? $postVars["nss"] : null,
     isset($pageErrors["nss"]) ? $pageErrors["nss"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="family_situation">' . _("Family Situation") . ":" . "</label>\n";
+  $row = Form::strLabel("family_situation", _("Family Situation") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("family_situation", 3, 30, $postVars["family_situation"]);
+  $row .= Form::strTextArea("family_situation", "family_situation", 3, 30, $postVars["family_situation"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="labour_situation">' . _("Labour Situation") . ":" . "</label>\n";
+  $row = Form::strLabel("labour_situation", _("Labour Situation") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("labour_situation", 3, 30, $postVars["labour_situation"]);
+  $row .= Form::strTextArea("labour_situation", "labour_situation", 3, 30, $postVars["labour_situation"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="education">' . _("Education") . ":" . "</label>\n";
+  $row = Form::strLabel("education", _("Education") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("education", 3, 30, $postVars["education"]);
+  $row .= Form::strTextArea("education", "education", 3, 30, $postVars["education"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="insurance_company">' . _("Insurance Company") . ":" . "</label>\n";
+  $row = Form::strLabel("insurance_company", _("Insurance Company") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("insurance_company", 30, 30,
+  $row .= Form::strText("insurance_company", "insurance_company", 30, 30,
     isset($postVars["insurance_company"]) ? $postVars["insurance_company"] : null,
     isset($pageErrors["insurance_company"]) ? $pageErrors["insurance_company"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="id_member">' . _("Doctor you are assigned to") . ":" . "</label>\n";
+  $row = Form::strLabel("id_member", _("Doctor you are assigned to") . ":");
   $row .= OPEN_SEPARATOR;
 
   $staffQ = new Staff_Query();
@@ -216,14 +216,14 @@
   $staffQ->close();
   unset($staffQ);
 
-  $row .= htmlSelectArray("id_member", $array, $postVars["id_member"]);
+  $row .= Form::strSelect("id_member", "id_member", $array, $postVars["id_member"]);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
-    htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", "button1", _("Submit"))
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
   $options = array(

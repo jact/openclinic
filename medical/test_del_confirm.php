@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del_confirm.php,v 1.8 2005/07/21 16:56:59 jact Exp $
+ * $Id: test_del_confirm.php,v 1.9 2005/07/28 17:47:34 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
-  echo "<br />\n"; // @todo: should be deleted
+  echo "<br />\n"; // @fixme should be deleted
 ?>
 
 <form method="post" action="../medical/test_del.php?key=<?php echo $idProblem; ?>&amp;test=<?php echo $idTest; ?>&amp;pat=<?php echo $idPatient; ?>&amp;file=<?php echo $file; ?>">
@@ -83,13 +83,13 @@
 
   <p>
     <?php
-      showInputHidden("id_problem", $idProblem);
-      showInputHidden("id_test", $idTest);
-      showInputHidden("id_patient", $idPatient);
-      showInputHidden("file", $file);
+      Form::hidden("id_problem", "id_problem", $idProblem);
+      Form::hidden("id_test", "id_test", $idTest);
+      Form::hidden("id_patient", "id_patient", $idPatient);
+      Form::hidden("file", "file", $file);
 
-      showInputButton("delete", _("Delete"));
-      //showInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
+      Form::button("delete", "delete", _("Delete"));
+      //Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
     ?>
   </p>
 </form>

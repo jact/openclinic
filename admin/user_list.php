@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.15 2005/07/21 16:55:57 jact Exp $
+ * $Id: user_list.php,v 1.16 2005/07/28 17:46:28 jact Exp $
  */
 
 /**
@@ -25,7 +25,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/User_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -121,12 +121,9 @@
   }
   else
   {
-    $content = '<label for="id_member_login">';
-    $content .= _("Select a login to create a new user") . ": ";
-    $content .= "</label>\n";
-
-    $content .= htmlSelectArray("id_member_login", $array);
-    $content .= htmlInputButton("button1", _("Create"));
+    $content = Form::strLabel("id_member_login", _("Select a login to create a new user") . ": ");
+    $content .= Form::strSelect("id_member_login", "id_member_login", $array);
+    $content .= Form::strButton("button1", "button1", _("Create"));
   }
 
   $tbody = array(

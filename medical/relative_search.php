@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.16 2005/07/21 17:57:02 jact Exp $
+ * $Id: relative_search.php,v 1.17 2005/07/28 17:47:34 jact Exp $
  */
 
 /**
@@ -35,8 +35,9 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Patient_Page_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Search.php");
+  require_once("../lib/misc_lib.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving post vars and scrubbing the data
@@ -128,17 +129,17 @@ function changePage(page)
 <form method="post" action="../medical/relative_search.php">
   <div>
 <?php
-  showInputHidden("search_type", $_POST["search_type"]);
-  showInputHidden("search_text", $_POST["search_text"]);
-  showInputHidden("page", $currentPageNmbr);
-  showInputHidden("logical", $_POST["logical"]);
-  showInputHidden("limit", $_POST["limit"]);
-  showInputHidden("id_patient", $_POST["id_patient"]);
+  Form::hidden("search_type", "search_type", $searchType);
+  Form::hidden("search_text", "search_text", $searchText);
+  Form::hidden("page", "page", $currentPageNmbr);
+  Form::hidden("logical", "logical", $logical);
+  Form::hidden("limit", "limit", $limit);
+  Form::hidden("id_patient", "id_patient", $idPatient);
 
 /*  $n = count($_POST["check"]);
   for ($i = 0; $i < $n; $i++)
   {
-    showInputHidden(check[' . $i . '], $_POST["check"][$i]);
+    Form::hidden('check[' . $i . ']', 'check[' . $i . ']', $_POST["check"][$i]);
   }*/
 ?>
   </div>
@@ -245,7 +246,7 @@ function changePage(page)
   while ($pat = $patQ->fetch())
   {
     $row = $patQ->getCurrentRow() . '.';
-    $row .= '<input type="checkbox" name="check[]" value="' . $pat->getIdPatient() . '" />';
+    $row .= Form::strCheckBox(numberToAlphabet($patQ->getCurrentRow()), "check[]", $pat->getIdPatient());
     $row .= OPEN_SEPARATOR;
 
     $row .= $pat->getSurname1() . ' ' . $pat->getSurname2() . ' ' . $pat->getFirstName();

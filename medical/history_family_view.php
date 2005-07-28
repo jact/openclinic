@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_view.php,v 1.7 2005/07/21 16:56:58 jact Exp $
+ * $Id: history_family_view.php,v 1.8 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -34,7 +34,6 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
   require_once("../classes/History_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 

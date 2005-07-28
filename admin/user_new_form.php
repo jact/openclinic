@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.11 2005/07/21 16:55:57 jact Exp $
+ * $Id: user_new_form.php,v 1.12 2005/07/28 17:46:28 jact Exp $
  */
 
 /**
@@ -24,7 +24,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
   require_once("../lib/Check.php");
 
@@ -87,9 +87,9 @@
 <form method="post" action="../admin/user_new.php" onsubmit="return md5Login(this);">
   <div>
 <?php
-  showInputHidden("referer", "new"); // to user_validate_post.php
-  showInputHidden("id_member", $postVars["id_member"]);
-  showInputHidden("login", $postVars["login"]);
+  Form::hidden("referer", "referer", "new"); // to user_validate_post.php
+  Form::hidden("id_member", "id_member", $postVars["id_member"]);
+  Form::hidden("login", "login", $postVars["login"]);
 
   $action = "new";
   require_once("../admin/user_fields.php");

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.14 2005/07/21 16:55:57 jact Exp $
+ * $Id: theme_list.php,v 1.15 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -25,7 +25,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Theme_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -85,10 +85,10 @@
     _("Change Theme by default in application")
   );
 
-  $content = '<label for="id_theme">' . _("Choose a New Theme:") . "</label>\n";
+  $content = Form::strLabel("id_theme", _("Choose a New Theme:"));
 
-  $content .= htmlSelect("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
-  $content .= htmlInputButton("button1", _("Update"));
+  $content .= Form::strSelectTable("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
+  $content .= Form::strButton("button1", "button1", _("Update"));
 
   $tbody = array(
     0 => array($content)

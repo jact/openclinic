@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.15 2005/07/21 16:56:58 jact Exp $
+ * $Id: problem_fields.php,v 1.16 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -46,7 +46,7 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="id_member">' . _("Attending Physician") . ":" . "</label>\n";
+  $row = Form::strLabel("id_member", _("Attending Physician") . ":");
   $row .= OPEN_SEPARATOR;
 
   $staffQ = new Staff_Query();
@@ -76,62 +76,62 @@
   $staffQ->close();
   unset($staffQ);
 
-  $row .= htmlSelectArray("id_member", $array, isset($postVars["id_member"]) ? $postVars["id_member"] : null);
+  $row .= Form::strSelect("id_member", "id_member", $array, isset($postVars["id_member"]) ? $postVars["id_member"] : null);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="meeting_place">' . _("Meeting Place") . ":" . "</label>\n";
+  $row = Form::strLabel("meeting_place", _("Meeting Place") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("meeting_place", 40, 40,
+  $row .= Form::strText("meeting_place", "meeting_place", 40, 40,
     isset($postVars["meeting_place"]) ? $postVars["meeting_place"] : null,
     isset($pageErrors["meeting_place"]) ? $pageErrors["meeting_place"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="wording" class="requiredField">' . _("Wording") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("wording", 4, 90,
+  $row = Form::strLabel("wording", _("Wording") . ":", true) . "<br />\n";
+  $row .= Form::strTextArea("wording", "wording", 4, 90,
     isset($postVars["wording"]) ? $postVars["wording"] : null,
     isset($pageErrors["wording"]) ? $pageErrors["wording"] : null
   );
 
   $tbody[] = array($row);
 
-  $row = '<label for="subjective">' . _("Subjective") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("subjective", 4, 90, isset($postVars["subjective"]) ? $postVars["subjective"] : null);
+  $row = Form::strLabel("subjective", _("Subjective") . ":") . "<br />\n";
+  $row .= Form::strTextArea("subjective", "subjective", 4, 90, isset($postVars["subjective"]) ? $postVars["subjective"] : null);
 
   $tbody[] = array($row);
 
-  $row = '<label for="objective">' . _("Objective") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("objective", 4, 90, isset($postVars["objective"]) ? $postVars["objective"] : null);
+  $row = Form::strLabel("objective", _("Objective") . ":") . "<br />\n";
+  $row .= Form::strTextArea("objective", "objective", 4, 90, isset($postVars["objective"]) ? $postVars["objective"] : null);
 
   $tbody[] = array($row);
 
-  $row = '<label for="appreciation">' . _("Appreciation") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("appreciation", 4, 90, isset($postVars["appreciation"]) ? $postVars["appreciation"] : null);
+  $row = Form::strLabel("appreciation", _("Appreciation") . ":") . "<br />\n";
+  $row .= Form::strTextArea("appreciation", "appreciation", 4, 90, isset($postVars["appreciation"]) ? $postVars["appreciation"] : null);
 
   $tbody[] = array($row);
 
-  $row = '<label for="action_plan">' . _("Action Plan") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("action_plan", 4, 90, isset($postVars["action_plan"]) ? $postVars["action_plan"] : null);
+  $row = Form::strLabel("action_plan", _("Action Plan") . ":") . "<br />\n";
+  $row .= Form::strTextArea("action_plan", "action_plan", 4, 90, isset($postVars["action_plan"]) ? $postVars["action_plan"] : null);
 
   $tbody[] = array($row);
 
-  $row = '<label for="prescription">' . _("Prescription") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("prescription", 4, 90, isset($postVars["prescription"]) ? $postVars["prescription"] : null);
+  $row = Form::strLabel("prescription", _("Prescription") . ":") . "<br />\n";
+  $row .= Form::strTextArea("prescription", "prescription", 4, 90, isset($postVars["prescription"]) ? $postVars["prescription"] : null);
 
   $tbody[] = array($row);
 
-  $row = '<label for="closed_problem">' . _("Closed Problem") . ":" . "</label>\n";
+  $row = Form::strLabel("closed_problem", _("Closed Problem") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlCheckBox("closed_problem", "closed_problem", "closed", isset($postVars["closed_problem"]) ? $postVars["closed_problem"] != "" : false);
+  $row .= Form::strCheckBox("closed_problem", "closed_problem", "closed", isset($postVars["closed_problem"]) ? $postVars["closed_problem"] != "" : false);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
-    htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", "button1", _("Submit"))
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
   $options = array(

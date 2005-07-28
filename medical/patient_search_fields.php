@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_fields.php,v 1.9 2005/07/21 16:56:58 jact Exp $
+ * $Id: patient_search_fields.php,v 1.10 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@
 
   $tbody = array();
 
-  $row = '<label for="search_type">' . _("Field") . ': ' . "</label>\n";
+  $row = Form::strLabel("search_type", _("Field") . ': ');
 
   $array = null;
   $array[OPEN_SEARCH_SURNAME1] = _("Surname 1");
@@ -43,29 +43,29 @@
   $array[OPEN_SEARCH_INSURANCE] = _("Insurance Company");
   $array[OPEN_SEARCH_COLLEGIATE] = _("Collegiate Number");
 
-  $row .= htmlSelectArray("search_type", $array, OPEN_SEARCH_SURNAME1);
+  $row .= Form::strSelect("search_type", "search_type", $array, OPEN_SEARCH_SURNAME1);
   unset($array);
 
   $tbody[] = array($row);
 
-  $row = '* ' . htmlInputText("search_text", 40, 80);
-  $row .= htmlInputButton("button1", _("Search"));
+  $row = '* ' . Form::strText("search_text", "search_text", 40, 80);
+  $row .= Form::strButton("button1", "button1", _("Search"));
 
   $tbody[] = array($row);
 
-  $row = '<label for="logical">' . _("Logical") . ': ' . "</label>\n";
+  $row = Form::strLabel("logical", _("Logical") . ': ');
 
   $array = null;
   $array[OPEN_OR] = "OR";
   $array[OPEN_NOT] = "NOT";
   $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
 
-  $row .= htmlSelectArray("logical", $array, OPEN_OR);
+  $row .= Form::strSelect("logical", "logical", $array, OPEN_OR);
   unset($array);
 
   $row .= OPEN_SEPARATOR;
 
-  $row .= '<label for="limit">' . _("Limit") . ': ' . "</label>\n";
+  $row .= Form::strLabel("limit", _("Limit") . ': ');
 
   $array = null;
   $array["0"] = _("All");
@@ -73,7 +73,7 @@
   $array["20"] = 20;
   $array["50"] = 50;
   $array["100"] = 100;
-  $row .= htmlSelectArray("limit", $array);
+  $row .= Form::strSelect("limit", "limit", $array);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);

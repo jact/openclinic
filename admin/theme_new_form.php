@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.12 2005/07/21 16:55:57 jact Exp $
+ * $Id: theme_new_form.php,v 1.13 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -24,7 +24,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   // after login_check inclusion to avoid JavaScript mistakes in demo version

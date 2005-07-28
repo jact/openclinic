@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.20 2005/07/21 16:55:57 jact Exp $
+ * $Id: theme_preview.php,v 1.21 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -33,7 +33,7 @@
   }
 
   require_once("../classes/Setting_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Error.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -252,9 +252,9 @@
 
   $tbody[] = array(sprintf(_("Sample data row %d"), 2));
 
-  $row = '* <label for="sample_text" class="requiredField">' . _("Required Field") . ":" . "</label>\n";
+  $row = Form::strLabel("sample_text", _("Required Field") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("sample_text", 50, 50, _("Sample Input Text"), "", "text", true);
+  $row .= Form::strText("sample_text", "sample_text", 50, 50, _("Sample Input Text"), "", "text", true);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -265,7 +265,7 @@
   );
 
   $tfoot = array(
-    htmlInputButton("sample_button", _("Sample Button"), "button")
+    Form::strButton("sample_button", "sample_button", _("Sample Button"), "button")
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.15 2005/07/21 17:41:51 jact Exp $
+ * $Id: setting_fields.php,v 1.16 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -35,20 +35,20 @@
 
   $tbody = array();
 
-  $row = '<label for="clinic_name">' . _("Clinic Name") . ":" . "</label>\n";
+  $row = Form::strLabel("clinic_name", _("Clinic Name") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("clinic_name", 40, 128, $postVars["clinic_name"], $pageErrors["clinic_name"]);
+  $row .= Form::strText("clinic_name", "clinic_name", 40, 128, $postVars["clinic_name"], $pageErrors["clinic_name"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="clinic_image_url">' . _("Clinic Image") . ":" . "</label>\n";
+  $row = Form::strLabel("clinic_image_url", _("Clinic Image") . ":");
   $row .= OPEN_SEPARATOR;
 
   $dir = "../images/";
   $ext = array("bmp", "gif", "jpe", "jpeg", "jpg", "png");
   $array = File::getDirContent($dir, false, $ext);
 
-  $row .= htmlSelectArray("clinic_image_url", $array, basename($postVars["clinic_image_url"]));
+  $row .= Form::strSelect("clinic_image_url", "clinic_image_url", $array, basename($postVars["clinic_image_url"]));
   unset($array);
   unset($ext);
 
@@ -56,67 +56,66 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="use_image">' . _("Use Image in place of Name") . ":" . "</label>\n";
+  $row = Form::strLabel("use_image", _("Use Image in place of Name") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlCheckBox("use_image", "use_image", 1, $postVars["use_image"] != "");
+  $row .= Form::strCheckBox("use_image", "use_image", 1, $postVars["use_image"] != "");
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="clinic_hours">' . _("Clinic Hours") . ":" . "</label>\n";
+  $row = Form::strLabel("clinic_hours", _("Clinic Hours") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("clinic_hours", 40, 128, $postVars["clinic_hours"], $pageErrors["clinic_hours"]);
+  $row .= Form::strText("clinic_hours", "clinic_hours", 40, 128, $postVars["clinic_hours"], $pageErrors["clinic_hours"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="clinic_address">' . _("Clinic Address") . ":" . "</label>\n";
+  $row = Form::strLabel("clinic_address", _("Clinic Address") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("clinic_address", 3, 30, $postVars["clinic_address"]);
+  $row .= Form::strTextArea("clinic_address", "clinic_address", 3, 30, $postVars["clinic_address"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="clinic_phone">' . _("Clinic Phone") . ":" . "</label>\n";
+  $row = Form::strLabel("clinic_phone", _("Clinic Phone") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("clinic_phone", 40, 40, $postVars["clinic_phone"], $pageErrors["clinic_phone"]);
+  $row .= Form::strText("clinic_phone", "clinic_phone", 40, 40, $postVars["clinic_phone"], $pageErrors["clinic_phone"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="clinic_url">' . _("Clinic URL") . ":" . "</label>\n";
+  $row = Form::strLabel("clinic_url", _("Clinic URL") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("clinic_url", 40, 300, $postVars["clinic_url"], $pageErrors["clinic_url"]);
+  $row .= Form::strText("clinic_url", "clinic_url", 40, 300, $postVars["clinic_url"], $pageErrors["clinic_url"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    $row = '<label for="language">' . _("Language") . ":" . "</label>\n";
+    $row = Form::strLabel("language", _("Language") . ":");
     $row .= OPEN_SEPARATOR;
-
-    $row .= htmlSelectArray("language", I18n::languageList(), $postVars["language"]);
+    $row .= Form::strSelect("language", "language", I18n::languageList(), $postVars["language"]);
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
   }
 
-  $row = '<label for="id_theme">' . _("Theme by default") . ":" . "</label>\n";
+  $row = Form::strLabel("id_theme", _("Theme by default") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlSelect("theme_tbl", "id_theme", $postVars["id_theme"], "theme_name");
+  $row .= Form::strSelectTable("theme_tbl", "id_theme", $postVars["id_theme"], "theme_name");
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="session_timeout" class="requiredField">' . _("Session Timeout") . ":" . "</label>\n";
+  $row = Form::strLabel("session_timeout", _("Session Timeout") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("session_timeout", 3, 3, $postVars["session_timeout"], $pageErrors["session_timeout"]);
+  $row .= Form::strText("session_timeout", "session_timeout", 3, 3, $postVars["session_timeout"], $pageErrors["session_timeout"]);
   $row .= _("minutes");
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="items_per_page" class="requiredField">' . _("Search Results") . ":" . "</label>\n";
+  $row = Form::strLabel("items_per_page", _("Search Results") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("items_per_page", 2, 2, $postVars["items_per_page"], $pageErrors["items_per_page"]);
+  $row .= Form::strText("items_per_page", "items_per_page", 2, 2, $postVars["items_per_page"], $pageErrors["items_per_page"]);
   $row .= _("items per page") . "**";
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $tfoot = array(htmlInputButton("button1", _("Update")));
+  $tfoot = array(Form::strButton("button1", "button1", _("Update")));
 
   $options = array(
     'shaded' => false,

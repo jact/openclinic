@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.10 2005/07/19 19:51:35 jact Exp $
+ * $Id: install.php,v 1.11 2005/07/28 17:46:48 jact Exp $
  */
 
 /**
@@ -22,7 +22,7 @@
   require_once("../install/header.php"); // i18n l10n
   require_once("../install/parse_sql_file.php");
   require_once("../classes/Setting_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Error.php");
 
   echo '<h1>' . _("OpenClinic Installation:") . "</h1>\n";
@@ -36,7 +36,7 @@
   {
     Error::query($setQ);
   }
-  echo '<p>' . _("Database connection is good.") . "</p>\n";
+  HTML::message(_("Database connection is good."), OPEN_MSG_INFO);
 
   ////////////////////////////////////////////////////////////////////
   // Show warning message if database exists
@@ -75,8 +75,8 @@
 
         <p>
           <?php
-            showInputButton("continue", _("Continue"));
-            showInputButton("cancel", _("Cancel"), "button", 'onclick="parent.location=\'../install/cancel_msg.php\'"');
+            Form::button("continue", "continue", _("Continue"));
+            Form::button("cancel", "cancel", _("Cancel"), "button", 'onclick="parent.location=\'../install/cancel_msg.php\'"');
           ?>
         </p>
       </form>
@@ -106,7 +106,7 @@
     }
     else
     {
-      echo '<p class="error">' . _("Last instruction failed") . "</p>\n";
+      HTML::message(_("Last instruction failed"), OPEN_MSG_ERROR);
       exit();
     }
   }

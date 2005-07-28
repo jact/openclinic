@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search_fields.php,v 1.10 2005/07/21 16:56:58 jact Exp $
+ * $Id: problem_search_fields.php,v 1.11 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -29,7 +29,7 @@
 
   $tbody = array();
 
-  $row = '<label for="search_type_problem">' . _("Field") . ': ' . "</label>\n";
+  $row = Form::strLabel("search_type_problem", _("Field") . ': ');
 
   $array = null;
   $array[OPEN_SEARCH_WORDING] = _("Wording");
@@ -39,28 +39,28 @@
   $array[OPEN_SEARCH_ACTIONPLAN] = _("Action Plan");
   $array[OPEN_SEARCH_PRESCRIPTION] = _("Prescription");
 
-  $row .= htmlSelectArray("search_type_problem", $array, OPEN_SEARCH_WORDING);
+  $row .= Form::strSelect("search_type_problem", "search_type_problem", $array, OPEN_SEARCH_WORDING);
   unset($array);
 
   $tbody[] = array($row);
 
-  $row = '* ' . htmlInputText("search_text_problem", 40, 120);
-  $row .= htmlInputButton("submit_problem", _("Search"));
+  $row = '* ' . Form::strText("search_text_problem", "search_text_problem", 40, 120);
+  $row .= Form::strButton("submit_problem", "submit_problem", _("Search"));
 
   $tbody[] = array($row);
 
-  $row = '<label for="logical_problem">' . _("Logical") . ': ' . "</label>\n";
+  $row = Form::strLabel("logical_problem", _("Logical") . ': ');
 
   $array = null;
   $array[OPEN_OR] = "OR";
   $array[OPEN_NOT] = "NOT";
   $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
 
-  $row .= htmlSelectArray("logical_problem", $array, OPEN_OR);
+  $row .= Form::strSelect("logical_problem", "logical_problem", $array, OPEN_OR);
   unset($array);
 
   $row .= OPEN_SEPARATOR;
-  $row .= '<label for="limit_problem">' . _("Limit") . ': ' . "</label>\n";
+  $row .= Form::strLabel("limit_problem", _("Limit") . ': ');
 
   $array = null;
   $array["0"] = _("All");
@@ -69,7 +69,7 @@
   $array["50"] = 50;
   $array["100"] = 100;
 
-  $row .= htmlSelectArray("limit_problem", $array);
+  $row .= Form::strSelect("limit_problem", "limit_problem", $array);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);

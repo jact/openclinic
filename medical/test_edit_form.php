@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit_form.php,v 1.10 2005/07/21 16:56:59 jact Exp $
+ * $Id: test_edit_form.php,v 1.11 2005/07/28 17:47:34 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Test_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   // after login_check inclusion to avoid JavaScript mistakes in demo version
@@ -125,10 +125,10 @@
 <form method="post" action="../medical/test_edit.php" enctype="multipart/form-data" onsubmit="document.forms[0].upload_file.value = document.forms[0].path_filename.value; return true;">
   <div>
 <?php
-  showInputHidden("id_problem", $idProblem);
-  showInputHidden("id_patient", $idPatient);
-  showInputHidden("id_test", $idTest);
-  showInputHidden("upload_file", $postVars["path_filename"]);
+  Form::hidden("id_problem", "id_problem", $idProblem);
+  Form::hidden("id_patient", "id_patient", $idPatient);
+  Form::hidden("id_test", "id_test", $idTest);
+  Form::hidden("upload_file", "upload_file", $postVars["path_filename"]);
 
   require_once("../medical/test_fields.php");
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.18 2005/07/21 17:56:51 jact Exp $
+ * $Id: user_access_log.php,v 1.19 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Access_Page_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Search.php");
   require_once("../lib/Check.php");
 
@@ -121,8 +121,8 @@ function changePage(page)
 <form method="post" action="../admin/user_access_log.php?key=<?php echo $idUser; ?>&amp;login=<?php echo $login; ?>">
   <div>
 <?php
-  showInputHidden("page", $currentPageNmbr);
-  showInputHidden("limit", $limit);
+  Form::hidden("page", "page", $currentPageNmbr);
+  Form::hidden("limit", "limit", $limit);
 ?>
   </div>
 </form>

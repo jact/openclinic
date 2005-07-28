@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.14 2005/07/21 16:56:58 jact Exp $
+ * $Id: relative_list.php,v 1.15 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Relative_Query.php");
   require_once("../classes/Patient_Page_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
 
   ////////////////////////////////////////////////////////////////////
   // Retrieving get vars
@@ -118,7 +118,7 @@
 <form method="post" action="../medical/relative_search.php">
   <div>
 <?php
-  showInputHidden("id_patient", $idPatient);
+  Form::hidden("id_patient", "id_patient", $idPatient);
 
   require_once("../medical/patient_search_fields.php");
 ?>

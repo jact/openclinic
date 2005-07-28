@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.14 2005/07/21 17:57:02 jact Exp $
+ * $Id: patient_search.php,v 1.15 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Patient_Page_Query.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Search.php");
 
   ////////////////////////////////////////////////////////////////////
@@ -129,11 +129,11 @@ function changePage(page)
 <form method="post" action="../medical/patient_search.php">
   <div>
 <?php
-  showInputHidden("search_type", $_POST["search_type"]);
-  showInputHidden("search_text", $_POST["search_text"]);
-  showInputHidden("page", $currentPageNmbr);
-  showInputHidden("logical", $_POST["logical"]);
-  showInputHidden("limit", $limit);
+  Form::hidden("search_type", "search_type", $searchType);
+  Form::hidden("search_text", "search_text", $searchText);
+  Form::hidden("page", "page", $currentPageNmbr);
+  Form::hidden("logical", "logical", $logical);
+  Form::hidden("limit", "limit", $limit);
 ?>
   </div>
 </form>

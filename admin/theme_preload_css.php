@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.8 2005/07/21 16:55:57 jact Exp $
+ * $Id: theme_preload_css.php,v 1.9 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -34,7 +34,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
   if (!empty($_FILES['css_filename']['name']) && $_FILES['css_filename']['size'] > 0)
@@ -84,22 +84,17 @@
 
   $tbody = array();
 
-  $row = '* <label for="css_filename" class="requiredField">' . _("Path Filename") . ":" . "</label>\n";
+  $row = Form::strLabel("css_filename", _("Path Filename") . ":", true);
   $row .= OPEN_SEPARATOR;
 
-  //$row .= htmlInputHidden("MAX_FILE_SIZE", "10000");
-  $row .= htmlInputFile("css_filename", "", 50);
-
-  /*if (isset($pageErrors["css_filename"]))
-  {
-    $row .= HTML::strMessage($pageErrors["css_filename"], OPEN_MSG_ERROR);
-  }*/
+  //$row .= Form::strHidden("MAX_FILE_SIZE", "MAX_FILE_SIZE", "10000");
+  $row .= Form::strFile("css_filename", "css_filename", "", 50, /*"", $pageErrors["css_filename"]*/);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
-    htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", "button1", _("Submit"))
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
   $options = array(

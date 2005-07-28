@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.15 2005/07/21 16:55:57 jact Exp $
+ * $Id: user_edit_form.php,v 1.16 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   {
     include_once("../shared/login_check.php");
   }
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   // after login_check inclusion to avoid JavaScript mistakes in demo version
@@ -138,13 +138,13 @@
 <form method="post" action="../admin/user_edit.php" onsubmit="return md5Login(this);">
   <div>
 <?php
-  showInputHidden("referer", "edit"); // to user_validate_post.php
-  showInputHidden("id_user", $postVars["id_user"]);
-  showInputHidden("id_member", $postVars["id_member"]);
+  Form::hidden("referer", "referer", "edit"); // to user_validate_post.php
+  Form::hidden("id_user", "id_user", $postVars["id_user"]);
+  Form::hidden("id_member", "id_member", $postVars["id_member"]);
 
   if (isset($_GET["all"]))
   {
-    showInputHidden("all", "Y");
+    Form::hidden("all", "all", "Y");
   }
 
   $action = "edit";

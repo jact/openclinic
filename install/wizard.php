@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.17 2005/07/21 16:00:33 jact Exp $
+ * $Id: wizard.php,v 1.18 2005/07/28 17:46:48 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
     exit();
   } // end step 8
 
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Error.php");
   require_once("../lib/Check.php");
 
@@ -102,39 +102,37 @@
 <?php
   echo "<div>\n";
   //Error::debug($_POST);
-  showInputHidden("alreadyVisited", 1);
-  showInputHidden("buttonPressed");
+  Check::safeArray($_POST);
 
-  showInputHidden("dbHost", ereg_replace(" ", "", Check::safeText($_POST['dbHost'])));
-  showInputHidden("dbUser", ereg_replace(" ", "", Check::safeText($_POST['dbUser'])));
-  showInputHidden("dbPasswd", Check::safeText($_POST['dbPasswd']));
-  showInputHidden("dbName", ereg_replace(" ", "", Check::safeText($_POST['dbName'])));
+  Form::hidden("h_alreadyVisited", "alreadyVisited", 1);
+  Form::hidden("h_buttonPressed", "buttonPressed");
 
-  showInputHidden("clinicLanguage", Check::safeText($_POST['clinicLanguage']));
-  showInputHidden("clinicName", Check::safeText($_POST['clinicName']));
-  showInputHidden("clinicHours", Check::safeText($_POST['clinicHours']));
-  showInputHidden("clinicAddress", Check::safeText($_POST['clinicAddress']));
-  showInputHidden("clinicPhone", Check::safeText($_POST['clinicPhone']));
-  showInputHidden("timeout", intval($_POST['timeout']));
-  showInputHidden("itemsPage", intval($_POST['itemsPage']));
-  showInputHidden("clinicTheme", Check::safeText($_POST['clinicTheme']));
+  Form::hidden("h_dbHost", "dbHost", ereg_replace(" ", "", $_POST['dbHost']));
+  Form::hidden("h_dbUser", "dbUser", ereg_replace(" ", "", $_POST['dbUser']));
+  Form::hidden("h_dbPasswd", "dbPasswd", $_POST['dbPasswd']);
+  Form::hidden("h_dbName", "dbName", ereg_replace(" ", "", $_POST['dbName']));
 
-  showInputHidden("firstName", Check::safeText($_POST['firstName']));
-  showInputHidden("surname1", Check::safeText($_POST['surname1']));
-  showInputHidden("surname2", Check::safeText($_POST['surname2']));
-  showInputHidden("adminAddress", Check::safeText($_POST['adminAddress']));
-  showInputHidden("adminPhone", Check::safeText($_POST['adminPhone']));
-  showInputHidden("passwd", Check::safeText($_POST['passwd']));
-  showInputHidden("email", ereg_replace(" ", "", Check::safeText($_POST['email'])));
-  showInputHidden("adminTheme", Check::safeText($_POST['adminTheme']));
+  Form::hidden("h_clinicLanguage", "clinicLanguage", $_POST['clinicLanguage']);
+  Form::hidden("h_clinicName", "clinicName", $_POST['clinicName']);
+  Form::hidden("h_clinicHours", "clinicHours", $_POST['clinicHours']);
+  Form::hidden("h_clinicAddress", "clinicAddress", $_POST['clinicAddress']);
+  Form::hidden("h_clinicPhone", "clinicPhone", $_POST['clinicPhone']);
+  Form::hidden("h_timeout", "timeout", intval($_POST['timeout']));
+  Form::hidden("h_itemsPage", "itemsPage", intval($_POST['itemsPage']));
+  Form::hidden("h_clinicTheme", "clinicTheme", $_POST['clinicTheme']);
+
+  Form::hidden("h_firstName", "firstName", $_POST['firstName']);
+  Form::hidden("h_surname1", "surname1", $_POST['surname1']);
+  Form::hidden("h_surname2", "surname2", $_POST['surname2']);
+  Form::hidden("h_adminAddress", "adminAddress", $_POST['adminAddress']);
+  Form::hidden("h_adminPhone", "adminPhone", $_POST['adminPhone']);
+  Form::hidden("h_passwd", "passwd", $_POST['passwd']);
+  Form::hidden("h_email", "email", ereg_replace(" ", "", $_POST['email']));
+  Form::hidden("h_adminTheme", "adminTheme", $_POST['adminTheme']);
   echo "</div>\n";
 ?>
 <div id="window">
-  <h1>
-    <span><?php echo _("OpenClinic Install Wizard"); ?></span>
-
-    <img src="../images/install_software.png" width="48" height="48" />
-  </h1>
+  <h1><?php echo _("OpenClinic Install Wizard"); ?></h1>
 <!-- End Header -->
 <?php
   ////////////////////////////////////////////////////////////////////
@@ -185,26 +183,26 @@
   <div class="center">
     <table>
       <tr>
-        <td><label for="dbHost"><?php echo _("Database Host:"); ?></label></td>
-        <td><?php showInputText("dbHost", 25, 100, $_POST['dbHost']); ?></td>
+        <td><?php Form::label("dbHost", _("Database Host:")); ?></td>
+        <td><?php Form::text("dbHost", "dbHost", 25, 100, $_POST['dbHost']); ?></td>
         <td><?php echo _("e. g.") . " localhost"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="dbUser"><?php echo _("Database User:"); ?></label></td>
-        <td><?php showInputText("dbUser", 25, 100, $_POST['dbUser']); ?></td>
+        <td><?php Form::label("dbUser", _("Database User:")); ?></td>
+        <td><?php Form::text("dbUser", "dbUser", 25, 100, $_POST['dbUser']); ?></td>
         <td><?php echo _("e. g.") . " root"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="dbPasswd"><?php echo _("Database Password:"); ?></label></td>
-        <td><?php showInputText("dbPasswd", 25, 100, $_POST['dbPasswd']); ?></td>
+        <td><?php Form::label("dbPasswd", _("Database Password:")); ?></td>
+        <td><?php Form::text("dbPasswd", "dbPasswd", 25, 100, $_POST['dbPasswd']); ?></td>
         <td><?php echo _("e. g.") . " s45gh72cv"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="dbName"><?php echo _("Database Name:"); ?></label></td>
-        <td><?php showInputText("dbName", 25, 100, $_POST['dbName']); ?></td>
+        <td><?php Form::label("dbName", _("Database Name:")); ?></td>
+        <td><?php Form::text("dbName", "dbName", 25, 100, $_POST['dbName']); ?></td>
         <td><?php echo _("e. g.") . " openclinic"; ?></td>
       </tr>
     </table>
@@ -240,50 +238,50 @@
   <div class="center">
     <table>
       <tr>
-        <td><label for="clinicLanguage"><?php echo _("Language") . ":"; ?></label></td>
-        <td><?php showSelectArray("clinicLanguage", $locale, $_POST['clinicLanguage']); ?></td>
+        <td><?php Form::label("clinicLanguage", _("Language") . ":"); ?></td>
+        <td><?php Form::select("clinicLanguage", "clinicLanguage", $locale, $_POST['clinicLanguage']); ?></td>
         <td></td>
       </tr>
 
       <tr>
-        <td><label for="clinicName"><?php echo _("Clinic Name") . ":"; ?></label></td>
-        <td><?php showInputText("clinicName", 30, 128, $_POST['clinicName']); ?></td>
+        <td><?php Form::label("clinicName", _("Clinic Name") . ":"); ?></td>
+        <td><?php Form::text("clinicName", "clinicName", 30, 128, $_POST['clinicName']); ?></td>
         <td><?php echo _("e. g.") . " My Clinic"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="clinicHours"><?php echo _("Clinic Hours") . ":"; ?></label></td>
-        <td><?php showInputText("clinicHours", 30, 128, $_POST['clinicHours']); ?></td>
+        <td><?php Form::label("clinicHours", _("Clinic Hours") . ":"); ?></td>
+        <td><?php Form::text("clinicHours", "clinicHours", 30, 128, $_POST['clinicHours']); ?></td>
         <td><?php echo _("e. g.") . " L-V 9am-5pm"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="clinicAddress"><?php echo _("Clinic Address") . ":"; ?></label></td>
-        <td><?php showInputText("clinicAddress", 30, 200, $_POST['clinicAddress']); ?></td>
+        <td><?php Form::label("clinicAddress", _("Clinic Address") . ":"); ?></td>
+        <td><?php Form::text("clinicAddress", "clinicAddress", 30, 200, $_POST['clinicAddress']); ?></td>
         <td><?php echo _("e. g.") . " Sesame Street"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="clinicPhone"><?php echo _("Clinic Phone") . ":"; ?></label></td>
-        <td><?php showInputText("clinicPhone", 30, 40, $_POST['clinicPhone']); ?></td>
+        <td><?php Form::label("clinicPhone", _("Clinic Phone") . ":"); ?></td>
+        <td><?php Form::text("clinicPhone", "clinicPhone", 30, 40, $_POST['clinicPhone']); ?></td>
         <td><?php echo _("e. g.") . " 999 66 66 66"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="timeout"><?php echo _("Session Timeout (minutes):"); ?></label></td>
-        <td><?php showInputText("timeout", 30, 3, $_POST['timeout']); ?></td>
+        <td><?php Form::label("timeout", _("Session Timeout (minutes):")); ?></td>
+        <td><?php Form::text("timeout", "timeout", 30, 3, $_POST['timeout']); ?></td>
         <td><?php echo _("e. g.") . " 20"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="itemsPage"><?php echo _("Search Results (items per page):"); ?></label></td>
-        <td><?php showInputText("itemsPage", 30, 2, $_POST['itemsPage']); ?></td>
+        <td><?php Form::label("itemsPage", _("Search Results (items per page):")); ?></td>
+        <td><?php Form::text("itemsPage", "itemsPage", 30, 2, $_POST['itemsPage']); ?></td>
         <td><?php echo _("e. g.") . " 10"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="clinicTheme"><?php echo _("Theme by default") . ":"; ?></label></td>
-        <td><?php showSelectArray("clinicTheme", $themes, $_POST['clinicTheme']); ?></td>
+        <td><?php Form::label("clinicTheme", _("Theme by default") . ":"); ?></td>
+        <td><?php Form::select("clinicTheme", "clinicTheme", $themes, $_POST['clinicTheme']); ?></td>
         <td></td>
       </tr>
     </table>
@@ -312,37 +310,35 @@
 ?>
   <h2><?php echo sprintf(_("Step %d of %d: "), 5, 7) . _("Admin Data"); ?></h2>
 
-  <p></p>
-
   <div class="center">
     <table>
       <tr>
-        <td><label for="firstName"><?php echo _("First Name") . ":"; ?></label></td>
-        <td><?php showInputText("firstName", 30, 25, $_POST['firstName']); ?></td>
+        <td><?php Form::label("firstName", _("First Name") . ":"); ?></td>
+        <td><?php Form::text("firstName", "firstName", 30, 25, $_POST['firstName']); ?></td>
         <td><?php echo _("e. g.") . " John"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="surname1"><?php echo _("Surname 1") . ":"; ?></label></td>
-        <td><?php showInputText("surname1", 30, 30, $_POST['surname1']); ?></td>
+        <td><?php Form::label("surname1", _("Surname 1") . ":"); ?></td>
+        <td><?php Form::text("surname1", "surname1", 30, 30, $_POST['surname1']); ?></td>
         <td><?php echo _("e. g.") . " Doe"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="surname2"><?php echo _("Surname 2") . ":"; ?></label></td>
-        <td><?php showInputText("surname2", 30, 30, $_POST['surname2']); ?></td>
+        <td><?php Form::label("surname2", _("Surname 2") . ":"); ?></td>
+        <td><?php Form::text("surname2", "surname2", 30, 30, $_POST['surname2']); ?></td>
         <td><?php echo _("e. g.") . " Smith"; ?></td>
       </tr>
 
       <tr>
-        <td><label for="adminAddress"><?php echo _("Address") . ":"; ?></label></td>
-        <td><?php showInputText("adminAddress", 30, 200, $_POST['adminAddress']); ?></td>
+        <td><?php Form::label("adminAddress", _("Address") . ":"); ?></td>
+        <td><?php Form::text("adminAddress", "adminAddress", 30, 200, $_POST['adminAddress']); ?></td>
         <td></td>
       </tr>
 
       <tr>
-        <td><label for="adminPhone"><?php echo _("Phone Contact") . ":"; ?></label></td>
-        <td><?php showInputText("adminPhone", 30, 40, $_POST['adminPhone']); ?></td>
+        <td><?php Form::label("adminPhone", _("Phone Contact") . ":"); ?></td>
+        <td><?php Form::text("adminPhone", "adminPhone", 30, 40, $_POST['adminPhone']); ?></td>
         <td></td>
       </tr>
 
@@ -353,20 +349,20 @@
       </tr>
 
       <tr>
-        <td><label for="passwd"><?php echo _("Password") . ":"; ?></label></td>
-        <td><?php showInputText("passwd", 30, 20, $_POST['passwd']); ?></td>
+        <td><?php Form::label("passwd", _("Password") . ":"); ?></td>
+        <td><?php Form::text("passwd", "passwd", 30, 20, $_POST['passwd']); ?></td>
         <td class="note"><?php echo _("required"); ?></td>
       </tr>
 
       <tr>
-        <td><label for="email"><?php echo _("Email") . ":"; ?></label></td>
-        <td><?php showInputText("email", 30, 40, $_POST['email']); ?></td>
+        <td><?php Form::label("email", _("Email") . ":"); ?></td>
+        <td><?php Form::text("email", "email", 30, 40, $_POST['email']); ?></td>
         <td></td>
       </tr>
 
       <tr>
-        <td><label for="adminTheme"><?php echo _("Theme") . ":"; ?></label></td>
-        <td><?php showSelectArray("adminTheme", $themes, $_POST['adminTheme']); ?></td>
+        <td><?php Form::label("adminTheme", _("Theme") . ":"); ?></td>
+        <td><?php Form::select("adminTheme", "adminTheme", $themes, $_POST['adminTheme']); ?></td>
         <td></td>
       </tr>
     </table>
@@ -484,18 +480,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.17 2005/07/21 16:00:33 jact Exp $
+ * $Id: wizard.php,v 1.18 2005/07/28 17:46:48 jact Exp $
  */
 
 /**
  * database_constants.php
- ********************************************************************
+ *
  * Definition of database connection variables
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * Last modified: ' . date("d/m/Y H:i") . '
  */
 
@@ -580,7 +576,7 @@
     }
     else
     {
-      echo '<p class="error">' . _("Last instruction failed") . "</p>\n";
+      HTML::message(_("Last instruction failed"), OPEN_MSG_ERROR);
       exit();
     }
   }
@@ -779,7 +775,6 @@ function _showButton($name, $value, $type = "next")
  * @param boolean $echoWhenOk true => show ok when extension exists
  * @return string message (empty or not)
  * @access private
- *
  */
 function _warnIfExtNotLoaded($extensionName, $echoWhenOk = false)
 {

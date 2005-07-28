@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.9 2005/07/21 16:55:57 jact Exp $
+ * $Id: staff_new_form.php,v 1.10 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -24,7 +24,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../lib/Check.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
@@ -74,7 +74,7 @@
 <form method="post" action="../admin/staff_new.php?type=<?php echo $memberType; ?>">
   <div>
 <?php
-  showInputHidden("member_type", $typeValue);
+  Form::hidden("member_type", "member_type", $typeValue);
 
   require_once("../admin/staff_fields.php");
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_fields.php,v 1.7 2005/07/21 16:56:58 jact Exp $
+ * $Id: history_family_fields.php,v 1.8 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -28,29 +28,29 @@
 
   $tbody = array();
 
-  $row = '<label for="parents_status_health">' . _("Parents Status Health") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("parents_status_health", 4, 90, $postVars["parents_status_health"]);
+  $row = Form::strLabel("parents_status_health", _("Parents Status Health") . ":") . "<br />\n";
+  $row .= Form::strTextArea("parents_status_health", "parents_status_health", 4, 90, $postVars["parents_status_health"]);
 
   $tbody[] = array($row);
 
-  $row = '<label for="brothers_status_health">' . _("Brothers and Sisters Status Health") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("brothers_status_health", 4, 90, $postVars["brothers_status_health"]);
+  $row = Form::strLabel("brothers_status_health", _("Brothers and Sisters Status Health") . ":") . "<br />\n";
+  $row .= Form::strTextArea("brothers_status_health", "brothers_status_health", 4, 90, $postVars["brothers_status_health"]);
 
   $tbody[] = array($row);
 
-  $row = '<label for="spouse_childs_status_health">' . _("Spouse and Childs Status Health") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("spouse_childs_status_health", 4, 90, $postVars["spouse_childs_status_health"]);
+  $row = Form::strLabel("spouse_childs_status_health", _("Spouse and Childs Status Health") . ":") . "<br />\n";
+  $row .= Form::strTextArea("spouse_childs_status_health", "spouse_childs_status_health", 4, 90, $postVars["spouse_childs_status_health"]);
 
   $tbody[] = array($row);
 
-  $row = '<label for="family_illness">' . _("Family Illness") . ":" . "</label><br />\n";
-  $row .= htmlTextArea("family_illness", 4, 90, $postVars["family_illness"]);
+  $row = Form::strLabel("family_illness", _("Family Illness") . ":") . "<br />\n";
+  $row .= Form::strTextArea("family_illness", "family_illness", 4, 90, $postVars["family_illness"]);
 
   $tbody[] = array($row);
 
   $tfoot = array(
-    htmlInputButton("button1", _("Update"))
-    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", "button1", _("Update"))
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
   $options = array(

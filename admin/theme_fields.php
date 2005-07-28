@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_fields.php,v 1.8 2005/07/21 16:55:57 jact Exp $
+ * $Id: theme_fields.php,v 1.9 2005/07/28 17:46:27 jact Exp $
  */
 
 /**
@@ -28,33 +28,33 @@
 
   $tbody = array();
 
-  $row = '* <label for="theme_name" class="requiredField">' . _("Theme Name") . ":" . "</label>\n";
+  $row = Form::strLabel("theme_name", _("Theme Name") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("theme_name", 50, 50,
+  $row .= Form::strText("theme_name", "theme_name", 50, 50,
     isset($postVars["theme_name"]) ? $postVars["theme_name"] : null,
     isset($pageErrors["theme_name"]) ? $pageErrors["theme_name"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="css_file" class="requiredField">' . _("CSS File") . ":" . "</label>\n";
+  $row = Form::strLabel("css_file", _("CSS File") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("css_file", 50, 50,
+  $row .= Form::strText("css_file", "css_file", 50, 50,
     isset($postVars["css_file"]) ? $postVars["css_file"] : null,
     isset($pageErrors["css_file"]) ? $pageErrors["css_file"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '* <label for="css_rules" class="requiredField">' . _("CSS Rules") . ":" . "</label>\n";
+  $row = Form::strLabel("css_rules", _("CSS Rules") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= htmlTextArea("css_rules", 25, 80, isset($postVars["css_rules"]) ? $postVars["css_rules"] : null, $pageErrors["css_rules"]);
+  $row .= Form::strTextArea("css_rules", "css_rules", 25, 80, isset($postVars["css_rules"]) ? $postVars["css_rules"] : null, $pageErrors["css_rules"]);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
-    htmlInputButton("button1", _("Submit"), "button", 'onclick="editTheme()"')
-    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", "button1", _("Submit"), "button", 'onclick="editTheme()"')
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
   $options = array(

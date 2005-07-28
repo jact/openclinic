@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.13 2005/07/21 16:56:58 jact Exp $
+ * $Id: problem_list.php,v 1.14 2005/07/28 17:47:33 jact Exp $
  */
 
 /**
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Problem_Page_Query.php");
-  require_once("../lib/input_lib.php");
   require_once("../lib/misc_lib.php");
 
   ////////////////////////////////////////////////////////////////////

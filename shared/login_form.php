@@ -5,14 +5,14 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.10 2005/07/21 16:57:13 jact Exp $
+ * $Id: login_form.php,v 1.11 2005/07/28 17:48:07 jact Exp $
  */
 
 /**
  * login_form.php
- ********************************************************************
+ *
  * User login form
- ********************************************************************
+ *
  * Author: jact <jachavar@gmail.com>
  */
 
@@ -26,7 +26,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
 
   // this must be here, after read_settings.php (session_start())
   if (isset($_GET["ret"]))
@@ -76,7 +76,7 @@ function md5Login(f)
 <form method="post" action="../shared/login.php" onsubmit="return md5Login(this);">
   <div class="center">
 <?php
-  showInputHidden("md5");
+  Form::hidden("md5", "md5");
 
   $thead = array(
     _("User Login") => array('colspan' => 2)
@@ -84,18 +84,18 @@ function md5Login(f)
 
   $tbody = array();
 
-  $row = '<label for="login_session">' . _("Login") . ":" . "</label>\n";
+  $row = Form::strLabel("login_session", _("Login") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("login_session", 20, 20,
+  $row .= Form::strText("login_session", "login_session", 20, 20,
     isset($postVars["login_session"]) ? $postVars["login_session"] : null,
     isset($pageErrors["login_session"]) ? $pageErrors["login_session"] : null
   );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="pwd_session">' . _("Password") . ":" . "</label>\n";
+  $row = Form::strLabel("pwd_session", _("Password") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("pwd_session", 20, 20,
+  $row .= Form::strText("pwd_session", "pwd_session", 20, 20,
     isset($postVars["pwd_session"]) ? $postVars["pwd_session"] : null,
     isset($pageErrors["pwd_session"]) ? $pageErrors["pwd_session"] : null,
     "password"
@@ -103,7 +103,7 @@ function md5Login(f)
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $tfoot = array(htmlInputButton("button1", _("Enter")));
+  $tfoot = array(Form::strButton("button1", "button1", _("Enter")));
 
   $options = array(
     'shaded' => false,

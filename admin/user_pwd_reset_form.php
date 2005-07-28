@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.13 2005/07/21 16:55:57 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.14 2005/07/28 17:46:28 jact Exp $
  */
 
 /**
@@ -34,7 +34,7 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../lib/input_lib.php");
+  require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   // after login_check inclusion to avoid JavaScript mistakes in demo version
@@ -122,11 +122,11 @@
 <form method="post" action="../admin/user_pwd_reset.php" onsubmit="return md5Login(this);">
   <div class="center">
 <?php
-  showInputHidden("id_user", $postVars["id_user"]);
-  showInputHidden("login", $postVars["login"]);
+  Form::hidden("id_user", "id_user", $postVars["id_user"]);
+  Form::hidden("login", "login", $postVars["login"]);
 
-  showInputHidden("md5");
-  showInputHidden("md5_confirm");
+  Form::hidden("md5", "md5");
+  Form::hidden("md5_confirm", "md5_confirm");
 
   $thead = array(
     _("Reset User Password") => array('colspan' => 2)
@@ -140,21 +140,21 @@
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="pwd">' . _("Password") . ":" . "</label>\n";
+  $row = Form::strLabel("pwd", _("Password") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("pwd", 20, 20, $postVars["pwd"], $pageErrors["pwd"], "password");
+  $row .= Form::strText("pwd", "pwd", 20, 20, $postVars["pwd"], $pageErrors["pwd"], "password");
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
-  $row = '<label for="pwd2">' . _("Re-enter Password") . ":" . "</label>\n";
+  $row = Form::strLabel("pwd2", _("Re-enter Password") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= htmlInputText("pwd2", 20, 20, $postVars["pwd2"], $pageErrors["pwd2"], "password");
+  $row .= Form::strText("pwd2", "pwd2", 20, 20, $postVars["pwd2"], $pageErrors["pwd2"], "password");
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
-    htmlInputButton("button1", _("Submit"))
-    . htmlInputButton("return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", "button1", _("Submit"))
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
   $options = array(
