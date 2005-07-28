@@ -5,15 +5,15 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: misc_lib.php,v 1.8 2005/02/19 10:50:24 jact Exp $
+ * $Id: misc_lib.php,v 1.9 2005/07/28 17:51:42 jact Exp $
  */
 
 /**
  * misc_lib.php
- ********************************************************************
+ *
  * Set of miscellanean functions
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.7
  */
 
@@ -28,13 +28,14 @@
  *  string fieldPreview(string $field)
  *  string translateBrowser(string $text)
  *  string unTranslateBrowser(string $text)
+ *  string numberToAlphabet(int $number)
  */
 
 /**
  * string fieldPreview(string $field)
- ********************************************************************
+ *
  * Returns a preview of a memo field
- ********************************************************************
+ *
  * @param string $field
  * @return string preview of field
  * @access public
@@ -65,9 +66,9 @@ function fieldPreview($field)
 
 /*
  * string translateBrowser(string $text)
- ********************************************************************
+ *
  * Returns a string ready to see in a web browser
- ********************************************************************
+ *
  * @param string $text
  * @return string
  * @access public
@@ -80,9 +81,9 @@ function translateBrowser($text)
 
 /*
  * string unTranslateBrowser(string $text)
- ********************************************************************
+ *
  * Returns a string ready to insert it in a database
- ********************************************************************
+ *
  * @param string $text
  * @return string
  * @access public
@@ -91,5 +92,27 @@ function translateBrowser($text)
 function unTranslateBrowser($text)
 {
   return ((strpos($_SERVER["HTTP_USER_AGENT"], "Gecko") === false) ? $text : utf8_decode($text));
+}
+
+/**
+ * string numberToAlphabet(int $number)
+ *
+ * Converts an integer in an alphabetical string
+ *
+ * @author Mike (PHP manual, user contributes notes for chr() function)
+ * @param int $number integer to convert
+ * @return string alphabetical string
+ * @access public
+ * @since 0.8
+ */
+function numberToAlphabet($number)
+{
+  if ($number % 26 >= 1)
+  {
+    $alphaString = chr(($number % 26) + 64) . (isset($alphaString) ? $alphaString : "");
+    $alphaString = numberToAlphabet($number / 26) . $alphaString;
+  }
+
+  return (isset($alphaString) ? $alphaString : "");
 }
 ?>
