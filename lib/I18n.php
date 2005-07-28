@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: I18n.php,v 1.1 2005/07/20 20:53:20 jact Exp $
+ * $Id: I18n.php,v 1.2 2005/07/28 19:03:42 jact Exp $
  */
 
 /**
@@ -31,6 +31,7 @@
  *  bool languageExists(string $lang)
  *  string localDate(string $date)
  *  mixed languageList(void)
+ *  array getNLS(void)
  */
 
 define("OPEN_LANG_DEFAULT",  "en");
@@ -90,7 +91,7 @@ class I18n
     putenv("LANG=" . $newLang);
     setlocale(LC_ALL, $newLang);
 
-    /*global $nls;
+    /*$nls = I18n::getNLS();
     if (defined("PHP_OS") && eregi("win", PHP_OS))
     {
       setlocale(LC_ALL, (isset($nls['win32'][$newLang]) ? $nls['win32'][$newLang] : $newLang));
@@ -323,15 +324,13 @@ class I18n
    *
    * Returns an array with available languages
    *
-   * @global array $nls
    * @return mixed array with available languages or null if empty
    * @access public
    * @since 0.7
    */
   function languageList()
   {
-    global $nls;
-
+    $nls = I18n::getNLS();
     $array = null;
     $handle = opendir(OPEN_LANG_DIR);
 
@@ -353,6 +352,149 @@ class I18n
     closedir($handle);
 
     return $array;
+  }
+
+  /**
+   * array getNLS(void)
+   *
+   * Returns an associative array with NLS application settings
+   * If you add a new language please use alphabetical order by name.
+   *
+   * The basic idea and values was taken from then Horde Framework (http://horde.org)
+   * The original filename was horde/config/nls.php.dist and it was
+   * maintained by Jan Schneider (mail@janschneider.de)
+   *
+   * @return array (associative)
+   * @access public
+   * @since 0.6
+   */
+  function getNLS()
+  {
+    $nls['language']['bg_BG'] = '&#x0411;&#x044a;&#x043b;&#x0433;&#x0430;&#x0440;&#x0441;&#x043a;&#x0438;';
+    //$nls['language']['zh_CN'] = 'Simplified Chinese (&#31616;&#20307;&#20013;&#25991;)';
+    $nls['language']['zh_TW'] = 'Traditional Chinese (&#32321;&#39636;&#20013;&#25991;)';
+    //$nls['language']['zh_TW.utf8'] = 'Traditional Chinese (&#32321;&#39636;&#20013;&#25991;) (UTF-8)';
+    //$nls['language']['cs_CZ'] = '&#x010c;esky';
+    //$nls['language']['da_DK'] = 'Dansk';
+    //$nls['language']['de_DE'] = 'Deutsch';
+    $nls['language']['en'] = 'English';
+    $nls['language']['en_GB'] = 'English (UK)';
+    $nls['language']['en_US'] = 'English (US)';
+    $nls['language']['es_ES'] = 'Espa&#241;ol';
+    //$nls['language']['fr_FR'] = 'Fran&#231;ais';
+    //$nls['language']['it_IT'] = 'Italiano';
+    //$nls['language']['he_IL'] = 'Hebrew';
+    //$nls['language']['is_IS'] = '&#205;slenska';
+    //$nls['language']['ja_JP'] = '&#x65e5;&#x672c;&#x8a9e; (EUC-JP)';
+    //$nls['language']['lt_LT'] = 'Lietuvi&#x0173;';
+    //$nls['language']['nl_NL'] = 'Nederlands';
+    $nls['language']['nl_BE'] = 'Nederlands (Belgium)';
+    //$nls['language']['no_NO'] = 'Norsk bokm&#229;l';
+    //$nls['language']['pl_PL'] = 'Polski';
+    //$nls['language']['pt_PT'] = 'Portugu&#234;s';
+    //$nls['language']['pt_BR'] = 'Portugu&#234;s Brasileiro';
+    //$nls['language']['ru_RU'] = '&#x0420;&#x0443;&#x0441;&#x0441;&#x043a;&#x0438;&#x0439; (Windows)';
+    //$nls['language']['ru_RU.koi8r'] = '&#x0420;&#x0443;&#x0441;&#x0441;&#x043a;&#x0438;&#x0439; (KOI8-R)';
+    //$nls['language']['sl_SI'] = 'Sloven&#x0161;&#x010d;ina';
+    //$nls['language']['fi_FI'] = 'Suomi';
+    //$nls['language']['sv_SE'] = 'Svenska';
+    //$nls['language']['tr_TR'] = 'T&#252;rk&#231;e';
+    //$nls['language']['uk_UA'] = '&#x0423;&#x043a;&#x0440;&#x0430;&#x0457;&#x043d;&#x0441;&#x044c;&#x043a;&#x0430;';
+
+    ////////////////////////////////////////////////////////////////////
+    // Aliases for languages with different browser and gettext codes
+    ////////////////////////////////////////////////////////////////////
+    $nls['alias']['bg'] = 'bg_BG';
+    $nls['alias']['bg_BG.CP1251'] = 'bg_BG';
+    //$nls['alias']['cs'] = 'cs_CZ';
+    //$nls['alias']['da'] = 'da_DK';
+    //$nls['alias']['de'] = 'de_DE';
+    $nls['alias']['en'] = 'en_US';
+    $nls['alias']['es'] = 'es_ES';
+    //$nls['alias']['fi'] = 'fi_FI';
+    //$nls['alias']['fr'] = 'fr_FR';
+    //$nls['alias']['is'] = 'is_IS';
+    //$nls['alias']['it'] = 'it_IT';
+    //$nls['alias']['ja'] = 'ja_JP';
+    //$nls['alias']['lt'] = 'lt_LT';
+    //$nls['alias']['nl'] = 'nl_NL';
+    //$nls['alias']['no'] = 'no_NO';
+    //$nls['alias']['nb'] = 'no_NO';
+    //$nls['alias']['pl'] = 'pl_PL';
+    //$nls['alias']['pt'] = 'pt_PT';
+    //$nls['alias']['ru'] = 'ru_RU';
+    //$nls['alias']['sl'] = 'sl_SI';
+    //$nls['alias']['sv'] = 'sv_SE';
+    //$nls['alias']['tr'] = 'tr_TR';
+    //$nls['alias']['uk'] = 'uk_UA';
+
+    ////////////////////////////////////////////////////////////////////
+    // Aliases for languages in win32 systems (ISO 3166-Alpha-3)
+    ////////////////////////////////////////////////////////////////////
+    $nls['win32']['bg_BG'] = 'bgr';
+    $nls['win32']['en']    = 'eng';
+    $nls['win32']['es_ES'] = 'esp';
+    $nls['win32']['nl_BE'] = 'nld';
+    $nls['win32']['zh_TW'] = 'chn';
+
+    ////////////////////////////////////////////////////////////////////
+    // Charsets
+    //
+    // Add your own charsets, if your system uses others than "normal"
+    ////////////////////////////////////////////////////////////////////
+    $nls['default']['charset'] =    'ISO-8859-1';
+
+    $nls['charset']['bg_BG']   =    'windows-1251';
+    //$nls['charset']['cs_CZ'] =    'ISO-8859-2';
+    //$nls['charset']['he_IL'] =    'windows-1255';
+    //$nls['charset']['ja_JP'] =    'EUC-JP';
+    //$nls['charset']['lt_LT'] =    'windows-1257';
+    //$nls['charset']['pl_PL'] =    'ISO-8859-2';
+    //$nls['charset']['ru_RU'] =    'windows-1251';
+    //$nls['charset']['ru_RU.KOI8-R'] = 'KOI8-R';
+    //$nls['charset']['sl_SI'] =    'ISO-8859-2';
+    //$nls['charset']['tr_TR'] =    'ISO-8859-9';
+    //$nls['charset']['uk_UA'] =    'KOI8-U';
+    //$nls['charset']['zh_CN'] =    'GB2312';
+    $nls['charset']['zh_TW'] =    'BIG5';
+    //$nls['charset']['zh_TW.utf8'] = 'UTF-8';
+
+    //$nls['charset']['de_DE'] =    'de_DE.ISO-8859-15@euro';
+    //$nls['charset']['lt_LT'] =    'ISO-8859-13';
+
+    ////////////////////////////////////////////////////////////////////
+    // Multibyte charsets
+    ////////////////////////////////////////////////////////////////////
+    $nls['multibyte']['BIG5'] =   true;
+    $nls['multibyte']['EUC-JP'] = true;
+    $nls['multibyte']['GB2312'] = true;
+    $nls['multibyte']['UTF-8'] =  true;
+
+    ////////////////////////////////////////////////////////////////////
+    // Encoding
+    ////////////////////////////////////////////////////////////////////
+    $nls['default']['encoding'] = 'ISO-8859-1';
+    //$nls['encoding']['bg_BG'] = 'UTF-8';
+
+    ////////////////////////////////////////////////////////////////////
+    // Direction
+    ////////////////////////////////////////////////////////////////////
+    $nls['default']['direction'] = 'ltr';
+    //$nls['direction']['he_IL'] = 'rtl';
+
+    ////////////////////////////////////////////////////////////////////
+    // Alignment
+    ////////////////////////////////////////////////////////////////////
+    $nls['default']['alignment'] = 'left';
+    //$nls['alignment']['he_IL'] = 'right';
+
+    ////////////////////////////////////////////////////////////////////
+    // Flags "alias"
+    ////////////////////////////////////////////////////////////////////
+    //$nls['flag']['ru_RU.koi8r'] = 'ru_RU';
+    //$nls['flag']['zh_TW.utf8']  =  'zh_TW';
+
+    return $nls;
   }
 } // end class
 ?>
