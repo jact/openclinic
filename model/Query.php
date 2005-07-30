@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.7 2005/07/30 15:11:33 jact Exp $
+ * $Id: Query.php,v 1.8 2005/07/30 15:13:46 jact Exp $
  */
 
 /**
  * Query.php
- ********************************************************************
+ *
  * Contains the class Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/DbConnection.php");
 
 /**
  * Query parent data access component class for all data access components
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "")
  *  bool close(void)
@@ -56,9 +56,9 @@ class Query
 
   /**
    * bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "")
-   ********************************************************************
+   *
    * Instantiates private connection var and connects to the database
-   ********************************************************************
+   *
    * @param string $database (optional)
    * @param string $user (optional)
    * @param string $pwd (optional)
@@ -91,9 +91,9 @@ class Query
 
   /**
    * bool close(void)
-   ********************************************************************
+   *
    * Closes database and destroys connection
-   ********************************************************************
+   *
    * @return boolean returns false, if error occurs
    * @access public
    */
@@ -114,9 +114,9 @@ class Query
 
   /**
    * bool exec(string $sql)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param string $sql SQL of query to execute
    * @return boolean returns false, if error occurs
    * @access public
@@ -140,9 +140,9 @@ class Query
 
   /**
    * mixed fetchRow(int $arrayType = MYSQL_ASSOC)
-   ********************************************************************
+   *
    * Returns a resulting array
-   ********************************************************************
+   *
    * @param int $arrayType (optional) array type to return
    * @return array resulting array. Returns false, if no more rows to fetch.
    * @access public
@@ -162,9 +162,9 @@ class Query
 
   /**
    * mixed fetchAll(int $arrayType = MYSQL_ASSOC)
-   ********************************************************************
+   *
    * Returns all records in an array
-   ********************************************************************
+   *
    * @param int $arrayType (optional) array type to return
    * @return array resulting array. Returns false if there is an empty result
    * @access public
@@ -186,9 +186,9 @@ class Query
 
   /**
    * int numRows(void)
-   ********************************************************************
+   *
    * Returns the number of rows in the result
-   ********************************************************************
+   *
    * @return int, number of rows in result
    * @access public
    * @since 0.4
@@ -200,7 +200,7 @@ class Query
 
   /**
    * bool resetResult(void)
-   ********************************************************************
+   *
    * @return boolean false if error occurred
    * @access public
    */
@@ -211,7 +211,7 @@ class Query
 
   /**
    * bool freeResult(void)
-   ********************************************************************
+   *
    * @return boolean false if error occurred
    * @access public
    */
@@ -222,7 +222,7 @@ class Query
 
   /**
    * mixed affectedRows(void)
-   ********************************************************************
+   *
    * @return int number of affected rows or false if an error occurs
    * @access public
    * @since 0.7
@@ -234,9 +234,9 @@ class Query
 
   /**
    * mixed getPrimaryKey(string $table = "")
-   ********************************************************************
+   *
    * Returns the key fields of a table
-   ********************************************************************
+   *
    * @param string $table (optional) name of table (if empty, $this->_table)
    * @return mixed array with key fields or false if an error occurs
    * @access public
@@ -269,9 +269,9 @@ class Query
 
   /**
    * string getRowData(array $key, array $value, string $table = "")
-   ********************************************************************
+   *
    * Returns serialized row data of a table
-   ********************************************************************
+   *
    * @param array $key key fields of table
    * @param array $value values of key fields of table
    * @param string $table (optional) name of table (if empty, $this->_table)
@@ -313,9 +313,9 @@ class Query
 
   /**
    * void clearErrors(void)
-   ********************************************************************
+   *
    * clears error info
-   ********************************************************************
+   *
    * @access public
    */
   function clearErrors()
@@ -329,7 +329,7 @@ class Query
 
   /**
    * bool isError(void)
-   ********************************************************************
+   *
    * @return boolean true if error occurred
    * @access public
    */
@@ -340,7 +340,7 @@ class Query
 
   /**
    * string getError(void)
-   ********************************************************************
+   *
    * @return string error message
    * @access public
    */
@@ -351,7 +351,7 @@ class Query
 
   /**
    * int getDbErrno(void)
-   ********************************************************************
+   *
    * @return int error number returned from database
    * @access public
    */
@@ -362,7 +362,7 @@ class Query
 
   /**
    * string getDbError(void)
-   ********************************************************************
+   *
    * @return string error message returned from database
    * @access public
    */
@@ -373,7 +373,7 @@ class Query
 
   /**
    * string getSQL(void)
-   ********************************************************************
+   *
    * @return string SQL used in query when an error occurs in Query execution
    * @access public
    */
@@ -384,7 +384,7 @@ class Query
 
   /**
    * string getTableName(void)
-   ********************************************************************
+   *
    * @return string table name
    * @access public
    */
