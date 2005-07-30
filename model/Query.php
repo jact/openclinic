@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2004 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.6 2005/05/02 11:20:08 jact Exp $
+ * $Id: Query.php,v 1.7 2005/07/30 15:11:33 jact Exp $
  */
 
 /**
@@ -42,6 +42,7 @@ require_once("../classes/DbConnection.php");
  *  int getDbErrno(void)
  *  string getDbError(void)
  *  string getSQL(void)
+ *  string getTableName(void)
  */
 class Query
 {
