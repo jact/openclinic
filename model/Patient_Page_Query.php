@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Page_Query.php,v 1.2 2005/07/21 15:59:46 jact Exp $
+ * $Id: Patient_Page_Query.php,v 1.3 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
@@ -317,7 +317,7 @@ class Patient_Page_Query extends Page_Query
     $sql .= " WHERE first_name='" . urlencode($firstName) . "'";
     $sql .= " AND surname1='" . urlencode($surname1) . "'";
     $sql .= " AND surname2='" . urlencode($surname2) . "'";
-    if ($idPatient > 0)
+    if ($idPatient)
     {
       $sql .= " AND id_patient<>" . intval($idPatient);
     }

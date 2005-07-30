@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.11 2004/09/22 18:18:24 jact Exp $
+ * $Id: User_Query.php,v 1.12 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
  * User_Query.php
- ********************************************************************
+ *
  * Contains the class User_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -21,10 +21,10 @@ require_once("../classes/User.php");
 
 /**
  * User_Query data access component for users
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void User_Query(void)
  *  mixed select(int $idUser = 0)
@@ -43,9 +43,9 @@ class User_Query extends Query
 {
   /**
    * void User_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -56,9 +56,9 @@ class User_Query extends Query
 
   /**
    * mixed select(int $idUser = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idUser (optional) key of user to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -68,7 +68,7 @@ class User_Query extends Query
     $sql = "SELECT login,id_member," . $this->_table . ".*";
     $sql .= " FROM staff_tbl," . $this->_table;
     $sql .= " WHERE " . $this->_table . ".id_user=staff_tbl.id_user";
-    if ($idUser != "")
+    if ($idUser)
     {
       $sql .= " AND " . $this->_table . ".id_user=" . intval($idUser);
     }
@@ -86,9 +86,9 @@ class User_Query extends Query
 
   /**
    * mixed selectLogins(void)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
    */
@@ -111,9 +111,9 @@ class User_Query extends Query
 
   /**
    * bool existLogin(string $login, int $idMember = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param string $login login of user to know if exists
    * @param int $idMember (optional) key of staff member
    * @return boolean returns true if login already exists or false if error occurs
@@ -143,9 +143,9 @@ class User_Query extends Query
 
   /**
    * mixed verifySignOn(string $login, string $pwd, bool $onlyCheck = false)
-   ********************************************************************
+   *
    * Executes a query to verify a sign on login and password
-   ********************************************************************
+   *
    * @param string $login login of user to select
    * @param string $pwd password of staff member to select
    * @param bool $onlyCheck (optional)
@@ -171,9 +171,9 @@ class User_Query extends Query
 
   /**
    * bool isActivated(string $login)
-   ********************************************************************
+   *
    * Verifies if a login user is activated or not
-   ********************************************************************
+   *
    * @param string $login login of user to see if is deactivated
    * @return boolean returns false, if error occurs or user is deactivated
    * @access public
@@ -221,9 +221,9 @@ class User_Query extends Query
 
   /**
    * bool deactivate(string $login)
-   ********************************************************************
+   *
    * Updates an user and sets the actived flag to No.
-   ********************************************************************
+   *
    * @param string $login login of user to deactivate
    * @return boolean returns false, if error occurs
    * @access public
@@ -262,9 +262,9 @@ class User_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the User object
-   ********************************************************************
+   *
    * @return User returns user or false if no more users to fetch
    * @access public
    */
@@ -315,9 +315,9 @@ class User_Query extends Query
 
   /**
    * bool insert(User $user)
-   ********************************************************************
+   *
    * Inserts a new user into the users table.
-   ********************************************************************
+   *
    * @param User $user user to insert
    * @return boolean returns false, if error occurs
    * @access public
@@ -365,9 +365,9 @@ class User_Query extends Query
 
   /**
    * bool update(User $user)
-   ********************************************************************
+   *
    * Update an user in the users table.
-   ********************************************************************
+   *
    * @param User $user user to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -422,9 +422,9 @@ class User_Query extends Query
 
   /**
    * bool resetPwd(User $user)
-   ********************************************************************
+   *
    * Resets an user password in the users table.
-   ********************************************************************
+   *
    * @param User $user user to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -452,9 +452,9 @@ class User_Query extends Query
 
   /**
    * bool delete(int $idUser)
-   ********************************************************************
+   *
    * Deletes an user from the users table.
-   ********************************************************************
+   *
    * @param string $idUser key of user to delete
    * @return boolean returns false, if error occurs
    * @access public

@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Connection_Query.php,v 1.4 2004/07/24 16:32:14 jact Exp $
+ * $Id: Connection_Query.php,v 1.5 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
  * Connection_Query.php
- ********************************************************************
+ *
  * Contains the class Connection_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
 
 /**
  * Connection_Query data access component for connection table
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Connection_Query(void)
  *  mixed select(int $idProblem, int $idConnection = 0)
@@ -35,9 +35,9 @@ class Connection_Query extends Query
 {
   /**
    * void Connection_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -48,9 +48,9 @@ class Connection_Query extends Query
 
   /**
    * mixed select(int $idProblem, int $idConnection = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idProblem key of medical problem
    * @param int $idConnection (optional) key of connection problem
    * @return mixed if error occurs returns false, else number of rows in the result
@@ -61,7 +61,7 @@ class Connection_Query extends Query
     $sql = "SELECT *";
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem);
-    if ($idConnection > 0)
+    if ($idConnection)
     {
       $sql .= " AND id_connection=" . intval($idConnection);
     }
@@ -78,9 +78,9 @@ class Connection_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result.
-   ********************************************************************
+   *
    * @return array returns array or false if no more rows to fetch
    * @access public
    */
@@ -93,9 +93,9 @@ class Connection_Query extends Query
 
   /**
    * bool insert(int $idProblem, int $idConnection)
-   ********************************************************************
+   *
    * Inserts a new connection problem into the database.
-   ********************************************************************
+   *
    * @param int $idProblem
    * @param int $idConnection
    * @return boolean returns false, if error occurs
@@ -131,9 +131,9 @@ class Connection_Query extends Query
 
   /**
    * bool delete(int $idProblem, int $idConnection)
-   ********************************************************************
+   *
    * Delete a row in the connection table.
-   ********************************************************************
+   *
    * @param int $idProblem
    * @param int $idConnection
    * @return boolean returns false, if error occurs

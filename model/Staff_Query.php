@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.10 2005/07/21 15:59:46 jact Exp $
+ * $Id: Staff_Query.php,v 1.11 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
  * Staff_Query.php
- ********************************************************************
+ *
  * Contains the class Staff_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -21,10 +21,10 @@ require_once("../classes/Staff.php");
 
 /**
  * Staff_Query data access component for clinic staff members
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Staff_Query(void)
  *  mixed select(int $idMember = 0)
@@ -39,9 +39,9 @@ class Staff_Query extends Query
 {
   /**
    * void Staff_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -52,9 +52,9 @@ class Staff_Query extends Query
 
   /**
    * mixed select(int $idMember = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idMember (optional) key of staff member to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -63,7 +63,7 @@ class Staff_Query extends Query
   {
     $sql = "SELECT *";
     $sql .= " FROM " . $this->_table;
-    if ($idMember > 0)
+    if ($idMember)
     {
       $sql .= " WHERE id_member=" . intval($idMember);
     }
@@ -81,9 +81,9 @@ class Staff_Query extends Query
 
   /**
    * mixed selectType(string $type = 'A')
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param string $type (optional) type of staff member to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -118,9 +118,9 @@ class Staff_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the Staff object.
-   ********************************************************************
+   *
    * @return mixed returns staff member or false if no more staff members to fetch
    * @access public
    */
@@ -150,9 +150,9 @@ class Staff_Query extends Query
 
   /**
    * bool existLogin(string $login, int $idMember = 0)
-   ********************************************************************
+   *
    * Returns true if login already exists
-   ********************************************************************
+   *
    * @param string $login staff member login
    * @param int $idMember (optional) key of staff member
    * @return boolean returns true if login already exists or false if error occurs
@@ -162,8 +162,8 @@ class Staff_Query extends Query
   {
     $sql = "SELECT COUNT(login)";
     $sql .= " FROM " . $this->_table;
-    $sql .= " WHERE login='" . urlencode($login) . "'";
-    if ($idMember > 0)
+    $sql .= " WHERE login='" . urlencode($login) . "'"; // in BD it is urlencodeaded
+    if ($idMember)
     {
       $sql .= " AND id_member<>" . intval($idMember);
     }
@@ -182,9 +182,9 @@ class Staff_Query extends Query
 
   /**
    * bool insert(Staff $staff)
-   ********************************************************************
+   *
    * Inserts a new staff member into the staff table.
-   ********************************************************************
+   *
    * @param Staff $staff staff member to insert
    * @return boolean returns false, if error occurs
    * @access public
@@ -236,9 +236,9 @@ class Staff_Query extends Query
 
   /**
    * bool update(Staff $staff)
-   ********************************************************************
+   *
    * Update a staff member in the staff table.
-   ********************************************************************
+   *
    * @param Staff $staff staff member to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -287,9 +287,9 @@ class Staff_Query extends Query
 
   /**
    * bool delete(int $idMember, int $idUser = 0)
-   ********************************************************************
+   *
    * Deletes a staff member from the staff table.
-   ********************************************************************
+   *
    * @param string $idMember key of staff member to delete
    * @param string $idUser key of user to delete
    * @return boolean returns false, if error occurs

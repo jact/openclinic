@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History_Query.php,v 1.6 2004/08/23 17:58:43 jact Exp $
+ * $Id: History_Query.php,v 1.7 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
  * History_Query.php
- ********************************************************************
+ *
  * Contains the class History_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -21,10 +21,10 @@ require_once("../classes/History.php");
 
 /**
  * History_Query data access component for History class
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void History_Query(void)
  *  mixed selectPersonal(int $idPatient = 0)
@@ -38,9 +38,9 @@ class History_Query extends Query
 {
   /**
    * void History_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -51,9 +51,9 @@ class History_Query extends Query
 
   /**
    * mixed selectPersonal(int $idPatient = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idPatient key of history to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -64,7 +64,7 @@ class History_Query extends Query
     $sql .= "peristaltic_conditions,psychological,children_complaint,venereal_disease,";
     $sql .= "accident_surgical_operation,medicinal_intolerance,mental_illness";
     $sql .= " FROM " . $this->_table;
-    if ($idPatient > 0)
+    if ($idPatient)
     {
       $sql .= " WHERE id_patient=" . intval($idPatient);
     }
@@ -82,9 +82,9 @@ class History_Query extends Query
 
   /**
    * mixed selectFamily(int $idPatient = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idPatient key of history to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -94,7 +94,7 @@ class History_Query extends Query
     $sql = "SELECT id_patient,parents_status_health,brothers_status_health,";
     $sql .= "spouse_childs_status_health,family_illness";
     $sql .= " FROM " . $this->_table;
-    if ($idPatient > 0)
+    if ($idPatient)
     {
       $sql .= " WHERE id_patient=" . intval($idPatient);
     }
@@ -112,9 +112,9 @@ class History_Query extends Query
 
   /**
    * mixed fetchPersonal(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the History object.
-   ********************************************************************
+   *
    * @return History returns personal antecedents or false if no more histories to fetch
    * @access public
    */
@@ -146,9 +146,9 @@ class History_Query extends Query
 
   /**
    * mixed fetchFamily(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the History object.
-   ********************************************************************
+   *
    * @return History returns family antecedents or false if no more histories to fetch
    * @access public
    */
@@ -173,9 +173,9 @@ class History_Query extends Query
 
   /**
    * bool updatePersonal(History $history)
-   ********************************************************************
+   *
    * Update personal antecedents in the history table.
-   ********************************************************************
+   *
    * @param History $history personal antecedents to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -213,9 +213,9 @@ class History_Query extends Query
 
   /**
    * bool updateFamily(History $history)
-   ********************************************************************
+   *
    * Update family antecedents in the history table.
-   ********************************************************************
+   *
    * @param History $history family antecedents to update
    * @return boolean returns false, if error occurs
    * @access public

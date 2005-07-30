@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Record_Page_Query.php,v 1.2 2005/07/21 15:59:46 jact Exp $
+ * $Id: Record_Page_Query.php,v 1.3 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
@@ -65,19 +65,19 @@ class Record_Page_Query extends Page_Query
     $sql = "SELECT *";
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE 1";
-    if ($year != "")
+    if ($year)
     {
       $sql .= " AND YEAR(access_date)=" . intval($year);
     }
-    if ($month != "")
+    if ($month)
     {
       $sql .= " AND MONTH(access_date)=" . intval($month);
     }
-    if ($day != "")
+    if ($day)
     {
       $sql .= " AND DATE_FORMAT(access_date, '%d')=" . intval($day);
     }
-    if ($hour != "")
+    if ($hour)
     {
       $sql .= " AND DATE_FORMAT(access_date, '%H')=" . intval($hour);
     }

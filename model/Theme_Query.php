@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.8 2004/08/23 17:58:43 jact Exp $
+ * $Id: Theme_Query.php,v 1.9 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
  * Theme_Query.php
- ********************************************************************
+ *
  * Contains the class Theme_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -21,10 +21,10 @@ require_once("../classes/Theme.php");
 
 /**
  * Theme_Query data access component for themes
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Theme_Query(void)
  *  mixed select(int $idTheme = 0)
@@ -39,9 +39,9 @@ class Theme_Query extends Query
 {
   /**
    * void Theme_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -52,9 +52,9 @@ class Theme_Query extends Query
 
   /**
    * mixed select(int $idTheme = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idTheme key of theme to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -63,7 +63,7 @@ class Theme_Query extends Query
   {
     $sql = "SELECT *";
     $sql .= " FROM " . $this->_table;
-    if ($idTheme > 0)
+    if ($idTheme)
     {
       $sql .= " WHERE id_theme=" . intval($idTheme);
     }
@@ -81,9 +81,9 @@ class Theme_Query extends Query
 
   /**
    * mixed selectWithStats(int $idTheme = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idTheme key of theme to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
@@ -92,7 +92,7 @@ class Theme_Query extends Query
   {
     $sql = "SELECT " . $this->_table . ".*, count(user_tbl.id_user) AS row_count";
     $sql .= " FROM " . $this->_table . " LEFT JOIN user_tbl ON " . $this->_table . ".id_theme=user_tbl.id_theme";
-    if ($idTheme > 0)
+    if ($idTheme)
     {
       $sql .= " WHERE " . $this->_table . ".id_theme=" . intval($idTheme);
     }
@@ -111,9 +111,9 @@ class Theme_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the Theme object.
-   ********************************************************************
+   *
    * @return Theme returns theme or false if no more themes to fetch
    * @access public
    */
@@ -140,9 +140,9 @@ class Theme_Query extends Query
 
   /**
    * bool existCSSFile(string $file, int $idTheme = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param string $file filename to know if exists
    * @param int $idTheme (optional) key of theme
    * @global array $reservedCSSFiles
@@ -162,7 +162,7 @@ class Theme_Query extends Query
     $sql = "SELECT COUNT(css_file)";
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE css_file='" . urlencode($file) . "'";
-    if ($idTheme > 0)
+    if ($idTheme)
     {
       $sql .= " AND id_theme<>" . intval($idTheme);
     }
@@ -204,9 +204,9 @@ class Theme_Query extends Query
 
   /**
    * bool insert(Theme $theme)
-   ********************************************************************
+   *
    * Inserts a new theme into the theme table.
-   ********************************************************************
+   *
    * @param Theme $theme theme to insert
    * @return boolean returns false, if error occurs
    * @access public
@@ -239,9 +239,9 @@ class Theme_Query extends Query
 
   /**
    * bool update(Theme $theme)
-   ********************************************************************
+   *
    * Update a theme in the theme table.
-   ********************************************************************
+   *
    * @param Theme $theme theme to insert
    * @return boolean returns false, if error occurs
    * @access public
@@ -288,9 +288,9 @@ class Theme_Query extends Query
 
   /**
    * bool delete(int $idTheme)
-   ********************************************************************
+   *
    * Deletes a theme from the theme table.
-   ********************************************************************
+   *
    * @param int $idTheme key of theme to delete
    * @return boolean returns false, if error occurs
    * @access public

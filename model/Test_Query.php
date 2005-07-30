@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test_Query.php,v 1.7 2004/09/22 18:18:24 jact Exp $
+ * $Id: Test_Query.php,v 1.8 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
  * Test_Query.php
- ********************************************************************
+ *
  * Contains the class Test_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -21,10 +21,10 @@ require_once("../classes/Test.php");
 
 /**
  * Test_Query data access component for medical tests
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Test_Query(void)
  *  mixed getLastId(void)
@@ -38,9 +38,9 @@ class Test_Query extends Query
 {
   /**
    * void Test_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -51,9 +51,9 @@ class Test_Query extends Query
 
   /**
    * mixed getLastId(void)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @return mixed if error occurs returns false, else last insert id
    * @access public
    * @since 0.3
@@ -76,9 +76,9 @@ class Test_Query extends Query
 
   /**
    * mixed select(int $idProblem, int $idTest = 0)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param int $idProblem key of medical problem
    * @param int $idTest (optional) key of medical test
    * @return mixed if error occurs returns false, else number of rows in the result
@@ -89,7 +89,7 @@ class Test_Query extends Query
     $sql = "SELECT *";
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem);
-    if ($idTest > 0)
+    if ($idTest)
     {
       $sql .= " AND id_test=" . intval($idTest);
     }
@@ -106,9 +106,9 @@ class Test_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the Test object.
-   ********************************************************************
+   *
    * @return Test returns medical test or false if no more tests to fetch
    * @access public
    */
@@ -131,9 +131,9 @@ class Test_Query extends Query
 
   /**
    * bool insert(Test $test)
-   ********************************************************************
+   *
    * Inserts a new medical test into the medical tests table.
-   ********************************************************************
+   *
    * @param Test $test medical test to insert
    * @return boolean returns false, if error occurs
    * @access public
@@ -163,9 +163,9 @@ class Test_Query extends Query
 
   /**
    * bool update(Test $test)
-   ********************************************************************
+   *
    * Update a medical test in the medical tests table.
-   ********************************************************************
+   *
    * @param Test $test medical test to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -194,9 +194,9 @@ class Test_Query extends Query
 
   /**
    * bool delete(int $idTest)
-   ********************************************************************
+   *
    * Delete a row in the medical test table.
-   ********************************************************************
+   *
    * @param int $idTest
    * @return boolean returns false, if error occurs
    * @access public

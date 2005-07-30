@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description_Query.php,v 1.5 2004/08/23 17:58:43 jact Exp $
+ * $Id: Description_Query.php,v 1.6 2005/07/30 17:27:26 jact Exp $
  */
 
 /**
  * Description_Query.php
- ********************************************************************
+ *
  * Contains the class Description_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -21,10 +21,10 @@ require_once("../classes/Description.php");
 
 /**
  * Description_Query data access component for domain tables
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  bool select(string $tableName, string $fieldCode, string $fieldDescription = "", string $keyValue = "")
  *  mixed fetch(void)
@@ -35,9 +35,9 @@ class Description_Query extends Query
 {
   /**
    * bool select(string $tableName, string $fieldCode, string $fieldDescription = "", string $keyValue = "")
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @param string $tableName table name to query
    * @param string $fieldCode code of row to fetch
    * @param string $fieldDescription (optional) description of row to fetch
@@ -48,14 +48,14 @@ class Description_Query extends Query
   function select($tableName, $fieldCode, $fieldDescription = "", $keyValue = "")
   {
     $sql = "SELECT " . $fieldCode;
-    if ($fieldDescription != "")
+    if ($fieldDescription)
     {
       $sql .= "," . $fieldDescription;
     }
     $sql .= " FROM ".$tableName." ";
-    if ($keyValue != "")
+    if ($keyValue)
     {
-      $sql .= " WHERE " . $fieldCode . "='" . urlencode($keyValue) . "'";
+      $sql .= " WHERE " . $fieldCode . "='" . urlencode($keyValue) . "'"; // in BD it is urlencodeaded
     }
     $sql .= " ORDER BY " . ($fieldDescription != "" ? $fieldDescription : $fieldCode);
 
@@ -70,9 +70,9 @@ class Description_Query extends Query
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the Description object.
-   ********************************************************************
+   *
    * @return List returns list object or false if no more list rows to fetch
    * @access public
    */
@@ -96,9 +96,9 @@ class Description_Query extends Query
 
   /**
    * array fetchRows(string $col = "")
-   ********************************************************************
+   *
    * Fetches all rows from the query result.
-   ********************************************************************
+   *
    * @return assocArray returns associative array containing domain codes and values.
    * @access public
    */
@@ -119,9 +119,9 @@ class Description_Query extends Query
 
   /**
    * bool update(string $tableName, Description $des)
-   ********************************************************************
+   *
    * Update a row in a domain table.
-   ********************************************************************
+   *
    * @param string $tableName table name of domain table to query
    * @param Description $des row to update
    * @return boolean returns false, if error occurs
