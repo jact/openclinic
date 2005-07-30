@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.17 2005/07/28 17:47:34 jact Exp $
+ * $Id: relative_search.php,v 1.18 2005/07/30 15:10:48 jact Exp $
  */
 
 /**
@@ -232,7 +232,7 @@ function changePage(page)
 <form method="post" action="../medical/relative_new.php">
   <div>
 <?php
-  showInputHidden("id_patient", $_POST["id_patient"]);
+  Form::hidden("r_id_patient", "id_patient", $idPatient);
 
   $thead = array(
     sprintf(_("Search Results From Query: %s"), $query) => array('colspan' => 2)
@@ -265,7 +265,7 @@ function changePage(page)
 
   $tfoot = array(
     0 => '<a href="#" onclick="setCheckboxes(1, \'check[]\', true); return false;">' . _("Select all") . '</a>' . ' / ' . '<a href="#" onclick="setCheckboxes(1, \'check[]\', false); return false;">' . _("Unselect all") . '</a>',
-    1 => htmlInputButton("button1", _("Add selected to Relatives List"))
+    1 => Form::strButton("button1", "button1", _("Add selected to Relatives List"))
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);
