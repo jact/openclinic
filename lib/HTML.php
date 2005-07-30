@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: HTML.php,v 1.1 2005/07/21 16:55:25 jact Exp $
+ * $Id: HTML.php,v 1.2 2005/07/30 18:59:37 jact Exp $
  */
 
 /**
@@ -35,6 +35,8 @@
  *  void table(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
  *  string strMessage(string $text, int $type = OPEN_MSG_WARNING)
  *  void message(string $text, int $type = OPEN_MSG_WARNING)
+ *  string strBreadCrumb(array &$links, string $class = "")
+ *  void breadCrumb(array &$links, string $class = "")
  */
 class HTML
 {
@@ -282,6 +284,61 @@ class HTML
   function message($text, $type = OPEN_MSG_WARNING)
   {
     echo HTML::strMessage($text, isset($type) ? $type : OPEN_MSG_WARNING);
+  }
+
+  /**
+   * string strBreadCrumb(array &$links, string $class = "")
+   *
+   * Returns a bread crumb and a title page.
+   *
+   * @param array (associative - strings) $links texts and links to show in header
+   * @param string $class (optional) to put a background-image
+   * @return string bread crumb and title page
+   * @access public
+   * @since 0.8
+   */
+  function strBreadCrumb(&$links, $class = "")
+  {
+    $rows = sizeof($links);
+    if ($rows == 0)
+    {
+      return;
+    }
+
+    $html = '<p id="breadCrumb">';
+
+    $keys = array_keys($links);
+    $title = array_pop($keys);
+    array_pop($links);
+    foreach ($links as $key => $value)
+    {
+      $html .= ($value) ? '<a href="' . $value . '">' . $key . '</a>' : $key;
+      $html .= ' &raquo; ';
+    }
+
+    $html .= "</p>\n";
+
+    $html .= '<h1' . ( !empty($class) ? ' class="' . $class . '"' : '') . '>' . $title . "</h1>\n";
+
+    unset($links);
+
+    return $html;
+  }
+
+  /**
+   * void breadCrumb(array &$links, string $class = "")
+   *
+   * Draws a bread crumb and a title page.
+   *
+   * @param array (associative - strings) $links texts and links to show in header
+   * @param string $class (optional) to put a background-image
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function breadCrumb(&$links, $class = "")
+  {
+    echo HTML::strBreadCrumb($links, isset($class) ? $class : "");
   }
 } // end class
 ?>
