@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.20 2005/07/28 17:46:28 jact Exp $
+ * $Id: user_record_log.php,v 1.21 2005/07/30 15:14:53 jact Exp $
  */
 
 /**
@@ -141,8 +141,7 @@ function changePage(page)
       1 => array('align' => 'center', 'nowrap' => 1),
       2 => array('align' => 'center'),
       3 => array('align' => 'center'),
-      4 => array('align' => 'center'),
-      5 => array('align' => 'center')
+      4 => array('align' => 'center')
     );
 
     $tbody = array();
@@ -158,7 +157,7 @@ function changePage(page)
       $row .= OPEN_SEPARATOR;
       $row .= $record["operation"];
       $row .= OPEN_SEPARATOR;
-      $row .= var_export(unserialize($record["affected_row"]), true);
+      $row .= htmlspecialchars(var_export(unserialize($record["affected_row"]), true));
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
