@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.13 2005/07/28 17:46:27 jact Exp $
+ * $Id: setting_edit_form.php,v 1.14 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "settings";
 
@@ -31,9 +31,9 @@
   $focusFormName = "forms[0]";
   $focusFormField = "clinic_name";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string flag to read data from database.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for query string flag to read data from database.
+   */
   if (isset($_GET["reset"]))
   {
     include_once("../classes/Setting_Query.php");
@@ -77,28 +77,27 @@
     unset($set);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Config settings");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  showNavLinks($links, "config_clinic.png");
+  HTML::breadCrumb($links, "icon configIcon");
   unset($links);
 
   require_once("../shared/form_errors_msg.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Display update message if coming from setting_edit with a successful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display update message if coming from setting_edit with a successful update.
+   */
   if (isset($_GET["updated"]))
   {
     HTML::message(_("Data has been updated."), OPEN_MSG_INFO);

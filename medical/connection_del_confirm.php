@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del_confirm.php,v 1.8 2005/07/28 17:47:32 jact Exp $
+ * $Id: connection_del_confirm.php,v 1.9 2005/07/30 18:58:36 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["conn"]) || !is_numeric($_GET["pat"]) || empty($_GET["wording"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "problems";
   $onlyDoctor = false;
@@ -37,17 +37,17 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idProblem = intval($_GET["key"]);
   $idConnection = intval($_GET["conn"]);
   $idPatient = intval($_GET["pat"]);
   $wording = Check::safeText($_GET["wording"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show confirm page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Delete Connection with Medical Problem");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
@@ -55,10 +55,9 @@
 
   $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -67,7 +66,7 @@
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);

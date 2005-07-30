@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.11 2005/07/28 17:47:33 jact Exp $
+ * $Id: connection_new_form.php,v 1.12 2005/07/30 18:58:37 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
   if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["pat"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling get vars
+   */
   $tab = "medical";
   $nav = "problems";
   $onlyDoctor = false;
@@ -38,15 +38,15 @@
   require_once("../lib/Form.php");
   require_once("../lib/misc_lib.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Search database
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search database
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -61,9 +61,9 @@
     Error::query($problemQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show search results
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Add New Connection Problems");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
@@ -71,10 +71,9 @@
 
   $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -83,13 +82,15 @@
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
 
-  // Display no results message if no results returned from search.
+  /**
+   * Display no results message if no results returned from search.
+   */
   if ($count == 0)
   {
     $problemQ->close();
@@ -98,7 +99,7 @@
     exit();
   }
 
-  echo '<h3>' . _("Medical Problems List:") . "</h3>\n";
+  echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
 ?>
 
 <form method="post" action="../medical/connection_new.php">

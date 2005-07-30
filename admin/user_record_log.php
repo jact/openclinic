@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.21 2005/07/30 15:14:53 jact Exp $
+ * $Id: user_record_log.php,v 1.22 2005/07/30 18:58:26 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "users";
   $restrictInDemo = true; // There are not logs in demo version
   $returnLocation = "../admin/user_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0)
+  /**
+   * Checking for get vars. Go back to user list if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -40,21 +40,21 @@
   require_once("../lib/Search.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idUser = intval($_GET["key"]);
   $login = Check::safeText($_GET["login"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post vars and scrubbing the data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post vars and scrubbing the data
+   */
   $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
 
-  ////////////////////////////////////////////////////////////////////
-  // Search user operations
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search user operations
+   */
   $recordQ = new Record_Page_Query();
   $recordQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $recordQ->connect();
@@ -70,25 +70,24 @@
     Error::query($recordQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show success page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Record Logs");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Users") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "users.png");
+  HTML::breadCrumb($links, "icon userIcon");
   unset($links);
 
-  echo '<h3>' . sprintf(_("Record Logs List for user %s"), $login) . ":</h3>\n";
+  echo '<h2>' . sprintf(_("Record Logs List for user %s"), $login) . ":</h2>\n";
 
   if ($recordQ->getRowCount() == 0)
   {

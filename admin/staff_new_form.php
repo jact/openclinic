@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.10 2005/07/28 17:46:27 jact Exp $
+ * $Id: staff_new_form.php,v 1.11 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "staff";
 
@@ -32,9 +32,9 @@
   $focusFormName = "forms[0]";
   $focusFormField = "nif";
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $memberType = (isset($_GET["type"])) ? Check::safeText($_GET["type"]) : "A"; // Administrative by default
 
   switch ($memberType)
@@ -56,16 +56,15 @@
 
   $returnLocation = "../admin/staff_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Staff Members") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "staff.png");
+  HTML::breadCrumb($links, "icon staffIcon");
   unset($links);
 
   require_once("../shared/form_errors_msg.php");

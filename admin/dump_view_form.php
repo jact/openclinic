@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_view_form.php,v 1.8 2005/07/28 17:46:27 jact Exp $
+ * $Id: dump_view_form.php,v 1.9 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "dump";
   $restrictInDemo = true; // To prevent users' malice
@@ -55,21 +55,20 @@
   $auxConn->close();
   unset($auxConn);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Dumps");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  showNavLinks($links, "dumps.png");
+  HTML::breadCrumb($links, "icon dumpIcon");
   unset($links);
 
   echo '<p>';

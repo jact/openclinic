@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_stats.php,v 1.7 2005/07/20 20:24:33 jact Exp $
+ * $Id: log_stats.php,v 1.8 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -17,9 +17,9 @@
  * @since 0.4
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "logs";
   $restrictInDemo = true; // There are not logs in demo version
@@ -29,9 +29,9 @@
   require_once("../lib/log_lib.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   if (count($_GET) == 0 || empty($_GET['table']))
   {
     $table = "access";
@@ -46,21 +46,20 @@
   }
   $option = (isset($_GET["option"])) ? Check::safeText($_GET["option"]) : "";
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Logs");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  showNavLinks($links, "logs.png");
+  HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
   echo '<p>';

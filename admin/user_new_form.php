@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.12 2005/07/28 17:46:28 jact Exp $
+ * $Id: user_new_form.php,v 1.13 2005/07/30 18:58:26 jact Exp $
  */
 
 /**
@@ -16,11 +16,12 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "users";
+  $returnLocation = "../admin/user_list.php";
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
@@ -32,9 +33,9 @@
   $focusFormName = "forms[0]";
   $focusFormField = "pwd";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post or get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post or get vars
+   */
   if (isset($_POST["id_member_login"]))
   {
     $array = explode(OPEN_SEPARATOR, Check::safeText($_POST["id_member_login"]), 2);
@@ -57,24 +58,21 @@
     $postVars["login"] = $_SESSION["postVars"]["login"];
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Add New User");
   require_once("../shared/header.php");
 
-  $returnLocation = "../admin/user_list.php";
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Users") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "users.png");
+  HTML::breadCrumb($links, "icon userIcon");
   unset($links);
 
   require_once("../shared/form_errors_msg.php");

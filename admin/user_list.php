@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.16 2005/07/28 17:46:28 jact Exp $
+ * $Id: user_list.php,v 1.17 2005/07/30 18:58:26 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "users";
 
@@ -27,9 +27,9 @@
   require_once("../classes/User_Query.php");
   require_once("../lib/Form.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   $userQ = new User_Query();
@@ -54,58 +54,57 @@
   $userQ->freeResult();
   $userQ->clearErrors(); // needed after empty fetch()
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Users");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  showNavLinks($links, "users.png");
+  HTML::breadCrumb($links, "icon userIcon");
   unset($links);
 
-  ////////////////////////////////////////////////////////////////////
-  // Display insertion message if coming from new with a successful insert.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display insertion message if coming from new with a successful insert.
+   */
   if (isset($_GET["added"]) && !empty($info))
   {
     HTML::message(sprintf(_("User, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display update message if coming from edit with a successful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display update message if coming from edit with a successful update.
+   */
   if (isset($_GET["updated"]) && !empty($info))
   {
     HTML::message(sprintf(_("User, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display deletion message if coming from del with a successful delete.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display deletion message if coming from del with a successful delete.
+   */
   if (isset($_GET["deleted"]) && !empty($info))
   {
     HTML::message(sprintf(_("User, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display password reset message if coming from pwd_reset with a succesful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display password reset message if coming from pwd_reset with a succesful update.
+   */
   if (isset($_GET["password"]) && !empty($info))
   {
     HTML::message(sprintf(_("Password of user, %s, has been reset."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display login used message.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display login used message.
+   */
   if (isset($_GET["login"]) && !empty($info))
   {
     HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);

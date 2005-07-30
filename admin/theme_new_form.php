@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.13 2005/07/28 17:46:27 jact Exp $
+ * $Id: theme_new_form.php,v 1.14 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -16,11 +16,12 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "themes";
+  $returnLocation = "../admin/theme_list.php";
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
@@ -31,10 +32,10 @@
   $focusFormName = "forms[0]";
   $focusFormField = "theme_name";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string flag to read data from database.
-  // This is only used when copying an existing theme.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for query string flag to read data from database.
+   * This is only used when copying an existing theme.
+   */
   if (isset($_GET["key"]))
   {
     $idTheme = intval($_GET["key"]);
@@ -81,24 +82,21 @@
     fclose($fp);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Add New Theme");
   require_once("../shared/header.php");
 
-  $returnLocation = "../admin/theme_list.php";
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Themes") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "themes.png");
+  HTML::breadCrumb($links, "icon themeIcon");
   unset($links);
 ?>
 

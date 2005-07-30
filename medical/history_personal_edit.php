@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_edit.php,v 1.7 2005/07/30 15:10:25 jact Exp $
+ * $Id: history_personal_edit.php,v 1.8 2005/07/30 18:58:37 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "history";
   $onlyDoctor = false;
@@ -37,14 +37,14 @@
   require_once("../classes/History_Query.php");
   require_once("../shared/record_log.php"); // record log
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post var
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post var
+   */
   $idPatient = intval($_POST["id_patient"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
   $history = new History();
 
   $history->setIdPatient($_POST["id_patient"]);
@@ -94,14 +94,14 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Prevent user from aborting script
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Prevent user from aborting script
+   */
   $oldAbort = ignore_user_abort(true);
 
-  ////////////////////////////////////////////////////////////////////
-  // Update personal antecedents
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update personal antecedents
+   */
   $historyQ = new History_Query();
   $historyQ->connect();
   if ($historyQ->isError())
@@ -119,19 +119,19 @@
   $historyQ->close();
   unset($historyQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
-  recordLog("History_Query", "UPDATE", array($idPatient));
+  /**
+   * Record log process
+   */
+  recordLog("History_Query", "UPDATE", array($idPatient), "selectPersonal");
 
-  ////////////////////////////////////////////////////////////////////
-  // Reset abort setting
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reset abort setting
+   */
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 

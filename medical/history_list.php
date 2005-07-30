@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_list.php,v 1.13 2005/07/28 17:47:33 jact Exp $
+ * $Id: history_list.php,v 1.14 2005/07/30 18:58:37 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]))
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "history";
   $onlyDoctor = true;
@@ -37,9 +37,9 @@
   require_once("../classes/Problem_Page_Query.php");
   require_once("../lib/misc_lib.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get var
+   */
   $idPatient = intval($_GET["key"]);
 
   $problemQ = new Problem_Page_Query();
@@ -56,23 +56,22 @@
     Error::query($problemQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Clinic History");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   if ( !showPatientHeader($idPatient) )
@@ -89,7 +88,7 @@
 
   echo "<hr />\n";
 
-  echo '<h3>' . _("Closed Medical Problems List:") . "</h3>\n";
+  echo '<h2>' . _("Closed Medical Problems List:") . "</h2>\n";
 
   if ($count == 0)
   {

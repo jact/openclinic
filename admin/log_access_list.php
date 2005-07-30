@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.13 2005/07/21 16:55:57 jact Exp $
+ * $Id: log_access_list.php,v 1.14 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -17,18 +17,18 @@
  * @since 0.4
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to log statistics if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get vars. Go back to log statistics if none found.
+   */
   if (count($_GET) == 0)
   {
     header("Location: ../admin/log_stats.php?table=access");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "logs";
   $restrictInDemo = true; // There are not logs in demo version
@@ -37,9 +37,9 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Access_Page_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $year = (isset($_GET["year"])) ? intval($_GET["year"]) : 0;
   $month = (isset($_GET["month"])) ? intval($_GET["month"]) : 0;
   $day = (isset($_GET["day"])) ? intval($_GET["day"]) : 0;
@@ -59,22 +59,21 @@
     Error::query($accessQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Access Logs");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Logs") => "../admin/log_stats.php?table=access",
     $title => ""
   );
-  showNavLinks($links, "logs.png");
+  HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
   if ($total == 0)

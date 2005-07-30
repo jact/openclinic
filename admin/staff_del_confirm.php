@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del_confirm.php,v 1.9 2005/07/28 17:46:27 jact Exp $
+ * $Id: staff_del_confirm.php,v 1.10 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -16,16 +16,16 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "staff";
   $returnLocation = "../admin/staff_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string. Go back to staff list if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for query string. Go back to staff list if none found.
+   */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["sur1"]) || empty($_GET["sur2"]) || empty($_GET["first"]))
   {
     header("Location: " . $returnLocation);
@@ -37,30 +37,29 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idMember = intval($_GET["key"]);
   $surname1 = Check::safeText($_GET["sur1"]);
   $surname2 = Check::safeText($_GET["sur2"]);
   $firstName = Check::safeText($_GET["first"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show confirm page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Delete Staff Member");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Staff Members") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "staff.png");
+  HTML::breadCrumb($links, "icon staffIcon");
   unset($links);
 ?>
 

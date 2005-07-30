@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del_confirm.php,v 1.9 2005/07/28 17:46:27 jact Exp $
+ * $Id: theme_del_confirm.php,v 1.10 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -16,16 +16,16 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "themes";
   $returnLocation = "../admin/theme_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string. Go back to theme list if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for query string. Go back to theme list if none found.
+   */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]) || empty($_GET["file"]))
   {
     header("Location: " . $returnLocation);
@@ -37,29 +37,28 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idTheme = intval($_GET["key"]);
   $name = Check::safeText($_GET["name"]);
   $file = Check::safeText($_GET["file"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show confirm page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Delete Theme");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Themes") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "themes.png");
+  HTML::breadCrumb($links, "icon themeIcon");
   unset($links);
 ?>
 

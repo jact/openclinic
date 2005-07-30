@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.9 2005/07/28 17:46:27 jact Exp $
+ * $Id: theme_preload_css.php,v 1.10 2005/07/30 18:58:26 jact Exp $
  */
 
 /**
@@ -17,17 +17,17 @@
  * @since 0.7
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idTheme = ((isset($_GET["key"]) && intval($_GET["key"]) > 0) ? intval($_GET["key"]) : 0);
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "themes";
-  $restrictInDemo = true; // To prevent users' malice // ya veremos
+  $restrictInDemo = true; // To prevent users' malice // We'll see
   $returnLocation = ($idTheme > 0)
     ? '../admin/theme_edit_form.php?key=' . $idTheme
     : '../admin/theme_new_form.php';
@@ -52,27 +52,25 @@
     exit();
   }
 
-  // after login_check inclusion to avoid JavaScript mistakes in demo version
+  /**
+   * Show page
+   */
+  $title = _("Preload CSS file");
+  // to avoid JavaScript mistakes in demo version
   $focusFormName = "forms[0]";
   $focusFormField = "css_filename";
-
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
-  $title = _("Preload CSS file");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Themes") => "../admin/theme_list.php",
     (strstr($returnLocation, "edit") ? _("Edit Theme") : _("Add New Theme")) => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "themes.png");
+  HTML::breadCrumb($links, "icon themeIcon");
   unset($links);
 ?>
 
@@ -88,7 +86,7 @@
   $row .= OPEN_SEPARATOR;
 
   //$row .= Form::strHidden("MAX_FILE_SIZE", "MAX_FILE_SIZE", "10000");
-  $row .= Form::strFile("css_filename", "css_filename", "", 50, /*"", $pageErrors["css_filename"]*/);
+  $row .= Form::strFile("css_filename", "css_filename", "", 50/*, "", $pageErrors["css_filename"]*/);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 

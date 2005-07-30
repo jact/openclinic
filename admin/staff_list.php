@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.15 2005/07/21 16:55:57 jact Exp $
+ * $Id: staff_list.php,v 1.16 2005/07/30 18:58:25 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "staff";
 
@@ -26,9 +26,9 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Staff_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $memberType = (isset($_GET["type"]) ? Check::safeText($_GET["type"]) : "");
   $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
@@ -39,50 +39,49 @@
     Error::query($staffQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Staff Members");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  showNavLinks($links, "staff.png");
+  HTML::breadCrumb($links, "icon staffIcon");
   unset($links);
 
-  ////////////////////////////////////////////////////////////////////
-  // Display insertion message if coming from new with a successful insert.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display insertion message if coming from new with a successful insert.
+   */
   if (isset($_GET["added"]) && !empty($info))
   {
     HTML::message(sprintf(_("Staff member, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display update message if coming from edit with a successful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display update message if coming from edit with a successful update.
+   */
   if (isset($_GET["updated"]) && !empty($info))
   {
     HTML::message(sprintf(_("Staff member, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display deletion message if coming from del with a successful delete.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display deletion message if coming from del with a successful delete.
+   */
   if (isset($_GET["deleted"]) && !empty($info))
   {
     HTML::message(sprintf(_("Staff member, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display login used message.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display login used message.
+   */
   if (isset($_GET["login"]) && !empty($info))
   {
     HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
