@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.16 2005/07/28 17:46:27 jact Exp $
+ * $Id: user_edit_form.php,v 1.17 2005/07/30 18:57:25 jact Exp $
  */
 
 /**
@@ -16,20 +16,21 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to users list if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]))
+  /**
+   * Checking for get vars. Go back to users list if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     header("Location: ../admin/user_list.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = ((isset($_GET["all"])) ? "home" : "admin");
   $nav = "users";
+  $returnLocation = ((isset($_GET["all"])) ? "../home/index.php" : "../admin/user_list.php");
 
   require_once("../shared/read_settings.php");
   if ( !isset($_GET["all"]) )
@@ -37,79 +38,74 @@
     include_once("../shared/login_check.php");
   }
   require_once("../lib/Form.php");
+  require_once("../classes/User_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  // after login_check inclusion to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "email";
+  /**
+   * Retrieving get vars
+   */
+  $idUser = intval($_GET["key"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string flag to read data from database.
-  ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["key"]))
+  /**
+   * Search database
+   */
+  $userQ = new User_Query();
+  $userQ->connect();
+  if ($userQ->isError())
   {
-    $idUser = intval($_GET["key"]);
-    $postVars["id_user"] = $idUser;
-
-    include_once("../classes/User_Query.php");
-
-    $userQ = new User_Query();
-    $userQ->connect();
-    if ($userQ->isError())
-    {
-      Error::query($userQ);
-    }
-
-    $numRows = $userQ->select($idUser);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
-
-    if ( !$numRows )
-    {
-      $userQ->close();
-      include_once("../shared/header.php");
-
-      HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../shared/footer.php");
-      exit();
-    }
-
-    $user = $userQ->fetch();
-    if ($userQ->isError())
-    {
-      Error::fetch($userQ, false);
-    }
-    else
-    {
-      $postVars["id_member"] = $user->getIdMember();
-      $postVars["login"] = $user->getLogin();
-      $postVars["email"] = $user->getEmail();
-      $postVars["actived"] = ($user->isActived() ? "checked" : "");
-      $postVars["id_theme"] = $user->getIdTheme();
-      $postVars["id_profile"] = $user->getIdProfile();
-    }
-    $userQ->freeResult();
-    $userQ->close();
-    unset($userQ);
-    unset($user);
+    Error::query($userQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  $numRows = $userQ->select($idUser);
+  if ($userQ->isError())
+  {
+    $userQ->close();
+    Error::query($userQ);
+  }
+
+  if ( !$numRows )
+  {
+    $userQ->close();
+    include_once("../shared/header.php");
+
+    HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
+
+    include_once("../shared/footer.php");
+    exit();
+  }
+
+  $user = $userQ->fetch();
+  if ($userQ->isError())
+  {
+    Error::fetch($userQ, false);
+  }
+  else
+  {
+    $postVars["id_user"] = $idUser;
+    $postVars["id_member"] = $user->getIdMember();
+    $postVars["login"] = $user->getLogin();
+    $postVars["email"] = $user->getEmail();
+    $postVars["actived"] = ($user->isActived() ? "checked" : "");
+    $postVars["id_theme"] = $user->getIdTheme();
+    $postVars["id_profile"] = $user->getIdProfile();
+  }
+  $userQ->freeResult();
+  $userQ->close();
+  unset($userQ);
+  unset($user);
+
+  /**
+   * Show page
+   */
   $title = ((isset($_GET["all"])) ? _("Change User Data") : _("Edit User"));
+  // to avoid JavaScript mistakes in demo version
+  $focusFormName = "forms[0]";
+  $focusFormField = "email";
   require_once("../shared/header.php");
 
-  $returnLocation = ((isset($_GET["all"])) ? "../home/index.php" : "../admin/user_list.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   if ( !isset($_GET["all"]) )
   {
     $links = array(
@@ -125,7 +121,7 @@
       $title => ""
     );
   }
-  showNavLinks($links, "users.png");
+  HTML::breadCrumb($links, "icon userIcon");
   unset($links);
 
   require_once("../shared/form_errors_msg.php");

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_edit_form.php,v 1.7 2005/07/28 17:47:33 jact Exp $
+ * $Id: history_personal_edit_form.php,v 1.8 2005/07/30 18:57:54 jact Exp $
  */
 
 /**
@@ -16,99 +16,101 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "history";
   $onlyDoctor = false;
 
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
+  {
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
+
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
+  require_once("../classes/History_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  // after login_check inclusion to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "birth_growth";
+  /**
+   * Retrieving get vars
+   */
+  $idPatient = intval($_GET["key"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string flag to read data from database.
-  ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["key"]))
+  /**
+   * Search database
+   */
+  $historyQ = new History_Query();
+  $historyQ->connect();
+  if ($historyQ->isError())
   {
-    $idPatient = intval($_GET["key"]);
+    Error::query($historyQ);
+  }
 
-    include_once("../classes/History_Query.php");
-
-    $historyQ = new History_Query();
-    $historyQ->connect();
-    if ($historyQ->isError())
-    {
-      Error::query($historyQ);
-    }
-
-    $numRows = $historyQ->selectPersonal($idPatient);
-    if ($historyQ->isError())
-    {
-      $historyQ->close();
-      Error::query($historyQ);
-    }
-
-    if ( !$numRows )
-    {
-      $historyQ->close();
-      include_once("../shared/header.php");
-
-      HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../shared/footer.php");
-      exit();
-    }
-
-    $history = $historyQ->fetchPersonal();
-    if ($historyQ->isError())
-    {
-      Error::fetch($historyQ, false);
-    }
-    else
-    {
-      $postVars["id_patient"] = $history->getIdPatient();
-      $postVars["birth_growth"] = $history->getBirthGrowth();
-      $postVars["growth_sexuality"] = $history->getGrowthSexuality();
-      $postVars["feed"] = $history->getFeed();
-      $postVars["habits"] = $history->getHabits();
-      $postVars["peristaltic_conditions"] = $history->getPeristalticConditions();
-      $postVars["psychological"] = $history->getPsychological();
-      $postVars["children_complaint"] = $history->getChildrenComplaint();
-      $postVars["venereal_disease"] = $history->getVenerealDisease();
-      $postVars["accident_surgical_operation"] = $history->getAccidentSurgicalOperation();
-      $postVars["medicinal_intolerance"] = $history->getMedicinalIntolerance();
-      $postVars["mental_illness"] = $history->getMentalIllness();
-    }
-    $historyQ->freeResult();
+  $numRows = $historyQ->selectPersonal($idPatient);
+  if ($historyQ->isError())
+  {
     $historyQ->close();
-    unset($historyQ);
-    unset($history);
+    Error::query($historyQ);
+  }
+
+  if ( !$numRows )
+  {
+    $historyQ->close();
+    include_once("../shared/header.php");
+
+    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
+
+    include_once("../shared/footer.php");
+    exit();
+  }
+
+  $history = $historyQ->fetchPersonal();
+  if ($historyQ->isError())
+  {
+    Error::fetch($historyQ, false);
   }
   else
   {
-    $idPatient = $postVars["id_patient"];
+    $postVars["id_patient"] = $history->getIdPatient();
+    $postVars["birth_growth"] = $history->getBirthGrowth();
+    $postVars["growth_sexuality"] = $history->getGrowthSexuality();
+    $postVars["feed"] = $history->getFeed();
+    $postVars["habits"] = $history->getHabits();
+    $postVars["peristaltic_conditions"] = $history->getPeristalticConditions();
+    $postVars["psychological"] = $history->getPsychological();
+    $postVars["children_complaint"] = $history->getChildrenComplaint();
+    $postVars["venereal_disease"] = $history->getVenerealDisease();
+    $postVars["accident_surgical_operation"] = $history->getAccidentSurgicalOperation();
+    $postVars["medicinal_intolerance"] = $history->getMedicinalIntolerance();
+    $postVars["mental_illness"] = $history->getMentalIllness();
   }
+  $historyQ->freeResult();
+  $historyQ->close();
+  unset($historyQ);
+  unset($history);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Edit Personal Antecedents");
+  // to avoid JavaScript mistakes in demo version
+  $focusFormName = "forms[0]";
+  $focusFormField = "birth_growth";
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
   $returnLocation = "../medical/history_personal_view.php?key=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -116,7 +118,7 @@
     _("View Personal Antecedents") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
@@ -124,9 +126,9 @@
 
   require_once("../shared/form_errors_msg.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Display update message if coming from setting_edit with a successful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display update message if coming from setting_edit with a successful update.
+   */
   if (isset($_GET["updated"]))
   {
     HTML::message(_("Personal Antecedents have been updated."), OPEN_MSG_INFO);

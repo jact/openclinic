@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit_form.php,v 1.11 2005/07/28 17:46:27 jact Exp $
+ * $Id: staff_edit_form.php,v 1.12 2005/07/30 18:57:25 jact Exp $
  */
 
 /**
@@ -16,82 +16,87 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "staff";
+  $returnLocation = "../admin/staff_list.php";
+
+  /**
+   * Checking for query string. Go back to staff list if none found.
+   */
+  if (count($_GET) == 0 || empty($_GET["key"]) || !is_numeric($_GET["key"]))
+  {
+    header("Location: " . $returnLocation);
+    exit();
+  }
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
+  require_once("../classes/Staff_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  // after login_check inclusion to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "nif";
+  /**
+   * Retrieving get vars
+   */
+  $idMember = intval($_GET["key"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string flag to read data from database.
-  ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["key"]))
+  /**
+   * Search database
+   */
+  $staffQ = new Staff_Query();
+  $staffQ->connect();
+  if ($staffQ->isError())
   {
-    $idMember = intval($_GET["key"]);
-    $postVars["id_member"] = $idMember;
-
-    include_once("../classes/Staff_Query.php");
-
-    $staffQ = new Staff_Query();
-    $staffQ->connect();
-    if ($staffQ->isError())
-    {
-      Error::query($staffQ);
-    }
-
-    $numRows = $staffQ->select($idMember);
-    if ($staffQ->isError())
-    {
-      $staffQ->close();
-      Error::query($staffQ);
-    }
-
-    if ( !$numRows )
-    {
-      $staffQ->close();
-      include_once("../shared/header.php");
-
-      HTML::message(_("That staff member does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../shared/footer.php");
-      exit();
-    }
-
-    $staff = $staffQ->fetch();
-    if ($staffQ->isError())
-    {
-      Error::fetch($staffQ, false);
-    }
-    else
-    {
-      $postVars["member_type"] = $staff->getMemberType();
-      $postVars["collegiate_number"] = $staff->getCollegiateNumber();
-      $postVars["nif"] = $staff->getNIF();
-      $postVars["first_name"] = $staff->getFirstName();
-      $postVars["surname1"] = $staff->getSurname1();
-      $postVars["surname2"] = $staff->getSurname2();
-      $postVars["address"] = $staff->getAddress();
-      $postVars["phone_contact"] = $staff->getPhone();
-      $postVars["login"] = $staff->getLogin();
-    }
-    $staffQ->freeResult();
-    $staffQ->close();
-    unset($staffQ);
-    unset($staff);
+    Error::query($staffQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  $numRows = $staffQ->select($idMember);
+  if ($staffQ->isError())
+  {
+    $staffQ->close();
+    Error::query($staffQ);
+  }
+
+  if ( !$numRows )
+  {
+    $staffQ->close();
+    include_once("../shared/header.php");
+
+    HTML::message(_("That staff member does not exist."), OPEN_MSG_ERROR);
+
+    include_once("../shared/footer.php");
+    exit();
+  }
+
+  $staff = $staffQ->fetch();
+  if ($staffQ->isError())
+  {
+    Error::fetch($staffQ, false);
+  }
+  else
+  {
+    $postVars["id_member"] = $idMember;
+    $postVars["member_type"] = $staff->getMemberType();
+    $postVars["collegiate_number"] = $staff->getCollegiateNumber();
+    $postVars["nif"] = $staff->getNIF();
+    $postVars["first_name"] = $staff->getFirstName();
+    $postVars["surname1"] = $staff->getSurname1();
+    $postVars["surname2"] = $staff->getSurname2();
+    $postVars["address"] = $staff->getAddress();
+    $postVars["phone_contact"] = $staff->getPhone();
+    $postVars["login"] = $staff->getLogin();
+  }
+  $staffQ->freeResult();
+  $staffQ->close();
+  unset($staffQ);
+  unset($staff);
+
+  /**
+   * Show page
+   */
   switch (substr($postVars["member_type"], 0, 1))
   {
     case "A":
@@ -107,20 +112,20 @@
       exit();
       break;
   }
+  // to avoid JavaScript mistakes in demo version
+  $focusFormName = "forms[0]";
+  $focusFormField = "nif";
   require_once("../shared/header.php");
 
-  $returnLocation = "../admin/staff_list.php";
-
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread Crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Staff Members") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "staff.png");
+  HTML::breadCrumb($links, "icon staffIcon");
   unset($links);
 
   require_once("../shared/form_errors_msg.php");

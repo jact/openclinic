@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.14 2005/07/28 17:46:28 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.15 2005/07/30 18:57:26 jact Exp $
  */
 
 /**
@@ -16,17 +16,17 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "users";
   $returnLocation = "../admin/user_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to users list if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]))
+  /**
+   * Checking for get vars. Go back to users list if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -34,82 +34,79 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
+  require_once("../classes/User_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  // after login_check inclusion to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "pwd";
+  /**
+   * Retrieving get vars
+   */
+  $idUser = intval($_GET["key"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string flag to read data from database.
-  ////////////////////////////////////////////////////////////////////
-  if (isset($_GET["key"]))
+  /**
+   * Search database
+   */
+  $userQ = new User_Query();
+  $userQ->connect();
+  if ($userQ->isError())
   {
-    $idUser = intval($_GET["key"]);
-    $postVars["id_user"] = $idUser;
-
-    include_once("../classes/User_Query.php");
-
-    $userQ = new User_Query();
-    $userQ->connect();
-    if ($userQ->isError())
-    {
-      Error::query($userQ);
-    }
-
-    $numRows = $userQ->select($idUser);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
-
-    if ( !$numRows )
-    {
-      $userQ->close();
-      include_once("../shared/header.php");
-
-      HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../shared/footer.php");
-      exit();
-    }
-
-    $user = $userQ->fetch();
-    if ($userQ->isError())
-    {
-      Error::fetch($userQ, false);
-    }
-    else
-    {
-      $postVars["login"] = $user->getLogin();
-      $postVars["pwd"] = $postVars["pwd2"] = "";
-      //$postVars["pwd"] = $postVars["pwd2"] = $user->getPwd(); // no because it's encoded
-      //Error::debug($user->getPwd());
-    }
-    $userQ->freeResult();
-    $userQ->close();
-    unset($userQ);
-    unset($user);
+    Error::query($userQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  $numRows = $userQ->select($idUser);
+  if ($userQ->isError())
+  {
+    $userQ->close();
+    Error::query($userQ);
+  }
+
+  if ( !$numRows )
+  {
+    $userQ->close();
+    include_once("../shared/header.php");
+
+    HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
+
+    include_once("../shared/footer.php");
+    exit();
+  }
+
+  $user = $userQ->fetch();
+  if ($userQ->isError())
+  {
+    Error::fetch($userQ, false);
+  }
+  else
+  {
+    $postVars["id_user"] = $idUser;
+    $postVars["login"] = $user->getLogin();
+    $postVars["pwd"] = $postVars["pwd2"] = "";
+    //$postVars["pwd"] = $postVars["pwd2"] = $user->getPwd(); // no because it's encoded
+    //Error::debug($user->getPwd());
+  }
+  $userQ->freeResult();
+  $userQ->close();
+  unset($userQ);
+  unset($user);
+
+  /**
+   * Show page
+   */
   $title = _("Reset User Password");
+  // to avoid JavaScript mistakes in demo version
+  $focusFormName = "forms[0]";
+  $focusFormField = "pwd";
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Users") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "users.png");
+  HTML::breadCrumb($links, "icon userIcon");
   unset($links);
 
   require_once("../shared/form_errors_msg.php");

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_view.php,v 1.8 2005/07/28 17:47:33 jact Exp $
+ * $Id: history_personal_view.php,v 1.9 2005/07/30 18:57:54 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]))
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "history";
   $onlyDoctor = true;
@@ -37,14 +37,14 @@
   require_once("../classes/History_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get var
+   */
   $idPatient = intval($_GET["key"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Search database for problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search database for problem
+   */
   $historyQ = new History_Query();
   $historyQ->connect();
   if ($historyQ->isError())
@@ -81,24 +81,23 @@
   $historyQ->close();
   unset($historyQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show search results
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("View Personal Antecedents");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     _("Clinic History") => "../medical/history_list.php?key=" . $idPatient,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
@@ -108,9 +107,9 @@
     echo '<p><a href="../medical/history_personal_edit_form.php?key=' . $idPatient . '&amp;reset=Y">' . _("Edit Personal Antecedents") . "</a></p>\n";
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show personal antecedents
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show personal antecedents
+   */
   echo '<h2>' . _("Personal Antecedents") . "</h2>\n";
 
   if ($history->getBirthGrowth())
