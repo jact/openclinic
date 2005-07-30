@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit.php,v 1.5 2005/07/19 19:51:13 jact Exp $
+ * $Id: history_family_edit.php,v 1.6 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -95,15 +95,13 @@
     Error::query($historyQ);
   }
 
-  $table = $historyQ->getTableName();
-
   $historyQ->close();
   unset($historyQ);
 
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog($table, "UPDATE", array($idPatient));
+  recordLog("History_Query", "UPDATE", array($idPatient));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

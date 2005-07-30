@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_new.php,v 1.7 2005/07/19 19:51:13 jact Exp $
+ * $Id: patient_new.php,v 1.8 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -67,7 +67,7 @@
     $patQ->close();
     include_once("../shared/header.php");
 
-    echo '<p>' . sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName) . "</p>\n";
+    HTML::message(sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName), OPEN_MSG_INFO);
 
     include_once("../shared/footer.php");
     exit();
@@ -87,8 +87,6 @@
     Error::query($patQ);
   }
 
-  $table = $patQ->getTableName();
-
   $patQ->close();
   unset($patQ);
   unset($pat);
@@ -96,7 +94,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog($table, "INSERT", array($idPatient));
+  recordLog("Patient_Page_Query", "INSERT", array($idPatient));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

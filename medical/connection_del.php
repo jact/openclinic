@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del.php,v 1.10 2005/07/20 20:25:23 jact Exp $
+ * $Id: connection_del.php,v 1.11 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -64,7 +64,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process (before deleting process)
   ////////////////////////////////////////////////////////////////////
-  recordLog($connQ->getTableName(), "DELETE", array($idProblem, $idConnection));
+  recordLog("Connection_Query", "DELETE", array($idProblem, $idConnection));
 
   $connQ->delete($idProblem, $idConnection);
   if ($connQ->isError())

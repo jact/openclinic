@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new.php,v 1.6 2005/07/19 19:51:13 jact Exp $
+ * $Id: connection_new.php,v 1.7 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -84,7 +84,7 @@
       ////////////////////////////////////////////////////////////////////
       // Record log process
       ////////////////////////////////////////////////////////////////////
-      recordLog($connQ->getTableName(), "INSERT", array($idProblem, $_POST["check"][$i]));
+      recordLog("Connection_Query", "INSERT", array($idProblem, $_POST["check"][$i]));
     }
   }
   $connQ->close();

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_del.php,v 1.9 2005/07/20 20:25:24 jact Exp $
+ * $Id: relative_del.php,v 1.10 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -63,7 +63,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process (before deleting process)
   ////////////////////////////////////////////////////////////////////
-  recordLog($relQ->getTableName(), "DELETE", array($idPatient, $idRelative));
+  recordLog("Relative_Query", "DELETE", array($idPatient, $idRelative));
 
   $relQ->delete($idPatient, $idRelative);
   if ($relQ->isError())

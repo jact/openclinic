@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new.php,v 1.8 2005/07/19 19:51:14 jact Exp $
+ * $Id: problem_new.php,v 1.9 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -80,15 +80,13 @@
     Error::query($problemQ);
   }
 
-  $table = $problemQ->getTableName();
-
   $problemQ->close();
   unset($problemQ);
 
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog($table, "INSERT", array($idProblem));
+  recordLog("Problem_Page_Query", "INSERT", array($idProblem));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

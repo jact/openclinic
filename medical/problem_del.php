@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.12 2005/07/20 20:25:24 jact Exp $
+ * $Id: problem_del.php,v 1.13 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -140,7 +140,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process (before deleting process)
   ////////////////////////////////////////////////////////////////////
-  recordLog($problemQ->getTableName(), "DELETE", array($idProblem));
+  recordLog("Problem_Page_Query", "DELETE", array($idProblem));
 
   $problemQ->delete($idProblem);
   if ($problemQ->isError())

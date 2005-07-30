@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.9 2005/07/20 20:25:24 jact Exp $
+ * $Id: patient_edit.php,v 1.10 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -73,7 +73,7 @@
     $patQ->close();
     include_once("../shared/header.php");
 
-    echo '<p>' . sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName) . "</p>\n";
+    HTML::message(sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName), OPEN_MSG_INFO);
 
     echo '<p><a href="' . $returnLocation . '">' . _("Return to Patient Social Data") . "</a></p>\n";
 
@@ -88,8 +88,6 @@
     Error::query($patQ);
   }
 
-  $table = $patQ->getTableName();
-
   $patQ->close();
   unset($patQ);
   unset($pat);
@@ -97,7 +95,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process
   ////////////////////////////////////////////////////////////////////
-  recordLog($table, "UPDATE", array($idPatient));
+  recordLog("Patient_Page_Query", "UPDATE", array($idPatient));
 
   ////////////////////////////////////////////////////////////////////
   // Reset abort setting

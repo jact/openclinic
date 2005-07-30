@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.14 2005/07/21 16:00:48 jact Exp $
+ * $Id: patient_del.php,v 1.15 2005/07/30 15:10:25 jact Exp $
  */
 
 /**
@@ -109,7 +109,7 @@
       $patQ->close();
       include_once("../shared/header.php");
 
-      echo '<p>' . _("That patient does not exist.") . "</p>\n";
+      HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
       include_once("../shared/footer.php");
       exit();
@@ -169,7 +169,7 @@
   ////////////////////////////////////////////////////////////////////
   // Record log process (before deleting process)
   ////////////////////////////////////////////////////////////////////
-  recordLog($patQ->getTableName(), "DELETE", array($idPatient));
+  recordLog("Patient_Page_Query", "DELETE", array($idPatient));
 
   $patQ->delete($idPatient);
   if ($patQ->isError())
@@ -232,14 +232,12 @@
       Error::query($problemQ);
     }
 
-    $table = $problemQ->getTableName();
-
     ////////////////////////////////////////////////////////////////////
     // Record log process (before deleting process)
     ////////////////////////////////////////////////////////////////////
     for ($i = 0; $i < $numRows; $i++)
     {
-      recordLog($table, "DELETE", array($array[$i]->getIdProblem()));
+      recordLog("Problem_Page_Query", "DELETE", array($array[$i]->getIdProblem()));
     }
 
     for ($i = 0; $i < $numRows; $i++)
@@ -304,14 +302,12 @@
       Error::query($problemQ);
     }
 
-    $table = $problemQ->getTableName();
-
     ////////////////////////////////////////////////////////////////////
     // Record log process (before deleting process)
     ////////////////////////////////////////////////////////////////////
     for ($i = 0; $i < $numRows; $i++)
     {
-      recordLog($table, "DELETE", array($array[$i]->getIdProblem()));
+      recordLog("Problem_Page_Query", "DELETE", array($array[$i]->getIdProblem()));
     }
 
     for ($i = 0; $i < $numRows; $i++)

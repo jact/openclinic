@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.9 2005/07/19 19:52:03 jact Exp $
+ * $Id: record_log.php,v 1.10 2005/07/30 15:10:00 jact Exp $
  */
 
 /**
@@ -26,44 +26,57 @@
   require_once("../classes/Record_Page_Query.php");
 
   /**
-   * void recordLog(string $table, string, $operation, array $key)
+   * void recordLog(string $class, string, $operation, array $key)
    *
    * Inserts a new record in log operations table if it is possible
    *
-   * @param string $table
+   * @param string $class
    * @param string $operation one between INSERT, UPDATE, DELETE
    * @param array $key primary key of the record
    * @return void
    * @access public
+   * @see OPEN_DEMO
    */
-  function recordLog($table, $operation, $key)
+  function recordLog($class, $operation, $key)
   {
     if (defined("OPEN_DEMO") && OPEN_DEMO)
     {
       return; // disabled in demo version
     }
 
-    $queryQ = new Query();
+    $queryQ = new $class;
     $queryQ->connect();
     if ($queryQ->isError())
     {
       Error::query($queryQ);
     }
 
-    $tableKey = $queryQ->getPrimaryKey($table);
+    $params = implode(", ", $key);
+    $numRows = $queryQ->select($params);
     if ($queryQ->isError())
     {
       $queryQ->close();
       Error::query($queryQ);
     }
 
-    $data = $queryQ->getRowData($tableKey, $key, $table);
+    if ( !$numRows )
+    {
+      $queryQ->close();
+      return;
+    }
+
+    $data = $queryQ->fetchRow(); // obtains an array
     if ($queryQ->isError())
     {
       $queryQ->close();
-      Error::query($queryQ);
+      Error::fetch($queryQ);
+      return;
     }
-    //$queryQ->close(); // don't remove comment mark (fails in relative_new.php)
+
+    $data = serialize($data);
+
+    $table = $queryQ->getTableName();
+    $queryQ->close();
     unset($queryQ);
 
     $recQ = new Record_Page_Query();
@@ -80,11 +93,11 @@
       Error::query($recQ);
     }
 
-    if ($operation != "DELETE") // because log process is before deleting process
+    //if ($operation != "DELETE") // because log process is before deleting process
     //if ($idKey2 == 0) // attention!!! if (count($key) > 1)
-    {
+    //{
       $recQ->close();
-    }
+    //}
     unset($recQ);
   }
 ?>
