@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.12 2005/07/28 17:47:33 jact Exp $
+ * $Id: problem_view.php,v 1.13 2005/07/31 11:15:52 jact Exp $
  */
 
 /**
@@ -16,17 +16,17 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "problems";
   $onlyDoctor = true;
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["pat"]))
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["pat"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
@@ -38,15 +38,15 @@
   require_once("../classes/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Search database for problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search database for problem
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -83,35 +83,34 @@
   $problemQ->close();
   unset($problemQ);
 
-  if ($problem->getClosingDate())
+  if ($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00")
   {
     $nav = "history";
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Update session variables
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update session variables
+   */
   require_once("../medical/visited_list.php");
   addPatient($idPatient);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show search results
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("View Medical Problem");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     (($nav == "problems") ? _("Medical Problems Report") : _("Clinic History")) => (($nav == "problems") ? "../medical/problem_list.php?key=" . $idPatient : "../medical/history_list.php?key=" . $idPatient),
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
