@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.14 2005/07/28 17:47:33 jact Exp $
+ * $Id: problem_edit_form.php,v 1.15 2005/07/31 11:10:51 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
   if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["pat"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "problems";
   $onlyDoctor = false;
@@ -39,20 +39,15 @@
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  // after login_check inclusion to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "wording";
-
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
 
-  // after clean (get_form_vars.php)
-  $postVars["id_problem"] = $idProblem;
-  $postVars["id_patient"] = $idPatient;
-
+  /**
+   * Search database
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -85,6 +80,8 @@
   }
   else
   {
+    $postVars["id_problem"] = $idProblem;
+    $postVars["id_patient"] = $idPatient;
     $postVars["order_number"] = $problem->getOrderNumber();
     $postVars["opening_date"] = $problem->getOpeningDate();
     if (isset($_GET["reset"]))
@@ -106,19 +103,21 @@
   unset($problemQ);
   unset($problem);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Edit Medical Problem");
+  // to avoid JavaScript mistakes in demo version
+  $focusFormName = "forms[0]";
+  $focusFormField = "wording";
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
   $returnLocation = "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -126,28 +125,28 @@
     _("View Medical Problem") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
   echo "<br />\n"; // @fixme should be deleted
 
   require_once("../shared/form_errors_msg.php");
-?>
 
-<form method="post" action="../medical/problem_edit.php">
-  <div>
-<?php
+  /**
+   * Edit form
+   */
+  echo '<form method="post" action="../medical/problem_edit.php">' . "\n";
+  echo "<div>\n";
+
   Form::hidden("id_problem", "id_problem", $postVars["id_problem"]);
   Form::hidden("last_update_date", "last_update_date", $postVars["last_update_date"]);
   Form::hidden("id_patient", "id_patient", $postVars["id_patient"]);
 
   require_once("../medical/problem_fields.php");
-?>
-  </div>
-</form>
 
-<?php
+  echo "</div>\n</form>\n";
+
   HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");

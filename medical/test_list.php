@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.14 2005/07/28 17:47:34 jact Exp $
+ * $Id: test_list.php,v 1.15 2005/07/31 11:13:36 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["pat"]))
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["pat"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "problems";
   $onlyDoctor = true;
@@ -38,25 +38,24 @@
   require_once("../classes/Test_Query.php");
   require_once("../lib/misc_lib.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
   $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("View Medical Tests");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
   require_once("../medical/problem_header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -64,31 +63,31 @@
     _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
 
-  ////////////////////////////////////////////////////////////////////
-  // Display insertion message if coming from new with a successful insert.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display insertion message if coming from new with a successful insert.
+   */
   if (isset($_GET["added"]) && !empty($info))
   {
     HTML::message(sprintf(_("Medical test, %s, has been added."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display update message if coming from edit with a successful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display update message if coming from edit with a successful update.
+   */
   if (isset($_GET["updated"]) && !empty($info))
   {
     HTML::message(sprintf(_("Medical test, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display deletion message if coming from del with a successful delete.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display deletion message if coming from del with a successful delete.
+   */
   if (isset($_GET["deleted"]) && !empty($info))
   {
     HTML::message(sprintf(_("Medical test, %s, has been deleted."), $info), OPEN_MSG_INFO);
@@ -122,7 +121,7 @@
     exit();
   }
 
-  echo '<h3>' . _("Medical Tests List:") . "</h3>\n";
+  echo '<h2>' . _("Medical Tests List:") . "</h2>\n";
 
   $thead = array(
     _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 3 : 1)),

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del_confirm.php,v 1.9 2005/07/28 17:47:34 jact Exp $
+ * $Id: test_del_confirm.php,v 1.10 2005/07/31 11:13:04 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["test"]) || !is_numeric($_GET["pat"]) || empty($_GET["file"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "problems";
   $onlyDoctor = false;
@@ -38,17 +38,17 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idProblem = intval($_GET["key"]);
   $idTest = intval($_GET["test"]);
   $idPatient = intval($_GET["pat"]);
   $file = Check::safeText($_GET["file"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show confirm page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Delete Medical Test");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
@@ -56,10 +56,9 @@
 
   $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -68,7 +67,7 @@
     _("View Medical Tests") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
@@ -76,7 +75,7 @@
   echo "<br />\n"; // @fixme should be deleted
 ?>
 
-<form method="post" action="../medical/test_del.php?key=<?php echo $idProblem; ?>&amp;test=<?php echo $idTest; ?>&amp;pat=<?php echo $idPatient; ?>&amp;file=<?php echo $file; ?>">
+<form method="post" action="../medical/test_del.php?key=<?php echo $idProblem; ?>&amp;test=<?php echo $idTest; ?>&amp;pat=<?php echo $idPatient; ?>&amp;file=<?php echo urlencode($file); ?>">
   <h3><?php echo $title; ?></h3>
 
   <?php HTML::message(sprintf(_("Are you sure you want to delete medical test, %s, from list?"), $file)); ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.15 2005/07/28 17:47:33 jact Exp $
+ * $Id: patient_search.php,v 1.16 2005/07/31 11:09:19 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "search";
   $onlyDoctor = true;
@@ -38,9 +38,9 @@
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post vars and scrubbing the data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post vars and scrubbing the data
+   */
   $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $searchType = Check::safeText($_POST["search_type"]);
   $logical = Check::safeText($_POST["logical"]);
@@ -53,9 +53,9 @@
   // transform string in array of strings
   $arraySearch = Search::explodeQuoted($searchText);
 
-  ////////////////////////////////////////////////////////////////////
-  // Search database
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search database
+   */
   $patQ = new Patient_Page_Query();
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $patQ->connect();
@@ -71,9 +71,9 @@
     Error::query($patQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show patient view screen if only one result from query
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show patient view screen if only one result from query
+   */
   if ($patQ->getRowCount() == 1)
   {
     $pat = $patQ->fetch();
@@ -84,25 +84,26 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show search results
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Search Results");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     $title => ""
   );
-  showNavLinks($links, "search.png");
+  HTML::breadCrumb($links, "icon searchIcon");
   unset($links);
 
-  // Display no results message if no results returned from search.
+  /**
+   * Display no results message if no results returned from search.
+   */
   if ($patQ->getRowCount() == 0)
   {
     $patQ->close();
@@ -139,13 +140,17 @@ function changePage(page)
 </form>
 
 <?php
-  // Printing result stats and page nav
+  /**
+   * Printing result stats and page nav
+   */
   echo '<p><strong>' . sprintf(_("%d matches found."), $patQ->getRowCount()) . "</strong></p>\n";
 
   $pageCount = $patQ->getPageCount();
   Search::pageLinks($currentPageNmbr, $pageCount);
 
-  // Choose field
+  /**
+   * Choose field
+   */
   $val = "";
   switch ($searchType)
   {
@@ -202,7 +207,9 @@ function changePage(page)
       break;
   }
 
-  // Build query
+  /**
+   * Build query
+   */
   $searchText = urldecode($searchText);
   $word = explode(" ", $searchText);
   $query = $key . " = (";

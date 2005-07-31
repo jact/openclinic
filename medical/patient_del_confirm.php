@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del_confirm.php,v 1.8 2005/07/28 17:47:33 jact Exp $
+ * $Id: patient_del_confirm.php,v 1.9 2005/07/31 11:08:13 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "social";
   $onlyDoctor = false;
@@ -37,31 +37,30 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idPatient = intval($_GET["key"]);
   $patName = Check::safeText($_GET["name"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show confirm page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Delete Patient");
   require_once("../shared/header.php");
 
   $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y";
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     _("Social Data") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 ?>
 

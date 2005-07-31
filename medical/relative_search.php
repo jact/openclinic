@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.18 2005/07/30 15:10:48 jact Exp $
+ * $Id: relative_search.php,v 1.19 2005/07/31 11:12:48 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "social";
   $onlyDoctor = false;
@@ -39,9 +39,9 @@
   require_once("../lib/Search.php");
   require_once("../lib/misc_lib.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post vars and scrubbing the data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post vars and scrubbing the data
+   */
   $idPatient = intval($_POST["id_patient"]);
   $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $searchType = Check::safeText($_POST["search_type"]);
@@ -57,9 +57,9 @@
   // explode data
   $arraySearch = explode("+", $searchText);
 
-  ////////////////////////////////////////////////////////////////////
-  // Search database
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search database
+   */
   $patQ = new Patient_Page_Query();
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $patQ->connect();
@@ -75,19 +75,18 @@
     Error::query($patQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show search results
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Search Results");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
   $returnLocation = "../medical/relative_list.php?key=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -95,12 +94,14 @@
     _("View Relatives") => $returnLocation,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
 
-  // Display no results message if no results returned from search.
+  /**
+   * Display no results message if no results returned from search.
+   */
   if ($patQ->getRowCount() == 0)
   {
     $patQ->close();
@@ -146,7 +147,9 @@ function changePage(page)
 </form>
 
 <?php
-  // Printing result stats and page nav
+  /**
+   * Printing result stats and page nav
+   */
   echo '<p><strong>' . sprintf(_("%d matches found."), $patQ->getRowCount()) . "</strong></p>\n";
 
   $pageCount = $patQ->getPageCount();
@@ -200,7 +203,9 @@ function changePage(page)
       break;
   }
 
-  // Build query
+  /**
+   * Build query
+   */
   $searchText = urldecode($searchText);
   $word = explode(" ", $searchText);
   $query = $key . " = (";

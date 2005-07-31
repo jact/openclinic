@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del_confirm.php,v 1.8 2005/07/28 17:47:33 jact Exp $
+ * $Id: problem_del_confirm.php,v 1.9 2005/07/31 11:10:22 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for query string. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for query string. Go back to form if none found.
+   */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["pat"]) || empty($_GET["wording"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "problems";
   $onlyDoctor = false;
@@ -37,26 +37,25 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
   $wording = Check::safeText($_GET["wording"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show confirm page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Delete Medical Problem");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
   $returnLocation = "../medical/problem_list.php?key=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
@@ -64,15 +63,15 @@
     _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
-  echo "<br />\n";
+  echo "<br />\n"; // @fixme should be deleted
 ?>
 
 <form method="post" action="../medical/problem_del.php">
-  <h3><?php echo _("Delete Medical Problem"); ?></h3>
+  <h3><?php echo $title; ?></h3>
 
   <?php HTML::message(sprintf(_("Are you sure you want to delete medical problem, %s, from list?"), $wording)); ?>
 

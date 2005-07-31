@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.9 2005/07/21 17:24:30 jact Exp $
+ * $Id: dump_process.php,v 1.10 2005/07/31 11:05:03 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "dump";
 
@@ -27,40 +27,38 @@
   require_once("../lib/dump_lib.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Increase time limit for script execution and initializes some variables
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Increase time limit for script execution and initializes some variables
+   */
   @set_time_limit(OPEN_EXEC_TIME_LIMIT);
   $dumpBuffer = "";
   $crlf = DLIB_whichCrlf(); // defines the default <CR><LF> format
   $_POST = Check::safeArray($_POST);
 
-  ////////////////////////////////////////////////////////////////////
-  // Send headers depending on whether the user choosen to download a dump file or not
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Send headers depending on whether the user choosen to download a dump file or not
+   */
   // No download
   if (empty($_POST['as_file']))
   {
-    ////////////////////////////////////////////////////////////////////
-    // Show page
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Show page
+     */
     $title = _("Dump result");
     include_once("../shared/header.php");
 
-    ////////////////////////////////////////////////////////////////////
-    // Navigation links
-    ////////////////////////////////////////////////////////////////////
-    include_once("../shared/navigation_links.php");
+    /**
+     * Bread crumb
+     */
     $links = array(
       _("Admin") => "../admin/index.php",
       _("Dumps") => "../admin/dump_view_form.php",
       $title => ""
     );
-    showNavLinks($links, "dumps.png");
+    HTML::breadCrumb($links, "icon dumpIcon");
     unset($links);
 
-    echo '<div class="sqlcode">' . "\n";
-    echo '  <pre width="80">' . "\n";
+    echo '<pre width="80" class="sqlcode">' . "\n";
   }
   else // Download
   {
@@ -114,9 +112,9 @@
     }
   } // end download
 
-  ////////////////////////////////////////////////////////////////////
-  // Builds the dump
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Builds the dump
+   */
   // Gets the number of tables if a dump of a database has been required
   if ( !isset($_POST['table_select']) || count($_POST['table_select']) != 1 )
   {
@@ -359,18 +357,17 @@
     unset($auxConn);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // "Displays" the dump...
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * "Displays" the dump...
+   */
   echo DLIB_htmlFormat($dumpBuffer, isset($_POST['as_file']) ? $_POST['as_file'] : false);
 
-  ////////////////////////////////////////////////////////////////////
-  // Close the html tags and add the footers in dump is displayed on screen
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Close the html tags and add the footers in dump is displayed on screen
+   */
   if (empty($_POST['as_file']))
   {
-    echo "  </pre>\n";
-    echo "</div>\n";
+    echo "</pre>\n";
     echo '<p><a href="../admin/dump_view_form.php">';
     echo _("Back return");
     echo "</a></p>\n";

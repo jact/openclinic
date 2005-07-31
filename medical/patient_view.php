@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.15 2005/07/28 17:47:33 jact Exp $
+ * $Id: patient_view.php,v 1.16 2005/07/31 11:10:04 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
   if (count($_GET) == 0 || empty($_GET["key"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "social";
   $onlyDoctor = true;
@@ -38,14 +38,14 @@
   require_once("../classes/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get var
+   */
   $idPatient = intval($_GET["key"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Search database for patient
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search database for patient
+   */
   $patQ = new Patient_Page_Query();
   $patQ->connect();
   if ($patQ->isError())
@@ -82,41 +82,40 @@
   unset($patQ);
   $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
-  ////////////////////////////////////////////////////////////////////
-  // Update session variables
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update session variables
+   */
   require_once("../medical/visited_list.php");
   addPatient($pat->getIdPatient(), $patName);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show search results
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Social Data");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  ////////////////////////////////////////////////////////////////////
-  // Display insertion message if coming from new with a successful insert.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display insertion message if coming from new with a successful insert.
+   */
   if (isset($_GET["added"]))
   {
     HTML::message(_("Patient has been added."), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display update message if coming from edit with a successful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display update message if coming from edit with a successful update.
+   */
   if (isset($_GET["updated"]))
   {
     HTML::message(_("Patient has been updated."), OPEN_MSG_INFO);

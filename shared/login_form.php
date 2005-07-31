@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.11 2005/07/28 17:48:07 jact Exp $
+ * $Id: login_form.php,v 1.12 2005/07/31 11:06:06 jact Exp $
  */
 
 /**
@@ -16,42 +16,46 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "home";
   $nav = "login";
-  $focusFormName = "forms[0]";
-  $focusFormField = "login_session";
 
   require_once("../shared/read_settings.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
   require_once("../lib/Form.php");
+  require_once("../lib/Check.php");
 
-  // this must be here, after read_settings.php (session_start())
+  /**
+   * this must be here, after read_settings.php (session_start())
+   */
   if (isset($_GET["ret"]))
   {
-    $_SESSION["returnPage"] = $_GET["ret"];
+    $_SESSION["returnPage"] = Check::safeText($_GET["ret"]);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("User Login");
+  $focusFormName = "forms[0]";
+  $focusFormField = "login_session";
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Home") => "../home/index.php",
     $title => ""
   );
-  showNavLinks($links, "users.png");
+  HTML::breadCrumb($links, "icon userIcon");
   unset($links);
 
-  // Warning message if loginAttempts == (OPEN_MAX_LOGIN_ATTEMPTS - 1)
+  /**
+   * Warning message if loginAttempts == (OPEN_MAX_LOGIN_ATTEMPTS - 1)
+   */
   if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION["loginAttempts"])
       && $_SESSION["loginAttempts"] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
   {

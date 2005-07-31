@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_optimize_db.php,v 1.8 2005/07/21 16:55:56 jact Exp $
+ * $Id: dump_optimize_db.php,v 1.9 2005/07/31 11:05:03 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
   $nav = "dump";
   $restrictInDemo = true; // To prevent users' malice
@@ -44,25 +44,24 @@
     Error::connection($auxConn);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Optimize Database");
   require_once("../shared/header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Dumps") => "../admin/dump_view_form.php",
     $title => ""
   );
-  showNavLinks($links, "dumps.png");
+  HTML::breadCrumb($links, "icon dumpIcon");
   unset($links);
 
-  echo '<h3>' . sprintf(_("Optimizing Database: %s"), OPEN_DATABASE) . "</h3>\n";
+  echo '<h2>' . sprintf(_("Optimizing Database: %s"), OPEN_DATABASE) . "</h2>\n";
 
   $numTables = $auxConn->numRows();
   if ( !$numTables )
@@ -144,7 +143,7 @@
   HTML::table($thead, $tbody, null, $options);
 
   $totalGain = round($totalGain, 3);
-  echo '<h4>' . _("Optimization Results") . ":</h4>\n";
+  echo '<h3>' . _("Optimization Results") . ":</h3>\n";
 
   HTML::message(sprintf(_("Total Database Size: %d KB"), $totalAll), OPEN_MSG_INFO);
   HTML::message(sprintf(_("Total Space Saved: %d KB"), $totalGain), OPEN_MSG_INFO);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.15 2005/07/28 17:47:33 jact Exp $
+ * $Id: relative_list.php,v 1.16 2005/07/31 11:12:33 jact Exp $
  */
 
 /**
@@ -16,18 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]))
+  /**
+   * Checking for get vars. Go back to form if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "social";
   $onlyDoctor = true;
@@ -38,9 +38,9 @@
   require_once("../classes/Patient_Page_Query.php");
   require_once("../lib/Form.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $idPatient = intval($_GET["key"]);
   $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
@@ -70,39 +70,38 @@
   $relQ->close();
   unset($relQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("View Relatives");
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Navigation links
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/navigation_links.php");
+  /**
+   * Bread crumb
+   */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     _("Social Data") => "../medical/patient_view.php?key=" . $idPatient,
     $title => ""
   );
-  showNavLinks($links, "patient.png");
+  HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   showPatientHeader($idPatient);
 
-  ////////////////////////////////////////////////////////////////////
-  // Display insertion message if coming from new with a successful insert.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display insertion message if coming from new with a successful insert.
+   */
   if (isset($_GET["added"]))
   {
     HTML::message(_("Relatives have been added."), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display deletion message if coming from del with a successful delete.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display deletion message if coming from del with a successful delete.
+   */
   if (isset($_GET["deleted"]) && !empty($info))
   {
     HTML::message(sprintf(_("Relative, %s, has been deleted."), $info), OPEN_MSG_INFO);
@@ -111,21 +110,21 @@
   if ($hasMedicalAdminAuth)
   {
     $title = _("Search Relatives to add to list");
-?>
 
-<p>&nbsp;</p> <!-- // @fixme should be deleted -->
+    echo "<p>&nbsp;</p>\n"; // @fixme should be deleted
 
-<form method="post" action="../medical/relative_search.php">
-  <div>
-<?php
-  Form::hidden("id_patient", "id_patient", $idPatient);
+    /**
+     * Search form
+     */
+    echo '<form method="post" action="../medical/relative_search.php">' . "\n";
+    echo "<div>\n";
 
-  require_once("../medical/patient_search_fields.php");
-?>
-  </div>
-</form>
+    Form::hidden("id_patient", "id_patient", $idPatient);
 
-<?php
+    require_once("../medical/patient_search_fields.php");
+
+    echo "</div>\n</form>\n";
+
     HTML::message('* ' . _("Note: Empty search to see all results."));
   } // end if
 
@@ -138,7 +137,7 @@
 
   echo "<hr />\n";
 
-  echo '<h3>' . _("Relatives List:") . "</h3>\n";
+  echo '<h2>' . _("Relatives List:") . "</h2>\n";
 
   $thead = array(
     _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),
