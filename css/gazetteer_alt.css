@@ -1,5 +1,5 @@
 /* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
-/* $Id: gazetteer_alt.css,v 1.6 2005/07/18 19:16:42 jact Exp $ */
+/* $Id: gazetteer_alt.css,v 1.7 2005/07/31 11:05:42 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -162,7 +162,6 @@ img {
   border-bottom: 1px dotted #848484;
   font-family: "trebuchet ms", verdana, helvetica, arial, sans-serif;
   margin: 0 0 0.75em 0;
-  padding: 0.5ex 0 0.5ex 0.5ex;
 }
 
 #mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
@@ -323,4 +322,46 @@ hr {
   color: #9C9A9C;
   border: 1px solid #9C9A9C;
   margin: 10px 0;
+}
+
+#breadCrumb {
+  margin-bottom: 0;
+}
+
+.icon {
+  margin-top: 5px;
+  padding: 10px 0 10px 45px;
+  background-position: center left;
+}
+
+.dumpIcon {
+  background: url(../images/dumps.png) no-repeat;
+}
+
+.logIcon {
+  background: url(../images/logs.png) no-repeat;
+}
+
+.configIcon {
+  background: url(../images/config_clinic.png) no-repeat;
+}
+
+.staffIcon {
+  background: url(../images/staff.png) no-repeat;
+}
+
+.themeIcon {
+  background: url(../images/themes.png) no-repeat;
+}
+
+.userIcon {
+  background: url(../images/users.png) no-repeat;
+}
+
+.patientIcon {
+  background: url(../images/patient.png) no-repeat;
+}
+
+.searchIcon {
+  background: url(../images/search.png) no-repeat;
 }

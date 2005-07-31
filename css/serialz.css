@@ -344,3 +344,45 @@ hr {
   border: 1px solid #dce0d3;
   margin: 10px 0;
 }
+
+#breadCrumb {
+  margin-bottom: 0;
+}
+
+.icon {
+  margin-top: 5px;
+  padding: 10px 0 10px 45px;
+  background-position: center left;
+}
+
+.dumpIcon {
+  background: url(../images/dumps.png) no-repeat;
+}
+
+.logIcon {
+  background: url(../images/logs.png) no-repeat;
+}
+
+.configIcon {
+  background: url(../images/config_clinic.png) no-repeat;
+}
+
+.staffIcon {
+  background: url(../images/staff.png) no-repeat;
+}
+
+.themeIcon {
+  background: url(../images/themes.png) no-repeat;
+}
+
+.userIcon {
+  background: url(../images/users.png) no-repeat;
+}
+
+.patientIcon {
+  background: url(../images/patient.png) no-repeat;
+}
+
+.searchIcon {
+  background: url(../images/search.png) no-repeat;
+}
