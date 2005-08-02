@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.18 2005/07/28 17:46:48 jact Exp $
+ * $Id: wizard.php,v 1.19 2005/08/02 18:04:19 jact Exp $
  */
 
 /**
@@ -27,9 +27,9 @@
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
   //error_reporting(E_ALL); // debug mode
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 8: If we have concluded...
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 8: If we have concluded...
+   */
   if ($_POST['buttonPressed'] == "next7")
   {
     header("Location: ../index.php");
@@ -47,9 +47,9 @@
     4 => "Gazetteer Alternate"
   );
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 0: Variables initialization if first visit
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 0: Variables initialization if first visit
+   */
   if ( !$_POST['alreadyVisited'] )
   {
     //init variables
@@ -77,17 +77,17 @@
     $_POST['adminTheme'] = 3; // Sinorca by default
   } // end step 0
 
-  ////////////////////////////////////////////////////////////////////
-  // i18n l10n
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * i18n l10n
+   */
   require_once("../shared/i18n.php");
 
   $locale = I18n::languageList();
   // end i18n l10n
 
-  ////////////////////////////////////////////////////////////////////
-  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+   */
   $title = _("OpenClinic Install Wizard");
   require_once("../shared/xhtml_start.php");
 ?>
@@ -135,9 +135,9 @@
   <h1><?php echo _("OpenClinic Install Wizard"); ?></h1>
 <!-- End Header -->
 <?php
-  ////////////////////////////////////////////////////////////////////
-  // Step 2: License
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 2: License
+   */
   if ($_POST['buttonPressed'] == "next1" || $_POST['buttonPressed'] == "back2")
   {
     $focusFormField = "license";
@@ -167,9 +167,9 @@
 <?php
   } // end step license
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 3: MySQL database settings
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 3: MySQL database settings
+   */
   elseif ($_POST['buttonPressed'] == "next2" || $_POST['buttonPressed'] == "back3")
   {
     $focusFormField = "dbHost[1]";
@@ -222,9 +222,9 @@
 <?php
   } // end step mysql
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 4: Config Settings
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 4: Config Settings
+   */
   elseif ($_POST['buttonPressed'] == "next3" || $_POST['buttonPressed'] == "back4")
   {
     $focusFormField = "clinicLanguage[1]";
@@ -301,9 +301,9 @@
 <?php
   } // end step config settings
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 5: Admin data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 5: Admin data
+   */
   elseif ($_POST['buttonPressed'] == "next4" || $_POST['buttonPressed'] == "back5")
   {
     $focusFormField = "firstName[1]";
@@ -382,9 +382,9 @@
 <?php
   } // end step admin data
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 6: Last Check
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 6: Last Check
+   */
   elseif ($_POST['buttonPressed'] == "next5")
   {
     //$focusFormField = "back5";
@@ -456,18 +456,18 @@
 <?php
   } // end step last check
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 7: Start using OpenClinic
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 7: Start using OpenClinic
+   */
   elseif ($_POST['buttonPressed'] == "next6")
   {
     $focusFormField = "next7";
 ?>
   <h2><?php echo sprintf(_("Step %d of %d: "), 7, 7) . _("Start using OpenClinic"); ?></h2>
 <?php
-  ////////////////////////////////////////////////////////////////////
-  // Write database_constants.php file
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Write database_constants.php file
+   */
   $mode = (ereg('Win', $_SERVER["HTTP_USER_AGENT"])) ? 'wb' : 'w';
   $aux = fopen('../database_constants.php', $mode);
   if ( !$aux )
@@ -483,7 +483,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.18 2005/07/28 17:46:48 jact Exp $
+ * $Id: wizard.php,v 1.19 2005/08/02 18:04:19 jact Exp $
  */
 
 /**
@@ -523,16 +523,16 @@
   fclose($aux);
   flush();
 
-  ////////////////////////////////////////////////////////////////////
-  // This is needed to really flush file contents
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * This is needed to really flush file contents
+   */
   $aux = fopen('../database_constants.php', 'r');
   fread($aux, filesize('../database_constants.php'));
   fclose($aux);
 
-  ////////////////////////////////////////////////////////////////////
-  // Database connection
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Database connection
+   */
   $db = @mysql_connect($_POST['dbHost'], $_POST['dbUser'], $_POST['dbPasswd']);
   if (mysql_errno() > 0) // problem with server
   {
@@ -551,18 +551,18 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Database creation
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Database creation
+   */
   mysql_query('DROP DATABASE IF EXISTS ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
   //mysql_create_db($_POST['dbName']);
   mysql_query('CREATE DATABASE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
   //mysql_select_db($_POST['dbName']);
   mysql_query('USE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
 
-  ////////////////////////////////////////////////////////////////////
-  // Database tables creation
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Database tables creation
+   */
   require_once("../install/parse_sql_file.php");
 
   foreach ($tables as $tableName)
@@ -581,9 +581,9 @@
     }
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Database tables update (setting_tbl, staff_tbl, user_tbl)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Database tables update (setting_tbl, staff_tbl, user_tbl)
+   */
   //mysql_select_db($_POST['dbName']);
   mysql_connect($_POST['dbHost'], $_POST['dbUser'], $_POST['dbPasswd']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
   mysql_query('USE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
@@ -634,9 +634,9 @@
 <?php
   } // end step 7
 
-  ////////////////////////////////////////////////////////////////////
-  // Step 1: Requirements
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Step 1: Requirements
+   */
   else
   {
     //$focusFormField = "next1";
