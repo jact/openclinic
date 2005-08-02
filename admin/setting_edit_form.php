@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.14 2005/07/30 18:58:25 jact Exp $
+ * $Id: setting_edit_form.php,v 1.15 2005/08/02 17:57:41 jact Exp $
  */
 
 /**
@@ -26,10 +26,6 @@
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
-
-  // after login_check inclusion to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "clinic_name";
 
   /**
    * Checking for query string flag to read data from database.
@@ -81,6 +77,9 @@
    * Show page
    */
   $title = _("Config settings");
+  // to avoid JavaScript mistakes in demo version
+  $focusFormName = "forms[0]";
+  $focusFormField = "clinic_name";
   require_once("../shared/header.php");
 
   /**
