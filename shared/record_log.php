@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.11 2005/07/30 18:55:37 jact Exp $
+ * $Id: record_log.php,v 1.12 2005/08/02 17:54:00 jact Exp $
  */
 
 /**
@@ -52,8 +52,7 @@
       Error::query($queryQ);
     }
 
-    $params = implode(", ", $key);
-    $numRows = $queryQ->$method($params);
+    $numRows = call_user_func_array(array($queryQ, $method), $key);
     if ($queryQ->isError())
     {
       $queryQ->close();
