@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: form_errors_msg.php,v 1.4 2005/07/21 16:57:13 jact Exp $
+ * $Id: form_errors_msg.php,v 1.5 2005/08/03 16:57:55 jact Exp $
  */
 
 /**
@@ -16,8 +16,20 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  if (count($pageErrors) > 0)
+  if (isset($pageErrors) && count($pageErrors) > 0)
   {
-    HTML::message(_("ERROR: Some fields have been incorrectly filled. Please fix the fields and send the form again. Each incorrectly filled field is marked with specific error message."), OPEN_MSG_ERROR);
+    echo '<div class="error">';
+    echo '<p>' . _("ERROR: Some fields have been incorrectly filled. Please fix the fields and send the form again. Each incorrectly filled field is marked with specific error message.") . "</p>\n";
+
+    echo "<ul>\n";
+    foreach ($pageErrors as $key => $value)
+    {
+      if ($value)
+      {
+        echo '<li><a href="#' . $key . '" onclick="document.' . $focusFormName . '.' . $key . '.focus();">' . $value . "</a></li>\n";
+      }
+    }
+    echo "</ul>\n";
+    echo "</div>\n";
   }
 ?>
