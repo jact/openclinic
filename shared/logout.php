@@ -2,32 +2,32 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: logout.php,v 1.6 2004/07/18 14:53:21 jact Exp $
+ * $Id: logout.php,v 1.7 2005/08/03 18:03:05 jact Exp $
  */
 
 /**
  * logout.php
- ********************************************************************
+ *
  * Session destruction process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   require_once("../shared/session_info.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Session destroy
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Session destroy
+   */
   //echo session_encode(); // debug
   $_SESSION = array(); // deregister all current session variables
   session_destroy(); // clean up session ID
 
-  ////////////////////////////////////////////////////////////////////
-  // Cookie destroy
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Cookie destroy
+   */
   $params = session_get_cookie_params();
   setcookie(session_name(), 0, 1, $params['path']);
   unset($params);

@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: cancel_msg.php,v 1.3 2004/07/28 16:33:08 jact Exp $
+ * $Id: cancel_msg.php,v 1.4 2005/08/03 18:01:57 jact Exp $
  */
 
 /**
  * cancel_msg.php
- ********************************************************************
+ *
  * Installation cancelled screen
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   require_once("../install/header.php"); // i18n l10n

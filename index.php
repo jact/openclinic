@@ -2,19 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.1 2004/01/29 14:04:34 jact Exp $
+ * $Id: index.php,v 1.2 2005/08/03 18:01:23 jact Exp $
  */
 
 /**
  * index.php
- ********************************************************************
+ *
  * Index page of the project
- ********************************************************************
- * Author: jact <jachavar@terra.es>
- * Last modified: 29/01/04 15:04
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
   require_once("./database_constants.php");

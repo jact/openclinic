@@ -1,18 +1,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: access_log_tbl.sql,v 1.4 2004/09/22 18:19:08 jact Exp $
+ * $Id: access_log_tbl.sql,v 1.5 2005/08/03 18:02:28 jact Exp $
  */
 
 /**
  * access_log_tbl.sql
- ********************************************************************
+ *
  * Creation of access_log_tbl structure
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.3
  */
 
