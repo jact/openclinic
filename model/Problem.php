@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem.php,v 1.8 2005/07/20 20:24:47 jact Exp $
+ * $Id: Problem.php,v 1.9 2005/08/03 18:04:19 jact Exp $
  */
 
 /**
@@ -87,7 +87,7 @@ class Problem
 
   /*
    * bool validateData(void)
-   ********************************************************************
+   *
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
