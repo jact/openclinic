@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.10 2005/07/30 18:58:26 jact Exp $
+ * $Id: theme_preload_css.php,v 1.11 2005/08/03 16:19:19 jact Exp $
  */
 
 /**
@@ -21,6 +21,7 @@
    * Retrieving get vars
    */
   $idTheme = ((isset($_GET["key"]) && intval($_GET["key"]) > 0) ? intval($_GET["key"]) : 0);
+  $fromCopy = (isset($_GET["copy"]) ? true : false);
 
   /**
    * Controlling vars
@@ -29,7 +30,9 @@
   $nav = "themes";
   $restrictInDemo = true; // To prevent users' malice // We'll see
   $returnLocation = ($idTheme > 0)
-    ? '../admin/theme_edit_form.php?key=' . $idTheme
+    ? (($fromCopy)
+      ? '../admin/theme_new_form.php?key=' . $idTheme
+      : '../admin/theme_edit_form.php?key=' . $idTheme)
     : '../admin/theme_new_form.php';
 
   require_once("../shared/read_settings.php");

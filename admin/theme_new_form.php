@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.15 2005/08/02 17:57:41 jact Exp $
+ * $Id: theme_new_form.php,v 1.16 2005/08/03 16:19:15 jact Exp $
  */
 
 /**
@@ -121,7 +121,7 @@ function editTheme()
 
 <?php
   echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a>\n";
-  echo ' | <a href="../admin/theme_preload_css.php">' . _("Preload CSS file") . "</a></p>\n";
+  echo ' | <a href="../admin/theme_preload_css.php' . (isset($idTheme) ? '?key=' . $idTheme . '&amp;copy=Y' : '') . '">' . _("Preload CSS file") . "</a></p>\n";
   //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // @todo
 
   echo "<hr />\n";
