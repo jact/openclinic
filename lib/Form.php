@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.2 2005/08/03 16:17:53 jact Exp $
+ * $Id: Form.php,v 1.3 2005/08/03 16:55:34 jact Exp $
  */
 
 /**
@@ -207,7 +207,7 @@ class Form
           {
             $html .= ' selected="selected"';
           }
-          $html .= ">" . /*htmlspecialchars(*/$optValue/*)*/ . "</option>\n"; // @fixme use htmlspecialchars
+          $html .= ">" . (!empty($value) ? /*htmlspecialchars(*/$optValue/*)*/ : "&nbsp;") . "</option>\n"; // @fixme use htmlspecialchars
         }
         $html .= "</optgroup>\n";
       }
@@ -218,7 +218,7 @@ class Form
         {
           $html .= ' selected="selected"';
         }
-        $html .= ">" . /*htmlspecialchars(*/$value/*)*/ . "</option>\n"; // @fixme use htmlspecialchars
+        $html .= ">" . (!empty($value) ? /*htmlspecialchars(*/$value/*)*/ : "&nbsp;") . "</option>\n"; // @fixme use htmlspecialchars
       }
     }
     $html .= "</select>\n";
