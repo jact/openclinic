@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.19 2005/07/21 16:57:13 jact Exp $
+ * $Id: footer.php,v 1.20 2005/08/03 17:40:49 jact Exp $
  */
 
 /**
@@ -16,7 +16,7 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();

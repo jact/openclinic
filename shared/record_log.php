@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.12 2005/08/02 17:54:00 jact Exp $
+ * $Id: record_log.php,v 1.13 2005/08/03 17:40:50 jact Exp $
  */
 
 /**
@@ -17,7 +17,7 @@
  * @since 0.3
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();
@@ -93,11 +93,7 @@
       Error::query($recQ);
     }
 
-    //if ($operation != "DELETE") // because log process is before deleting process
-    //if ($idKey2 == 0) // attention!!! if (count($key) > 1)
-    //{
-      $recQ->close();
-    //}
+    $recQ->close();
     unset($recQ);
   }
 ?>

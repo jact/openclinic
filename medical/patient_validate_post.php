@@ -2,22 +2,22 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_validate_post.php,v 1.6 2004/10/18 17:24:04 jact Exp $
+ * $Id: patient_validate_post.php,v 1.7 2005/08/03 17:40:19 jact Exp $
  */
 
 /**
  * patient_validate_post.php
- ********************************************************************
+ *
  * Validate post data of a patient
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  * @since 0.6
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.16 2005/07/19 19:52:03 jact Exp $
+ * $Id: read_settings.php,v 1.17 2005/08/03 17:41:10 jact Exp $
  */
 
 /**
@@ -16,38 +16,38 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Start server page generation time
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Start server page generation time
+   */
   $microTime = explode(" ", microtime());
   $startTime = $microTime[1] + $microTime[0];
   unset($microTime);
 
-  ////////////////////////////////////////////////////////////////////
-  // Loading global constants
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Loading global constants
+   */
   require_once("../shared/global_constants.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Reading settings from database
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Making session user info available on all pages
+   */
+  require_once("../shared/session_info.php");
+
+  /**
+   * Reading settings from database
+   */
   require_once("../classes/Setting_Query.php");
   require_once("../classes/Theme_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Making session user info available on all pages
-  ////////////////////////////////////////////////////////////////////
-  require_once("../shared/session_info.php");
-
-  ////////////////////////////////////////////////////////////////////
-  // Reading general settings
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reading general settings
+   */
   $setQ = new Setting_Query();
   $setQ->connect();
   if ($setQ->isError())
@@ -73,9 +73,9 @@
   $setQ->close();
   unset($setQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // General settings constants
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * General settings constants
+   */
   define("OPEN_CLINIC_NAME",      $set->getClinicName());
   define("OPEN_CLINIC_HOURS",     $set->getClinicHours());
   define("OPEN_CLINIC_ADDRESS",   $set->getClinicAddress());
@@ -91,14 +91,14 @@
 
   unset($set);
 
-  ////////////////////////////////////////////////////////////////////
-  // i18n l10n (after OPEN_LANGUAGE is defined)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * i18n l10n (after OPEN_LANGUAGE is defined)
+   */
   require_once("../shared/i18n.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Reading theme settings
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reading theme settings
+   */
   $themeQ = new Theme_Query();
   $themeQ->connect();
   if ($themeQ->isError())
@@ -131,9 +131,9 @@
   $themeQ->close();
   unset($themeQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Theme related constants
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Theme related constants
+   */
   define("OPEN_THEME_NAME",     $theme->getThemeName());
   define("OPEN_THEME_CSS_FILE", $theme->getCSSFile());
 

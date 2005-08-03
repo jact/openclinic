@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: misc_lib.php,v 1.9 2005/07/28 17:51:42 jact Exp $
+ * $Id: misc_lib.php,v 1.10 2005/08/03 17:39:59 jact Exp $
  */
 
 /**
@@ -17,7 +17,7 @@
  * @since 0.7
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();

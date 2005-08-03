@@ -2,21 +2,21 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_lib.php,v 1.9 2005/07/21 17:24:24 jact Exp $
+ * $Id: dump_lib.php,v 1.10 2005/08/03 17:39:59 jact Exp $
  */
 
 /**
  * dump_lib.php
- ********************************************************************
+ *
  * Set of functions used to build dumps of tables
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();
@@ -42,10 +42,10 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * string DLIB_htmlFormat(string $string = '', string $asFile = '')
-   ********************************************************************
+   *
    * Uses the 'htmlspecialchars()' php function on databases, tables
    * and fields name if the dump has to be displayed on screen.
-   ********************************************************************
+   *
    * @param string $string the string to format
    * @param string $asFile
    * @return string the formatted string
@@ -58,11 +58,11 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * mixed DLIB_backquote(mixed $mixedVar, bool $doIt = true)
-   ********************************************************************
+   *
    * Adds backquotes on both sides of a database, table or field name.
    * Since MySQL 3.23.06 this allows to use non-alphanumeric characters
    * in these names.
-   ********************************************************************
+   *
    * @param   mixed    the database, table or field name to "backquote" or
    *                   array of it
    * @param   boolean  a flag to bypass this function (used by dump
@@ -99,10 +99,10 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * string DLIB_sqlAddSlashes(string $string = '', bool $isLike = false)
-   ********************************************************************
+   *
    * Add slashes before "'" and "\" characters so a value containing
    * them can be used in a sql comparison.
-   ********************************************************************
+   *
    * @param   string  the string to slash
    * @param   boolean whether the string will be used in a 'LIKE' clause
    *                  (it then requires two more escaped sequences) or not
@@ -122,9 +122,9 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * string DLIB_getTableDef(string $db, string $table, string $crlf, array &$postVars)
-   ********************************************************************
+   *
    * Returns $table's CREATE definition
-   ********************************************************************
+   *
    * @param   string   the database name
    * @param   string   the table name
    * @param   string   the end of line sequence
@@ -296,10 +296,10 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * bool DLIB_getTableContentFast(string $db, string $table, string $addQuery = '', string $crlf, array &$postVars)
-   ********************************************************************
+   *
    * php >= 4.0.5 only : get the content of $table as a series of INSERT
    * statements.
-   ********************************************************************
+   *
    * @param   string   the current database name
    * @param   string   the current table name
    * @param   string   the 'limit' clause to use with the sql query
@@ -416,10 +416,10 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * bool DLIB_getTableContentOld(string $db, string $table, string $addQuery = '', string $crlf, array &$postVars)
-   ********************************************************************
+   *
    * php < 4.0.5 only: get the content of $table as a series of INSERT
    * statements.
-   ********************************************************************
+   *
    * @param   string   the current database name
    * @param   string   the current table name
    * @param   string   the 'limit' clause to use with the sql query
@@ -533,10 +533,10 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * void DLIB_getTableContent(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $crlf, array &$postVars)
-   ********************************************************************
+   *
    * Dispatches between the versions of 'getTableContent' to use
    * depending on the php version
-   ********************************************************************
+   *
    * @param   string   the current database name
    * @param   string   the current table name
    * @param   integer  the offset on this table
@@ -562,9 +562,9 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * mixed DLIB_getTableCSV(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $sep, string $encBy, string $escBy, string $addCharacter, string $what)
-   ********************************************************************
+   *
    * Outputs the content of a table in CSV format
-   ********************************************************************
+   *
    * @param   string   the database name
    * @param   string   the table name
    * @param   integer  the offset on this table
@@ -709,9 +709,9 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * string DLIB_getTableXML(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $crlf, string $startTable, string $endTable)
-   ********************************************************************
+   *
    * Outputs the content of a table in XML format
-   ********************************************************************
+   *
    * @param   string   the database name
    * @param   string   the table name
    * @param   integer  the offset on this table
@@ -806,9 +806,9 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * string DLIB_whichCrlf(void)
-   ********************************************************************
+   *
    * Defines the <CR><LF> value depending on the user OS.
-   ********************************************************************
+   *
    * @return string the <CR><LF> value to use
    * @access public
    */
@@ -836,9 +836,9 @@ if ( !defined('DLIB_INCLUDED') )
 
   /**
    * string DLIB_localisedDate(int $timestamp = -1)
-   ********************************************************************
+   *
    * Writes localised date
-   ********************************************************************
+   *
    * @param  int    the current timestamp
    * @return string the formated date
    * @access public

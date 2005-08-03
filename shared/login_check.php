@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.9 2005/07/19 19:52:03 jact Exp $
+ * $Id: login_check.php,v 1.10 2005/08/03 17:40:50 jact Exp $
  */
 
 /**
@@ -17,15 +17,15 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking to see if we are in demo mode and if we should not execute this page.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking to see if we are in demo mode and if we should not execute this page
+   */
   if (isset($restrictInDemo) && $restrictInDemo && OPEN_DEMO)
   {
     include_once("../shared/demo_msg.php");
@@ -35,17 +35,17 @@
   require_once("../classes/Session_Query.php");
   require_once("../lib/Error.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Disabling users control for demo
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Disabling users control for demo
+   */
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     //works in PHP >= 4.1
     $_SESSION['returnPage'] = urlencode($_SERVER['REQUEST_URI']);
 
-    ////////////////////////////////////////////////////////////////////
-    // Checking to see if session variables exist
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Checking to see if session variables exist
+     */
     if ( !isset($_SESSION['loginSession']) || ($_SESSION['loginSession'] == "") )
     {
       header("Location: ../shared/login_form.php");
@@ -58,9 +58,9 @@
       exit();
     }
 
-    ////////////////////////////////////////////////////////////////////
-    // Checking if the request is from a different IP to previously
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Checking if the request is from a different IP to previously
+     */
     if (isset($_SESSION['loginIP']) && $_SESSION['loginIP'] != $_SERVER['REMOTE_ADDR'])
     {
       // This is possibly a session hijack attempt
@@ -72,9 +72,9 @@
       exit();
     }
 
-    ////////////////////////////////////////////////////////////////////
-    // Checking session table to see if token has timed out
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Checking session table to see if token has timed out
+     */
     $sessQ = new Session_Query();
     $sessQ->connect();
     if ($sessQ->isError())
@@ -102,10 +102,10 @@
       unset($_SESSION['invalidToken']);
     }
 
-    ////////////////////////////////////////////////////////////////////
-    // Checking authorization for this tab
-    // The session authorization flags were set at login in login.php
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Checking authorization for this tab
+     * The session authorization flags were set at login in login.php
+     */
     if (isset($tab))
     {
       if ($tab == "medical")
@@ -134,7 +134,6 @@
       }
     }
 
-    //if ( !$_SESSION['hasAdminAuth'] )
     if ( !$_SESSION['hasAdminAuth'] && !$_SESSION['hasMedicalAuth'] )
     {
       $hasMedicalAdminAuth = (isset($onlyDoctor) ? !($onlyDoctor) : true);

@@ -2,31 +2,30 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_defines.php,v 1.4 2004/10/18 17:24:03 jact Exp $
+ * $Id: dump_defines.php,v 1.5 2005/08/03 17:39:28 jact Exp $
  */
 
 /**
  * dump_defines.php
- ********************************************************************
+ *
  * Definition constants needed for the dump process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();
   }
 
 /**
- * DEFINES CONSTANTS
  * Overview:
- *  DLIB_PHP_INT_VERSION      (int)    - eg: 30017 instead of 3.0.17 or 40006 instead of 4.0.6RC3
- *  DLIB_IS_WINDOWS           (bool)   - mark if OpenClinic running on windows server
+ *  DLIB_PHP_INT_VERSION      (int)    - eg: 30017 instead of 3.0.17 or 40006 instead of 4.0.6
+ *  DLIB_IS_WINDOWS           (bool)   - whether the os php is running on is windows or not
  *  DLIB_MYSQL_INT_VERSION    (int)    - eg: 32339 instead of 3.23.39
  *  DLIB_MYSQL_VERSION        (string) - eg: 3.23.39
  *  DLIB_USR_OS               (string) - the platform (os) of the user
@@ -34,7 +33,9 @@
  *  DLIB_USR_BROWSER_VER      (double) - the version of this browser
  */
 
-// php version
+/**
+ * DLIB_PHP_INT_VERSION
+ */
 if ( !defined('DLIB_PHP_INT_VERSION') )
 {
   if ( !ereg('([0-9]{1,2}).([0-9]{1,2}).([0-9]{1,2})', phpversion(), $match) )
@@ -61,7 +62,9 @@ if ( !defined('DLIB_PHP_INT_VERSION') )
   }
 }
 
-// Whether the os php is running on is windows or not
+/**
+ * DLIB_IS_WINDOWS
+ */
 if ( !defined('DLIB_IS_WINDOWS') )
 {
   if (defined('PHP_OS') && eregi('win', PHP_OS))
@@ -74,7 +77,9 @@ if ( !defined('DLIB_IS_WINDOWS') )
   }
 }
 
-// MySQL Version
+/**
+ * DLIB_MYSQL_INT_VERSION, DLIB_MYSQL_VERSION
+ */
 if ( !defined('DLIB_MYSQL_INT_VERSION') )
 {
   if (defined('OPEN_HOST'))
@@ -122,9 +127,12 @@ if ( !defined('DLIB_MYSQL_INT_VERSION') )
   unset($match);
 }
 
-// Determines platform (OS), browser and version of the user
-// Based on a phpBuilder article:
-//   see http://www.phpbuilder.net/columns/tim20000821.php
+/**
+ * DLIB_USR_OS, DLIB_USR_BROWSER_VER, DLIB_USR_BROWSER_AGENT
+ * Determines platform (OS), browser and version of the user
+ * Based on a phpBuilder article:
+ * @see http://www.phpbuilder.net/columns/tim20000821.php
+ */
 if ( !defined('DLIB_USR_OS') )
 {
   if ( !empty($_SERVER['HTTP_USER_AGENT']) )

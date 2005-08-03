@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.19 2005/08/02 18:04:19 jact Exp $
+ * $Id: wizard.php,v 1.20 2005/08/03 17:39:42 jact Exp $
  */
 
 /**
@@ -483,7 +483,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.19 2005/08/02 18:04:19 jact Exp $
+ * $Id: wizard.php,v 1.20 2005/08/03 17:39:42 jact Exp $
  */
 
 /**
@@ -495,19 +495,17 @@
  * Last modified: ' . date("d/m/Y H:i") . '
  */
 
-  if (str_replace("\\\\", "/", __FILE__) == str_replace("\\\\", "/", $_SERVER[\'PATH_TRANSLATED\']))
+  if (str_replace("\\\\", "/", __FILE__) == str_replace("\\\\", "/", $_SERVER[\'SCRIPT_FILENAME\']))
   {
     header("Location: ./index.php");
     exit();
   }
 
 /**
- ********************************************************************
- *                         A T T E N T I O N !
+ * A T T E N T I O N !
  *
  * Please modify the following database connection variables to match
  * the MySQL database and user that you have created for OpenClinic.
- ********************************************************************
  */
   define("OPEN_HOST",     "' . $_POST['dbHost'] . '");
   define("OPEN_DATABASE", "' . $_POST['dbName'] . '");

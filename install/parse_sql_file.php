@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: parse_sql_file.php,v 1.11 2005/07/19 19:51:35 jact Exp $
+ * $Id: parse_sql_file.php,v 1.12 2005/08/03 17:39:42 jact Exp $
  */
 
 /**
@@ -16,7 +16,7 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();
@@ -30,7 +30,9 @@ require_once("../lib/Error.php");
  *  bool parseSQLFile(string $file, string $table, bool $drop = true)
  */
 
-// table array (15 elements)
+/**
+ * table array (15 elements)
+ */
 $tables = array(
   "access_log_tbl",
   "connection_problem_tbl",
@@ -85,7 +87,9 @@ function parseSQLFile($file, $table, $drop = true)
     }
   }
 
-  // reading through sql file executing SQL only when ";" is encountered and if is out of brackets
+  /**
+   * reading through sql file executing SQL only when ";" is encountered and if is out of brackets
+   */
   $fp = fopen($file, "r");
   $sqlSentence = "";
   $outBracket = true;

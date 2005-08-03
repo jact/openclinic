@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_validate_post.php,v 1.9 2005/06/13 19:03:23 jact Exp $
+ * $Id: problem_validate_post.php,v 1.10 2005/08/03 17:40:19 jact Exp $
  */
 
 /**
@@ -17,7 +17,7 @@
  * @since 0.6
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['PATH_TRANSLATED']))
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
   {
     header("Location: ../index.php");
     exit();
