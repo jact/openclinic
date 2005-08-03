@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.1 2005/07/28 17:46:02 jact Exp $
+ * $Id: Form.php,v 1.2 2005/08/03 16:17:53 jact Exp $
  */
 
 /**
@@ -199,7 +199,7 @@ class Form
     {
       if (is_array($value))
       {
-        $html .= '<optgroup>' . $key . '</optgroup>';
+        $html .= '<optgroup label="' . $key . '">';
         foreach ($value as $optKey => $optValue)
         {
           $html .= '<option value="' . $optKey . '"';
@@ -209,6 +209,7 @@ class Form
           }
           $html .= ">" . /*htmlspecialchars(*/$optValue/*)*/ . "</option>\n"; // @fixme use htmlspecialchars
         }
+        $html .= "</optgroup>\n";
       }
       else
       {
