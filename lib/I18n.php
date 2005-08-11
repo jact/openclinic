@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: I18n.php,v 1.2 2005/07/28 19:03:42 jact Exp $
+ * $Id: I18n.php,v 1.3 2005/08/11 16:03:13 jact Exp $
  */
 
 /**
@@ -15,6 +15,10 @@
  *
  * Author: jact <jachavar@gmail.com>
  */
+
+define("OPEN_LANG_DEFAULT",  "en");
+define("OPEN_LANG_DIR",      "../locale/");
+define("OPEN_LANG_FILENAME", "openclinic");
 
 /**
  * I18n set of i18n and l10n functions
@@ -33,11 +37,6 @@
  *  mixed languageList(void)
  *  array getNLS(void)
  */
-
-define("OPEN_LANG_DEFAULT",  "en");
-define("OPEN_LANG_DIR",      "../locale/");
-define("OPEN_LANG_FILENAME", "openclinic");
-
 class I18n
 {
   /**
@@ -51,6 +50,7 @@ class I18n
    */
   function setLanguage($lang = "")
   {
+    $newLang = OPEN_LANG_DEFAULT;
     if (empty($lang))
     {
       // Detect Browser Language
@@ -71,10 +71,6 @@ class I18n
         {
           $newLang = $browserLanguage;
         }
-        else
-        {
-          $newLang = OPEN_LANG_DEFAULT;
-        }
       }
     }
     else
@@ -82,10 +78,6 @@ class I18n
       if (I18n::languageExists($lang))
       {
         $newLang = $lang;
-      }
-      else
-      {
-        $newLang = OPEN_LANG_DEFAULT;
       }
     }
     putenv("LANG=" . $newLang);
@@ -95,7 +87,6 @@ class I18n
     if (defined("PHP_OS") && eregi("win", PHP_OS))
     {
       setlocale(LC_ALL, (isset($nls['win32'][$newLang]) ? $nls['win32'][$newLang] : $newLang));
-      //echo $nls['win32'][$newLang]; echo $newLang; exit(); // debug
     }
     else
     {
@@ -116,10 +107,10 @@ class I18n
    */
   function initLanguage($lang)
   {
-    ////////////////////////////////////////////////////////////////////
-    // Test if we're using gettext. If yes, do some gettext settings.
-    // If not emulate _() function
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Test if we're using gettext. If yes, do some gettext settings.
+     * If not emulate _() function
+     */
     $check = (in_array("gettext", get_loaded_extensions()) && function_exists('gettext'));
     if ($check)
     {
@@ -338,15 +329,14 @@ class I18n
     {
       if ($file != 'CVS' && $file != '.' && $file != '..' && is_dir(OPEN_LANG_DIR . $file))
       {
-        /*if (function_exists('html_entity_decode'))
+        if (function_exists('html_entity_decode'))
         {
           $array["$file"] = html_entity_decode($nls['language'][$file], ENT_COMPAT, OPEN_CHARSET);
         }
         else
         {
           $array["$file"] = strtr($nls['language'][$file], array_flip(get_html_translation_table(HTML_ENTITIES)));
-        }*/
-        $array["$file"] = $nls['language'][$file];
+        }
       }
     }
     closedir($handle);
