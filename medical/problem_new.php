@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new.php,v 1.9 2005/07/30 15:10:25 jact Exp $
+ * $Id: problem_new.php,v 1.10 2005/08/15 14:30:55 jact Exp $
  */
 
 /**
@@ -16,20 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/problem_new_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "medical";
-  $nav = "problems";
+  /**
+   * Controlling vars
+   */
   $onlyDoctor = false;
 
   require_once("../shared/read_settings.php");
@@ -37,28 +35,28 @@
   require_once("../classes/Problem_Page_Query.php");
   require_once("../shared/record_log.php"); // record log
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post var
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post var
+   */
   $idPatient = intval($_POST["id_patient"]);
 
-  $errorLocation = "../medical/problem_new_form.php?key=" . $idPatient;
+  $errorLocation = "../medical/problem_new_form.php?key=" . $idPatient; // controlling var
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
   $problem = new Problem();
 
   require_once("../medical/problem_validate_post.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Prevent user from aborting script
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Prevent user from aborting script
+   */
   $oldAbort = ignore_user_abort(true);
 
-  ////////////////////////////////////////////////////////////////////
-  // Insert new medical problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Insert new medical problem
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -83,27 +81,27 @@
   $problemQ->close();
   unset($problemQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Record log process
+   */
   recordLog("Problem_Page_Query", "INSERT", array($idProblem));
 
-  ////////////////////////////////////////////////////////////////////
-  // Reset abort setting
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reset abort setting
+   */
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  $returnLocation = "../medical/problem_list.php?key=" . $idPatient;
+  $returnLocation = "../medical/problem_list.php?key=" . $idPatient; // controlling var
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to problem list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($problem->getWording()) . ($problem->getClosingDate(false) ? "&closed=Y" : "");
   unset($problem);
   header("Location: " . $returnLocation . "&added=Y&info=" . $info);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit.php,v 1.10 2005/07/30 15:10:26 jact Exp $
+ * $Id: test_edit.php,v 1.11 2005/08/15 14:30:55 jact Exp $
  */
 
 /**
@@ -16,20 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/test_list.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "medical";
-  $nav = "problems";
+  /**
+   * Controlling vars
+   */
   $onlyDoctor = false;
   $restrictInDemo = true; // To prevent users' malice
 
@@ -38,32 +36,32 @@
   require_once("../classes/Test_Query.php");
   require_once("../shared/record_log.php"); // record log
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post vars
+   */
   $idPatient = intval($_POST["id_patient"]);
   $idProblem = intval($_POST["id_problem"]);
   $idTest = intval($_POST["id_test"]);
 
-  $errorLocation = "../medical/test_edit_form.php?key=" . $idProblem . "&pat=" . $idPatient . "&test=" . $idTest;
+  $errorLocation = "../medical/test_edit_form.php?key=" . $idProblem . "&pat=" . $idPatient . "&test=" . $idTest; // controlling var
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
   $test = new Test();
 
   $test->setIdTest($_POST["id_test"]);
 
   require_once("../medical/test_validate_post.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Prevent user from aborting script
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Prevent user from aborting script
+   */
   $oldAbort = ignore_user_abort(true);
 
-  ////////////////////////////////////////////////////////////////////
-  // Update medical test
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update medical test
+   */
   $testQ = new Test_Query();
   $testQ->connect();
   if ($testQ->isError())
@@ -81,28 +79,28 @@
   $testQ->close();
   unset($testQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Record log process
+   */
   recordLog("Test_Query", "UPDATE", array($test->getIdTest()));
 
-  ////////////////////////////////////////////////////////////////////
-  // Reset abort setting
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reset abort setting
+   */
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
   // To header, without &amp;
-  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&pat=" . $idPatient;
+  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&pat=" . $idPatient; // controlling var
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to medical test list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($test->getPathFilename(false));
   unset($test);
   header("Location: " . $returnLocation . "&updated=Y&info=" . $info);

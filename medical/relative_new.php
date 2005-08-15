@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_new.php,v 1.7 2005/07/30 15:10:25 jact Exp $
+ * $Id: relative_new.php,v 1.8 2005/08/15 14:30:55 jact Exp $
  */
 
 /**
@@ -16,20 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/patient_new_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "medical";
-  $nav = "social";
+  /**
+   * Controlling vars
+   */
   $onlyDoctor = false;
 
   require_once("../shared/read_settings.php");
@@ -37,19 +35,19 @@
   require_once("../classes/Relative_Query.php");
   require_once("../shared/record_log.php"); // record log
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post var
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post var
+   */
   $idPatient = intval($_POST["id_patient"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Prevent user from aborting script
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Prevent user from aborting script
+   */
   $oldAbort = ignore_user_abort(true);
 
-  ////////////////////////////////////////////////////////////////////
-  // Insert new relatives patient
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Insert new relatives patient
+   */
   $relQ = new Relative_Query();
   $relQ->connect();
   if ($relQ->isError())
@@ -80,24 +78,24 @@
     }
     else
     {
-      ////////////////////////////////////////////////////////////////////
-      // Record log process
-      ////////////////////////////////////////////////////////////////////
+      /**
+       * Record log process
+       */
       recordLog("Relative_Query", "INSERT", array($idPatient, $_POST["check"][$i]));
     }
   }
   $relQ->close();
   unset($relQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Reset abort setting
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reset abort setting
+   */
   ignore_user_abort($oldAbort);
 
-  $returnLocation = "../medical/relative_list.php?key=" . $idPatient;
+  $returnLocation = "../medical/relative_list.php?key=" . $idPatient; // controlling var
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to relative list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   header("Location: " . $returnLocation . "&added=Y");
 ?>
