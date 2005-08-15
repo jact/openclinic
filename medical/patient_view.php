@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.17 2005/08/15 10:57:08 jact Exp $
+ * $Id: patient_view.php,v 1.18 2005/08/15 16:38:38 jact Exp $
  */
 
 /**
@@ -165,7 +165,7 @@
     echo '<p>' . $pat->getRace() . "</p>\n";
   }
 
-  if ($pat->getBirthDate() != "")
+  if ($pat->getBirthDate() != "" && $pat->getBirthDate() != "0000-00-00")
   {
     echo '<h3>' . _("Birth Date") . "</h3>\n";
     echo '<p>' . I18n::localDate($pat->getBirthDate()) . "</p>\n";
@@ -180,7 +180,7 @@
     echo '<p>' . $pat->getBirthPlace() . "</p>\n";
   }
 
-  if ($pat->getDeceaseDate() != "")
+  if ($pat->getDeceaseDate() != "" && $pat->getDeceaseDate() != "0000-00-00")
   {
     echo '<h3>' . _("Decease Date") . "</h3>\n";
     echo '<p>' . I18n::localDate($pat->getDeceaseDate()) . "</p>\n";
