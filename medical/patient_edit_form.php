@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.17 2005/08/15 10:56:11 jact Exp $
+ * $Id: patient_edit_form.php,v 1.18 2005/08/15 15:10:41 jact Exp $
  */
 
 /**
@@ -110,16 +110,11 @@
 
       $_SESSION["postVars"] = $postVars;
     }
-    $patName = urlencode($pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2());
 
     $patQ->freeResult();
     $patQ->close();
     unset($patQ);
     unset($pat);
-  }
-  else
-  {
-    $patName = urlencode($postVars["first_name"] . " " . $postVars["surname1"] . " " . $postVars["surname2"]);
   }
 
   /**
