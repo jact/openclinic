@@ -1,5 +1,5 @@
 /* Feel free and change all what you want */
-/* $Id: scheme.css,v 1.8 2005/07/31 11:05:42 jact Exp $ */
+/* $Id: scheme.css,v 1.9 2005/08/15 16:34:40 jact Exp $ */
 
 /* --Layout-- */
 html, body {
@@ -316,6 +316,12 @@ hr {
   background-position: center left;
 }
 
+.bigIcon {
+  margin-top: 5px;
+  padding: 20px 0 20px 65px;
+  background-position: center left;
+}
+
 .dumpIcon {
   background: url(../images/dumps.png) no-repeat;
 }
@@ -346,4 +352,12 @@ hr {
 
 .searchIcon {
   background: url(../images/search.png) no-repeat;
+}
+
+.medicalIcon {
+  background: url(../images/medical.png) no-repeat;
+}
+
+.adminIcon {
+  background: url(../images/admin.png) no-repeat;
 }

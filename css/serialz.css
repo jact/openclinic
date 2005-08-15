@@ -263,10 +263,6 @@ label {
   text-align: center;
 }
 
-#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
-  vertical-align: middle;
-}
-
 #headerInformation p {
   margin: 0;
 }
@@ -355,6 +351,12 @@ hr {
   background-position: center left;
 }
 
+.bigIcon {
+  margin-top: 5px;
+  padding: 20px 0 20px 65px;
+  background-position: center left;
+}
+
 .dumpIcon {
   background: url(../images/dumps.png) no-repeat;
 }
@@ -385,4 +387,12 @@ hr {
 
 .searchIcon {
   background: url(../images/search.png) no-repeat;
+}
+
+.medicalIcon {
+  background: url(../images/medical.png) no-repeat;
+}
+
+.adminIcon {
+  background: url(../images/admin.png) no-repeat;
 }
