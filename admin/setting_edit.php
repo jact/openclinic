@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit.php,v 1.4 2005/07/19 19:50:03 jact Exp $
+ * $Id: setting_edit.php,v 1.5 2005/08/15 11:22:59 jact Exp $
  */
 
 /**
@@ -16,29 +16,27 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../admin/setting_edit_form.php?reset=Y");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "admin";
-  $nav = "settings";
+  /**
+   * Controlling vars
+   */
   //$restrictInDemo = true;
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Setting_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
   $set = new Setting();
 
   $set->setClinicName($_POST["clinic_name"]);
@@ -82,9 +80,9 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Update setting table row
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update app settings
+   */
   $setQ = new Setting_Query();
   $setQ->connect();
   if ($setQ->isError())
@@ -111,9 +109,9 @@
   unset($setQ);
   unset($set);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 

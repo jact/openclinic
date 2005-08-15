@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new.php,v 1.7 2005/07/19 19:50:04 jact Exp $
+ * $Id: user_new.php,v 1.8 2005/08/15 11:22:59 jact Exp $
  */
 
 /**
@@ -16,11 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "admin";
-  $nav = "users";
+  /**
+   * Controlling vars
+   */
   //$restrictInDemo = true;
   $errorLocation = "../admin/user_new_form.php";
   $returnLocation = "../admin/user_list.php";
@@ -38,16 +36,16 @@
   require_once("../shared/login_check.php");
   require_once("../classes/User_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
   $user = new User();
 
   require_once("../admin/user_validate_post.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Insert new user
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Insert new user
+   */
   $userQ = new User_Query();
   $userQ->connect();
   if ($userQ->isError())
@@ -71,15 +69,15 @@
   $userQ->close();
   unset($userQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to user list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($user->getLogin());
   $returnLocation .= ((isset($loginUsed) && $loginUsed) ? "?login" : "?added") . "=Y&info=" . $info;
   unset($user);

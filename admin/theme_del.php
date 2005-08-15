@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del.php,v 1.11 2005/08/03 17:39:28 jact Exp $
+ * $Id: theme_del.php,v 1.12 2005/08/15 11:22:59 jact Exp $
  */
 
 /**
@@ -19,13 +19,11 @@
   /**
    * Controlling vars
    */
-  $tab = "admin";
-  $nav = "themes";
   //$restrictInDemo = true; // To prevent users' malice
   $returnLocation = "../admin/theme_list.php";
 
   /**
-   * Checking for post vars. Go back to theme list if none found.
+   * Checking for post vars. Go back to $returnLocation if none found.
    */
   if (count($_POST) == 0)
   {
@@ -69,7 +67,7 @@
   }
 
   /**
-   * Redirect to theme list to avoid reload problem
+   * Redirect to $returnLocation to avoid reload problem
    */
   $info = urlencode($name);
   header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
