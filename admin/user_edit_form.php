@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.17 2005/07/30 18:57:25 jact Exp $
+ * $Id: user_edit_form.php,v 1.18 2005/08/15 10:45:25 jact Exp $
  */
 
 /**
@@ -38,7 +38,6 @@
     include_once("../shared/login_check.php");
   }
   require_once("../lib/Form.php");
-  require_once("../classes/User_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   /**
@@ -47,52 +46,60 @@
   $idUser = intval($_GET["key"]);
 
   /**
-   * Search database
+   * Checking for query string flag to read data from database
    */
-  $userQ = new User_Query();
-  $userQ->connect();
-  if ($userQ->isError())
+  if (isset($_GET["reset"]))
   {
-    Error::query($userQ);
-  }
+    include_once("../classes/User_Query.php");
 
-  $numRows = $userQ->select($idUser);
-  if ($userQ->isError())
-  {
+    /**
+     * Search database
+     */
+    $userQ = new User_Query();
+    $userQ->connect();
+    if ($userQ->isError())
+    {
+      Error::query($userQ);
+    }
+
+    $numRows = $userQ->select($idUser);
+    if ($userQ->isError())
+    {
+      $userQ->close();
+      Error::query($userQ);
+    }
+
+    if ( !$numRows )
+    {
+      $userQ->close();
+      include_once("../shared/header.php");
+
+      HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
+
+      include_once("../shared/footer.php");
+      exit();
+    }
+
+    $user = $userQ->fetch();
+    if ($userQ->isError())
+    {
+      Error::fetch($userQ, false);
+    }
+    else
+    {
+      $postVars["id_user"] = $idUser;
+      $postVars["id_member"] = $user->getIdMember();
+      $postVars["login"] = $user->getLogin();
+      $postVars["email"] = $user->getEmail();
+      $postVars["actived"] = ($user->isActived() ? "checked" : "");
+      $postVars["id_theme"] = $user->getIdTheme();
+      $postVars["id_profile"] = $user->getIdProfile();
+    }
+    $userQ->freeResult();
     $userQ->close();
-    Error::query($userQ);
+    unset($userQ);
+    unset($user);
   }
-
-  if ( !$numRows )
-  {
-    $userQ->close();
-    include_once("../shared/header.php");
-
-    HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../shared/footer.php");
-    exit();
-  }
-
-  $user = $userQ->fetch();
-  if ($userQ->isError())
-  {
-    Error::fetch($userQ, false);
-  }
-  else
-  {
-    $postVars["id_user"] = $idUser;
-    $postVars["id_member"] = $user->getIdMember();
-    $postVars["login"] = $user->getLogin();
-    $postVars["email"] = $user->getEmail();
-    $postVars["actived"] = ($user->isActived() ? "checked" : "");
-    $postVars["id_theme"] = $user->getIdTheme();
-    $postVars["id_profile"] = $user->getIdProfile();
-  }
-  $userQ->freeResult();
-  $userQ->close();
-  unset($userQ);
-  unset($user);
 
   /**
    * Show page
@@ -131,9 +138,13 @@
 
 <script src="../scripts/password.php" type="text/javascript"></script>
 
-<form method="post" action="../admin/user_edit.php" onsubmit="return md5Login(this);">
-  <div>
 <?php
+  /**
+   * Edit form
+   */
+  echo '<form method="post" action="../admin/user_edit.php" onsubmit="return md5Login(this);">' . "\n";
+  echo "<div>\n";
+
   Form::hidden("referer", "referer", "edit"); // to user_validate_post.php
   Form::hidden("id_user", "id_user", $postVars["id_user"]);
   Form::hidden("id_member", "id_member", $postVars["id_member"]);
@@ -145,11 +156,9 @@
 
   $action = "edit";
   require_once("../admin/user_fields.php");
-?>
-  </div>
-</form>
 
-<?php
+  echo "</div>\n</form>\n";
+
   HTML::message('* ' . _("Note: The fields with * are required."));
 
   if (isset($_GET["all"]))

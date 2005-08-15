@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.16 2005/07/30 18:57:25 jact Exp $
+ * $Id: theme_edit_form.php,v 1.17 2005/08/15 10:42:59 jact Exp $
  */
 
 /**
@@ -24,9 +24,9 @@
   $returnLocation = "../admin/theme_list.php";
 
   /**
-   * Checking for get vars. Go back to theme list if none found.
+   * Checking for get vars. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || empty($_GET["key"]) || !is_numeric($_GET["key"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -34,7 +34,6 @@
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
-  require_once("../classes/Theme_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
@@ -44,55 +43,63 @@
   $idTheme = intval($_GET["key"]);
 
   /**
-   * Search database
+   * Checking for query string flag to read data from database
    */
-  $themeQ = new Theme_Query();
-  $themeQ->connect();
-  if ($themeQ->isError())
+  if (isset($_GET["reset"]))
   {
-    Error::query($themeQ);
-  }
+    include_once("../classes/Theme_Query.php");
 
-  $numRows = $themeQ->select($idTheme);
-  if ($themeQ->isError())
-  {
-    $themeQ->close();
-    Error::query($themeQ);
-  }
-
-  if ( !$numRows )
-  {
-    $themeQ->close();
-    include_once("../shared/header.php");
-
-    HTML::message(_("That theme does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../shared/footer.php");
-    exit();
-  }
-
-  $theme = $themeQ->fetch();
-  if ($themeQ->isError())
-  {
-    Error::fetch($themeQ, false);
-  }
-  else
-  {
-    $postVars["id_theme"] = $idTheme;
-    $postVars["theme_name"] = $theme->getThemeName();
-    $postVars["css_file"] = $theme->getCSSFile();
-    $filename = "../css/" . $theme->getCSSFile();
-    $fp = fopen($filename, 'r');
-    if ($fp)
+    /**
+     * Search database
+     */
+    $themeQ = new Theme_Query();
+    $themeQ->connect();
+    if ($themeQ->isError())
     {
-      $postVars["css_rules"] = fread($fp, filesize($filename));
-      fclose($fp);
+      Error::query($themeQ);
     }
+
+    $numRows = $themeQ->select($idTheme);
+    if ($themeQ->isError())
+    {
+      $themeQ->close();
+      Error::query($themeQ);
+    }
+
+    if ( !$numRows )
+    {
+      $themeQ->close();
+      include_once("../shared/header.php");
+
+      HTML::message(_("That theme does not exist."), OPEN_MSG_ERROR);
+
+      include_once("../shared/footer.php");
+      exit();
+    }
+
+    $theme = $themeQ->fetch();
+    if ($themeQ->isError())
+    {
+      Error::fetch($themeQ, false);
+    }
+    else
+    {
+      $postVars["id_theme"] = $idTheme;
+      $postVars["theme_name"] = $theme->getThemeName();
+      $postVars["css_file"] = $theme->getCSSFile();
+      $filename = "../css/" . $theme->getCSSFile();
+      $fp = fopen($filename, 'r');
+      if ($fp)
+      {
+        $postVars["css_rules"] = fread($fp, filesize($filename));
+        fclose($fp);
+      }
+    }
+    $themeQ->freeResult();
+    $themeQ->close();
+    unset($themeQ);
+    unset($theme);
   }
-  $themeQ->freeResult();
-  $themeQ->close();
-  unset($themeQ);
-  unset($theme);
 
   /**
    * Show page
@@ -137,25 +144,25 @@ function editTheme()
 
 <?php
   echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a>\n";
-  echo ' | <a href="../admin/theme_preload_css.php?key=' . intval($_GET["key"]) . '">' . _("Preload CSS file") . "</a></p>\n";
+  echo ' | <a href="../admin/theme_preload_css.php?key=' . $idTheme . '">' . _("Preload CSS file") . "</a></p>\n";
   //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // @todo
 
   echo "<hr />\n";
 
   require_once("../shared/form_errors_msg.php");
-?>
 
-<form method="post" action="../admin/theme_edit.php">
-  <div>
-<?php
+  /**
+   * Edit form
+   */
+  echo '<form method="post" action="../admin/theme_edit.php">' . "\n";
+  echo "<div>\n";
+
   Form::hidden("id_theme", "id_theme", $postVars["id_theme"]);
 
   require_once("../admin/theme_fields.php");
-?>
-  </div>
-</form>
 
-<?php
+  echo "</div>\n</form>\n";
+
   HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");
