@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.15 2005/08/03 17:39:28 jact Exp $
+ * $Id: user_fields.php,v 1.16 2005/08/15 10:46:07 jact Exp $
  */
 
 /**
@@ -38,7 +38,7 @@
   {
     $row = Form::strLabel("old_pwd", _("Current Password") . ":", true);
     $row .= OPEN_SEPARATOR;
-    $row .= Form::strPassword("old_pwd", "old_pwd", 20, 20, isset($postVars["old_pwd"]) ? $postVars["old_pwd"] : null, $pageErrors["old_pwd"]);
+    $row .= Form::strPassword("old_pwd", "old_pwd", 20, 20, isset($postVars["old_pwd"]) ? $postVars["old_pwd"] : null, isset($pageErrors["old_pwd"]) ? $pageErrors["old_pwd"] : null);
     $row .= Form::strHidden("md5_old", "md5_old");
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -48,14 +48,14 @@
   {
     $row = Form::strLabel("pwd", _("Password") . ":", true);
     $row .= OPEN_SEPARATOR;
-    $row .= Form::strPassword("pwd", "pwd", 20, 20, isset($postVars["pwd"]) ? $postVars["pwd"] : null, $pageErrors["pwd"]);
+    $row .= Form::strPassword("pwd", "pwd", 20, 20, isset($postVars["pwd"]) ? $postVars["pwd"] : null, isset($pageErrors["pwd"]) ? $pageErrors["pwd"] : null);
     $row .= Form::strHidden("md5", "md5");
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
 
     $row = Form::strLabel("pw2", _("Re-enter Password") . ":", true);
     $row .= OPEN_SEPARATOR;
-    $row .= Form::strPassword("pwd2", "pwd2", 20, 20, isset($postVars["pwd2"]) ? $postVars["pwd2"] : null, $pageErrors["pwd2"]);
+    $row .= Form::strPassword("pwd2", "pwd2", 20, 20, isset($postVars["pwd2"]) ? $postVars["pwd2"] : null, isset($pageErrors["pwd2"]) ? $pageErrors["pwd2"] : null);
     $row .= Form::strHidden("md5_confirm", "md5_confirm");
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
