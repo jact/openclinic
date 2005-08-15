@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.15 2005/08/02 17:57:41 jact Exp $
+ * $Id: setting_edit_form.php,v 1.16 2005/08/15 10:34:38 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   /**
-   * Checking for query string flag to read data from database.
+   * Checking for query string flag to read data from database
    */
   if (isset($_GET["reset"]))
   {
@@ -101,15 +101,17 @@
   {
     HTML::message(_("Data has been updated."), OPEN_MSG_INFO);
   }
-?>
 
-<form method="post" action="../admin/setting_edit.php">
-  <div>
-<?php require_once("../admin/setting_fields.php"); ?>
-  </div>
-</form>
+  /**
+   * Edit form
+   */
+  echo '<form method="post" action="../admin/setting_edit.php">' . "\n";
+  echo "<div>\n";
 
-<?php
+  require_once("../admin/setting_fields.php");
+
+  echo "</div>\n</form>\n";
+
   HTML::message('* ' . _("Note: The fields with * are required."));
   HTML::message('** ' . _("Note: If zero, searchs return all results without pagination."));
 
