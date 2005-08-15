@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.17 2005/08/15 10:57:22 jact Exp $
+ * $Id: print_medical_record.php,v 1.18 2005/08/15 16:39:26 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "print";
   $onlyDoctor = true;
@@ -32,12 +32,11 @@
   require_once("../lib/HTML.php");
 
   $style = '<link rel="stylesheet" type="text/css" href="../css/style.css" />' . "\n";
-  $style .= '<style type="text/css"><!--/*--><![CDATA[/*<!--*/' . "body {background: #fff; border: 0; padding: 0; }" . "/*]]>*/--></style>\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get vars. Close window if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_GET) == 0 || empty($_GET["key"]))
+  /**
+   * Checking for get vars. Close window if none found.
+   */
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
     include_once("../shared/xhtml_start.php");
     echo $style;
@@ -48,14 +47,14 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get var
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get var
+   */
   $idPatient = intval($_GET["key"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Search database for patient
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Search database for patient
+   */
   $patQ = new Patient_Page_Query();
   $patQ->connect();
   if ($patQ->isError())
@@ -93,17 +92,17 @@
   unset($patQ);
   $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
-  ////////////////////////////////////////////////////////////////////
-  // Show medical record
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show medical record
+   */
   $title = $patName . " " . date(_("Y-m-d H:i:s"));
   require_once("../shared/xhtml_start.php");
   echo $style;
-  echo "</head><body>\n";
+  echo "</head><body id='medicalRecord'>\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Show social data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show social data
+   */
   echo '<h2>' . _("Social Data") . "</h2>\n";
   echo '<h3>' . _("Patient") . "</h3>\n";
   echo '<p>' . $pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName() . "</p>\n";
@@ -135,7 +134,7 @@
     echo '<p>' . $pat->getRace() . "</p>\n";
   }
 
-  if ($pat->getBirthDate() != "")
+  if ($pat->getBirthDate() != "" && $pat->getBirthDate() != "0000-00-00")
   {
     echo '<h3>' . _("Birth Date") . "</h3>\n";
     echo '<p>' . I18n::localDate($pat->getBirthDate()) . "</p>\n";
@@ -150,7 +149,7 @@
     echo '<p>' . $pat->getBirthPlace() . "</p>\n";
   }
 
-  if ($pat->getDeceaseDate() != "")
+  if ($pat->getDeceaseDate() != "" && $pat->getDeceaseDate() != "0000-00-00")
   {
     echo '<h3>' . _("Decease Date") . "</h3>\n";
     echo '<p>' . I18n::localDate($pat->getDeceaseDate()) . "</p>\n";
@@ -221,9 +220,9 @@
 
   echo "<hr />\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Show medical problems
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show medical problems
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -238,9 +237,9 @@
     Error::query($problemQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show list
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show list
+   */
   echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
 
   if ($count == 0)
@@ -273,7 +272,7 @@
         }
         $staffQ->freeResult();
       }
-      //$staffQ->close(); // don't delete comment marks
+      $staffQ->close();
       unset($staffQ);
       unset($staff);
     }
@@ -336,9 +335,9 @@
   unset($problemQ);
   unset($problem);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show personal antecedents
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show personal antecedents
+   */
   $historyQ = new History_Query();
   $historyQ->connect();
   if ($historyQ->isError())
@@ -429,9 +428,9 @@
 
   echo "<hr />\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Show family antecedents
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show family antecedents
+   */
   $historyQ->selectFamily($idPatient);
   if ($historyQ->isError())
   {
@@ -476,9 +475,9 @@
 
   echo "<hr />\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Show closed medical problems
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show closed medical problems
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -493,9 +492,9 @@
     Error::query($problemQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Show list
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show list
+   */
   echo '<h2>' . _("Closed Medical Problems List:") . "</h2>\n";
 
   if ($count == 0)
@@ -511,26 +510,26 @@
 
     if ($problem->getIdMember())
     {
-      $auxQ = new Staff_Query();
-      $auxQ->connect();
-      if ($auxQ->isError())
+      $staffQ = new Staff_Query();
+      $staffQ->connect();
+      if ($staffQ->isError())
       {
-        Error::query($auxQ);
+        Error::query($staffQ);
       }
 
-      $numRows = $auxQ->select($problem->getIdMember());
+      $numRows = $staffQ->select($problem->getIdMember());
       if ($numRows)
       {
-        $staff = $auxQ->fetch();
+        $staff = $staffQ->fetch();
         if ($staff)
         {
           echo '<h3>' . _("Attending Physician") . "</h3>\n";
           echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
         }
-        $auxQ->freeResult();
+        $staffQ->freeResult();
       }
-      //$auxQ->close(); // don't delete comment marks
-      unset($auxQ);
+      $staffQ->close();
+      unset($staffQ);
       unset($staff);
     }
 
@@ -592,9 +591,9 @@
   unset($problemQ);
   unset($problem);
 
-  ////////////////////////////////////////////////////////////////////
-  // Do print the page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Do print the page
+   */
   echo '<script type="text/javascript">' . "\n";
   echo "<!--/*--><![CDATA[/*<!--*/\n";
   echo 'if (typeof(window.print) != "undefined")' . "\n";
@@ -604,8 +603,8 @@
   echo "/*]]>*///-->\n";
   echo "</script>\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Show footer page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show footer page
+   */
   echo "</body></html>\n";
 ?>
