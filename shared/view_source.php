@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: view_source.php,v 1.6 2005/07/21 16:57:13 jact Exp $
+ * $Id: view_source.php,v 1.7 2005/08/15 16:40:39 jact Exp $
  */
 
 /**
@@ -20,38 +20,24 @@
   require_once("../shared/login_check.php");
   require_once("../lib/HTML.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
-  ////////////////////////////////////////////////////////////////////
+  $_GET = Check::safeArray($_GET); // sanitizing parameters
+
+  /**
+   * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+   */
   $title = sprintf(_("Source file: %s"), $_GET["file"]);
   require_once("../shared/xhtml_start.php");
-?>
 
-<link rel="stylesheet" type="text/css" href="../css/style.css" />
+  echo '<link rel="stylesheet" type="text/css" href="../css/style.css" />';
+  echo "</head>\n";
 
-<style type="text/css">
-<!--/*--><![CDATA[/*<!--*/
-body {
-  background: #fff;
-  color: inherit;
-  border: 0;
-  padding: 0;
-}
-code {
-  white-space: pre;
-}
-/*]]>*/-->
-</style>
-</head>
-<body
-<?php
+  echo '<body id="viewSource"';
   if (count($_GET) == 0 || empty($_GET["file"]) || empty($_GET["tab"]))
   {
-    echo 'onload="window.close()"';
+    echo ' onload="window.close()"';
   }
-?>
->
-<?php
+  echo ">\n";
+
   if (isset($_SESSION["hasAdminAuth"]))
   {
     $file = basename($_GET["file"]);
@@ -75,6 +61,6 @@ code {
   {
     HTML::message(sprintf(_("You are not authorized to use %s tab."), _("Admin"))); // maybe change
   }
+
+  echo "</body>\n</html>\n";
 ?>
-</body>
-</html>
