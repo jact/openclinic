@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Search.php,v 1.1 2005/07/21 17:56:43 jact Exp $
+ * $Id: Search.php,v 1.2 2005/08/15 08:18:01 jact Exp $
  */
 
 /**
@@ -172,7 +172,7 @@ class Search
       $pageString .= ' | <a href="#" onclick="changePage(' . ($currentPage + 1) . ');">' . _("next") . '&raquo;</a>';
     }
 
-    $pageString = '<p>' . _("Result Pages") . ': ' . $pageString . "</p>\n";
+    $pageString = '<p class="pageLinks">' . _("Result Pages") . ': ' . $pageString . "</p>\n";
 
     echo $pageString;
   }
