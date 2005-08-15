@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_suspended.php,v 1.5 2005/07/21 16:57:13 jact Exp $
+ * $Id: login_suspended.php,v 1.6 2005/08/15 16:40:53 jact Exp $
  */
 
 /**
@@ -16,14 +16,17 @@
  * Author: jact <jachavar@gmail.com>
  */
 
+  /**
+   * Controllign vars
+   */
   $tab = "home";
   $nav = "";
 
   require_once("../shared/read_settings.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("User account suspended");
   require_once("../shared/header.php");
 
@@ -35,9 +38,9 @@
   //Error::debug($_SESSION);
   //Error::debug($user);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy session values
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy session values
+   */
   $_SESSION = array(); // deregister all current session variables
   session_destroy(); // clean up session ID
 

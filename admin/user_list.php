@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.17 2005/07/30 18:58:26 jact Exp $
+ * $Id: user_list.php,v 1.18 2005/08/15 16:33:25 jact Exp $
  */
 
 /**
@@ -132,17 +132,18 @@
   $options = array(
     'shaded' => false
   );
-?>
 
-<form method="post" action="../admin/user_new_form.php?reset=Y">
-  <div>
-<?php HTML::table($thead, $tbody, null, $options); ?>
-  </div>
-</form>
+  /**
+   * New user form
+   * @todo use fieldset
+   */
+  echo '<form method="post" action="../admin/user_new_form.php?reset=Y">' . "\n";
+  echo "<div>\n";
+  HTML::table($thead, $tbody, null, $options);
+  echo "</div>\n</form>\n";
 
-<hr />
+  echo "<hr />\n"; // @todo remove it
 
-<?php
   $numRows = $userQ->select();
   if ($userQ->isError())
   {
@@ -150,7 +151,7 @@
     Error::query($userQ);
   }
 
-  echo '<h3>' . _("Users List:") . "</h3>\n";
+  echo '<h2>' . _("Users List:") . "</h2>\n";
 
   if ($numRows == 0)
   {
@@ -182,15 +183,17 @@
   $tbody = array();
   while ($user = $userQ->fetch())
   {
-    // to protect 'big brother' user
+    /**
+     * to protect 'big brother' user
+     */
     if ($user->getIdProfile() == OPEN_PROFILE_ADMINISTRATOR && $user->getIdUser() == 1)
     {
       continue;
     }
 
-    ////////////////////////////////////////////////////////////////////
-    // Row construction
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Row construction
+     */
     $row = '<a href="../admin/user_edit_form.php?key=' . $user->getIdUser(). '&amp;reset=Y">' . _("edit") . '</a>';
     $row .= OPEN_SEPARATOR;
     $row .= '<a href="../admin/user_pwd_reset_form.php?key=' . $user->getIdUser() . '&amp;reset=Y">' . _("pwd") . '</a>';

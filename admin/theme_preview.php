@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.21 2005/07/28 17:46:27 jact Exp $
+ * $Id: theme_preview.php,v 1.22 2005/08/15 16:32:41 jact Exp $
  */
 
 /**
@@ -18,14 +18,14 @@
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "admin";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for get and post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for get and post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0 && count($_GET) == 0)
   {
     header("Location: ../admin/theme_edit_form.php");
@@ -36,9 +36,9 @@
   require_once("../lib/Form.php");
   require_once("../lib/Error.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Reading general settings
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reading general settings
+   */
   $setQ = new Setting_Query();
   $setQ->connect();
   if ($setQ->isError())
@@ -67,18 +67,18 @@
   define("OPEN_LANGUAGE", $set->getLanguage());
   unset($set);
 
-  ////////////////////////////////////////////////////////////////////
-  // i18n l10n (after OPEN_LANGUAGE is defined)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * i18n l10n (after OPEN_LANGUAGE is defined)
+   */
   require_once("../shared/i18n.php");
 
   if (isset($_GET["key"]) && intval($_GET["key"]) > 0)
   {
     include_once("../classes/Theme_Query.php");
 
-    ////////////////////////////////////////////////////////////////////
-    // Reading theme settings
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Reading theme settings
+     */
     $themeQ = new Theme_Query();
     $themeQ->connect();
     if ($themeQ->isError())
@@ -116,9 +116,9 @@
 
   if (isset($_POST["theme_name"]) && isset($_POST["css_rules"]))
   {
-    ////////////////////////////////////////////////////////////////////
-    // Theme related constants
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Theme related constants
+     */
     define("OPEN_THEME_NAME",      $_POST["theme_name"]);
     define("OPEN_THEME_CSS_RULES", $_POST["css_rules"]);
   }
@@ -128,9 +128,9 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+   */
   $title = sprintf(_("%s Theme Preview"), OPEN_THEME_NAME);
   require_once("../shared/xhtml_start.php");
 ?>
@@ -233,13 +233,13 @@
 
 <!-- Main Zone -->
 <div id="mainZone">
-<h2><?php echo sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]); ?></h2>
+<h1><?php echo sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]); ?></h1>
 
 <p><a href="#top"><?php echo _("Sample Link"); ?></a></p>
 
 <hr />
 
-<h3><?php echo _("Subtitle Sample:"); ?></h3>
+<h2><?php echo _("Subtitle Sample:"); ?></h2>
 
 <?php
   $thead = array(

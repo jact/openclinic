@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new.php,v 1.8 2005/08/15 11:22:59 jact Exp $
+ * $Id: user_new.php,v 1.9 2005/08/15 16:33:41 jact Exp $
  */
 
 /**
@@ -23,9 +23,9 @@
   $errorLocation = "../admin/user_new_form.php";
   $returnLocation = "../admin/user_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: " . $errorLocation);

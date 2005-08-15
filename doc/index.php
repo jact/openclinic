@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.15 2005/08/03 17:04:45 jact Exp $
+ * $Id: index.php,v 1.16 2005/08/15 16:35:40 jact Exp $
  */
 
 /**
@@ -27,9 +27,9 @@
 
   require_once("../shared/read_settings.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // XHTML Start (XML prolog, DOCTYPE, title page and meta data)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
+   */
   $title = _("OpenClinic Help");
   require_once("../shared/xhtml_start.php");
 

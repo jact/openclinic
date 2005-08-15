@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: HTML.php,v 1.2 2005/07/30 18:59:37 jact Exp $
+ * $Id: HTML.php,v 1.3 2005/08/15 16:37:03 jact Exp $
  */
 
 /**
@@ -16,12 +16,12 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Messages constants
-  ////////////////////////////////////////////////////////////////////
-  define("OPEN_MSG_INFO",    1);
-  define("OPEN_MSG_WARNING", 2);
-  define("OPEN_MSG_ERROR",   3);
+/**
+ * Messages constants
+ */
+define("OPEN_MSG_INFO",    1);
+define("OPEN_MSG_WARNING", 2);
+define("OPEN_MSG_ERROR",   3);
 
 /**
  * HTML set of html tags functions

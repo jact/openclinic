@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.16 2005/07/28 17:46:48 jact Exp $
+ * $Id: index.php,v 1.17 2005/08/15 16:36:33 jact Exp $
  */
 
 /**
@@ -62,9 +62,9 @@
     }
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // To Opera navigators
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * To Opera navigators
+   */
   if (isset($_POST['sql_file']))
   {
     $_POST['sql_file'] = str_replace('\"', '', $_POST['sql_file']);
@@ -74,9 +74,9 @@
     $_POST['secret_file'] = str_replace('\"', '', $_POST['secret_file']);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // If JavaScript is actived and works fine, we prevent Mozilla's problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * If JavaScript is actived and works fine, we prevent Mozilla's problem
+   */
   if (isset($_POST['secret_file']))
   {
     if (strlen($_POST['secret_file']) > 0 && $_POST['secret_file'] != $_POST['sql_file'])
@@ -85,9 +85,9 @@
     }
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // In Mozilla there no path file, only name and extension. Why? Is it an error?
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * In Mozilla there no path file, only name and extension. Why? Is it an error?
+   */
   if (isset($_POST['view_file']) && !empty($_FILES['sql_file']['name']) && $_FILES['sql_file']['size'] > 0)
   {
     $fp = fopen($_FILES['sql_file']['tmp_name'], 'r');

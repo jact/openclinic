@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.20 2005/08/03 17:40:49 jact Exp $
+ * $Id: footer.php,v 1.21 2005/08/15 16:41:21 jact Exp $
  */
 
 /**
@@ -78,9 +78,9 @@
     HTML::message(_("This is a demo version"), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // End server page generation time
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * End server page generation time
+   */
   $microTime = explode(" ", microtime());
   $endTime = $microTime[1] + $microTime[0];
   $totalTime = sprintf(_("Page generation: %s seconds"), substr(($endTime - $startTime), 0, 6));

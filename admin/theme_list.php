@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.17 2005/08/15 10:44:07 jact Exp $
+ * $Id: theme_list.php,v 1.18 2005/08/15 16:32:20 jact Exp $
  */
 
 /**
@@ -96,23 +96,24 @@
   $options = array(
     'shaded' => false
   );
+
+  /**
+   * Theme use form
+   * @todo use fieldset
+   */
+  echo '<form method="post" action="../admin/theme_use.php">';
+  echo "<div>\n";
+  HTML::table($thead, $tbody, null, $options);
+  echo "</div>\n</form>\n";
+
+  echo "<hr />\n"; // @todo remove it
+
+  echo '<p>' . '<a href="../admin/theme_new_form.php?reset=Y">' . _("Add New Theme") . "</a></p>\n";
+
+  echo "<hr />\n"; // @todo remove it
+
+  echo '<h2>' . _("Themes List:") . "</h2>\n";
 ?>
-
-<form method="post" action="../admin/theme_use.php">
-  <div>
-<?php HTML::table($thead, $tbody, null, $options); ?>
-  </div>
-</form>
-
-<hr />
-
-<p>
-  <a href="../admin/theme_new_form.php?reset=Y"><?php echo _("Add New Theme"); ?></a>
-</p>
-
-<hr />
-
-<h2><?php echo _("Themes List:"); ?></h2>
 
 <script type="text/javascript" defer="defer">
 <!--/*--><![CDATA[/*<!--*/
@@ -160,9 +161,9 @@ function previewTheme(key)
   $tbody = array();
   while ($theme = $themeQ->fetch())
   {
-    ////////////////////////////////////////////////////////////////////
-    // Row construction
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Row construction
+     */
     if (in_array($theme->getCSSFile(), $reservedCSSFiles))
     {
       $row = "** " . _("edit");

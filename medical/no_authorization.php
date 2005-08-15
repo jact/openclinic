@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: no_authorization.php,v 1.4 2005/07/21 16:56:58 jact Exp $
+ * $Id: no_authorization.php,v 1.5 2005/08/15 16:37:50 jact Exp $
  */
 
 /**
@@ -16,17 +16,17 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "medical";
   $nav = "";
 
   require_once("../shared/read_settings.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Not Authorization");
   require_once("../shared/header.php");
 

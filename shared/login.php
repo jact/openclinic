@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.15 2005/07/20 20:25:38 jact Exp $
+ * $Id: login.php,v 1.16 2005/08/15 16:41:10 jact Exp $
  */
 
 /**
@@ -16,9 +16,9 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../shared/login_form.php");
@@ -32,9 +32,9 @@
 
   unset($pageErrors); // to clean previous errors
 
-  ////////////////////////////////////////////////////////////////////
-  // Login edits
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Login edits
+   */
   $errorFound = false;
   $loginSession = urlencode(Check::safeText($_POST["login_session"]));
   if ($loginSession == "")
@@ -43,9 +43,9 @@
     $pageErrors["login_session"] = _("This is a required field.");
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Password edits
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Password edits
+   */
   $pwdSession = Check::safeText($_POST["md5"]);
   if ($pwdSession == "")
   {
@@ -94,7 +94,9 @@
       $user = $userQ->fetch();
       if ($userQ->isError())
       {
-        // Invalid password. Add one to login attempts.
+        /**
+         * Invalid password. Add one to login attempts.
+         */
         $errorFound = true;
         $pageErrors["pwd_session"] = _("Invalid sign on.");
         if ( !isset($_SESSION["loginAttempts"]) || ($_SESSION["loginAttempts"] == "") )
@@ -114,7 +116,9 @@
         }
         $userQ->clearErrors(); // needed after empty fetch(), from verifySigOn()
 
-        // Suspend user login if loginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS
+        /**
+         * Suspend user login if loginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS
+         */
         if (OPEN_MAX_LOGIN_ATTEMPTS && $sessLoginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS)
         {
           $userQ->deactivate($loginSession);
@@ -133,9 +137,9 @@
     $userQ->close();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect back to form if an error occurred
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect back to form if an error occurred
+   */
   if ($errorFound)
   {
     $_SESSION["postVars"] = Check::safeArray($_POST);
@@ -149,18 +153,18 @@
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to suspended message if suspended
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to suspended message if suspended
+   */
   if ( !$user->isActived() )
   {
     header("Location: ../shared/login_suspended.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Insert new session row with random token
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Insert new session row with random token
+   */
   $sessionQ = new Session_Query();
   $sessionQ->connect();
   if ($sessionQ->isError())
@@ -177,9 +181,9 @@
   $sessionQ->close();
   unset($sessionQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Insert new user access
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Insert new user access
+   */
   $accessQ = new Access_Page_Query();
   $accessQ->connect();
   if ($accessQ->isError())
@@ -196,9 +200,9 @@
   $accessQ->close();
   unset($accessQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors and reset sign on variables
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors and reset sign on variables
+   */
   $_SESSION["postVars"] = null; // for safety's sake
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
@@ -223,8 +227,8 @@
     $_SESSION["returnPage"] = urlencode("../home/index.php");
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to return page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to return page
+   */
   header("Location: " . urldecode($_SESSION["returnPage"]));
 ?>

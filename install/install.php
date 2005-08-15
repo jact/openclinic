@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.11 2005/07/28 17:46:48 jact Exp $
+ * $Id: install.php,v 1.12 2005/08/15 16:36:47 jact Exp $
  */
 
 /**
@@ -27,9 +27,9 @@
 
   echo '<h1>' . _("OpenClinic Installation:") . "</h1>\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Testing connection and current version
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Testing connection and current version
+   */
   $setQ = new Setting_Query();
   $setQ->connect();
   if ($setQ->isError())
@@ -38,9 +38,9 @@
   }
   HTML::message(_("Database connection is good."), OPEN_MSG_INFO);
 
-  ////////////////////////////////////////////////////////////////////
-  // Show warning message if database exists
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show warning message if database exists
+   */
   $setQ->select();
   if ($setQ->isError())
   {
@@ -57,6 +57,7 @@
 
     if ( !isset($_GET["confirm"]) || ($_GET["confirm"] != "yes") )
     {
+      // @todo use fieldset
 ?>
       <form method="post" action="../install/install.php?confirm=yes">
         <p>
@@ -91,9 +92,9 @@
   unset($setQ);
   unset($set);
 
-  ////////////////////////////////////////////////////////////////////
-  // Creating each table listed in the $tables array
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Creating each table listed in the $tables array
+   */
   foreach ($tables as $tableName)
   {
     $result = parseSQLFile("./sql/" . $tableName . ".sql", $tableName, true);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: I18n.php,v 1.4 2005/08/15 10:59:45 jact Exp $
+ * $Id: I18n.php,v 1.5 2005/08/15 16:37:14 jact Exp $
  */
 
 /**
@@ -411,9 +411,9 @@ class I18n
     //$nls['language']['tr_TR'] = 'T&#252;rk&#231;e';
     //$nls['language']['uk_UA'] = '&#x0423;&#x043a;&#x0440;&#x0430;&#x0457;&#x043d;&#x0441;&#x044c;&#x043a;&#x0430;';
 
-    ////////////////////////////////////////////////////////////////////
-    // Aliases for languages with different browser and gettext codes
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Aliases for languages with different browser and gettext codes
+     */
     $nls['alias']['bg'] = 'bg_BG';
     $nls['alias']['bg_BG.CP1251'] = 'bg_BG';
     //$nls['alias']['cs'] = 'cs_CZ';
@@ -438,20 +438,20 @@ class I18n
     //$nls['alias']['tr'] = 'tr_TR';
     //$nls['alias']['uk'] = 'uk_UA';
 
-    ////////////////////////////////////////////////////////////////////
-    // Aliases for languages in win32 systems (ISO 3166-Alpha-3)
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Aliases for languages in win32 systems (ISO 3166-Alpha-3)
+     */
     $nls['win32']['bg_BG'] = 'bgr';
     $nls['win32']['en']    = 'eng';
     $nls['win32']['es_ES'] = 'esp';
     $nls['win32']['nl_BE'] = 'nld';
     $nls['win32']['zh_TW'] = 'chn';
 
-    ////////////////////////////////////////////////////////////////////
-    // Charsets
-    //
-    // Add your own charsets, if your system uses others than "normal"
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Charsets
+     *
+     * Add your own charsets, if your system uses others than "normal"
+     */
     $nls['default']['charset'] =    'ISO-8859-1';
 
     $nls['charset']['bg_BG']   =    'windows-1251';
@@ -472,35 +472,35 @@ class I18n
     //$nls['charset']['de_DE'] =    'de_DE.ISO-8859-15@euro';
     //$nls['charset']['lt_LT'] =    'ISO-8859-13';
 
-    ////////////////////////////////////////////////////////////////////
-    // Multibyte charsets
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Multibyte charsets
+     */
     $nls['multibyte']['BIG5'] =   true;
     $nls['multibyte']['EUC-JP'] = true;
     $nls['multibyte']['GB2312'] = true;
     $nls['multibyte']['UTF-8'] =  true;
 
-    ////////////////////////////////////////////////////////////////////
-    // Encoding
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Encoding
+     */
     $nls['default']['encoding'] = 'ISO-8859-1';
     //$nls['encoding']['bg_BG'] = 'UTF-8';
 
-    ////////////////////////////////////////////////////////////////////
-    // Direction
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Direction
+     */
     $nls['default']['direction'] = 'ltr';
     //$nls['direction']['he_IL'] = 'rtl';
 
-    ////////////////////////////////////////////////////////////////////
-    // Alignment
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Alignment
+     */
     $nls['default']['alignment'] = 'left';
     //$nls['alignment']['he_IL'] = 'right';
 
-    ////////////////////////////////////////////////////////////////////
-    // Flags "alias"
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Flags "alias"
+     */
     //$nls['flag']['ru_RU.koi8r'] = 'ru_RU';
     //$nls['flag']['zh_TW.utf8']  =  'zh_TW';
 
