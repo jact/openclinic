@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_del_confirm.php,v 1.10 2005/07/30 18:58:25 jact Exp $
+ * $Id: theme_del_confirm.php,v 1.11 2005/08/15 15:11:39 jact Exp $
  */
 
 /**
@@ -24,7 +24,7 @@
   $returnLocation = "../admin/theme_list.php";
 
   /**
-   * Checking for query string. Go back to theme list if none found.
+   * Checking for query string. Go back to $returnLocation if none found.
    */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]) || empty($_GET["file"]))
   {
@@ -60,22 +60,26 @@
   );
   HTML::breadCrumb($links, "icon themeIcon");
   unset($links);
+
+  /**
+   * Form
+   */
+  echo '<form method="post" action="../admin/theme_del.php">' . "\n";
+  echo '<fieldset class="center">';
+  echo '<legend>' . $title . "</legend>\n";
+
+  HTML::message(sprintf(_("Are you sure you want to delete theme, %s?"), $name));
+
+  echo '<p class="formButton">';
+  Form::hidden("id_theme", "id_theme", $idTheme);
+  Form::hidden("name", "name", $name);
+  Form::hidden("file", "file", $file);
+
+  Form::button("delete", "delete", _("Delete"));
+  Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
+  echo "</p>\n";
+
+  echo "</fieldset>\n</form>\n";
+
+  require_once("../shared/footer.php");
 ?>
-
-<form method="post" action="../admin/theme_del.php">
-  <h3><?php echo _("Delete Theme"); ?></h3>
-
-  <?php HTML::message(sprintf(_("Are you sure you want to delete theme, %s?"), $name)); ?>
-
-  <p>
-    <?php
-      Form::hidden("id_theme", "id_theme", $idTheme);
-      Form::hidden("name", "name", $name);
-      Form::hidden("file", "file", $file);
-      Form::button("delete", "delete", _("Delete"));
-      //Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-    ?>
-  </p>
-</form>
-
-<?php require_once("../shared/footer.php"); ?>

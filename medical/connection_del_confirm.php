@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del_confirm.php,v 1.9 2005/07/30 18:58:36 jact Exp $
+ * $Id: connection_del_confirm.php,v 1.10 2005/08/15 15:11:29 jact Exp $
  */
 
 /**
@@ -53,7 +53,7 @@
   require_once("../medical/patient_header.php");
   require_once("../medical/problem_header.php");
 
-  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
+  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient; // controlling var
 
   /**
    * Bread crumb
@@ -71,24 +71,27 @@
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
+
+  /**
+   * Form
+   */
+  echo '<form method="post" action="../medical/connection_del.php">' . "\n";
+  echo '<fieldset class="center">';
+  echo '<legend>' . $title . "</legend>\n";
+
+  HTML::message(sprintf(_("Are you sure you want to delete connection, %s, from list?"), $wording));
+
+  echo '<p class="formButton">';
+  Form::hidden("id_problem", "id_problem", $idProblem);
+  Form::hidden("id_connection", "id_connection", $idConnection);
+  Form::hidden("id_patient", "id_patient", $idPatient);
+  Form::hidden("wording", "wording", $wording);
+
+  Form::button("delete", "delete", _("Delete"));
+  Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
+  echo "</p>\n";
+
+  echo "</fieldset>\n</form>\n";
+
+  require_once("../shared/footer.php");
 ?>
-
-<form method="post" action="../medical/connection_del.php">
-  <h3><?php echo $title; ?></h3>
-
-  <?php HTML::message(sprintf(_("Are you sure you want to delete connection, %s, from list?"), $wording)); ?>
-
-  <p>
-    <?php
-      Form::hidden("id_problem", "id_problem", $idProblem);
-      Form::hidden("id_connection", "id_connection", $idConnection);
-      Form::hidden("id_patient", "id_patient", $idPatient);
-      Form::hidden("wording", "wording", $wording);
-
-      Form::button("delete", "delete", _("Delete"));
-      //Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-    ?>
-  </p>
-</form>
-
-<?php require_once("../shared/footer.php"); ?>

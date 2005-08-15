@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del_confirm.php,v 1.9 2005/07/31 11:08:13 jact Exp $
+ * $Id: patient_del_confirm.php,v 1.10 2005/08/15 15:11:29 jact Exp $
  */
 
 /**
@@ -49,7 +49,7 @@
   $title = _("Delete Patient");
   require_once("../shared/header.php");
 
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y";
+  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y"; // controlling var
 
   /**
    * Bread crumb
@@ -62,22 +62,24 @@
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
+
+  /**
+   * Form
+   */
+  echo '<form method="post" action="../medical/patient_del.php">' . "\n";
+  echo '<fieldset class="center">';
+  echo '<legend>' . $title . "</legend>\n";
+  HTML::message(sprintf(_("Are you sure you want to delete patient, %s?"), $patName));
+
+  echo '<p class="formButton">';
+  Form::hidden("id_patient", "id_patient", $idPatient);
+  Form::hidden("name", "name", $patName);
+
+  Form::button("delete", "delete", _("Delete"));
+  Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
+  echo "</p>\n";
+
+  echo "</fieldset>\n</form>\n";
+
+  require_once("../shared/footer.php");
 ?>
-
-<form method="post" action="../medical/patient_del.php">
-  <h3><?php echo $title; ?></h3>
-
-  <?php HTML::message(sprintf(_("Are you sure you want to delete patient, %s?"), $patName)); ?>
-
-  <p>
-    <?php
-      Form::hidden("id_patient", "id_patient", $idPatient);
-      Form::hidden("name", "name", $patName);
-
-      Form::button("delete", "delete", _("Delete"));
-      //Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-    ?>
-  </p>
-</form>
-
-<?php require_once("../shared/footer.php"); ?>

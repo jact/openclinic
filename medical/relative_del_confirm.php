@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_del_confirm.php,v 1.9 2005/07/31 11:12:19 jact Exp $
+ * $Id: relative_del_confirm.php,v 1.10 2005/08/15 15:11:29 jact Exp $
  */
 
 /**
@@ -51,7 +51,7 @@
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
-  $returnLocation = "../medical/relative_list.php?key=" . $idPatient;
+  $returnLocation = "../medical/relative_list.php?key=" . $idPatient; // controlling var
 
   /**
    * Bread crumb
@@ -67,23 +67,26 @@
   unset($links);
 
   showPatientHeader($idPatient);
+
+  /**
+   * Form
+   */
+  echo '<form method="post" action="../medical/relative_del.php">' . "\n";
+  echo '<fieldset class="center">';
+  echo '<legend>' . $title . "</legend>\n";
+
+  HTML::message(sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relName));
+
+  echo '<p class="formButton">';
+  Form::hidden("id_patient", "id_patient", $idPatient);
+  Form::hidden("id_relative", "id_relative", $idRelative);
+  Form::hidden("name", "name", $relName);
+
+  Form::button("delete", "delete", _("Delete"));
+  Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
+  echo "</p>\n";
+
+  echo "</fieldset>\n</form>\n";
+
+  require_once("../shared/footer.php");
 ?>
-
-<form method="post" action="../medical/relative_del.php">
-  <h3><?php echo $title; ?></h3>
-
-  <?php HTML::message(sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relName)); ?>
-
-  <p>
-    <?php
-      Form::hidden("id_patient", "id_patient", $idPatient);
-      Form::hidden("id_relative", "id_relative", $idRelative);
-      Form::hidden("name", "name", $relName);
-
-      Form::button("delete", "delete", _("Delete"));
-      //Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-    ?>
-  </p>
-</form>
-
-<?php require_once("../shared/footer.php"); ?>
