@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: I18n.php,v 1.3 2005/08/11 16:03:13 jact Exp $
+ * $Id: I18n.php,v 1.4 2005/08/15 10:59:45 jact Exp $
  */
 
 /**
@@ -250,6 +250,14 @@ class I18n
    */
   function localDate($date = "")
   {
+    $local = "";
+    $winOS = false;
+
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
+    {
+      $winOS = true;
+    }
+
     switch (strlen($date))
     {
       case 0:
@@ -259,46 +267,58 @@ class I18n
       case 8: // Ymd
         if ($date != str_repeat("0", 8))
         {
-          $local = date(_("Y-m-d"), mktime(0, 0, 0, substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
-        }
-        else
-        {
-          $local = "";
+          if (($winOS && $date < '19700101') || (!$winOS && $date < '19000101'))
+          {
+            $local = $date;
+          }
+          else
+          {
+            $local = date(_("Y-m-d"), mktime(0, 0, 0, substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
+          }
         }
         break;
 
       case 10: // Y-m-d
         if ($date != "0000-00-00")
         {
-          $parts = explode("-", $date);
-          $local = date(_("Y-m-d"), mktime(0, 0, 0, $parts[1], $parts[2], $parts[0]));
-        }
-        else
-        {
-          $local = "";
+          if (($winOS && $date < '1970-01-01') || (!$winOS && $date < '1900-01-01'))
+          {
+            $local = $date;
+          }
+          else
+          {
+            $parts = explode("-", $date);
+            $local = date(_("Y-m-d"), mktime(0, 0, 0, $parts[1], $parts[2], $parts[0]));
+          }
         }
         break;
 
       case 14: // YmdHis
         if ($date != str_repeat("0", 14))
         {
-          $local = date(_("Y-m-d H:i:s"), mktime(substr($date, 8, 2), substr($date, 10, 2), substr($date, 12, 2), substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
-        }
-        else
-        {
-          $local = "";
+          if (($winOS && $date < '19700101000000') || (!$winOS && $date < '19000101000000'))
+          {
+            $local = $date;
+          }
+          else
+          {
+            $local = date(_("Y-m-d H:i:s"), mktime(substr($date, 8, 2), substr($date, 10, 2), substr($date, 12, 2), substr($date, 4, 2), substr($date, 6, 2), substr($date, 0, 4)));
+          }
         }
         break;
 
       case 19: // Y-m-d H:i:s
         if ($date != "0000-00-00 00:00:00")
         {
-          $parts = sscanf($date, "%d-%d-%d %d:%d:%d");
-          $local = date(_("Y-m-d H:i:s"), mktime($parts[3], $parts[4], $parts[5], $parts[1], $parts[2], $parts[0]));
-        }
-        else
-        {
-          $local = "";
+          if (($winOS && $date < '1970-01-01 00:00:00') || (!$winOS && $date < '1900-01-01 00:00:00'))
+          {
+            $local = $date;
+          }
+          else
+          {
+            $parts = sscanf($date, "%d-%d-%d %d:%d:%d");
+            $local = date(_("Y-m-d H:i:s"), mktime($parts[3], $parts[4], $parts[5], $parts[1], $parts[2], $parts[0]));
+          }
         }
         break;
 
