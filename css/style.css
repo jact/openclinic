@@ -4,7 +4,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.13 2005/08/03 18:01:45 jact Exp $
+ * $Id: style.css,v 1.14 2005/08/15 16:35:25 jact Exp $
  */
 
 /**
@@ -224,4 +224,22 @@ kbd {
 html>body a#xhtml11 { /* gecko browsers */
   margin-left: 46%;
   border: 1px solid #000;
+}
+
+/* Specific styles for view source code */
+#viewSource {
+  background: #fff;
+  color: inherit;
+  border: 0;
+  padding: 0;
+}
+#viewSource code {
+  white-space: pre;
+}
+
+/* Specific styles for print medical record */
+#medicalRecord {
+  background: #fff;
+  border: 0;
+  padding: 0;
 }
