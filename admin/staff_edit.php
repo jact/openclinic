@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit.php,v 1.6 2005/07/19 19:50:04 jact Exp $
+ * $Id: staff_edit.php,v 1.7 2005/08/15 10:35:56 jact Exp $
  */
 
 /**
@@ -16,19 +16,16 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "admin";
-  $nav = "staff";
+  /**
+   * Controlling vars
+   */
   //$restrictInDemo = true;
-  $errorLocation = "../admin/staff_edit_form.php";
   $returnLocation = "../admin/staff_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_POST) == 0)
+  /**
+   * Checking for post vars. Go back to $returnLocation if none found.
+   */
+  if (count($_POST) == 0 || !is_numeric($_POST["id_member"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -38,18 +35,19 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Staff_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
+  $errorLocation = "../admin/staff_edit_form.php?key=" . intval($_POST["id_member"]); // controlling var
   $staff = new Staff();
 
   $staff->setIdMember($_POST["id_member"]);
 
   require_once("../admin/staff_validate_post.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Update staff member
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update staff member
+   */
   $staffQ = new Staff_Query();
   $staffQ->connect();
   if ($staffQ->isError())
@@ -73,15 +71,15 @@
   $staffQ->close();
   unset($staffQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to staff list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   if (isset($loginUsed) && $loginUsed)
   {
     $info = urlencode($staff->getLogin());
