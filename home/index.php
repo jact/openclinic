@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.9 2005/07/21 16:56:13 jact Exp $
+ * $Id: index.php,v 1.10 2005/08/15 16:35:59 jact Exp $
  */
 
 /**
@@ -16,39 +16,39 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Controlling vars
+   */
   $tab = "home";
   $nav = "home";
 
   require_once("../shared/read_settings.php");
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving get vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving get vars
+   */
   $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
-  ////////////////////////////////////////////////////////////////////
-  // Show page
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Show page
+   */
   $title = _("Welcome to OpenClinic");
   require_once("../shared/header.php");
 
   echo '<h1>' . $title . "</h1>\n";
 
-  ////////////////////////////////////////////////////////////////////
-  // Display update message if coming from edit with a successful update.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display update message if coming from edit with a successful update.
+   */
   if (isset($_GET["updated"]) && !empty($info))
   {
     HTML::message(sprintf(_("User, %s, has been updated."), $info), OPEN_MSG_INFO);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Display login used message.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Display login used message.
+   */
   if (isset($_GET["login"]) && !empty($info))
   {
     HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
@@ -58,8 +58,7 @@
   echo '<p>' . _("When you select any of the following tabs you will be prompted to login.") . "</p>\n";
 ?>
 
-<h2>
-  <a href="../medical/index.php"><img src="../images/medical.png" width="60" height="60" alt="<?php echo _("Medical Records"); ?>" title="<?php echo _("Medical Records"); ?>" /></a>
+<h2 class="bigIcon medicalIcon">
   <a href="../medical/index.php"><?php echo _("Medical Records"); ?></a>
 </h2>
 
@@ -76,8 +75,7 @@
 
 <hr />
 
-<h2>
-  <a href="../admin/index.php"><img src="../images/admin.png" width="60" height="60" alt="<?php echo _("Admin"); ?>" title="<?php echo _("Admin"); ?>" /></a>
+<h2 class="bigIcon adminIcon">
   <a href="../admin/index.php"><?php echo _("Admin"); ?></a>
 </h2>
 

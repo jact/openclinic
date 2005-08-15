@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.4 2005/08/03 18:01:34 jact Exp $
+ * $Id: index.php,v 1.5 2005/08/15 16:31:32 jact Exp $
  */
 
 /**
@@ -32,15 +32,13 @@
   require_once("../shared/header.php");
 ?>
 
-<h1>
-  <img src="../images/admin.png" width="60" height="60" alt="" />
+<h1 class="bigIcon adminIcon">
   <?php echo $title; ?>
 </h1>
 
 <p><?php echo _("Use the following functions located in the left hand navigation area to manage your clinic's staff and administrative records."); ?></p>
 
-<h2>
-  <a href="../admin/setting_edit_form.php?reset=Y"><img src="../images/config_clinic.png" width="40" height="40" alt="<?php echo _("Config settings"); ?>" title="<?php echo _("Config settings"); ?>" /></a>
+<h2 class="icon configIcon">
   <a href="../admin/setting_edit_form.php?reset=Y"><?php echo _("Config settings"); ?></a>
 </h2>
 
@@ -48,8 +46,7 @@
 
 <hr />
 
-<h2>
-  <a href="../admin/theme_list.php"><img src="../images/themes.png" width="40" height="40" alt="<?php echo _("Themes"); ?>" title="<?php echo _("Themes"); ?>" /></a>
+<h2 class="icon themeIcon">
   <a href="../admin/theme_list.php"><?php echo _("Themes"); ?></a>
 </h2>
 
@@ -64,8 +61,7 @@
 
 <hr />
 
-<h2>
-  <a href="../admin/staff_list.php"><img src="../images/staff.png" width="40" height="40" alt="<?php echo _("Staff Members"); ?>" title="<?php echo _("Staff Members"); ?>" /></a>
+<h2 class="icon staffIcon">
   <a href="../admin/staff_list.php"><?php echo _("Staff Members"); ?></a>
 </h2>
 
@@ -80,8 +76,7 @@
 
 <hr />
 
-<h2>
-  <a href="../admin/user_list.php"><img src="../images/users.png" width="40" height="40" alt="<?php echo _("Users"); ?>" title="<?php echo _("Users"); ?>" /></a>
+<h2 class="icon userIcon">
   <a href="../admin/user_list.php"><?php echo _("Users"); ?></a>
 </h2>
 
@@ -97,8 +92,7 @@
 
 <hr />
 
-<h2>
-  <a href="../admin/dump_view_form.php"><img src="../images/dumps.png" width="40" height="40" alt="<?php echo _("Dumps"); ?>" title="<?php echo _("Dumps"); ?>" /></a>
+<h2 class="icon dumpIcon">
   <a href="../admin/dump_view_form.php"><?php echo _("Dumps"); ?></a>
 </h2>
 
@@ -114,8 +108,7 @@
 
 <hr />
 
-<h2>
-  <a href="../admin/log_stats.php"><img src="../images/logs.png" width="40" height="40" alt="<?php echo _("Logs"); ?>" title="<?php echo _("Logs"); ?>" /></a>
+<h2 class="icon logIcon">
   <a href="../admin/log_stats.php"><?php echo _("Logs"); ?></a>
 </h2>
 
