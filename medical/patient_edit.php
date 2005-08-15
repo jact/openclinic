@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.10 2005/07/30 15:10:25 jact Exp $
+ * $Id: patient_edit.php,v 1.11 2005/08/15 10:51:15 jact Exp $
  */
 
 /**
@@ -16,32 +16,30 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_POST) == 0)
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
+  if (count($_POST) == 0 || !is_numeric($_POST["id_patient"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "medical";
-  $nav = "social";
+  /**
+   * Controlling vars
+   */
   $onlyDoctor = false;
-  $errorLocation = "../medical/patient_edit_form.php";
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/Patient_Page_Query.php");
   require_once("../shared/record_log.php"); // record log
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
   $idPatient = intval($_POST["id_patient"]);
+  $errorLocation = "../medical/patient_edit_form.php?key=" . $idPatient; // controlling var
   $patName = urldecode(Check::safeText($_POST["first_name"] . " " . $_POST["surname1"] . " " . $_POST["surname2"]));
 
   $pat = new Patient();
@@ -51,16 +49,16 @@
   require_once("../medical/patient_validate_post.php");
 
   // To header, without &amp;
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&reset=Y";
+  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&reset=Y"; // controlling var
 
-  ////////////////////////////////////////////////////////////////////
-  // Prevent user from aborting script
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Prevent user from aborting script
+   */
   $oldAbort = ignore_user_abort(true);
 
-  ////////////////////////////////////////////////////////////////////
-  // Update patient
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update patient
+   */
   $patQ = new Patient_Page_Query();
   $patQ->connect();
   if ($patQ->isError())
@@ -92,24 +90,24 @@
   unset($patQ);
   unset($pat);
 
-  ////////////////////////////////////////////////////////////////////
-  // Record log process
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Record log process
+   */
   recordLog("Patient_Page_Query", "UPDATE", array($idPatient));
 
-  ////////////////////////////////////////////////////////////////////
-  // Reset abort setting
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reset abort setting
+   */
   ignore_user_abort($oldAbort);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to patient view to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   header("Location: " . $returnLocation . "&updated=Y");
 ?>

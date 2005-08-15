@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.9 2005/07/19 19:50:04 jact Exp $
+ * $Id: user_edit.php,v 1.10 2005/08/15 10:44:46 jact Exp $
  */
 
 /**
@@ -16,24 +16,25 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "admin";
-  $nav = "users";
+  /**
+   * Controlling vars
+   */
   //$restrictInDemo = true;
   $returnLocation = "../admin/user_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to users list if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_POST) == 0)
+  /**
+   * Checking for post vars. Go back to $returnLocation if none found.
+   */
+  if (count($_POST) == 0 || !is_numeric($_POST["id_user"]))
   {
     header("Location: " . $returnLocation);
     exit();
   }
 
-  $errorLocation = "../admin/user_edit_form.php?key=" . $_POST["id_user"] . ((isset($_POST["all"])) ? "&all=Y" : "");
+  /**
+   * Controlling vars
+   */
+  $errorLocation = "../admin/user_edit_form.php?key=" . intval($_POST["id_user"]) . ((isset($_POST["all"])) ? "&all=Y" : "");
   // Redefinition if it is needed after count($_POST)
   $returnLocation = ((isset($_POST["all"])) ? "../home/index.php" : "../admin/user_list.php");
 
@@ -44,18 +45,18 @@
   }
   require_once("../classes/User_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
   $user = new User();
 
   $user->setIdUser($_POST["id_user"]);
 
   require_once("../admin/user_validate_post.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Update user
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update user
+   */
   $userQ = new User_Query();
   $userQ->connect();
   if ($userQ->isError())
@@ -76,9 +77,11 @@
       Error::query($userQ);
     }
 
+    /**
+     * updating session variables if user is current user
+     */
     if (isset($_POST["all"]))
     {
-      // updating session variables if user is current user
       $_SESSION['loginSession'] = $user->getLogin();
       $_SESSION['userTheme'] = $user->getIdTheme();
     }
@@ -111,15 +114,15 @@
   $userQ->close();
   unset($userQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to $returnLocation to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($user->getLogin());
   $returnLocation .= ((isset($loginUsed) && $loginUsed) ? "?login" : "?updated") . "=Y&info=" . $info;
   unset($user);

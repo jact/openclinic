@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset.php,v 1.5 2005/07/19 19:50:04 jact Exp $
+ * $Id: user_pwd_reset.php,v 1.6 2005/08/15 10:46:42 jact Exp $
  */
 
 /**
@@ -16,18 +16,16 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "admin";
-  $nav = "users";
+  /**
+   * Controlling vars
+   */
   //$restrictInDemo = true;
   $returnLocation = "../admin/user_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to users list if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_POST) == 0)
+  /**
+   * Checking for post vars. Go back to $returnLocation if none found.
+   */
+  if (count($_POST) == 0 || !is_numeric($_POST["id_user"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -37,9 +35,10 @@
   require_once("../shared/login_check.php");
   require_once("../classes/User_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
+  $errorLocation = "../admin/user_pwd_reset_form.php?key=" . intval($_POST["id_user"]); // controlling var
   $user = new User();
 
   $user->setIdUser($_POST["id_user"]);
@@ -59,13 +58,13 @@
     $_SESSION["postVars"] = $_POST;
     $_SESSION["pageErrors"] = $pageErrors;
 
-    header("Location: ../admin/user_pwd_reset_form.php");
+    header("Location: " . $errorLocation);
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Update user
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update user
+   */
   $userQ = new User_Query();
   $userQ->connect();
   if ($userQ->isError())
@@ -82,15 +81,15 @@
   $userQ->close();
   unset($userQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to user list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($user->getLogin());
   unset($user);
   header("Location: " . $returnLocation . "?password=Y&info=" . $info);

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit.php,v 1.6 2005/07/19 19:50:04 jact Exp $
+ * $Id: theme_edit.php,v 1.7 2005/08/15 10:42:13 jact Exp $
  */
 
 /**
@@ -16,19 +16,16 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "admin";
-  $nav = "themes";
+  /**
+   * Controlling vars
+   */
   //$restrictInDemo = true;
-  $errorLocation = "../admin/theme_edit_form.php";
   $returnLocation = "../admin/theme_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
-  if (count($_POST) == 0)
+  /**
+   * Checking for post vars. Go back to $returnLocation if none found.
+   */
+  if (count($_POST) == 0 || !is_numeric($_POST["id_theme"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -38,9 +35,10 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Theme_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Validate data
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Validate data
+   */
+  $errorLocation = "../admin/theme_edit_form.php?key=" . intval($_POST["id_theme"]); // controlling var
   $theme = new Theme();
 
   $theme->setIdTheme($_POST["id_theme"]);
@@ -48,9 +46,9 @@
 
   require_once("../admin/theme_validate_post.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Update theme
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update theme
+   */
   $themeQ = new Theme_Query();
   $themeQ->connect();
   if ($themeQ->isError())
@@ -74,15 +72,15 @@
   $themeQ->close();
   unset($themeQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to theme list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($theme->getThemeName());
   $returnLocation .= ((isset($fileUsed) && $fileUsed) ? "?file" : "?updated") . "=Y&info=" . $info;
   unset($theme);
