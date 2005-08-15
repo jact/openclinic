@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.16 2005/07/30 18:58:25 jact Exp $
+ * $Id: theme_list.php,v 1.17 2005/08/15 10:44:07 jact Exp $
  */
 
 /**
@@ -112,7 +112,7 @@
 
 <hr />
 
-<h3><?php echo _("Themes List:"); ?></h3>
+<h2><?php echo _("Themes List:"); ?></h2>
 
 <script type="text/javascript" defer="defer">
 <!--/*--><![CDATA[/*<!--*/
