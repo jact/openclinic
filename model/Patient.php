@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.9 2005/07/20 20:24:47 jact Exp $
+ * $Id: Patient.php,v 1.10 2005/08/15 11:02:36 jact Exp $
  */
 
 /**
@@ -51,7 +51,7 @@ require_once("../lib/Check.php");
  *  void setSex(string $value)
  *  string getRace(void)
  *  void setRace(string $value)
- *  string getBirthDate(bool $view = true)
+ *  string getBirthDate(void)
  *  string getBirthDateError(void)
  *  void setBirthDate(string $value)
  *  void setBirthDateFromParts(string $month, string $day, string $year)
@@ -59,7 +59,7 @@ require_once("../lib/Check.php");
  *  void setAge(string $value)
  *  string getBirthPlace(void)
  *  void setBirthPlace(string $value)
- *  string getDeceaseDate(bool $view = true)
+ *  string getDeceaseDate(void)
  *  string getDeceaseDateError(void)
  *  void setDeceaseDate(string $value)
  *  void setDeceaseDateFromParts(string $month, string $day, string $year)
@@ -458,26 +458,14 @@ class Patient
   }
 
   /**
-   * string getBirthDate(bool $view = true)
+   * string getBirthDate(void)
    *
-   * @param bool $view (optional) to view in screen or to save in database
    * @return string
    * @access public
-   * @fixme $view argument
    */
-  function getBirthDate($view = true)
+  function getBirthDate()
   {
-    if ($view)
-    {
-      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_birthDate);
-      return ($this->_birthDate != "0000-00-00")
-               ? (($this->_birthDate >= "1970-01-01") ? date(_("Y-m-d"), strtotime($temp)) : $this->_birthDate)
-               : "";
-    }
-    else
-    {
-      return $this->_birthDate;
-    }
+    return $this->_birthDate;
   }
 
   /**
@@ -568,26 +556,14 @@ class Patient
   }
 
   /**
-   * string getDeceaseDate(bool $view = true)
+   * string getDeceaseDate(void)
    *
-   * @param bool $view (optional) to view in screen or to save in database
    * @return string
    * @access public
-   * @fixme $view argument
    */
-  function getDeceaseDate($view = true)
+  function getDeceaseDate()
   {
-    if ($view)
-    {
-      $temp = ereg_replace('^([0-9]{2,4})-([0-9]{1,2})-([0-9]{1,2})$', '\2/\3/\1', $this->_deceaseDate);
-      return ($this->_deceaseDate != "0000-00-00")
-               ? (($this->_deceaseDate >= "1970-01-01") ? date(_("Y-m-d"), strtotime($temp)) : $this->_deceaseDate)
-               : "";
-    }
-    else
-    {
-      return $this->_deceaseDate;
-    }
+    return $this->_deceaseDate;
   }
 
   /**
