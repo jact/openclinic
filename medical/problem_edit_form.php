@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.15 2005/07/31 11:10:51 jact Exp $
+ * $Id: problem_edit_form.php,v 1.16 2005/08/15 10:58:05 jact Exp $
  */
 
 /**
@@ -19,7 +19,7 @@
   /**
    * Checking for get vars. Go back to form if none found.
    */
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["pat"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["pat"]))
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
