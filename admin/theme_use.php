@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_use.php,v 1.5 2005/07/19 19:50:04 jact Exp $
+ * $Id: theme_use.php,v 1.6 2005/08/15 16:33:05 jact Exp $
  */
 
 /**
@@ -16,16 +16,14 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "admin";
-  $nav = "themes";
+  /**
+   * Controlling vars
+   */
   $returnLocation = "../admin/theme_list.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to theme list if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to $returnLocation if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: " . $returnLocation);
@@ -36,9 +34,9 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Setting_Query.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Update theme in use
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update theme in use
+   */
   $idTheme = intval($_POST["id_theme"]);
 
   $setQ = new Setting_Query();
@@ -57,9 +55,9 @@
   $setQ->close();
   unset($setQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Destroy form values and errors
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Destroy form values and errors
+   */
   unset($_SESSION["postVars"]);
   unset($_SESSION["pageErrors"]);
 
