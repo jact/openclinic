@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Session_Query.php,v 1.3 2004/07/24 16:33:56 jact Exp $
+ * $Id: Session_Query.php,v 1.4 2005/08/15 16:44:47 jact Exp $
  */
 
 /**
  * Session_Query.php
- ********************************************************************
+ *
  * Contains the class Session_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
 
 /**
  * Session_Query data access component for sign on sessions
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Session_Query(void)
  *  bool validToken(string $login, int $token)
@@ -34,9 +34,9 @@ class Session_Query extends Query
 {
   /**
    * void Session_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -47,9 +47,9 @@ class Session_Query extends Query
 
   /**
    * bool validToken(string $login, int $token)
-   ********************************************************************
+   *
    * Executes a query to validate the token
-   ********************************************************************
+   *
    * @param string $login login of user to validate
    * @param int $token sign on token of user to validate
    * @return boolean returns true if token is valid, false if token is not.
@@ -85,19 +85,19 @@ class Session_Query extends Query
 
   /**
    * mixed getToken(string $login)
-   ********************************************************************
+   *
    * Inserts or updates the session table and returns a new valid sign on token
-   ********************************************************************
+   *
    * @param string $login login of user to validate
    * @return int returns token or false, if error occurs
    * @access public
    */
   function getToken($login)
   {
-    ////////////////////////////////////////////////////////////////////
-    // Only purpose of the delete is to clean up old session rows so that
-    // the session table doesn't get too full.
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Only purpose of the delete is to clean up old session rows so that
+     * the session table doesn't get too full.
+     */
     $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE login='" . urlencode($login) . "'";
     $sql .= " AND last_updated_date < date_sub(sysdate(), interval ";
@@ -129,10 +129,9 @@ class Session_Query extends Query
 
   /**
    * bool _updateToken(int $token)
-   ********************************************************************
-   * Updates last updated date in session table so that the session will
-   * not time out.
-   ********************************************************************
+   *
+   * Updates last updated date in session table so that the session will not time out.
+   *
    * @param int $token token of session to update
    * @return boolean returns true if successful, false if error occurs.
    * @access private
