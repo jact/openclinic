@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.16 2005/07/31 11:08:38 jact Exp $
+ * $Id: patient_edit_form.php,v 1.17 2005/08/15 10:56:11 jact Exp $
  */
 
 /**
@@ -34,7 +34,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../classes/Patient_Page_Query.php");
   require_once("../classes/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
@@ -44,72 +43,84 @@
   $idPatient = intval($_GET["key"]);
 
   /**
-   * Search database
+   * Checking for query string flag to read data from database
    */
-  $patQ = new Patient_Page_Query();
-  $patQ->connect();
-  if ($patQ->isError())
+  if (isset($_GET["reset"]))
   {
-    Error::query($patQ);
-  }
+    include_once("../classes/Patient_Page_Query.php");
 
-  $numRows = $patQ->select($idPatient);
-  if ($patQ->isError())
-  {
+    /**
+     * Search database
+     */
+    $patQ = new Patient_Page_Query();
+    $patQ->connect();
+    if ($patQ->isError())
+    {
+      Error::query($patQ);
+    }
+
+    $numRows = $patQ->select($idPatient);
+    if ($patQ->isError())
+    {
+      $patQ->close();
+      Error::query($patQ);
+    }
+
+    if ( !$numRows )
+    {
+      $patQ->close();
+      include_once("../shared/header.php");
+
+      HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
+
+      include_once("../shared/footer.php");
+      exit();
+    }
+
+    $pat = $patQ->fetch();
+    if ($patQ->isError())
+    {
+      Error::fetch($patQ, false);
+    }
+    else
+    {
+      /**
+       * load up post vars
+       */
+      $postVars["id_patient"] = $idPatient;
+      //$postVars["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)
+      $postVars["id_member"] = $pat->getIdMember();
+      $postVars["nif"] = $pat->getNIF();
+      $postVars["first_name"] = $pat->getFirstName();
+      $postVars["surname1"] = $pat->getSurname1();
+      $postVars["surname2"] = $pat->getSurname2();
+      $postVars["address"] = $pat->getAddress();
+      $postVars["phone_contact"] = $pat->getPhone();
+      $postVars["sex"] = $pat->getSex();
+      $postVars["race"] = $pat->getRace();
+      $postVars["birth_date"] = $pat->getBirthDate();
+      $postVars["birth_place"] = $pat->getBirthPlace();
+      $postVars["decease_date"] = $pat->getDeceaseDate();
+      $postVars["nts"] = $pat->getNTS();
+      $postVars["nss"] = $pat->getNSS();
+      $postVars["family_situation"] = $pat->getFamilySituation();
+      $postVars["labour_situation"] = $pat->getLabourSituation();
+      $postVars["education"] = $pat->getEducation();
+      $postVars["insurance_company"] = $pat->getInsuranceCompany();
+
+      $_SESSION["postVars"] = $postVars;
+    }
+    $patName = urlencode($pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2());
+
+    $patQ->freeResult();
     $patQ->close();
-    Error::query($patQ);
-  }
-
-  if ( !$numRows )
-  {
-    $patQ->close();
-    include_once("../shared/header.php");
-
-    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../shared/footer.php");
-    exit();
-  }
-
-  $pat = $patQ->fetch();
-  if ($patQ->isError())
-  {
-    Error::fetch($patQ, false);
+    unset($patQ);
+    unset($pat);
   }
   else
   {
-    /**
-     * load up post vars
-     */
-    $postVars["id_patient"] = $idPatient;
-    //$postVars["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)
-    $postVars["id_member"] = $pat->getIdMember();
-    $postVars["nif"] = $pat->getNIF();
-    $postVars["first_name"] = $pat->getFirstName();
-    $postVars["surname1"] = $pat->getSurname1();
-    $postVars["surname2"] = $pat->getSurname2();
-    $postVars["address"] = $pat->getAddress();
-    $postVars["phone_contact"] = $pat->getPhone();
-    $postVars["sex"] = $pat->getSex();
-    $postVars["race"] = $pat->getRace();
-    $postVars["birth_date"] = $pat->getBirthDate(false);
-    $postVars["birth_place"] = $pat->getBirthPlace();
-    $postVars["decease_date"] = $pat->getDeceaseDate(false);
-    $postVars["nts"] = $pat->getNTS();
-    $postVars["nss"] = $pat->getNSS();
-    $postVars["family_situation"] = $pat->getFamilySituation();
-    $postVars["labour_situation"] = $pat->getLabourSituation();
-    $postVars["education"] = $pat->getEducation();
-    $postVars["insurance_company"] = $pat->getInsuranceCompany();
-
-    $_SESSION["postVars"] = $postVars;
+    $patName = urlencode($postVars["first_name"] . " " . $postVars["surname1"] . " " . $postVars["surname2"]);
   }
-  $patName = urlencode($pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2());
-
-  $patQ->freeResult();
-  $patQ->close();
-  unset($patQ);
-  unset($pat);
 
   /**
    * Show page
