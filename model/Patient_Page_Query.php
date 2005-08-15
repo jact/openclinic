@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Page_Query.php,v 1.3 2005/07/30 17:27:26 jact Exp $
+ * $Id: Patient_Page_Query.php,v 1.4 2005/08/15 11:03:27 jact Exp $
  */
 
 /**
@@ -380,9 +380,9 @@ class Patient_Page_Query extends Page_Query
     $sql .= ($patient->getPhone() == "") ? "NULL, " : "'" . urlencode($patient->getPhone()) . "', ";
     $sql .= "'" . $patient->getSex() . "', ";
     $sql .= ($patient->getRace() == "") ? "NULL, " : "'" . urlencode($patient->getRace()) . "', ";
-    $sql .= ($patient->getBirthDate(false) == "") ? "NULL, " : "'" . $patient->getBirthDate(false) . "', ";
+    $sql .= ($patient->getBirthDate() == "") ? "NULL, " : "'" . $patient->getBirthDate() . "', ";
     $sql .= ($patient->getBirthPlace() == "") ? "NULL, " : "'" . urlencode($patient->getBirthPlace()) . "', ";
-    $sql .= ($patient->getDeceaseDate(false) == "") ? "NULL, " : "'" . $patient->getDeceaseDate(false) . "', ";
+    $sql .= ($patient->getDeceaseDate() == "") ? "NULL, " : "'" . $patient->getDeceaseDate() . "', ";
     $sql .= ($patient->getNTS() == "") ? "NULL, " : "'" . urlencode($patient->getNTS()) . "', ";
     $sql .= ($patient->getNSS() == "") ? "NULL, " : "'" . urlencode($patient->getNSS()) . "', ";
     $sql .= ($patient->getFamilySituation() == "") ? "NULL, " : "'" . urlencode($patient->getFamilySituation()) . "', ";
@@ -452,9 +452,9 @@ class Patient_Page_Query extends Page_Query
     $sql .= "phone_contact=" . (($patient->getPhone() == "") ? "NULL, " : "'" . urlencode($patient->getPhone()) . "', ");
     $sql .= "sex='" . $patient->getSex() . "', ";
     $sql .= "race=" . (($patient->getRace() == "") ? "NULL, " : "'" . urlencode($patient->getRace()) . "', ");
-    $sql .= "birth_date=" . (($patient->getBirthDate(false) == "") ? "NULL, " : "'" . $patient->getBirthDate(false) . "', ");
+    $sql .= "birth_date=" . (($patient->getBirthDate() == "") ? "NULL, " : "'" . $patient->getBirthDate() . "', ");
     $sql .= "birth_place=" . (($patient->getBirthPlace() == "") ? "NULL, " : "'" . urlencode($patient->getBirthPlace()) . "', ");
-    $sql .= "decease_date=" . (($patient->getDeceaseDate(false) == "") ? "NULL, " : "'" . $patient->getDeceaseDate(false) . "', ");
+    $sql .= "decease_date=" . (($patient->getDeceaseDate() == "") ? "NULL, " : "'" . $patient->getDeceaseDate() . "', ");
     $sql .= "nts=" . (($patient->getNTS() == "") ? "NULL, " : "'" . urlencode($patient->getNTS()) . "', ");
     $sql .= "nss=" . (($patient->getNSS() == "") ? "NULL, " : "'" . urlencode($patient->getNSS()) . "', ");
     $sql .= "family_situation=" . (($patient->getFamilySituation() == "") ? "NULL, " : "'" . urlencode($patient->getFamilySituation()) . "', ");
