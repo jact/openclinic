@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del.php,v 1.11 2005/07/30 15:10:25 jact Exp $
+ * $Id: connection_del.php,v 1.12 2005/08/15 11:31:17 jact Exp $
  */
 
 /**
@@ -16,20 +16,18 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "medical";
-  $nav = "problems";
+  /**
+   * Controlling vars
+   */
   $onlyDoctor = false;
 
   require_once("../shared/read_settings.php");
@@ -38,22 +36,22 @@
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/Check.php");
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post vars
+   */
   $idProblem = intval($_POST["id_problem"]);
   $idConnection = intval($_POST["id_connection"]);
   $idPatient = intval($_POST["id_patient"]);
   $wording = Check::safeText($_POST["wording"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Prevent user from aborting script
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Prevent user from aborting script
+   */
   $oldAbort = ignore_user_abort(true);
 
-  ////////////////////////////////////////////////////////////////////
-  // Delete relative
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Delete relative
+   */
   $connQ = new Connection_Query();
   $connQ->connect();
   if ($connQ->isError())
@@ -61,9 +59,9 @@
     Error::query($connQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Record log process (before deleting process)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Record log process (before deleting process)
+   */
   recordLog("Connection_Query", "DELETE", array($idProblem, $idConnection));
 
   $connQ->delete($idProblem, $idConnection);
@@ -76,17 +74,17 @@
   $connQ->close();
   unset($connQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Reset abort setting
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reset abort setting
+   */
   ignore_user_abort($oldAbort);
 
   // To header, without &amp;
   $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient;
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to connection problem list to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($wording);
   header("Location: " . $returnLocation . "&deleted=Y&info=" . $info);
 ?>

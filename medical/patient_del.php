@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.15 2005/07/30 15:10:25 jact Exp $
+ * $Id: patient_del.php,v 1.16 2005/08/15 11:31:17 jact Exp $
  */
 
 /**
@@ -16,46 +16,44 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  ////////////////////////////////////////////////////////////////////
-  // Checking for post vars. Go back to form if none found.
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Checking for post vars. Go back to form if none found.
+   */
   if (count($_POST) == 0)
   {
     header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Controlling vars
-  ////////////////////////////////////////////////////////////////////
-  $tab = "medical";
-  $nav = "";
+  /**
+   * Controlling vars
+   */
   $onlyDoctor = false;
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/History_Query.php");
   require_once("../classes/Patient_Page_Query.php");
-  require_once("../classes/Relative_Query.php"); /* referencial integrity */
+  require_once("../classes/Relative_Query.php"); // referencial integrity
   require_once("../classes/DelPatient_Query.php");
-  require_once("../classes/Problem_Page_Query.php"); /* referencial integrity */
-  require_once("../classes/DelProblem_Query.php"); /* referencial integrity */
+  require_once("../classes/Problem_Page_Query.php"); // referencial integrity
+  require_once("../classes/DelProblem_Query.php"); // referencial integrity
   require_once("../shared/record_log.php"); // record log
 
-  ////////////////////////////////////////////////////////////////////
-  // Retrieving post vars
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Retrieving post vars
+   */
   $idPatient = intval($_POST["id_patient"]);
   $patName = Check::safeText($_POST["name"]);
 
-  ////////////////////////////////////////////////////////////////////
-  // Prevent user from aborting script
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Prevent user from aborting script
+   */
   $oldAbort = ignore_user_abort(true);
 
-  ////////////////////////////////////////////////////////////////////
-  // Delete relatives
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Delete relatives
+   */
   $relQ = new Relative_Query();
   $relQ->connect();
   if ($relQ->isError())
@@ -85,9 +83,9 @@
   unset($relQ);
   unset($rel);
 
-  ////////////////////////////////////////////////////////////////////
-  // Delete patient
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Delete patient
+   */
   $patQ = new Patient_Page_Query();
   $patQ->connect();
   if ($patQ->isError())
@@ -166,9 +164,9 @@
     unset($historyF);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Record log process (before deleting process)
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Record log process (before deleting process)
+   */
   recordLog("Patient_Page_Query", "DELETE", array($idPatient));
 
   $patQ->delete($idPatient);
@@ -181,9 +179,9 @@
   $patQ->close();
   unset($patQ);
 
-  ////////////////////////////////////////////////////////////////////
-  // Delete asociated problems
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Delete asociated problems
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -191,9 +189,9 @@
     Error::query($problemQ);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // First: open problems
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * First: open problems
+   */
   $numRows = $problemQ->selectProblems($idPatient, false);
   if ($numRows)
   {
@@ -232,9 +230,9 @@
       Error::query($problemQ);
     }
 
-    ////////////////////////////////////////////////////////////////////
-    // Record log process (before deleting process)
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Record log process (before deleting process)
+     */
     for ($i = 0; $i < $numRows; $i++)
     {
       recordLog("Problem_Page_Query", "DELETE", array($array[$i]->getIdProblem()));
@@ -254,9 +252,9 @@
     unset($array);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Afterwards: closed problems
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Afterwards: closed problems
+   */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
   if ($problemQ->isError())
@@ -302,9 +300,9 @@
       Error::query($problemQ);
     }
 
-    ////////////////////////////////////////////////////////////////////
-    // Record log process (before deleting process)
-    ////////////////////////////////////////////////////////////////////
+    /**
+     * Record log process (before deleting process)
+     */
     for ($i = 0; $i < $numRows; $i++)
     {
       recordLog("Problem_Page_Query", "DELETE", array($array[$i]->getIdProblem()));
@@ -324,22 +322,22 @@
     unset($array);
   }
 
-  ////////////////////////////////////////////////////////////////////
-  // Update session variables
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Update session variables
+   */
   require_once("../medical/visited_list.php");
   deletePatient($idPatient);
 
-  ////////////////////////////////////////////////////////////////////
-  // Reset abort setting
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Reset abort setting
+   */
   ignore_user_abort($oldAbort);
 
   $returnLocation = "../medical/patient_search_form.php";
 
-  ////////////////////////////////////////////////////////////////////
-  // Redirect to patient search form to avoid reload problem
-  ////////////////////////////////////////////////////////////////////
+  /**
+   * Redirect to $returnLocation to avoid reload problem
+   */
   $info = urlencode($patName);
   header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
 ?>
