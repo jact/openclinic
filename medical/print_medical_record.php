@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.16 2005/07/21 16:56:58 jact Exp $
+ * $Id: print_medical_record.php,v 1.17 2005/08/15 10:57:22 jact Exp $
  */
 
 /**
@@ -138,7 +138,7 @@
   if ($pat->getBirthDate() != "")
   {
     echo '<h3>' . _("Birth Date") . "</h3>\n";
-    echo '<p>' . $pat->getBirthDate() . "</p>\n";
+    echo '<p>' . I18n::localDate($pat->getBirthDate()) . "</p>\n";
 
     echo '<h3>' . _("Age") . "</h3>\n";
     echo '<p>' . $pat->getAge() . "</p>\n";
@@ -153,7 +153,7 @@
   if ($pat->getDeceaseDate() != "")
   {
     echo '<h3>' . _("Decease Date") . "</h3>\n";
-    echo '<p>' . $pat->getDeceaseDate() . "</p>\n";
+    echo '<p>' . I18n::localDate($pat->getDeceaseDate()) . "</p>\n";
   }
 
   if ($pat->getNTS())
