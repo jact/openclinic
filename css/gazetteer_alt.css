@@ -1,5 +1,5 @@
 /* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
-/* $Id: gazetteer_alt.css,v 1.8 2005/08/15 16:34:40 jact Exp $ */
+/* $Id: gazetteer_alt.css,v 1.9 2005/08/16 15:24:46 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -378,4 +378,54 @@ hr {
 
 .adminIcon {
   background: url(../images/admin.png) no-repeat;
+}
+
+/* clearfix */
+.clearfix {
+  display: inline-block;
+  width: 100%;
+}
+
+/* Hide from IE-mac \*/
+* html .clearfix {
+  height: 1%;
+  width: auto;
+}
+
+.clearfix {
+  display: table;
+}
+/* End hide from IE-mac */
+
+/* patientHeader, problemHeader */
+#patientHeader, #problemHeader {
+  background: #848484;
+  color: #fff;
+  font-weight: bold;
+  border: 1px solid #848484;
+}
+
+#problemHeader {
+  border-top: none;
+}
+
+#patientHeader p, #problemHeader p {
+  float: left;
+  width: 38%;
+  margin: 0;
+  padding: 2px 5px;
+}
+
+#problemHeader p {
+  width: 30%;
+}
+
+#patientHeader p.right {
+  float: right;
+  width: 18%;
+}
+
+#problemHeader p.right {
+  float: right;
+  width: 32%;
 }

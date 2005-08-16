@@ -389,3 +389,53 @@ hr {
 .adminIcon {
   background: url(../images/admin.png) no-repeat;
 }
+
+/* clearfix */
+.clearfix {
+  display: inline-block;
+  width: 100%;
+}
+
+/* Hide from IE-mac \*/
+* html .clearfix {
+  height: 1%;
+  width: auto;
+}
+
+.clearfix {
+  display: table;
+}
+/* End hide from IE-mac */
+
+/* patientHeader, problemHeader */
+#patientHeader, #problemHeader {
+  background: #eff7f7;
+  color: #94baa5;
+  font-weight: bold;
+  border: 1px solid #efefef;
+}
+
+#problemHeader {
+  border-top: none;
+}
+
+#patientHeader p, #problemHeader p {
+  float: left;
+  width: 38%;
+  margin: 0;
+  padding: 2px 5px;
+}
+
+#problemHeader p {
+  width: 30%;
+}
+
+#patientHeader p.right {
+  float: right;
+  width: 18%;
+}
+
+#problemHeader p.right {
+  float: right;
+  width: 32%;
+}

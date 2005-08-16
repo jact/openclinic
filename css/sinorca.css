@@ -1,5 +1,5 @@
 /* CSS based in Sinorca (haran's design in oswd.org) */
-/* $Id: sinorca.css,v 1.5 2005/07/18 19:16:42 jact Exp $ */
+/* $Id: sinorca.css,v 1.6 2005/08/16 15:24:46 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -366,4 +366,54 @@ hr {
   color: #9C9A9C;
   border: 1px solid #9C9A9C;
   margin: 10px 0;
+}
+
+/* clearfix */
+.clearfix {
+  display: inline-block;
+  width: 100%;
+}
+
+/* Hide from IE-mac \*/
+* html .clearfix {
+  height: 1%;
+  width: auto;
+}
+
+.clearfix {
+  display: table;
+}
+/* End hide from IE-mac */
+
+/* patientHeader, problemHeader */
+#patientHeader, #problemHeader {
+  background: #8CAAE7;
+  color: #fff;
+  font-weight: bold;
+  border: 1px solid #9C9A9C;
+}
+
+#problemHeader {
+  border-top: none;
+}
+
+#patientHeader p, #problemHeader p {
+  float: left;
+  width: 38%;
+  margin: 0;
+  padding: 2px 5px;
+}
+
+#problemHeader p {
+  width: 30%;
+}
+
+#patientHeader p.right {
+  float: right;
+  width: 18%;
+}
+
+#problemHeader p.right {
+  float: right;
+  width: 32%;
 }
