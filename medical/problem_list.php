@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.15 2005/07/31 11:11:09 jact Exp $
+ * $Id: problem_list.php,v 1.16 2005/08/16 15:18:19 jact Exp $
  */
 
 /**
@@ -165,7 +165,7 @@
       $row .= '<a href="../medical/problem_edit_form.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '&amp;reset=Y">' . _("edit") . '</a>';
       $row .= OPEN_SEPARATOR;
 
-      $row .= '<a href="../medical/problem_del_confirm.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '&amp;wording=' . fieldPreview($problem->getWording()) . '">' . _("del") . '</a>';
+      $row .= '<a href="../medical/problem_del_confirm.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '&amp;wording=' . urlencode(fieldPreview($problem->getWording())) . '">' . _("del") . '</a>';
       $row .= OPEN_SEPARATOR;
     } // end if
 
