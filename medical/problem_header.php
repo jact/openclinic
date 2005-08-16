@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_header.php,v 1.16 2005/08/03 17:40:19 jact Exp $
+ * $Id: problem_header.php,v 1.17 2005/08/16 15:12:52 jact Exp $
  */
 
 /**
@@ -33,7 +33,7 @@
    * @param int $idProblem key of medical problem to show header
    * @return boolean false if medical problem does not exist, true otherwise
    * @access public
-   * @todo suppress table
+   * @see fieldPreview
    */
   function showProblemHeader($idProblem)
   {
@@ -65,19 +65,13 @@
 
     $problemQ->freeResult();
     $problemQ->close();
-?>
 
-    <table width="100%">
-      <tr>
-        <td><?php echo _("Wording") . ': ' . fieldPreview($problem->getWording()); ?></td>
+    echo '<div id="problemHeader" class="clearfix">' . "\n";
+    echo '<p>' . _("Wording") . ': ' . fieldPreview($problem->getWording()) . "</p>\n";
+    echo '<p class="right">' . _("Opening Date") . ': ' . I18n::localDate($problem->getOpeningDate()) . "</p>\n";
+    echo '<p class="right">' . _("Last Update Date") . ': ' . I18n::localDate($problem->getLastUpdateDate()) . "</p>\n";
+    echo "</div>\n";
 
-        <td class="right"><?php echo _("Opening Date") . ': ' . I18n::localDate($problem->getOpeningDate()); ?></td>
-
-        <td class="right"><?php echo _("Last Update Date") . ': ' . I18n::localDate($problem->getLastUpdateDate()); ?></td>
-      </tr>
-    </table>
-
-<?php
     unset($problemQ);
     unset($problem);
 

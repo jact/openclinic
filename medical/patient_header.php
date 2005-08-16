@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_header.php,v 1.14 2005/08/03 17:40:19 jact Exp $
+ * $Id: patient_header.php,v 1.15 2005/08/16 15:12:52 jact Exp $
  */
 
 /**
@@ -32,7 +32,6 @@
    * @param int $idPatient key of patient to show header
    * @return boolean false if patient does not exist, true otherwise
    * @access public
-   * @todo suppress table
    */
   function showPatientHeader($idPatient)
   {
@@ -66,19 +65,13 @@
     $patQ->close();
 
     $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
-?>
 
-    <table width="100%">
-      <tr>
-        <td><?php echo _("Patient") . ': ' . $patName; ?></td>
+    echo '<div id="patientHeader" class="clearfix">' . "\n";
+    echo '<p>' . _("Patient") . ': ' . $patName . "</p>\n";
+    echo '<p>' . _("Sex") . ': ' . ($pat->getSex() == 'V' ? _("Male") : _("Female")) . "</p>\n";
+    echo '<p class="right">' . _("Age") . ': ' . $pat->getAge() . "</p>\n";
+    echo "</div>\n";
 
-        <td><?php echo _("Sex") . ': ' . ($pat->getSex() == 'V' ? _("Male") : _("Female")); ?></td>
-
-        <td class="right"><?php echo _("Age") . ': ' . $pat->getAge(); ?></td>
-      </tr>
-    </table>
-
-<?php
     unset($patQ);
     unset($pat);
 
