@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.15 2005/07/30 18:58:37 jact Exp $
+ * $Id: connection_list.php,v 1.16 2005/08/17 17:00:55 jact Exp $
  */
 
 /**
@@ -160,7 +160,7 @@
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/connection_del_confirm.php?key=' . $idProblem . '&amp;conn=' . $problem->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;wording=' . fieldPreview($problem->getWording()) . '">' . _("del") . '</a>';
+      $row .= '<a href="../medical/connection_del_confirm.php?key=' . $idProblem . '&amp;conn=' . $problem->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;wording=' . urlencode(fieldPreview($problem->getWording())) . '">' . _("del") . '</a>';
       $row .= OPEN_SEPARATOR;
     } // end if
 
