@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.4 2005/08/11 16:02:19 jact Exp $
+ * $Id: Form.php,v 1.5 2005/08/17 17:03:24 jact Exp $
  */
 
 /**
@@ -53,6 +53,8 @@ if (file_exists("../classes/Description_Query.php"))
  *  void selectTable(string $tableName, string $fieldCode, string $defaultValue = "", string $fieldDescription = "", int $size = 0)
  *  string strLabel(string $field, string $text, bool $required = false)
  *  void label(string $field, string $text, bool $required = false)
+ *  string strFieldset(string $legend, array &$body, array $foot = null, $options = null)
+ *  void fieldset(string $legend, array &$body, array $foot = null, $options = null)
  */
 class Form
 {
@@ -97,7 +99,7 @@ class Form
 
     if ( !empty($error) )
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR);
+      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
     }
 
     return $html;
@@ -225,7 +227,7 @@ class Form
 
     if ( !empty($error) )
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR);
+      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
     }
 
     return $html;
@@ -286,7 +288,7 @@ class Form
 
     if ( !empty($error) )
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR);
+      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
     }
 
     return $html;
@@ -568,7 +570,7 @@ class Form
 
     if ( !empty($error) )
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR);
+      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
     }
 
     return $html;
@@ -720,6 +722,96 @@ class Form
   function label($field, $text, $required = false)
   {
     echo Form::strLabel($field, $text, $required);
+  }
+
+  /**
+   * string strFieldset(string $legend, array &$body, array $foot = null, $options = null)
+   *
+   * Returns html fieldset
+   * Options example:
+   *   $options = array(
+   *     'class' => 'center large', // fieldset class
+   *    'r1' => array('class' => 'date'), // row number (starts in zero) class
+   *   );
+   *
+   * @param string $legend legend of fieldset
+   * @param array &$body set of labels and fields
+   * @param array $foot (optional) buttons or another thing
+   * @param array $options (optional) options of fieldset
+   * @return string html fieldset
+   * @access public
+   */
+  function strFieldset($legend, &$body, $foot = null, $options = null)
+  {
+    $html = "";
+    if (count($body) == 0)
+    {
+      return $html; // no data, no fieldset
+    }
+
+    $html .= '<fieldset';
+    if (isset($options['class']))
+    {
+      $html .= ' class="' . $options['class'] . '"';
+    }
+    $html .= ">\n";
+
+    if ( !empty($legend) )
+    {
+      $html .= '<legend>' . trim($legend) . "</legend>\n";
+    }
+
+    if (count($body) > 0)
+    {
+      $numRow = 0;
+      foreach ($body as $row)
+      {
+        $html .= '<p';
+        if (isset($options['r' . $numRow]['class']))
+        {
+          $html .= ' class="' . $options['r' . $numRow]['class'] . '"';
+        }
+        $html .= ">\n";
+
+        $html .= $row;
+
+        $html .= "</p>\n";
+        $numRow++;
+      }
+    }
+
+    if (count($foot) > 0)
+    {
+      $html .= '<p class="formButton">' . "\n";
+      foreach ($foot as $row)
+      {
+        $html .= $row;
+      }
+      $html .= "</p>\n";
+    }
+
+    $html .= "</fieldset>\n";
+
+    unset($body);
+
+    return $html;
+  }
+
+  /**
+   * void fieldset(string $legend, array &$body, array $foot = null, $options = null)
+   *
+   * Draws html fieldset
+   *
+   * @param string $legend legend of fieldset
+   * @param array &$body set of labels and fields
+   * @param array $foot (optional) buttons or another thing
+   * @param array $options (optional) options of fieldset
+   * @return void
+   * @access public
+   */
+  function fieldset($legend, &$body, $foot = null, $options = null)
+  {
+    echo Form::strFieldset($legend, $body, isset($foot) ? $foot : null, isset($options) ? $options : null);
   }
 } // end class
 ?>
