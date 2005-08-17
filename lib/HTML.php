@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: HTML.php,v 1.3 2005/08/15 16:37:03 jact Exp $
+ * $Id: HTML.php,v 1.4 2005/08/17 17:04:21 jact Exp $
  */
 
 /**
@@ -33,8 +33,8 @@ define("OPEN_MSG_ERROR",   3);
  * Methods:
  *  string strTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
  *  void table(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
- *  string strMessage(string $text, int $type = OPEN_MSG_WARNING)
- *  void message(string $text, int $type = OPEN_MSG_WARNING)
+ *  string strMessage(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
+ *  void message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
  *  string strBreadCrumb(array &$links, string $class = "")
  *  void breadCrumb(array &$links, string $class = "")
  */
@@ -233,16 +233,17 @@ class HTML
   }
 
   /**
-   * string strMessage(string $text, int $type = OPEN_MSG_WARNING)
+   * string strMessage(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
    *
    * Returns an html paragraph with a message
    *
    * @param string $text message
    * @param int $type (optional) possible values: OPEN_MSG_ERROR, OPEN_MSG_WARNING (default), OPEN_MSG_INFO
+   * @param bool $block (optional) if false, inline tag (span), block tag otherwise (p)
    * @return string html message
    * @access public
    */
-  function strMessage($text, $type = OPEN_MSG_WARNING)
+  function strMessage($text, $type = OPEN_MSG_WARNING, $block = true)
   {
     if (empty($text))
     {
@@ -264,26 +265,27 @@ class HTML
         break;
     }
 
-    $html = '<p class="' . $class . '">';
+    $html = '<' . ($block ? 'p' : 'span') . ' class="' . $class . '">';
     $html .= $text;
-    $html .= "</p>\n";
+    $html .= '</' . ($block ? 'p' : 'span') . ">\n";
 
     return $html;
   }
 
   /**
-   * void message(string $text, int $type = OPEN_MSG_WARNING)
+   * void message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
    *
    * Draws an html paragraph with a message
    *
    * @param string $text message
    * @param int $type (optional) possible values: OPEN_MSG_ERROR, OPEN_MSG_WARNING (default), OPEN_MSG_INFO
+   * @param bool $block (optional) if false, inline tag (span), block tag otherwise (p)
    * @return void
    * @access public
    */
-  function message($text, $type = OPEN_MSG_WARNING)
+  function message($text, $type = OPEN_MSG_WARNING, $block = true)
   {
-    echo HTML::strMessage($text, isset($type) ? $type : OPEN_MSG_WARNING);
+    echo HTML::strMessage($text, isset($type) ? $type : OPEN_MSG_WARNING, isset($block) ? $block : true);
   }
 
   /**
