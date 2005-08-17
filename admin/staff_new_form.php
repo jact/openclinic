@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.12 2005/08/02 17:57:41 jact Exp $
+ * $Id: staff_new_form.php,v 1.13 2005/08/17 16:55:53 jact Exp $
  */
 
 /**
@@ -68,19 +68,19 @@
   unset($links);
 
   require_once("../shared/form_errors_msg.php");
-?>
 
-<form method="post" action="../admin/staff_new.php?type=<?php echo $memberType; ?>">
-  <div>
-<?php
+  /**
+   * New form
+   */
+  echo '<form method="post" action="../admin/staff_new.php?type=' . $memberType . '">' . "\n";
+  echo "<div>\n";
+
   Form::hidden("member_type", "member_type", $typeValue);
 
   require_once("../admin/staff_fields.php");
-?>
-  </div>
-</form>
 
-<?php
+  echo "</div>\n</form>\n";
+
   HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");

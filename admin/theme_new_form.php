@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.16 2005/08/03 16:19:15 jact Exp $
+ * $Id: theme_new_form.php,v 1.17 2005/08/17 16:55:53 jact Exp $
  */
 
 /**
@@ -127,15 +127,16 @@ function editTheme()
   echo "<hr />\n";
 
   require_once("../shared/form_errors_msg.php");
-?>
 
-<form method="post" action="../admin/theme_new.php">
-  <div>
-<?php require_once("../admin/theme_fields.php"); ?>
-  </div>
-</form>
+  /**
+   * New form
+   */
+  echo '<form method="post" action="../admin/theme_new.php">' . "\n";
 
-<?php
+  require_once("../admin/theme_fields.php");
+
+  echo "</form>\n";
+
   HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");

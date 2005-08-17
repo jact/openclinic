@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.14 2005/08/02 17:57:41 jact Exp $
+ * $Id: user_new_form.php,v 1.15 2005/08/17 16:55:53 jact Exp $
  */
 
 /**
@@ -81,20 +81,22 @@
 
 <script src="../scripts/password.php" type="text/javascript"></script>
 
-<form method="post" action="../admin/user_new.php" onsubmit="return md5Login(this);">
-  <div>
 <?php
+  /**
+   * Edit form
+   */
+  echo '<form method="post" action="../admin/user_new.php" onsubmit="return md5Login(this);">' . "\n";
+  echo "<div>\n";
+
   Form::hidden("referer", "referer", "new"); // to user_validate_post.php
   Form::hidden("id_member", "id_member", $postVars["id_member"]);
   Form::hidden("login", "login", $postVars["login"]);
 
   $action = "new";
   require_once("../admin/user_fields.php");
-?>
-  </div>
-</form>
 
-<?php
+  echo "</div>\n</form>\n";
+
   HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");

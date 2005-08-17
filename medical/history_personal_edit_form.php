@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_edit_form.php,v 1.8 2005/07/30 18:57:54 jact Exp $
+ * $Id: history_personal_edit_form.php,v 1.9 2005/08/17 16:56:15 jact Exp $
  */
 
 /**
@@ -122,7 +122,6 @@
   unset($links);
 
   showPatientHeader($idPatient);
-  echo "<br />\n"; // @fixme should be deleted
 
   require_once("../shared/form_errors_msg.php");
 
@@ -133,16 +132,18 @@
   {
     HTML::message(_("Personal Antecedents have been updated."), OPEN_MSG_INFO);
   }
-?>
 
-<form method="post" action="../medical/history_personal_edit.php">
-  <div>
-<?php
+  /**
+   * Edit form
+   */
+  echo '<form method="post" action="../medical/history_personal_edit.php">' . "\n";
+  echo "<div>\n";
+
   Form::hidden("id_patient", "id_patient", $idPatient);
 
   require_once("../medical/history_personal_fields.php");
-?>
-  </div>
-</form>
 
-<?php require_once("../shared/footer.php"); ?>
+  echo "</div>\n</form>\n";
+
+  require_once("../shared/footer.php");
+?>
