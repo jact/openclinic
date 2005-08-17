@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_del_confirm.php,v 1.11 2005/08/15 15:11:29 jact Exp $
+ * $Id: test_del_confirm.php,v 1.12 2005/08/17 16:54:16 jact Exp $
  */
 
 /**
@@ -77,22 +77,27 @@
    * Form
    */
   echo '<form method="post" action="../medical/test_del.php">' . "\n";
-  echo '<fieldset class="center">';
-  echo '<legend>' . $title . "</legend>\n";
 
-  HTML::message(sprintf(_("Are you sure you want to delete medical test, %s, from list?"), $file));
+  $tbody = array();
 
-  echo '<p class="formButton">';
-  Form::hidden("id_problem", "id_problem", $idProblem);
-  Form::hidden("id_test", "id_test", $idTest);
-  Form::hidden("id_patient", "id_patient", $idPatient);
-  Form::hidden("file", "file", $file);
+  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete medical test, %s, from list?"), $file), OPEN_MSG_WARNING, false);
 
-  Form::button("delete", "delete", _("Delete"));
-  Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-  echo "</p>\n";
+  $row = Form::strHidden("id_problem", "id_problem", $idProblem);
+  $row .= Form::strHidden("id_test", "id_test", $idTest);
+  $row .= Form::strHidden("id_patient", "id_patient", $idPatient);
+  $row .= Form::strHidden("file", "file", $file);
+  $tbody[] = $row;
 
-  echo "</fieldset>\n</form>\n";
+  $tfoot = array(
+    Form::strButton("delete", "delete", _("Delete"))
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+  );
+
+  $options = array('class' => 'center');
+
+  Form::fieldset($title, $tbody, $tfoot, $options);
+
+  echo "</form>\n";
 
   require_once("../shared/footer.php");
 ?>

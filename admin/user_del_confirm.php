@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del_confirm.php,v 1.10 2005/08/15 15:11:39 jact Exp $
+ * $Id: user_del_confirm.php,v 1.11 2005/08/17 16:53:59 jact Exp $
  */
 
 /**
@@ -64,20 +64,25 @@
    * Form
    */
   echo '<form method="post" action="../admin/user_del.php">' . "\n";
-  echo '<fieldset class="center">';
-  echo '<legend>' . $title . "</legend>\n";
 
-  HTML::message(sprintf(_("Are you sure you want to delete user, %s?"), $login));
+  $tbody = array();
 
-  echo '<p class="formButton">';
-  Form::hidden("id_user", "id_user", $idUser);
-  Form::hidden("login", "login", $login);
+  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete user, %s?"), $login), OPEN_MSG_WARNING, false);
 
-  Form::button("delete", "delete", _("Delete"));
-  Form::button("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"');
-  echo "</p>\n";
+  $row = Form::strHidden("id_user", "id_user", $idUser);
+  $row .= Form::strHidden("login", "login", $login);
+  $tbody[] = $row;
 
-  echo "</fieldset>\n</form>\n";
+  $tfoot = array(
+    Form::strButton("delete", "delete", _("Delete"))
+    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+  );
+
+  $options = array('class' => 'center');
+
+  Form::fieldset($title, $tbody, $tfoot, $options);
+
+  echo "</form>\n";
 
   require_once("../shared/footer.php");
 ?>
