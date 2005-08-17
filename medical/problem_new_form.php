@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new_form.php,v 1.10 2005/07/31 11:11:35 jact Exp $
+ * $Id: problem_new_form.php,v 1.11 2005/08/17 17:00:12 jact Exp $
  */
 
 /**
@@ -42,7 +42,7 @@
    * Retrieving get vars
    */
   $idPatient = intval($_GET["key"]);
-  $orderNumber = intval($_GET["num"]);
+  $orderNumber = isset($_GET["num"]) ? intval($_GET["num"]) : (isset($postVars["order_number"]) ? $postVars["order_number"] - 1 : 0);
 
   // after clean (get_form_vars.php)
   $postVars["id_patient"] = $idPatient;
@@ -82,7 +82,6 @@
     include_once("../shared/footer.php");
     exit();
   }
-  echo "<br />\n"; // @fixme should be deleted
 
   //Error::debug($postVars);
 
