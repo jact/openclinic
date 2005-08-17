@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_fields.php,v 1.11 2005/08/03 17:40:19 jact Exp $
+ * $Id: test_fields.php,v 1.12 2005/08/17 16:52:53 jact Exp $
  */
 
 /**
@@ -22,23 +22,16 @@
     exit();
   }
 
-  $thead = array(
-    $title => array('colspan' => 2)
-  );
-
   $tbody = array();
 
   $row = Form::strLabel("document_type", _("Document Type") . ":");
-  $row .= OPEN_SEPARATOR;
   $row .= Form::strText("document_type", "document_type", 40, 128,
     isset($postVars["document_type"]) ? $postVars["document_type"] : null,
     isset($pageErrors["document_type"]) ? $pageErrors["document_type"] : null
   );
-
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $row = Form::strLabel("path_filename", _("Path Filename") . ":", true);
-  $row .= OPEN_SEPARATOR;
 
   //$row .= Form::strHidden("MAX_FILE_SIZE", "MAX_FILE_SIZE", "70000");
   $len = (isset($postVars["path_filename"]) ? strlen($postVars["path_filename"]) : 0);
@@ -49,18 +42,12 @@
   }
 
   $row .= Form::strFile("path_filename", "path_filename", isset($postVars['path_filename']) ? $postVars['path_filename'] : null, 50, "", isset($pageErrors["path_filename"]) ? $pageErrors["path_filename"] : "");
-
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $tfoot = array(
     Form::strButton("button1", "button1", _("Submit"))
     . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
-  $options = array(
-    'shaded' => false,
-    'tfoot' => array('align' => 'center')
-  );
-
-  HTML::table($thead, $tbody, $tfoot, $options);
+  Form::fieldset($title, $tbody, $tfoot);
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.12 2005/07/31 11:06:06 jact Exp $
+ * $Id: login_form.php,v 1.13 2005/08/17 16:52:17 jact Exp $
  */
 
 /**
@@ -77,52 +77,43 @@ function md5Login(f)
 /*]]>*///-->
 </script>
 
-<form method="post" action="../shared/login.php" onsubmit="return md5Login(this);">
-  <div class="center">
 <?php
-  Form::hidden("md5", "md5");
-
-  $thead = array(
-    _("User Login") => array('colspan' => 2)
-  );
+  /**
+   * Login form
+   */
+  echo '<form method="post" action="../shared/login.php" onsubmit="return md5Login(this);">' . "\n";
 
   $tbody = array();
 
+  $row = Form::strHidden("md5", "md5");
+  $tbody[] = $row;
+
   $row = Form::strLabel("login_session", _("Login") . ":");
-  $row .= OPEN_SEPARATOR;
   $row .= Form::strText("login_session", "login_session", 20, 20,
     isset($postVars["login_session"]) ? $postVars["login_session"] : null,
     isset($pageErrors["login_session"]) ? $pageErrors["login_session"] : null
   );
-
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $row = Form::strLabel("pwd_session", _("Password") . ":");
-  $row .= OPEN_SEPARATOR;
-  $row .= Form::strText("pwd_session", "pwd_session", 20, 20,
+  $row .= Form::strPassword("pwd_session", "pwd_session", 20, 20,
     isset($postVars["pwd_session"]) ? $postVars["pwd_session"] : null,
-    isset($pageErrors["pwd_session"]) ? $pageErrors["pwd_session"] : null,
-    "password"
+    isset($pageErrors["pwd_session"]) ? $pageErrors["pwd_session"] : null
   );
-
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $tfoot = array(Form::strButton("button1", "button1", _("Enter")));
 
   $options = array(
-    'shaded' => false,
-    'tfoot' => array('align' => 'center')
+    'class' => 'center'
   );
 
-  HTML::table($thead, $tbody, $tfoot, $options);
-?>
-  </div>
-</form>
+  Form::fieldset($title, $tbody, $tfoot, $options);
+  echo "</form>\n";
 
-<?php
   HTML::message(_("You must have cookies enabled to access your account."));
 
-  //Error::debug($_SESSION, "session variables:", true);
+  //Error::debug($_SESSION, "session variables", true);
 
   require_once("../shared/footer.php");
 ?>
