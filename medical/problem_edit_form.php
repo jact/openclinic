@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.16 2005/08/15 10:58:05 jact Exp $
+ * $Id: problem_edit_form.php,v 1.17 2005/08/17 17:01:44 jact Exp $
  */
 
 /**
@@ -129,7 +129,6 @@
   unset($links);
 
   showPatientHeader($idPatient);
-  echo "<br />\n"; // @fixme should be deleted
 
   require_once("../shared/form_errors_msg.php");
 
