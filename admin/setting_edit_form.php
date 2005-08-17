@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.16 2005/08/15 10:34:38 jact Exp $
+ * $Id: setting_edit_form.php,v 1.17 2005/08/17 16:53:22 jact Exp $
  */
 
 /**
@@ -106,11 +106,10 @@
    * Edit form
    */
   echo '<form method="post" action="../admin/setting_edit.php">' . "\n";
-  echo "<div>\n";
 
   require_once("../admin/setting_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
   HTML::message('** ' . _("Note: If zero, searchs return all results without pagination."));
