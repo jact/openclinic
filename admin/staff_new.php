@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new.php,v 1.7 2005/08/15 11:22:59 jact Exp $
+ * $Id: staff_new.php,v 1.8 2005/08/17 16:54:52 jact Exp $
  */
 
 /**
@@ -16,15 +16,17 @@
  * Author: jact <jachavar@gmail.com>
  */
 
+  require_once("../lib/Check.php");
+
   /**
    * Controlling vars
    */
   //$restrictInDemo = true;
-  $errorLocation = "../admin/staff_new_form.php?type=" . $_GET['type'];
+  $errorLocation = "../admin/staff_new_form.php?type=" . Check::safeText($_GET['type']);
   $returnLocation = "../admin/staff_list.php";
 
   /**
-   * Checking for post vars. Go back to form if none found.
+   * Checking for post vars. Go back to $errorLocation if none found.
    */
   if (count($_POST) == 0)
   {
