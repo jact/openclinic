@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.16 2005/07/31 11:12:33 jact Exp $
+ * $Id: relative_list.php,v 1.17 2005/08/17 17:01:17 jact Exp $
  */
 
 /**
@@ -177,7 +177,7 @@
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/relative_del_confirm.php?key=' . $idPatient . '&amp;rel=' . $pat->getIdPatient() . '&amp;name=' . $relName . '">' . _("del") . '</a>';
+      $row .= '<a href="../medical/relative_del_confirm.php?key=' . $idPatient . '&amp;rel=' . $pat->getIdPatient() . '&amp;name=' . urlencode($relName) . '">' . _("del") . '</a>';
       $row .= OPEN_SEPARATOR;
     } // end if
 
