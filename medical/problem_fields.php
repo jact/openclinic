@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.18 2005/08/17 16:52:53 jact Exp $
+ * $Id: problem_fields.php,v 1.19 2005/08/19 10:59:03 jact Exp $
  */
 
 /**
@@ -112,5 +112,9 @@
     . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
   );
 
-  Form::fieldset($title, $tbody, $tfoot);
+  $options = array(
+    'class' => 'largeArea'
+  );
+
+  Form::fieldset($title, $tbody, $tfoot, $options);
 ?>
