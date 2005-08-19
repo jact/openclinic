@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.18 2005/08/17 16:52:34 jact Exp $
+ * $Id: setting_fields.php,v 1.19 2005/08/19 10:56:32 jact Exp $
  */
 
 /**
@@ -33,7 +33,10 @@
   }
 
   $row = Form::strLabel("clinic_name", _("Clinic Name") . ":");
-  $row .= Form::strText("clinic_name", "clinic_name", 40, 128, $postVars["clinic_name"], $pageErrors["clinic_name"]);
+  $row .= Form::strText("clinic_name", "clinic_name", 40, 128,
+    isset($postVars["clinic_name"]) ? $postVars["clinic_name"] : null,
+    isset($pageErrors["clinic_name"]) ? $pageErrors["clinic_name"] : null
+  );
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_image_url", _("Clinic Image") . ":");
@@ -46,7 +49,7 @@
   unset($array);
   unset($ext);
 
-  $row .= '<br />' . _("(must be in /images/ directory)");
+  $row .= _("(must be in /images/ directory)");
   $tbody[] = $row;
 
   $row = Form::strLabel("use_image", _("Use Image in place of Name") . ":");
@@ -54,19 +57,28 @@
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_hours", _("Clinic Hours") . ":");
-  $row .= Form::strText("clinic_hours", "clinic_hours", 40, 128, $postVars["clinic_hours"], $pageErrors["clinic_hours"]);
+  $row .= Form::strText("clinic_hours", "clinic_hours", 40, 128,
+    isset($postVars["clinic_hours"]) ? $postVars["clinic_hours"] : null,
+    isset($pageErrors["clinic_hours"]) ? $pageErrors["clinic_hours"] : null
+  );
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_address", _("Clinic Address") . ":");
-  $row .= Form::strTextArea("clinic_address", "clinic_address", 3, 30, $postVars["clinic_address"]);
+  $row .= Form::strTextArea("clinic_address", "clinic_address", 3, 30, isset($postVars["clinic_address"]) ? $postVars["clinic_address"] : null);
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_phone", _("Clinic Phone") . ":");
-  $row .= Form::strText("clinic_phone", "clinic_phone", 40, 40, $postVars["clinic_phone"], $pageErrors["clinic_phone"]);
+  $row .= Form::strText("clinic_phone", "clinic_phone", 40, 40,
+    isset($postVars["clinic_phone"]) ? $postVars["clinic_phone"] : null,
+    isset($pageErrors["clinic_phone"]) ? $pageErrors["clinic_phone"] : null
+  );
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_url", _("Clinic URL") . ":");
-  $row .= Form::strText("clinic_url", "clinic_url", 40, 300, $postVars["clinic_url"], $pageErrors["clinic_url"]);
+  $row .= Form::strText("clinic_url", "clinic_url", 40, 300,
+    isset($postVars["clinic_url"]) ? $postVars["clinic_url"] : null,
+    isset($pageErrors["clinic_url"]) ? $pageErrors["clinic_url"] : null
+  );
   $tbody[] = $row;
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
