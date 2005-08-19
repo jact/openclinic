@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.5 2005/08/17 17:03:24 jact Exp $
+ * $Id: Form.php,v 1.6 2005/08/19 10:59:49 jact Exp $
  */
 
 /**
@@ -691,10 +691,6 @@ class Form
   function strLabel($field, $text, $required = false)
   {
     $html = "";
-    if ($required)
-    {
-      $html .= '* ';
-    }
     $html .= '<label';
     $html .= ' for="' . $field . '"';
     if ($required)
@@ -702,6 +698,10 @@ class Form
       $html .= ' class="' . "requiredField" . '"';
     }
     $html .= '>';
+    if ($required)
+    {
+      $html .= '* ';
+    }
     $html .= $text . '</label>' . "\n";
 
     return $html;
