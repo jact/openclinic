@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.13 2005/08/17 16:52:17 jact Exp $
+ * $Id: login_form.php,v 1.14 2005/08/19 10:58:34 jact Exp $
  */
 
 /**
@@ -104,11 +104,7 @@ function md5Login(f)
 
   $tfoot = array(Form::strButton("button1", "button1", _("Enter")));
 
-  $options = array(
-    'class' => 'center'
-  );
-
-  Form::fieldset($title, $tbody, $tfoot, $options);
+  Form::fieldset($title, $tbody, $tfoot);
   echo "</form>\n";
 
   HTML::message(_("You must have cookies enabled to access your account."));
