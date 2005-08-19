@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.18 2005/08/15 16:33:25 jact Exp $
+ * $Id: user_list.php,v 1.19 2005/08/19 10:58:02 jact Exp $
  */
 
 /**
@@ -110,9 +110,7 @@
     HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
-  $thead = array(
-    _("Create New User")
-  );
+  $legend = _("Create New User");
 
   if (empty($array))
   {
@@ -122,27 +120,17 @@
   {
     $content = Form::strLabel("id_member_login", _("Select a login to create a new user") . ": ");
     $content .= Form::strSelect("id_member_login", "id_member_login", $array);
-    $content .= Form::strButton("button1", "button1", _("Create"));
+    $tfoot = array(Form::strButton("button1", "button1", _("Create")));
   }
 
-  $tbody = array(
-    0 => array($content)
-  );
-
-  $options = array(
-    'shaded' => false
-  );
+  $tbody = array($content);
 
   /**
    * New user form
-   * @todo use fieldset
    */
   echo '<form method="post" action="../admin/user_new_form.php?reset=Y">' . "\n";
-  echo "<div>\n";
-  HTML::table($thead, $tbody, null, $options);
-  echo "</div>\n</form>\n";
-
-  echo "<hr />\n"; // @todo remove it
+  Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null);
+  echo "</form>\n";
 
   $numRows = $userQ->select();
   if ($userQ->isError())
