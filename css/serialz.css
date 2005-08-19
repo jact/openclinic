@@ -1,5 +1,5 @@
 /* CSS based in www.serialz.to site */
-/* $id$ */
+/* $Id: serialz.css,v 1.12 2005/08/19 11:00:19 jact Exp $ */
 
 /* Layout */
 html, body {
@@ -225,6 +225,57 @@ a:link, a:visited {
 }
 
 /* Form styles */
+/*form {
+  text-align: center;
+}*/
+
+fieldset {
+  border: 1px solid #dce0d3;
+  margin: 8px auto;
+  padding: 5px;
+}
+
+fieldset p {
+  margin: 12px 0px;
+}
+
+fieldset .formButton {
+  margin: 16px 0;
+  text-align: center;
+}
+
+fieldset .error {
+  display: block;
+  margin: 2px 0 16px;
+  border-bottom: 1px solid #fff;
+}
+
+legend {
+  background: #374611;
+  color: #f5f5dc;
+  margin: auto;
+  border: 1px solid #dce0d3;
+  padding: 0 5px;
+  font-weight: bold;
+}
+
+fieldset label {
+  display: block;
+  width: 40%;
+  float: left;
+  text-align: right;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+fieldset.largeArea label {
+  width: 25%;
+}
+
+.requiredField {
+  font-weight: bold;
+}
+
 input, textarea, select {
   font-family: "Trebuchet MS", helvetica, arial, sans-serif;
   font-size: 14px;
@@ -242,19 +293,16 @@ input:focus, textarea:focus, select:focus {
 input[type="submit"], input[type="button"], input[type="reset"] {
   border-width: 1px;
   font-weight: bold;
+  margin: 2px 10px;
+}
+
+input[type="submit"], .formButton input:first-child {
+  padding: 4px;
 }
 
 input[type="radio"], input[type="checkbox"] {
   background: #9ea985;
   color: inherit;
-}
-
-label {
-  cursor: pointer;
-}
-
-.requiredField {
-  font-weight: bold;
 }
 
 /* Miscellaneous */
