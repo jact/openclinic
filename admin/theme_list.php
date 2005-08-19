@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.18 2005/08/15 16:32:20 jact Exp $
+ * $Id: theme_list.php,v 1.19 2005/08/19 10:57:25 jact Exp $
  */
 
 /**
@@ -80,37 +80,24 @@
     HTML::message(sprintf(_("Filename of theme, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
-  $thead = array(
-    _("Change Theme by default in application")
-  );
+  $legend = _("Change Theme by default in application");
 
   $content = Form::strLabel("id_theme", _("Choose a New Theme:"));
 
   $content .= Form::strSelectTable("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
-  $content .= Form::strButton("button1", "button1", _("Update"));
 
-  $tbody = array(
-    0 => array($content)
-  );
+  $tbody = array($content);
 
-  $options = array(
-    'shaded' => false
-  );
+  $tfoot = array(Form::strButton("button1", "button1", _("Update")));
 
   /**
    * Theme use form
-   * @todo use fieldset
    */
   echo '<form method="post" action="../admin/theme_use.php">';
-  echo "<div>\n";
-  HTML::table($thead, $tbody, null, $options);
-  echo "</div>\n</form>\n";
-
-  echo "<hr />\n"; // @todo remove it
+  Form::fieldset($legend, $tbody, $tfoot);
+  echo "</form>\n";
 
   echo '<p>' . '<a href="../admin/theme_new_form.php?reset=Y">' . _("Add New Theme") . "</a></p>\n";
-
-  echo "<hr />\n"; // @todo remove it
 
   echo '<h2>' . _("Themes List:") . "</h2>\n";
 ?>
