@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Search.php,v 1.2 2005/08/15 08:18:01 jact Exp $
+ * $Id: Search.php,v 1.3 2005/08/22 15:15:29 jact Exp $
  */
 
 /**
@@ -26,6 +26,7 @@
  * Methods:
  *  array explodeQuoted(string $str)
  *  void pageLinks(int $currentPage, int $pageCount)
+ *  void changePageJS(void)
  */
 class Search
 {
@@ -175,6 +176,39 @@ class Search
     $pageString = '<p class="pageLinks">' . _("Result Pages") . ': ' . $pageString . "</p>\n";
 
     echo $pageString;
+  }
+
+  /**
+   * void changePageJS(void)
+   *
+   * Inserts in a page a function in JavaScript to change page
+   *
+   * @return void
+   * @access public
+   */
+  function changePageJS()
+  {
+    echo <<<EOT
+<!-- JavaScript to post back to this page -->
+<script type="text/javascript" defer="defer">
+<!--/*--><![CDATA[/*<!--*/
+function changePage(page)
+{
+  var f = document.getElementById("changePage");
+
+  if (f == null)
+  {
+    return;
+  }
+
+  f.page.value = page;
+  f.submit();
+
+  return false;
+}
+/*]]>*///-->
+</script>
+EOT;
   }
 } // end class
 ?>
