@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.19 2005/07/31 11:12:48 jact Exp $
+ * $Id: relative_search.php,v 1.20 2005/08/22 15:16:27 jact Exp $
  */
 
 /**
@@ -111,25 +111,14 @@
   }
 
   //Error::debug($_POST);
-?>
 
-<!-- JavaScript to post back to this page -->
-<script type="text/javascript">
-<!--/*--><![CDATA[/*<!--*/
-function changePage(page)
-{
-  document.forms[0].page.value = page;
-  document.forms[0].submit();
+  Search::changePageJS();
 
-  return false;
-}
-/*]]>*///-->
-</script>
-
-<!-- Form used by javascript to post back to this page -->
-<form method="post" action="../medical/relative_search.php">
-  <div>
-<?php
+  /**
+   * Form used by javascript to post back to this page (id="changePage" important)
+   */
+  echo '<form id="changePage" method="post" action="../medical/relative_search.php">' . "\n";
+  echo "<div>\n";
   Form::hidden("search_type", "search_type", $searchType);
   Form::hidden("search_text", "search_text", $searchText);
   Form::hidden("page", "page", $currentPageNmbr);
@@ -142,11 +131,8 @@ function changePage(page)
   {
     Form::hidden('check[' . $i . ']', 'check[' . $i . ']', $_POST["check"][$i]);
   }*/
-?>
-  </div>
-</form>
+  echo "</div>\n</form>\n";
 
-<?php
   /**
    * Printing result stats and page nav
    */

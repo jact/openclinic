@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.22 2005/07/30 18:58:26 jact Exp $
+ * $Id: user_record_log.php,v 1.23 2005/08/22 15:16:18 jact Exp $
  */
 
 /**
@@ -101,32 +101,18 @@
 
     $pageCount = $recordQ->getPageCount();
     Search::pageLinks($currentPageNmbr, $pageCount);
-?>
 
-<!-- JavaScript to post back to this page -->
-<script type="text/javascript">
-<!--/*--><![CDATA[/*<!--*/
-function changePage(page)
-{
-  document.forms[0].page.value = page;
-  document.forms[0].submit();
+    Search::changePageJS();
 
-  return false;
-}
-/*]]>*///-->
-</script>
+    /**
+     * Form used by javascript to post back to this page (id="changePage" important)
+     */
+    echo '<form id="changePage" method="post" action="../admin/user_record_log.php?key=' . $idUser . '&amp;login=' . urlencode($login) . '">' . "\n";
+    echo "<div>\n";
+    Form::hidden("page", "page", $currentPageNmbr);
+    Form::hidden("limit", "limit", $limit);
+    echo "</div>\n</form>\n";
 
-<!-- Form used by javascript to post back to this page -->
-<form method="post" action="../admin/user_record_log.php?key=<?php echo $idUser; ?>&amp;login=<?php echo $login; ?>">
-  <div>
-<?php
-  Form::hidden("page", "page", $currentPageNmbr);
-  Form::hidden("limit", "limit", $limit);
-?>
-  </div>
-</form>
-
-<?php
     $thead = array(
       _("Access Date") => array('colspan' => 2),
       _("Login"),

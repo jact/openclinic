@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.16 2005/07/31 11:09:19 jact Exp $
+ * $Id: patient_search.php,v 1.17 2005/08/22 15:16:27 jact Exp $
  */
 
 /**
@@ -111,35 +111,21 @@
     include_once("../shared/footer.php");
     exit();
   }
-?>
 
-<!-- JavaScript to post back to this page -->
-<script type="text/javascript">
-<!--/*--><![CDATA[/*<!--*/
-function changePage(page)
-{
-  document.forms[0].page.value = page;
-  document.forms[0].submit();
+  Search::changePageJS();
 
-  return false;
-}
-/*]]>*///-->
-</script>
-
-<!-- Form used by javascript to post back to this page -->
-<form method="post" action="../medical/patient_search.php">
-  <div>
-<?php
+  /**
+   * Form used by javascript to post back to this page (id="changePage" important)
+   */
+  echo '<form id="changePage" method="post" action="../medical/patient_search.php">' . "\n";
+  echo "<div>\n";
   Form::hidden("search_type", "search_type", $searchType);
   Form::hidden("search_text", "search_text", $searchText);
   Form::hidden("page", "page", $currentPageNmbr);
   Form::hidden("logical", "logical", $logical);
   Form::hidden("limit", "limit", $limit);
-?>
-  </div>
-</form>
+  echo "</div>\n</form>\n";
 
-<?php
   /**
    * Printing result stats and page nav
    */
