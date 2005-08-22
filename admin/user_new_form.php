@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.15 2005/08/17 16:55:53 jact Exp $
+ * $Id: user_new_form.php,v 1.16 2005/08/22 15:12:09 jact Exp $
  */
 
 /**
@@ -58,9 +58,7 @@
    * Show page
    */
   $title = _("Add New User");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "pwd";
+  $focusFormField = "pwd"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
 
   /**

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.23 2005/08/03 17:40:49 jact Exp $
+ * $Id: header.php,v 1.24 2005/08/22 15:14:20 jact Exp $
  */
 
 /**
@@ -46,9 +46,9 @@
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
 </head>
 <body<?php
-  if (isset($focusFormName) && isset($focusFormField) && ($focusFormName != "") && ($focusFormField != ""))
+  if (isset($focusFormField) && !empty($focusFormField))
   {
-    echo ' onload="self.focus(); document.' . $focusFormName . "." . $focusFormField . '.focus()"';
+    echo ' onload="self.focus(); var field = document.getElementById(\'' . $focusFormField . '\'); if (field != null) field.focus();"';
   }
 ?>>
 

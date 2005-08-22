@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.13 2005/08/17 16:55:53 jact Exp $
+ * $Id: staff_new_form.php,v 1.14 2005/08/22 15:12:08 jact Exp $
  */
 
 /**
@@ -48,10 +48,7 @@
       break;
   }
 
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "nif";
-
+  $focusFormField = "nif"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
 
   $returnLocation = "../admin/staff_list.php";

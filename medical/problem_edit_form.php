@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.17 2005/08/17 17:01:44 jact Exp $
+ * $Id: problem_edit_form.php,v 1.18 2005/08/22 15:11:49 jact Exp $
  */
 
 /**
@@ -107,9 +107,7 @@
    * Show page
    */
   $title = _("Edit Medical Problem");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "wording";
+  $focusFormField = "wording"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.17 2005/08/17 16:55:53 jact Exp $
+ * $Id: theme_new_form.php,v 1.18 2005/08/22 15:12:08 jact Exp $
  */
 
 /**
@@ -82,9 +82,7 @@
    * Show page
    */
   $title = _("Add New Theme");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "theme_name";
+  $focusFormField = "theme_name"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
 
   /**

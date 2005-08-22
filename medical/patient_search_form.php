@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_form.php,v 1.8 2005/07/31 11:09:39 jact Exp $
+ * $Id: patient_search_form.php,v 1.9 2005/08/22 15:11:49 jact Exp $
  */
 
 /**
@@ -31,9 +31,7 @@
    * Show page
    */
   $title = _("Search Patient");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "search_text";
+  $focusFormField = "search_text"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
 
   $headerWording2 = _("Search Patient by Medical Problem");

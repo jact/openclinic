@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.18 2005/08/15 15:10:41 jact Exp $
+ * $Id: patient_edit_form.php,v 1.19 2005/08/22 15:11:49 jact Exp $
  */
 
 /**
@@ -121,9 +121,7 @@
    * Show page
    */
   $title = _("Edit Patient Social Data");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "nif";
+  $focusFormField = "nif"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
 
   $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y";

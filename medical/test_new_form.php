@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_new_form.php,v 1.10 2005/08/17 17:01:44 jact Exp $
+ * $Id: test_new_form.php,v 1.11 2005/08/22 15:11:50 jact Exp $
  */
 
 /**
@@ -52,9 +52,7 @@
    * Show page
    */
   $title = _("Add Medical Test");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "document_type";
+  $focusFormField = "document_type"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
   require_once("../medical/problem_header.php");

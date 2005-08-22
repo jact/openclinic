@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.14 2005/08/19 10:58:34 jact Exp $
+ * $Id: login_form.php,v 1.15 2005/08/22 15:12:33 jact Exp $
  */
 
 /**
@@ -39,7 +39,6 @@
    * Show page
    */
   $title = _("User Login");
-  $focusFormName = "forms[0]";
   $focusFormField = "login_session";
   require_once("../shared/header.php");
 

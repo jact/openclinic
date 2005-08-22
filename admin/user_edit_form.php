@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.18 2005/08/15 10:45:25 jact Exp $
+ * $Id: user_edit_form.php,v 1.19 2005/08/22 15:12:08 jact Exp $
  */
 
 /**
@@ -105,9 +105,7 @@
    * Show page
    */
   $title = ((isset($_GET["all"])) ? _("Change User Data") : _("Edit User"));
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "email";
+  $focusFormField = "email"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
 
   /**

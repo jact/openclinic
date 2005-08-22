@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.11 2005/08/03 16:19:19 jact Exp $
+ * $Id: theme_preload_css.php,v 1.12 2005/08/22 15:12:08 jact Exp $
  */
 
 /**
@@ -59,9 +59,7 @@
    * Show page
    */
   $title = _("Preload CSS file");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "css_filename";
+  $focusFormField = "css_filename"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
 
   /**

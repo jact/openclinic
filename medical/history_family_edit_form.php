@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit_form.php,v 1.9 2005/08/17 16:56:15 jact Exp $
+ * $Id: history_family_edit_form.php,v 1.10 2005/08/22 15:11:49 jact Exp $
  */
 
 /**
@@ -93,9 +93,7 @@
    * Show page
    */
   $title = _("Edit Family Antecedents");
-  // to avoid JavaScript mistakes in demo version
-  $focusFormName = "forms[0]";
-  $focusFormField = "parents_status_health";
+  $focusFormField = "parents_status_health"; // to avoid JavaScript mistakes in demo version
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
