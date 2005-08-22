@@ -1,5 +1,5 @@
 /* CSS based in www.serialz.to site */
-/* $Id: serialz.css,v 1.12 2005/08/19 11:00:19 jact Exp $ */
+/* $Id: serialz.css,v 1.13 2005/08/22 15:50:18 jact Exp $ */
 
 /* Layout */
 html, body {
@@ -225,10 +225,6 @@ a:link, a:visited {
 }
 
 /* Form styles */
-/*form {
-  text-align: center;
-}*/
-
 fieldset {
   border: 1px solid #dce0d3;
   margin: 8px auto;
