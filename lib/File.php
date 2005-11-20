@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: File.php,v 1.1 2005/07/21 17:41:44 jact Exp $
+ * $Id: File.php,v 1.2 2005/11/20 16:40:57 jact Exp $
  */
 
 /**
@@ -148,43 +148,56 @@ class File
    */
   function sendMail($from, $fromName, $to, $toName, $subject, $text, $html, $attachFiles = null)
   {
-    $html = $html ? $html : preg_replace("/\n/", "<br />", $text) or die("neither text nor html part present.");
+    if (empty($text) && empty($html))
+    {
+      return _("Neither text nor html part present");
+    }
+
+    if (empty($from))
+    {
+      return _("Sender address missing");
+    }
+
+    if (empty($to))
+    {
+      return _("Recipient address missing");
+    }
+
+    $html = $html ? $html : preg_replace("/\n/", "<br />", $text);
     $text = $text ? $text : "Sorry, but you need an html mailer to read this mail.";
-    $from or die("sender address missing");
-    $to or die("recipient address missing");
 
     $outerBoundary = "----=_OuterBoundary_000";
-    $innerBoundary = "----=_InnerBoundery_001";
+    $innerBoundary = "----=_InnerBoundary_001";
 
-    $headers = "MIME-Version: 1.0\r\n"; // maybe cause problems
+    $headers = "MIME-Version: 1.0\n";
     $headers .= "From: " . $fromName . " <" . $from . ">\n";
     $headers .= "To: " . $toName . " <" . $to . ">\n";
     $headers .= "Reply-To: " . $fromName . " <" . $from. ">\n";
     $headers .= "X-Priority: 1\n";
     $headers .= "X-MSMail-Priority: High\n";
     $headers .= "X-Mailer: My PHP Mailer\n";
-    $headers .= "Content-Type: multipart/mixed; boundary=\"" . $outerBoundary . "\"\n";
+    $headers .= 'Content-Type: multipart/mixed; boundary="' . $outerBoundary . '"' . "\n";
 
-    //Messages start with text/html alternatives in OB
+    //Messages start with text/html alternatives in outerBoundary
     $msg = "This is a multi-part message in MIME format.\n";
-    $msg .= "\n--".$outerBoundary."\n";
-    $msg .= "Content-Type: multipart/alternative; boundary=\"" . $innerBoundary . "\"\n\n";
+    $msg .= "\n--" . $outerBoundary . "\n";
+    $msg .= 'Content-Type: multipart/alternative; boundary="' . $innerBoundary . '"' . "\n\n";
 
     //plaintext section
     $msg .= "\n--" . $innerBoundary . "\n";
-    $msg .= "Content-Type: text/plain; charset=\"iso-8859-1\"\n";
+    $msg .= 'Content-Type: text/plain; charset="iso-8859-1"' . "\n";
     $msg .= "Content-Transfer-Encoding: quoted-printable\n\n";
     // plaintext goes here
     $msg .= $text . "\n\n";
 
     // html section
     $msg .= "\n--" . $innerBoundary . "\n";
-    $msg .= "Content-Type: text/html; charset=\"iso-8859-1\"\n";
+    $msg .= 'Content-Type: text/html; charset="iso-8859-1"' . "\n";
     $msg .= "Content-Transfer-Encoding: base64\n\n";
     // html goes here
     $msg .= chunk_split(base64_encode($html)) . "\n\n";
 
-    // end of IB
+    // end of innerBoundary
     $msg .= "\n--" . $innerBoundary . "--\n";
 
     // attachments
@@ -195,14 +208,15 @@ class File
         $pathArray = explode("/", $file);
         $fileName = $pathArray[count($pathArray) - 1];
         $msg .= "\n--" . $outerBoundary . "\n";
-        $msg .= "Content-Type: application/octet-stream; name=\"" . $fileName . "\"\n";
-        $msg .= "Content-Disposition: attachment; filename=\"" . $fileName . "\"\n";
+        $msg .= 'Content-Type: application/octet-stream; name="' . $fileName . '"' . "\n";
+        $msg .= 'Content-Disposition: attachment; filename="' . $fileName . '"' . "\n";
         $msg .= "Content-Transfer-Encoding: base64\n\n";
 
         //file goes here
         $fd = fopen($file, "r");
         $fileContent = fread($fd, filesize($file));
         fclose($fd);
+
         $fileContent = chunk_split(base64_encode($fileContent));
         $msg .= $fileContent;
         $msg .= "\n\n";
