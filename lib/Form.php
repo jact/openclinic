@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.6 2005/08/19 10:59:49 jact Exp $
+ * $Id: Form.php,v 1.7 2005/12/26 18:06:58 jact Exp $
  */
 
 /**
@@ -35,8 +35,8 @@ if (file_exists("../classes/Description_Query.php"))
  *  void text(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
  *  string strPassword(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", bool $readOnly = false, string $addendum = "")
  *  void password(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", bool $readOnly = false, string $addendum = "")
- *  string strSelect(string $id, string $name, array &$array, string $defaultValue = "", int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
- *  void select(string $id, string $name, array &$array, string $defaultValue = "", int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
+ *  string strSelect(string $id, string $name, array &$array, mixed $defaultValue = null, int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
+ *  void select(string $id, string $name, array &$array, mixed $defaultValue = null, int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
  *  string strTextArea(string $id, string $name, int $rows, int $cols, string $value = "", string $error = "", bool $disabled = false, string $addendum = "")
  *  void textArea(string $id, string $name, int $rows, int $cols, string $value = "", string $error = "", bool $disabled = false, string $addendum = "")
  *  string strHidden(string $id, string $name, string $value = "", string $addendum = "")
@@ -172,14 +172,14 @@ class Form
   }
 
   /**
-   * string strSelect(string $id, string $name, array &$array, string $defaultValue = "", int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
+   * string strSelect(string $id, string $name, array &$array, mixed $defaultValue = null, int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
    *
    * Returns select html tag based in an array.
    *
    * @param string $id identifier of input field
    * @param string $name name of the select tag
    * @param array $array data of the select tag
-   * @param string $defaultValue (optional)
+   * @param mixed $defaultValue (optional) array or string or int
    * @param int $size (optional) size of the select html tag
    * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
    * @param string $error (optional) select error message
@@ -187,7 +187,7 @@ class Form
    * @access public
    * @since 0.7
    */
-  function strSelect($id, $name, &$array, $defaultValue = "", $size = 0, $addendum = "", $error = "")
+  function strSelect($id, $name, &$array, $defaultValue = null, $size = 0, $addendum = "", $error = "")
   {
     $html = '<select id="' . $id . '"';
     if ( !empty($addendum) )
@@ -205,7 +205,11 @@ class Form
         foreach ($value as $optKey => $optValue)
         {
           $html .= '<option value="' . $optKey . '"';
-          if ($defaultValue == $optKey)
+          if ($size > 0 && is_array($defaultValue) && in_array($optKey, $defaultValue))
+          {
+            $html .= ' selected="selected"';
+          }
+          elseif ($defaultValue == $optKey)
           {
             $html .= ' selected="selected"';
           }
@@ -216,7 +220,11 @@ class Form
       else
       {
         $html .= '<option value="' . $key . '"';
-        if ($defaultValue == $key)
+        if ($size > 0 && is_array($defaultValue) && in_array($key, $defaultValue))
+        {
+          $html .= ' selected="selected"';
+        }
+        elseif ($defaultValue == $key)
         {
           $html .= ' selected="selected"';
         }
