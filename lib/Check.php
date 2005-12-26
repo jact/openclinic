@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Check.php,v 1.2 2005/08/16 15:13:59 jact Exp $
+ * $Id: Check.php,v 1.3 2005/12/26 18:09:22 jact Exp $
  */
 
 /**
@@ -17,7 +17,59 @@
  */
 
 /**
- * Check set of functions to validate data
+ * Sources constants
+ * Input Filter extension: Rasmus Lerdorf, Derick Rethans
+ */
+define("CHK_GET",     1);
+define("CHK_POST",    2);
+define("CHK_COOKIE",  3);
+define("CHK_ENV",     4);
+define("CHK_SERVER",  5);
+define("CHK_SESSION", 6);
+
+/**
+ * Logical filters constants
+ * Input Filter extension: Rasmus Lerdorf, Derick Rethans
+ */
+define("CHK_LF_INT",     0x0101);
+define("CHK_LF_BOOLEAN", 0x0102);
+define("CHK_LF_FLOAT",   0x0103);
+define("CHK_LF_EMAIL",   0x0112);
+define("CHK_LF_IP",      0x0113);
+
+/**
+ * Sanitizing filters constants
+ * Input Filter extension: Rasmus Lerdorf, Derick Rethans
+ */
+define("CHK_SF_STRING",        0x0201);
+define("CHK_SF_ENCODED",       0x0202);
+define("CHK_SF_SPECIAL_CHARS", 0x0203);
+define("CHK_SF_UNSAFE_RAW",    0x0204);
+
+/**
+ * Filter options constants
+ * Input Filter extension: Rasmus Lerdorf, Derick Rethans
+ */
+define("CHK_ALLOW_OCTAL", 0x0001);
+define("CHK_ALLOW_HEX",   0x0002);
+
+define("CHK_STRIP_LOW",   0x0004);
+define("CHK_STRIP_HIGH",  0x0008);
+define("CHK_ENCODE_LOW",  0x0010);
+define("CHK_ENCODE_HIGH", 0x0020);
+define("CHK_ENCODE_AMP",  0x0040);
+
+define("CHK_IPV4",        0x100000);
+define("CHK_IPV6",        0x200000);
+
+/**
+ * Other constants
+ * Input Filter extension: Rasmus Lerdorf, Derick Rethans
+ */
+define("CHK_NO_FILTER", 0);
+
+/**
+ * Check set of functions to validate and filter data
  *
  * @author jact <jachavar@gmail.com>
  * @access public
@@ -31,6 +83,10 @@
  *  array safeArray(array &$array)
  *  string basicClean(string $string)
  *  mixed removeMagicQuotes(mixed $data)
+ *  mixed getVar(int $source, string $name, int $filter = CHK_NO_FILTER, mixed $options = null, string $characterset = "")
+ *  mixed filter(mixed $value, int $filter, mixed $options = null, string $characterset = "")
+ *  bool isVar(int $source, string $name)
+ *  mixed _rawVar(int $source, string $name)
  */
 class Check
 {
@@ -286,6 +342,182 @@ class Check
     }
 
     return $data;
+  }
+
+  /**
+   * mixed getVar(int $source, string $name, int $filter = CHK_NO_FILTER, mixed $options = null, string $characterset = "")
+   *
+   * @param int $source
+   * @param string $name
+   * @param int $filter (optional)
+   * @param mixed $options (optional) filter options
+   * @param string $characterset (optional)
+   * @return mixed
+   * @access public
+   * @since 0.8
+   */
+  function getVar($source, $name, $filter = CHK_NO_FILTER, $options = null, $characterset = "")
+  {
+    if ( !Check::isVar($source, $name) ) // self::isVar($source, $name)
+    {
+      return false;
+    }
+
+    $value = Check::_rawVar($source, $name); // self::_rawVar($source, $name);
+    if ($filter == CHK_NO_FILTER || $filter == CHK_UNSAFE_RAW)
+    {
+      return $value;
+    }
+
+    //return self::filter($value, $filter, $options, $characterset);
+    return Check::filter($value, $filter, $options, $characterset);
+  }
+
+  /**
+   * mixed filter(mixed $value, int $filter, mixed $options = null, string $characterset = "")
+   *
+   * @param mixed $value
+   * @param int $filter
+   * @param mixed $options (optional) filter options
+   * @param string $characterset (optional)
+   * @return mixed
+   * @access public
+   * @since 0.8
+   */
+  function filter($value, $filter, $options = null, $characterset = "")
+  {
+    $ret = $value;
+    switch ($filter)
+    {
+      case CHK_LF_INT:
+        // @todo filter options CHK_ALLOW_OCTAL, CHK_ALLOW_HEX
+        $ret = intval($value);
+        break;
+
+      case CHK_LF_FLOAT:
+        $ret = floatval($value);
+        break;
+
+      case CHK_LF_BOOLEAN:
+        if (gettype($value) == 'string')
+        {
+          $value = strtolower($value);
+        }
+        $ret = ($value == 1 || $value == 'on' || $value == 'y' || $value == 'yes');
+        break;
+
+      case CHK_LF_EMAIL:
+        // @todo
+        break;
+
+      case CHK_LF_IP:
+        // @todo (CHK_IPV4, CHK_IPV6)
+        break;
+
+      case CHK_SF_STRING:
+        // @todo filter options CHK_STRIP_LOW, CHK_STRIP_HIGH, CHK_ENCODE_LOW, CHK_ENCODE_HIGH, CHK_ENCODE_AMP
+        $ret = Check::safeText($value); // self::safeText($value);
+        break;
+
+      case CHK_SF_ENCODED:
+        // @todo
+        break;
+
+      case CHK_SF_SPECIAL_CHARS:
+        // @todo
+        break;
+    }
+
+    return $ret;
+  }
+
+  /**
+   * bool isVar(int $source, string $name)
+   *
+   * @param int $source
+   * @param string $name
+   * @return boolean
+   * @access public
+   * @since 0.8
+   */
+  function isVar($source, $name)
+  {
+    $ret = false;
+    switch ($source)
+    {
+      case CHK_GET:
+        $ret = array_key_exists($name, $_GET);
+        break;
+
+      case CHK_POST:
+        $ret = array_key_exists($name, $_POST);
+        break;
+
+      case CHK_COOKIE:
+        $ret = array_key_exists($name, $_COOKIE);
+        break;
+
+      case CHK_ENV:
+        $ret = array_key_exists($name, $_ENV);
+        break;
+
+      case CHK_SERVER:
+        $ret = array_key_exists($name, $_SERVER);
+        break;
+
+      case CHK_SESSION:
+        $ret = array_key_exists($name, $_SESSION);
+        break;
+    }
+
+    return $ret;
+  }
+
+  /**
+   * mixed _rawVar(int $source, string $name)
+   *
+   * @param int $source
+   * @param string $name
+   * @return mixed
+   * @access private
+   * @since 0.8
+   */
+  function _rawVar($source, $name)
+  {
+    /*if ( !Check::isVar($source, $name) )
+    {
+      return false;
+    }*/
+
+    $ret = false;
+    switch ($source)
+    {
+      case CHK_GET:
+        $ret = $_GET[$name];
+        break;
+
+      case CHK_POST:
+        $ret = $_POST[$name];
+        break;
+
+      case CHK_COOKIE:
+        $ret = $_COOKIE[$name];
+        break;
+
+      case CHK_ENV:
+        $ret = $_ENV[$name];
+        break;
+
+      case CHK_SERVER:
+        $ret = $_SERVER[$name];
+        break;
+
+      case CHK_SESSION:
+        $ret = $_SESSION[$name];
+        break;
+    }
+
+    return $ret;
   }
 } // end class
 ?>
