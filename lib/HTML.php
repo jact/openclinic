@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: HTML.php,v 1.4 2005/08/17 17:04:21 jact Exp $
+ * $Id: HTML.php,v 1.5 2005/12/26 18:05:45 jact Exp $
  */
 
 /**
@@ -37,6 +37,8 @@ define("OPEN_MSG_ERROR",   3);
  *  void message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
  *  string strBreadCrumb(array &$links, string $class = "")
  *  void breadCrumb(array &$links, string $class = "")
+ *  string srtLink(string $text, string $url, array $arg = null, string $title = "")
+ *  void link(string $text, string $url, array $arg = null, string $title = "")
  */
 class HTML
 {
@@ -250,6 +252,7 @@ class HTML
       return; // no message
     }
 
+    $class = "advice";
     switch ($type)
     {
       case OPEN_MSG_ERROR:
@@ -258,10 +261,6 @@ class HTML
 
       case OPEN_MSG_INFO:
         $class = "message";
-        break;
-
-      default:
-        $class = "advice";
         break;
     }
 
@@ -341,6 +340,60 @@ class HTML
   function breadCrumb(&$links, $class = "")
   {
     echo HTML::strBreadCrumb($links, isset($class) ? $class : "");
+  }
+
+  /**
+   * string srtLink(string $text, string $url, array $arg = null, string $title = "")
+   *
+   * Returns an HTML anchor link.
+   *
+   * @param string $text
+   * @param string $url
+   * @param array $arg (optional) arguments of $url
+   * @param string $title (optional)
+   * @return string HTML anchor link
+   * @access public
+   * @since 0.8
+   */
+  function strLink($text, $url, $arg = null, $title = "")
+  {
+    $html = '<a href="' . $url;
+    if (is_array($arg))
+    {
+      $query = '?';
+      foreach ($arg as $key => $value)
+      {
+        $query .= urlencode($key) . '=' . urlencode($value) . '&amp;';
+      }
+      $query = substr($query, 0, -4); // remove last '&amp;'
+      $html .= $query;
+    }
+    $html .= '"';
+    if ( !empty($title) )
+    {
+      $html .= ' title="' . $title . '"';
+    }
+    $html .= '>' . $text . "</a>\n";
+
+    return $html;
+  }
+
+  /**
+   * void link(string $text, string $url, array $arg = null, string $title = "")
+   *
+   * Draws an HTML anchor link.
+   *
+   * @param string $text
+   * @param string $url
+   * @param array $arg (optional) arguments of $url
+   * @param string $title (optional)
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function link($text, $url, $arg = null, $title = "")
+  {
+    echo HTML::strLink($text, $url, is_array($arg) ? $arg : null, isset($title) ? $title : "");
   }
 } // end class
 ?>
