@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.13 2005/07/31 11:15:52 jact Exp $
+ * $Id: problem_view.php,v 1.14 2005/12/26 18:03:50 jact Exp $
  */
 
 /**
@@ -83,7 +83,7 @@
   $problemQ->close();
   unset($problemQ);
 
-  if ($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00")
+  if (I18n::localDate($problem->getClosingDate()) != "")
   {
     $nav = "history";
   }
@@ -118,7 +118,7 @@
   echo '<p>';
   if ($hasMedicalAdminAuth)
   {
-    if ( !$problem->getClosingDate() )
+    if (I18n::localDate($problem->getClosingDate()) == "")
     {
       echo '<a href="../medical/problem_edit_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '&amp;reset=Y">' . _("Edit Medical Problem Data") . '</a> | ';
     }
