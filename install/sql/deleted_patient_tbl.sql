@@ -1,10 +1,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: deleted_patient_tbl.sql,v 1.6 2005/08/03 18:02:29 jact Exp $
+ * $Id: deleted_patient_tbl.sql,v 1.7 2006/01/09 20:16:41 jact Exp $
  */
 
 /**
@@ -36,6 +36,7 @@ CREATE TABLE deleted_patient_tbl (
   education TEXT NULL, /* estudios */
   insurance_company VARCHAR(30) NULL, /* entidad aseguradora */
   id_member INT UNSIGNED NULL, /* clave del médico al que pertenece por cupo */
+  collegiate_number VARCHAR(20) NULL, /* numero de colegiado (del médico al que pertenece por cupo) */
   birth_growth TEXT NULL, /* nacimiento y crecimiento (desarrollo) */
   growth_sexuality TEXT NULL, /* desarrollo y vida sexual */
   feed TEXT NULL, /* alimentación */
