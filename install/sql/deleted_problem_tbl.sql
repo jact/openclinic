@@ -1,10 +1,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: deleted_problem_tbl.sql,v 1.6 2005/08/03 18:02:29 jact Exp $
+ * $Id: deleted_problem_tbl.sql,v 1.7 2006/01/14 12:40:17 jact Exp $
  */
 
 /**
@@ -21,6 +21,7 @@ CREATE TABLE deleted_problem_tbl (
   last_update_date DATE NOT NULL, /* fecha de última actualización */
   id_patient INT UNSIGNED NOT NULL,
   id_member INT UNSIGNED NULL, /* clave del médico que atiende el problema */
+  collegiate_number VARCHAR(20) NULL, /* numero de colegiado (del médico al que pertenece por cupo) */
   order_number TINYINT UNSIGNED NOT NULL, /* número de orden relativo a cada paciente */
   opening_date DATE NOT NULL, /* fecha de apertura */
   closing_date DATE NULL, /* fecha de cierre */
