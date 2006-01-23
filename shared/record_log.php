@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: record_log.php,v 1.13 2005/08/03 17:40:50 jact Exp $
+ * $Id: record_log.php,v 1.14 2006/01/23 22:43:01 jact Exp $
  */
 
 /**
@@ -47,26 +47,15 @@
 
     $queryQ = new $class;
     $queryQ->connect();
-    if ($queryQ->isError())
-    {
-      Error::query($queryQ);
-    }
 
-    $numRows = call_user_func_array(array($queryQ, $method), $key);
-    if ($queryQ->isError())
-    {
-      $queryQ->close();
-      Error::query($queryQ);
-    }
-
-    if ( !$numRows )
+    if ( !call_user_func_array(array($queryQ, $method), $key) )
     {
       $queryQ->close();
       return;
     }
 
     $data = $queryQ->fetchRow(); // obtains an array
-    if ($queryQ->isError())
+    if ( !$data )
     {
       $queryQ->close();
       Error::fetch($queryQ);
@@ -81,17 +70,8 @@
 
     $recQ = new Record_Page_Query();
     $recQ->connect();
-    if ($recQ->isError())
-    {
-      Error::query($recQ);
-    }
 
     $recQ->insert($_SESSION['userId'], $_SESSION['loginSession'], $table, $operation, $data);
-    if ($recQ->isError())
-    {
-      $recQ->close();
-      Error::query($recQ);
-    }
 
     $recQ->close();
     unset($recQ);

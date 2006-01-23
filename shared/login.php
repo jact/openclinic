@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.16 2005/08/15 16:41:10 jact Exp $
+ * $Id: login.php,v 1.17 2006/01/23 22:46:37 jact Exp $
  */
 
 /**
@@ -56,18 +56,8 @@
   {
     $userQ = new User_Query();
     $userQ->connect();
-    if ($userQ->isError())
-    {
-      Error::query($userQ);
-    }
 
     $result = $userQ->existLogin($loginSession);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
-
     if ( !$result )
     {
       $errorFound = true;
@@ -84,15 +74,14 @@
       }
 
       $lastLogin = (isset($_SESSION["postVars"]["login_session"])) ? $_SESSION["postVars"]["login_session"] : "";
-      $userQ->verifySignOn($loginSession, $pwdSession);
-      if ($userQ->isError())
+      if ( !$userQ->verifySignOn($loginSession, $pwdSession) )
       {
         $userQ->close();
         Error::query($userQ);
       }
 
       $user = $userQ->fetch();
-      if ($userQ->isError())
+      if ( !$user )
       {
         /**
          * Invalid password. Add one to login attempts.
@@ -122,11 +111,7 @@
         if (OPEN_MAX_LOGIN_ATTEMPTS && $sessLoginAttempts >= OPEN_MAX_LOGIN_ATTEMPTS)
         {
           $userQ->deactivate($loginSession);
-          if ($userQ->isError())
-          {
-            $userQ->close();
-            Error::query($userQ);
-          }
+
           $userQ->close();
 
           header("Location: ../shared/login_suspended.php");
@@ -167,17 +152,9 @@
    */
   $sessionQ = new Session_Query();
   $sessionQ->connect();
-  if ($sessionQ->isError())
-  {
-    Error::query($sessionQ);
-  }
 
   $token = $sessionQ->getToken($user->getLogin());
-  if ($sessionQ->isError())
-  {
-    $sessionQ->close();
-    Error::query($sessionQ);
-  }
+
   $sessionQ->close();
   unset($sessionQ);
 
@@ -186,17 +163,9 @@
    */
   $accessQ = new Access_Page_Query();
   $accessQ->connect();
-  if ($accessQ->isError())
-  {
-    Error::query($accessQ);
-  }
 
   $accessQ->insert($user);
-  if ($accessQ->isError())
-  {
-    $accessQ->close();
-    Error::query($accessQ);
-  }
+
   $accessQ->close();
   unset($accessQ);
 

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.10 2005/08/03 17:40:50 jact Exp $
+ * $Id: login_check.php,v 1.11 2006/01/23 22:45:11 jact Exp $
  */
 
 /**
@@ -33,7 +33,6 @@
   }
 
   require_once("../classes/Session_Query.php");
-  require_once("../lib/Error.php");
 
   /**
    * Disabling users control for demo
@@ -77,18 +76,9 @@
      */
     $sessQ = new Session_Query();
     $sessQ->connect();
-    if ($sessQ->isError())
-    {
-      Error::query($sessQ);
-    }
 
     if ( !$sessQ->validToken($_SESSION['loginSession'], $_SESSION['token']) )
     {
-      if ($sessQ->isError())
-      {
-        $sessQ->close();
-        Error::query($sessQ);
-      }
       $sessQ->close();
 
       $_SESSION['invalidToken'] = true;

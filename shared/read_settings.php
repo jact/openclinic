@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.17 2005/08/03 17:41:10 jact Exp $
+ * $Id: read_settings.php,v 1.18 2006/01/23 22:43:46 jact Exp $
  */
 
 /**
@@ -50,20 +50,11 @@
    */
   $setQ = new Setting_Query();
   $setQ->connect();
-  if ($setQ->isError())
-  {
-    Error::query($setQ);
-  }
 
   $setQ->select();
-  if ($setQ->isError())
-  {
-    $setQ->close();
-    Error::query($setQ);
-  }
 
   $set = $setQ->fetch();
-  if ($setQ->isError())
+  if ( !$set )
   {
     $setQ->close();
     Error::fetch($setQ);
@@ -101,27 +92,11 @@
    */
   $themeQ = new Theme_Query();
   $themeQ->connect();
-  if ($themeQ->isError())
-  {
-    Error::query($themeQ);
-  }
 
-  if (isset($_SESSION["userTheme"]))
-  {
-    $themeQ->select($_SESSION["userTheme"]);
-  }
-  else
-  {
-    $themeQ->select(OPEN_THEME_ID);
-  }
-  if ($themeQ->isError())
-  {
-    $themeQ->close();
-    Error::query($themeQ);
-  }
+  $themeQ->select((isset($_SESSION["userTheme"]) ? $_SESSION["userTheme"] : OPEN_THEME_ID));
 
   $theme = $themeQ->fetch();
-  if ($themeQ->isError())
+  if ( !$theme )
   {
     $themeQ->close();
     Error::fetch($themeQ);
