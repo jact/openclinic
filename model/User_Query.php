@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.12 2005/07/30 17:27:26 jact Exp $
+ * $Id: User_Query.php,v 1.13 2006/01/23 22:10:52 jact Exp $
  */
 
 /**
@@ -74,14 +74,7 @@ class User_Query extends Query
     }
     $sql .= " ORDER BY login;";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing user information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -94,19 +87,13 @@ class User_Query extends Query
    */
   function selectLogins()
   {
-    $sql = "SELECT id_member,login FROM staff_tbl";
+    $sql = "SELECT id_member,login";
+    $sql .= " FROM staff_tbl";
     $sql .= " WHERE id_user IS NULL";
     $sql .= " AND login IS NOT NULL";
     $sql .= " ORDER BY login;";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing user information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -129,10 +116,8 @@ class User_Query extends Query
       $sql .= " AND id_member<>" . intval($idMember);
     }
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error checking for dup login.";
       return false;
     }
 
@@ -161,10 +146,6 @@ class User_Query extends Query
     $sql .= " AND pwd='" . urlencode($pwd) . "'"; // md5 from form
 
     $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error verifying login and password.";
-    }
 
     return ($onlyCheck ? $this->numRows() > 0 : $result);
   }
@@ -185,38 +166,34 @@ class User_Query extends Query
     $sql .= " FROM staff_tbl";
     $sql .= " WHERE login='" . urlencode($login) . "';";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error accessing staff member information.";
       return false;
     }
 
-    $result = $this->fetchRow();
-    if ( !$result )
+    $array = $this->fetchRow();
+    if ( !$array )
     {
       return false;
     }
-    $idUser = $result['id_user'];
+    $idUser = $array['id_user'];
 
     $sql = "SELECT actived";
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_user=" . intval($idUser);
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing user information.";
-      return false;
-    }
-
-    $result = $this->fetchRow();
-    if ( !$result )
+    if ( !$this->exec($sql) )
     {
       return false;
     }
 
-    return ($result['actived'] == "Y");
+    $array = $this->fetchRow();
+    if ( !$array )
+    {
+      return false;
+    }
+
+    return ($array['actived'] == "Y");
   }
 
   /**
@@ -234,30 +211,22 @@ class User_Query extends Query
     $sql .= " FROM staff_tbl";
     $sql .= " WHERE login='" . urlencode($login) . "';";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error deactivating user.";
       return false;
     }
 
-    $result = $this->fetchRow();
-    if ( !$result )
+    $array = $this->fetchRow();
+    if ( !$array )
     {
       return false;
     }
-    $idUser = $result['id_user'];
+    $idUser = $array['id_user'];
 
     $sql = "UPDATE " . $this->_table . " SET actived='N'";
     $sql .= " WHERE id_user=" . intval($idUser) . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error deactivating user.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -343,10 +312,8 @@ class User_Query extends Query
     $sql .= $user->getIdTheme() . ", ";
     $sql .= $user->getIdProfile() . ");";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error inserting new user information.";
       return false;
     }
 
@@ -354,13 +321,7 @@ class User_Query extends Query
     $sql .= " id_user=LAST_INSERT_ID()";
     $sql .= " WHERE id_member=" . $user->getIdMember() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error inserting new user information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -380,13 +341,7 @@ class User_Query extends Query
       return false;
     }
 
-    $isDupLogin = $this->existLogin($user->getLogin(), $user->getIdMember());
-    if ($this->isError())
-    {
-      return false;
-    }
-
-    if ($isDupLogin)
+    if ($this->existLogin($user->getLogin(), $user->getIdMember()))
     {
       $this->_isError = true;
       $this->_error = "Login is already in use.";
@@ -397,10 +352,8 @@ class User_Query extends Query
     $sql .= " login='" . urlencode($user->getLogin()) . "'";
     $sql .= " WHERE id_user=" . $user->getIdUser() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error updating member user information.";
       return false;
     }
 
@@ -411,13 +364,7 @@ class User_Query extends Query
     $sql .= " id_profile=" . $user->getIdProfile();
     $sql .= " WHERE id_user=" . $user->getIdUser() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating user information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -441,13 +388,7 @@ class User_Query extends Query
     $sql .= " pwd='" . urlencode($user->getPwd()) . "'"; // md5 from form
     $sql .= " WHERE id_user=" . $user->getIdUser() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error reseting password.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -464,10 +405,8 @@ class User_Query extends Query
     $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_user=" . intval($idUser) . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error deleting user information.";
       return false;
     }
 
@@ -475,13 +414,7 @@ class User_Query extends Query
     $sql .= " id_user=NULL";
     $sql .= " WHERE id_user=" . intval($idUser) . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating member user information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

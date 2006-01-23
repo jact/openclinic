@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Session_Query.php,v 1.4 2005/08/15 16:44:47 jact Exp $
+ * $Id: Session_Query.php,v 1.5 2006/01/23 22:09:45 jact Exp $
  */
 
 /**
@@ -64,15 +64,12 @@ class Session_Query extends Query
     $sql .= " AND last_updated_date >= date_sub(sysdate(), interval ";
     $sql .= OPEN_SESSION_TIMEOUT . " minute)";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error accessing session information.";
       return false;
     }
 
-    $rowCount = $this->numRows();
-    if ($rowCount > 0)
+    if ($this->numRows() > 0)
     {
       $this->_updateToken($token);
       return true;
@@ -103,10 +100,8 @@ class Session_Query extends Query
     $sql .= " AND last_updated_date < date_sub(sysdate(), interval ";
     $sql .= OPEN_SESSION_TIMEOUT . " minute)";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error deleting session information.";
       return false;
     }
 
@@ -118,13 +113,7 @@ class Session_Query extends Query
     $sql .= "'" . urlencode($login) . "', sysdate(), ";
     $sql .= $token . ")";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error creating a new session.";
-    }
-
-    return $token;
+    return ($this->exec($sql) ? $token : false);
   }
 
   /**
@@ -142,13 +131,7 @@ class Session_Query extends Query
     $sql .= " last_updated_date=sysdate()";
     $sql .= " WHERE token=" . intval($token) . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating session timeout.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>
