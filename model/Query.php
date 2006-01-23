@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.8 2005/07/30 15:13:46 jact Exp $
+ * $Id: Query.php,v 1.9 2006/01/23 21:39:01 jact Exp $
  */
 
 /**
@@ -17,6 +17,7 @@
  */
 
 require_once("../classes/DbConnection.php");
+require_once("../lib/Error.php");
 
 /**
  * Query parent data access component class for all data access components
@@ -25,7 +26,7 @@ require_once("../classes/DbConnection.php");
  * @access public
  *
  * Methods:
- *  bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "")
+ *  bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
  *  bool close(void)
  *  bool exec(string $sql)
  *  mixed fetchRow(int $arrayType = MYSQL_ASSOC)
@@ -38,6 +39,7 @@ require_once("../classes/DbConnection.php");
  *  string getRowData(array $key, array $value, string $table = "")
  *  void clearErrors(void)
  *  bool isError(void)
+ *  void captureError(bool $value)
  *  string getError(void)
  *  int getDbErrno(void)
  *  string getDbError(void)
@@ -48,6 +50,7 @@ class Query
 {
   var $_conn;
   var $_isError = false;
+  var $_captureError = false;
   var $_error = ""; // so it could change the error message
   var $_dbErrno = 0; // it is not superfluous
   var $_dbError = ""; // it is not superfluous
@@ -55,7 +58,7 @@ class Query
   var $_table = ""; // to extends classes
 
   /**
-   * bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "")
+   * bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
    *
    * Instantiates private connection var and connects to the database
    *
@@ -63,10 +66,11 @@ class Query
    * @param string $user (optional)
    * @param string $pwd (optional)
    * @param string $host (optional)
+   * @param int $port (optional)
    * @return void
    * @access public
    */
-  function connect($database = "", $user = "", $pwd = "", $host = "")
+  function connect($database = "", $user = "", $pwd = "", $host = "", $port = 3306)
   {
     if (empty($database))
     {
@@ -74,7 +78,7 @@ class Query
     }
     else
     {
-      $this->_conn = new DbConnection($database, $user, $pwd, $host);
+      $this->_conn = new DbConnection($database, $user, $pwd, $host, $port);
     }
 
     $result = $this->_conn->connect();
@@ -84,6 +88,11 @@ class Query
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
+
+      if ( !$this->_captureError )
+      {
+        Error::query($this);
+      }
     }
 
     return $result;
@@ -106,6 +115,11 @@ class Query
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
+
+      if ( !$this->_captureError )
+      {
+        Error::query($this);
+      }
     }
     unset($this->_conn);
 
@@ -133,6 +147,12 @@ class Query
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
+
+      if ( !$this->_captureError )
+      {
+        $this->close();
+        Error::query($this);
+      }
     }
 
     return $result;
@@ -151,11 +171,17 @@ class Query
   function fetchRow($arrayType = MYSQL_ASSOC)
   {
     $result = $this->_conn->fetchRow($arrayType);
-    if ($result === false)
+    /*if ($result === false)
     {
       $this->_isError = true;
       $this->_error = $this->_conn->getError();
-    }
+
+      if ( !$this->_captureError )
+      {
+        $this->close();
+        Error::query($this);
+      }
+    }*/
 
     return $result;
   }
@@ -173,13 +199,19 @@ class Query
   function fetchAll($arrayType = MYSQL_ASSOC)
   {
     $result = $this->_conn->fetchAll($arrayType);
-    if ($result === false)
+    /*if ($result === false)
     {
       $this->_isError = true;
       $this->_error = $this->_conn->getError();
       $this->_dbErrno = $this->_conn->getDbErrno();
       $this->_dbError = $this->_conn->getDbError();
-    }
+
+      if ( !$this->_captureError )
+      {
+        $this->close();
+        Error::query($this);
+      }
+    }*/
 
     return $result;
   }
@@ -336,6 +368,18 @@ class Query
   function isError()
   {
     return $this->_isError;
+  }
+
+  /**
+   * void captureError(bool $value)
+   *
+   * @param bool $value
+   * @access public
+   * @since 0.8
+   */
+  function captureError($value)
+  {
+    $this->_captureError = ($value != false);
   }
 
   /**
