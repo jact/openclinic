@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.17 2005/08/15 16:36:33 jact Exp $
+ * $Id: index.php,v 1.18 2006/01/23 22:49:47 jact Exp $
  */
 
 /**
@@ -137,6 +137,8 @@
   require_once("../classes/Query.php");
 
   $installQ = new Query();
+  $installQ->captureError(true);
+
   $installQ->connect();
   if ($installQ->isError())
   {
