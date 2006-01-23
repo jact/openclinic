@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit.php,v 1.7 2005/07/30 18:58:37 jact Exp $
+ * $Id: history_family_edit.php,v 1.8 2006/01/23 23:13:54 jact Exp $
  */
 
 /**
@@ -83,17 +83,8 @@
    */
   $historyQ = new History_Query();
   $historyQ->connect();
-  if ($historyQ->isError())
-  {
-    Error::query($historyQ);
-  }
 
   $historyQ->updateFamily($history);
-  if ($historyQ->isError())
-  {
-    $historyQ->close();
-    Error::query($historyQ);
-  }
 
   $historyQ->close();
   unset($historyQ);

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.10 2005/08/15 10:44:46 jact Exp $
+ * $Id: user_edit.php,v 1.11 2006/01/23 23:08:50 jact Exp $
  */
 
 /**
@@ -59,10 +59,6 @@
    */
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->isError())
-  {
-    Error::query($userQ);
-  }
 
   if ($userQ->existLogin($user->getLogin(), $user->getIdMember()))
   {
@@ -71,11 +67,6 @@
   else
   {
     $userQ->update($user);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
 
     /**
      * updating session variables if user is current user
@@ -89,8 +80,7 @@
 
   if ($changePwd && !$loginUsed)
   {
-    $userQ->verifySignOn($_POST["login"], $_POST["md5_old"], true);
-    if ($userQ->isError())
+    if ( !$userQ->verifySignOn($_POST["login"], $_POST["md5_old"], true) )
     {
       $userQ->close();
 
@@ -105,11 +95,6 @@
     }
 
     $userQ->resetPwd($user);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
   }
   $userQ->close();
   unset($userQ);

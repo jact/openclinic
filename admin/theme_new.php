@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new.php,v 1.7 2005/08/15 11:22:59 jact Exp $
+ * $Id: theme_new.php,v 1.8 2006/01/23 23:05:22 jact Exp $
  */
 
 /**
@@ -48,10 +48,6 @@
    */
   $themeQ = new Theme_Query();
   $themeQ->connect();
-  if ($themeQ->isError())
-  {
-    Error::query($themeQ);
-  }
 
   if ($themeQ->existCSSFile($theme->getCSSFile()))
   {
@@ -60,11 +56,6 @@
   else
   {
     $themeQ->insert($theme);
-    if ($themeQ->isError())
-    {
-      $themeQ->close();
-      Error::query($themeQ);
-    }
   }
   $themeQ->close();
   unset($themeQ);

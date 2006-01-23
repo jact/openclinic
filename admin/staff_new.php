@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new.php,v 1.8 2005/08/17 16:54:52 jact Exp $
+ * $Id: staff_new.php,v 1.9 2006/01/23 23:02:30 jact Exp $
  */
 
 /**
@@ -50,10 +50,6 @@
    */
   $staffQ = new Staff_Query();
   $staffQ->connect();
-  if ($staffQ->isError())
-  {
-    Error::query($staffQ);
-  }
 
   if ($staffQ->existLogin($staff->getLogin()))
   {
@@ -62,11 +58,6 @@
   else
   {
     $staffQ->insert($staff);
-    if ($staffQ->isError())
-    {
-      $staffQ->close();
-      Error::query($staffQ);
-    }
   }
   $staffQ->close();
   unset($staffQ);

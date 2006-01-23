@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset.php,v 1.6 2005/08/15 10:46:42 jact Exp $
+ * $Id: user_pwd_reset.php,v 1.7 2006/01/23 23:11:37 jact Exp $
  */
 
 /**
@@ -67,17 +67,9 @@
    */
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->isError())
-  {
-    Error::query($userQ);
-  }
 
   $userQ->resetPwd($user);
-  if ($userQ->isError())
-  {
-    $userQ->close();
-    Error::query($userQ);
-  }
+
   $userQ->close();
   unset($userQ);
 

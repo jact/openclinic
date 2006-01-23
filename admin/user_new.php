@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new.php,v 1.9 2005/08/15 16:33:41 jact Exp $
+ * $Id: user_new.php,v 1.10 2006/01/23 23:11:22 jact Exp $
  */
 
 /**
@@ -48,10 +48,6 @@
    */
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->isError())
-  {
-    Error::query($userQ);
-  }
 
   if ($userQ->existLogin($user->getLogin(), $user->getIdMember()))
   {
@@ -60,11 +56,6 @@
   else
   {
     $userQ->insert($user);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
   }
   $userQ->close();
   unset($userQ);

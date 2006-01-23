@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.19 2005/08/19 10:57:25 jact Exp $
+ * $Id: theme_list.php,v 1.20 2006/01/23 23:05:08 jact Exp $
  */
 
 /**
@@ -114,19 +114,8 @@ function previewTheme(key)
 <?php
   $themeQ = new Theme_Query();
   $themeQ->connect();
-  if ($themeQ->isError())
-  {
-    Error::query($themeQ);
-  }
 
-  $numRows = $themeQ->selectWithStats();
-  if ($themeQ->isError())
-  {
-    $themeQ->close();
-    Error::query($themeQ);
-  }
-
-  if ($numRows == 0)
+  if ( !$themeQ->selectWithStats() )
   {
     $themeQ->close();
     HTML::message(_("No results found."), OPEN_MSG_INFO);

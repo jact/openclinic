@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.18 2005/08/22 15:12:08 jact Exp $
+ * $Id: setting_edit_form.php,v 1.19 2006/01/23 22:57:57 jact Exp $
  */
 
 /**
@@ -36,24 +36,11 @@
 
     $setQ = new Setting_Query();
     $setQ->connect();
-    if ($setQ->isError())
-    {
-      Error::query($setQ);
-    }
 
     $setQ->select();
-    if ($setQ->isError())
-    {
-      $setQ->close();
-      Error::query($setQ);
-    }
 
     $set = $setQ->fetch();
-    if ($setQ->isError())
-    {
-      Error::fetch($setQ, false);
-    }
-    else
+    if ($set)
     {
       $postVars["clinic_name"] = $set->getClinicName();
       $postVars["clinic_image_url"] = $set->getClinicImageUrl();
@@ -66,6 +53,10 @@
       $postVars["id_theme"] = $set->getIdTheme();
       $postVars["session_timeout"] = $set->getSessionTimeout();
       $postVars["items_per_page"] = $set->getItemsPerPage();
+    }
+    else
+    {
+      Error::fetch($setQ, false);
     }
     $setQ->freeResult();
     $setQ->close();

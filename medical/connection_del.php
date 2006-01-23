@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del.php,v 1.12 2005/08/15 11:31:17 jact Exp $
+ * $Id: connection_del.php,v 1.13 2006/01/23 23:13:29 jact Exp $
  */
 
 /**
@@ -54,10 +54,6 @@
    */
   $connQ = new Connection_Query();
   $connQ->connect();
-  if ($connQ->isError())
-  {
-    Error::query($connQ);
-  }
 
   /**
    * Record log process (before deleting process)
@@ -65,11 +61,6 @@
   recordLog("Connection_Query", "DELETE", array($idProblem, $idConnection));
 
   $connQ->delete($idProblem, $idConnection);
-  if ($connQ->isError())
-  {
-    $connQ->close();
-    Error::query($connQ);
-  }
 
   $connQ->close();
   unset($connQ);

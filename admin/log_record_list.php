@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.17 2005/07/30 18:58:25 jact Exp $
+ * $Id: log_record_list.php,v 1.18 2006/01/23 22:56:46 jact Exp $
  */
 
 /**
@@ -45,20 +45,6 @@
   $day = (isset($_GET["day"])) ? intval($_GET["day"]) : 0;
   $hour = (isset($_GET["hour"])) ? intval($_GET["hour"]) : 0;
 
-  $recordQ = new Record_Page_Query();
-  $recordQ->connect();
-  if ($recordQ->isError())
-  {
-    Error::query($recordQ);
-  }
-
-  $total = $recordQ->select($year, $month, $day, $hour);
-  if ($recordQ->isError())
-  {
-    $recordQ->close();
-    Error::query($recordQ);
-  }
-
   /**
    * Show page
    */
@@ -76,6 +62,10 @@
   HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
+  $recordQ = new Record_Page_Query();
+  $recordQ->connect();
+
+  $total = $recordQ->select($year, $month, $day, $hour);
   if ($total == 0)
   {
     $recordQ->close();

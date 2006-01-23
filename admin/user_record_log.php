@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.23 2005/08/22 15:16:18 jact Exp $
+ * $Id: user_record_log.php,v 1.24 2006/01/23 23:12:32 jact Exp $
  */
 
 /**
@@ -58,17 +58,8 @@
   $recordQ = new Record_Page_Query();
   $recordQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $recordQ->connect();
-  if ($recordQ->isError())
-  {
-    Error::query($recordQ);
-  }
 
   $recordQ->searchUser($idUser, $currentPageNmbr, $limit);
-  if ($recordQ->isError())
-  {
-    $recordQ->close();
-    Error::query($recordQ);
-  }
 
   /**
    * Show page

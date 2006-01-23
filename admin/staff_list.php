@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.16 2005/07/30 18:58:25 jact Exp $
+ * $Id: staff_list.php,v 1.17 2006/01/23 23:02:06 jact Exp $
  */
 
 /**
@@ -31,13 +31,6 @@
    */
   $memberType = (isset($_GET["type"]) ? Check::safeText($_GET["type"]) : "");
   $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
-
-  $staffQ = new Staff_Query();
-  $staffQ->connect();
-  if ($staffQ->isError())
-  {
-    Error::query($staffQ);
-  }
 
   /**
    * Show page
@@ -87,6 +80,9 @@
     HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
+  $staffQ = new Staff_Query();
+  $staffQ->connect();
+
   if ( !empty($memberType) )
   {
     $numRows = $staffQ->selectType($memberType);
@@ -107,12 +103,6 @@
     $numRows = $staffQ->select();
     $listTitle = _("Staff Members") . ":";
     $viewType = true;
-  }
-
-  if ($staffQ->isError())
-  {
-    $staffQ->close();
-    Error::query($staffQ);
   }
 
   //Error::debug($_SESSION);

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.18 2005/08/22 15:12:08 jact Exp $
+ * $Id: theme_edit_form.php,v 1.19 2006/01/23 23:03:51 jact Exp $
  */
 
 /**
@@ -54,19 +54,8 @@
      */
     $themeQ = new Theme_Query();
     $themeQ->connect();
-    if ($themeQ->isError())
-    {
-      Error::query($themeQ);
-    }
 
-    $numRows = $themeQ->select($idTheme);
-    if ($themeQ->isError())
-    {
-      $themeQ->close();
-      Error::query($themeQ);
-    }
-
-    if ( !$numRows )
+    if ( !$themeQ->select($idTheme) )
     {
       $themeQ->close();
       include_once("../shared/header.php");
@@ -78,11 +67,7 @@
     }
 
     $theme = $themeQ->fetch();
-    if ($themeQ->isError())
-    {
-      Error::fetch($themeQ, false);
-    }
-    else
+    if ($theme)
     {
       $postVars["id_theme"] = $idTheme;
       $postVars["theme_name"] = $theme->getThemeName();
@@ -94,6 +79,10 @@
         $postVars["css_rules"] = fread($fp, filesize($filename));
         fclose($fp);
       }
+    }
+    else
+    {
+      Error::fetch($themeQ, false);
     }
     $themeQ->freeResult();
     $themeQ->close();

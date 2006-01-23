@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.17 2005/08/22 15:12:09 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.18 2006/01/23 23:12:15 jact Exp $
  */
 
 /**
@@ -54,19 +54,8 @@
      */
     $userQ = new User_Query();
     $userQ->connect();
-    if ($userQ->isError())
-    {
-      Error::query($userQ);
-    }
 
-    $numRows = $userQ->select($idUser);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
-
-    if ( !$numRows )
+    if ( !$userQ->select($idUser) )
     {
       $userQ->close();
       include_once("../shared/header.php");
@@ -78,17 +67,17 @@
     }
 
     $user = $userQ->fetch();
-    if ($userQ->isError())
-    {
-      Error::fetch($userQ, false);
-    }
-    else
+    if ($user)
     {
       $postVars["id_user"] = $idUser;
       $postVars["login"] = $user->getLogin();
       $postVars["pwd"] = $postVars["pwd2"] = "";
       //$postVars["pwd"] = $postVars["pwd2"] = $user->getPwd(); // no because it's encoded
       //Error::debug($user->getPwd());
+    }
+    else
+    {
+      Error::fetch($userQ, false);
     }
     $userQ->freeResult();
     $userQ->close();

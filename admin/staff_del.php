@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_del.php,v 1.10 2005/08/15 11:22:59 jact Exp $
+ * $Id: staff_del.php,v 1.11 2006/01/23 22:59:03 jact Exp $
  */
 
 /**
@@ -45,19 +45,8 @@
    */
   $staffQ = new Staff_Query();
   $staffQ->connect();
-  if ($staffQ->isError())
-  {
-    Error::query($staffQ);
-  }
 
-  $numRows = $staffQ->select($idMember);
-  if ($staffQ->isError())
-  {
-    $staffQ->close();
-    Error::query($staffQ);
-  }
-
-  if ( !$numRows )
+  if ( !$staffQ->select($idMember) )
   {
     $staffQ->close();
     include_once("../shared/header.php");
@@ -69,18 +58,14 @@
   }
 
   $staff = $staffQ->fetch();
-  if ($staffQ->isError())
+  if ( !$staff )
   {
     $staffQ->close();
     Error::fetch($staffQ);
   }
 
   $staffQ->delete($staff->getIdMember(), $staff->getIdUser());
-  if ($staffQ->isError())
-  {
-    $staffQ->close();
-    Error::query($staffQ);
-  }
+
   $staffQ->close();
   unset($staffQ);
 

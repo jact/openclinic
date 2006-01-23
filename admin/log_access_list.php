@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_access_list.php,v 1.14 2005/07/30 18:58:25 jact Exp $
+ * $Id: log_access_list.php,v 1.15 2006/01/23 22:55:28 jact Exp $
  */
 
 /**
@@ -45,20 +45,6 @@
   $day = (isset($_GET["day"])) ? intval($_GET["day"]) : 0;
   $hour = (isset($_GET["hour"])) ? intval($_GET["hour"]) : 0;
 
-  $accessQ = new Access_Page_Query();
-  $accessQ->connect();
-  if ($accessQ->isError())
-  {
-    Error::query($accessQ);
-  }
-
-  $total = $accessQ->select($year, $month, $day, $hour);
-  if ($accessQ->isError())
-  {
-    $accessQ->close();
-    Error::query($accessQ);
-  }
-
   /**
    * Show page
    */
@@ -76,6 +62,10 @@
   HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
+  $accessQ = new Access_Page_Query();
+  $accessQ->connect();
+
+  $total = $accessQ->select($year, $month, $day, $hour);
   if ($total == 0)
   {
     $accessQ->close();

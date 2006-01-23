@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.19 2005/08/19 10:58:02 jact Exp $
+ * $Id: user_list.php,v 1.20 2006/01/23 23:11:06 jact Exp $
  */
 
 /**
@@ -34,17 +34,8 @@
 
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->isError())
-  {
-    Error::query($userQ);
-  }
 
   $userQ->selectLogins();
-  if ($userQ->isError())
-  {
-    $userQ->close();
-    Error::query($userQ);
-  }
 
   $array = null;
   while ($user = $userQ->fetch())
@@ -52,7 +43,6 @@
     $array[$user->getIdMember() . OPEN_SEPARATOR . $user->getLogin()] = $user->getLogin();
   }
   $userQ->freeResult();
-  $userQ->clearErrors(); // needed after empty fetch()
 
   /**
    * Show page
@@ -132,16 +122,9 @@
   Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null);
   echo "</form>\n";
 
-  $numRows = $userQ->select();
-  if ($userQ->isError())
-  {
-    $userQ->close();
-    Error::query($userQ);
-  }
-
   echo '<h2>' . _("Users List:") . "</h2>\n";
 
-  if ($numRows == 0)
+  if ( !$userQ->select() )
   {
     $userQ->close();
     HTML::message(_("No results found."), OPEN_MSG_INFO);

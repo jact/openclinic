@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.19 2005/08/22 15:12:08 jact Exp $
+ * $Id: user_edit_form.php,v 1.20 2006/01/23 23:09:29 jact Exp $
  */
 
 /**
@@ -57,19 +57,8 @@
      */
     $userQ = new User_Query();
     $userQ->connect();
-    if ($userQ->isError())
-    {
-      Error::query($userQ);
-    }
 
-    $numRows = $userQ->select($idUser);
-    if ($userQ->isError())
-    {
-      $userQ->close();
-      Error::query($userQ);
-    }
-
-    if ( !$numRows )
+    if ( !$userQ->select($idUser) )
     {
       $userQ->close();
       include_once("../shared/header.php");
@@ -81,11 +70,7 @@
     }
 
     $user = $userQ->fetch();
-    if ($userQ->isError())
-    {
-      Error::fetch($userQ, false);
-    }
-    else
+    if ($user)
     {
       $postVars["id_user"] = $idUser;
       $postVars["id_member"] = $user->getIdMember();
@@ -94,6 +79,10 @@
       $postVars["actived"] = ($user->isActived() ? "checked" : "");
       $postVars["id_theme"] = $user->getIdTheme();
       $postVars["id_profile"] = $user->getIdProfile();
+    }
+    else
+    {
+      Error::fetch($userQ, false);
     }
     $userQ->freeResult();
     $userQ->close();

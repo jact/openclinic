@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.7 2005/12/26 18:06:58 jact Exp $
+ * $Id: Form.php,v 1.8 2006/01/23 22:52:24 jact Exp $
  */
 
 /**
@@ -20,7 +20,6 @@ require_once("../lib/HTML.php");
 if (file_exists("../classes/Description_Query.php"))
 {
   include_once("../classes/Description_Query.php");
-  include_once("../lib/Error.php");
 }
 
 /**
@@ -623,19 +622,8 @@ class Form
   {
     $desQ = new Description_Query();
     $desQ->connect();
-    if ($desQ->isError())
-    {
-      Error::query($desQ);
-    }
 
-    $numRows = $desQ->select($tableName, $fieldCode, $fieldDescription);
-    if ($desQ->isError())
-    {
-      $desQ->close();
-      Error::query($desQ);
-    }
-
-    if ( !$numRows )
+    if ( !$desQ->select($tableName, $fieldCode, $fieldDescription) )
     {
       return; // no rows, no select
     }

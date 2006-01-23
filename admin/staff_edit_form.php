@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit_form.php,v 1.14 2005/08/22 15:12:08 jact Exp $
+ * $Id: staff_edit_form.php,v 1.15 2006/01/23 23:00:19 jact Exp $
  */
 
 /**
@@ -54,19 +54,8 @@
      */
     $staffQ = new Staff_Query();
     $staffQ->connect();
-    if ($staffQ->isError())
-    {
-      Error::query($staffQ);
-    }
 
-    $numRows = $staffQ->select($idMember);
-    if ($staffQ->isError())
-    {
-      $staffQ->close();
-      Error::query($staffQ);
-    }
-
-    if ( !$numRows )
+    if ( !$staffQ->select($idMember) )
     {
       $staffQ->close();
       include_once("../shared/header.php");
@@ -78,11 +67,7 @@
     }
 
     $staff = $staffQ->fetch();
-    if ($staffQ->isError())
-    {
-      Error::fetch($staffQ, false);
-    }
-    else
+    if ($staff)
     {
       $postVars["id_member"] = $idMember;
       $postVars["member_type"] = $staff->getMemberType();
@@ -94,6 +79,10 @@
       $postVars["address"] = $staff->getAddress();
       $postVars["phone_contact"] = $staff->getPhone();
       $postVars["login"] = $staff->getLogin();
+    }
+    else
+    {
+      Error::fetch($staffQ, false);
     }
     $staffQ->freeResult();
     $staffQ->close();

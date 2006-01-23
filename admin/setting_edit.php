@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit.php,v 1.5 2005/08/15 11:22:59 jact Exp $
+ * $Id: setting_edit.php,v 1.6 2006/01/23 22:57:25 jact Exp $
  */
 
 /**
@@ -85,25 +85,12 @@
    */
   $setQ = new Setting_Query();
   $setQ->connect();
-  if ($setQ->isError())
-  {
-    Error::query($setQ);
-  }
 
   $setQ->update($set);
-  if ($setQ->isError())
-  {
-    $setQ->close();
-    Error::query($setQ);
-  }
 
   if (isset($_POST["id_theme"]))
   {
-    if ( !$setQ->updateTheme($_POST["id_theme"]) )
-    {
-      $setQ->close();
-      Error::query($setQ);
-    }
+    $setQ->updateTheme($_POST["id_theme"]);
   }
   $setQ->close();
   unset($setQ);

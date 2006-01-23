@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del.php,v 1.9 2005/08/15 11:22:59 jact Exp $
+ * $Id: user_del.php,v 1.10 2006/01/23 23:07:42 jact Exp $
  */
 
 /**
@@ -47,17 +47,9 @@
    */
   $userQ = new User_Query();
   $userQ->connect();
-  if ($userQ->isError())
-  {
-    Error::query($userQ);
-  }
 
   $userQ->delete($idUser);
-  if ($userQ->isError())
-  {
-    $userQ->close();
-    Error::query($userQ);
-  }
+
   $userQ->close();
   unset($userQ);
 
