@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Record_Page_Query.php,v 1.3 2005/07/30 17:27:26 jact Exp $
+ * $Id: Record_Page_Query.php,v 1.4 2006/01/23 21:47:55 jact Exp $
  */
 
 /**
@@ -83,14 +83,7 @@ class Record_Page_Query extends Page_Query
     }
     $sql .= " ORDER BY access_date DESC";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing record log information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -139,10 +132,8 @@ class Record_Page_Query extends Page_Query
     //Error::debug($sql, "sql"); // debug
 
     // Running row count sql statement
-    $countResult = $this->exec($sqlCount);
-    if ($countResult == false)
+    if ( !$this->exec($sqlCount) )
     {
-      $this->_error = "Error counting record log information.";
       return false;
     }
 
@@ -156,14 +147,7 @@ class Record_Page_Query extends Page_Query
     $this->_pageCount = (intval($this->_itemsPerPage) > 0) ? ceil($this->_rowCount / $this->_itemsPerPage) : 1;
 
     // Running search sql statement
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing record log information.";
-      return false;
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -223,13 +207,7 @@ class Record_Page_Query extends Page_Query
     $sql .= "'" . urlencode($affectedRow) . "')";
     //echo $sql; exit(); // debug
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error inserting new record log information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Page_Query.php,v 1.2 2005/07/21 15:59:46 jact Exp $
+ * $Id: Problem_Page_Query.php,v 1.3 2006/01/23 21:47:29 jact Exp $
  */
 
 /**
@@ -156,10 +156,8 @@ class Problem_Page_Query extends Page_Query
     //Error::debug($sql, "sql"); // debug
 
     // Running row count sql statement
-    $countResult = $this->exec($sqlCount);
-    if ($countResult == false)
+    if ( !$this->exec($sqlCount) )
     {
-      $this->_error = "Error counting patient search results.";
       return false;
     }
 
@@ -173,14 +171,7 @@ class Problem_Page_Query extends Page_Query
     $this->_pageCount = (intval($this->_itemsPerPage) > 0) ? ceil($this->_rowCount / $this->_itemsPerPage) : 1;
 
     // Running search sql statement
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error searching problem information.";
-      return false;
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -197,10 +188,8 @@ class Problem_Page_Query extends Page_Query
     $sql = "SELECT LAST_INSERT_ID() AS last_id";
     $sql .= " FROM " . $this->_table;
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error accessing last id information.";
       return false;
     }
 
@@ -223,14 +212,7 @@ class Problem_Page_Query extends Page_Query
     $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
     $sql .= " WHERE id_problem=" . intval($idProblem);
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing medical problem information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return $this->exec($sql);
   }
 
   /**
@@ -251,14 +233,7 @@ class Problem_Page_Query extends Page_Query
     $sql .= ($closed ? " AND (closing_date IS NOT NULL AND closing_date != '0000-00-00')" : " AND (closing_date IS NULL OR closing_date='0000-00-00')");
     $sql .= " ORDER BY order_number;";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing medical problem information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -276,10 +251,8 @@ class Problem_Page_Query extends Page_Query
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error accessing medical problem information.";
       return false;
     }
 
@@ -362,13 +335,7 @@ class Problem_Page_Query extends Page_Query
     $sql .= ($problem->getActionPlan() == "") ? "NULL, " : "'" . urlencode($problem->getActionPlan()) . "', ";
     $sql .= ($problem->getPrescription() == "") ? "NULL);" : "'" . urlencode($problem->getPrescription()) . "');";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error inserting new medical problem information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -401,13 +368,7 @@ class Problem_Page_Query extends Page_Query
     $sql .= " prescription=" . (($problem->getPrescription() == "") ? "NULL" : "'" . urlencode($problem->getPrescription()) . "'");
     $sql .= " WHERE id_problem=" . $problem->getIdProblem() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating medical problem information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -424,13 +385,7 @@ class Problem_Page_Query extends Page_Query
     $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_problem=" . intval($idProblem) . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error deleting medical problem information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

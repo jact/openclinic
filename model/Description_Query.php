@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description_Query.php,v 1.6 2005/07/30 17:27:26 jact Exp $
+ * $Id: Description_Query.php,v 1.7 2006/01/23 21:44:24 jact Exp $
  */
 
 /**
@@ -59,13 +59,7 @@ class Description_Query extends Query
     }
     $sql .= " ORDER BY " . ($fieldDescription != "" ? $fieldDescription : $fieldCode);
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing the " . $tableName . " table.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -109,6 +103,7 @@ class Description_Query extends Query
       $col = "description";
     }
 
+    $assoc = array();
     while ($result = $this->fetchRow())
     {
       $assoc[$result["code"]] = $result[$col];
@@ -142,13 +137,7 @@ class Description_Query extends Query
       $sql .= "WHERE id_profile=" . $des->getCode();
     }
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating " . $table;
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

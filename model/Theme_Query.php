@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.9 2005/07/30 17:27:26 jact Exp $
+ * $Id: Theme_Query.php,v 1.10 2006/01/23 21:55:30 jact Exp $
  */
 
 /**
@@ -69,14 +69,7 @@ class Theme_Query extends Query
     }
     $sql .= " ORDER BY theme_name";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing theme information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -99,14 +92,7 @@ class Theme_Query extends Query
     $sql .= " GROUP BY 1,2,3";
     $sql .= " ORDER BY " . $this->_table . ".theme_name;";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing theme information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -167,10 +153,8 @@ class Theme_Query extends Query
       $sql .= " AND id_theme<>" . intval($idTheme);
     }
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error checking for dup file.";
       return false;
     }
 
@@ -228,13 +212,7 @@ class Theme_Query extends Query
     $sql .= "'" . urlencode($theme->getThemeName()) . "', ";
     $sql .= "'" . urlencode($theme->getCSSFile()) . "');";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error inserting new look and feel theme.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -254,13 +232,7 @@ class Theme_Query extends Query
       return false;
     }
 
-    $isDupFile = $this->existCSSFile($theme->getCSSFile(), $theme->getIdTheme());
-    if ($this->isError())
-    {
-      return false;
-    }
-
-    if ($isDupFile)
+    if ($this->existCSSFile($theme->getCSSFile(), $theme->getIdTheme()))
     {
       $this->_isError = true;
       $this->_error = "File is already in use.";
@@ -277,13 +249,7 @@ class Theme_Query extends Query
     $sql .= "css_file='" . urlencode($theme->getCSSFile()) . "'";
     $sql .= " WHERE id_theme=" . $theme->getIdTheme();
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating look and feel theme.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -300,13 +266,7 @@ class Theme_Query extends Query
     $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_theme=" . intval($idTheme);
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error deleting look and feel theme.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

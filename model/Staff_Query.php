@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.11 2005/07/30 17:27:26 jact Exp $
+ * $Id: Staff_Query.php,v 1.12 2006/01/23 21:53:08 jact Exp $
  */
 
 /**
@@ -69,14 +69,7 @@ class Staff_Query extends Query
     }
     $sql .= " ORDER BY first_name, surname1";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing staff member information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -106,14 +99,7 @@ class Staff_Query extends Query
     $sql .= " WHERE member_type='" . $type . "'";
     $sql .= " ORDER BY first_name, surname1";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing staff member information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -168,10 +154,8 @@ class Staff_Query extends Query
       $sql .= " AND id_member<>" . intval($idMember);
     }
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error checking for dup login.";
       return false;
     }
 
@@ -197,13 +181,7 @@ class Staff_Query extends Query
       return false;
     }
 
-    /*$isDupLogin = $this->existLogin($staff->getLogin());
-    if ($this->isError())
-    {
-      return false;
-    }
-
-    if ($isDupLogin)
+    /*if ($this->existLogin($staff->getLogin()))
     {
       $this->_isError = true;
       $this->_error = "Login is already in use.";
@@ -225,13 +203,7 @@ class Staff_Query extends Query
     $sql .= (($staff->getIdUser() == "") ? "NULL, " : "'" . $staff->getIdUser() . "', ");
     $sql .= (($staff->getLogin() == "") ? "NULL);" : "'" . urlencode($staff->getLogin()) . "');");
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error inserting new member user information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -252,13 +224,7 @@ class Staff_Query extends Query
     }
 
     // If changing login check to see if it already exists.
-    /*$isDupLogin = $this->existLogin($staff->getLogin(), $staff->getIdMember());
-    if ($this->isError())
-    {
-      return false;
-    }
-
-    if ($isDupLogin)
+    /*if ($this->existLogin($staff->getLogin(), $staff->getIdMember()))
     {
       $this->_isError = true;
       $this->_error = "Login is already in use.";
@@ -276,13 +242,7 @@ class Staff_Query extends Query
     $sql .= "login=" . (($staff->getLogin() == "") ? "NULL" : "'" . urlencode($staff->getLogin()) . "'");
     $sql .= " WHERE id_member=" . $staff->getIdMember() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating member user information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -301,11 +261,6 @@ class Staff_Query extends Query
     $sql .= " WHERE id_member=" . intval($idMember) . ";";
 
     $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error deleting staff information.";
-      return false;
-    }
 
     if ($idUser == 0)
     {
@@ -315,13 +270,7 @@ class Staff_Query extends Query
     $sql = "DELETE FROM user_tbl";
     $sql .= " WHERE id_user=" . intval($idUser) . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error deleting user information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

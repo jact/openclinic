@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History_Query.php,v 1.7 2005/07/30 17:27:26 jact Exp $
+ * $Id: History_Query.php,v 1.8 2006/01/23 21:44:51 jact Exp $
  */
 
 /**
@@ -70,14 +70,7 @@ class History_Query extends Query
     }
     $sql .= " ORDER BY id_patient";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing history information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -100,14 +93,7 @@ class History_Query extends Query
     }
     $sql .= " ORDER BY id_patient";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing history information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -202,13 +188,7 @@ class History_Query extends Query
     $sql .= "mental_illness=" . (($history->getMentalIllness() == "") ? "NULL " : "'" . urlencode($history->getMentalIllness()) . "' ");
     $sql .= " WHERE id_patient=" . $history->getIdPatient() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating personal antecedents.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -235,13 +215,7 @@ class History_Query extends Query
     $sql .= "family_illness=" . (($history->getFamilyIllness() == "") ? "NULL " : "'" . urlencode($history->getFamilyIllness()) . "' ");
     $sql .= " WHERE id_patient=" . $history->getIdPatient() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating family antecedents.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

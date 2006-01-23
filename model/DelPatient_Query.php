@@ -2,28 +2,28 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelPatient_Query.php,v 1.4 2004/10/16 14:47:47 jact Exp $
+ * $Id: DelPatient_Query.php,v 1.5 2006/01/23 21:43:44 jact Exp $
  */
 
 /**
  * DelPatient_Query.php
- ********************************************************************
+ *
  * Contains the class DelPatient_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
 
 /**
  * DelPatient_Query data access component for deleted patients
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void DelPatient_Query(void)
  *  bool insert(Patient $patient, History $historyP, History $historyF, int $idUser, string $login)
@@ -32,9 +32,9 @@ class DelPatient_Query extends Query
 {
   /**
    * void DelPatient_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -45,9 +45,9 @@ class DelPatient_Query extends Query
 
   /**
    * bool insert(Patient $patient, History $historyP, History $historyF, int $idUser, string $login)
-   ********************************************************************
+   *
    * Inserts a new deleted patient into the database.
-   ********************************************************************
+   *
    * @param Patient $patient patient to insert
    * @param History $historyP patient's personal antecedents to insert
    * @param History $historyF patient's family antecedents to insert
@@ -109,13 +109,7 @@ class DelPatient_Query extends Query
     $sql .= intval($idUser) . ", ";
     $sql .= "'" . urlencode($login) . "');";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error inserting new deleted patient information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

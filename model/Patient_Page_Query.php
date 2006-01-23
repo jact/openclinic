@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Page_Query.php,v 1.4 2005/08/15 11:03:27 jact Exp $
+ * $Id: Patient_Page_Query.php,v 1.5 2006/01/23 21:46:28 jact Exp $
  */
 
 /**
@@ -174,10 +174,8 @@ class Patient_Page_Query extends Page_Query
     //Error::debug($sql, "sql"); // debug
 
     // Running row count sql statement
-    $countResult = $this->exec($sqlCount);
-    if ($countResult == false)
+    if ( !$this->exec($sqlCount) )
     {
-      $this->_error = "Error counting patient search results.";
       return false;
     }
 
@@ -191,14 +189,7 @@ class Patient_Page_Query extends Page_Query
     $this->_pageCount = (intval($this->_itemsPerPage) > 0) ? ceil($this->_rowCount / $this->_itemsPerPage) : 1;
 
     // Running search sql statement
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error searching patient information.";
-      return false;
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -214,10 +205,8 @@ class Patient_Page_Query extends Page_Query
     $sql = "SELECT LAST_INSERT_ID() AS last_id";
     $sql .= " FROM " . $this->_table;
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error accessing last id information.";
       return false;
     }
 
@@ -241,14 +230,7 @@ class Patient_Page_Query extends Page_Query
     $sql .= " FROM " . $this->_table . " LEFT JOIN staff_tbl ON " . $this->_table . ".id_member=staff_tbl.id_member";
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing patient information.";
-      return false;
-    }
-
-    return $this->numRows();
+    return ($this->exec($sql) ? $this->numRows() : false);
   }
 
   /**
@@ -322,10 +304,8 @@ class Patient_Page_Query extends Page_Query
       $sql .= " AND id_patient<>" . intval($idPatient);
     }
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error checking for dup name.";
       return false;
     }
 
@@ -351,13 +331,7 @@ class Patient_Page_Query extends Page_Query
       return false;
     }
 
-    /*$isDupName = $this->existName($patient->getFirstName(), $patient->getSurname1(), $patient->getSurname2());
-    if ($this->isError())
-    {
-      return false;
-    }
-
-    if ($isDupName)
+    /*if ($this->existName($patient->getFirstName(), $patient->getSurname1(), $patient->getSurname2()))
     {
       $this->_isError = true;
       $this->_error = "Patient name, " . $patient->getFirstName();
@@ -391,23 +365,15 @@ class Patient_Page_Query extends Page_Query
     $sql .= ($patient->getInsuranceCompany() == "") ? "NULL, " : "'" . urlencode($patient->getInsuranceCompany()) . "', ";
     $sql .= ($patient->getIdMember() == 0) ? "NULL);" : $patient->getIdMember() . ");";
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error inserting new patient information.";
       return false;
     }
 
     $sql = "INSERT INTO history_tbl (id_patient) VALUES (";
     $sql .= $this->getLastId() . ");";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error inserting new patient information in history.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -427,13 +393,7 @@ class Patient_Page_Query extends Page_Query
       return false;
     }
 
-    /*$isDupName = $this->existName($patient->getFirstName(), $patient->getSurname1(), $patient->getSurname2(), $patient->getIdPatient());
-    if ($this->isError())
-    {
-      return false;
-    }
-
-    if ($isDupName)
+    /*if ($this->existName($patient->getFirstName(), $patient->getSurname1(), $patient->getSurname2(), $patient->getIdPatient()))
     {
       $this->_isError = true;
       $this->_error = "Patient name, " . $patient->getFirstName();
@@ -464,13 +424,7 @@ class Patient_Page_Query extends Page_Query
     $sql .= "id_member=" . (($patient->getIdMember() == 0) ? "NULL " : $patient->getIdMember() . " ");
     $sql .= "WHERE id_patient=" . $patient->getIdPatient();
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating patient information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
@@ -487,23 +441,15 @@ class Patient_Page_Query extends Page_Query
     $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
-    $result = $this->exec($sql);
-    if ($result == false)
+    if ( !$this->exec($sql) )
     {
-      $this->_error = "Error deleting patient information.";
       return false;
     }
 
     $sql = "DELETE FROM history_tbl";
     $sql .= " WHERE id_patient=" . intval($idPatient);
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error deleting patient information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>

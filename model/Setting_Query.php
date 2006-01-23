@@ -2,18 +2,18 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2004 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting_Query.php,v 1.6 2004/08/23 17:58:43 jact Exp $
+ * $Id: Setting_Query.php,v 1.7 2006/01/23 21:51:24 jact Exp $
  */
 
 /**
  * Setting_Query.php
- ********************************************************************
+ *
  * Contains the class Setting_Query
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * Author: jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -21,10 +21,10 @@ require_once("../classes/Setting.php");
 
 /**
  * Setting_Query data access component for setting table
- ********************************************************************
- * @author jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  * @access public
- ********************************************************************
+ *
  * Methods:
  *  void Setting_Query(void)
  *  bool select(void)
@@ -36,9 +36,9 @@ class Setting_Query extends Query
 {
   /**
    * void Setting_Query(void)
-   ********************************************************************
+   *
    * Constructor function
-   ********************************************************************
+   *
    * @return void
    * @access public
    */
@@ -49,9 +49,9 @@ class Setting_Query extends Query
 
   /**
    * bool select(void)
-   ********************************************************************
+   *
    * Executes a query
-   ********************************************************************
+   *
    * @return boolean returns false, if error occurs
    * @access public
    */
@@ -59,20 +59,14 @@ class Setting_Query extends Query
   {
     $sql = "SELECT * FROM " . $this->_table;
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error accessing config settings information.";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
    * mixed fetch(void)
-   ********************************************************************
+   *
    * Fetches a row from the query result and populates the Setting object.
-   ********************************************************************
+   *
    * @return Setting returns settings object or false if no more rows to fetch
    * @access public
    */
@@ -103,9 +97,9 @@ class Setting_Query extends Query
 
   /**
    * bool update(Setting $set)
-   ********************************************************************
-   * Update a the row in the setting table.
-   ********************************************************************
+   *
+   * Update the row in the setting table.
+   *
    * @param Setting $set settings object to update
    * @return boolean returns false, if error occurs
    * @access public
@@ -130,20 +124,14 @@ class Setting_Query extends Query
     $sql .= "session_timeout=" . $set->getSessionTimeout() . ", ";
     $sql .= "items_per_page=" . $set->getItemsPerPage() . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating config settings information";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 
   /**
    * bool updateTheme(int $idTheme)
-   ********************************************************************
+   *
    * Update theme in the row in the settings table.
-   ********************************************************************
+   *
    * @param int $idTheme key of theme to make it default application theme
    * @return boolean returns false, if error occurs
    * @access public
@@ -153,13 +141,7 @@ class Setting_Query extends Query
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "id_theme=" . intval($idTheme) . ";";
 
-    $result = $this->exec($sql);
-    if ($result == false)
-    {
-      $this->_error = "Error updating clinic theme in use";
-    }
-
-    return $result;
+    return $this->exec($sql);
   }
 } // end class
 ?>
