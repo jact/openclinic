@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.15 2005/08/22 15:14:05 jact Exp $
+ * $Id: xhtml_start.php,v 1.16 2006/01/23 22:37:10 jact Exp $
  */
 
 /**
@@ -47,7 +47,7 @@
   $contentType = ($xhtml) ? "application/xhtml+xml" : "text/html";
   $contentType .= "; charset=" . OPEN_CHARSET;
 
-  header("Content-Type: " . $contentType);
+  header("Content-Type: " . $contentType); // force document encoding, ignore server configuration
   header("Vary: Accept");
 
   if (defined("OPEN_BUFFER") && OPEN_BUFFER)
@@ -109,7 +109,7 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2005 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2006 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
