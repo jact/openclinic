@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.2 2005/08/03 18:01:23 jact Exp $
+ * $Id: index.php,v 1.3 2006/01/23 22:48:05 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
     exit();
   }
 
-  $db = @mysql_connect(OPEN_HOST, OPEN_USERNAME, OPEN_PWD);
+  $db = @mysql_connect(OPEN_HOST . (defined("OPEN_PORT") ? ':' . OPEN_PORT : ''), OPEN_USERNAME, OPEN_PWD);
   if ( !$db )
   {
     message();
