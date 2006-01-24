@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new.php,v 1.8 2005/08/15 11:31:17 jact Exp $
+ * $Id: connection_new.php,v 1.9 2006/01/24 20:15:38 jact Exp $
  */
 
 /**
@@ -51,10 +51,6 @@
    */
   $connQ = new Connection_Query();
   $connQ->connect();
-  if ($connQ->isError())
-  {
-    Error::query($connQ);
-  }
 
   $n = count($_POST["check"]);
   for ($i = 0; $i < $n; $i++)
@@ -64,6 +60,7 @@
       continue; // a problem can't be connection of itself
     }
 
+    $connQ->captureError(true);
     $connQ->insert($idProblem, $_POST["check"][$i]);
     if ($connQ->isError())
     {
