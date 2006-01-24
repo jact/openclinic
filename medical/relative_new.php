@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_new.php,v 1.8 2005/08/15 14:30:55 jact Exp $
+ * $Id: relative_new.php,v 1.9 2006/01/24 20:21:00 jact Exp $
  */
 
 /**
@@ -50,10 +50,7 @@
    */
   $relQ = new Relative_Query();
   $relQ->connect();
-  if ($relQ->isError())
-  {
-    Error::query($relQ);
-  }
+  $relQ->captureError(true);
 
   $n = count($_POST["check"]);
   for ($i = 0; $i < $n; $i++)
