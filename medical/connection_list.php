@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.16 2005/08/17 17:00:55 jact Exp $
+ * $Id: connection_list.php,v 1.17 2006/01/24 20:14:40 jact Exp $
  */
 
 /**
@@ -92,20 +92,9 @@
 
   $connQ = new Connection_Query;
   $connQ->connect();
-  if ($connQ->isError())
-  {
-    Error::query($connQ);
-  }
-
-  $numRows = $connQ->select($idProblem);
-  if ($connQ->isError())
-  {
-    $connQ->close();
-    Error::query($connQ);
-  }
 
   $connArray = array();
-  if ($numRows)
+  if ($connQ->select($idProblem))
   {
     while ($conn = $connQ->fetch())
     {
@@ -133,10 +122,7 @@
 
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
+  $problemQ->captureError(true);
 
   $tbody = array();
   for ($i = 0; $i < count($connArray); $i++)
@@ -149,7 +135,7 @@
     }
 
     $problem = $problemQ->fetch();
-    if ($problemQ->isError())
+    if ( !$problem )
     {
       $problemQ->close();
       Error::fetch($problemQ);
