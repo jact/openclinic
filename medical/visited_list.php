@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: visited_list.php,v 1.12 2005/08/03 17:40:19 jact Exp $
+ * $Id: visited_list.php,v 1.13 2006/01/24 20:10:42 jact Exp $
  */
 
 /**
@@ -15,6 +15,7 @@
  *
  * Author: jact <jachavar@gmail.com>
  * @since 0.4
+ * @todo convert in class?
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -46,25 +47,14 @@
   {
     $patQ = new Patient_Page_Query();
     $patQ->connect();
-    if ($patQ->isError())
-    {
-      Error::query($patQ);
-    }
 
-    $numRows = $patQ->select($idPatient);
-    if ($patQ->isError())
-    {
-      $patQ->close();
-      Error::query($patQ);
-    }
-
-    if ( !$numRows )
+    if ( !$patQ->select($idPatient) )
     {
       return _("That patient does not exist.");
     }
 
     $pat = $patQ->fetch();
-    if ($patQ->isError())
+    if ( !$pat )
     {
       $patQ->close();
       Error::fetch($patQ);

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.16 2005/08/16 15:18:19 jact Exp $
+ * $Id: problem_list.php,v 1.17 2006/01/24 19:59:19 jact Exp $
  */
 
 /**
@@ -42,22 +42,6 @@
    */
   $idPatient = intval($_GET["key"]);
   $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
-
-  $problemQ = new Problem_Page_Query();
-  $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
-
-  $lastOrderNumber = $problemQ->getLastOrderNumber($idPatient);
-
-  $count = $problemQ->selectProblems($idPatient);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
 
   /**
    * Show page
@@ -125,6 +109,11 @@
     HTML::message(sprintf(_("Medical problem, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
+  $problemQ = new Problem_Page_Query();
+  $problemQ->connect();
+
+  $lastOrderNumber = $problemQ->getLastOrderNumber($idPatient);
+
   if ($hasMedicalAdminAuth)
   {
     echo '<p><a href="../medical/problem_new_form.php?key=' . $idPatient . '&amp;num=' . $lastOrderNumber . '&amp;reset=Y">' . _("Add New Medical Problem") . "</a></p>\n";
@@ -134,7 +123,7 @@
 
   echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
 
-  if ($count == 0)
+  if ( !$problemQ->selectProblems($idPatient) )
   {
     $problemQ->close();
     HTML::message(_("No medical problems defined for this patient."), OPEN_MSG_INFO);

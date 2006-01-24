@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_new.php,v 1.9 2005/08/15 11:31:17 jact Exp $
+ * $Id: patient_new.php,v 1.10 2006/01/24 19:47:29 jact Exp $
  */
 
 /**
@@ -55,10 +55,6 @@
    */
   $patQ = new Patient_Page_Query();
   $patQ->connect();
-  if ($patQ->isError())
-  {
-    Error::query($patQ);
-  }
 
   if ($patQ->existName($pat->getFirstName(), $pat->getSurname1(), $pat->getSurname2()))
   {
@@ -72,18 +68,7 @@
   }
 
   $patQ->insert($pat);
-  if ($patQ->isError())
-  {
-    $patQ->close();
-    Error::query($patQ);
-  }
-
   $idPatient = $patQ->getLastId();
-  if ($patQ->isError())
-  {
-    $patQ->close();
-    Error::query($patQ);
-  }
 
   $patQ->close();
   unset($patQ);

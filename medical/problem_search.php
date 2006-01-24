@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.20 2005/08/22 15:16:27 jact Exp $
+ * $Id: problem_search.php,v 1.21 2006/01/24 20:00:58 jact Exp $
  */
 
 /**
@@ -61,17 +61,8 @@
   $problemQ = new Problem_Page_Query();
   $problemQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
 
   $problemQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
 
   /**
    * Show problem view screen if only one result from query
@@ -227,22 +218,11 @@
 
     $patQ = new Patient_Page_Query();
     $patQ->connect();
-    if ($patQ->isError())
-    {
-      Error::query($patQ);
-    }
 
-    $numRows = $patQ->select($array[2]);
-    if ($patQ->isError())
-    {
-      $patQ->close();
-      Error::query($patQ);
-    }
-
-    if ($numRows)
+    if ($patQ->select($array[2]))
     {
       $pat = $patQ->fetch();
-      if ($patQ->isError())
+      if ( !$pat )
       {
         $patQ->close();
         Error::fetch($patQ);

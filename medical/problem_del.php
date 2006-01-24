@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del.php,v 1.14 2005/08/15 14:30:55 jact Exp $
+ * $Id: problem_del.php,v 1.15 2006/01/24 19:53:28 jact Exp $
  */
 
 /**
@@ -54,10 +54,6 @@
    */
   $connQ = new Connection_Query();
   $connQ->connect();
-  if ($connQ->isError())
-  {
-    Error::query($connQ);
-  }
 
   $numRows = $connQ->select($idProblem);
 
@@ -71,11 +67,6 @@
   while ($aux = array_shift($conn))
   {
     $connQ->delete($idProblem, $aux[1]);
-    if ($connQ->isError())
-    {
-      $connQ->close();
-      Error::query($connQ);
-    }
   }
   $connQ->close();
   unset($connQ);
@@ -86,21 +77,10 @@
    */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    $numRows = $problemQ->select($idProblem);
-    if ($problemQ->isError())
-    {
-      $problemQ->close();
-      Error::query($problemQ);
-    }
-
-    if ( !$numRows )
+    if ( !$problemQ->select($idProblem) )
     {
       $problemQ->close();
       include_once("../shared/header.php");
@@ -112,7 +92,7 @@
     }
 
     $problem = $problemQ->fetch();
-    if ($problemQ->isError())
+    if ( !$problem )
     {
       $problemQ->close();
       Error::fetch($problemQ);
@@ -120,17 +100,9 @@
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
-    if ($delProblemQ->isError())
-    {
-      Error::query($delProblemQ);
-    }
 
     $delProblemQ->insert($problem, $_SESSION['userId'], $_SESSION['loginSession']);
-    if ($delProblemQ->isError())
-    {
-      $delProblemQ->close();
-      Error::query($delProblemQ);
-    }
+
     unset($delProblemQ);
     unset($problem);
   }
@@ -141,11 +113,7 @@
   recordLog("Problem_Page_Query", "DELETE", array($idProblem));
 
   $problemQ->delete($idProblem);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
+
   $problemQ->close();
   unset($problemQ);
 

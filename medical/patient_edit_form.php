@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.19 2005/08/22 15:11:49 jact Exp $
+ * $Id: patient_edit_form.php,v 1.20 2006/01/24 19:44:38 jact Exp $
  */
 
 /**
@@ -54,19 +54,8 @@
      */
     $patQ = new Patient_Page_Query();
     $patQ->connect();
-    if ($patQ->isError())
-    {
-      Error::query($patQ);
-    }
 
-    $numRows = $patQ->select($idPatient);
-    if ($patQ->isError())
-    {
-      $patQ->close();
-      Error::query($patQ);
-    }
-
-    if ( !$numRows )
+    if ( !$patQ->select($idPatient) )
     {
       $patQ->close();
       include_once("../shared/header.php");
@@ -78,11 +67,7 @@
     }
 
     $pat = $patQ->fetch();
-    if ($patQ->isError())
-    {
-      Error::fetch($patQ, false);
-    }
-    else
+    if ($pat)
     {
       /**
        * load up post vars
@@ -109,6 +94,10 @@
       $postVars["insurance_company"] = $pat->getInsuranceCompany();
 
       $_SESSION["postVars"] = $postVars;
+    }
+    else
+    {
+      Error::fetch($patQ, false);
     }
 
     $patQ->freeResult();

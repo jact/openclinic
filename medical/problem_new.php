@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new.php,v 1.10 2005/08/15 14:30:55 jact Exp $
+ * $Id: problem_new.php,v 1.11 2006/01/24 19:59:42 jact Exp $
  */
 
 /**
@@ -59,24 +59,9 @@
    */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
 
   $problemQ->insert($problem);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
-
   $idProblem = $problemQ->getLastId();
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
 
   $problemQ->close();
   unset($problemQ);

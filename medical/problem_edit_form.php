@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.18 2005/08/22 15:11:49 jact Exp $
+ * $Id: problem_edit_form.php,v 1.19 2006/01/24 19:55:14 jact Exp $
  */
 
 /**
@@ -50,19 +50,8 @@
    */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
 
-  $numRows = $problemQ->select($idProblem);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
-
-  if ( !$numRows )
+  if ( !$problemQ->select($idProblem) )
   {
     $problemQ->close();
     include_once("../shared/header.php");
@@ -74,11 +63,7 @@
   }
 
   $problem = $problemQ->fetch();
-  if ($problemQ->isError())
-  {
-    Error::fetch($problemQ, false);
-  }
-  else
+  if ($problem)
   {
     $postVars["id_problem"] = $idProblem;
     $postVars["id_patient"] = $idPatient;
@@ -97,6 +82,10 @@
       $postVars["action_plan"] = $problem->getActionPlan();
       $postVars["prescription"] = $problem->getPrescription();
     }
+  }
+  else
+  {
+    Error::fetch($problemQ, false);
   }
   $problemQ->freeResult();
   $problemQ->close();

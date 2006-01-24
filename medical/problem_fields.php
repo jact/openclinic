@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_fields.php,v 1.19 2005/08/19 10:59:03 jact Exp $
+ * $Id: problem_fields.php,v 1.20 2006/01/24 19:55:59 jact Exp $
  */
 
 /**
@@ -40,21 +40,10 @@
 
   $staffQ = new Staff_Query();
   $staffQ->connect();
-  if ($staffQ->isError())
-  {
-    Error::query($staffQ);
-  }
-
-  $numRows = $staffQ->selectType('D');
-  if ($staffQ->isError())
-  {
-    $staffQ->close();
-    Error::query($staffQ);
-  }
 
   $array = null;
   $array[0] = ""; // to permit null value
-  if ($numRows)
+  if ($staffQ->selectType('D'))
   {
     while ($staff = $staffQ->fetch())
     {

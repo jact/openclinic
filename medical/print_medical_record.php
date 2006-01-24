@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.18 2005/08/15 16:39:26 jact Exp $
+ * $Id: print_medical_record.php,v 1.19 2006/01/24 19:52:01 jact Exp $
  */
 
 /**
@@ -57,19 +57,8 @@
    */
   $patQ = new Patient_Page_Query();
   $patQ->connect();
-  if ($patQ->isError())
-  {
-    Error::query($patQ);
-  }
 
-  $numRows = $patQ->select($idPatient);
-  if ($patQ->isError())
-  {
-    $patQ->close();
-    Error::query($patQ);
-  }
-
-  if ( !$numRows )
+  if ( !$patQ->select($idPatient) )
   {
     $patQ->close();
     include_once("../shared/xhtml_start.php");
@@ -82,7 +71,7 @@
   }
 
   $pat = $patQ->fetch();
-  if ($patQ->isError())
+  if ( !$pat )
   {
     $patQ->close();
     Error::fetch($patQ);
@@ -195,13 +184,8 @@
   {
     $staffQ = new Staff_Query();
     $staffQ->connect();
-    if ($staffQ->isError())
-    {
-      Error::query($staffQ);
-    }
 
-    $numRows = $staffQ->select($pat->getIdMember());
-    if ($numRows)
+    if ($staffQ->select($pat->getIdMember()))
     {
       $staff = $staffQ->fetch();
       if ($staff)
@@ -225,24 +209,13 @@
    */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
-
-  $count = $problemQ->selectProblems($idPatient);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
 
   /**
    * Show list
    */
   echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
 
-  if ($count == 0)
+  if ( !$problemQ->selectProblems($idPatient) )
   {
     echo '<p>' . _("No medical problems defined for this patient.") . "</p>\n";
   }
@@ -256,13 +229,8 @@
     {
       $staffQ = new Staff_Query();
       $staffQ->connect();
-      if ($staffQ->isError())
-      {
-        Error::query($staffQ);
-      }
 
-      $numRows = $staffQ->select($problem->getIdMember());
-      if ($numRows)
+      if ($staffQ->select($problem->getIdMember()))
       {
         $staff = $staffQ->fetch();
         if ($staff)
@@ -340,20 +308,11 @@
    */
   $historyQ = new History_Query();
   $historyQ->connect();
-  if ($historyQ->isError())
-  {
-    Error::query($historyQ);
-  }
 
   $historyQ->selectPersonal($idPatient);
-  if ($historyQ->isError())
-  {
-    $historyQ->close();
-    Error::query($historyQ);
-  }
 
   $history = $historyQ->fetchPersonal();
-  if ($historyQ->isError())
+  if ( !$history )
   {
     Error::fetch($historyQ);
   }
@@ -432,14 +391,9 @@
    * Show family antecedents
    */
   $historyQ->selectFamily($idPatient);
-  if ($historyQ->isError())
-  {
-    $historyQ->close();
-    Error::query($historyQ);
-  }
 
   $history = $historyQ->fetchFamily();
-  if ($historyQ->isError())
+  if ( !$history )
   {
     Error::fetch($historyQ);
   }
@@ -480,24 +434,13 @@
    */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
-
-  $count = $problemQ->selectProblems($idPatient, true);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
 
   /**
    * Show list
    */
   echo '<h2>' . _("Closed Medical Problems List:") . "</h2>\n";
 
-  if ($count == 0)
+  if ( !$problemQ->selectProblems($idPatient, true) )
   {
     echo '<p>' . _("No closed medical problems defined for this patient.") . "</p>\n";
     echo '<hr />' . "\n";
@@ -512,13 +455,8 @@
     {
       $staffQ = new Staff_Query();
       $staffQ->connect();
-      if ($staffQ->isError())
-      {
-        Error::query($staffQ);
-      }
 
-      $numRows = $staffQ->select($problem->getIdMember());
-      if ($numRows)
+      if ($staffQ->select($problem->getIdMember()))
       {
         $staff = $staffQ->fetch();
         if ($staff)

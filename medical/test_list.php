@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.15 2005/07/31 11:13:36 jact Exp $
+ * $Id: test_list.php,v 1.16 2006/01/24 20:09:26 jact Exp $
  */
 
 /**
@@ -101,19 +101,8 @@
 
   $testQ = new Test_Query;
   $testQ->connect();
-  if ($testQ->isError())
-  {
-    Error::query($testQ);
-  }
 
-  $count = $testQ->select($idProblem);
-  if ($testQ->isError())
-  {
-    $testQ->close();
-    Error::query($testQ);
-  }
-
-  if ($count == 0)
+  if ( !$testQ->select($idProblem) )
   {
     $testQ->close();
     HTML::message(_("No medical tests defined for this medical problem."), OPEN_MSG_INFO);

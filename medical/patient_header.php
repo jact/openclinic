@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_header.php,v 1.15 2005/08/16 15:12:52 jact Exp $
+ * $Id: patient_header.php,v 1.16 2006/01/24 19:47:07 jact Exp $
  */
 
 /**
@@ -37,25 +37,14 @@
   {
     $patQ = new Patient_Page_Query();
     $patQ->connect();
-    if ($patQ->isError())
-    {
-      Error::query($patQ);
-    }
 
-    $numRows = $patQ->select($idPatient);
-    if ($patQ->isError())
-    {
-      $patQ->close();
-      Error::query($patQ);
-    }
-
-    if ( !$numRows )
+    if ( !$patQ->select($idPatient) )
     {
       return false; // maybe return HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
     }
 
     $pat = $patQ->fetch();
-    if ($patQ->isError())
+    if ( !$pat )
     {
       $patQ->close();
       Error::fetch($patQ);

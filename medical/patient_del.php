@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.16 2005/08/15 11:31:17 jact Exp $
+ * $Id: patient_del.php,v 1.17 2006/01/24 19:41:53 jact Exp $
  */
 
 /**
@@ -56,10 +56,6 @@
    */
   $relQ = new Relative_Query();
   $relQ->connect();
-  if ($relQ->isError())
-  {
-    Error::query($relQ);
-  }
 
   $numRows = $relQ->select($idPatient);
 
@@ -73,11 +69,6 @@
   while ($aux = array_shift($rel))
   {
     $relQ->delete($idPatient, $aux[1]);
-    if ($relQ->isError())
-    {
-      $relQ->close();
-      Error::query($relQ);
-    }
   }
   $relQ->close();
   unset($relQ);
@@ -88,21 +79,10 @@
    */
   $patQ = new Patient_Page_Query();
   $patQ->connect();
-  if ($patQ->isError())
-  {
-    Error::query($patQ);
-  }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    $numRows = $patQ->select($idPatient);
-    if ($patQ->isError())
-    {
-      $patQ->close();
-      Error::query($patQ);
-    }
-
-    if ( !$numRows )
+    if ( !$patQ->select($idPatient) )
     {
       $patQ->close();
       include_once("../shared/header.php");
@@ -114,7 +94,7 @@
     }
 
     $patient = $patQ->fetch();
-    if ($patQ->isError())
+    if ( !$patient )
     {
       $patQ->close();
       Error::fetch($patQ);
@@ -122,41 +102,19 @@
 
     $historyQ = new History_Query();
     $historyQ->connect();
-    if ($historyQ->isError())
-    {
-      Error::query($historyQ);
-    }
 
     $historyQ->selectPersonal($idPatient);
-    if ($historyQ->isError())
-    {
-      $historyQ->close();
-      Error::query($historyQ);
-    }
     $historyP = $historyQ->fetchPersonal();
 
     $historyQ->selectFamily($idPatient);
-    if ($historyQ->isError())
-    {
-      $historyQ->close();
-      Error::query($historyQ);
-    }
     $historyF = $historyQ->fetchFamily();
     //Error::debug($patient); Error::debug($historyP); Error::debug($historyF, "", true);
 
     $delPatientQ = new DelPatient_Query();
     $delPatientQ->connect();
-    if ($delPatientQ->isError())
-    {
-      Error::query($delPatientQ);
-    }
 
     $delPatientQ->insert($patient, $historyP, $historyF, $_SESSION['userId'], $_SESSION['loginSession']);
-    if ($delPatientQ->isError())
-    {
-      $delPatientQ->close();
-      Error::query($delPatientQ);
-    }
+
     unset($delPatientQ);
     unset($patient);
     unset($historyQ);
@@ -170,11 +128,6 @@
   recordLog("Patient_Page_Query", "DELETE", array($idPatient));
 
   $patQ->delete($idPatient);
-  if ($patQ->isError())
-  {
-    $patQ->close();
-    Error::query($patQ);
-  }
 
   $patQ->close();
   unset($patQ);
@@ -184,10 +137,6 @@
    */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
 
   /**
    * First: open problems
@@ -206,29 +155,16 @@
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
-    if ($delProblemQ->isError())
-    {
-      Error::query($delProblemQ);
-    }
 
     for ($i = 0; $i < $numRows; $i++)
     {
       $delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']);
-      if ($delProblemQ->isError())
-      {
-        $delProblemQ->close();
-        Error::query($delProblemQ);
-      }
     }
     $delProblemQ->close();
     unset($delProblemQ);
 
     $problemQ = new Problem_Page_Query();
     $problemQ->connect();
-    if ($problemQ->isError())
-    {
-      Error::query($problemQ);
-    }
 
     /**
      * Record log process (before deleting process)
@@ -241,11 +177,6 @@
     for ($i = 0; $i < $numRows; $i++)
     {
       $problemQ->delete($array[$i]->getIdProblem());
-      if ($problemQ->isError())
-      {
-        $problemQ->close();
-        Error::query($problemQ);
-      }
     }
     $problemQ->close();
     unset($problemQ);
@@ -257,10 +188,6 @@
    */
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
 
   $numRows = $problemQ->selectProblems($idPatient, true);
   if ($numRows)
@@ -276,29 +203,16 @@
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
-    if ($delProblemQ->isError())
-    {
-      Error::query($delProblemQ);
-    }
 
     for ($i = 0; $i < $numRows; $i++)
     {
       $delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']);
-      if ($delProblemQ->isError())
-      {
-        $delProblemQ->close();
-        Error::query($delProblemQ);
-      }
     }
     $delProblemQ->close();
     unset($delProblemQ);
 
     $problemQ = new Problem_Page_Query();
     $problemQ->connect();
-    if ($problemQ->isError())
-    {
-      Error::query($problemQ);
-    }
 
     /**
      * Record log process (before deleting process)
@@ -311,11 +225,6 @@
     for ($i = 0; $i < $numRows; $i++)
     {
       $problemQ->delete($array[$i]->getIdProblem());
-      if ($problemQ->isError())
-      {
-        $problemQ->close();
-        Error::query($problemQ);
-      }
     }
     $problemQ->close();
     unset($problemQ);

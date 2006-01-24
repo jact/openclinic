@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.17 2005/08/17 17:01:17 jact Exp $
+ * $Id: relative_list.php,v 1.18 2006/01/24 20:03:30 jact Exp $
  */
 
 /**
@@ -46,20 +46,9 @@
 
   $relQ = new Relative_Query;
   $relQ->connect();
-  if ($relQ->isError())
-  {
-    Error::query($relQ);
-  }
-
-  $numRows = $relQ->select($idPatient);
-  if ($relQ->isError())
-  {
-    $relQ->close();
-    Error::query($relQ);
-  }
 
   $relArray = array();
-  if ($numRows)
+  if ($relQ->select($idPatient))
   {
     while ($rel = $relQ->fetch())
     {
@@ -148,10 +137,7 @@
 
   $patQ = new Patient_Page_Query();
   $patQ->connect();
-  if ($patQ->isError())
-  {
-    Error::query($patQ);
-  }
+  $patQ->captureError(true);
 
   $tbody = array();
   for ($i = 0; $i < count($relArray); $i++)
@@ -164,7 +150,7 @@
     }
 
     $pat = $patQ->fetch();
-    if ($patQ->isError())
+    if ( !$pat )
     {
       $patQ->close();
       Error::fetch($patQ);

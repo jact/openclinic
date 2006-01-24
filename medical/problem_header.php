@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_header.php,v 1.17 2005/08/16 15:12:52 jact Exp $
+ * $Id: problem_header.php,v 1.18 2006/01/24 19:56:38 jact Exp $
  */
 
 /**
@@ -39,25 +39,14 @@
   {
     $problemQ = new Problem_Page_Query();
     $problemQ->connect();
-    if ($problemQ->isError())
-    {
-      Error::query($problemQ);
-    }
 
-    $numRows = $problemQ->select($idProblem);
-    if ($problemQ->isError())
-    {
-      $problemQ->close();
-      Error::query($problemQ);
-    }
-
-    if ( !$numRows )
+    if ( !$problemQ->select($idProblem) )
     {
       return false; // maybe return HTML::message(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     }
 
     $problem = $problemQ->fetch();
-    if ($problemQ->isError())
+    if ( !$problem )
     {
       $problemQ->close();
       Error::fetch($problemQ);

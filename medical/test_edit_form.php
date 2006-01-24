@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit_form.php,v 1.14 2005/08/22 15:11:50 jact Exp $
+ * $Id: test_edit_form.php,v 1.15 2006/01/24 20:08:23 jact Exp $
  */
 
 /**
@@ -51,19 +51,8 @@
    */
   $testQ = new Test_Query();
   $testQ->connect();
-  if ($testQ->isError())
-  {
-    Error::query($testQ);
-  }
 
-  $numRows = $testQ->select($idProblem, $idTest);
-  if ($testQ->isError())
-  {
-    $testQ->close();
-    Error::query($testQ);
-  }
-
-  if ( !$numRows )
+  if ( !$testQ->select($idProblem, $idTest) )
   {
     $testQ->close();
     include_once("../shared/header.php");
@@ -75,14 +64,14 @@
   }
 
   $test = $testQ->fetch();
-  if ($testQ->isError())
-  {
-    Error::fetch($testQ, false);
-  }
-  else
+  if ($test)
   {
     $postVars["document_type"] = $test->getDocumentType();
     $postVars["path_filename"] = $test->getPathFilename();
+  }
+  else
+  {
+    Error::fetch($testQ, false);
   }
   $testQ->freeResult();
   $testQ->close();

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.17 2005/08/22 15:16:27 jact Exp $
+ * $Id: patient_search.php,v 1.18 2006/01/24 19:47:47 jact Exp $
  */
 
 /**
@@ -59,17 +59,8 @@
   $patQ = new Patient_Page_Query();
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $patQ->connect();
-  if ($patQ->isError())
-  {
-    Error::query($patQ);
-  }
 
   $patQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
-  if ($patQ->isError())
-  {
-    $patQ->close();
-    Error::query($patQ);
-  }
 
   /**
    * Show patient view screen if only one result from query
