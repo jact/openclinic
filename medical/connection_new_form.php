@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.12 2005/07/30 18:58:37 jact Exp $
+ * $Id: connection_new_form.php,v 1.13 2006/01/24 20:17:02 jact Exp $
  */
 
 /**
@@ -45,23 +45,6 @@
   $idPatient = intval($_GET["pat"]);
 
   /**
-   * Search database
-   */
-  $problemQ = new Problem_Page_Query();
-  $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
-
-  $count = $problemQ->selectProblems($idPatient);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
-
-  /**
    * Show page
    */
   $title = _("Add New Connection Problems");
@@ -89,9 +72,15 @@
   showProblemHeader($idProblem);
 
   /**
+   * Search database
+   */
+  $problemQ = new Problem_Page_Query();
+  $problemQ->connect();
+
+  /**
    * Display no results message if no results returned from search.
    */
-  if ($count == 0)
+  if ( !$problemQ->selectProblems($idPatient) )
   {
     $problemQ->close();
     HTML::message(_("No medical problems defined for this patient."), OPEN_MSG_INFO);
@@ -100,11 +89,13 @@
   }
 
   echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
-?>
 
-<form method="post" action="../medical/connection_new.php">
-  <div>
-<?php
+  /**
+   * New form
+   */
+  echo '<form method="post" action="../medical/connection_new.php">' . "\n";
+  echo "<div>\n";
+
   Form::hidden("id_problem", "id_problem", $idProblem);
   Form::hidden("id_patient", "id_patient", $idPatient);
 
@@ -138,10 +129,7 @@
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);
-?>
-  </div>
-</form>
+  echo "</div>\n</form>\n";
 
-<?php
   require_once("../shared/footer.php");
 ?>

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit_form.php,v 1.10 2005/08/22 15:11:49 jact Exp $
+ * $Id: history_family_edit_form.php,v 1.11 2006/01/24 20:17:37 jact Exp $
  */
 
 /**
@@ -48,19 +48,8 @@
    */
   $historyQ = new History_Query();
   $historyQ->connect();
-  if ($historyQ->isError())
-  {
-    Error::query($historyQ);
-  }
 
-  $numRows = $historyQ->selectFamily($idPatient);
-  if ($historyQ->isError())
-  {
-    $historyQ->close();
-    Error::query($historyQ);
-  }
-
-  if ( !$numRows )
+  if ( !$historyQ->selectFamily($idPatient) )
   {
     $historyQ->close();
     include_once("../shared/header.php");
@@ -72,17 +61,17 @@
   }
 
   $history = $historyQ->fetchFamily();
-  if ($historyQ->isError())
-  {
-    Error::fetch($historyQ, false);
-  }
-  else
+  if ($history)
   {
     $postVars["id_patient"] = $history->getIdPatient();
     $postVars["parents_status_health"] = $history->getParentsStatusHealth();
     $postVars["brothers_status_health"] = $history->getBrothersStatusHealth();
     $postVars["spouse_childs_status_health"] = $history->getSpouseChildsStatusHealth();
     $postVars["family_illness"] = $history->getFamilyIllness();
+  }
+  else
+  {
+    Error::fetch($historyQ, false);
   }
   $historyQ->freeResult();
   $historyQ->close();

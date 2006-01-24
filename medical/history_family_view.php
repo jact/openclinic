@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_view.php,v 1.9 2005/07/30 18:57:54 jact Exp $
+ * $Id: history_family_view.php,v 1.10 2006/01/24 20:18:14 jact Exp $
  */
 
 /**
@@ -47,19 +47,8 @@
    */
   $historyQ = new History_Query();
   $historyQ->connect();
-  if ($historyQ->isError())
-  {
-    Error::query($historyQ);
-  }
 
-  $numRows = $historyQ->selectFamily($idPatient);
-  if ($historyQ->isError())
-  {
-    $historyQ->close();
-    Error::query($historyQ);
-  }
-
-  if ( !$numRows )
+  if ( !$historyQ->selectFamily($idPatient) )
   {
     $historyQ->close();
     include_once("../shared/header.php");
@@ -71,7 +60,7 @@
   }
 
   $history = $historyQ->fetchFamily();
-  if ($historyQ->isError())
+  if ( !$history )
   {
     $historyQ->close();
     Error::fetch($historyQ);

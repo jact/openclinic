@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_list.php,v 1.14 2005/07/30 18:58:37 jact Exp $
+ * $Id: history_list.php,v 1.15 2006/01/24 20:19:29 jact Exp $
  */
 
 /**
@@ -42,20 +42,6 @@
    */
   $idPatient = intval($_GET["key"]);
 
-  $problemQ = new Problem_Page_Query();
-  $problemQ->connect();
-  if ($problemQ->isError())
-  {
-    Error::query($problemQ);
-  }
-
-  $count = $problemQ->selectProblems($idPatient, true);
-  if ($problemQ->isError())
-  {
-    $problemQ->close();
-    Error::query($problemQ);
-  }
-
   /**
    * Show page
    */
@@ -90,7 +76,10 @@
 
   echo '<h2>' . _("Closed Medical Problems List:") . "</h2>\n";
 
-  if ($count == 0)
+  $problemQ = new Problem_Page_Query();
+  $problemQ->connect();
+
+  if ( !$problemQ->selectProblems($idPatient, true) )
   {
     $problemQ->close();
     HTML::message(_("No closed medical problems defined for this patient."), OPEN_MSG_INFO);
