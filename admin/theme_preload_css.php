@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.12 2005/08/22 15:12:08 jact Exp $
+ * $Id: theme_preload_css.php,v 1.13 2006/01/24 20:22:20 jact Exp $
  */
 
 /**
@@ -73,10 +73,12 @@
   );
   HTML::breadCrumb($links, "icon themeIcon");
   unset($links);
-?>
 
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'] . (($idTheme) ? "?key=" . $idTheme : ""); ?>" enctype="multipart/form-data">
-<?php
+  /**
+   * Form
+   */
+  echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . (($idTheme) ? "?key=" . $idTheme : "") . '" enctype="multipart/form-data">' . "\n";
+
   $thead = array(
     $title => array('colspan' => 2)
   );
@@ -102,10 +104,8 @@
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);
-?>
-</form>
+  echo "</form>\n";
 
-<?php
   HTML::message('* ' . _("Note: The fields with * are required."));
 
   require_once("../shared/footer.php");
