@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User.php,v 1.5 2005/07/20 20:24:48 jact Exp $
+ * $Id: User.php,v 1.6 2006/03/12 18:10:01 jact Exp $
  */
 
 /**
@@ -43,7 +43,7 @@ require_once("../lib/Check.php");
  *  string getEmailError(void)
  *  void setEmail(string $value)
  *  bool isActived(void)
- *  void setActived(bool $value)
+ *  void setActived(mixed $value)
  *  int getIdTheme(void)
  *  void setIdTheme(int $value)
  *  int getIdProfile(void)
@@ -349,15 +349,19 @@ class User
   }
 
   /**
-   * void setActived(bool $value)
+   * void setActived(mixed $value)
    *
-   * @param boolean $value true if user is actived
+   * @param mixed $value true if user is actived
    * @return void
    * @access public
    */
   function setActived($value)
   {
-    $this->_actived = ($value == true);
+    if (gettype($value) == 'string')
+    {
+      $value = strtolower($value);
+    }
+    $this->_actived = ($value == 1 || $value == 'on' || $value == 'y' || $value == 'yes');
   }
 
   /**
