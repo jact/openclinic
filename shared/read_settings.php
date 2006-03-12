@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: read_settings.php,v 1.18 2006/01/23 22:43:46 jact Exp $
+ * $Id: read_settings.php,v 1.19 2006/03/12 18:51:34 jact Exp $
  */
 
 /**
@@ -109,7 +109,7 @@
   /**
    * Theme related constants
    */
-  define("OPEN_THEME_NAME",     $theme->getThemeName());
+  define("OPEN_THEME_NAME",     $theme->getName());
   define("OPEN_THEME_CSS_FILE", $theme->getCSSFile());
 
   unset($theme);
