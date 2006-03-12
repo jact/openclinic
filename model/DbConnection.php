@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DbConnection.php,v 1.9 2006/01/23 21:35:34 jact Exp $
+ * $Id: DbConnection.php,v 1.10 2006/03/12 17:54:35 jact Exp $
  */
 
 /**
@@ -31,7 +31,7 @@ if (file_exists("../database_constants.php"))
  *  void DbConnection(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
  *  bool connect(bool $persistency = false)
  *  bool close(void)
- *  bool exec(string $sql)
+ *  bool exec(string $sql, array $params = null)
  *  mixed fetchRow(int $arrayType = MYSQL_ASSOC)
  *  mixed fetchAll(int $arrayType = MYSQL_ASSOC)
  *  mixed affectedRows(void)
@@ -210,16 +210,69 @@ class DbConnection
   }
 
   /**
-   * bool exec(string $sql)
+   * bool exec(string $sql, array $params = null)
    *
    * Executes a query
    *
    * @param string $sql SQL of query to execute
+   * @param array $params (optional) SQL parameters to prepare sentence
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function exec($sql)
+  function exec($sql, $params = null)
   {
+    if (is_array($params))
+    {
+      $translations = substr_count($sql, '?');
+      $parameters = count($params);
+      if ($translations != $parameters)
+      {
+        $this->_error = "Unable to prepare query.";
+        return false;
+      }
+
+      $temp = explode('?', $sql);
+      $sql = "";
+      $i = 0;
+      foreach ($temp as $value)
+      {
+        $sql .= $value;
+        if ($i < $parameters)
+        {
+          switch (gettype($params[$i]))
+          {
+            case 'NULL':
+              $sql .= "NULL";
+              break;
+
+            case 'integer':
+            case 'double':
+              if ($params[$i] == 0)
+              {
+                $sql .= "NULL";
+              }
+              else
+              {
+                $sql .= $params[$i];
+              }
+              break;
+
+            case 'string':
+              if (empty($params[$i]))
+              {
+                $sql .= "NULL";
+              }
+              else
+              {
+                $sql .= "'" . mysql_real_escape_string($params[$i]) . "'"; // PHP >= 4.3.0
+              }
+              break;
+          }
+        }
+        $i++;
+      }
+    }
+
     $this->_SQL = $sql;
 
     $this->_result = mysql_query($sql, $this->_link);
