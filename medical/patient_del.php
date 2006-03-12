@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del.php,v 1.17 2006/01/24 19:41:53 jact Exp $
+ * $Id: patient_del.php,v 1.18 2006/03/12 18:49:30 jact Exp $
  */
 
 /**
@@ -104,10 +104,10 @@
     $historyQ->connect();
 
     $historyQ->selectPersonal($idPatient);
-    $historyP = $historyQ->fetchPersonal();
+    $historyP = $historyQ->fetch();
 
     $historyQ->selectFamily($idPatient);
-    $historyF = $historyQ->fetchFamily();
+    $historyF = $historyQ->fetch();
     //Error::debug($patient); Error::debug($historyP); Error::debug($historyF, "", true);
 
     $delPatientQ = new DelPatient_Query();

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_view.php,v 1.10 2006/01/24 20:20:34 jact Exp $
+ * $Id: history_personal_view.php,v 1.11 2006/03/12 18:49:30 jact Exp $
  */
 
 /**
@@ -59,7 +59,7 @@
     exit();
   }
 
-  $history = $historyQ->fetchPersonal();
+  $history = $historyQ->fetch();
   if ( !$history )
   {
     $historyQ->close();

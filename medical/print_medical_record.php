@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.19 2006/01/24 19:52:01 jact Exp $
+ * $Id: print_medical_record.php,v 1.20 2006/03/12 18:49:30 jact Exp $
  */
 
 /**
@@ -22,6 +22,7 @@
   $tab = "medical";
   $nav = "print";
   $onlyDoctor = true;
+  $style = '<link rel="stylesheet" type="text/css" href="../css/style.css" />' . "\n";
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
@@ -30,8 +31,6 @@
   require_once("../classes/Problem_Page_Query.php");
   require_once("../classes/History_Query.php");
   require_once("../lib/HTML.php");
-
-  $style = '<link rel="stylesheet" type="text/css" href="../css/style.css" />' . "\n";
 
   /**
    * Checking for get vars. Close window if none found.
@@ -311,7 +310,7 @@
 
   $historyQ->selectPersonal($idPatient);
 
-  $history = $historyQ->fetchPersonal();
+  $history = $historyQ->fetch();
   if ( !$history )
   {
     Error::fetch($historyQ);
@@ -392,7 +391,7 @@
    */
   $historyQ->selectFamily($idPatient);
 
-  $history = $historyQ->fetchFamily();
+  $history = $historyQ->fetch();
   if ( !$history )
   {
     Error::fetch($historyQ);
