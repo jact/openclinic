@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.10 2006/01/23 21:55:30 jact Exp $
+ * $Id: Theme_Query.php,v 1.11 2006/03/12 18:07:21 jact Exp $
  */
 
 /**
@@ -27,13 +27,13 @@ require_once("../classes/Theme.php");
  *
  * Methods:
  *  void Theme_Query(void)
- *  mixed select(int $idTheme = 0)
- *  mixed selectWithStats(int $idTheme = 0)
+ *  mixed select(int $id = 0)
+ *  mixed selectWithStats(int $id = 0)
  *  mixed fetch(void)
- *  bool existCSSFile(string $file, int $idTheme = 0)
+ *  bool existCSSFile(string $file, int $id = 0)
  *  bool insert(Theme $theme)
  *  bool update(Theme $theme)
- *  bool delete(int $idTheme)
+ *  bool delete(int $id)
  */
 class Theme_Query extends Query
 {
@@ -48,24 +48,32 @@ class Theme_Query extends Query
   function Theme_Query()
   {
     $this->_table = "theme_tbl";
+    $this->_primaryKey = array("id_theme");
+
+    $this->_map = array(
+      'id_theme' => array(/*'accessor' => 'getId',*/ 'mutator' => 'setId'),
+      'theme_name' => array(/*'accessor' => 'getName',*/ 'mutator' => 'setName'),
+      'css_file' => array(/*'accessor' => 'getCSSFile',*/ 'mutator' => 'setCSSFile'),
+      'row_count' => array(/*'accessor' => 'getCount',*/ 'mutator' => 'setCount')
+    );
   }
 
   /**
-   * mixed select(int $idTheme = 0)
+   * mixed select(int $id = 0)
    *
    * Executes a query
    *
-   * @param int $idTheme key of theme to select
+   * @param int $id key of theme to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
    */
-  function select($idTheme = 0)
+  function select($id = 0)
   {
     $sql = "SELECT *";
     $sql .= " FROM " . $this->_table;
-    if ($idTheme)
+    if ($id)
     {
-      $sql .= " WHERE id_theme=" . intval($idTheme);
+      $sql .= " WHERE id_theme=" . intval($id);
     }
     $sql .= " ORDER BY theme_name";
 
@@ -73,21 +81,21 @@ class Theme_Query extends Query
   }
 
   /**
-   * mixed selectWithStats(int $idTheme = 0)
+   * mixed selectWithStats(int $id = 0)
    *
    * Executes a query
    *
-   * @param int $idTheme key of theme to select
+   * @param int $id key of theme to select
    * @return mixed if error occurs returns false, else number of rows in the result
    * @access public
    */
-  function selectWithStats($idTheme = 0)
+  function selectWithStats($id = 0)
   {
     $sql = "SELECT " . $this->_table . ".*, count(user_tbl.id_user) AS row_count";
     $sql .= " FROM " . $this->_table . " LEFT JOIN user_tbl ON " . $this->_table . ".id_theme=user_tbl.id_theme";
-    if ($idTheme)
+    if ($id)
     {
-      $sql .= " WHERE " . $this->_table . ".id_theme=" . intval($idTheme);
+      $sql .= " WHERE " . $this->_table . ".id_theme=" . intval($id);
     }
     $sql .= " GROUP BY 1,2,3";
     $sql .= " ORDER BY " . $this->_table . ".theme_name;";
@@ -105,40 +113,38 @@ class Theme_Query extends Query
    */
   function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
     }
 
     $theme = new Theme();
-    $theme->setIdTheme(intval($array["id_theme"]));
-    $theme->setThemeName(urldecode($array["theme_name"]));
-    $theme->setCSSFile(urldecode($array["css_file"]));
-
-    if (isset($array["row_count"]))
+    foreach ($array as $key => $value)
     {
-      $theme->setCount(intval($array["row_count"]));
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $theme->$setProp(urldecode($value));
+      }
     }
 
     return $theme;
   }
 
   /**
-   * bool existCSSFile(string $file, int $idTheme = 0)
+   * bool existCSSFile(string $file, int $id = 0)
    *
    * Executes a query
    *
-   * @param string $file filename to know if exists
-   * @param int $idTheme (optional) key of theme
    * @global array $reservedCSSFiles
+   * @param string $file filename to know if exists
+   * @param int $id (optional) key of theme
    * @return boolean returns true if file already exists or false if error occurs
    * @access public
    */
-  function existCSSFile($file, $idTheme = 0)
+  function existCSSFile($file, $id = 0)
   {
-    global $reservedCSSFiles;
-
     if (in_array($file, $reservedCSSFiles))
     {
       $this->_error = "That filename is reserved for internal use.";
@@ -148,9 +154,9 @@ class Theme_Query extends Query
     $sql = "SELECT COUNT(css_file)";
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE css_file='" . urlencode($file) . "'";
-    if ($idTheme)
+    if ($id)
     {
-      $sql .= " AND id_theme<>" . intval($idTheme);
+      $sql .= " AND id_theme<>" . intval($id);
     }
 
     if ( !$this->exec($sql) )
@@ -158,7 +164,7 @@ class Theme_Query extends Query
       return false;
     }
 
-    $array = $this->fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQL_NUM);
 
     return ($array[0] > 0);
   }
@@ -209,7 +215,7 @@ class Theme_Query extends Query
     }
 
     $sql = "INSERT INTO " . $this->_table . " VALUES (NULL, ";
-    $sql .= "'" . urlencode($theme->getThemeName()) . "', ";
+    $sql .= "'" . urlencode($theme->getName()) . "', ";
     $sql .= "'" . urlencode($theme->getCSSFile()) . "');";
 
     return $this->exec($sql);
@@ -232,7 +238,7 @@ class Theme_Query extends Query
       return false;
     }
 
-    if ($this->existCSSFile($theme->getCSSFile(), $theme->getIdTheme()))
+    if ($this->existCSSFile($theme->getCSSFile(), $theme->getId()))
     {
       $this->_isError = true;
       $this->_error = "File is already in use.";
@@ -245,26 +251,26 @@ class Theme_Query extends Query
     }
 
     $sql = "UPDATE " . $this->_table . " SET ";
-    $sql .= "theme_name='" . urlencode($theme->getThemeName()) . "', ";
+    $sql .= "theme_name='" . urlencode($theme->getName()) . "', ";
     $sql .= "css_file='" . urlencode($theme->getCSSFile()) . "'";
-    $sql .= " WHERE id_theme=" . $theme->getIdTheme();
+    $sql .= " WHERE id_theme=" . $theme->getId();
 
     return $this->exec($sql);
   }
 
   /**
-   * bool delete(int $idTheme)
+   * bool delete(int $id)
    *
    * Deletes a theme from the theme table.
    *
-   * @param int $idTheme key of theme to delete
+   * @param int $id key of theme to delete
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function delete($idTheme)
+  function delete($id)
   {
     $sql = "DELETE FROM " . $this->_table;
-    $sql .= " WHERE id_theme=" . intval($idTheme);
+    $sql .= " WHERE id_theme=" . intval($id);
 
     return $this->exec($sql);
   }
