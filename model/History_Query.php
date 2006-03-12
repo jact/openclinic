@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History_Query.php,v 1.8 2006/01/23 21:44:51 jact Exp $
+ * $Id: History_Query.php,v 1.9 2006/03/12 18:03:42 jact Exp $
  */
 
 /**
@@ -29,8 +29,7 @@ require_once("../classes/History.php");
  *  void History_Query(void)
  *  mixed selectPersonal(int $idPatient = 0)
  *  mixed selectFamily(int $idPatient = 0)
- *  mixed fetchPersonal(void)
- *  mixed fetchFamily(void)
+ *  mixed fetch(void)
  *  bool updatePersonal(History $history)
  *  bool updateFamily(History $history)
  */
@@ -47,6 +46,26 @@ class History_Query extends Query
   function History_Query()
   {
     $this->_table = "history_tbl";
+    $this->_primaryKey = array("id_patient");
+
+    $this->_map = array(
+      'id_patient' => array('mutator' => 'setIdPatient'),
+      'birth_growth' => array('mutator' => 'setBirthGrowth'),
+      'growth_sexuality' => array('mutator' => 'setGrowthSexuality'),
+      'feed' => array('mutator' => 'setFeed'),
+      'habits' => array('mutator' => 'setHabits'),
+      'peristaltic_conditions' => array('mutator' => 'setPeristalticConditions'),
+      'psychological' => array('mutator' => 'setPsychological'),
+      'children_complaint' => array('mutator' => 'setChildrenComplaint'),
+      'venereal_disease' => array('mutator' => 'setVenerealDisease'),
+      'accident_surgical_operation' => array('mutator' => 'setAccidentSurgicalOperation'),
+      'medicinal_intolerance' => array('mutator' => 'setMedicinalIntolerance'),
+      'mental_illness' => array('mutator' => 'setMentalIllness'),
+      'parents_status_health' => array('mutator' => 'setParentsStatusHealth'),
+      'brothers_status_health' => array('mutator' => 'setBrothersStatusHealth'),
+      'spouse_childs_status_health' => array('mutator' => 'setSpouseChildsStatusHealth'),
+      'family_illness' => array('mutator' => 'setFamilyIllness')
+    );
   }
 
   /**
@@ -97,62 +116,30 @@ class History_Query extends Query
   }
 
   /**
-   * mixed fetchPersonal(void)
-   *
-   * Fetches a row from the query result and populates the History object.
-   *
-   * @return History returns personal antecedents or false if no more histories to fetch
-   * @access public
-   */
-  function fetchPersonal()
-  {
-    $array = $this->fetchRow();
-    if ($array == false)
-    {
-      return false;
-    }
-
-    $history = new History();
-    $history->setIdPatient(intval($array["id_patient"]));
-
-    $history->setBirthGrowth(urldecode($array["birth_growth"]));
-    $history->setGrowthSexuality(urldecode($array["growth_sexuality"]));
-    $history->setFeed(urldecode($array["feed"]));
-    $history->setHabits(urldecode($array["habits"]));
-    $history->setPeristalticConditions(urldecode($array["peristaltic_conditions"]));
-    $history->setPsychological(urldecode($array["psychological"]));
-    $history->setChildrenComplaint(urldecode($array["children_complaint"]));
-    $history->setVenerealDisease(urldecode($array["venereal_disease"]));
-    $history->setAccidentSurgicalOperation(urldecode($array["accident_surgical_operation"]));
-    $history->setMedicinalIntolerance(urldecode($array["medicinal_intolerance"]));
-    $history->setMentalIllness(urldecode($array["mental_illness"]));
-
-    return $history;
-  }
-
-  /**
-   * mixed fetchFamily(void)
+   * mixed fetch(void)
    *
    * Fetches a row from the query result and populates the History object.
    *
    * @return History returns family antecedents or false if no more histories to fetch
    * @access public
    */
-  function fetchFamily()
+  function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
     }
 
     $history = new History();
-    $history->setIdPatient(intval($array["id_patient"]));
-
-    $history->setParentsStatusHealth(urldecode($array["parents_status_health"]));
-    $history->setBrothersStatusHealth(urldecode($array["brothers_status_health"]));
-    $history->setSpouseChildsStatusHealth(urldecode($array["spouse_childs_status_health"]));
-    $history->setFamilyIllness(urldecode($array["family_illness"]));
+    foreach ($array as $key => $value)
+    {
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $history->$setProp(urldecode($value));
+      }
+    }
 
     return $history;
   }
@@ -174,21 +161,36 @@ class History_Query extends Query
       return false;
     }
 
-    $sql = "UPDATE " . $this->_table . " SET ";
-    $sql .= "birth_growth=" . (($history->getBirthGrowth() == "") ? "NULL, " : "'" . urlencode($history->getBirthGrowth()) . "', ");
-    $sql .= "growth_sexuality=" . (($history->getGrowthSexuality() == "") ? "NULL, " : "'" . urlencode($history->getGrowthSexuality()) . "', ");
-    $sql .= "feed=" . (($history->getFeed() == "") ? "NULL, " : "'" . urlencode($history->getFeed()) . "', ");
-    $sql .= "habits=" . (($history->getHabits() == "") ? "NULL, " : "'" . urlencode($history->getHabits()) . "', ");
-    $sql .= "peristaltic_conditions=" . (($history->getPeristalticConditions() == "") ? "NULL, " : "'" . urlencode($history->getPeristalticConditions()) . "', ");
-    $sql .= "psychological=" . (($history->getPsychological() == "") ? "NULL, " : "'" . urlencode($history->getPsychological()) . "', ");
-    $sql .= "children_complaint=" . (($history->getChildrenComplaint() == "") ? "NULL, " : "'" . urlencode($history->getChildrenComplaint()) . "', ");
-    $sql .= "venereal_disease=" . (($history->getVenerealDisease() == "") ? "NULL, " : "'" . urlencode($history->getVenerealDisease()) . "', ");
-    $sql .= "accident_surgical_operation=" . (($history->getAccidentSurgicalOperation() == "") ? "NULL, " : "'" . urlencode($history->getAccidentSurgicalOperation()) . "', ");
-    $sql .= "medicinal_intolerance=" . (($history->getMedicinalIntolerance() == "") ? "NULL, " : "'" . urlencode($history->getMedicinalIntolerance()) . "', ");
-    $sql .= "mental_illness=" . (($history->getMentalIllness() == "") ? "NULL " : "'" . urlencode($history->getMentalIllness()) . "' ");
-    $sql .= " WHERE id_patient=" . $history->getIdPatient() . ";";
+    $sql = "UPDATE " . $this->_table . " SET "
+         . "birth_growth=?, "
+         . "growth_sexuality=?, "
+         . "feed=?, "
+         . "habits=?, "
+         . "peristaltic_conditions=?, "
+         . "psychological=?, "
+         . "children_complaint=?, "
+         . "venereal_disease=?, "
+         . "accident_surgical_operation=?, "
+         . "medicinal_intolerance=?, "
+         . "mental_illness=? "
+         . "WHERE id_patient=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      urlencode($history->getBirthGrowth()),
+      urlencode($history->getGrowthSexuality()),
+      urlencode($history->getFeed()),
+      urlencode($history->getHabits()),
+      urlencode($history->getPeristalticConditions()),
+      urlencode($history->getPsychological()),
+      urlencode($history->getChildrenComplaint()),
+      urlencode($history->getVenerealDisease()),
+      urlencode($history->getAccidentSurgicalOperation()),
+      urlencode($history->getMedicinalIntolerance()),
+      urlencode($history->getMentalIllness()),
+      $history->getIdPatient()
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**
@@ -208,14 +210,22 @@ class History_Query extends Query
       return false;
     }
 
-    $sql = "UPDATE " . $this->_table . " SET ";
-    $sql .= "parents_status_health=" . (($history->getParentsStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getParentsStatusHealth()) . "', ");
-    $sql .= "brothers_status_health=" . (($history->getBrothersStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getBrothersStatusHealth()) . "', ");
-    $sql .= "spouse_childs_status_health=" . (($history->getSpouseChildsStatusHealth() == "") ? "NULL, " : "'" . urlencode($history->getSpouseChildsStatusHealth()) . "', ");
-    $sql .= "family_illness=" . (($history->getFamilyIllness() == "") ? "NULL " : "'" . urlencode($history->getFamilyIllness()) . "' ");
-    $sql .= " WHERE id_patient=" . $history->getIdPatient() . ";";
+    $sql = "UPDATE " . $this->_table . " SET "
+         . "parents_status_health=?, "
+         . "brothers_status_health=?, "
+         . "spouse_childs_status_health=?, "
+         . "family_illness=? "
+         . "WHERE id_patient=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      urlencode($history->getParentsStatusHealth()),
+      urlencode($history->getBrothersStatusHealth()),
+      urlencode($history->getSpouseChildsStatusHealth()),
+      urlencode($history->getFamilyIllness()),
+      $history->getIdPatient()
+    );
+
+    return $this->exec($sql, $params);
   }
 } // end class
 ?>
