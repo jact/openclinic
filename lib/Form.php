@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.8 2006/01/23 22:52:24 jact Exp $
+ * $Id: Form.php,v 1.9 2006/03/12 18:20:47 jact Exp $
  */
 
 /**
@@ -30,24 +30,25 @@ if (file_exists("../classes/Description_Query.php"))
  * @since 0.8
  *
  * Methods:
- *  string strText(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
- *  void text(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
- *  string strPassword(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", bool $readOnly = false, string $addendum = "")
- *  void password(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", bool $readOnly = false, string $addendum = "")
- *  string strSelect(string $id, string $name, array &$array, mixed $defaultValue = null, int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
- *  void select(string $id, string $name, array &$array, mixed $defaultValue = null, int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
- *  string strTextArea(string $id, string $name, int $rows, int $cols, string $value = "", string $error = "", bool $disabled = false, string $addendum = "")
- *  void textArea(string $id, string $name, int $rows, int $cols, string $value = "", string $error = "", bool $disabled = false, string $addendum = "")
- *  string strHidden(string $id, string $name, string $value = "", string $addendum = "")
- *  void hidden(string $id, string $name, string $value = "", string $addendum = "")
- *  string strCheckBox(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
- *  void checkBox(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
- *  string strRadioButton(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
- *  void radioButton(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
- *  string strButton(string $id, string $name, string $value, string $type = "submit", string $addendum = "")
- *  void button(string $id, string $name, string $value, string $type = "submit", string $addendum = "")
- *  string strFile(string $id, string $name, string $value = "", int $size = 0, string $addendum = "", string $error = "")
- *  void file(string $id, string $name, string $value = "", int $size = 0, string $addendum = "", string $error = "")
+ *  string strInput(array $options)
+ *  string strText(string $name, int $size, string $value = "", array $addendum = null)
+ *  void text(string $name, int $size, string $value = "", array $addendum = null)
+ *  string strPassword(string $name, int $size, string $value = "", array $addendum = null)
+ *  void password(string $name, int $size, string $value = "", array $addendum = null)
+ *  string strSelect(string $name, array &$array, mixed $defaultValue = null, array $addendum = null)
+ *  void select(string $name, array &$array, mixed $defaultValue = null, array $addendum = null)
+ *  string strTextArea(string $name, int $rows, int $cols, string $value = "", array $addendum = null)
+ *  void textArea(string $name, int $rows, int $cols, string $value = "", array $addendum = null)
+ *  string strHidden(string $name, string $value = "", array $addendum = null)
+ *  void hidden(string $name, string $value = "", array $addendum = null)
+ *  string strCheckBox(string $name, mixed $value, bool $checked = false, array $addendum = null)
+ *  void checkBox(string $name, mixed $value, bool $checked = false, array $addendum = null)
+ *  string strRadioButton(string $name, mixed $value, bool $checked = false, array $addendum = null)
+ *  void radioButton(string $name, mixed $value, bool $checked = false, array $addendum = null)
+ *  string strButton(string $name, string $value, string $type = "submit", array $addendum = null)
+ *  void button(string $name, string $value, string $type = "submit", array $addendum = null)
+ *  string strFile(string $name, string $value = "", int $size = 0, array $addendum = null)
+ *  void file(string $name, string $value = "", int $size = 0, array $addendum = null)
  *  string strSelectTable(string $tableName, string $fieldCode, string $defaultValue = "", string $fieldDescription = "", int $size = 0)
  *  void selectTable(string $tableName, string $fieldCode, string $defaultValue = "", string $fieldDescription = "", int $size = 0)
  *  string strLabel(string $field, string $text, bool $required = false)
@@ -58,144 +59,188 @@ if (file_exists("../classes/Description_Query.php"))
 class Form
 {
   /**
-   * string strText(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
+   * string strInput(array $options)
+   *
+   * Returns input html tag.
+   *
+   * @param array $options
+   *  example:
+   *    $options = array(
+   *      'id' => 'address',
+   *      'name' => 'address',
+   *      'type' => 'text',
+   *      'readonly' => true,
+   *      'disabled' => true,
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
+   * @return string input html tag
+   * @access public
+   * @since 0.8
+   */
+  function strInput($options)
+  {
+    $html = '<input';
+    foreach ($options as $key => $value)
+    {
+      if ($key == 'error')
+      {
+        continue;
+      }
+
+      $html .= ' ' . $key . '="' . (($value === true) ? $key : $value) . '"';
+    }
+    $html .= " />\n";
+
+    return $html;
+  }
+
+  /**
+   * string strText(string $name, int $size, string $value = "", array $addendum = null)
    *
    * Returns input html tag of type text or password.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param int $size size of text box
-   * @param int $max (optional) max input length of text box
    * @param string $value (optional) input value
-   * @param string $error (optional) input error
-   * @param string $type (optional) type of the input field (text by default)
-   * @param bool $readOnly (optional) if the field is read only (false by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *  example:
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'maxlength' => 20,
+   *      'readonly' => true,
+   *      'type' => 'password', // text by default
+   *      'error' => 'The field is required',
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
    * @return string input html tag
    * @access public
    * @since 0.7
    */
-  function strText($id, $name, $size, $max = 0, $value = "", $error = "", $type = "text", $readOnly = false, $addendum = "")
+  function strText($name, $size, $value = "", $addendum = null)
   {
-    $html = '<input';
-    $html .= ' type="' . $type . '"';
-    $html .= ' id="' . $id . '"';
-    $html .= ' name="' . $name . '"';
-    $html .= ' size="' . intval($size) . '"';
-    if (intval($max) > 0)
-    {
-      $html .= ' maxlength="' . intval($max) . '"';
-    }
-    if ($readOnly)
-    {
-      $html .= ' readonly="readonly"';
-    }
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
-    $html .= ' value="' . htmlspecialchars($value) . '" />' . "\n";
+    $addendum['type'] = (isset($addendum['type']) ? $addendum['type'] : 'text');
+    $addendum['id'] = (isset($addendum['id']) ? $addendum['id'] : $name);
+    $addendum['name'] = $name;
+    $addendum['size'] = intval($size);
+    $addendum['maxlength'] = (isset($addendum['maxlength']) ? $addendum['maxlength'] : $size);
+    $addendum['value'] = htmlspecialchars($value);
 
-    if ( !empty($error) )
+    $html = Form::strInput($addendum);
+
+    if (isset($addendum['error']) && !empty($addendum['error']))
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
+      $html .= HTML::strMessage($addendum['error'], OPEN_MSG_ERROR, false);
     }
 
     return $html;
   }
 
   /**
-   * void text(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", string $type = "text", bool $readOnly = false, string $addendum = "")
+   * void text(string $name, int $size, string $value = "", array $addendum = null)
    *
    * Draws input html tag of type text or password.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param int $size size of text box
-   * @param int $max (optional) max input length of text box
    * @param string $value (optional) input value
-   * @param string $error (optional) input error
-   * @param string $type (optional) type of the input field (text by default)
-   * @param bool $readOnly (optional) if the field is read only (false by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    */
-  function text($id, $name, $size, $max = 0, $value = "", $error = "", $type = "text", $readOnly = false, $addendum = "")
+  function text($name, $size, $value = "", $addendum = null)
   {
-    echo Form::strText($id, $name, $size, $max, $value, $error, $type, $readOnly, $addendum);
+    echo Form::strText($name, $size, $value, $addendum);
   }
 
   /**
-   * string strPassword(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", bool $readOnly = false, string $addendum = "")
+   * string strPassword(string $name, int $size, string $value = "", array $addendum = null)
    *
    * Returns input html tag of type password.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param int $size size of text box
-   * @param int $max (optional) max input length of text box
    * @param string $value (optional) input value
-   * @param string $error (optional) input error
-   * @param bool $readOnly (optional) if the field is read only (false by default)
-   * @param string $addendum (optional) javascript event handlers, ...
+   * @param array $addendum (optional) JavaScript event handlers, ...
    * @return string input html tag
    * @access public
    * @since 0.8
    */
-  function strPassword($id, $name, $size, $max = 0, $value = "", $error = "", $readOnly = false, $addendum = "")
+  function strPassword($name, $size, $value = "", $addendum = null)
   {
-    return Form::strText($id, $name, $size, $max, $value, $error, "password", $readOnly, $addendum);
+    $addendum['type'] = 'password';
+
+    return Form::strText($name, $size, $value, $addendum);
   }
 
   /**
-   * void password(string $id, string $name, int $size, int $max = 0, string $value = "", string $error = "", bool $readOnly = false, string $addendum = "")
+   * void password(string $name, int $size, string $value = "", array $addendum = null)
    *
    * Draws input html tag of type password.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param int $size size of text box
-   * @param int $max (optional) max input length of text box
    * @param string $value (optional) input value
-   * @param string $error (optional) input error
-   * @param bool $readOnly (optional) if the field is read only (false by default)
-   * @param string $addendum (optional) javascript event handlers, ...
+   * @param array $addendum (optional) JavaScript event handlers, ...
    * @return void
    * @access public
    * @since 0.8
    */
-  function password($id, $name, $size, $max = 0, $value = "", $error = "", $readOnly = false, $addendum = "")
+  function password($name, $size, $value = "", $addendum = null)
   {
-    Form::text($id, $name, $size, $max, $value, $error, "password", $readOnly, $addendum);
+    $addendum['type'] = 'password';
+    Form::text($name, $size, $value, $addendum);
   }
 
   /**
-   * string strSelect(string $id, string $name, array &$array, mixed $defaultValue = null, int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
+   * string strSelect(string $name, array &$array, mixed $defaultValue = null, array $addendum = null)
    *
    * Returns select html tag based in an array.
    *
-   * @param string $id identifier of input field
    * @param string $name name of the select tag
    * @param array $array data of the select tag
    * @param mixed $defaultValue (optional) array or string or int
-   * @param int $size (optional) size of the select html tag
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
-   * @param string $error (optional) select error message
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'size' => 20,
+   *      'disabled' => true,
+   *      'error' => 'The field is required',
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
    * @return string select html tag
    * @access public
    * @since 0.7
    */
-  function strSelect($id, $name, &$array, $defaultValue = null, $size = 0, $addendum = "", $error = "")
+  function strSelect($name, &$array, $defaultValue = null, $addendum = null)
   {
-    $html = '<select id="' . $id . '"';
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
+    $html = '<select';
+    $html .= ' id="' . (isset($addendum['id']) ? $addendum['id'] : $name) . '"';
     $html .= ' name="' . $name;
-    $html .= (($size > 0) ? '[]" multiple="multiple" size="' . intval($size) . '">' : '">');
-    $html .= "\n";
+    if (isset($addendum['size']) && $addendum['size'] > 0)
+    {
+      $html .= '[]" multiple="multiple" size="' . intval($addendum['size']);
+    }
+    else
+    {
+      $addendum['size'] = 0;
+    }
+    $html .= '"';
+    if (is_array($addendum))
+    {
+      foreach ($addendum as $key => $value)
+      {
+        if ($key == 'size' || $key == 'id' || $key == 'error')
+        {
+          continue;
+        }
+
+        $html .= ' ' . $key . '="' . $value . '"';
+      }
+    }
+    $html .= ">\n";
     foreach ($array as $key => $value)
     {
       if (is_array($value))
@@ -204,7 +249,7 @@ class Form
         foreach ($value as $optKey => $optValue)
         {
           $html .= '<option value="' . $optKey . '"';
-          if ($size > 0 && is_array($defaultValue) && in_array($optKey, $defaultValue))
+          if ($addendum['size'] > 0 && is_array($defaultValue) && in_array($optKey, $defaultValue))
           {
             $html .= ' selected="selected"';
           }
@@ -219,7 +264,7 @@ class Form
       else
       {
         $html .= '<option value="' . $key . '"';
-        if ($size > 0 && is_array($defaultValue) && in_array($key, $defaultValue))
+        if ($addendum['size'] > 0 && is_array($defaultValue) && in_array($key, $defaultValue))
         {
           $html .= ' selected="selected"';
         }
@@ -232,376 +277,355 @@ class Form
     }
     $html .= "</select>\n";
 
-    if ( !empty($error) )
+    if (isset($addendum['error']) && !empty($addendum['error']))
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
+      $html .= HTML::strMessage($addendum['error'], OPEN_MSG_ERROR, false);
     }
 
     return $html;
   }
 
   /**
-   * void select(string $id, string $name, array &$array, string $defaultValue = "", int $size = 0, bool $disabled = false, string $addendum = "", string $error = "")
+   * void select(string $name, array &$array, mixed $defaultValue = null, array $addendum = null)
    *
    * Draws select html tag based in an array.
    *
-   * @param string $id identifier of input field
    * @param string $name name of the select tag
    * @param array $array data of the select tag
    * @param string $defaultValue (optional)
-   * @param int $size (optional) size of the select html tag
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
-   * @param string $error (optional) select error message
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    */
-  function select($id, $name, &$array, $defaultValue = "", $size = 0, $addendum = "", $error = "")
+  function select($name, &$array, $defaultValue = null, $addendum = null)
   {
-    echo Form::strSelect($id, $name, $array, isset($defaultValue) ? $defaultValue : "", isset($size) ? $size : 0, isset($addemdum) ? $addemdum : "", isset($error) ? $error : "");
+    echo Form::strSelect($name, $array, isset($defaultValue) ? $defaultValue : null, isset($addendum) ? $addendum : null);
   }
 
   /**
-   * string strTextArea(string $id, string $name, int $rows, int $cols, string $value = "", string $error = "", bool $disabled = false, string $addendum = "")
+   * string strTextArea(string $name, int $rows, int $cols, string $value = "", array $addendum = null)
    *
    * Returns textarea html tag.
    *
-   * @param string $id identifier of input field
    * @param string $name name of the textarea tag
    * @param int $rows number of rows of the textarea tag
    * @param int $cols number of cols of the textarea tag
    * @param string $value (optional) value of the textarea tag
-   * @param string $error (optional) textarea error message
-   * @param bool $disabled (optional) state of the textarea tag
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'disabled' => true,
+   *      'error' => 'The field is required',
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
    * @return string textarea html tag
    * @access public
    * @since 0.7
    */
-  function strTextArea($id, $name, $rows, $cols, $value = "", $error = "", $disabled = false, $addendum= "")
+  function strTextArea($name, $rows, $cols, $value = "", $addendum = null)
   {
-    $html = '<textarea id="' . $id . '"';
+    $html = '<textarea';
+    $html .= ' id="' . (isset($addendum['id']) ? $addendum['id'] : $name) . '"';
     $html .= ' name="' . $name . '"';
     $html .= ' rows="' . $rows . '"';
     $html .= ' cols="' . $cols . '"';
-    if ($disabled)
+    if (is_array($addendum))
     {
-      $html .= ' disabled="disabled"';
-    }
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
-    $html .= ">" . htmlspecialchars($value) . "</textarea>\n";
+      foreach ($addendum as $key => $val)
+      {
+        if ($key == 'id' || $key == 'error')
+        {
+          continue;
+        }
 
-    if ( !empty($error) )
+        $html .= ' ' . $key . '="' . $val . '"';
+      }
+    }
+    $html .= '>' . htmlspecialchars($value) . "</textarea>\n";
+
+    if (isset($addendum['error']) && !empty($addendum['error']))
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
+      $html .= HTML::strMessage($addendum['error'], OPEN_MSG_ERROR, false);
     }
 
     return $html;
   }
 
   /**
-   * void textArea(string $id, string $name, int $rows, int $cols, string $value = "", string $error = "", bool $disabled = false, string $addendum = "")
+   * void textArea(string $name, int $rows, int $cols, string $value = "", array $addendum = null)
    *
    * Draws textarea html tag.
    *
-   * @param string $id identifier of input field
    * @param string $name name of the textarea tag
    * @param int $rows number of rows of the textarea tag
    * @param int $cols number of cols of the textarea tag
    * @param string $value (optional) value of the textarea tag
-   * @param string $error (optional) textarea error message
-   * @param bool $disabled (optional) state of the textarea tag
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    */
-  function textArea($id, $name, $rows, $cols, $value = "", $error = "", $disabled = false, $addendum = "")
+  function textArea($name, $rows, $cols, $value = "", $addendum = null)
   {
-    echo Form::strTextArea($id, $name, $rows, $cols, $value, $error, $disabled, $addendum);
+    echo Form::strTextArea($name, $rows, $cols, $value, $addendum);
   }
 
   /**
-   * string strHidden(string $id, string $name, string $value = "", string $addendum = "")
+   * string strHidden(string $name, string $value = "", array $addendum = null)
    *
    * Returns input html tag of type hidden.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param string $value (optional) input value
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'class' => 'noPrint',
+   *      'onclick' => '...'
+   *    );
    * @return string input html tag
    * @access public
    * @since 0.7
    */
-  function strHidden($id, $name, $value = "", $addendum = "")
+  function strHidden($name, $value = "", $addendum = null)
   {
-    $html = '<input type="hidden"';
-    $html .= ' id="' . $id . '"';
-    $html .= ' name="' . $name . '"';
-    $html .= ' value="' . htmlspecialchars($value) . '"';
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
-    $html .= ' />' . "\n";
+    $addendum['type'] = 'hidden';
+    $addendum['id'] = (isset($addendum['id']) ? $addendum['id'] : $name);
+    $addendum['name'] = $name;
+    $addendum['value'] = htmlspecialchars($value);
 
-    return $html;
+    return Form::strInput($addendum);
   }
 
   /**
-   * void hidden(string $id, string $name, string $value = "", string $addendum = "")
+   * void hidden(string $name, string $value = "", array $addendum = null)
    *
    * Draws input html tag of type hidden.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param string $value (optional) input value
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    * @since 0.2
    */
-  function hidden($id, $name, $value = "", $addendum = "")
+  function hidden($name, $value = "", $addendum = null)
   {
-    echo Form::strHidden($id, $name, $value, $addendum);
+    echo Form::strHidden($name, $value, $addendum);
   }
 
   /**
-   * string strCheckBox(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
+   * string strCheckBox(string $name, mixed $value, bool $checked = false, array $addendum = null)
    *
    * Returns input html tag of type checkbox.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param mixed $value input value
    * @param bool $checked (optional) if the field is checked or not (false by default)
-   * @param bool $readOnly (optional) if the field is read only (false by default)
-   * @param bool $disabled (optional) if the field is disabled (false by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'disabled' => true,
+   *      'readonly' => true,
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
    * @return string input html tag
    * @access public
    * @since 0.7
    */
-  function strCheckBox($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
+  function strCheckBox($name, $value, $checked = false, $addendum = null)
   {
-    $html = '<input type="checkbox"';
-    $html .= ' id="' . $id . '"';
-    $html .= ' name="' . $name . '"';
-    $html .= ' value="' . htmlspecialchars($value) . '"';
+    $addendum['type'] = 'checkbox';
+    $addendum['id'] = (isset($addendum['id']) ? $addendum['id'] : $name);
+    $addendum['name'] = $name;
+    $addendum['value'] = htmlspecialchars($value);
     if ($checked)
     {
-      $html .= ' checked="checked"';
+      $addendum['checked'] = true;
     }
-    if ($readOnly)
-    {
-      $html .= ' readonly="readonly"';
-    }
-    if ($disabled)
-    {
-      $html .= ' disabled="disabled"';
-    }
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
-    $html .= " />\n";
 
-    return $html;
+    return Form::strInput($addendum);
   }
 
   /**
-   * void checkBox(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
+   * void checkBox(string $name, mixed $value, bool $checked = false, array $addendum = null)
    *
    * Draws input html tag of type checkbox.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param mixed $value input value
    * @param bool $checked (optional) if the field is checked or not (false by default)
-   * @param bool $readOnly (optional) if the field is read only (false by default)
-   * @param bool $disabled (optional) if the field is disabled (false by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    * @since 0.4
    */
-  function checkBox($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
+  function checkBox($name, $value, $checked = false, $addendum = null)
   {
-    echo Form::strCheckBox($id, $name, $value, $checked, $readOnly, $disabled, $addendum);
+    echo Form::strCheckBox($name, $value, $checked, $addendum);
   }
 
   /**
-   * string strRadioButton(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
+   * string strRadioButton(string $name, mixed $value, bool $checked = false, array $addendum = null)
    *
    * Returns input html tag of type radio button.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param mixed $value input value
    * @param bool $checked if the field is checked or not (false by default)
-   * @param bool $readOnly if the field is read only (false by default)
-   * @param bool $disabled if the field is disabled (false by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'disabled' => true,
+   *      'readonly' => true,
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
    * @return string input html tag
    * @access public
    * @since 0.7
    */
-  function strRadioButton($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
+  function strRadioButton($name, $value, $checked = false, $addendum = null)
   {
-    $html = '<input type="radio"';
-    $html .= ' id="' . $id . '"';
-    $html .= ' name="' . $name . '"';
-    $html .= ' value="' . htmlspecialchars($value) . '"';
+    $addendum['type'] = 'radio';
+    $addendum['id'] = (isset($addendum['id']) ? $addendum['id'] : $name);
+    $addendum['name'] = $name;
+    $addendum['value'] = htmlspecialchars($value);
     if ($checked)
     {
-      $html .= ' checked="checked"';
+      $addendum['checked'] = true;
     }
-    if ($readOnly)
-    {
-      $html .= ' readonly="readonly"';
-    }
-    if ($disabled)
-    {
-      $html .= ' disabled="disabled"';
-    }
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
-    $html .= " />\n";
 
-    return $html;
+    return Form::strInput($addendum);
   }
 
   /**
-   * void radioButton(string $id, string $name, mixed $value, bool $checked = false, bool $readOnly = false, bool $disabled = false, string $addendum = "")
+   * void radioButton(string $name, mixed $value, bool $checked = false, array $addendum = null)
    *
    * Draws input html tag of type radio button.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param mixed $value input value
    * @param bool $checked if the field is checked or not (false by default)
-   * @param bool $readOnly if the field is read only (false by default)
-   * @param bool $disabled if the field is disabled (false by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    * @since 0.6
    */
-  function radioButton($id, $name, $value, $checked = false, $readOnly = false, $disabled = false, $addendum = "")
+  function radioButton($name, $value, $checked = false, $addendum = null)
   {
-    echo Form::strRadioButton($id, $name, $value, $checked, $readOnly, $disabled, $addendum);
+    echo Form::strRadioButton($name, $value, $checked, $addendum);
   }
 
   /**
-   * string strButton(string $id, string $name, string $value, string $type = "submit", string $addendum = "")
+   * string strButton(string $name, string $value, string $type = "submit", array $addendum = null)
    *
    * Returns input html tag of type button.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param string $value input value
    * @param string $type (optional) type of button (submit by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'disabled' => true,
+   *      'readonly' => true,
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
    * @return string input html tag
    * @access public
    * @since 0.7
    */
-  function strButton($id, $name, $value, $type = "submit", $addendum = "")
+  function strButton($name, $value, $type = "submit", $addendum = "")
   {
-    $html = '<input type="' . $type . '"';
-    $html .= ' id="' . $id . '"';
-    $html .= ' name="' . $name . '"';
-    $html .= ' value="' . $value . '"';
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
-    $html .= " />\n";
+    $addendum['type'] = $type;
+    $addendum['id'] = (isset($addendum['id']) ? $addendum['id'] : $name);
+    $addendum['name'] = $name;
+    $addendum['value'] = htmlspecialchars($value);
 
-    return $html;
+    return Form::strInput($addendum);
   }
 
   /**
-   * void button(string $id, string $name, string $value, string $type = "submit", string $addendum = "")
+   * void button(string $name, string $value, string $type = "submit", array $addendum = null)
    *
    * Draws input html tag of type button.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param string $value input value
    * @param string $type (optional) type of button (submit by default)
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    * @since 0.6
    */
-  function button($id, $name, $value, $type = "submit", $addendum = "")
+  function button($name, $value, $type = "submit", $addendum = "")
   {
-    echo Form::strButton($id, $name, $value, $type, $addendum);
+    echo Form::strButton($name, $value, $type, $addendum);
   }
 
   /**
-   * string strFile(string $id, string $name, string $value = "", int $size = 0, string $addendum = "", string $error = "")
+   * string strFile(string $name, string $value = "", int $size = 0, array $addendum = null)
    *
    * Returns input html tag of type file.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param string $value (optional) input value
    * @param int $size (optional) size of the input html tag
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
-   * @param string $error (optional) input error message
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *    $addendum = array(
+   *      'id' => 'address', // id = name by default
+   *      'disabled' => true,
+   *      'readonly' => true,
+   *      'error' => 'This field is required',
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
    * @return string input html tag
    * @access public
    * @since 0.7
    * @todo $error
    */
-  function strFile($id, $name, $value = "", $size = 0, $addendum = "", $error = "")
+  function strFile($name, $value = "", $size = 0, $addendum = null)
   {
-    $html = '<input type="file"';
-    $html .= ' id="' . $id . '"';
-    $html .= ' name="' . $name . '"';
+    $addendum['type'] = 'file';
+    $addendum['id'] = (isset($addendum['id']) ? $addendum['id'] : $name);
+    $addendum['name'] = $name;
+    $addendum['value'] = htmlspecialchars($value);
     if ($size > 0)
     {
-      $html .= ' size="' . intval($size) . '"';
+      $addendum['size'] = intval($size);
     }
-    if ( !empty($addendum) )
-    {
-      $html .= ' ' . $addendum;
-    }
-    $html .= ' value="' . htmlspecialchars($value) . '" />' . "\n";
 
-    if ( !empty($error) )
+    $html = Form::strInput($addendum);
+
+    if (isset($addendum['error']) && !empty($addendum['error']))
     {
-      $html .= HTML::strMessage($error, OPEN_MSG_ERROR, false);
+      $html .= HTML::strMessage($addendum['error'], OPEN_MSG_ERROR, false);
     }
 
     return $html;
   }
 
   /**
-   * void file(string $id, string $name, string $value = "", int $size = 0, string $addendum = "", string $error = "")
+   * void file(string $name, string $value = "", int $size = 0, array $addendum = null)
    *
    * Draws input html tag of type file.
    *
-   * @param string $id identifier of input field
    * @param string $name name of input field
    * @param string $value (optional) input value
    * @param int $size (optional) size of the input html tag
-   * @param string $addendum (optional) JavaScript event handlers, class attribute, etc
-   * @param string $error (optional) input error message
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
    * @since 0.6
    * @todo $error
    */
-  function file($id, $name, $value = "", $size = 0, $addendum = "", $error = "")
+  function file($name, $value = "", $size = 0, $addendum = null)
   {
-    echo Form::strFile($id, $name, $value, $size, $addendum, $error);
+    echo Form::strFile($name, $value, $size, $addendum);
   }
 
   /**
