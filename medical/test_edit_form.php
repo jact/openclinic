@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_edit_form.php,v 1.15 2006/01/24 20:08:23 jact Exp $
+ * $Id: test_edit_form.php,v 1.16 2006/03/12 18:47:34 jact Exp $
  */
 
 /**
@@ -114,10 +114,10 @@
   echo '<form method="post" action="../medical/test_edit.php" enctype="multipart/form-data" onsubmit="document.forms[0].upload_file.value = document.forms[0].path_filename.value; return true;">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_problem", "id_problem", $idProblem);
-  Form::hidden("id_patient", "id_patient", $idPatient);
-  Form::hidden("id_test", "id_test", $idTest);
-  Form::hidden("upload_file", "upload_file", $postVars["path_filename"]);
+  Form::hidden("id_problem", $idProblem);
+  Form::hidden("id_patient", $idPatient);
+  Form::hidden("id_test", $idTest);
+  Form::hidden("upload_file", $postVars["path_filename"]);
 
   require_once("../medical/test_fields.php");
 

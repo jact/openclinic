@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.21 2006/01/24 20:00:58 jact Exp $
+ * $Id: problem_search.php,v 1.22 2006/03/12 18:45:42 jact Exp $
  */
 
 /**
@@ -111,11 +111,11 @@
    */
   echo '<form id="changePage" method="post" action="../medical/problem_search.php">' . "\n";
   echo "<div>\n";
-  Form::hidden("search_type_problem", "search_type_problem", $searchType);
-  Form::hidden("search_text_problem", "search_text_problem", $searchText);
-  Form::hidden("page", "page", $currentPageNmbr);
-  Form::hidden("logical_problem", "logical_problem", $logical);
-  Form::hidden("limit_problem", "limit_problem", $limit);
+  Form::hidden("search_type_problem", $searchType);
+  Form::hidden("search_text_problem", $searchText);
+  Form::hidden("page", $currentPageNmbr);
+  Form::hidden("logical_problem", $logical);
+  Form::hidden("limit_problem", $limit);
   echo "</div>\n</form>\n";
 
   /**

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.20 2006/01/23 23:09:29 jact Exp $
+ * $Id: user_edit_form.php,v 1.21 2006/03/12 18:35:05 jact Exp $
  */
 
 /**
@@ -132,13 +132,13 @@
   echo '<form method="post" action="../admin/user_edit.php" onsubmit="return md5Login(this);">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("referer", "referer", "edit"); // to user_validate_post.php
-  Form::hidden("id_user", "id_user", $postVars["id_user"]);
-  Form::hidden("id_member", "id_member", $postVars["id_member"]);
+  Form::hidden("referer", "edit"); // to user_validate_post.php
+  Form::hidden("id_user", $postVars["id_user"]);
+  Form::hidden("id_member", $postVars["id_member"]);
 
   if (isset($_GET["all"]))
   {
-    Form::hidden("all", "all", "Y");
+    Form::hidden("all", "Y");
   }
 
   $action = "edit";

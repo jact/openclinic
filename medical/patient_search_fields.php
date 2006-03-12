@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_fields.php,v 1.11 2005/08/03 17:40:19 jact Exp $
+ * $Id: patient_search_fields.php,v 1.12 2006/03/12 18:44:25 jact Exp $
  */
 
 /**
@@ -43,13 +43,13 @@
   $array[OPEN_SEARCH_INSURANCE] = _("Insurance Company");
   $array[OPEN_SEARCH_COLLEGIATE] = _("Collegiate Number");
 
-  $row .= Form::strSelect("search_type", "search_type", $array, OPEN_SEARCH_SURNAME1);
+  $row .= Form::strSelect("search_type", $array, OPEN_SEARCH_SURNAME1);
   unset($array);
 
   $tbody[] = array($row);
 
-  $row = '* ' . Form::strText("search_text", "search_text", 40, 80);
-  $row .= Form::strButton("button1", "button1", _("Search"));
+  $row = '* ' . Form::strText("search_text", 40, "", array('maxlength' => 80));
+  $row .= Form::strButton("button1", _("Search"));
 
   $tbody[] = array($row);
 
@@ -60,7 +60,7 @@
   $array[OPEN_NOT] = "NOT";
   $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
 
-  $row .= Form::strSelect("logical", "logical", $array, OPEN_OR);
+  $row .= Form::strSelect("logical", $array, OPEN_OR);
   unset($array);
 
   $row .= OPEN_SEPARATOR;
@@ -73,7 +73,7 @@
   $array["20"] = 20;
   $array["50"] = 50;
   $array["100"] = 100;
-  $row .= Form::strSelect("limit", "limit", $array);
+  $row .= Form::strSelect("limit", $array);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);

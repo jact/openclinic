@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_new_form.php,v 1.8 2005/08/22 15:11:49 jact Exp $
+ * $Id: patient_new_form.php,v 1.9 2006/03/12 18:43:51 jact Exp $
  */
 
 /**
@@ -58,7 +58,7 @@
   echo '<form method="post" action="../medical/patient_new.php">' . "\n";
   echo "<div>\n";
 
-  //Form::hidden("last_update_date", "last_update_date", $postVars['last_update_date']);
+  //Form::hidden("last_update_date", $postVars['last_update_date']);
 
   require_once("../medical/patient_fields.php");
 

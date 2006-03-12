@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search_fields.php,v 1.12 2005/08/03 17:40:19 jact Exp $
+ * $Id: problem_search_fields.php,v 1.13 2006/03/12 18:46:01 jact Exp $
  */
 
 /**
@@ -39,13 +39,13 @@
   $array[OPEN_SEARCH_ACTIONPLAN] = _("Action Plan");
   $array[OPEN_SEARCH_PRESCRIPTION] = _("Prescription");
 
-  $row .= Form::strSelect("search_type_problem", "search_type_problem", $array, OPEN_SEARCH_WORDING);
+  $row .= Form::strSelect("search_type_problem", $array, OPEN_SEARCH_WORDING);
   unset($array);
 
   $tbody[] = array($row);
 
-  $row = '* ' . Form::strText("search_text_problem", "search_text_problem", 40, 120);
-  $row .= Form::strButton("submit_problem", "submit_problem", _("Search"));
+  $row = '* ' . Form::strText("search_text_problem", 40, "", array('maxlength' => 120));
+  $row .= Form::strButton("submit_problem", _("Search"));
 
   $tbody[] = array($row);
 
@@ -56,7 +56,7 @@
   $array[OPEN_NOT] = "NOT";
   $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
 
-  $row .= Form::strSelect("logical_problem", "logical_problem", $array, OPEN_OR);
+  $row .= Form::strSelect("logical_problem", $array, OPEN_OR);
   unset($array);
 
   $row .= OPEN_SEPARATOR;
@@ -69,7 +69,7 @@
   $array["50"] = 50;
   $array["100"] = 100;
 
-  $row .= Form::strSelect("limit_problem", "limit_problem", $array);
+  $row .= Form::strSelect("limit_problem", $array);
   unset($array);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);

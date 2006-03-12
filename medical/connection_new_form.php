@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.13 2006/01/24 20:17:02 jact Exp $
+ * $Id: connection_new_form.php,v 1.14 2006/03/12 18:41:24 jact Exp $
  */
 
 /**
@@ -96,8 +96,8 @@
   echo '<form method="post" action="../medical/connection_new.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_problem", "id_problem", $idProblem);
-  Form::hidden("id_patient", "id_patient", $idPatient);
+  Form::hidden("id_problem", $idProblem);
+  Form::hidden("id_patient", $idPatient);
 
   $thead = array(
     _("Order Number"),
@@ -108,7 +108,9 @@
   while ($problem = $problemQ->fetch())
   {
     $row = $problem->getOrderNumber() . '.';
-    $row .= Form::strCheckBox(numberToAlphabet($problem->getOrderNumber()), "check[]", $problem->getIdProblem());
+    $row .= Form::strCheckBox("check[]", $problem->getIdProblem(), false,
+      array('id' => numberToAlphabet($problem->getOrderNumber()))
+    );
     $row .= OPEN_SEPARATOR;
     $row .= $problem->getWording();
 
@@ -120,7 +122,7 @@
   unset($problem);
 
   $tfoot = array(
-    Form::strButton("button1", "button1", _("Add selected to Connection Problems List"))
+    Form::strButton("button1", _("Add selected to Connection Problems List"))
   );
 
   $options = array(

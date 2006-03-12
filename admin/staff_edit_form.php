@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit_form.php,v 1.15 2006/01/23 23:00:19 jact Exp $
+ * $Id: staff_edit_form.php,v 1.16 2006/03/12 18:29:57 jact Exp $
  */
 
 /**
@@ -131,8 +131,8 @@
   echo '<form method="post" action="../admin/staff_edit.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_member", "id_member", $postVars["id_member"]);
-  Form::hidden("member_type", "member_type", $postVars["member_type"]);
+  Form::hidden("id_member", $postVars["id_member"]);
+  Form::hidden("member_type", $postVars["member_type"]);
 
   require_once("../admin/staff_fields.php");
 

@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_new_form.php,v 1.11 2005/08/22 15:11:50 jact Exp $
+ * $Id: test_new_form.php,v 1.12 2006/03/12 18:48:12 jact Exp $
  */
 
 /**
@@ -86,9 +86,9 @@
   echo '<form method="post" action="../medical/test_new.php" enctype="multipart/form-data" onsubmit="document.forms[0].upload_file.value = document.forms[0].path_filename.value; return true;">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_problem", "id_problem", $postVars["id_problem"]);
-  Form::hidden("id_patient", "id_patient", $idPatient);
-  Form::hidden("upload_file", "upload_file");
+  Form::hidden("id_problem", $postVars["id_problem"]);
+  Form::hidden("id_patient", $idPatient);
+  Form::hidden("upload_file");
 
   require_once("../medical/test_fields.php");
 

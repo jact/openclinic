@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.16 2005/08/22 15:12:09 jact Exp $
+ * $Id: user_new_form.php,v 1.17 2006/03/12 18:36:00 jact Exp $
  */
 
 /**
@@ -86,9 +86,9 @@
   echo '<form method="post" action="../admin/user_new.php" onsubmit="return md5Login(this);">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("referer", "referer", "new"); // to user_validate_post.php
-  Form::hidden("id_member", "id_member", $postVars["id_member"]);
-  Form::hidden("login", "login", $postVars["login"]);
+  Form::hidden("referer", "new"); // to user_validate_post.php
+  Form::hidden("id_member", $postVars["id_member"]);
+  Form::hidden("login", $postVars["login"]);
 
   $action = "new";
   require_once("../admin/user_fields.php");

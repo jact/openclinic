@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_fields.php,v 1.19 2005/08/19 10:56:32 jact Exp $
+ * $Id: setting_fields.php,v 1.20 2006/03/12 18:26:13 jact Exp $
  */
 
 /**
@@ -28,14 +28,17 @@
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    $row = Form::strHidden("language", "language", "en");
+    $row = Form::strHidden("language", "en");
     $tbody[] = $row;
   }
 
   $row = Form::strLabel("clinic_name", _("Clinic Name") . ":");
-  $row .= Form::strText("clinic_name", "clinic_name", 40, 128,
+  $row .= Form::strText("clinic_name", 40,
     isset($postVars["clinic_name"]) ? $postVars["clinic_name"] : null,
-    isset($pageErrors["clinic_name"]) ? $pageErrors["clinic_name"] : null
+    array(
+      'maxlength' => 128,
+      'error' => isset($pageErrors["clinic_name"]) ? $pageErrors["clinic_name"] : null
+    )
   );
   $tbody[] = $row;
 
@@ -45,7 +48,7 @@
   $ext = array("bmp", "gif", "jpe", "jpeg", "jpg", "png");
   $array = File::getDirContent($dir, false, $ext);
 
-  $row .= Form::strSelect("clinic_image_url", "clinic_image_url", $array, basename($postVars["clinic_image_url"]));
+  $row .= Form::strSelect("clinic_image_url", $array, basename($postVars["clinic_image_url"]));
   unset($array);
   unset($ext);
 
@@ -53,38 +56,44 @@
   $tbody[] = $row;
 
   $row = Form::strLabel("use_image", _("Use Image in place of Name") . ":");
-  $row .= Form::strCheckBox("use_image", "use_image", 1, $postVars["use_image"] != "");
+  $row .= Form::strCheckBox("use_image", 1, $postVars["use_image"] != "");
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_hours", _("Clinic Hours") . ":");
-  $row .= Form::strText("clinic_hours", "clinic_hours", 40, 128,
+  $row .= Form::strText("clinic_hours", 40,
     isset($postVars["clinic_hours"]) ? $postVars["clinic_hours"] : null,
-    isset($pageErrors["clinic_hours"]) ? $pageErrors["clinic_hours"] : null
+    array(
+      'maxlength' => 128,
+      'error' => isset($pageErrors["clinic_hours"]) ? $pageErrors["clinic_hours"] : null
+    )
   );
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_address", _("Clinic Address") . ":");
-  $row .= Form::strTextArea("clinic_address", "clinic_address", 3, 30, isset($postVars["clinic_address"]) ? $postVars["clinic_address"] : null);
+  $row .= Form::strTextArea("clinic_address", 3, 30, isset($postVars["clinic_address"]) ? $postVars["clinic_address"] : null);
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_phone", _("Clinic Phone") . ":");
-  $row .= Form::strText("clinic_phone", "clinic_phone", 40, 40,
+  $row .= Form::strText("clinic_phone", 40,
     isset($postVars["clinic_phone"]) ? $postVars["clinic_phone"] : null,
-    isset($pageErrors["clinic_phone"]) ? $pageErrors["clinic_phone"] : null
+    isset($pageErrors["clinic_phone"]) ? array('error' => $pageErrors["clinic_phone"]) : null
   );
   $tbody[] = $row;
 
   $row = Form::strLabel("clinic_url", _("Clinic URL") . ":");
-  $row .= Form::strText("clinic_url", "clinic_url", 40, 300,
+  $row .= Form::strText("clinic_url", 40,
     isset($postVars["clinic_url"]) ? $postVars["clinic_url"] : null,
-    isset($pageErrors["clinic_url"]) ? $pageErrors["clinic_url"] : null
+    array(
+      'maxlength' => 300,
+      'error' => isset($pageErrors["clinic_url"]) ? $pageErrors["clinic_url"] : null
+    )
   );
   $tbody[] = $row;
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     $row = Form::strLabel("language", _("Language") . ":");
-    $row .= Form::strSelect("language", "language", I18n::languageList(), $postVars["language"]);
+    $row .= Form::strSelect("language", I18n::languageList(), $postVars["language"]);
     $tbody[] = $row;
   }
 
@@ -93,16 +102,16 @@
   $tbody[] = $row;
 
   $row = Form::strLabel("session_timeout", _("Session Timeout") . ":", true);
-  $row .= Form::strText("session_timeout", "session_timeout", 3, 3, $postVars["session_timeout"], $pageErrors["session_timeout"]);
+  $row .= Form::strText("session_timeout", 3, $postVars["session_timeout"], $pageErrors["session_timeout"]);
   $row .= _("minutes");
   $tbody[] = $row;
 
   $row = Form::strLabel("items_per_page", _("Search Results") . ":", true);
-  $row .= Form::strText("items_per_page", "items_per_page", 2, 2, $postVars["items_per_page"], $pageErrors["items_per_page"]);
+  $row .= Form::strText("items_per_page", 2, $postVars["items_per_page"], $pageErrors["items_per_page"]);
   $row .= _("items per page") . "**";
   $tbody[] = $row;
 
-  $tfoot = array(Form::strButton("button1", "button1", _("Update")));
+  $tfoot = array(Form::strButton("button1", _("Update")));
 
   Form::fieldset($title, $tbody, $tfoot);
 ?>

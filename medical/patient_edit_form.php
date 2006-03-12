@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit_form.php,v 1.20 2006/01/24 19:44:38 jact Exp $
+ * $Id: patient_edit_form.php,v 1.21 2006/03/12 18:43:18 jact Exp $
  */
 
 /**
@@ -136,8 +136,8 @@
   echo '<form method="post" action="../medical/patient_edit.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_patient", "id_patient", $postVars["id_patient"]);
-  //Form::hidden("last_update_date", "last_update_date", $postVars["last_update_date"]);
+  Form::hidden("id_patient", $postVars["id_patient"]);
+  //Form::hidden("last_update_date", $postVars["last_update_date"]);
 
   require_once("../medical/patient_fields.php");
 

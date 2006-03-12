@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_del_confirm.php,v 1.11 2005/08/17 16:53:59 jact Exp $
+ * $Id: user_del_confirm.php,v 1.12 2006/03/12 18:34:51 jact Exp $
  */
 
 /**
@@ -69,13 +69,13 @@
 
   $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete user, %s?"), $login), OPEN_MSG_WARNING, false);
 
-  $row = Form::strHidden("id_user", "id_user", $idUser);
-  $row .= Form::strHidden("login", "login", $login);
+  $row = Form::strHidden("id_user", $idUser);
+  $row .= Form::strHidden("login", $login);
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("delete", "delete", _("Delete"))
-    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("delete", _("Delete"))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
   $options = array('class' => 'center');

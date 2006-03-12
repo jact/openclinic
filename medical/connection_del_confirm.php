@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_del_confirm.php,v 1.11 2005/08/17 16:54:16 jact Exp $
+ * $Id: connection_del_confirm.php,v 1.12 2006/03/12 18:40:56 jact Exp $
  */
 
 /**
@@ -81,15 +81,15 @@
 
   $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete connection, %s, from list?"), $wording), OPEN_MSG_WARNING, false);
 
-  $row = Form::strHidden("id_problem", "id_problem", $idProblem);
-  $row .= Form::strHidden("id_connection", "id_connection", $idConnection);
-  $row .= Form::strHidden("id_patient", "id_patient", $idPatient);
-  $row .= Form::strHidden("wording", "wording", $wording);
+  $row = Form::strHidden("id_problem", $idProblem);
+  $row .= Form::strHidden("id_connection", $idConnection);
+  $row .= Form::strHidden("id_patient", $idPatient);
+  $row .= Form::strHidden("wording", $wording);
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("delete", "delete", _("Delete"))
-    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("delete", _("Delete"))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
   $options = array('class' => 'center');

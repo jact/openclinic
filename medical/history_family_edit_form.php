@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit_form.php,v 1.11 2006/01/24 20:17:37 jact Exp $
+ * $Id: history_family_edit_form.php,v 1.12 2006/03/12 18:41:41 jact Exp $
  */
 
 /**
@@ -60,7 +60,7 @@
     exit();
   }
 
-  $history = $historyQ->fetchFamily();
+  $history = $historyQ->fetch();
   if ($history)
   {
     $postVars["id_patient"] = $history->getIdPatient();
@@ -119,7 +119,7 @@
   echo '<form method="post" action="../medical/history_family_edit.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_patient", "id_patient", $idPatient);
+  Form::hidden("id_patient", $idPatient);
 
   require_once("../medical/history_family_fields.php");
 

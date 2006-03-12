@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.14 2005/08/22 15:12:08 jact Exp $
+ * $Id: staff_new_form.php,v 1.15 2006/03/12 18:30:30 jact Exp $
  */
 
 /**
@@ -33,16 +33,14 @@
    */
   $memberType = (isset($_GET["type"])) ? Check::safeText($_GET["type"]) : "A"; // Administrative by default
 
-  switch ($memberType)
+  switch (strtolower($memberType))
   {
     case "a":
-    case "A":
       $title = _("Add New Administrative Information");
       $typeValue = OPEN_ADMINISTRATIVE;
       break;
 
     case "d":
-    case "D":
       $title = _("Add New Doctor Information");
       $typeValue = OPEN_DOCTOR;
       break;
@@ -72,7 +70,7 @@
   echo '<form method="post" action="../admin/staff_new.php?type=' . $memberType . '">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("member_type", "member_type", $typeValue);
+  Form::hidden("member_type", $typeValue);
 
   require_once("../admin/staff_fields.php");
 

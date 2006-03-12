@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.23 2006/01/23 23:06:38 jact Exp $
+ * $Id: theme_preview.php,v 1.24 2006/03/12 18:33:49 jact Exp $
  */
 
 /**
@@ -85,7 +85,7 @@
     $themeQ->close();
     unset($themeQ);
 
-    $_POST["theme_name"] = $theme->getThemeName();
+    $_POST["theme_name"] = $theme->getName();
     $filename = '../css/' . $theme->getCSSFile();
     $size = filesize($filename);
     $fp = fopen($filename, 'r');
@@ -235,7 +235,7 @@
 
   $row = Form::strLabel("sample_text", _("Required Field") . ":", true);
   $row .= OPEN_SEPARATOR;
-  $row .= Form::strText("sample_text", "sample_text", 50, 50, _("Sample Input Text"), "", "text", true);
+  $row .= Form::strText("sample_text", 50, _("Sample Input Text"), array('readonly' => true));
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -246,7 +246,7 @@
   );
 
   $tfoot = array(
-    Form::strButton("sample_button", "sample_button", _("Sample Button"), "button")
+    Form::strButton("sample_button", _("Sample Button"), "button")
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);

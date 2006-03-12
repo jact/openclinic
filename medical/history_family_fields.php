@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_fields.php,v 1.11 2005/08/19 10:59:02 jact Exp $
+ * $Id: history_family_fields.php,v 1.12 2006/03/12 18:42:04 jact Exp $
  */
 
 /**
@@ -25,24 +25,24 @@
   $tbody = array();
 
   $row = Form::strLabel("parents_status_health", _("Parents Status Health") . ":");
-  $row .= Form::strTextArea("parents_status_health", "parents_status_health", 4, 90, $postVars["parents_status_health"]);
+  $row .= Form::strTextArea("parents_status_health", 4, 90, $postVars["parents_status_health"]);
   $tbody[] = $row;
 
   $row = Form::strLabel("brothers_status_health", _("Brothers and Sisters Status Health") . ":");
-  $row .= Form::strTextArea("brothers_status_health", "brothers_status_health", 4, 90, $postVars["brothers_status_health"]);
+  $row .= Form::strTextArea("brothers_status_health", 4, 90, $postVars["brothers_status_health"]);
   $tbody[] = $row;
 
   $row = Form::strLabel("spouse_childs_status_health", _("Spouse and Childs Status Health") . ":");
-  $row .= Form::strTextArea("spouse_childs_status_health", "spouse_childs_status_health", 4, 90, $postVars["spouse_childs_status_health"]);
+  $row .= Form::strTextArea("spouse_childs_status_health", 4, 90, $postVars["spouse_childs_status_health"]);
   $tbody[] = $row;
 
   $row = Form::strLabel("family_illness", _("Family Illness") . ":");
-  $row .= Form::strTextArea("family_illness", "family_illness", 4, 90, $postVars["family_illness"]);
+  $row .= Form::strTextArea("family_illness", 4, 90, $postVars["family_illness"]);
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("button1", "button1", _("Update"))
-    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", _("Update"))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
   $options = array(

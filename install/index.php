@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.18 2006/01/23 22:49:47 jact Exp $
+ * $Id: index.php,v 1.19 2006/03/12 18:38:21 jact Exp $
  */
 
 /**
@@ -104,8 +104,8 @@
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
       <div>
         <?php
-          Form::hidden("sql_file", "sql_file", Check::safeText($_POST['sql_file']));
-          Form::hidden("sql_query", "sql_query", $sqlQuery);
+          Form::hidden("sql_file", Check::safeText($_POST['sql_file']));
+          Form::hidden("sql_query", $sqlQuery);
         ?>
       </div>
 
@@ -114,7 +114,7 @@
         if (in_array($filename[0], $tables))
         {
           echo '<p>';
-          Form::checkBox("drop", "drop", "true");
+          Form::checkBox("drop", "true");
           Form::label("drop", _("Add 'DROP table' sentence"));
           echo "</p>\n";
         }
@@ -122,8 +122,8 @@
 
       <p>
         <?php
-          Form::button("install_file", "install_file", _("Install file"));
-          Form::button("cancel_install", "cancel_install", _("Cancel"), "button", 'onclick="parent.location=\'./index.php\'"');
+          Form::button("install_file", _("Install file"));
+          Form::button("cancel_install", _("Cancel"), "button", array('onclick' => 'parent.location=\'./index.php\''));
         ?>
       </p>
     </form>
@@ -190,12 +190,12 @@
 
 <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data" onsubmit="this.secret_file.value = this.sql_file.value; return true;">
   <div>
-    <?php Form::hidden("secret_file", "secret_file"); ?>
+    <?php Form::hidden("secret_file"); ?>
+
+    <p><?php Form::file("sql_file", "", 50); ?></p>
+
+    <p><?php Form::button("view_file", _("View file")); ?></p>
   </div>
-
-  <p><?php Form::file("sql_file", "sql_file", "", 50); ?></p>
-
-  <p><?php Form::button("view_file", "view_file", _("View file")); ?></p>
 </form>
 
 <hr />

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.13 2006/01/23 22:50:39 jact Exp $
+ * $Id: install.php,v 1.14 2006/03/12 18:38:49 jact Exp $
  */
 
 /**
@@ -72,8 +72,8 @@
 
         <p>
           <?php
-            Form::button("continue", "continue", _("Continue"));
-            Form::button("cancel", "cancel", _("Cancel"), "button", 'onclick="parent.location=\'../install/cancel_msg.php\'"');
+            Form::button("continue", _("Continue"));
+            Form::button("cancel", _("Cancel"), "button", array('onclick' => 'parent.location=\'../install/cancel_msg.php\''));
           ?>
         </p>
       </form>

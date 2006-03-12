@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.15 2005/08/22 15:12:33 jact Exp $
+ * $Id: login_form.php,v 1.16 2006/03/12 18:24:16 jact Exp $
  */
 
 /**
@@ -84,24 +84,24 @@ function md5Login(f)
 
   $tbody = array();
 
-  $row = Form::strHidden("md5", "md5");
+  $row = Form::strHidden("md5");
   $tbody[] = $row;
 
   $row = Form::strLabel("login_session", _("Login") . ":");
-  $row .= Form::strText("login_session", "login_session", 20, 20,
+  $row .= Form::strText("login_session", 20,
     isset($postVars["login_session"]) ? $postVars["login_session"] : null,
-    isset($pageErrors["login_session"]) ? $pageErrors["login_session"] : null
+    isset($pageErrors["login_session"]) ? array('error' => $pageErrors["login_session"]) : null
   );
   $tbody[] = $row;
 
   $row = Form::strLabel("pwd_session", _("Password") . ":");
-  $row .= Form::strPassword("pwd_session", "pwd_session", 20, 20,
+  $row .= Form::strPassword("pwd_session", 20,
     isset($postVars["pwd_session"]) ? $postVars["pwd_session"] : null,
-    isset($pageErrors["pwd_session"]) ? $pageErrors["pwd_session"] : null
+    isset($pageErrors["pwd_session"]) ? array('error' => $pageErrors["pwd_session"]) : null
   );
   $tbody[] = $row;
 
-  $tfoot = array(Form::strButton("button1", "button1", _("Enter")));
+  $tfoot = array(Form::strButton("button1", _("Enter")));
 
   Form::fieldset($title, $tbody, $tfoot);
   echo "</form>\n";

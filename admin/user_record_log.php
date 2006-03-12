@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.24 2006/01/23 23:12:32 jact Exp $
+ * $Id: user_record_log.php,v 1.25 2006/03/12 18:36:40 jact Exp $
  */
 
 /**
@@ -100,8 +100,8 @@
      */
     echo '<form id="changePage" method="post" action="../admin/user_record_log.php?key=' . $idUser . '&amp;login=' . urlencode($login) . '">' . "\n";
     echo "<div>\n";
-    Form::hidden("page", "page", $currentPageNmbr);
-    Form::hidden("limit", "limit", $limit);
+    Form::hidden("page", $currentPageNmbr);
+    Form::hidden("limit", $limit);
     echo "</div>\n</form>\n";
 
     $thead = array(

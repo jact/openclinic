@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.21 2006/01/24 20:04:05 jact Exp $
+ * $Id: relative_search.php,v 1.22 2006/03/12 18:47:05 jact Exp $
  */
 
 /**
@@ -101,8 +101,6 @@
     exit();
   }
 
-  //Error::debug($_POST);
-
   Search::changePageJS();
 
   /**
@@ -110,12 +108,12 @@
    */
   echo '<form id="changePage" method="post" action="../medical/relative_search.php">' . "\n";
   echo "<div>\n";
-  Form::hidden("search_type", "search_type", $searchType);
-  Form::hidden("search_text", "search_text", $searchText);
-  Form::hidden("page", "page", $currentPageNmbr);
-  Form::hidden("logical", "logical", $logical);
-  Form::hidden("limit", "limit", $limit);
-  Form::hidden("id_patient", "id_patient", $idPatient);
+  Form::hidden("search_type", $searchType);
+  Form::hidden("search_text", $searchText);
+  Form::hidden("page", $currentPageNmbr);
+  Form::hidden("logical", $logical);
+  Form::hidden("limit", $limit);
+  Form::hidden("id_patient", $idPatient);
 
 /*  $n = count($_POST["check"]);
   for ($i = 0; $i < $n; $i++)
@@ -214,7 +212,7 @@
 <form method="post" action="../medical/relative_new.php">
   <div>
 <?php
-  Form::hidden("r_id_patient", "id_patient", $idPatient);
+  Form::hidden("id_patient", $idPatient, array('id' => 'r_id_patient'));
 
   $thead = array(
     sprintf(_("Search Results From Query: %s"), $query) => array('colspan' => 2)
@@ -228,7 +226,9 @@
   while ($pat = $patQ->fetch())
   {
     $row = $patQ->getCurrentRow() . '.';
-    $row .= Form::strCheckBox(numberToAlphabet($patQ->getCurrentRow()), "check[]", $pat->getIdPatient());
+    $row .= Form::strCheckBox("check[]", $pat->getIdPatient(), false,
+      array('id' => numberToAlphabet($patQ->getCurrentRow()))
+    );
     $row .= OPEN_SEPARATOR;
 
     $row .= $pat->getSurname1() . ' ' . $pat->getSurname2() . ' ' . $pat->getFirstName();
@@ -247,7 +247,7 @@
 
   $tfoot = array(
     0 => '<a href="#" onclick="setCheckboxes(1, \'check[]\', true); return false;">' . _("Select all") . '</a>' . ' / ' . '<a href="#" onclick="setCheckboxes(1, \'check[]\', false); return false;">' . _("Unselect all") . '</a>',
-    1 => Form::strButton("button1", "button1", _("Add selected to Relatives List"))
+    1 => Form::strButton("button1", _("Add selected to Relatives List"))
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);

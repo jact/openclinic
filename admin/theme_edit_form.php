@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.19 2006/01/23 23:03:51 jact Exp $
+ * $Id: theme_edit_form.php,v 1.20 2006/03/12 18:31:26 jact Exp $
  */
 
 /**
@@ -70,7 +70,7 @@
     if ($theme)
     {
       $postVars["id_theme"] = $idTheme;
-      $postVars["theme_name"] = $theme->getThemeName();
+      $postVars["theme_name"] = $theme->getName();
       $postVars["css_file"] = $theme->getCSSFile();
       $filename = "../css/" . $theme->getCSSFile();
       $fp = fopen($filename, 'r');
@@ -144,7 +144,7 @@ function editTheme()
   echo '<form method="post" action="../admin/theme_edit.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_theme", "id_theme", $postVars["id_theme"]);
+  Form::hidden("id_theme", $postVars["id_theme"]);
 
   require_once("../admin/theme_fields.php");
 

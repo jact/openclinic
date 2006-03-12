@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new_form.php,v 1.12 2005/08/22 15:11:49 jact Exp $
+ * $Id: problem_new_form.php,v 1.13 2006/03/12 18:45:29 jact Exp $
  */
 
 /**
@@ -91,10 +91,10 @@
   echo '<form method="post" action="../medical/problem_new.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("last_update_date", "last_update_date", $postVars['last_update_date']);
-  Form::hidden("id_patient", "id_patient", $idPatient);
-  Form::hidden("opening_date", "opening_date", $postVars['opening_date']);
-  Form::hidden("order_number", "order_number", $postVars['order_number']);
+  Form::hidden("last_update_date", $postVars['last_update_date']);
+  Form::hidden("id_patient", $idPatient);
+  Form::hidden("opening_date", $postVars['opening_date']);
+  Form::hidden("order_number", $postVars['order_number']);
 
   require_once("../medical/problem_fields.php");
 

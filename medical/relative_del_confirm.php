@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_del_confirm.php,v 1.12 2006/01/24 20:21:17 jact Exp $
+ * $Id: relative_del_confirm.php,v 1.13 2006/03/12 18:46:21 jact Exp $
  */
 
 /**
@@ -77,14 +77,14 @@
 
   $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relName), OPEN_MSG_WARNING, false);
 
-  $row = Form::strHidden("id_patient", "id_patient", $idPatient);
-  $row .= Form::strHidden("id_relative", "id_relative", $idRelative);
-  $row .= Form::strHidden("name", "name", $relName);
+  $row = Form::strHidden("id_patient", $idPatient);
+  $row .= Form::strHidden("id_relative", $idRelative);
+  $row .= Form::strHidden("name", $relName);
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("delete", "delete", _("Delete"))
-    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("delete", _("Delete"))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
   $options = array('class' => 'center');

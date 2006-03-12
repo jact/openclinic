@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_view_form.php,v 1.9 2005/07/30 18:58:25 jact Exp $
+ * $Id: dump_view_form.php,v 1.10 2006/03/12 18:25:35 jact Exp $
  */
 
 /**
@@ -109,7 +109,7 @@
         : $table[$tables[$i]] = $tables[$i];
       $i++;
     } // end while
-    Form::select("table_select", "table_select", $table, "", 8);
+    Form::select("table_select", $table, null, array('size' => 8));
     unset($table);
 ?>
 
@@ -127,27 +127,52 @@
 ?>
           <td>
             <?php
-              Form::radioButton("radio_dump_data", "what", "data", true, false, false, 'onclick="updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0, 0));"');
+              Form::radioButton("what", "data", true,
+                array(
+                  'id' => 'radio_dump_data',
+                  'onclick' => 'updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0, 0));'
+                )
+              );
               Form::label("radio_dump_data", _("Structure and data"));
 
               echo "<br />\n";
 
-              Form::radioButton("radio_dump_structure", "what", "structure", false, false, false, 'onclick="updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0, 0));"');
+              Form::radioButton("what", "structure", false,
+                array(
+                  'id' => 'radio_dump_structure',
+                  'onclick' => 'updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0, 0));'
+                )
+              );
               Form::label("radio_dump_structure", _("Structure only"));
 
               echo "<br />\n";
 
-              Form::radioButton("radio_dump_dataonly", "what", "dataonly", false, false, false, 'onclick="updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 1, 0));"');
+              Form::radioButton("what", "dataonly", false,
+                array(
+                  'id' => 'radio_dump_dataonly',
+                  'onclick' => 'updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 1, 0));'
+                )
+              );
               Form::label("radio_dump_dataonly", _("Data only"));
 
               echo "<br />\n";
 
-              Form::radioButton("radio_dump_xml", "what", "xml", false, false, false, 'onclick="updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));"');
+              Form::radioButton("what", "xml", false,
+                array(
+                  'id' => 'radio_dump_xml',
+                  'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
+                )
+              );
               Form::label("radio_dump_xml", _("Export to XML format"));
 
               echo "<br />\n";
 
-              Form::radioButton("radio_dump_csv", "what", "excel", false, false, false, 'onclick="updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));"');
+              Form::radioButton("what", "excel", false,
+                array(
+                  'id' => 'radio_dump_csv',
+                  'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
+                )
+              );
               Form::label("radio_dump_csv", _("Export to CSV format (data only)"));
             ?>
           </td>
@@ -156,7 +181,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("drop", "drop", "yes");
+              Form::checkBox("drop", "yes");
               Form::label("drop", _("Add 'DROP TABLE'"));
             ?>
           </td>
@@ -165,7 +190,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("show_columns", "show_columns", "yes");
+              Form::checkBox("show_columns", "yes");
               Form::label("show_columns", _("Complete 'INSERTs'"));
             ?>
           </td>
@@ -174,7 +199,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("extended_inserts", "extended_inserts", "yes");
+              Form::checkBox("extended_inserts", "yes");
               Form::label("extended_inserts", _("Extended 'INSERTs'"));
             ?>
           </td>
@@ -183,7 +208,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("use_backquotes", "use_backquotes", "yes");
+              Form::checkBox("use_backquotes", "yes");
               Form::label("use_backquotes", _("Enclose table and field names with backquotes"));
             ?>
           </td>
@@ -192,7 +217,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("add_delete", "add_delete", "yes");
+              Form::checkBox("add_delete", "yes");
               Form::label("add_delete", _("Add 'DELETE * FROM __table__'"));
             ?>
           </td>
@@ -201,7 +226,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("use_dbname", "use_dbname", "yes");
+              Form::checkBox("use_dbname", "yes");
               Form::label("use_dbname", _("Add 'USE __dbname__'"));
             ?>
           </td>
@@ -210,7 +235,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("create_db", "create_db", "yes");
+              Form::checkBox("create_db", "yes");
               Form::label("create_db", _("Add 'CREATE DATABASE __dbname__'"));
             ?>
           </td>
@@ -219,7 +244,7 @@
         <tr>
           <td<?php echo $colspan; ?>>
             <?php
-              Form::checkBox("as_file", "as_file", "sendit");
+              Form::checkBox("as_file", "sendit");
               Form::label("as_file", _("Save as file"));
             ?>
           </td>
@@ -227,7 +252,7 @@
 
         <tr>
           <td<?php echo $colspan; ?> class="center">
-            <?php Form::button("button1", "button1", _("Submit")); ?>
+            <?php Form::button("button1", _("Submit")); ?>
           </td>
         </tr>
       </tbody>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.18 2006/01/23 23:12:15 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.19 2006/03/12 18:36:28 jact Exp $
  */
 
 /**
@@ -118,11 +118,11 @@
   echo '<form method="post" action="../admin/user_pwd_reset.php" onsubmit="return md5Login(this);">' . "\n";
   echo '<div class="center">' . "\n";
 
-  Form::hidden("id_user", "id_user", $postVars["id_user"]);
-  Form::hidden("login", "login", $postVars["login"]);
+  Form::hidden("id_user", $postVars["id_user"]);
+  Form::hidden("login", $postVars["login"]);
 
-  Form::hidden("md5", "md5");
-  Form::hidden("md5_confirm", "md5_confirm");
+  Form::hidden("md5");
+  Form::hidden("md5_confirm");
 
   $thead = array(
     _("Reset User Password") => array('colspan' => 2)
@@ -138,19 +138,25 @@
 
   $row = Form::strLabel("pwd", _("Password") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= Form::strPassword("pwd", "pwd", 20, 20, isset($postVars["pwd"]) ? $postVars["pwd"] : null, isset($pageErrors["pwd"]) ? $pageErrors["pwd"] : null);
+  $row .= Form::strPassword("pwd", 20,
+    isset($postVars["pwd"]) ? $postVars["pwd"] : null,
+    isset($pageErrors["pwd"]) ? array('error' => $pageErrors["pwd"]) : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $row = Form::strLabel("pwd2", _("Re-enter Password") . ":");
   $row .= OPEN_SEPARATOR;
-  $row .= Form::strPassword("pwd2", "pwd2", 20, 20, isset($postVars["pwd2"]) ? $postVars["pwd2"] : null, isset($pageErrors["pwd2"]) ? $pageErrors["pwd2"] : null);
+  $row .= Form::strPassword("pwd2", 20,
+    isset($postVars["pwd2"]) ? $postVars["pwd2"] : null,
+    isset($pageErrors["pwd2"]) ? array('error' => $pageErrors["pwd2"]) : null
+  );
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
-    Form::strButton("button1", "button1", _("Submit"))
-    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", _("Submit"))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
   $options = array(
