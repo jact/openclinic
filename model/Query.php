@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Query.php,v 1.9 2006/01/23 21:39:01 jact Exp $
+ * $Id: Query.php,v 1.10 2006/03/12 17:58:22 jact Exp $
  */
 
 /**
@@ -28,7 +28,7 @@ require_once("../lib/Error.php");
  * Methods:
  *  bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
  *  bool close(void)
- *  bool exec(string $sql)
+ *  bool exec(string $sql, array $params = null)
  *  mixed fetchRow(int $arrayType = MYSQL_ASSOC)
  *  mixed fetchAll(int $arrayType = MYSQL_ASSOC)
  *  int numRows(void)
@@ -56,6 +56,8 @@ class Query
   var $_dbError = ""; // it is not superfluous
   var $_SQL = ""; // it is not superfluous
   var $_table = ""; // to extends classes
+  var $_primaryKey = null; // to extends classes
+  var $_map = null; // to extends classes
 
   /**
    * bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
@@ -127,20 +129,21 @@ class Query
   }
 
   /**
-   * bool exec(string $sql)
+   * bool exec(string $sql, array $params = null)
    *
    * Executes a query
    *
    * @param string $sql SQL of query to execute
+   * @param array $params (optional) SQL parameters to prepare sentence
    * @return boolean returns false, if error occurs
    * @access public
    * @since 0.6
    */
-  function exec($sql)
+  function exec($sql, $params = null)
   {
     $this->_SQL = $sql;
 
-    $result = $this->_conn->exec($sql);
+    $result = $this->_conn->exec($sql, $params);
     if ($result === false)
     {
       $this->_isError = true;
@@ -279,6 +282,11 @@ class Query
     if (empty($this->_table) && empty($table))
     {
       return false;
+    }
+
+    if (empty($table) && is_array($this->_primaryKey))
+    {
+      return $this->_primaryKey;
     }
 
     $sql = "SHOW FIELDS FROM " . (( !empty($table) ) ? trim($table) : $this->_table);
