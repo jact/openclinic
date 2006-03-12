@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: misc_lib.php,v 1.10 2005/08/03 17:39:59 jact Exp $
+ * $Id: misc_lib.php,v 1.11 2006/03/12 18:22:32 jact Exp $
  */
 
 /**
@@ -97,9 +97,9 @@ function unTranslateBrowser($text)
 /**
  * string numberToAlphabet(int $number)
  *
- * Converts an integer in an alphabetical string
+ * Converts an integer in an alphabetical string (1 <= $number <= 702)
  *
- * @author Mike (PHP manual, user contributes notes for chr() function)
+ * @author PHP manual, user contributes notes for chr() function
  * @param int $number integer to convert
  * @return string alphabetical string
  * @access public
@@ -107,12 +107,6 @@ function unTranslateBrowser($text)
  */
 function numberToAlphabet($number)
 {
-  if ($number % 26 >= 1)
-  {
-    $alphaString = chr(($number % 26) + 64) . (isset($alphaString) ? $alphaString : "");
-    $alphaString = numberToAlphabet($number / 26) . $alphaString;
-  }
-
-  return (isset($alphaString) ? $alphaString : "");
+  return ($number-- > 26 ? chr(($number / 26 + 25) % 26 + ord('A')) : '') . chr($number % 26 + ord('A'));
 }
 ?>
