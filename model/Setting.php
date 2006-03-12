@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting.php,v 1.8 2005/07/20 20:24:47 jact Exp $
+ * $Id: Setting.php,v 1.9 2006/03/12 18:11:29 jact Exp $
  */
 
 /**
@@ -34,7 +34,7 @@ require_once("../lib/Check.php");
  *  string getClinicImageUrl(void)
  *  void setClinicImageUrl(string $value)
  *  bool isUseImageSet(void)
- *  void setUseImage(bool $value)
+ *  void setUseImage(mixed $value)
  *  string getClinicHours(void)
  *  void setClinicHours(string $value)
  *  string getClinicAddress(void)
@@ -178,15 +178,19 @@ class Setting
   }
 
   /**
-   * void setUseImage(bool $value)
+   * void setUseImage(mixed $value)
    *
-   * @param bool $value new value to set
+   * @param mixed $value new value to set
    * @return void
    * @access public
    */
   function setUseImage($value)
   {
-    $this->_useImageSet = ($value == true);
+    if (gettype($value) == 'string')
+    {
+      $value = strtolower($value);
+    }
+    $this->_useImageSet = ($value == 1 || $value == 'on' || $value == 'y' || $value == 'yes');
   }
 
   /**
