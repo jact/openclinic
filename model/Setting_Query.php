@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting_Query.php,v 1.7 2006/01/23 21:51:24 jact Exp $
+ * $Id: Setting_Query.php,v 1.8 2006/03/12 18:05:54 jact Exp $
  */
 
 /**
@@ -45,6 +45,22 @@ class Setting_Query extends Query
   function Setting_Query()
   {
     $this->_table = "setting_tbl";
+    $this->_primaryKey = null;
+
+    $this->_map = array(
+      'clinic_name' => array('mutator' => 'setClinicName'),
+      'clinic_image_url' => array('mutator' => 'setClinicImageUrl'),
+      'use_image' => array('mutator' => 'setUseImage'),
+      'clinic_hours' => array('mutator' => 'setClinicHours'),
+      'clinic_address' => array('mutator' => 'setClinicAddress'),
+      'clinic_phone' => array('mutator' => 'setClinicPhone'),
+      'clinic_url' => array('mutator' => 'setClinicUrl'),
+      'session_timeout' => array('mutator' => 'setSessionTimeout'),
+      'items_per_page' => array('mutator' => 'setItemsPerPage'),
+      'version' => array('mutator' => 'setVersion'),
+      'language' => array('mutator' => 'setLanguage'),
+      'id_theme' => array('mutator' => 'setIdTheme')
+    );
   }
 
   /**
@@ -72,27 +88,23 @@ class Setting_Query extends Query
    */
   function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
     }
 
-    $set = new Setting();
-    $set->setClinicName(urldecode($array["clinic_name"]));
-    $set->setClinicImageUrl(urldecode($array["clinic_image_url"]));
-    $set->setUseImage($array["use_image"] == 'Y');
-    $set->setClinicHours(urldecode($array["clinic_hours"]));
-    $set->setClinicAddress(urldecode($array["clinic_address"]));
-    $set->setClinicPhone(urldecode($array["clinic_phone"]));
-    $set->setClinicUrl(urldecode($array["clinic_url"]));
-    $set->setSessionTimeout(intval($array["session_timeout"]));
-    $set->setItemsPerPage(intval($array["items_per_page"]));
-    $set->setVersion(urldecode($array["version"]));
-    $set->setLanguage(urldecode($array["language"]));
-    $set->setIdTheme(intval($array["id_theme"]));
+    $setting = new Setting();
+    foreach ($array as $key => $value)
+    {
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $setting->$setProp(urldecode($value));
+      }
+    }
 
-    return $set;
+    return $setting;
   }
 
   /**
@@ -112,19 +124,32 @@ class Setting_Query extends Query
       return false;
     }
 
-    $sql = "UPDATE " . $this->_table . " SET ";
-    $sql .= "clinic_name='" . urlencode($set->getClinicName()) . "', ";
-    $sql .= "clinic_image_url='" . urlencode($set->getClinicImageUrl()) . "', ";
-    $sql .= "use_image=" . ($set->isUseImageSet() ? "'Y', " : "'N', ");
-    $sql .= "clinic_hours='" . urlencode($set->getClinicHours()) . "', ";
-    $sql .= "clinic_address='" . urlencode($set->getClinicAddress()) . "', ";
-    $sql .= "clinic_phone='" . urlencode($set->getClinicPhone()) . "', ";
-    $sql .= "clinic_url='" . urlencode($set->getClinicUrl()) . "', ";
-    $sql .= "language='" . $set->getLanguage() . "', ";
-    $sql .= "session_timeout=" . $set->getSessionTimeout() . ", ";
-    $sql .= "items_per_page=" . $set->getItemsPerPage() . ";";
+    $sql = "UPDATE " . $this->_table . " SET "
+         . "clinic_name=?, "
+         . "clinic_image_url=?, "
+         . "use_image=?, "
+         . "clinic_hours=?, "
+         . "clinic_address=?, "
+         . "clinic_phone=?, "
+         . "clinic_url=?, "
+         . "language=?, "
+         . "session_timeout=?, "
+         . "items_per_page=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      urlencode($set->getClinicName()),
+      urlencode($set->getClinicImageUrl()),
+      ($set->isUseImageSet() ? "Y" : "N"),
+      urlencode($set->getClinicHours()),
+      urlencode($set->getClinicAddress()),
+      urlencode($set->getClinicPhone()),
+      urlencode($set->getClinicUrl()),
+      $set->getLanguage(),
+      $set->getSessionTimeout(),
+      $set->getItemsPerPage()
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**
