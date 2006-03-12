@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Connection_Query.php,v 1.6 2006/01/23 21:43:15 jact Exp $
+ * $Id: Connection_Query.php,v 1.7 2006/03/12 18:12:15 jact Exp $
  */
 
 /**
@@ -79,7 +79,7 @@ class Connection_Query extends Query
    */
   function fetch()
   {
-    $array = $this->fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQL_NUM);
 
     return $array; // false or array
   }
