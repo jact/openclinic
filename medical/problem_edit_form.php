@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.19 2006/01/24 19:55:14 jact Exp $
+ * $Id: problem_edit_form.php,v 1.20 2006/03/12 18:51:00 jact Exp $
  */
 
 /**
@@ -73,7 +73,7 @@
     {
       $postVars["last_update_date"] = $problem->getLastUpdateDate();
       $postVars["id_member"] = $problem->getIdMember();
-      $postVars["closed_problem"] = ((I18n::localDate($problem->getClosingDate()) != "") ? "checked" : "");
+      $postVars["closed_problem"] = (($problem->getClosingDate() != "") ? "checked" : "");
       $postVars["meeting_place"] = $problem->getMeetingPlace();
       $postVars["wording"] = $problem->getWording();
       $postVars["subjective"] = $problem->getSubjective();
@@ -125,9 +125,9 @@
   echo '<form method="post" action="../medical/problem_edit.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_problem", "id_problem", $postVars["id_problem"]);
-  Form::hidden("last_update_date", "last_update_date", $postVars["last_update_date"]);
-  Form::hidden("id_patient", "id_patient", $postVars["id_patient"]);
+  Form::hidden("id_problem", $postVars["id_problem"]);
+  Form::hidden("last_update_date", $postVars["last_update_date"]);
+  Form::hidden("id_patient", $postVars["id_patient"]);
 
   require_once("../medical/problem_fields.php");
 
