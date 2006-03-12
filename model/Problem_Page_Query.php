@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Problem_Page_Query.php,v 1.3 2006/01/23 21:47:29 jact Exp $
+ * $Id: Problem_Page_Query.php,v 1.4 2006/03/12 18:05:24 jact Exp $
  */
 
 /**
@@ -50,6 +50,25 @@ class Problem_Page_Query extends Page_Query
   function Problem_Page_Query()
   {
     $this->_table = "problem_tbl";
+    $this->_primaryKey = array("id_problem");
+
+    $this->_map = array(
+      'id_problem' => array('mutator' => 'setIdProblem'),
+      'last_update_date' => array('mutator' => 'setLastUpdateDate'),
+      'id_patient' => array('mutator' => 'setIdPatient'),
+      'id_member' => array('mutator' => 'setIdMember'),
+      'collegiate_number' => array('mutator' => 'setCollegiateNumber'),
+      'order_number' => array('mutator' => 'setOrderNumber'),
+      'opening_date' => array('mutator' => 'setOpeningDate'),
+      'closing_date' => array('mutator' => 'setClosingDate'),
+      'meeting_place' => array('mutator' => 'setMeetingPlace'),
+      'wording' => array('mutator' => 'setWording'),
+      'subjective' => array('mutator' => 'setSubjective'),
+      'objective' => array('mutator' => 'setObjective'),
+      'appreciation' => array('mutator' => 'setAppreciation'),
+      'action_plan' => array('mutator' => 'setActionPlan'),
+      'prescription' => array('mutator' => 'setPrescription')
+    );
   }
 
   /**
@@ -162,7 +181,7 @@ class Problem_Page_Query extends Page_Query
     }
 
     // Calculate stats based on row count
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     $this->_rowCount = $array["row_count"];
     if ($limitFrom > 0 && $limitFrom < $this->_rowCount)
     {
@@ -193,7 +212,7 @@ class Problem_Page_Query extends Page_Query
       return false;
     }
 
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     return ($array == false ? 0 : $array["last_id"]);
   }
 
@@ -256,7 +275,8 @@ class Problem_Page_Query extends Page_Query
       return false;
     }
 
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
+
     return ($array == false ? 0 : $array["last"]);
   }
 
@@ -270,7 +290,7 @@ class Problem_Page_Query extends Page_Query
    */
   function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
@@ -281,21 +301,14 @@ class Problem_Page_Query extends Page_Query
     $this->_currentRow = $this->_rowNumber + (($this->_currentPage - 1) * $this->_itemsPerPage);
 
     $problem = new Problem();
-    $problem->setIdProblem(intval($array["id_problem"]));
-    $problem->setLastUpdateDate(urldecode($array["last_update_date"]));
-    $problem->setIdPatient(intval($array["id_patient"]));
-    $problem->setIdMember(intval($array["id_member"]));
-    $problem->setCollegiateNumber(urldecode($array["collegiate_number"]));
-    $problem->setOrderNumber(intval($array["order_number"]));
-    $problem->setOpeningDate(urldecode($array["opening_date"]));
-    $problem->setClosingDate(urldecode($array["closing_date"]));
-    $problem->setMeetingPlace(urldecode($array["meeting_place"]));
-    $problem->setWording(urldecode($array["wording"]));
-    $problem->setSubjective(urldecode($array["subjective"]));
-    $problem->setObjective(urldecode($array["objective"]));
-    $problem->setAppreciation(urldecode($array["appreciation"]));
-    $problem->setActionPlan(urldecode($array["action_plan"]));
-    $problem->setPrescription(urldecode($array["prescription"]));
+    foreach ($array as $key => $value)
+    {
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $problem->$setProp(urldecode($value));
+      }
+    }
 
     return $problem;
   }
@@ -321,21 +334,25 @@ class Problem_Page_Query extends Page_Query
     $sql .= " (id_problem, last_update_date, id_patient, id_member, order_number, ";
     $sql .= "opening_date, closing_date, meeting_place, wording, subjective, objective, ";
     $sql .= "appreciation, action_plan, prescription) VALUES (NULL, ";
-    $sql .= "'" . $problem->getLastUpdateDate() . "', ";
-    $sql .= $problem->getIdPatient() . ", ";
-    $sql .= ($problem->getIdMember() == 0) ? "NULL, " : $problem->getIdMember() . ", ";
-    $sql .= $problem->getOrderNumber() . ", ";
-    $sql .= "'" . $problem->getOpeningDate() . "', ";
-    $sql .= "'" . $problem->getClosingDate() . "', ";
-    $sql .= ($problem->getMeetingPlace() == "") ? "NULL, " : "'" . urlencode($problem->getMeetingPlace()) . "', ";
-    $sql .= "'" . $problem->getWording() . "', ";
-    $sql .= ($problem->getSubjective() == "") ? "NULL, " : "'" . urlencode($problem->getSubjective()) . "', ";
-    $sql .= ($problem->getObjective() == "") ? "NULL, " : "'" . urlencode($problem->getObjective()) . "', ";
-    $sql .= ($problem->getAppreciation() == "") ? "NULL, " : "'" . urlencode($problem->getAppreciation()) . "', ";
-    $sql .= ($problem->getActionPlan() == "") ? "NULL, " : "'" . urlencode($problem->getActionPlan()) . "', ";
-    $sql .= ($problem->getPrescription() == "") ? "NULL);" : "'" . urlencode($problem->getPrescription()) . "');";
+    $sql .= "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    return $this->exec($sql);
+    $params = array(
+      $problem->getLastUpdateDate(),
+      $problem->getIdPatient(),
+      $problem->getIdMember(),
+      $problem->getOrderNumber(),
+      $problem->getOpeningDate(),
+      $problem->getClosingDate(),
+      urlencode($problem->getMeetingPlace()),
+      $problem->getWording(),
+      urlencode($problem->getSubjective()),
+      urlencode($problem->getObjective()),
+      urlencode($problem->getAppreciation()),
+      urlencode($problem->getActionPlan()),
+      urlencode($problem->getPrescription())
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**
@@ -355,20 +372,33 @@ class Problem_Page_Query extends Page_Query
       return false;
     }
 
-    $sql = "UPDATE " . $this->_table . " SET";
-    $sql .= " last_update_date=curdate(),";
-    $sql .= " id_member=" . (($problem->getIdMember() == 0) ? "NULL," : $problem->getIdMember() . ",");
-    $sql .= " closing_date=" . (($problem->getClosingDate(false) == "") ? "NULL," : "'" . urlencode($problem->getClosingDate(false)) . "',");
-    $sql .= " meeting_place=" . (($problem->getMeetingPlace() == "") ? "NULL," : "'" . urlencode($problem->getMeetingPlace()) . "',");
-    $sql .= " wording='" . urlencode($problem->getWording()) . "',";
-    $sql .= " subjective=" . (($problem->getSubjective() == "") ? "NULL," : "'" . urlencode($problem->getSubjective()) . "',");
-    $sql .= " objective=" . (($problem->getObjective() == "") ? "NULL," : "'" . urlencode($problem->getObjective()) . "',");
-    $sql .= " appreciation=" . (($problem->getAppreciation() == "") ? "NULL," : "'" . urlencode($problem->getAppreciation()) . "',");
-    $sql .= " action_plan=" . (($problem->getActionPlan() == "") ? "NULL," : "'" . urlencode($problem->getActionPlan()) . "',");
-    $sql .= " prescription=" . (($problem->getPrescription() == "") ? "NULL" : "'" . urlencode($problem->getPrescription()) . "'");
-    $sql .= " WHERE id_problem=" . $problem->getIdProblem() . ";";
+    $sql = "UPDATE " . $this->_table . " SET "
+         . "last_update_date=CURDATE(), "
+         . "id_member=?, "
+         . "closing_date=?, "
+         . "meeting_place=?, "
+         . "wording=?, "
+         . "subjective=?, "
+         . "objective=?, "
+         . "appreciation=?, "
+         . "action_plan=?, "
+         . "prescription=? "
+         . "WHERE id_problem=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      $problem->getIdMember(),
+      urlencode($problem->getClosingDate(false)),
+      urlencode($problem->getMeetingPlace()),
+      urlencode($problem->getWording()),
+      urlencode($problem->getSubjective()),
+      urlencode($problem->getObjective()),
+      urlencode($problem->getAppreciation()),
+      urlencode($problem->getActionPlan()),
+      urlencode($problem->getPrescription()),
+      $problem->getIdProblem()
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**

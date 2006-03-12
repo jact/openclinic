@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.13 2006/01/23 22:10:52 jact Exp $
+ * $Id: User_Query.php,v 1.14 2006/03/12 18:07:55 jact Exp $
  */
 
 /**
@@ -52,6 +52,18 @@ class User_Query extends Query
   function User_Query()
   {
     $this->_table = "user_tbl";
+    $this->_primaryKey = array("id_user");
+
+    $this->_map = array(
+      'id_user' => array(/*'accessor' => 'getIdUser',*/ 'mutator' => 'setIdUser'),
+      'id_member' => array(/*'accessor' => 'getIdMember',*/ 'mutator' => 'setIdMember'),
+      'login' => array(/*'accessor' => 'getLogin',*/ 'mutator' => 'setLogin'),
+      'pwd' => array(/*'accessor' => 'getPwd',*/ 'mutator' => 'setPwd'),
+      'email' => array(/*'accessor' => 'getEmail',*/ 'mutator' => 'setEmail'),
+      'actived' => array(/*'accessor' => 'isActived',*/ 'mutator' => 'setActived'),
+      'id_theme' => array(/*'accessor' => 'getIdTheme',*/ 'mutator' => 'setIdTheme'),
+      'id_profile' => array(/*'accessor' => 'getIdProfile',*/ 'mutator' => 'setIdProfile')
+    );
   }
 
   /**
@@ -121,7 +133,7 @@ class User_Query extends Query
       return false;
     }
 
-    $array = $this->fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQL_NUM);
 
     return ($array[0] > 0);
   }
@@ -171,23 +183,22 @@ class User_Query extends Query
       return false;
     }
 
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ( !$array )
     {
       return false;
     }
-    $idUser = $array['id_user'];
 
     $sql = "SELECT actived";
     $sql .= " FROM " . $this->_table;
-    $sql .= " WHERE id_user=" . intval($idUser);
+    $sql .= " WHERE id_user=" . intval($array['id_user']);
 
     if ( !$this->exec($sql) )
     {
       return false;
     }
 
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ( !$array )
     {
       return false;
@@ -216,15 +227,14 @@ class User_Query extends Query
       return false;
     }
 
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ( !$array )
     {
       return false;
     }
-    $idUser = $array['id_user'];
 
     $sql = "UPDATE " . $this->_table . " SET actived='N'";
-    $sql .= " WHERE id_user=" . intval($idUser) . ";";
+    $sql .= " WHERE id_user=" . intval($array['id_user']) . ";";
 
     return $this->exec($sql);
   }
@@ -239,44 +249,20 @@ class User_Query extends Query
    */
   function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
     }
 
     $user = new User();
-    if (isset($array["id_user"]))
+    foreach ($array as $key => $value)
     {
-      $user->setIdUser(intval($array["id_user"]));
-    }
-    if (isset($array["id_member"]))
-    {
-      $user->setIdMember(intval($array["id_member"]));
-    }
-    if (isset($array["login"]))
-    {
-      $user->setLogin(urldecode($array["login"]));
-    }
-    if (isset($array["pwd"]))
-    {
-      $user->setPwd(urldecode($array["pwd"]));
-    }
-    if (isset($array["email"]))
-    {
-      $user->setEmail(urldecode($array["email"]));
-    }
-    if (isset($array["actived"]))
-    {
-      $user->setActived($array["actived"] == "Y");
-    }
-    if (isset($array["id_theme"]))
-    {
-      $user->setIdTheme(intval($array["id_theme"]));
-    }
-    if (isset($array["id_profile"]))
-    {
-      $user->setIdProfile(intval($array["id_profile"]));
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $user->$setProp(urldecode($value));
+      }
     }
 
     return $user;
@@ -299,20 +285,19 @@ class User_Query extends Query
       return false;
     }
 
-    /*if ($this->isError())
-    {
-      return false; // or $this->clearErrors(); ???
-    }*/
-
     $sql = "INSERT INTO " . $this->_table;
     $sql .= " (id_user, pwd, email, actived, id_theme, id_profile) VALUES (NULL, ";
-    $sql .= "'" . urlencode($user->getPwd()) . "', "; // md5 from form
-    $sql .= ($user->getEmail() == "") ? "NULL, " : "'" . urlencode($user->getEmail()) . "', ";
-    $sql .= ($user->isActived()) ? "'Y', " : "'N', ";
-    $sql .= $user->getIdTheme() . ", ";
-    $sql .= $user->getIdProfile() . ");";
+    $sql .= "?, ?, ?, ?, ?);";
 
-    if ( !$this->exec($sql) )
+    $params = array(
+      urlencode($user->getPwd()), // md5 from form
+      urlencode($user->getEmail()),
+      ($user->isActived() ? "Y" : "N"),
+      $user->getIdTheme(),
+      $user->getIdProfile()
+    );
+
+    if ( !$this->exec($sql, $params) )
     {
       return false;
     }
@@ -357,14 +342,23 @@ class User_Query extends Query
       return false;
     }
 
-    $sql = "UPDATE " . $this->_table . " SET"; //" last_updated_date = curdate(),";
-    $sql .= " email=" . (($user->getEmail() == "") ? "NULL," : "'" . urlencode($user->getEmail()) . "',");
-    $sql .= " actived=" . ($user->isActived() ? "'Y', " : "'N', ");
-    $sql .= " id_theme=" . $user->getIdTheme() . ", ";
-    $sql .= " id_profile=" . $user->getIdProfile();
-    $sql .= " WHERE id_user=" . $user->getIdUser() . ";";
+    $sql = "UPDATE " . $this->_table . " SET "
+         //. "last_updated_date = CURDATE(), "
+         . "email=?, "
+         . "actived=?, "
+         . "id_theme=?, "
+         . "id_profile=? "
+         . "WHERE id_user=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      urlencode($user->getEmail()),
+      ($user->isActived() ? "Y" : "N"),
+      $user->getIdTheme(),
+      $user->getIdProfile(),
+      $user->getIdUser()
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**

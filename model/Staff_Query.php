@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.12 2006/01/23 21:53:08 jact Exp $
+ * $Id: Staff_Query.php,v 1.13 2006/03/12 18:06:18 jact Exp $
  */
 
 /**
@@ -48,6 +48,21 @@ class Staff_Query extends Query
   function Staff_Query()
   {
     $this->_table = "staff_tbl";
+    $this->_primaryKey = array("id_member");
+
+    $this->_map = array(
+      'id_member' => array('mutator' => 'setIdMember'),
+      'member_type' => array('mutator' => 'setMemberType'),
+      'collegiate_number' => array('mutator' => 'setCollegiateNumber'),
+      'nif' => array('mutator' => 'setNIF'),
+      'first_name' => array('mutator' => 'setFirstName'),
+      'surname1' => array('mutator' => 'setSurname1'),
+      'surname2' => array('mutator' => 'setSurname2'),
+      'address' => array('mutator' => 'setAddress'),
+      'phone_contact' => array('mutator' => 'setPhone'),
+      'login' => array('mutator' => 'setLogin'),
+      'id_user' => array('mutator' => 'setIdUser')
+    );
   }
 
   /**
@@ -112,24 +127,21 @@ class Staff_Query extends Query
    */
   function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
     }
 
     $staff = new Staff();
-    $staff->setIdMember(intval($array["id_member"]));
-    $staff->setMemberType(urldecode($array["member_type"]));
-    $staff->setCollegiateNumber(urldecode($array["collegiate_number"]));
-    $staff->setNIF(urldecode($array["nif"]));
-    $staff->setFirstName(urldecode($array["first_name"]));
-    $staff->setSurname1(urldecode($array["surname1"]));
-    $staff->setSurname2(urldecode($array["surname2"]));
-    $staff->setAddress(urldecode($array["address"]));
-    $staff->setPhone(urldecode($array["phone_contact"]));
-    $staff->setLogin(urldecode($array["login"]));
-    $staff->setIdUser(intval($array["id_user"]));
+    foreach ($array as $key => $value)
+    {
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $staff->$setProp(urldecode($value));
+      }
+    }
 
     return $staff;
   }
@@ -159,7 +171,7 @@ class Staff_Query extends Query
       return false;
     }
 
-    $array = $this->fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQL_NUM);
 
     return ($array[0] > 0);
   }
@@ -192,18 +204,22 @@ class Staff_Query extends Query
     $sql = "INSERT INTO " . $this->_table;
     $sql .= " (id_member, member_type, collegiate_number, nif, first_name, surname1, ";
     $sql .= "surname2, address, phone_contact, id_user, login) VALUES (NULL, ";
-    $sql .= "'" . $staff->getMemberType() . "', ";
-    $sql .= (($staff->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($staff->getCollegiateNumber()) . "', ");
-    $sql .= "'" . urlencode($staff->getNIF()) . "', ";
-    $sql .= "'" . urlencode($staff->getFirstName()) . "', ";
-    $sql .= "'" . urlencode($staff->getSurname1()) . "', ";
-    $sql .= "'" . urlencode($staff->getSurname2()) . "', ";
-    $sql .= (($staff->getAddress() == "") ? "NULL, " : "'" . urlencode($staff->getAddress()) . "', ");
-    $sql .= (($staff->getPhone() == "") ? "NULL, " : "'" . urlencode($staff->getPhone()) . "', ");
-    $sql .= (($staff->getIdUser() == "") ? "NULL, " : "'" . $staff->getIdUser() . "', ");
-    $sql .= (($staff->getLogin() == "") ? "NULL);" : "'" . urlencode($staff->getLogin()) . "');");
+    $sql .= "?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    return $this->exec($sql);
+    $params = array(
+      $staff->getMemberType(),
+      urlencode($staff->getCollegiateNumber()),
+      urlencode($staff->getNIF()),
+      urlencode($staff->getFirstName()),
+      urlencode($staff->getSurname1()),
+      urlencode($staff->getSurname2()),
+      urlencode($staff->getAddress()),
+      urlencode($staff->getPhone()),
+      $staff->getIdUser(),
+      urlencode($staff->getLogin())
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**
@@ -231,18 +247,30 @@ class Staff_Query extends Query
       return false;
     }*/
 
-    $sql = "UPDATE " . $this->_table . " SET ";
-    $sql .= "collegiate_number=" . (($staff->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($staff->getCollegiateNumber()) . "', ");
-    $sql .= "nif='" . urlencode($staff->getNIF()) . "', ";
-    $sql .= "first_name='" . urlencode($staff->getFirstName()) . "', ";
-    $sql .= "surname1='" . urlencode($staff->getSurname1()) . "', ";
-    $sql .= "surname2='" . urlencode($staff->getSurname2()) . "', ";
-    $sql .= "address=" . (($staff->getAddress() == "") ? "NULL, " : "'" . urlencode($staff->getAddress()) . "', ");
-    $sql .= "phone_contact=" . (($staff->getPhone() == "") ? "NULL, " : "'" . urlencode($staff->getPhone()) . "', ");
-    $sql .= "login=" . (($staff->getLogin() == "") ? "NULL" : "'" . urlencode($staff->getLogin()) . "'");
-    $sql .= " WHERE id_member=" . $staff->getIdMember() . ";";
+    $sql = "UPDATE " . $this->_table . " SET "
+         . "collegiate_number=?, "
+         . "nif=?, "
+         . "first_name=?, "
+         . "surname1=?, "
+         . "surname2=?, "
+         . "address=?, "
+         . "phone_contact=?, "
+         . "login=? "
+         . "WHERE id_member=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      urlencode($staff->getCollegiateNumber()),
+      urlencode($staff->getNIF()),
+      urlencode($staff->getFirstName()),
+      urlencode($staff->getSurname1()),
+      urlencode($staff->getSurname2()),
+      urlencode($staff->getAddress()),
+      urlencode($staff->getPhone()),
+      urlencode($staff->getLogin()),
+      $staff->getIdMember()
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test_Query.php,v 1.9 2006/01/23 21:53:40 jact Exp $
+ * $Id: Test_Query.php,v 1.10 2006/03/12 18:06:39 jact Exp $
  */
 
 /**
@@ -47,6 +47,14 @@ class Test_Query extends Query
   function Test_Query()
   {
     $this->_table = "medical_test_tbl";
+    $this->_primaryKey = array("id_test");
+
+    $this->_map = array(
+      'id_test' => array('mutator' => 'setIdTest'),
+      'id_problem' => array('mutator' => 'setIdProblem'),
+      'document_type' => array('mutator' => 'setDocumentType'),
+      'path_filename' => array('mutator' => 'setPathFilename')
+    );
   }
 
   /**
@@ -68,7 +76,7 @@ class Test_Query extends Query
       return false;
     }
 
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     return ($array == false ? 0 : $array["last_id"]);
   }
 
@@ -105,17 +113,21 @@ class Test_Query extends Query
    */
   function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
     }
 
     $test = new Test();
-    $test->setIdTest(intval($array["id_test"]));
-    $test->setIdProblem(intval($array["id_problem"]));
-    $test->setDocumentType(urldecode($array["document_type"]));
-    $test->setPathFilename(urldecode($array["path_filename"]));
+    foreach ($array as $key => $value)
+    {
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $test->$setProp(urldecode($value));
+      }
+    }
 
     return $test;
   }
@@ -138,12 +150,15 @@ class Test_Query extends Query
     }
 
     $sql = "INSERT INTO " . $this->_table;
-    $sql .= " (id_test, id_problem, document_type, path_filename) VALUES (NULL, ";
-    $sql .= $test->getIdProblem() . ", ";
-    $sql .= ($test->getDocumentType() == "") ? "NULL, " : "'" . urlencode($test->getDocumentType()) . "', ";
-    $sql .= "'" . urlencode($test->getPathFilename()) . "');";
+    $sql .= " (id_test, id_problem, document_type, path_filename) VALUES (NULL, ?, ?, ?);";
 
-    return $this->exec($sql);
+    $params = array(
+      $test->getIdProblem(),
+      urlencode($test->getDocumentType()),
+      urlencode($test->getPathFilename())
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**
@@ -163,12 +178,18 @@ class Test_Query extends Query
       return false;
     }
 
-    $sql = "UPDATE " . $this->_table . " SET";
-    $sql .= " document_type=" . (($test->getDocumentType() == "") ? "NULL," : "'" . urlencode($test->getDocumentType()) . "',");
-    $sql .= " path_filename='" . urlencode($test->getPathFilename()) . "'";
-    $sql .= " WHERE id_test=" . $test->getIdTest() . ";";
+    $sql = "UPDATE " . $this->_table . " SET "
+         . "document_type=?, "
+         . "path_filename=? "
+         . "WHERE id_test=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      urlencode($test->getDocumentType()),
+      urlencode($test->getPathFilename()),
+      $test->getIdTest()
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**

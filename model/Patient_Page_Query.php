@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Page_Query.php,v 1.5 2006/01/23 21:46:28 jact Exp $
+ * $Id: Patient_Page_Query.php,v 1.6 2006/03/12 18:04:58 jact Exp $
  */
 
 /**
@@ -49,6 +49,32 @@ class Patient_Page_Query extends Page_Query
   function Patient_Page_Query()
   {
     $this->_table = "patient_tbl";
+    $this->_primaryKey = array("id_patient");
+
+    $this->_map = array(
+      'id_patient' => array('mutator' => 'setIdPatient'),
+      //'last_update_date' => array('mutator' => 'setLastUpdateDate'),
+      'id_member' => array('mutator' => 'setIdMember'),
+      'collegiate_number' => array('mutator' => 'setCollegiateNumber'),
+      'nif' => array('mutator' => 'setNIF'),
+      'first_name' => array('mutator' => 'setFirstName'),
+      'surname1' => array('mutator' => 'setSurname1'),
+      'surname2' => array('mutator' => 'setSurname2'),
+      'address' => array('mutator' => 'setAddress'),
+      'phone_contact' => array('mutator' => 'setPhone'),
+      'sex' => array('mutator' => 'setSex'),
+      'race' => array('mutator' => 'setRace'),
+      'birth_date' => array('mutator' => 'setBirthDate'),
+      'age' => array('mutator' => 'setAge'),
+      'birth_place' => array('mutator' => 'setBirthPlace'),
+      'decease_date' => array('mutator' => 'setDeceaseDate'),
+      'nts' => array('mutator' => 'setNTS'),
+      'nss' => array('mutator' => 'setNSS'),
+      'family_situation' => array('mutator' => 'setFamilySituation'),
+      'labour_situation' => array('mutator' => 'setLabourSituation'),
+      'education' => array('mutator' => 'setEducation'),
+      'insurance_company' => array('mutator' => 'setInsuranceCompany')
+    );
   }
 
   /**
@@ -180,7 +206,7 @@ class Patient_Page_Query extends Page_Query
     }
 
     // Calculate stats based on row count
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     $this->_rowCount = $array["row_count"];
     if ($limitFrom > 0 && $limitFrom < $this->_rowCount)
     {
@@ -210,7 +236,8 @@ class Patient_Page_Query extends Page_Query
       return false;
     }
 
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
+
     return ($array == false ? 0 : $array["last_id"]);
   }
 
@@ -243,7 +270,7 @@ class Patient_Page_Query extends Page_Query
    */
   function fetch()
   {
-    $array = $this->fetchRow();
+    $array = parent::fetchRow();
     if ($array == false)
     {
       return false;
@@ -254,28 +281,14 @@ class Patient_Page_Query extends Page_Query
     $this->_currentRow = $this->_rowNumber + (($this->_currentPage - 1) * $this->_itemsPerPage);
 
     $patient = new Patient();
-    $patient->setIdPatient(intval($array["id_patient"]));
-    //$patient->setLastUpdateDate(urldecode($array["last_update_date"]));
-    $patient->setIdMember(intval($array["id_member"]));
-    $patient->setCollegiateNumber(urldecode($array["collegiate_number"]));
-    $patient->setNIF(urldecode($array["nif"]));
-    $patient->setFirstName(urldecode($array["first_name"]));
-    $patient->setSurname1(urldecode($array["surname1"]));
-    $patient->setSurname2(urldecode($array["surname2"]));
-    $patient->setAddress(urldecode($array["address"]));
-    $patient->setPhone(urldecode($array["phone_contact"]));
-    $patient->setSex(urlencode($array["sex"]));
-    $patient->setRace(urldecode($array["race"]));
-    $patient->setBirthDate(urldecode($array["birth_date"]));
-    $patient->setAge(intval($array["age"]));
-    $patient->setBirthPlace(urldecode($array["birth_place"]));
-    $patient->setDeceaseDate(urldecode($array["decease_date"]));
-    $patient->setNTS(urldecode($array["nts"]));
-    $patient->setNSS(urldecode($array["nss"]));
-    $patient->setFamilySituation(urldecode($array["family_situation"]));
-    $patient->setLabourSituation(urldecode($array["labour_situation"]));
-    $patient->setEducation(urldecode($array["education"]));
-    $patient->setInsuranceCompany(urldecode($array["insurance_company"]));
+    foreach ($array as $key => $value)
+    {
+      $setProp = $this->_map[$key]['mutator'];
+      if ($setProp && $value)
+      {
+        $patient->$setProp(urldecode($value));
+      }
+    }
 
     return $patient;
   }
@@ -309,7 +322,7 @@ class Patient_Page_Query extends Page_Query
       return false;
     }
 
-    $array = $this->fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQL_NUM);
 
     return ($array[0] > 0);
   }
@@ -344,28 +357,31 @@ class Patient_Page_Query extends Page_Query
     $sql .= " (id_patient, nif, first_name, surname1, surname2, address, ";
     $sql .= "phone_contact, sex, race, birth_date, birth_place, decease_date, nts, nss, ";
     $sql .= "family_situation, labour_situation, education, insurance_company, ";
-    $sql .= "id_member) VALUES (NULL, ";
-    //$sql .= "'" . $patient->getLastUpdateDate() . "', ";
-    $sql .= ($patient->getNIF() == "") ? "NULL, " : "'" . urlencode($patient->getNIF()) . "', ";
-    $sql .= "'" . urlencode($patient->getFirstName()) . "', ";
-    $sql .= "'" . urlencode($patient->getSurname1()) . "', ";
-    $sql .= "'" . urlencode($patient->getSurname2()) . "', ";
-    $sql .= ($patient->getAddress() =="") ? "NULL, " : "'" . urlencode($patient->getAddress()) . "', ";
-    $sql .= ($patient->getPhone() == "") ? "NULL, " : "'" . urlencode($patient->getPhone()) . "', ";
-    $sql .= "'" . $patient->getSex() . "', ";
-    $sql .= ($patient->getRace() == "") ? "NULL, " : "'" . urlencode($patient->getRace()) . "', ";
-    $sql .= ($patient->getBirthDate() == "") ? "NULL, " : "'" . $patient->getBirthDate() . "', ";
-    $sql .= ($patient->getBirthPlace() == "") ? "NULL, " : "'" . urlencode($patient->getBirthPlace()) . "', ";
-    $sql .= ($patient->getDeceaseDate() == "") ? "NULL, " : "'" . $patient->getDeceaseDate() . "', ";
-    $sql .= ($patient->getNTS() == "") ? "NULL, " : "'" . urlencode($patient->getNTS()) . "', ";
-    $sql .= ($patient->getNSS() == "") ? "NULL, " : "'" . urlencode($patient->getNSS()) . "', ";
-    $sql .= ($patient->getFamilySituation() == "") ? "NULL, " : "'" . urlencode($patient->getFamilySituation()) . "', ";
-    $sql .= ($patient->getLabourSituation() == "") ? "NULL, " : "'" . urlencode($patient->getLabourSituation()) . "', ";
-    $sql .= ($patient->getEducation() == "") ? "NULL, " : "'" . urlencode($patient->getEducation()) . "', ";
-    $sql .= ($patient->getInsuranceCompany() == "") ? "NULL, " : "'" . urlencode($patient->getInsuranceCompany()) . "', ";
-    $sql .= ($patient->getIdMember() == 0) ? "NULL);" : $patient->getIdMember() . ");";
+    $sql .= "id_member) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
-    if ( !$this->exec($sql) )
+    $params = array(
+      //$patient->getLastUpdateDate(),
+      urlencode($patient->getNIF()),
+      urlencode($patient->getFirstName()),
+      urlencode($patient->getSurname1()),
+      urlencode($patient->getSurname2()),
+      urlencode($patient->getAddress()),
+      urlencode($patient->getPhone()),
+      $patient->getSex(),
+      urlencode($patient->getRace()),
+      $patient->getBirthDate(),
+      urlencode($patient->getBirthPlace()),
+      $patient->getDeceaseDate(),
+      urlencode($patient->getNTS()),
+      urlencode($patient->getNSS()),
+      urlencode($patient->getFamilySituation()),
+      urlencode($patient->getLabourSituation()),
+      urlencode($patient->getEducation()),
+      urlencode($patient->getInsuranceCompany()),
+      $patient->getIdMember()
+    );
+
+    if ( !$this->exec($sql, $params) )
     {
       return false;
     }
@@ -402,29 +418,51 @@ class Patient_Page_Query extends Page_Query
       return false;
     }*/
 
-    $sql = "UPDATE " . $this->_table . " SET ";
-    //$sql .= "last_update_date=curdate(), ";
-    $sql .= "nif=" . (($patient->getNIF() == "") ? "NULL, " : "'" . urlencode($patient->getNIF()) . "', ");
-    $sql .= "first_name='" . urlencode($patient->getFirstName()) . "', ";
-    $sql .= "surname1='" . urlencode($patient->getSurname1()) . "', ";
-    $sql .= "surname2='" . urlencode($patient->getSurname2()) . "', ";
-    $sql .= "address=" . (($patient->getAddress() =="") ? "NULL, " : "'" . urlencode($patient->getAddress()) . "', ");
-    $sql .= "phone_contact=" . (($patient->getPhone() == "") ? "NULL, " : "'" . urlencode($patient->getPhone()) . "', ");
-    $sql .= "sex='" . $patient->getSex() . "', ";
-    $sql .= "race=" . (($patient->getRace() == "") ? "NULL, " : "'" . urlencode($patient->getRace()) . "', ");
-    $sql .= "birth_date=" . (($patient->getBirthDate() == "") ? "NULL, " : "'" . $patient->getBirthDate() . "', ");
-    $sql .= "birth_place=" . (($patient->getBirthPlace() == "") ? "NULL, " : "'" . urlencode($patient->getBirthPlace()) . "', ");
-    $sql .= "decease_date=" . (($patient->getDeceaseDate() == "") ? "NULL, " : "'" . $patient->getDeceaseDate() . "', ");
-    $sql .= "nts=" . (($patient->getNTS() == "") ? "NULL, " : "'" . urlencode($patient->getNTS()) . "', ");
-    $sql .= "nss=" . (($patient->getNSS() == "") ? "NULL, " : "'" . urlencode($patient->getNSS()) . "', ");
-    $sql .= "family_situation=" . (($patient->getFamilySituation() == "") ? "NULL, " : "'" . urlencode($patient->getFamilySituation()) . "', ");
-    $sql .= "labour_situation=" . (($patient->getLabourSituation() == "") ? "NULL, " : "'" . urlencode($patient->getLabourSituation()) . "', ");
-    $sql .= "education=" . (($patient->getEducation() == "") ? "NULL, " : "'" . urlencode($patient->getEducation()) . "', ");
-    $sql .= "insurance_company=" . (($patient->getInsuranceCompany() == "") ? "NULL, " : "'" . urlencode($patient->getInsuranceCompany()) . "', ");
-    $sql .= "id_member=" . (($patient->getIdMember() == 0) ? "NULL " : $patient->getIdMember() . " ");
-    $sql .= "WHERE id_patient=" . $patient->getIdPatient();
+    $sql = "UPDATE " . $this->_table . " SET "
+         //. "last_update_date=CURDATE(), "
+         . "nif=?, "
+         . "first_name=?, "
+         . "surname1=?, "
+         . "surname2=?, "
+         . "address=?, "
+         . "phone_contact=?, "
+         . "sex=?, "
+         . "race=?, "
+         . "birth_date=?, "
+         . "birth_place=?, "
+         . "decease_date=?, "
+         . "nts=?, "
+         . "nss=?, "
+         . "family_situation=?, "
+         . "labour_situation=?, "
+         . "education=?, "
+         . "insurance_company=?, "
+         . "id_member=? "
+         . "WHERE id_patient=?;";
 
-    return $this->exec($sql);
+    $params = array(
+      urlencode($patient->getNIF()),
+      urlencode($patient->getFirstName()),
+      urlencode($patient->getSurname1()),
+      urlencode($patient->getSurname2()),
+      urlencode($patient->getAddress()),
+      urlencode($patient->getPhone()),
+      $patient->getSex(),
+      urlencode($patient->getRace()),
+      $patient->getBirthDate(),
+      urlencode($patient->getBirthPlace()),
+      $patient->getDeceaseDate(),
+      urlencode($patient->getNTS()),
+      urlencode($patient->getNSS()),
+      urlencode($patient->getFamilySituation()),
+      urlencode($patient->getLabourSituation()),
+      urlencode($patient->getEducation()),
+      urlencode($patient->getInsuranceCompany()),
+      $patient->getIdMember(),
+      $patient->getIdPatient()
+    );
+
+    return $this->exec($sql, $params);
   }
 
   /**
