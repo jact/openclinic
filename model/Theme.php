@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme.php,v 1.9 2005/07/20 20:24:47 jact Exp $
+ * $Id: Theme.php,v 1.10 2006/03/12 18:10:36 jact Exp $
  */
 
 /**
@@ -18,6 +18,7 @@
 
 require_once("../lib/Check.php");
 
+// @todo should be a class constant
 $reservedCSSFiles = array(
   "style.css",
   "wizard.css",
@@ -36,11 +37,11 @@ $reservedCSSFiles = array(
  *
  * Methods:
  *  bool validateData(void)
- *  int getIdTheme(void)
- *  void setIdTheme(int $value)
- *  string getThemeName(void)
- *  string getThemeNameError(void)
- *  void setThemeName(string $value)
+ *  int getId(void)
+ *  void setId(int $value)
+ *  string getName(void)
+ *  string getNameError(void)
+ *  void setName(string $value)
  *  string getCSSFile(void)
  *  string getCSSFileError(void)
  *  void setCSSFile(string $value)
@@ -52,9 +53,9 @@ $reservedCSSFiles = array(
  */
 class Theme
 {
-  var $_idTheme = 0;
-  var $_themeName = "";
-  var $_themeNameError = "";
+  var $_id = 0;
+  var $_name = "";
+  var $_nameError = "";
   var $_cssFile = "";
   var $_cssFileError = "";
   var $_cssRules = "";
@@ -82,10 +83,10 @@ class Theme
 
     $valid = true;
 
-    if ($this->_themeName == "")
+    if ($this->_name == "")
     {
       $valid = false;
-      $this->_themeNameError = _("This is a required field.");
+      $this->_nameError = _("This is a required field.");
     }
 
     if ($this->_cssFile == "")
@@ -109,60 +110,60 @@ class Theme
   }
 
   /**
-   * int getIdTheme(void)
+   * int getId(void)
    *
    * @return int id theme
    * @access public
    */
-  function getIdTheme()
+  function getId()
   {
-    return intval($this->_idTheme);
+    return intval($this->_id);
   }
 
   /**
-   * void setIdTheme(int $value)
+   * void setId(int $value)
    *
    * @param int $value id theme
    * @return void
    * @access public
    */
-  function setIdTheme($value)
+  function setId($value)
   {
-    $this->_idTheme = intval($value);
+    $this->_id = intval($value);
   }
 
   /**
-   * string getThemeName(void)
+   * string getName(void)
    *
    * @return string theme name
    * @access public
    */
-  function getThemeName()
+  function getName()
   {
-    return stripslashes(strtr($this->_themeName, $this->_trans));
+    return stripslashes(strtr($this->_name, $this->_trans));
   }
 
   /**
-   * string getThemeNameError(void)
+   * string getNameError(void)
    *
    * @return string theme name error text
    * @access public
    */
-  function getThemeNameError()
+  function getNameError()
   {
-    return $this->_themeNameError;
+    return $this->_nameError;
   }
 
   /**
-   * void setThemeName(string $value)
+   * void setName(string $value)
    *
    * @param string $value theme name
    * @return void
    * @access public
    */
-  function setThemeName($value)
+  function setName($value)
   {
-    $this->_themeName = Check::safeText($value);
+    $this->_name = Check::safeText($value);
   }
 
   /**
