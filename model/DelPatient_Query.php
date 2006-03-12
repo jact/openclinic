@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelPatient_Query.php,v 1.5 2006/01/23 21:43:44 jact Exp $
+ * $Id: DelPatient_Query.php,v 1.6 2006/03/12 18:00:21 jact Exp $
  */
 
 /**
@@ -41,6 +41,7 @@ class DelPatient_Query extends Query
   function DelPatient_Query()
   {
     $this->_table = "deleted_patient_tbl";
+    $this->_primaryKey = null;
   }
 
   /**
@@ -67,49 +68,51 @@ class DelPatient_Query extends Query
     $sql .= "accident_surgical_operation, medicinal_intolerance, mental_illness, ";
     $sql .= "parents_status_health, brothers_status_health, spouse_childs_status_health, ";
     $sql .= "family_illness, create_date, id_user, login) VALUES (";
-    $sql .= $patient->getIdPatient() . ", ";
-    $sql .= ($patient->getNIF() == "") ? "NULL, " : "'" . urlencode($patient->getNIF()) . "', ";
-    $sql .= "'" . urlencode($patient->getFirstName()) . "', ";
-    $sql .= "'" . urlencode($patient->getSurname1()) . "', ";
-    $sql .= "'" . urlencode($patient->getSurname2()) . "', ";
-    $sql .= ($patient->getAddress() =="") ? "NULL, " : "'" . urlencode($patient->getAddress()) . "', ";
-    $sql .= ($patient->getPhone() == "") ? "NULL, " : "'" . urlencode($patient->getPhone()) . "', ";
-    $sql .= "'" . $patient->getSex() . "', ";
-    $sql .= ($patient->getRace() == "") ? "NULL, " : "'" . urlencode($patient->getRace()) . "', ";
-    $sql .= "'" . $patient->getBirthDate() . "', ";
-    $sql .= ($patient->getBirthPlace() == "") ? "NULL, " : "'" . urlencode($patient->getBirthPlace()) . "', ";
-    $sql .= "'" . $patient->getDeceaseDate() . "', ";
-    $sql .= ($patient->getNTS() == "") ? "NULL, " : "'" . urlencode($patient->getNTS()) . "', ";
-    $sql .= ($patient->getNSS() == "") ? "NULL, " : "'" . urlencode($patient->getNSS()) . "', ";
-    $sql .= ($patient->getFamilySituation() == "") ? "NULL, " : "'" . urlencode($patient->getFamilySituation()) . "', ";
-    $sql .= ($patient->getLabourSituation() == "") ? "NULL, " : "'" . urlencode($patient->getLabourSituation()) . "', ";
-    $sql .= ($patient->getEducation() == "") ? "NULL, " : "'" . urlencode($patient->getEducation()) . "', ";
-    $sql .= ($patient->getInsuranceCompany() == "") ? "NULL, " : "'" . urlencode($patient->getInsuranceCompany()) . "', ";
-    $sql .= ($patient->getIdMember() == 0) ? "NULL, " : $patient->getIdMember() . ", ";
-    $sql .= ($patient->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($patient->getCollegiateNumber()) . "', ";
+    $sql .= "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ";
+    $sql .= "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ";
+    $sql .= "?, ?, ?, ?, NOW(), ?, ?);";
 
-    $sql .= (($historyP->getBirthGrowth() == "") ? "NULL, " : "'" . urlencode($historyP->getBirthGrowth()) . "', ");
-    $sql .= (($historyP->getGrowthSexuality() == "") ? "NULL, " : "'" . urlencode($historyP->getGrowthSexuality()) . "', ");
-    $sql .= (($historyP->getFeed() == "") ? "NULL, " : "'" . urlencode($historyP->getFeed()) . "', ");
-    $sql .= (($historyP->getHabits() == "") ? "NULL, " : "'" . urlencode($historyP->getHabits()) . "', ");
-    $sql .= (($historyP->getPeristalticConditions() == "") ? "NULL, " : "'" . urlencode($historyP->getPeristalticConditions()) . "', ");
-    $sql .= (($historyP->getPsychological() == "") ? "NULL, " : "'" . urlencode($historyP->getPsychological()) . "', ");
-    $sql .= (($historyP->getChildrenComplaint() == "") ? "NULL, " : "'" . urlencode($historyP->getChildrenComplaint()) . "', ");
-    $sql .= (($historyP->getVenerealDisease() == "") ? "NULL, " : "'" . urlencode($historyP->getVenerealDisease()) . "', ");
-    $sql .= (($historyP->getAccidentSurgicalOperation() == "") ? "NULL, " : "'" . urlencode($historyP->getAccidentSurgicalOperation()) . "', ");
-    $sql .= (($historyP->getMedicinalIntolerance() == "") ? "NULL, " : "'" . urlencode($historyP->getMedicinalIntolerance()) . "', ");
-    $sql .= (($historyP->getMentalIllness() == "") ? "NULL, " : "'" . urlencode($historyP->getMentalIllness()) . "', ");
+    $params = array(
+      $patient->getIdPatient(),
+      urlencode($patient->getNIF()),
+      urlencode($patient->getFirstName()),
+      urlencode($patient->getSurname1()),
+      urlencode($patient->getSurname2()),
+      urlencode($patient->getAddress()),
+      urlencode($patient->getPhone()),
+      $patient->getSex(),
+      urlencode($patient->getRace()),
+      $patient->getBirthDate(),
+      urlencode($patient->getBirthPlace()),
+      $patient->getDeceaseDate(),
+      urlencode($patient->getNTS()),
+      urlencode($patient->getNSS()),
+      urlencode($patient->getFamilySituation()),
+      urlencode($patient->getLabourSituation()),
+      urlencode($patient->getEducation()),
+      urlencode($patient->getInsuranceCompany()),
+      $patient->getIdMember(),
+      urlencode($patient->getCollegiateNumber()),
+      urlencode($historyP->getBirthGrowth()),
+      urlencode($historyP->getGrowthSexuality()),
+      urlencode($historyP->getFeed()),
+      urlencode($historyP->getHabits()),
+      urlencode($historyP->getPeristalticConditions()),
+      urlencode($historyP->getPsychological()),
+      urlencode($historyP->getChildrenComplaint()),
+      urlencode($historyP->getVenerealDisease()),
+      urlencode($historyP->getAccidentSurgicalOperation()),
+      urlencode($historyP->getMedicinalIntolerance()),
+      urlencode($historyP->getMentalIllness()),
+      urlencode($historyF->getParentsStatusHealth()),
+      urlencode($historyF->getBrothersStatusHealth()),
+      urlencode($historyF->getSpouseChildsStatusHealth()),
+      urlencode($historyF->getFamilyIllness()),
+      intval($idUser),
+      urlencode($login)
+    );
 
-    $sql .= (($historyF->getParentsStatusHealth() == "") ? "NULL, " : "'" . urlencode($historyF->getParentsStatusHealth()) . "', ");
-    $sql .= (($historyF->getBrothersStatusHealth() == "") ? "NULL, " : "'" . urlencode($historyF->getBrothersStatusHealth()) . "', ");
-    $sql .= (($historyF->getSpouseChildsStatusHealth() == "") ? "NULL, " : "'" . urlencode($historyF->getSpouseChildsStatusHealth()) . "', ");
-    $sql .= (($historyF->getFamilyIllness() == "") ? "NULL, " : "'" . urlencode($historyF->getFamilyIllness()) . "', ");
-
-    $sql .= "NOW(), ";
-    $sql .= intval($idUser) . ", ";
-    $sql .= "'" . urlencode($login) . "');";
-
-    return $this->exec($sql);
+    return $this->exec($sql, $params);
   }
 } // end class
 ?>

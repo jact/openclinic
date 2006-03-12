@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelProblem_Query.php,v 1.6 2006/01/23 21:44:03 jact Exp $
+ * $Id: DelProblem_Query.php,v 1.7 2006/03/12 18:00:42 jact Exp $
  */
 
 /**
@@ -41,6 +41,7 @@ class DelProblem_Query extends Query
   function DelProblem_Query()
   {
     $this->_table = "deleted_problem_tbl";
+    $this->_primaryKey = null;
   }
 
   /**
@@ -60,27 +61,29 @@ class DelProblem_Query extends Query
     $sql .= " (id_problem, last_update_date, id_patient, id_member, collegiate_number, order_number, ";
     $sql .= "opening_date, closing_date, meeting_place, wording, subjective, objective, ";
     $sql .= "appreciation, action_plan, prescription, create_date, id_user, login) VALUES (";
-    $sql .= $problem->getIdProblem() . ", ";
-    $sql .= "'" . $problem->getLastUpdateDate() . "', ";
-    $sql .= $problem->getIdPatient() . ", ";
-    $sql .= ($problem->getIdMember() == 0) ? "NULL, " : $problem->getIdMember() . ", ";
-    $sql .= ($problem->getCollegiateNumber() == "") ? "NULL, " : "'" . urlencode($problem->getCollegiateNumber()) . "', ";
-    $sql .= $problem->getOrderNumber() . ", ";
-    $sql .= "'" . $problem->getOpeningDate() . "', ";
-    $sql .= "'" . $problem->getClosingDate() . "', ";
-    $sql .= ($problem->getMeetingPlace() == "") ? "NULL, " : "'" . urlencode($problem->getMeetingPlace()) . "', ";
-    $sql .= "'" . $problem->getWording() . "', ";
-    $sql .= ($problem->getSubjective() == "") ? "NULL, " : "'" . urlencode($problem->getSubjective()) . "', ";
-    $sql .= ($problem->getObjective() == "") ? "NULL, " : "'" . urlencode($problem->getObjective()) . "', ";
-    $sql .= ($problem->getAppreciation() == "") ? "NULL, " : "'" . urlencode($problem->getAppreciation()) . "', ";
-    $sql .= ($problem->getActionPlan() == "") ? "NULL, " : "'" . urlencode($problem->getActionPlan()) . "', ";
-    $sql .= ($problem->getPrescription() == "") ? "NULL, " : "'" . urlencode($problem->getPrescription()) . "', ";
+    $sql .= "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?);";
 
-    $sql .= "NOW(), ";
-    $sql .= intval($idUser) . ", ";
-    $sql .= "'" . urlencode($login) . "');";
+    $params = array(
+      $problem->getIdProblem(),
+      $problem->getLastUpdateDate(),
+      $problem->getIdPatient(),
+      $problem->getIdMember(),
+      urlencode($problem->getCollegiateNumber()),
+      $problem->getOrderNumber(),
+      $problem->getOpeningDate(),
+      $problem->getClosingDate(),
+      urlencode($problem->getMeetingPlace()),
+      $problem->getWording(),
+      urlencode($problem->getSubjective()),
+      urlencode($problem->getObjective()),
+      urlencode($problem->getAppreciation()),
+      urlencode($problem->getActionPlan()),
+      urlencode($problem->getPrescription()),
+      intval($idUser),
+      urlencode($login)
+    );
 
-    return $this->exec($sql);
+    return $this->exec($sql, $params);
   }
 } // end class
 ?>
