@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.13 2006/01/24 20:22:20 jact Exp $
+ * $Id: theme_preload_css.php,v 1.14 2006/03/12 18:37:15 jact Exp $
  */
 
 /**
@@ -88,14 +88,14 @@
   $row = Form::strLabel("css_filename", _("Path Filename") . ":", true);
   $row .= OPEN_SEPARATOR;
 
-  //$row .= Form::strHidden("MAX_FILE_SIZE", "MAX_FILE_SIZE", "10000");
-  $row .= Form::strFile("css_filename", "css_filename", "", 50/*, "", $pageErrors["css_filename"]*/);
+  //$row .= Form::strHidden("MAX_FILE_SIZE", "10000");
+  $row .= Form::strFile("css_filename", "", 50/*, array('error' => $pageErrors["css_filename"])*/);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
   $tfoot = array(
-    Form::strButton("button1", "button1", _("Submit"))
-    . Form::strButton("return", "return", _("Return"), "button", 'onclick="parent.location=\'' . $returnLocation . '\'"')
+    Form::strButton("button1", _("Submit"))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
   $options = array(

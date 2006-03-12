@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.20 2006/01/23 23:05:08 jact Exp $
+ * $Id: theme_list.php,v 1.21 2006/03/12 18:37:15 jact Exp $
  */
 
 /**
@@ -88,7 +88,7 @@
 
   $tbody = array($content);
 
-  $tfoot = array(Form::strButton("button1", "button1", _("Update")));
+  $tfoot = array(Form::strButton("button1", _("Update")));
 
   /**
    * Theme use form
@@ -146,14 +146,14 @@ function previewTheme(key)
     }
     else
     {
-      $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getIdTheme() . '&amp;reset=Y">' . _("edit") . '</a>';
+      $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getId() . '&amp;reset=Y">' . _("edit") . '</a>';
     }
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="../admin/theme_new_form.php?key=' . $theme->getIdTheme() . '&amp;reset=Y">' . _("copy") . '</a>';
+    $row .= '<a href="../admin/theme_new_form.php?key=' . $theme->getId() . '&amp;reset=Y">' . _("copy") . '</a>';
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="../admin/theme_preview.php?key=' . $theme->getIdTheme() . '" onclick="return previewTheme(' . $theme->getIdTheme() . ')">' . _("preview") . '</a>';
+    $row .= '<a href="../admin/theme_preview.php?key=' . $theme->getId() . '" onclick="return previewTheme(' . $theme->getId() . ')">' . _("preview") . '</a>';
     $row .= OPEN_SEPARATOR;
 
     $row .= '<a href="' . $validateLink . $theme->getCSSFile() . '">' . _("validate") . '</a>';
@@ -163,20 +163,20 @@ function previewTheme(key)
     {
       $row .= "** " . _("del");
     }
-    elseif ($theme->getIdTheme() == OPEN_THEME_ID || $theme->getCount() > 0)
+    elseif ($theme->getId() == OPEN_THEME_ID || $theme->getCount() > 0)
     {
       $row .= "* " . _("del");
     }
     else
     {
-      $row .= '<a href="../admin/theme_del_confirm.php?key=' . $theme->getIdTheme() . '&amp;name=' . urlencode($theme->getThemeName()) . '&amp;file=' . urlencode($theme->getCSSFile()) . '">' . _("del") . '</a>';
+      $row .= '<a href="../admin/theme_del_confirm.php?key=' . $theme->getId() . '&amp;name=' . urlencode($theme->getName()) . '&amp;file=' . urlencode($theme->getCSSFile()) . '">' . _("del") . '</a>';
     } // end if
     $row .= OPEN_SEPARATOR;
 
-    $row .= $theme->getThemeName();
+    $row .= $theme->getName();
     $row .= OPEN_SEPARATOR;
 
-    if ($theme->getIdTheme() == OPEN_THEME_ID)
+    if ($theme->getId() == OPEN_THEME_ID)
     {
       $row .= _("in use") . " (" . _("by application") . ") ";
     }

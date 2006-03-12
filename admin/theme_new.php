@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new.php,v 1.8 2006/01/23 23:05:22 jact Exp $
+ * $Id: theme_new.php,v 1.9 2006/03/12 18:37:15 jact Exp $
  */
 
 /**
@@ -69,7 +69,7 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($theme->getThemeName());
+  $info = urlencode($theme->getName());
   $returnLocation .= ((isset($fileUsed) && $fileUsed) ? "?file" : "?added") . "=Y&info=" . $info;
   unset($theme);
   header("Location: " . $returnLocation);

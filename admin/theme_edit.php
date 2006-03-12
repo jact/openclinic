@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit.php,v 1.8 2006/01/23 23:03:06 jact Exp $
+ * $Id: theme_edit.php,v 1.9 2006/03/12 18:37:15 jact Exp $
  */
 
 /**
@@ -41,8 +41,8 @@
   $errorLocation = "../admin/theme_edit_form.php?key=" . intval($_POST["id_theme"]); // controlling var
   $theme = new Theme();
 
-  $theme->setIdTheme($_POST["id_theme"]);
-  $_POST["id_theme"] = $theme->getIdTheme();
+  $theme->setId($_POST["id_theme"]);
+  $_POST["id_theme"] = $theme->getId();
 
   require_once("../admin/theme_validate_post.php");
 
@@ -52,7 +52,7 @@
   $themeQ = new Theme_Query();
   $themeQ->connect();
 
-  if ($themeQ->existCSSFile($theme->getCSSFile(), $theme->getIdTheme()))
+  if ($themeQ->existCSSFile($theme->getCSSFile(), $theme->getId()))
   {
     $fileUsed = true;
   }
@@ -72,7 +72,7 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($theme->getThemeName());
+  $info = urlencode($theme->getName());
   $returnLocation .= ((isset($fileUsed) && $fileUsed) ? "?file" : "?updated") . "=Y&info=" . $info;
   unset($theme);
   header("Location: " . $returnLocation);
