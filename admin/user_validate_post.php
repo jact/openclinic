@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_validate_post.php,v 1.7 2005/08/03 17:39:28 jact Exp $
+ * $Id: user_validate_post.php,v 1.8 2006/03/15 20:27:08 jact Exp $
  */
 
 /**
@@ -65,12 +65,12 @@
   }
   if ( !($validData && $validPwd) )
   {
-    $pageErrors["login"] = $user->getLoginError();
-    $pageErrors["pwd"] = $user->getPwdError();
-    $pageErrors["email"] = $user->getEmailError();
+    $formError["login"] = $user->getLoginError();
+    $formError["pwd"] = $user->getPwdError();
+    $formError["email"] = $user->getEmailError();
 
-    $_SESSION["postVars"] = $_POST;
-    $_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = $_POST;
+    $_SESSION["formError"] = $formError;
 
     header("Location: " . $errorLocation);
     exit();

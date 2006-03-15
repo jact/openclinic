@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.5 2005/08/15 16:31:32 jact Exp $
+ * $Id: index.php,v 1.6 2006/03/15 20:12:41 jact Exp $
  */
 
 /**
@@ -39,7 +39,7 @@
 <p><?php echo _("Use the following functions located in the left hand navigation area to manage your clinic's staff and administrative records."); ?></p>
 
 <h2 class="icon configIcon">
-  <a href="../admin/setting_edit_form.php?reset=Y"><?php echo _("Config settings"); ?></a>
+  <a href="../admin/setting_edit_form.php"><?php echo _("Config settings"); ?></a>
 </h2>
 
 <p><?php echo _("Update config settings."); ?></p>

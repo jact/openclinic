@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_form.php,v 1.16 2006/03/12 18:24:16 jact Exp $
+ * $Id: login_form.php,v 1.17 2006/03/15 20:12:27 jact Exp $
  */
 
 /**
@@ -23,7 +23,7 @@
   $nav = "login";
 
   require_once("../shared/read_settings.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
@@ -89,15 +89,15 @@ function md5Login(f)
 
   $row = Form::strLabel("login_session", _("Login") . ":");
   $row .= Form::strText("login_session", 20,
-    isset($postVars["login_session"]) ? $postVars["login_session"] : null,
-    isset($pageErrors["login_session"]) ? array('error' => $pageErrors["login_session"]) : null
+    isset($formVar["login_session"]) ? $formVar["login_session"] : null,
+    isset($formError["login_session"]) ? array('error' => $formError["login_session"]) : null
   );
   $tbody[] = $row;
 
   $row = Form::strLabel("pwd_session", _("Password") . ":");
   $row .= Form::strPassword("pwd_session", 20,
-    isset($postVars["pwd_session"]) ? $postVars["pwd_session"] : null,
-    isset($pageErrors["pwd_session"]) ? array('error' => $pageErrors["pwd_session"]) : null
+    isset($formVar["pwd_session"]) ? $formVar["pwd_session"] : null,
+    isset($formError["pwd_session"]) ? array('error' => $formError["pwd_session"]) : null
   );
   $tbody[] = $row;
 
@@ -107,6 +107,12 @@ function md5Login(f)
   echo "</form>\n";
 
   HTML::message(_("You must have cookies enabled to access your account."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   //Error::debug($_SESSION, "session variables", true);
 

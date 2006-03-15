@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.21 2006/03/12 18:37:15 jact Exp $
+ * $Id: theme_list.php,v 1.22 2006/03/15 20:23:14 jact Exp $
  */
 
 /**
@@ -97,7 +97,7 @@
   Form::fieldset($legend, $tbody, $tfoot);
   echo "</form>\n";
 
-  echo '<p>' . '<a href="../admin/theme_new_form.php?reset=Y">' . _("Add New Theme") . "</a></p>\n";
+  echo '<p>' . '<a href="../admin/theme_new_form.php">' . _("Add New Theme") . "</a></p>\n";
 
   echo '<h2>' . _("Themes List:") . "</h2>\n";
 ?>
@@ -146,11 +146,11 @@ function previewTheme(key)
     }
     else
     {
-      $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getId() . '&amp;reset=Y">' . _("edit") . '</a>';
+      $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getId() . '">' . _("edit") . '</a>';
     }
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="../admin/theme_new_form.php?key=' . $theme->getId() . '&amp;reset=Y">' . _("copy") . '</a>';
+    $row .= '<a href="../admin/theme_new_form.php?key=' . $theme->getId() . '">' . _("copy") . '</a>';
     $row .= OPEN_SEPARATOR;
 
     $row .= '<a href="../admin/theme_preview.php?key=' . $theme->getId() . '" onclick="return previewTheme(' . $theme->getId() . ')">' . _("preview") . '</a>';

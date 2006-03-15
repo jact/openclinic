@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_use.php,v 1.7 2006/01/23 23:06:56 jact Exp $
+ * $Id: theme_use.php,v 1.8 2006/03/15 20:25:24 jact Exp $
  */
 
 /**
@@ -50,8 +50,8 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   header("Location: " . $returnLocation);
 ?>

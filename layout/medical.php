@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: medical.php,v 1.11 2005/08/03 17:40:29 jact Exp $
+ * $Id: medical.php,v 1.12 2006/03/15 20:28:12 jact Exp $
  */
 
 /**
@@ -27,7 +27,7 @@
     echo '<p class="sideBarLogin">';
     echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="logout" title="logout" /></a>';
     echo '<br />';
-    echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;reset=Y&amp;all=Y" title="' . _("manage your user account") . '">' . $_SESSION["loginSession"] . "</a> ]\n";
+    echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;all=Y" title="' . _("manage your user account") . '">' . $_SESSION["loginSession"] . "</a> ]\n";
     echo "</p>\n";
     echo "<hr />\n";
   }
@@ -89,7 +89,7 @@
   {
     echo ($nav == "new")
       ? '<li class="selected">' . _("New Patient") . '</li>'
-      : '<li><a href="../medical/patient_new_form.php?reset=Y">' . _("New Patient") . '</a></li>';
+      : '<li><a href="../medical/patient_new_form.php">' . _("New Patient") . '</a></li>';
   }
 ?>
 

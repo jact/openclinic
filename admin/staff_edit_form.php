@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit_form.php,v 1.16 2006/03/12 18:29:57 jact Exp $
+ * $Id: staff_edit_form.php,v 1.17 2006/03/15 20:14:15 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -43,9 +43,9 @@
   $idMember = intval($_GET["key"]);
 
   /**
-   * Checking for query string flag to read data from database
+   * Checking for $formError to read data from database
    */
-  if (isset($_GET["reset"]))
+  if ( !isset($formError) )
   {
     include_once("../classes/Staff_Query.php");
 
@@ -69,16 +69,16 @@
     $staff = $staffQ->fetch();
     if ($staff)
     {
-      $postVars["id_member"] = $idMember;
-      $postVars["member_type"] = $staff->getMemberType();
-      $postVars["collegiate_number"] = $staff->getCollegiateNumber();
-      $postVars["nif"] = $staff->getNIF();
-      $postVars["first_name"] = $staff->getFirstName();
-      $postVars["surname1"] = $staff->getSurname1();
-      $postVars["surname2"] = $staff->getSurname2();
-      $postVars["address"] = $staff->getAddress();
-      $postVars["phone_contact"] = $staff->getPhone();
-      $postVars["login"] = $staff->getLogin();
+      $formVar["id_member"] = $idMember;
+      $formVar["member_type"] = $staff->getMemberType();
+      $formVar["collegiate_number"] = $staff->getCollegiateNumber();
+      $formVar["nif"] = $staff->getNIF();
+      $formVar["first_name"] = $staff->getFirstName();
+      $formVar["surname1"] = $staff->getSurname1();
+      $formVar["surname2"] = $staff->getSurname2();
+      $formVar["address"] = $staff->getAddress();
+      $formVar["phone_contact"] = $staff->getPhone();
+      $formVar["login"] = $staff->getLogin();
     }
     else
     {
@@ -93,7 +93,7 @@
   /**
    * Show page
    */
-  switch (substr($postVars["member_type"], 0, 1))
+  switch (substr($formVar["member_type"], 0, 1))
   {
     case "A":
       $title = _("Edit Administrative Information");
@@ -131,14 +131,20 @@
   echo '<form method="post" action="../admin/staff_edit.php">' . "\n";
   echo "<div>\n";
 
-  Form::hidden("id_member", $postVars["id_member"]);
-  Form::hidden("member_type", $postVars["member_type"]);
+  Form::hidden("id_member", $formVar["id_member"]);
+  Form::hidden("member_type", $formVar["member_type"]);
 
   require_once("../admin/staff_fields.php");
 
   echo "</div>\n</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

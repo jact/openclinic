@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_edit_form.php,v 1.20 2006/03/12 18:31:26 jact Exp $
+ * $Id: theme_edit_form.php,v 1.21 2006/03/15 20:22:49 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -43,9 +43,9 @@
   $idTheme = intval($_GET["key"]);
 
   /**
-   * Checking for query string flag to read data from database
+   * Checking for $formError to read data from database
    */
-  if (isset($_GET["reset"]))
+  if ( !isset($formError) )
   {
     include_once("../classes/Theme_Query.php");
 
@@ -69,14 +69,14 @@
     $theme = $themeQ->fetch();
     if ($theme)
     {
-      $postVars["id_theme"] = $idTheme;
-      $postVars["theme_name"] = $theme->getName();
-      $postVars["css_file"] = $theme->getCSSFile();
+      $formVar["id_theme"] = $idTheme;
+      $formVar["theme_name"] = $theme->getName();
+      $formVar["css_file"] = $theme->getCSSFile();
       $filename = "../css/" . $theme->getCSSFile();
       $fp = fopen($filename, 'r');
       if ($fp)
       {
-        $postVars["css_rules"] = fread($fp, filesize($filename));
+        $formVar["css_rules"] = fread($fp, filesize($filename));
         fclose($fp);
       }
     }
@@ -142,15 +142,20 @@ function editTheme()
    * Edit form
    */
   echo '<form method="post" action="../admin/theme_edit.php">' . "\n";
-  echo "<div>\n";
 
-  Form::hidden("id_theme", $postVars["id_theme"]);
+  Form::hidden("id_theme", $formVar["id_theme"]);
 
   require_once("../admin/theme_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

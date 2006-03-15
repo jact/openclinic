@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit_form.php,v 1.19 2006/01/23 22:57:57 jact Exp $
+ * $Id: setting_edit_form.php,v 1.20 2006/03/15 20:13:26 jact Exp $
  */
 
 /**
@@ -25,12 +25,12 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
-   * Checking for query string flag to read data from database
+   * Checking for $formError to read data from database
    */
-  if (isset($_GET["reset"]))
+  if ( !isset($formError) )
   {
     include_once("../classes/Setting_Query.php");
 
@@ -42,17 +42,17 @@
     $set = $setQ->fetch();
     if ($set)
     {
-      $postVars["clinic_name"] = $set->getClinicName();
-      $postVars["clinic_image_url"] = $set->getClinicImageUrl();
-      $postVars["use_image"] = ($set->isUseImageSet() ? "checked" : "");
-      $postVars["clinic_hours"] = $set->getClinicHours();
-      $postVars["clinic_address"] = $set->getClinicAddress();
-      $postVars["clinic_phone"] = $set->getClinicPhone();
-      $postVars["clinic_url"] = $set->getClinicUrl();
-      $postVars["language"] = $set->getLanguage();
-      $postVars["id_theme"] = $set->getIdTheme();
-      $postVars["session_timeout"] = $set->getSessionTimeout();
-      $postVars["items_per_page"] = $set->getItemsPerPage();
+      $formVar["clinic_name"] = $set->getClinicName();
+      $formVar["clinic_image_url"] = $set->getClinicImageUrl();
+      $formVar["use_image"] = ($set->isUseImageSet() ? "checked" : "");
+      $formVar["clinic_hours"] = $set->getClinicHours();
+      $formVar["clinic_address"] = $set->getClinicAddress();
+      $formVar["clinic_phone"] = $set->getClinicPhone();
+      $formVar["clinic_url"] = $set->getClinicUrl();
+      $formVar["language"] = $set->getLanguage();
+      $formVar["id_theme"] = $set->getIdTheme();
+      $formVar["session_timeout"] = $set->getSessionTimeout();
+      $formVar["items_per_page"] = $set->getItemsPerPage();
     }
     else
     {
@@ -95,13 +95,17 @@
    * Edit form
    */
   echo '<form method="post" action="../admin/setting_edit.php">' . "\n";
-
   require_once("../admin/setting_fields.php");
-
   echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
   HTML::message('** ' . _("Note: If zero, searchs return all results without pagination."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

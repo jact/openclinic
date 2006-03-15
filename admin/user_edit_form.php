@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit_form.php,v 1.21 2006/03/12 18:35:05 jact Exp $
+ * $Id: user_edit_form.php,v 1.22 2006/03/15 20:26:47 jact Exp $
  */
 
 /**
@@ -38,7 +38,7 @@
     include_once("../shared/login_check.php");
   }
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -46,9 +46,9 @@
   $idUser = intval($_GET["key"]);
 
   /**
-   * Checking for query string flag to read data from database
+   * Checking for $formError to read data from database
    */
-  if (isset($_GET["reset"]))
+  if ( !isset($formError) )
   {
     include_once("../classes/User_Query.php");
 
@@ -72,13 +72,13 @@
     $user = $userQ->fetch();
     if ($user)
     {
-      $postVars["id_user"] = $idUser;
-      $postVars["id_member"] = $user->getIdMember();
-      $postVars["login"] = $user->getLogin();
-      $postVars["email"] = $user->getEmail();
-      $postVars["actived"] = ($user->isActived() ? "checked" : "");
-      $postVars["id_theme"] = $user->getIdTheme();
-      $postVars["id_profile"] = $user->getIdProfile();
+      $formVar["id_user"] = $idUser;
+      $formVar["id_member"] = $user->getIdMember();
+      $formVar["login"] = $user->getLogin();
+      $formVar["email"] = $user->getEmail();
+      $formVar["actived"] = ($user->isActived() ? "checked" : "");
+      $formVar["id_theme"] = $user->getIdTheme();
+      $formVar["id_profile"] = $user->getIdProfile();
     }
     else
     {
@@ -133,8 +133,8 @@
   echo "<div>\n";
 
   Form::hidden("referer", "edit"); // to user_validate_post.php
-  Form::hidden("id_user", $postVars["id_user"]);
-  Form::hidden("id_member", $postVars["id_member"]);
+  Form::hidden("id_user", $formVar["id_user"]);
+  Form::hidden("id_member", $formVar["id_member"]);
 
   if (isset($_GET["all"]))
   {
@@ -152,6 +152,12 @@
   {
     HTML::message(_("Fill password fields only if you want to change it."), OPEN_MSG_INFO);
   }
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

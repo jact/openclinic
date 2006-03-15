@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: admin.php,v 1.9 2005/08/03 17:40:29 jact Exp $
+ * $Id: admin.php,v 1.10 2006/03/15 20:28:12 jact Exp $
  */
 
 /**
@@ -27,14 +27,14 @@
     echo '<p class="sideBarLogin">';
     echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="logout" title="logout" /></a>';
     echo '<br />';
-    echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;reset=Y&amp;all=Y" title="' . _("manage your user account") . '">' . $_SESSION["loginSession"] . "</a> ]\n";
+    echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;all=Y" title="' . _("manage your user account") . '">' . $_SESSION["loginSession"] . "</a> ]\n";
     echo "</p>\n";
     echo "<hr />\n";
   }
 
   $linkList = array(
     "summary" => array(_("Summary"), "../admin/index.php"),
-    "settings" => array(_("Config settings"), "../admin/setting_edit_form.php?reset=Y"),
+    "settings" => array(_("Config settings"), "../admin/setting_edit_form.php"),
     "themes" => array(_("Themes"), "../admin/theme_list.php"),
     "staff" => array(_("Staff Members"), "../admin/staff_list.php"),
     "users" => array(_("Users"), "../admin/user_list.php"),

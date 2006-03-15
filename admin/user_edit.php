@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_edit.php,v 1.11 2006/01/23 23:08:50 jact Exp $
+ * $Id: user_edit.php,v 1.12 2006/03/15 20:26:33 jact Exp $
  */
 
 /**
@@ -84,11 +84,11 @@
     {
       $userQ->close();
 
-      unset($pageErrors);
-      $pageErrors["old_pwd"] = ((trim($_POST["md5_old"]) == "") ? _("This is a required field.") : _("This field is not correct."));
+      unset($formError);
+      $formError["old_pwd"] = ((trim($_POST["md5_old"]) == "") ? _("This is a required field.") : _("This field is not correct."));
 
-      $_SESSION["postVars"] = $_POST;
-      $_SESSION["pageErrors"] = $pageErrors;
+      $_SESSION["formVar"] = $_POST;
+      $_SESSION["formError"] = $formError;
 
       header("Location: " . $errorLocation);
       exit();
@@ -102,8 +102,8 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Redirect to $returnLocation to avoid reload problem

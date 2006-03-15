@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2005 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: home.php,v 1.10 2005/08/03 17:40:29 jact Exp $
+ * $Id: home.php,v 1.11 2006/03/15 20:28:12 jact Exp $
  */
 
 /**
@@ -30,7 +30,7 @@
     {
       echo '<a href="../shared/logout.php"><img src="../images/logout.png" width="96" height="22" alt="' . _("logout") . '" title="logout" /></a>';
       echo '<br />';
-      echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;reset=Y&amp;all=Y" title="' . _("manage your user account") . '">' . $sessLogin . '</a> ]';
+      echo '[ <a href="../admin/user_edit_form.php?key=' . $_SESSION["userId"] . '&amp;all=Y" title="' . _("manage your user account") . '">' . $sessLogin . '</a> ]';
     }
     else
     {

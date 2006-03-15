@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit.php,v 1.6 2006/01/23 22:57:25 jact Exp $
+ * $Id: setting_edit.php,v 1.7 2006/03/15 20:13:04 jact Exp $
  */
 
 /**
@@ -21,7 +21,7 @@
    */
   if (count($_POST) == 0)
   {
-    header("Location: ../admin/setting_edit_form.php?reset=Y");
+    header("Location: ../admin/setting_edit_form.php");
     exit();
   }
 
@@ -70,11 +70,11 @@
 
   if ( !$set->validateData() )
   {
-    $pageErrors["session_timeout"] = $set->getSessionTimeoutError();
-    $pageErrors["items_per_page"] = $set->getItemsPerPageError();
+    $formError["session_timeout"] = $set->getSessionTimeoutError();
+    $formError["items_per_page"] = $set->getItemsPerPageError();
 
-    $_SESSION["postVars"] = $_POST;
-    $_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = $_POST;
+    $_SESSION["formError"] = $formError;
 
     header("Location: ../admin/setting_edit_form.php");
     exit();
@@ -99,8 +99,8 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
-  header("Location: ../admin/setting_edit_form.php?reset=Y&updated=Y");
+  header("Location: ../admin/setting_edit_form.php?updated=Y");
 ?>

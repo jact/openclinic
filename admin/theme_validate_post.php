@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_validate_post.php,v 1.8 2006/03/12 18:37:15 jact Exp $
+ * $Id: theme_validate_post.php,v 1.9 2006/03/15 20:25:35 jact Exp $
  */
 
 /**
@@ -34,12 +34,12 @@
 
   if ( !$theme->validateData() )
   {
-    $pageErrors["theme_name"] = $theme->getNameError();
-    $pageErrors["css_file"] = $theme->getCSSFileError();
-    $pageErrors["css_rules"] = $theme->getCSSRulesError();
+    $formError["theme_name"] = $theme->getNameError();
+    $formError["css_file"] = $theme->getCSSFileError();
+    $formError["css_rules"] = $theme->getCSSRulesError();
 
-    $_SESSION["postVars"] = $_POST;
-    $_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = $_POST;
+    $_SESSION["formError"] = $formError;
 
     header("Location: " . $errorLocation);
     exit();

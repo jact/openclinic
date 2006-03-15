@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_validate_post.php,v 1.7 2005/08/03 17:39:28 jact Exp $
+ * $Id: staff_validate_post.php,v 1.8 2006/03/15 20:19:17 jact Exp $
  */
 
 /**
@@ -55,15 +55,15 @@
 
   if ( !$staff->validateData() )
   {
-    $pageErrors["collegiate_number"] = $staff->getCollegiateNumberError();
-    $pageErrors["nif"] = $staff->getNIFError();
-    $pageErrors["first_name"] = $staff->getFirstNameError();
-    $pageErrors["surname1"] = $staff->getSurname1Error();
-    $pageErrors["surname2"] = $staff->getSurname2Error();
-    $pageErrors["login"] = $staff->getLoginError();
+    $formError["collegiate_number"] = $staff->getCollegiateNumberError();
+    $formError["nif"] = $staff->getNIFError();
+    $formError["first_name"] = $staff->getFirstNameError();
+    $formError["surname1"] = $staff->getSurname1Error();
+    $formError["surname2"] = $staff->getSurname2Error();
+    $formError["login"] = $staff->getLoginError();
 
-    $_SESSION["postVars"] = $_POST;
-    $_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = $_POST;
+    $_SESSION["formError"] = $formError;
 
     header("Location: " . $errorLocation);
     exit();

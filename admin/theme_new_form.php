@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.19 2006/01/23 23:05:57 jact Exp $
+ * $Id: theme_new_form.php,v 1.20 2006/03/15 20:24:54 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Checking for query string flag to read data from database.
@@ -46,10 +46,10 @@
     $theme = $themeQ->fetch();
     if ($theme)
     {
-      $postVars["css_file"] = $theme->getCSSFile();
+      $formVar["css_file"] = $theme->getCSSFile();
       $filename = "../css/" . $theme->getCSSFile();
       $fp = fopen($filename, 'r');
-      $postVars["css_rules"] = fread($fp, filesize($filename));
+      $formVar["css_rules"] = fread($fp, filesize($filename));
       fclose($fp);
     }
     else
@@ -61,11 +61,11 @@
     unset($themeQ);
     unset($theme);
   }
-  elseif (isset($_GET["reset"]))
+  elseif ( !isset($formError) )
   {
     $filename = "../css/" . "scheme.css";
     $fp = fopen($filename, 'r');
-    $postVars["css_rules"] = fread($fp, filesize($filename));
+    $formVar["css_rules"] = fread($fp, filesize($filename));
     fclose($fp);
   }
 
@@ -121,12 +121,16 @@ function editTheme()
    * New form
    */
   echo '<form method="post" action="../admin/theme_new.php">' . "\n";
-
   require_once("../admin/theme_fields.php");
-
   echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

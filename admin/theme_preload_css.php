@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.14 2006/03/12 18:37:15 jact Exp $
+ * $Id: theme_preload_css.php,v 1.15 2006/03/15 20:25:14 jact Exp $
  */
 
 /**
@@ -49,7 +49,7 @@
     $_POST['css_file'] = $_FILES['css_filename']['name'];
     $_POST['css_rules'] = $cssRules;
 
-    $_SESSION["postVars"] = $_POST;
+    $_SESSION["formVar"] = $_POST;
 
     header("Location: " . $returnLocation);
     exit();
@@ -89,7 +89,7 @@
   $row .= OPEN_SEPARATOR;
 
   //$row .= Form::strHidden("MAX_FILE_SIZE", "10000");
-  $row .= Form::strFile("css_filename", "", 50/*, array('error' => $pageErrors["css_filename"])*/);
+  $row .= Form::strFile("css_filename", "", 50/*, array('error' => $formError["css_filename"])*/);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 

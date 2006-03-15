@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.21 2006/03/12 18:35:45 jact Exp $
+ * $Id: user_list.php,v 1.22 2006/03/15 20:27:02 jact Exp $
  */
 
 /**
@@ -118,7 +118,7 @@
   /**
    * New user form
    */
-  echo '<form method="post" action="../admin/user_new_form.php?reset=Y">' . "\n";
+  echo '<form method="post" action="../admin/user_new_form.php">' . "\n";
   Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null);
   echo "</form>\n";
 
@@ -165,9 +165,9 @@
     /**
      * Row construction
      */
-    $row = '<a href="../admin/user_edit_form.php?key=' . $user->getIdUser(). '&amp;reset=Y">' . _("edit") . '</a>';
+    $row = '<a href="../admin/user_edit_form.php?key=' . $user->getIdUser(). '">' . _("edit") . '</a>';
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../admin/user_pwd_reset_form.php?key=' . $user->getIdUser() . '&amp;reset=Y">' . _("pwd") . '</a>';
+    $row .= '<a href="../admin/user_pwd_reset_form.php?key=' . $user->getIdUser() . '">' . _("pwd") . '</a>';
     $row .= OPEN_SEPARATOR;
     if (isset($_SESSION["userId"]) && $user->getIdUser() == $_SESSION["userId"])
     {
@@ -178,7 +178,7 @@
       $row .= '<a href="../admin/user_del_confirm.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("del") . '</a>';
     }
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../admin/staff_edit_form.php?key=' . $user->getIdMember() . '&amp;reset=Y">' . _("edit member") . '</a>';
+    $row .= '<a href="../admin/staff_edit_form.php?key=' . $user->getIdMember() . '">' . _("edit member") . '</a>';
     $row .= OPEN_SEPARATOR;
     $row .= '<a href="../admin/user_access_log.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("accesses"). '</a>';
     $row .= OPEN_SEPARATOR;

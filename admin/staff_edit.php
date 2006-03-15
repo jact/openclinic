@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit.php,v 1.8 2006/01/23 22:59:33 jact Exp $
+ * $Id: staff_edit.php,v 1.9 2006/03/15 20:13:54 jact Exp $
  */
 
 /**
@@ -65,8 +65,8 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Redirect to $returnLocation to avoid reload problem

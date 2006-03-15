@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_fields.php,v 1.18 2006/03/12 18:35:26 jact Exp $
+ * $Id: user_fields.php,v 1.19 2006/03/15 20:26:53 jact Exp $
  */
 
 /**
@@ -25,15 +25,15 @@
   $tbody = array();
 
   $row = ($action == "new") ? _("Login") . ":" : Form::strLabel("login", _("Login") . ":", true);
-  $row .= ($action == "new") ? $postVars["login"] : Form::strText("login", 20, $postVars["login"], array('error' => $pageErrors["login"]));
+  $row .= ($action == "new") ? $formVar["login"] : Form::strText("login", 20, isset($formVar["login"]) ? $formVar["login"] : null, isset($formError["login"]) ? array('error' => $formError["login"]) : null);
   $tbody[] = $row;
 
   if (isset($_GET["all"]))
   {
     $row = Form::strLabel("old_pwd", _("Current Password") . ":", true);
     $row .= Form::strPassword("old_pwd", 20,
-      isset($postVars["old_pwd"]) ? $postVars["old_pwd"] : null,
-      isset($pageErrors["old_pwd"]) ? array('error' => $pageErrors["old_pwd"]) : null
+      isset($formVar["old_pwd"]) ? $formVar["old_pwd"] : null,
+      isset($formError["old_pwd"]) ? array('error' => $formError["old_pwd"]) : null
     );
     $row .= Form::strHidden("md5_old");
     $tbody[] = $row;
@@ -43,34 +43,36 @@
   {
     $row = Form::strLabel("pwd", _("Password") . ":", true);
     $row .= Form::strPassword("pwd", 20,
-      isset($postVars["pwd"]) ? $postVars["pwd"] : null,
-      isset($pageErrors["pwd"]) ? array('error' => $pageErrors["pwd"]) : null
+      isset($formVar["pwd"]) ? $formVar["pwd"] : null,
+      isset($formError["pwd"]) ? array('error' => $formError["pwd"]) : null
     );
     $row .= Form::strHidden("md5");
     $tbody[] = $row;
 
     $row = Form::strLabel("pw2", _("Re-enter Password") . ":", true);
     $row .= Form::strPassword("pwd2", 20,
-      isset($postVars["pwd2"]) ? $postVars["pwd2"] : null,
-      isset($pageErrors["pwd2"]) ? array('error' => $pageErrors["pwd2"]) : null
+      isset($formVar["pwd2"]) ? $formVar["pwd2"] : null,
+      isset($formError["pwd2"]) ? array('error' => $formError["pwd2"]) : null
     );
     $row .= Form::strHidden("md5_confirm");
     $tbody[] = $row;
   }
 
   $row = Form::strLabel("email", _("Email") . ":");
-  $row .= Form::strText("email", 40, isset($postVars["email"]) ? $postVars["email"] : null, array('error' => $pageErrors["email"]));
+  $row .= Form::strText("email", 40, isset($formVar["email"]) ? $formVar["email"] : null,
+    isset($formError["email"]) ? array('error' => $formError["email"]) : null
+  );
   $tbody[] = $row;
 
   if ( !isset($_GET["all"]) )
   {
     $row = Form::strLabel("actived", _("Actived") . ":");
-    $row .= Form::strCheckBox("actived", 1, isset($postVars["actived"]) ? $postVars["actived"] != "" : false);
+    $row .= Form::strCheckBox("actived", 1, isset($formVar["actived"]) ? $formVar["actived"] != "" : false);
     $tbody[] = $row;
 
-    if ( !isset($postVars["id_profile"]) || $postVars["id_profile"] == "" )
+    if ( !isset($formVar["id_profile"]) || $formVar["id_profile"] == "" )
     {
-      $postVars["id_profile"] = OPEN_PROFILE_DOCTOR; // by default doctor profile
+      $formVar["id_profile"] = OPEN_PROFILE_DOCTOR; // by default doctor profile
     }
 
     $array = array(
@@ -80,18 +82,18 @@
     );
 
     $row = Form::strLabel("id_profile", _("Profile") . ":", true);
-    $row .= Form::strSelect("id_profile", $array, $postVars["id_profile"]);
+    $row .= Form::strSelect("id_profile", $array, $formVar["id_profile"]);
     unset($array);
     $tbody[] = $row;
   }
 
   $row = Form::strLabel("id_theme", _("Theme") . ":");
-  $row .= Form::strSelectTable("theme_tbl", "id_theme", isset($postVars["id_theme"]) ? $postVars["id_theme"] : null, "theme_name");
+  $row .= Form::strSelectTable("theme_tbl", "id_theme", isset($formVar["id_theme"]) ? $formVar["id_theme"] : null, "theme_name");
   $tbody[] = $row;
 
   $tfoot = array(
     Form::strButton("button1", _("Submit"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\'"'))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
   Form::fieldset($title, $tbody, $tfoot);
@@ -99,6 +101,6 @@
   if (isset($_GET["all"]))
   {
     Form::hidden("actived", "checked");
-    Form::hidden("id_profile", $postVars["id_profile"]);
+    Form::hidden("id_profile", $formVar["id_profile"]);
   }
 ?>

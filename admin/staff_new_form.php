@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_new_form.php,v 1.15 2006/03/12 18:30:30 jact Exp $
+ * $Id: staff_new_form.php,v 1.16 2006/03/15 20:18:58 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Show page
@@ -77,6 +77,12 @@
   echo "</div>\n</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

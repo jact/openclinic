@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.17 2006/03/12 18:36:00 jact Exp $
+ * $Id: user_new_form.php,v 1.18 2006/03/15 20:27:03 jact Exp $
  */
 
 /**
@@ -26,7 +26,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
   require_once("../lib/Check.php");
 
   /**
@@ -36,22 +36,22 @@
   {
     $array = explode(OPEN_SEPARATOR, Check::safeText($_POST["id_member_login"]), 2);
     $idMember = $array[0];
-    $postVars["id_member"] = $idMember;
+    $formVar["id_member"] = $idMember;
     $login = $array[1];
-    $postVars["login"] = $login;
+    $formVar["login"] = $login;
     unset($array);
   }
   elseif (isset($_GET["id_member"]) && isset($_GET["login"]))
   {
     $idMember = intval($_GET["id_member"]);
-    $postVars["id_member"] = $idMember;
+    $formVar["id_member"] = $idMember;
     $login = Check::safeText($_GET["login"]);
-    $postVars["login"] = $login;
+    $formVar["login"] = $login;
   }
   else
   {
-    $postVars["id_member"] = $_SESSION["postVars"]["id_member"];
-    $postVars["login"] = $_SESSION["postVars"]["login"];
+    $formVar["id_member"] = $_SESSION["formVar"]["id_member"];
+    $formVar["login"] = $_SESSION["formVar"]["login"];
   }
 
   /**
@@ -87,8 +87,8 @@
   echo "<div>\n";
 
   Form::hidden("referer", "new"); // to user_validate_post.php
-  Form::hidden("id_member", $postVars["id_member"]);
-  Form::hidden("login", $postVars["login"]);
+  Form::hidden("id_member", $formVar["id_member"]);
+  Form::hidden("login", $formVar["login"]);
 
   $action = "new";
   require_once("../admin/user_fields.php");
@@ -96,6 +96,12 @@
   echo "</div>\n</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

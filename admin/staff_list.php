@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.17 2006/01/23 23:02:06 jact Exp $
+ * $Id: staff_list.php,v 1.18 2006/03/15 20:15:00 jact Exp $
  */
 
 /**
@@ -108,9 +108,9 @@
   //Error::debug($_SESSION);
 
   echo '<p>';
-  echo '<a href="../admin/staff_new_form.php?reset=Y&amp;type=A">';
+  echo '<a href="../admin/staff_new_form.php?type=A">';
   echo _("Add New Administrative") . '</a> | ';
-  echo '<a href="../admin/staff_new_form.php?reset=Y&amp;type=D">';
+  echo '<a href="../admin/staff_new_form.php?type=D">';
   echo _("Add New Doctor") . '</a>';
   echo "</p>\n";
 
@@ -180,7 +180,7 @@
       continue;
     }
 
-    $row = '<a href="../admin/staff_edit_form.php?key=' . $staff->getIdMember() . '&amp;reset=Y">' . _("edit") . '</a>';
+    $row = '<a href="../admin/staff_edit_form.php?key=' . $staff->getIdMember() . '">' . _("edit") . '</a>';
     $row .= OPEN_SEPARATOR;
 
     if ($staff->getIdMember() == $_SESSION["memberUser"])
@@ -203,7 +203,7 @@
     }
     else
     {
-      $row .= '<a href="../admin/user_edit_form.php?key=' . $staff->getIdUser() . '&amp;reset=Y">' . _("edit user") . '</a>';
+      $row .= '<a href="../admin/user_edit_form.php?key=' . $staff->getIdUser() . '">' . _("edit user") . '</a>';
     } // end if
     $row .= OPEN_SEPARATOR;
 
