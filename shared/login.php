@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login.php,v 1.17 2006/01/23 22:46:37 jact Exp $
+ * $Id: login.php,v 1.18 2006/03/15 20:10:53 jact Exp $
  */
 
 /**
@@ -30,7 +30,7 @@
   require_once("../classes/Session_Query.php");
   require_once("../classes/Access_Page_Query.php");
 
-  unset($pageErrors); // to clean previous errors
+  unset($formError); // to clean previous errors
 
   /**
    * Login edits
@@ -40,7 +40,7 @@
   if ($loginSession == "")
   {
     $errorFound = true;
-    $pageErrors["login_session"] = _("This is a required field.");
+    $formError["login_session"] = _("This is a required field.");
   }
 
   /**
@@ -50,7 +50,7 @@
   if ($pwdSession == "")
   {
     $errorFound = true;
-    $pageErrors["pwd_session"] = _("This is a required field.");
+    $formError["pwd_session"] = _("This is a required field.");
   }
   else
   {
@@ -61,7 +61,7 @@
     if ( !$result )
     {
       $errorFound = true;
-      $pageErrors["login_session"] = _("Login unknown.");
+      $formError["login_session"] = _("Login unknown.");
     }
     else
     {
@@ -73,7 +73,7 @@
         exit();
       }
 
-      $lastLogin = (isset($_SESSION["postVars"]["login_session"])) ? $_SESSION["postVars"]["login_session"] : "";
+      $lastLogin = (isset($_SESSION["formVar"]["login_session"])) ? $_SESSION["formVar"]["login_session"] : "";
       if ( !$userQ->verifySignOn($loginSession, $pwdSession) )
       {
         $userQ->close();
@@ -87,7 +87,7 @@
          * Invalid password. Add one to login attempts.
          */
         $errorFound = true;
-        $pageErrors["pwd_session"] = _("Invalid sign on.");
+        $formError["pwd_session"] = _("Invalid sign on.");
         if ( !isset($_SESSION["loginAttempts"]) || ($_SESSION["loginAttempts"] == "") )
         {
           $sessLoginAttempts = 1;
@@ -127,8 +127,8 @@
    */
   if ($errorFound)
   {
-    $_SESSION["postVars"] = Check::safeArray($_POST);
-    $_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = Check::safeArray($_POST);
+    $_SESSION["formError"] = $formError;
     if (isset($sessLoginAttempts))
     {
       $_SESSION["loginAttempts"] = $sessLoginAttempts;
@@ -172,9 +172,9 @@
   /**
    * Destroy form values and errors and reset sign on variables
    */
-  $_SESSION["postVars"] = null; // for safety's sake
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  $_SESSION["formVar"] = null; // for safety's sake
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   // works in PHP >= 4.1.0
   $_SESSION["memberUser"] = $user->getIdMember();
