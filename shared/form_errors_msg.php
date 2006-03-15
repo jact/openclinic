@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: form_errors_msg.php,v 1.6 2005/08/22 15:12:28 jact Exp $
+ * $Id: form_errors_msg.php,v 1.7 2006/03/15 20:05:48 jact Exp $
  */
 
 /**
@@ -16,13 +16,13 @@
  * Author: jact <jachavar@gmail.com>
  */
 
-  if (isset($pageErrors) && count($pageErrors) > 0)
+  if (isset($formError) && count($formError) > 0)
   {
     echo '<div class="error">';
     echo '<p>' . _("ERROR: Some fields have been incorrectly filled. Please fix the fields and send the form again. Each incorrectly filled field is marked with specific error message.") . "</p>\n";
 
     echo "<ul>\n";
-    foreach ($pageErrors as $key => $value)
+    foreach ($formError as $key => $value)
     {
       if ($value)
       {

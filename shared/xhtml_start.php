@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: xhtml_start.php,v 1.16 2006/01/23 22:37:10 jact Exp $
+ * $Id: xhtml_start.php,v 1.17 2006/03/15 20:05:15 jact Exp $
  */
 
 /**
@@ -91,7 +91,7 @@
   /**
    * @since 0.8
    */
-  echo ((isset($pageErrors) && count($pageErrors) > 0 && isset($focusFormField)) ? " : " . _("Error occurred") : "");
+  echo ((isset($formError) && count($formError) > 0 && isset($focusFormField)) ? " : " . _("Error occurred") : "");
 ?></title>
 
 <?php //<meta http-equiv="Content-Style-Type" content="text/css2" /> ?>
