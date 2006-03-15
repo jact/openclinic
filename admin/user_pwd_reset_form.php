@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_pwd_reset_form.php,v 1.19 2006/03/12 18:36:28 jact Exp $
+ * $Id: user_pwd_reset_form.php,v 1.20 2006/03/15 20:27:44 jact Exp $
  */
 
 /**
@@ -35,7 +35,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -43,9 +43,9 @@
   $idUser = intval($_GET["key"]);
 
   /**
-   * Checking for query string flag to read data from database
+   * Checking for $formError to read data from database
    */
-  if (isset($_GET["reset"]))
+  if ( !isset($formError) )
   {
     include_once("../classes/User_Query.php");
 
@@ -69,10 +69,10 @@
     $user = $userQ->fetch();
     if ($user)
     {
-      $postVars["id_user"] = $idUser;
-      $postVars["login"] = $user->getLogin();
-      $postVars["pwd"] = $postVars["pwd2"] = "";
-      //$postVars["pwd"] = $postVars["pwd2"] = $user->getPwd(); // no because it's encoded
+      $formVar["id_user"] = $idUser;
+      $formVar["login"] = $user->getLogin();
+      $formVar["pwd"] = $formVar["pwd2"] = "";
+      //$formVar["pwd"] = $formVar["pwd2"] = $user->getPwd(); // no because it's encoded
       //Error::debug($user->getPwd());
     }
     else
@@ -116,57 +116,50 @@
    * @todo use user_fields.php with some controlling var to display adecuated fields
    */
   echo '<form method="post" action="../admin/user_pwd_reset.php" onsubmit="return md5Login(this);">' . "\n";
-  echo '<div class="center">' . "\n";
 
-  Form::hidden("id_user", $postVars["id_user"]);
-  Form::hidden("login", $postVars["login"]);
+  Form::hidden("id_user", $formVar["id_user"]);
+  Form::hidden("login", $formVar["login"]);
 
   Form::hidden("md5");
   Form::hidden("md5_confirm");
 
-  $thead = array(
-    _("Reset User Password") => array('colspan' => 2)
-  );
-
   $tbody = array();
 
-  $row = _("Login") . ":";
-  $row .= OPEN_SEPARATOR;
-  $row .= $postVars["login"];
+  $row = _("Login") . ": ";
+  $row .= '<strong>' . $formVar["login"] . '</strong>';
 
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $row = Form::strLabel("pwd", _("Password") . ":");
-  $row .= OPEN_SEPARATOR;
   $row .= Form::strPassword("pwd", 20,
-    isset($postVars["pwd"]) ? $postVars["pwd"] : null,
-    isset($pageErrors["pwd"]) ? array('error' => $pageErrors["pwd"]) : null
+    isset($formVar["pwd"]) ? $formVar["pwd"] : null,
+    isset($formError["pwd"]) ? array('error' => $formError["pwd"]) : null
   );
 
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $row = Form::strLabel("pwd2", _("Re-enter Password") . ":");
-  $row .= OPEN_SEPARATOR;
   $row .= Form::strPassword("pwd2", 20,
-    isset($postVars["pwd2"]) ? $postVars["pwd2"] : null,
-    isset($pageErrors["pwd2"]) ? array('error' => $pageErrors["pwd2"]) : null
+    isset($formVar["pwd2"]) ? $formVar["pwd2"] : null,
+    isset($formError["pwd2"]) ? array('error' => $formError["pwd2"]) : null
   );
 
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $tfoot = array(
     Form::strButton("button1", _("Submit"))
     . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
   );
 
-  $options = array(
-    'shaded' => false,
-    'tfoot' => array('align' => 'center')
-  );
+  Form::fieldset($title, $tbody, $tfoot);
 
-  HTML::table($thead, $tbody, $tfoot, $options);
+  echo "</form>\n";
 
-  echo "</div>\n</form>\n";
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>
