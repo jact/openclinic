@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.16 2006/01/24 20:09:26 jact Exp $
+ * $Id: test_list.php,v 1.17 2006/03/15 20:47:25 jact Exp $
  */
 
 /**
@@ -95,7 +95,7 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p><a href="../medical/test_new_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '&amp;reset=Y">' . _("Add New Medical Test") . "</a></p>\n";
+    echo '<p><a href="../medical/test_new_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '">' . _("Add New Medical Test") . "</a></p>\n";
     echo "<hr />\n";
   }
 
@@ -129,7 +129,7 @@
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/test_edit_form.php?key=' . $test->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;test=' . $test->getIdTest() . '&amp;reset=Y">' . _("edit") . '</a>';
+      $row .= '<a href="../medical/test_edit_form.php?key=' . $test->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;test=' . $test->getIdTest() . '">' . _("edit") . '</a>';
       $row .= OPEN_SEPARATOR;
 
       $row .= '<a href="../medical/test_del_confirm.php?key=' . $idProblem . '&amp;test=' . $test->getIdTest() . '&amp;pat=' . $idPatient . '&amp;file=' . $test->getPathFilename() . '">' . _("del") . '</a>';

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_family_edit_form.php,v 1.12 2006/03/12 18:41:41 jact Exp $
+ * $Id: history_family_edit_form.php,v 1.13 2006/03/15 20:43:32 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   require_once("../shared/login_check.php");
   require_once("../classes/History_Query.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -63,11 +63,11 @@
   $history = $historyQ->fetch();
   if ($history)
   {
-    $postVars["id_patient"] = $history->getIdPatient();
-    $postVars["parents_status_health"] = $history->getParentsStatusHealth();
-    $postVars["brothers_status_health"] = $history->getBrothersStatusHealth();
-    $postVars["spouse_childs_status_health"] = $history->getSpouseChildsStatusHealth();
-    $postVars["family_illness"] = $history->getFamilyIllness();
+    $formVar["id_patient"] = $history->getIdPatient();
+    $formVar["parents_status_health"] = $history->getParentsStatusHealth();
+    $formVar["brothers_status_health"] = $history->getBrothersStatusHealth();
+    $formVar["spouse_childs_status_health"] = $history->getSpouseChildsStatusHealth();
+    $formVar["family_illness"] = $history->getFamilyIllness();
   }
   else
   {
@@ -117,13 +117,18 @@
    * Edit form
    */
   echo '<form method="post" action="../medical/history_family_edit.php">' . "\n";
-  echo "<div>\n";
 
   Form::hidden("id_patient", $idPatient);
 
   require_once("../medical/history_family_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

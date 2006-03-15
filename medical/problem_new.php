@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new.php,v 1.11 2006/01/24 19:59:42 jact Exp $
+ * $Id: problem_new.php,v 1.12 2006/03/15 20:46:43 jact Exp $
  */
 
 /**
@@ -79,8 +79,8 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   $returnLocation = "../medical/problem_list.php?key=" . $idPatient; // controlling var
 

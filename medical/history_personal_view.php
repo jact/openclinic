@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_view.php,v 1.11 2006/03/12 18:49:30 jact Exp $
+ * $Id: history_personal_view.php,v 1.12 2006/03/15 20:44:22 jact Exp $
  */
 
 /**
@@ -35,7 +35,6 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../classes/History_Query.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   /**
    * Retrieving get var
@@ -93,7 +92,7 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p><a href="../medical/history_personal_edit_form.php?key=' . $idPatient . '&amp;reset=Y">' . _("Edit Personal Antecedents") . "</a></p>\n";
+    echo '<p><a href="../medical/history_personal_edit_form.php?key=' . $idPatient . '">' . _("Edit Personal Antecedents") . "</a></p>\n";
   }
 
   /**

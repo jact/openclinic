@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_new_form.php,v 1.13 2006/03/12 18:45:29 jact Exp $
+ * $Id: problem_new_form.php,v 1.14 2006/03/15 20:46:43 jact Exp $
  */
 
 /**
@@ -36,20 +36,20 @@
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
   require_once("../classes/Staff_Query.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
    */
   $idPatient = intval($_GET["key"]);
-  $orderNumber = isset($_GET["num"]) ? intval($_GET["num"]) : (isset($postVars["order_number"]) ? $postVars["order_number"] - 1 : 0);
+  $orderNumber = isset($_GET["num"]) ? intval($_GET["num"]) : (isset($formVar["order_number"]) ? $formVar["order_number"] - 1 : 0);
 
   // after clean (get_form_vars.php)
-  $postVars["id_patient"] = $idPatient;
-  //$postVars["id_member"] = ???; // @fixme si no está vacía y es la primera vez que se accede aquí es igual al médico que le corresponde por cupo?
-  $postVars["order_number"] = $orderNumber + 1;
-  $postVars["opening_date"] = date("Y-m-d"); // automatic date (ISO format) without getText
-  $postVars["last_update_date"] = date("Y-m-d"); // automatic date (ISO format) without getText
+  $formVar["id_patient"] = $idPatient;
+  //$formVar["id_member"] = ???; // @fixme si no está vacía y es la primera vez que se accede aquí es igual al médico que le corresponde por cupo?
+  $formVar["order_number"] = $orderNumber + 1;
+  $formVar["opening_date"] = date("Y-m-d"); // automatic date (ISO format) without getText
+  $formVar["last_update_date"] = date("Y-m-d"); // automatic date (ISO format) without getText
 
   /**
    * Show page
@@ -81,7 +81,7 @@
     exit();
   }
 
-  //Error::debug($postVars);
+  //Error::debug($formVar);
 
   require_once("../shared/form_errors_msg.php");
 
@@ -89,18 +89,23 @@
    * New form
    */
   echo '<form method="post" action="../medical/problem_new.php">' . "\n";
-  echo "<div>\n";
 
-  Form::hidden("last_update_date", $postVars['last_update_date']);
+  Form::hidden("last_update_date", $formVar['last_update_date']);
   Form::hidden("id_patient", $idPatient);
-  Form::hidden("opening_date", $postVars['opening_date']);
-  Form::hidden("order_number", $postVars['order_number']);
+  Form::hidden("opening_date", $formVar['opening_date']);
+  Form::hidden("order_number", $formVar['order_number']);
 
   require_once("../medical/problem_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

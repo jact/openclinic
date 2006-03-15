@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_del_confirm.php,v 1.13 2006/03/12 18:43:04 jact Exp $
+ * $Id: patient_del_confirm.php,v 1.14 2006/03/15 20:45:03 jact Exp $
  */
 
 /**
@@ -49,7 +49,7 @@
   $title = _("Delete Patient");
   require_once("../shared/header.php");
 
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&amp;reset=Y"; // controlling var
+  $returnLocation = "../medical/patient_view.php?key=" . $idPatient; // controlling var
 
   /**
    * Bread crumb

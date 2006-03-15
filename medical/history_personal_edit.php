@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_edit.php,v 1.9 2006/01/23 23:14:00 jact Exp $
+ * $Id: history_personal_edit.php,v 1.10 2006/03/15 20:43:59 jact Exp $
  */
 
 /**
@@ -84,11 +84,11 @@
 
   if ( !$history->validateData() )
   {
-    //$pageErrors["???"] = $history->get???Error();
-    //$pageErrors["???"] = $history->get???Error();
+    //$formError["???"] = $history->get???Error();
+    //$formError["???"] = $history->get???Error();
 
-    $_SESSION["postVars"] = $_POST;
-    //$_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = $_POST;
+    //$_SESSION["formError"] = $formError;
 
     header("Location: ../medical/history_personal_edit_form.php?key=" . $idPatient);
     exit();
@@ -123,8 +123,8 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
-  header("Location: ../medical/history_personal_edit_form.php?key=" . $idPatient . "&reset=Y&updated=Y");
+  header("Location: ../medical/history_personal_edit_form.php?key=" . $idPatient . "&updated=Y");
 ?>

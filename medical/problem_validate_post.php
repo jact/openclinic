@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_validate_post.php,v 1.10 2005/08/03 17:40:19 jact Exp $
+ * $Id: problem_validate_post.php,v 1.11 2006/03/15 20:46:49 jact Exp $
  */
 
 /**
@@ -73,10 +73,10 @@
 
   if ( !$problem->validateData() )
   {
-    $pageErrors["wording"] = $problem->getWordingError();
+    $formError["wording"] = $problem->getWordingError();
 
-    $_SESSION["postVars"] = $_POST;
-    $_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = $_POST;
+    $_SESSION["formError"] = $formError;
 
     header("Location: " . $errorLocation);
     exit();

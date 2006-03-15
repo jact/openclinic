@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.17 2006/01/24 19:59:19 jact Exp $
+ * $Id: problem_list.php,v 1.18 2006/03/15 20:46:43 jact Exp $
  */
 
 /**
@@ -116,7 +116,7 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p><a href="../medical/problem_new_form.php?key=' . $idPatient . '&amp;num=' . $lastOrderNumber . '&amp;reset=Y">' . _("Add New Medical Problem") . "</a></p>\n";
+    echo '<p><a href="../medical/problem_new_form.php?key=' . $idPatient . '&amp;num=' . $lastOrderNumber . '">' . _("Add New Medical Problem") . "</a></p>\n";
   }
 
   echo "<hr />\n";
@@ -151,7 +151,7 @@
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/problem_edit_form.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '&amp;reset=Y">' . _("edit") . '</a>';
+      $row .= '<a href="../medical/problem_edit_form.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("edit") . '</a>';
       $row .= OPEN_SEPARATOR;
 
       $row .= '<a href="../medical/problem_del_confirm.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '&amp;wording=' . urlencode(fieldPreview($problem->getWording())) . '">' . _("del") . '</a>';

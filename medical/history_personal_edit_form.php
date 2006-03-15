@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_edit_form.php,v 1.12 2006/03/12 18:42:26 jact Exp $
+ * $Id: history_personal_edit_form.php,v 1.13 2006/03/15 20:44:17 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   require_once("../shared/login_check.php");
   require_once("../classes/History_Query.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -63,18 +63,18 @@
   $history = $historyQ->fetch();
   if ($history)
   {
-    $postVars["id_patient"] = $history->getIdPatient();
-    $postVars["birth_growth"] = $history->getBirthGrowth();
-    $postVars["growth_sexuality"] = $history->getGrowthSexuality();
-    $postVars["feed"] = $history->getFeed();
-    $postVars["habits"] = $history->getHabits();
-    $postVars["peristaltic_conditions"] = $history->getPeristalticConditions();
-    $postVars["psychological"] = $history->getPsychological();
-    $postVars["children_complaint"] = $history->getChildrenComplaint();
-    $postVars["venereal_disease"] = $history->getVenerealDisease();
-    $postVars["accident_surgical_operation"] = $history->getAccidentSurgicalOperation();
-    $postVars["medicinal_intolerance"] = $history->getMedicinalIntolerance();
-    $postVars["mental_illness"] = $history->getMentalIllness();
+    $formVar["id_patient"] = $history->getIdPatient();
+    $formVar["birth_growth"] = $history->getBirthGrowth();
+    $formVar["growth_sexuality"] = $history->getGrowthSexuality();
+    $formVar["feed"] = $history->getFeed();
+    $formVar["habits"] = $history->getHabits();
+    $formVar["peristaltic_conditions"] = $history->getPeristalticConditions();
+    $formVar["psychological"] = $history->getPsychological();
+    $formVar["children_complaint"] = $history->getChildrenComplaint();
+    $formVar["venereal_disease"] = $history->getVenerealDisease();
+    $formVar["accident_surgical_operation"] = $history->getAccidentSurgicalOperation();
+    $formVar["medicinal_intolerance"] = $history->getMedicinalIntolerance();
+    $formVar["mental_illness"] = $history->getMentalIllness();
   }
   else
   {
@@ -124,13 +124,18 @@
    * Edit form
    */
   echo '<form method="post" action="../medical/history_personal_edit.php">' . "\n";
-  echo "<div>\n";
 
   Form::hidden("id_patient", $idPatient);
 
   require_once("../medical/history_personal_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_new_form.php,v 1.12 2006/03/12 18:48:12 jact Exp $
+ * $Id: test_new_form.php,v 1.13 2006/03/15 20:47:25 jact Exp $
  */
 
 /**
@@ -36,7 +36,7 @@
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -45,8 +45,8 @@
   $idPatient = intval($_GET["pat"]);
 
   // after clean (get_form_vars.php)
-  $postVars["id_problem"] = $idProblem;
-  $postVars["id_patient"] = $idPatient;
+  $formVar["id_problem"] = $idProblem;
+  $formVar["id_patient"] = $idPatient;
 
   /**
    * Show page
@@ -76,7 +76,7 @@
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
 
-  //Error::debug($postVars);
+  //Error::debug($formVar);
 
   require_once("../shared/form_errors_msg.php");
 
@@ -84,17 +84,22 @@
    * New form
    */
   echo '<form method="post" action="../medical/test_new.php" enctype="multipart/form-data" onsubmit="document.forms[0].upload_file.value = document.forms[0].path_filename.value; return true;">' . "\n";
-  echo "<div>\n";
 
-  Form::hidden("id_problem", $postVars["id_problem"]);
+  Form::hidden("id_problem", $idProblem);
   Form::hidden("id_patient", $idPatient);
   Form::hidden("upload_file");
 
   require_once("../medical/test_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

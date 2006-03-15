@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.19 2006/01/24 19:48:46 jact Exp $
+ * $Id: patient_view.php,v 1.20 2006/03/15 20:45:53 jact Exp $
  */
 
 /**
@@ -36,7 +36,6 @@
   require_once("../shared/login_check.php");
   require_once("../classes/Patient_Page_Query.php");
   require_once("../classes/Staff_Query.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
 
   /**
    * Retrieving get var
@@ -113,7 +112,7 @@
   echo '<p>';
   if ($hasMedicalAdminAuth)
   {
-    echo '<a href="../medical/patient_edit_form.php?key=' . $idPatient . '&amp;reset=Y">' . _("Edit Social Data") . '</a> | ';
+    echo '<a href="../medical/patient_edit_form.php?key=' . $idPatient . '">' . _("Edit Social Data") . '</a> | ';
     echo '<a href="../medical/patient_del_confirm.php?key=' . $idPatient . '&amp;name=' . urlencode($patName) . '">' . _("Delete Patient") . '</a> | ';
   }
   echo '<a href="../medical/relative_list.php?key=' . $idPatient . '">' . _("View Relatives") . '</a>';

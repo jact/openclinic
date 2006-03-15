@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.5 2005/08/15 16:37:34 jact Exp $
+ * $Id: index.php,v 1.6 2006/03/15 20:44:26 jact Exp $
  */
 
 /**
@@ -60,7 +60,7 @@
 <hr />
 
 <h2 class="icon patientIcon">
-  <a href="../medical/patient_new_form.php?reset=Y"><?php echo _("New Patient"); ?></a>
+  <a href="../medical/patient_new_form.php"><?php echo _("New Patient"); ?></a>
 </h2>
 
 <p><?php echo _("Build a new patient information in medical records system."); ?></p>

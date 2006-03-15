@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_edit_form.php,v 1.20 2006/03/12 18:51:00 jact Exp $
+ * $Id: problem_edit_form.php,v 1.21 2006/03/15 20:46:24 jact Exp $
  */
 
 /**
@@ -37,7 +37,7 @@
   require_once("../classes/Problem_Page_Query.php");
   require_once("../classes/Staff_Query.php");
   require_once("../lib/Form.php");
-  require_once("../shared/get_form_vars.php"); // to clean $postVars and $pageErrors
+  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
    * Retrieving get vars
@@ -65,22 +65,22 @@
   $problem = $problemQ->fetch();
   if ($problem)
   {
-    $postVars["id_problem"] = $idProblem;
-    $postVars["id_patient"] = $idPatient;
-    $postVars["order_number"] = $problem->getOrderNumber();
-    $postVars["opening_date"] = $problem->getOpeningDate();
-    if (isset($_GET["reset"]))
+    $formVar["id_problem"] = $idProblem;
+    $formVar["id_patient"] = $idPatient;
+    $formVar["order_number"] = $problem->getOrderNumber();
+    $formVar["opening_date"] = $problem->getOpeningDate();
+    if ( !isset($formError) )
     {
-      $postVars["last_update_date"] = $problem->getLastUpdateDate();
-      $postVars["id_member"] = $problem->getIdMember();
-      $postVars["closed_problem"] = (($problem->getClosingDate() != "") ? "checked" : "");
-      $postVars["meeting_place"] = $problem->getMeetingPlace();
-      $postVars["wording"] = $problem->getWording();
-      $postVars["subjective"] = $problem->getSubjective();
-      $postVars["objective"] = $problem->getObjective();
-      $postVars["appreciation"] = $problem->getAppreciation();
-      $postVars["action_plan"] = $problem->getActionPlan();
-      $postVars["prescription"] = $problem->getPrescription();
+      $formVar["last_update_date"] = $problem->getLastUpdateDate();
+      $formVar["id_member"] = $problem->getIdMember();
+      $formVar["closed_problem"] = (($problem->getClosingDate() != "") ? "checked" : "");
+      $formVar["meeting_place"] = $problem->getMeetingPlace();
+      $formVar["wording"] = $problem->getWording();
+      $formVar["subjective"] = $problem->getSubjective();
+      $formVar["objective"] = $problem->getObjective();
+      $formVar["appreciation"] = $problem->getAppreciation();
+      $formVar["action_plan"] = $problem->getActionPlan();
+      $formVar["prescription"] = $problem->getPrescription();
     }
   }
   else
@@ -123,17 +123,22 @@
    * Edit form
    */
   echo '<form method="post" action="../medical/problem_edit.php">' . "\n";
-  echo "<div>\n";
 
-  Form::hidden("id_problem", $postVars["id_problem"]);
-  Form::hidden("last_update_date", $postVars["last_update_date"]);
-  Form::hidden("id_patient", $postVars["id_patient"]);
+  Form::hidden("id_problem", $formVar["id_problem"]);
+  Form::hidden("last_update_date", $formVar["last_update_date"]);
+  Form::hidden("id_patient", $formVar["id_patient"]);
 
   require_once("../medical/problem_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   require_once("../shared/footer.php");
 ?>

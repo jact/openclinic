@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_validate_post.php,v 1.7 2005/08/03 17:40:19 jact Exp $
+ * $Id: patient_validate_post.php,v 1.8 2006/03/15 20:45:53 jact Exp $
  */
 
 /**
@@ -82,14 +82,14 @@
 
   if ( !$pat->validateData() )
   {
-    $pageErrors["first_name"] = $pat->getFirstNameError();
-    $pageErrors["surname1"] = $pat->getSurname1Error();
-    $pageErrors["surname2"] = $pat->getSurname2Error();
-    $pageErrors["birth_date"] = $pat->getBirthDateError();
-    $pageErrors["decease_date"] = $pat->getDeceaseDateError();
+    $formError["first_name"] = $pat->getFirstNameError();
+    $formError["surname1"] = $pat->getSurname1Error();
+    $formError["surname2"] = $pat->getSurname2Error();
+    $formError["birth_date"] = $pat->getBirthDateError();
+    $formError["decease_date"] = $pat->getDeceaseDateError();
 
-    $_SESSION["postVars"] = $_POST;
-    $_SESSION["pageErrors"] = $pageErrors;
+    $_SESSION["formVar"] = $_POST;
+    $_SESSION["formError"] = $formError;
 
     header("Location: " . $errorLocation);
     exit();

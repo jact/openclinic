@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.12 2006/01/24 19:42:44 jact Exp $
+ * $Id: patient_edit.php,v 1.13 2006/03/15 20:45:28 jact Exp $
  */
 
 /**
@@ -48,8 +48,7 @@
 
   require_once("../medical/patient_validate_post.php");
 
-  // To header, without &amp;
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient . "&reset=Y"; // controlling var
+  $returnLocation = "../medical/patient_view.php?key=" . $idPatient; // controlling var
 
   /**
    * Prevent user from aborting script
@@ -94,8 +93,8 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["postVars"]);
-  unset($_SESSION["pageErrors"]);
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Redirect to $returnLocation to avoid reload problem
