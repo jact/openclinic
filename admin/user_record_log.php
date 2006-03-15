@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_record_log.php,v 1.25 2006/03/12 18:36:40 jact Exp $
+ * $Id: user_record_log.php,v 1.26 2006/03/15 20:27:15 jact Exp $
  */
 
 /**
@@ -49,7 +49,7 @@
   /**
    * Retrieving post vars and scrubbing the data
    */
-  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
 
   /**
@@ -59,7 +59,7 @@
   $recordQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $recordQ->connect();
 
-  $recordQ->searchUser($idUser, $currentPageNmbr, $limit);
+  $recordQ->searchUser($idUser, $currentPage, $limit);
 
   /**
    * Show page
@@ -91,7 +91,7 @@
     echo '<p><strong>' . sprintf(_("%d transactions."), $recordQ->getRowCount()) . "</strong></p>\n";
 
     $pageCount = $recordQ->getPageCount();
-    Search::pageLinks($currentPageNmbr, $pageCount);
+    Search::pageLinks($currentPage, $pageCount);
 
     Search::changePageJS();
 
@@ -100,7 +100,7 @@
      */
     echo '<form id="changePage" method="post" action="../admin/user_record_log.php?key=' . $idUser . '&amp;login=' . urlencode($login) . '">' . "\n";
     echo "<div>\n";
-    Form::hidden("page", $currentPageNmbr);
+    Form::hidden("page", $currentPage);
     Form::hidden("limit", $limit);
     echo "</div>\n</form>\n";
 
@@ -142,7 +142,7 @@
 
     HTML::table($thead, $tbody, null, $options);
 
-    Search::pageLinks($currentPageNmbr, $pageCount);
+    Search::pageLinks($currentPage, $pageCount);
   } // end if-else
   unset($recordQ);
 

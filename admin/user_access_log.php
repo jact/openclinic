@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.23 2006/03/12 18:34:29 jact Exp $
+ * $Id: user_access_log.php,v 1.24 2006/03/15 20:26:06 jact Exp $
  */
 
 /**
@@ -49,7 +49,7 @@
   /**
    * Retrieving post vars and scrubbing the data
    */
-  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
 
   /**
@@ -59,7 +59,7 @@
   $accessQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $accessQ->connect();
 
-  $accessQ->searchUser($idUser, $currentPageNmbr, $limit);
+  $accessQ->searchUser($idUser, $currentPage, $limit);
 
   /**
    * Show page
@@ -91,7 +91,7 @@
     echo '<p><strong>' . sprintf(_("%d accesses."), $accessQ->getRowCount()) . "</strong></p>\n";
 
     $pageCount = $accessQ->getPageCount();
-    Search::pageLinks($currentPageNmbr, $pageCount);
+    Search::pageLinks($currentPage, $pageCount);
 
     Search::changePageJS();
 
@@ -100,7 +100,7 @@
      */
     echo '<form id="changePage" method="post" action="../admin/user_access_log.php?key=' . $idUser . '&amp;login=' . urlencode($login) . '">' . "\n";
     echo "<div>\n";
-    Form::hidden("page", $currentPageNmbr);
+    Form::hidden("page", $currentPage);
     Form::hidden("limit", $limit);
     echo "</div>\n</form>\n";
 
@@ -140,7 +140,7 @@
 
     HTML::table($thead, $tbody, null, $options);
 
-    Search::pageLinks($currentPageNmbr, $pageCount);
+    Search::pageLinks($currentPage, $pageCount);
   } // end if-else
   unset($accessQ);
   unset($access);
