@@ -2,10 +2,10 @@
 /**
  * This file is part of OpenClinic
  *
- * Copyright (c) 2002-2005 jact
+ * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.21 2005/08/15 16:41:21 jact Exp $
+ * $Id: footer.php,v 1.22 2006/03/15 20:04:28 jact Exp $
  */
 
 /**
@@ -66,7 +66,7 @@
   </p>
 
   <p>
-    Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;gmail.com" accesskey="9">Jose Antonio Chavarría</a>
+    Copyright &copy; 2002-2006 <a href="mailto:CUT-THIS.jachavar&#64;gmail.com" accesskey="9">Jose Antonio Chavarría</a>
     <br />
     <?php echo _("under the"); ?>
     <a href="../home/license.php" rel="license">GNU General Public License</a>
