@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.19 2006/03/12 18:44:12 jact Exp $
+ * $Id: patient_search.php,v 1.20 2006/03/15 20:48:32 jact Exp $
  */
 
 /**
@@ -41,7 +41,7 @@
   /**
    * Retrieving post vars and scrubbing the data
    */
-  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $searchType = Check::safeText($_POST["search_type"]);
   $logical = Check::safeText($_POST["logical"]);
   $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
@@ -60,7 +60,7 @@
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $patQ->connect();
 
-  $patQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
+  $patQ->search($searchType, $arraySearch, $currentPage, $logical, $limit);
 
   /**
    * Show patient view screen if only one result from query
@@ -71,7 +71,7 @@
     $patQ->freeResult();
     $patQ->close();
 
-    header("Location: ../medical/patient_view.php?key=" . $pat->getIdPatient() . "&reset=Y");
+    header("Location: ../medical/patient_view.php?key=" . $pat->getIdPatient());
     exit();
   }
 
@@ -112,7 +112,7 @@
   echo "<div>\n";
   Form::hidden("search_type", $searchType);
   Form::hidden("search_text", $searchText);
-  Form::hidden("page", $currentPageNmbr);
+  Form::hidden("page", $currentPage);
   Form::hidden("logical", $logical);
   Form::hidden("limit", $limit);
   echo "</div>\n</form>\n";
@@ -123,7 +123,7 @@
   echo '<p><strong>' . sprintf(_("%d matches found."), $patQ->getRowCount()) . "</strong></p>\n";
 
   $pageCount = $patQ->getPageCount();
-  Search::pageLinks($currentPageNmbr, $pageCount);
+  Search::pageLinks($currentPage, $pageCount);
 
   /**
    * Choose field
@@ -224,7 +224,7 @@
   {
     $row = $patQ->getCurrentRow() . '.';
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../medical/patient_view.php?key=' . $pat->getIdPatient() . '&amp;reset=Y">' . $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName() . '</a>';
+    $row .= '<a href="../medical/patient_view.php?key=' . $pat->getIdPatient() . '">' . $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName() . '</a>';
 
     if ($val != "")
     {
@@ -240,7 +240,7 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  Search::pageLinks($currentPageNmbr, $pageCount);
+  Search::pageLinks($currentPage, $pageCount);
 
   require_once("../shared/footer.php");
 ?>

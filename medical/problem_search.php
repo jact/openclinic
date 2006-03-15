@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_search.php,v 1.22 2006/03/12 18:45:42 jact Exp $
+ * $Id: problem_search.php,v 1.23 2006/03/15 20:48:20 jact Exp $
  */
 
 /**
@@ -43,7 +43,7 @@
   /**
    * Retrieving post vars and scrubbing the data
    */
-  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $searchType = Check::safeText($_POST["search_type_problem"]);
   $logical = Check::safeText($_POST["logical_problem"]);
   $limit = (isset($_POST["limit_problem"])) ? intval($_POST["limit_problem"]) : 0;
@@ -62,7 +62,7 @@
   $problemQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $problemQ->connect();
 
-  $problemQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
+  $problemQ->search($searchType, $arraySearch, $currentPage, $logical, $limit);
 
   /**
    * Show problem view screen if only one result from query
@@ -72,7 +72,7 @@
     $problem = $problemQ->fetch();
     $problemQ->close();
 
-    header("Location: ../medical/problem_view.php?key=" . $problem->getIdProblem() . "&pat=" . $problem->getIdPatient() . "&reset=Y");
+    header("Location: ../medical/problem_view.php?key=" . $problem->getIdProblem() . "&pat=" . $problem->getIdPatient());
     exit();
   }
 
@@ -113,7 +113,7 @@
   echo "<div>\n";
   Form::hidden("search_type_problem", $searchType);
   Form::hidden("search_text_problem", $searchText);
-  Form::hidden("page", $currentPageNmbr);
+  Form::hidden("page", $currentPage);
   Form::hidden("logical_problem", $logical);
   Form::hidden("limit_problem", $limit);
   echo "</div>\n</form>\n";
@@ -124,7 +124,7 @@
   echo '<p><strong>' . sprintf(_("%d matches found."), $problemQ->getRowCount()) . "</strong></p>\n";
 
   $pageCount = $problemQ->getPageCount();
-  Search::pageLinks($currentPageNmbr, $pageCount);
+  Search::pageLinks($currentPage, $pageCount);
 
   /**
    * Choose field
@@ -231,7 +231,7 @@
       $row = $array[0] . '.';
       $row .= OPEN_SEPARATOR;
 
-      $row .= '<a href="../medical/problem_view.php?key=' . $array[1] . '&amp;pat=' . $array[2] . '&amp;reset=Y">' . $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName() . '</a>';
+      $row .= '<a href="../medical/problem_view.php?key=' . $array[1] . '&amp;pat=' . $array[2] . '">' . $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName() . '</a>';
       $row .= "<br />\n" . $key . " " . $array[3] . "<br />\n";
       $row .= _("Opening Date") . ": " . $array[4];
       if ($array[5] != "")
@@ -250,7 +250,7 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  Search::pageLinks($currentPageNmbr, $pageCount);
+  Search::pageLinks($currentPage, $pageCount);
 
   require_once("../shared/footer.php");
 ?>

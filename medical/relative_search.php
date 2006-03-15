@@ -5,7 +5,7 @@
  * Copyright (c) 2002-2006 jact
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.22 2006/03/12 18:47:05 jact Exp $
+ * $Id: relative_search.php,v 1.23 2006/03/15 20:47:59 jact Exp $
  */
 
 /**
@@ -43,7 +43,7 @@
    * Retrieving post vars and scrubbing the data
    */
   $idPatient = intval($_POST["id_patient"]);
-  $currentPageNmbr = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
+  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
   $searchType = Check::safeText($_POST["search_type"]);
   $logical = Check::safeText($_POST["logical"]);
   $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
@@ -64,7 +64,7 @@
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $patQ->connect();
 
-  $patQ->search($searchType, $arraySearch, $currentPageNmbr, $logical, $limit);
+  $patQ->search($searchType, $arraySearch, $currentPage, $logical, $limit);
 
   /**
    * Show page
@@ -110,7 +110,7 @@
   echo "<div>\n";
   Form::hidden("search_type", $searchType);
   Form::hidden("search_text", $searchText);
-  Form::hidden("page", $currentPageNmbr);
+  Form::hidden("page", $currentPage);
   Form::hidden("logical", $logical);
   Form::hidden("limit", $limit);
   Form::hidden("id_patient", $idPatient);
@@ -128,7 +128,7 @@
   echo '<p><strong>' . sprintf(_("%d matches found."), $patQ->getRowCount()) . "</strong></p>\n";
 
   $pageCount = $patQ->getPageCount();
-  Search::pageLinks($currentPageNmbr, $pageCount);
+  Search::pageLinks($currentPage, $pageCount);
 
   $val = "";
   switch ($_POST["search_type"])
@@ -208,10 +208,9 @@
 
 <script type="text/javascript" src="../scripts/checkboxes.js" defer="defer"></script>
 
-<!-- Printing result table -->
-<form method="post" action="../medical/relative_new.php">
-  <div>
 <?php
+  echo '<form method="post" action="../medical/relative_new.php">' . "\n";
+
   Form::hidden("id_patient", $idPatient, array('id' => 'r_id_patient'));
 
   $thead = array(
@@ -251,12 +250,10 @@
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);
-?>
-  </div>
-</form>
 
-<?php
-  Search::pageLinks($currentPageNmbr, $pageCount);
+  echo "</form>\n";
+
+  Search::pageLinks($currentPage, $pageCount);
 
   require_once("../shared/footer.php");
 ?>
