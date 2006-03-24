@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_view.php,v 1.16 2006/03/15 20:46:49 jact Exp $
+ * $Id: problem_view.php,v 1.17 2006/03/24 20:27:47 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * View medical problem data screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -108,12 +108,36 @@
   {
     if (I18n::localDate($problem->getClosingDate()) == "")
     {
-      echo '<a href="../medical/problem_edit_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '">' . _("Edit Medical Problem Data") . '</a> | ';
+      HTML::link(_("Edit Medical Problem Data"), '../medical/problem_edit_form.php',
+        array(
+          'key' => $idProblem,
+          'pat' => $idPatient
+        )
+      );
+      echo ' | ';
     }
-    echo '<a href="../medical/problem_del_confirm.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '&amp;wording=' . urlencode($problem->getWording()) . '">' . _("Delete Medical Problem") . '</a> | ';
+    HTML::link(_("Delete Medical Problem"), '../medical/problem_del_confirm.php',
+      array(
+        'key' => $idProblem,
+        'pat' => $idPatient,
+        'wording' => $problem->getWording()
+      )
+    );
+    echo ' | ';
   }
-  echo '<a href="../medical/connection_list.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '">' . _("View Connection Problems") . '</a> | ';
-  echo '<a href="../medical/test_list.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '">' . _("View Medical Tests") . '</a>';
+  HTML::link(_("View Connection Problems"), '../medical/connection_list.php',
+    array(
+      'key' => $idProblem,
+      'pat' => $idPatient
+    )
+  );
+  echo ' | ';
+  HTML::link(_("View Medical Tests"), '../medical/test_list.php',
+    array(
+      'key' => $idProblem,
+      'pat' => $idPatient
+    )
+  );
   echo "</p>\n";
 
   echo '<h2>' . _("Medical Problem Data") . "</h2>\n";

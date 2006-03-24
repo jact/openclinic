@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_list.php,v 1.17 2006/01/24 20:14:40 jact Exp $
+ * $Id: connection_list.php,v 1.18 2006/03/24 20:24:43 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * List of defined connection between medical problems screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -87,7 +87,14 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p><a href="../medical/connection_new_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '">' . _("Add New Connection Problems") . "</a></p>\n";
+    echo '<p>';
+    HTML::link(_("Add New Connection Problems"), '../medical/connection_new_form.php',
+      array(
+        'key' => $idProblem,
+        'pat' => $idPatient
+      )
+    );
+    echo "</p>\n";
   }
 
   $connQ = new Connection_Query;
@@ -141,12 +148,24 @@
       Error::fetch($problemQ);
     }
 
-    $row = '<a href="../medical/problem_view.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $idPatient . '">' . _("view") . '</a>';
+    $row = HTML::strLink(_("view"), '../medical/problem_view.php',
+      array(
+        'key' => $problem->getIdProblem(),
+        'pat' => $idPatient
+      )
+    );
     $row .= OPEN_SEPARATOR;
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/connection_del_confirm.php?key=' . $idProblem . '&amp;conn=' . $problem->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;wording=' . urlencode(fieldPreview($problem->getWording())) . '">' . _("del") . '</a>';
+      $row .= HTML::strLink(_("del"), '../medical/connection_del_confirm.php',
+        array(
+          'key' => $idProblem,
+          'conn' => $problem->getIdProblem(),
+          'pat' => $idPatient,
+          'wording' => fieldPreview($problem->getWording())
+        )
+      );
       $row .= OPEN_SEPARATOR;
     } // end if
 

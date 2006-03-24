@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_list.php,v 1.22 2006/03/15 20:23:14 jact Exp $
+ * $Id: theme_list.php,v 1.23 2006/03/24 20:19:10 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * List of defined themes screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -97,7 +97,7 @@
   Form::fieldset($legend, $tbody, $tfoot);
   echo "</form>\n";
 
-  echo '<p>' . '<a href="../admin/theme_new_form.php">' . _("Add New Theme") . "</a></p>\n";
+  echo '<p>' . HTML::strLink(_("Add New Theme"), '../admin/theme_new_form.php') . "</p>\n";
 
   echo '<h2>' . _("Themes List:") . "</h2>\n";
 ?>
@@ -146,17 +146,19 @@ function previewTheme(key)
     }
     else
     {
-      $row = '<a href="../admin/theme_edit_form.php?key=' . $theme->getId() . '">' . _("edit") . '</a>';
+      $row = HTML::strLink(_("edit"), '../admin/theme_edit_form.php', array('key' => $theme->getId()));
     }
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="../admin/theme_new_form.php?key=' . $theme->getId() . '">' . _("copy") . '</a>';
+    $row .= HTML::strLink(_("copy"), '../admin/theme_new_form.php', array('key' => $theme->getId()));
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="../admin/theme_preview.php?key=' . $theme->getId() . '" onclick="return previewTheme(' . $theme->getId() . ')">' . _("preview") . '</a>';
+    $row .= HTML::strLink(_("preview"), '../admin/theme_preview.php', array('key' => $theme->getId()),
+      array('onclick' => 'return previewTheme(' . $theme->getId() . ')')
+    );
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="' . $validateLink . $theme->getCSSFile() . '">' . _("validate") . '</a>';
+    $row .= HTML::strLink(_("validate"), $validateLink . $theme->getCSSFile());
     $row .= OPEN_SEPARATOR;
 
     if (in_array($theme->getCSSFile(), $reservedCSSFiles))
@@ -169,7 +171,13 @@ function previewTheme(key)
     }
     else
     {
-      $row .= '<a href="../admin/theme_del_confirm.php?key=' . $theme->getId() . '&amp;name=' . urlencode($theme->getName()) . '&amp;file=' . urlencode($theme->getCSSFile()) . '">' . _("del") . '</a>';
+      $row .= HTML::strLink(_("del"), '../admin/theme_del_confirm.php',
+        array(
+          'key' => $theme->getId(),
+          'name' => $theme->getName(),
+          'file' => $theme->getCSSFile()
+        )
+      );
     } // end if
     $row .= OPEN_SEPARATOR;
 

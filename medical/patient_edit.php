@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_edit.php,v 1.13 2006/03/15 20:45:28 jact Exp $
+ * $Id: patient_edit.php,v 1.14 2006/03/24 20:25:54 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Patient edition process
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -68,7 +68,7 @@
 
     HTML::message(sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName), OPEN_MSG_INFO);
 
-    echo '<p><a href="' . $returnLocation . '">' . _("Return to Patient Social Data") . "</a></p>\n";
+    echo '<p>' . HTML::strLink(_("Return to Patient Social Data"), $returnLocation) . "</p>\n";
 
     include_once("../shared/footer.php");
     exit();

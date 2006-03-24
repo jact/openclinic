@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_search.php,v 1.23 2006/03/15 20:47:59 jact Exp $
+ * $Id: relative_search.php,v 1.24 2006/03/24 20:28:19 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Possible relatives result set page
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -245,7 +245,7 @@
   unset($patQ);
 
   $tfoot = array(
-    0 => '<a href="#" onclick="setCheckboxes(1, \'check[]\', true); return false;">' . _("Select all") . '</a>' . ' / ' . '<a href="#" onclick="setCheckboxes(1, \'check[]\', false); return false;">' . _("Unselect all") . '</a>',
+    0 => HTML::strLink(_("Select all"), '#', null, array('onclick' => "setCheckboxes(1, 'check[]', true); return false;")) . ' / ' . HTML::strLink(_("Unselect all"), '#', null, array('onclick' => "setCheckboxes(1, 'check[]', false); return false;")),
     1 => Form::strButton("button1", _("Add selected to Relatives List"))
   );
 

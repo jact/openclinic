@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_access_log.php,v 1.24 2006/03/15 20:26:06 jact Exp $
+ * $Id: user_access_log.php,v 1.25 2006/03/24 20:20:23 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * List of user's accesses
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -146,7 +146,7 @@
   unset($access);
   unset($profiles);
 
-  echo '<p><a href="' . $returnLocation . '">' . _("Return to users list") . "</a></p>\n";
+  echo '<p>' . HTML::strLink(_("Return to users list"), $returnLocation) . "</p>\n";
 
   require_once("../shared/footer.php");
 ?>

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.16 2005/08/15 16:35:40 jact Exp $
+ * $Id: index.php,v 1.17 2006/03/24 20:21:39 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Home page of documentation project
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /*if (count($_GET) == 0 || !isset($_GET['tab']) || !isset($_GET['nav']))
@@ -26,6 +26,7 @@
   $tab = "doc";
 
   require_once("../shared/read_settings.php");
+  require_once("../lib/HTML.php");
 
   /**
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
@@ -55,7 +56,7 @@
   <!-- End Tabs -->
 
   <div id="sourceForgeLinks">
-    <a href="#" onclick="window.close(); return false;"><?php echo _("Close Window"); ?></a>
+    <?php HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')); ?>
   </div><!-- End #sourceForgeLinks -->
 </div><!-- End #header -->
 <!-- End Header -->
@@ -64,7 +65,7 @@
 <div id="sideBar">
   <ul class="linkList">
     <li class="selected"><?php echo _("Help Topic"); ?></li>
-    <li><a href="#"><?php echo _("Help Topic"); ?></a></li>
+    <li><?php HTML::link(_("Help Topic"), '#'); ?></li>
   </ul><!-- End .linkList -->
 
   <hr />

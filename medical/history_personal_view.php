@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: history_personal_view.php,v 1.12 2006/03/15 20:44:22 jact Exp $
+ * $Id: history_personal_view.php,v 1.13 2006/03/24 20:25:29 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Personal antecedents screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -92,7 +92,9 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p><a href="../medical/history_personal_edit_form.php?key=' . $idPatient . '">' . _("Edit Personal Antecedents") . "</a></p>\n";
+    echo '<p>';
+    HTML::link(_("Edit Personal Antecedents"), '../medical/history_personal_edit_form.php', array('key' => $idPatient));
+    echo "</p>\n";
   }
 
   /**

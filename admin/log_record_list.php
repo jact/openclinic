@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_record_list.php,v 1.18 2006/01/23 22:56:46 jact Exp $
+ * $Id: log_record_list.php,v 1.19 2006/03/24 20:17:46 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * List of record's logs in a date
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  * @since 0.4
  */
 
@@ -118,8 +118,9 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  echo '<p><a href="' . (isset($_SERVER["HTTP_REFERER"]) ? htmlspecialchars($_SERVER["HTTP_REFERER"]) : '../index.php') . '">';
-  echo _("Back return") . "</a></p>\n";
+  echo '<p>';
+  HTML::link(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php'));
+  echo "</p>\n";
 
   require_once("../shared/footer.php");
 ?>

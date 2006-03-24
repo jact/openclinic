@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_list.php,v 1.18 2006/03/15 20:15:00 jact Exp $
+ * $Id: staff_list.php,v 1.19 2006/03/24 20:18:29 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * List of defined staff members screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -108,10 +108,9 @@
   //Error::debug($_SESSION);
 
   echo '<p>';
-  echo '<a href="../admin/staff_new_form.php?type=A">';
-  echo _("Add New Administrative") . '</a> | ';
-  echo '<a href="../admin/staff_new_form.php?type=D">';
-  echo _("Add New Doctor") . '</a>';
+  HTML::link(_("Add New Administrative"), '../admin/staff_new_form.php', array('type' => 'A'));
+  echo ' | ';
+  HTML::link(_("Add New Doctor"), '../admin/staff_new_form.php', array('type' => 'D'));
   echo "</p>\n";
 
   echo "<hr />";
@@ -121,32 +120,29 @@
   echo '<p>';
   if ( !empty($memberType) )
   {
-    echo '<a href="../admin/staff_list.php">';
+    HTML::link(_("View all staff members"), '../admin/staff_list.php');
   }
-  echo _("View all staff members");
-  if ( !empty($memberType) )
+  else
   {
-    echo '</a>';
+    echo _("View all staff members");
   }
   echo ' | ';
   if ($memberType != 'A')
   {
-    echo '<a href="../admin/staff_list.php?type=A">';
+    HTML::link(_("View only administratives"), '../admin/staff_list.php', array('type' => 'A'));
   }
-  echo _("View only administratives");
-  if ($memberType != 'A')
+  else
   {
-    echo '</a>';
+    echo _("View only administratives");
   }
   echo ' | ';
   if ($memberType != 'D')
   {
-    echo '<a href="../admin/staff_list.php?type=D">';
+    HTML::link(_("View only doctors"), '../admin/staff_list.php', array('type' => 'D'));
   }
-  echo _("View only doctors");
-  if ($memberType != 'D')
+  else
   {
-    echo '</a>';
+    echo _("View only doctors");
   }
   echo "</p>\n";
 
@@ -180,7 +176,7 @@
       continue;
     }
 
-    $row = '<a href="../admin/staff_edit_form.php?key=' . $staff->getIdMember() . '">' . _("edit") . '</a>';
+    $row = HTML::strLink(_("edit"), '../admin/staff_edit_form.php', array('key' => $staff->getIdMember()));
     $row .= OPEN_SEPARATOR;
 
     if ($staff->getIdMember() == $_SESSION["memberUser"])
@@ -189,7 +185,14 @@
     }
     else
     {
-      $row .= '<a href="../admin/staff_del_confirm.php?key=' . $staff->getIdMember() . '&amp;sur1=' . urlencode($staff->getSurname1()) . '&amp;sur2=' . urlencode($staff->getSurname2()) . '&amp;first=' . urlencode($staff->getFirstName()) . '">' . _("del") . '</a>';
+      $row .= HTML::strLink(_("del"), '../admin/staff_del_confirm.php',
+        array(
+          'key' => $staff->getIdMember(),
+          'sur1' => $staff->getSurname1(),
+          'sur2' => $staff->getSurname2(),
+          'first' => $staff->getFirstName()
+        )
+      );
     } // end if
     $row .= OPEN_SEPARATOR;
 
@@ -199,11 +202,16 @@
     }
     elseif ($staff->getIdUser() == 0)
     {
-      $row .= '<a href="../admin/user_new_form.php?id_member=' . $staff->getIdMember() . '&amp;login=' . $staff->getLogin() . '">' . _("create user") . '</a>';
+      $row .= HTML::strLink(_("create user"), '../admin/user_new_form.php',
+        array(
+          'id_member' => $staff->getIdMember(),
+          'login' => $staff->getLogin()
+        )
+      );
     }
     else
     {
-      $row .= '<a href="../admin/user_edit_form.php?key=' . $staff->getIdUser() . '">' . _("edit user") . '</a>';
+      $row .= HTML::strLink(_("edit user"), '../admin/user_edit_form.php', array('key' => $staff->getIdUser()));
     } // end if
     $row .= OPEN_SEPARATOR;
 

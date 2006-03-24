@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_view.php,v 1.20 2006/03/15 20:45:53 jact Exp $
+ * $Id: patient_view.php,v 1.21 2006/03/24 20:26:36 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * View patient data screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -112,10 +112,17 @@
   echo '<p>';
   if ($hasMedicalAdminAuth)
   {
-    echo '<a href="../medical/patient_edit_form.php?key=' . $idPatient . '">' . _("Edit Social Data") . '</a> | ';
-    echo '<a href="../medical/patient_del_confirm.php?key=' . $idPatient . '&amp;name=' . urlencode($patName) . '">' . _("Delete Patient") . '</a> | ';
+    HTML::link(_("Edit Social Data"), '../medical/patient_edit_form.php', array('key' => $idPatient));
+    echo ' | ';
+    HTML::link(_("Delete Patient"), '../medical/patient_del_confirm.php',
+      array(
+        'key' => $idPatient,
+        'name' => $patName
+      )
+    );
+    echo ' | ';
   }
-  echo '<a href="../medical/relative_list.php?key=' . $idPatient . '">' . _("View Relatives") . '</a>';
+  HTML::link(_("View Relatives"), '../medical/relative_list.php', array('key' => $idPatient));
   echo "</p>\n";
 
   echo "<hr />\n";

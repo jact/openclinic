@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_process.php,v 1.10 2005/07/31 11:05:03 jact Exp $
+ * $Id: dump_process.php,v 1.11 2006/03/24 20:16:01 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains database dump process
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -368,9 +368,7 @@
   if (empty($_POST['as_file']))
   {
     echo "</pre>\n";
-    echo '<p><a href="../admin/dump_view_form.php">';
-    echo _("Back return");
-    echo "</a></p>\n";
+    echo '<p>' . HTML::strLink(_("Back return"), "../admin/dump_view_form.php") . "</p>\n";
 
     include_once('../shared/footer.php');
   } // end if

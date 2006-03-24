@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_list.php,v 1.22 2006/03/15 20:27:02 jact Exp $
+ * $Id: user_list.php,v 1.23 2006/03/24 20:20:48 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * List of defined users screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -165,9 +165,9 @@
     /**
      * Row construction
      */
-    $row = '<a href="../admin/user_edit_form.php?key=' . $user->getIdUser(). '">' . _("edit") . '</a>';
+    $row = HTML::strLink(_("edit"), '../admin/user_edit_form.php', array('key' => $user->getIdUser()));
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../admin/user_pwd_reset_form.php?key=' . $user->getIdUser() . '">' . _("pwd") . '</a>';
+    $row .= HTML::strLink(_("pwd"), '../admin/user_pwd_reset_form.php', array('key' => $user->getIdUser()));
     $row .= OPEN_SEPARATOR;
     if (isset($_SESSION["userId"]) && $user->getIdUser() == $_SESSION["userId"])
     {
@@ -175,14 +175,29 @@
     }
     else
     {
-      $row .= '<a href="../admin/user_del_confirm.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("del") . '</a>';
+      $row .= HTML::strLink(_("del"), '../admin/user_del_confirm.php',
+        array(
+          'key' => $user->getIdUser(),
+          'login' => $user->getLogin()
+        )
+      );
     }
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../admin/staff_edit_form.php?key=' . $user->getIdMember() . '">' . _("edit member") . '</a>';
+    $row .= HTML::strLink(_("edit member"), '../admin/staff_edit_form.php', array('key' => $user->getIdMember()));
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../admin/user_access_log.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("accesses"). '</a>';
+    $row .= HTML::strLink(_("accesses"), '../admin/user_access_log.php',
+      array(
+        'key' => $user->getIdUser(),
+        'login' => $user->getLogin()
+      )
+    );
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../admin/user_record_log.php?key=' . $user->getIdUser() . '&amp;login=' . $user->getLogin() . '">' . _("transactions") . '</a>';
+    $row .= HTML::strLink(_("transactions"), '../admin/user_record_log.php',
+      array(
+        'key' => $user->getIdUser(),
+        'login' => $user->getLogin()
+      )
+    );
     $row .= OPEN_SEPARATOR;
     $row .= $user->getLogin();
     $row .= OPEN_SEPARATOR;

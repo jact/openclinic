@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preview.php,v 1.24 2006/03/12 18:33:49 jact Exp $
+ * $Id: theme_preview.php,v 1.25 2006/03/24 20:20:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Preview page of an application theme
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
@@ -142,9 +142,9 @@
   <div class="menuBar">
     <ul id="tabs">
     <?php
-      echo '<li id="first"><a href="#top">' . _("Home") . "</a></li>\n";
-      echo '<li><a href="#top">' . _("Medical Records") . "</a></li>\n";
-      //echo '<li><a href="#top">' . "Statistics" . "</a></li>\n";
+      echo '<li id="first">' . HTML::strLink(_("Home"), '#top') . "</li>\n";
+      echo '<li>' . HTML::strLink(_("Medical Records"), '#top') . "</li>\n";
+      //echo '<li>' . HTML::strLink("Statistics", '#top') . "</li>\n";
       echo '<li><span>' . _("Admin") . "</span></li>\n";
     ?>
     </ul>
@@ -152,7 +152,7 @@
   <!-- End Tabs -->
 
   <div id="sourceForgeLinks">
-    <a href="#" onclick="window.close(); return false;"><?php echo _("Close Window"); ?></a>
+    <?php HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')); ?>
   </div><!-- End #sourceForgeLinks -->
 </div><!-- End #header -->
 <!-- End Header -->
@@ -161,7 +161,7 @@
 <div id="sideBar">
   <ul class="linkList">
     <li class="selected"><?php echo _("Theme Preview"); ?></li>
-    <li><a href="#top"><?php echo _("Sample Link"); ?></a></li>
+    <li><?php HTML::link(_("Sample Link"), '#top'); ?></li>
   </ul><!-- End .linkList -->
 
   <hr />
@@ -216,7 +216,7 @@
 <div id="mainZone">
 <h1><?php echo sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]); ?></h1>
 
-<p><a href="#top"><?php echo _("Sample Link"); ?></a></p>
+<p><?php HTML::link(_("Sample Link"), '#top'); ?></p>
 
 <hr />
 

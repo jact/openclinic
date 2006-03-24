@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_list.php,v 1.18 2006/03/15 20:46:43 jact Exp $
+ * $Id: problem_list.php,v 1.19 2006/03/24 20:27:06 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Medical problems screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -116,7 +116,14 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p><a href="../medical/problem_new_form.php?key=' . $idPatient . '&amp;num=' . $lastOrderNumber . '">' . _("Add New Medical Problem") . "</a></p>\n";
+    echo '<p>';
+    HTML::link(_("Add New Medical Problem"), '../medical/problem_new_form.php',
+      array(
+        'key' => $idPatient,
+        'num' => $lastOrderNumber
+      )
+    );
+    echo "</p>\n";
   }
 
   echo "<hr />\n";
@@ -151,20 +158,46 @@
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/problem_edit_form.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("edit") . '</a>';
+      $row .= HTML::strLink(_("edit"), '../medical/problem_edit_form.php',
+        array(
+          'key' => $problem->getIdProblem(),
+          'pat' => $problem->getIdPatient()
+        )
+      );
       $row .= OPEN_SEPARATOR;
 
-      $row .= '<a href="../medical/problem_del_confirm.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '&amp;wording=' . urlencode(fieldPreview($problem->getWording())) . '">' . _("del") . '</a>';
+      $row .= HTML::strLink(_("del"), '../medical/problem_del_confirm.php',
+        array(
+          'key' => $problem->getIdProblem(),
+          'pat' => $problem->getIdPatient(),
+          'wording' => fieldPreview($problem->getWording())
+        )
+      );
       $row .= OPEN_SEPARATOR;
     } // end if
 
-    $row .= '<a href="../medical/problem_view.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("view") . '</a>';
+    $row .= HTML::strLink(_("view"), '../medical/problem_view.php',
+      array(
+        'key' => $problem->getIdProblem(),
+        'pat' => $problem->getIdPatient()
+      )
+    );
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="../medical/test_list.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("tests") . '</a>';
+    $row .= HTML::strLink(_("tests"), '../medical/test_list.php',
+      array(
+        'key' => $problem->getIdProblem(),
+        'pat' => $problem->getIdPatient()
+      )
+    );
     $row .= OPEN_SEPARATOR;
 
-    $row .= '<a href="../medical/connection_list.php?key=' . $problem->getIdProblem() . '&amp;pat=' . $problem->getIdPatient() . '">' . _("connect") . '</a>';
+    $row .= HTML::strLink(_("connect"), '../medical/connection_list.php',
+      array(
+        'key' => $problem->getIdProblem(),
+        'pat' => $problem->getIdPatient()
+      )
+    );
     $row .= OPEN_SEPARATOR;
 
     $row .= fieldPreview($problem->getWording());

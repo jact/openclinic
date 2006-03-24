@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.22 2006/03/15 20:04:28 jact Exp $
+ * $Id: footer.php,v 1.23 2006/03/24 20:29:26 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the common foot of the web pages
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -33,24 +33,46 @@
 <!-- Footer -->
 <div id="footer">
   <ul id="footerLinks">
-    <li><a href="../home/index.php" accesskey="1"><?php echo _("Clinic Home"); ?></a></li>
+    <li><?php HTML::link(_("Clinic Home"), '../home/index.php', null, array('accesskey' => 1)); ?></li>
 
-    <li><a href="../index.html"><?php echo _("OpenClinic Readme"); ?></a></li>
+    <li><?php HTML::link(_("OpenClinic Readme"), '../index.html'); ?></li>
 
 <?php
   if (isset($tab) && isset($nav))
   {
-    echo '<li><a href="../doc/index.php?tab=' . $tab . '&amp;nav=' . $nav . '" title="' . _("Opens a new window") . '" onclick="return popSecondary(\'../doc/index.php?tab=' . $tab . '&amp;nav=' . $nav . '\')">' . _("Help") . "</a></li>\n";
+    echo '<li>';
+    HTML::link(_("Help"), '../doc/index.php',
+      array(
+        'tab' => $tab,
+        'nav' => $nav
+      ),
+      array(
+        'title' => _("Opens a new window"),
+        'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&amp;nav=' . $nav . "')"
+      )
+    );
+    echo "</li>\n";
   }
 
-  if (isset($_SESSION["userId"]) && ($_SESSION["userId"] == 1 || ($_SESSION["userId"] > 0 && $_SESSION["userId"] < 3 && !OPEN_DEMO)))
+  if (isset($_SESSION["hasAdminAuth"]) && ($_SESSION["hasAdminAuth"] === true && !OPEN_DEMO))
   {
-    echo '<li><a href="../shared/view_source.php?file=' . $_SERVER['PHP_SELF'] . '&amp;tab=' . $tab . '" title="' . _("Opens a new window") . '" onclick="return popSecondary(\'../shared/view_source.php?file=' . $_SERVER['PHP_SELF'] . '&amp;tab=' . $tab . '\')">' . _("View source code") . "</a></li>\n";
+    echo '<li>';
+    HTML::link(_("View source code"), '../shared/view_source.php',
+      array(
+        'file' => $_SERVER['PHP_SELF'],
+        'tab' => $tab
+      ),
+      array(
+        'title' => _("Opens a new window"),
+        'onclick' => "return popSecondary('../shared/view_source.php?file=" . $_SERVER['PHP_SELF'] . '&amp;tab=' . $tab . "')"
+      )
+    );
+    echo "</li>\n";
   }
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    echo '<li><a href="../demo_version.html">' . _("Demo version features") . "</a></li>\n";
+    echo '<li>' . HTML::strLink(_("Demo version features"), '../demo_version.html') . "</li>\n";
   }
 ?>
   </ul><!-- End #footerLinks -->
@@ -65,14 +87,17 @@
     ?>
   </p>
 
-  <p>
-    Copyright &copy; 2002-2006 <a href="mailto:CUT-THIS.jachavar&#64;gmail.com" accesskey="9">Jose Antonio Chavarría</a>
-    <br />
-    <?php echo _("under the"); ?>
-    <a href="../home/license.php" rel="license">GNU General Public License</a>
-  </p>
-
 <?php
+  echo '<p>';
+  echo sprintf('Copyright &copy; 2002-2006 %s',
+    HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.jachavar&#64;gmail.com', null,
+      array('accesskey' => 9)
+    )
+  );
+  echo "</p>\n";
+
+  echo '<p>' . sprintf(_("Under the %s"), HTML::strLink('GNU General Public License', '../home/license.php', null, array('rel' => 'license'))) . "</p>\n";
+
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
     HTML::message(_("This is a demo version"), OPEN_MSG_INFO);

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.6 2006/03/15 20:44:26 jact Exp $
+ * $Id: index.php,v 1.7 2006/03/24 20:25:43 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Summary page of the Medical Records tab
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -31,41 +31,26 @@
    */
   $title = _("Medical Records");
   require_once("../shared/header.php");
-?>
 
-<h1 class="bigIcon medicalIcon">
-  <?php echo $title; ?>
-</h1>
+  echo '<h1 class="bigIcon medicalIcon">' . $title . "</h1>\n";
+  echo '<p>' . _("Use the following functions located in the left hand navigation area to manage your medical records.") . "</p>\n";
 
-<p><?php echo _("Use the following functions located in the left hand navigation area to manage your medical records."); ?></p>
+  echo '<h2 class="icon searchIcon">' . HTML::strLink(_("Search Patient"), '../medical/patient_search_form.php') . "</h2>\n";
+  echo '<p>' . _("Search and view patients. Once a patient is selected you can:") . "</p>\n";
 
-<h2 class="icon searchIcon">
-  <a href="../medical/patient_search_form.php"><?php echo _("Search Patient"); ?></a>
-</h2>
+  echo "<ul>\n";
+  echo '<li>' . _("manage social data") . "</li>\n";
+  echo '<li>' . _("manage clinic history") . "</li>\n";
+  echo '<li>' . _("manage problems report") . "</li>\n";
+  echo '<li>' . _("print medical record") . "</li>\n";
+  echo "</ul>\n";
 
-<p><?php echo _("Search and view patients. Once a patient is selected you can:"); ?></p>
-
-<ul>
-  <li><?php echo _("manage social data"); ?></li>
-  <li><?php echo _("manage clinic history"); ?></li>
-  <li><?php echo _("manage problems report"); ?></li>
-  <li><?php echo _("print medical record"); ?></li>
-</ul>
-
-<?php
   if ($hasMedicalAdminAuth)
   {
-?>
+    echo "<hr />\n";
 
-<hr />
-
-<h2 class="icon patientIcon">
-  <a href="../medical/patient_new_form.php"><?php echo _("New Patient"); ?></a>
-</h2>
-
-<p><?php echo _("Build a new patient information in medical records system."); ?></p>
-
-<?php
+    echo '<h2 class="icon patientIcon">' . HTML::strLink(_("New Patient"), '../medical/patient_new_form.php') . "</h2>\n";
+    echo '<p>' . _("Build a new patient information in medical records system.") . "</p>\n";
   } // end if
 
   require_once("../shared/footer.php");

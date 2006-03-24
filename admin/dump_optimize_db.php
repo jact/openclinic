@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_optimize_db.php,v 1.9 2005/07/31 11:05:03 jact Exp $
+ * $Id: dump_optimize_db.php,v 1.10 2006/03/24 20:15:44 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Optimization screen of database
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -148,9 +148,7 @@
   HTML::message(sprintf(_("Total Database Size: %d KB"), $totalAll), OPEN_MSG_INFO);
   HTML::message(sprintf(_("Total Space Saved: %d KB"), $totalGain), OPEN_MSG_INFO);
 
-  echo '<p><a href="../admin/dump_view_form.php">';
-  echo _("Back return");
-  echo "</a></p>\n";
+  echo '<p>' . HTML::strlink(_("Back return"), '../admin/dump_view_form.php') . "</p>\n";
 
   require_once("../shared/footer.php");
 ?>

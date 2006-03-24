@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search.php,v 1.20 2006/03/15 20:48:32 jact Exp $
+ * $Id: patient_search.php,v 1.21 2006/03/24 20:26:12 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Patient result set page
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -224,7 +224,9 @@
   {
     $row = $patQ->getCurrentRow() . '.';
     $row .= OPEN_SEPARATOR;
-    $row .= '<a href="../medical/patient_view.php?key=' . $pat->getIdPatient() . '">' . $pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName() . '</a>';
+    $row .= HTML::strLink($pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName(),
+      '../medical/patient_view.php', array('key' => $pat->getIdPatient())
+    );
 
     if ($val != "")
     {

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.10 2005/08/15 16:35:59 jact Exp $
+ * $Id: index.php,v 1.11 2006/03/24 20:21:56 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Summary page of the Home tab
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -56,38 +56,31 @@
 
   echo '<p>' . _("OpenClinic is an easy to use, open source, medical records system.") . "</p>\n";
   echo '<p>' . _("When you select any of the following tabs you will be prompted to login.") . "</p>\n";
+
+  echo '<h2 class="bigIcon medicalIcon">' . HTML::strLink(_("Medical Records"), '../medical/index.php') . "</h2>\n";
+  echo '<p>' . _("Use this tab to manage your patient's medical records.") . "</p>\n";
+  echo '<p>' . _("Patient's Administration:") . "</p>\n";
+
+  echo "<ul>\n";
+  echo '<li>' . _("Search, new, delete, edit") . "</li>\n";
+  echo '<li>' . _("Social Data") . "</li>\n";
+  echo '<li>' . _("Clinic History") . "</li>\n";
+  echo '<li>' . _("Problem Reports") . "</li>\n";
+  echo "</ul>\n";
+
+  echo "<hr />\n";
+
+  echo '<h2 class="bigIcon adminIcon">' . HTML::strLink(_("Admin"), '../admin/index.php') . "</h2>\n";
+  echo '<p>' . _("Use this tab to manage administrative options.") . "</p>\n";
+
+  echo "<ul>\n";
+  echo '<li>' . _("Staff members") . "</li>\n";
+  echo '<li>' . _("Config settings") . "</li>\n";
+  echo '<li>' . _("Clinic themes editor") . "</li>\n";
+  echo '<li>' . _("System users") . "</li>\n";
+  echo '<li>' . _("Dumps") . "</li>\n";
+  echo '<li>' . _("Logs") . "</li>\n";
+  echo "</ul>\n";
+
+  require_once("../shared/footer.php");
 ?>
-
-<h2 class="bigIcon medicalIcon">
-  <a href="../medical/index.php"><?php echo _("Medical Records"); ?></a>
-</h2>
-
-<p><?php echo _("Use this tab to manage your patient's medical records."); ?></p>
-
-<p><?php echo _("Patient's Administration:"); ?></p>
-
-<ul>
-  <li><?php echo _("Search, new, delete, edit"); ?></li>
-  <li><?php echo _("Social Data"); ?></li>
-  <li><?php echo _("Clinic History"); ?></li>
-  <li><?php echo _("Problem Reports"); ?></li>
-</ul>
-
-<hr />
-
-<h2 class="bigIcon adminIcon">
-  <a href="../admin/index.php"><?php echo _("Admin"); ?></a>
-</h2>
-
-<p><?php echo _("Use this tab to manage administrative options."); ?></p>
-
-<ul>
-  <li><?php echo _("Staff members"); ?></li>
-  <li><?php echo _("Config settings"); ?></li>
-  <li><?php echo _("Clinic themes editor"); ?></li>
-  <li><?php echo _("System users"); ?></li>
-  <li><?php echo _("Dumps"); ?></li>
-  <li><?php echo _("Logs"); ?></li>
-</ul>
-
-<?php require_once("../shared/footer.php"); ?>

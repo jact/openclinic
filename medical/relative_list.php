@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: relative_list.php,v 1.19 2006/03/12 18:46:34 jact Exp $
+ * $Id: relative_list.php,v 1.20 2006/03/24 20:28:03 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * List of defined relation between patients screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -158,12 +158,18 @@
 
     $relName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
-    $row = '<a href="../medical/patient_view.php?key=' . $pat->getIdPatient() . '">' . _("view") . '</a>';
+    $row = HTML::strLink(_("view"), '../medical/patient_view.php', array('key' => $pat->getIdPatient()));
     $row .= OPEN_SEPARATOR;
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/relative_del_confirm.php?key=' . $idPatient . '&amp;rel=' . $pat->getIdPatient() . '&amp;name=' . urlencode($relName) . '">' . _("del") . '</a>';
+      $row .= HTML::strLink(_("del"), '../medical/relative_del_confirm.php',
+        array(
+          'key' => $idPatient,
+          'rel' => $pat->getIdPatient(),
+          'name' => $relName
+        )
+      );
       $row .= OPEN_SEPARATOR;
     } // end if
 

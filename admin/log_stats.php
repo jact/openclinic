@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_stats.php,v 1.8 2005/07/30 18:58:25 jact Exp $
+ * $Id: log_stats.php,v 1.9 2006/03/24 20:18:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Log stats screen (access logins or record operations)
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  * @since 0.4
  */
 
@@ -65,22 +65,20 @@
   echo '<p>';
   if ($table != 'access')
   {
-    echo '<a href="../admin/log_stats.php?table=access">';
+    HTML::link(_("Access Logs"), '../admin/log_stats.php', array('table' => 'access'));
   }
-  echo _("Access Logs");
-  if ($table != 'access')
+  else
   {
-    echo '</a>';
+    echo _("Access Logs");
   }
   echo ' | ';
   if ($table != 'record')
   {
-    echo '<a href="../admin/log_stats.php?table=record">';
+    HTML::link(_("Record Logs"), '../admin/log_stats.php', array('table' => 'record'));
   }
-  echo _("Record Logs");
-  if ($table != 'record')
+  else
   {
-    echo '</a>';
+    echo _("Record Logs");
   }
   echo "</p>\n";
 

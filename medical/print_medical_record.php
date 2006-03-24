@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: print_medical_record.php,v 1.20 2006/03/12 18:49:30 jact Exp $
+ * $Id: print_medical_record.php,v 1.21 2006/03/24 20:26:50 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Medical record of a patient screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -41,7 +41,7 @@
     echo $style;
     echo "</head><body>\n";
     HTML::message(_("No patient selected."), OPEN_MSG_ERROR);
-    echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
+    echo '<p>' . HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')) . "</p>\n";
     echo "</body></html>\n";
     exit();
   }
@@ -64,7 +64,7 @@
     echo $style;
     echo "</head><body>\n";
     HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-    echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
+    echo '<p>' . HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')) . "</p>\n";
     echo "</body></html>\n";
     exit();
   }

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: test_list.php,v 1.17 2006/03/15 20:47:25 jact Exp $
+ * $Id: test_list.php,v 1.18 2006/03/24 20:28:31 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Medical tests screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -95,7 +95,14 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p><a href="../medical/test_new_form.php?key=' . $idProblem . '&amp;pat=' . $idPatient . '">' . _("Add New Medical Test") . "</a></p>\n";
+    echo '<p>';
+    HTML::link(_("Add New Medical Test"), '../medical/test_new_form.php',
+      array(
+        'key' => $idProblem,
+        'pat' => $idPatient
+      )
+    );
+    echo "</p>\n";
     echo "<hr />\n";
   }
 
@@ -124,15 +131,28 @@
     $temp = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
     $temp = substr($temp, 0, strrpos($temp, "/")) . "/tests/" . translateBrowser($test->getPathFilename(false));
 
-    $row = '<a href="' . $temp . '" onclick="return popSecondary(\'' . $temp . '\')">' . _("view") . '</a>';
+    $row = HTML::strLink(_("view"), $temp, null, array('onclick' => "return popSecondary('" . $temp . "')"));
     $row .= OPEN_SEPARATOR;
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= '<a href="../medical/test_edit_form.php?key=' . $test->getIdProblem() . '&amp;pat=' . $idPatient . '&amp;test=' . $test->getIdTest() . '">' . _("edit") . '</a>';
+      $row .= HTML::strLink(_("edit"), '../medical/test_edit_form.php',
+        array(
+          'key' => $test->getIdProblem(),
+          'pat' => $idPatient,
+          'test' => $test->getIdTest()
+        )
+      );
       $row .= OPEN_SEPARATOR;
 
-      $row .= '<a href="../medical/test_del_confirm.php?key=' . $idProblem . '&amp;test=' . $test->getIdTest() . '&amp;pat=' . $idPatient . '&amp;file=' . $test->getPathFilename() . '">' . _("del") . '</a>';
+      $row .= HTML::strLink(_("del"), '../medical/test_del_confirm.php',
+        array(
+          'key' => $idProblem,
+          'pat' => $idPatient,
+          'test' => $test->getIdTest(),
+          'file' => $test->getPathFilename()
+        )
+      );
       $row .= OPEN_SEPARATOR;
     } // end if
 

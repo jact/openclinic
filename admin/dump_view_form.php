@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_view_form.php,v 1.10 2006/03/12 18:25:35 jact Exp $
+ * $Id: dump_view_form.php,v 1.11 2006/03/24 20:16:54 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Choice screen of database dump
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -72,33 +72,33 @@
   unset($links);
 
   echo '<p>';
-  echo '<a href="../install/index.php">' . _("Install dump from file") . '</a>';
-  echo ' | <a href="../admin/dump_optimize_db.php">' . _("Optimize Database") . '</a>';
+  HTML::link(_("Install dump from file"), '../install/index.php');
+  echo ' | ';
+  HTML::link(_("Optimize Database"), '../admin/dump_optimize_db.php');
   echo "</p>\n";
 ?>
 
 <script type="text/javascript" src="../scripts/dump_functions.js" defer="defer"></script>
 
 <form method="post" action="./dump_process.php">
-  <div>
-    <table>
-      <thead>
+  <table>
+    <thead>
 <?php
   $colspan = '';
   if ($numTables > 1)
   {
     $colspan = ' colspan="2"';
 ?>
-        <tr>
-          <th<?php echo $colspan; ?>>
-            <?php echo _("View dump of database"); ?>
-          </th>
-        </tr>
-      </thead>
+      <tr>
+        <th<?php echo $colspan; ?>>
+          <?php echo _("View dump of database"); ?>
+        </th>
+      </tr>
+    </thead>
 
-      <tbody>
-        <tr>
-          <td class="center">
+    <tbody>
+      <tr>
+        <td class="center">
 <?php
     $i = 0;
     $table = null;
@@ -111,153 +111,144 @@
     } // end while
     Form::select("table_select", $table, null, array('size' => 8));
     unset($table);
-?>
 
-            <br />
-
-            <a href="#" onclick="setSelectOptions(0, 'table_select[]', true); return false;"><?php echo _("Select all"); ?></a>
-
-            &nbsp;/&nbsp;
-
-            <a href="#" onclick="setSelectOptions(0, 'table_select[]', false); return false;"><?php echo _("Unselect all"); ?></a>
-          </td>
-<?php
+    echo "<br />\n";
+    HTML::link(_("Select all"), '#', null, array('onclick' => "setSelectOptions(0, 'table_select[]', true); return false;"));
+    echo ' / ';
+    HTML::link(_("Unselect all"), '#', null, array('onclick' => "setSelectOptions(0, 'table_select[]', false); return false;"));
+    echo "</td>\n";
   } // end if
-  echo "\n";
+
+  echo "<td>\n";
+  Form::radioButton("what", "data", true,
+    array(
+      'id' => 'radio_dump_data',
+      'onclick' => 'updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0, 0));'
+    )
+  );
+  Form::label("radio_dump_data", _("Structure and data"));
+
+  echo "<br />\n";
+
+  Form::radioButton("what", "structure", false,
+    array(
+      'id' => 'radio_dump_structure',
+      'onclick' => 'updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0, 0));'
+    )
+  );
+  Form::label("radio_dump_structure", _("Structure only"));
+
+  echo "<br />\n";
+
+  Form::radioButton("what", "dataonly", false,
+    array(
+      'id' => 'radio_dump_dataonly',
+      'onclick' => 'updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 1, 0));'
+    )
+  );
+  Form::label("radio_dump_dataonly", _("Data only"));
+
+  echo "<br />\n";
+
+  Form::radioButton("what", "xml", false,
+    array(
+      'id' => 'radio_dump_xml',
+      'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
+    )
+  );
+  Form::label("radio_dump_xml", _("Export to XML format"));
+
+  echo "<br />\n";
+
+  Form::radioButton("what", "excel", false,
+    array(
+      'id' => 'radio_dump_csv',
+      'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
+    )
+  );
+  Form::label("radio_dump_csv", _("Export to CSV format (data only)"));
+  echo "</td>\n";
+  echo "</tr>\n";
 ?>
-          <td>
-            <?php
-              Form::radioButton("what", "data", true,
-                array(
-                  'id' => 'radio_dump_data',
-                  'onclick' => 'updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0, 0));'
-                )
-              );
-              Form::label("radio_dump_data", _("Structure and data"));
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("drop", "yes");
+            Form::label("drop", _("Add 'DROP TABLE'"));
+          ?>
+        </td>
+      </tr>
 
-              echo "<br />\n";
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("show_columns", "yes");
+            Form::label("show_columns", _("Complete 'INSERTs'"));
+          ?>
+        </td>
+      </tr>
 
-              Form::radioButton("what", "structure", false,
-                array(
-                  'id' => 'radio_dump_structure',
-                  'onclick' => 'updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0, 0));'
-                )
-              );
-              Form::label("radio_dump_structure", _("Structure only"));
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("extended_inserts", "yes");
+            Form::label("extended_inserts", _("Extended 'INSERTs'"));
+          ?>
+        </td>
+      </tr>
 
-              echo "<br />\n";
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("use_backquotes", "yes");
+            Form::label("use_backquotes", _("Enclose table and field names with backquotes"));
+          ?>
+        </td>
+      </tr>
 
-              Form::radioButton("what", "dataonly", false,
-                array(
-                  'id' => 'radio_dump_dataonly',
-                  'onclick' => 'updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 1, 0));'
-                )
-              );
-              Form::label("radio_dump_dataonly", _("Data only"));
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("add_delete", "yes");
+            Form::label("add_delete", _("Add 'DELETE * FROM __table__'"));
+          ?>
+        </td>
+      </tr>
 
-              echo "<br />\n";
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("use_dbname", "yes");
+            Form::label("use_dbname", _("Add 'USE __dbname__'"));
+          ?>
+        </td>
+      </tr>
 
-              Form::radioButton("what", "xml", false,
-                array(
-                  'id' => 'radio_dump_xml',
-                  'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
-                )
-              );
-              Form::label("radio_dump_xml", _("Export to XML format"));
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("create_db", "yes");
+            Form::label("create_db", _("Add 'CREATE DATABASE __dbname__'"));
+          ?>
+        </td>
+      </tr>
 
-              echo "<br />\n";
+      <tr>
+        <td<?php echo $colspan; ?>>
+          <?php
+            Form::checkBox("as_file", "sendit");
+            Form::label("as_file", _("Save as file"));
+          ?>
+        </td>
+      </tr>
 
-              Form::radioButton("what", "excel", false,
-                array(
-                  'id' => 'radio_dump_csv',
-                  'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
-                )
-              );
-              Form::label("radio_dump_csv", _("Export to CSV format (data only)"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("drop", "yes");
-              Form::label("drop", _("Add 'DROP TABLE'"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("show_columns", "yes");
-              Form::label("show_columns", _("Complete 'INSERTs'"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("extended_inserts", "yes");
-              Form::label("extended_inserts", _("Extended 'INSERTs'"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("use_backquotes", "yes");
-              Form::label("use_backquotes", _("Enclose table and field names with backquotes"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("add_delete", "yes");
-              Form::label("add_delete", _("Add 'DELETE * FROM __table__'"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("use_dbname", "yes");
-              Form::label("use_dbname", _("Add 'USE __dbname__'"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("create_db", "yes");
-              Form::label("create_db", _("Add 'CREATE DATABASE __dbname__'"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?>>
-            <?php
-              Form::checkBox("as_file", "sendit");
-              Form::label("as_file", _("Save as file"));
-            ?>
-          </td>
-        </tr>
-
-        <tr>
-          <td<?php echo $colspan; ?> class="center">
-            <?php Form::button("button1", _("Submit")); ?>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+      <tr>
+        <td<?php echo $colspan; ?> class="center">
+          <?php Form::button("button1", _("Submit")); ?>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </form>
 
 <?php

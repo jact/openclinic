@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_new_form.php,v 1.20 2006/03/15 20:24:54 jact Exp $
+ * $Id: theme_new_form.php,v 1.21 2006/03/24 20:19:36 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Addition screen of a theme
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -109,9 +109,13 @@ function editTheme()
 </script>
 
 <?php
-  echo '<p><a href="#" onclick="previewTheme(); return false;">' . _("Preview Theme") . "</a>\n";
-  echo ' | <a href="../admin/theme_preload_css.php' . (isset($idTheme) ? '?key=' . $idTheme . '&amp;copy=Y' : '') . '">' . _("Preload CSS file") . "</a></p>\n";
-  //echo ' | <a href="../admin/theme_upload_image.php">' . _("Upload image") . "</a></p>\n"; // @todo
+  echo '<p>';
+  HTML::link(_("Preview Theme"), '#', null, array('onclick' => 'previewTheme(); return false;'));
+  echo ' | ';
+  HTML::link(_("Preload CSS file"), '../admin/theme_preload_css.php', (isset($idTheme) ? array('key' => $idTheme, 'copy' => 'Y') : null));
+  //echo ' | ';
+  //HTML::link(_("Upload image"), '../admin/theme_upload_image.php'); // @todo
+  echo "</p>\n";
 
   echo "<hr />\n";
 

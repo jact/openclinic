@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: view_source.php,v 1.7 2005/08/15 16:40:39 jact Exp $
+ * $Id: view_source.php,v 1.8 2006/03/24 20:29:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * View source code of a file screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   require_once("../shared/read_settings.php");
@@ -54,7 +54,7 @@
     {
       HTML::message(_("No file found."), OPEN_MSG_ERROR);
 
-      echo '<p><a href="#" onclick="window.close(); return false;">' . _("Close Window") . "</a></p>\n";
+      echo '<p>' . HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')) . "</p>\n";
     }
   }
   else

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: footer.php,v 1.5 2005/06/14 18:48:22 jact Exp $
+ * $Id: footer.php,v 1.6 2006/03/24 20:22:42 jact Exp $
  */
 
 /**
@@ -13,36 +13,56 @@
  *
  * Contains the common foot of the installation pages
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 ?>
 
 </div><!-- End #content -->
 
 <div id="left">
-  <p>
-    <a href="http://openclinic.sourceforge.net" id="logo" title="OpenClinic web site">OpenClinic web site</a>
-  </p>
+<?php
+  echo '<p>';
+  HTML::link(_("OpenClinic web site"), 'http://openclinic.sourceforge.net', null,
+    array(
+      'id' => 'logo',
+      'title' => _("OpenClinic web site")
+    )
+  );
+  echo "</p>\n";
+?>
 
   <ul class="linkList">
-    <li><a href="../install.html"><?php echo _("Install Instructions"); ?></a></li>
+    <li><?php HTML::link(_("Install Instructions"), '../install.html'); ?></li>
 
-    <li><a href="../index.html"><?php echo _("OpenClinic Readme"); ?></a></li>
+    <li><?php HTML::link(_("OpenClinic Readme"), '../index.html'); ?></li>
 
-    <li class="bold"><a href="../home/index.php"><?php echo _("Start OpenClinic"); ?></a></li>
+    <li class="bold"><?php HTML::link(_("Start OpenClinic"), '../home/index.php'); ?></li>
   </ul>
 </div><!-- End #left -->
 
 <div id="footer">
-  <p><?php echo _("Powered by OpenClinic"); ?></p>
+<?php
+  echo '<p>' . _("Powered by OpenClinic") . "</p>\n";
 
-  <p>Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;gmail.com" accesskey="9">Jose Antonio Chavarría</a></p>
+  echo '<p>';
+  echo sprintf('Copyright &copy; 2002-2006 %s',
+    HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.jachavar&#64;gmail.com', null,
+      array('accesskey' => 9)
+    )
+  );
+  echo "</p>\n";
 
-  <p><?php echo _("under the"); ?> <a href="../home/license.php">GNU General Public License</a></p>
+  echo '<p>' . sprintf(_("Under the %s"), HTML::strLink('GNU General Public License', '../home/license.php', null, array('rel' => 'license'))) . "</p>\n";
 
-  <p>
-    <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
-  </p>
+  echo '<p>';
+  HTML::link('Valid XHTML 1.1', 'http://validator.w3.org/check/referer', null,
+    array(
+      'id' => 'xhtml11',
+      'title' => 'Valid XHTML 1.1'
+    )
+  );
+  echo "</p>\n";
+?>
 </div><!-- End #footer -->
 </body>
 </html>
