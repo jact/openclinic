@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.24 2005/08/22 15:14:20 jact Exp $
+ * $Id: header.php,v 1.25 2006/03/25 20:08:58 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the common header of the web pages
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -31,6 +31,8 @@
 ?>
 
 <link rel="home" title="<?php echo _("Clinic Home"); ?>" href="../home/index.php" />
+
+<link rel="icon" type="image/png" href="../images/miniopc.png" />
 
 <link rel="shortcut icon" type="image/png" href="../images/miniopc.png" />
 
@@ -101,7 +103,7 @@
 
   <hr class="noPrint" />
 
-  <p class="noPrint"><a href="#mainZone" accesskey="2"><?php echo _("Skip over navigation"); ?></a></p>
+  <p class="noPrint"><?php HTML::link(_("Skip over navigation"), '#mainZone', null, array('accesskey' => 2)); ?></p>
 
   <!-- Tabs -->
   <div class="menuBar">
@@ -127,7 +129,7 @@
 
         echo ($tab == $key)
           ? '<span>' . $value[0] . '</span>'
-          : '<a href="' . $value[1] . '">' . $value[0] . "</a>";
+          : HTML::strLink($value[0], $value[1]);
         echo "</li>\n";
       }
       unset($mainNav);
@@ -137,19 +139,23 @@
   <!-- End Tabs -->
 
   <ul id="sourceForgeLinks">
-    <li><a href="http://sourceforge.net/projects/openclinic/"><?php echo _("Project Page"); ?></a></li>
+<?php
+  $sfLinks = array(
+    _("Project Page") => 'http://sourceforge.net/projects/openclinic/',
+    //_("Mailing Lists") => 'http://sourceforge.net/mail/?group_id=70742',
+    _("Downloads") => 'http://sourceforge.net/project/showfiles.php?group_id=70742',
+    _("Report Bugs") => 'http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857',
+    //_("Tasks") => 'http://sourceforge.net/pm/?group_id=70742',
+    _("Forums") => 'http://sourceforge.net/forum/?group_id=70742',
+    //_("Developers"), 'http://sourceforge.net/project/memberlist.php?group_id=70742'
+  );
 
-    <?php //<li><a href="http://sourceforge.net/mail/?group_id=70742">?><?php //echo _("Mailing Lists"); ?><?php //</a></li> ?>
-
-    <li><a href="http://sourceforge.net/project/showfiles.php?group_id=70742"><?php echo _("Downloads"); ?></a></li>
-
-    <li><a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857"><?php echo _("Report Bugs"); ?></a></li>
-
-    <?php //<li><a href="http://sourceforge.net/pm/?group_id=70742">?><?php //echo _("Tasks"); ?><?php //</a></li> ?>
-
-    <li><a href="http://sourceforge.net/forum/?group_id=70742"><?php echo _("Forums"); ?></a></li>
-
-    <?php //<li><a href="http://sourceforge.net/project/memberlist.php?group_id=70742">?><?php //echo _("Developers"); ?><?php //</a></li> ?>
+  foreach ($sfLinks as $key => $value)
+  {
+    echo '<li>' . HTML::strLink($key, $value) . "</li>\n";
+  }
+  unset($sfLinks);
+?>
   </ul><!-- End #sourceForgeLinks -->
 </div><!-- End #header -->
 <!-- End Header -->
