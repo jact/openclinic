@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: header.php,v 1.7 2005/08/15 16:36:17 jact Exp $
+ * $Id: header.php,v 1.8 2006/03/25 20:04:10 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the common header of the installation pages
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -21,12 +21,16 @@
    */
   require_once("../shared/i18n.php");
 
+  require_once("../lib/HTML.php");
+
   /**
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
    */
   $title = _("OpenClinic Install");
   require_once("../shared/xhtml_start.php");
 ?>
+
+<link rel="icon" type="image/png" href="../images/miniopc.png" />
 
 <link rel="shortcut icon" type="image/png" href="../images/miniopc.png" />
 
