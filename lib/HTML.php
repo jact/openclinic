@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: HTML.php,v 1.5 2005/12/26 18:05:45 jact Exp $
+ * $Id: HTML.php,v 1.6 2006/03/25 20:06:30 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class HTML
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 /**
@@ -37,8 +37,12 @@ define("OPEN_MSG_ERROR",   3);
  *  void message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
  *  string strBreadCrumb(array &$links, string $class = "")
  *  void breadCrumb(array &$links, string $class = "")
- *  string srtLink(string $text, string $url, array $arg = null, string $title = "")
- *  void link(string $text, string $url, array $arg = null, string $title = "")
+ *  string strLink(string $text, string $url, array $arg = null, array $addendum = null)
+ *  void link(string $text, string $url, array $arg = null, array $addendum = null)
+ *  string strItemList(array &$items) // @todo
+ *  void ItemList(array &$items) // @todo
+ *  string strOrderedList(array &$items) // @todo
+ *  void OrderedList(array &$items) // @todo
  */
 class HTML
 {
@@ -296,6 +300,7 @@ class HTML
    * @param string $class (optional) to put a background-image
    * @return string bread crumb and title page
    * @access public
+   * @see strLink
    * @since 0.8
    */
   function strBreadCrumb(&$links, $class = "")
@@ -313,7 +318,7 @@ class HTML
     array_pop($links);
     foreach ($links as $key => $value)
     {
-      $html .= ($value) ? '<a href="' . $value . '">' . $key . '</a>' : $key;
+      $html .= ($value) ? HTML::strLink($key, $value) : $key;
       $html .= ' &raquo; ';
     }
 
@@ -343,19 +348,19 @@ class HTML
   }
 
   /**
-   * string srtLink(string $text, string $url, array $arg = null, string $title = "")
+   * string strLink(string $text, string $url, array $arg = null, array $addendum = null)
    *
    * Returns an HTML anchor link.
    *
    * @param string $text
    * @param string $url
    * @param array $arg (optional) arguments of $url
-   * @param string $title (optional)
+   * @param array $addendum (optional)
    * @return string HTML anchor link
    * @access public
    * @since 0.8
    */
-  function strLink($text, $url, $arg = null, $title = "")
+  function strLink($text, $url, $arg = null, $addendum = null)
   {
     $html = '<a href="' . $url;
     if (is_array($arg))
@@ -365,35 +370,37 @@ class HTML
       {
         $query .= urlencode($key) . '=' . urlencode($value) . '&amp;';
       }
-      $query = substr($query, 0, -4); // remove last '&amp;'
-      $html .= $query;
+      $html .= substr($query, 0, -5); // remove last '&amp;'
     }
     $html .= '"';
-    if ( !empty($title) )
+    if (is_array($addendum))
     {
-      $html .= ' title="' . $title . '"';
+      foreach ($addendum as $key => $value)
+      {
+        $html .= ' ' . $key . '="' . $value . '"';
+      }
     }
-    $html .= '>' . $text . "</a>\n";
+    $html .= '>' . $text . '</a>';
 
     return $html;
   }
 
   /**
-   * void link(string $text, string $url, array $arg = null, string $title = "")
+   * void link(string $text, string $url, array $arg = null, array $addendum = null)
    *
    * Draws an HTML anchor link.
    *
    * @param string $text
    * @param string $url
    * @param array $arg (optional) arguments of $url
-   * @param string $title (optional)
+   * @param array $addendum (optional)
    * @return void
    * @access public
    * @since 0.8
    */
-  function link($text, $url, $arg = null, $title = "")
+  function link($text, $url, $arg = null, $addendum = null)
   {
-    echo HTML::strLink($text, $url, is_array($arg) ? $arg : null, isset($title) ? $title : "");
+    echo HTML::strLink($text, $url, is_array($arg) ? $arg : null, isset($addendum) ? $addendum : null);
   }
 } // end class
 ?>
