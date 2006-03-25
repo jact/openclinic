@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Check.php,v 1.3 2005/12/26 18:09:22 jact Exp $
+ * $Id: Check.php,v 1.4 2006/03/25 20:08:04 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Check
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 /**
@@ -347,7 +347,7 @@ class Check
   /**
    * mixed getVar(int $source, string $name, int $filter = CHK_NO_FILTER, mixed $options = null, string $characterset = "")
    *
-   * @param int $source
+   * @param int $source (@see Sources constants)
    * @param string $name
    * @param int $filter (optional)
    * @param mixed $options (optional) filter options

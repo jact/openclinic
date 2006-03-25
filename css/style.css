@@ -1,10 +1,10 @@
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: style.css,v 1.14 2005/08/15 16:35:25 jact Exp $
+ * $Id: style.css,v 1.15 2006/03/25 20:08:31 jact Exp $
  */
 
 /**
@@ -12,7 +12,7 @@
  *
  * Contains the css styles of OpenClinic doc pages
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 html {
@@ -56,7 +56,7 @@ h3 {
   background: #00a;
   color: #fff;
 }
-.note {
+.note, .advice {
   background: inherit;
   color: #dc143c;
   font-weight: bold;
