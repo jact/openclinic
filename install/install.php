@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: install.php,v 1.14 2006/03/12 18:38:49 jact Exp $
+ * $Id: install.php,v 1.15 2006/03/25 20:00:43 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Installation process screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
@@ -53,32 +53,22 @@
 
     if ( !isset($_GET["confirm"]) || ($_GET["confirm"] != "yes") )
     {
-      // @todo use fieldset
-?>
-      <form method="post" action="../install/install.php?confirm=yes">
-        <p>
-          <?php echo sprintf(_("OpenClinic (version %s) is already installed."), $set->getVersion()); ?>
-        </p>
-
-        <hr />
-
-        <p class="error">
-          <?php echo _("Are you sure you want to delete all clinic data and create new OpenClinic tables?"); ?>
-        </p>
-
-        <p class="note">
-          <?php echo _("If you continue all data will be lost."); ?>
-        </p>
-
-        <p>
-          <?php
-            Form::button("continue", _("Continue"));
-            Form::button("cancel", _("Cancel"), "button", array('onclick' => 'parent.location=\'../install/cancel_msg.php\''));
-          ?>
-        </p>
-      </form>
-<?php
+      echo '<p>' . sprintf(_("OpenClinic (version %s) is already installed."), $set->getVersion()) . "</p>\n";
       $setQ->close();
+
+      echo "<hr />\n";
+
+      echo '<p class="error">' . _("Are you sure you want to delete all clinic data and create new OpenClinic tables?") . "</p>\n";
+      echo '<p class="note">' . _("If you continue all data will be lost.") . "</p>\n";
+
+      // @todo use fieldset
+      echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '?confirm=yes">' . "\n";
+      echo '<p>';
+      Form::button("continue", _("Continue"));
+      Form::button("cancel", _("Cancel"), "button", array('onclick' => "parent.location='../install/cancel_msg.php'"));
+      echo "</p>\n";
+      echo "</form>\n";
+
       include_once("../install/footer.php");
       exit();
     }
@@ -107,10 +97,10 @@
       exit();
     }
   }
+
+  HTML::message(_("OpenClinic tables have been created successfully!"));
+
+  echo '<h1>' . HTML::strLink(_("Start using OpenClinic"), '../home/index.php') . "</h1>\n";
+
+  require_once("../install/footer.php");
 ?>
-
-<p class="note"><?php echo _("OpenClinic tables have been created successfully!"); ?></p>
-
-<h1><a href="../home/index.php"><?php echo _("Start using OpenClinic"); ?></a></h1>
-
-<?php require_once("../install/footer.php"); ?>

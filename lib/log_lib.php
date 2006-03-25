@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: log_lib.php,v 1.11 2005/08/03 17:39:59 jact Exp $
+ * $Id: log_lib.php,v 1.12 2006/03/25 20:02:32 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Set of log stats functions
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -109,11 +109,17 @@ function showYearStats($table)
     $tbody = array();
     while (list($year, $hits) = $auxConn->fetchRow(MYSQL_NUM))
     {
-      $row = '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=yearly&amp;year=' . $year . '">' . $year . '</a>';
+      $row = HTML::strLink($year, $_SERVER['PHP_SELF'],
+        array(
+          'table' => $table,
+          'option' => 'yearly',
+          'year' => $year
+        )
+      );
       $row .= OPEN_SEPARATOR;
       $widthImage = round(100 * $hits / $totalHitsYear, 0);
       $row .= percBar($widthImage, 200, false);
-      $row .= ' (<a href="../admin/log_' . $table . '_list.php?year=' . $year . '">' . $hits . '</a>)';
+      $row .= ' (' . HTML::strLink($hits, '../admin/log_' . $table . '_list.php', array('year' => $year)) . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
@@ -174,11 +180,23 @@ function showMonthStats($table, $year)
     $tbody = array();
     while (list($month, $hits) = $auxConn->fetchRow(MYSQL_NUM))
     {
-      $row = '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=monthly&amp;year=' . $year . '&amp;month=' . $month . '">' . $months[intval($month) - 1] . '</a>';
+      $row = HTML::strLink($months[intval($month) - 1], $_SERVER['PHP_SELF'],
+        array(
+          'table' => $table,
+          'option' => 'monthly',
+          'year' => $year,
+          'month' => $month
+        )
+      );
       $row .= OPEN_SEPARATOR;
       $widthImage = round(100 * $hits / $totalHitsMonth, 0);
       $row .= percBar($widthImage, 200, false);
-      $row .= ' (<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '">' . $hits . '</a>)';
+      $row .= ' (' . HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
+        array(
+          'year' => $year,
+          'month' => $month
+        )
+      ) . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
@@ -244,7 +262,15 @@ function showDailyStats($table, $year, $month)
     $tbody = array();
     while (list($year, $month, $day, $hits) = $auxConn->fetchRow(MYSQL_NUM))
     {
-      $row = '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '&amp;option=daily&amp;year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '">' . intval($day) . '</a>';
+      $row = HTML::strLink(intval($day), $_SERVER['PHP_SELF'],
+        array(
+          'table' => $table,
+          'option' => 'daily',
+          'year' => $year,
+          'month' => $month,
+          'day' => $day
+        )
+      );
       $row .= OPEN_SEPARATOR;
       if ($hits == 0)
       {
@@ -255,7 +281,13 @@ function showDailyStats($table, $year, $month)
       {
         $widthImage = round(100 * $hits / $totalHitsDay, 0);
         $percent = substr(100 * $hits / $totalHitsDay, 0, 5);
-        $hits = '<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '">' . $hits . '</a>';
+        $hits = HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
+          array(
+            'year' => $year,
+            'month' => $month,
+            'day' => $day
+          )
+        );
       }
       $row .= percBar($widthImage, 200, false);
       $row .= ' ' . $percent . '% (' . $hits . ')';
@@ -341,7 +373,14 @@ function showHourlyStats($table, $year, $month, $day)
         {
           $widthImage = round(100 * $hits / $totalHitsHour, 0);
           $percent = substr(100 * $hits / $totalHitsHour, 0, 5);
-          $hits = '<a href="../admin/log_' . $table . '_list.php?year=' . $year . '&amp;month=' . $month . '&amp;day=' . $day . '&amp;hour=' . $k . '">' . $hits . '</a>';
+          $hits = HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
+            array(
+              'year' => $year,
+              'month' => $month,
+              'day' => $day,
+              'hour', $k
+            )
+          );
         }
         $row .= percBar($widthImage, 200, false);
         $row .= ' ' . $percent . '% (' . $hits . ')';
@@ -456,10 +495,9 @@ function stats($table)
 function showLinks($table)
 {
   echo '<p>';
-  echo '<a href="' . $_SERVER['PHP_SELF'] . '?table=' . $table . '">';
-  echo _("Back to Main Statistics");
-  echo '</a> | <a href="' . (isset($_SERVER["HTTP_REFERER"]) ? htmlspecialchars($_SERVER["HTTP_REFERER"]) : '../index.php') . '">';
-  echo _("Back return");
-  echo "</a></p>\n";
+  HTML::link(_("Back to Main Statistics"), $_SERVER['PHP_SELF'], array('table' => $table));
+  echo ' | ';
+  HTML::link(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? htmlspecialchars($_SERVER["HTTP_REFERER"]) : '../index.php'));
+  echo "</p>\n";
 }
 ?>

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Search.php,v 1.3 2005/08/22 15:15:29 jact Exp $
+ * $Id: Search.php,v 1.4 2006/03/25 20:03:06 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Search
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 /**
@@ -83,6 +83,7 @@ class Search
    * @param int $currentPage
    * @param int $pageCount total pages
    * @return void
+   * @see HTML::strLink()
    * @access public
    * @todo optimize code with constants
    * @todo make strPageLinks() function
@@ -102,8 +103,8 @@ class Search
       for ($i = 1; $i < $initPageMax + 1; $i++)
       {
         $pageString .= ($i == $currentPage)
-                        ? '<strong>' . $i . "</strong>\n"
-                        : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
+                        ? '<strong>' . $i . '</strong>'
+                        : HTML::strLink($i, '#', null, array('onclick' => 'changePage(' . $i . ');'));
         if ($i < $initPageMax)
         {
           $pageString .= ' | ';
@@ -122,8 +123,8 @@ class Search
           for ($i = ($initPageMin - 1); $i < ($initPageMax + 2); $i++)
           {
             $pageString .= ($i == $currentPage)
-                            ? '<strong>' . $i . "</strong>\n"
-                            : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
+                            ? '<strong>' . $i . '</strong>'
+                            : HTML::strLink($i, '#', null, array('onclick' => 'changePage(' . $i . ');'));
             if ($i < ($initPageMax + 1))
             {
               $pageString .= ' | ';
@@ -140,8 +141,8 @@ class Search
         for ($i = $pageCount - 2; $i < $pageCount + 1; $i++)
         {
           $pageString .= ($i == $currentPage)
-                          ? '<strong>' . $i . "</strong>\n"
-                          : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
+                          ? '<strong>' . $i . '</strong>'
+                          : HTML::strLink($i, '#', null, array('onclick' => 'changePage(' . $i . ');'));
           if ($i < $pageCount)
           {
             $pageString .= ' | ';
@@ -154,8 +155,8 @@ class Search
       for ($i = 1; $i < $pageCount + 1; $i++)
       {
         $pageString .= ($i == $currentPage)
-                        ? '<strong>' . $i . "</strong>\n"
-                        : '<a href="#" onclick="changePage(' . $i . ');">' . $i . "</a>\n";
+                        ? '<strong>' . $i . '</strong>'
+                        : HTML::strLink($i, '#', null, array('onclick' => 'changePage(' . $i . ');'));
         if ($i < $pageCount)
         {
           $pageString .= ' | ';
@@ -165,12 +166,12 @@ class Search
 
     if ($currentPage > 1)
     {
-      $pageString = ' <a href="#" onclick="changePage(' . ($currentPage - 1) . ');">&laquo;' . _("prev") . '</a> | ' . $pageString;
+      $pageString = ' ' . HTML::strLink('&laquo;' . _("prev"), '#', null, array('onclick' => 'changePage(' . ($currentPage - 1) . ');')) . ' | ' . $pageString;
     }
 
     if ($currentPage < $pageCount)
     {
-      $pageString .= ' | <a href="#" onclick="changePage(' . ($currentPage + 1) . ');">' . _("next") . '&raquo;</a>';
+      $pageString .= ' | ' . HTML::strLink(_("next") . '&raquo;', '#', null, array('onclick' => 'changePage(' . ($currentPage + 1) . ');'));
     }
 
     $pageString = '<p class="pageLinks">' . _("Result Pages") . ': ' . $pageString . "</p>\n";
