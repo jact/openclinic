@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Error.php,v 1.3 2005/07/21 17:11:54 jact Exp $
+ * $Id: Error.php,v 1.4 2006/03/25 20:07:38 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Error
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 /**
@@ -61,7 +61,7 @@ class Error
 
     if ($query->getDbErrno() == 1049) // Unable to connect to database
     {
-      echo '<p><a href="../install.html">' . "Install instructions". "</a></p>\n";
+      echo '<p><a href="../install.html">' . "Install instructions" . "</a></p>\n";
     }
 
     if ($goOut)
@@ -97,7 +97,7 @@ class Error
 
     if ($conn->getDbErrno() == 1049) // Unable to connect to database
     {
-      echo '<p><a href="../install.html">' . "Install instructions". "</a></p>\n";
+      echo '<p><a href="../install.html">' . "Install instructions" . "</a></p>\n";
     }
 
     if ($goOut)
@@ -199,12 +199,14 @@ class Error
     switch ($number)
     {
       case E_USER_ERROR:
+        $prepend = "Error";
         $error = "\nERROR";
         $goOut = true;
         break;
 
       case E_WARNING:
       case E_USER_WARNING:
+        $prepend = "Warning";
         $error = "\nWARNING";
         break;
 
@@ -216,10 +218,12 @@ class Error
         //break; // don't remove comment mark
 
       case E_USER_NOTICE:
+        $prepend = "Notice";
         $error = "\nNOTICE";
         break;
 
       default:
+        $prepend = "Error";
         $error = "\nUNHANDLED ERROR";
         break;
     }
@@ -229,7 +233,7 @@ class Error
     //$error .= "\n" . $message;
     $error .= "\nClient IP: " . $_SERVER["REMOTE_ADDR"];
 
-    $prepend = "\n[PHP Error " . date("Y-m-d H:i:s") . "]";
+    $prepend = "\n[PHP " . $prepend . " " . date("Y-m-d H:i:s") . "]";
     $error = ereg_replace("\n", $prepend, $error);
     $error .= "\n" . str_repeat("_", 78); // separator line
 
