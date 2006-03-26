@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: license.php,v 1.4 2005/07/30 18:59:47 jact Exp $
+ * $Id: license.php,v 1.5 2006/03/26 14:59:59 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * License page of the home tab
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**

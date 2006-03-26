@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test.php,v 1.5 2005/07/20 20:24:47 jact Exp $
+ * $Id: Test.php,v 1.6 2006/03/26 14:59:53 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Medical Test
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 require_once("../lib/Check.php");

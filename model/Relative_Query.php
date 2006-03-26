@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Relative_Query.php,v 1.6 2006/03/12 18:12:15 jact Exp $
+ * $Id: Relative_Query.php,v 1.7 2006/03/26 14:59:53 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Relative_Query
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");

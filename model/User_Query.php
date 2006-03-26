@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.14 2006/03/12 18:07:55 jact Exp $
+ * $Id: User_Query.php,v 1.15 2006/03/26 14:59:53 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class User_Query
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Setting.php,v 1.9 2006/03/12 18:11:29 jact Exp $
+ * $Id: Setting.php,v 1.10 2006/03/26 14:59:53 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Setting
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 define("OPEN_SETTING_SESSION_TIMEOUT", 20);

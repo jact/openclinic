@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.11 2006/03/12 18:07:21 jact Exp $
+ * $Id: Theme_Query.php,v 1.12 2006/03/26 14:59:53 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Theme_Query
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");

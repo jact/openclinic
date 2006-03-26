@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Page_Query.php,v 1.2 2005/06/14 16:51:08 jact Exp $
+ * $Id: Page_Query.php,v 1.3 2006/03/26 14:59:53 jact Exp $
  */
 
 /**
@@ -13,8 +13,8 @@
  *
  * Contains the class Page_Query (pagination methods)
  *
- * Author: jact <jachavar@gmail.com>
- * Author: Jorge López Herranz <lopez.herranz@gmail.com>
+ * @author jact <jachavar@gmail.com>
+ * @author Jorge López Herranz <lopez.herranz@gmail.com>
  */
 
 require_once("../classes/Query.php");

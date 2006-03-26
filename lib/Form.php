@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.9 2006/03/12 18:20:47 jact Exp $
+ * $Id: Form.php,v 1.10 2006/03/26 15:02:57 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Form
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 require_once("../lib/HTML.php");

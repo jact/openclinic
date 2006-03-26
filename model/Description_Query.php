@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description_Query.php,v 1.8 2006/03/12 18:12:15 jact Exp $
+ * $Id: Description_Query.php,v 1.9 2006/03/26 14:59:53 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Contains the class Description_Query
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Query.php");
@@ -28,7 +28,7 @@ require_once("../classes/Description.php");
  * Methods:
  *  bool select(string $tableName, string $fieldCode, string $fieldDescription = "", string $keyValue = "")
  *  mixed fetch(void)
- *  array fetchRows(string $col = "")
+ *  array fetchAll(string $col = "")
  *  bool update(string $tableName, Description $des)
  */
 class Description_Query extends Query
@@ -89,14 +89,15 @@ class Description_Query extends Query
   }
 
   /**
-   * array fetchRows(string $col = "")
+   * array fetchAll(string $col = "")
    *
    * Fetches all rows from the query result.
    *
+   * @param $col (optional) name of the field result
    * @return assocArray returns associative array containing domain codes and values.
    * @access public
    */
-  function fetchRows($col = "")
+  function fetchAll($col = "")
   {
     if ($col == "")
     {

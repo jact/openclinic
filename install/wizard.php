@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.21 2006/03/12 18:40:00 jact Exp $
+ * $Id: wizard.php,v 1.22 2006/03/26 15:02:49 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * OpenClinic Install Wizard
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  * @since 0.5
  */
 
@@ -478,12 +478,12 @@
 
   $fileContent ='<?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: wizard.php,v 1.21 2006/03/12 18:40:00 jact Exp $
+ * $Id: wizard.php,v 1.22 2006/03/26 15:02:49 jact Exp $
  */
 
 /**
@@ -491,7 +491,7 @@
  *
  * Definition of database connection variables
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  * Last modified: ' . date("d/m/Y H:i") . '
  */
 
