@@ -1,29 +1,30 @@
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2004 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: dump_functions.js,v 1.2 2004/04/18 14:31:10 jact Exp $
+ * $Id: dump_functions.js,v 1.3 2006/03/26 15:33:35 jact Exp $
  */
 
 /**
  * dump_functions.js
- ********************************************************************
+ *
  * JavaScript functions for the dump process
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  */
 
 /**
- ********************************************************************
+ * bool checkFormElementInRange(obj theForm, string theFieldName, int min, int max)
+ *
  * Ensures a value submitted in a form is numeric and is in a range
- ********************************************************************
- * @param   object   the form
- * @param   string   the name of the form field to check
- * @param   integer  the minimum authorized value
- * @param   integer  the maximum authorized value
- * @return  boolean  whether a valid number has been submitted or not
+ *
+ * @param  object  the form
+ * @param  string  the name of the form field to check
+ * @param  integer the minimum authorized value
+ * @param  integer the maximum authorized value
+ * @return boolean whether a valid number has been submitted or not
  */
 function checkFormElementInRange(theForm, theFieldName, min, max)
 {
@@ -65,13 +66,14 @@ function checkFormElementInRange(theForm, theFieldName, min, max)
 } // end of the 'checkFormElementInRange()' function
 
 /**
- ********************************************************************
+ * bool setSelectOptions(int indexForm, string elementSelect, bool doCheck)
+ *
  * Checks/unchecks all options of a <select> element
- ********************************************************************
- * @param   int      the form index
- * @param   string   the element name
- * @param   boolean  whether to check or to uncheck the element
- * @return  boolean  always true
+ *
+ * @param  int     the form index
+ * @param  string  the element name
+ * @param  boolean whether to check or to uncheck the element
+ * @return boolean always true
  */
 function setSelectOptions(indexForm, elementSelect, doCheck)
 {
@@ -87,12 +89,13 @@ function setSelectOptions(indexForm, elementSelect, doCheck)
 } // end of the 'setSelectOptions()' function
 
 /**
- ********************************************************************
+ * bool updateChecks(int indexForm, array array)
+ *
  * Enable/disable all checkbox of a <form> element
- ********************************************************************
- * @param   int      the form index
- * @param   boolean  array to enable or disable checkboxes
- * @return  boolean  always true
+ *
+ * @param  int     the form index
+ * @param  boolean array to enable or disable checkboxes
+ * @return boolean always true
  */
 function updateChecks(indexForm, array)
 {

@@ -1,10 +1,10 @@
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_tbl.sql,v 1.11 2005/06/14 18:03:30 jact Exp $
+ * $Id: setting_tbl.sql,v 1.12 2006/03/26 15:36:40 jact Exp $
  */
 
 /**
@@ -12,7 +12,7 @@
  *
  * Creation of setting_tbl structure
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
 CREATE TABLE setting_tbl (

@@ -1,24 +1,25 @@
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2004 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: checkboxes.js,v 1.2 2004/04/18 14:31:10 jact Exp $
+ * $Id: checkboxes.js,v 1.3 2006/03/26 15:33:35 jact Exp $
  */
 
 /**
  * checkboxes.js
- ********************************************************************
+ *
  * JavaScript functions for the check/uncheck checkboxes
- ********************************************************************
- * Author: jact <jachavar@terra.es>
+ *
+ * @author jact <jachavar@gmail.com>
  */
 
 /**
- ********************************************************************
+ * bool setCheckboxes(int indexForm, string elementName, bool doCheck)
+ *
  * Checks/unchecks all checkboxes of a form
- ********************************************************************
+ *
  * @param int the form index
  * @param string the element name
  * @param bool whether to check or to uncheck the element
