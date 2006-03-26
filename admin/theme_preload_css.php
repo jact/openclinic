@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: theme_preload_css.php,v 1.15 2006/03/15 20:25:14 jact Exp $
+ * $Id: theme_preload_css.php,v 1.16 2006/03/26 14:47:34 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Upload a css file to preload contents
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  * @since 0.7
  */
 
@@ -79,31 +79,20 @@
    */
   echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . (($idTheme) ? "?key=" . $idTheme : "") . '" enctype="multipart/form-data">' . "\n";
 
-  $thead = array(
-    $title => array('colspan' => 2)
-  );
-
   $tbody = array();
 
   $row = Form::strLabel("css_filename", _("Path Filename") . ":", true);
-  $row .= OPEN_SEPARATOR;
-
   //$row .= Form::strHidden("MAX_FILE_SIZE", "10000");
   $row .= Form::strFile("css_filename", "", 50/*, array('error' => $formError["css_filename"])*/);
 
-  $tbody[] = explode(OPEN_SEPARATOR, $row);
+  $tbody[] = $row;
 
   $tfoot = array(
     Form::strButton("button1", _("Submit"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
   );
 
-  $options = array(
-    'shaded' => false,
-    'tfoot' => array('align' => 'center')
-  );
-
-  HTML::table($thead, $tbody, $tfoot, $options);
+  Form::fieldset($title, $tbody, $tfoot);
   echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));

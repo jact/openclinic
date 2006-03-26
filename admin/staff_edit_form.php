@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: staff_edit_form.php,v 1.17 2006/03/15 20:14:15 jact Exp $
+ * $Id: staff_edit_form.php,v 1.18 2006/03/26 14:47:23 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Edition screen of a staff member
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -129,14 +129,13 @@
    * Edit form
    */
   echo '<form method="post" action="../admin/staff_edit.php">' . "\n";
-  echo "<div>\n";
 
   Form::hidden("id_member", $formVar["id_member"]);
   Form::hidden("member_type", $formVar["member_type"]);
 
   require_once("../admin/staff_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 

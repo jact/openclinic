@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: setting_edit.php,v 1.7 2006/03/15 20:13:04 jact Exp $
+ * $Id: setting_edit.php,v 1.8 2006/03/26 14:47:23 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Config settings edition process
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**

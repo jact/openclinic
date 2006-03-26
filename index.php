@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.3 2006/01/23 22:48:05 jact Exp $
+ * $Id: index.php,v 1.4 2006/03/26 14:47:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,8 @@
  *
  * Index page of the project
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
+ * @todo i18n and HTML.php inclusion
  */
 
   require_once("./database_constants.php");
@@ -53,5 +54,4 @@
   @mysql_close($db);
 
   header("Location: home/index.php");
-  exit();
 ?>

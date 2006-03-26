@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_validate_post.php,v 1.8 2006/03/15 20:27:08 jact Exp $
+ * $Id: user_validate_post.php,v 1.9 2006/03/26 14:47:45 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Validate post data of an user
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  * @since 0.6
  */
 

@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: user_new_form.php,v 1.18 2006/03/15 20:27:03 jact Exp $
+ * $Id: user_new_form.php,v 1.19 2006/03/26 14:47:45 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Addition screen of an user
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -84,7 +84,6 @@
    * Edit form
    */
   echo '<form method="post" action="../admin/user_new.php" onsubmit="return md5Login(this);">' . "\n";
-  echo "<div>\n";
 
   Form::hidden("referer", "new"); // to user_validate_post.php
   Form::hidden("id_member", $formVar["id_member"]);
@@ -93,7 +92,7 @@
   $action = "new";
   require_once("../admin/user_fields.php");
 
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 
