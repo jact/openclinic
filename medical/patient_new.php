@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_new.php,v 1.11 2006/03/15 20:45:47 jact Exp $
+ * $Id: patient_new.php,v 1.12 2006/03/26 15:13:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Patient addition process
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**

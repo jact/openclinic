@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_fields.php,v 1.23 2006/03/15 20:45:28 jact Exp $
+ * $Id: patient_fields.php,v 1.24 2006/03/26 15:13:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Fields of patient data
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -173,7 +173,7 @@
 
   $tfoot = array(
     Form::strButton("button1", _("Submit"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
   );
 
   Form::fieldset($title, $tbody, $tfoot);

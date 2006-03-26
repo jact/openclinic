@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: patient_search_form.php,v 1.9 2005/08/22 15:11:49 jact Exp $
+ * $Id: patient_search_form.php,v 1.10 2006/03/26 15:13:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Search patient screen
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**

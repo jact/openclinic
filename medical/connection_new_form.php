@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new_form.php,v 1.14 2006/03/12 18:41:24 jact Exp $
+ * $Id: connection_new_form.php,v 1.15 2006/03/26 15:13:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Addition screen of a connection between medical problems
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -94,7 +94,6 @@
    * New form
    */
   echo '<form method="post" action="../medical/connection_new.php">' . "\n";
-  echo "<div>\n";
 
   Form::hidden("id_problem", $idProblem);
   Form::hidden("id_patient", $idPatient);
@@ -131,7 +130,7 @@
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);
-  echo "</div>\n</form>\n";
+  echo "</form>\n";
 
   require_once("../shared/footer.php");
 ?>

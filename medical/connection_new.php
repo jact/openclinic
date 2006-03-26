@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: connection_new.php,v 1.9 2006/01/24 20:15:38 jact Exp $
+ * $Id: connection_new.php,v 1.10 2006/03/26 15:13:08 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Connection between medical problems addition process
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
