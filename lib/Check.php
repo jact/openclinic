@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: Check.php,v 1.5 2006/03/26 16:05:56 jact Exp $
- */
-
-/**
  * Check.php
  *
  * Contains the class Check
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: Check.php,v 1.6 2006/03/26 17:41:14 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
 /**
