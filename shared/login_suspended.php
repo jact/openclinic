@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_suspended.php,v 1.6 2005/08/15 16:40:53 jact Exp $
+ * $Id: login_suspended.php,v 1.7 2006/03/26 15:25:04 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Screen with user login suspended message
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**

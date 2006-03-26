@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: login_check.php,v 1.11 2006/01/23 22:45:11 jact Exp $
+ * $Id: login_check.php,v 1.12 2006/03/26 15:25:04 jact Exp $
  */
 
 /**
@@ -14,7 +14,7 @@
  * Used to verify sign on token on every secured page.
  * Redirects to the login page if token not valid.
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))

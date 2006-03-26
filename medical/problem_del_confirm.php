@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2006 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: problem_del_confirm.php,v 1.13 2006/03/12 18:44:40 jact Exp $
+ * $Id: problem_del_confirm.php,v 1.14 2006/03/26 15:20:49 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Confirmation screen of a medical problem deletion process
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  */
 
   /**
@@ -84,7 +84,7 @@
 
   $tfoot = array(
     Form::strButton("delete", _("Delete"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
+    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
   );
 
   $options = array('class' => 'center');

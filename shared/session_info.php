@@ -1,11 +1,11 @@
 <?php
 /**
- * This file is part of OpenClinic
+ * @package OpenClinic
  *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ * @copyright Copyright (c) 2002-2006 jact
+ * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: session_info.php,v 1.6 2005/08/03 17:40:50 jact Exp $
+ * $Id: session_info.php,v 1.7 2006/03/26 15:25:04 jact Exp $
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * Making session user info available on all pages
  *
- * Author: jact <jachavar@gmail.com>
+ * @author jact <jachavar@gmail.com>
  * @since 0.7
  */
 
