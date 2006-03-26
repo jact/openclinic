@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test_Query.php,v 1.12 2006/03/26 15:55:49 jact Exp $
+ * $Id: Test_Query.php,v 1.13 2006/03/26 16:12:44 jact Exp $
  */
 
 /**
@@ -31,8 +31,8 @@ require_once("../classes/Test.php");
  *  bool update(Test $test)
  *  bool delete(int $idTest)
  *
- * @author jact <jachavar@gmail.com>
  * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
  * @access public
  */
 class Test_Query extends Query

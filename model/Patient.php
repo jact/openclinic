@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.12 2006/03/26 15:55:42 jact Exp $
+ * $Id: Patient.php,v 1.13 2006/03/26 16:12:37 jact Exp $
  */
 
 /**
@@ -73,8 +73,8 @@ require_once("../lib/Check.php");
  *  string getInsuranceCompany(void)
  *  void setInsuranceCompany(string $value)
  *
- * @author jact <jachavar@gmail.com>
  * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
  * @access public
  */
 class Patient

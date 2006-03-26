@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Page_Query.php,v 1.4 2006/03/26 15:55:41 jact Exp $
+ * $Id: Page_Query.php,v 1.5 2006/03/26 16:12:36 jact Exp $
  */
 
 /**
@@ -28,9 +28,9 @@ require_once("../classes/Query.php");
  *  int getRowCount(void)
  *  int getPageCount(void)
  *
+ * @package OpenClinic
  * @author jact <jachavar@gmail.com>
  * @author Jorge López Herranz <lopez.herranz@gmail.com>
- * @package OpenClinic
  * @access public
  * @see OPEN_SETTING_ITEMS_PER_PAGE
  * @since 0.8

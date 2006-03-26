@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History.php,v 1.6 2006/03/26 15:55:41 jact Exp $
+ * $Id: History.php,v 1.7 2006/03/26 16:12:36 jact Exp $
  */
 
 /**
@@ -56,8 +56,8 @@ require_once("../lib/Check.php");
  *  void setSpouseChildsStatusHealth(string $value)
  *  void setFamilyIllness(string $value)
  *
- * @author jact <jachavar@gmail.com>
  * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
  * @access public
  */
 class History

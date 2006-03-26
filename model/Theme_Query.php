@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.13 2006/03/26 15:55:50 jact Exp $
+ * $Id: Theme_Query.php,v 1.14 2006/03/26 16:12:45 jact Exp $
  */
 
 /**
@@ -32,8 +32,8 @@ require_once("../classes/Theme.php");
  *  bool update(Theme $theme)
  *  bool delete(int $id)
  *
- * @author jact <jachavar@gmail.com>
  * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
  * @access public
  */
 class Theme_Query extends Query

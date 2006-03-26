@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Relative_Query.php,v 1.8 2006/03/26 15:55:45 jact Exp $
+ * $Id: Relative_Query.php,v 1.9 2006/03/26 16:12:40 jact Exp $
  */
 
 /**
@@ -28,8 +28,8 @@ require_once("../classes/Query.php");
  *  bool insert(int $idPatient, int $idRelative)
  *  bool delete(int $idPatient, int $idRelative)
  *
- * @author jact <jachavar@gmail.com>
  * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
  * @access public
  */
 class Relative_Query extends Query

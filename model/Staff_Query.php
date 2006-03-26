@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff_Query.php,v 1.15 2006/03/26 15:55:48 jact Exp $
+ * $Id: Staff_Query.php,v 1.16 2006/03/26 16:12:43 jact Exp $
  */
 
 /**
@@ -32,8 +32,8 @@ require_once("../classes/Staff.php");
  *  bool update(Staff $staff)
  *  bool delete(int $idMember, int $idUser = 0)
  *
- * @author jact <jachavar@gmail.com>
  * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
  * @access public
  */
 class Staff_Query extends Query
