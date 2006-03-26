@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Test.php,v 1.6 2006/03/26 14:59:53 jact Exp $
+ * $Id: Test.php,v 1.7 2006/03/26 15:55:49 jact Exp $
  */
 
 /**
@@ -21,9 +21,6 @@ require_once("../lib/Check.php");
 /*
  * Test represents a medical test for a medical problem
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  bool validateData(void)
  *  int getIdTest(void)
@@ -35,6 +32,10 @@ require_once("../lib/Check.php");
  *  string getPathFilename(boolean $withPath = true)
  *  string getPathFilenameError(void)
  *  void setPathFilename(string $value)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Test
 {

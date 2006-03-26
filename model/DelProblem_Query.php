@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelProblem_Query.php,v 1.8 2006/03/26 14:59:53 jact Exp $
+ * $Id: DelProblem_Query.php,v 1.9 2006/03/26 15:55:40 jact Exp $
  */
 
 /**
@@ -21,12 +21,13 @@ require_once("../classes/Query.php");
 /**
  * DelProblem_Query data access component for deleted medical problems
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void DelProblem_Query(void)
  *  bool insert(Problem $problem, int $idUser, string $login)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class DelProblem_Query extends Query
 {

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Session_Query.php,v 1.6 2006/03/26 14:59:53 jact Exp $
+ * $Id: Session_Query.php,v 1.7 2006/03/26 15:55:46 jact Exp $
  */
 
 /**
@@ -21,14 +21,15 @@ require_once("../classes/Query.php");
 /**
  * Session_Query data access component for sign on sessions
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void Session_Query(void)
  *  bool validToken(string $login, int $token)
  *  mixed getToken(string $login)
  *  bool _updateToken(int $token)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Session_Query extends Query
 {

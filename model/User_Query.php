@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User_Query.php,v 1.15 2006/03/26 14:59:53 jact Exp $
+ * $Id: User_Query.php,v 1.16 2006/03/26 15:55:51 jact Exp $
  */
 
 /**
@@ -22,9 +22,6 @@ require_once("../classes/User.php");
 /**
  * User_Query data access component for users
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void User_Query(void)
  *  mixed select(int $idUser = 0)
@@ -38,6 +35,10 @@ require_once("../classes/User.php");
  *  bool update(User $user)
  *  bool resetPwd(User $user)
  *  bool delete(int $idUser)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class User_Query extends Query
 {

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DbConnection.php,v 1.11 2006/03/26 14:59:53 jact Exp $
+ * $Id: DbConnection.php,v 1.12 2006/03/26 15:55:39 jact Exp $
  */
 
 /**
@@ -23,9 +23,6 @@ if (file_exists("../database_constants.php"))
 
 /**
  * DbConnection encapsulates all database specific functions for the project
- *
- * @author jact <jachavar@gmail.com>
- * @access public
  *
  * Methods:
  *  void DbConnection(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
@@ -51,6 +48,10 @@ if (file_exists("../database_constants.php"))
  *  string getDbError(void)
  *  string getSQL(void)
  *  bool freeResult(void)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class DbConnection
 {

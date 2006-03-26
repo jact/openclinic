@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Record_Page_Query.php,v 1.6 2006/03/26 14:59:53 jact Exp $
+ * $Id: Record_Page_Query.php,v 1.7 2006/03/26 15:55:45 jact Exp $
  */
 
 /**
@@ -21,16 +21,17 @@ require_once("../classes/Page_Query.php");
 /**
  * Record_Page_Query data access component for record logs
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.3
- *
  * Methods:
  *  void Record_Page_Query(void)
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
  *  mixed fetch(void)
  *  bool insert(int $idUser, string $login, string $tableName, string $operation, string $affectedRow)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
+ * @since 0.3
  */
 class Record_Page_Query extends Page_Query
 {

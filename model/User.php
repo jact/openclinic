@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: User.php,v 1.7 2006/03/26 14:59:53 jact Exp $
+ * $Id: User.php,v 1.8 2006/03/26 15:55:50 jact Exp $
  */
 
 /**
@@ -20,9 +20,6 @@ require_once("../lib/Check.php");
 
 /*
  * User represents an application user.
- *
- * @author jact <jachavar@gmail.com>
- * @access public
  *
  * Methods:
  *  bool validateData(void)
@@ -48,6 +45,10 @@ require_once("../lib/Check.php");
  *  void setIdTheme(int $value)
  *  int getIdProfile(void)
  *  void setIdProfile(int $value)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class User
 {

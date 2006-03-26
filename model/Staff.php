@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Staff.php,v 1.7 2006/03/26 14:59:53 jact Exp $
+ * $Id: Staff.php,v 1.8 2006/03/26 15:55:48 jact Exp $
  */
 
 /**
@@ -20,9 +20,6 @@ require_once("../lib/Check.php");
 
 /*
  * Staff represents a clinic staff member.
- *
- * @author jact <jachavar@gmail.com>
- * @access public
  *
  * Methods:
  *  bool validateData(void)
@@ -54,6 +51,10 @@ require_once("../lib/Check.php");
  *  void setAddress(string $value)
  *  string getPhone(void)
  *  void setPhone(string $value)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 
 class Staff

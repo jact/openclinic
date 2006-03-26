@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: History_Query.php,v 1.10 2006/03/26 14:59:53 jact Exp $
+ * $Id: History_Query.php,v 1.11 2006/03/26 15:55:41 jact Exp $
  */
 
 /**
@@ -22,9 +22,6 @@ require_once("../classes/History.php");
 /**
  * History_Query data access component for History class
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void History_Query(void)
  *  mixed selectPersonal(int $idPatient = 0)
@@ -32,6 +29,10 @@ require_once("../classes/History.php");
  *  mixed fetch(void)
  *  bool updatePersonal(History $history)
  *  bool updateFamily(History $history)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class History_Query extends Query
 {

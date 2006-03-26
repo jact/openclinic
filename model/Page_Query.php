@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Page_Query.php,v 1.3 2006/03/26 14:59:53 jact Exp $
+ * $Id: Page_Query.php,v 1.4 2006/03/26 15:55:41 jact Exp $
  */
 
 /**
@@ -22,17 +22,18 @@ require_once("../classes/Query.php");
 /**
  * Page_Query contains pagination methods and properties
  *
- * @author jact <jachavar@gmail.com>
- * @author Jorge López Herranz <lopez.herranz@gmail.com>
- * @access public
- * @see OPEN_SETTING_ITEMS_PER_PAGE
- * @since 0.8
- *
  * Methods:
  *  void setItemsPerPage(int $value)
  *  int getCurrentRow(void)
  *  int getRowCount(void)
  *  int getPageCount(void)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @author Jorge López Herranz <lopez.herranz@gmail.com>
+ * @package OpenClinic
+ * @access public
+ * @see OPEN_SETTING_ITEMS_PER_PAGE
+ * @since 0.8
  */
 class Page_Query extends Query
 {

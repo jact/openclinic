@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Description_Query.php,v 1.9 2006/03/26 14:59:53 jact Exp $
+ * $Id: Description_Query.php,v 1.10 2006/03/26 15:55:40 jact Exp $
  */
 
 /**
@@ -22,14 +22,15 @@ require_once("../classes/Description.php");
 /**
  * Description_Query data access component for domain tables
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  bool select(string $tableName, string $fieldCode, string $fieldDescription = "", string $keyValue = "")
  *  mixed fetch(void)
  *  array fetchAll(string $col = "")
  *  bool update(string $tableName, Description $des)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Description_Query extends Query
 {

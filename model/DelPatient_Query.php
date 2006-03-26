@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: DelPatient_Query.php,v 1.7 2006/03/26 14:59:53 jact Exp $
+ * $Id: DelPatient_Query.php,v 1.8 2006/03/26 15:55:39 jact Exp $
  */
 
 /**
@@ -21,12 +21,13 @@ require_once("../classes/Query.php");
 /**
  * DelPatient_Query data access component for deleted patients
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void DelPatient_Query(void)
  *  bool insert(Patient $patient, History $historyP, History $historyF, int $idUser, string $login)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class DelPatient_Query extends Query
 {

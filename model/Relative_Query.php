@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Relative_Query.php,v 1.7 2006/03/26 14:59:53 jact Exp $
+ * $Id: Relative_Query.php,v 1.8 2006/03/26 15:55:45 jact Exp $
  */
 
 /**
@@ -21,15 +21,16 @@ require_once("../classes/Query.php");
 /**
  * Relative_Query data access component for relative table
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void Relative_Query(void)
  *  mixed select(int $idPatient, int $idRelative = 0)
  *  mixed fetch(void)
  *  bool insert(int $idPatient, int $idRelative)
  *  bool delete(int $idPatient, int $idRelative)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Relative_Query extends Query
 {

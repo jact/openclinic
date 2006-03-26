@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Access_Page_Query.php,v 1.6 2006/03/26 14:59:52 jact Exp $
+ * $Id: Access_Page_Query.php,v 1.7 2006/03/26 15:55:38 jact Exp $
  */
 
 /**
@@ -21,16 +21,17 @@ require_once("../classes/Page_Query.php");
 /**
  * Access_Page_Query data access component for application users accesses
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.3
- *
  * Methods:
  *  void Access_Page_Query(void)
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
  *  mixed fetch(void)
  *  bool insert(User $user)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
+ * @since 0.3
  */
 class Access_Page_Query extends Page_Query
 {

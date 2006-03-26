@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Connection_Query.php,v 1.8 2006/03/26 14:59:53 jact Exp $
+ * $Id: Connection_Query.php,v 1.9 2006/03/26 15:55:39 jact Exp $
  */
 
 /**
@@ -21,15 +21,16 @@ require_once("../classes/Query.php");
 /**
  * Connection_Query data access component for connection table
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void Connection_Query(void)
  *  mixed select(int $idProblem, int $idConnection = 0)
  *  mixed fetch(void)
  *  bool insert(int $idProblem, int $idConnection)
  *  bool delete(int $idProblem, int $idConnection)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Connection_Query extends Query
 {

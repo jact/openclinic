@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme_Query.php,v 1.12 2006/03/26 14:59:53 jact Exp $
+ * $Id: Theme_Query.php,v 1.13 2006/03/26 15:55:50 jact Exp $
  */
 
 /**
@@ -22,9 +22,6 @@ require_once("../classes/Theme.php");
 /**
  * Theme_Query data access component for themes
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void Theme_Query(void)
  *  mixed select(int $id = 0)
@@ -34,6 +31,10 @@ require_once("../classes/Theme.php");
  *  bool insert(Theme $theme)
  *  bool update(Theme $theme)
  *  bool delete(int $id)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Theme_Query extends Query
 {

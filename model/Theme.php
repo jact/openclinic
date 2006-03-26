@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Theme.php,v 1.11 2006/03/26 14:59:53 jact Exp $
+ * $Id: Theme.php,v 1.12 2006/03/26 15:55:50 jact Exp $
  */
 
 /**
@@ -32,9 +32,6 @@ $reservedCSSFiles = array(
 /*
  * Theme represents a look and feel theme.
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  bool validateData(void)
  *  int getId(void)
@@ -50,6 +47,10 @@ $reservedCSSFiles = array(
  *  void setCSSRules(string $value)
  *  int getCount(void)
  *  void setCount(int $value)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Theme
 {

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient_Page_Query.php,v 1.7 2006/03/26 14:59:53 jact Exp $
+ * $Id: Patient_Page_Query.php,v 1.8 2006/03/26 15:55:43 jact Exp $
  */
 
 /**
@@ -22,9 +22,6 @@ require_once("../classes/Patient.php");
 /**
  * Patient_Page_Query data access component for patients
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- *
  * Methods:
  *  void Patient_Page_Query(void)
  *  bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
@@ -35,6 +32,10 @@ require_once("../classes/Patient.php");
  *  bool insert(Patient $patient)
  *  bool update(Patient $patient)
  *  bool delete(int $idPatient)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Patient_Page_Query extends Page_Query
 {

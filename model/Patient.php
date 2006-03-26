@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Patient.php,v 1.11 2006/03/26 14:59:53 jact Exp $
+ * $Id: Patient.php,v 1.12 2006/03/26 15:55:42 jact Exp $
  */
 
 /**
@@ -20,9 +20,6 @@ require_once("../lib/Check.php");
 
 /*
  * Patient contains business rules for patient data validation.
- *
- * @author jact <jachavar@gmail.com>
- * @access public
  *
  * Methods:
  *  bool validateData(void)
@@ -75,6 +72,10 @@ require_once("../lib/Check.php");
  *  void setEducation(string $value)
  *  string getInsuranceCompany(void)
  *  void setInsuranceCompany(string $value)
+ *
+ * @author jact <jachavar@gmail.com>
+ * @package OpenClinic
+ * @access public
  */
 class Patient
 {
