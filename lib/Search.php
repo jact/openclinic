@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Search.php,v 1.4 2006/03/25 20:03:06 jact Exp $
+ * $Id: Search.php,v 1.5 2006/03/26 16:05:56 jact Exp $
  */
 
 /**
@@ -19,14 +19,15 @@
 /**
  * Search set of used functions in search's pages
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.8
- *
  * Methods:
  *  array explodeQuoted(string $str)
  *  void pageLinks(int $currentPage, int $pageCount)
  *  void changePageJS(void)
+ *
+ * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
+ * @access public
+ * @since 0.8
  */
 class Search
 {

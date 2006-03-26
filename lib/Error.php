@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Error.php,v 1.4 2006/03/25 20:07:38 jact Exp $
+ * $Id: Error.php,v 1.5 2006/03/26 16:05:56 jact Exp $
  */
 
 /**
@@ -19,10 +19,6 @@
 /**
  * Error set of show error and debug functions
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.8
- *
  * Methods:
  *  void query(Query $query, bool $goOut = true)
  *  void connection(DbConnection $conn, bool $goOut = true)
@@ -32,6 +28,11 @@
  *  void customHandler(int $number, string $message, string $file, int $line, array $context)
  *  void debug(mixed $expression, string $message = "", bool $goOut = false)
  *  void trace(mixed $expression, string $message = "", bool $goOut = false)
+ *
+ * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
+ * @access public
+ * @since 0.8
  */
 class Error
 {

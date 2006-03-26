@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Check.php,v 1.4 2006/03/25 20:08:04 jact Exp $
+ * $Id: Check.php,v 1.5 2006/03/26 16:05:56 jact Exp $
  */
 
 /**
@@ -71,10 +71,6 @@ define("CHK_NO_FILTER", 0);
 /**
  * Check set of functions to validate and filter data
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.8
- *
  * Methods:
  *  bool hasMetas(string $text)
  *  mixed stripMetas(string $text)
@@ -87,6 +83,11 @@ define("CHK_NO_FILTER", 0);
  *  mixed filter(mixed $value, int $filter, mixed $options = null, string $characterset = "")
  *  bool isVar(int $source, string $name)
  *  mixed _rawVar(int $source, string $name)
+ *
+ * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
+ * @access public
+ * @since 0.8
  */
 class Check
 {

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: File.php,v 1.3 2006/03/26 15:02:57 jact Exp $
+ * $Id: File.php,v 1.4 2006/03/26 16:05:56 jact Exp $
  */
 
 /**
@@ -19,14 +19,15 @@
 /**
  * File set of functions connected to files management
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.8
- *
  * Methods:
  *  array getDirContent(string $dir, bool $subDir = false, array $allowedExtensions = null)
  *  bool upload(array &$file, string $destinationDir = "", string $destinationName = "", bool $secure = true)
  *  mixed sendMail(string $from, string $fromName, string $to, string $toName, string $subject, string $text, string $html, array $attachFiles = null)
+ *
+ * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
+ * @access public
+ * @since 0.8
  */
 class File
 {

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: Form.php,v 1.10 2006/03/26 15:02:57 jact Exp $
+ * $Id: Form.php,v 1.11 2006/03/26 16:05:56 jact Exp $
  */
 
 /**
@@ -24,10 +24,6 @@ if (file_exists("../classes/Description_Query.php"))
 
 /**
  * Form set of HTML form tags functions
- *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.8
  *
  * Methods:
  *  string strInput(array $options)
@@ -55,6 +51,11 @@ if (file_exists("../classes/Description_Query.php"))
  *  void label(string $field, string $text, bool $required = false)
  *  string strFieldset(string $legend, array &$body, array $foot = null, $options = null)
  *  void fieldset(string $legend, array &$body, array $foot = null, $options = null)
+ *
+ * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
+ * @access public
+ * @since 0.8
  */
 class Form
 {

@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: HTML.php,v 1.6 2006/03/25 20:06:30 jact Exp $
+ * $Id: HTML.php,v 1.7 2006/03/26 16:05:56 jact Exp $
  */
 
 /**
@@ -26,10 +26,6 @@ define("OPEN_MSG_ERROR",   3);
 /**
  * HTML set of html tags functions
  *
- * @author jact <jachavar@gmail.com>
- * @access public
- * @since 0.8
- *
  * Methods:
  *  string strTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
  *  void table(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
@@ -39,10 +35,15 @@ define("OPEN_MSG_ERROR",   3);
  *  void breadCrumb(array &$links, string $class = "")
  *  string strLink(string $text, string $url, array $arg = null, array $addendum = null)
  *  void link(string $text, string $url, array $arg = null, array $addendum = null)
- *  string strItemList(array &$items) // @todo
- *  void ItemList(array &$items) // @todo
- *  string strOrderedList(array &$items) // @todo
- *  void OrderedList(array &$items) // @todo
+ *
+ * @package OpenClinic
+ * @author jact <jachavar@gmail.com>
+ * @access public
+ * @since 0.8
+ * @todo string strItemList(array &$items)
+ * @todo void ItemList(array &$items)
+ * @todo string strOrderedList(array &$items)
+ * @todo void OrderedList(array &$items)
  */
 class HTML
 {
