@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: HTML.php,v 1.7 2006/03/26 16:05:56 jact Exp $
+ * $Id: HTML.php,v 1.8 2006/03/26 16:21:21 jact Exp $
  */
 
 /**
@@ -41,9 +41,9 @@ define("OPEN_MSG_ERROR",   3);
  * @access public
  * @since 0.8
  * @todo string strItemList(array &$items)
- * @todo void ItemList(array &$items)
+ * @todo void itemList(array &$items)
  * @todo string strOrderedList(array &$items)
- * @todo void OrderedList(array &$items)
+ * @todo void orderedList(array &$items)
  */
 class HTML
 {
