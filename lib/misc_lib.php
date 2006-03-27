@@ -1,20 +1,17 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: misc_lib.php,v 1.12 2006/03/26 15:02:57 jact Exp $
- */
-
-/**
  * misc_lib.php
  *
  * Set of miscellanean functions
  *
- * @author jact <jachavar@gmail.com>
- * @since 0.7
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: misc_lib.php,v 1.13 2006/03/27 18:35:38 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.7
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))

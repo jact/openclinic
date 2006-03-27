@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: license.php,v 1.5 2006/03/26 14:59:59 jact Exp $
- */
-
-/**
  * license.php
  *
  * License page of the home tab
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: license.php,v 1.6 2006/03/27 18:35:32 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
   /**

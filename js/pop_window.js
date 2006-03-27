@@ -1,18 +1,15 @@
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: pop_window.js,v 1.5 2006/03/26 15:33:35 jact Exp $
- */
-
-/**
  * pop_window.php
  *
  * Contains functions to open new windows
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: pop_window.js,v 1.6 2006/03/27 18:32:43 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
 /**

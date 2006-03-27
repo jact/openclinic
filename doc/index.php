@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: index.php,v 1.17 2006/03/24 20:21:39 jact Exp $
- */
-
-/**
  * index.php
  *
  * Home page of documentation project
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: index.php,v 1.18 2006/03/27 18:35:25 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
   /*if (count($_GET) == 0 || !isset($_GET['tab']) || !isset($_GET['nav']))
