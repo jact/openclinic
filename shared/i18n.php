@@ -1,20 +1,17 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: i18n.php,v 1.8 2006/03/26 15:25:04 jact Exp $
- */
-
-/**
  * i18n.php
  *
  * Defines i18n l10n constants and initializes OPEN_LANGUAGE settings
  *
- * @author jact <jachavar@gmail.com>
- * @since 0.7
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: i18n.php,v 1.9 2006/03/28 19:20:42 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.7
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -36,7 +33,22 @@
   }
   I18n::initLanguage(OPEN_LANGUAGE);
 
-  define("OPEN_CHARSET", (isset($nls['charset'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['charset']));
-  define("OPEN_DIRECTION", (isset($nls['direction'][OPEN_LANGUAGE]) ? $nls['charset'][OPEN_LANGUAGE] : $nls['default']['direction']));
-  define("OPEN_ENCODING", (isset($nls['encoding'][OPEN_LANGUAGE]) ? $nls['encoding'][OPEN_LANGUAGE] : $nls['default']['encoding']));
+  define("OPEN_CHARSET",
+    (isset($nls['charset'][OPEN_LANGUAGE])
+      ? $nls['charset'][OPEN_LANGUAGE]
+      : $nls['default']['charset']
+    )
+  );
+  define("OPEN_DIRECTION",
+    (isset($nls['direction'][OPEN_LANGUAGE])
+      ? $nls['charset'][OPEN_LANGUAGE]
+      : $nls['default']['direction']
+    )
+  );
+  define("OPEN_ENCODING",
+    (isset($nls['encoding'][OPEN_LANGUAGE])
+      ? $nls['encoding'][OPEN_LANGUAGE]
+      : $nls['default']['encoding']
+    )
+  );
 ?>
