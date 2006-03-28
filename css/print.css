@@ -1,18 +1,15 @@
 /**
- * This file is part of OpenClinic
- *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: print.css,v 1.3 2005/08/03 18:01:45 jact Exp $
- */
-
-/**
  * print.css
  *
  * Contains the css styles of OpenClinic doc pages for print media
  *
- * Author: jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: print.css,v 1.4 2006/03/28 19:08:40 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
 body {

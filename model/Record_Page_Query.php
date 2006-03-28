@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: Record_Page_Query.php,v 1.8 2006/03/26 16:12:40 jact Exp $
- */
-
-/**
  * Record_Page_Query.php
  *
  * Contains the class Record_Page_Query
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: Record_Page_Query.php,v 1.9 2006/03/28 19:06:40 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
 require_once("../classes/Page_Query.php");

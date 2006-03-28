@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: Patient.php,v 1.13 2006/03/26 16:12:37 jact Exp $
- */
-
-/**
  * Patient.php
  *
  * Contains the class Patient
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: Patient.php,v 1.14 2006/03/28 19:06:40 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
 require_once("../lib/Check.php");

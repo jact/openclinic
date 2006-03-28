@@ -1,19 +1,16 @@
 /**
- * This file is part of OpenClinic
- *
- * Copyright (c) 2002-2005 jact
- * Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: wizard.css,v 1.5 2005/07/28 17:50:48 jact Exp $
- */
-
-/**
  * wizard.css
  *
  * Contains the css styles of OpenClinic Install Wizard
  *
- * Author: jact <jachavar@gmail.com>
- * @since 0.5
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: wizard.css,v 1.6 2006/03/28 19:08:40 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.5
  */
 
 body {
