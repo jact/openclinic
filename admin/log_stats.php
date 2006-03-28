@@ -1,20 +1,17 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: log_stats.php,v 1.9 2006/03/24 20:18:08 jact Exp $
- */
-
-/**
  * log_stats.php
  *
  * Log stats screen (access logins or record operations)
  *
- * @author jact <jachavar@gmail.com>
- * @since 0.4
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: log_stats.php,v 1.10 2006/03/28 19:15:32 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.4
  */
 
   /**

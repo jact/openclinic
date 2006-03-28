@@ -1,20 +1,17 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: log_access_list.php,v 1.16 2006/03/24 20:17:33 jact Exp $
- */
-
-/**
  * log_access_list.php
  *
  * List of user's accesses in a date
  *
- * @author jact <jachavar@gmail.com>
- * @since 0.4
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: log_access_list.php,v 1.17 2006/03/28 19:15:32 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.4
  */
 
   /**

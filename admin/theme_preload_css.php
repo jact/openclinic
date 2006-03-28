@@ -1,20 +1,17 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: theme_preload_css.php,v 1.16 2006/03/26 14:47:34 jact Exp $
- */
-
-/**
  * theme_preload_css.php
  *
  * Upload a css file to preload contents
  *
- * @author jact <jachavar@gmail.com>
- * @since 0.7
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: theme_preload_css.php,v 1.17 2006/03/28 19:15:32 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.7
  */
 
   /**

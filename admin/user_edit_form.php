@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: user_edit_form.php,v 1.23 2006/03/26 14:47:45 jact Exp $
- */
-
-/**
  * user_edit_form.php
  *
  * Edition screen of user data
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: user_edit_form.php,v 1.24 2006/03/28 19:15:33 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
   /**
