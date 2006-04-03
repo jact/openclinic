@@ -1,20 +1,17 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: problem_search.php,v 1.24 2006/03/24 20:27:29 jact Exp $
- */
-
-/**
  * problem_search.php
  *
  * Medical problems result set page
  *
- * @author jact <jachavar@gmail.com>
- * @since 0.4
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: problem_search.php,v 1.25 2006/04/03 18:59:30 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.4
  */
 
   /**

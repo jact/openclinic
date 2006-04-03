@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: print_medical_record.php,v 1.21 2006/03/24 20:26:50 jact Exp $
- */
-
-/**
  * print_medical_record.php
  *
  * Medical record of a patient screen
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: print_medical_record.php,v 1.22 2006/04/03 18:59:29 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
   /**

@@ -1,20 +1,17 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: problem_validate_post.php,v 1.12 2006/03/26 15:20:49 jact Exp $
- */
-
-/**
  * problem_validate_post.php
  *
  * Validate post data of a medical problem
  *
- * @author jact <jachavar@gmail.com>
- * @since 0.6
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: problem_validate_post.php,v 1.13 2006/04/03 18:59:30 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ * @since     0.6
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
