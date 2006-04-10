@@ -1,5 +1,5 @@
 /* CSS based in Sinorca (haran's design in oswd.org) */
-/* $Id: sinorca.css,v 1.7 2005/08/22 15:50:43 jact Exp $ */
+/* $Id: sinorca.css,v 1.8 2006/04/10 19:05:27 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -127,7 +127,7 @@ li#first a, li#first span {
   border-bottom: 1px solid #9C9A9C;
 }
 
-#sideBar hr {
+#skipLink, hr {
   display: none;
 }
 
@@ -410,7 +410,8 @@ input[type="submit"], .formButton input:first-child {
   font-weight: bold;
 }
 
-hr {
+#mainZone hr {
+  display: block;
   background: #9C9A9C;
   color: #9C9A9C;
   border: 1px solid #9C9A9C;

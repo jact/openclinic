@@ -1,5 +1,5 @@
 /* CSS based in SuperfluousBanter.org site */
-/* $Id: banter.css,v 1.9 2005/08/22 15:50:43 jact Exp $ */
+/* $Id: banter.css,v 1.10 2006/04/10 19:05:27 jact Exp $ */
 
 /* Layout */
 html, body {
@@ -350,13 +350,19 @@ label {
   color: #bdba8c;
 }
 
+hr, #skipLink {
+  display: none;
+}
+
 #sideBar hr {
+  display: block;
   background: #efefef;
   color: #efefef;
   border: 2px solid #efefef;
 }
 
-hr {
+#mainZone hr {
+  display: block;
   background: #b5bab5;
   color: #b5bab5;
   border: 1px solid #b5bab5;

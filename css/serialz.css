@@ -1,5 +1,5 @@
 /* CSS based in www.serialz.to site */
-/* $Id: serialz.css,v 1.13 2005/08/22 15:50:18 jact Exp $ */
+/* $Id: serialz.css,v 1.14 2006/04/10 19:05:27 jact Exp $ */
 
 /* Layout */
 html, body {
@@ -362,7 +362,7 @@ img {
   white-space: nowrap;
 }
 
-.noPrint, #sideBar hr {
+.noPrint, #skipLink, hr {
   display: none;
 }
 
@@ -378,7 +378,8 @@ img {
   text-align: left;
 }
 
-hr {
+#mainZone hr {
+  display: block;
   background: #dce0d3;
   color: #dce0d3;
   border: 1px solid #dce0d3;

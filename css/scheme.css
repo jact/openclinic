@@ -1,5 +1,5 @@
 /* Feel free and change all what you want */
-/* $Id: scheme.css,v 1.9 2005/08/15 16:34:40 jact Exp $ */
+/* $Id: scheme.css,v 1.10 2006/04/10 19:05:27 jact Exp $ */
 
 /* --Layout-- */
 html, body {
@@ -283,7 +283,8 @@ img {
   white-space: nowrap;
 }
 
-hr {
+#mainZone hr {
+  display: block;
   background: #000;
   color: #000;
   border: 1px solid #000;
@@ -360,4 +361,8 @@ hr {
 
 .adminIcon {
   background: url(../images/admin.png) no-repeat;
+}
+
+hr, #skipLink {
+  display: none;
 }
