@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.20 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.21 2006/04/10 19:57:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,7 +43,7 @@
   /**
    * Password edits
    */
-  $pwdSession = Check::safeText($_POST["md5"]);
+  $pwdSession = Check::safeText($_POST["md5_session"]);
   if ($pwdSession == "")
   {
     $errorFound = true;
