@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.24 2006/03/28 19:15:33 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.25 2006/04/10 19:57:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -28,6 +28,7 @@
   $tab = ((isset($_GET["all"])) ? "home" : "admin");
   $nav = "users";
   $returnLocation = ((isset($_GET["all"])) ? "../home/index.php" : "../admin/user_list.php");
+  $isMd5 = true;
 
   require_once("../shared/read_settings.php");
   if ( !isset($_GET["all"]) )
@@ -116,13 +117,7 @@
   unset($links);
 
   require_once("../shared/form_errors_msg.php");
-?>
 
-<script src="../scripts/md5.js" type="text/javascript"></script>
-
-<script src="../scripts/password.php" type="text/javascript"></script>
-
-<?php
   /**
    * Edit form
    */
