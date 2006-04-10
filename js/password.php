@@ -3,16 +3,17 @@
  * password.php
  *
  * Contains the function md5Login used in:
- *  - user_new_form.php
- *  - user_edit_form.php
- *  - user_pwd_reset_form.php
+ *  - admin/user_new_form.php
+ *  - admin/user_edit_form.php
+ *  - admin/user_pwd_reset_form.php
+ *  - shared/login_form.php
  *
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: password.php,v 1.4 2006/03/27 18:32:43 jact Exp $
+ * @version   CVS: $Id: password.php,v 1.5 2006/04/10 19:54:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +26,7 @@ header("Content-Type: text/javascript; charset=" . OPEN_CHARSET);
  * Translates plain text passwords to md5 passwords
  *
  * @param string form name
- * @return boolean true if ok, false otherwise
+ * @return boolean true if ok to submit form, false otherwise
  */
 function md5Login(f)
 {
@@ -60,6 +61,12 @@ function md5Login(f)
   {
     f['md5_confirm'].value = hex_md5(f['pwd2'].value);
     f['pwd2'].value = '';
+  }
+
+  if (f['pwd_session'] != null)
+  {
+    f['md5_session'].value = hex_md5(f['pwd_session'].value);
+    f['pwd_session'].value = '';
   }
 
   return true;
