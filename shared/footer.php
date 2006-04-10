@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.24 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.25 2006/04/10 19:03:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,11 +23,9 @@
   //Error::debug($_SERVER);
 ?>
 </div><!-- End #mainZone -->
-<!-- End Main Zone -->
 
-<hr class="noPrint" />
+<hr />
 
-<!-- Footer -->
 <div id="footer">
   <ul id="footerLinks">
     <li><?php HTML::link(_("Clinic Home"), '../home/index.php', null, array('accesskey' => 1)); ?></li>
@@ -113,12 +111,12 @@
   }
 ?>
 </div><!-- End #footer -->
-<!-- End Footer -->
 </body>
 </html>
 <?php
   if (defined("OPEN_BUFFER") && OPEN_BUFFER)
   {
     ob_end_flush();
+    flush();
   }
 ?>
