@@ -1,5 +1,5 @@
 /* CSS based in www.serialz.to site */
-/* $Id: serialz.css,v 1.14 2006/04/10 19:05:27 jact Exp $ */
+/* $Id: serialz.css,v 1.15 2006/04/10 19:54:04 jact Exp $ */
 
 /* Layout */
 html, body {
@@ -240,7 +240,7 @@ fieldset .formButton {
   text-align: center;
 }
 
-fieldset .error {
+fieldset span.error {
   display: block;
   margin: 2px 0 16px;
   border-bottom: 1px solid #fff;
@@ -299,6 +299,10 @@ input[type="submit"], .formButton input:first-child {
 input[type="radio"], input[type="checkbox"] {
   background: #9ea985;
   color: inherit;
+}
+
+input.error, textarea.error, select.error {
+  border: 3px solid #374611;
 }
 
 /* Miscellaneous */

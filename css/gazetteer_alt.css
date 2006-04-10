@@ -1,5 +1,5 @@
 /* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
-/* $Id: gazetteer_alt.css,v 1.11 2006/04/10 19:05:27 jact Exp $ */
+/* $Id: gazetteer_alt.css,v 1.12 2006/04/10 19:54:04 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -289,7 +289,7 @@ fieldset .formButton {
   text-align: center;
 }
 
-fieldset .error {
+fieldset span.error {
   display: block;
   margin: 2px 0 16px;
   border-bottom: 1px solid #D2691E;
@@ -336,6 +336,10 @@ input[type="submit"], input[type="button"], input[type="reset"] {
 
 input[type="submit"], .formButton input:first-child {
   padding: 4px;
+}
+
+input.error, textarea.error, select.error {
+  border: 3px solid #d2691e;
 }
 
 .requiredField {
