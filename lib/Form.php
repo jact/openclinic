@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.12 2006/03/26 17:41:14 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.13 2006/04/10 20:10:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -124,6 +124,10 @@ class Form
     $addendum['size'] = intval($size);
     $addendum['maxlength'] = (isset($addendum['maxlength']) ? $addendum['maxlength'] : $size);
     $addendum['value'] = htmlspecialchars($value);
+    if (isset($addendum['error']) && !empty($addendum['error']))
+    {
+      $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
+    }
 
     $html = Form::strInput($addendum);
 
@@ -228,6 +232,11 @@ class Form
     $html .= '"';
     if (is_array($addendum))
     {
+      if (isset($addendum['error']) && !empty($addendum['error']))
+      {
+        $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
+      }
+
       foreach ($addendum as $key => $value)
       {
         if ($key == 'size' || $key == 'id' || $key == 'error')
@@ -330,6 +339,11 @@ class Form
     $html .= ' cols="' . $cols . '"';
     if (is_array($addendum))
     {
+      if (isset($addendum['error']) && !empty($addendum['error']))
+      {
+        $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
+      }
+
       foreach ($addendum as $key => $val)
       {
         if ($key == 'id' || $key == 'error')
@@ -595,6 +609,10 @@ class Form
     if ($size > 0)
     {
       $addendum['size'] = intval($size);
+    }
+    if (isset($addendum['error']) && !empty($addendum['error']))
+    {
+      $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
     }
 
     $html = Form::strInput($addendum);
