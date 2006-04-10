@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.19 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.20 2006/04/10 19:57:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,6 +18,7 @@
    */
   $tab = "home";
   $nav = "login";
+  $isMd5 = true;
 
   require_once("../shared/read_settings.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
@@ -57,23 +58,7 @@
   {
     HTML::message(_("Last attempt to type correct password before suspend this user account."));
   }
-?>
 
-<script src="../scripts/md5.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-<!--/*--><![CDATA[/*<!--*/
-function md5Login(f)
-{
-  f['md5'].value = hex_md5(f['pwd_session'].value);
-  f['pwd_session'].value = '';
-
-  return true;
-}
-/*]]>*///-->
-</script>
-
-<?php
   /**
    * Login form
    */
@@ -81,7 +66,7 @@ function md5Login(f)
 
   $tbody = array();
 
-  $row = Form::strHidden("md5");
+  $row = Form::strHidden("md5_session");
   $tbody[] = $row;
 
   $row = Form::strLabel("login_session", _("Login") . ":");
