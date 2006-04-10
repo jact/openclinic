@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.27 2006/04/10 19:04:20 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.28 2006/04/10 19:55:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,8 +38,14 @@
 <?php
   if ( !(isset($_GET['css']) && $_GET['css'] == "off") )
   {
-    echo '<link rel="stylesheet" type="text/css" href="../css/' . OPEN_THEME_CSS_FILE . '" title="' . OPEN_THEME_NAME . '" />';
-  } // end-if
+    echo '<link rel="stylesheet" type="text/css" href="../css/' . OPEN_THEME_CSS_FILE . '" title="' . OPEN_THEME_NAME . '" />' . "\n";
+  }
+
+  if (isset($isMd5) && $isMd5)
+  {
+    echo '<script src="../scripts/md5.js" type="text/javascript" defer="defer"></script>' . "\n";
+    echo '<script src="../scripts/password.php" type="text/javascript" defer="defer"></script>' . "\n";
+  }
 ?>
 
 <script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
