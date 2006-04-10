@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Session_Query.php,v 1.9 2006/03/28 19:06:40 jact Exp $
+ * @version   CVS: $Id: Session_Query.php,v 1.10 2006/04/10 19:20:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,23 +59,15 @@ class Session_Query extends Query
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE login='" . urlencode($login);
     $sql .= "' AND token=" . intval($token);
-    $sql .= " AND last_updated_date >= date_sub(sysdate(), interval ";
-    $sql .= OPEN_SESSION_TIMEOUT . " minute)";
+    $sql .= " AND last_updated_date >= DATE_SUB(SYSDATE(), INTERVAL ";
+    $sql .= OPEN_SESSION_TIMEOUT . " MINUTE)";
 
     if ( !$this->exec($sql) )
     {
       return false;
     }
 
-    if ($this->numRows() > 0)
-    {
-      $this->_updateToken($token);
-      return true;
-    }
-    else
-    {
-      return false;
-    }
+    return ($this->numRows() > 0 ? $this->_updateToken($token) : false);
   }
 
   /**
@@ -95,8 +87,8 @@ class Session_Query extends Query
      */
     $sql = "DELETE FROM " . $this->_table;
     $sql .= " WHERE login='" . urlencode($login) . "'";
-    $sql .= " AND last_updated_date < date_sub(sysdate(), interval ";
-    $sql .= OPEN_SESSION_TIMEOUT . " minute)";
+    $sql .= " AND last_updated_date < DATE_SUB(SYSDATE(), INTERVAL ";
+    $sql .= OPEN_SESSION_TIMEOUT . " MINUTE)";
 
     if ( !$this->exec($sql) )
     {
@@ -108,7 +100,7 @@ class Session_Query extends Query
 
     $sql = "INSERT INTO " . $this->_table;
     $sql .= " (login, last_updated_date, token) VALUES (";
-    $sql .= "'" . urlencode($login) . "', sysdate(), ";
+    $sql .= "'" . urlencode($login) . "', SYSDATE(), ";
     $sql .= $token . ")";
 
     return ($this->exec($sql) ? $token : false);
@@ -126,7 +118,7 @@ class Session_Query extends Query
   function _updateToken($token)
   {
     $sql = "UPDATE " . $this->_table . " SET";
-    $sql .= " last_updated_date=sysdate()";
+    $sql .= " last_updated_date=SYSDATE()";
     $sql .= " WHERE token=" . intval($token) . ";";
 
     return $this->exec($sql);
