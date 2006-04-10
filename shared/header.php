@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.26 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.27 2006/04/10 19:04:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -51,7 +51,6 @@
   }
 ?>>
 
-<!-- Header -->
 <div id="header">
   <div id="subHeader">
     <?php
@@ -98,11 +97,10 @@
     </div><!-- End #headerInformation -->
   </div><!-- End #subHeader -->
 
-  <hr class="noPrint" />
+  <hr />
 
-  <p class="noPrint"><?php HTML::link(_("Skip over navigation"), '#mainZone', null, array('accesskey' => 2)); ?></p>
+  <p id="skipLink"><?php HTML::link(_("Skip over navigation"), '#mainZone', null, array('accesskey' => 2)); ?></p>
 
-  <!-- Tabs -->
   <div class="menuBar">
     <ul id="tabs">
     <?php
@@ -133,7 +131,6 @@
     ?>
     </ul>
   </div><!-- End .menuBar -->
-  <!-- End Tabs -->
 
   <ul id="sourceForgeLinks">
 <?php
@@ -155,11 +152,9 @@
 ?>
   </ul><!-- End #sourceForgeLinks -->
 </div><!-- End #header -->
-<!-- End Header -->
 
-<hr class="noPrint" />
+<hr />
 
-<!-- Side Bar -->
 <div id="sideBar">
   <?php require_once("../navbars/" . $tab . ".php"); ?>
 
@@ -209,11 +204,9 @@
     </p>
   </div><!-- End #sideBarLogo -->
 </div><!-- End #sideBar -->
-<!-- End Side Bar -->
 
-<hr class="noPrint" />
+<hr />
 
-<!-- Main Zone -->
 <div id="mainZone">
 <?php
   if (defined("OPEN_DEMO") && OPEN_DEMO)
