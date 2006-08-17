@@ -1,4 +1,4 @@
-$Id: README,v 1.6 2005/08/03 18:03:31 jact Exp $
+$Id: README,v 1.7 2006/08/17 17:42:42 jact Exp $
 
 OpenClinic: Web Medical Records System
 ======================================
@@ -39,7 +39,7 @@ Currently OpenClinic has the following options:
 Requirements
 ============
 
-    * PHP4 >= 4.2 (due to session variable changes in PHP 4.2) compiled with MySQL support (tested with versions 4.2.* and 4.3.*);
+    * PHP4 >= 4.3.0 (due to use of mysql_real_escape_string function) compiled with MySQL support (tested with versions 4.3.*, 4.4.*);
 
     * MySQL (tested with versions 3.23.36, 3.23.49, 3.23.51, 3.23.52, 3.23.54, 3.23.55, 4.0.16 and 4.0.18);
 
