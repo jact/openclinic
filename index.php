@@ -5,7 +5,7 @@
  * @copyright Copyright (c) 2002-2006 jact
  * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
- * $Id: index.php,v 1.4 2006/03/26 14:47:08 jact Exp $
+ * $Id: index.php,v 1.5 2006/08/17 17:37:57 jact Exp $
  */
 
 /**
@@ -16,6 +16,13 @@
  * @author jact <jachavar@gmail.com>
  * @todo i18n and HTML.php inclusion
  */
+
+  // Ensuring a minimum version of PHP
+  define("OPEN_PHP_VERSION", '4.3.0');
+  if (version_compare(phpversion(), OPEN_PHP_VERSION) < 0)
+  {
+    exit(sprintf('PHP %s or higher is required.', OPEN_PHP_VERSION));
+  }
 
   require_once("./database_constants.php");
 
