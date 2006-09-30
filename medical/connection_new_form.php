@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.17 2006/09/30 17:06:11 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.18 2006/09/30 17:50:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -49,7 +49,7 @@
   require_once("../medical/patient_header.php");
   require_once("../medical/problem_header.php");
 
-  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
+  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient;
 
   /**
    * Bread crumb
@@ -58,7 +58,7 @@
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     _("Medical Problems Report") => "../medical/problem_list.php?key=" . $idPatient,
-    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient,
+    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&pat=" . $idPatient,
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );

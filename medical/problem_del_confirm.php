@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del_confirm.php,v 1.16 2006/09/30 17:17:23 jact Exp $
+ * @version   CVS: $Id: problem_del_confirm.php,v 1.17 2006/09/30 17:50:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -57,7 +57,7 @@
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     _("Medical Problems Report") => $returnLocation,
-    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient,
+    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&pat=" . $idPatient,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");

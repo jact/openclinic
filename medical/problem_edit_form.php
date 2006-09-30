@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit_form.php,v 1.24 2006/09/30 17:18:27 jact Exp $
+ * @version   CVS: $Id: problem_edit_form.php,v 1.25 2006/09/30 17:50:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -97,7 +97,7 @@
   require_once("../shared/header.php");
   require_once("../medical/patient_header.php");
 
-  $returnLocation = "../medical/problem_view.php?key=" . $idProblem . "&amp;pat=" . $idPatient;
+  $returnLocation = "../medical/problem_view.php?key=" . $idProblem . "&pat=" . $idPatient;
 
   /**
    * Bread crumb
