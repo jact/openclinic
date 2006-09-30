@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_stats.php,v 1.10 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: log_stats.php,v 1.11 2006/09/30 16:41:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -59,27 +59,27 @@
   HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
-  echo '<p>';
+  $relatedLinks = "";
   if ($table != 'access')
   {
-    HTML::link(_("Access Logs"), '../admin/log_stats.php', array('table' => 'access'));
+    $relatedLinks .= HTML::strLink(_("Access Logs"), '../admin/log_stats.php', array('table' => 'access'));
   }
   else
   {
-    echo _("Access Logs");
+    $relatedLinks .= _("Access Logs");
   }
-  echo ' | ';
+  $relatedLinks .= ' | ';
   if ($table != 'record')
   {
-    HTML::link(_("Record Logs"), '../admin/log_stats.php', array('table' => 'record'));
+    $relatedLinks .= HTML::strLink(_("Record Logs"), '../admin/log_stats.php', array('table' => 'record'));
   }
   else
   {
-    echo _("Record Logs");
+    $relatedLinks .= _("Record Logs");
   }
-  echo "</p>\n";
+  HTML::para($relatedLinks);
 
-  echo "<hr />\n";
+  HTML::rule();
 
   switch ($option)
   {

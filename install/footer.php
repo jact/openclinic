@@ -1,68 +1,74 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: footer.php,v 1.6 2006/03/24 20:22:42 jact Exp $
- */
-
-/**
  * footer.php
  *
  * Contains the common foot of the installation pages
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: footer.php,v 1.7 2006/09/30 16:55:46 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
-?>
 
-</div><!-- End #content -->
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
+  {
+    header("Location: ../index.php");
+    exit();
+  }
 
-<div id="left">
-<?php
-  echo '<p>';
-  HTML::link(_("OpenClinic web site"), 'http://openclinic.sourceforge.net', null,
-    array(
-      'id' => 'logo',
-      'title' => _("OpenClinic web site")
+  HTML::end('div'); // #content
+
+  HTML::start('div', array('id' => 'left'));
+
+  HTML::para(
+    HTML::strLink(_("OpenClinic web site"), 'http://openclinic.sourceforge.net', null,
+      array(
+        'id' => 'logo',
+        'title' => _("OpenClinic web site")
+      )
     )
   );
-  echo "</p>\n";
-?>
 
-  <ul class="linkList">
-    <li><?php HTML::link(_("Install Instructions"), '../install.html'); ?></li>
+  $array = array(
+    HTML::strLink(_("Install Instructions"), '../install.html'),
+    HTML::strLink(_("OpenClinic Readme"), '../index.html'),
+    array(HTML::strLink(_("Start OpenClinic"), '../home/index.php'), array('class' => 'bold'))
+  );
+  HTML::itemList($array, array('class' => 'linkList'));
 
-    <li><?php HTML::link(_("OpenClinic Readme"), '../index.html'); ?></li>
+  HTML::end('div'); // #left
 
-    <li class="bold"><?php HTML::link(_("Start OpenClinic"), '../home/index.php'); ?></li>
-  </ul>
-</div><!-- End #left -->
+  HTML::start('div', array('id' => 'footer'));
 
-<div id="footer">
-<?php
-  echo '<p>' . _("Powered by OpenClinic") . "</p>\n";
+  HTML::para(_("Powered by OpenClinic"));
 
-  echo '<p>';
-  echo sprintf('Copyright &copy; 2002-2006 %s',
-    HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.jachavar&#64;gmail.com', null,
-      array('accesskey' => 9)
+  HTML::para(
+    sprintf('Copyright &copy; 2002-2006 %s',
+      HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.jachavar&#64;gmail.com', null,
+        array('accesskey' => 9)
+      )
     )
   );
-  echo "</p>\n";
 
-  echo '<p>' . sprintf(_("Under the %s"), HTML::strLink('GNU General Public License', '../home/license.php', null, array('rel' => 'license'))) . "</p>\n";
-
-  echo '<p>';
-  HTML::link('Valid XHTML 1.1', 'http://validator.w3.org/check/referer', null,
-    array(
-      'id' => 'xhtml11',
-      'title' => 'Valid XHTML 1.1'
+  HTML::para(
+    sprintf(_("Under the %s"),
+      HTML::strLink('GNU General Public License', '../LICENSE', null, array('rel' => 'license'))
     )
   );
-  echo "</p>\n";
+
+  HTML::para(
+    HTML::strLink('Valid XHTML 1.1', 'http://validator.w3.org/check/referer', null,
+      array(
+        'id' => 'xhtml11',
+        'title' => 'Valid XHTML 1.1'
+      )
+    )
+  );
+
+  HTML::end('div'); // #footer
+  HTML::end('body');
+  HTML::end('html');
 ?>
-</div><!-- End #footer -->
-</body>
-</html>

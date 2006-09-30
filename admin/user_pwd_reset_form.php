@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.23 2006/04/10 19:57:47 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.24 2006/09/30 16:50:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -107,7 +107,13 @@
    * Edit form
    * @todo use user_fields.php with some controlling var to display adecuated fields
    */
-  echo '<form method="post" action="../admin/user_pwd_reset.php" onsubmit="return md5Login(this);">' . "\n";
+  HTML::start('form',
+    array(
+      'method' => 'post',
+      'action' => '../admin/user_pwd_reset.php',
+      'onclick' => 'return md5Login(this);'
+    )
+  );
 
   Form::hidden("id_user", $formVar["id_user"]);
   Form::hidden("login", $formVar["login"]);
@@ -118,7 +124,7 @@
   $tbody = array();
 
   $row = _("Login") . ": ";
-  $row .= '<strong>' . $formVar["login"] . '</strong>';
+  $row .= HTML::strTag('strong', $formVar["login"]);
 
   $tbody[] = $row;
 
@@ -145,7 +151,7 @@
 
   Form::fieldset($title, $tbody, $tfoot);
 
-  echo "</form>\n";
+  HTML::end('form');
 
   /**
    * Destroy form values and errors

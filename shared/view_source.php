@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: view_source.php,v 1.9 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: view_source.php,v 1.10 2006/09/30 17:28:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,15 +25,22 @@
   $title = sprintf(_("Source file: %s"), $_GET["file"]);
   require_once("../shared/xhtml_start.php");
 
-  echo '<link rel="stylesheet" type="text/css" href="../css/style.css" />';
-  echo "</head>\n";
+  HTML::start('link',
+    array(
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+      'href' => '../css/style.css'
+    ),
+    true
+  );
+  HTML::end('head');
 
-  echo '<body id="viewSource"';
+  $array = array('id' => 'viewSource');
   if (count($_GET) == 0 || empty($_GET["file"]) || empty($_GET["tab"]))
   {
-    echo ' onload="window.close()"';
+    $array['onload'] = 'window.close();';
   }
-  echo ">\n";
+  HTML::start('body', $array);
 
   if (isset($_SESSION["hasAdminAuth"]))
   {
@@ -51,7 +58,7 @@
     {
       HTML::message(_("No file found."), OPEN_MSG_ERROR);
 
-      echo '<p>' . HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')) . "</p>\n";
+      HTML::para(HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')));
     }
   }
   else
@@ -59,5 +66,6 @@
     HTML::message(sprintf(_("You are not authorized to use %s tab."), _("Admin"))); // maybe change
   }
 
-  echo "</body>\n</html>\n";
+  HTML::end('body');
+  HTML::end('html');
 ?>

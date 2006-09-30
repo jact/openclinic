@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.8 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.9 2006/09/30 16:40:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -28,72 +28,77 @@
   $title = _("Admin");
   require_once("../shared/header.php");
 
-  echo '<h1 class="bigIcon adminIcon">' . $title . "</h1>\n";
-  echo '<p>' . _("Use the following functions located in the left hand navigation area to manage your clinic's staff and administrative records.") . "</p>\n";
+  HTML::section(1, $title, array('class' => 'bigIcon adminIcon'));
+  HTML::para(_("Use the following functions located in the left hand navigation area to manage your clinic's staff and administrative records."));
 
-  echo '<h2 class="icon configIcon">' . HTML::strLink(_("Config settings"), '../admin/setting_edit_form.php') . "</h2>\n";
-  echo '<p>' . _("Update config settings.") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Config settings"), '../admin/setting_edit_form.php'), array('class' => 'icon configIcon'));
+  HTML::para(_("Update config settings."));
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2 class="icon themeIcon">' . HTML::strLink(_("Themes"), '../admin/theme_list.php') . "</h2>\n";
-  echo '<p>' . _("View the list of site look and feel themes.") . ' ' . _("From this list you can:") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Themes"), '../admin/theme_list.php'), array('class' => 'icon themeIcon'));
+  HTML::para(_("View the list of site look and feel themes.") . ' ' . _("From this list you can:"));
 
-  echo "<ul>\n";
-  echo '<li>' . _("set the theme in use by default for your site") . "</li>\n";
-  echo '<li>' . _("build a new site theme") . "</li>\n";
-  echo '<li>' . _("edit an existing theme") . "</li>\n";
-  echo '<li>' . _("delete a theme") . "</li>\n";
-  echo "</ul>\n";
+  $array = array(
+    _("set the theme in use by default for your site"),
+    _("build a new site theme"),
+    _("edit an existing theme"),
+    _("delete a theme")
+  );
+  HTML::itemList($array);
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2 class="icon staffIcon">' . HTML::strLink(_("Staff Members"), '../admin/staff_list.php') . "</h2>\n";
-  echo '<p>' . _("View the clinic staff member list.") . ' ' . _("From this list you can:") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Staff Members"), '../admin/staff_list.php'), array('class' => 'icon staffIcon'));
+  HTML::para(_("View the clinic staff member list.") . ' ' . _("From this list you can:"));
 
-  echo "<ul>\n";
-  echo '<li>' . _("build a new staff member") . "</li>\n";
-  echo '<li>' . _("edit the staff member information") . "</li>\n";
-  echo '<li>' . _("build or edit the clinic user associated") . "</li>\n";
-  echo '<li>' . _("delete a staff member") . "</li>\n";
-  echo "</ul>\n";
+  $array = array(
+    _("build a new staff member"),
+    _("edit the staff member information"),
+    _("build or edit the clinic user associated"),
+    _("delete a staff member")
+  );
+  HTML::itemList($array);
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2 class="icon userIcon">' . HTML::strLink(_("Users"), '../admin/user_list.php') . "</h2>\n";
-  echo '<p>' . _("View the list of clinic users.") . ' ' . _("From this list you can:") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Users"), '../admin/user_list.php'), array('class' => 'icon userIcon'));
+  HTML::para(_("View the list of clinic users.") . ' ' . _("From this list you can:"));
 
-  echo "<ul>\n";
-  echo '<li>' . _("build a new clinic user") . "</li>\n";
-  echo '<li>' . _("edit a existing clinic user") . "</li>\n";
-  echo '<li>' . _("edit the staff member information") . "</li>\n";
-  echo '<li>' . _("reset a user's password") . "</li>\n";
-  echo '<li>' . _("delete a clinic user") . "</li>\n";
-  echo "</ul>\n";
+  $array = array(
+    _("build a new clinic user"),
+    _("edit a existing clinic user"),
+    _("edit the staff member information"),
+    _("reset a user's password"),
+    _("delete a clinic user")
+  );
+  HTML::itemList($array);
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2 class="icon dumpIcon">' . HTML::strLink(_("Dumps"), '../admin/dump_view_form.php') . "</h2>\n";
-  echo '<p>' . _("From this option you can:") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Dumps"), '../admin/dump_view_form.php'), array('class' => 'icon dumpIcon'));
+  HTML::para(_("From this option you can:"));
 
-  echo "<ul>\n";
-  echo '<li>' . _("install dump from file") . "</li>\n";
-  echo '<li>' . sprintf(_("export database dump to %s format"), "MySQL") . "</li>\n";
-  echo '<li>' . sprintf(_("export database dump to %s format"), "XML") . "</li>\n";
-  echo '<li>' . sprintf(_("export database dump to %s format"), "CSV") . "</li>\n";
-  echo '<li>' . _("optimize database") . "</li>\n";
-  echo "</ul>\n";
+  $array = array(
+    _("install dump from file"),
+    sprintf(_("export database dump to %s format"), "MySQL"),
+    sprintf(_("export database dump to %s format"), "XML"),
+    sprintf(_("export database dump to %s format"), "CSV"),
+    _("optimize database")
+  );
+  HTML::itemList($array);
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2 class="icon logIcon">' . HTML::strLink(_("Logs"), '../admin/log_stats.php') . "</h2>\n";
-  echo '<p>' . _("View logs generated by the program:") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Logs"), '../admin/log_stats.php'), array('class' => 'icon logIcon'));
+  HTML::para(_("View logs generated by the program:"));
 
-  echo "<ul>\n";
-  echo '<li>' . _("user's accesses logs") . "</li>\n";
-  echo '<li>' . _("operations with medical records logs") . "</li>\n";
-  echo '<li>' . _("statistics for years, months, days and hours") . "</li>\n";
-  echo "</ul>\n";
+  $array = array(
+    _("user's accesses logs"),
+    _("operations with medical records logs"),
+    _("statistics for years, months, days and hours")
+  );
+  HTML::itemList($array);
 
   require_once("../shared/footer.php");
 ?>

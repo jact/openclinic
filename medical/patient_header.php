@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_header.php,v 1.18 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: patient_header.php,v 1.19 2006/09/30 17:13:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -52,11 +52,11 @@
 
     $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
-    echo '<div id="patientHeader" class="clearfix">' . "\n";
-    echo '<p>' . _("Patient") . ': ' . $patName . "</p>\n";
-    echo '<p>' . _("Sex") . ': ' . ($pat->getSex() == 'V' ? _("Male") : _("Female")) . "</p>\n";
-    echo '<p class="right">' . _("Age") . ': ' . $pat->getAge() . "</p>\n";
-    echo "</div>\n";
+    HTML::start('div', array('id' => 'patientHeader', 'class' => 'clearfix'));
+    HTML::para(_("Patient") . ': ' . $patName);
+    HTML::para(_("Sex") . ': ' . ($pat->getSex() == 'V' ? _("Male") : _("Female")));
+    HTML::para(_("Age") . ': ' . $pat->getAge(), array('class' => 'right'));
+    HTML::end('div');
 
     unset($patQ);
     unset($pat);

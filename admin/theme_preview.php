@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.26 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.27 2006/09/30 16:47:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -111,115 +111,196 @@
    */
   $title = sprintf(_("%s Theme Preview"), OPEN_THEME_NAME);
   require_once("../shared/xhtml_start.php");
-?>
 
-<link rel="shortcut icon" href="../images/miniopc.png" type="image/png" />
+  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
 
-<style type="text/css" title="<?php echo OPEN_THEME_NAME; ?>">
-<!--/*--><![CDATA[/*<!--*/
-<?php echo OPEN_THEME_CSS_RULES; ?>
-/*]]>*/-->
-</style>
+  HTML::start('style', array('type' => 'text/css', 'title' => OPEN_THEME_NAME));
+  echo "<!--/*--><![CDATA[/*<!--*/\n";
+  echo OPEN_THEME_CSS_RULES;
+  echo "/*]]>*/-->\n";
+  HTML::end('style');
 
-<script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
-</head>
-<body id="top">
+  HTML::start('script', array('src' => '../scripts/pop_window.js', 'type' => 'text/javascript', 'defer' => true));
+  HTML::end('script');
 
-<!-- Header -->
-<div id="header">
-  <div id="subHeader">
-    <h1><?php echo _("Clinic Name"); ?></h1>
+  HTML::end('head');
+  HTML::start('body', array('id' => 'top'));
 
-    <div id="headerInformation">
-      <p><?php echo _("Information"); ?></p>
-    </div>
-  </div><!-- End #subHeader -->
+  HTML::start('div', array('id' => 'header'));
+  HTML::start('div', array('id' => 'subHeader'));
 
-  <!-- Tabs -->
-  <div class="menuBar">
-    <ul id="tabs">
-    <?php
-      echo '<li id="first">' . HTML::strLink(_("Home"), '#top') . "</li>\n";
-      echo '<li>' . HTML::strLink(_("Medical Records"), '#top') . "</li>\n";
-      //echo '<li>' . HTML::strLink("Statistics", '#top') . "</li>\n";
-      echo '<li><span>' . _("Admin") . "</span></li>\n";
-    ?>
-    </ul>
-  </div><!-- End .menuBar -->
-  <!-- End Tabs -->
+  HTML::section(1, _("Clinic Name"));
 
-  <div id="sourceForgeLinks">
-    <?php HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')); ?>
-  </div><!-- End #sourceForgeLinks -->
-</div><!-- End #header -->
-<!-- End Header -->
+  HTML::start('div', array('id' => 'headerInformation'));
+  HTML::para(_("Information"));
+  HTML::end('div'); // #headerInformation
 
-<!-- Side Bar -->
-<div id="sideBar">
-  <ul class="linkList">
-    <li class="selected"><?php echo _("Theme Preview"); ?></li>
-    <li><?php HTML::link(_("Sample Link"), '#top'); ?></li>
-  </ul><!-- End .linkList -->
+  HTML::end('div'); // #subHeader
 
-  <hr />
+  HTML::start('div', array('class' => 'menuBar'));
 
-  <div id="sideBarLogo">
-    <p>
-      <a href="http://openclinic.sourceforge.net">
-        <img src="../images/openclinic-2.png" width="130" height="29" alt="<?php echo _("Powered by OpenClinic"); ?>" title="<?php echo _("Powered by OpenClinic"); ?>" />
-      </a>
-    </p>
+  $array = array(
+    array(HTML::strLink(_("Home"), '#top'), array('id' => 'first')),
+    HTML::strLink(_("Medical Records"), '#top'),
+    //HTML::strLink("Statistics", '#top'),
+    HTML::strTag('span', _("Admin"))
+  );
+  HTML::itemList($array, array('id' => 'tabs'));
 
-    <p>
-      <a href="http://www.coresis.com">
-        <img src="../images/thank.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" /><img src="../images/coresis.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" />
-      </a>
-    </p>
+  HTML::end('div'); // .menuBar
 
-    <p>
-      <a href="http://sourceforge.net">
-        <img src="../images/sf-logo.png" width="130" height="37" alt="SourceForge.net Logo"  title="SourceForge.net Logo" />
-      </a>
-    </p>
+  HTML::start('div', array('id' => 'sourceForgeLinks'));
+  HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'));
+  HTML::end('div'); // #sourceForgeLinks
 
-    <p>
-      <a href="http://www.php.net">
-        <img src="../images/php-logo.gif" width="80" height="15" alt="Powered by PHP" title="Powered by PHP" />
-      </a>
-    </p>
+  HTML::end('div'); // #header
 
-    <p>
-      <a href="http://www.mysql.com">
-        <img src="../images/mysql-logo.png" width="80" height="15" alt="Works with MySQL" title="Works with MySQL" />
-      </a>
-    </p>
+  HTML::start('div', array('id' => 'sideBar'));
 
-    <p>
-      <a href="http://validator.w3.org/check/referer">
-        <img src="../images/valid-xhtml11.png" width="80" height="15" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" />
-      </a>
-    </p>
+  $array = array(
+    array(_("Theme Preview"), array('class' => 'selected')),
+    HTML::strLink(_("Sample Link"), '#top')
+  );
+  HTML::itemList($array, array('class' => 'linkList'));
 
-    <p>
-      <a href="http://jigsaw.w3.org/css-validator?uri=<?php echo "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']; ?>">
-        <img src="../images/valid-css.png" width="80" height="15" alt="Valid CSS" title="Valid CSS" />
-      </a>
-    </p>
-  </div><!-- End #sidebarLogo -->
-</div><!-- End #sideBar -->
-<!-- End Side Bar -->
+  HTML::rule();
 
-<!-- Main Zone -->
-<div id="mainZone">
-<h1><?php echo sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]); ?></h1>
+  HTML::start('div', array('id' => 'sideBarLogo'));
 
-<p><?php HTML::link(_("Sample Link"), '#top'); ?></p>
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/openclinic-2.png',
+          'width' => 130,
+          'height' => 29,
+          'alt' => _("Powered by OpenClinic"),
+          'title' => _("Powered by OpenClinic")
+        ),
+        true
+      ),
+      'http://openclinic.sourceforge.net'
+    )
+  );
 
-<hr />
+  $thankCoresis = HTML::strStart('img',
+    array(
+      'src' => '../images/thank.png',
+      'width' => 65,
+      'height' => 30,
+      'alt' => 'OpenClinic Logo thanks to Coresis',
+      'title' => 'OpenClinic Logo thanks to Coresis'
+    ),
+    true
+  );
+  $thankCoresis .= HTML::strStart('img',
+    array(
+      'src' => '../images/coresis.png',
+      'width' => 65,
+      'height' => 30,
+      'alt' => 'OpenClinic Logo thanks to Coresis',
+      'title' => 'OpenClinic Logo thanks to Coresis'
+    ),
+    true
+  );
+  $thankCoresis = str_replace("\n", '', $thankCoresis);
+  HTML::para(HTML::strLink($thankCoresis, 'http://www.coresis.com'));
+  unset($thankCoresis);
 
-<h2><?php echo _("Subtitle Sample:"); ?></h2>
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/sf-logo.png',
+          'width' => 130,
+          'height' => 37,
+          'alt' => "Project hosted in SourceForge.net",
+          'title' => "Project hosted in SourceForge.net"
+        ),
+        true
+      ),
+      'http://sourceforge.net'
+    )
+  );
 
-<?php
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/php-logo.gif',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Powered by PHP",
+          'title' => "Powered by PHP"
+        ),
+        true
+      ),
+      'http://www.php.net'
+    )
+  );
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/mysql-logo.png',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Works with MySQL",
+          'title' => "Works with MySQL"
+        ),
+        true
+      ),
+      'http://www.mysql.com'
+    )
+  );
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/valid-xhtml11.png',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Valid XHTML 1.1",
+          'title' => "Valid XHTML 1.1"
+        ),
+        true
+      ),
+      'http://validator.w3.org/check/referer'
+    )
+  );
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/valid-css.png',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Valid CSS",
+          'title' => "Valid CSS"
+        ),
+        true
+      ),
+      'http://jigsaw.w3.org/css-validator',
+      array('uri' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'])
+    )
+  );
+
+  HTML::end('div'); // #sideBarLogo
+  HTML::end('div'); // #sideBar
+
+  HTML::start('div', array('id' => 'mainZone'));
+
+  HTML::section(1, sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]));
+
+  HTML::para(HTML::strLink(_("Sample Link"), '#top'));
+
+  HTML::rule();
+
+  HTML::section(2, _("Subtitle Sample:"));
+
   $thead = array(
     _("Table Heading") => array('colspan' => 2)
   );

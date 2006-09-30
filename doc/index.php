@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.18 2006/03/27 18:35:25 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.19 2006/09/30 16:52:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -31,93 +31,183 @@
   $title = _("OpenClinic Help");
   require_once("../shared/xhtml_start.php");
 
-  echo '<link rel="stylesheet" type="text/css" href="../css/' . OPEN_THEME_CSS_FILE . '" title="' . OPEN_THEME_NAME . '" />';
+  HTML::start('link',
+    array(
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+      'href' => '../css/' . OPEN_THEME_CSS_FILE,
+      'title' => OPEN_THEME_NAME
+    ),
+    true
+  );
+
+  HTML::start('script', array('type' => 'text/javascript', 'src' => '../scripts/pop_window.js', 'defer' => true));
+  HTML::end('script');
+
+  HTML::end('head');
+  HTML::start('body');
+
+  HTML::start('div', array('id' => 'header'));
+  HTML::start('div', array('id' => 'subHeader'));
+  HTML::section(1, _("OpenClinic Help"));
+  HTML::end('div'); // #subHeader
+
+  HTML::start('div', array('class' => 'menuBar'));
+
+  $array = array(
+    array(HTML::strTag('span', _("Help")), array('id' => 'first'))
+  );
+  HTML::itemList($array, array('id' => 'tabs'));
+
+  HTML::end('div'); // .menuBar
+
+  HTML::start('div', array('id' => 'sourceForgeLinks'));
+  HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'));
+  HTML::end('div'); // #sourceForgeLinks
+
+  HTML::end('div'); // #header
+
+  HTML::start('div', array('id' => 'sideBar'));
+
+  $array = array(
+    array(_("Help Topic"), array('class' => 'selected')),
+    HTML::strLink(_("Help Topic"), '#')
+  );
+  HTML::itemList($array, array('class' => 'linkList'));
+
+  HTML::rule();
+
+  HTML::start('div', array('id' => 'sideBarLogo'));
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/openclinic-2.png',
+          'width' => 130,
+          'height' => 29,
+          'alt' => _("Powered by OpenClinic"),
+          'title' => _("Powered by OpenClinic")
+        ),
+        true
+      ),
+      'http://openclinic.sourceforge.net'
+    )
+  );
+
+  $thankCoresis = HTML::strStart('img',
+    array(
+      'src' => '../images/thank.png',
+      'width' => 65,
+      'height' => 30,
+      'alt' => 'OpenClinic Logo thanks to Coresis',
+      'title' => 'OpenClinic Logo thanks to Coresis'
+    ),
+    true
+  );
+  $thankCoresis .= HTML::strStart('img',
+    array(
+      'src' => '../images/coresis.png',
+      'width' => 65,
+      'height' => 30,
+      'alt' => 'OpenClinic Logo thanks to Coresis',
+      'title' => 'OpenClinic Logo thanks to Coresis'
+    ),
+    true
+  );
+  $thankCoresis = str_replace("\n", '', $thankCoresis);
+  HTML::para(HTML::strLink($thankCoresis, 'http://www.coresis.com'));
+  unset($thankCoresis);
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/sf-logo.png',
+          'width' => 130,
+          'height' => 37,
+          'alt' => "Project hosted in SourceForge.net",
+          'title' => "Project hosted in SourceForge.net"
+        ),
+        true
+      ),
+      'http://sourceforge.net'
+    )
+  );
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/php-logo.gif',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Powered by PHP",
+          'title' => "Powered by PHP"
+        ),
+        true
+      ),
+      'http://www.php.net'
+    )
+  );
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/mysql-logo.png',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Works with MySQL",
+          'title' => "Works with MySQL"
+        ),
+        true
+      ),
+      'http://www.mysql.com'
+    )
+  );
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/valid-xhtml11.png',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Valid XHTML 1.1",
+          'title' => "Valid XHTML 1.1"
+        ),
+        true
+      ),
+      'http://validator.w3.org/check/referer'
+    )
+  );
+
+  HTML::para(
+    HTML::strLink(
+      HTML::strStart('img',
+        array(
+          'src' => '../images/valid-css.png',
+          'width' => 80,
+          'height' => 15,
+          'alt' => "Valid CSS",
+          'title' => "Valid CSS"
+        ),
+        true
+      ),
+      'http://jigsaw.w3.org/css-validator',
+      array('uri' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'])
+    )
+  );
+
+  HTML::end('div'); // #sideBarLogo
+  HTML::end('div'); // #sideBar
+
+  HTML::start('div', array('id' => 'mainZone'));
+
+  HTML::section(3, _("Sample Help Page:"));
+
+  Error::trace($_GET); // debug
+
+  require_once("../shared/footer.php");
 ?>
-
-<script type="text/javascript" src="../scripts/pop_window.js" defer="defer"></script>
-</head>
-<body>
-
-<!-- Header -->
-<div id="header">
-  <div id="subHeader">
-    <h1><?php echo _("OpenClinic Help"); ?></h1>
-  </div><!-- End #subHeader -->
-
-  <!-- Tabs -->
-  <div class="menuBar">
-    <ul id="tabs">
-      <li id="first"><span><?php echo _("Help"); ?></span></li>
-    </ul>
-  </div><!-- End .menuBar -->
-  <!-- End Tabs -->
-
-  <div id="sourceForgeLinks">
-    <?php HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')); ?>
-  </div><!-- End #sourceForgeLinks -->
-</div><!-- End #header -->
-<!-- End Header -->
-
-<!-- Side Bar -->
-<div id="sideBar">
-  <ul class="linkList">
-    <li class="selected"><?php echo _("Help Topic"); ?></li>
-    <li><?php HTML::link(_("Help Topic"), '#'); ?></li>
-  </ul><!-- End .linkList -->
-
-  <hr />
-
-  <div id="sideBarLogo">
-    <p>
-      <a href="http://openclinic.sourceforge.net">
-        <img src="../images/openclinic-2.png" width="130" height="29" alt="<?php echo _("Powered by OpenClinic"); ?>" title="<?php echo _("Powered by OpenClinic"); ?>" />
-      </a>
-    </p>
-
-    <p>
-      <a href="http://www.coresis.com">
-        <img src="../images/thank.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" /><img src="../images/coresis.png" width="65" height="30" alt="OpenClinic Logo thanks to Coresis" title="OpenClinic Logo thanks to Coresis" />
-      </a>
-    </p>
-
-    <p>
-      <a href="http://sourceforge.net">
-        <img src="../images/sf-logo.png" width="130" height="37" alt="SourceForge.net Logo"  title="SourceForge.net Logo" />
-      </a>
-    </p>
-
-    <p>
-      <a href="http://www.php.net">
-        <img src="../images/php-logo.gif" width="80" height="15" alt="Powered by PHP" title="Powered by PHP" />
-      </a>
-    </p>
-
-    <p>
-      <a href="http://www.mysql.com">
-        <img src="../images/mysql-logo.png" width="80" height="15" alt="Works with MySQL" title="Works with MySQL" />
-      </a>
-    </p>
-
-    <p>
-      <a href="http://validator.w3.org/check/referer">
-        <img src="../images/valid-xhtml11.png" width="80" height="15" alt="Valid XHTML 1.1" title="Valid XHTML 1.1" />
-      </a>
-    </p>
-
-    <p>
-      <a href="http://jigsaw.w3.org/css-validator?uri=<?php echo "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']; ?>">
-        <img src="../images/valid-css.png" width="80" height="15" alt="Valid CSS" title="Valid CSS" />
-      </a>
-    </p>
-  </div><!-- End #sidebarLogo -->
-</div><!-- End #sideBar -->
-<!-- End Side Bar -->
-
-<!-- Main Zone -->
-<div id="mainZone">
-
-<h3><?php echo _("Sample Help Page:"); ?></h3>
-
-<?php Error::trace($_GET); // debug ?>
-
-<?php require_once("../shared/footer.php"); ?>

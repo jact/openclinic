@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.16 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.17 2006/09/30 17:06:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -85,12 +85,12 @@
     exit();
   }
 
-  echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
+  HTML::section(2, _("Medical Problems List:"));
 
   /**
    * New form
    */
-  echo '<form method="post" action="../medical/connection_new.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../medical/connection_new.php'));
 
   Form::hidden("id_problem", $idProblem);
   Form::hidden("id_patient", $idPatient);
@@ -127,7 +127,7 @@
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);
-  echo "</form>\n";
+  HTML::end('form');
 
   require_once("../shared/footer.php");
 ?>

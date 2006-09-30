@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_lib.php,v 1.13 2006/03/27 18:35:38 jact Exp $
+ * @version   CVS: $Id: log_lib.php,v 1.14 2006/09/30 17:02:43 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -52,9 +52,34 @@ function percBar($pperc, $width = 100, $xecho = true, $label = "")
 
   $perc = round(($width * ($pperc / 100)), 0);
 
-  $what = '<img src="../images/leftbar.gif" height="14" width="7" alt="' . $label . '" />';
-  $what .= '<img src="../images/mainbar.gif" height="14" width="' . $perc . '" alt="' . $label . '" />';
-  $what .= '<img src="../images/rightbar.gif" height="14" width="7" alt="' . $label . '" />';
+  $what = HTML::strStart('img',
+    array(
+      'src' => '../images/leftbar.gif',
+      'width' => 7,
+      'height' => 14,
+      'alt' => $label
+    ),
+    true
+  );
+  $what .= HTML::strStart('img',
+    array(
+      'src' => '../images/mainbar.gif',
+      'width' => $perc,
+      'height' => 14,
+      'alt' => $label
+    ),
+    true
+  );
+  $what .= HTML::strStart('img',
+    array(
+      'src' => '../images/rightbar.gif',
+      'width' => 7,
+      'height' => 14,
+      'alt' => $label
+    ),
+    true
+  );
+  $what = str_replace("\n", '', $what);
 
   if ($xecho)
   {
@@ -85,7 +110,7 @@ function showYearStats($table)
   $auxConn->exec($query);
   list($totalHitsYear) = $auxConn->fetchRow(MYSQL_NUM);
 
-  echo '<h4>' . _("Yearly Stats") . "</h4>\n";
+  HTML::section(4, _("Yearly Stats"));
 
   if ($totalHitsYear > 0)
   {
@@ -153,7 +178,7 @@ function showMonthStats($table, $year)
   $auxConn->exec($query);
   list($totalHitsMonth) = $auxConn->fetchRow(MYSQL_NUM);
 
-  echo '<h4>' . sprintf(_("Monthly Stats for %d"), intval($year)) . "</h4>\n";
+  HTML::section(4, sprintf(_("Monthly Stats for %d"), intval($year)));
 
   if ($totalHitsMonth > 0)
   {
@@ -233,7 +258,7 @@ function showDailyStats($table, $year, $month)
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-  echo '<h4>' . sprintf(_("Daily Stats for %s, %d"), $months[intval($month) - 1], intval($year)) . "</h4>\n";
+  HTML::section(4, sprintf(_("Daily Stats for %s, %d"), $months[intval($month) - 1], intval($year)));
 
   if ($totalHitsDay > 0)
   {
@@ -330,7 +355,7 @@ function showHourlyStats($table, $year, $month, $day)
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-  echo '<h4>' . sprintf(_("Hourly Stats for %s %d, %d"), $months[intval($month) - 1], intval($day), intval($year)) . "</h4>\n";
+  HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d"), $months[intval($month) - 1], intval($day), intval($year)));
 
   if ($totalHitsHour > 0)
   {
@@ -419,20 +444,19 @@ function stats($table)
   $today = date("Y-m-d"); // calculated date
   $arrToday = explode("-", $today);
 
-  echo '<h3>';
+  $sectionTitle = "";
   switch ($table)
   {
     case "access":
-      echo _("Access Logs");
+      $sectionTitle .= _("Access Logs");
       break;
 
     case "record":
-      echo _("Record Logs");
+      $sectionTitle .= _("Record Logs");
       break;
   }
-  echo ': ' . $total . ' ';
-  echo strtolower(_("Hits"));
-  echo "</h3>\n";
+  $sectionTitle .= ': ' . $total . ' ' . strtolower(_("Hits"));
+  HTML::section(3, $sectionTitle);
 
   $query = "SELECT YEAR(access_date), MONTH(access_date), COUNT(*) FROM " . $table . "_log_tbl";
   $query .= " GROUP BY 2";
@@ -443,7 +467,7 @@ function stats($table)
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-  echo '<p>' . sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits) . "</p>\n";
+  HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits));
 
   $query = "SELECT YEAR(access_date), MONTH(access_date), DATE_FORMAT(access_date, '%d'), COUNT(*)";
   $query .= " FROM " . $table . "_log_tbl";
@@ -453,7 +477,7 @@ function stats($table)
   $auxConn->exec($query);
   list($year, $month, $day, $hits) = $auxConn->fetchRow(MYSQL_NUM);
 
-  echo '<p>' . sprintf(_("Busiest Day: %d %s %d (%d hits)"), intval($day), $months[intval($month) - 1], intval($year), $hits) . "</p>\n";
+  HTML::para(sprintf(_("Busiest Day: %d %s %d (%d hits)"), intval($day), $months[intval($month) - 1], intval($year), $hits));
 
   $query = "SELECT YEAR(access_date), MONTH(access_date), DATE_FORMAT(access_date, '%d'), HOUR(access_date), COUNT(*)";
   $query .= " FROM " . $table . "_log_tbl";
@@ -468,15 +492,15 @@ function stats($table)
   unset($auxConn);
 
   $hour = sprintf("%02d:00 - %02d:59", $hour, $hour);
-  echo '<p>' . sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"), $hour, $months[intval($month) - 1], intval($day), intval($year), $hits) . "</p>\n";
+  HTML::para(sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"), $hour, $months[intval($month) - 1], intval($day), intval($year), $hits));
 
-  echo "<hr />\n";
+  HTML::rule();
   showYearStats($table);
-  echo "<hr />\n";
+  HTML::rule();
   showMonthStats($table, intval($arrToday[0]));
-  echo "<hr />\n";
+  HTML::rule();
   showDailyStats($table, intval($arrToday[0]), intval($arrToday[1]));
-  echo "<hr />\n";
+  HTML::rule();
   showHourlyStats($table, intval($arrToday[0]), intval($arrToday[1]), $arrToday[2]);
 }
 
@@ -491,10 +515,10 @@ function stats($table)
  */
 function showLinks($table)
 {
-  echo '<p>';
-  HTML::link(_("Back to Main Statistics"), $_SERVER['PHP_SELF'], array('table' => $table));
-  echo ' | ';
-  HTML::link(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? htmlspecialchars($_SERVER["HTTP_REFERER"]) : '../index.php'));
-  echo "</p>\n";
+  HTML::para(
+    HTML::strLink(_("Back to Main Statistics"), $_SERVER['PHP_SELF'], array('table' => $table))
+    . ' | '
+    . HTML::strLink(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php'))
+  );
 }
 ?>

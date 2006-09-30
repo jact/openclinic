@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_header.php,v 1.20 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_header.php,v 1.21 2006/09/30 17:18:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -52,11 +52,17 @@
     $problemQ->freeResult();
     $problemQ->close();
 
-    echo '<div id="problemHeader" class="clearfix">' . "\n";
-    echo '<p>' . _("Wording") . ': ' . fieldPreview($problem->getWording()) . "</p>\n";
-    echo '<p class="right">' . _("Opening Date") . ': ' . I18n::localDate($problem->getOpeningDate()) . "</p>\n";
-    echo '<p class="right">' . _("Last Update Date") . ': ' . I18n::localDate($problem->getLastUpdateDate()) . "</p>\n";
-    echo "</div>\n";
+    HTML::start('div', array('id' => 'problemHeader', 'class' => 'clearfix'));
+    HTML::para(_("Wording") . ': ' . fieldPreview($problem->getWording()));
+    HTML::para(
+      _("Opening Date") . ': ' . I18n::localDate($problem->getOpeningDate()),
+      array('class' => 'right')
+    );
+    HTML::para(
+      _("Last Update Date") . ': ' . I18n::localDate($problem->getLastUpdateDate()),
+      array('class' => 'right')
+    );
+    HTML::end('div');
 
     unset($problemQ);
     unset($problem);

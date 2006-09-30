@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.24 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.25 2006/09/30 16:45:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -90,13 +90,13 @@
   /**
    * Theme use form
    */
-  echo '<form method="post" action="../admin/theme_use.php">';
+  HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_use.php'));
   Form::fieldset($legend, $tbody, $tfoot);
-  echo "</form>\n";
+  HTML::end('form');
 
-  echo '<p>' . HTML::strLink(_("Add New Theme"), '../admin/theme_new_form.php') . "</p>\n";
+  HTML::para(HTML::strLink(_("Add New Theme"), '../admin/theme_new_form.php'));
 
-  echo '<h2>' . _("Themes List:") . "</h2>\n";
+  HTML::section(2, _("Themes List:"));
 ?>
 
 <script type="text/javascript" defer="defer">

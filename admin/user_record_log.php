@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_record_log.php,v 1.28 2006/03/28 19:15:33 jact Exp $
+ * @version   CVS: $Id: user_record_log.php,v 1.29 2006/09/30 16:51:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -75,7 +75,7 @@
   HTML::breadCrumb($links, "icon userIcon");
   unset($links);
 
-  echo '<h2>' . sprintf(_("Record Logs List for user %s"), $login) . ":</h2>\n";
+  HTML::section(2, sprintf(_("Record Logs List for user %s"), $login) . ":");
 
   if ($recordQ->getRowCount() == 0)
   {
@@ -85,7 +85,7 @@
   else
   {
     // Printing result stats and page nav
-    echo '<p><strong>' . sprintf(_("%d transactions."), $recordQ->getRowCount()) . "</strong></p>\n";
+    HTML::para(HTML::strTag('strong', sprintf(_("%d transactions."), $recordQ->getRowCount())));
 
     $pageCount = $recordQ->getPageCount();
     Search::pageLinks($currentPage, $pageCount);
@@ -95,11 +95,16 @@
     /**
      * Form used by javascript to post back to this page (id="changePage" important)
      */
-    echo '<form id="changePage" method="post" action="../admin/user_record_log.php?key=' . $idUser . '&amp;login=' . urlencode($login) . '">' . "\n";
-    echo "<div>\n";
+    HTML::start('form',
+      array(
+        'id' => 'changePage',
+        'method' => 'post',
+        'action' => '../admin/user_record_log.php?key=' . $idUser . '&login=' . urlencode($login)
+      )
+    );
     Form::hidden("page", $currentPage);
     Form::hidden("limit", $limit);
-    echo "</div>\n</form>\n";
+    HTML::end('form');
 
     $thead = array(
       _("Access Date") => array('colspan' => 2),
@@ -143,7 +148,7 @@
   } // end if-else
   unset($recordQ);
 
-  echo '<p>' . HTML::strLink(_("Return to users list"), $returnLocation) . "</p>\n";
+  HTML::para(HTML::strLink(_("Return to users list"), $returnLocation));
 
   require_once("../shared/footer.php");
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: license.php,v 1.6 2006/03/27 18:35:32 jact Exp $
+ * @version   CVS: $Id: license.php,v 1.7 2006/09/30 16:52:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,7 +43,7 @@
   HTML::breadCrumb($links);
   unset($links);
 
-  echo '<pre>';
+  HTML::start('pre');
   if ($lines === false)
   {
     // End Of Text
@@ -70,7 +70,7 @@ EOT;
       echo htmlspecialchars($line);
     }
   }
-  echo "</pre>\n";
+  HTML::end('pre');
 
   require_once("../shared/footer.php");
 ?>

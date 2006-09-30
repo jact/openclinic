@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_form.php,v 1.11 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: patient_search_form.php,v 1.12 2006/09/30 17:14:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,18 +55,18 @@
   /**
    * Patient search form
    */
-  echo '<form method="post" action="../medical/patient_search.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_search.php'));
   require_once("../medical/patient_search_fields.php");
-  echo "</form>\n";
+  HTML::end('form');
 
-  echo "<hr />\n";
+  HTML::rule();
 
   /**
    * Problem search form
    */
-  echo '<form method="post" action="../medical/problem_search.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_search.php'));
   require_once("../medical/problem_search_fields.php");
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: Empty search to see all results."));
 

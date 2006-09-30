@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.25 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.26 2006/09/30 17:20:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -106,19 +106,18 @@
   /**
    * Form used by javascript to post back to this page (id="changePage" important)
    */
-  echo '<form id="changePage" method="post" action="../medical/problem_search.php">' . "\n";
-  echo "<div>\n";
+  HTML::start('form', array('id' => 'changePage', 'method' => 'post', 'action' => '../medical/problem_search.php'));
   Form::hidden("search_type_problem", $searchType);
   Form::hidden("search_text_problem", $searchText);
   Form::hidden("page", $currentPage);
   Form::hidden("logical_problem", $logical);
   Form::hidden("limit_problem", $limit);
-  echo "</div>\n</form>\n";
+  HTML::end('form');
 
   /**
    * Printing result stats and page nav
    */
-  echo '<p><strong>' . sprintf(_("%d matches found."), $problemQ->getRowCount()) . "</strong></p>\n";
+  HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $problemQ->getRowCount())));
 
   $pageCount = $problemQ->getPageCount();
   Search::pageLinks($currentPage, $pageCount);

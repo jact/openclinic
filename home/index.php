@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.12 2006/03/27 18:35:32 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.13 2006/09/30 16:52:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,7 @@
   $title = _("Welcome to OpenClinic");
   require_once("../shared/header.php");
 
-  echo '<h1>' . $title . "</h1>\n";
+  HTML::section(1, $title);
 
   /**
    * Display update message if coming from edit with a successful update.
@@ -51,33 +51,35 @@
     HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
   }
 
-  echo '<p>' . _("OpenClinic is an easy to use, open source, medical records system.") . "</p>\n";
-  echo '<p>' . _("When you select any of the following tabs you will be prompted to login.") . "</p>\n";
+  HTML::para(_("OpenClinic is an easy to use, open source, medical records system."));
+  HTML::para(_("When you select any of the following tabs you will be prompted to login."));
 
-  echo '<h2 class="bigIcon medicalIcon">' . HTML::strLink(_("Medical Records"), '../medical/index.php') . "</h2>\n";
-  echo '<p>' . _("Use this tab to manage your patient's medical records.") . "</p>\n";
-  echo '<p>' . _("Patient's Administration:") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Medical Records"), '../medical/index.php'), array('class' => 'bigIcon medicalIcon'));
+  HTML::para(_("Use this tab to manage your patient's medical records."));
+  HTML::para(_("Patient's Administration:"));
 
-  echo "<ul>\n";
-  echo '<li>' . _("Search, new, delete, edit") . "</li>\n";
-  echo '<li>' . _("Social Data") . "</li>\n";
-  echo '<li>' . _("Clinic History") . "</li>\n";
-  echo '<li>' . _("Problem Reports") . "</li>\n";
-  echo "</ul>\n";
+  $array = array(
+    _("Search, new, delete, edit"),
+    _("Social Data"),
+    _("Clinic History"),
+    _("Problem Reports")
+  );
+  HTML::itemList($array);
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2 class="bigIcon adminIcon">' . HTML::strLink(_("Admin"), '../admin/index.php') . "</h2>\n";
-  echo '<p>' . _("Use this tab to manage administrative options.") . "</p>\n";
+  HTML::section(2, HTML::strLink(_("Admin"), '../admin/index.php'), array('class' => 'bigIcon adminIcon'));
+  HTML::para(_("Use this tab to manage administrative options."));
 
-  echo "<ul>\n";
-  echo '<li>' . _("Staff members") . "</li>\n";
-  echo '<li>' . _("Config settings") . "</li>\n";
-  echo '<li>' . _("Clinic themes editor") . "</li>\n";
-  echo '<li>' . _("System users") . "</li>\n";
-  echo '<li>' . _("Dumps") . "</li>\n";
-  echo '<li>' . _("Logs") . "</li>\n";
-  echo "</ul>\n";
+  $array = array(
+    _("Staff members"),
+    _("Config settings"),
+    _("Clinic themes editor"),
+    _("System users"),
+    _("Dumps"),
+    _("Logs")
+  );
+  HTML::itemList($array);
 
   require_once("../shared/footer.php");
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del_confirm.php,v 1.15 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: staff_del_confirm.php,v 1.16 2006/09/30 16:42:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -62,7 +62,7 @@
   /**
    * Form
    */
-  echo '<form method="post" action="../admin/staff_del.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../admin/staff_del.php'));
 
   $tbody = array();
 
@@ -79,7 +79,7 @@
 
   Form::fieldset($title, $tbody, $tfoot, $options);
 
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The del function will delete the related user too (if exists)."));
 

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.24 2006/03/28 19:15:33 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.25 2006/09/30 16:49:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -115,11 +115,11 @@
   /**
    * New user form
    */
-  echo '<form method="post" action="../admin/user_new_form.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../admin/user_new_form.php'));
   Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null);
-  echo "</form>\n";
+  HTML::end('form');
 
-  echo '<h2>' . _("Users List:") . "</h2>\n";
+  HTML::section(2, _("Users List:"));
 
   if ( !$userQ->select() )
   {
@@ -200,7 +200,7 @@
     $row .= OPEN_SEPARATOR;
     $row .= $user->getEmail();
     $row .= OPEN_SEPARATOR;
-    $row .= (($user->isActived()) ? _("yes") : '<strong>' . _("no") . '</strong>');
+    $row .= ($user->isActived() ? _("yes") : HTML::strTag('strong', _("no")));
     $row .= OPEN_SEPARATOR;
     $row .= $profiles[$user->getIdProfile()];
 

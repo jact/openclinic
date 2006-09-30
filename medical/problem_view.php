@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_view.php,v 1.18 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_view.php,v 1.19 2006/09/30 17:20:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -68,7 +68,7 @@
   $problemQ->close();
   unset($problemQ);
 
-  if (I18n::localDate($problem->getClosingDate()) != "")
+  if ($problem->getClosingDate() != "" && $problem->getClosingDate() != '0000-00-00')
   {
     $nav = "history";
   }
@@ -100,44 +100,44 @@
 
   showPatientHeader($idPatient);
 
-  echo '<p>';
+  $relatedLinks = "";
   if ($hasMedicalAdminAuth)
   {
-    if (I18n::localDate($problem->getClosingDate()) == "")
+    if ($problem->getClosingDate() == "" || $problem->getClosingDate() == '0000-00-00')
     {
-      HTML::link(_("Edit Medical Problem Data"), '../medical/problem_edit_form.php',
+      $relatedLinks .= HTML::strLink(_("Edit Medical Problem Data"), '../medical/problem_edit_form.php',
         array(
           'key' => $idProblem,
           'pat' => $idPatient
         )
       );
-      echo ' | ';
+      $relatedLinks .= ' | ';
     }
-    HTML::link(_("Delete Medical Problem"), '../medical/problem_del_confirm.php',
+    $relatedLinks .= HTML::strLink(_("Delete Medical Problem"), '../medical/problem_del_confirm.php',
       array(
         'key' => $idProblem,
         'pat' => $idPatient,
         'wording' => $problem->getWording()
       )
     );
-    echo ' | ';
+    $relatedLinks .= ' | ';
   }
-  HTML::link(_("View Connection Problems"), '../medical/connection_list.php',
+  $relatedLinks .= HTML::strLink(_("View Connection Problems"), '../medical/connection_list.php',
     array(
       'key' => $idProblem,
       'pat' => $idPatient
     )
   );
-  echo ' | ';
-  HTML::link(_("View Medical Tests"), '../medical/test_list.php',
+  $relatedLinks .= ' | ';
+  $relatedLinks .= HTML::strLink(_("View Medical Tests"), '../medical/test_list.php',
     array(
       'key' => $idProblem,
       'pat' => $idPatient
     )
   );
-  echo "</p>\n";
+  HTML::para($relatedLinks);
 
-  echo '<h2>' . _("Medical Problem Data") . "</h2>\n";
+  HTML::section(2, _("Medical Problem Data"));
 
   if ($problem->getIdMember())
   {
@@ -149,8 +149,8 @@
       $staff = $staffQ->fetch();
       if ($staff)
       {
-        echo '<h3>' . _("Attending Physician") . "</h3>\n";
-        echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
+        HTML::section(3, _("Attending Physician"));
+        HTML::para($staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName());
       }
       $staffQ->freeResult();
     }
@@ -159,58 +159,58 @@
     unset($staff);
   }
 
-  echo '<h3>' . _("Opening Date") . "</h3>\n";
-  echo '<p>' . I18n::localDate($problem->getOpeningDate()) . "</p>\n";
+  HTML::section(3, _("Opening Date"));
+  HTML::para(I18n::localDate($problem->getOpeningDate()));
 
-  if (I18n::localDate($problem->getLastUpdateDate()) != "") // backwards compatibility
+  if ($problem->getLastUpdateDate() != "" && $problem->getLastUpdateDate() != "0000-00-00") // backwards compatibility
   {
-    echo '<h3>' . _("Last Update Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($problem->getLastUpdateDate()) . "</p>\n";
+    HTML::section(3, _("Last Update Date"));
+    HTML::para(I18n::localDate($problem->getLastUpdateDate()));
   }
 
-  if (I18n::localDate($problem->getClosingDate()) != "")
+  if ($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00")
   {
-    echo '<h3>' . _("Closing Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($problem->getClosingDate()) . "</p>\n";
+    HTML::section(3, _("Closing Date"));
+    HTML::para(I18n::localDate($problem->getClosingDate()));
   }
 
   if ($problem->getMeetingPlace())
   {
-    echo '<h3>' . _("Meeting Place") . "</h3>\n";
-    echo '<p>' . $problem->getMeetingPlace() . "</p>\n";
+    HTML::section(3, _("Meeting Place"));
+    HTML::para($problem->getMeetingPlace());
   }
 
-  echo '<h3>' . _("Wording") . "</h3>\n";
-  echo '<p>' . nl2br($problem->getWording()) . "</p>\n";
+  HTML::section(3, _("Wording"));
+  HTML::para(nl2br($problem->getWording()));
 
   if ($problem->getSubjective())
   {
-    echo '<h3>' . _("Subjective") . "</h3>\n";
-    echo '<p>' . nl2br($problem->getSubjective()) . "</p>\n";
+    HTML::section(3, _("Subjective"));
+    HTML::para(nl2br($problem->getSubjective()));
   }
 
   if ($problem->getObjective())
   {
-    echo '<h3>' . _("Objective") . "</h3>\n";
-    echo '<p>' . nl2br($problem->getObjective()) . "</p>\n";
+    HTML::section(3, _("Objective"));
+    HTML::para(nl2br($problem->getObjective()));
   }
 
   if ($problem->getAppreciation())
   {
-    echo '<h3>' . _("Appreciation") . "</h3>\n";
-    echo '<p>' . nl2br($problem->getAppreciation()) . "</p>\n";
+    HTML::section(3, _("Appreciation"));
+    HTML::para(nl2br($problem->getAppreciation()));
   }
 
   if ($problem->getActionPlan())
   {
-    echo '<h3>' . _("Action Plan") . "</h3>\n";
-    echo '<p>' . nl2br($problem->getActionPlan()) . "</p>\n";
+    HTML::section(3, _("Action Plan"));
+    HTML::para(nl2br($problem->getActionPlan()));
   }
 
   if ($problem->getPrescription())
   {
-    echo '<h3>' . _("Prescription") . "</h3>\n";
-    echo '<p>' . nl2br($problem->getPrescription()) . "</p>\n";
+    HTML::section(3, _("Prescription"));
+    HTML::para(nl2br($problem->getPrescription()));
   }
 
   require_once("../shared/footer.php");

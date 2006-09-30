@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.19 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.20 2006/09/30 17:22:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,15 +92,15 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p>';
-    HTML::link(_("Add New Medical Test"), '../medical/test_new_form.php',
-      array(
-        'key' => $idProblem,
-        'pat' => $idPatient
+    HTML::para(
+      HTML::strLink(_("Add New Medical Test"), '../medical/test_new_form.php',
+        array(
+          'key' => $idProblem,
+          'pat' => $idPatient
+        )
       )
     );
-    echo "</p>\n";
-    echo "<hr />\n";
+    HTML::rule();
   }
 
   $testQ = new Test_Query;
@@ -114,7 +114,7 @@
     exit();
   }
 
-  echo '<h2>' . _("Medical Tests List:") . "</h2>\n";
+  HTML::section(2, _("Medical Tests List:"));
 
   $thead = array(
     _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 3 : 1)),

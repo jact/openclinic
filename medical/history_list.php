@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_list.php,v 1.17 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: history_list.php,v 1.18 2006/09/30 17:08:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,15 +66,15 @@
     exit();
   }
 
-  echo '<p>';
-  HTML::link(_("View Personal Antecedents"), '../medical/history_personal_view.php', array('key' => $idPatient));
-  echo ' | ';
-  HTML::link(_("View Family Antecedents"), '../medical/history_family_view.php', array('key' => $idPatient));
-  echo "</p>\n";
+  HTML::para(
+    HTML::strLink(_("View Personal Antecedents"), '../medical/history_personal_view.php', array('key' => $idPatient))
+    . ' | '
+    . HTML::strLink(_("View Family Antecedents"), '../medical/history_family_view.php', array('key' => $idPatient))
+  );
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2>' . _("Closed Medical Problems List:") . "</h2>\n";
+  HTML::section(2, _("Closed Medical Problems List:"));
 
   $problemQ = new Problem_Page_Query();
   $problemQ->connect();

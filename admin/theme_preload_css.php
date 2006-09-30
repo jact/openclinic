@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.17 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.18 2006/09/30 16:46:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -74,7 +74,13 @@
   /**
    * Form
    */
-  echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . (($idTheme) ? "?key=" . $idTheme : "") . '" enctype="multipart/form-data">' . "\n";
+  HTML::start('form',
+    array(
+      'method' => 'post',
+      'action' => $_SERVER['PHP_SELF'] . ($idTheme ? '?key=' . $idTheme : ''),
+      'enctype' => 'multipart/form-data'
+    )
+  );
 
   $tbody = array();
 
@@ -90,7 +96,7 @@
   );
 
   Form::fieldset($title, $tbody, $tfoot);
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 

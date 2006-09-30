@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: no_authorization.php,v 1.7 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: no_authorization.php,v 1.8 2006/09/30 17:11:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -27,7 +27,7 @@
   $title = _("Not Authorization");
   require_once("../shared/header.php");
 
-  echo '<h1>' . $title . "</h1>\n";
+  HTML::section(1, $title);
 
   HTML::message(sprintf(_("You are not authorized to use %s tab."), _("Medical Records")));
 

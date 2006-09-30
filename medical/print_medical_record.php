@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.22 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: print_medical_record.php,v 1.23 2006/09/30 17:17:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,6 @@
   $tab = "medical";
   $nav = "print";
   $onlyDoctor = true;
-  $style = '<link rel="stylesheet" type="text/css" href="../css/style.css" />' . "\n";
 
   require_once("../shared/read_settings.php");
   require_once("../shared/login_check.php");
@@ -29,6 +28,15 @@
   require_once("../classes/History_Query.php");
   require_once("../lib/HTML.php");
 
+  $style = HTML::strStart('link',
+    array(
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+      'href' => '../css/style.css'
+    ),
+    true
+  );
+
   /**
    * Checking for get vars. Close window if none found.
    */
@@ -36,10 +44,14 @@
   {
     include_once("../shared/xhtml_start.php");
     echo $style;
-    echo "</head><body>\n";
+    HTML::end('head');
+    HTML::start('body');
+
     HTML::message(_("No patient selected."), OPEN_MSG_ERROR);
-    echo '<p>' . HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')) . "</p>\n";
-    echo "</body></html>\n";
+    HTML::para(HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')));
+
+    HTML::end('body');
+    HTML::end('html');
     exit();
   }
 
@@ -59,10 +71,14 @@
     $patQ->close();
     include_once("../shared/xhtml_start.php");
     echo $style;
-    echo "</head><body>\n";
+    HTML::end('head');
+    HTML::start('body');
+
     HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-    echo '<p>' . HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')) . "</p>\n";
-    echo "</body></html>\n";
+    HTML::para(HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')));
+
+    HTML::end('body');
+    HTML::end('html');
     exit();
   }
 
@@ -83,97 +99,98 @@
   $title = $patName . " " . date(_("Y-m-d H:i:s"));
   require_once("../shared/xhtml_start.php");
   echo $style;
-  echo "</head><body id='medicalRecord'>\n";
+  HTML::end('head');
+  HTML::start('body', array('id' => 'medicalRecord'));
 
   /**
    * Show social data
    */
-  echo '<h2>' . _("Social Data") . "</h2>\n";
-  echo '<h3>' . _("Patient") . "</h3>\n";
-  echo '<p>' . $pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName() . "</p>\n";
+  HTML::section(2, _("Social Data"));
+  HTML::section(3, _("Patient"));
+  HTML::para($pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName());
 
   if ($pat->getNIF())
   {
-    echo '<h3>' . _("Tax Identification Number (TIN)") . "</h3>\n";
-    echo '<p>' . $pat->getNIF() . "</p>\n";
+    HTML::section(3, _("Tax Identification Number (TIN)"));
+    HTML::para($pat->getNIF());
   }
 
   if ($pat->getAddress())
   {
-    echo '<h3>' . _("Address") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getAddress()) . "</p>\n";
+    HTML::section(3, _("Address"));
+    HTML::para(nl2br($pat->getAddress()));
   }
 
   if ($pat->getPhone())
   {
-    echo '<h3>' . _("Phone Contact") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getPhone()) . "</p>\n";
+    HTML::section(3, _("Phone Contact"));
+    HTML::para(nl2br($pat->getPhone()));
   }
 
-  echo '<h3>' . _("Sex") . "</h3>\n";
-  echo '<p>' . (($pat->getSex() == 'V') ? _("Male") : _("Female")) . "</p>\n";
+  HTML::section(3, _("Sex"));
+  HTML::para((($pat->getSex() == 'V') ? _("Male") : _("Female")));
 
   if ($pat->getRace())
   {
-    echo '<h3>' . _("Race") . "</h3>\n";
-    echo '<p>' . $pat->getRace() . "</p>\n";
+    HTML::section(3, _("Race"));
+    HTML::para($pat->getRace());
   }
 
   if ($pat->getBirthDate() != "" && $pat->getBirthDate() != "0000-00-00")
   {
-    echo '<h3>' . _("Birth Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($pat->getBirthDate()) . "</p>\n";
+    HTML::section(3, _("Race"));
+    HTML::para(I18n::localDate($pat->getBirthDate()));
 
-    echo '<h3>' . _("Age") . "</h3>\n";
-    echo '<p>' . $pat->getAge() . "</p>\n";
+    HTML::section(3, _("Age"));
+    HTML::para($pat->getAge());
   }
 
   if ($pat->getBirthPlace())
   {
-    echo '<h3>' . _("Birth Place") . "</h3>\n";
-    echo '<p>' . $pat->getBirthPlace() . "</p>\n";
+    HTML::section(3, _("Birth Place"));
+    HTML::para($pat->getBirthPlace());
   }
 
   if ($pat->getDeceaseDate() != "" && $pat->getDeceaseDate() != "0000-00-00")
   {
-    echo '<h3>' . _("Decease Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($pat->getDeceaseDate()) . "</p>\n";
+    HTML::section(3, _("Decease Date"));
+    HTML::para(I18n::localDate($pat->getDeceaseDate()));
   }
 
   if ($pat->getNTS())
   {
-    echo '<h3>' . _("Sanitary Card Number (SCN)") . "</h3>\n";
-    echo '<p>' . $pat->getNTS() . "</p>\n";
+    HTML::section(3, _("Sanitary Card Number (SCN)"));
+    HTML::para($pat->getNTS());
   }
 
   if ($pat->getNSS())
   {
-    echo '<h3>' . _("National Health Service Number (NHSN)") . "</h3>\n";
-    echo '<p>' . $pat->getNSS() . "</p>\n";
+    HTML::section(3, _("National Health Service Number (NHSN)"));
+    HTML::para($pat->getNSS());
   }
 
   if ($pat->getFamilySituation())
   {
-    echo '<h3>' . _("Family Situation") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getFamilySituation()) . "</p>\n";
+    HTML::section(3, _("Family Situation"));
+    HTML::para(nl2br($pat->getFamilySituation()));
   }
 
   if ($pat->getLabourSituation())
   {
-    echo '<h3>' . _("Labour Situation") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getLabourSituation()) . "</p>\n";
+    HTML::section(3, _("Labour Situation"));
+    HTML::para(nl2br($pat->getLabourSituation()));
   }
 
   if ($pat->getEducation())
   {
-    echo '<h3>' . _("Education") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getEducation()) . "</p>\n";
+    HTML::section(3, _("Education"));
+    HTML::para(nl2br($pat->getEducation()));
   }
 
   if ($pat->getInsuranceCompany())
   {
-    echo '<h3>' . _("Insurance Company") . "</h3>\n";
-    echo '<p>' . $pat->getInsuranceCompany() . "</p>\n";
+    HTML::section(3, _("Insurance Company"));
+    HTML::para($pat->getInsuranceCompany());
   }
 
   if ($pat->getIdMember())
@@ -186,8 +203,8 @@
       $staff = $staffQ->fetch();
       if ($staff)
       {
-        echo '<h3>' . _("Doctor you are assigned to") . "</h3>\n";
-        echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
+        HTML::section(3, _("Doctor you are assigned to"));
+        HTML::para($staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName());
       }
       $staffQ->freeResult();
     }
@@ -198,7 +215,7 @@
 
   unset($pat);
 
-  echo "<hr />\n";
+  HTML::rule();
 
   /**
    * Show medical problems
@@ -209,17 +226,17 @@
   /**
    * Show list
    */
-  echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
+  HTML::section(2, _("Medical Problems List:"));
 
   if ( !$problemQ->selectProblems($idPatient) )
   {
-    echo '<p>' . _("No medical problems defined for this patient.") . "</p>\n";
+    HTML::message(_("No medical problems defined for this patient."));
   }
 
   while ($problem = $problemQ->fetch())
   {
-    echo '<h3>' . _("Order Number") . "</h3>\n";
-    echo '<p>' . $problem->getOrderNumber() . "</p>\n";
+    HTML::section(3, _("Order Number"));
+    HTML::para($problem->getOrderNumber());
 
     if ($problem->getIdMember())
     {
@@ -231,8 +248,8 @@
         $staff = $staffQ->fetch();
         if ($staff)
         {
-          echo '<h3>' . _("Attending Physician") . "</h3>\n";
-          echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
+          HTML::section(3, _("Attending Physician"));
+          HTML::para($staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName());
         }
         $staffQ->freeResult();
       }
@@ -241,58 +258,58 @@
       unset($staff);
     }
 
-    echo '<h3>' . _("Opening Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($problem->getOpeningDate()) . "</p>\n";
+    HTML::section(3, _("Opening Date"));
+    HTML::para(I18n::localDate($problem->getOpeningDate()));
 
-    echo '<h3>' . _("Last Update Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($problem->getLastUpdateDate()) . "</p>\n";
+    HTML::section(3, _("Last Update Date"));
+    HTML::para(I18n::localDate($problem->getLastUpdateDate()));
 
-    if (I18n::localDate($problem->getClosingDate()) != "")
+    if ($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00")
     {
-      echo '<h3>' . _("Closing Date") . "</h3>\n";
-      echo '<p>' . I18n::localDate($problem->getClosingDate()) . "</p>\n";
+      HTML::section(3, _("Closing Date"));
+      HTML::para(I18n::localDate($problem->getClosingDate()));
     }
 
     if ($problem->getMeetingPlace())
     {
-      echo '<h3>' . _("Meeting Place") . "</h3>\n";
-      echo '<p>' . $problem->getMeetingPlace() . "</p>\n";
+      HTML::section(3, _("Meeting Place"));
+      HTML::para($problem->getMeetingPlace());
     }
 
-    echo '<h3>' . _("Wording") . "</h3>\n";
-    echo '<p>' . nl2br($problem->getWording()) . "</p>\n";
+    HTML::section(3, _("Wording"));
+    HTML::para(nl2br($problem->getWording()));
 
     if ($problem->getSubjective())
     {
-      echo '<h3>' . _("Subjective") . "</h3>\n";
-      echo '<p>' . nl2br($problem->getSubjective()) . "</p>\n";
+      HTML::section(3, _("Subjective"));
+      HTML::para(nl2br($problem->getSubjective()));
     }
 
     if ($problem->getObjective())
     {
-      echo '<h3>' . _("Objective") . "</h3>\n";
-      echo '<p>' . nl2br($problem->getObjective()) . "</p>\n";
+      HTML::section(3, _("Objective"));
+      HTML::para(nl2br($problem->getObjective()));
     }
 
     if ($problem->getAppreciation())
     {
-      echo '<h3>' . _("Appreciation") . "</h3>\n";
-      echo '<p>' . nl2br($problem->getAppreciation()) . "</p>\n";
+      HTML::section(3, _("Appreciation"));
+      HTML::para(nl2br($problem->getAppreciation()));
     }
 
     if ($problem->getActionPlan())
     {
-      echo '<h3>' . _("Action Plan") . "</h3>\n";
-      echo '<p>' . nl2br($problem->getActionPlan()) . "</p>\n";
+      HTML::section(3, _("Action Plan"));
+      HTML::para(nl2br($problem->getActionPlan()));
     }
 
     if ($problem->getPrescription())
     {
-      echo '<h3>' . _("Prescription") . "</h3>\n";
-      echo '<p>' . nl2br($problem->getPrescription()) . "</p>\n";
+      HTML::section(3, _("Prescription"));
+      HTML::para(nl2br($problem->getPrescription()));
     }
 
-    echo "<hr />\n";
+    HTML::rule();
   } // end while
   $problemQ->freeResult();
   $problemQ->close();
@@ -313,75 +330,75 @@
     Error::fetch($historyQ);
   }
 
-  echo '<h2>' . _("Personal Antecedents") . "</h2>\n";
+  HTML::section(2, _("Personal Antecedents"));
 
   if ($history->getBirthGrowth())
   {
-    echo '<h3>' . _("Birth and Growth") . "</h3>\n";
-    echo '<p>' . nl2br($history->getBirthGrowth()) . "</p>\n";
+    HTML::section(3, _("Birth and Growth"));
+    HTML::para(nl2br($history->getBirthGrowth()));
   }
 
   if ($history->getGrowthSexuality())
   {
-    echo '<h3>' . _("Growth and Sexuality") . "</h3>\n";
-    echo '<p>' . nl2br($history->getGrowthSexuality()) . "</p>\n";
+    HTML::section(3, _("Growth and Sexuality"));
+    HTML::para(nl2br($history->getGrowthSexuality()));
   }
 
   if ($history->getFeed())
   {
-    echo '<h3>' . _("Feed") . "</h3>\n";
-    echo '<p>' . nl2br($history->getFeed()) . "</p>\n";
+    HTML::section(3, _("Feed"));
+    HTML::para(nl2br($history->getFeed()));
   }
 
   if ($history->getHabits())
   {
-    echo '<h3>' . _("Habits") . "</h3>\n";
-    echo '<p>' . nl2br($history->getHabits()) . "</p>\n";
+    HTML::section(3, _("Habits"));
+    HTML::para(nl2br($history->getHabits()));
   }
 
   if ($history->getPeristalticConditions())
   {
-    echo '<h3>' . _("Peristaltic Conditions") . "</h3>\n";
-    echo '<p>' . nl2br($history->getPeristalticConditions()) . "</p>\n";
+    HTML::section(3, _("Peristaltic Conditions"));
+    HTML::para(nl2br($history->getPeristalticConditions()));
   }
 
   if ($history->getPsychological())
   {
-    echo '<h3>' . _("Psychological Conditions") . "</h3>\n";
-    echo '<p>' . nl2br($history->getPsychological()) . "</p>\n";
+    HTML::section(3, _("Psychological Conditions"));
+    HTML::para(nl2br($history->getPsychological()));
   }
 
   if ($history->getChildrenComplaint())
   {
-    echo '<h3>' . _("Children Complaint") . "</h3>\n";
-    echo '<p>' . nl2br($history->getChildrenComplaint()) . "</p>\n";
+    HTML::section(3, _("Children Complaint"));
+    HTML::para(nl2br($history->getChildrenComplaint()));
   }
 
   if ($history->getVenerealDisease())
   {
-    echo '<h3>' . _("Venereal Disease") . "</h3>\n";
-    echo '<p>' . nl2br($history->getVenerealDisease()) . "</p>\n";
+    HTML::section(3, _("Venereal Disease"));
+    HTML::para(nl2br($history->getVenerealDisease()));
   }
 
   if ($history->getAccidentSurgicalOperation())
   {
-    echo '<h3>' . _("Accidents and Surgical Operations") . "</h3>\n";
-    echo '<p>' . nl2br($history->getAccidentSurgicalOperation()) . "</p>\n";
+    HTML::section(3, _("Accidents and Surgical Operations"));
+    HTML::para(nl2br($history->getAccidentSurgicalOperation()));
   }
 
   if ($history->getMedicinalIntolerance())
   {
-    echo '<h3>' . _("Medicinal Intolerance") . "</h3>\n";
-    echo '<p>' . nl2br($history->getMedicinalIntolerance()) . "</p>\n";
+    HTML::section(3, _("Medicinal Intolerance"));
+    HTML::para(nl2br($history->getMedicinalIntolerance()));
   }
 
   if ($history->getMentalIllness())
   {
-    echo '<h3>' . _("Mental Illness") . "</h3>\n";
-    echo '<p>' . nl2br($history->getMentalIllness()) . "</p>\n";
+    HTML::section(3, _("Mental Illness"));
+    HTML::para(nl2br($history->getMentalIllness()));
   }
 
-  echo "<hr />\n";
+  HTML::rule();
 
   /**
    * Show family antecedents
@@ -397,33 +414,33 @@
   $historyQ->close();
   unset($historyQ);
 
-  echo '<h2>' . _("Family Antecedents") . "</h2>\n";
+  HTML::section(2, _("Family Antecedents"));
 
   if ($history->getParentsStatusHealth())
   {
-    echo '<h3>' . _("Parents Status Health") . "</h3>\n";
-    echo '<p>' . nl2br($history->getParentsStatusHealth()) . "</p>\n";
+    HTML::section(3, _("Parents Status Health"));
+    HTML::para(nl2br($history->getParentsStatusHealth()));
   }
 
   if ($history->getBrothersStatusHealth())
   {
-    echo '<h3>' . _("Brothers and Sisters Status Health") . "</h3>\n";
-    echo '<p>' . nl2br($history->getBrothersStatusHealth()) . "</p>\n";
+    HTML::section(3, _("Brothers and Sisters Status Health"));
+    HTML::para(nl2br($history->getBrothersStatusHealth()));
   }
 
   if ($history->getSpouseChildsStatusHealth())
   {
-    echo '<h3>' . _("Spouse and Childs Status Health") . "</h3>\n";
-    echo '<p>' . nl2br($history->getSpouseChildsStatusHealth()) . "</p>\n";
+    HTML::section(3, _("Spouse and Childs Status Health"));
+    HTML::para(nl2br($history->getSpouseChildsStatusHealth()));
   }
 
   if ($history->getFamilyIllness())
   {
-    echo '<h3>' . _("Family Illness") . "</h3>\n";
-    echo '<p>' . nl2br($history->getFamilyIllness()) . "</p>\n";
+    HTML::section(3, _("Family Illness"));
+    HTML::para(nl2br($history->getFamilyIllness()));
   }
 
-  echo "<hr />\n";
+  HTML::rule();
 
   /**
    * Show closed medical problems
@@ -434,18 +451,18 @@
   /**
    * Show list
    */
-  echo '<h2>' . _("Closed Medical Problems List:") . "</h2>\n";
+  HTML::section(2, _("Closed Medical Problems List:"));
 
   if ( !$problemQ->selectProblems($idPatient, true) )
   {
-    echo '<p>' . _("No closed medical problems defined for this patient.") . "</p>\n";
-    echo '<hr />' . "\n";
+    HTML::message(_("No closed medical problems defined for this patient."));
+    HTML::rule();
   }
 
   while ($problem = $problemQ->fetch())
   {
-    echo '<h3>' . _("Order Number") . "</h3>\n";
-    echo '<p>' . $problem->getOrderNumber() . "</p>\n";
+    HTML::section(3, _("Order Number"));
+    HTML::para($problem->getOrderNumber());
 
     if ($problem->getIdMember())
     {
@@ -457,8 +474,8 @@
         $staff = $staffQ->fetch();
         if ($staff)
         {
-          echo '<h3>' . _("Attending Physician") . "</h3>\n";
-          echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
+          HTML::section(3, _("Attending Physician"));
+          HTML::para($staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName());
         }
         $staffQ->freeResult();
       }
@@ -467,58 +484,58 @@
       unset($staff);
     }
 
-    echo '<h3>' . _("Opening Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($problem->getOpeningDate()) . "</p>\n";
+    HTML::section(3, _("Opening Date"));
+    HTML::para(I18n::localDate($problem->getOpeningDate()));
 
-    echo '<h3>' . _("Last Update Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($problem->getLastUpdateDate()) . "</p>\n";
+    HTML::section(3, _("Last Update Date"));
+    HTML::para(I18n::localDate($problem->getLastUpdateDate()));
 
-    if (I18n::localDate($problem->getClosingDate()) != "")
+    if ($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00")
     {
-      echo '<h3>' . _("Closing Date") . "</h3>\n";
-      echo '<p>' . I18n::localDate($problem->getClosingDate()) . "</p>\n";
+      HTML::section(3, _("Closing Date"));
+      HTML::para(I18n::localDate($problem->getClosingDate()));
     }
 
     if ($problem->getMeetingPlace())
     {
-      echo '<h3>' . _("Meeting Place") . "</h3>\n";
-      echo '<p>' . $problem->getMeetingPlace() . "</p>\n";
+      HTML::section(3, _("Meeting Place"));
+      HTML::para($problem->getMeetingPlace());
     }
 
-    echo '<h3>' . _("Wording") . "</h3>\n";
-    echo '<p>' . $problem->getWording() . "</p>\n";
+    HTML::section(3, _("Wording"));
+    HTML::para(nl2br($problem->getWording()));
 
     if ($problem->getSubjective())
     {
-      echo '<h3>' . _("Subjective") . "</h3>\n";
-      echo '<p>' . $problem->getSubjective() . "</p>\n";
+      HTML::section(3, _("Subjective"));
+      HTML::para(nl2br($problem->getSubjective()));
     }
 
     if ($problem->getObjective())
     {
-      echo '<h3>' . _("Objective") . "</h3>\n";
-      echo '<p>' . $problem->getObjective() . "</p>\n";
+      HTML::section(3, _("Objective"));
+      HTML::para(nl2br($problem->getObjective()));
     }
 
     if ($problem->getAppreciation())
     {
-      echo '<h3>' . _("Appreciation") . "</h3>\n";
-      echo '<p>' . $problem->getAppreciation() . "</p>\n";
+      HTML::section(3, _("Appreciation"));
+      HTML::para(nl2br($problem->getAppreciation()));
     }
 
     if ($problem->getActionPlan())
     {
-      echo '<h3>' . _("Action Plan") . "</h3>\n";
-      echo '<p>' . $problem->getActionPlan() . "</p>\n";
+      HTML::section(3, _("Action Plan"));
+      HTML::para(nl2br($problem->getActionPlan()));
     }
 
     if ($problem->getPrescription())
     {
-      echo '<h3>' . _("Prescription") . "</h3>\n";
-      echo '<p>' . $problem->getPrescription() . "</p>\n";
+      HTML::section(3, _("Prescription"));
+      HTML::para(nl2br($problem->getPrescription()));
     }
 
-    echo "<hr />\n";
+    HTML::rule();
   } // end while
   $problemQ->freeResult();
   $problemQ->close();
@@ -528,17 +545,18 @@
   /**
    * Do print the page
    */
-  echo '<script type="text/javascript">' . "\n";
-  echo "<!--/*--><![CDATA[/*<!--*/\n";
+  HTML::start('script', array('type' => 'text/javascript'));
+  echo "\n<!--/*--><![CDATA[/*<!--*/\n";
   echo 'if (typeof(window.print) != "undefined")' . "\n";
   echo "{\n";
   echo '  window.print();' . "\n";
   echo "}\n";
   echo "/*]]>*///-->\n";
-  echo "</script>\n";
+  HTML::end('script');
 
   /**
    * Show footer page
    */
-  echo "</body></html>\n";
+  HTML::end('body');
+  HTML::end('html');
 ?>

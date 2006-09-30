@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new_form.php,v 1.16 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_new_form.php,v 1.17 2006/09/30 17:19:40 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -85,7 +85,7 @@
   /**
    * New form
    */
-  echo '<form method="post" action="../medical/problem_new.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_new.php'));
 
   Form::hidden("last_update_date", $formVar['last_update_date']);
   Form::hidden("id_patient", $idPatient);
@@ -94,7 +94,7 @@
 
   require_once("../medical/problem_fields.php");
 
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 

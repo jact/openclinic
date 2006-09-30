@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.20 2006/04/10 19:57:12 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.21 2006/09/30 17:27:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -62,7 +62,13 @@
   /**
    * Login form
    */
-  echo '<form method="post" action="../shared/login.php" onsubmit="return md5Login(this);">' . "\n";
+  HTML::start('form',
+    array(
+      'method' => 'post',
+      'action' => '../shared/login.php',
+      'onsubmit' => 'return md5Login(this);'
+    )
+  );
 
   $tbody = array();
 
@@ -86,7 +92,7 @@
   $tfoot = array(Form::strButton("button1", _("Enter")));
 
   Form::fieldset($title, $tbody, $tfoot);
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message(_("You must have cookies enabled to access your account."));
 

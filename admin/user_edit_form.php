@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.25 2006/04/10 19:57:47 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.26 2006/09/30 16:48:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -121,7 +121,13 @@
   /**
    * Edit form
    */
-  echo '<form method="post" action="../admin/user_edit.php" onsubmit="return md5Login(this);">' . "\n";
+  HTML::start('form',
+    array(
+      'method' => 'post',
+      'action' => '../admin/user_edit.php',
+      'onclick' => 'return md5Login(this);'
+    )
+  );
 
   Form::hidden("referer", "edit"); // to user_validate_post.php
   Form::hidden("id_user", $formVar["id_user"]);
@@ -135,7 +141,7 @@
   $action = "edit";
   require_once("../admin/user_fields.php");
 
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 

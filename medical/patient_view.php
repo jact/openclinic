@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.22 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.23 2006/09/30 17:15:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -106,112 +106,114 @@
     HTML::message(_("Patient has been updated."), OPEN_MSG_INFO);
   }
 
-  echo '<p>';
+  $relatedLinks = "";
   if ($hasMedicalAdminAuth)
   {
-    HTML::link(_("Edit Social Data"), '../medical/patient_edit_form.php', array('key' => $idPatient));
-    echo ' | ';
-    HTML::link(_("Delete Patient"), '../medical/patient_del_confirm.php',
+    $relatedLinks .= HTML::strLink(_("Edit Social Data"), '../medical/patient_edit_form.php',
+      array('key' => $idPatient)
+    );
+    $relatedLinks .= ' | ';
+    $relatedLinks .= HTML::strLink(_("Delete Patient"), '../medical/patient_del_confirm.php',
       array(
         'key' => $idPatient,
         'name' => $patName
       )
     );
-    echo ' | ';
+    $relatedLinks .= ' | ';
   }
-  HTML::link(_("View Relatives"), '../medical/relative_list.php', array('key' => $idPatient));
-  echo "</p>\n";
+  $relatedLinks .= HTML::strLink(_("View Relatives"), '../medical/relative_list.php', array('key' => $idPatient));
+  HTML::para($relatedLinks);
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h3>' . _("Patient") . "</h3>\n";
-  echo '<p>' . $pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName() . "</p>\n";
+  HTML::section(3, _("Patient"));
+  HTML::para($pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName());
 
-  //echo '<h3>' . _("Last Update Date") . "</h3>\n";
-  //echo '<p>' . I18n::localDate($pat->getLastUpdateDate()) . "</p>\n";
+  //HTML::section(3, _("Last Update Date"));
+  //HTML::para(I18n::localDate($pat->getLastUpdateDate()));
 
   if ($pat->getNIF())
   {
-    echo '<h3>' . _("Tax Identification Number (TIN)") . "</h3>\n";
-    echo '<p>' . $pat->getNIF() . "</p>\n";
+    HTML::section(3, _("Tax Identification Number (TIN)"));
+    HTML::para($pat->getNIF());
   }
 
   if ($pat->getAddress())
   {
-    echo '<h3>' . _("Address") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getAddress()) . "</p>\n";
+    HTML::section(3, _("Address"));
+    HTML::para(nl2br($pat->getAddress()));
   }
 
   if ($pat->getPhone())
   {
-    echo '<h3>' . _("Phone Contact") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getPhone()) . "</p>\n";
+    HTML::section(3, _("Phone Contact"));
+    HTML::para(nl2br($pat->getPhone()));
   }
 
-  echo '<h3>' . _("Sex") . "</h3>\n";
-  echo '<p>' . (($pat->getSex() == 'V') ? _("Male") : _("Female")) . "</p>\n";
+  HTML::section(3, _("Sex"));
+  HTML::para(($pat->getSex() == 'V') ? _("Male") : _("Female"));
 
   if ($pat->getRace())
   {
-    echo '<h3>' . _("Race") . "</h3>\n";
-    echo '<p>' . $pat->getRace() . "</p>\n";
+    HTML::section(3, _("Race"));
+    HTML::para($pat->getRace());
   }
 
   if ($pat->getBirthDate() != "" && $pat->getBirthDate() != "0000-00-00")
   {
-    echo '<h3>' . _("Birth Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($pat->getBirthDate()) . "</p>\n";
+    HTML::section(3, _("Birth Date"));
+    HTML::para(I18n::localDate($pat->getBirthDate()));
 
-    echo '<h3>' . _("Age") . "</h3>\n";
-    echo '<p>' . $pat->getAge() . "</p>\n";
+    HTML::section(3, _("Age"));
+    HTML::para($pat->getAge());
   }
 
   if ($pat->getBirthPlace())
   {
-    echo '<h3>' . _("Birth Place") . "</h3>\n";
-    echo '<p>' . $pat->getBirthPlace() . "</p>\n";
+    HTML::section(3, _("Birth Place"));
+    HTML::para($pat->getBirthPlace());
   }
 
   if ($pat->getDeceaseDate() != "" && $pat->getDeceaseDate() != "0000-00-00")
   {
-    echo '<h3>' . _("Decease Date") . "</h3>\n";
-    echo '<p>' . I18n::localDate($pat->getDeceaseDate()) . "</p>\n";
+    HTML::section(3, _("Decease Date"));
+    HTML::para(I18n::localDate($pat->getDeceaseDate()));
   }
 
   if ($pat->getNTS())
   {
-    echo '<h3>' . _("Sanitary Card Number (SCN)") . "</h3>\n";
-    echo '<p>' . $pat->getNTS() . "</p>\n";
+    HTML::section(3, _("Sanitary Card Number (SCN)"));
+    HTML::para($pat->getNTS());
   }
 
   if ($pat->getNSS())
   {
-    echo '<h3>' . _("National Health Service Number (NHSN)") . "</h3>\n";
-    echo '<p>' . $pat->getNSS() . "</p>\n";
+    HTML::section(3, _("National Health Service Number (NHSN)"));
+    HTML::para($pat->getNSS());
   }
 
   if ($pat->getFamilySituation())
   {
-    echo '<h3>' . _("Family Situation") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getFamilySituation()) . "</p>\n";
+    HTML::section(3, _("Family Situation"));
+    HTML::para(nl2br($pat->getFamilySituation()));
   }
 
   if ($pat->getLabourSituation())
   {
-    echo '<h3>' . _("Labour Situation") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getLabourSituation()) . "</p>\n";
+    HTML::section(3, _("Labour Situation"));
+    HTML::para(nl2br($pat->getLabourSituation()));
   }
 
   if ($pat->getEducation())
   {
-    echo '<h3>' . _("Education") . "</h3>\n";
-    echo '<p>' . nl2br($pat->getEducation()) . "</p>\n";
+    HTML::section(3, _("Education"));
+    HTML::para(nl2br($pat->getEducation()));
   }
 
   if ($pat->getInsuranceCompany())
   {
-    echo '<h3>' . _("Insurance Company") . "</h3>\n";
-    echo '<p>' . $pat->getInsuranceCompany() . "</p>\n";
+    HTML::section(3, _("Insurance Company"));
+    HTML::para($pat->getInsuranceCompany());
   }
 
   if ($pat->getIdMember())
@@ -224,8 +226,8 @@
       $staff = $staffQ->fetch();
       if ($staff)
       {
-        echo '<h3>' . _("Doctor you are assigned to") . "</h3>\n";
-        echo '<p>' . $staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName() . "</p>\n";
+        HTML::section(3, _("Doctor you are assigned to"));
+        HTML::para($staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName());
       }
       $staffQ->freeResult();
     }

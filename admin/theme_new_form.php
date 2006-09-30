@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_new_form.php,v 1.22 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: theme_new_form.php,v 1.23 2006/09/30 16:45:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -106,24 +106,24 @@ function editTheme()
 </script>
 
 <?php
-  echo '<p>';
-  HTML::link(_("Preview Theme"), '#', null, array('onclick' => 'previewTheme(); return false;'));
-  echo ' | ';
-  HTML::link(_("Preload CSS file"), '../admin/theme_preload_css.php', (isset($idTheme) ? array('key' => $idTheme, 'copy' => 'Y') : null));
-  //echo ' | ';
-  //HTML::link(_("Upload image"), '../admin/theme_upload_image.php'); // @todo
-  echo "</p>\n";
+  HTML::para(
+    HTML::strLink(_("Preview Theme"), '#', null, array('onclick' => 'previewTheme(); return false;'))
+    . ' | '
+    . HTML::strLink(_("Preload CSS file"), '../admin/theme_preload_css.php', (isset($idTheme) ? array('key' => $idTheme, 'copy' => 'Y') : null))
+    //. ' | '
+    //. HTML::strLink(_("Upload image"), '../admin/theme_upload_image.php') // @todo
+  );
 
-  echo "<hr />\n";
+  HTML::rule();
 
   require_once("../shared/form_errors_msg.php");
 
   /**
    * New form
    */
-  echo '<form method="post" action="../admin/theme_new.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_new.php'));
   require_once("../admin/theme_fields.php");
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 

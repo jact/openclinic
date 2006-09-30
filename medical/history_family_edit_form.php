@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_edit_form.php,v 1.15 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: history_family_edit_form.php,v 1.16 2006/09/30 17:06:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -113,13 +113,13 @@
   /**
    * Edit form
    */
-  echo '<form method="post" action="../medical/history_family_edit.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../medical/history_family_edit.php'));
 
   Form::hidden("id_patient", $idPatient);
 
   require_once("../medical/history_family_fields.php");
 
-  echo "</form>\n";
+  HTML::end('form');
 
   /**
    * Destroy form values and errors

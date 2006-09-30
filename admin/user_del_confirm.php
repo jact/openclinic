@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del_confirm.php,v 1.14 2006/03/28 19:15:33 jact Exp $
+ * @version   CVS: $Id: user_del_confirm.php,v 1.15 2006/09/30 16:48:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -60,7 +60,7 @@
   /**
    * Form
    */
-  echo '<form method="post" action="../admin/user_del.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../admin/user_del.php'));
 
   $tbody = array();
 
@@ -79,7 +79,7 @@
 
   Form::fieldset($title, $tbody, $tfoot, $options);
 
-  echo "</form>\n";
+  HTML::end('form');
 
   require_once("../shared/footer.php");
 ?>

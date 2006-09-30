@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit_form.php,v 1.23 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_edit_form.php,v 1.24 2006/09/30 17:18:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -70,7 +70,7 @@
     {
       $formVar["last_update_date"] = $problem->getLastUpdateDate();
       $formVar["id_member"] = $problem->getIdMember();
-      $formVar["closed_problem"] = (($problem->getClosingDate() != "") ? "checked" : "");
+      $formVar["closed_problem"] = (($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00") ? "checked" : "");
       $formVar["meeting_place"] = $problem->getMeetingPlace();
       $formVar["wording"] = $problem->getWording();
       $formVar["subjective"] = $problem->getSubjective();
@@ -119,7 +119,7 @@
   /**
    * Edit form
    */
-  echo '<form method="post" action="../medical/problem_edit.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_edit.php'));
 
   Form::hidden("id_problem", $formVar["id_problem"]);
   Form::hidden("last_update_date", $formVar["last_update_date"]);
@@ -127,7 +127,7 @@
 
   require_once("../medical/problem_fields.php");
 
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 

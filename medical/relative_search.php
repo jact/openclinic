@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.25 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.26 2006/09/30 17:21:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -103,8 +103,7 @@
   /**
    * Form used by javascript to post back to this page (id="changePage" important)
    */
-  echo '<form id="changePage" method="post" action="../medical/relative_search.php">' . "\n";
-  echo "<div>\n";
+  HTML::start('form', array('id' => 'changePage', 'method' => 'post', 'action' => '../medical/relative_search.php'));
   Form::hidden("search_type", $searchType);
   Form::hidden("search_text", $searchText);
   Form::hidden("page", $currentPage);
@@ -117,12 +116,12 @@
   {
     Form::hidden('check[' . $i . ']', 'check[' . $i . ']', $_POST["check"][$i]);
   }*/
-  echo "</div>\n</form>\n";
+  HTML::end('form');
 
   /**
    * Printing result stats and page nav
    */
-  echo '<p><strong>' . sprintf(_("%d matches found."), $patQ->getRowCount()) . "</strong></p>\n";
+  HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
 
   $pageCount = $patQ->getPageCount();
   Search::pageLinks($currentPage, $pageCount);
@@ -201,12 +200,11 @@
     $query .= " NOT ";
   }
   $query .= $word[$num - 1] . ")";
-?>
 
-<script type="text/javascript" src="../scripts/checkboxes.js" defer="defer"></script>
+  HTML::start('script', array('type' => 'text/javascript', 'src' => '../scripts/checkboxes.js', 'defer' => true));
+  HTML::end('script');
 
-<?php
-  echo '<form method="post" action="../medical/relative_new.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_new.php'));
 
   Form::hidden("id_patient", $idPatient, array('id' => 'r_id_patient'));
 
@@ -248,7 +246,7 @@
 
   HTML::table($thead, $tbody, $tfoot, $options);
 
-  echo "</form>\n";
+  HTML::end('form');
 
   Search::pageLinks($currentPage, $pageCount);
 

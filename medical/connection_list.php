@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_list.php,v 1.19 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: connection_list.php,v 1.20 2006/09/30 17:04:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -84,14 +84,14 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p>';
-    HTML::link(_("Add New Connection Problems"), '../medical/connection_new_form.php',
-      array(
-        'key' => $idProblem,
-        'pat' => $idPatient
+    HTML::para(
+      HTML::strLink(_("Add New Connection Problems"), '../medical/connection_new_form.php',
+        array(
+          'key' => $idProblem,
+          'pat' => $idPatient
+        )
       )
     );
-    echo "</p>\n";
   }
 
   $connQ = new Connection_Query;
@@ -116,7 +116,7 @@
     exit();
   }
 
-  echo '<h2>' . _("Connection Problems List:") . "</h2>\n";
+  HTML::section(2, _("Connection Problems List:"));
 
   $thead = array(
     _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),

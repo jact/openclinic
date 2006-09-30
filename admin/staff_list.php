@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.20 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.21 2006/09/30 16:42:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -104,44 +104,44 @@
 
   //Error::debug($_SESSION);
 
-  echo '<p>';
-  HTML::link(_("Add New Administrative"), '../admin/staff_new_form.php', array('type' => 'A'));
-  echo ' | ';
-  HTML::link(_("Add New Doctor"), '../admin/staff_new_form.php', array('type' => 'D'));
-  echo "</p>\n";
+  HTML::para(
+    HTML::strLink(_("Add New Administrative"), '../admin/staff_new_form.php', array('type' => 'A'))
+    . ' | '
+    . HTML::strLink(_("Add New Doctor"), '../admin/staff_new_form.php', array('type' => 'D'))
+  );
 
-  echo "<hr />";
+  HTML::rule();
 
-  echo '<h3>' . $listTitle . "</h3>\n";
+  HTML::section(3, $listTitle);
 
-  echo '<p>';
+  $relatedLinks = "";
   if ( !empty($memberType) )
   {
-    HTML::link(_("View all staff members"), '../admin/staff_list.php');
+    $relatedLinks .= HTML::strLink(_("View all staff members"), '../admin/staff_list.php');
   }
   else
   {
-    echo _("View all staff members");
+    $relatedLinks .= _("View all staff members");
   }
-  echo ' | ';
+  $relatedLinks .= ' | ';
   if ($memberType != 'A')
   {
-    HTML::link(_("View only administratives"), '../admin/staff_list.php', array('type' => 'A'));
+    $relatedLinks .= HTML::strLink(_("View only administratives"), '../admin/staff_list.php', array('type' => 'A'));
   }
   else
   {
-    echo _("View only administratives");
+    $relatedLinks .= _("View only administratives");
   }
-  echo ' | ';
+  $relatedLinks .= ' | ';
   if ($memberType != 'D')
   {
-    HTML::link(_("View only doctors"), '../admin/staff_list.php', array('type' => 'D'));
+    $relatedLinks .= HTML::strLink(_("View only doctors"), '../admin/staff_list.php', array('type' => 'D'));
   }
   else
   {
-    echo _("View only doctors");
+    $relatedLinks .= _("View only doctors");
   }
-  echo "</p>\n";
+  HTML::para($relatedLinks);
 
   if ( !$numRows )
   {

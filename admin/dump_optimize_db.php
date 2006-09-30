@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_optimize_db.php,v 1.11 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: dump_optimize_db.php,v 1.12 2006/09/30 16:39:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -58,7 +58,7 @@
   HTML::breadCrumb($links, "icon dumpIcon");
   unset($links);
 
-  echo '<h2>' . sprintf(_("Optimizing Database: %s"), OPEN_DATABASE) . "</h2>\n";
+  HTML::section(2, sprintf(_("Optimizing Database: %s"), OPEN_DATABASE));
 
   $numTables = $auxConn->numRows();
   if ( !$numTables )
@@ -140,12 +140,12 @@
   HTML::table($thead, $tbody, null, $options);
 
   $totalGain = round($totalGain, 3);
-  echo '<h3>' . _("Optimization Results") . ":</h3>\n";
+  HTML::section(3, _("Optimization Results") . ":");
 
   HTML::message(sprintf(_("Total Database Size: %d KB"), $totalAll), OPEN_MSG_INFO);
   HTML::message(sprintf(_("Total Space Saved: %d KB"), $totalGain), OPEN_MSG_INFO);
 
-  echo '<p>' . HTML::strlink(_("Back return"), '../admin/dump_view_form.php') . "</p>\n";
+  HTML::para(HTML::strlink(_("Back return"), '../admin/dump_view_form.php'));
 
   require_once("../shared/footer.php");
 ?>

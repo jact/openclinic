@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_new_form.php,v 1.15 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: test_new_form.php,v 1.16 2006/09/30 17:22:40 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -80,7 +80,14 @@
   /**
    * New form
    */
-  echo '<form method="post" action="../medical/test_new.php" enctype="multipart/form-data" onsubmit="document.forms[0].upload_file.value = document.forms[0].path_filename.value; return true;">' . "\n";
+  HTML::start('form',
+    array(
+      'method' => 'post',
+      'action' => '../medical/test_new.php',
+      'enctype' => 'multipart/form-data',
+      'onsubmit' => 'document.forms[0].upload_file.value = document.forms[0].path_filename.value; return true;'
+    )
+  );
 
   Form::hidden("id_problem", $idProblem);
   Form::hidden("id_patient", $idPatient);
@@ -88,7 +95,7 @@
 
   require_once("../medical/test_fields.php");
 
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 

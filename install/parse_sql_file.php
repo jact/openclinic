@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: parse_sql_file.php,v 1.14 2006/03/26 15:02:49 jact Exp $
- */
-
-/**
  * parse_sql_file.php
  *
  * Contains the function parseSQLFile() and the array with OpenClinic table names
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: parse_sql_file.php,v 1.15 2006/09/30 16:59:49 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -22,7 +19,8 @@
     exit();
   }
 
-require_once("../classes/Query.php");
+  require_once("../classes/Query.php");
+  require_once("../lib/HTML.php");
 
 /**
  * Functions:
@@ -114,10 +112,10 @@ function parseSQLFile($file, $table, $drop = true)
       $result = $installQ->exec($sqlSentence);
       if ($installQ->isError())
       {
-        echo sprintf(_("Process sql [%s]"), $sqlSentence) . '<br />';
+        HTML::para(sprintf(_("Process sql [%s]"), $sqlSentence));
         $installQ->close();
         Error::query($installQ, false);
-        echo '<p class="error">' . sprintf(_("Error: %s"), $installQ->getDbError()) . "</p>\n";
+        HTML::message(sprintf(_("Error: %s"), $installQ->getDbError()), OPEN_MSG_ERROR);
         return false;
       }
       $sqlSentence = "";

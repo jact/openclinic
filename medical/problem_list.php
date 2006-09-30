@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.20 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.21 2006/09/30 17:19:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -113,19 +113,19 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p>';
-    HTML::link(_("Add New Medical Problem"), '../medical/problem_new_form.php',
-      array(
-        'key' => $idPatient,
-        'num' => $lastOrderNumber
+    HTML::para(
+      HTML::strLink(_("Add New Medical Problem"), '../medical/problem_new_form.php',
+        array(
+          'key' => $idPatient,
+          'num' => $lastOrderNumber
+        )
       )
     );
-    echo "</p>\n";
   }
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2>' . _("Medical Problems List:") . "</h2>\n";
+  HTML::section(2, _("Medical Problems List:"));
 
   if ( !$problemQ->selectProblems($idPatient) )
   {

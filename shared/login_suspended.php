@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_suspended.php,v 1.8 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: login_suspended.php,v 1.9 2006/09/30 17:27:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -27,7 +27,7 @@
   $title = _("User account suspended");
   require_once("../shared/header.php");
 
-  echo '<h1>' . $title . "</h1>\n";
+  HTML::section(1, $title);
 
   HTML::message(_("Your user account has been suspended."));
   HTML::message(_("Contact with administrator to resolve this problem."), OPEN_MSG_INFO);

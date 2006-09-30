@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_record_list.php,v 1.20 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: log_record_list.php,v 1.21 2006/09/30 16:41:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -71,8 +71,8 @@
     exit();
   }
 
-  echo '<h3>' . _("Record Logs List:") . "</h3>\n";
-  echo '<p><strong>' . sprintf(_("%d transactions."), $total) . "</strong></p>\n";
+  HTML::section(3, _("Record Logs List:"));
+  HTML::para(HTML::strTag('strong', sprintf(_("%d transactions."), $total)));
 
   $thead = array(
     _("Access Date") => array('colspan' => 2),
@@ -115,9 +115,9 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  echo '<p>';
-  HTML::link(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php'));
-  echo "</p>\n";
+  HTML::para(
+    HTML::strLink(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php'));
+  );
 
   require_once("../shared/footer.php");
 ?>

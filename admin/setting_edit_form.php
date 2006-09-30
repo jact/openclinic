@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit_form.php,v 1.22 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: setting_edit_form.php,v 1.23 2006/09/30 16:42:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,9 +91,9 @@
   /**
    * Edit form
    */
-  echo '<form method="post" action="../admin/setting_edit.php">' . "\n";
+  HTML::start('form', array('method' => 'post', 'action' => '../admin/setting_edit.php'));
   require_once("../admin/setting_fields.php");
-  echo "</form>\n";
+  HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
   HTML::message('** ' . _("Note: If zero, searchs return all results without pagination."));

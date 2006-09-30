@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_view.php,v 1.14 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: history_family_view.php,v 1.15 2006/09/30 17:08:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -89,38 +89,40 @@
 
   if ($hasMedicalAdminAuth)
   {
-    echo '<p>';
-    HTML::link(_("Edit Family Antecedents"), '../medical/history_family_edit_form.php', array('key' => $idPatient));
-    echo "</p>\n";
+    HTML::para(
+      HTML::strLink(_("Edit Family Antecedents"), '../medical/history_family_edit_form.php',
+        array('key' => $idPatient)
+      )
+    );
   }
 
   /**
    * Show family antecedents
    */
-  echo '<h2>' . _("Family Antecedents") . "</h2>\n";
+  HTML::section(2, _("Family Antecedents"));
 
   if ($history->getParentsStatusHealth())
   {
-    echo '<h3>' . _("Parents Status Health") . "</h3>\n";
-    echo '<p>' . nl2br($history->getParentsStatusHealth()) . "</p>\n";
+    HTML::section(3, _("Parents Status Health"));
+    HTML::para(nl2br($history->getParentsStatusHealth()));
   }
 
   if ($history->getBrothersStatusHealth())
   {
-    echo '<h3>' . _("Brothers and Sisters Status Health") . "</h3>\n";
-    echo '<p>' . nl2br($history->getBrothersStatusHealth()) . "</p>\n";
+    HTML::section(3, _("Brothers and Sisters Status Health"));
+    HTML::para(nl2br($history->getBrothersStatusHealth()));
   }
 
   if ($history->getSpouseChildsStatusHealth())
   {
-    echo '<h3>' . _("Spouse and Childs Status Health") . "</h3>\n";
-    echo '<p>' . nl2br($history->getSpouseChildsStatusHealth()) . "</p>\n";
+    HTML::section(3, _("Spouse and Childs Status Health"));
+    HTML::para(nl2br($history->getSpouseChildsStatusHealth()));
   }
 
   if ($history->getFamilyIllness())
   {
-    echo '<h3>' . _("Family Illness") . "</h3>\n";
-    echo '<p>' . nl2br($history->getFamilyIllness()) . "</p>\n";
+    HTML::section(3, _("Family Illness"));
+    HTML::para(nl2br($history->getFamilyIllness()));
   }
 
   require_once("../shared/footer.php");

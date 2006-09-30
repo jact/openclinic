@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.21 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.22 2006/09/30 17:21:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -102,14 +102,13 @@
     /**
      * Search form
      */
-    echo '<form method="post" action="../medical/relative_search.php">' . "\n";
-    echo "<div>\n";
+    HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_search.php'));
 
     Form::hidden("id_patient", $idPatient);
 
     require_once("../medical/patient_search_fields.php");
 
-    echo "</div>\n</form>\n";
+    HTML::end('form');
 
     HTML::message('* ' . _("Note: Empty search to see all results."));
   } // end if
@@ -121,9 +120,9 @@
     exit();
   }
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2>' . _("Relatives List:") . "</h2>\n";
+  HTML::section(2, _("Relatives List:"));
 
   $thead = array(
     _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),

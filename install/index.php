@@ -1,19 +1,16 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: index.php,v 1.20 2006/03/25 19:54:19 jact Exp $
- */
-
-/**
  * index.php
  *
  * Index page of installation process
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: index.php,v 1.21 2006/09/30 16:58:11 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
@@ -48,7 +45,7 @@
     if ( !parseSQLFile($tmpFile, $table, isset($_POST['drop'])) )
     {
       HTML::message(_("Parse failed."), OPEN_MSG_ERROR);
-      echo '<p>' . HTML::strLink(_("Back to installation main page"), $_SERVER['PHP_SELF']) . "</p>\n";
+      HTML::para(HTML::strLink(_("Back to installation main page"), $_SERVER['PHP_SELF']));
       include_once("../install/footer.php");
       unlink($tmpFile);
       exit();
@@ -56,8 +53,8 @@
     else
     {
       HTML::message(_("File installed correctly."), OPEN_MSG_INFO);
-      echo '<p>' . HTML::strLink(_("Go to OpenClinic"), '../home/index.php') . "</p>\n";
-      echo "<hr />\n";
+      HTML::para(HTML::strLink(_("Go to OpenClinic"), '../home/index.php'));
+      HTML::rule();
       unlink($tmpFile);
     }
   }
@@ -95,37 +92,35 @@
     fclose($fp);
     $sqlQuery = Check::safeText($sqlQuery, false);
 
-    echo '<pre>';
-    echo $sqlQuery;
-    echo "</pre>\n";
+    HTML::tag('pre', $sqlQuery);
 
-    echo "<hr />\n";
+    HTML::rule();
 
-    echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '">' . "\n";
+    HTML::start('form', array('method' => 'post', 'action' => $_SERVER['PHP_SELF']));
     Form::hidden("sql_file", Check::safeText($_POST['sql_file']));
     Form::hidden("sql_query", $sqlQuery);
 
     $filename = explode("-", $_FILES['sql_file']['name']);
     if (in_array($filename[0], $tables))
     {
-      echo '<p>';
-      Form::checkBox("drop", "true");
-      Form::label("drop", _("Add 'DROP table' sentence"));
-      echo "</p>\n";
+      HTML::para(
+        Form::strCheckBox("drop", "true")
+        . Form::strLabel("drop", _("Add 'DROP table' sentence"))
+      );
     }
 
-    echo '<p>';
-    Form::button("install_file", _("Install file"));
-    Form::button("cancel_install", _("Cancel"), "button", array('onclick' => "parent.location='./index.php'"));
-    echo "</p>\n";
+    HTML::para(
+      Form::strButton("install_file", _("Install file"))
+      . Form::strButton("cancel_install", _("Cancel"), "button", array('onclick' => "parent.location='./index.php'"))
+    );
 
-    echo "</form>\n";
+    HTML::end('form');
 
     include_once("../install/footer.php");
     exit();
   } // end if
 
-  echo '<h1>' . _("OpenClinic Installation:") . "</h1>\n";
+  HTML::section(1, _("OpenClinic Installation:"));
 
   require_once("../classes/Query.php");
 
@@ -135,42 +130,57 @@
   $installQ->connect();
   if ($installQ->isError())
   {
-    echo '<p>' . _("The connection to the database failed with the following error:") . "</p>\n";
-    echo '<pre class="error">' . $installQ->getDbError() . "</pre>\n";
-    echo "<hr />\n";
+    HTML::para(_("The connection to the database failed with the following error:"));
+    HTML::tag('pre', $installQ->getDbError(), array('class' => 'error'));
+    HTML::rule();
 
-    echo '<p>' . _("Please make sure the following has been done before running this install script.") . "</p>\n";
+    HTML::para(_("Please make sure the following has been done before running this install script."));
 
-    echo "<ol>\n";
-    echo '<li>' . sprintf(_("Create OpenClinic database (%sstep 4%s of the install instructions)"), '<a href="../install.html#step4">', "</a>") . "</li>\n";
-    echo '<li>' . sprintf(_("Create OpenClinic database user (%sstep 5%s of the install instructions)"), '<a href="../install.html#step5">', "</a>") . "</li>\n";
-    echo '<li>' . sprintf(_("Update %s with your new database username and password (%sstep 8%s of the install instructions)"), "<strong>openclinic/database_constants.php</strong>", '<a href="../install.html#step8">', "</a>") . "</li>\n";
-    echo "</ol>\n";
+    $array = array(
+      sprintf(_("Create OpenClinic database (%s of the install instructions)"),
+        HTML::strLink(sprintf(_("step %d"), 4), '../install.html#step4')
+      ),
+      sprintf(_("Create OpenClinic database user (%s of the install instructions)"),
+        HTML::strLink(sprintf(_("step %d"), 5), '../install.html#step5')
+      ),
+      sprintf(_("Update %s with your new database username and password (%s of the install instructions)"),
+        HTML::strTag('strong', 'openclinic/database_constants.php'),
+        HTML::strLink(sprintf(_("step %d"), 8), '../install.html#step8')
+      )
+    );
+    HTML::itemList($array, null, true);
 
-    echo '<p>' . sprintf(_("See %sInstall Instructions%s for more details."), '<a href="../install.html">', "</a>") . "</p>\n";
+    HTML::para(sprintf(_("See %s for more details."), HTML::strLink(_("Install Instructions"), '../install.html')));
 
     include_once("../install/footer.php");
     exit();
   } // end if
-  echo '<p>' . _("Database connection is good.") . "</p>\n";
+  HTML::para(_("Database connection is good."));
 
   $installQ->close();
 
-  echo '<p>' . HTML::strLink(_("Create OpenClinic tables"), './install.php') . "</p>\n";
+  HTML::para(HTML::strLink(_("Create OpenClinic tables"), './install.php'));
 
-  echo "<hr />\n";
+  HTML::rule();
 
-  echo '<h2>' . _("Install a SQL file:") . "</h2>\n";
+  HTML::section(2, _("Install a SQL file:"));
 
-  echo '<form method="post" action="' . $_SERVER['PHP_SELF'] . '" enctype="multipart/form-data" onsubmit="this.secret_file.value = this.sql_file.value; return true;">' . "\n";
+  // @todo use fieldset
+  HTML::start('form',
+    array(
+      'method' => 'post',
+      'action' => $_SERVER['PHP_SELF'],
+      'onsubmit' => 'this.secret_file.value = this.sql_file.value; return true;'
+    )
+  );
   Form::hidden("secret_file");
 
-  echo '<p>' . Form::strFile("sql_file", "", 50) . "</p>\n";
+  HTML::para(Form::strFile("sql_file", "", 50));
 
-  echo '<p>' . Form::strButton("view_file", _("View file")) . "</p>\n";
-  echo "</form>\n";
+  HTML::para(Form::strButton("view_file", _("View file")));
+  HTML::end('form');
 
-  echo "<hr />\n";
+  HTML::rule();
 
   require_once("../install/footer.php");
 ?>

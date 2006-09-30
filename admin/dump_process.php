@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_process.php,v 1.12 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: dump_process.php,v 1.13 2006/09/30 16:39:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,7 +55,7 @@
     HTML::breadCrumb($links, "icon dumpIcon");
     unset($links);
 
-    echo '<pre width="80" class="sqlcode">' . "\n";
+    HTML::start('pre', array('width' => 80, 'class' => 'sqlcode'));
   }
   else // Download
   {
@@ -364,8 +364,8 @@
    */
   if (empty($_POST['as_file']))
   {
-    echo "</pre>\n";
-    echo '<p>' . HTML::strLink(_("Back return"), "../admin/dump_view_form.php") . "</p>\n";
+    HTML::end('pre');
+    HTML::para(HTML::strLink(_("Back return"), "../admin/dump_view_form.php"));
 
     include_once('../shared/footer.php');
   } // end if

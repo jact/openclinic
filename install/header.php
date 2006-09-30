@@ -1,20 +1,23 @@
 <?php
 /**
- * @package OpenClinic
- *
- * @copyright Copyright (c) 2002-2006 jact
- * @license Licensed under the GNU GPL. For full terms see the file LICENSE.
- *
- * $Id: header.php,v 1.8 2006/03/25 20:04:10 jact Exp $
- */
-
-/**
  * header.php
  *
  * Contains the common header of the installation pages
  *
- * @author jact <jachavar@gmail.com>
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2006 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: header.php,v 1.9 2006/09/30 16:55:58 jact Exp $
+ * @author    jact <jachavar@gmail.com>
  */
+
+  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
+  {
+    header("Location: ../index.php");
+    exit();
+  }
 
   /**
    * i18n l10n
@@ -28,16 +31,24 @@
    */
   $title = _("OpenClinic Install");
   require_once("../shared/xhtml_start.php");
+
+  HTML::start('link', array('rel' => 'icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
+  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
+  HTML::start('link', array('rel' => 'bookmark icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
+
+  HTML::start('link',
+    array(
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+      'href' => '../css/style.css',
+      'title' => 'OpenClinic',
+      'media' => 'all'
+    ),
+    true
+  );
+
+  HTML::end('head');
+  HTML::start('body', array('id' => 'top'));
+
+  HTML::start('div', array('id' => 'content'));
 ?>
-
-<link rel="icon" type="image/png" href="../images/miniopc.png" />
-
-<link rel="shortcut icon" type="image/png" href="../images/miniopc.png" />
-
-<link rel="bookmark icon" type="image/png" href="../images/miniopc.png" />
-
-<link rel="stylesheet" type="text/css" href="../css/style.css" media="all" title="OpenClinic" />
-</head>
-<body id="top">
-<!-- beginning of main body -->
-<div id="content">
