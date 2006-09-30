@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: xhtml_start.php,v 1.19 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: xhtml_start.php,v 1.20 2006/09/30 17:33:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -73,41 +73,40 @@
   {
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . "\n";
   }
-?>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo str_replace("_", "-", OPEN_LANGUAGE); ?>" dir="<?php echo OPEN_DIRECTION; ?>">
-<head>
-<meta http-equiv="Content-Type" content="<?php echo $contentType; ?>" />
 
-<title><?php
+  HTML::start('html',
+    array(
+      'xmlns' => 'http://www.w3.org/1999/xhtml',
+      'xml:lang' => str_replace("_", "-", OPEN_LANGUAGE),
+      'dir' => OPEN_DIRECTION
+    )
+  );
+  HTML::start('head');
+  HTML::start('meta', array('http-equiv' => 'Content-Type', 'content' => $contentType), true);
+
+  $titlePage = ((isset($title) && !empty($title) ) ? $title : "");
   if (defined("OPEN_CLINIC_NAME") && OPEN_CLINIC_NAME)
   {
-    echo OPEN_CLINIC_NAME . " : ";
+    $titlePage = OPEN_CLINIC_NAME . " : " . $titlePage;
   }
-  echo ((isset($title) && $title != "") ? $title : "");
 
   /**
    * @since 0.8
    */
-  echo ((isset($formError) && count($formError) > 0 && isset($focusFormField)) ? " : " . _("Error occurred") : "");
-?></title>
+  $titlePage .= ((isset($formError) && count($formError) > 0 && isset($focusFormField)) ? " : " . _("Error occurred") : "");
 
-<?php //<meta http-equiv="Content-Style-Type" content="text/css2" /> ?>
-<meta http-equiv="Cache-Control" content="no-store,no-cache,must-revalidate" />
+  HTML::tag('title', $titlePage);
 
-<meta http-equiv="Pragma" content="no-cache" />
+  //HTML::start('meta', array('http-equiv' => 'Content-Style-Type', 'content' => 'text/css2'), true);
+  HTML::start('meta', array('http-equiv' => 'Cache-Control', 'content' => 'no-store,no-cache,must-revalidate'), true);
+  HTML::start('meta', array('http-equiv' => 'Pragma', 'content' => 'no-cache'), true);
+  HTML::start('meta', array('http-equiv' => 'Expires', 'content' => '-1'), true);
+  HTML::start('meta', array('http-equiv' => 'imagetoolbar', 'content' => 'no'), true);
 
-<meta http-equiv="Expires" content="-1" />
-
-<meta http-equiv="imagetoolbar" content="no" />
-
-<meta name="robots" content="noindex,nofollow,noarchive" />
-
-<meta name="MSSmartTagsPreventParsing" content="TRUE" />
-
-<meta name="author" content="Jose Antonio Chavarría" />
-
-<meta name="copyright" content="2002-2006 Jose Antonio Chavarría" />
-
-<meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
-
-<meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
+  HTML::start('meta', array('name' => 'robots', 'content' => 'noindex,nofollow,noarchive'), true);
+  HTML::start('meta', array('name' => 'MSSmartTagsPreventParsing', 'content' => 'TRUE'), true);
+  HTML::start('meta', array('name' => 'author', 'content' => 'Jose Antonio Chavarría'), true);
+  HTML::start('meta', array('name' => 'copyright', 'content' => '2002-2006 Jose Antonio Chavarría'), true);
+  HTML::start('meta', array('name' => 'keywords', 'content' => 'OpenClinic, open source, gpl, healthcare, php, mysql, coresis'), true);
+  HTML::start('meta', array('name' => 'description', 'content' => 'OpenClinic is an easy to use, open source, medical records system written in PHP'), true);
+?>
