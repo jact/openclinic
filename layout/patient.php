@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient.php,v 1.9 2006/03/27 18:32:34 jact Exp $
+ * @version   CVS: $Id: patient.php,v 1.10 2006/09/30 17:25:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -26,20 +26,26 @@
     "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php?key=" . $idPatient)
   );
 
-  echo '<ul class="subnavbar">';
-
+  $array = null;
   foreach ($linkList as $key => $value)
   {
-    echo '<li' . (($nav == $key) ? ' class="selected">' . $value[0] : '>' . HTML::strLink($value[0], $value[1])) . "</li>\n";
+    if ($nav == $key)
+    {
+      $array[] = array($value[0], array('class' => 'selected'));
+    }
+    else
+    {
+      $array[] = HTML::strLink($value[0], $value[1]);
+    }
   }
   unset($linkList);
 
-  echo ($nav == "print")
-    ? '<li class="selected">' . _("Print Medical Record") . '</li>'
-    : '<li>' . HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
+  $array[] = ($nav == "print")
+    ? array(_("Print Medical Record"), array('class' => 'selected'))
+    : HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
         array('key' => $idPatient),
         array('onclick' => "return popSecondary('../medical/print_medical_record.php?key=" . $idPatient . "')")
-      ) . '</li>';
+      );
 
-  echo "</ul>\n"; // end .subnavbar
+  HTML::itemList($array, array('class' => 'subnavbar'));
 ?>

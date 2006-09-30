@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: home.php,v 1.13 2006/03/27 18:32:34 jact Exp $
+ * @version   CVS: $Id: home.php,v 1.14 2006/09/30 17:23:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,49 +22,73 @@
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     $sessLogin = isset($_SESSION["loginSession"]) ? $_SESSION["loginSession"] : "";
-    echo '<p class="sideBarLogin">';
     if ( !empty($sessLogin) && !isset($_SESSION["invalidToken"]) )
     {
-      HTML::link('<img src="../images/logout.png" width="96" height="22" alt="' . _("logout") . '" title="' . _("logout") . '" />', '../shared/logout.php');
-      echo '<br />';
-      echo '[ ' . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
-        array(
-          'key' => $_SESSION["userId"],
-          'all' => 'Y'
-        ),
-        array('title' => _("manage your user account"))
-      ) . " ]\n";
+      $sideBarLogin = HTML::strLink(
+          HTML::strStart('img',
+            array(
+              'src' => '../images/logout.png',
+              'width' => 96,
+              'height' => 22,
+              'alt' => _("logout"),
+              'title' => _("logout")
+            ),
+            true
+          ),
+          '../shared/logout.php'
+        )
+        . '<br />'
+        . '[ '
+        . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
+          array(
+            'key' => $_SESSION["userId"],
+            'all' => 'Y'
+          ),
+          array('title' => _("manage your user account"))
+        )
+        . ' ]';
     }
     else
     {
-      HTML::link('<img src="../images/login.png" width="96" height="22" alt="' . _("login") . '" title="' . _("login") . '" />', '../shared/login_form.php', array('ret' => '../home/index.php'));
+      $sideBarLogin = HTML::strLink(
+        HTML::strStart('img',
+          array(
+            'src' => '../images/login.png',
+            'width' => 96,
+            'height' => 22,
+            'alt' => _("login"),
+            'title' => _("login")
+          ),
+          true
+        ),
+        '../shared/login_form.php',
+        array('ret' => '../home/index.php')
+      );
     }
-    echo "</p>\n";
-    echo "<hr />\n";
+    HTML::para($sideBarLogin, array('class' => 'sideBarLogin'));
+    unset($sideBarLogin);
+    HTML::rule();
   }
 
-  echo '<ul class="linkList">';
+  $array = null;
+  $array[] = ($nav == "home")
+    ? array(_("Summary"), array('class' => 'selected'))
+    : HTML::strLink(_("Summary"), '../home/index.php');
 
-  echo ($nav == "home")
-    ? '<li class="selected">' . _("Summary") . '</li>'
-    : '<li>' . HTML::strLink(_("Summary"), '../home/index.php') . '</li>';
+  $array[] = ($nav == "license")
+    ? array(_("License"), array('class' => 'selected'))
+    : HTML::strLink(_("License"), '../home/license.php');
 
-  echo ($nav == "license")
-    ? '<li class="selected">' . _("License") . '</li>'
-    : '<li>' . HTML::strLink(_("License"), '../home/license.php') . '</li>';
-
-  echo '<li>';
-  HTML::link(_("Help"), '../doc/index.php',
+  $array[] = HTML::strLink(_("Help"), '../doc/index.php',
     array(
       'tab' => $tab,
       'nav' => $nav
     ),
     array(
       'title' => _("Opens a new window"),
-      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&amp;nav=' . $nav . "')"
+      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
     )
   );
-  echo "</li>\n";
 
-  echo "</ul><!-- End .linkList -->\n";
+  HTML::itemList($array, array('class' => 'linkList'));
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.14 2006/03/27 18:32:34 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.15 2006/09/30 17:24:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,18 +21,33 @@
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    echo '<p class="sideBarLogin">';
-    HTML::link('<img src="../images/logout.png" width="96" height="22" alt="' . _("logout") . '" title="' . _("logout") . '" />', '../shared/logout.php');
-    echo '<br />';
-    echo '[ ' . HTML::strLink($_SESSION["loginSession"], '../admin/user_edit_form.php',
-      array(
-        'key' => $_SESSION["userId"],
-        'all' => 'Y'
-      ),
-      array('title' => _("manage your user account"))
-    ) . " ]\n";
-    echo "</p>\n";
-    echo "<hr />\n";
+    HTML::para(
+      HTML::strLink(
+        HTML::strStart('img',
+          array(
+            'src' => '../images/logout.png',
+            'width' => 96,
+            'height' => 22,
+            'alt' => _("logout"),
+            'title' => _("logout")
+          ),
+          true
+        ),
+        '../shared/logout.php'
+      )
+      . '<br />'
+      . '[ '
+      . HTML::strLink($_SESSION["loginSession"], '../admin/user_edit_form.php',
+        array(
+          'key' => $_SESSION["userId"],
+          'all' => 'Y'
+        ),
+        array('title' => _("manage your user account"))
+      )
+      . ' ]',
+      array('class' => 'sideBarLogin')
+    );
+    HTML::rule();
   }
 
   echo '<ul class="linkList">';
@@ -47,9 +62,8 @@
 
   if ($nav == "search")
   {
-    echo '<ul class="subnavbar">';
-    echo '<li class="selected">' . _("Search Results") . "</li>\n";
-    echo "</ul>\n";
+    $array = array(array(_("Search Results"), array('class' => 'selected')));
+    HTML::itemList($array, array('class' => 'subnavbar'));
   }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
@@ -61,7 +75,7 @@
       {
         if (isset($idPatient) && $arrKey == $idPatient)
         {
-          echo '<li class="selected"><em>' . $arrValue . '</em>';
+          echo '<li class="selected">' . HTML::strTag('em', $arrValue);
           if ($nav == "social" || $nav == "history" || $nav == "problems" || $nav == "print")
           {
             include_once("../navbars/patient.php");
@@ -70,7 +84,9 @@
         }
         else
         {
-          echo '<li>' . HTML::strLink('<em>' . $arrValue . '</em>', '../medical/patient_view.php', array('key' => $arrKey)) . '</li>';
+          echo '<li>';
+          HTML::link(HTML::strTag('em', $arrValue), '../medical/patient_view.php', array('key' => $arrKey));
+          echo '</li>';
         }
       }
     }
@@ -103,7 +119,7 @@
     ),
     array(
       'title' => _("Opens a new window"),
-      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&amp;nav=' . $nav . "')"
+      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
     )
   );
   echo "</li>\n";

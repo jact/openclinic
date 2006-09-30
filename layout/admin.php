@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: admin.php,v 1.12 2006/03/27 18:32:34 jact Exp $
+ * @version   CVS: $Id: admin.php,v 1.13 2006/09/30 17:23:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,18 +21,33 @@
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    echo '<p class="sideBarLogin">';
-    HTML::link('<img src="../images/logout.png" width="96" height="22" alt="' . _("logout") . '" title="' . _("logout") . '" />', '../shared/logout.php');
-    echo '<br />';
-    echo '[ ' . HTML::strLink($_SESSION["loginSession"], '../admin/user_edit_form.php',
-      array(
-        'key' => $_SESSION["userId"],
-        'all' => 'Y'
-      ),
-      array('title' => _("manage your user account"))
-    ) . " ]\n";
-    echo "</p>\n";
-    echo "<hr />\n";
+    HTML::para(
+      HTML::strLink(
+        HTML::strStart('img',
+          array(
+            'src' => '../images/logout.png',
+            'width' => 96,
+            'height' => 22,
+            'alt' => _("logout"),
+            'title' => _("logout")
+          ),
+          true
+        ),
+        '../shared/logout.php'
+      )
+      . '<br />'
+      . '[ '
+      . HTML::strLink($_SESSION["loginSession"], '../admin/user_edit_form.php',
+        array(
+          'key' => $_SESSION["userId"],
+          'all' => 'Y'
+        ),
+        array('title' => _("manage your user account"))
+      )
+      . ' ]',
+      array('class' => 'sideBarLogin')
+    );
+    HTML::rule();
   }
 
   $linkList = array(
@@ -46,26 +61,30 @@
     "logs" => array(_("Log Statistics"), "../admin/log_stats.php")
   );
 
-  echo '<ul class="linkList">';
-
+  $array = null;
   foreach ($linkList as $key => $value)
   {
-    echo '<li' . (($nav == $key) ? ' class="selected">' . $value[0] : '>' . HTML::strLink($value[0], $value[1])) . "</li>\n";
+    if ($nav == $key)
+    {
+      $array[] = array($value[0], array('class' => 'selected'));
+    }
+    else
+    {
+      $array[] = HTML::strLink($value[0], $value[1]);
+    }
   }
   unset($linkList);
 
-  echo '<li>';
-  HTML::link(_("Help"), '../doc/index.php',
+  $array[] = HTML::strLink(_("Help"), '../doc/index.php',
     array(
       'tab' => $tab,
       'nav' => $nav
     ),
     array(
       'title' => _("Opens a new window"),
-      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&amp;nav=' . $nav . "')"
+      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
     )
   );
-  echo "</li>\n";
 
-  echo "</ul><!-- End .linkList -->\n";
+  HTML::itemList($array, array('class' => 'linkList'));
 ?>
