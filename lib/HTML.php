@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.9 2006/03/26 17:41:14 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.10 2006/09/30 17:38:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,28 +24,174 @@ define("OPEN_MSG_ERROR",   3);
  * HTML set of html tags functions
  *
  * Methods:
- *  string strTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
- *  void table(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
+ *  string strStart(string $tag, array $options = null, bool $closed = false)
+ *  void start(string $tag, array $options = null, bool $closed = false)
+ *  string strEnd(string $tag)
+ *  void end(string $tag)
+ *  string strTag(string $tag, string $text, array $options = null)
+ *  void tag(string $tag, string $text, array $options = null)
+ *  string strTable(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
+ *  void table(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
  *  string strMessage(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
  *  void message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
  *  string strBreadCrumb(array &$links, string $class = "")
  *  void breadCrumb(array &$links, string $class = "")
  *  string strLink(string $text, string $url, array $arg = null, array $addendum = null)
  *  void link(string $text, string $url, array $arg = null, array $addendum = null)
+ *  string strSection(int $level, string $text, array $addendum = null)
+ *  void section(int $level, string $text, array $addendum = null)
+ *  string strPara(string $text, array $addendum = null)
+ *  void para(string $text, array $addendum = null)
+ *  string strRule(array $addendum = null)
+ *  void rule(array $addendum = null)
+ *  string strItemList(array &$items, array $addendum = null, bool $ordered = false)
+ *  void itemList(array &$items, array $addendum = null, bool $ordered = false)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
  * @access public
  * @since 0.8
- * @todo string strItemList(array &$items)
- * @todo void itemList(array &$items)
- * @todo string strOrderedList(array &$items)
- * @todo void orderedList(array &$items)
  */
 class HTML
 {
   /**
-   * string strTable(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
+   * string strStart(string $tag, array $options = null, bool $closed = false)
+   *
+   * Returns an HTML start tag
+   *
+   * @param string $tag HTML tag
+   * @param array $options (optional)
+   *  example:
+   *    $options = array(
+   *      'id' => 'address',
+   *      'name' => 'address',
+   *      'type' => 'text',
+   *      'readonly' => true,
+   *      'disabled' => true,
+   *      'class' => 'required',
+   *      'onclick' => '...'
+   *    );
+   * @param bool $closed (optional) closed or not?
+   * @return string HTML start tag
+   * @access public
+   * @since 0.8
+   */
+  function strStart($tag, $options = null, $closed = false)
+  {
+    $html = '<' . $tag;
+    if (is_array($options))
+    {
+      foreach ($options as $key => $value)
+      {
+        if ($key == 'error') // Form::*
+        {
+          continue;
+        }
+
+        //$html .= ' ' . $key . '="' . htmlspecialchars(($value === true) ? $key : $value) . '"';
+        $html .= ' ' . $key . '="' . htmlentities(($value === true) ? $key : $value) . '"';
+      }
+    }
+    $html .= ($closed ? " />\n" : '>');
+
+    return $html;
+  }
+
+  /**
+   * void start(string $tag, array $options = null, bool $closed = false)
+   *
+   * Draws an HTML start tag
+   *
+   * @param string $tag HTML tag
+   * @param array $options (optional)
+   * @param bool $closed (optional) closed or not?
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function start($tag, $options = null, $closed = false)
+  {
+    echo HTML::strStart($tag, isset($options) ? $options : null, $closed);
+  }
+
+  /**
+   * string strEnd(string $tag)
+   *
+   * Returns an HTML end tag
+   *
+   * @param string $tag HTML tag
+   * @return string HTML end tag
+   * @access public
+   * @since 0.8
+   */
+  function strEnd($tag)
+  {
+    $html = '</' . $tag . ">\n";
+
+    return $html;
+  }
+
+  /**
+   * void end(string $tag)
+   *
+   * Draws an HTML end tag
+   *
+   * @param string $tag HTML tag
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function end($tag)
+  {
+    echo HTML::strEnd($tag);
+  }
+
+  /**
+   * string strTag(string $tag, string $text, array $options = null)
+   *
+   * Returns an HTML tag with text content
+   *
+   * @param string $tag HTML tag
+   * @param string $text
+   * @param array $options (optional)
+   * @return string HTML tag with text content
+   * @access public
+   * @since 0.8
+   */
+  function strTag($tag, $text, $options = null)
+  {
+    $rawText = strip_tags($text); // @fixme poner en función aparte?
+    if ($rawText == $text)
+    {
+      $text = htmlentities($text); // mirar WordPress para cómo lo hacen allí
+    }
+
+    $html = HTML::strStart($tag, isset($options) ? $options : null);
+    $html .= $text;
+    $html .= '</' . $tag . '>'; //HTML::strEnd($tag);
+
+    return $html;
+  }
+
+  /**
+   * void tag(string $tag, string $text, array $options = null)
+   *
+   * Draws an HTML tag with text content
+   *
+   * @param string $tag HTML tag
+   * @param string $text
+   * @param array $options (optional)
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function tag($tag, $text, $options = null)
+  {
+    echo HTML::strTag($tag, $text, isset($options) ? $options : null);
+  }
+
+  /**
+   * string strTable(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
    *
    * Returns html table
    * Options example:
@@ -76,35 +222,28 @@ class HTML
 
     if ((isset($options['align']) && $options['align'] == "center"))
     {
-      $html .= '<div class="center">' . "\n";
+      $html .= HTML::strStart('div', array('class' => 'center')) . "\n";
     }
-    $html .= "<table>\n";
+    $html .= HTML::strStart('table') . "\n";
 
     if ( !empty($caption) )
     {
-      $html .= '<caption>' . trim($caption) . "</caption>\n";
+      $html .= HTML::strTag('caption', $caption) . "\n";
     }
 
     if (count($head) > 0)
     {
-      $html .= "<thead>\n";
-      $html .= "<tr>\n";
+      $html .= HTML::strStart('thead') . "\n";
+      $html .= HTML::strStart('tr') . "\n";
       foreach ($head as $key => $value)
       {
-        $html .= '<th';
-        if (gettype($value) == "array")
-        {
-          foreach ($value as $k => $v)
-          {
-            $html .= ' ' . $k . '="' . $v . '"';
-          }
-        }
-        $html .= '>';
-        $html .= (gettype($value) == "array") ? $key : $value;
-        $html .= "</th>\n";
+        $html .= HTML::strTag('th',
+          gettype($value) == "array" ? $key : $value,
+          gettype($value) == "array" ? $value : null
+        ) . "\n";
       }
-      $html .= "</tr>\n";
-      $html .= "</thead>\n";
+      $html .= HTML::strEnd('tr');
+      $html .= HTML::strEnd('thead');
     }
 
     $maxCol = 1;
@@ -118,59 +257,57 @@ class HTML
 
     if (count($foot) > 0)
     {
-      $html .= "<tfoot>\n";
+      $html .= HTML::strStart('tfoot') . "\n";
       foreach ($foot as $row)
       {
-        $html .= "<tr>\n";
-        $html .= '<td';
+        $html .= HTML::strStart('tr') . "\n";
+
+        $cellOptions = null;
         if ($maxCol > 1)
         {
-          $html .= ' colspan="' . $maxCol . '"';
+          $cellOptions['colspan'] = $maxCol;
         }
         if (isset($options['tfoot']['align']) && $options['tfoot']['align'] == 'left')
         {
-          $html .= ' class="left"';
+          $cellOptions['class'] = 'left';
         }
         elseif (isset($options['tfoot']['align']) && $options['tfoot']['align'] == 'right')
         {
-          $html .= ' class="right"';
+          $cellOptions['class'] = 'right';
         }
         else
         {
-          $html .= ' class="center"';
+          $cellOptions['class'] = 'center';
         }
-        $html .= '>';
-        $html .= $row;
-        $html .= "</td>\n";
-        $html .= "</tr>\n";
+        $html .= HTML::strTag('td', $row, $cellOptions);
+
+        $html .= HTML::strEnd('tr');
       }
-      $html .= "</tfoot>\n";
+      $html .= HTML::strEnd('tfoot');
     }
 
     if (count($body) > 0)
     {
       $rowClass = "odd";
-      $html .= "<tbody>\n";
+      $html .= HTML::strStart('tbody') . "\n";
       $numRow = 0;
       foreach ($body as $row)
       {
+        $cellOptions = null;
         if ( !isset($options['shaded']) || (isset($options['shaded']) && $options['shaded']))
         {
-          $html .= '<tr class="' . $rowClass . '">' . "\n";
+          $cellOptions['class'] = $rowClass;
         }
-        else
-        {
-          $html .= "<tr>\n";
-        }
+        $html .= HTML::strStart('tr', $cellOptions);
 
         $numCol = 0;
         foreach ($row as $data)
         {
-          $html .= '<td';
+          $cellOptions = null;
 
           if (isset($options['r' . $numRow]['colspan']) && $options['r' . $numRow]['colspan'] > 0)
           {
-            $html .= ' colspan="' . $options['r' . $numRow]['colspan'] . '"';
+            $cellOptions['colspan'] = $options['r' . $numRow]['colspan'];
           }
 
           $class = array();
@@ -190,26 +327,24 @@ class HTML
 
           if (count($class) > 0)
           {
-            $html .= ' class="' . implode(" ", $class) . '"';
+            $cellOptions['class'] = implode(" ", $class);
           }
 
-          $html .= '>';
-          $html .= $data;
-          $html .= "</td>\n";
+          $html .= HTML::strTag('td', $data, $cellOptions);
           $numCol++;
         }
-        $html .= "</tr>\n";
+        $html .= HTML::strEnd('tr');
         $numRow++;
         // swap row color
         $rowClass = ($rowClass == "odd") ? "even" : "odd";
       }
-      $html .= "</tbody>\n";
+      $html .= HTML::strEnd('tbody');
     }
 
-    $html .= "</table>\n";
+    $html .= HTML::strEnd('table');
     if ((isset($options['align']) && $options['align'] == "center"))
     {
-      $html .= "</div>\n";
+      $html .= HTML::strEnd('div');
     }
 
     unset($head);
@@ -219,7 +354,7 @@ class HTML
   }
 
   /**
-   * void table(array &$head, array &$body, array $foot = null, $options = null, string $caption = "")
+   * void table(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
    *
    * Draws html table
    *
@@ -233,7 +368,11 @@ class HTML
    */
   function table(&$head, &$body, $foot = null, $options = null, $caption = "")
   {
-    echo HTML::strTable($head, $body, isset($foot) ? $foot : null, isset($options) ? $options : null, isset($caption) ? $caption : null);
+    echo HTML::strTable($head, $body,
+      isset($foot) ? $foot : null,
+      isset($options) ? $options : null,
+      isset($caption) ? $caption : null
+    );
   }
 
   /**
@@ -266,9 +405,7 @@ class HTML
         break;
     }
 
-    $html = '<' . ($block ? 'p' : 'span') . ' class="' . $class . '">';
-    $html .= $text;
-    $html .= '</' . ($block ? 'p' : 'span') . ">\n";
+    $html = HTML::strTag($block ? 'p' : 'span', $text, array('class' => $class)) . "\n";
 
     return $html;
   }
@@ -303,13 +440,12 @@ class HTML
    */
   function strBreadCrumb(&$links, $class = "")
   {
-    $rows = sizeof($links);
-    if ($rows == 0)
+    if ( !count($links) )
     {
       return;
     }
 
-    $html = '<p id="breadCrumb">';
+    $html = HTML::strStart('p', array('id' => 'breadCrumb'));
 
     $keys = array_keys($links);
     $title = array_pop($keys);
@@ -320,9 +456,9 @@ class HTML
       $html .= ' &raquo; ';
     }
 
-    $html .= "</p>\n";
+    $html .= HTML::strEnd('p');
 
-    $html .= '<h1' . ( !empty($class) ? ' class="' . $class . '"' : '') . '>' . $title . "</h1>\n";
+    $html .= HTML::strSection(1, $title, !empty($class) ? array('class' => $class) : null);
 
     unset($links);
 
@@ -360,25 +496,19 @@ class HTML
    */
   function strLink($text, $url, $arg = null, $addendum = null)
   {
-    $html = '<a href="' . $url;
+    $query = "";
     if (is_array($arg))
     {
-      $query = '?';
+      $query .= '?';
       foreach ($arg as $key => $value)
       {
-        $query .= urlencode($key) . '=' . urlencode($value) . '&amp;';
+        $query .= urlencode($key) . '=' . urlencode($value) . '&';
       }
-      $html .= substr($query, 0, -5); // remove last '&amp;'
+      $query = rtrim($query, '&'); // remove last '&'
     }
-    $html .= '"';
-    if (is_array($addendum))
-    {
-      foreach ($addendum as $key => $value)
-      {
-        $html .= ' ' . $key . '="' . $value . '"';
-      }
-    }
-    $html .= '>' . $text . '</a>';
+    $addendum['href'] = $url . $query;
+
+    $html = HTML::strTag('a', $text, $addendum);
 
     return $html;
   }
@@ -399,6 +529,179 @@ class HTML
   function link($text, $url, $arg = null, $addendum = null)
   {
     echo HTML::strLink($text, $url, is_array($arg) ? $arg : null, isset($addendum) ? $addendum : null);
+  }
+
+  /**
+   * string strSection(int $level, string $text, array $addendum = null)
+   *
+   * Returns an HTML section
+   *
+   * @param int $level (1..6)
+   * @param string $text
+   * @param array $addendum (optional)
+   * @return string HTML section
+   * @access public
+   * @since 0.8
+   */
+  function strSection($level, $text, $addendum = null)
+  {
+    $level = ($level > 0 && $level < 7) ? intval($level) : 1;
+    $html = HTML::strTag('h' . $level, $text, isset($addendum) ? $addendum : null) . "\n";
+
+    return $html;
+  }
+
+  /**
+   * void section(int $level, string $text, array $addendum = null)
+   *
+   * Draws an HTML section
+   *
+   * @param int $level (1..6)
+   * @param string $text
+   * @param array $addendum (optional)
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function section($level, $text, $addendum = null)
+  {
+    echo HTML::strSection($level, $text, isset($addendum) ? $addendum : null);
+  }
+
+  /**
+   * string strPara(string $text, array $addendum = null)
+   *
+   * Returns an HTML paragraph
+   *
+   * @param string $text
+   * @param array $addendum (optional)
+   * @return string HTML paragraph
+   * @access public
+   * @since 0.8
+   */
+  function strPara($text, $addendum = null)
+  {
+    $html = HTML::strTag('p', $text, isset($addendum) ? $addendum : null) . "\n";
+
+    return $html;
+  }
+
+  /**
+   * void para(string $text, array $addendum = null)
+   *
+   * Draws an HTML paragraph
+   *
+   * @param string $text
+   * @param array $addendum (optional)
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function para($text, $addendum = null)
+  {
+    echo HTML::strPara($text, isset($addendum) ? $addendum : null);
+  }
+
+  /**
+   * string strRule(array $addendum = null)
+   *
+   * Returns an HTML horizontal rule
+   *
+   * @param array $addendum (optional)
+   * @return string HTML horizontal rule
+   * @access public
+   * @since 0.8
+   */
+  function strRule($addendum = null)
+  {
+    return HTML::strStart('hr', isset($addendum) ? $addendum : null, true);
+  }
+
+  /**
+   * void rule(array $addendum = null)
+   *
+   * Draws an HTML horizontal rule
+   *
+   * @param array $addendum (optional)
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function rule($addendum = null)
+  {
+    echo HTML::strRule(isset($addendum) ? $addendum : null);
+  }
+
+  /**
+   * string strItemList(array &$items, array $addendum = null, bool $ordered = false)
+   *
+   * Returns an HTML ordered or unordered list
+   *
+   * @param array $items
+   *  example:
+   *    $items = array(
+   *      0 => 'item text',
+   *      1 => array(
+   *        0 => 'item text',
+   *        1 => array(
+   *          'id' => 'current',
+   *          'class' => 'selected'
+   *        ),
+   *      ),
+   *      2 => 'item text',
+   *      3 => 'item text'
+   *    );
+   * @param array $addendum (optional)
+   * @param bool $ordered (optional) ordered list or not
+   * @return string HTML ordered or unordered list
+   * @access public
+   * @since 0.8
+   */
+  function strItemList(&$items, $addendum = null, $ordered = false)
+  {
+    if ( !is_array($items) )
+    {
+      return;
+    }
+
+    $tag = ($ordered ? 'ol' : 'ul');
+    $html = HTML::strStart($tag, isset($addendum) ? $addendum : null) . "\n";
+    foreach ($items as $item)
+    {
+      $content = '';
+      $options = null;
+      if (is_array($item))
+      {
+        $content = $item[0];
+        $options = $item[1];
+      }
+      else
+      {
+        $content = $item;
+      }
+
+      $html .= HTML::strTag('li', $content, $options) . "\n";
+    }
+    $html .= HTML::strEnd($tag);
+
+    return $html;
+  }
+
+  /**
+   * void itemList(array &$items, array $addendum = null, bool $ordered = false)
+   *
+   * Draws an HTML ordered or unordered list
+   *
+   * @param array $items
+   * @param array $addendum (optional)
+   * @param bool $ordered (optional) ordered list or not
+   * @return void
+   * @access public
+   * @since 0.8
+   */
+  function itemList(&$items, $addendum = null, $ordered = false)
+  {
+    echo HTML::strItemList($items, isset($addendum) ? $addendum : null, $ordered);
   }
 } // end class
 ?>
