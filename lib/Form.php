@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.13 2006/04/10 20:10:21 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.14 2006/09/30 17:40:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,6 @@ if (file_exists("../classes/Description_Query.php"))
  * Form set of HTML form tags functions
  *
  * Methods:
- *  string strInput(array $options)
  *  string strText(string $name, int $size, string $value = "", array $addendum = null)
  *  void text(string $name, int $size, string $value = "", array $addendum = null)
  *  string strPassword(string $name, int $size, string $value = "", array $addendum = null)
@@ -56,43 +55,6 @@ if (file_exists("../classes/Description_Query.php"))
  */
 class Form
 {
-  /**
-   * string strInput(array $options)
-   *
-   * Returns input html tag.
-   *
-   * @param array $options
-   *  example:
-   *    $options = array(
-   *      'id' => 'address',
-   *      'name' => 'address',
-   *      'type' => 'text',
-   *      'readonly' => true,
-   *      'disabled' => true,
-   *      'class' => 'required',
-   *      'onclick' => '...'
-   *    );
-   * @return string input html tag
-   * @access public
-   * @since 0.8
-   */
-  function strInput($options)
-  {
-    $html = '<input';
-    foreach ($options as $key => $value)
-    {
-      if ($key == 'error')
-      {
-        continue;
-      }
-
-      $html .= ' ' . $key . '="' . (($value === true) ? $key : $value) . '"';
-    }
-    $html .= " />\n";
-
-    return $html;
-  }
-
   /**
    * string strText(string $name, int $size, string $value = "", array $addendum = null)
    *
@@ -129,7 +91,7 @@ class Form
       $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
     }
 
-    $html = Form::strInput($addendum);
+    $html = HTML::strStart('input', $addendum, true);
 
     if (isset($addendum['error']) && !empty($addendum['error']))
     {
@@ -218,71 +180,61 @@ class Form
    */
   function strSelect($name, &$array, $defaultValue = null, $addendum = null)
   {
-    $html = '<select';
-    $html .= ' id="' . (isset($addendum['id']) ? $addendum['id'] : $name) . '"';
-    $html .= ' name="' . $name;
+    $size = isset($addendum['size']) ? $addendum['size'] : 0;
+    $addendum['id'] = isset($addendum['id']) ? $addendum['id'] : $name;
+    $addendum['name'] = $name . ($size > 0 ? '[]' : '');
     if (isset($addendum['size']) && $addendum['size'] > 0)
     {
-      $html .= '[]" multiple="multiple" size="' . intval($addendum['size']);
+      $addendum['multiple'] = true;
     }
-    else
+    if (isset($addendum['error']) && !empty($addendum['error']))
     {
-      $addendum['size'] = 0;
+      $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
     }
-    $html .= '"';
-    if (is_array($addendum))
-    {
-      if (isset($addendum['error']) && !empty($addendum['error']))
-      {
-        $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
-      }
+    $html = HTML::strStart('select', $addendum) . "\n";
 
-      foreach ($addendum as $key => $value)
-      {
-        if ($key == 'size' || $key == 'id' || $key == 'error')
-        {
-          continue;
-        }
-
-        $html .= ' ' . $key . '="' . $value . '"';
-      }
-    }
-    $html .= ">\n";
     foreach ($array as $key => $value)
     {
+      $options = null;
       if (is_array($value))
       {
-        $html .= '<optgroup label="' . $key . '">';
+        $html .= HTML::strStart('optgroup', array('label' => $key));
         foreach ($value as $optKey => $optValue)
         {
-          $html .= '<option value="' . $optKey . '"';
-          if ($addendum['size'] > 0 && is_array($defaultValue) && in_array($optKey, $defaultValue))
+          $options['value'] = $optKey;
+          if ($size > 0 && is_array($defaultValue) && in_array($optKey, $defaultValue))
           {
-            $html .= ' selected="selected"';
+            $options['selected'] = true;
           }
           elseif ($defaultValue == $optKey)
           {
-            $html .= ' selected="selected"';
+            $options['selected'] = true;
           }
-          $html .= ">" . (($value !== "") ? /*htmlspecialchars(*/$optValue/*)*/ : "&nbsp;") . "</option>\n"; // @fixme use htmlspecialchars
+          //$html .= HTML::strTag('option', $value != '' ? $optValue : '&nbsp;', $options) . "\n";
+          $html .= HTML::strStart('option', $options);
+          $html .= ($value != '' ? /*htmlspecialchars(*/$optValue/*)*/ : '&nbsp;'); // @fixme
+          $html .= HTML::strEnd('option');
         }
-        $html .= "</optgroup>\n";
+        $html .= HTML::strEnd('optgroup');
       }
       else
       {
-        $html .= '<option value="' . $key . '"';
-        if ($addendum['size'] > 0 && is_array($defaultValue) && in_array($key, $defaultValue))
+        $options['value'] = $key;
+        if ($size > 0 && is_array($defaultValue) && in_array($key, $defaultValue))
         {
-          $html .= ' selected="selected"';
+          $options['selected'] = true;
         }
         elseif ($defaultValue == $key)
         {
-          $html .= ' selected="selected"';
+          $options['selected'] = true;
         }
-        $html .= ">" . (($value !== "") ? /*htmlspecialchars(*/$value/*)*/ : "&nbsp;") . "</option>\n"; // @fixme use htmlspecialchars
+        //$html .= HTML::strTag('option', $value != '' ? $value : '&nbsp;', $options) . "\n";
+        $html .= HTML::strStart('option', $options);
+        $html .= ($value != '' ? /*htmlspecialchars(*/$value/*)*/ : '&nbsp;'); // @fixme
+        $html .= HTML::strEnd('option');
       }
     }
-    $html .= "</select>\n";
+    $html .= HTML::strEnd('select');
 
     if (isset($addendum['error']) && !empty($addendum['error']))
     {
@@ -332,29 +284,15 @@ class Form
    */
   function strTextArea($name, $rows, $cols, $value = "", $addendum = null)
   {
-    $html = '<textarea';
-    $html .= ' id="' . (isset($addendum['id']) ? $addendum['id'] : $name) . '"';
-    $html .= ' name="' . $name . '"';
-    $html .= ' rows="' . $rows . '"';
-    $html .= ' cols="' . $cols . '"';
-    if (is_array($addendum))
+    $addendum['id'] = isset($addendum['id']) ? $addendum['id'] : $name;
+    $addendum['name'] = $name;
+    $addendum['rows'] = $rows;
+    $addendum['cols'] = $cols;
+    if (isset($addendum['error']) && !empty($addendum['error']))
     {
-      if (isset($addendum['error']) && !empty($addendum['error']))
-      {
-        $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
-      }
-
-      foreach ($addendum as $key => $val)
-      {
-        if ($key == 'id' || $key == 'error')
-        {
-          continue;
-        }
-
-        $html .= ' ' . $key . '="' . $val . '"';
-      }
+      $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
     }
-    $html .= '>' . htmlspecialchars($value) . "</textarea>\n";
+    $html = HTML::strTag('textarea', $value, $addendum);
 
     if (isset($addendum['error']) && !empty($addendum['error']))
     {
@@ -406,7 +344,7 @@ class Form
     $addendum['name'] = $name;
     $addendum['value'] = htmlspecialchars($value);
 
-    return Form::strInput($addendum);
+    return HTML::strStart('input', $addendum, true);
   }
 
   /**
@@ -457,7 +395,7 @@ class Form
       $addendum['checked'] = true;
     }
 
-    return Form::strInput($addendum);
+    return HTML::strStart('input', $addendum, true);
   }
 
   /**
@@ -509,7 +447,7 @@ class Form
       $addendum['checked'] = true;
     }
 
-    return Form::strInput($addendum);
+    return HTML::strStart('input', $addendum, true);
   }
 
   /**
@@ -557,7 +495,7 @@ class Form
     $addendum['name'] = $name;
     $addendum['value'] = htmlspecialchars($value);
 
-    return Form::strInput($addendum);
+    return HTML::strStart('input', $addendum, true);
   }
 
   /**
@@ -615,7 +553,7 @@ class Form
       $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
     }
 
-    $html = Form::strInput($addendum);
+    $html = HTML::strStart('input', $addendum, true);
 
     if (isset($addendum['error']) && !empty($addendum['error']))
     {
@@ -668,25 +606,29 @@ class Form
       return; // no rows, no select
     }
 
-    $html = '<select id="' . $fieldCode . '"';
-    $html .= ' name="' . $fieldCode;
-    $html .= (($size > 0) ? '[]" multiple="multiple" size="' . intval($size) . '">' : '">');
-    $html .= "\n";
+    $options['id'] = $fieldCode;
+    $options['name'] = $fieldCode . ($size > 0 ? '[]' : '');
+    if ($size > 0)
+    {
+      $options['multiple'] = true;
+      $options['size'] = intval($size);
+    }
+    $html = HTML::strStart('select', $options) . "\n";
+
     while ($aux = $desQ->fetch())
     {
-      $html .= '<option value="' . $aux->getCode() . '"';
-      if ($aux->getCode() == $defaultValue)
+      $array = null;
+      if ( !empty($fieldDescription) )
       {
-        $html .= ' selected="selected"';
+        $array['value'] = $aux->getCode();
+        if ($aux->getCode() == $defaultValue)
+        {
+          $array['selected'] = true;
+        }
+        $html .= HTML::strTag('option', $aux->getDescription(), $array) . "\n";
       }
-      $html .= ">";
-      if ($fieldDescription != "")
-      {
-        $html .= htmlspecialchars($aux->getDescription());
-      }
-      $html .= "</option>\n";
     }
-    $html .= "</select>\n";
+    $html .= HTML::strEnd('select');
 
     $desQ->close();
     unset($desQ);
@@ -726,19 +668,13 @@ class Form
    */
   function strLabel($field, $text, $required = false)
   {
-    $html = "";
-    $html .= '<label';
-    $html .= ' for="' . $field . '"';
+    $addendum['for'] = $field;
     if ($required)
     {
-      $html .= ' class="' . "requiredField" . '"';
+      $addendum['class'] = 'requiredField';
+      $text = '* ' . $text;
     }
-    $html .= '>';
-    if ($required)
-    {
-      $html .= '* ';
-    }
-    $html .= $text . '</label>' . "\n";
+    $html = HTML::strTag('label', $text, $addendum) . "\n";
 
     return $html;
   }
@@ -785,16 +721,11 @@ class Form
       return $html; // no data, no fieldset
     }
 
-    $html .= '<fieldset';
-    if (isset($options['class']))
-    {
-      $html .= ' class="' . $options['class'] . '"';
-    }
-    $html .= ">\n";
+    $html .= HTML::strStart('fieldset', isset($options['class']) ? array('class' => $options['class']) : null) . "\n";
 
     if ( !empty($legend) )
     {
-      $html .= '<legend>' . trim($legend) . "</legend>\n";
+      $html .= HTML::strTag('legend', trim($legend)) . "\n";
     }
 
     if (count($body) > 0)
@@ -802,31 +733,27 @@ class Form
       $numRow = 0;
       foreach ($body as $row)
       {
-        $html .= '<p';
+        $rowOptions = null;
         if (isset($options['r' . $numRow]['class']))
         {
-          $html .= ' class="' . $options['r' . $numRow]['class'] . '"';
+          $rowOptions['class'] = $options['r' . $numRow]['class'];
         }
-        $html .= ">\n";
-
-        $html .= $row;
-
-        $html .= "</p>\n";
+        $html .= HTML::strPara($row, $rowOptions);
         $numRow++;
       }
     }
 
     if (count($foot) > 0)
     {
-      $html .= '<p class="formButton">' . "\n";
+      $footText = '';
       foreach ($foot as $row)
       {
-        $html .= $row;
+        $footText .= $row;
       }
-      $html .= "</p>\n";
+      $html .= HTML::strPara($footText, array('class' => 'formButton'));
     }
 
-    $html .= "</fieldset>\n";
+    $html .= HTML::strEnd('fieldset');
 
     unset($body);
 
