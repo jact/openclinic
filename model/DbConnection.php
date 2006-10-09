@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: DbConnection.php,v 1.14 2006/03/28 19:06:39 jact Exp $
+ * @version   CVS: $Id: DbConnection.php,v 1.15 2006/10/09 19:02:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,12 +18,17 @@ if (file_exists("../database_constants.php"))
   include_once("../database_constants.php");
 }
 
+if ( !defined("OPEN_PERSISTENT") )
+{
+  define("OPEN_PERSISTENT", true);
+}
+
 /**
  * DbConnection encapsulates all database specific functions for the project
  *
  * Methods:
  *  void DbConnection(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
- *  bool connect(bool $persistency = false)
+ *  bool connect(bool $persistency = OPEN_PERSISTENT)
  *  bool close(void)
  *  bool exec(string $sql, array $params = null)
  *  mixed fetchRow(int $arrayType = MYSQL_ASSOC)
@@ -153,7 +158,7 @@ class DbConnection
   }
 
   /**
-   * bool connect(bool $persistency = false)
+   * bool connect(bool $persistency = OPEN_PERSISTENT)
    *
    * Connects to the database
    *
@@ -161,11 +166,11 @@ class DbConnection
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function connect($persistency = false)
+  function connect($persistency = OPEN_PERSISTENT)
   {
     $this->_link = ($persistency)
-                     ? mysql_pconnect($this->_host . ":" . $this->_port, $this->_userName, $this->_passwd)
-                     : mysql_connect($this->_host . ":" . $this->_port, $this->_userName, $this->_passwd, true); // always open new link
+      ? mysql_pconnect($this->_host . ":" . $this->_port, $this->_userName, $this->_passwd)
+      : mysql_connect($this->_host . ":" . $this->_port, $this->_userName, $this->_passwd, true); // always open new link
     if ($this->_link == false)
     {
       $this->_error = "Unable to connect to host.";
