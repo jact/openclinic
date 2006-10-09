@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: database_constants.php,v 1.7 2006/03/28 19:21:25 jact Exp $
+ * @version   CVS: $Id: database_constants.php,v 1.8 2006/10/09 19:03:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,8 +25,9 @@
  * Please modify the following database connection variables to match
  * the MySQL database and user that you have created for OpenClinic.
  */
-  define("OPEN_HOST",     "localhost");
-  define("OPEN_DATABASE", "openclinic");
-  define("OPEN_USERNAME", "root");
-  define("OPEN_PWD",      "");
+  define("OPEN_HOST",       "localhost");
+  define("OPEN_DATABASE",   "openclinic");
+  define("OPEN_USERNAME",   "root");
+  define("OPEN_PWD",        "");
+  define("OPEN_PERSISTENT", true);
 ?>
