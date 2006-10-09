@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.14 2006/09/30 17:40:06 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.15 2006/10/09 20:02:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -210,10 +210,7 @@ class Form
           {
             $options['selected'] = true;
           }
-          //$html .= HTML::strTag('option', $value != '' ? $optValue : '&nbsp;', $options) . "\n";
-          $html .= HTML::strStart('option', $options);
-          $html .= ($value != '' ? /*htmlspecialchars(*/$optValue/*)*/ : '&nbsp;'); // @fixme
-          $html .= HTML::strEnd('option');
+          $html .= HTML::strTag('option', $value != '' ? $optValue : '&nbsp;', $options) . "\n";
         }
         $html .= HTML::strEnd('optgroup');
       }
@@ -228,10 +225,7 @@ class Form
         {
           $options['selected'] = true;
         }
-        //$html .= HTML::strTag('option', $value != '' ? $value : '&nbsp;', $options) . "\n";
-        $html .= HTML::strStart('option', $options);
-        $html .= ($value != '' ? /*htmlspecialchars(*/$value/*)*/ : '&nbsp;'); // @fixme
-        $html .= HTML::strEnd('option');
+        $html .= HTML::strTag('option', $value != '' ? $value : '&nbsp;', $options) . "\n";
       }
     }
     $html .= HTML::strEnd('select');
