@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.26 2006/09/30 17:26:35 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.27 2006/10/09 20:05:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,7 +42,7 @@
       ),
       array(
         'title' => _("Opens a new window"),
-        'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&amp;nav=' . $nav . "')"
+        'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
       )
     );
   }
