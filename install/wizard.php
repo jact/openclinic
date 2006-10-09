@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.23 2006/09/30 17:01:16 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.24 2006/10/09 19:03:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -457,7 +457,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.23 2006/09/30 17:01:16 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.24 2006/10/09 19:03:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -473,10 +473,11 @@
  * Please modify the following database connection variables to match
  * the MySQL database and user that you have created for OpenClinic.
  */
-  define("OPEN_HOST",     "' . $_POST['dbHost'] . '");
-  define("OPEN_DATABASE", "' . $_POST['dbName'] . '");
-  define("OPEN_USERNAME", "' . $_POST['dbUser'] . '");
-  define("OPEN_PWD",      "' . $_POST['dbPasswd'] . '");
+  define("OPEN_HOST",       "' . $_POST['dbHost'] . '");
+  define("OPEN_DATABASE",   "' . $_POST['dbName'] . '");
+  define("OPEN_USERNAME",   "' . $_POST['dbUser'] . '");
+  define("OPEN_PWD",        "' . $_POST['dbPasswd'] . '");
+  define("OPEN_PERSISTENT", true);
 ?>
 ';
     if ( !fwrite($aux, $fileContent) )
