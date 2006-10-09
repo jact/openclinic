@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.10 2006/09/30 17:38:20 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.11 2006/10/09 19:08:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,6 +24,7 @@ define("OPEN_MSG_ERROR",   3);
  * HTML set of html tags functions
  *
  * Methods:
+ *  string xmlEntities(string $text, int $quoteStyle = ENT_QUOTES)
  *  string strStart(string $tag, array $options = null, bool $closed = false)
  *  void start(string $tag, array $options = null, bool $closed = false)
  *  string strEnd(string $tag)
@@ -54,6 +55,36 @@ define("OPEN_MSG_ERROR",   3);
  */
 class HTML
 {
+  /**
+   * string xmlEntities(string $text, int $quoteStyle = ENT_QUOTES)
+   *
+   * Encode only the entities of a string not already encoded
+   * From the PHP Manual user notes: tmp1000 at fastmail dot deleteme dot fm (23-Oct-2004 06:07)
+   *
+   * @param string $text
+   * @param int $quoteStyle (optional)
+   * @return string
+   * @access public
+   * @since 0.8
+   */
+  function xmlEntities($text, $quoteStyle = ENT_QUOTES)
+  {
+    static $trans;
+    if ( !isset($trans) )
+    {
+      $trans = get_html_translation_table(HTML_ENTITIES, $quoteStyle);
+      foreach ($trans as $key => $value)
+      {
+        $trans[$key] = '&#' . ord($key) . ';';
+      }
+      // don't translate the '&' in case it is part of &xxx;
+      $trans[chr(38)] = '&';
+    }
+
+    // after the initial translation, _do_ map standalone '&' into '&#38;'
+    return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,3};)/", "&#38;", strtr($text, $trans));
+  }
+
   /**
    * string strStart(string $tag, array $options = null, bool $closed = false)
    *
@@ -88,8 +119,7 @@ class HTML
           continue;
         }
 
-        //$html .= ' ' . $key . '="' . htmlspecialchars(($value === true) ? $key : $value) . '"';
-        $html .= ' ' . $key . '="' . htmlentities(($value === true) ? $key : $value) . '"';
+        $html .= ' ' . $key . '="' . HTML::xmlEntities(($value === true) ? $key : $value) . '"';
       }
     }
     $html .= ($closed ? " />\n" : '>');
@@ -160,10 +190,10 @@ class HTML
    */
   function strTag($tag, $text, $options = null)
   {
-    $rawText = strip_tags($text); // @fixme poner en función aparte?
+    $rawText = strip_tags($text);
     if ($rawText == $text)
     {
-      $text = htmlentities($text); // mirar WordPress para cómo lo hacen allí
+      $text = HTML::xmlEntities($text);
     }
 
     $html = HTML::strStart($tag, isset($options) ? $options : null);
