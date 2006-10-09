@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.11 2006/10/09 19:08:28 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.12 2006/10/09 20:03:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -81,8 +81,9 @@ class HTML
       $trans[chr(38)] = '&';
     }
 
-    // after the initial translation, _do_ map standalone '&' into '&#38;'
-    return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[0-9]{2,3};)/", "&#38;", strtr($text, $trans));
+    // after the initial translation, _do_ map standalone '&' into '&amp;' Duane (09-Jan-2005 01:34)
+    return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[x0-9a-f]{2,6};)/", "&amp;", strtr($text, $trans));
+    //return $text; // debug
   }
 
   /**
