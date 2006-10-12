@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: xhtml_start.php,v 1.20 2006/09/30 17:33:49 jact Exp $
+ * @version   CVS: $Id: xhtml_start.php,v 1.21 2006/10/12 17:29:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -18,6 +18,22 @@
   {
     header("Location: ../index.php");
     exit();
+  }
+
+  /**
+   * string _convert2Utf8(string $buffer)
+   *
+   * Callback function for ob_start
+   *
+   * @param string $buffer
+   * @return string $buffer utf8 converted
+   * @access private
+   * @since 0.8
+   */
+  function _convert2Utf8($buffer)
+  {
+    //return mb_convert_encoding($buffer, "UTF-8", OPEN_CHARSET);
+    return utf8_encode($buffer);
   }
 
   /**
@@ -42,7 +58,7 @@
   $xhtml = ($xhtml && (defined("OPEN_XML_ACTIVED") ? OPEN_XML_ACTIVED : false));
 
   $contentType = ($xhtml) ? "application/xhtml+xml" : "text/html";
-  $contentType .= "; charset=" . OPEN_CHARSET;
+  $contentType .= "; charset=" . OPEN_CHARSET/*"UTF-8"*/;
 
   header("Content-Type: " . $contentType); // force document encoding, ignore server configuration
   header("Vary: Accept");
@@ -55,14 +71,14 @@
     }
     else
     {
-      ob_start();
+      ob_start(/*"_convert2Utf8"*/); // _convert2Utf8
     }
   }
 
   if (strpos($contentType, "application/xhtml+xml") !== false)
   {
     // To prevent 'short_open_tag = On' mistake
-    echo '<?xml version="1.0" encoding="' . OPEN_ENCODING . '" standalone="no" ?>' . "\n";
+    echo '<?xml version="1.0" encoding="' . OPEN_ENCODING/*"UTF-8"*/ . '" standalone="no" ?>' . "\n";
   }
 
   if ($xhtml)
