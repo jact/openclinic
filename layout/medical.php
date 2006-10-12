@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.15 2006/09/30 17:24:06 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.16 2006/10/12 17:26:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -52,9 +52,9 @@
 
   echo '<ul class="linkList">';
 
-  echo ($nav == "summary")
-    ? '<li class="selected">' . _("Summary") . '</li>'
-    : '<li>' . HTML::strLink(_("Summary"), '../medical/index.php') . '</li>';
+  ($nav == "summary")
+    ? HTML::tag('li', _("Summary"), array('class' => 'selected'))
+    : HTML::tag('li', HTML::strLink(_("Summary"), '../medical/index.php'));
 
   echo ($nav == "searchform")
     ? '<li class="selected">' . _("Search Patient")
@@ -78,7 +78,7 @@
           echo '<li class="selected">' . HTML::strTag('em', $arrValue);
           if ($nav == "social" || $nav == "history" || $nav == "problems" || $nav == "print")
           {
-            include_once("../navbars/patient.php");
+            echo _patientLinks($idPatient, $nav);
           }
           echo "</li>\n";
         }
@@ -99,30 +99,74 @@
   {
     if ($nav == "social" || $nav == "history" || $nav == "problems" || $nav == "print")
     {
-      include_once("../navbars/patient.php");
+      echo _patientLinks($idPatient, $nav);
     }
     echo "</li>\n"; // end searchform
   }
 
   if ($hasMedicalAdminAuth)
   {
-    echo ($nav == "new")
-      ? '<li class="selected">' . _("New Patient") . '</li>'
-      : '<li>' . HTML::strLink(_("New Patient"), '../medical/patient_new_form.php') . '</li>';
+    ($nav == "new")
+      ? HTML::tag('li', _("New Patient"), array('class' => 'selected'))
+      : HTML::tag('li', HTML::strLink(_("New Patient"), '../medical/patient_new_form.php'));
   }
 
-  echo '<li>';
-  HTML::link(_("Help"), '../doc/index.php',
-    array(
-      'tab' => $tab,
-      'nav' => $nav
-    ),
-    array(
-      'title' => _("Opens a new window"),
-      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
+  HTML::tag('li',
+    HTML::strLink(_("Help"), '../doc/index.php',
+      array(
+        'tab' => $tab,
+        'nav' => $nav
+      ),
+      array(
+        'title' => _("Opens a new window"),
+        'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
+      )
     )
   );
-  echo "</li>\n";
 
   echo "</ul><!-- End .linkList -->\n";
+
+  /**
+   * string _patientLinks(int $idPatient, string $nav)
+   *
+   * Returns a list with links about a patient
+   *
+   * @param int $idPatient
+   * @param string $nav
+   * @return string
+   * @access private
+   * @since 0.8
+   */
+  function _patientLinks($idPatient, $nav)
+  {
+    $linkList = array(
+      "social" => array(_("Social Data"), "../medical/patient_view.php?key=" . $idPatient),
+      //"preventive" => array(_("Datos Preventivos"), ""), // I don't know how implement it
+      "history" => array(_("Clinic History"), "../medical/history_list.php?key=" . $idPatient),
+      "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php?key=" . $idPatient)
+    );
+
+    $array = null;
+    foreach ($linkList as $key => $value)
+    {
+      if ($nav == $key)
+      {
+        $array[] = array($value[0], array('class' => 'selected'));
+      }
+      else
+      {
+        $array[] = HTML::strLink($value[0], $value[1]);
+      }
+    }
+    unset($linkList);
+
+    $array[] = ($nav == "print")
+      ? array(_("Print Medical Record"), array('class' => 'selected'))
+      : HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
+          array('key' => $idPatient),
+          array('onclick' => "return popSecondary('../medical/print_medical_record.php?key=" . $idPatient . "')")
+        );
+
+    return HTML::strItemList($array, array('class' => 'subnavbar'));
+  }
 ?>
