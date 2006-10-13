@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: global_constants.php,v 1.15 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: global_constants.php,v 1.16 2006/10/13 09:38:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -35,8 +35,9 @@
   define("OPEN_LOG_ERRORS",    false); // Save errors to a file?
   define("OPEN_LOG_FILE",      "/tmp/error_log.txt"); // Allways use / separator (Win32 too)
 
+  //ini_set('display_errors', OPEN_SCREEN_ERRORS ? 'on' : 'off'); // does not work!!!
   require_once("../lib/Error.php");
-  set_error_handler(array("Error", "customHandler")); // Error::customHandler
+  set_error_handler(array("Error", "customHandler")); // Error::customHandler // PHP >= 4.3.0
 
   /**
    * Search types
