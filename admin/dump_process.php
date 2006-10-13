@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_process.php,v 1.13 2006/09/30 16:39:30 jact Exp $
+ * @version   CVS: $Id: dump_process.php,v 1.14 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
   $tab = "admin";
   $nav = "dump";
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
   require_once("../admin/dump_defines.php");
   require_once("../lib/dump_lib.php");
   require_once("../lib/Check.php");
@@ -42,7 +42,7 @@
      * Show page
      */
     $title = _("Dump result");
-    include_once("../shared/header.php");
+    include_once("../layout/header.php");
 
     /**
      * Bread crumb
@@ -367,6 +367,6 @@
     HTML::end('pre');
     HTML::para(HTML::strLink(_("Back return"), "../admin/dump_view_form.php"));
 
-    include_once('../shared/footer.php');
+    include_once('../layout/footer.php');
   } // end if
 ?>

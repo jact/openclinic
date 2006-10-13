@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.26 2006/09/30 16:48:47 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.27 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,10 +30,10 @@
   $returnLocation = ((isset($_GET["all"])) ? "../home/index.php" : "../admin/user_list.php");
   $isMd5 = true;
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
   if ( !isset($_GET["all"]) )
   {
-    include_once("../shared/login_check.php");
+    include_once("../auth/login_check.php");
   }
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
@@ -48,7 +48,7 @@
    */
   if ( !isset($formError) )
   {
-    include_once("../classes/User_Query.php");
+    include_once("../model/User_Query.php");
 
     /**
      * Search database
@@ -59,11 +59,11 @@
     if ( !$userQ->select($idUser) )
     {
       $userQ->close();
-      include_once("../shared/header.php");
+      include_once("../layout/header.php");
 
       HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
 
-      include_once("../shared/footer.php");
+      include_once("../layout/footer.php");
       exit();
     }
 
@@ -93,7 +93,7 @@
    */
   $title = ((isset($_GET["all"])) ? _("Change User Data") : _("Edit User"));
   $focusFormField = "email"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -156,5 +156,5 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

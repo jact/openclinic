@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.24 2006/09/30 16:45:00 jact Exp $
+ * @version   CVS: $Id: theme_edit_form.php,v 1.25 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,8 +29,8 @@
     exit();
   }
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
@@ -44,7 +44,7 @@
    */
   if ( !isset($formError) )
   {
-    include_once("../classes/Theme_Query.php");
+    include_once("../model/Theme_Query.php");
 
     /**
      * Search database
@@ -55,11 +55,11 @@
     if ( !$themeQ->select($idTheme) )
     {
       $themeQ->close();
-      include_once("../shared/header.php");
+      include_once("../layout/header.php");
 
       HTML::message(_("That theme does not exist."), OPEN_MSG_ERROR);
 
-      include_once("../shared/footer.php");
+      include_once("../layout/footer.php");
       exit();
     }
 
@@ -92,7 +92,7 @@
    */
   $title = _("Edit Theme");
   $focusFormField = "theme_name"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -158,5 +158,5 @@ function editTheme()
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

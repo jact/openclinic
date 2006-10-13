@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_header.php,v 1.19 2006/09/30 17:13:07 jact Exp $
+ * @version   CVS: $Id: patient_header.php,v 1.20 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
     exit();
   }
 
-  require_once("../classes/Patient_Page_Query.php");
+  require_once("../model/Patient_Page_Query.php");
 
   /**
    * bool showPatientHeader(int $idPatient)

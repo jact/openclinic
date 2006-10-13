@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_fields.php,v 1.23 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: setting_fields.php,v 1.24 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,7 +41,7 @@
 
   $row = Form::strLabel("clinic_image_url", _("Clinic Image") . ":");
 
-  $dir = "../images/";
+  $dir = "../img/";
   $ext = array("bmp", "gif", "jpe", "jpeg", "jpg", "png");
   $array = File::getDirContent($dir, false, $ext);
 
@@ -49,7 +49,7 @@
   unset($array);
   unset($ext);
 
-  $row .= _("(must be in /images/ directory)");
+  $row .= _("(must be in /img/ directory)");
   $tbody[] = $row;
 
   $row = Form::strLabel("use_image", _("Use Image in place of Name") . ":");

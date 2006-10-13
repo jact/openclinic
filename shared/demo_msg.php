@@ -9,11 +9,11 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: demo_msg.php,v 1.10 2006/09/30 17:25:50 jact Exp $
+ * @version   CVS: $Id: demo_msg.php,v 1.11 2006/10/13 19:48:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
 
   /**
    * Controlling vars
@@ -25,11 +25,11 @@
    * Show page
    */
   $title = _("This is a demo version");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   HTML::section(1, $title);
 
   HTML::message(_("This function is not available in this demo version of OpenClinic."), OPEN_MSG_INFO);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

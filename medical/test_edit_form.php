@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_edit_form.php,v 1.21 2006/09/30 17:50:07 jact Exp $
+ * @version   CVS: $Id: test_edit_form.php,v 1.22 2006/10/13 19:53:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,9 +30,9 @@
   $onlyDoctor = false;
   $restrictInDemo = true; // To prevent users' malice
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Test_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Test_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
@@ -52,11 +52,11 @@
   if ( !$testQ->select($idProblem, $idTest) )
   {
     $testQ->close();
-    include_once("../shared/header.php");
+    include_once("../layout/header.php");
 
     HTML::message(_("That medical test does not exist"), OPEN_MSG_ERROR);
 
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -80,7 +80,7 @@
    */
   $title = _("Edit Medical Test");
   $focusFormField = "document_type"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
   require_once("../medical/patient_header.php");
   require_once("../medical/problem_header.php");
 
@@ -134,5 +134,5 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

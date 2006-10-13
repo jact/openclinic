@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.25 2006/09/30 16:45:39 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.26 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,9 +19,9 @@
   $tab = "admin";
   $nav = "themes";
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Theme_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Theme_Query.php");
   require_once("../lib/Form.php");
 
   /**
@@ -33,7 +33,7 @@
    * Show page
    */
   $title = _("Themes");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -116,7 +116,7 @@ function previewTheme(key)
   {
     $themeQ->close();
     HTML::message(_("No results found."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -207,5 +207,5 @@ function previewTheme(key)
   HTML::message('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
   HTML::message('** ' . _("Note: The functions edit and delete are not available on the application themes."));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

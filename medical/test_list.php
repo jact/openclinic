@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.21 2006/09/30 17:50:07 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.22 2006/10/13 19:53:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,9 +30,9 @@
   $onlyDoctor = true;
   $restrictInDemo = true; // To prevent users' malice
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Test_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Test_Query.php");
   require_once("../lib/misc_lib.php");
 
   /**
@@ -46,7 +46,7 @@
    * Show page
    */
   $title = _("View Medical Tests");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
   require_once("../medical/patient_header.php");
   require_once("../medical/problem_header.php");
 
@@ -110,7 +110,7 @@
   {
     $testQ->close();
     HTML::message(_("No medical tests defined for this medical problem."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -167,5 +167,5 @@
 
   HTML::table($thead, $tbody);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

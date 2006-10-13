@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_lib.php,v 1.14 2006/09/30 17:02:43 jact Exp $
+ * @version   CVS: $Id: log_lib.php,v 1.15 2006/10/13 19:54:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
     exit();
   }
 
-  require_once("../classes/DbConnection.php");
+  require_once("../model/DbConnection.php");
 
 /**
  * Functions:
@@ -46,15 +46,15 @@
  */
 function percBar($pperc, $width = 100, $xecho = true, $label = "")
 {
-  //$leftSize = getimagesize("../images/leftbar.gif");
-  //$mainSize = getimagesize("../images/mainbar.gif");
-  //$rightSize = getimagesize("../images/rightbar.gif");
+  //$leftSize = getimagesize("../img/leftbar.gif");
+  //$mainSize = getimagesize("../img/mainbar.gif");
+  //$rightSize = getimagesize("../img/rightbar.gif");
 
   $perc = round(($width * ($pperc / 100)), 0);
 
   $what = HTML::strStart('img',
     array(
-      'src' => '../images/leftbar.gif',
+      'src' => '../img/leftbar.gif',
       'width' => 7,
       'height' => 14,
       'alt' => $label
@@ -63,7 +63,7 @@ function percBar($pperc, $width = 100, $xecho = true, $label = "")
   );
   $what .= HTML::strStart('img',
     array(
-      'src' => '../images/mainbar.gif',
+      'src' => '../img/mainbar.gif',
       'width' => $perc,
       'height' => 14,
       'alt' => $label
@@ -72,7 +72,7 @@ function percBar($pperc, $width = 100, $xecho = true, $label = "")
   );
   $what .= HTML::strStart('img',
     array(
-      'src' => '../images/rightbar.gif',
+      'src' => '../img/rightbar.gif',
       'width' => 7,
       'height' => 14,
       'alt' => $label

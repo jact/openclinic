@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_record_list.php,v 1.21 2006/09/30 16:41:09 jact Exp $
+ * @version   CVS: $Id: log_record_list.php,v 1.22 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -30,9 +30,9 @@
   $nav = "logs";
   $restrictInDemo = true; // There are not logs in demo version
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Record_Page_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Record_Page_Query.php");
 
   /**
    * Retrieving get vars
@@ -46,7 +46,7 @@
    * Show page
    */
   $title = _("Record Logs");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -67,7 +67,7 @@
   {
     $recordQ->close();
     HTML::message(_("No logs in this date."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -116,8 +116,8 @@
   HTML::table($thead, $tbody, null, $options);
 
   HTML::para(
-    HTML::strLink(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php'));
+    HTML::strLink(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php'))
   );
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

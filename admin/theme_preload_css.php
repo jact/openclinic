@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.18 2006/09/30 16:46:53 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.19 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -32,8 +32,8 @@
       : '../admin/theme_edit_form.php?key=' . $idTheme)
     : '../admin/theme_new_form.php';
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
@@ -57,7 +57,7 @@
    */
   $title = _("Preload CSS file");
   $focusFormField = "css_filename"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread crumb
@@ -100,5 +100,5 @@
 
   HTML::message('* ' . _("Note: The fields with * are required."));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

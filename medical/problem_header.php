@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_header.php,v 1.21 2006/09/30 17:18:48 jact Exp $
+ * @version   CVS: $Id: problem_header.php,v 1.22 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
     exit();
   }
 
-  require_once("../classes/Problem_Page_Query.php");
+  require_once("../model/Problem_Page_Query.php");
   require_once("../lib/misc_lib.php");
 
   /**

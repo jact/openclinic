@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.13 2006/10/09 19:00:45 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.14 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,8 +20,8 @@
   $nav = "dump";
   $restrictInDemo = true; // To prevent users' malice
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../admin/dump_defines.php");
   require_once("../lib/dump_lib.php");
   require_once("../lib/Form.php");
@@ -56,7 +56,7 @@
    * Show page
    */
   $title = _("Dumps");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -76,12 +76,12 @@
 
   if ($numTables < 1)
   {
-    // @todo
-    require_once("../shared/footer.php");
+    // @todo message
+    require_once("../layout/footer.php");
     exit();
   }
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../scripts/dump_functions.js', 'defer' => true));
+  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/dump_functions.js', 'defer' => true));
   HTML::end('script');
 
   HTML::start('form', array('method' => 'post', 'action' => './dump_process.php'));
@@ -170,5 +170,5 @@
 
   HTML::message(_("Note: Some check options are exclusive. Be carefully!"));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_new_form.php,v 1.23 2006/09/30 16:45:59 jact Exp $
+ * @version   CVS: $Id: theme_new_form.php,v 1.24 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,8 +20,8 @@
   $nav = "themes";
   $returnLocation = "../admin/theme_list.php";
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
@@ -33,7 +33,7 @@
   {
     $idTheme = intval($_GET["key"]);
 
-    include_once("../classes/Theme_Query.php");
+    include_once("../model/Theme_Query.php");
 
     $themeQ = new Theme_Query();
     $themeQ->connect();
@@ -71,7 +71,7 @@
    */
   $title = _("Add New Theme");
   $focusFormField = "theme_name"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -133,5 +133,5 @@ function editTheme()
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

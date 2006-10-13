@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit_form.php,v 1.16 2006/09/30 17:08:50 jact Exp $
+ * @version   CVS: $Id: history_personal_edit_form.php,v 1.17 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,9 +29,9 @@
     exit();
   }
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/History_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/History_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
@@ -49,11 +49,11 @@
   if ( !$historyQ->selectPersonal($idPatient) )
   {
     $historyQ->close();
-    include_once("../shared/header.php");
+    include_once("../layout/header.php");
 
     HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -87,7 +87,7 @@
    */
   $title = _("Edit Personal Antecedents");
   $focusFormField = "birth_growth"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
   require_once("../medical/patient_header.php");
 
   $returnLocation = "../medical/history_personal_view.php?key=" . $idPatient;
@@ -134,5 +134,5 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

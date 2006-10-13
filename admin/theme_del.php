@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del.php,v 1.15 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: theme_del.php,v 1.16 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -28,9 +28,9 @@
     exit();
   }
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Theme_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Theme_Query.php");
 
   /**
    * Retrieving post vars

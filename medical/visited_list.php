@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: visited_list.php,v 1.15 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: visited_list.php,v 1.16 2006/10/13 19:53:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  * @todo      convert in class?
@@ -29,7 +29,7 @@
  *  void deletePatient(int $idPatient)
  */
 
-  require_once("../classes/Patient_Page_Query.php");
+  require_once("../model/Patient_Page_Query.php");
 
   /**
    * string getPatientName(int $idPatient)

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.25 2006/09/30 16:49:53 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.26 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,9 +19,9 @@
   $tab = "admin";
   $nav = "users";
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/User_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/User_Query.php");
   require_once("../lib/Form.php");
 
   /**
@@ -34,10 +34,10 @@
 
   $userQ->selectLogins();
 
-  $array = null;
+  $userArray = null;
   while ($user = $userQ->fetch())
   {
-    $array[$user->getIdMember() . OPEN_SEPARATOR . $user->getLogin()] = $user->getLogin();
+    $userArray[$user->getIdMember() . OPEN_SEPARATOR . $user->getLogin()] = $user->getLogin();
   }
   $userQ->freeResult();
 
@@ -45,7 +45,7 @@
    * Show page
    */
   $title = _("Users");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -99,14 +99,14 @@
 
   $legend = _("Create New User");
 
-  if (empty($array))
+  if (empty($userArray))
   {
     $content = _("There no more users to create. You must create more staff members first.");
   }
   else
   {
     $content = Form::strLabel("id_member_login", _("Select a login to create a new user") . ": ");
-    $content .= Form::strSelect("id_member_login", $array);
+    $content .= Form::strSelect("id_member_login", $userArray);
     $tfoot = array(Form::strButton("button1", _("Create")));
   }
 
@@ -125,7 +125,7 @@
   {
     $userQ->close();
     HTML::message(_("No results found."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -217,5 +217,5 @@
 
   HTML::message('* ' . _("Note: The del function will not be applicated to the session user."));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

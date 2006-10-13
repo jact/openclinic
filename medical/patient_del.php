@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.20 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.21 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -27,14 +27,14 @@
    */
   $onlyDoctor = false;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/History_Query.php");
-  require_once("../classes/Patient_Page_Query.php");
-  require_once("../classes/Relative_Query.php"); // referencial integrity
-  require_once("../classes/DelPatient_Query.php");
-  require_once("../classes/Problem_Page_Query.php"); // referencial integrity
-  require_once("../classes/DelProblem_Query.php"); // referencial integrity
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/History_Query.php");
+  require_once("../model/Patient_Page_Query.php");
+  require_once("../model/Relative_Query.php"); // referencial integrity
+  require_once("../model/DelPatient_Query.php");
+  require_once("../model/Problem_Page_Query.php"); // referencial integrity
+  require_once("../model/DelProblem_Query.php"); // referencial integrity
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -82,11 +82,11 @@
     if ( !$patQ->select($idPatient) )
     {
       $patQ->close();
-      include_once("../shared/header.php");
+      include_once("../layout/header.php");
 
       HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
-      include_once("../shared/footer.php");
+      include_once("../layout/footer.php");
       exit();
     }
 

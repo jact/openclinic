@@ -9,14 +9,14 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.15 2006/10/09 20:02:58 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.16 2006/10/13 19:54:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once("../lib/HTML.php");
-if (file_exists("../classes/Description_Query.php"))
+if (file_exists("../model/Description_Query.php"))
 {
-  include_once("../classes/Description_Query.php");
+  include_once("../model/Description_Query.php");
 }
 
 /**

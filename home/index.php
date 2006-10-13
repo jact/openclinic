@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.13 2006/09/30 16:52:37 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.14 2006/10/13 19:50:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
   $tab = "home";
   $nav = "home";
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
   require_once("../lib/Check.php");
 
   /**
@@ -31,7 +31,7 @@
    * Show page
    */
   $title = _("Welcome to OpenClinic");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   HTML::section(1, $title);
 
@@ -81,5 +81,5 @@
   );
   HTML::itemList($array);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

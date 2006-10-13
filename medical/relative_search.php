@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.26 2006/09/30 17:21:29 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.27 2006/10/13 19:53:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,9 +29,9 @@
   $nav = "social";
   $onlyDoctor = false;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Patient_Page_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Patient_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
   require_once("../lib/misc_lib.php");
@@ -67,7 +67,7 @@
    * Show page
    */
   $title = _("Search Results");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
   require_once("../medical/patient_header.php");
 
   $returnLocation = "../medical/relative_list.php?key=" . $idPatient;
@@ -94,7 +94,7 @@
   {
     $patQ->close();
     HTML::message(_("No results found."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -250,5 +250,5 @@
 
   Search::pageLinks($currentPage, $pageCount);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

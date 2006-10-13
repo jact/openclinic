@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.27 2006/09/30 16:47:21 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.28 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,7 +29,7 @@
     exit();
   }
 
-  require_once("../classes/Setting_Query.php");
+  require_once("../model/Setting_Query.php");
   require_once("../lib/Form.php");
 
   /**
@@ -57,11 +57,11 @@
   /**
    * i18n l10n (after OPEN_LANGUAGE is defined)
    */
-  require_once("../shared/i18n.php");
+  require_once("../config/i18n.php");
 
   if (isset($_GET["key"]) && intval($_GET["key"]) > 0)
   {
-    include_once("../classes/Theme_Query.php");
+    include_once("../model/Theme_Query.php");
 
     /**
      * Reading theme settings
@@ -110,9 +110,9 @@
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
    */
   $title = sprintf(_("%s Theme Preview"), OPEN_THEME_NAME);
-  require_once("../shared/xhtml_start.php");
+  require_once("../layout/xhtml_start.php");
 
-  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
+  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
 
   HTML::start('style', array('type' => 'text/css', 'title' => OPEN_THEME_NAME));
   echo "<!--/*--><![CDATA[/*<!--*/\n";
@@ -120,7 +120,7 @@
   echo "/*]]>*/-->\n";
   HTML::end('style');
 
-  HTML::start('script', array('src' => '../scripts/pop_window.js', 'type' => 'text/javascript', 'defer' => true));
+  HTML::start('script', array('src' => '../js/pop_window.js', 'type' => 'text/javascript', 'defer' => true));
   HTML::end('script');
 
   HTML::end('head');
@@ -171,7 +171,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/openclinic-2.png',
+          'src' => '../img/openclinic-2.png',
           'width' => 130,
           'height' => 29,
           'alt' => _("Powered by OpenClinic"),
@@ -185,7 +185,7 @@
 
   $thankCoresis = HTML::strStart('img',
     array(
-      'src' => '../images/thank.png',
+      'src' => '../img/thank.png',
       'width' => 65,
       'height' => 30,
       'alt' => 'OpenClinic Logo thanks to Coresis',
@@ -195,7 +195,7 @@
   );
   $thankCoresis .= HTML::strStart('img',
     array(
-      'src' => '../images/coresis.png',
+      'src' => '../img/coresis.png',
       'width' => 65,
       'height' => 30,
       'alt' => 'OpenClinic Logo thanks to Coresis',
@@ -211,7 +211,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/sf-logo.png',
+          'src' => '../img/sf-logo.png',
           'width' => 130,
           'height' => 37,
           'alt' => "Project hosted in SourceForge.net",
@@ -227,7 +227,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/php-logo.gif',
+          'src' => '../img/php-logo.gif',
           'width' => 80,
           'height' => 15,
           'alt' => "Powered by PHP",
@@ -243,7 +243,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/mysql-logo.png',
+          'src' => '../img/mysql-logo.png',
           'width' => 80,
           'height' => 15,
           'alt' => "Works with MySQL",
@@ -259,7 +259,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/valid-xhtml11.png',
+          'src' => '../img/valid-xhtml11.png',
           'width' => 80,
           'height' => 15,
           'alt' => "Valid XHTML 1.1",
@@ -275,7 +275,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/valid-css.png',
+          'src' => '../img/valid-css.png',
           'width' => 80,
           'height' => 15,
           'alt' => "Valid CSS",
@@ -335,5 +335,5 @@
 
   HTML::message(_("Sample Warning"));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

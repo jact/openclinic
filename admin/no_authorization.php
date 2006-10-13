@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: no_authorization.php,v 1.8 2006/09/30 16:41:41 jact Exp $
+ * @version   CVS: $Id: no_authorization.php,v 1.9 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,17 +19,17 @@
   $tab = "admin";
   $nav = "";
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
 
   /**
    * Show page
    */
   $title = _("Not Authorization");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   HTML::section(1, $title);
 
   HTML::message(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

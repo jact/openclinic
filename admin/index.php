@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.9 2006/09/30 16:40:05 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.10 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,14 +19,14 @@
   $tab = "admin";
   $nav = "summary";
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
 
   /**
    * Show page
    */
   $title = _("Admin");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   HTML::section(1, $title, array('class' => 'bigIcon adminIcon'));
   HTML::para(_("Use the following functions located in the left hand navigation area to manage your clinic's staff and administrative records."));
@@ -100,5 +100,5 @@
   );
   HTML::itemList($array);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

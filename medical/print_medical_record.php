@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.23 2006/09/30 17:17:05 jact Exp $
+ * @version   CVS: $Id: print_medical_record.php,v 1.24 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,12 +20,12 @@
   $nav = "print";
   $onlyDoctor = true;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Patient_Page_Query.php");
-  require_once("../classes/Staff_Query.php");
-  require_once("../classes/Problem_Page_Query.php");
-  require_once("../classes/History_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Patient_Page_Query.php");
+  require_once("../model/Staff_Query.php");
+  require_once("../model/Problem_Page_Query.php");
+  require_once("../model/History_Query.php");
   require_once("../lib/HTML.php");
 
   $style = HTML::strStart('link',
@@ -42,7 +42,7 @@
    */
   if (count($_GET) == 0 || !is_numeric($_GET["key"]))
   {
-    include_once("../shared/xhtml_start.php");
+    include_once("../layout/xhtml_start.php");
     echo $style;
     HTML::end('head');
     HTML::start('body');
@@ -69,7 +69,7 @@
   if ( !$patQ->select($idPatient) )
   {
     $patQ->close();
-    include_once("../shared/xhtml_start.php");
+    include_once("../layout/xhtml_start.php");
     echo $style;
     HTML::end('head');
     HTML::start('body');
@@ -97,7 +97,7 @@
    * Show medical record
    */
   $title = $patName . " " . date(_("Y-m-d H:i:s"));
-  require_once("../shared/xhtml_start.php");
+  require_once("../layout/xhtml_start.php");
   echo $style;
   HTML::end('head');
   HTML::start('body', array('id' => 'medicalRecord'));

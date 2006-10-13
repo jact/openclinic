@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.21 2006/09/30 16:42:54 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.22 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,9 +19,9 @@
   $tab = "admin";
   $nav = "staff";
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Staff_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Staff_Query.php");
 
   /**
    * Retrieving get vars
@@ -33,7 +33,7 @@
    * Show page
    */
   $title = _("Staff Members");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -147,7 +147,7 @@
   {
     $staffQ->close();
     HTML::message(_("No results found."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -250,5 +250,5 @@
   HTML::message('* ' . _("Note: To the create user function must have a correct login."));
   HTML::message('** ' . _("Note: The del function will not be applicated to the session user."));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

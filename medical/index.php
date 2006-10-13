@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.9 2006/09/30 17:11:17 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.10 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,14 +20,14 @@
   $nav = "summary";
   $onlyDoctor = true;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
 
   /**
    * Show page
    */
   $title = _("Medical Records");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   HTML::section(1, $title, array('class' => 'bigIcon medicalIcon'));
   HTML::para(_("Use the following functions located in the left hand navigation area to manage your medical records."));
@@ -51,5 +51,5 @@
     HTML::para(_("Build a new patient information in medical records system."));
   } // end if
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

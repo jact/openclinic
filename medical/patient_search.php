@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search.php,v 1.23 2006/09/30 17:14:04 jact Exp $
+ * @version   CVS: $Id: patient_search.php,v 1.24 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,9 +29,9 @@
   $nav = "search";
   $onlyDoctor = true;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Patient_Page_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Patient_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
 
@@ -76,7 +76,7 @@
    * Show page
    */
   $title = _("Search Results");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread crumb
@@ -96,7 +96,7 @@
   {
     $patQ->close();
     HTML::message(_("No results found."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -240,5 +240,5 @@
 
   Search::pageLinks($currentPage, $pageCount);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

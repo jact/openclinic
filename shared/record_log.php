@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: record_log.php,v 1.16 2006/03/28 19:20:42 jact Exp $
+ * @version   CVS: $Id: record_log.php,v 1.17 2006/10/13 19:48:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.3
  */
@@ -20,7 +20,7 @@
     exit();
   }
 
-  require_once("../classes/Record_Page_Query.php");
+  require_once("../model/Record_Page_Query.php");
 
   /**
    * void recordLog(string $class, string, $operation, array $key, string $method = "select")

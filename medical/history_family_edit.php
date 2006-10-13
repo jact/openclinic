@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_edit.php,v 1.11 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: history_family_edit.php,v 1.12 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,9 +29,9 @@
   $nav = "history";
   $onlyDoctor = false;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/History_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/History_Query.php");
   require_once("../shared/record_log.php"); // record log
 
   /**

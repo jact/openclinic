@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: view_source.php,v 1.10 2006/09/30 17:28:11 jact Exp $
+ * @version   CVS: $Id: view_source.php,v 1.11 2006/10/13 19:48:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../lib/HTML.php");
 
   $_GET = Check::safeArray($_GET); // sanitizing parameters
@@ -23,7 +23,7 @@
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
    */
   $title = sprintf(_("Source file: %s"), $_GET["file"]);
-  require_once("../shared/xhtml_start.php");
+  require_once("../layout/xhtml_start.php");
 
   HTML::start('link',
     array(

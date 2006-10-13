@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit_form.php,v 1.20 2006/09/30 16:42:37 jact Exp $
+ * @version   CVS: $Id: staff_edit_form.php,v 1.21 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,8 +29,8 @@
     exit();
   }
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
@@ -44,7 +44,7 @@
    */
   if ( !isset($formError) )
   {
-    include_once("../classes/Staff_Query.php");
+    include_once("../model/Staff_Query.php");
 
     /**
      * Search database
@@ -55,11 +55,11 @@
     if ( !$staffQ->select($idMember) )
     {
       $staffQ->close();
-      include_once("../shared/header.php");
+      include_once("../layout/header.php");
 
       HTML::message(_("That staff member does not exist."), OPEN_MSG_ERROR);
 
-      include_once("../shared/footer.php");
+      include_once("../layout/footer.php");
       exit();
     }
 
@@ -107,7 +107,7 @@
   }
 
   $focusFormField = "nif"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread Crumb
@@ -142,5 +142,5 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

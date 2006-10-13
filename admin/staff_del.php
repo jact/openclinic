@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del.php,v 1.13 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: staff_del.php,v 1.14 2006/10/13 19:49:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -28,9 +28,9 @@
     exit();
   }
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Staff_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Staff_Query.php");
 
   /**
    * Retrieving post var
@@ -46,11 +46,11 @@
   if ( !$staffQ->select($idMember) )
   {
     $staffQ->close();
-    include_once("../shared/header.php");
+    include_once("../layout/header.php");
 
     HTML::message(_("That staff member does not exist."), OPEN_MSG_ERROR);
 
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 

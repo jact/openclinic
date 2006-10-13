@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.17 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.18 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -27,11 +27,11 @@
    */
   $onlyDoctor = false;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Problem_Page_Query.php");
-  require_once("../classes/Connection_Query.php"); // referencial integrity
-  require_once("../classes/DelProblem_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Problem_Page_Query.php");
+  require_once("../model/Connection_Query.php"); // referencial integrity
+  require_once("../model/DelProblem_Query.php");
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -80,11 +80,11 @@
     if ( !$problemQ->select($idProblem) )
     {
       $problemQ->close();
-      include_once("../shared/header.php");
+      include_once("../layout/header.php");
 
       HTML::message(_("That medical problem does not exist."), OPEN_MSG_ERROR);
 
-      include_once("../shared/footer.php");
+      include_once("../layout/footer.php");
       exit();
     }
 

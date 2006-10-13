@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_access_log.php,v 1.27 2006/09/30 16:48:09 jact Exp $
+ * @version   CVS: $Id: user_access_log.php,v 1.28 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,9 +30,9 @@
     exit();
   }
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Access_Page_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Access_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
   require_once("../lib/Check.php");
@@ -62,7 +62,7 @@
    * Show page
    */
   $title = _("Access Logs");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread crumb
@@ -150,5 +150,5 @@
 
   HTML::para(HTML::strLink(_("Return to users list"), $returnLocation));
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

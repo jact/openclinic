@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_del.php,v 1.14 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: relative_del.php,v 1.15 2006/10/13 19:53:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -27,9 +27,9 @@
    */
   $onlyDoctor = false;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Relative_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Relative_Query.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/Check.php");
 

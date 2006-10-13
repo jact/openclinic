@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.22 2006/09/30 17:21:04 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.23 2006/10/13 19:53:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,10 +29,10 @@
   $nav = "social";
   $onlyDoctor = true;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Relative_Query.php");
-  require_once("../classes/Patient_Page_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Relative_Query.php");
+  require_once("../model/Patient_Page_Query.php");
   require_once("../lib/Form.php");
 
   /**
@@ -60,7 +60,7 @@
    * Show page
    */
   $title = _("View Relatives");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
   require_once("../medical/patient_header.php");
 
   /**
@@ -116,7 +116,7 @@
   if (count($relArray) == 0)
   {
     HTML::message(_("No relatives defined for this patient."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -186,5 +186,5 @@
 
   HTML::table($thead, $tbody);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

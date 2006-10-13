@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit.php,v 1.14 2006/03/28 19:15:33 jact Exp $
+ * @version   CVS: $Id: user_edit.php,v 1.15 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -35,12 +35,12 @@
   // Redefinition if it is needed after count($_POST)
   $returnLocation = ((isset($_POST["all"])) ? "../home/index.php" : "../admin/user_list.php");
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
   if ( !isset($_POST["all"]) )
   {
-    include_once("../shared/login_check.php");
+    include_once("../auth/login_check.php");
   }
-  require_once("../classes/User_Query.php");
+  require_once("../model/User_Query.php");
 
   /**
    * Validate data

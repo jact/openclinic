@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.21 2006/09/30 17:19:23 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.22 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,9 +29,9 @@
   $nav = "problems";
   $onlyDoctor = true;
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
-  require_once("../classes/Problem_Page_Query.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../model/Problem_Page_Query.php");
   require_once("../lib/misc_lib.php");
 
   /**
@@ -44,7 +44,7 @@
    * Show page
    */
   $title = _("Medical Problems Report");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
   require_once("../medical/patient_header.php");
 
   /**
@@ -64,7 +64,7 @@
 
     HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -131,7 +131,7 @@
   {
     $problemQ->close();
     HTML::message(_("No medical problems defined for this patient."), OPEN_MSG_INFO);
-    include_once("../shared/footer.php");
+    include_once("../layout/footer.php");
     exit();
   }
 
@@ -214,5 +214,5 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

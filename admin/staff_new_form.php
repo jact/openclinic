@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_new_form.php,v 1.19 2006/09/30 16:44:19 jact Exp $
+ * @version   CVS: $Id: staff_new_form.php,v 1.20 2006/10/13 19:49:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,8 +19,8 @@
   $tab = "admin";
   $nav = "staff";
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
@@ -44,7 +44,7 @@
   }
 
   $focusFormField = "nif"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   $returnLocation = "../admin/staff_list.php";
 
@@ -80,5 +80,5 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.25 2006/09/30 17:12:39 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.26 2006/10/13 19:53:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -28,10 +28,10 @@
     exit();
   }
 
-  require_once("../shared/read_settings.php");
-  require_once("../shared/login_check.php");
+  require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../classes/Staff_Query.php");
+  require_once("../model/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
@@ -44,7 +44,7 @@
    */
   if ( !isset($formError) )
   {
-    include_once("../classes/Patient_Page_Query.php");
+    include_once("../model/Patient_Page_Query.php");
 
     /**
      * Search database
@@ -55,11 +55,11 @@
     if ( !$patQ->select($idPatient) )
     {
       $patQ->close();
-      include_once("../shared/header.php");
+      include_once("../layout/header.php");
 
       HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
 
-      include_once("../shared/footer.php");
+      include_once("../layout/footer.php");
       exit();
     }
 
@@ -108,7 +108,7 @@
    */
   $title = _("Edit Patient Social Data");
   $focusFormField = "nif"; // to avoid JavaScript mistakes in demo version
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   $returnLocation = "../medical/patient_view.php?key=" . $idPatient;
   //Error::debug($formVar);
@@ -147,5 +147,5 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>
