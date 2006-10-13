@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: parse_sql_file.php,v 1.15 2006/09/30 16:59:49 jact Exp $
+ * @version   CVS: $Id: parse_sql_file.php,v 1.16 2006/10/13 20:14:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
     exit();
   }
 
-  require_once("../classes/Query.php");
+  require_once("../model/Query.php");
   require_once("../lib/HTML.php");
 
 /**

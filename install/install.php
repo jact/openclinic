@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.16 2006/09/30 16:59:21 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.17 2006/10/13 20:14:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,7 +18,7 @@
 
   require_once("../install/header.php"); // i18n l10n
   require_once("../install/parse_sql_file.php");
-  require_once("../classes/Setting_Query.php");
+  require_once("../model/Setting_Query.php");
   require_once("../lib/Form.php");
 
   HTML::section(1, _("OpenClinic Installation:"));

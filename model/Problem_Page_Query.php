@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem_Page_Query.php,v 1.8 2006/03/28 19:06:40 jact Exp $
+ * @version   CVS: $Id: Problem_Page_Query.php,v 1.9 2006/10/13 20:11:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../classes/Page_Query.php");
-require_once("../classes/Problem.php");
+require_once("../model/Page_Query.php");
+require_once("../model/Problem.php");
 
 /**
  * Problem_Page_Query data access component for medical problems

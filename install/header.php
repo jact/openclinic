@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.9 2006/09/30 16:55:58 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.10 2006/10/13 20:14:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
   /**
    * i18n l10n
    */
-  require_once("../shared/i18n.php");
+  require_once("../config/i18n.php");
 
   require_once("../lib/HTML.php");
 
@@ -30,11 +30,11 @@
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
    */
   $title = _("OpenClinic Install");
-  require_once("../shared/xhtml_start.php");
+  require_once("../layout/xhtml_start.php");
 
-  HTML::start('link', array('rel' => 'icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
-  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
-  HTML::start('link', array('rel' => 'bookmark icon', 'type' => 'image/png', 'href' => '../images/miniopc.png'), true);
+  HTML::start('link', array('rel' => 'icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
+  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
+  HTML::start('link', array('rel' => 'bookmark icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
 
   HTML::start('link',
     array(

@@ -9,13 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: DbConnection.php,v 1.15 2006/10/09 19:02:21 jact Exp $
+ * @version   CVS: $Id: DbConnection.php,v 1.16 2006/10/13 20:11:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-if (file_exists("../database_constants.php"))
+if (file_exists("../config/database_constants.php"))
 {
-  include_once("../database_constants.php");
+  include_once("../config/database_constants.php");
 }
 
 if ( !defined("OPEN_PERSISTENT") )

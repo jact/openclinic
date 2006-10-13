@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: admin.php,v 1.13 2006/09/30 17:23:16 jact Exp $
+ * @version   CVS: $Id: admin.php,v 1.14 2006/10/13 20:12:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,7 @@
       HTML::strLink(
         HTML::strStart('img',
           array(
-            'src' => '../images/logout.png',
+            'src' => '../img/logout.png',
             'width' => 96,
             'height' => 22,
             'alt' => _("logout"),
@@ -33,7 +33,7 @@
           ),
           true
         ),
-        '../shared/logout.php'
+        '../auth/logout.php'
       )
       . '<br />'
       . '[ '

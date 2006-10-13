@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: license.php,v 1.7 2006/09/30 16:52:55 jact Exp $
+ * @version   CVS: $Id: license.php,v 1.8 2006/10/13 20:15:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
   $tab = "home";
   $nav = "license";
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
 
   $licenseFile = (is_file("../locale/" . OPEN_LANGUAGE . "/copying.txt"))
     ? "../locale/" . OPEN_LANGUAGE . "/copying.txt"
@@ -31,7 +31,7 @@
    * Show page
    */
   $title = _("License");
-  require_once("../shared/header.php");
+  require_once("../layout/header.php");
 
   /**
    * Bread crumb
@@ -43,11 +43,10 @@
   HTML::breadCrumb($links);
   unset($links);
 
-  HTML::start('pre');
   if ($lines === false)
   {
     // End Of Text
-    echo <<<EOT
+    $license = <<<EOT
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
@@ -65,12 +64,13 @@ EOT;
   }
   else
   {
+    $license = '';
     foreach ($lines as $line)
     {
-      echo htmlspecialchars($line);
+      $license .= htmlspecialchars($line);
     }
   }
-  HTML::end('pre');
+  HTML::tag('pre', $license);
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>

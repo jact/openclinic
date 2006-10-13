@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.24 2006/10/09 19:03:50 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.25 2006/10/13 20:15:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -79,7 +79,7 @@
   /**
    * i18n l10n
    */
-  require_once("../shared/i18n.php");
+  require_once("../config/i18n.php");
 
   $locale = I18n::languageList();
   // end i18n l10n
@@ -88,7 +88,7 @@
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
    */
   $title = _("OpenClinic Install Wizard");
-  require_once("../shared/xhtml_start.php");
+  require_once("../layout/xhtml_start.php");
 
   HTML::start('link', array('rel' => 'stylesheet', 'href' => '../css/wizard.css', 'type' => 'text/css'), true);
 
@@ -107,7 +107,7 @@
     )
   );
   //Error::debug($_POST);
-  Check::safeArray($_POST);
+  $_POST = Check::safeArray($_POST);
 
   Form::hidden("alreadyVisited", 1, array('id' => 'h_alreadyVisited'));
   Form::hidden("buttonPressed", null, array('id' => 'h_buttonPressed'));
@@ -457,7 +457,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.24 2006/10/09 19:03:50 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.25 2006/10/13 20:15:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -757,11 +757,11 @@ function _showButton($name, $value, $type = "next")
   if ($type == "next")
   {
     HTML::tag('span', $value);
-    HTML::start('img', array('src' => '../images/arrow_right.png', 'width' => 22, 'height' => 22), true);
+    HTML::start('img', array('src' => '../img/arrow_right.png', 'width' => 22, 'height' => 22), true);
   }
   elseif ($type == "back")
   {
-    HTML::start('img', array('src' => '../images/arrow_left.png', 'width' => 22, 'height' => 22), true);
+    HTML::start('img', array('src' => '../img/arrow_left.png', 'width' => 22, 'height' => 22), true);
     HTML::tag('span', $value);
   }
 

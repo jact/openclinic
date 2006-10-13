@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.21 2006/09/30 16:58:11 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.22 2006/10/13 20:14:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -122,7 +122,7 @@
 
   HTML::section(1, _("OpenClinic Installation:"));
 
-  require_once("../classes/Query.php");
+  require_once("../model/Query.php");
 
   $installQ = new Query();
   $installQ->captureError(true);

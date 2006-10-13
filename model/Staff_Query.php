@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Staff_Query.php,v 1.17 2006/03/28 19:06:40 jact Exp $
+ * @version   CVS: $Id: Staff_Query.php,v 1.18 2006/10/13 20:11:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../classes/Query.php");
-require_once("../classes/Staff.php");
+require_once("../model/Query.php");
+require_once("../model/Staff.php");
 
 /**
  * Staff_Query data access component for clinic staff members

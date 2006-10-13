@@ -13,11 +13,11 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: password.php,v 1.5 2006/04/10 19:54:33 jact Exp $
+ * @version   CVS: $Id: password.php,v 1.6 2006/10/13 20:10:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../shared/read_settings.php");
+require_once("../config/environment.php");
 header("Content-Type: text/javascript; charset=" . OPEN_CHARSET);
 ?>
 /**

@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Description_Query.php,v 1.12 2006/03/28 19:06:39 jact Exp $
+ * @version   CVS: $Id: Description_Query.php,v 1.13 2006/10/13 20:11:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../classes/Query.php");
-require_once("../classes/Description.php");
+require_once("../model/Query.php");
+require_once("../model/Description.php");
 
 /**
  * Description_Query data access component for domain tables

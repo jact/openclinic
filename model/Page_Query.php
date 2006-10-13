@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Page_Query.php,v 1.6 2006/03/28 19:06:40 jact Exp $
+ * @version   CVS: $Id: Page_Query.php,v 1.7 2006/10/13 20:11:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @author    Jorge López Herranz <lopez.herranz@gmail.com>
  */
 
-require_once("../classes/Query.php");
+require_once("../model/Query.php");
 
 /**
  * Page_Query contains pagination methods and properties

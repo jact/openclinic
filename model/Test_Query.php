@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Test_Query.php,v 1.14 2006/03/28 19:06:40 jact Exp $
+ * @version   CVS: $Id: Test_Query.php,v 1.15 2006/10/13 20:11:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../classes/Query.php");
-require_once("../classes/Test.php");
+require_once("../model/Query.php");
+require_once("../model/Test.php");
 
 /**
  * Test_Query data access component for medical tests
