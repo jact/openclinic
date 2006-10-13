@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_tbl.sql,v 1.13 2006/03/28 19:01:43 jact Exp $
+ * @version   CVS: $Id: setting_tbl.sql,v 1.14 2006/10/13 09:40:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,7 +38,7 @@ INSERT INTO setting_tbl VALUES (
   'http://www.example.com',
   20,
   10,
-  '0.8.20060328',
+  '0.8.20061013',
   'en',
   1
 );
