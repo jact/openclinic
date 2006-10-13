@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.19 2006/09/30 16:52:08 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.20 2006/10/13 20:01:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,14 +22,14 @@
 
   $tab = "doc";
 
-  require_once("../shared/read_settings.php");
+  require_once("../config/environment.php");
   require_once("../lib/HTML.php");
 
   /**
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
    */
   $title = _("OpenClinic Help");
-  require_once("../shared/xhtml_start.php");
+  require_once("../layout/xhtml_start.php");
 
   HTML::start('link',
     array(
@@ -41,7 +41,7 @@
     true
   );
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../scripts/pop_window.js', 'defer' => true));
+  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/pop_window.js', 'defer' => true));
   HTML::end('script');
 
   HTML::end('head');
@@ -83,7 +83,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/openclinic-2.png',
+          'src' => '../img/openclinic-2.png',
           'width' => 130,
           'height' => 29,
           'alt' => _("Powered by OpenClinic"),
@@ -97,7 +97,7 @@
 
   $thankCoresis = HTML::strStart('img',
     array(
-      'src' => '../images/thank.png',
+      'src' => '../img/thank.png',
       'width' => 65,
       'height' => 30,
       'alt' => 'OpenClinic Logo thanks to Coresis',
@@ -107,7 +107,7 @@
   );
   $thankCoresis .= HTML::strStart('img',
     array(
-      'src' => '../images/coresis.png',
+      'src' => '../img/coresis.png',
       'width' => 65,
       'height' => 30,
       'alt' => 'OpenClinic Logo thanks to Coresis',
@@ -123,7 +123,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/sf-logo.png',
+          'src' => '../img/sf-logo.png',
           'width' => 130,
           'height' => 37,
           'alt' => "Project hosted in SourceForge.net",
@@ -139,7 +139,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/php-logo.gif',
+          'src' => '../img/php-logo.gif',
           'width' => 80,
           'height' => 15,
           'alt' => "Powered by PHP",
@@ -155,7 +155,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/mysql-logo.png',
+          'src' => '../img/mysql-logo.png',
           'width' => 80,
           'height' => 15,
           'alt' => "Works with MySQL",
@@ -171,7 +171,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/valid-xhtml11.png',
+          'src' => '../img/valid-xhtml11.png',
           'width' => 80,
           'height' => 15,
           'alt' => "Valid XHTML 1.1",
@@ -187,7 +187,7 @@
     HTML::strLink(
       HTML::strStart('img',
         array(
-          'src' => '../images/valid-css.png',
+          'src' => '../img/valid-css.png',
           'width' => 80,
           'height' => 15,
           'alt' => "Valid CSS",
@@ -209,5 +209,5 @@
 
   Error::trace($_GET); // debug
 
-  require_once("../shared/footer.php");
+  require_once("../layout/footer.php");
 ?>
