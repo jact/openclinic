@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 
-<!-- $Id: coding_guidelines.html,v 1.14 2005/08/03 18:03:45 jact Exp $ -->
+<!-- $Id: coding_guidelines.html,v 1.15 2006/10/13 19:25:06 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -13,7 +13,7 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2005 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2006 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
@@ -23,9 +23,9 @@
 
 <link rel="stylesheet" type="text/css" href="./css/print.css" media="print" />
 
-<link rel="shortcut icon" type="image/png" href="./images/miniopc.png" />
+<link rel="shortcut icon" type="image/png" href="./img/miniopc.png" />
 
-<link rel="bookmark icon" type="image/png" href="./images/miniopc.png" />
+<link rel="bookmark icon" type="image/png" href="./img/miniopc.png" />
 </head>
 <body id="top">
 <div id="content">
@@ -269,30 +269,22 @@ function fooFunction($arg1, $arg2 = '')
 </pre>
 
   <p>
-    Or instead of this, a smaller version. But this reduced version should always include a file with the kind of license used in the distribution of the program. Just like the next example:
+  Or instead of this, a smaller version. But this reduced version should always include a file with the kind of license used in the distribution of the program. It would be a good idea to have a head comment like this next one (it could be include <a href="http://www.phpdoc.de">PHPDoc</a> directives). Just like the next example (inspired in <a href="http://framework.zend.com">Zend Framework project</a>):
   </p>
 
 <pre class="programlisting">
 /**
- * This file is part of Project Name
+ * file_name.php
  *
- * Copyright (c) Year Author
+ * Description
+ *
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
- */
-</pre>
-
-  <p>
-    It would be a good idea to have a head comment like this next one (it could be include <a href="http://www.phpdoc.de">PHPDoc</a> directives):
-  </p>
-
-<pre class="programlisting">
-/**
- * file_name.php - Short description content (optional)
  *
- * Long description (more detailed)
- *
- * Author: Name &lt;e-mail address&gt; (optional)
- * Last modified: Date/Time ($Id: coding_guidelines.html,v 1.14 2005/08/03 18:03:45 jact Exp $ better)
+ * @package   Project name
+ * @copyright year author
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: coding_guidelines.html,v 1.15 2006/10/13 19:25:06 jact Exp $
+ * @author    Name &lt;e-mail address&gt; (e-mail optional)
  */
 </pre>
 
@@ -387,21 +379,27 @@ function fooFunction($arg1, $arg2 = '')
 
 <pre class="programlisting">
 /**
- * void showInputText(string $fieldName, string $size, string $max,
- * array &amp;$postVars, array &amp;$pageErrors, string $type = "text",
- * bool $readOnly = false)
+ * string strText(string $name, int $size, string $value = "", array $addendum = null)
  *
- * Draws input html tag of type text or password.
+ * Returns input html tag of type text or password.
  *
- * @param string $fieldName name of input field
- * @param string $size size of text box
- * @param string $max max input length of text box
- * @param array_reference &amp;$postVars reference to array containing all input values
- * @param array_reference &amp;$pageErrors reference to array containing all input errors
- * @param string $type type of the input field (text by default)
- * @param bool $readOnly if the field is read only (false by default)
- * @return void
+ * @param string $name name of input field
+ * @param int $size size of text box
+ * @param string $value (optional) input value
+ * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+ *  example:
+ *    $addendum = array(
+ *      'id' => 'address', // id = name by default
+ *      'maxlength' => 20,
+ *      'readonly' => true,
+ *      'type' => 'password', // text by default
+ *      'error' => 'The field is required',
+ *      'class' => 'required',
+ *      'onclick' => '...'
+ *    );
+ * @return string input html tag
  * @access public
+ * @since 0.7
  */
 </pre>
   </div><!-- End .noteCode -->
@@ -583,14 +581,14 @@ collegiate_number, first_name, phone_contact, login
   </p>
 </div><!-- End #content -->
 
-<div id="left">
+<div id="menu">
   <p>
     <a href="http://openclinic.sourceforge.net" id="logo" title="OpenClinic web site">OpenClinic web site</a>
   </p>
 
   <h2>Table of contents</h2>
 
-  <ul class="linkList">
+  <ul>
     <li><a href="#file_format">1. Code Files Format</a></li>
 
     <li><a href="#indentation">2. Indentation</a></li>
@@ -613,13 +611,13 @@ collegiate_number, first_name, phone_contact, login
 
     <li><a href="#i18n">11. Code Internationalization</a></li>
   </ul>
-</div><!-- End #left -->
+</div><!-- End #menu -->
 
-<div id="right">
+<div id="extra">
   <h2>Related links</h2>
 
-  <ul class="linkList">
-    <li class="bold"><a href="./index.php">Start OpenClinic</a></li>
+  <ul>
+    <li><a href="./index.php"><strong>Start OpenClinic</strong></a></li>
 
     <li><a href="./index.html">Readme</a></li>
 
@@ -633,14 +631,12 @@ collegiate_number, first_name, phone_contact, login
   <p>
     <a href="http://sourceforge.net" id="hosting" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
   </p>
-</div><!-- End #right -->
+</div><!-- End #extra -->
 
 <div id="footer">
   <p>Powered by OpenClinic</p>
 
-  <p>Copyright &copy; 2002-2005 <a href="mailto:CUT-THIS.jachavar&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a></p>
-
-  <p>under the <a href="./LICENSE">GNU General Public License</a></p>
+  <p>Copyright &copy; 2002-2006 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a><br />under the <a href="./LICENSE">GNU General Public License</a></p>
 
   <p>
     <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
