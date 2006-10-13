@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.6 2006/03/26 17:41:14 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.7 2006/10/13 09:32:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,6 +22,8 @@
  *  void fetch(Query $query, bool $goOut = true)
  *  void message(string $errorMsg, int $errorType = E_USER_WARNING)
  *  string backTrace(array $context)
+ *  string getSourceContext(string $file, int $line, array $context)
+ *  array _getVariables(string $code)
  *  void customHandler(int $number, string $message, string $file, int $line, array $context)
  *  void debug(mixed $expression, string $message = "", bool $goOut = false)
  *  void trace(mixed $expression, string $message = "", bool $goOut = false)
@@ -177,6 +179,120 @@ class Error
   }
 
   /**
+   * string getSourceContext(string $file, int $line, array $context)
+   *
+   * Returns information about source context of an error
+   *
+   * @param string $file
+   * @param int $line
+   * @param array $context
+   * @return string information about source
+   * @access public
+   * @since 0.8
+   */
+  function getSourceContext($file, $line, $context)
+  {
+    // check that file exists
+    if ( !file_exists($file) )
+    {
+      return "Context cannot be shown: " . $file . " does not exist";
+    }
+
+    // check that the line number is valid
+    if ( !is_int($line) || $line <= 0 )
+    {
+      return "Context cannot be shown: " . $line . " is an invalid line number";
+    }
+
+    $source = highlight_file($file, true);
+    $source = split("<br />", $source);
+    $lines = file($file);
+
+    // get line numbers
+    $start = $line - 5; //$this->context_options['source_lines'] - 1;
+    $finish = $line + 5; //$this->context_options['source_lines'];
+
+    // get lines
+    if ($start < 0)
+    {
+      $start = 0;
+    }
+    if ($start >= count($lines))
+    {
+      $start = count($lines) - 1;
+    }
+
+    if ($finish >= count($lines))
+    {
+      $finish = count($lines) - 1;
+    }
+
+    $contextLines = null;
+    for ($i = $start; $i < $finish; $i++)
+    {
+      // highlight line in question
+      if ($i == ($line - 1))
+      {
+        $contextLines[] = '<font color="red"><b>' . ($i + 1) . "\t" . strip_tags($source[$line - 1]) . '</b></font>';
+      }
+      else
+      {
+        $contextLines[] = '<font color="black"><b>' . ($i + 1) . "</b></font>\t" . $source[$i] . '</font>';
+      }
+    }
+
+    $length = $finish - $start;
+    $code = implode("", array_slice($lines, $start, $length));
+
+    $variables = Error::_getVariables($code);
+
+    // remove all but the 'relevant' variables
+    $relevant = null;
+    foreach ($context as $key => $value)
+    {
+      if (isset($variables[$key]))
+      {
+        $relevant[$key] = $value;
+      }
+    }
+
+    ob_start();
+    $output = trim(implode("\n", $contextLines)) . "<br>\n";
+    print_r($relevant);
+    $output .= ob_get_contents();
+    ob_end_clean();
+
+    return $output;
+  }
+
+  /**
+   * array _getVariables(string $code)
+   *
+   * Parses the code for variable tokens, and returns an unique list
+   *
+   * @param string $code
+   * @return array with context variables
+   * @access private
+   * @since 0.8
+   */
+  function _getVariables($code)
+  {
+    $tokens = token_get_all("<?php\n{$code}\n?>");
+
+    $variables = array();
+    foreach ($tokens as $index => $value)
+    {
+      if ((is_array($value)) && ($value[0] == T_VARIABLE))
+      {
+        $name = str_replace('$', '', $value[1]);
+        $variables[$name] = $name;
+      }
+    }
+
+    return $variables;
+  }
+
+  /**
    * void customHandler(int $number, string $message, string $file, int $line, array $context)
    *
    * Custom error handler
@@ -226,9 +342,21 @@ class Error
         break;
     }
 
+    // for not repeat variables
+    unset(
+      $context['HTTP_POST_VARS'],
+      $context['HTTP_GET_VARS'],
+      $context['HTTP_SERVER_VARS'],
+      $context['HTTP_COOKIE_VARS'],
+      $context['HTTP_ENV_VARS'],
+      $context['HTTP_POST_FILES']
+    );
+
     $error .= " on line " . $line . " in " . $file . ".\n";
+    $error .= "\nMessage: " . $message;
+    $error .= "\nSource:\n";
+    $error .= Error::getSourceContext($file, $line, $context);
     $error .= Error::backTrace($context);
-    //$error .= "\n" . $message;
     $error .= "\nClient IP: " . $_SERVER["REMOTE_ADDR"];
 
     $prepend = "\n[PHP " . $prepend . " " . date("Y-m-d H:i:s") . "]";
@@ -243,9 +371,9 @@ class Error
     if (defined("OPEN_LOG_ERRORS") && OPEN_LOG_ERRORS)
     {
       $logDir = substr(OPEN_LOG_FILE, 0, strrpos(OPEN_LOG_FILE, "/"));
-      //echo $logDir; // debug
       if (is_dir($logDir))
       {
+        $error = strtr(strip_tags($error), array_flip(get_html_translation_table(HTML_SPECIALCHARS)));
         error_log($error, 3, OPEN_LOG_FILE);
       }
     }
@@ -300,7 +428,7 @@ class Error
    */
   function trace($expression, $message = "", $goOut = false)
   {
-    echo "\n<!-- debug -->\n";
+    echo "\n<!-- trace -->\n";
     echo "<pre>\n";
     if ( !empty($message) )
     {
@@ -309,7 +437,7 @@ class Error
     $output = var_export($expression, true);
     echo htmlspecialchars($output);
     echo "</pre>\n";
-    echo "<!-- end debug -->\n";
+    echo "<!-- end trace -->\n";
 
     if ($goOut)
     {
