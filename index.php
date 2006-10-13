@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.7 2006/09/30 16:38:24 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.8 2006/10/13 19:25:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo      i18n and HTML.php inclusion
  */
@@ -21,7 +21,7 @@
     exit(sprintf('PHP %s or higher is required.', OPEN_PHP_VERSION));
   }
 
-  require_once("./database_constants.php");
+  require_once("./config/database_constants.php");
 
   function _message()
   {
