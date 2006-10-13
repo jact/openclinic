@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_lib.php,v 1.13 2006/03/27 18:35:38 jact Exp $
+ * @version   CVS: $Id: dump_lib.php,v 1.14 2006/10/13 09:28:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -135,13 +135,17 @@ if ( !defined('DLIB_INCLUDED') )
     $schemaCreate = '';
     if (isset($formVar['drop']))
     {
-      $schemaCreate .= 'DROP TABLE IF EXISTS ' . DLIB_backquote(DLIB_htmlFormat($table, $formVar['as_file']), $formVar['use_backquotes']) . ';' . $crlf;
+      $schemaCreate .= 'DROP TABLE IF EXISTS '
+        . DLIB_backquote(
+          DLIB_htmlFormat($table, isset($formVar['as_file']) ? $formVar['as_file'] : ''),
+          isset($formVar['use_backquotes']) ? $formVar['use_backquotes'] : true)
+        . ';' . $crlf;
     }
 
     $localConn = new DbConnection();
     if ( !$localConn->connect() )
     {
-      return 'Unable to connect to database';
+      return 'Unable to connect to database'; // @todo i18n
     }
 
     if (DLIB_MYSQL_INT_VERSION >= 32321)
