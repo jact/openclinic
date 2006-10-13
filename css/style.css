@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: style.css,v 1.16 2006/03/28 19:08:40 jact Exp $
+ * @version   CVS: $Id: style.css,v 1.17 2006/10/13 20:00:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -85,31 +85,32 @@ h3 {
   padding-left: 20px;
   background: #b0e0e6;
   border: 1px solid #87ceeb;
+  overflow: auto;
 }
 hr {
   background: #000;
   color: #000;
   border: 1px solid #000;
 }
-.linkList {
+#menu ul, #extra ul {
   list-style: none outside none;
   margin: 0 0 0 3px;
   padding: 0;
 }
-html>body .linkList { /* be nice with Opera */
+html>body #menu ul, html>body #extra ul { /* be nice with Opera */
   list-style: none;
 }
-.linkList li {
+#menu li, #extra li {
   margin: 0;
   padding: 0;
 }
-html>body .linkList li {
+html>body #menu li, html>body #extra li {
   margin: 0 3px 0 0;
   padding: 2px 0px;
   line-height: 1.5em;
 }
-.linkList a, .linkList a:link, .linkList a:visited,
-#content .linkList a, #content .linkList a:link, #content .linkList a:visited {
+#menu li a, #menu li a:link, #menu li a:visited,
+#extra li a, #extra li a:link, #extra li a:visited {
   background: #98aab1;
   color: #fff;
   border: 1px solid #fff;
@@ -123,19 +124,19 @@ html>body .linkList li {
   width: 11em;
   text-decoration: none;
 }
-.linkList li.bold a, .linkList li.bold a:link, .linkList li.bold a:visited {
+#menu li strong, #extra li strong {
   background: #98aab1;
   color: #ffd700;
   font-weight: bold;
 }
-.linkList a:focus, #content .linkList a:focus {
+#menu a:focus, #extra a:focus {
   background: #00a;
   color: #fff;
   bottom: 1px;
   position: relative;
   right: 1px;
 }
-.linkList a:active {
+#menu a:active, #extra a:active {
   background: #999;
   color: #fff;
   bottom: 0;
@@ -157,37 +158,37 @@ kbd {
 #content {
   padding: 0em 14em 1em 14em;
 }
-#left {
+#menu {
   position: fixed;
   top: 1.1em;
   left: 1.8em;
   width: 12em;
   background: #eee;
 }
-#right {
+#extra {
   position: fixed;
   top: 1.1em;
   right: 1.8em;
   width: 12em;
   background: #eee;
 }
-#left h2, #right h2 {
+#menu h2, #extra h2 {
   margin: 10px 0 3px 0;
 }
 /* MSIE only rules */
-* html #left, * html #right {
+* html #menu, * html #extra {
   position: absolute;
 }
-* html #left {
+* html #menu {
   left: 1.1em;
 }
-* html #left h2 {
+* html #menu h2 {
   margin-left: 0.7em;
 }
-* html #left .linkList {
+* html #menu ul {
   margin-left: 1em;
 }
-* html .linkList li {
+* html #menu li {
   margin-bottom: 2px;
 }
 /* All done. */
@@ -197,7 +198,7 @@ kbd {
   border: 1px solid #000;
   text-indent: -5000px;
   text-decoration: none;
-  background: url(../images/openclinic-3.png) no-repeat;
+  background: url(../img/openclinic-3.png) no-repeat;
   width: 190px;
   height: 38px;
 }
@@ -206,7 +207,7 @@ kbd {
   border: 1px solid #fff;
   text-indent: -5000px;
   text-decoration: none;
-  background: url(../images/sf-logo.png) no-repeat;
+  background: url(../img/sf-logo.png) no-repeat;
   width: 125px;
   height: 37px;
 }
@@ -214,7 +215,7 @@ kbd {
   display: block;
   text-indent: -5000px;
   text-decoration: none;
-  background: url(../images/valid-xhtml11.png) no-repeat;
+  background: url(../img/valid-xhtml11.png) no-repeat;
   width: 80px;
   height: 15px;
 }
