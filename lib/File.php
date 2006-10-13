@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: File.php,v 1.5 2006/03/26 17:41:14 jact Exp $
+ * @version   CVS: $Id: File.php,v 1.6 2006/10/13 20:13:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,6 +41,11 @@ class File
    */
   function getDirContent($dir, $subDir = false, $allowedExtensions = null)
   {
+    if ( !is_dir($dir) )
+    {
+      return;
+    }
+
     $handle = opendir($dir);
     $arrayFiles = null;
     $arrayDirs = null;
