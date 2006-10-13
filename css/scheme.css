@@ -1,5 +1,5 @@
 /* Feel free and change all what you want */
-/* $Id: scheme.css,v 1.10 2006/04/10 19:05:27 jact Exp $ */
+/* $Id: scheme.css,v 1.11 2006/10/13 19:59:24 jact Exp $ */
 
 /* --Layout-- */
 html, body {
@@ -116,13 +116,13 @@ li#first a, li#first span {
 }
 
 .linkList li {
-  list-style-image: url(../images/bullet_normal.gif);
+  list-style-image: url(../img/bullet_normal.gif);
   line-height: 1.25em;
   margin-bottom: 4ex;
 }
 
 .linkList .selected {
-  list-style-image: url(../images/bullet_selected.gif);
+  list-style-image: url(../img/bullet_selected.gif);
 }
 
 .linkList .subnavbar {
@@ -324,43 +324,43 @@ img {
 }
 
 .dumpIcon {
-  background: url(../images/dumps.png) no-repeat;
+  background: url(../img/dumps.png) no-repeat;
 }
 
 .logIcon {
-  background: url(../images/logs.png) no-repeat;
+  background: url(../img/logs.png) no-repeat;
 }
 
 .configIcon {
-  background: url(../images/config_clinic.png) no-repeat;
+  background: url(../img/config_clinic.png) no-repeat;
 }
 
 .staffIcon {
-  background: url(../images/staff.png) no-repeat;
+  background: url(../img/staff.png) no-repeat;
 }
 
 .themeIcon {
-  background: url(../images/themes.png) no-repeat;
+  background: url(../img/themes.png) no-repeat;
 }
 
 .userIcon {
-  background: url(../images/users.png) no-repeat;
+  background: url(../img/users.png) no-repeat;
 }
 
 .patientIcon {
-  background: url(../images/patient.png) no-repeat;
+  background: url(../img/patient.png) no-repeat;
 }
 
 .searchIcon {
-  background: url(../images/search.png) no-repeat;
+  background: url(../img/search.png) no-repeat;
 }
 
 .medicalIcon {
-  background: url(../images/medical.png) no-repeat;
+  background: url(../img/medical.png) no-repeat;
 }
 
 .adminIcon {
-  background: url(../images/admin.png) no-repeat;
+  background: url(../img/admin.png) no-repeat;
 }
 
 hr, #skipLink {

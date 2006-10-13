@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.css,v 1.6 2006/03/28 19:08:40 jact Exp $
+ * @version   CVS: $Id: wizard.css,v 1.7 2006/10/13 19:59:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -29,7 +29,7 @@ h1 {
   font-size: 24px;
   border-bottom: 2px solid #3cb371;
   color: #fff;
-  background: #99cc32 url(../images/install_software.png) center right no-repeat;
+  background: #99cc32 url(../img/install_software.png) center right no-repeat;
   margin: 0;
   padding: 12px 10px;
 }
