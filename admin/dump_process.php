@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_process.php,v 1.14 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: dump_process.php,v 1.15 2006/10/14 15:20:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,7 +29,6 @@
    */
   @set_time_limit(OPEN_EXEC_TIME_LIMIT);
   $dumpBuffer = "";
-  $crlf = DLIB_whichCrlf(); // defines the default <CR><LF> format
   $_POST = Check::safeArray($_POST);
 
   /**
@@ -153,19 +152,16 @@
           break;
       }
 
-      $dumpBuffer .= '# OpenClinic MySQL-Dump' . $crlf
-                   . '# version ' . OPEN_VERSION . $crlf
-                   . '# http://openclinic.sourceforge.net/' . $crlf
-                   . '#' . $crlf
-                   . '# ' . _("Type") . ": " . $auxStr . $crlf
-                   . '# ' . _("Host") . ": " . OPEN_HOST . $crlf
-                   . '# ' . _("Generation Time") . ": " . DLIB_localisedDate() . $crlf
-                   . '# ' . _("Server Version")
-                   . ': ' . substr(DLIB_MYSQL_INT_VERSION, 0, 1)
-                   . '.' . substr(DLIB_MYSQL_INT_VERSION, 1, 2)
-                   . '.' . substr(DLIB_MYSQL_INT_VERSION, 3) . $crlf
-                   . '# ' . _("PHP Version") . ": " . phpversion() . $crlf
-                   . '# ' . _("Database") . ": " . OPEN_DATABASE . $crlf;
+      $dumpBuffer .= '# OpenClinic MySQL-Dump' . DLIB_CRLF
+                   . '# version ' . OPEN_VERSION . DLIB_CRLF
+                   . '# http://openclinic.sourceforge.net/' . DLIB_CRLF
+                   . '#' . DLIB_CRLF
+                   . '# ' . _("Type") . ": " . $auxStr . DLIB_CRLF
+                   . '# ' . _("Host") . ": " . OPEN_HOST . DLIB_CRLF
+                   . '# ' . _("Generation Time") . ": " . I18n::localDate() . DLIB_CRLF
+                   . '# ' . _("Server Version") . ': ' . DLIB_MYSQL_VERSION . DLIB_CRLF
+                   . '# ' . _("PHP Version") . ": " . phpversion() . DLIB_CRLF
+                   . '# ' . _("Database") . ": " . OPEN_DATABASE . DLIB_CRLF;
 
       if (isset($_POST['table_select']))
       {
@@ -177,17 +173,17 @@
       {
         $tableSelect = _("All Tables");
       }
-      $dumpBuffer .= '# ' . sprintf(_("Table Summary: %s"), $tableSelect) . $crlf
-                   . '# ---------------------------------------------' . $crlf;
+      $dumpBuffer .= '# ' . sprintf(_("Table Summary: %s"), $tableSelect) . DLIB_CRLF
+                   . '# ' . str_repeat('-', 45) . DLIB_CRLF;
 
       if (isset($_POST['create_db']))
       {
-        $dumpBuffer .= $crlf . 'CREATE DATABASE ' . OPEN_DATABASE . ';' . $crlf;
+        $dumpBuffer .= DLIB_CRLF . 'CREATE DATABASE ' . OPEN_DATABASE . ';' . DLIB_CRLF;
       }
 
       if (isset($_POST['use_dbname']))
       {
-        $dumpBuffer .= $crlf . 'USE ' . OPEN_DATABASE . ';' . $crlf;
+        $dumpBuffer .= DLIB_CRLF . 'USE ' . OPEN_DATABASE . ';' . DLIB_CRLF;
       }
 
       for ($i = 0; $i < $numTables; $i++)
@@ -204,23 +200,23 @@
           // If only datas, no need to displays table name
           if ($_POST['what'] != 'dataonly')
           {
-            $dumpBuffer .= $crlf . '#' . $crlf
+            $dumpBuffer .= DLIB_CRLF . '#' . DLIB_CRLF
                         . '# ' . sprintf(_("Table structure for table %s"), $formattedTableName)
-                        . $crlf . '#' . $crlf . $crlf
-                        . DLIB_getTableDef(OPEN_DATABASE, $table, $crlf, $_POST)
-                        . ';' . $crlf;
+                        . DLIB_CRLF . '#' . DLIB_CRLF . DLIB_CRLF
+                        . DLIB_getTableDef(OPEN_DATABASE, $table, $_POST)
+                        . ';' . DLIB_CRLF;
           }
 
           // At least data
           if (($_POST['what'] == 'data') || ($_POST['what'] == 'dataonly'))
           {
-            $dumpBuffer .= $crlf . '#' . $crlf
+            $dumpBuffer .= DLIB_CRLF . '#' . DLIB_CRLF
                         . '# ' . sprintf(_("Dumping data for table %s"), $formattedTableName)
-                        . $crlf . '#' . $crlf . $crlf;
+                        . DLIB_CRLF . '#' . DLIB_CRLF . DLIB_CRLF;
 
             if ($_POST['what'] == 'dataonly' && isset($_POST['add_delete']))
             {
-              $dumpBuffer .= 'DELETE * FROM ' . $formattedTableName . ';' . $crlf . $crlf;
+              $dumpBuffer .= 'DELETE * FROM ' . $formattedTableName . ';' . DLIB_CRLF . DLIB_CRLF;
             }
 
             if ( !isset($limitFrom) || !isset($limitTo) )
@@ -230,35 +226,32 @@
 
             echo $dumpBuffer;
             $dumpBuffer = '';
-            DLIB_getTableContent(OPEN_DATABASE, $table, $limitFrom, $limitTo, $crlf, $_POST);
+            DLIB_getTableContent(OPEN_DATABASE, $table, $limitFrom, $limitTo, $_POST);
           } // end if
         } // end if
       } // end for
 
       // don't remove, it makes easier to select & copy from browser
-      $dumpBuffer .= $crlf;
+      $dumpBuffer .= DLIB_CRLF;
     } // end 'no csv or xml' case
 
     // 'xml' case
     elseif ($_POST['what'] == 'xml')
     {
       // first add the xml tag
-      $dumpBuffer .= '<?xml version="1.0" encoding="ISO-8859-1" ?>' . $crlf . $crlf;
+      $dumpBuffer .= '<?xml version="1.0" encoding="ISO-8859-1" ?>' . DLIB_CRLF . DLIB_CRLF;
       // some comments
-      $dumpBuffer .= '<!--' . $crlf
-                  . '--' . $crlf
-                  . '-- OpenClinic XML-Dump' . $crlf
-                  . '-- version ' . OPEN_VERSION . $crlf
-                  . '-- http://openclinic.sourceforge.net/' . $crlf
-                  . '--' . $crlf
-                  . '-- ' . _("Host") . ": " . OPEN_HOST . $crlf
-                  . '-- ' . _("Generation Time") . ": " . DLIB_localisedDate() . $crlf
-                  . '-- ' . _("Server Version")
-                  . ': ' . substr(DLIB_MYSQL_INT_VERSION, 0, 1)
-                  . '.' . substr(DLIB_MYSQL_INT_VERSION, 1, 2)
-                  . '.' . substr(DLIB_MYSQL_INT_VERSION, 3) . $crlf
-                  . '-- ' . _("PHP Version") . ": " . phpversion() . $crlf
-                  . '-- ' . _("Database") . ": " . OPEN_DATABASE . $crlf;
+      $dumpBuffer .= '<!--' . DLIB_CRLF
+                  . '--' . DLIB_CRLF
+                  . '-- OpenClinic XML-Dump' . DLIB_CRLF
+                  . '-- version ' . OPEN_VERSION . DLIB_CRLF
+                  . '-- http://openclinic.sourceforge.net/' . DLIB_CRLF
+                  . '--' . DLIB_CRLF
+                  . '-- ' . _("Host") . ": " . OPEN_HOST . DLIB_CRLF
+                  . '-- ' . _("Generation Time") . ": " . I18n::localDate() . DLIB_CRLF
+                  . '-- ' . _("Server Version") . ': ' . DLIB_MYSQL_VERSION . DLIB_CRLF
+                  . '-- ' . _("PHP Version") . ": " . phpversion() . DLIB_CRLF
+                  . '-- ' . _("Database") . ": " . OPEN_DATABASE . DLIB_CRLF;
 
       if (isset($_POST['table_select']))
       {
@@ -270,13 +263,13 @@
       {
         $tableSelect = _("All Tables");
       }
-      $dumpBuffer .= '-- ' . sprintf(_("Table Summary: %s"), $tableSelect) . $crlf
-                  . '--' . $crlf
-                  . '-->' . $crlf . $crlf;
+      $dumpBuffer .= '-- ' . sprintf(_("Table Summary: %s"), $tableSelect) . DLIB_CRLF
+                  . '--' . DLIB_CRLF
+                  . '-->' . DLIB_CRLF . DLIB_CRLF;
 
       // Now build the structure
       // TODO: Make db and table names XML compatible (designer responsability)
-      $dumpBuffer .= '<' . OPEN_DATABASE . '>' . $crlf;
+      $dumpBuffer .= '<' . OPEN_DATABASE . '>' . DLIB_CRLF;
       if (isset($_POST['table_select']))
       {
         $tmpSelect = implode($_POST['table_select'], OPEN_SEPARATOR);
@@ -295,10 +288,10 @@
         if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, OPEN_SEPARATOR . $table . OPEN_SEPARATOR))
             || (!isset($tmpSelect) && !empty($table)))
         {
-          $dumpBuffer .= DLIB_getTableXML(OPEN_DATABASE, $table, $limitFrom, $limitTo, $crlf, _("table") . " ", _("end of table") . " ");
+          $dumpBuffer .= DLIB_getTableXML(OPEN_DATABASE, $table, $limitFrom, $limitTo, _("table") . " ", _("end of table") . " ");
         } // end if
       } // end for
-      $dumpBuffer .= '</' . OPEN_DATABASE . '>' . $crlf;
+      $dumpBuffer .= '</' . OPEN_DATABASE . '>' . DLIB_CRLF;
     } // end 'xml' case
 
     else // 'csv' case
@@ -310,7 +303,7 @@
       }
       elseif (empty($addCharacter))
       {
-        $addCharacter = $crlf;
+        $addCharacter = DLIB_CRLF;
       }
       else
       {
@@ -357,7 +350,7 @@
   /**
    * "Displays" the dump...
    */
-  echo DLIB_htmlFormat($dumpBuffer, isset($_POST['as_file']) ? $_POST['as_file'] : false);
+  echo (isset($_POST['as_file']) ? $dumpBuffer : HTML::xmlEntities($dumpBuffer));
 
   /**
    * Close the html tags and add the footers in dump is displayed on screen
