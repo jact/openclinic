@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_lib.php,v 1.14 2006/10/13 09:28:15 jact Exp $
+ * @version   CVS: $Id: dump_lib.php,v 1.15 2006/10/14 15:23:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,57 +21,37 @@
 
 /**
  * Functions:
- *  string DLIB_htmlFormat(string $string = '', string $asFile = '')
  *  mixed DLIB_backquote(mixed $mixedVar, bool $doIt = true)
- *  string DLIB_sqlAddSlashes(string $string = '', bool $isLike = false)
- *  string DLIB_getTableDef(string $db, string $table, string $crlf, array &$formVar)
- *  bool DLIB_getTableContentFast(string $db, string $table, string $addQuery = '', string $crlf, array &$formVar)
- *  bool DLIB_getTableContentOld(string $db, string $table, string $addQuery = '', string $crlf, array &$formVar)
- *  void DLIB_getTableContent(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $crlf, array &$formVar)
+ *  string DLIB_sqlAddSlashes(string $text, bool $isLike = false)
+ *  string DLIB_getTableDef(string $db, string $table, array &$formVar)
+ *  void DLIB_getTableContent(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, array &$formVar)
  *  mixed DLIB_getTableCSV(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $sep, string $encBy, string $escBy, string $addCharacter, string $what)
- *  string DLIB_getTableXML(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $crlf, string $startTable, string $endTable)
- *  string DLIB_whichCrlf(void)
- *  string DLIB_localisedDate(int $timestamp = -1)
+ *  string DLIB_getTableXML(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $startTable, string $endTable)
  */
 if ( !defined('DLIB_INCLUDED') )
 {
   define('DLIB_INCLUDED', 1);
 
   /**
-   * string DLIB_htmlFormat(string $string = '', string $asFile = '')
-   *
-   * Uses the 'htmlspecialchars()' php function on databases, tables
-   * and fields name if the dump has to be displayed on screen.
-   *
-   * @param string $string the string to format
-   * @param string $asFile
-   * @return string the formatted string
-   * @access private
-   */
-  function DLIB_htmlFormat($string = '', $asFile = '')
-  {
-    return (empty($asFile) ? htmlspecialchars(urldecode($string)) : $string);
-  } // end 'DLIB_htmlFormat()' function
-
-  /**
    * mixed DLIB_backquote(mixed $mixedVar, bool $doIt = true)
    *
    * Adds backquotes on both sides of a database, table or field name.
-   * Since MySQL 3.23.06 this allows to use non-alphanumeric characters
-   * in these names.
+   * Since MySQL 3.23.06 this allows to use non-alphanumeric characters in these names.
    *
-   * @param   mixed    the database, table or field name to "backquote" or
-   *                   array of it
-   * @param   boolean  a flag to bypass this function (used by dump
-   *                   functions)
-   * @return  mixed    the "backquoted" database, table or field name if the
-   *                   current MySQL release is >= 3.23.06, the original
-   *                   one else
-   * @access  public
+   * @param mixed $mixedVar the database, table or field name to "backquote" or array of it
+   * @param bool $doIt (optional) a flag to bypass this function (used by dump functions)
+   * @return mixed the "backquoted" database, table or field name if the
+   *               current MySQL release is >= 3.23.06, the original one else
+   * @access public
    */
   function DLIB_backquote($mixedVar, $doIt = true)
   {
-    if ($doIt && DLIB_MYSQL_INT_VERSION >= 32306 && !empty($mixedVar) && $mixedVar != '*')
+    if ($doIt == false)
+    {
+      return $mixedVar;
+    }
+
+    if (DLIB_MYSQL_INT_VERSION >= 32306 && !empty($mixedVar) && $mixedVar != '*')
     {
       if (is_array($mixedVar))
       {
@@ -88,58 +68,51 @@ if ( !defined('DLIB_INCLUDED') )
         return '`' . $mixedVar . '`';
       }
     }
-    else
-    {
-      return $mixedVar;
-    }
   } // end of the 'DLIB_backquote()' function
 
   /**
-   * string DLIB_sqlAddSlashes(string $string = '', bool $isLike = false)
+   * string DLIB_sqlAddSlashes(string $text, bool $isLike = false)
    *
    * Add slashes before "'" and "\" characters so a value containing
    * them can be used in a sql comparison.
    *
-   * @param   string  the string to slash
-   * @param   boolean whether the string will be used in a 'LIKE' clause
-   *                  (it then requires two more escaped sequences) or not
-   * @return  string  the slashed string
-   * @access  public
+   * @param string $text the string to slash
+   * @param bool $isLike (optional) whether the string will be used in a 'LIKE' clause
+   *             (it then requires two more escaped sequences) or not
+   * @return string the slashed string
+   * @access public
    */
-  function DLIB_sqlAddSlashes($string = '', $isLike = false)
+  function DLIB_sqlAddSlashes($text, $isLike = false)
   {
-    ($isLike)
-      ? $string = str_replace('\\', '\\\\\\\\', $string)
-      : $string = str_replace('\\', '\\\\', $string);
+    $text = ($isLike)
+      ? str_replace('\\', '\\\\\\\\', $text)
+      : str_replace('\\', '\\\\', $text);
 
-    $string = str_replace('\'', '\\\'', $string);
+    $text = str_replace('\'', '\\\'', $text);
 
-    return $string;
+    return $text;
   } // end of the 'DLIB_sqlAddSlashes()' function
 
   /**
-   * string DLIB_getTableDef(string $db, string $table, string $crlf, array &$formVar)
+   * string DLIB_getTableDef(string $db, string $table, array &$formVar)
    *
    * Returns $table's CREATE definition
    *
-   * @param   string   the database name
-   * @param   string   the table name
-   * @param   string   the end of line sequence
-   * @param   string   the url to go back in case of error
-   * @return  string   the CREATE statement on success
-   * @see     DLIB_htmlFormat()
-   * @access  public
+   * @param string $db database name
+   * @param string $table table name
+   * @param array $formVar
+   * @return string the CREATE statement on success
+   * @access public
+   * @see DLIB_CRLF
    */
-  function DLIB_getTableDef($db, $table, $crlf, &$formVar)
+  function DLIB_getTableDef($db, $table, &$formVar)
   {
     $schemaCreate = '';
     if (isset($formVar['drop']))
     {
       $schemaCreate .= 'DROP TABLE IF EXISTS '
-        . DLIB_backquote(
-          DLIB_htmlFormat($table, isset($formVar['as_file']) ? $formVar['as_file'] : ''),
-          isset($formVar['use_backquotes']) ? $formVar['use_backquotes'] : true)
-        . ';' . $crlf;
+        . DLIB_backquote($table, isset($formVar['use_backquotes']) ? $formVar['use_backquotes'] : true)
+        . ';' . DLIB_CRLF;
     }
 
     $localConn = new DbConnection();
@@ -157,19 +130,19 @@ if ( !defined('DLIB_INCLUDED') )
 
         if (isset($tmpRes['Create_time']) && !empty($tmpRes['Create_time']))
         {
-          $schemaCreate .= '# ' . _("Create Time") . ': ' . DLIB_localisedDate(strtotime($tmpRes['Create_time'])) . $crlf;
+          $schemaCreate .= '# ' . _("Create Time") . ': ' . I18n::localDate($tmpRes['Create_time']) . DLIB_CRLF;
         }
 
         if (isset($tmpRes['Update_time']) && !empty($tmpRes['Update_time']))
         {
-          $schemaCreate .= '# ' . _("Update Time") . ': ' . DLIB_localisedDate(strtotime($tmpRes['Update_time'])) . $crlf;
+          $schemaCreate .= '# ' . _("Update Time") . ': ' . I18n::localDate($tmpRes['Update_time']) . DLIB_CRLF;
         }
 
         if (isset($tmpRes['Check_time']) && !empty($tmpRes['Check_time']))
         {
-          $schemaCreate .= '# ' . _("Check Time") . ': ' . DLIB_localisedDate(strtotime($tmpRes['Check_time'])) . $crlf;
+          $schemaCreate .= '# ' . _("Check Time") . ': ' . I18n::localDate($tmpRes['Check_time']) . DLIB_CRLF;
         }
-        $schemaCreate .= $crlf;
+        $schemaCreate .= DLIB_CRLF;
       }
       $localConn->freeResult();
 
@@ -192,14 +165,14 @@ if ( !defined('DLIB_INCLUDED') )
         $tmpRes[1] = substr($tmpRes[1], 0, 13)
                    . ((isset($formVar['use_backquotes']) && $formVar['use_backquotes']) ? DLIB_backquote($tmpRes[0]) : $tmpRes[0])
                    . substr($tmpRes[1], $pos);
-        $schemaCreate .= str_replace("\n", $crlf, DLIB_htmlFormat($tmpRes[1], isset($formVar['as_file']) ? $formVar['as_file'] : false));
+        $schemaCreate .= str_replace("\n", DLIB_CRLF, $tmpRes[1]);
       }
       //$localConn->close(); // don't remove the comment mark
       return $schemaCreate;
     } // end if MySQL >= 3.23.21
 
     // For MySQL < 3.23.20
-    $schemaCreate .= 'CREATE TABLE ' . DLIB_htmlFormat(DLIB_backquote($table, $formVar['use_backquotes']), $formVar['as_file']) . ' (' . $crlf;
+    $schemaCreate .= 'CREATE TABLE ' . DLIB_backquote($table, $formVar['use_backquotes']) . ' (' . DLIB_CRLF;
 
     $localQuery = 'SHOW FIELDS FROM ' . DLIB_backquote($db) . '.' . DLIB_backquote($table);
     if ( !$localConn->exec($localQuery) )
@@ -209,10 +182,11 @@ if ( !defined('DLIB_INCLUDED') )
 
     while ($row = $localConn->fetchRow())
     {
-      $schemaCreate .= '   ' . DLIB_htmlFormat(DLIB_backquote($row['Field'], $formVar['use_backquotes']), $formVar['as_file']) . ' ' . $row['Type'];
+      $schemaCreate .= '   ' . DLIB_backquote($row['Field'], $formVar['use_backquotes'])
+                     . ' ' . strtoupper($row['Type']);
       if (isset($row['Default']) && $row['Default'] != '')
       {
-        $schemaCreate .= ' DEFAULT \'' . DLIB_htmlFormat(DLIB_sqlAddSlashes($row['Default']), $formVar['as_file']) . '\'';
+        $schemaCreate .= ' DEFAULT \'' . DLIB_sqlAddSlashes($row['Default']) . '\'';
       }
 
       if ($row['Null'] != 'YES')
@@ -225,9 +199,9 @@ if ( !defined('DLIB_INCLUDED') )
         $schemaCreate .= ' ' . $row['Extra'];
       }
 
-      $schemaCreate .= ',' . $crlf;
+      $schemaCreate .= ',' . DLIB_CRLF;
     } // end while
-    $schemaCreate = ereg_replace(',' . $crlf . '$', '', $schemaCreate);
+    $schemaCreate = ereg_replace(',' . DLIB_CRLF . '$', '', $schemaCreate);
 
     $localQuery = 'SHOW KEYS FROM ' . DLIB_backquote($db) . '.' . DLIB_backquote($table);
     if ( !$localConn->exec($localQuery) )
@@ -258,18 +232,18 @@ if ( !defined('DLIB_INCLUDED') )
 
       if ($subPart > 1)
       {
-        $index[$kname][] = DLIB_htmlFormat(DLIB_backquote($row['Column_name'], $formVar['use_backquotes']), $formVar['as_file']) . '(' . $subPart . ')';
+        $index[$kname][] = DLIB_backquote($row['Column_name'], $formVar['use_backquotes']) . '(' . $subPart . ')';
       }
       else
       {
-        $index[$kname][] = DLIB_htmlFormat(DLIB_backquote($row['Column_name'], $formVar['use_backquotes']), $formVar['as_file']);
+        $index[$kname][] = DLIB_backquote($row['Column_name'], $formVar['use_backquotes']);
       }
     } // end while
     //$localConn->close(); // don't remove the comment mark
 
     while (list($x, $columns) = @each($index))
     {
-      $schemaCreate     .= ',' . $crlf;
+      $schemaCreate     .= ',' . DLIB_CRLF;
       if ($x == 'PRIMARY')
       {
         $schemaCreate .= '   PRIMARY KEY (';
@@ -290,27 +264,33 @@ if ( !defined('DLIB_INCLUDED') )
       $schemaCreate   .= implode($columns, ', ') . ')';
     } // end while
 
-    $schemaCreate .= $crlf . ')';
+    $schemaCreate .= DLIB_CRLF . ')';
 
     return $schemaCreate;
   } // end of the 'DLIB_getTableDef()' function
 
   /**
-   * bool DLIB_getTableContentFast(string $db, string $table, string $addQuery = '', string $crlf, array &$formVar)
+   * bool DLIB_getTableContent(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, array &$formVar)
    *
    * php >= 4.0.5 only : get the content of $table as a series of INSERT
    * statements.
    *
-   * @param   string   the current database name
-   * @param   string   the current table name
-   * @param   string   the 'limit' clause to use with the sql query
-   * @param   string   the CRLF character
-   * @return  boolean  false if error occurs
-   * @access  private
-   * @see     DLIB_getTableContent()
+   * @param string $db the current database name
+   * @param string $table the current table name
+   * @param int $limitFrom (optional) the offset on this table
+   * @param int $limitTo (optional) the last row to get
+   * @return boolean false if error occurs
+   * @access private
+   * @see DLIB_getTableContent()
+   * @see DLIB_CRLF
    */
-  function DLIB_getTableContentFast($db, $table, $addQuery = '', $crlf, &$formVar)
+  function DLIB_getTableContent($db, $table, $limitFrom = 0, $limitTo = 0, &$formVar)
   {
+    // Defines the offsets to use
+    ($limitTo > 0 && $limitFrom >= 0)
+      ? $addQuery = ' LIMIT ' . (($limitFrom > 0) ? $limitFrom . ', ' : '') . $limitTo
+      : $addQuery = '';
+
     $localConn = new DbConnection();
     if ( !$localConn->connect() )
     {
@@ -340,12 +320,12 @@ if ( !defined('DLIB_INCLUDED') )
     if (isset($formVar['show_columns']))
     {
       $fields       = implode(', ', $fieldSet);
-      $schemaInsert = 'INSERT INTO ' . DLIB_backquote(DLIB_htmlFormat($table, $formVar['as_file']), $formVar['use_backquotes'])
-                     . ' (' . DLIB_htmlFormat($fields, $formVar['as_file']) . ') VALUES (';
+      $schemaInsert = 'INSERT INTO ' . DLIB_backquote($table, $formVar['use_backquotes'])
+                     . ' (' . $fields . ') VALUES (';
     }
     else
     {
-      $schemaInsert = 'INSERT INTO ' . DLIB_backquote(DLIB_htmlFormat($table, isset($formVar['as_file']) ? $formVar['as_file'] : false), isset($formVar['use_backquotes']) ? $formVar['use_backquotes'] : false)
+      $schemaInsert = 'INSERT INTO ' . DLIB_backquote($table, isset($formVar['use_backquotes']) ? $formVar['use_backquotes'] : false)
                      . ' VALUES (';
     }
 
@@ -403,162 +383,16 @@ if ( !defined('DLIB_INCLUDED') )
       unset($values);
 
       // Show sentence
-      echo DLIB_htmlFormat($insertLine . $crlf, (isset($formVar['as_file']) ? $formVar['as_file'] : ''));
+      echo $insertLine . DLIB_CRLF;
     } // end while
 
     if (isset($formVar['extended_inserts']))
     {
-      echo DLIB_htmlFormat(';' . $crlf, $formVar['as_file']);
+      echo ';' . DLIB_CRLF;
     }
     //$localConn->close(); // don't remove the comment mark
 
     return true;
-  } // end of the 'DLIB_getTableContentFast()' function
-
-  /**
-   * bool DLIB_getTableContentOld(string $db, string $table, string $addQuery = '', string $crlf, array &$formVar)
-   *
-   * php < 4.0.5 only: get the content of $table as a series of INSERT
-   * statements.
-   *
-   * @param   string   the current database name
-   * @param   string   the current table name
-   * @param   string   the 'limit' clause to use with the sql query
-   * @param   string   the CRLF character
-   * @return  boolean  false if error occurs
-   * @access  private
-   * @see     DLIB_getTableContent()
-   */
-  function DLIB_getTableContentOld($db, $table, $addQuery = '', $crlf, &$formVar)
-  {
-    $localConn = new DbConnection();
-    if ( !$localConn->connect() )
-    {
-      return false;
-    }
-
-    $localQuery = 'SELECT * FROM ' . DLIB_backquote($db) . '.' . DLIB_backquote($table) . $addQuery;
-    if ( !$localConn->exec($localQuery) )
-    {
-      return false;
-    }
-
-    $currentRow = 0;
-    $numFields = $localConn->numFields();
-    $numRows   = $localConn->numRows();
-
-    @set_time_limit(OPEN_EXEC_TIME_LIMIT); // HaRa
-
-    while ($row = $localConn->fetchRow(MYSQL_NUM))
-    {
-      $currentRow++;
-      $tableList = '(';
-      for ($j = 0; $j < $numFields; $j++)
-      {
-        $tableList .= DLIB_backquote($localConn->fieldName($j), $formVar['use_backquotes']) . ', ';
-      }
-      $tableList     = substr($tableList, 0, -2);
-      $tableList     .= ')';
-
-      if (isset($formVar['extended_inserts']) && $currentRow > 1)
-      {
-        $schemaInsert = '(';
-      }
-      else
-      {
-        if (isset($formVar['show_columns']))
-        {
-          $schemaInsert = 'INSERT INTO ' . DLIB_backquote(DLIB_htmlFormat($table, $formVar['as_file']), $formVar['use_backquotes'])
-                         . ' ' . DLIB_htmlFormat($tableList) . ' VALUES (';
-        }
-        else
-        {
-          $schemaInsert = 'INSERT INTO ' . DLIB_backquote(DLIB_htmlFormat($table, $formVar['as_file']), $formVar['use_backquotes'])
-                         . ' VALUES (';
-        }
-      }
-
-      for ($j = 0; $j < $numFields; $j++)
-      {
-        if ( !isset($row[$j]) )
-        {
-          $schemaInsert .= ' NULL, ';
-        }
-        elseif ($row[$j] == '0' || $row[$j] != '')
-        {
-          $type = $localConn->fieldType($j);
-
-          // a number
-          if ($type == 'tinyint' || $type == 'smallint' || $type == 'mediumint'
-             || $type == 'int' || $type == 'bigint'  ||$type == 'timestamp')
-          {
-            $schemaInsert .= $row[$j] . ', ';
-          }
-          // a string
-          else
-          {
-            $dummy  = '';
-            $srcstr = $row[$j];
-            for ($xx = 0; $xx < strlen($srcstr); $xx++)
-            {
-              $yy = strlen($dummy);
-              if ($srcstr[$xx] == '\\')   $dummy .= '\\\\';
-              if ($srcstr[$xx] == '\'')   $dummy .= '\\\'';
-              //if ($srcstr[$xx] == '"')    $dummy .= '\\"';
-              if ($srcstr[$xx] == "\x00") $dummy .= '\0';
-              if ($srcstr[$xx] == "\x0a") $dummy .= '\n';
-              if ($srcstr[$xx] == "\x0d") $dummy .= '\r';
-              //if ($srcstr[$xx] == "\x08") $dummy .= '\b';
-              //if ($srcstr[$xx] == "\t")   $dummy .= '\t';
-              if ($srcstr[$xx] == "\x1a") $dummy .= '\Z';
-              if (strlen($dummy) == $yy)  $dummy .= $srcstr[$xx];
-            }
-            $schemaInsert .= "'" . $dummy . "', ";
-          }
-        }
-        else
-        {
-          $schemaInsert .= "'', ";
-        } // end if
-      } // end for
-      $schemaInsert = ereg_replace(', $', '', $schemaInsert);
-      $schemaInsert .= ')';
-
-      // Show sentence
-      echo DLIB_htmlFormat(trim($schemaInsert) . ";" . $crlf, $formVar['as_file']);
-    } // end while
-    //$localConn->close(); // don't remove the comment mark
-
-    return true;
-  } // end of the 'DLIB_getTableContentOld()' function
-
-  /**
-   * void DLIB_getTableContent(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $crlf, array &$formVar)
-   *
-   * Dispatches between the versions of 'getTableContent' to use
-   * depending on the php version
-   *
-   * @param   string   the current database name
-   * @param   string   the current table name
-   * @param   integer  the offset on this table
-   * @param   integer  the last row to get
-   * @param   string   the CRLF character
-   * @param   array
-   * @access  public
-   * @see     DLIB_getTableContentFast(), DLIB_getTableContentOld()
-   * @author  staybyte
-   */
-  function DLIB_getTableContent($db, $table, $limitFrom = 0, $limitTo = 0, $crlf, &$formVar)
-  {
-    // Defines the offsets to use
-    ($limitTo > 0 && $limitFrom >= 0)
-      ? $addQuery = ' LIMIT ' . (($limitFrom > 0) ? $limitFrom . ', ' : '') . $limitTo
-      : $addQuery = '';
-
-    // Call the working function depending on the php version
-    (DLIB_PHP_INT_VERSION >= 40005)
-      ? DLIB_getTableContentFast($db, $table, $addQuery, $crlf, $formVar)
-      : DLIB_getTableContentOld($db, $table, $addQuery, $crlf, $formVar);
   } // end of the 'DLIB_getTableContent()' function
 
   /**
@@ -566,17 +400,17 @@ if ( !defined('DLIB_INCLUDED') )
    *
    * Outputs the content of a table in CSV format
    *
-   * @param   string   the database name
-   * @param   string   the table name
-   * @param   integer  the offset on this table
-   * @param   integer  the last row to get
-   * @param   string   the field separator character
-   * @param   string   the optional "enclosed by" character
-   * @param   string   the optional "escaped by" character
-   * @param   string   whether to obtain an excel compatible csv format or a
-   *                   simple csv one
-   * @return  mixed false if error occurs, string if ok
-   * @access  public
+   * @param string $db the database name
+   * @param string $table the table name
+   * @param int $limitFrom (optional) the offset on this table
+   * @param int $limitTo (optional) the last row to get
+   * @param string $sep the field separator character
+   * @param string $encBy the optional "enclosed by" character
+   * @param string $escBy the optional "escaped by" character
+   * @param string $addCharacter
+   * @param string $what whether to obtain an excel compatible csv format or a simple csv one
+   * @return mixed false if error occurs, string if ok
+   * @access public
    */
   function DLIB_getTableCSV($db, $table, $limitFrom = 0, $limitTo = 0, $sep, $encBy, $escBy, $addCharacter, $what)
   {
@@ -709,21 +543,21 @@ if ( !defined('DLIB_INCLUDED') )
   } // end of the 'DLIB_getTableCSV()' function
 
   /**
-   * string DLIB_getTableXML(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $crlf, string $startTable, string $endTable)
+   * string DLIB_getTableXML(string $db, string $table, int $limitFrom = 0, int $limitTo = 0, string $startTable, string $endTable)
    *
    * Outputs the content of a table in XML format
    *
-   * @param   string   the database name
-   * @param   string   the table name
-   * @param   integer  the offset on this table
-   * @param   integer  the last row to get
-   * @param   string   the end of line sequence
-   * @param   string   the start string of the table
-   * @param   string   the end string of the table
-   * @return  string   the XML data structure on success
-   * @access  public
+   * @param string $db the database name
+   * @param string $table the table name
+   * @param int $limitFrom (optional) the offset on this table
+   * @param int $limitTo (optional) the last row to get
+   * @param string $startTable the start string of the table
+   * @param string $endTable the end string of the table
+   * @return string the XML data structure on success
+   * @access public
+   * @see DLIB_CRLF
    */
-  function DLIB_getTableXML($db, $table, $limitFrom = 0, $limitTo = 0, $crlf, $startTable, $endTable)
+  function DLIB_getTableXML($db, $table, $limitFrom = 0, $limitTo = 0, $startTable, $endTable)
   {
     $localConn = new DbConnection();
     if ( !$localConn->connect() )
@@ -769,10 +603,10 @@ if ( !defined('DLIB_INCLUDED') )
       return '';
     }
 
-    $buffer = '  <!-- ' . $startTable . $table . ' -->' . $crlf;
+    $buffer = '  <!-- ' . $startTable . $table . ' -->' . DLIB_CRLF;
     while ($record = $localConn->fetchRow(MYSQL_ASSOC))
     {
-      $buffer .= '    <' . $table . '>' . $crlf;
+      $buffer .= '    <' . $table . '>' . DLIB_CRLF;
       for ($i = 0; $i < $numFields; $i++)
       {
         if ( !is_null($record[$fields[$i]]) )
@@ -784,7 +618,7 @@ if ( !defined('DLIB_INCLUDED') )
                   . ($defaults[$i] ? ' default="' . $defaults[$i] . '"' : '')
                   . ($extras[$i] ? ' extra="' . $extras[$i] . '"' : '')
                   . '>' . htmlspecialchars($record[$fields[$i]])
-                  . '</' . $fields[$i] . '>' . $crlf;
+                  . '</' . $fields[$i] . '>' . DLIB_CRLF;
         }
         else
         {
@@ -794,73 +628,15 @@ if ( !defined('DLIB_INCLUDED') )
                   . ($keys[$i] ? ' key="' . $keys[$i] . '"' : '')
                   . ($defaults[$i] ? ' default="' . $defaults[$i] . '"' : '')
                   . ($extras[$i] ? ' extra="' . $extras[$i] . '"' : '')
-                  . ' />' . $crlf;
+                  . ' />' . DLIB_CRLF;
         }
       }
-      $buffer .= '    </' . $table . '>' . $crlf;
+      $buffer .= '    </' . $table . '>' . DLIB_CRLF;
     }
     //$localConn->close(); // don't remove the comment mark
-    $buffer .= '  <!-- ' . $endTable . $table . ' -->' . $crlf;
+    $buffer .= '  <!-- ' . $endTable . $table . ' -->' . DLIB_CRLF;
 
     return $buffer;
   } // end of the 'DLIB_getTableXML()' function
-
-  /**
-   * string DLIB_whichCrlf(void)
-   *
-   * Defines the <CR><LF> value depending on the user OS.
-   *
-   * @return string the <CR><LF> value to use
-   * @access public
-   */
-  function DLIB_whichCrlf()
-  {
-    // The 'DLIB_USR_OS' constant is defined in "dump_defines.php"
-    // Win case
-    if (DLIB_USR_OS == 'Win')
-    {
-      $theCrlf = "\r\n";
-    }
-    // Mac case
-    elseif (DLIB_USR_OS == 'Mac')
-    {
-      $theCrlf = "\r";
-    }
-    // Others
-    else
-    {
-      $theCrlf = "\n";
-    }
-
-    return $theCrlf;
-  } // end of the 'DLIB_whichCrlf()' function
-
-  /**
-   * string DLIB_localisedDate(int $timestamp = -1)
-   *
-   * Writes localised date
-   *
-   * @param  int    the current timestamp
-   * @return string the formated date
-   * @access public
-   */
-  function DLIB_localisedDate($timestamp = -1)
-  {
-    //$dayOfWeek = array('Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab');
-    //$month = array('Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic');
-    ///$dateFmt = '%d-%m-%Y %H:%M:%S';
-
-    if ($timestamp == -1)
-    {
-      $timestamp = time();
-    }
-
-    //$date = strftime($dateFmt, $timestamp);
-    //$date = ereg_replace('%[aA]', $dayOfWeek[(int)strftime('%w', $timestamp)], $dateFmt);
-    //$date = ereg_replace('%[bB]', $month[(int)strftime('%m', $timestamp) - 1], $date);
-
-    ///return strftime($dateFmt, $timestamp);
-    return date(_("Y-m-d H:i:s"), $timestamp);
-  } // end of the 'DLIB_localisedDate()' function
 } // $__DUMP_LIB__
 ?>
