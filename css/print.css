@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print.css,v 1.4 2006/03/28 19:08:40 jact Exp $
+ * @version   CVS: $Id: print.css,v 1.5 2006/10/14 11:19:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -17,19 +17,28 @@ body {
   font-size: 10pt;
   line-height: 160%;
 }
-#left, #right {
+
+#menu, #extra {
   display: none;
 }
+
 #footer {
   text-align: center;
   font-size: 8pt;
 }
+
 #footer p {
   margin: 0;
 }
+
 acronym:after {
   content: " (" attr(title) ")";
 }
+
 a[href^="http"]:after, a[href^="mailto"]:after {
   content: " (link: " attr(href) ")";
+}
+
+#skipLink, .menuBar, #sourceForgeLinks, #sideBar, #footerLinks {
+  display: none;
 }
