@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.25 2006/10/13 20:15:02 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.26 2006/10/14 11:33:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -173,7 +173,7 @@
 
     HTML::section(2, sprintf(_("Step %d of %d: "), 3, 7) . _("MySQL Database Settings"));
 
-    HTML::para(sprintf(_("Install script create OpenClinic database. These following values will be written in %s file. All fields are required."), HTML::strTag('tt', 'database_constants.php')));
+    HTML::para(sprintf(_("Install script create OpenClinic database. These following values will be written in %s file. All fields are required."), HTML::strTag('tt', 'config/database_constants.php')));
 
     $tbody = array();
 
@@ -430,16 +430,16 @@
     HTML::section(2, sprintf(_("Step %d of %d: "), 7, 7) . _("Start using OpenClinic"));
 
     /**
-     * Write database_constants.php file
+     * Write config/database_constants.php file
      */
     $mode = (ereg('Win', $_SERVER["HTTP_USER_AGENT"])) ? 'wb' : 'w';
-    $aux = fopen('../database_constants.php', $mode);
+    $aux = fopen('../config/database_constants.php', $mode);
     if ( !$aux )
     {
       HTML::message(
         sprintf(
           _("Incorrect permissions of %s file. Continue is impossible."),
-          "database_constants.php"
+          HTML::strTag('tt', "config/database_constants.php")
         ),
         OPEN_MSG_ERROR
       );
@@ -457,7 +457,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.25 2006/10/13 20:15:02 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.26 2006/10/14 11:33:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -491,8 +491,8 @@
     /**
      * This is needed to really flush file contents
      */
-    $aux = fopen('../database_constants.php', 'r');
-    fread($aux, filesize('../database_constants.php'));
+    $aux = fopen('../config/database_constants.php', 'r');
+    fread($aux, filesize('../config/database_constants.php'));
     fclose($aux);
 
     /**
@@ -590,7 +590,7 @@
     HTML::para(
       sprintf(_("%s: To protect your site, make %s and %s files read only (chmod 400)."),
         HTML::strTag('span', _("Security advice"), array('class' => 'note')),
-        HTML::strTag('tt', 'database_constants.php'),
+        HTML::strTag('tt', 'config/database_constants.php'),
         HTML::strTag('tt', 'openclinic/install/')
       )
     );
@@ -613,13 +613,13 @@
 
     HTML::para(
       sprintf(_("This script will configure OpenClinic database and %s file."),
-        HTML::strTag('tt', 'database_constants.php')
+        HTML::strTag('tt', 'config/database_constants.php')
       )
     );
 
     HTML::start('blockquote', array('class' => 'error'));
     echo sprintf(_("The file %s already exists in your system! This script INSTALLS and DOES NOT UPGRADE. It will remove all OpenClinic data. If this is what you want, you can go on. If you want upgrade go to the %s."),
-      HTML::strTag('tt', 'database_constants.php'),
+      HTML::strTag('tt', 'config/database_constants.php'),
       HTML::strLink(_("upgrade script"), './index.php')
     );
     HTML::end('blockquote');
@@ -660,19 +660,19 @@
 
     $itemArray[] = 'MySQL >= 3.23.36';
 
-    $text =sprintf(_("Write access to %s file"), HTML::strTag('tt', 'database_constants.php'));
-    if (chmod("../database_constants.php", 0666) == false)
+    $text =sprintf(_("Write access to %s file"), HTML::strTag('tt', 'config/database_constants.php'));
+    if (chmod("../config/database_constants.php", 0666) == false)
     {
       $text .= HTML::strPara(_("This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."));
       if (defined('PHP_OS') && eregi('win', PHP_OS))
       {
-        $text .= HTML::strMessage(sprintf(_("Deactivate read-only mode in the file properties of %s."), HTML::strTag('tt', 'database_constants.php')), OPEN_MSG_ERROR);
+        $text .= HTML::strMessage(sprintf(_("Deactivate read-only mode in the file properties of %s."), HTML::strTag('tt', 'config/database_constants.php')), OPEN_MSG_ERROR);
       }
       else
       {
         $text .= HTML::strMessage(sprintf(_("Open a shell, go to %s directory and type %s."),
             HTML::strTag('tt', 'openclinic'),
-            HTML::strTag('tt', sprintf("chmod 666 %s", "database_constants.php"))
+            HTML::strTag('tt', sprintf("chmod 666 %s", "config/database_constants.php"))
           ),
           OPEN_MSG_ERROR
         );
