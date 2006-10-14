@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.1 2006/10/13 20:11:58 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.2 2006/10/14 11:18:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -32,7 +32,7 @@
   HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
   HTML::start('link', array('rel' => 'bookmark icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
 
-  if ( !(isset($_GET['css']) && $_GET['css'] == "off") )
+  if ( !(isset($_GET['css']) && ($_GET['css'] == 'off' || $_GET['css'] == 'print')) )
   {
     HTML::start('link',
       array(
@@ -45,6 +45,15 @@
       true
     );
   }
+  HTML::start('link',
+    array(
+      'rel' => 'stylesheet',
+      'type' => 'text/css',
+      'href' => '../css/print.css',
+      'media' => (isset($_GET['css']) && $_GET['css'] == 'print') ? 'all' : 'print'
+    ),
+    true
+  );
 
   if (isset($isMd5) && $isMd5)
   {
@@ -121,35 +130,14 @@
     array('id' => 'skipLink')
   );
 
-  HTML::start('div', array('class' => 'menuBar'));
-
+  require_once("../layout/component.php");
   $mainNav = array(
     "home" => array(_("Home"), "../home/index.php"),
     "medical" => array(_("Medical Records"), "../medical/index.php"),
     //"stats" => array("Statistics", "../stats/index.php"),
     "admin" => array(_("Admin"), "../admin/index.php")
   );
-
-  $array = null;
-  $sentinel = true;
-  foreach ($mainNav as $key => $value)
-  {
-    $options = null;
-    if ($sentinel)
-    {
-      $sentinel = false;
-      $options = array('id' => 'first');
-    }
-
-    $item = ($tab == $key)
-      ? HTML::strTag('span', $value[0])
-      : HTML::strLink($value[0], $value[1]);
-    $array[] = (is_null($options) ? $item : array($item, $options));
-  }
-  HTML::itemList($array, array('id' => 'tabs'));
-  unset($mainNav, $array);
-
-  HTML::end('div'); // .menuBar
+  echo menuBar($tab, $mainNav);
 
   $sfLinks = array(
     _("Project Page") => 'http://sourceforge.net/projects/openclinic/',
@@ -175,133 +163,8 @@
 
   HTML::start('div', array('id' => 'sideBar'));
   require_once("../layout/" . $tab . ".php");
-
   HTML::rule();
-
-  HTML::start('div', array('id' => 'sideBarLogo'));
-
-  HTML::para(
-    HTML::strLink(
-      HTML::strStart('img',
-        array(
-          'src' => '../img/openclinic-2.png',
-          'width' => 130,
-          'height' => 29,
-          'alt' => _("Powered by OpenClinic"),
-          'title' => _("Powered by OpenClinic")
-        ),
-        true
-      ),
-      'http://openclinic.sourceforge.net'
-    )
-  );
-
-  $thankCoresis = HTML::strStart('img',
-    array(
-      'src' => '../img/thank.png',
-      'width' => 65,
-      'height' => 30,
-      'alt' => 'OpenClinic Logo thanks to Coresis',
-      'title' => 'OpenClinic Logo thanks to Coresis'
-    ),
-    true
-  );
-  $thankCoresis .= HTML::strStart('img',
-    array(
-      'src' => '../img/coresis.png',
-      'width' => 65,
-      'height' => 30,
-      'alt' => 'OpenClinic Logo thanks to Coresis',
-      'title' => 'OpenClinic Logo thanks to Coresis'
-    ),
-    true
-  );
-  $thankCoresis = str_replace("\n", '', $thankCoresis);
-  HTML::para(HTML::strLink($thankCoresis, 'http://www.coresis.com'));
-  unset($thankCoresis);
-
-  HTML::para(
-    HTML::strLink(
-      HTML::strStart('img',
-        array(
-          'src' => '../img/sf-logo.png',
-          'width' => 130,
-          'height' => 37,
-          'alt' => "Project hosted in SourceForge.net",
-          'title' => "Project hosted in SourceForge.net"
-        ),
-        true
-      ),
-      'http://sourceforge.net'
-    )
-  );
-
-  HTML::para(
-    HTML::strLink(
-      HTML::strStart('img',
-        array(
-          'src' => '../img/php-logo.gif',
-          'width' => 80,
-          'height' => 15,
-          'alt' => "Powered by PHP",
-          'title' => "Powered by PHP"
-        ),
-        true
-      ),
-      'http://www.php.net'
-    )
-  );
-
-  HTML::para(
-    HTML::strLink(
-      HTML::strStart('img',
-        array(
-          'src' => '../img/mysql-logo.png',
-          'width' => 80,
-          'height' => 15,
-          'alt' => "Works with MySQL",
-          'title' => "Works with MySQL"
-        ),
-        true
-      ),
-      'http://www.mysql.com'
-    )
-  );
-
-  HTML::para(
-    HTML::strLink(
-      HTML::strStart('img',
-        array(
-          'src' => '../img/valid-xhtml11.png',
-          'width' => 80,
-          'height' => 15,
-          'alt' => "Valid XHTML 1.1",
-          'title' => "Valid XHTML 1.1"
-        ),
-        true
-      ),
-      'http://validator.w3.org/check/referer'
-    )
-  );
-
-  HTML::para(
-    HTML::strLink(
-      HTML::strStart('img',
-        array(
-          'src' => '../img/valid-css.png',
-          'width' => 80,
-          'height' => 15,
-          'alt' => "Valid CSS",
-          'title' => "Valid CSS"
-        ),
-        true
-      ),
-      'http://jigsaw.w3.org/css-validator',
-      array('uri' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'])
-    )
-  );
-
-  HTML::end('div'); // #sideBarLogo
+  echo logoInfo();
   HTML::end('div'); // #sideBar
 
   HTML::rule();
