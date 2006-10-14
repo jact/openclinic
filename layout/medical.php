@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.17 2006/10/13 20:12:16 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.18 2006/10/14 11:16:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,36 +19,8 @@
     exit();
   }
 
-  if (defined("OPEN_DEMO") && !OPEN_DEMO)
-  {
-    HTML::para(
-      HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/logout.png',
-            'width' => 96,
-            'height' => 22,
-            'alt' => _("logout"),
-            'title' => _("logout")
-          ),
-          true
-        ),
-        '../auth/logout.php'
-      )
-      . '<br />'
-      . '[ '
-      . HTML::strLink($_SESSION["loginSession"], '../admin/user_edit_form.php',
-        array(
-          'key' => $_SESSION["userId"],
-          'all' => 'Y'
-        ),
-        array('title' => _("manage your user account"))
-      )
-      . ' ]',
-      array('class' => 'sideBarLogin')
-    );
-    HTML::rule();
-  }
+  require_once("../layout/component.php");
+  echo authInfo();
 
   echo '<ul class="linkList">';
 

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: home.php,v 1.15 2006/10/13 20:12:16 jact Exp $
+ * @version   CVS: $Id: home.php,v 1.16 2006/10/14 11:16:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,56 +19,8 @@
     exit();
   }
 
-  if (defined("OPEN_DEMO") && !OPEN_DEMO)
-  {
-    $sessLogin = isset($_SESSION["loginSession"]) ? $_SESSION["loginSession"] : "";
-    if ( !empty($sessLogin) && !isset($_SESSION["invalidToken"]) )
-    {
-      $sideBarLogin = HTML::strLink(
-          HTML::strStart('img',
-            array(
-              'src' => '../img/logout.png',
-              'width' => 96,
-              'height' => 22,
-              'alt' => _("logout"),
-              'title' => _("logout")
-            ),
-            true
-          ),
-          '../auth/logout.php'
-        )
-        . '<br />'
-        . '[ '
-        . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
-          array(
-            'key' => $_SESSION["userId"],
-            'all' => 'Y'
-          ),
-          array('title' => _("manage your user account"))
-        )
-        . ' ]';
-    }
-    else
-    {
-      $sideBarLogin = HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/login.png',
-            'width' => 96,
-            'height' => 22,
-            'alt' => _("login"),
-            'title' => _("login")
-          ),
-          true
-        ),
-        '../auth/login_form.php',
-        array('ret' => '../home/index.php')
-      );
-    }
-    HTML::para($sideBarLogin, array('class' => 'sideBarLogin'));
-    unset($sideBarLogin);
-    HTML::rule();
-  }
+  require_once("../layout/component.php");
+  echo authInfo();
 
   $array = null;
   $array[] = ($nav == "home")
