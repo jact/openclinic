@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.7 2006/09/30 16:55:46 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.8 2006/10/14 11:33:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,7 +21,7 @@
 
   HTML::end('div'); // #content
 
-  HTML::start('div', array('id' => 'left'));
+  HTML::start('div', array('id' => 'menu'));
 
   HTML::para(
     HTML::strLink(_("OpenClinic web site"), 'http://openclinic.sourceforge.net', null,
@@ -35,11 +35,11 @@
   $array = array(
     HTML::strLink(_("Install Instructions"), '../install.html'),
     HTML::strLink(_("OpenClinic Readme"), '../index.html'),
-    array(HTML::strLink(_("Start OpenClinic"), '../home/index.php'), array('class' => 'bold'))
+    HTML::strLink(HTML::strTag('strong', _("Start OpenClinic")), '../home/index.php')
   );
-  HTML::itemList($array, array('class' => 'linkList'));
+  HTML::itemList($array);
 
-  HTML::end('div'); // #left
+  HTML::end('div'); // #menu
 
   HTML::start('div', array('id' => 'footer'));
 
@@ -47,7 +47,7 @@
 
   HTML::para(
     sprintf('Copyright &copy; 2002-2006 %s',
-      HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.jachavar&#64;gmail.com', null,
+      HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.openclinic&#64;gmail.com', null,
         array('accesskey' => 9)
       )
     )
