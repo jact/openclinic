@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_defines.php,v 1.7 2006/03/28 19:15:31 jact Exp $
+ * @version   CVS: $Id: dump_defines.php,v 1.8 2006/10/14 15:18:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -28,6 +28,7 @@
  *  DLIB_USR_OS               (string) - the platform (os) of the user
  *  DLIB_USR_BROWSER_AGENT    (string) - the browser of the user
  *  DLIB_USR_BROWSER_VER      (double) - the version of this browser
+ *  DLIB_CRLF                 (string) - CR LF sequence
  */
 
 /**
@@ -202,5 +203,20 @@ if ( !defined('DLIB_USR_OS') )
     define('DLIB_USR_BROWSER_VER', 0);
     define('DLIB_USR_BROWSER_AGENT', 'OTHER');
   }
+}
+
+if (defined("DLIB_USR_OS") && DLIB_USR_OS == 'Win')
+{
+  define("DLIB_CRLF", "\r\n");
+}
+// Mac case
+elseif (defined("DLIB_USR_OS") && DLIB_USR_OS == 'Mac')
+{
+  define("DLIB_CRLF", "\r");
+}
+// Others
+else
+{
+  define("DLIB_CRLF", "\n");
 }
 ?>
