@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_process.php,v 1.15 2006/10/14 15:20:19 jact Exp $
+ * @version   CVS: $Id: dump_process.php,v 1.16 2006/10/15 15:46:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -203,7 +203,12 @@
             $dumpBuffer .= DLIB_CRLF . '#' . DLIB_CRLF
                         . '# ' . sprintf(_("Table structure for table %s"), $formattedTableName)
                         . DLIB_CRLF . '#' . DLIB_CRLF . DLIB_CRLF
-                        . DLIB_getTableDef(OPEN_DATABASE, $table, $_POST)
+                        . DLIB_getTableDef(OPEN_DATABASE, $table,
+                          array(
+                            'drop' => isset($_POST['drop']) ? $_POST['drop'] : null,
+                            'use_backquotes' => isset($_POST['use_backquotes']) ? $_POST['use_backquotes'] : null
+                          )
+                        )
                         . ';' . DLIB_CRLF;
           }
 
@@ -224,9 +229,15 @@
               $limitFrom = $limitTo = 0;
             }
 
-            echo $dumpBuffer;
-            $dumpBuffer = '';
-            DLIB_getTableContent(OPEN_DATABASE, $table, $limitFrom, $limitTo, $_POST);
+            $dumpBuffer .= DLIB_getTableContent(OPEN_DATABASE, $table,
+              array(
+                'from' => $limitFrom,
+                'to' => $limitTo,
+                'use_backquotes' => isset($_POST['use_backquotes']) ? $_POST['use_backquotes'] : null,
+                'show_columns' => isset($_POST['show_columns']) ? $_POST['show_columns'] : null,
+                'extended_inserts' => isset($_POST['extended_inserts']) ? $_POST['extended_inserts'] : null
+              )
+            );
           } // end if
         } // end if
       } // end for
@@ -288,7 +299,14 @@
         if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, OPEN_SEPARATOR . $table . OPEN_SEPARATOR))
             || (!isset($tmpSelect) && !empty($table)))
         {
-          $dumpBuffer .= DLIB_getTableXML(OPEN_DATABASE, $table, $limitFrom, $limitTo, _("table") . " ", _("end of table") . " ");
+          $dumpBuffer .= DLIB_getTableXML(OPEN_DATABASE, $table,
+            array(
+              'from' => $limitFrom,
+              'to' => $limitTo,
+              'start_table' => _("table") . " ",
+              'end_table' => _("end of table") . " "
+            )
+          );
         } // end if
       } // end for
       $dumpBuffer .= '</' . OPEN_DATABASE . '>' . DLIB_CRLF;
@@ -296,26 +314,6 @@
 
     else // 'csv' case
     {
-      // Handles the EOL character
-      if ($_POST['what'] == 'excel')
-      {
-        $addCharacter = "\015\012";
-      }
-      elseif (empty($addCharacter))
-      {
-        $addCharacter = DLIB_CRLF;
-      }
-      else
-      {
-        if (get_magic_quotes_gpc())
-        {
-          $addCharacter = stripslashes($addCharacter);
-        }
-        $addCharacter = str_replace('\\r', "\015", $addCharacter);
-        $addCharacter = str_replace('\\n', "\012", $addCharacter);
-        $addCharacter = str_replace('\\t', "\011", $addCharacter);
-      } // end if
-
       if (isset($_POST['table_select']))
       {
         $tmpSelect = implode($_POST['table_select'], OPEN_SEPARATOR);
@@ -334,7 +332,13 @@
         if ((isset($tmpSelect) && strpos(' ' . $tmpSelect, OPEN_SEPARATOR . $table . OPEN_SEPARATOR))
             || (!isset($tmpSelect) && !empty($table)))
         {
-          $dumpBuffer .= DLIB_getTableCSV(OPEN_DATABASE, $table, $limitFrom, $limitTo, $separator, $enclosed, $escaped, $addCharacter, $_POST['what']);
+          $dumpBuffer .= DLIB_getTableCSV(OPEN_DATABASE, $table,
+            array(
+              'from' => $limitFrom,
+              'to' => $limitTo,
+              'what' => isset($_POST['what']) ? $_POST['what'] : null
+            )
+          );
         } // end if
       } // end for
     } // end 'csv' case
