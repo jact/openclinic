@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_optimize_db.php,v 1.13 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: dump_optimize_db.php,v 1.14 2006/10/16 18:10:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,8 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../admin/dump_defines.php");
-  require_once("../lib/dump_lib.php"); // DLIB_backquote()
+  require_once("../lib/Dump.php");
 
   @set_time_limit(OPEN_EXEC_TIME_LIMIT);
 
@@ -34,7 +33,7 @@
     Error::connection($auxConn);
   }
 
-  $localQuery = 'SHOW TABLE STATUS FROM ' . DLIB_backquote(OPEN_DATABASE);
+  $localQuery = 'SHOW TABLE STATUS FROM ' . Dump::backQuote(OPEN_DATABASE);
   if ( !$auxConn->exec($localQuery) )
   {
     $auxConn->close();

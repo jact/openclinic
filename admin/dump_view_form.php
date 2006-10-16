@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.14 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.15 2006/10/16 18:11:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,8 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../admin/dump_defines.php");
-  require_once("../lib/dump_lib.php");
+  require_once("../lib/Dump.php");
   require_once("../lib/Form.php");
 
   $auxConn = new DbConnection();
@@ -33,7 +32,7 @@
     Error::connection($auxConn);
   }
 
-  $localQuery = 'SHOW TABLES FROM ' . DLIB_backquote(OPEN_DATABASE);
+  $localQuery = 'SHOW TABLES FROM ' . Dump::backQuote(OPEN_DATABASE);
   if ( !$auxConn->exec($localQuery) )
   {
     $auxConn->close();
@@ -90,7 +89,7 @@
   $table = null;
   while ($i < $numTables)
   {
-    (DLIB_MYSQL_INT_VERSION >= 32303)
+    (DUMP_MYSQL_INT_VERSION >= 32303)
       ? $table[$tables[$i]['Name']] = $tables[$i]['Name']
       : $table[$tables[$i]] = $tables[$i];
     $i++;
