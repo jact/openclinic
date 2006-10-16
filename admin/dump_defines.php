@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_defines.php,v 1.8 2006/10/14 15:18:52 jact Exp $
+ * @version   CVS: $Id: dump_defines.php,v 1.9 2006/10/16 18:07:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,8 +21,6 @@
 
 /**
  * Overview:
- *  DLIB_PHP_INT_VERSION      (int)    - eg: 30017 instead of 3.0.17 or 40006 instead of 4.0.6
- *  DLIB_IS_WINDOWS           (bool)   - whether the os php is running on is windows or not
  *  DLIB_MYSQL_INT_VERSION    (int)    - eg: 32339 instead of 3.23.39
  *  DLIB_MYSQL_VERSION        (string) - eg: 3.23.39
  *  DLIB_USR_OS               (string) - the platform (os) of the user
@@ -30,50 +28,6 @@
  *  DLIB_USR_BROWSER_VER      (double) - the version of this browser
  *  DLIB_CRLF                 (string) - CR LF sequence
  */
-
-/**
- * DLIB_PHP_INT_VERSION
- */
-if ( !defined('DLIB_PHP_INT_VERSION') )
-{
-  if ( !ereg('([0-9]{1,2}).([0-9]{1,2}).([0-9]{1,2})', phpversion(), $match) )
-  {
-    $result = ereg('([0-9]{1,2}).([0-9]{1,2})', phpversion(), $match);
-  }
-
-  if (isset($match) && !empty($match[1]))
-  {
-    if ( !isset($match[2]) )
-    {
-      $match[2] = 0;
-    }
-    if ( !isset($match[3]) )
-    {
-      $match[3] = 0;
-    }
-    define('DLIB_PHP_INT_VERSION', (int)sprintf('%d%02d%02d', $match[1], $match[2], $match[3]));
-    unset($match);
-  }
-  else
-  {
-    define('DLIB_PHP_INT_VERSION', 0);
-  }
-}
-
-/**
- * DLIB_IS_WINDOWS
- */
-if ( !defined('DLIB_IS_WINDOWS') )
-{
-  if (defined('PHP_OS') && eregi('win', PHP_OS))
-  {
-    define('DLIB_IS_WINDOWS', 1);
-  }
-  else
-  {
-    define('DLIB_IS_WINDOWS', 0);
-  }
-}
 
 /**
  * DLIB_MYSQL_INT_VERSION, DLIB_MYSQL_VERSION
@@ -137,10 +91,6 @@ if ( !defined('DLIB_USR_OS') )
   {
     $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
   }
-/*  elseif ( !empty($_SERVER['HTTP_USER_AGENT']) )
-  {
-    $HTTP_USER_AGENT = $_SERVER['HTTP_USER_AGENT'];
-  }*/
   elseif ( !isset($HTTP_USER_AGENT) )
   {
     $HTTP_USER_AGENT = '';
