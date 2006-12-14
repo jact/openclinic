@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.25 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.26 2006/12/14 22:33:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -109,9 +109,9 @@
    */
   HTML::start('form',
     array(
+      'id' => 'userPwd',
       'method' => 'post',
-      'action' => '../admin/user_pwd_reset.php',
-      'onclick' => 'return md5Login(this);'
+      'action' => '../admin/user_pwd_reset.php'
     )
   );
 
