@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.16 2006/10/13 19:54:07 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.17 2006/12/14 22:17:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -47,6 +47,8 @@ if (file_exists("../model/Description_Query.php"))
  *  void label(string $field, string $text, bool $required = false)
  *  string strFieldset(string $legend, array &$body, array $foot = null, $options = null)
  *  void fieldset(string $legend, array &$body, array $foot = null, $options = null)
+ *  string generateToken(void)
+ *  void compareToken(string $url, string $method = 'post')
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -715,7 +717,16 @@ class Form
       return $html; // no data, no fieldset
     }
 
-    $html .= HTML::strStart('fieldset', isset($options['class']) ? array('class' => $options['class']) : null) . "\n";
+    $fieldsetOptions = null;
+    if (isset($options['id']))
+    {
+      $fieldsetOptions['id'] = $options['id'];
+    }
+    if (isset($options['class']))
+    {
+      $fieldsetOptions['class'] = $options['class'];
+    }
+    $html .= HTML::strStart('fieldset', $fieldsetOptions) . "\n";
 
     if ( !empty($legend) )
     {
@@ -732,7 +743,7 @@ class Form
         {
           $rowOptions['class'] = $options['r' . $numRow]['class'];
         }
-        $html .= HTML::strPara($row, $rowOptions);
+        $html .= HTML::strTag('div', $row, $rowOptions);
         $numRow++;
       }
     }
@@ -744,7 +755,7 @@ class Form
       {
         $footText .= $row;
       }
-      $html .= HTML::strPara($footText, array('class' => 'formButton'));
+      $html .= HTML::strTag('div', $footText, array('class' => 'formButton'));
     }
 
     $html .= HTML::strEnd('fieldset');
@@ -769,6 +780,59 @@ class Form
   function fieldset($legend, &$body, $foot = null, $options = null)
   {
     echo Form::strFieldset($legend, $body, isset($foot) ? $foot : null, isset($options) ? $options : null);
+  }
+
+  /**
+   * string generateToken(void)
+   *
+   * Anti-form automation attacks and session hijacking system
+   * Chris Shiflett (Essential PHP Security)
+   *
+   * @return string input hidden field to include in form
+   * @access public
+   */
+  function generateToken()
+  {
+    $token = md5(uniqid(rand(), true));
+    $_SESSION['token_form'] = $token;
+
+    return Form::strHidden('token_form', $token);
+  }
+
+  /**
+   * void compareToken(string $url, string $method = 'post')
+   *
+   * Anti-form automation attacks and session hijacking system
+   * Chris Shiflett (Essential PHP Security)
+   *
+   * @param string $url web address to redirect if fails
+   * @param string $method (optional)
+   * @return void
+   * @access public
+   */
+  function compareToken($url, $method = 'post')
+  {
+    if ($method != 'post' && $method != 'get')
+    {
+      header("Location: " . $url);
+      exit();
+    }
+
+    $token = ($method == 'post') ? $_POST['token_form'] : $_GET['token_form'];
+
+    if ( !isset($_SESSION['token_form']) )
+    {
+      $_SESSION['token_form'] = md5(uniqid(rand(), true));
+    }
+
+    if ($_SESSION['token_form'] != $token)
+    {
+      unset($_SESSION['token_form']);
+      header("Location: " . $url);
+      exit();
+    }
+
+    unset($_SESSION['token_form']);
   }
 } // end class
 ?>
