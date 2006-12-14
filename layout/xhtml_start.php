@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: xhtml_start.php,v 1.1 2006/10/13 20:11:58 jact Exp $
+ * @version   CVS: $Id: xhtml_start.php,v 1.2 2006/12/14 22:38:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -62,6 +62,10 @@
 
   header("Content-Type: " . $contentType); // force document encoding, ignore server configuration
   header("Vary: Accept");
+
+  // force not caching
+  header("Expires: -1");
+  header("Etag: " . md5(uniqid(rand(), true)));
 
   if (defined("OPEN_BUFFER") && OPEN_BUFFER)
   {
