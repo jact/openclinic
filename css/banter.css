@@ -1,5 +1,5 @@
 /* CSS based in SuperfluousBanter.org site */
-/* $Id: banter.css,v 1.12 2006/10/13 19:59:24 jact Exp $ */
+/* $Id: banter.css,v 1.13 2006/12/14 22:37:13 jact Exp $ */
 
 /* Layout */
 html, body {
@@ -227,7 +227,7 @@ fieldset {
   padding: 5px;
 }
 
-fieldset p {
+fieldset div {
   margin: 12px 0px;
 }
 
@@ -295,6 +295,18 @@ input[type="radio"], input[type="checkbox"] {
 
 input.error, textarea.error, select.error {
   border: 3px solid #9c0000;
+}
+
+fieldset#dumpTables {
+  margin-right: 1em;
+  width: 35%;
+  float: left;
+}
+
+fieldset#dumpOptions label,
+fieldset#dumpExtended label {
+  display: inline;
+  float: none;
 }
 
 /* Miscellaneous */

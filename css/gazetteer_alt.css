@@ -1,5 +1,5 @@
 /* CSS based in Gazetteer Alternate (haran's design in oswd.org) */
-/* $Id: gazetteer_alt.css,v 1.13 2006/10/13 19:59:24 jact Exp $ */
+/* $Id: gazetteer_alt.css,v 1.14 2006/12/14 22:37:13 jact Exp $ */
 
 html, body {
   background: #fff;
@@ -280,7 +280,7 @@ fieldset {
   padding: 5px;
 }
 
-fieldset p {
+fieldset div {
   margin: 12px 0px;
 }
 
@@ -340,6 +340,18 @@ input[type="submit"], .formButton input:first-child {
 
 input.error, textarea.error, select.error {
   border: 3px solid #d2691e;
+}
+
+fieldset#dumpTables {
+  margin-right: 1em;
+  width: 35%;
+  float: left;
+}
+
+fieldset#dumpOptions label,
+fieldset#dumpExtended label {
+  display: inline;
+  float: none;
 }
 
 .requiredField {
