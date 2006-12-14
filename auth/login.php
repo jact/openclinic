@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.1 2006/10/13 19:55:56 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.2 2006/12/14 22:34:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,6 +23,10 @@
   }
 
   require_once("../config/environment.php");
+  require_once("../lib/Form.php");
+
+  Form::compareToken('../auth/login_form.php');
+
   require_once("../model/User_Query.php");
   require_once("../model/Session_Query.php");
   require_once("../model/Access_Page_Query.php");
@@ -46,10 +50,19 @@
   $pwdSession = Check::safeText($_POST["md5_session"]);
   if ($pwdSession == "")
   {
-    $errorFound = true;
-    $formError["pwd_session"] = _("This is a required field.");
+    $pwdSession = Check::safeText($_POST["pwd_session"]); // JavaScript disabled?
+    if ($pwdSession == "")
+    {
+      $errorFound = true;
+      $formError["pwd_session"] = _("This is a required field.");
+    }
+    else
+    {
+      $pwdSession = md5($pwdSession); // JavaScript disabled!
+    }
   }
-  else
+
+  if ( !isset($formError["pwd_session"]) )
   {
     $userQ = new User_Query();
     $userQ->connect();
