@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Dump.php,v 1.1 2006/10/16 18:10:09 jact Exp $
+ * @version   CVS: $Id: Dump.php,v 1.2 2006/12/14 22:24:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,6 +21,7 @@
  *  DUMP_USR_BROWSER_AGENT (string) - the browser of the user
  *  DUMP_USR_BROWSER_VER   (double) - the version of the browser
  *  DUMP_CRLF              (string) - CR LF sequence
+ *  @todo $isWindows = (DIRECTORY_SEPARATOR == '\\');
  */
 
 /**
@@ -301,12 +302,13 @@ class Dump
       {
         $tmpRes    = $localConn->fetchRow(MYSQL_NUM);
         $pos       = strpos($tmpRes[1], ' (');
-        $tmpRes[1] = substr($tmpRes[1], 0, 13)
+        $tmpRes[1] = substr($tmpRes[1], 0, 13) // strlen('CREATE TABLE ') = 13
                    . ($useBackquote ? Dump::backQuote($tmpRes[0]) : $tmpRes[0])
                    . substr($tmpRes[1], $pos);
         $schemaCreate .= str_replace("\n", DUMP_CRLF, $tmpRes[1]);
       }
-      //$localConn->close(); // don't remove the comment mark
+      $localConn->close();
+
       return $schemaCreate;
     } // end if MySQL >= 3.23.21
 
@@ -454,15 +456,13 @@ class Dump
     } // end for
 
     // Sets the scheme
+    $schemaInsert = 'INSERT INTO ' . Dump::backQuote($table, $useBackquote);
     if (isset($options['show_columns']) && $options['show_columns'])
     {
       $fields       = implode(', ', $fieldSet);
-      $schemaInsert = 'INSERT INTO ' . Dump::backQuote($table, $useBackquote) . ' (' . $fields . ') VALUES (';
+      $schemaInsert .= ' (' . $fields . ')';
     }
-    else
-    {
-      $schemaInsert = 'INSERT INTO ' . Dump::backQuote($table, $useBackquote) . ' VALUES (';
-    }
+    $schemaInsert .= ' VALUES (';
 
     $search     = array("\x00", "\x0a", "\x0d", "\x1a"); //\x08\\x09, not required
     $replace    = array('\0', '\n', '\r', '\Z');
@@ -521,12 +521,12 @@ class Dump
       // Show sentence
       $buffer .= $insertLine . DUMP_CRLF;
     } // end while
+    $localConn->close();
 
     if (isset($options['extended_inserts']) && $options['extended_inserts'])
     {
       $buffer .= ';' . DUMP_CRLF;
     }
-    $localConn->close();
 
     return $buffer;
   }
@@ -685,7 +685,7 @@ class Dump
   /**
    * mixed XMLData(string $db, string $table, array $options = null)
    *
-   * Returns the content of a table in XML format
+   * Returns the content of a table in XML format (Propel model more or less)
    *
    * @param string $db database name
    * @param string $table table name
@@ -702,8 +702,7 @@ class Dump
       return false;
     }
 
-    $localQuery = 'SHOW COLUMNS FROM ' . Dump::backQuote($table);
-    $localQuery .= ' FROM ' . Dump::backQuote($db);
+    $localQuery = 'SHOW COLUMNS FROM ' . Dump::backQuote($table) . ' FROM ' . Dump::backQuote($db);
     if ( !$localConn->exec($localQuery) )
     {
       return false;
@@ -713,7 +712,7 @@ class Dump
     {
       $fields[$i] = $row['Field'];
       $types[$i] = $row['Type'];
-      $nulls[$i] = $row['Null'];
+      $nulls[$i] = (strtoupper($row['Null']) == 'YES') ? 'true' : 'false';
       $keys[$i] = $row['Key'];
       $defaults[$i] = $row['Default'];
       $extras[$i] = $row['Extra'];
@@ -735,40 +734,33 @@ class Dump
       return '';
     }
 
-    $startTable = isset($options['start_table']) ? $options['start_table'] : '';
-    $endTable = isset($options['end_table']) ? $options['end_table'] : '';
-    $buffer = '  <!-- ' . $startTable . $table . ' -->' . DUMP_CRLF;
+    $buffer = '  <table name="' . $table . '">' . DUMP_CRLF;
     while ($record = $localConn->fetchRow(MYSQL_ASSOC))
     {
-      $buffer .= '    <' . $table . '>' . DUMP_CRLF;
+      $buffer .= '    <row>' . DUMP_CRLF;
       for ($i = 0; $i < $numFields; $i++)
       {
+        $element = ' name="' . $fields[$i] . '"'
+                 . ' type="' . $types[$i] . '"'
+                 . ($nulls[$i] ? ' null="' . $nulls[$i] . '"' : '')
+                 . ($keys[$i] ? ' key="' . $keys[$i] . '"' : '')
+                 . ($defaults[$i] ? ' default="' . $defaults[$i] . '"' : '')
+                 . ($extras[$i] ? ' extra="' . $extras[$i] . '"' : '');
         if ( !is_null($record[$fields[$i]]) )
         {
-          $buffer .= '      <' . $fields[$i]
-                  . ' type="' . $types[$i] . '"'
-                  . ($nulls[$i] ? ' null="' . $nulls[$i] . '"' : '')
-                  . ($keys[$i] ? ' key="' . $keys[$i] . '"' : '')
-                  . ($defaults[$i] ? ' default="' . $defaults[$i] . '"' : '')
-                  . ($extras[$i] ? ' extra="' . $extras[$i] . '"' : '')
+          $buffer .= '      <column' . $element
                   . '>' . htmlspecialchars($record[$fields[$i]])
-                  . '</' . $fields[$i] . '>' . DUMP_CRLF;
+                  . '</column>' . DUMP_CRLF;
         }
         else
         {
-          $buffer .= '      <' . $fields[$i]
-                  . ' type="' . $types[$i] . '"'
-                  . ($nulls[$i] ? ' null="' . $nulls[$i] . '"' : '')
-                  . ($keys[$i] ? ' key="' . $keys[$i] . '"' : '')
-                  . ($defaults[$i] ? ' default="' . $defaults[$i] . '"' : '')
-                  . ($extras[$i] ? ' extra="' . $extras[$i] . '"' : '')
-                  . ' />' . DUMP_CRLF;
+          $buffer .= '      <column' . $element . ' />' . DUMP_CRLF;
         }
       }
-      $buffer .= '    </' . $table . '>' . DUMP_CRLF;
+      $buffer .= '    </row>' . DUMP_CRLF;
     }
     $localConn->close();
-    $buffer .= '  <!-- ' . $endTable . $table . ' -->' . DUMP_CRLF;
+    $buffer .= '  </table>' . DUMP_CRLF;
 
     return $buffer;
   }
