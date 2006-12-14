@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.15 2006/10/16 18:11:20 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.16 2006/12/14 22:26:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -93,9 +93,10 @@
       ? $table[$tables[$i]['Name']] = $tables[$i]['Name']
       : $table[$tables[$i]] = $tables[$i];
     $i++;
-  } // end while
+  }
+
   $fieldArray = array(
-    Form::strSelect("table_select", $table, null, array('size' => 8))
+    Form::strSelect("table_select", $table, null, array('size' => 15))
   );
   unset($table);
 
@@ -105,7 +106,7 @@
     . HTML::strLink(_("Unselect all"), '#', null, array('onclick' => "setSelectOptions(0, 'table_select[]', false); return false;"))
   );
 
-  Form::fieldset(_("View dump of database"), $fieldArray, $fieldFoot);
+  Form::fieldset(_("View dump of database"), $fieldArray, $fieldFoot, array('id' => 'dumpTables'));
 
   $fieldArray = null;
 
@@ -149,7 +150,7 @@
     )
     . Form::strLabel("radio_dump_csv", _("Export to CSV format (data only)"));
 
-  Form::fieldset(_("Options"), $fieldArray);
+  Form::fieldset(_("Options"), $fieldArray, null, array('id' => 'dumpOptions'));
 
   $fieldArray = array(
     Form::strCheckBox("drop", "yes") . Form::strLabel("drop", _("Add 'DROP TABLE'")),
@@ -162,9 +163,12 @@
     Form::strCheckBox("as_file", "sendit") . Form::strLabel("as_file", _("Save as file"))
   );
 
-  Form::fieldset(_("Extended options"), $fieldArray);
+  Form::fieldset(_("Extended options"), $fieldArray, null, array('id' => 'dumpExtended'));
 
-  HTML::para(Form::strButton("button1", _("Submit")), array('class' => 'center'));
+  HTML::para(
+    Form::strButton("dump", _("Submit")) . Form::generateToken(),
+    array('class' => 'center')
+  );
   HTML::end('form');
 
   HTML::message(_("Note: Some check options are exclusive. Be carefully!"));
