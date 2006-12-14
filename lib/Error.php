@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.7 2006/10/13 09:32:53 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.8 2006/12/14 22:22:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -163,11 +163,18 @@ class Error
     for ($x = 2; $x < count($trace); $x++)
     {
       $callNo = $x - 2;
-      $calls .= "\n " . $callNo . ": " . $trace[$x]["function"];
+      $calls .= "\n " . $callNo . ": ";
+      $calls .= (isset($trace[$x]["class"]) ? $trace[$x]["class"] . $trace[$x]["type"] : '');
+      $calls .= $trace[$x]["function"];
+      $calls .= (isset($trace[$x]["args"]) && is_array($trace[$x]["args"]))
+        ? '(' . implode(', ', $trace[$x]["args"]) . ')'
+        : '';
       $calls .= " (line " . $trace[$x]["line"] . " in " . $trace[$x]["file"] . ")";
     }
 
-    $calls .= "\nVariables in " . (isset($trace[2]["function"]) ? $trace[2]["function"] : "UNKNOWN") . "():";
+    $calls .= "\nVariables in ";
+    $calls .= (isset($trace[2]["class"]) ? $trace[2]["class"] . $trace[2]["type"] : '');
+    $calls .= (isset($trace[2]["function"]) ? $trace[2]["function"] : "UNKNOWN") . "():";
 
     // Use the $context to get variable information for the function with the error
     foreach ($context as $key => $value)
@@ -195,13 +202,13 @@ class Error
     // check that file exists
     if ( !file_exists($file) )
     {
-      return "Context cannot be shown: " . $file . " does not exist";
+      return sprintf("Context cannot be shown: %s does not exist", $file);
     }
 
     // check that the line number is valid
     if ( !is_int($line) || $line <= 0 )
     {
-      return "Context cannot be shown: " . $line . " is an invalid line number";
+      return sprintf("Context cannot be shown: %s is an invalid line number", $line);
     }
 
     $source = highlight_file($file, true);
@@ -282,7 +289,7 @@ class Error
     $variables = array();
     foreach ($tokens as $index => $value)
     {
-      if ((is_array($value)) && ($value[0] == T_VARIABLE))
+      if (is_array($value) && ($value[0] == T_VARIABLE))
       {
         $name = str_replace('$', '', $value[1]);
         $variables[$name] = $name;
@@ -349,7 +356,8 @@ class Error
       $context['HTTP_SERVER_VARS'],
       $context['HTTP_COOKIE_VARS'],
       $context['HTTP_ENV_VARS'],
-      $context['HTTP_POST_FILES']
+      $context['HTTP_POST_FILES'],
+      $context['translation'] // does not add info
     );
 
     $error .= " on line " . $line . " in " . $file . ".\n";
@@ -360,12 +368,13 @@ class Error
     $error .= "\nClient IP: " . $_SERVER["REMOTE_ADDR"];
 
     $prepend = "\n[PHP " . $prepend . " " . date("Y-m-d H:i:s") . "]";
-    $error = ereg_replace("\n", $prepend, $error);
+    //$error = ereg_replace("\n", $prepend, $error);
+    $error = $prepend . $error;
     $error .= "\n" . str_repeat("_", 78); // separator line
 
     if ( !defined("OPEN_SCREEN_ERRORS") || OPEN_SCREEN_ERRORS )
     {
-      echo '<pre>' . wordwrap($error, 78, "\n", true) . "</pre>\n";
+      echo '<pre>' . wordwrap($error, 78, "\n"/*, true*/) . "</pre>\n";
     }
 
     if (defined("OPEN_LOG_ERRORS") && OPEN_LOG_ERRORS)
