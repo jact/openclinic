@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.1 2006/10/13 19:55:56 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.2 2006/12/14 22:35:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,9 +64,9 @@
    */
   HTML::start('form',
     array(
+      'id' => 'loginForm',
       'method' => 'post',
-      'action' => '../auth/login.php',
-      'onsubmit' => 'return md5Login(this);'
+      'action' => '../auth/login.php'
     )
   );
 
@@ -89,7 +89,10 @@
   );
   $tbody[] = $row;
 
-  $tfoot = array(Form::strButton("button1", _("Enter")));
+  $tfoot = array(
+    Form::strButton("login", _("Enter"))
+    . Form::generateToken()
+  );
 
   Form::fieldset($title, $tbody, $tfoot);
   HTML::end('form');

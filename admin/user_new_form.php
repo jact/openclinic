@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_new_form.php,v 1.23 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: user_new_form.php,v 1.24 2006/12/14 22:33:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -32,6 +32,8 @@
    */
   if (isset($_POST["id_member_login"]))
   {
+    Form::compareToken($returnLocation);
+
     $array = explode(OPEN_SEPARATOR, Check::safeText($_POST["id_member_login"]), 2);
     $idMember = $array[0];
     $formVar["id_member"] = $idMember;
@@ -77,9 +79,9 @@
    */
   HTML::start('form',
     array(
+      'id' => 'userNew',
       'method' => 'post',
-      'action' => '../admin/user_new.php',
-      'onsubmit' => 'return md5Login(this);'
+      'action' => '../admin/user_new.php'
     )
   );
 
