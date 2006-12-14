@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_process.php,v 1.17 2006/10/16 18:11:09 jact Exp $
+ * @version   CVS: $Id: dump_process.php,v 1.18 2006/12/14 22:25:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,6 +20,11 @@
   $nav = "dump";
 
   require_once("../config/environment.php");
+  require_once("../auth/login_check.php");
+  require_once("../lib/Form.php");
+
+  Form::compareToken('../admin/dump_view_form.php');
+
   require_once("../lib/Dump.php");
   require_once("../lib/Check.php");
 
@@ -279,7 +284,7 @@
 
       // Now build the structure
       // TODO: Make db and table names XML compatible (designer responsability)
-      $dumpBuffer .= '<' . OPEN_DATABASE . '>' . DUMP_CRLF;
+      $dumpBuffer .= '<database name="' . OPEN_DATABASE . '">' . DUMP_CRLF;
       if (isset($_POST['table_select']))
       {
         $tmpSelect = implode($_POST['table_select'], OPEN_SEPARATOR);
@@ -301,14 +306,12 @@
           $dumpBuffer .= Dump::XMLData(OPEN_DATABASE, $table,
             array(
               'from' => $limitFrom,
-              'to' => $limitTo,
-              'start_table' => _("table") . " ",
-              'end_table' => _("end of table") . " "
+              'to' => $limitTo
             )
           );
         } // end if
       } // end for
-      $dumpBuffer .= '</' . OPEN_DATABASE . '>' . DUMP_CRLF;
+      $dumpBuffer .= '</database>' . DUMP_CRLF;
     } // end 'xml' case
 
     else // 'csv' case
