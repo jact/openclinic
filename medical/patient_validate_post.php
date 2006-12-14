@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_validate_post.php,v 1.10 2006/04/03 18:59:29 jact Exp $
+ * @version   CVS: $Id: patient_validate_post.php,v 1.11 2006/12/14 22:42:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -19,6 +19,9 @@
     header("Location: ../index.php");
     exit();
   }
+
+  require_once("../lib/Form.php");
+  Form::compareToken($errorLocation);
 
   //$pat->setLastUpdateDate($_POST["last_update_date"]);
   //$_POST["last_update_date"] = $pat->getLastUpdateDate();

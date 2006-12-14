@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del_confirm.php,v 1.18 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: patient_del_confirm.php,v 1.19 2006/12/14 22:40:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -76,6 +76,7 @@
   $tfoot = array(
     Form::strButton("delete", _("Delete"))
     . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
+    . Form::generateToken()
   );
 
   $options = array('class' => 'center');

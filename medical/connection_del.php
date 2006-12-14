@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_del.php,v 1.16 2006/10/13 19:53:15 jact Exp $
+ * @version   CVS: $Id: connection_del.php,v 1.17 2006/12/14 22:39:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,6 +29,10 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  require_once("../lib/Form.php");
+
+  Form::compareToken('../medical/patient_search_form.php');
+
   require_once("../model/Connection_Query.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/Check.php");

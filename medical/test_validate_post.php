@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_validate_post.php,v 1.11 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: test_validate_post.php,v 1.12 2006/12/14 22:45:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -19,6 +19,9 @@
     header("Location: ../index.php");
     exit();
   }
+
+  require_once("../lib/Form.php");
+  Form::compareToken($errorLocation);
 
   require_once("../lib/File.php");
 

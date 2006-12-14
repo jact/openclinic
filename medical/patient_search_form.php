@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_form.php,v 1.13 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: patient_search_form.php,v 1.14 2006/12/14 22:41:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -51,6 +51,8 @@
   {
     HTML::message(sprintf(_("Patient, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
   }
+
+  $tokenForm = Form::generateToken(); // for 2 forms (patient, problem)
 
   /**
    * Patient search form

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search_fields.php,v 1.15 2006/04/03 18:59:30 jact Exp $
+ * @version   CVS: $Id: problem_search_fields.php,v 1.16 2006/12/14 22:43:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -42,7 +42,7 @@
   $tbody[] = array($row);
 
   $row = '* ' . Form::strText("search_text_problem", 40, "", array('maxlength' => 120));
-  $row .= Form::strButton("submit_problem", _("Search"));
+  $row .= Form::strButton("search_problem", _("Search"));
 
   $tbody[] = array($row);
 
@@ -68,6 +68,8 @@
 
   $row .= Form::strSelect("limit_problem", $array);
   unset($array);
+
+  $row .= str_replace('id="token_form"', 'id="token_form_2"', $tokenForm); // defined in patient_search_form.php
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
