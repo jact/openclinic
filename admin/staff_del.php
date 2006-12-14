@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del.php,v 1.14 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: staff_del.php,v 1.15 2006/12/14 22:27:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,6 +30,10 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  require_once("../lib/Form.php");
+
+  Form::compareToken($returnLocation);
+
   require_once("../model/Staff_Query.php");
 
   /**

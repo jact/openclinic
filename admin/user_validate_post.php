@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_validate_post.php,v 1.10 2006/03/28 19:15:33 jact Exp $
+ * @version   CVS: $Id: user_validate_post.php,v 1.11 2006/12/14 22:32:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -19,6 +19,9 @@
     header("Location: ../index.php");
     exit();
   }
+
+  require_once("../lib/Form.php");
+  Form::compareToken($errorLocation);
 
   $user->setIdMember($_POST["id_member"]);
   $_POST["id_member"] = $user->getIdMember();

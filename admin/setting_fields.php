@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_fields.php,v 1.24 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: setting_fields.php,v 1.25 2006/12/14 22:27:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -112,7 +112,10 @@
   $row .= _("items per page") . "**";
   $tbody[] = $row;
 
-  $tfoot = array(Form::strButton("button1", _("Update")));
+  $tfoot = array(
+    Form::strButton("update", _("Update"))
+    . Form::generateToken()
+  );
 
   Form::fieldset($title, $tbody, $tfoot);
 ?>

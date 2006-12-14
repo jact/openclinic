@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit.php,v 1.10 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: setting_edit.php,v 1.11 2006/12/14 22:27:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,6 +29,10 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  require_once("../lib/Form.php");
+
+  Form::compareToken('../admin/setting_edit_form.php');
+
   require_once("../model/Setting_Query.php");
 
   /**

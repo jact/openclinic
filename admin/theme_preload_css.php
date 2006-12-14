@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.19 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.20 2006/12/14 22:30:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -35,6 +35,12 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
+
+  if (count($_POST) > 0)
+  {
+    Form::compareToken($returnLocation);
+  }
+
   require_once("../lib/Check.php");
 
   if (!empty($_FILES['css_filename']['name']) && $_FILES['css_filename']['size'] > 0)
@@ -93,6 +99,7 @@
   $tfoot = array(
     Form::strButton("button1", _("Submit"))
     . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
+    . Form::generateToken()
   );
 
   Form::fieldset($title, $tbody, $tfoot);

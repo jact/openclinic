@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_validate_post.php,v 1.10 2006/03/28 19:15:32 jact Exp $
+ * @version   CVS: $Id: staff_validate_post.php,v 1.11 2006/12/14 22:29:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -19,6 +19,9 @@
     header("Location: ../index.php");
     exit();
   }
+
+  require_once("../lib/Form.php");
+  Form::compareToken($errorLocation);
 
   $staff->setMemberType($_POST["member_type"]);
   $_POST["member_type"] = $staff->getMemberType();

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.26 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.27 2006/12/14 22:31:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -107,7 +107,7 @@
   {
     $content = Form::strLabel("id_member_login", _("Select a login to create a new user") . ": ");
     $content .= Form::strSelect("id_member_login", $userArray);
-    $tfoot = array(Form::strButton("button1", _("Create")));
+    $tfoot = array(Form::strButton("new", _("Create")) . Form::generateToken());
   }
 
   $tbody = array($content);
