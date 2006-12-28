@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.22 2006/10/13 20:14:21 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.23 2006/12/28 16:21:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,10 +22,14 @@
   require_once("../lib/Error.php");
   require_once("../lib/Check.php");
 
+  session_start(); // to keep token_form
   //Error::debug($_POST);
+  //Error::debug($_FILES);
 
   if (isset($_POST['install_file']))
   {
+    Form::compareToken('./index.php');
+
     $table = basename($_POST['sql_file']);
     $table = str_replace('.sql', '', $table);
 
@@ -111,10 +115,12 @@
 
     HTML::para(
       Form::strButton("install_file", _("Install file"))
-      . Form::strButton("cancel_install", _("Cancel"), "button", array('onclick' => "parent.location='./index.php'"))
+      . Form::generateToken()
     );
 
     HTML::end('form');
+
+    HTML::para(HTML::strLink(_("Cancel"), './index.php'));
 
     include_once("../install/footer.php");
     exit();

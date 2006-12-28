@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.17 2006/10/13 20:14:34 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.18 2006/12/28 16:21:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,6 +20,12 @@
   require_once("../install/parse_sql_file.php");
   require_once("../model/Setting_Query.php");
   require_once("../lib/Form.php");
+
+  session_start(); // to keep token_form
+  if (isset($_GET["confirm"]) && $_GET["confirm"] == "yes")
+  {
+    Form::compareToken('./index.php');
+  }
 
   HTML::section(1, _("OpenClinic Installation:"));
 
@@ -70,11 +76,11 @@
       );
       HTML::para(
         Form::strButton("continue", _("Continue"))
-        . Form::strButton("cancel", _("Cancel"), "button",
-            array('onclick' => "parent.location='../install/cancel_msg.php'")
-          )
+        . Form::generateToken()
       );
       HTML::end('form');
+
+      HTML::para(HTML::strLink(_("Cancel"), '../install/cancel_msg.php'));
 
       include_once("../install/footer.php");
       exit();
