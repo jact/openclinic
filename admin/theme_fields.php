@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_fields.php,v 1.17 2006/12/14 22:29:36 jact Exp $
+ * @version   CVS: $Id: theme_fields.php,v 1.18 2006/12/28 16:17:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,8 +42,7 @@
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("button1", _("Submit"), "button", array('onclick' => 'editTheme()'))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => 'parent.location=\'' . $returnLocation . '\''))
+    Form::strButton("save", _("Submit"), "button", array('onclick' => 'editTheme();'))
     . Form::generateToken()
   );
 

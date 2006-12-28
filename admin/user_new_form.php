@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_new_form.php,v 1.24 2006/12/14 22:33:19 jact Exp $
+ * @version   CVS: $Id: user_new_form.php,v 1.25 2006/12/28 16:19:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -95,6 +95,8 @@
   HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  HTML::para(HTML::strLink(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

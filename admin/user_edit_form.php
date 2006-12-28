@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.28 2006/12/14 22:33:29 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.29 2006/12/28 16:18:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -149,6 +149,8 @@
   {
     HTML::message(_("Fill password fields only if you want to change it."), OPEN_MSG_INFO);
   }
+
+  HTML::para(HTML::strLink(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

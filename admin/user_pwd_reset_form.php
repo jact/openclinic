@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.26 2006/12/14 22:33:29 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.27 2006/12/28 16:19:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -145,13 +145,14 @@
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("button1", _("Submit"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
+    Form::strButton("change", _("Submit"))
   );
 
   Form::fieldset($title, $tbody, $tfoot);
 
   HTML::end('form');
+
+  HTML::para(HTML::strLink(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_fields.php,v 1.22 2006/12/14 22:31:08 jact Exp $
+ * @version   CVS: $Id: user_fields.php,v 1.23 2006/12/28 16:18:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -89,8 +89,7 @@
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("button1", _("Submit"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
+    Form::strButton("save", _("Submit"))
     . Form::generateToken()
   );
 

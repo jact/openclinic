@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del_confirm.php,v 1.17 2006/12/14 22:30:37 jact Exp $
+ * @version   CVS: $Id: user_del_confirm.php,v 1.18 2006/12/28 16:18:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -72,7 +72,6 @@
 
   $tfoot = array(
     Form::strButton("delete", _("Delete"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
     . Form::generateToken()
   );
 
@@ -81,6 +80,8 @@
   Form::fieldset($title, $tbody, $tfoot, $options);
 
   HTML::end('form');
+
+  HTML::para(HTML::strLink(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>

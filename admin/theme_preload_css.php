@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.20 2006/12/14 22:30:02 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.21 2006/12/28 16:18:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -97,8 +97,7 @@
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("button1", _("Submit"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
+    Form::strButton("preload", _("Submit"))
     . Form::generateToken()
   );
 
@@ -106,6 +105,8 @@
   HTML::end('form');
 
   HTML::message('* ' . _("Note: The fields with * are required."));
+
+  HTML::para(HTML::strLink(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>
