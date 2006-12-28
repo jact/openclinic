@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_fields.php,v 1.16 2006/12/14 22:40:11 jact Exp $
+ * @version   CVS: $Id: history_family_fields.php,v 1.17 2006/12/28 16:24:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -39,7 +39,6 @@
 
   $tfoot = array(
     Form::strButton("update", _("Update"))
-    . Form::strButton("return", _("Return"), "button", array('onclick' => "parent.location='" . $returnLocation . "'"))
     . Form::generateToken()
   );
 

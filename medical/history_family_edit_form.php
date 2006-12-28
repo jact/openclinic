@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_edit_form.php,v 1.17 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: history_family_edit_form.php,v 1.18 2006/12/28 16:24:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -120,6 +120,8 @@
   require_once("../medical/history_family_fields.php");
 
   HTML::end('form');
+
+  HTML::para(HTML::strLink(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors
