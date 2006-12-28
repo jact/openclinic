@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.28 2006/12/14 22:42:59 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.29 2006/12/28 16:29:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -116,6 +116,7 @@
   Form::hidden("page", $currentPage);
   Form::hidden("logical_problem", $logical);
   Form::hidden("limit_problem", $limit);
+  echo Form::generateToken();
   HTML::end('form');
 
   /**
