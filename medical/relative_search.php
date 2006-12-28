@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.28 2006/12/14 22:44:27 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.29 2006/12/28 16:30:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -241,8 +241,7 @@
 
   $tfoot = array(
     0 => HTML::strLink(_("Select all"), '#', null, array('onclick' => "setCheckboxes(1, 'check[]', true); return false;")) . ' / ' . HTML::strLink(_("Unselect all"), '#', null, array('onclick' => "setCheckboxes(1, 'check[]', false); return false;")),
-    1 => Form::strButton("add", _("Add selected to Relatives List")),
-    2 => Form::generateToken()
+    1 => Form::strButton("add", _("Add selected to Relatives List")) . Form::generateToken(),
   );
 
   HTML::table($thead, $tbody, $tfoot, $options);
