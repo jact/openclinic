@@ -6,20 +6,46 @@
  *  - admin/user_new_form.php
  *  - admin/user_edit_form.php
  *  - admin/user_pwd_reset_form.php
- *  - shared/login_form.php
+ *  - auth/login_form.php
  *
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: password.php,v 1.6 2006/10/13 20:10:00 jact Exp $
+ * @version   CVS: $Id: password.php,v 1.7 2006/12/28 16:32:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once("../config/environment.php");
 header("Content-Type: text/javascript; charset=" . OPEN_CHARSET);
 ?>
+addEvent(window, 'load', initMd5Login, false); // event.js included!
+
+/**
+ * void initMd5Login(void)
+ */
+function initMd5Login()
+{
+  f = document.getElementById('loginForm');
+  if (f == null)
+  {
+    f = document.getElementById('userNew');
+  }
+  if (f == null)
+  {
+    f = document.getElementById('userEdit');
+  }
+  if (f == null)
+  {
+    f = document.getElementById('userPwd');
+  }
+  if (f != null)
+  {
+    f.onsubmit = function () {return md5Login(this);};
+  }
+}
+
 /**
  * bool md5Login(string f)
  *
