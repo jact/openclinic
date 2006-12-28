@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.2 2006/10/14 11:18:24 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.3 2006/12/28 16:33:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -57,6 +57,9 @@
 
   if (isset($isMd5) && $isMd5)
   {
+    HTML::start('script', array('src' => '../js/event.js', 'type' => 'text/javascript', 'defer' => true));
+    HTML::end('script');
+
     HTML::start('script', array('src' => '../js/md5.js', 'type' => 'text/javascript', 'defer' => true));
     HTML::end('script');
 
