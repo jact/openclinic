@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_stats.php,v 1.12 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: log_stats.php,v 1.13 2007/01/15 22:33:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -83,17 +83,17 @@
 
   switch ($option)
   {
-    case "yearly":
-      showMonthStats($table, intval($_GET['year']));
-      showLinks($table);
-      break;
-
     case "monthly":
-      showDailyStats($table, intval($_GET['year']), intval($_GET['month']));
+      showMonthlyStats($table, intval($_GET['year']));
       showLinks($table);
       break;
 
     case "daily":
+      showDailyStats($table, intval($_GET['year']), intval($_GET['month']));
+      showLinks($table);
+      break;
+
+    case "hourly":
       showHourlyStats($table, intval($_GET['year']), intval($_GET['month']), intval($_GET['day']));
       showLinks($table);
       break;
