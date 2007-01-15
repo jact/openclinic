@@ -7,10 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_lib.php,v 1.16 2006/12/28 16:34:34 jact Exp $
+ * @version   CVS: $Id: log_lib.php,v 1.17 2007/01/15 22:35:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
+ * @todo static class
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -19,19 +20,18 @@
     exit();
   }
 
-  require_once("../model/DbConnection.php");
+  require_once("../model/LogStats_Query.php");
   require_once("../lib/HTML.php");
 
 /**
  * Functions:
  *  string percBar(int $pperc, int $scale = 1, string $label = "")
- *  void showYearStats(string $table)
- *  void showMonthStats(string $table, int $year)
+ *  void showYearlyStats(string $table)
+ *  void showMonthlyStats(string $table, int $year)
  *  void showDailyStats(string $table, int $year, int $month)
  *  void showHourlyStats(string $table, int $year, int $month, int $day)
  *  void stats(string $table)
  *  void showLinks(string $table)
- * @todo class LogStats para las consultas
  */
 
 /*
@@ -86,7 +86,7 @@ function percBar($pperc, $scale = 1, $label = "")
 }
 
 /*
- * void showYearStats(string $table)
+ * void showYearlyStats(string $table)
  *
  * Draws a table with yearly stats
  *
@@ -94,20 +94,18 @@ function percBar($pperc, $scale = 1, $label = "")
  * @return void
  * @access public
  */
-function showYearStats($table)
+function showYearlyStats($table)
 {
-  $auxConn = new DbConnection(); // new LogStats($table)
-  $auxConn->connect();
+  $logQ = new LogStats_Query($table);
+  $logQ->connect();
 
-  $query = "SELECT COUNT(*) AS total_hits_year FROM " . $table . "_log_tbl";
-  $auxConn->exec($query); // LogStats->yearHits()
-  list($totalHitsYear) = $auxConn->fetchRow(MYSQL_NUM);
+  $totalHits = $logQ->totalHits();
 
-  HTML::section(4, sprintf(_("Yearly Stats: %d hits"), $totalHitsYear));
+  HTML::section(4, sprintf(_("Yearly Stats: %d hits"), $totalHits));
 
-  if ($totalHitsYear <= 0)
+  if ($totalHits == 0)
   {
-    $auxConn->close();
+    $logQ->close();
     HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
 
     return;
@@ -123,23 +121,21 @@ function showYearStats($table)
     1 => array('nowrap' => 1)
   );
 
-  $query = "SELECT YEAR(access_date), COUNT(*) FROM " . $table . "_log_tbl";
-  $query .= " GROUP BY 1 ORDER BY 1"; // LogStats->year()
-  $auxConn->exec($query);
+  $array = $logQ->hitsByYear();
 
   $tbody = array();
-  while (list($year, $hits) = $auxConn->fetchRow(MYSQL_NUM))
+  foreach ($array as $year => $hits)
   {
     $row = HTML::strLink($year, $_SERVER['PHP_SELF'],
       array(
         'table' => $table,
-        'option' => 'yearly',
+        'option' => 'monthly',
         'year' => $year
       )
     );
     $row .= OPEN_SEPARATOR;
-    $widthImage = round(100 * $hits / $totalHitsYear, 0);
-    $percent = substr(100 * $hits / $totalHitsYear, 0, 5);
+    $widthImage = round(100 * $hits / $totalHits, 0);
+    $percent = substr(100 * $hits / $totalHits, 0, 5);
     $row .= percBar($widthImage);
     $row .= ' ' . $percent . '% (' . HTML::strLink($hits, '../admin/log_' . $table . '_list.php', array('year' => $year)) . ')';
 
@@ -147,13 +143,13 @@ function showYearStats($table)
   }
   HTML::table($thead, $tbody, null, $options);
 
-  $auxConn->freeResult();
-  $auxConn->close();
-  unset($auxConn);
+  $logQ->freeResult();
+  $logQ->close();
+  unset($logQ);
 }
 
 /*
- * void showMonthStats(string $table, int $year)
+ * void showMonthlyStats(string $table, int $year)
  *
  * Draws a table with monthly stats
  *
@@ -162,21 +158,18 @@ function showYearStats($table)
  * @return void
  * @access public
  */
-function showMonthStats($table, $year)
+function showMonthlyStats($table, $year)
 {
-  $auxConn = new DbConnection(); // new LogStats($table)
-  $auxConn->connect();
+  $logQ = new LogStats_Query($table);
+  $logQ->connect();
 
-  $query = "SELECT COUNT(*) AS total_hits_month FROM " . $table . "_log_tbl";
-  $query .= " WHERE YEAR(access_date)='" . $year . "'";
-  $auxConn->exec($query); // LogStats->monthHits($year)
-  list($totalHitsMonth) = $auxConn->fetchRow(MYSQL_NUM);
+  $totalHits = $logQ->yearHits($year);
 
-  HTML::section(4, sprintf(_("Monthly Stats for %d: %d hits"), intval($year), $totalHitsMonth));
+  HTML::section(4, sprintf(_("Monthly Stats for %d: %d hits"), intval($year), $totalHits));
 
-  if ($totalHitsMonth <= 0)
+  if ($totalHits == 0)
   {
-    $auxConn->close();
+    $logQ->close();
     HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
 
     return;
@@ -192,27 +185,24 @@ function showMonthStats($table, $year)
     1 => array('nowrap' => 1)
   );
 
-  $query = "SELECT MONTH(access_date), COUNT(*) FROM " . $table . "_log_tbl";
-  $query .= " WHERE YEAR(access_date)='" . $year . "'";
-  $query .= " GROUP BY DATE_FORMAT(access_date, '%Y-%m')";
-  $auxConn->exec($query); // LogStats->month($year)
+  $array = $logQ->yearHitsByMonth($year);
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
   $tbody = array();
-  while (list($month, $hits) = $auxConn->fetchRow(MYSQL_NUM))
+  foreach ($array as $month => $hits)
   {
     $row = HTML::strLink($months[intval($month) - 1], $_SERVER['PHP_SELF'],
       array(
         'table' => $table,
-        'option' => 'monthly',
+        'option' => 'daily',
         'year' => $year,
         'month' => $month
       )
     );
     $row .= OPEN_SEPARATOR;
-    $widthImage = round(100 * $hits / $totalHitsMonth, 0);
-    $percent = substr(100 * $hits / $totalHitsMonth, 0, 5);
+    $widthImage = round(100 * $hits / $totalHits, 0);
+    $percent = substr(100 * $hits / $totalHits, 0, 5);
     $row .= percBar($widthImage);
     $row .= ' ' . $percent . '% (' . HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
       array(
@@ -225,9 +215,9 @@ function showMonthStats($table, $year)
   }
   HTML::table($thead, $tbody, null, $options);
 
-  $auxConn->freeResult();
-  $auxConn->close();
-  unset($auxConn);
+  $logQ->freeResult();
+  $logQ->close();
+  unset($logQ);
 }
 
 /*
@@ -243,22 +233,18 @@ function showMonthStats($table, $year)
  */
 function showDailyStats($table, $year, $month)
 {
-  $auxConn = new DbConnection(); // new LogStats($table)
-  $auxConn->connect();
+  $logQ = new LogStats_Query($table);
+  $logQ->connect();
 
-  $query = "SELECT COUNT(*) AS total_hits_date FROM " . $table . "_log_tbl";
-  $query .= " WHERE YEAR(access_date)='" . $year . "'";
-  $query .= " AND MONTH(access_date)='" . $month . "'";
-  $auxConn->exec($query); // LogStats->dayHits($year, $month)
-  list($totalHitsDay) = $auxConn->fetchRow(MYSQL_NUM);
+  $totalHits = $logQ->monthHits($year, $month);
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-  HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"), $months[intval($month) - 1], intval($year), $totalHitsDay));
+  HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"), $months[intval($month) - 1], intval($year), $totalHits));
 
-  if ($totalHitsDay <= 0)
+  if ($totalHits == 0)
   {
-    $auxConn->close();
+    $logQ->close();
     HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
 
     return;
@@ -275,20 +261,15 @@ function showDailyStats($table, $year, $month)
     1 => array('nowrap' => 1)
   );
 
-  $query = "SELECT YEAR(access_date), MONTH(access_date), DATE_FORMAT(access_date, '%d'), COUNT(*)";
-  $query .= " FROM " . $table . "_log_tbl";
-  $query .= " WHERE YEAR(access_date)='" . $year . "'";
-  $query .= " AND MONTH(access_date)='" . $month . "'";
-  $query .= " GROUP BY 3 ORDER BY 3";
-  $auxConn->exec($query); // LogStats->day($year, $month)
+  $array = $logQ->monthHitsByDay($year, $month);
 
   $tbody = array();
-  while (list($year, $month, $day, $hits) = $auxConn->fetchRow(MYSQL_NUM))
+  foreach ($array as $day => $hits)
   {
     $row = HTML::strLink(intval($day), $_SERVER['PHP_SELF'],
       array(
         'table' => $table,
-        'option' => 'daily',
+        'option' => 'hourly',
         'year' => $year,
         'month' => $month,
         'day' => $day
@@ -302,8 +283,8 @@ function showDailyStats($table, $year, $month)
     }
     else
     {
-      $widthImage = round(100 * $hits / $totalHitsDay, 0);
-      $percent = substr(100 * $hits / $totalHitsDay, 0, 5);
+      $widthImage = round(100 * $hits / $totalHits, 0);
+      $percent = substr(100 * $hits / $totalHits, 0, 5);
       $hits = HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
         array(
           'year' => $year,
@@ -319,9 +300,9 @@ function showDailyStats($table, $year, $month)
   }
   HTML::table($thead, $tbody, null, $options);
 
-  $auxConn->freeResult();
-  $auxConn->close();
-  unset($auxConn);
+  $logQ->freeResult();
+  $logQ->close();
+  unset($logQ);
 }
 
 /*
@@ -338,27 +319,24 @@ function showDailyStats($table, $year, $month)
  */
 function showHourlyStats($table, $year, $month, $day)
 {
-  $auxConn = new DbConnection(); // new LogStats($table)
-  $auxConn->connect();
+  $logQ = new LogStats_Query($table);
+  $logQ->connect();
 
-  $query = "SELECT COUNT(*) AS total_hits_hour FROM " . $table . "_log_tbl";
-  $query .= " WHERE YEAR(access_date)='" . $year . "'";
-  $query .= " AND MONTH(access_date)='" . $month . "'";
-  $query .= " AND DATE_FORMAT(access_date, '%d')='" . $day . "'";
-  $auxConn->exec($query); // LogStats->hourHits($year, $month, $day)
-  list($totalHitsHour) = $auxConn->fetchRow(MYSQL_NUM);
+  $totalHits = $logQ->dayHits($year, $month, $day);
 
   $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-  HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"), $months[intval($month) - 1], intval($day), intval($year), $totalHitsHour));
+  HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"), $months[intval($month) - 1], intval($day), intval($year), $totalHits));
 
-  if ($totalHitsHour <= 0)
+  if ($totalHits == 0)
   {
-    $auxConn->close();
+    $logQ->close();
     HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
 
     return;
   }
+
+  $array = $logQ->dayHitsByHour($year, $month, $day);
 
   $thead = array(
     _("Hour"),
@@ -371,51 +349,38 @@ function showHourlyStats($table, $year, $month, $day)
   );
 
   $tbody = array();
-  for ($k = 0; $k <= 23; $k++)
+  foreach ($array as $hour => $hits)
   {
-    $query = "SELECT HOUR(access_date), COUNT(*) FROM " . $table . "_log_tbl";
-    $query .= " WHERE YEAR(access_date)='" . $year . "'";
-    $query .= " AND MONTH(access_date)='" . $month . "'";
-    $query .= " AND DATE_FORMAT(access_date, '%d')='" . $day . "'";
-    $query .= " AND HOUR(access_date)='" . $k . "'";
-    $query .= " GROUP BY DATE_FORMAT(access_date, '%Y-%m-%d')";
-
-    $auxConn->exec($query); // LogStats->hour($year, $month, $day)
-    if ($auxConn->numRows() > 0)
+    $row = sprintf("%02d:00 - %02d:59", $hour, $hour);
+    $row .= OPEN_SEPARATOR;
+    if ($hits == 0)
     {
-      list($hour, $hits) = $auxConn->fetchRow(MYSQL_NUM);
-
-      $row = sprintf("%02d:00 - %02d:59", $k, $k);
-      $row .= OPEN_SEPARATOR;
-      if ($hits == 0)
-      {
-        $widthImage = 0;
-        $percent = 0;
-      }
-      else
-      {
-        $widthImage = round(100 * $hits / $totalHitsHour, 0);
-        $percent = substr(100 * $hits / $totalHitsHour, 0, 5);
-        $hits = HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
-          array(
-            'year' => $year,
-            'month' => $month,
-            'day' => $day,
-            'hour', $k
-          )
-        );
-      }
-      $row .= percBar($widthImage);
-      $row .= ' ' . $percent . '% (' . $hits . ')';
-
-      $tbody[] = explode(OPEN_SEPARATOR, $row);
+      $widthImage = 0;
+      $percent = 0;
     }
+    else
+    {
+      $widthImage = round(100 * $hits / $totalHits, 0);
+      $percent = substr(100 * $hits / $totalHits, 0, 5);
+      $hits = HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
+        array(
+          'year' => $year,
+          'month' => $month,
+          'day' => $day,
+          'hour', $hour
+        )
+      );
+    }
+    $row .= percBar($widthImage);
+    $row .= ' ' . $percent . '% (' . $hits . ')';
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   }
   HTML::table($thead, $tbody, null, $options);
 
-  $auxConn->freeResult();
-  $auxConn->close();
-  unset($auxConn);
+  $logQ->freeResult();
+  $logQ->close();
+  unset($logQ);
 }
 
 /*
@@ -429,16 +394,13 @@ function showHourlyStats($table, $year, $month, $day)
  */
 function stats($table)
 {
-  $auxConn = new DbConnection(); // new LogStats($table)
-  $auxConn->connect();
+  $logQ = new LogStats_Query($table);
+  $logQ->connect();
 
-  $query = "SELECT COUNT(*) FROM " . $table . "_log_tbl";
-  $auxConn->exec($query); // LogStats->hits()
-  list($total) = $auxConn->fetchRow(MYSQL_NUM);
-
-  if ($total <= 0)
+  $total = $logQ->totalHits();
+  if ($total == 0)
   {
-    $auxConn->close();
+    $logQ->close();
     HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
 
     return;
@@ -461,46 +423,49 @@ function stats($table)
   $sectionTitle .= ': ' . $total . ' ' . strtolower(_("Hits"));
   HTML::section(3, $sectionTitle);
 
-  $query = "SELECT YEAR(access_date), MONTH(access_date), COUNT(*) FROM " . $table . "_log_tbl";
-  $query .= " GROUP BY 1, 2";
-  $query .= " ORDER BY 3 DESC";
-  $query .= " LIMIT 0, 1";
-  $auxConn->exec($query); // LogStats->busiestMonth()
-  list($year, $month, $hits) = $auxConn->fetchRow(MYSQL_NUM);
+  $array = $logQ->busiestYear();
+  if (is_array($array))
+  {
+    list($year, $hits) = $array;
 
-  $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
+    HTML::para(sprintf(_("Busiest Year: %d (%d hits)"), intval($year), $hits));
+  }
 
-  HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits));
+  $array = $logQ->busiestMonth();
+  if (is_array($array))
+  {
+    list($year, $month, $hits) = $array;
 
-  $query = "SELECT YEAR(access_date), MONTH(access_date), DATE_FORMAT(access_date, '%d'), COUNT(*)";
-  $query .= " FROM " . $table . "_log_tbl";
-  $query .= " GROUP BY 1, 2, 3";
-  $query .= " ORDER BY 4 DESC";
-  $query .= " LIMIT 0, 1";
-  $auxConn->exec($query); // LogStats->busiestDay()
-  list($year, $month, $day, $hits) = $auxConn->fetchRow(MYSQL_NUM);
+    $months = array(_("January"), _("February"), _("March"), _("April"), _("May"), _("June"), _("July"), _("August"), _("September"), _("October"), _("November"), _("December"));
 
-  HTML::para(sprintf(_("Busiest Day: %d %s %d (%d hits)"), intval($day), $months[intval($month) - 1], intval($year), $hits));
+    HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits));
+  }
 
-  $query = "SELECT YEAR(access_date), MONTH(access_date), DATE_FORMAT(access_date, '%d'), HOUR(access_date), COUNT(*)";
-  $query .= " FROM " . $table . "_log_tbl";
-  $query .= " GROUP BY 1, 2, 3, 4";
-  $query .= " ORDER BY 5 DESC";
-  $query .= " LIMIT 0, 1";
-  $auxConn->exec($query); // LogStats->busiestHour()
-  list($year, $month, $day, $hour, $hits) = $auxConn->fetchRow(MYSQL_NUM);
+  $array = $logQ->busiestDay();
+  if (is_array($array))
+  {
+    list($year, $month, $day, $hits) = $array;
 
-  $hour = sprintf("%02d:00 - %02d:59", $hour, $hour);
-  HTML::para(sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"), $hour, $months[intval($month) - 1], intval($day), intval($year), $hits));
+    HTML::para(sprintf(_("Busiest Day: %d %s %d (%d hits)"), intval($day), $months[intval($month) - 1], intval($year), $hits));
+  }
 
-  $auxConn->freeResult();
-  $auxConn->close();
-  unset($auxConn);
+  $array = $logQ->busiestHour();
+  if (is_array($array))
+  {
+    list($year, $month, $day, $hour, $hits) = $array;
+
+    $hour = sprintf("%02d:00 - %02d:59", $hour, $hour);
+    HTML::para(sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"), $hour, $months[intval($month) - 1], intval($day), intval($year), $hits));
+  }
+
+  $logQ->freeResult();
+  $logQ->close();
+  unset($logQ);
 
   HTML::rule();
-  showYearStats($table);
+  showYearlyStats($table);
   HTML::rule();
-  showMonthStats($table, intval($arrToday[0]));
+  showMonthlyStats($table, intval($arrToday[0]));
   HTML::rule();
   showDailyStats($table, intval($arrToday[0]), intval($arrToday[1]));
   HTML::rule();
