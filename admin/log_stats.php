@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_stats.php,v 1.13 2007/01/15 22:33:47 jact Exp $
+ * @version   CVS: $Id: log_stats.php,v 1.14 2007/01/29 16:03:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -23,7 +23,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../lib/log_lib.php");
+  require_once("../lib/LogStats.php");
   require_once("../lib/Check.php");
 
   /**
@@ -84,22 +84,22 @@
   switch ($option)
   {
     case "monthly":
-      showMonthlyStats($table, intval($_GET['year']));
-      showLinks($table);
+      LogStats::monthly($table, intval($_GET['year']));
+      LogStats::links($table);
       break;
 
     case "daily":
-      showDailyStats($table, intval($_GET['year']), intval($_GET['month']));
-      showLinks($table);
+      LogStats::daily($table, intval($_GET['year']), intval($_GET['month']));
+      LogStats::links($table);
       break;
 
     case "hourly":
-      showHourlyStats($table, intval($_GET['year']), intval($_GET['month']), intval($_GET['day']));
-      showLinks($table);
+      LogStats::hourly($table, intval($_GET['year']), intval($_GET['month']), intval($_GET['day']));
+      LogStats::links($table);
       break;
 
     default:
-      stats($table);
+      LogStats::all($table);
       break;
   }
 
