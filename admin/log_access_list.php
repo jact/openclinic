@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_access_list.php,v 1.19 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: log_access_list.php,v 1.20 2007/01/29 16:52:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -53,7 +53,7 @@
    */
   $links = array(
     _("Admin") => "../admin/index.php",
-    _("Logs") => "../admin/log_stats.php?table=access",
+    _("Log Statistics") => "../admin/log_stats.php?table=access",
     $title => ""
   );
   HTML::breadCrumb($links, "icon logIcon");
