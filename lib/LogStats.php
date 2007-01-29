@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.1 2007/01/29 16:02:13 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.2 2007/01/29 16:28:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -22,6 +22,7 @@
  *
  * Methods:
  *  string _percBar(int $percentage, int $scale = 1, string $label = "")
+ *  array _getMonths(void)
  *  void yearly(string $table)
  *  void monthly(string $table, int $year)
  *  void daily(string $table, int $year, int $month)
@@ -85,6 +86,34 @@ class LogStats
     $html = str_replace("\n", '', $html);
 
     return $html;
+  }
+
+  /*
+   * array _getMonths(void)
+   *
+   * Returns an array with month names
+   *
+   * @return array
+   * @access private
+   */
+  function _getMonths()
+  {
+    $months = array(
+      _("January"),
+      _("February"),
+      _("March"),
+      _("April"),
+      _("May"),
+      _("June"),
+      _("July"),
+      _("August"),
+      _("September"),
+      _("October"),
+      _("November"),
+      _("December")
+    );
+
+    return $months;
   }
 
   /*
@@ -189,20 +218,7 @@ class LogStats
 
     $array = $logQ->yearHitsByMonth($year);
 
-    $months = array(
-      _("January"),
-      _("February"),
-      _("March"),
-      _("April"),
-      _("May"),
-      _("June"),
-      _("July"),
-      _("August"),
-      _("September"),
-      _("October"),
-      _("November"),
-      _("December")
-    );
+    $months = LogStats::_getMonths();
 
     $tbody = array();
     foreach ($array as $month => $hits)
@@ -253,20 +269,7 @@ class LogStats
 
     $totalHits = $logQ->monthHits($year, $month);
 
-    $months = array(
-      _("January"),
-      _("February"),
-      _("March"),
-      _("April"),
-      _("May"),
-      _("June"),
-      _("July"),
-      _("August"),
-      _("September"),
-      _("October"),
-      _("November"),
-      _("December")
-    );
+    $months = LogStats::_getMonths();
 
     HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"), $months[intval($month) - 1], intval($year), $totalHits));
 
@@ -352,20 +355,7 @@ class LogStats
 
     $totalHits = $logQ->dayHits($year, $month, $day);
 
-    $months = array(
-      _("January"),
-      _("February"),
-      _("March"),
-      _("April"),
-      _("May"),
-      _("June"),
-      _("July"),
-      _("August"),
-      _("September"),
-      _("October"),
-      _("November"),
-      _("December")
-    );
+    $months = LogStats::_getMonths();
 
     HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"), $months[intval($month) - 1], intval($day), intval($year), $totalHits));
 
@@ -476,21 +466,7 @@ class LogStats
     if (is_array($array))
     {
       list($year, $month, $hits) = $array;
-
-      $months = array(
-        _("January"),
-        _("February"),
-        _("March"),
-        _("April"),
-        _("May"),
-        _("June"),
-        _("July"),
-        _("August"),
-        _("September"),
-        _("October"),
-        _("November"),
-        _("December")
-      );
+      $months = LogStats::_getMonths();
 
       HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits));
     }
