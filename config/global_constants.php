@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: global_constants.php,v 1.1 2006/10/13 19:57:01 jact Exp $
+ * @version   CVS: $Id: global_constants.php,v 1.2 2007/01/29 15:24:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -85,13 +85,11 @@
    *
    * OPEN_EXEC_TIME_LIMIT - to dump proccesses
    * OPEN_VISITED_ITEMS - number of items of visited patients list
-   * OPEN_ALLOWED_HTML_TAGS - tags which should not be stripped by strip_tags() function
    * OPEN_FIELD_PREVIEW_LIMIT - max lenght to preview text fields
    * OPEN_SEPARATOR - separation character in explode() implode() functions
    */
   define("OPEN_EXEC_TIME_LIMIT", 300);
   define("OPEN_VISITED_ITEMS", 3);
-  define("OPEN_ALLOWED_HTML_TAGS", "<a><b><blockquote><br><code><div><em><i><li><ol><p><pre><strike><strong><sub><sup><tt><u><ul><hr>");
   define("OPEN_FIELD_PREVIEW_LIMIT", 30);
   define("OPEN_SEPARATOR", "|");
 ?>
