@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.23 2006/12/28 16:21:22 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.24 2007/01/29 15:26:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -137,7 +137,7 @@
   if ($installQ->isError())
   {
     HTML::para(_("The connection to the database failed with the following error:"));
-    HTML::tag('pre', $installQ->getDbError(), array('class' => 'error'));
+    HTML::message($installQ->getDbError(), OPEN_MSG_ERROR);
     HTML::rule();
 
     HTML::para(_("Please make sure the following has been done before running this install script."));
@@ -166,6 +166,7 @@
   $installQ->close();
 
   HTML::para(HTML::strLink(_("Create OpenClinic tables"), './install.php'));
+  HTML::para(HTML::strLink(_("Upgrade OpenClinic database"), './upgrade.php'));
 
   HTML::rule();
 
