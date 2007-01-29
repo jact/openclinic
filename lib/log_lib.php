@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_lib.php,v 1.17 2007/01/15 22:35:15 jact Exp $
+ * @version   CVS: $Id: log_lib.php,v 1.18 2007/01/29 15:20:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -25,7 +25,7 @@
 
 /**
  * Functions:
- *  string percBar(int $pperc, int $scale = 1, string $label = "")
+ *  string percBar(int $percentage, int $scale = 1, string $label = "")
  *  void showYearlyStats(string $table)
  *  void showMonthlyStats(string $table, int $year)
  *  void showDailyStats(string $table, int $year, int $month)
@@ -35,23 +35,23 @@
  */
 
 /*
- * string percBar(int $pperc, int $scale = 1, string $label = "")
+ * string percBar(int $percentage, int $scale = 1, string $label = "")
  *
  * Returns a percentage bar
  *
- * @param int $pperc
+ * @param int $percentage
  * @param int $scale (optional)
  * @param string $label (optional) alternative text of the images
  * @return string
  * @access public
  */
-function percBar($pperc, $scale = 1, $label = "")
+function percBar($percentage, $scale = 1, $label = "")
 {
   //$leftSize = getimagesize("../img/leftbar.gif");
   //$mainSize = getimagesize("../img/mainbar.gif");
   //$rightSize = getimagesize("../img/rightbar.gif");
 
-  $perc = round($scale * $pperc, 0);
+  $perc = round($scale * $percentage, 0);
 
   $html = HTML::strStart('img',
     array(
