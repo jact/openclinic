@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: parse_sql_file.php,v 1.16 2006/10/13 20:14:47 jact Exp $
+ * @version   CVS: $Id: parse_sql_file.php,v 1.17 2007/01/29 15:27:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -110,7 +110,7 @@ function parseSQLFile($file, $table, $drop = true)
     if ($char == ";" && $outBracket)
     {
       $result = $installQ->exec($sqlSentence);
-      if ($installQ->isError())
+      if ($installQ->isError() && $installQ->getDbErrno() != 1060) // duplicate column
       {
         HTML::para(sprintf(_("Process sql [%s]"), $sqlSentence));
         $installQ->close();
