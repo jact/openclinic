@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Search.php,v 1.9 2006/12/28 16:24:08 jact Exp $
+ * @version   CVS: $Id: Search.php,v 1.10 2007/01/29 15:22:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -102,7 +102,7 @@ class Search
     }
     else
     {
-      $pageLink = HTML::strLink('%s', htmlspecialchars($url) . ((strpos($url, '?') !== false) ? '&amp;' : '?') . 'page=%d');
+      $pageLink = HTML::strLink('%s', htmlspecialchars(str_replace('%', '%%', $url)) . ((strpos($url, '?') !== false) ? '&amp;' : '?') . 'page=%d');
     }
 
     $pageString = '';
@@ -182,6 +182,11 @@ class Search
     if ($currentPage < $pageCount)
     {
       $pageString .= ' | ' . sprintf($pageLink, $currentPage + 1, _("next") . '&raquo;');
+    }
+
+    if ( !empty($url) )
+    {
+      $pageString = str_replace('%%', '%', $pageString);
     }
 
     HTML::para(_("Result Pages") . ': ' . $pageString, array('class' => 'pageLinks'));
