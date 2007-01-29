@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Check.php,v 1.6 2006/03/26 17:41:14 jact Exp $
+ * @version   CVS: $Id: Check.php,v 1.7 2007/01/29 15:23:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,6 +64,11 @@ define("CHK_IPV6",        0x200000);
  * Input Filter extension: Rasmus Lerdorf, Derick Rethans
  */
 define("CHK_NO_FILTER", 0);
+
+/**
+ * CHK_ALLOWED_HTML_TAGS - tags which should not be stripped by strip_tags() function
+ */
+define("CHK_ALLOWED_HTML_TAGS", "<a><b><blockquote><br><code><div><em><i><li><ol><p><pre><strike><strong><sub><sup><tt><u><ul><hr>");
 
 /**
  * Check set of functions to validate and filter data
@@ -200,7 +205,7 @@ class Check
   {
     if ($allowTags)
     {
-      $value = trim(htmlspecialchars(strip_tags($text, OPEN_ALLOWED_HTML_TAGS)));
+      $value = trim(htmlspecialchars(strip_tags($text, CHK_ALLOWED_HTML_TAGS)));
     }
     else
     {
