@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.2 2007/01/29 16:28:06 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.3 2007/01/29 16:51:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -28,7 +28,7 @@
  *  void daily(string $table, int $year, int $month)
  *  void hourly(string $table, int $year, int $month, int $day)
  *  void all(string $table)
- *  void links(string $table)
+ *  void links(string $table, array $date = null)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -503,21 +503,35 @@ class LogStats
   }
 
   /*
-   * void links(string $table)
+   * void links(string $table, array $date = null)
    *
    * Displays navigation log links
    *
    * @param string $table
+   * @param array $date (optional) array('year' => int[[, 'month' => int], 'day' => int])
    * @return void
    * @access public
    */
-  function links($table)
+  function links($table, $date = null)
   {
-    HTML::para(
-      HTML::strLink(_("Back to Main Statistics"), $_SERVER['PHP_SELF'], array('table' => $table))
-      . ' | '
-      . HTML::strLink(_("Back return"), (isset($_SERVER["HTTP_REFERER"]) ? $_SERVER["HTTP_REFERER"] : '../index.php'))
-    );
+    $page = $_SERVER['PHP_SELF'];
+
+    $array[] = HTML::strLink(_("Main Stats"), $page, array('table' => $table));
+    if (is_array($date) && isset($date['year']) && isset($date['month']))
+    {
+      $array[] = HTML::strLink(_("Monthly Stats"), $page,
+        array('table' => $table, 'option' => 'monthly', 'year' => $date['year'])
+      );
+
+      if (isset($date['day']))
+      {
+        $array[] = HTML::strLink(_("Daily Stats"), $page,
+          array('table' => $table, 'option' => 'daily', 'year' => $date['year'], 'month' => $date['month'])
+        );
+      }
+    }
+
+    HTML::para(implode(' | ', $array));
   }
 } // end class
 ?>
