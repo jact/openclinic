@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.3 2007/01/29 16:51:51 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.4 2007/01/29 17:00:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -157,7 +157,7 @@ class LogStats
     $tbody = array();
     foreach ($array as $year => $hits)
     {
-      $row = HTML::strLink($year, $_SERVER['PHP_SELF'],
+      $row = HTML::strLink($year, '../admin/log_stats.php',
         array(
           'table' => $table,
           'option' => 'monthly',
@@ -223,7 +223,7 @@ class LogStats
     $tbody = array();
     foreach ($array as $month => $hits)
     {
-      $row = HTML::strLink($months[intval($month) - 1], $_SERVER['PHP_SELF'],
+      $row = HTML::strLink($months[intval($month) - 1], '../admin/log_stats.php',
         array(
           'table' => $table,
           'option' => 'daily',
@@ -297,7 +297,7 @@ class LogStats
     $tbody = array();
     foreach ($array as $day => $hits)
     {
-      $row = HTML::strLink(intval($day), $_SERVER['PHP_SELF'],
+      $row = HTML::strLink(intval($day), '../admin/log_stats.php',
         array(
           'table' => $table,
           'option' => 'hourly',
@@ -508,13 +508,13 @@ class LogStats
    * Displays navigation log links
    *
    * @param string $table
-   * @param array $date (optional) array('year' => int[[, 'month' => int], 'day' => int])
+   * @param array $date (optional) array('year' => int[, 'month' => int[, 'day' => int]])
    * @return void
    * @access public
    */
   function links($table, $date = null)
   {
-    $page = $_SERVER['PHP_SELF'];
+    $page = '../admin/log_stats.php';
 
     $array[] = HTML::strLink(_("Main Stats"), $page, array('table' => $table));
     if (is_array($date) && isset($date['year']) && isset($date['month']))
