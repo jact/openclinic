@@ -5,11 +5,13 @@ ALTER TABLE patient_tbl ADD id_member INT UNSIGNED NULL AFTER insurance_company;
 ALTER TABLE patient_tbl DROP collegiate_number;
 
 ALTER TABLE deleted_patient_tbl ADD id_member INT UNSIGNED NULL AFTER insurance_company;
+ALTER TABLE deleted_patient_tbl DROP collegiate_number;
 
 ALTER TABLE problem_tbl ADD id_member INT UNSIGNED NULL AFTER last_update_date;
 ALTER TABLE problem_tbl DROP collegiate_number;
 
 ALTER TABLE deleted_problem_tbl ADD id_member INT UNSIGNED NULL AFTER id_patient;
+ALTER TABLE deleted_problem_tbl DROP collegiate_number;
 
 ALTER TABLE record_log_tbl CHANGE id_key1 affected_row TEXT NOT NULL;
 ALTER TABLE record_log_tbl DROP id_key2;
