@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Access_Page_Query.php,v 1.10 2006/10/13 20:11:02 jact Exp $
+ * @version   CVS: $Id: Access_Page_Query.php,v 1.11 2007/04/24 21:30:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -98,12 +98,7 @@ class Access_Page_Query extends Page_Query
    */
   function searchUser($idUser, $page, $limitFrom = 0)
   {
-    // reset stats
-    $this->_rowNumber = 0;
-    $this->_currentRow = 0;
-    $this->_currentPage = ($page > 1) ? intval($page) : 1;
-    $this->_rowCount = 0;
-    $this->_pageCount = 0;
+    parent::_resetStats($page);
 
     $sql = " FROM " . $this->_table;
     $sql .= " WHERE id_user=" . intval($idUser);
@@ -135,14 +130,8 @@ class Access_Page_Query extends Page_Query
       return false;
     }
 
-    // Calculate stats based on row count
     $array = parent::fetchRow();
-    $this->_rowCount = $array["row_count"];
-    if ($limitFrom > 0 && $limitFrom < $this->_rowCount)
-    {
-      $this->_rowCount = $limitFrom;
-    }
-    $this->_pageCount = (intval($this->_itemsPerPage) > 0) ? ceil($this->_rowCount / $this->_itemsPerPage) : 1;
+    parent::_calculateStats($array["row_count"], $limitFrom);
 
     // Running search sql statement
     return $this->exec($sql);
@@ -165,9 +154,7 @@ class Access_Page_Query extends Page_Query
       return false;
     }
 
-    // increment rowNumber
-    $this->_rowNumber = $this->_rowNumber + 1;
-    $this->_currentRow = $this->_rowNumber + (($this->_currentPage - 1) * $this->_itemsPerPage);
+    parent::_incrementRow();
 
     $access = array();
     $access["login"] = urldecode($array["login"]);
