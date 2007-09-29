@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Search.php,v 1.10 2007/01/29 15:22:17 jact Exp $
+ * @version   CVS: $Id: Search.php,v 1.11 2007/09/29 10:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,6 +36,7 @@ class Search
    * @param string $text string to be exploded
    * @return stringArray
    * @access public
+   * @static
    */
   function explodeQuoted($text)
   {
@@ -86,6 +87,7 @@ class Search
    * @see HTML::strTag()
    * @see HTML::para()
    * @access public
+   * @static
    * @todo optimize code with constants
    * @todo make strPageLinks() function
    */
@@ -199,6 +201,7 @@ class Search
    *
    * @return void
    * @access public
+   * @static
    */
   function changePageJS()
   {

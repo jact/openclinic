@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.4 2007/01/29 17:00:23 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.5 2007/09/29 10:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -124,6 +124,7 @@ class LogStats
    * @param string $table
    * @return void
    * @access public
+   * @static
    */
   function yearly($table)
   {
@@ -188,6 +189,7 @@ class LogStats
    * @param int $year
    * @return void
    * @access public
+   * @static
    */
   function monthly($table, $year)
   {
@@ -261,6 +263,7 @@ class LogStats
    * @param int $month
    * @return void
    * @access public
+   * @static
    */
   function daily($table, $year, $month)
   {
@@ -347,6 +350,7 @@ class LogStats
    * @param int $day
    * @return void
    * @access public
+   * @static
    */
   function hourly($table, $year, $month, $day)
   {
@@ -422,6 +426,7 @@ class LogStats
    * @param string $table
    * @return void
    * @access public
+   * @static
    */
   function all($table)
   {
@@ -511,6 +516,7 @@ class LogStats
    * @param array $date (optional) array('year' => int[, 'month' => int[, 'day' => int]])
    * @return void
    * @access public
+   * @static
    */
   function links($table, $date = null)
   {

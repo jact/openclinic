@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.12 2006/10/09 20:03:44 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.13 2007/09/29 10:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -65,6 +65,7 @@ class HTML
    * @param int $quoteStyle (optional)
    * @return string
    * @access public
+   * @static
    * @since 0.8
    */
   function xmlEntities($text, $quoteStyle = ENT_QUOTES)
@@ -106,6 +107,7 @@ class HTML
    * @param bool $closed (optional) closed or not?
    * @return string HTML start tag
    * @access public
+   * @static
    * @since 0.8
    */
   function strStart($tag, $options = null, $closed = false)
@@ -138,6 +140,7 @@ class HTML
    * @param bool $closed (optional) closed or not?
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function start($tag, $options = null, $closed = false)
@@ -153,6 +156,7 @@ class HTML
    * @param string $tag HTML tag
    * @return string HTML end tag
    * @access public
+   * @static
    * @since 0.8
    */
   function strEnd($tag)
@@ -170,6 +174,7 @@ class HTML
    * @param string $tag HTML tag
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function end($tag)
@@ -187,6 +192,7 @@ class HTML
    * @param array $options (optional)
    * @return string HTML tag with text content
    * @access public
+   * @static
    * @since 0.8
    */
   function strTag($tag, $text, $options = null)
@@ -214,6 +220,7 @@ class HTML
    * @param array $options (optional)
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function tag($tag, $text, $options = null)
@@ -242,6 +249,7 @@ class HTML
    * @param string $caption (optional)
    * @return string html table
    * @access public
+   * @static
    */
   function strTable(&$head, &$body, $foot = null, $options = null, $caption = "")
   {
@@ -396,6 +404,7 @@ class HTML
    * @param string $caption (optional)
    * @return void
    * @access public
+   * @static
    */
   function table(&$head, &$body, $foot = null, $options = null, $caption = "")
   {
@@ -416,6 +425,7 @@ class HTML
    * @param bool $block (optional) if false, inline tag (span), block tag otherwise (p)
    * @return string html message
    * @access public
+   * @static
    */
   function strMessage($text, $type = OPEN_MSG_WARNING, $block = true)
   {
@@ -451,6 +461,7 @@ class HTML
    * @param bool $block (optional) if false, inline tag (span), block tag otherwise (p)
    * @return void
    * @access public
+   * @static
    */
   function message($text, $type = OPEN_MSG_WARNING, $block = true)
   {
@@ -466,6 +477,7 @@ class HTML
    * @param string $class (optional) to put a background-image
    * @return string bread crumb and title page
    * @access public
+   * @static
    * @see strLink
    * @since 0.8
    */
@@ -505,6 +517,7 @@ class HTML
    * @param string $class (optional) to put a background-image
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function breadCrumb(&$links, $class = "")
@@ -523,6 +536,7 @@ class HTML
    * @param array $addendum (optional)
    * @return string HTML anchor link
    * @access public
+   * @static
    * @since 0.8
    */
   function strLink($text, $url, $arg = null, $addendum = null)
@@ -555,6 +569,7 @@ class HTML
    * @param array $addendum (optional)
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function link($text, $url, $arg = null, $addendum = null)
@@ -572,6 +587,7 @@ class HTML
    * @param array $addendum (optional)
    * @return string HTML section
    * @access public
+   * @static
    * @since 0.8
    */
   function strSection($level, $text, $addendum = null)
@@ -592,6 +608,7 @@ class HTML
    * @param array $addendum (optional)
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function section($level, $text, $addendum = null)
@@ -608,6 +625,7 @@ class HTML
    * @param array $addendum (optional)
    * @return string HTML paragraph
    * @access public
+   * @static
    * @since 0.8
    */
   function strPara($text, $addendum = null)
@@ -626,6 +644,7 @@ class HTML
    * @param array $addendum (optional)
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function para($text, $addendum = null)
@@ -641,6 +660,7 @@ class HTML
    * @param array $addendum (optional)
    * @return string HTML horizontal rule
    * @access public
+   * @static
    * @since 0.8
    */
   function strRule($addendum = null)
@@ -656,6 +676,7 @@ class HTML
    * @param array $addendum (optional)
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function rule($addendum = null)
@@ -686,6 +707,7 @@ class HTML
    * @param bool $ordered (optional) ordered list or not
    * @return string HTML ordered or unordered list
    * @access public
+   * @static
    * @since 0.8
    */
   function strItemList(&$items, $addendum = null, $ordered = false)
@@ -728,6 +750,7 @@ class HTML
    * @param bool $ordered (optional) ordered list or not
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function itemList(&$items, $addendum = null, $ordered = false)

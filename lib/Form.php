@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.17 2006/12/14 22:17:32 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.18 2007/09/29 10:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -78,6 +78,7 @@ class Form
    *    );
    * @return string input html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strText($name, $size, $value = "", $addendum = null)
@@ -114,6 +115,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    */
   function text($name, $size, $value = "", $addendum = null)
   {
@@ -131,6 +133,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, ...
    * @return string input html tag
    * @access public
+   * @static
    * @since 0.8
    */
   function strPassword($name, $size, $value = "", $addendum = null)
@@ -151,6 +154,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, ...
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function password($name, $size, $value = "", $addendum = null)
@@ -178,6 +182,7 @@ class Form
    *    );
    * @return string select html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strSelect($name, &$array, $defaultValue = null, $addendum = null)
@@ -251,6 +256,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    */
   function select($name, &$array, $defaultValue = null, $addendum = null)
   {
@@ -276,6 +282,7 @@ class Form
    *    );
    * @return string textarea html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strTextArea($name, $rows, $cols, $value = "", $addendum = null)
@@ -310,6 +317,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    */
   function textArea($name, $rows, $cols, $value = "", $addendum = null)
   {
@@ -331,6 +339,7 @@ class Form
    *    );
    * @return string input html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strHidden($name, $value = "", $addendum = null)
@@ -353,6 +362,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    * @since 0.2
    */
   function hidden($name, $value = "", $addendum = null)
@@ -378,6 +388,7 @@ class Form
    *    );
    * @return string input html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strCheckBox($name, $value, $checked = false, $addendum = null)
@@ -405,6 +416,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    * @since 0.4
    */
   function checkBox($name, $value, $checked = false, $addendum = null)
@@ -430,6 +442,7 @@ class Form
    *    );
    * @return string input html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strRadioButton($name, $value, $checked = false, $addendum = null)
@@ -457,6 +470,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    * @since 0.6
    */
   function radioButton($name, $value, $checked = false, $addendum = null)
@@ -482,6 +496,7 @@ class Form
    *    );
    * @return string input html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strButton($name, $value, $type = "submit", $addendum = "")
@@ -505,6 +520,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    * @since 0.6
    */
   function button($name, $value, $type = "submit", $addendum = "")
@@ -531,6 +547,7 @@ class Form
    *    );
    * @return string input html tag
    * @access public
+   * @static
    * @since 0.7
    * @todo $error
    */
@@ -570,6 +587,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    * @return void
    * @access public
+   * @static
    * @since 0.6
    * @todo $error
    */
@@ -590,6 +608,7 @@ class Form
    * @param int $size (optional) size of the select html tag
    * @return string select html tag
    * @access public
+   * @static
    * @since 0.7
    */
   function strSelectTable($tableName, $fieldCode, $defaultValue = "", $fieldDescription = "", $size = 0)
@@ -644,6 +663,7 @@ class Form
    * @param int $size (optional) size of the select html tag
    * @return void
    * @access public
+   * @static
    */
   function selectTable($tableName, $fieldCode, $defaultValue = "", $fieldDescription = "", $size = 0)
   {
@@ -660,6 +680,7 @@ class Form
    * @param bool $required (optional)
    * @return string label html tag
    * @access public
+   * @static
    * @since 0.8
    */
   function strLabel($field, $text, $required = false)
@@ -685,6 +706,7 @@ class Form
    * @param bool $required (optional)
    * @return void
    * @access public
+   * @static
    * @since 0.8
    */
   function label($field, $text, $required = false)
@@ -708,6 +730,7 @@ class Form
    * @param array $options (optional) options of fieldset
    * @return string html fieldset
    * @access public
+   * @static
    */
   function strFieldset($legend, &$body, $foot = null, $options = null)
   {
@@ -776,6 +799,7 @@ class Form
    * @param array $options (optional) options of fieldset
    * @return void
    * @access public
+   * @static
    */
   function fieldset($legend, &$body, $foot = null, $options = null)
   {
@@ -790,6 +814,7 @@ class Form
    *
    * @return string input hidden field to include in form
    * @access public
+   * @static
    */
   function generateToken()
   {
@@ -809,6 +834,7 @@ class Form
    * @param string $method (optional)
    * @return void
    * @access public
+   * @static
    */
   function compareToken($url, $method = 'post')
   {

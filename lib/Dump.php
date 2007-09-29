@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Dump.php,v 1.2 2006/12/14 22:24:52 jact Exp $
+ * @version   CVS: $Id: Dump.php,v 1.3 2007/09/29 10:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -194,6 +194,7 @@ class Dump
    * @return mixed the "backquoted" database, table or field name if the
    *               current MySQL release is >= 3.23.06, the original one else
    * @access public
+   * @static
    */
   function backQuote($mixedVar, $doIt = true)
   {
@@ -229,6 +230,7 @@ class Dump
    *             (it then requires two more escaped sequences) or not
    * @return string the slashed string
    * @access public
+   * @static
    */
   function addSlashes($text, $isLike = false)
   {
@@ -251,6 +253,7 @@ class Dump
    * @param array $options (optional) (drop, use_backquotes)
    * @return mixed false if error occurs, string with CREATE statement if OK
    * @access public
+   * @static
    * @see DUMP_CRLF, DUMP_MYSQL_INT_VERSION
    */
   function SQLDefinition($db, $table, $options = null)
@@ -419,6 +422,7 @@ class Dump
    * @param array $options (optional) (use_backquotes, show_columns, extended_inserts, from, to)
    * @return mixed false if error occurs, string if OK
    * @access public
+   * @static
    * @see DUMP_CRLF
    */
   function SQLData($db, $table, $options = null)
@@ -468,7 +472,7 @@ class Dump
     $replace    = array('\0', '\n', '\r', '\Z');
     $currentRow = 0;
 
-    @set_time_limit(OPEN_EXEC_TIME_LIMIT);
+    set_time_limit(OPEN_EXEC_TIME_LIMIT);
 
     $buffer = '';
     while ($row = $localConn->fetchRow(MYSQL_NUM))
@@ -542,6 +546,7 @@ class Dump
    * @param array $options (optional) (from, to, what = {excel, csv})
    * @return mixed false if error occurs, string if ok
    * @access public
+   * @static
    * @see DUMP_CRLF
    */
   function CSVData($db, $table, $options = null)
@@ -692,6 +697,7 @@ class Dump
    * @param array $options (optional) (from, to, start_table, end_table)
    * @return mixed false if error occurs, string if ok
    * @access public
+   * @static
    * @see DUMP_CRLF
    */
   function XMLData($db, $table, $options = null)

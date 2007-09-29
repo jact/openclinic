@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: File.php,v 1.6 2006/10/13 20:13:38 jact Exp $
+ * @version   CVS: $Id: File.php,v 1.7 2007/09/29 10:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,6 +38,7 @@ class File
    * @param array $allowedExtensions (optional)
    * @return array associative (in alphabetic order)
    * @access public
+   * @static
    */
   function getDirContent($dir, $subDir = false, $allowedExtensions = null)
   {
@@ -107,6 +108,7 @@ class File
    * @param boolean $secure (optional) to remove execution permissions to file if it is possible
    * @return boolean true if ok, false otherwise
    * @access public
+   * @static
    */
   function upload(&$file, $destinationDir = "", $destinationName = "", $secure = true)
   {
@@ -148,6 +150,7 @@ class File
    * @param array $attachFiles (optional) array containing the filenames to attach like array("file1", "file2")
    * @return mixed boolean or string if a necessary parameter is missing
    * @access public
+   * @static
    */
   function sendMail($from, $fromName, $to, $toName, $subject, $text, $html, $attachFiles = null)
   {

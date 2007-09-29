@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: I18n.php,v 1.8 2006/03/26 17:41:14 jact Exp $
+ * @version   CVS: $Id: I18n.php,v 1.9 2007/09/29 10:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,6 +45,7 @@ class I18n
    * @param string $lang (optional)
    * @return string new language setted
    * @access public
+   * @static
    */
   function setLanguage($lang = "")
   {
@@ -102,6 +103,7 @@ class I18n
    * @param string $lang
    * @return void
    * @access public
+   * @static
    */
   function initLanguage($lang)
   {
@@ -115,6 +117,10 @@ class I18n
       $textDomain = $lang . "-" . OPEN_LANG_FILENAME;
       bindtextdomain($textDomain, realpath(OPEN_LANG_DIR));
       textdomain($textDomain);
+      $nls = I18n::getNLS();
+      bind_textdomain_codeset($textDomain,
+        isset($nls['charset'][$lang]) ? $nls['charset'][$lang] : $nls['default']['charset']
+      );
     }
     else
     {
@@ -130,6 +136,7 @@ class I18n
    * @global array $translation
    * @return void
    * @access public
+   * @static
    */
   function emulateGetText()
   {
@@ -180,6 +187,7 @@ class I18n
    * @param string $lang (optional)
    * @return mixed false if .po file doesn't exist or string with filename if it exists
    * @access public
+   * @static
    */
   function poFilename($lang = "")
   {
@@ -217,6 +225,7 @@ class I18n
    * @param string $lang
    * @return bool returns true if gettext is defined, and the .mo file is found for language, or no gettext, and a .po file is found
    * @access public
+   * @static
    */
   function languageExists($lang)
   {
@@ -244,6 +253,7 @@ class I18n
    * @param string $date (optional) ISO date (Ymd or Y-m-d or YmdHis or Y-m-d H:i:s)
    * @return string returns local formated date
    * @access public
+   * @static
    * @since 0.7
    */
   function localDate($date = "")
@@ -335,6 +345,7 @@ class I18n
    *
    * @return mixed array with available languages or null if empty
    * @access public
+   * @static
    * @since 0.7
    */
   function languageList()
@@ -374,6 +385,7 @@ class I18n
    *
    * @return array (associative)
    * @access public
+   * @static
    * @since 0.6
    */
   function getNLS()
