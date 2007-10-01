@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.2 2006/12/14 22:35:30 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.3 2007/10/01 19:56:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -102,7 +102,7 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
+  //unset($_SESSION["formVar"]); // if discommented, OPEN_MAX_LOGIN_ATTEMPTS does not work!
   unset($_SESSION["formError"]);
 
   //Error::debug($_SESSION, "session variables", true);
