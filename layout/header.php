@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.3 2006/12/28 16:33:28 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.4 2007/10/03 19:37:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,11 +55,14 @@
     true
   );
 
-  if (isset($isMd5) && $isMd5)
+  if ((isset($isMd5) && $isMd5) || (isset($focusFormField) && !empty($focusFormField)))
   {
     HTML::start('script', array('src' => '../js/event.js', 'type' => 'text/javascript', 'defer' => true));
     HTML::end('script');
+  }
 
+  if (isset($isMd5) && $isMd5)
+  {
     HTML::start('script', array('src' => '../js/md5.js', 'type' => 'text/javascript', 'defer' => true));
     HTML::end('script');
 
@@ -67,15 +70,17 @@
     HTML::end('script');
   }
 
+  if (isset($focusFormField) && !empty($focusFormField))
+  {
+    HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
+    HTML::end('script');
+  }
+
   HTML::start('script', array('src' => '../js/pop_window.js', 'type' => 'text/javascript', 'defer' => true));
   HTML::end('script');
 
   HTML::end('head');
-  HTML::start('body',
-    isset($focusFormField) && !empty($focusFormField)
-      ? array('onload' => 'self.focus(); var field = document.getElementById(\'' . $focusFormField . '\'); if (field != null) field.focus();')
-      : null
-  );
+  HTML::start('body');
 
   HTML::start('div', array('id' => 'header'));
   HTML::start('div', array('id' => 'subHeader'));
