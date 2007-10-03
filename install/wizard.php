@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.26 2006/10/14 11:33:52 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.27 2007/10/03 19:35:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -92,7 +92,7 @@
 
   HTML::start('link', array('rel' => 'stylesheet', 'href' => '../css/wizard.css', 'type' => 'text/css'), true);
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../scripts/wizard.js', 'defer' => true));
+  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/wizard.js', 'defer' => true));
   HTML::end('script');
 
   HTML::end('head');
@@ -173,7 +173,7 @@
 
     HTML::section(2, sprintf(_("Step %d of %d: "), 3, 7) . _("MySQL Database Settings"));
 
-    HTML::para(sprintf(_("Install script create OpenClinic database. These following values will be written in %s file. All fields are required."), HTML::strTag('tt', 'config/database_constants.php')));
+    HTML::para(sprintf(_("Install script create OpenClinic database. These following values will be written in %s file. All fields are required."), HTML::strTag('code', 'config/database_constants.php')));
 
     $tbody = array();
 
@@ -457,7 +457,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.26 2006/10/14 11:33:52 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.27 2007/10/03 19:35:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -720,11 +720,16 @@
 
   if (isset($focusFormField) && ( !empty($focusFormField) ))
   {
-    HTML::start('script', array('type' => 'text/javascript'));
-    echo "\n<!--/*--><![CDATA[/*<!--*/\n";
-    echo 'self.focus(); document.forms[0].' . $focusFormField . '.focus();';
-    echo "\n/*]]>*///-->\n";
+    HTML::start('script', array('src' => '../js/event.js', 'type' => 'text/javascript', 'defer' => true));
     HTML::end('script');
+
+    HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
+    HTML::end('script');
+    //HTML::start('script', array('type' => 'text/javascript'));
+    //echo "\n<!--/*--><![CDATA[/*<!--*/\n";
+    //echo 'self.focus(); document.forms[0].' . $focusFormField . '.focus();';
+    //echo "\n/*]]>*///-->\n";
+    //HTML::end('script');
   }
 
   HTML::end('body');
@@ -757,11 +762,11 @@ function _showButton($name, $value, $type = "next")
   if ($type == "next")
   {
     HTML::tag('span', $value);
-    HTML::start('img', array('src' => '../img/arrow_right.png', 'width' => 22, 'height' => 22), true);
+    HTML::start('img', array('src' => '../img/arrow_right.png', 'width' => 22, 'height' => 22, 'alt' => $value), true);
   }
   elseif ($type == "back")
   {
-    HTML::start('img', array('src' => '../img/arrow_left.png', 'width' => 22, 'height' => 22), true);
+    HTML::start('img', array('src' => '../img/arrow_left.png', 'width' => 22, 'height' => 22, 'alt' => $value), true);
     HTML::tag('span', $value);
   }
 
