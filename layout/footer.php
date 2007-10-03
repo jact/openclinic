@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.2 2006/10/14 11:17:13 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.3 2007/10/03 19:37:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -76,7 +76,8 @@
   HTML::para($text);
 
   HTML::para(
-    sprintf('Copyright &copy; 2002-2006 %s',
+    sprintf('Copyright &copy; 2002-%d %s',
+      date("Y"),
       HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.openclinic&#64;gmail.com', null,
         array('accesskey' => 9)
       )
