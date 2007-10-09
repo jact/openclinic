@@ -6,11 +6,94 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_functions.js,v 1.4 2006/03/27 18:32:43 jact Exp $
+ * @version   CVS: $Id: dump_functions.js,v 1.5 2007/10/09 19:31:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
+
+if (typeof addLoadEvent == 'function')
+{
+  addLoadEvent(initDumpForm); // event.js included!
+}
+
+/**
+ * void initDumpForm(void)
+ *
+ * Adds event handlers to dump form elements
+ *
+ * @return void
+ * @since 0.8
+ */
+function initDumpForm()
+{
+  var element = document.getElementById('select_all');
+  if (element != null)
+  {
+    element.onclick = function()
+    {
+      setSelectOptions(0, 'table_select[]', true);
+
+      return false;
+    };
+  }
+
+  element = document.getElementById('unselect_all');
+  if (element != null)
+  {
+    element.onclick = function()
+    {
+      setSelectOptions(0, 'table_select[]', false);
+
+      return false;
+    };
+  }
+
+  element = document.getElementById('radio_dump_data');
+  if (element != null)
+  {
+    element.onclick = function()
+    {
+      updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0, 0));
+    };
+  }
+
+  element = document.getElementById('radio_dump_structure');
+  if (element != null)
+  {
+    element.onclick = function()
+    {
+      updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0, 0));
+    };
+  }
+
+  element = document.getElementById('radio_dump_dataonly');
+  if (element != null)
+  {
+    element.onclick = function()
+    {
+      updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 1, 0));
+    };
+  }
+
+  element = document.getElementById('radio_dump_xml');
+  if (element != null)
+  {
+    element.onclick = function()
+    {
+      updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));
+    };
+  }
+
+  element = document.getElementById('radio_dump_csv');
+  if (element != null)
+  {
+    element.onclick = function()
+    {
+      updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));
+    };
+  }
+} // end of the 'initDumpForm()' function
 
 /**
  * bool checkFormElementInRange(obj theForm, string theFieldName, int min, int max)
