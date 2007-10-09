@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: home.php,v 1.16 2006/10/14 11:16:28 jact Exp $
+ * @version   CVS: $Id: home.php,v 1.17 2007/10/09 18:37:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,7 +38,7 @@
     ),
     array(
       'title' => _("Opens a new window"),
-      'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
+      'class' => 'popup'
     )
   );
 
