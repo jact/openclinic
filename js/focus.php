@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: focus.php,v 1.1 2007/10/03 19:36:41 jact Exp $
+ * @version   CVS: $Id: focus.php,v 1.2 2007/10/09 18:33:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -19,7 +19,10 @@ header("Content-Type: text/javascript; charset=" . OPEN_CHARSET);
 
 $field = Check::safeText($_GET['field']);
 ?>
-addEvent(window, 'load', focus, false); // event.js included!
+if (typeof addEvent == 'function')
+{
+  addEvent(window, 'load', focus, false); // event.js included!
+}
 
 /**
  * void focus(void)
