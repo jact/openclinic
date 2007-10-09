@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.29 2006/12/28 16:30:39 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.30 2007/10/09 19:31:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -201,7 +201,7 @@
   }
   $query .= $word[$num - 1] . ")";
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../scripts/checkboxes.js', 'defer' => true));
+  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/checkboxes.js', 'defer' => true));
   HTML::end('script');
 
   HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_new.php'));
@@ -240,7 +240,9 @@
   unset($patQ);
 
   $tfoot = array(
-    0 => HTML::strLink(_("Select all"), '#', null, array('onclick' => "setCheckboxes(1, 'check[]', true); return false;")) . ' / ' . HTML::strLink(_("Unselect all"), '#', null, array('onclick' => "setCheckboxes(1, 'check[]', false); return false;")),
+    0 => HTML::strLink(_("Select all"), '#', null, array('id' => 'select_all_checks')) // @todo created by JS
+      . ' / '
+      . HTML::strLink(_("Unselect all"), '#', null, array('id' => 'unselect_all_checks')), // @todo created by JS
     1 => Form::strButton("add", _("Add selected to Relatives List")) . Form::generateToken(),
   );
 
