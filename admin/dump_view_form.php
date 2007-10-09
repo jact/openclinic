@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.16 2006/12/14 22:26:57 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.17 2007/10/09 19:30:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -101,53 +101,28 @@
   unset($table);
 
   $fieldFoot = array(
-    HTML::strLink(_("Select all"), '#', null, array('onclick' => "setSelectOptions(0, 'table_select[]', true); return false;"))
+    HTML::strLink(_("Select all"), '#', null, array('id' => 'select_all')) // @todo created by JS
     . ' / '
-    . HTML::strLink(_("Unselect all"), '#', null, array('onclick' => "setSelectOptions(0, 'table_select[]', false); return false;"))
+    . HTML::strLink(_("Unselect all"), '#', null, array('id' => 'unselect_all')) // @todo created by JS
   );
 
   Form::fieldset(_("View dump of database"), $fieldArray, $fieldFoot, array('id' => 'dumpTables'));
 
   $fieldArray = null;
 
-  $fieldArray[] = Form::strRadioButton("what", "data", true,
-      array(
-        'id' => 'radio_dump_data',
-        'onclick' => 'updateChecks(0, new Array(0, 0, 0, 0, 1, 0, 0, 0));'
-      )
-    )
+  $fieldArray[] = Form::strRadioButton("what", "data", true, array('id' => 'radio_dump_data'))
     . Form::strLabel("radio_dump_data", _("Structure and data"));
 
-  $fieldArray[] = Form::strRadioButton("what", "structure", false,
-      array(
-        'id' => 'radio_dump_structure',
-        'onclick' => 'updateChecks(0, new Array(0, 1, 1, 0, 1, 0, 0, 0));'
-      )
-    )
+  $fieldArray[] = Form::strRadioButton("what", "structure", false, array('id' => 'radio_dump_structure'))
     . Form::strLabel("radio_dump_structure", _("Structure only"));
 
-  $fieldArray[] = Form::strRadioButton("what", "dataonly", false,
-      array(
-        'id' => 'radio_dump_dataonly',
-        'onclick' => 'updateChecks(0, new Array(1, 0, 0, 0, 0, 0, 1, 0));'
-      )
-    )
+  $fieldArray[] = Form::strRadioButton("what", "dataonly", false, array('id' => 'radio_dump_dataonly'))
     . Form::strLabel("radio_dump_dataonly", _("Data only"));
 
-  $fieldArray[] = Form::strRadioButton("what", "xml", false,
-      array(
-        'id' => 'radio_dump_xml',
-        'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
-      )
-    )
+  $fieldArray[] = Form::strRadioButton("what", "xml", false, array('id' => 'radio_dump_xml'))
     . Form::strLabel("radio_dump_xml", _("Export to XML format"));
 
-  $fieldArray[] = Form::strRadioButton("what", "excel", false,
-      array(
-        'id' => 'radio_dump_csv',
-        'onclick' => 'updateChecks(0, new Array(1, 1, 1, 1, 1, 1, 1, 0));'
-      )
-    )
+  $fieldArray[] = Form::strRadioButton("what", "excel", false, array('id' => 'radio_dump_csv'))
     . Form::strLabel("radio_dump_csv", _("Export to CSV format (data only)"));
 
   Form::fieldset(_("Options"), $fieldArray, null, array('id' => 'dumpOptions'));
