@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: pop_window.js,v 1.7 2007/10/03 19:35:56 jact Exp $
+ * @version   CVS: $Id: pop_window.js,v 1.8 2007/10/09 18:34:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -26,3 +26,38 @@ function popSecondary(url)
 
   return false;
 } // end of the 'popSecondary()' function
+
+/**
+ * void doPopups(void)
+ *
+ * Adds event handlers to a.popup elements
+ *
+ * @return void
+ * @author Jeremy Keith <http://adactio.com>
+ * @since 0.8
+ */
+function doPopups()
+{
+  if (document.getElementsByTagName)
+  {
+    var links = document.getElementsByTagName('a');
+    for (i = 0; i < links.length; i++)
+    {
+      if (links[i].className.match('popup'))
+      {
+        links[i].onclick = function()
+        {
+          //window.open(this.getAttribute('href'));
+
+          //return false;
+          return popSecondary(this.getAttribute('href'));
+        };
+      }
+    }
+  }
+} // end of the 'doPopups()' function
+
+if (typeof addLoadEvent == 'function')
+{
+  addLoadEvent(doPopups); // event.js included!
+}
