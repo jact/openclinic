@@ -7,10 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.18 2006/10/14 11:16:39 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.19 2007/10/09 18:39:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
+ * @todo      remove <ul>, <li> (use HTML::*)
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -91,7 +92,7 @@
       ),
       array(
         'title' => _("Opens a new window"),
-        'onclick' => "return popSecondary('../doc/index.php?tab=" . $tab . '&nav=' . $nav . "')"
+        'class' => 'popup'
       )
     )
   );
@@ -136,7 +137,7 @@
       ? array(_("Print Medical Record"), array('class' => 'selected'))
       : HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
           array('key' => $idPatient),
-          array('onclick' => "return popSecondary('../medical/print_medical_record.php?key=" . $idPatient . "')")
+          array('class' => 'popup')
         );
 
     return HTML::strItemList($array, array('class' => 'subnavbar'));
