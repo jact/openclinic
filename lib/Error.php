@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.8 2006/12/14 22:22:14 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.9 2007/10/10 18:24:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -284,7 +284,7 @@ class Error
    */
   function _getVariables($code)
   {
-    $tokens = token_get_all("<?php\n{$code}\n?>");
+    $tokens = token_get_all('<?php {$code} ?>');
 
     $variables = array();
     foreach ($tokens as $index => $value)
