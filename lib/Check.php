@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Check.php,v 1.7 2007/01/29 15:23:09 jact Exp $
+ * @version   CVS: $Id: Check.php,v 1.8 2007/10/10 18:23:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -93,7 +93,7 @@ define("CHK_ALLOWED_HTML_TAGS", "<a><b><blockquote><br><code><div><em><i><li><ol
  */
 class Check
 {
-  /*
+  /**
    * bool hasMetas(string $text)
    *
    * Checks if a string has meta characters in it . \\ + * ? [ ^ ] ( $ )
@@ -101,6 +101,7 @@ class Check
    * @param string $text
    * @return bool true if the submitted text has meta characters in it
    * @access public
+   * @static
    */
   function hasMetas($text)
   {
@@ -114,7 +115,7 @@ class Check
     return ($new != $text);
   }
 
-  /*
+  /**
    * mixed stripMetas(string $text)
    *
    * Strips " . \\ + * ? [ ^ ] ( $ ) " from submitted string
@@ -123,6 +124,7 @@ class Check
    * @param string $text
    * @return mixed false if submitted string is empty, string otherwise
    * @access public
+   * @static
    * @see customStrip() for how they are removed
    */
   function stripMetas($text)
@@ -138,7 +140,7 @@ class Check
     return $new;
   }
 
-  /*
+  /**
    * mixed customStrip(array $chars, string $text, bool $insensitive = false)
    *
    * $chars must be an array of characters to remove
@@ -149,6 +151,7 @@ class Check
    * @param bool $insensitive (optional)
    * @return mixed false if submitted string is empty, string otherwise
    * @access public
+   * @static
    */
   function customStrip($chars, $text, $insensitive = false)
   {
@@ -189,7 +192,7 @@ class Check
     return $text;
   }
 
-  /*
+  /**
    * string safeText(string $text, bool $allowTags = true, bool $includeEvents = true)
    *
    * This function sanitize a string value of suspicious contents
@@ -199,6 +202,7 @@ class Check
    * @param bool $includeEvents (optional) to strip JavaScript event handlers
    * @return string sanitized text
    * @access public
+   * @static
    * @see customStrip() for how they are removed
    */
   function safeText($text, $allowTags = true, $includeEvents = true)
@@ -231,7 +235,7 @@ class Check
     return $value;
   }
 
-  /*
+  /**
    * array safeArray(array &$array)
    *
    * This function sanitize an array values of suspicious contents
@@ -239,6 +243,7 @@ class Check
    * @param array &$array
    * @return array sanitized array
    * @access public
+   * @static
    * @see safeText() for how they are removed
    * @since 0.7
    */
@@ -265,7 +270,7 @@ class Check
     return $safeArray;
   }
 
-  /*
+  /**
    * string basicClean(string $string)
    *
    * this basic clean should clean html code from
@@ -275,6 +280,7 @@ class Check
    * @param string $string
    * @return string sanitized
    * @access public
+   * @static
    * @since 0.8
    */
   function basicClean($string)
@@ -315,12 +321,13 @@ class Check
     return $string;
   }
 
-  /*
+  /**
    * mixed removeMagicQuotes(mixed $data)
    *
    * @param mixed $data
    * @return mixed stripslashed $data
    * @access public
+   * @static
    * @since 0.8
    */
   function removeMagicQuotes($data)
@@ -357,6 +364,7 @@ class Check
    * @param string $characterset (optional)
    * @return mixed
    * @access public
+   * @static
    * @since 0.8
    */
   function getVar($source, $name, $filter = CHK_NO_FILTER, $options = null, $characterset = "")
@@ -385,6 +393,7 @@ class Check
    * @param string $characterset (optional)
    * @return mixed
    * @access public
+   * @static
    * @since 0.8
    */
   function filter($value, $filter, $options = null, $characterset = "")
@@ -441,6 +450,7 @@ class Check
    * @param string $name
    * @return boolean
    * @access public
+   * @static
    * @since 0.8
    */
   function isVar($source, $name)
@@ -483,6 +493,7 @@ class Check
    * @param string $name
    * @return mixed
    * @access private
+   * @static
    * @since 0.8
    */
   function _rawVar($source, $name)
