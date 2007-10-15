@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.13 2007/09/29 10:21:06 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.14 2007/10/15 20:12:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -125,7 +125,7 @@ class HTML
         $html .= ' ' . $key . '="' . HTML::xmlEntities(($value === true) ? $key : $value) . '"';
       }
     }
-    $html .= ($closed ? " />\n" : '>');
+    $html .= ($closed ? ' />' . PHP_EOL : '>');
 
     return $html;
   }
@@ -161,7 +161,7 @@ class HTML
    */
   function strEnd($tag)
   {
-    $html = '</' . $tag . ">\n";
+    $html = '</' . $tag . '>' . PHP_EOL;
 
     return $html;
   }
@@ -261,25 +261,25 @@ class HTML
 
     if ((isset($options['align']) && $options['align'] == "center"))
     {
-      $html .= HTML::strStart('div', array('class' => 'center')) . "\n";
+      $html .= HTML::strStart('div', array('class' => 'center')) . PHP_EOL;
     }
-    $html .= HTML::strStart('table') . "\n";
+    $html .= HTML::strStart('table') . PHP_EOL;
 
     if ( !empty($caption) )
     {
-      $html .= HTML::strTag('caption', $caption) . "\n";
+      $html .= HTML::strTag('caption', $caption) . PHP_EOL;
     }
 
     if (count($head) > 0)
     {
-      $html .= HTML::strStart('thead') . "\n";
-      $html .= HTML::strStart('tr') . "\n";
+      $html .= HTML::strStart('thead') . PHP_EOL;
+      $html .= HTML::strStart('tr') . PHP_EOL;
       foreach ($head as $key => $value)
       {
         $html .= HTML::strTag('th',
           gettype($value) == "array" ? $key : $value,
           gettype($value) == "array" ? $value : null
-        ) . "\n";
+        ) . PHP_EOL;
       }
       $html .= HTML::strEnd('tr');
       $html .= HTML::strEnd('thead');
@@ -296,10 +296,10 @@ class HTML
 
     if (count($foot) > 0)
     {
-      $html .= HTML::strStart('tfoot') . "\n";
+      $html .= HTML::strStart('tfoot') . PHP_EOL;
       foreach ($foot as $row)
       {
-        $html .= HTML::strStart('tr') . "\n";
+        $html .= HTML::strStart('tr') . PHP_EOL;
 
         $cellOptions = null;
         if ($maxCol > 1)
@@ -328,7 +328,7 @@ class HTML
     if (count($body) > 0)
     {
       $rowClass = "odd";
-      $html .= HTML::strStart('tbody') . "\n";
+      $html .= HTML::strStart('tbody') . PHP_EOL;
       $numRow = 0;
       foreach ($body as $row)
       {
@@ -446,7 +446,7 @@ class HTML
         break;
     }
 
-    $html = HTML::strTag($block ? 'p' : 'span', $text, array('class' => $class)) . "\n";
+    $html = HTML::strTag($block ? 'p' : 'span', $text, array('class' => $class)) . PHP_EOL;
 
     return $html;
   }
@@ -593,7 +593,7 @@ class HTML
   function strSection($level, $text, $addendum = null)
   {
     $level = ($level > 0 && $level < 7) ? intval($level) : 1;
-    $html = HTML::strTag('h' . $level, $text, isset($addendum) ? $addendum : null) . "\n";
+    $html = HTML::strTag('h' . $level, $text, isset($addendum) ? $addendum : null) . PHP_EOL;
 
     return $html;
   }
@@ -630,7 +630,7 @@ class HTML
    */
   function strPara($text, $addendum = null)
   {
-    $html = HTML::strTag('p', $text, isset($addendum) ? $addendum : null) . "\n";
+    $html = HTML::strTag('p', $text, isset($addendum) ? $addendum : null) . PHP_EOL;
 
     return $html;
   }
@@ -718,7 +718,7 @@ class HTML
     }
 
     $tag = ($ordered ? 'ol' : 'ul');
-    $html = HTML::strStart($tag, isset($addendum) ? $addendum : null) . "\n";
+    $html = HTML::strStart($tag, isset($addendum) ? $addendum : null) . PHP_EOL;
     foreach ($items as $item)
     {
       $content = '';
@@ -733,7 +733,7 @@ class HTML
         $content = $item;
       }
 
-      $html .= HTML::strTag('li', $content, $options) . "\n";
+      $html .= HTML::strTag('li', $content, $options) . PHP_EOL;
     }
     $html .= HTML::strEnd($tag);
 

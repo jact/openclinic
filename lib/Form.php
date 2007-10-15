@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.18 2007/09/29 10:21:06 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.19 2007/10/15 20:12:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -198,7 +198,7 @@ class Form
     {
       $addendum['class'] = (isset($addendum['class']) ? $addendum['class'] . ' error' : 'error');
     }
-    $html = HTML::strStart('select', $addendum) . "\n";
+    $html = HTML::strStart('select', $addendum) . PHP_EOL;
 
     foreach ($array as $key => $value)
     {
@@ -217,7 +217,7 @@ class Form
           {
             $options['selected'] = true;
           }
-          $html .= HTML::strTag('option', $value != '' ? $optValue : '&nbsp;', $options) . "\n";
+          $html .= HTML::strTag('option', $value != '' ? $optValue : '&nbsp;', $options) . PHP_EOL;
         }
         $html .= HTML::strEnd('optgroup');
       }
@@ -232,7 +232,7 @@ class Form
         {
           $options['selected'] = true;
         }
-        $html .= HTML::strTag('option', $value != '' ? $value : '&nbsp;', $options) . "\n";
+        $html .= HTML::strTag('option', $value != '' ? $value : '&nbsp;', $options) . PHP_EOL;
       }
     }
     $html .= HTML::strEnd('select');
@@ -628,7 +628,7 @@ class Form
       $options['multiple'] = true;
       $options['size'] = intval($size);
     }
-    $html = HTML::strStart('select', $options) . "\n";
+    $html = HTML::strStart('select', $options) . PHP_EOL;
 
     while ($aux = $desQ->fetch())
     {
@@ -640,7 +640,7 @@ class Form
         {
           $array['selected'] = true;
         }
-        $html .= HTML::strTag('option', $aux->getDescription(), $array) . "\n";
+        $html .= HTML::strTag('option', $aux->getDescription(), $array) . PHP_EOL;
       }
     }
     $html .= HTML::strEnd('select');
@@ -691,7 +691,7 @@ class Form
       $addendum['class'] = 'requiredField';
       $text = '* ' . $text;
     }
-    $html = HTML::strTag('label', $text, $addendum) . "\n";
+    $html = HTML::strTag('label', $text, $addendum) . PHP_EOL;
 
     return $html;
   }
@@ -749,11 +749,11 @@ class Form
     {
       $fieldsetOptions['class'] = $options['class'];
     }
-    $html .= HTML::strStart('fieldset', $fieldsetOptions) . "\n";
+    $html .= HTML::strStart('fieldset', $fieldsetOptions) . PHP_EOL;
 
     if ( !empty($legend) )
     {
-      $html .= HTML::strTag('legend', trim($legend)) . "\n";
+      $html .= HTML::strTag('legend', trim($legend)) . PHP_EOL;
     }
 
     if (count($body) > 0)

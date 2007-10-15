@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.27 2007/10/03 19:35:25 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.28 2007/10/15 20:11:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -457,7 +457,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.27 2007/10/03 19:35:25 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.28 2007/10/15 20:11:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -505,7 +505,7 @@
       $msg = mysql_error();
 
       HTML::rule();
-      HTML::para($no . "\n" . $msg);
+      HTML::para($no . PHP_EOL . $msg);
       HTML::rule();
 
       HTML::para(_("The MySQL server does not work or login pass is false."));
@@ -541,7 +541,7 @@
 
       if ($result)
       {
-        $text = sprintf(_("Table %s dropped."), $tableName) . "\n";
+        $text = sprintf(_("Table %s dropped."), $tableName) . PHP_EOL;
         $text .= sprintf(_("Table %s created."), $tableName);
         HTML::para($text);
       }
@@ -725,11 +725,6 @@
 
     HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
     HTML::end('script');
-    //HTML::start('script', array('type' => 'text/javascript'));
-    //echo "\n<!--/*--><![CDATA[/*<!--*/\n";
-    //echo 'self.focus(); document.forms[0].' . $focusFormField . '.focus();';
-    //echo "\n/*]]>*///-->\n";
-    //HTML::end('script');
   }
 
   HTML::end('body');
@@ -818,27 +813,27 @@ function _validateSettings()
   $warning = "";
   if (empty($_POST['dbHost']))
   {
-    $warning .= _("Database Host is empty.") . "\n";
+    $warning .= _("Database Host is empty.") . PHP_EOL;
   }
   if (empty($_POST['dbUser']))
   {
-    $warning .= _("Database User is empty.") . "\n";
+    $warning .= _("Database User is empty.") . PHP_EOL;
   }
   if (empty($_POST['dbName']))
   {
-    $warning .= _("Database Name is empty.") . "\n";
+    $warning .= _("Database Name is empty.") . PHP_EOL;
   }
   if ($_POST['timeout'] <= 0)
   {
-    $warning .= _("Session Timeout must be great than zero.") . "\n";
+    $warning .= _("Session Timeout must be great than zero.") . PHP_EOL;
   }
   if ($_POST['itemsPage'] <= 0)
   {
-    $warning .= _("Items per page must be great than zero.") . "\n";
+    $warning .= _("Items per page must be great than zero.") . PHP_EOL;
   }
   if (strlen($_POST['passwd']) < 4)
   {
-    $warning .= _("Admin password must be at least 4 characters.") . "\n";
+    $warning .= _("Admin password must be at least 4 characters.") . PHP_EOL;
   }
 
   if ( !empty($warning) )

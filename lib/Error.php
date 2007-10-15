@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.9 2007/10/10 18:24:58 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.10 2007/10/15 20:13:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -47,21 +47,23 @@ class Error
    */
   function query($query, $goOut = true)
   {
-    Error::message($query->getError() . " " . $query->getDbErrno() . " - " . $query->getDbError() . "." . $query->getSQL());
+    Error::message($query->getError() . " " . $query->getDbErrno()
+      . " - " . $query->getDbError() . "." . $query->getSQL()
+    );
 
     if (defined("OPEN_DEBUG") && OPEN_DEBUG)
     {
-      echo "\n<!-- _dbErrno = " . $query->getDbErrno() . "-->\n";
-      echo "<!-- _dbError = " . $query->getDbError() . "-->\n";
+      echo PHP_EOL . "<!-- _dbErrno = " . $query->getDbErrno() . "-->" . PHP_EOL;
+      echo "<!-- _dbError = " . $query->getDbError() . "-->" . PHP_EOL;
       if ($query->getSQL() != "")
       {
-        echo "<!-- _SQL = " . $query->getSQL() . "-->\n";
+        echo "<!-- _SQL = " . $query->getSQL() . "-->" . PHP_EOL;
       }
     }
 
     if ($query->getDbErrno() == 1049) // Unable to connect to database
     {
-      echo '<p><a href="../install.html">' . "Install instructions" . "</a></p>\n";
+      echo '<p><a href="../install.html">' . "Install instructions" . '</a></p>' . PHP_EOL;
     }
 
     if ($goOut)
@@ -82,22 +84,24 @@ class Error
    */
   function connection($conn, $goOut = true)
   {
-    Error::message($conn->getError() . " " . $conn->getDbErrno() . " - " . $conn->getDbError() . "." . $conn->getSQL());
+    Error::message($conn->getError() . " " . $conn->getDbErrno()
+      . " - " . $conn->getDbError() . "." . $conn->getSQL()
+    );
 
     if (defined("OPEN_DEBUG") && OPEN_DEBUG)
     {
-      echo "\n<!-- _dbErrno = " . $conn->getDbErrno() . "-->\n";
-      echo "<!-- _dbError = " . $conn->getDbError() . "-->\n";
-      echo "<!-- _error = " . $conn->getError() . "-->\n";
+      echo PHP_EOL . "<!-- _dbErrno = " . $conn->getDbErrno() . "-->" . PHP_EOL;
+      echo "<!-- _dbError = " . $conn->getDbError() . "-->" . PHP_EOL;
+      echo "<!-- _error = " . $conn->getError() . "-->" . PHP_EOL;
       if ($conn->getSQL() != "")
       {
-        echo "<!-- _SQL = " . $conn->getSQL() . "-->\n";
+        echo "<!-- _SQL = " . $conn->getSQL() . "-->" . PHP_EOL;
       }
     }
 
     if ($conn->getDbErrno() == 1049) // Unable to connect to database
     {
-      echo '<p><a href="../install.html">' . "Install instructions" . "</a></p>\n";
+      echo '<p><a href="../install.html">' . "Install instructions" . '</a></p>' . PHP_EOL;
     }
 
     if ($goOut)
@@ -120,7 +124,7 @@ class Error
   {
     if ($query->getSQL() != "")
     {
-      echo "\n<!-- _SQL = " . $query->getSQL() . "-->\n";
+      echo PHP_EOL . "<!-- _SQL = " . $query->getSQL() . "-->" . PHP_EOL;
     }
 
     if ($goOut)
@@ -156,14 +160,14 @@ class Error
    */
   function backTrace($context)
   {
-    $calls = "\nBacktrace:";
+    $calls = PHP_EOL . "Backtrace:";
     $trace = (function_exists("debug_backtrace") ? debug_backtrace() : null); // SF.net DEMO version PHP 4.1.2
 
     // Start at 2 -- ignore this function (0) and the customHandler() (1)
     for ($x = 2; $x < count($trace); $x++)
     {
       $callNo = $x - 2;
-      $calls .= "\n " . $callNo . ": ";
+      $calls .= PHP_EOL . " " . $callNo . ": ";
       $calls .= (isset($trace[$x]["class"]) ? $trace[$x]["class"] . $trace[$x]["type"] : '');
       $calls .= $trace[$x]["function"];
       $calls .= (isset($trace[$x]["args"]) && is_array($trace[$x]["args"]))
@@ -172,14 +176,14 @@ class Error
       $calls .= " (line " . $trace[$x]["line"] . " in " . $trace[$x]["file"] . ")";
     }
 
-    $calls .= "\nVariables in ";
+    $calls .= PHP_EOL . "Variables in ";
     $calls .= (isset($trace[2]["class"]) ? $trace[2]["class"] . $trace[2]["type"] : '');
     $calls .= (isset($trace[2]["function"]) ? $trace[2]["function"] : "UNKNOWN") . "():";
 
     // Use the $context to get variable information for the function with the error
     foreach ($context as $key => $value)
     {
-      $calls .= "\n " . $key . " is " . (( !empty($value) ) ? serialize($value) : "NULL");
+      $calls .= PHP_EOL . " " . $key . " is " . (( !empty($value) ) ? serialize($value) : "NULL");
     }
 
     return $calls;
@@ -264,7 +268,7 @@ class Error
     }
 
     ob_start();
-    $output = trim(implode("\n", $contextLines)) . "<br>\n";
+    $output = trim(implode(PHP_EOL, $contextLines)) . '<br>' . PHP_EOL;
     print_r($relevant);
     $output .= ob_get_contents();
     ob_end_clean();
@@ -321,14 +325,14 @@ class Error
     {
       case E_USER_ERROR:
         $prepend = "Error";
-        $error = "\nERROR";
+        $error = PHP_EOL . "ERROR";
         $goOut = true;
         break;
 
       case E_WARNING:
       case E_USER_WARNING:
         $prepend = "Warning";
-        $error = "\nWARNING";
+        $error = PHP_EOL . "WARNING";
         break;
 
       case E_NOTICE:
@@ -340,12 +344,12 @@ class Error
 
       case E_USER_NOTICE:
         $prepend = "Notice";
-        $error = "\nNOTICE";
+        $error = PHP_EOL . "NOTICE";
         break;
 
       default:
         $prepend = "Error";
-        $error = "\nUNHANDLED ERROR";
+        $error = PHP_EOL . "UNHANDLED ERROR";
         break;
     }
 
@@ -360,21 +364,21 @@ class Error
       $context['translation'] // does not add info
     );
 
-    $error .= " on line " . $line . " in " . $file . ".\n";
-    $error .= "\nMessage: " . $message;
-    $error .= "\nSource:\n";
+    $error .= " on line " . $line . " in " . $file . "." . PHP_EOL;
+    $error .= PHP_EOL . "Message: " . $message;
+    $error .= PHP_EOL . "Source:" . PHP_EOL;
     $error .= Error::getSourceContext($file, $line, $context);
     $error .= Error::backTrace($context);
-    $error .= "\nClient IP: " . $_SERVER["REMOTE_ADDR"];
+    $error .= PHP_EOL . "Client IP: " . $_SERVER["REMOTE_ADDR"];
 
-    $prepend = "\n[PHP " . $prepend . " " . date("Y-m-d H:i:s") . "]";
-    //$error = ereg_replace("\n", $prepend, $error);
+    $prepend = PHP_EOL . "[PHP " . $prepend . " " . date("Y-m-d H:i:s") . "]";
+    //$error = ereg_replace(PHP_EOL, $prepend, $error);
     $error = $prepend . $error;
-    $error .= "\n" . str_repeat("_", 78); // separator line
+    $error .= PHP_EOL . str_repeat("_", 78); // separator line
 
     if ( !defined("OPEN_SCREEN_ERRORS") || OPEN_SCREEN_ERRORS )
     {
-      echo '<pre>' . wordwrap($error, 78, "\n"/*, true*/) . "</pre>\n";
+      echo '<pre>' . wordwrap($error, 78, PHP_EOL/*, true*/) . '</pre>' . PHP_EOL;
     }
 
     if (defined("OPEN_LOG_ERRORS") && OPEN_LOG_ERRORS)
@@ -437,16 +441,16 @@ class Error
    */
   function trace($expression, $message = "", $goOut = false)
   {
-    echo "\n<!-- trace -->\n";
-    echo "<pre>\n";
+    echo PHP_EOL . "<!-- trace -->" . PHP_EOL;
+    echo "<pre>" . PHP_EOL;
     if ( !empty($message) )
     {
-      echo $message . "\n";
+      echo $message . PHP_EOL;
     }
     $output = var_export($expression, true);
     echo htmlspecialchars($output);
-    echo "</pre>\n";
-    echo "<!-- end trace -->\n";
+    echo "</pre>" . PHP_EOL;
+    echo "<!-- end trace -->" . PHP_EOL;
 
     if ($goOut)
     {

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.1 2006/10/14 11:15:41 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.2 2007/10/15 20:11:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -187,7 +187,7 @@
       ),
       true
     );
-    $thankCoresis = str_replace("\n", '', $thankCoresis);
+    $thankCoresis = str_replace(PHP_EOL, '', $thankCoresis);
     $html .= HTML::strPara(HTML::strLink($thankCoresis, 'http://www.coresis.com'));
     unset($thankCoresis);
 

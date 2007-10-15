@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_fields.php,v 1.18 2006/12/28 16:28:06 jact Exp $
+ * @version   CVS: $Id: test_fields.php,v 1.19 2007/10/15 20:14:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -40,7 +40,7 @@
     $row .= Form::strText("previous", $len, $formVar['path_filename'],
       array('readonly')
     );
-    $row .= "<br />\n";
+    $row .= "<br />" . PHP_EOL;
   }
 
   $row .= Form::strFile("path_filename", isset($formVar['path_filename']) ? $formVar['path_filename'] : null, 50, isset($formError["path_filename"]) ? array('error' => $formError["path_filename"]) : null);

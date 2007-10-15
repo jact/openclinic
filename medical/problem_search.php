@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.29 2006/12/28 16:29:03 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.30 2007/10/15 20:13:43 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -238,7 +238,7 @@
           'pat' => $array[2]
         )
       );
-      $row .= "<br />\n" . $key . " " . $array[3] . "<br />\n";
+      $row .= "<br />" . PHP_EOL . $key . " " . $array[3] . "<br />" . PHP_EOL;
       $row .= _("Opening Date") . ": " . $array[4];
       if ($array[5] != "")
       {

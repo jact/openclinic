@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.5 2007/09/29 10:21:06 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.6 2007/10/15 20:12:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -83,7 +83,7 @@ class LogStats
       ),
       true
     );
-    $html = str_replace("\n", '', $html);
+    $html = str_replace(PHP_EOL, '', $html);
 
     return $html;
   }

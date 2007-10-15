@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.18 2006/12/28 16:21:37 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.19 2007/10/15 20:10:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -100,8 +100,8 @@
 
     if ($result)
     {
-      $text = sprintf(_("Table %s dropped."), $tableName) . "\n";
-      $text .= sprintf(_("Table %s created."), $tableName) . "\n";
+      $text = sprintf(_("Table %s dropped."), $tableName) . PHP_EOL;
+      $text .= sprintf(_("Table %s created."), $tableName) . PHP_EOL;
       $text .= str_repeat(".", 50);
       HTML::para(nl2br($text));
     }
