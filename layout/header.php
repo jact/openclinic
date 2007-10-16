@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.5 2007/10/09 18:41:09 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.6 2007/10/16 20:23:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -135,14 +135,17 @@
     array('id' => 'skipLink')
   );
 
-  require_once("../layout/component.php");
-  $mainNav = array(
-    "home" => array(_("Home"), "../home/index.php"),
-    "medical" => array(_("Medical Records"), "../medical/index.php"),
-    //"stats" => array("Statistics", "../stats/index.php"),
-    "admin" => array(_("Admin"), "../admin/index.php")
-  );
-  echo menuBar($tab, $mainNav);
+  if (isset($tab))
+  {
+    include_once("../layout/component.php");
+    $mainNav = array(
+      "home" => array(_("Home"), "../home/index.php"),
+      "medical" => array(_("Medical Records"), "../medical/index.php"),
+      //"stats" => array("Statistics", "../stats/index.php"),
+      "admin" => array(_("Admin"), "../admin/index.php")
+    );
+    echo menuBar($tab, $mainNav);
+  }
 
   $sfLinks = array(
     _("Project Page") => 'http://sourceforge.net/projects/openclinic/',
@@ -166,13 +169,16 @@
 
   HTML::rule();
 
-  HTML::start('div', array('id' => 'sideBar'));
-  require_once("../layout/" . $tab . ".php");
-  HTML::rule();
-  echo logoInfo();
-  HTML::end('div'); // #sideBar
+  if (isset($tab))
+  {
+    HTML::start('div', array('id' => 'sideBar'));
+    include_once("../layout/" . $tab . ".php");
+    HTML::rule();
+    echo logoInfo();
+    HTML::end('div'); // #sideBar
 
-  HTML::rule();
+    HTML::rule();
+  }
 
   HTML::start('div', array('id' => 'mainZone'));
 
@@ -180,4 +186,9 @@
   {
     HTML::message(_("This is a demo version"), OPEN_MSG_INFO);
   }
+
+  /**
+   * Display "public" message from controller if available
+   */
+  echo FlashMsg::get();
 ?>
