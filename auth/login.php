@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.3 2007/10/01 19:54:47 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.4 2007/10/16 19:58:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -78,7 +78,10 @@
       {
         $userQ->close();
 
-        header("Location: ../auth/login_suspended.php");
+        $_SESSION = array(); // deregister all current session variables
+
+        FlashMsg::add(_("Your user account has been suspended. Contact with administrator to resolve this problem."));
+        header("Location: ../home/index.php");
         exit();
       }
 
@@ -123,7 +126,10 @@
 
           $userQ->close();
 
-          header("Location: ../auth/login_suspended.php");
+          $_SESSION = array(); // deregister all current session variables
+
+          FlashMsg::add(_("Your user account has been suspended. Contact with administrator to resolve this problem."));
+          header("Location: ../home/index.php");
           exit();
         }
       }
@@ -148,11 +154,14 @@
   }
 
   /**
-   * Redirect to suspended message if suspended
+   * Redirect to index page if suspended
    */
   if ( !$user->isActived() )
   {
-    header("Location: ../auth/login_suspended.php");
+    $_SESSION = array(); // deregister all current session variables
+
+    FlashMsg::add(_("Your user account has been suspended. Contact with administrator to resolve this problem."));
+    header("Location: ../home/index.php");
     exit();
   }
 
