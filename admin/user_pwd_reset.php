@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset.php,v 1.11 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset.php,v 1.12 2007/10/16 20:06:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -67,8 +67,11 @@
 
   $userQ->resetPwd($user);
 
+  FlashMsg::add(sprintf(_("Password of user, %s, has been reset."), $user->getLogin()));
+
   $userQ->close();
   unset($userQ);
+  unset($user);
 
   /**
    * Destroy form values and errors
@@ -79,7 +82,5 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($user->getLogin());
-  unset($user);
-  header("Location: " . $returnLocation . "?password=Y&info=" . $info);
+  header("Location: " . $returnLocation);
 ?>

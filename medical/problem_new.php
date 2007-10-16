@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new.php,v 1.15 2006/10/13 19:53:17 jact Exp $
+ * @version   CVS: $Id: problem_new.php,v 1.16 2007/10/16 20:15:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -60,8 +60,20 @@
   $problemQ->insert($problem);
   $idProblem = $problemQ->getLastId();
 
+  if ($problem->getClosingDate(false))
+  {
+    FlashMsg::add(sprintf(_("Medical problem, %s, has been added to closed medical problems list."),
+      $problem->getWording())
+    );
+  }
+  else
+  {
+    FlashMsg::add(sprintf(_("Medical problem, %s, has been added."), $problem->getWording()));
+  }
+
   $problemQ->close();
   unset($problemQ);
+  unset($problem);
 
   /**
    * Record log process
@@ -79,12 +91,10 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  $returnLocation = "../medical/problem_list.php?key=" . $idPatient; // controlling var
 
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($problem->getWording()) . ($problem->getClosingDate(false) ? "&closed=Y" : "");
-  unset($problem);
-  header("Location: " . $returnLocation . "&added=Y&info=" . $info);
+  $returnLocation = "../medical/problem_list.php?key=" . $idPatient;
+  header("Location: " . $returnLocation);
 ?>

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit.php,v 1.15 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: user_edit.php,v 1.16 2007/10/16 20:05:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -60,10 +60,14 @@
   if ($userQ->existLogin($user->getLogin(), $user->getIdMember()))
   {
     $loginUsed = true;
+    FlashMsg::add(sprintf(_("Login, %s, already exists. The changes have no effect."), $user->getLogin()),
+      OPEN_MSG_WARNING
+    );
   }
   else
   {
     $userQ->update($user);
+    FlashMsg::add(sprintf(_("User, %s, has been updated."), $user->getLogin()));
 
     /**
      * updating session variables if user is current user
@@ -95,6 +99,7 @@
   }
   $userQ->close();
   unset($userQ);
+  unset($user);
 
   /**
    * Destroy form values and errors
@@ -105,8 +110,5 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($user->getLogin());
-  $returnLocation .= ((isset($loginUsed) && $loginUsed) ? "?login" : "?updated") . "=Y&info=" . $info;
-  unset($user);
   header("Location: " . $returnLocation);
 ?>

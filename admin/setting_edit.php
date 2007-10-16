@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit.php,v 1.11 2006/12/14 22:27:13 jact Exp $
+ * @version   CVS: $Id: setting_edit.php,v 1.12 2007/10/16 20:01:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -103,5 +103,9 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  header("Location: ../admin/setting_edit_form.php?updated=Y");
+  /**
+   * Redirect to destiny to avoid reload problem
+   */
+  FlashMsg::add(_("Data has been updated."));
+  header("Location: ../admin/setting_edit_form.php");
 ?>

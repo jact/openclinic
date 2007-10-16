@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_del.php,v 1.17 2006/12/14 22:39:05 jact Exp $
+ * @version   CVS: $Id: connection_del.php,v 1.18 2007/10/16 20:07:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -71,12 +71,11 @@
    */
   ignore_user_abort($oldAbort);
 
-  // To header, without &amp;
-  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient;
-
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($wording);
-  header("Location: " . $returnLocation . "&deleted=Y&info=" . $info);
+  FlashMsg::add(sprintf(_("Connection with medical problem, %s, has been deleted."), $wording));
+  // To header, without &amp;
+  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient;
+  header("Location: " . $returnLocation);
 ?>

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_new.php,v 1.13 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: theme_new.php,v 1.14 2007/10/16 20:05:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,14 +48,16 @@
 
   if ($themeQ->existCSSFile($theme->getCSSFile()))
   {
-    $fileUsed = true;
+    FlashMsg:add(sprintf(_("Filename of theme, %s, already exists. The changes have no effect."), $theme->getName()));
   }
   else
   {
     $themeQ->insert($theme);
+    FlashMsg::add(sprintf(_("Theme, %s, has been added."), $theme->getName()));
   }
   $themeQ->close();
   unset($themeQ);
+  unset($theme);
 
   /**
    * Destroy form values and errors
@@ -66,8 +68,5 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($theme->getName());
-  $returnLocation .= ((isset($fileUsed) && $fileUsed) ? "?file" : "?added") . "=Y&info=" . $info;
-  unset($theme);
   header("Location: " . $returnLocation);
 ?>

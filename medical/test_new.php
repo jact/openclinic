@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_new.php,v 1.16 2006/10/13 19:53:17 jact Exp $
+ * @version   CVS: $Id: test_new.php,v 1.17 2007/10/16 20:16:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -62,8 +62,11 @@
   $testQ->insert($test);
   $idTest = $testQ->getLastId();
 
+  FlashMsg::add(sprintf(_("Medical test, %s, has been added."), $test->getPathFilename(false)));
+
   $testQ->close();
   unset($testQ);
+  unset($test);
 
   /**
    * Record log process
@@ -81,13 +84,10 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  // To header, without &amp;
-  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&pat=" . $idPatient; // controlling var
-
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($test->getPathFilename(false));
-  unset($test);
-  header("Location: " . $returnLocation . "&added=Y&info=" . $info);
+  // To header, without &amp;
+  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&pat=" . $idPatient; // controlling var
+  header("Location: " . $returnLocation);
 ?>

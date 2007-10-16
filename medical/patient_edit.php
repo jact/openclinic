@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit.php,v 1.17 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: patient_edit.php,v 1.18 2007/10/16 20:11:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -61,13 +61,11 @@
   if ($patQ->existName($pat->getFirstName(), $pat->getSurname1(), $pat->getSurname2(), $pat->getIdPatient()))
   {
     $patQ->close();
-    include_once("../layout/header.php");
 
-    HTML::message(sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName), OPEN_MSG_INFO);
-
-    HTML::para(HTML::strLink(_("Return to Patient Social Data"), $returnLocation));
-
-    include_once("../layout/footer.php");
+    FlashMsg::add(sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName),
+      OPEN_MSG_WARNING
+    );
+    header("Location: " . $returnLocation);
     exit();
   }
 
@@ -96,5 +94,6 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  header("Location: " . $returnLocation . "&updated=Y");
+  FlashMsg::add(_("Patient has been updated."));
+  header("Location: " . $returnLocation);
 ?>

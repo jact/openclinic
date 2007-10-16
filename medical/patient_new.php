@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_new.php,v 1.16 2007/10/01 20:00:08 jact Exp $
+ * @version   CVS: $Id: patient_new.php,v 1.17 2007/10/16 20:13:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -56,11 +56,11 @@
   if ($patQ->existName($pat->getFirstName(), $pat->getSurname1(), $pat->getSurname2()))
   {
     $patQ->close();
-    include_once("../layout/header.php");
 
-    HTML::message(sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName), OPEN_MSG_INFO);
-
-    include_once("../layout/footer.php");
+    FlashMsg::add(sprintf(_("Patient name, %s, is already in use. The changes have no effect."), $patName),
+      OPEN_MSG_WARNING
+    );
+    header("Location: ../medical/patient_new_form.php");
     exit();
   }
 
@@ -87,10 +87,10 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient;
-
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  header("Location: " . $returnLocation . "&added=Y");
+  FlashMsg::add(_("Patient has been added."));
+  $returnLocation = "../medical/patient_view.php?key=" . $idPatient;
+  header("Location: " . $returnLocation);
 ?>

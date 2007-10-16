@@ -7,25 +7,26 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.22 2006/12/14 22:40:42 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.23 2007/10/16 20:09:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
+
+  /**
+   * Controlling vars
+   */
+  $onlyDoctor = false;
+  $returnLocation = "../medical/patient_search_form.php";
 
   /**
    * Checking for post vars. Go back to form if none found.
    */
   if (count($_POST) == 0)
   {
-    header("Location: ../medical/patient_search_form.php");
+    header("Location: " . $returnLocation);
     exit();
   }
-
-  /**
-   * Controlling vars
-   */
-  $onlyDoctor = false;
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
@@ -86,11 +87,9 @@
     if ( !$patQ->select($idPatient) )
     {
       $patQ->close();
-      include_once("../layout/header.php");
 
-      HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../layout/footer.php");
+      FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+      header("Location: " . $returnLocation);
       exit();
     }
 
@@ -243,11 +242,9 @@
    */
   ignore_user_abort($oldAbort);
 
-  $returnLocation = "../medical/patient_search_form.php";
-
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($patName);
-  header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
+  FlashMsg::add(sprintf(_("Patient, %s, has been deleted."), $patName));
+  header("Location: " . $returnLocation);
 ?>

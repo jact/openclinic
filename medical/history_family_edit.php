@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_edit.php,v 1.13 2006/12/14 22:39:51 jact Exp $
+ * @version   CVS: $Id: history_family_edit.php,v 1.14 2007/10/16 20:08:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -106,5 +106,9 @@
   unset($_SESSION["formVar"]);
   unset($_SESSION["formError"]);
 
-  header("Location: ../medical/history_family_edit_form.php?key=" . $idPatient . "&updated=Y");
+  /**
+   * Redirect to destiny to avoid reload problem
+   */
+  FlashMsg::add(_("Family Antecedents have been updated."));
+  header("Location: ../medical/history_family_edit_form.php?key=" . $idPatient);
 ?>

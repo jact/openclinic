@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_new.php,v 1.14 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: staff_new.php,v 1.15 2007/10/16 20:04:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -50,14 +50,19 @@
 
   if ($staffQ->existLogin($staff->getLogin()))
   {
-    $loginUsed = true;
+    FlashMsg::add(sprintf(_("Login, %s, already exists. The changes have no effect."), $staff->getLogin()),
+      OPEN_MSG_WARNING
+    );
   }
   else
   {
     $staffQ->insert($staff);
+    $info = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
+    FlashMsg::add(sprintf(_("Staff member, %s, has been added."), $info));
   }
   $staffQ->close();
   unset($staffQ);
+  unset($staff);
 
   /**
    * Destroy form values and errors
@@ -68,16 +73,5 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  if (isset($loginUsed) && $loginUsed)
-  {
-    $info = urlencode($staff->getLogin());
-    $returnLocation .= "?login=Y&info=" . $info;
-  }
-  else
-  {
-    $info = urlencode($staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2());
-    $returnLocation .= "?added=Y&info=" . $info;
-  }
-  unset($staff);
   header("Location: " . $returnLocation);
 ?>

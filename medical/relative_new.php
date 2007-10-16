@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_new.php,v 1.13 2006/12/14 22:44:10 jact Exp $
+ * @version   CVS: $Id: relative_new.php,v 1.14 2007/10/16 20:16:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -90,10 +90,10 @@
    */
   ignore_user_abort($oldAbort);
 
-  $returnLocation = "../medical/relative_list.php?key=" . $idPatient; // controlling var
-
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  header("Location: " . $returnLocation . "&added=Y");
+  FlashMsg::add(_("Relatives have been added."));
+  $returnLocation = "../medical/relative_list.php?key=" . $idPatient; // controlling var
+  header("Location: " . $returnLocation);
 ?>

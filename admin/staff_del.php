@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del.php,v 1.15 2006/12/14 22:27:59 jact Exp $
+ * @version   CVS: $Id: staff_del.php,v 1.16 2007/10/16 20:03:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -50,11 +50,9 @@
   if ( !$staffQ->select($idMember) )
   {
     $staffQ->close();
-    include_once("../layout/header.php");
 
-    HTML::message(_("That staff member does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../layout/footer.php");
+    FlashMsg::add(_("That staff member does not exist."), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
     exit();
   }
 
@@ -67,13 +65,15 @@
 
   $staffQ->delete($staff->getIdMember(), $staff->getIdUser());
 
+  $info = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
+  FlashMsg::add(sprintf(_("Staff member, %s, has been deleted."), $info));
+
   $staffQ->close();
   unset($staffQ);
+  unset($staff);
 
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2());
-  unset($staff);
-  header("Location: " . $returnLocation . "?deleted=Y&info=" . $info);
+  header("Location: " . $returnLocation);
 ?>

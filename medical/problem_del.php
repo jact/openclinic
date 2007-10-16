@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.19 2006/12/14 22:42:19 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.20 2007/10/16 20:14:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -44,6 +44,8 @@
   $idProblem = intval($_POST["id_problem"]);
   $idPatient = intval($_POST["id_patient"]);
   $wording = Check::safeText($_POST["wording"]);
+
+  $returnLocation = "../medical/problem_list.php?key=" . $idPatient; // controlling var
 
   /**
    * Prevent user from aborting script
@@ -84,11 +86,9 @@
     if ( !$problemQ->select($idProblem) )
     {
       $problemQ->close();
-      include_once("../layout/header.php");
 
-      HTML::message(_("That medical problem does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../layout/footer.php");
+      FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
+      header("Location: " . $returnLocation);
       exit();
     }
 
@@ -123,11 +123,9 @@
    */
   ignore_user_abort($oldAbort);
 
-  $returnLocation = "../medical/problem_list.php?key=" . $idPatient; // controlling var
-
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $info = urlencode($wording);
-  header("Location: " . $returnLocation . "&deleted=Y&info=" . $info);
+  FlashMsg::add(sprintf(_("Medical problem, %s, has been deleted."), $wording));
+  header("Location: " . $returnLocation);
 ?>
