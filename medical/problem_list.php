@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.22 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.23 2007/10/16 20:20:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,7 +38,6 @@
    * Retrieving get vars
    */
   $idPatient = intval($_GET["key"]);
-  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   /**
    * Show page
@@ -66,44 +65,6 @@
 
     include_once("../layout/footer.php");
     exit();
-  }
-
-  /**
-   * Display insertion message if coming from new with a successful insert.
-   */
-  if (isset($_GET["added"]) && !empty($info))
-  {
-    if (isset($_GET["closed"]) && $_GET["closed"])
-    {
-      HTML::message(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), $info), OPEN_MSG_INFO);
-    }
-    else
-    {
-      HTML::message(sprintf(_("Medical problem, %s, has been added."), $info), OPEN_MSG_INFO);
-    }
-  }
-
-  /**
-   * Display update message if coming from edit with a successful update.
-   */
-  if (isset($_GET["updated"]) && !empty($info))
-  {
-    if (isset($_GET["closed"]) && $_GET["closed"])
-    {
-      HTML::message(sprintf(_("Medical problem, %s, has been added to closed medical problems list."), $info), OPEN_MSG_INFO);
-    }
-    else
-    {
-      HTML::message(sprintf(_("Medical problem, %s, has been updated."), $info), OPEN_MSG_INFO);
-    }
-  }
-
-  /**
-   * Display deletion message if coming from del with a successful delete.
-   */
-  if (isset($_GET["deleted"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Medical problem, %s, has been deleted."), $info), OPEN_MSG_INFO);
   }
 
   $problemQ = new Problem_Page_Query();

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_form.php,v 1.14 2006/12/14 22:41:59 jact Exp $
+ * @version   CVS: $Id: patient_search_form.php,v 1.15 2007/10/16 20:20:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,14 +43,6 @@
   );
   HTML::breadCrumb($links, "icon searchIcon");
   unset($links);
-
-  /**
-   * Display deletion message if coming from del with a successful delete.
-   */
-  if (isset($_GET["deleted"]) && isset($_GET["info"]))
-  {
-    HTML::message(sprintf(_("Patient, %s, has been deleted."), urldecode($_GET["info"])), OPEN_MSG_INFO);
-  }
 
   $tokenForm = Form::generateToken(); // for 2 forms (patient, problem)
 

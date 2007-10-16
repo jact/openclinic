@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit_form.php,v 1.18 2006/12/28 16:25:06 jact Exp $
+ * @version   CVS: $Id: history_personal_edit_form.php,v 1.19 2007/10/16 20:19:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -108,14 +108,6 @@
   showPatientHeader($idPatient);
 
   require_once("../shared/form_errors_msg.php");
-
-  /**
-   * Display update message if coming from setting_edit with a successful update.
-   */
-  if (isset($_GET["updated"]))
-  {
-    HTML::message(_("Personal Antecedents have been updated."), OPEN_MSG_INFO);
-  }
 
   /**
    * Edit form

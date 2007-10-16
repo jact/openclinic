@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.24 2007/10/15 20:14:02 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.25 2007/10/16 20:20:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -39,7 +39,6 @@
    * Retrieving get vars
    */
   $idPatient = intval($_GET["key"]);
-  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   $relQ = new Relative_Query;
   $relQ->connect();
@@ -76,22 +75,6 @@
   unset($links);
 
   showPatientHeader($idPatient);
-
-  /**
-   * Display insertion message if coming from new with a successful insert.
-   */
-  if (isset($_GET["added"]))
-  {
-    HTML::message(_("Relatives have been added."), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display deletion message if coming from del with a successful delete.
-   */
-  if (isset($_GET["deleted"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Relative, %s, has been deleted."), $info), OPEN_MSG_INFO);
-  }
 
   if ($hasMedicalAdminAuth)
   {

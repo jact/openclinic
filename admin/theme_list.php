@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.26 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.27 2007/10/16 20:21:41 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,11 +23,6 @@
   require_once("../auth/login_check.php");
   require_once("../model/Theme_Query.php");
   require_once("../lib/Form.php");
-
-  /**
-   * Retrieving get vars
-   */
-  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   /**
    * Show page
@@ -44,38 +39,6 @@
   );
   HTML::breadCrumb($links, "icon themeIcon");
   unset($links);
-
-  /**
-   * Display insertion message if coming from new with a successful insert.
-   */
-  if (isset($_GET["added"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Theme, %s, has been added."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display update message if coming from edit with a successful update.
-   */
-  if (isset($_GET["updated"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Theme, %s, has been updated."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display deletion message if coming from del with a successful delete.
-   */
-  if (isset($_GET["deleted"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Theme, %s, has been deleted."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display file used message.
-   */
-  if (isset($_GET["file"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Filename of theme, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
-  }
 
   $legend = _("Change Theme by default in application");
 

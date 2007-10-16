@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit_form.php,v 1.24 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: setting_edit_form.php,v 1.25 2007/10/16 20:21:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -79,14 +79,6 @@
   unset($links);
 
   require_once("../shared/form_errors_msg.php");
-
-  /**
-   * Display update message if coming from setting_edit with a successful update.
-   */
-  if (isset($_GET["updated"]))
-  {
-    HTML::message(_("Data has been updated."), OPEN_MSG_INFO);
-  }
 
   /**
    * Edit form

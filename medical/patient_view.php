@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.24 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.25 2007/10/16 20:20:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -89,22 +89,6 @@
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
-
-  /**
-   * Display insertion message if coming from new with a successful insert.
-   */
-  if (isset($_GET["added"]))
-  {
-    HTML::message(_("Patient has been added."), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display update message if coming from edit with a successful update.
-   */
-  if (isset($_GET["updated"]))
-  {
-    HTML::message(_("Patient has been updated."), OPEN_MSG_INFO);
-  }
 
   $relatedLinks = "";
   if ($hasMedicalAdminAuth)

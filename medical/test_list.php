@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.23 2007/10/09 18:42:13 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.24 2007/10/16 20:21:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -40,7 +40,6 @@
    */
   $idProblem = intval($_GET["key"]);
   $idPatient = intval($_GET["pat"]);
-  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   /**
    * Show page
@@ -65,30 +64,6 @@
 
   showPatientHeader($idPatient);
   showProblemHeader($idProblem);
-
-  /**
-   * Display insertion message if coming from new with a successful insert.
-   */
-  if (isset($_GET["added"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Medical test, %s, has been added."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display update message if coming from edit with a successful update.
-   */
-  if (isset($_GET["updated"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Medical test, %s, has been updated."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display deletion message if coming from del with a successful delete.
-   */
-  if (isset($_GET["deleted"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Medical test, %s, has been deleted."), $info), OPEN_MSG_INFO);
-  }
 
   if ($hasMedicalAdminAuth)
   {

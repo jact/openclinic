@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.22 2006/10/13 19:49:46 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.23 2007/10/16 20:21:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -27,7 +27,6 @@
    * Retrieving get vars
    */
   $memberType = (isset($_GET["type"]) ? Check::safeText($_GET["type"]) : "");
-  $info = (isset($_GET["info"]) ? urldecode(Check::safeText($_GET["info"])) : "");
 
   /**
    * Show page
@@ -44,38 +43,6 @@
   );
   HTML::breadCrumb($links, "icon staffIcon");
   unset($links);
-
-  /**
-   * Display insertion message if coming from new with a successful insert.
-   */
-  if (isset($_GET["added"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Staff member, %s, has been added."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display update message if coming from edit with a successful update.
-   */
-  if (isset($_GET["updated"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Staff member, %s, has been updated."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display deletion message if coming from del with a successful delete.
-   */
-  if (isset($_GET["deleted"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Staff member, %s, has been deleted."), $info), OPEN_MSG_INFO);
-  }
-
-  /**
-   * Display login used message.
-   */
-  if (isset($_GET["login"]) && !empty($info))
-  {
-    HTML::message(sprintf(_("Login, %s, already exists. The changes have no effect."), $info), OPEN_MSG_INFO);
-  }
 
   $staffQ = new Staff_Query();
   $staffQ->connect();
