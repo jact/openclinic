@@ -8,9 +8,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.1 2006/10/13 19:55:56 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.2 2007/10/16 19:56:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -99,26 +99,25 @@
       {
         if ( !$_SESSION['hasMedicalAuth'] && (isset($onlyDoctor) && !$onlyDoctor) )
         {
-          header("Location: ../medical/no_authorization.php");
-          exit();
+          FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Medical Records")));
         }
       }
       /*elseif ($tab == "stats")
       {
         if ( !$_SESSION['hasStatsAuth'] )
         {
-          header("Location: ../stats/no_authorization.php");
-          exit();
+          FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Stats")));
         }
       }*/
       elseif ($tab == "admin")
       {
         if ( !$_SESSION['hasAdminAuth'] )
         {
-          header("Location: ../admin/no_authorization.php");
-          exit();
+          FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
         }
       }
+      header("Location: ../home/index.php");
+      exit();
     }
 
     if ( !$_SESSION['hasAdminAuth'] && !$_SESSION['hasMedicalAuth'] )
