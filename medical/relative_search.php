@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.30 2007/10/09 19:31:04 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.31 2007/10/16 20:18:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -88,13 +88,14 @@
   showPatientHeader($idPatient);
 
   /**
-   * Display no results message if no results returned from search.
+   * No results message if no results returned from search.
    */
   if ($patQ->getRowCount() == 0)
   {
     $patQ->close();
-    HTML::message(_("No results found."), OPEN_MSG_INFO);
-    include_once("../layout/footer.php");
+
+    FlashMsg::add(_("No results found."));
+    header("Location: " . $returnLocation);
     exit();
   }
 

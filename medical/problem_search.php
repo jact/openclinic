@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.30 2007/10/15 20:13:43 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.31 2007/10/16 20:18:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -95,13 +95,14 @@
   unset($links);
 
   /**
-   * Display no results message if no results returned from search.
+   * No results message if no results returned from search.
    */
   if ($problemQ->getRowCount() == 0)
   {
     $problemQ->close();
-    HTML::message(_("No results found."), OPEN_MSG_INFO);
-    include_once("../layout/footer.php");
+
+    FlashMsg::add(_("No results found."));
+    header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
