@@ -9,16 +9,23 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.14 2007/10/15 20:12:42 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.15 2007/10/17 18:10:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 /**
  * Messages constants
  */
-define("OPEN_MSG_INFO",    1);
-define("OPEN_MSG_WARNING", 2);
-define("OPEN_MSG_ERROR",   3);
+define("OPEN_MSG_DEBUG",   0);
+define("OPEN_MSG_HINT",    1);
+define("OPEN_MSG_INFO",    2);
+define("OPEN_MSG_WARNING", 3);
+define("OPEN_MSG_ERROR",   4);
+
+/**
+ * Script path
+ */
+define("OPEN_SCRIPT_PATH", '../js/');
 
 /**
  * HTML set of html tags functions
@@ -47,6 +54,7 @@ define("OPEN_MSG_ERROR",   3);
  *  void rule(array $addendum = null)
  *  string strItemList(array &$items, array $addendum = null, bool $ordered = false)
  *  void itemList(array &$items, array $addendum = null, bool $ordered = false)
+ *  string insertScript(string $name)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -429,26 +437,23 @@ class HTML
    */
   function strMessage($text, $type = OPEN_MSG_WARNING, $block = true)
   {
+    static $_list = array(
+      OPEN_MSG_DEBUG   => 'debug',
+      OPEN_MSG_HINT    => 'hint',
+      OPEN_MSG_INFO    => 'info',
+      OPEN_MSG_WARNING => 'warning',
+      OPEN_MSG_ERROR   => 'error'
+    );
+
     if (empty($text))
     {
       return; // no message
     }
 
-    $class = "advice";
-    switch ($type)
-    {
-      case OPEN_MSG_ERROR:
-        $class = "error";
-        break;
+    $_class = (isset($_list[$type]) ? $_list[$type] : 'warning');
+    $_html = HTML::strTag($block ? 'p' : 'span', $text, array('class' => $_class)) . PHP_EOL;
 
-      case OPEN_MSG_INFO:
-        $class = "message";
-        break;
-    }
-
-    $html = HTML::strTag($block ? 'p' : 'span', $text, array('class' => $class)) . PHP_EOL;
-
-    return $html;
+    return $_html;
   }
 
   /**
@@ -756,6 +761,33 @@ class HTML
   function itemList(&$items, $addendum = null, $ordered = false)
   {
     echo HTML::strItemList($items, isset($addendum) ? $addendum : null, $ordered);
+  }
+
+  /**
+   * string insertScript(string $name)
+   *
+   * Returns an HTML script tag (if is not yet included)
+   *
+   * @param string $name (only filename, without path)
+   * @return string HTML
+   * @access public
+   * @static
+   * @see OPEN_SCRIPT_PATH
+   * @since 0.8
+   */
+  function insertScript($name)
+  {
+    static $_list = array();
+    $_html = '';
+
+    if ( !in_array($name, $_list) && is_file(OPEN_SCRIPT_PATH . $name))
+    {
+      $_html = HTML::strStart('script', array('src' => OPEN_SCRIPT_PATH . $name, 'type' => 'text/javascript'));
+      $_html .= HTML::strEnd('script');
+      $_list[] = $name;
+    }
+
+    return $_html;
   }
 } // end class
 ?>
