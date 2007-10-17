@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.2 2007/10/16 19:56:34 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.3 2007/10/17 18:07:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,8 @@
    */
   if (isset($restrictInDemo) && $restrictInDemo && OPEN_DEMO)
   {
-    include_once("../shared/demo_msg.php");
+    FlashMsg::add(_("This function is not available in this demo version of OpenClinic."));
+    header("Location: ../home/index.php");
     exit();
   }
 
