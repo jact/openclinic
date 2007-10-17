@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.19 2007/10/09 18:39:50 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.20 2007/10/17 19:16:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo      remove <ul>, <li> (use HTML::*)
  */
@@ -77,7 +77,7 @@
     echo "</li>\n"; // end searchform
   }
 
-  if ($hasMedicalAdminAuth)
+  if (isset($hasMedicalAdminAuth) && $hasMedicalAdminAuth)
   {
     ($nav == "new")
       ? HTML::tag('li', _("New Patient"), array('class' => 'selected'))
