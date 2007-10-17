@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.28 2007/10/15 20:11:23 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.29 2007/10/17 18:08:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -92,8 +92,7 @@
 
   HTML::start('link', array('rel' => 'stylesheet', 'href' => '../css/wizard.css', 'type' => 'text/css'), true);
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/wizard.js', 'defer' => true));
-  HTML::end('script');
+  echo HTML::insertScript('wizard.js');
 
   HTML::end('head');
   HTML::start('body');
@@ -457,7 +456,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.28 2007/10/15 20:11:23 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.29 2007/10/17 18:08:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -720,8 +719,7 @@
 
   if (isset($focusFormField) && ( !empty($focusFormField) ))
   {
-    HTML::start('script', array('src' => '../js/event.js', 'type' => 'text/javascript', 'defer' => true));
-    HTML::end('script');
+    echo HTML::insertScript('event.js');
 
     HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
     HTML::end('script');

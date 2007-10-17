@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.17 2007/10/09 19:30:39 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.18 2007/10/17 18:07:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -80,8 +80,7 @@
     exit();
   }
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/dump_functions.js', 'defer' => true));
-  HTML::end('script');
+  echo HTML::insertScript('dump_functions.js');
 
   HTML::start('form', array('method' => 'post', 'action' => './dump_process.php'));
 

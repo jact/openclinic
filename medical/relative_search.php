@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.31 2007/10/16 20:18:14 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.32 2007/10/17 18:11:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -202,8 +202,7 @@
   }
   $query .= $word[$num - 1] . ")";
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/checkboxes.js', 'defer' => true));
-  HTML::end('script');
+  echo HTML::insertScript('checkboxes.js');
 
   HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_new.php'));
 

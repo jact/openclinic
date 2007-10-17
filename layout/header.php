@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.6 2007/10/16 20:23:29 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.7 2007/10/17 18:08:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,19 +55,13 @@
     true
   );
 
-  HTML::start('script', array('src' => '../js/event.js', 'type' => 'text/javascript', 'defer' => true));
-  HTML::end('script');
-
-  HTML::start('script', array('src' => '../js/pop_window.js', 'type' => 'text/javascript', 'defer' => true));
-  HTML::end('script');
+  echo HTML::insertScript('event.js');
+  echo HTML::insertScript('pop_window.js');
 
   if (isset($isMd5) && $isMd5)
   {
-    HTML::start('script', array('src' => '../js/md5.js', 'type' => 'text/javascript', 'defer' => true));
-    HTML::end('script');
-
-    HTML::start('script', array('src' => '../js/password.php', 'type' => 'text/javascript', 'defer' => true));
-    HTML::end('script');
+    echo HTML::insertScript('md5.js');
+    echo HTML::insertScript('password.php');
   }
 
   if (isset($focusFormField) && !empty($focusFormField))

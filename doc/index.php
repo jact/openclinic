@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.21 2006/10/14 11:18:34 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.22 2007/10/17 18:08:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,8 +41,7 @@
     true
   );
 
-  HTML::start('script', array('type' => 'text/javascript', 'src' => '../js/pop_window.js', 'defer' => true));
-  HTML::end('script');
+  echo HTML::insertScript('pop_window.js');
 
   HTML::end('head');
   HTML::start('body');
