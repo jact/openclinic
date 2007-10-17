@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: FlashMsg.php,v 1.1 2007/10/16 20:00:14 jact Exp $
+ * @version   CVS: $Id: FlashMsg.php,v 1.2 2007/10/17 18:11:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,13 +20,12 @@ require_once(dirname(__FILE__) . "/HTML.php");
  *
  * Methods:
  *  bool add(string $message, int $type = OPEN_MSG_INFO, string $key = null)
- *  mixed get(string $key = null)
+ *  string get(string $key = null)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
  * @access public
  * @since 0.8
- * @todo array of messages
  */
 class FlashMsg
 {
@@ -49,55 +48,52 @@ class FlashMsg
 
     if (isset($key)) // "private" message
     {
-      $_SESSION['flash_msg'][$key]['msg'] = $message;
-      $_SESSION['flash_msg'][$key]['type'] = $type;
+      $_SESSION['flash_msg'][$key][] = array('msg' => $message, 'type' => $type);
     }
     else // "public" message
     {
-      $_SESSION['flash_msg']['msg'] = $message;
-      $_SESSION['flash_msg']['type'] = $type;
+      $_SESSION['flash_msg_public'][] = array('msg' => $message, 'type' => $type);
     }
 
     return true;
   }
 
   /**
-   * mixed get(string $key = null)
+   * string get(string $key = null)
    *
    * @param string $key (optional) for "private" message
-   * @return mixed if success string, null otherwise
+   * @return string
    * @access public
    * @static
    */
   function get($key = null)
   {
-    if ( !isset($key) )
+    $_html = '';
+
+    if ( !isset($key) ) // "public" message(s)
     {
-      if (isset($_SESSION['flash_msg']['msg']))
+      if (isset($_SESSION['flash_msg_public']))
       {
-        $message = $_SESSION['flash_msg']['msg'];
-        $type = $_SESSION['flash_msg']['type'];
-        unset($_SESSION['flash_msg']['msg']);
-        unset($_SESSION['flash_msg']['type']);
+        foreach ($_SESSION['flash_msg_public'] as $_value)
+        {
+          $_html .= HTML::strMessage($_value['msg'], $_value['type']);
+        }
+        unset($_SESSION['flash_msg_public']);
       }
     }
-    else
+    else // "private" message(s)
     {
-      if (isset($_SESSION['flash_msg'][$key]['msg']))
+      if (isset($_SESSION['flash_msg'][$key]))
       {
-        $message = $_SESSION['flash_msg'][$key]['msg'];
-        $type = $_SESSION['flash_msg'][$key]['type'];
-        unset($_SESSION['flash_msg'][$key]['msg']);
-        unset($_SESSION['flash_msg'][$key]['type']);
+        foreach ($_SESSION['flash_msg'][$key] as $_value)
+        {
+          $_html .= HTML::strMessage($_value['msg'], $_value['type']);
+        }
+        unset($_SESSION['flash_msg'][$key]);
       }
     }
 
-    if ( !isset($message) )
-    {
-      return null;
-    }
-
-    return HTML::strMessage($message, $type);
+    return $_html;
   }
 }
 ?>
