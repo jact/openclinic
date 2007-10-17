@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.3 2007/10/17 18:07:21 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.4 2007/10/17 19:15:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -101,6 +101,8 @@
         if ( !$_SESSION['hasMedicalAuth'] && (isset($onlyDoctor) && !$onlyDoctor) )
         {
           FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Medical Records")));
+          header("Location: ../home/index.php");
+          exit();
         }
       }
       /*elseif ($tab == "stats")
@@ -108,6 +110,8 @@
         if ( !$_SESSION['hasStatsAuth'] )
         {
           FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Stats")));
+          header("Location: ../home/index.php");
+          exit();
         }
       }*/
       elseif ($tab == "admin")
@@ -115,10 +119,10 @@
         if ( !$_SESSION['hasAdminAuth'] )
         {
           FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
+          header("Location: ../home/index.php");
+          exit();
         }
       }
-      header("Location: ../home/index.php");
-      exit();
     }
 
     if ( !$_SESSION['hasAdminAuth'] && !$_SESSION['hasMedicalAuth'] )
