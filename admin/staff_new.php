@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_new.php,v 1.15 2007/10/16 20:04:07 jact Exp $
+ * @version   CVS: $Id: staff_new.php,v 1.16 2007/10/25 21:58:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,6 +43,12 @@
   require_once("../admin/staff_validate_post.php");
 
   /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
+
+  /**
    * Insert new staff member
    */
   $staffQ = new Staff_Query();
@@ -63,12 +69,6 @@
   $staffQ->close();
   unset($staffQ);
   unset($staff);
-
-  /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
 
   /**
    * Redirect to $returnLocation to avoid reload problem

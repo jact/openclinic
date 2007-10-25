@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit.php,v 1.12 2007/10/16 20:01:01 jact Exp $
+ * @version   CVS: $Id: setting_edit.php,v 1.13 2007/10/25 21:58:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -82,6 +82,12 @@
   }
 
   /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
+
+  /**
    * Update app settings
    */
   $setQ = new Setting_Query();
@@ -96,12 +102,6 @@
   $setQ->close();
   unset($setQ);
   unset($set);
-
-  /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
 
   /**
    * Redirect to destiny to avoid reload problem

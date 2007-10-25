@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset.php,v 1.12 2007/10/16 20:06:51 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset.php,v 1.13 2007/10/25 21:58:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -60,6 +60,12 @@
   }
 
   /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
+
+  /**
    * Update user
    */
   $userQ = new User_Query();
@@ -72,12 +78,6 @@
   $userQ->close();
   unset($userQ);
   unset($user);
-
-  /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
 
   /**
    * Redirect to $returnLocation to avoid reload problem

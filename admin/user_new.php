@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_new.php,v 1.15 2007/10/16 20:06:03 jact Exp $
+ * @version   CVS: $Id: user_new.php,v 1.16 2007/10/25 21:58:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,6 +41,12 @@
   require_once("../admin/user_validate_post.php");
 
   /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
+
+  /**
    * Insert new user
    */
   $userQ = new User_Query();
@@ -60,12 +66,6 @@
   $userQ->close();
   unset($userQ);
   unset($user);
-
-  /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
 
   /**
    * Redirect to $returnLocation to avoid reload problem

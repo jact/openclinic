@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_use.php,v 1.11 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: theme_use.php,v 1.12 2007/10/25 21:58:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -32,6 +32,12 @@
   require_once("../model/Setting_Query.php");
 
   /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
+
+  /**
    * Update theme in use
    */
   $idTheme = intval($_POST["id_theme"]);
@@ -45,10 +51,7 @@
   unset($setQ);
 
   /**
-   * Destroy form values and errors
+   * Redirect to $returnLocation to avoid reload problem
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
-
   header("Location: " . $returnLocation);
 ?>
