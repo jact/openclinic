@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: xhtml_start.php,v 1.3 2007/10/15 20:12:08 jact Exp $
+ * @version   CVS: $Id: xhtml_start.php,v 1.4 2007/10/25 21:59:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -126,7 +126,7 @@
   HTML::start('meta', array('name' => 'robots', 'content' => 'noindex,nofollow,noarchive'), true);
   HTML::start('meta', array('name' => 'MSSmartTagsPreventParsing', 'content' => 'TRUE'), true);
   HTML::start('meta', array('name' => 'author', 'content' => 'Jose Antonio Chavarría'), true);
-  HTML::start('meta', array('name' => 'copyright', 'content' => '2002-2006 Jose Antonio Chavarría'), true);
+  HTML::start('meta', array('name' => 'copyright', 'content' => '2002-' . date("Y") . ' Jose Antonio Chavarría'), true);
   HTML::start('meta', array('name' => 'keywords', 'content' => 'OpenClinic, open source, gpl, healthcare, php, mysql, coresis'), true);
   HTML::start('meta', array('name' => 'description', 'content' => 'OpenClinic is an easy to use, open source, medical records system written in PHP'), true);
 ?>
