@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_del.php,v 1.17 2007/10/16 20:15:50 jact Exp $
+ * @version   CVS: $Id: relative_del.php,v 1.18 2007/10/26 21:35:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,6 +74,7 @@
    * Redirect to $returnLocation to avoid reload problem
    */
   FlashMsg::add(sprintf(_("Relative, %s, has been deleted."), $relName));
-  $returnLocation = "../medical/relative_list.php?key=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/relative_list.php?id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/relative_list.php"; // controlling var
   header("Location: " . $returnLocation);
 ?>
