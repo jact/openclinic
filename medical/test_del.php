@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_del.php,v 1.18 2007/10/16 20:16:24 jact Exp $
+ * @version   CVS: $Id: test_del.php,v 1.19 2007/10/26 21:35:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,7 +43,7 @@
   $idProblem = intval($_POST["id_problem"]);
   $idTest = intval($_POST["id_test"]);
   $idPatient = intval($_POST["id_patient"]);
-  $file = Check::safeText($_POST["file"]);
+  $file = Check::safeText($_POST["path_filename"]);
 
   /**
    * Prevent user from aborting script
@@ -78,6 +78,7 @@
    */
   FlashMsg::add(sprintf(_("Medical test, %s, has been deleted."), $file));
   // To header, without &amp;
-  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&pat=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/test_list.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/test_list.php"; // controlling var
   header("Location: " . $returnLocation);
 ?>
