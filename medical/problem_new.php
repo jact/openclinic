@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new.php,v 1.16 2007/10/16 20:15:32 jact Exp $
+ * @version   CVS: $Id: problem_new.php,v 1.17 2007/10/26 21:32:43 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -37,7 +37,8 @@
    */
   $idPatient = intval($_POST["id_patient"]);
 
-  $errorLocation = "../medical/problem_new_form.php?key=" . $idPatient; // controlling var
+  //$errorLocation = "../medical/problem_new_form.php?id_patient=" . $idPatient; // controlling var for validate_post
+  $errorLocation = "../medical/problem_new_form.php"; // controlling var for validate_post
 
   /**
    * Validate data
@@ -45,6 +46,12 @@
   $problem = new Problem();
 
   require_once("../medical/problem_validate_post.php");
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Prevent user from aborting script
@@ -86,15 +93,9 @@
   ignore_user_abort($oldAbort);
 
   /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
-
-
-  /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  $returnLocation = "../medical/problem_list.php?key=" . $idPatient;
+  //$returnLocation = "../medical/problem_list.php?id_patient=" . $idPatient;
+  $returnLocation = "../medical/problem_list.php";
   header("Location: " . $returnLocation);
 ?>

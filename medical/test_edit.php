@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_edit.php,v 1.17 2007/10/16 20:16:43 jact Exp $
+ * @version   CVS: $Id: test_edit.php,v 1.18 2007/10/26 21:33:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -40,7 +40,8 @@
   $idProblem = intval($_POST["id_problem"]);
   $idTest = intval($_POST["id_test"]);
 
-  $errorLocation = "../medical/test_edit_form.php?key=" . $idProblem . "&pat=" . $idPatient . "&test=" . $idTest; // controlling var
+  //$errorLocation = "../medical/test_edit_form.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient . "&id_test=" . $idTest; // controlling var for validate_post
+  $errorLocation = "../medical/test_edit_form.php"; // controlling var for validate_post
 
   /**
    * Validate data
@@ -50,6 +51,12 @@
   $test->setIdTest($_POST["id_test"]);
 
   require_once("../medical/test_validate_post.php");
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Prevent user from aborting script
@@ -68,12 +75,13 @@
 
   $testQ->close();
   unset($testQ);
-  unset($test);
 
   /**
    * Record log process
    */
   recordLog("Test_Query", "UPDATE", array($test->getIdTest()));
+
+  unset($test);
 
   /**
    * Reset abort setting
@@ -81,16 +89,10 @@
   ignore_user_abort($oldAbort);
 
   /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
-
-
-  /**
    * Redirect to $returnLocation to avoid reload problem
    */
   // To header, without &amp;
-  $returnLocation = "../medical/test_list.php?key=" . $idProblem . "&pat=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/test_list.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/test_list.php";
   header("Location: " . $returnLocation);
 ?>

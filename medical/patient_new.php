@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_new.php,v 1.17 2007/10/16 20:13:54 jact Exp $
+ * @version   CVS: $Id: patient_new.php,v 1.18 2007/10/26 21:30:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,6 +41,12 @@
   require_once("../medical/patient_validate_post.php");
 
   $patName = $pat->getFirstName() . ' ' . $pat->getSurname1() . ' ' . $pat->getSurname2();
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Prevent user from aborting script
@@ -82,15 +88,10 @@
   ignore_user_abort($oldAbort);
 
   /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
-
-  /**
    * Redirect to $returnLocation to avoid reload problem
    */
   FlashMsg::add(_("Patient has been added."));
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient;
+  //$returnLocation = "../medical/patient_view.php?id_patient=" . $idPatient;
+  $returnLocation = "../medical/patient_view.php";
   header("Location: " . $returnLocation);
 ?>

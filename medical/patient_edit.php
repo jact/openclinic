@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit.php,v 1.18 2007/10/16 20:11:00 jact Exp $
+ * @version   CVS: $Id: patient_edit.php,v 1.19 2007/10/26 21:30:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,7 +45,14 @@
 
   require_once("../medical/patient_validate_post.php");
 
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/patient_view.php?id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/patient_view.php"; // controlling var
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Prevent user from aborting script
@@ -84,12 +91,6 @@
    * Reset abort setting
    */
   ignore_user_abort($oldAbort);
-
-  /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
 
   /**
    * Redirect to $returnLocation to avoid reload problem
