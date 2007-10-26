@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Check.php,v 1.8 2007/10/10 18:23:59 jact Exp $
+ * @version   CVS: $Id: Check.php,v 1.9 2007/10/26 21:17:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -85,6 +85,8 @@ define("CHK_ALLOWED_HTML_TAGS", "<a><b><blockquote><br><code><div><em><i><li><ol
  *  mixed filter(mixed $value, int $filter, mixed $options = null, string $characterset = "")
  *  bool isVar(int $source, string $name)
  *  mixed _rawVar(int $source, string $name)
+ *  mixed postGetSessionInt(string $field, mixed $default = 0)
+ *  mixed postGetSessionString(string $field, mixed $default = "")
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -532,6 +534,70 @@ class Check
     }
 
     return $ret;
+  }
+
+  /**
+   * mixed postGetSessionInt(string $field, mixed $default = 0)
+   *
+   * Returns a string value in order POST, GET, SESSION
+   *
+   * @param string $field
+   * @param mixed $default (optional)
+   * @return mixed (int if ok, zero or default otherwise)
+   * @access public
+   * @static
+   */
+  function postGetSessionInt($field, $default = 0)
+  {
+    $_value = $default;
+    if (isset($_POST[$field]))
+    {
+      $_value = intval($_POST[$field]);
+      $_SESSION['bread_crumb'][$field] = $_value;
+    }
+    elseif (isset($_GET[$field]))
+    {
+      $_value = intval($_GET[$field]);
+      $_SESSION['bread_crumb'][$field] = $_value;
+    }
+    elseif (isset($_SESSION['bread_crumb'][$field]))
+    {
+      $_value = $_SESSION['bread_crumb'][$field];
+    }
+
+    return $_value;
+  }
+
+  /**
+   * mixed postGetSessionString(string $field, mixed $default = "")
+   *
+   * Returns a string value in order POST, GET, SESSION
+   *
+   * @param string $field
+   * @param mixed $default (optional)
+   * @return mixed (string if ok, empty string or default otherwise)
+   * @access public
+   * @static
+   */
+  function postGetSessionString($field, $default = "")
+  {
+    $_value = $default;
+    if (isset($_POST[$field]))
+    {
+      $_value = Check::safeText($_POST[$field]);
+      $_SESSION['bread_crumb'][$field] = $_value;
+    }
+    elseif (isset($_GET[$field]))
+    {
+      $_value = Check::safeText($_GET[$field]);
+      $_SESSION['bread_crumb'][$field] = $_value;
+    }
+    elseif (isset($_SESSION['bread_crumb'][$field]))
+    {
+      $_value = $_SESSION['bread_crumb'][$field];
+    }
+
+    return $_value;
   }
 } // end class
 ?>
