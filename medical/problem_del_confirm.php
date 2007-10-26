@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del_confirm.php,v 1.20 2006/12/28 16:26:22 jact Exp $
+ * @version   CVS: $Id: problem_del_confirm.php,v 1.21 2007/10/26 21:44:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for query string. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["pat"]) || empty($_GET["wording"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -33,37 +24,54 @@
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
+  require_once("../medical/PatientInfo.php");
+  require_once("../medical/ProblemInfo.php");
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
-  $wording = Check::safeText($_GET["wording"]);
+  $idProblem = Check::postGetSessionInt('id_problem');
+  $idPatient = Check::postGetSessionInt('id_patient');
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
+
+  $problem = new ProblemInfo($idProblem);
+  if ($problem->getWording() == '')
+  {
+    FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Show page
    */
   $title = _("Delete Medical Problem");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
 
-  $returnLocation = "../medical/problem_list.php?key=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/problem_list.php?id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/problem_list.php"; // controlling var
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
+    $patient->getName() => "../medical/patient_view.php",
     _("Medical Problems Report") => $returnLocation,
-    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&pat=" . $idPatient,
+    $problem->getWording() => "../medical/problem_view.php",
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
+  $patient->showHeader();
 
   /**
    * Confirm form
@@ -72,11 +80,12 @@
 
   $tbody = array();
 
+  $wording = $problem->getObject();
+  $wording = $wording->getWording();
   $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete medical problem, %s, from list?"), $wording), OPEN_MSG_WARNING, false);
 
   $row = Form::strHidden("id_problem", $idProblem);
   $row .= Form::strHidden("id_patient", $idPatient);
-  $row .= Form::strHidden("wording", $wording);
   $tbody[] = $row;
 
   $tfoot = array(

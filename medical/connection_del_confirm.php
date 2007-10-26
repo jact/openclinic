@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_del_confirm.php,v 1.19 2006/12/28 16:24:32 jact Exp $
+ * @version   CVS: $Id: connection_del_confirm.php,v 1.20 2007/10/26 21:41:40 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["conn"]) || !is_numeric($_GET["pat"]) || empty($_GET["wording"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -33,41 +24,57 @@
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
+  require_once("../medical/PatientInfo.php");
+  require_once("../medical/ProblemInfo.php");
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idProblem = intval($_GET["key"]);
-  $idConnection = intval($_GET["conn"]);
-  $idPatient = intval($_GET["pat"]);
-  $wording = Check::safeText($_GET["wording"]);
+  $idProblem = Check::postGetSessionInt('id_problem');
+  $idPatient = Check::postGetSessionInt('id_patient');
+  $idConnection = Check::postGetSessionInt('id_connection');
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
+
+  $problem = new ProblemInfo($idProblem);
+  if ($problem->getWording() == '')
+  {
+    FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Show page
    */
   $title = _("Delete Connection with Medical Problem");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
-  require_once("../medical/problem_header.php");
 
-  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/connection_list.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/connection_list.php"; // controlling var
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Medical Problems Report") => "../medical/problem_list.php?key=" . $idPatient,
-    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&pat=" . $idPatient,
+    $patient->getName() => "../medical/patient_view.php",
+    _("Medical Problems Report") => "../medical/problem_list.php", //"?id_patient=" . $idPatient,
+    $problem->getWording() => "../medical/problem_view.php",
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
-  showProblemHeader($idProblem);
+  $patient->showHeader();
+  $problem->showHeader();
 
   /**
    * Form
@@ -76,6 +83,9 @@
 
   $tbody = array();
 
+  $problem = new ProblemInfo($idConnection);
+  $wording = $problem->getObject();
+  $wording = $wording->getWording();
   $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete connection, %s, from list?"), $wording), OPEN_MSG_WARNING, false);
 
   $row = Form::strHidden("id_problem", $idProblem);
