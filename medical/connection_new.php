@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new.php,v 1.14 2007/10/16 20:07:56 jact Exp $
+ * @version   CVS: $Id: connection_new.php,v 1.15 2007/10/26 21:29:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -96,6 +96,7 @@
    */
   FlashMsg::add(_("Connection problems have been added."));
   // To header, without &amp;
-  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient;
+  //$returnLocation = "../medical/connection_list.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient;
+  $returnLocation = "../medical/connection_list.php";
   header("Location: " . $returnLocation);
 ?>
