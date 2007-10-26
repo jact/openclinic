@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit.php,v 1.15 2007/10/16 20:08:37 jact Exp $
+ * @version   CVS: $Id: history_personal_edit.php,v 1.16 2007/10/26 21:36:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,9 +91,16 @@
     $_SESSION["formVar"] = $_POST;
     //$_SESSION["formError"] = $formError;
 
-    header("Location: ../medical/history_personal_edit_form.php?key=" . $idPatient);
+    //header("Location: ../medical/history_personal_edit_form.php?id_patient=" . $idPatient);
+    header("Location: ../medical/history_personal_edit_form.php");
     exit();
   }
+
+  /**
+   * Destroy form values and errors
+   */
+  unset($_SESSION["formVar"]);
+  unset($_SESSION["formError"]);
 
   /**
    * Prevent user from aborting script
@@ -122,14 +129,9 @@
   ignore_user_abort($oldAbort);
 
   /**
-   * Destroy form values and errors
-   */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
-
-  /**
    * Redirect to destiny to avoid reload problem
    */
   FlashMsg::add(_("Personal Antecedents have been updated."));
-  header("Location: ../medical/history_personal_edit_form.php?key=" . $idPatient);
+  //header("Location: ../medical/history_personal_edit_form.php?id_patient=" . $idPatient);
+  header("Location: ../medical/history_personal_view.php");
 ?>
