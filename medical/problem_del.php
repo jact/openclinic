@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.20 2007/10/16 20:14:55 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.21 2007/10/26 21:32:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,9 +43,9 @@
    */
   $idProblem = intval($_POST["id_problem"]);
   $idPatient = intval($_POST["id_patient"]);
-  $wording = Check::safeText($_POST["wording"]);
 
-  $returnLocation = "../medical/problem_list.php?key=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/problem_list.php?id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/problem_list.php"; // controlling var
 
   /**
    * Prevent user from aborting script
@@ -98,6 +98,7 @@
       $problemQ->close();
       Error::fetch($problemQ);
     }
+    $wording = $problem->getWording();
 
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
