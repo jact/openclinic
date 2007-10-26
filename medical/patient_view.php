@@ -9,18 +9,9 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.25 2007/10/16 20:20:16 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.26 2007/10/26 22:07:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || empty($_GET["key"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -31,52 +22,34 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Patient_Page_Query.php");
+  require_once("../medical/PatientInfo.php");
   require_once("../model/Staff_Query.php");
 
   /**
-   * Retrieving get var
+   * Retrieving var (PGS)
    */
-  $idPatient = intval($_GET["key"]);
+  $idPatient = Check::postGetSessionInt('id_patient');
 
-  /**
-   * Search database for patient
-   */
-  $patQ = new Patient_Page_Query();
-  $patQ->connect();
-
-  if ( !$patQ->select($idPatient) )
+  $patient = new PatientInfo($idPatient);
+  $patName = $patient->getName();
+  $patient = $patient->getObject();
+  if ($patient == null)
   {
-    $patQ->close();
-    include_once("../layout/header.php");
-
-    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../layout/footer.php");
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
     exit();
   }
-
-  $pat = $patQ->fetch();
-  if ( !$pat )
-  {
-    $patQ->close();
-    Error::fetch($patQ);
-  }
-  $patQ->freeResult();
-  $patQ->close();
-  unset($patQ);
-  $patName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
   /**
    * Update session variables
    */
   require_once("../medical/visited_list.php");
-  addPatient($pat->getIdPatient(), $patName);
+  addPatient($patient->getIdPatient(), $patName);
 
   /**
    * Show page
    */
-  $title = _("Social Data");
+  $title = $patName; //_("Social Data");
   require_once("../layout/header.php");
 
   /**
@@ -84,128 +57,142 @@
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
+  HTML::section(2, _("Social Data"));
+
   $relatedLinks = "";
   if ($hasMedicalAdminAuth)
   {
     $relatedLinks .= HTML::strLink(_("Edit Social Data"), '../medical/patient_edit_form.php',
-      array('key' => $idPatient)
+      array('id_patient' => $idPatient)
     );
     $relatedLinks .= ' | ';
     $relatedLinks .= HTML::strLink(_("Delete Patient"), '../medical/patient_del_confirm.php',
-      array(
-        'key' => $idPatient,
-        'name' => $patName
-      )
+      array('id_patient' => $idPatient)
     );
-    $relatedLinks .= ' | ';
   }
-  $relatedLinks .= HTML::strLink(_("View Relatives"), '../medical/relative_list.php', array('key' => $idPatient));
+  HTML::para($relatedLinks);
+
+  $relatedLinks = HTML::strLink(_("View Relatives"), '../medical/relative_list.php',
+    array('id_patient' => $idPatient)
+  );
+  $relatedLinks .= ' | ';
+  $relatedLinks .= HTML::strLink(_("Clinic History"), '../medical/history_list.php',
+    array('id_patient' => $idPatient)
+  );
+  $relatedLinks .= ' | ';
+  $relatedLinks .= HTML::strLink(_("Medical Records"), '../medical/problem_list.php',
+    array('id_patient' => $idPatient)
+  );
+  $relatedLinks .= ' | ';
+  $relatedLinks .= HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
+    array('id_patient' => $idPatient),
+    array('class' => 'popup')
+  );
   HTML::para($relatedLinks);
 
   HTML::rule();
 
   HTML::section(3, _("Patient"));
-  HTML::para($pat->getSurname1() . ' ' . $pat->getSurname2() . ', ' . $pat->getFirstName());
+  HTML::para($patient->getSurname1() . ' ' . $patient->getSurname2() . ', ' . $patient->getFirstName());
 
   //HTML::section(3, _("Last Update Date"));
-  //HTML::para(I18n::localDate($pat->getLastUpdateDate()));
+  //HTML::para(I18n::localDate($patient->getLastUpdateDate()));
 
-  if ($pat->getNIF())
+  if ($patient->getNIF())
   {
     HTML::section(3, _("Tax Identification Number (TIN)"));
-    HTML::para($pat->getNIF());
+    HTML::para($patient->getNIF());
   }
 
-  if ($pat->getAddress())
+  if ($patient->getAddress())
   {
     HTML::section(3, _("Address"));
-    HTML::para(nl2br($pat->getAddress()));
+    HTML::para(nl2br($patient->getAddress()));
   }
 
-  if ($pat->getPhone())
+  if ($patient->getPhone())
   {
     HTML::section(3, _("Phone Contact"));
-    HTML::para(nl2br($pat->getPhone()));
+    HTML::para(nl2br($patient->getPhone()));
   }
 
   HTML::section(3, _("Sex"));
-  HTML::para(($pat->getSex() == 'V') ? _("Male") : _("Female"));
+  HTML::para(($patient->getSex() == 'V') ? _("Male") : _("Female"));
 
-  if ($pat->getRace())
+  if ($patient->getRace())
   {
     HTML::section(3, _("Race"));
-    HTML::para($pat->getRace());
+    HTML::para($patient->getRace());
   }
 
-  if ($pat->getBirthDate() != "" && $pat->getBirthDate() != "0000-00-00")
+  if ($patient->getBirthDate() != "" && $patient->getBirthDate() != "0000-00-00")
   {
     HTML::section(3, _("Birth Date"));
-    HTML::para(I18n::localDate($pat->getBirthDate()));
+    HTML::para(I18n::localDate($patient->getBirthDate()));
 
     HTML::section(3, _("Age"));
-    HTML::para($pat->getAge());
+    HTML::para($patient->getAge());
   }
 
-  if ($pat->getBirthPlace())
+  if ($patient->getBirthPlace())
   {
     HTML::section(3, _("Birth Place"));
-    HTML::para($pat->getBirthPlace());
+    HTML::para($patient->getBirthPlace());
   }
 
-  if ($pat->getDeceaseDate() != "" && $pat->getDeceaseDate() != "0000-00-00")
+  if ($patient->getDeceaseDate() != "" && $patient->getDeceaseDate() != "0000-00-00")
   {
     HTML::section(3, _("Decease Date"));
-    HTML::para(I18n::localDate($pat->getDeceaseDate()));
+    HTML::para(I18n::localDate($patient->getDeceaseDate()));
   }
 
-  if ($pat->getNTS())
+  if ($patient->getNTS())
   {
     HTML::section(3, _("Sanitary Card Number (SCN)"));
-    HTML::para($pat->getNTS());
+    HTML::para($patient->getNTS());
   }
 
-  if ($pat->getNSS())
+  if ($patient->getNSS())
   {
     HTML::section(3, _("National Health Service Number (NHSN)"));
-    HTML::para($pat->getNSS());
+    HTML::para($patient->getNSS());
   }
 
-  if ($pat->getFamilySituation())
+  if ($patient->getFamilySituation())
   {
     HTML::section(3, _("Family Situation"));
-    HTML::para(nl2br($pat->getFamilySituation()));
+    HTML::para(nl2br($patient->getFamilySituation()));
   }
 
-  if ($pat->getLabourSituation())
+  if ($patient->getLabourSituation())
   {
     HTML::section(3, _("Labour Situation"));
-    HTML::para(nl2br($pat->getLabourSituation()));
+    HTML::para(nl2br($patient->getLabourSituation()));
   }
 
-  if ($pat->getEducation())
+  if ($patient->getEducation())
   {
     HTML::section(3, _("Education"));
-    HTML::para(nl2br($pat->getEducation()));
+    HTML::para(nl2br($patient->getEducation()));
   }
 
-  if ($pat->getInsuranceCompany())
+  if ($patient->getInsuranceCompany())
   {
     HTML::section(3, _("Insurance Company"));
-    HTML::para($pat->getInsuranceCompany());
+    HTML::para($patient->getInsuranceCompany());
   }
 
-  if ($pat->getIdMember())
+  if ($patient->getIdMember())
   {
     $staffQ = new Staff_Query();
     $staffQ->connect();
 
-    if ($staffQ->select($pat->getIdMember()))
+    if ($staffQ->select($patient->getIdMember()))
     {
       $staff = $staffQ->fetch();
       if ($staff)
@@ -220,7 +207,7 @@
     unset($staff);
   }
 
-  unset($pat);
+  unset($patient);
 
   require_once("../layout/footer.php");
 ?>

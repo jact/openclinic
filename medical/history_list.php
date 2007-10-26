@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_list.php,v 1.19 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: history_list.php,v 1.20 2007/10/26 22:02:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -33,43 +24,48 @@
   require_once("../auth/login_check.php");
   require_once("../model/Problem_Page_Query.php");
   require_once("../lib/misc_lib.php");
+  require_once("../medical/PatientInfo.php");
 
   /**
-   * Retrieving get var
+   * Retrieving var (PGS)
    */
-  $idPatient = intval($_GET["key"]);
+  $idPatient = Check::postGetSessionInt('id_patient');
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Show page
    */
   $title = _("Clinic History");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
+    $patient->getName() => "../medical/patient_view.php",
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  if ( !showPatientHeader($idPatient) )
-  {
-    $problemQ->close();
-    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../layout/footer.php");
-    exit();
-  }
+  $patient->showHeader();
 
   HTML::para(
-    HTML::strLink(_("View Personal Antecedents"), '../medical/history_personal_view.php', array('key' => $idPatient))
+    HTML::strLink(_("View Personal Antecedents"), '../medical/history_personal_view.php',
+      array('id_patient' => $idPatient)
+    )
     . ' | '
-    . HTML::strLink(_("View Family Antecedents"), '../medical/history_family_view.php', array('key' => $idPatient))
+    . HTML::strLink(_("View Family Antecedents"), '../medical/history_family_view.php',
+      array('id_patient' => $idPatient)
+    )
   );
 
   HTML::rule();
@@ -109,8 +105,8 @@
 
     $row .= HTML::strLink(_("view"), '../medical/problem_view.php',
       array(
-        'key' => $problem->getIdProblem(),
-        'pat' => $problem->getIdPatient()
+        'id_problem' => $problem->getIdProblem(),
+        'id_patient' => $problem->getIdPatient()
       )
     );
     $row .= OPEN_SEPARATOR;
@@ -119,9 +115,8 @@
     {
       $row .= HTML::strLink(_("del"), '../medical/problem_del_confirm.php',
         array(
-          'key' => $problem->getIdProblem(),
-          'pat' => $problem->getIdPatient(),
-          'wording' => fieldPreview($problem->getWording())
+          'id_problem' => $problem->getIdProblem(),
+          'id_patient' => $problem->getIdPatient()
         )
       );
       $row .= OPEN_SEPARATOR;
@@ -129,16 +124,16 @@
 
     $row .= HTML::strLink(_("tests"), '../medical/test_list.php',
       array(
-        'key' => $problem->getIdProblem(),
-        'pat' => $problem->getIdPatient()
+        'id_problem' => $problem->getIdProblem(),
+        'id_patient' => $problem->getIdPatient()
       )
     );
     $row .= OPEN_SEPARATOR;
 
     $row .= HTML::strLink(_("connect"), '../medical/connection_list.php',
       array(
-        'key' => $problem->getIdProblem(),
-        'pat' => $problem->getIdPatient()
+        'id_problem' => $problem->getIdProblem(),
+        'id_patient' => $problem->getIdPatient()
       )
     );
     $row .= OPEN_SEPARATOR;

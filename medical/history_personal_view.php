@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_view.php,v 1.16 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: history_personal_view.php,v 1.17 2007/10/26 22:06:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -32,11 +23,20 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/History_Query.php");
+  require_once("../medical/PatientInfo.php");
 
   /**
-   * Retrieving get var
+   * Retrieving var (PGS)
    */
-  $idPatient = intval($_GET["key"]);
+  $idPatient = Check::postGetSessionInt('id_patient');
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Search database for problem
@@ -47,11 +47,9 @@
   if ( !$historyQ->selectPersonal($idPatient) )
   {
     $historyQ->close();
-    include_once("../layout/header.php");
 
-    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../layout/footer.php");
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
@@ -71,27 +69,26 @@
    */
   $title = _("View Personal Antecedents");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Clinic History") => "../medical/history_list.php?key=" . $idPatient,
+    $patient->getName() => "../medical/patient_view.php",
+    _("Clinic History") => "../medical/history_list.php", //"?id_patient=" . $idPatient,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
+  $patient->showHeader();
 
   if ($hasMedicalAdminAuth)
   {
     HTML::para(
       HTML::strLink(_("Edit Personal Antecedents"), '../medical/history_personal_edit_form.php',
-        array('key' => $idPatient)
+        array('id_patient' => $idPatient)
       )
     );
   }

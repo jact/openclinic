@@ -9,37 +9,39 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.25 2007/10/16 20:20:45 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.26 2007/10/26 22:04:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
    */
   $tab = "medical";
-  $nav = "social";
+  $nav = "relatives";
   $onlyDoctor = true;
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/Relative_Query.php");
-  require_once("../model/Patient_Page_Query.php");
   require_once("../lib/Form.php");
+  require_once("../medical/PatientInfo.php");
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idPatient = intval($_GET["key"]);
+  $idPatient = Check::postGetSessionInt('id_patient');
 
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
+
+  /**
+   * Search database for relatives
+   */
   $relQ = new Relative_Query;
   $relQ->connect();
 
@@ -60,21 +62,19 @@
    */
   $title = _("View Relatives");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => "../medical/patient_view.php?key=" . $idPatient,
+    $patient->getName() => "../medical/patient_view.php",
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
+  $patient->showHeader();
 
   if ($hasMedicalAdminAuth)
   {
@@ -91,7 +91,7 @@
 
     HTML::end('form');
 
-    HTML::message('* ' . _("Note: Empty search to see all results."));
+    HTML::message('* ' . _("Note: Empty search to see all results."), OPEN_MSG_HINT);
   } // end if
 
   if (count($relArray) == 0)
@@ -106,10 +106,15 @@
   HTML::section(2, _("Relatives List:"));
 
   $thead = array(
+    _("#"),
     _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),
     _("Surname 1"),
     _("Surname 2"),
     _("First Name")
+  );
+
+  $options = array(
+    0 => array('align' => 'right')
   );
 
   $patQ = new Patient_Page_Query();
@@ -135,16 +140,18 @@
 
     $relName = $pat->getFirstName() . " " . $pat->getSurname1() . " " . $pat->getSurname2();
 
-    $row = HTML::strLink(_("view"), '../medical/patient_view.php', array('key' => $pat->getIdPatient()));
+    $row = $i + 1 . '.';
+    $row .= OPEN_SEPARATOR;
+
+    $row .= HTML::strLink(_("view"), '../medical/patient_view.php', array('id_patient' => $pat->getIdPatient()));
     $row .= OPEN_SEPARATOR;
 
     if ($hasMedicalAdminAuth)
     {
       $row .= HTML::strLink(_("del"), '../medical/relative_del_confirm.php',
         array(
-          'key' => $idPatient,
-          'rel' => $pat->getIdPatient(),
-          'name' => $relName
+          'id_patient' => $idPatient,
+          'id_relative' => $pat->getIdPatient()
         )
       );
       $row .= OPEN_SEPARATOR;
@@ -165,7 +172,7 @@
   unset($patQ);
   unset($pat);
 
-  HTML::table($thead, $tbody);
+  HTML::table($thead, $tbody, null, $options);
 
   require_once("../layout/footer.php");
 ?>
