@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.20 2007/10/17 19:16:14 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.21 2007/10/26 21:16:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo      remove <ul>, <li> (use HTML::*)
  */
@@ -48,8 +48,16 @@
       {
         if (isset($idPatient) && $arrKey == $idPatient)
         {
-          echo '<li class="selected">' . HTML::strTag('em', $arrValue);
-          if ($nav == "social" || $nav == "history" || $nav == "problems" || $nav == "print")
+          echo '<li class="selected">';
+          if ($nav == "social")
+          {
+            HTML::tag('em', $arrValue);
+          }
+          else
+          {
+            HTML::link(HTML::strTag('em', $arrValue), '../medical/patient_view.php', array('id_patient' => $arrKey));
+          }
+          if ($nav == "social" || $nav == "relatives" || $nav == "history" || $nav == "problems" || $nav == "print")
           {
             echo _patientLinks($idPatient, $nav);
           }
@@ -58,7 +66,7 @@
         else
         {
           echo '<li>';
-          HTML::link(HTML::strTag('em', $arrValue), '../medical/patient_view.php', array('key' => $arrKey));
+          HTML::link(HTML::strTag('em', $arrValue), '../medical/patient_view.php', array('id_patient' => $arrKey));
           echo '</li>';
         }
       }
@@ -70,7 +78,7 @@
   }
   else
   {
-    if ($nav == "social" || $nav == "history" || $nav == "problems" || $nav == "print")
+    if ($nav == "relatives" || $nav == "history" || $nav == "problems" || $nav == "print")
     {
       echo _patientLinks($idPatient, $nav);
     }
@@ -113,10 +121,10 @@
   function _patientLinks($idPatient, $nav)
   {
     $linkList = array(
-      "social" => array(_("Social Data"), "../medical/patient_view.php?key=" . $idPatient),
+      "relatives" => array(_("View Relatives"), "../medical/relative_list.php?id_patient=" . $idPatient),
       //"preventive" => array(_("Datos Preventivos"), ""), // I don't know how implement it
-      "history" => array(_("Clinic History"), "../medical/history_list.php?key=" . $idPatient),
-      "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php?key=" . $idPatient)
+      "history" => array(_("Clinic History"), "../medical/history_list.php?id_patient=" . $idPatient),
+      "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php?id_patient=" . $idPatient)
     );
 
     $array = null;
@@ -136,7 +144,7 @@
     $array[] = ($nav == "print")
       ? array(_("Print Medical Record"), array('class' => 'selected'))
       : HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
-          array('key' => $idPatient),
+          array('id_patient' => $idPatient),
           array('class' => 'popup')
         );
 
