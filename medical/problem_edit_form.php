@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit_form.php,v 1.27 2006/12/28 16:26:34 jact Exp $
+ * @version   CVS: $Id: problem_edit_form.php,v 1.28 2007/10/26 21:57:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["pat"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -31,63 +22,52 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Problem_Page_Query.php");
+  require_once("../medical/ProblemInfo.php");
+  require_once("../medical/PatientInfo.php");
   require_once("../model/Staff_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
+  $idProblem = Check::postGetSessionInt('id_problem');
+  $idPatient = Check::postGetSessionInt('id_patient');
 
-  /**
-   * Search database
-   */
-  $problemQ = new Problem_Page_Query();
-  $problemQ->connect();
-
-  if ( !$problemQ->select($idProblem) )
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
   {
-    $problemQ->close();
-    include_once("../layout/header.php");
-
-    HTML::message(_("That medical problem does not exist."), OPEN_MSG_ERROR);
-
-    include_once("../layout/footer.php");
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
     exit();
   }
 
-  $problem = $problemQ->fetch();
-  if ($problem)
+  $problem = new ProblemInfo($idProblem);
+  $problem = $problem->getObject();
+  if ($problem == null)
   {
-    $formVar["id_problem"] = $idProblem;
-    $formVar["id_patient"] = $idPatient;
-    $formVar["order_number"] = $problem->getOrderNumber();
-    $formVar["opening_date"] = $problem->getOpeningDate();
-    if ( !isset($formError) )
-    {
-      $formVar["last_update_date"] = $problem->getLastUpdateDate();
-      $formVar["id_member"] = $problem->getIdMember();
-      $formVar["closed_problem"] = (($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00") ? "checked" : "");
-      $formVar["meeting_place"] = $problem->getMeetingPlace();
-      $formVar["wording"] = $problem->getWording();
-      $formVar["subjective"] = $problem->getSubjective();
-      $formVar["objective"] = $problem->getObjective();
-      $formVar["appreciation"] = $problem->getAppreciation();
-      $formVar["action_plan"] = $problem->getActionPlan();
-      $formVar["prescription"] = $problem->getPrescription();
-    }
+    FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
   }
-  else
+
+  $formVar["id_problem"] = $idProblem;
+  $formVar["id_patient"] = $idPatient;
+  $formVar["order_number"] = $problem->getOrderNumber();
+  $formVar["opening_date"] = $problem->getOpeningDate();
+  if ( !isset($formError) )
   {
-    Error::fetch($problemQ, false);
+    $formVar["last_update_date"] = $problem->getLastUpdateDate();
+    $formVar["id_member"] = $problem->getIdMember();
+    $formVar["closed_problem"] = (($problem->getClosingDate() != "" && $problem->getClosingDate() != "0000-00-00") ? "checked" : "");
+    $formVar["meeting_place"] = $problem->getMeetingPlace();
+    $formVar["wording"] = $problem->getWording();
+    $formVar["subjective"] = $problem->getSubjective();
+    $formVar["objective"] = $problem->getObjective();
+    $formVar["appreciation"] = $problem->getAppreciation();
+    $formVar["action_plan"] = $problem->getActionPlan();
+    $formVar["prescription"] = $problem->getPrescription();
   }
-  $problemQ->freeResult();
-  $problemQ->close();
-  unset($problemQ);
-  unset($problem);
 
   /**
    * Show page
@@ -95,24 +75,24 @@
   $title = _("Edit Medical Problem");
   $focusFormField = "wording"; // to avoid JavaScript mistakes in demo version
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
 
-  $returnLocation = "../medical/problem_view.php?key=" . $idProblem . "&pat=" . $idPatient;
+  //$returnLocation = "../medical/problem_view.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient;
+  $returnLocation = "../medical/problem_view.php";
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Medical Problems Report") => "../medical/problem_list.php?key=" . $idPatient,
-    _("View Medical Problem") => $returnLocation,
+    $patient->getName() => "../medical/problem_view.php",
+    _("Medical Problems Report") => "../medical/problem_list.php",
+    $problem->getWording() => $returnLocation,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
+  $patient->showHeader();
 
   require_once("../shared/form_errors_msg.php");
 
@@ -129,7 +109,7 @@
 
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: The fields with * are required."));
+  HTML::message('* ' . _("Note: The fields with * are required."), OPEN_MSG_HINT);
 
   HTML::para(HTML::strLink(_("Return"), $returnLocation));
 
