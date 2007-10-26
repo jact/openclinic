@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: ProblemInfo.php,v 1.1 2007/10/25 21:56:34 jact Exp $
+ * @version   CVS: $Id: ProblemInfo.php,v 1.2 2007/10/26 21:26:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -63,7 +63,8 @@ class ProblemInfo
     if ( !$this->_problem )
     {
       $_problemQ->close();
-      Error::fetch($_problemQ);
+
+      return;
     }
 
     $this->_wording = fieldPreview($this->_problem->getWording());
