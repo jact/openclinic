@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_del_confirm.php,v 1.19 2006/12/28 16:27:21 jact Exp $
+ * @version   CVS: $Id: relative_del_confirm.php,v 1.20 2007/10/26 21:45:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || !is_numeric($_GET["rel"]) || empty($_GET["name"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -33,37 +24,44 @@
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
+  require_once("../medical/PatientInfo.php");
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idPatient = intval($_GET["key"]);
-  $idRelative = intval($_GET["rel"]);
-  $relName = Check::safeText($_GET["name"]);
+  $idPatient = Check::postGetSessionInt('id_patient');
+  $idRelative = Check::postGetSessionInt('id_relative');
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Show page
    */
   $title = _("Delete Relative from list");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
 
-  $returnLocation = "../medical/relative_list.php?key=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/relative_list.php?id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/relative_list.php"; // controlling var
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => "../medical/patient_view.php?key=" . $idPatient,
+    $patient->getName() => "../medical/patient_view.php",
     _("View Relatives") => $returnLocation,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
+  $patient->showHeader();
 
   /**
    * Confirm form
@@ -72,11 +70,12 @@
 
   $tbody = array();
 
-  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relName), OPEN_MSG_WARNING, false);
+  $relative = new PatientInfo($idRelative);
+  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relative->getName()), OPEN_MSG_WARNING, false);
 
   $row = Form::strHidden("id_patient", $idPatient);
   $row .= Form::strHidden("id_relative", $idRelative);
-  $row .= Form::strHidden("name", $relName);
+  $row .= Form::strHidden("name", $relative->getName());
   $tbody[] = $row;
 
   $tfoot = array(

@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del_confirm.php,v 1.20 2006/12/28 16:25:27 jact Exp $
+ * @version   CVS: $Id: patient_del_confirm.php,v 1.21 2007/10/26 21:43:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -33,12 +24,20 @@
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
+  require_once("../medical/PatientInfo.php");
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idPatient = intval($_GET["key"]);
-  $patName = Check::safeText($_GET["name"]);
+  $idPatient = Check::postGetSessionInt('id_patient');
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Show page
@@ -46,15 +45,15 @@
   $title = _("Delete Patient");
   require_once("../layout/header.php");
 
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient; // controlling var
+  //$returnLocation = "../medical/patient_view.php?id_patient=" . $idPatient; // controlling var
+  $returnLocation = "../medical/patient_view.php"; // controlling var
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => $returnLocation,
+    $patient->getName() => $returnLocation,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
@@ -67,10 +66,10 @@
 
   $tbody = array();
 
-  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete patient, %s?"), $patName), OPEN_MSG_WARNING, false);
+  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete patient, %s?"), $patient->getName()), OPEN_MSG_WARNING, false);
 
   $row = Form::strHidden("id_patient", $idPatient);
-  $row .= Form::strHidden("name", $patName);
+  $row .= Form::strHidden("name", $patient->getName());
   $tbody[] = $row;
 
   $tfoot = array(
