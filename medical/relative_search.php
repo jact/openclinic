@@ -9,18 +9,9 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.32 2007/10/17 18:11:45 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.33 2007/10/26 22:11:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for post vars. Go back to form if none found.
-   */
-  if (count($_POST) == 0)
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -31,28 +22,36 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Patient_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
   require_once("../lib/misc_lib.php");
+  require_once("../medical/PatientInfo.php");
 
   /**
-   * Retrieving post vars and scrubbing the data
+   * Retrieving vars (PGS) and scrubbing the data
    */
-  $idPatient = intval($_POST["id_patient"]);
-  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
-  $searchType = Check::safeText($_POST["search_type"]);
-  $logical = Check::safeText($_POST["logical"]);
-  $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
+  $idPatient = Check::postGetSessionInt('id_patient');
+  $currentPage = Check::postGetSessionInt('page', 1);
+  $searchType = Check::postGetSessionInt('search_type');
+  $logical = Check::postGetSessionString('logical');
+  $limit = Check::postGetSessionInt('limit');
 
   // remove slashes added by form post
-  $searchText = stripslashes(Check::safeText($_POST["search_text"]));
+  $searchText = stripslashes(Check::postGetSessionString('search_text'));
   // remove redundant whitespace
   $searchText = eregi_replace("[[:space:]]+", " ", $searchText);
   // secure data
   $searchText = urlencode($searchText);
   // explode data
   $arraySearch = explode("+", $searchText);
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Search database
@@ -68,24 +67,23 @@
    */
   $title = _("Search Results");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
 
-  $returnLocation = "../medical/relative_list.php?key=" . $idPatient;
+  //$returnLocation = "../medical/relative_list.php?id_patient=" . $idPatient;
+  $returnLocation = "../medical/relative_list.php";
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => "../medical/patient_view.php?key=" . $idPatient,
+    $patient->getName() => "../medical/patient_view.php",
     _("View Relatives") => $returnLocation,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
+  $patient->showHeader();
 
   /**
    * No results message if no results returned from search.
@@ -99,36 +97,16 @@
     exit();
   }
 
-  Search::changePageJS();
-
-  /**
-   * Form used by javascript to post back to this page (id="changePage" important)
-   */
-  HTML::start('form', array('id' => 'changePage', 'method' => 'post', 'action' => '../medical/relative_search.php'));
-  Form::hidden("search_type", $searchType);
-  Form::hidden("search_text", $searchText);
-  Form::hidden("page", $currentPage);
-  Form::hidden("logical", $logical);
-  Form::hidden("limit", $limit);
-  Form::hidden("id_patient", $idPatient);
-
-/*  $n = count($_POST["check"]);
-  for ($i = 0; $i < $n; $i++)
-  {
-    Form::hidden('check[' . $i . ']', 'check[' . $i . ']', $_POST["check"][$i]);
-  }*/
-  HTML::end('form');
-
   /**
    * Printing result stats and page nav
    */
   HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
 
   $pageCount = $patQ->getPageCount();
-  Search::pageLinks($currentPage, $pageCount);
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
 
   $val = "";
-  switch ($_POST["search_type"])
+  switch ($searchType)
   {
     case OPEN_SEARCH_NIF:
       $key = _("Tax Identification Number (TIN)") . ":";
@@ -250,7 +228,7 @@
 
   HTML::end('form');
 
-  Search::pageLinks($currentPage, $pageCount);
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
 
   require_once("../layout/footer.php");
 ?>

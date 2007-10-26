@@ -9,18 +9,9 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search.php,v 1.27 2007/10/16 20:17:48 jact Exp $
+ * @version   CVS: $Id: patient_search.php,v 1.28 2007/10/26 22:09:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for post vars. Go back to form if none found.
-   */
-  if (count($_POST) == 0)
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling vars
@@ -31,24 +22,25 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../lib/Form.php");
-
-  Form::compareToken('../medical/patient_search_form.php');
-
   require_once("../model/Patient_Page_Query.php");
-  require_once("../lib/Form.php");
   require_once("../lib/Search.php");
 
+  if (isset($_POST['token_form']))
+  {
+    include_once("../lib/Form.php");
+    Form::compareToken('../medical/patient_search_form.php');
+  }
+
   /**
-   * Retrieving post vars and scrubbing the data
+   * Retrieving vars (PGS) and scrubbing the data
    */
-  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
-  $searchType = Check::safeText($_POST["search_type"]);
-  $logical = Check::safeText($_POST["logical"]);
-  $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
+  $currentPage = Check::postGetSessionInt('page', 1);
+  $searchType = Check::postGetSessionInt('search_type');
+  $logical = Check::postGetSessionString('logical');
+  $limit = Check::postGetSessionInt('limit');
 
   // remove slashes added by form post
-  $searchText = stripslashes(Check::safeText($_POST["search_text"]));
+  $searchText = stripslashes(Check::postGetSessionString('search_text'));
   // remove redundant whitespace
   $searchText = eregi_replace("[[:space:]]+", " ", $searchText);
   // transform string in array of strings
@@ -72,7 +64,7 @@
     $patQ->freeResult();
     $patQ->close();
 
-    header("Location: ../medical/patient_view.php?key=" . $pat->getIdPatient());
+    header("Location: ../medical/patient_view.php?id_patient=" . $pat->getIdPatient());
     exit();
   }
 
@@ -105,27 +97,13 @@
     exit();
   }
 
-  Search::changePageJS();
-
-  /**
-   * Form used by javascript to post back to this page (id="changePage" important)
-   */
-  HTML::start('form', array('id' => 'changePage', 'method' => 'post', 'action' => '../medical/patient_search.php'));
-  Form::hidden("search_type", $searchType);
-  Form::hidden("search_text", $searchText);
-  Form::hidden("page", $currentPage);
-  Form::hidden("logical", $logical);
-  Form::hidden("limit", $limit);
-  echo Form::generateToken();
-  HTML::end('form');
-
   /**
    * Printing result stats and page nav
    */
   HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
 
   $pageCount = $patQ->getPageCount();
-  Search::pageLinks($currentPage, $pageCount);
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
 
   /**
    * Choose field
@@ -227,7 +205,7 @@
     $row = $patQ->getCurrentRow() . '.';
     $row .= OPEN_SEPARATOR;
     $row .= HTML::strLink($pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName(),
-      '../medical/patient_view.php', array('key' => $pat->getIdPatient())
+      '../medical/patient_view.php', array('id_patient' => $pat->getIdPatient())
     );
 
     if ($val != "")
@@ -244,7 +222,7 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  Search::pageLinks($currentPage, $pageCount);
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
 
   require_once("../layout/footer.php");
 ?>

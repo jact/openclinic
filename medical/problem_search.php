@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.31 2007/10/16 20:18:01 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.32 2007/10/26 22:10:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -21,36 +21,30 @@
   $nav = "search";
   $onlyDoctor = true;
 
-  /**
-   * Checking for post vars. Go back to form if none found.
-   */
-  if (count($_POST) == 0)
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
-
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../lib/Form.php");
-
-  Form::compareToken('../medical/patient_search_form.php');
-
   require_once("../model/Patient_Page_Query.php");
   require_once("../model/Problem_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
 
+  if (isset($_POST['token_form']))
+  {
+    include_once("../lib/Form.php");
+    Form::compareToken('../medical/patient_search_form.php');
+  }
+
   /**
-   * Retrieving post vars and scrubbing the data
+   * Retrieving vars (PGS) and scrubbing the data
    */
-  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
-  $searchType = Check::safeText($_POST["search_type_problem"]);
-  $logical = Check::safeText($_POST["logical_problem"]);
-  $limit = (isset($_POST["limit_problem"])) ? intval($_POST["limit_problem"]) : 0;
+  //$currentPage = Check::postGetSessionInt('page_problem', 1);
+  $currentPage = Check::postGetSessionInt('page', 1);
+  $searchType = Check::postGetSessionInt('search_type_problem');
+  $logical = Check::postGetSessionString('logical_problem');
+  $limit = Check::postGetSessionInt('limit_problem');
 
   // remove slashes added by form post
-  $searchText = stripslashes(Check::safeText($_POST["search_text_problem"]));
+  $searchText = stripslashes(Check::postGetSessionString('search_text_problem'));
   // remove redundant whitespace
   $searchText = eregi_replace("[[:space:]]+", " ", $searchText);
   // transform string in array of strings
@@ -73,7 +67,7 @@
     $problem = $problemQ->fetch();
     $problemQ->close();
 
-    header("Location: ../medical/problem_view.php?key=" . $problem->getIdProblem() . "&pat=" . $problem->getIdPatient());
+    header("Location: ../medical/problem_view.php?id_problem=" . $problem->getIdProblem() . "&id_patient=" . $problem->getIdPatient());
     exit();
   }
 
@@ -106,27 +100,13 @@
     exit();
   }
 
-  Search::changePageJS();
-
-  /**
-   * Form used by javascript to post back to this page (id="changePage" important)
-   */
-  HTML::start('form', array('id' => 'changePage', 'method' => 'post', 'action' => '../medical/problem_search.php'));
-  Form::hidden("search_type_problem", $searchType);
-  Form::hidden("search_text_problem", $searchText);
-  Form::hidden("page", $currentPage);
-  Form::hidden("logical_problem", $logical);
-  Form::hidden("limit_problem", $limit);
-  echo Form::generateToken();
-  HTML::end('form');
-
   /**
    * Printing result stats and page nav
    */
   HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $problemQ->getRowCount())));
 
   $pageCount = $problemQ->getPageCount();
-  Search::pageLinks($currentPage, $pageCount);
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
 
   /**
    * Choose field
@@ -235,8 +215,8 @@
 
       $row .= HTML::strLink($pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName(),
         '../medical/problem_view.php', array(
-          'key' => $array[1],
-          'pat' => $array[2]
+          'id_problem' => $array[1],
+          'id_patient' => $array[2]
         )
       );
       $row .= "<br />" . PHP_EOL . $key . " " . $array[3] . "<br />" . PHP_EOL;
@@ -257,7 +237,7 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  Search::pageLinks($currentPage, $pageCount);
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
 
   require_once("../layout/footer.php");
 ?>
