@@ -7,20 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.20 2006/12/14 22:39:42 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.21 2007/10/26 21:49:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
-
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || empty($_GET["key"]) || empty($_GET["pat"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Controlling get vars
@@ -34,39 +25,56 @@
   require_once("../model/Problem_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/misc_lib.php");
+  require_once("../medical/PatientInfo.php");
+  require_once("../medical/ProblemInfo.php");
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idProblem = intval($_GET["key"]);
-  $idPatient = intval($_GET["pat"]);
+  $idProblem = Check::postGetSessionInt('id_problem');
+  $idPatient = Check::postGetSessionInt('id_patient');
+
+  $patient = new PatientInfo($idPatient);
+  if ($patient->getName() == '')
+  {
+    FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
+
+  $problem = new ProblemInfo($idProblem);
+  if ($problem->getWording() == '')
+  {
+    FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
 
   /**
    * Show page
    */
   $title = _("Add New Connection Problems");
   require_once("../layout/header.php");
-  require_once("../medical/patient_header.php");
-  require_once("../medical/problem_header.php");
 
-  $returnLocation = "../medical/connection_list.php?key=" . $idProblem . "&pat=" . $idPatient;
+  //$returnLocation = "../medical/connection_list.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient;
+  $returnLocation = "../medical/connection_list.php";
 
   /**
    * Bread crumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Medical Problems Report") => "../medical/problem_list.php?key=" . $idPatient,
-    _("View Medical Problem") => "../medical/problem_view.php?key=" . $idProblem . "&pat=" . $idPatient,
+    $patient->getName() => "../medical/patient_view.php",
+    _("Medical Problems Report") => "../medical/problem_list.php", //"?id_patient=" . $idPatient,
+    $problem->getWording() => "../medical/problem_view.php",
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  showPatientHeader($idPatient);
-  showProblemHeader($idProblem);
+  $patient->showHeader();
+  $problem->showHeader();
 
   /**
    * Search database

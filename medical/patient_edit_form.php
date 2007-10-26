@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.26 2006/10/13 19:53:16 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.27 2007/10/26 21:51:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,15 +19,6 @@
   $tab = "medical";
   $nav = "social";
 
-  /**
-   * Checking for get vars. Go back to form if none found.
-   */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
-  {
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
-
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
@@ -35,72 +26,54 @@
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
-   * Retrieving get vars
+   * Retrieving vars (PGS)
    */
-  $idPatient = intval($_GET["key"]);
+  $idPatient = Check::postGetSessionInt('id_patient');
 
   /**
    * Checking for $formError to read data from database
    */
   if ( !isset($formError) )
   {
-    include_once("../model/Patient_Page_Query.php");
+    include_once("../medical/PatientInfo.php");
 
-    /**
-     * Search database
-     */
-    $patQ = new Patient_Page_Query();
-    $patQ->connect();
-
-    if ( !$patQ->select($idPatient) )
+    $patient = new PatientInfo($idPatient);
+    $patName = $patient->getName();
+    $patient = $patient->getObject();
+    if ($patient == null)
     {
-      $patQ->close();
-      include_once("../layout/header.php");
-
-      HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../layout/footer.php");
+      FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
+      header("Location: ../medical/patient_search_form.php");
       exit();
     }
 
-    $pat = $patQ->fetch();
-    if ($pat)
-    {
-      /**
-       * load up post vars
-       */
-      $formVar["id_patient"] = $idPatient;
-      //$formVar["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)
-      $formVar["id_member"] = $pat->getIdMember();
-      $formVar["nif"] = $pat->getNIF();
-      $formVar["first_name"] = $pat->getFirstName();
-      $formVar["surname1"] = $pat->getSurname1();
-      $formVar["surname2"] = $pat->getSurname2();
-      $formVar["address"] = $pat->getAddress();
-      $formVar["phone_contact"] = $pat->getPhone();
-      $formVar["sex"] = $pat->getSex();
-      $formVar["race"] = $pat->getRace();
-      $formVar["birth_date"] = $pat->getBirthDate();
-      $formVar["birth_place"] = $pat->getBirthPlace();
-      $formVar["decease_date"] = $pat->getDeceaseDate();
-      $formVar["nts"] = $pat->getNTS();
-      $formVar["nss"] = $pat->getNSS();
-      $formVar["family_situation"] = $pat->getFamilySituation();
-      $formVar["labour_situation"] = $pat->getLabourSituation();
-      $formVar["education"] = $pat->getEducation();
-      $formVar["insurance_company"] = $pat->getInsuranceCompany();
+    /**
+     * load up post vars
+     */
+    $formVar["id_patient"] = $idPatient;
+    //$formVar["last_update_date"] = date("Y-m-d"); // automatic date (ISO format)
+    $formVar["id_member"] = $patient->getIdMember();
+    $formVar["nif"] = $patient->getNIF();
+    $formVar["first_name"] = $patient->getFirstName();
+    $formVar["surname1"] = $patient->getSurname1();
+    $formVar["surname2"] = $patient->getSurname2();
+    $formVar["address"] = $patient->getAddress();
+    $formVar["phone_contact"] = $patient->getPhone();
+    $formVar["sex"] = $patient->getSex();
+    $formVar["race"] = $patient->getRace();
+    $formVar["birth_date"] = $patient->getBirthDate();
+    $formVar["birth_place"] = $patient->getBirthPlace();
+    $formVar["decease_date"] = $patient->getDeceaseDate();
+    $formVar["nts"] = $patient->getNTS();
+    $formVar["nss"] = $patient->getNSS();
+    $formVar["family_situation"] = $patient->getFamilySituation();
+    $formVar["labour_situation"] = $patient->getLabourSituation();
+    $formVar["education"] = $patient->getEducation();
+    $formVar["insurance_company"] = $patient->getInsuranceCompany();
 
-      $_SESSION["formVar"] = $formVar;
-    }
-    else
-    {
-      Error::fetch($patQ, false);
-    }
+    $_SESSION["formVar"] = $formVar;
 
-    $patQ->freeResult();
-    $patQ->close();
-    unset($patQ);
-    unset($pat);
+    unset($patient);
   }
 
   /**
@@ -110,7 +83,8 @@
   $focusFormField = "nif"; // to avoid JavaScript mistakes in demo version
   require_once("../layout/header.php");
 
-  $returnLocation = "../medical/patient_view.php?key=" . $idPatient;
+  //$returnLocation = "../medical/patient_view.php?id_patient=" . $idPatient;
+  $returnLocation = "../medical/patient_view.php";
   //Error::debug($formVar);
 
   /**
@@ -118,8 +92,7 @@
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
-    _("Search Patient") => "../medical/patient_search_form.php",
-    _("Social Data") => $returnLocation,
+    $patName => $returnLocation,
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
@@ -139,7 +112,7 @@
 
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: The fields with * are required."));
+  HTML::message('* ' . _("Note: The fields with * are required."), OPEN_MSG_HINT);
 
   /**
    * Destroy form values and errors
