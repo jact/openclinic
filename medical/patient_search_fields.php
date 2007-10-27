@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_fields.php,v 1.16 2006/12/28 16:29:49 jact Exp $
+ * @version   CVS: $Id: patient_search_fields.php,v 1.17 2007/10/27 11:56:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -81,6 +81,7 @@
   {
     $row .= Form::generateToken();
   }
+  $row .= Form::strHidden("page", 1);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 

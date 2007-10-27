@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search_fields.php,v 1.16 2006/12/14 22:43:21 jact Exp $
+ * @version   CVS: $Id: problem_search_fields.php,v 1.17 2007/10/27 11:56:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -70,6 +70,7 @@
   unset($array);
 
   $row .= str_replace('id="token_form"', 'id="token_form_2"', $tokenForm); // defined in patient_search_form.php
+  $row .= Form::strHidden("page", 1, array('id' => 'page_problem'));
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
