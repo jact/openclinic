@@ -9,15 +9,15 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.25 2007/10/27 17:14:53 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.26 2007/10/27 17:52:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
   //error_reporting(E_ALL); // debug mode
 
-  require_once("../install/header.php"); // i18n l10n
-  require_once("../install/parse_sql_file.php");
+  require_once(dirname(__FILE__) . "/header.php"); // i18n l10n
+  require_once(dirname(__FILE__) . "/parse_sql_file.php");
   require_once("../lib/Form.php");
   require_once("../lib/Error.php");
   require_once("../lib/Check.php");
@@ -50,7 +50,7 @@
     {
       Msg::error(_("Parse failed."));
       HTML::para(HTML::strLink(_("Back to installation main page"), $_SERVER['PHP_SELF']));
-      include_once("../install/footer.php");
+      include_once(dirname(__FILE__) . "/footer.php");
       unlink($tmpFile);
       exit();
     }
@@ -122,7 +122,7 @@
 
     HTML::para(HTML::strLink(_("Cancel"), './index.php'));
 
-    include_once("../install/footer.php");
+    include_once(dirname(__FILE__) . "/footer.php");
     exit();
   } // end if
 
@@ -158,7 +158,7 @@
 
     HTML::para(sprintf(_("See %s for more details."), HTML::strLink(_("Install Instructions"), '../install.html')));
 
-    include_once("../install/footer.php");
+    include_once(dirname(__FILE__) . "/footer.php");
     exit();
   } // end if
   HTML::para(_("Database connection is good."));
@@ -189,5 +189,5 @@
 
   HTML::rule();
 
-  require_once("../install/footer.php");
+  require_once(dirname(__FILE__) . "/footer.php");
 ?>

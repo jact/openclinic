@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.30 2007/10/27 17:14:54 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.31 2007/10/27 17:53:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -456,7 +456,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.30 2007/10/27 17:14:54 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.31 2007/10/27 17:53:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -532,7 +532,7 @@
     /**
      * Database tables creation
      */
-    require_once("../install/parse_sql_file.php");
+    require_once(dirname(__FILE__) . "/parse_sql_file.php");
 
     foreach ($tables as $tableName)
     {
