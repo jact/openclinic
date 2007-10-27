@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.10 2006/10/13 20:14:10 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.11 2007/10/27 17:17:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
    */
   require_once("../config/i18n.php");
 
-  require_once("../lib/HTML.php");
+  require_once("../lib/Msg.php"); // include HTML.php
 
   /**
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)

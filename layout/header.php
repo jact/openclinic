@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.7 2007/10/17 18:08:50 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.8 2007/10/27 17:17:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@
     exit();
   }
 
-  require_once("../lib/HTML.php");
+  require_once("../lib/Msg.php"); // include HTML.php
 
   /**
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
@@ -178,7 +178,7 @@
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    HTML::message(_("This is a demo version"), OPEN_MSG_INFO);
+    Msg::info(_("This is a demo version"));
   }
 
   /**
