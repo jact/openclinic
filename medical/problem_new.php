@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new.php,v 1.17 2007/10/26 21:32:43 jact Exp $
+ * @version   CVS: $Id: problem_new.php,v 1.18 2007/10/27 11:53:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -96,6 +96,6 @@
    * Redirect to $returnLocation to avoid reload problem
    */
   //$returnLocation = "../medical/problem_list.php?id_patient=" . $idPatient;
-  $returnLocation = "../medical/problem_list.php";
+  $returnLocation = "../medical/problem_view.php?id_patient=" . $idPatient . "&id_problem=" . $idProblem;
   header("Location: " . $returnLocation);
 ?>
