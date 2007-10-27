@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.4 2007/10/16 19:58:22 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.5 2007/10/27 20:04:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -128,7 +128,9 @@
 
           $_SESSION = array(); // deregister all current session variables
 
-          FlashMsg::add(_("Your user account has been suspended. Contact with administrator to resolve this problem."));
+          FlashMsg::add(_("Your user account has been suspended. Contact with administrator to resolve this problem."),
+            OPEN_MSG_WARNING
+          );
           header("Location: ../home/index.php");
           exit();
         }
@@ -160,7 +162,9 @@
   {
     $_SESSION = array(); // deregister all current session variables
 
-    FlashMsg::add(_("Your user account has been suspended. Contact with administrator to resolve this problem."));
+    FlashMsg::add(_("Your user account has been suspended. Contact with administrator to resolve this problem."),
+      OPEN_MSG_WARNING
+    );
     header("Location: ../home/index.php");
     exit();
   }
@@ -204,14 +208,14 @@
   }
   $_SESSION["hasAdminAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
   $_SESSION["hasMedicalAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
-  $_SESSION["hasStatsAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR);
+  //$_SESSION["hasStatsAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR); // @todo?
   $_SESSION["userTheme"] = $user->getIdTheme();
   $_SESSION["userId"] = $user->getIdUser();
   $_SESSION["loginIP"] = $_SERVER["REMOTE_ADDR"];
 
   if ( !isset($_SESSION["returnPage"]) )
   {
-    $_SESSION["returnPage"] = urlencode("../home/index.php");
+    $_SESSION["returnPage"] = "../home/index.php";
   }
 
   /**
