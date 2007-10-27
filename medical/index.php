@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.11 2007/10/17 19:14:28 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.12 2007/10/27 16:12:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,6 +42,21 @@
     _("print medical record")
   );
   HTML::itemList($array);
+
+  $viewedPatient = LastViewedPatient::get();
+  if ($viewedPatient)
+  {
+    HTML::rule();
+
+    HTML::section(2, _("Last Viewed Patients"), array('class' => 'icon patientIcon'));
+
+    $array = array();
+    foreach ($viewedPatient as $key => $value)
+    {
+      $array[] = HTML::strLink($value, '../medical/patient_view.php', array('id_patient' => $key));
+    }
+    HTML::itemList($array);
+  }
 
   if (isset($hasMedicalAdminAuth) && $hasMedicalAdminAuth)
   {
