@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: xhtml_start.php,v 1.4 2007/10/25 21:59:18 jact Exp $
+ * @version   CVS: $Id: xhtml_start.php,v 1.5 2007/10/27 14:06:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -41,29 +41,31 @@
    *
    * Author: Tommy Olsson <http://autisticcuckoo.net/>
    */
-  $xhtml = false;
-  if (preg_match('/application\/xhtml\+xml(;q=(\d+\.\d+))?/i', $_SERVER['HTTP_ACCEPT'], $matches))
+  $_xhtml = false;
+  if (preg_match('/application\/xhtml\+xml(;q=(\d+\.\d+))?/i', $_SERVER['HTTP_ACCEPT'], $_matches))
   {
-    $xhtmlQ = isset($matches[2]) ? $matches[2] : 1;
-    if (preg_match('/text\/html(;q=(\d+\.\d+))?/i', $_SERVER['HTTP_ACCEPT'], $matches))
+    $_xhtmlQ = isset($_matches[2]) ? $_matches[2] : 1;
+    if (preg_match('/text\/html(;q=(\d+\.\d+))?/i', $_SERVER['HTTP_ACCEPT'], $_matches))
     {
-      $htmlQ = isset($matches[2]) ? $matches[2] : 1;
-      $xhtml = ($xhtmlQ >= $htmlQ);
+      $_htmlQ = isset($_matches[2]) ? $_matches[2] : 1;
+      $_xhtml = ($_xhtmlQ >= $_htmlQ);
     }
     else
     {
-      $xhtml = true;
+      $_xhtml = true;
     }
   }
-  $xhtml = ($xhtml && (defined("OPEN_XML_ACTIVED") ? OPEN_XML_ACTIVED : false));
+  $_xhtml = ($_xhtml && (defined("OPEN_XML_ACTIVED") ? OPEN_XML_ACTIVED : false));
 
-  $contentType = ($xhtml) ? "application/xhtml+xml" : "text/html";
-  $contentType .= "; charset=" . OPEN_CHARSET/*"UTF-8"*/;
+  $_contentType = ($_xhtml) ? "application/xhtml+xml" : "text/html";
+  $_contentType .= "; charset=" . OPEN_CHARSET/*"UTF-8"*/;
 
-  header("Content-Type: " . $contentType); // force document encoding, ignore server configuration
+  header("Content-Type: " . $_contentType); // force document encoding, ignore server configuration
   header("Vary: Accept");
 
-  // force not caching
+  /**
+   * Force not caching
+   */
   header("Expires: -1");
   header("Etag: " . md5(uniqid(rand(), true)));
 
@@ -79,13 +81,13 @@
     }
   }
 
-  if (strpos($contentType, "application/xhtml+xml") !== false)
+  if (strpos($_contentType, "application/xhtml+xml") !== false)
   {
     // To prevent 'short_open_tag = On' mistake
     echo '<?xml version="1.0" encoding="' . OPEN_ENCODING/*"UTF-8"*/ . '" standalone="no" ?>' . PHP_EOL;
   }
 
-  if ($xhtml)
+  if ($_xhtml)
   {
     echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' . PHP_EOL;
   }
@@ -102,20 +104,23 @@
     )
   );
   HTML::start('head');
-  HTML::start('meta', array('http-equiv' => 'Content-Type', 'content' => $contentType), true);
+  HTML::start('meta', array('http-equiv' => 'Content-Type', 'content' => $_contentType), true);
 
-  $titlePage = ((isset($title) && !empty($title) ) ? $title : "");
-  if (defined("OPEN_CLINIC_NAME") && OPEN_CLINIC_NAME)
-  {
-    $titlePage = OPEN_CLINIC_NAME . " : " . $titlePage;
-  }
+  $_titlePage = (isset($titlePage)) ? $titlePage : ((isset($title) && !empty($title) ) ? $title : "");
 
   /**
    * @since 0.8
    */
-  $titlePage .= ((isset($formError) && count($formError) > 0 && isset($focusFormField)) ? " : " . _("Error occurred") : "");
+  $_titlePage .= (isset($formError) && count($formError) > 0 && isset($focusFormField))
+    ? " : " . _("Error occurred")
+    : "";
 
-  HTML::tag('title', $titlePage);
+  if (defined("OPEN_CLINIC_NAME") && OPEN_CLINIC_NAME)
+  {
+    $_titlePage .= ' : ' . OPEN_CLINIC_NAME;
+  }
+
+  HTML::tag('title', $_titlePage);
 
   //HTML::start('meta', array('http-equiv' => 'Content-Style-Type', 'content' => 'text/css2'), true);
   HTML::start('meta', array('http-equiv' => 'Cache-Control', 'content' => 'no-store,no-cache,must-revalidate'), true);
