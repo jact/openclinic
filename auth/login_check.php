@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.4 2007/10/17 19:15:16 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.5 2007/10/27 20:03:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,109 +30,111 @@
     exit();
   }
 
-  require_once("../model/Session_Query.php");
-
   /**
    * Disabling users control for demo
    */
-  if (defined("OPEN_DEMO") && !OPEN_DEMO)
+  if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    //works in PHP >= 4.1
-    $_SESSION['returnPage'] = urlencode($_SERVER['REQUEST_URI']);
+    $hasMedicalAdminAuth = true;
 
-    /**
-     * Checking to see if session variables exist
-     */
-    if ( !isset($_SESSION['loginSession']) || ($_SESSION['loginSession'] == "") )
-    {
-      header("Location: ../auth/login_form.php");
-      exit();
-    }
+    return;
+  }
 
-    if ( !isset($_SESSION['token']) || $_SESSION['token'] == "" )
-    {
-      header("Location: ../auth/login_form.php");
-      exit();
-    }
+  //works in PHP >= 4.1
+  $_SESSION['returnPage'] = /*urlencode(*/$_SERVER['REQUEST_URI']/*)*/;
 
-    /**
-     * Checking if the request is from a different IP to previously
-     */
-    if (isset($_SESSION['loginIP']) && $_SESSION['loginIP'] != $_SERVER['REMOTE_ADDR'])
-    {
-      // This is possibly a session hijack attempt
-      //$_SESSION = array(); // deregister all current session variables
-      //session_destroy(); // clean up session ID
+  /**
+   * Checking to see if session variables exist
+   */
+  if ( !isset($_SESSION['loginSession']) || ($_SESSION['loginSession'] == "") )
+  {
+    header("Location: ../auth/login_form.php");
+    exit();
+  }
 
-      //header("Location: ../auth/login_form.php");
-      include_once("../auth/logout.php");
-      exit();
-    }
+  if ( !isset($_SESSION['token']) || $_SESSION['token'] == "" )
+  {
+    header("Location: ../auth/login_form.php");
+    exit();
+  }
 
-    /**
-     * Checking session table to see if token has timed out
-     */
-    $sessQ = new Session_Query();
-    $sessQ->connect();
+  /**
+   * Checking if the request is from a different IP to previously
+   */
+  if (isset($_SESSION['loginIP']) && $_SESSION['loginIP'] != $_SERVER['REMOTE_ADDR'])
+  {
+    // This is possibly a session hijack attempt
+    //$_SESSION = array(); // deregister all current session variables
+    //session_destroy(); // clean up session ID
 
-    if ( !$sessQ->validToken($_SESSION['loginSession'], $_SESSION['token']) )
-    {
-      $sessQ->close();
+    //header("Location: ../auth/login_form.php");
+    include_once("../auth/logout.php");
+    exit();
+  }
 
-      $_SESSION['invalidToken'] = true;
-      header("Location: ../auth/login_form.php?ret=" . $_SESSION['returnPage']);
-      exit();
-    }
+  /**
+   * Checking session table to see if token has timed out
+   */
+  require_once("../model/Session_Query.php");
+
+  $sessQ = new Session_Query();
+  $sessQ->connect();
+
+  if ( !$sessQ->validToken($_SESSION['loginSession'], $_SESSION['token']) )
+  {
     $sessQ->close();
 
-    if (isset($_SESSION['invalidToken']))
-    {
-      unset($_SESSION['invalidToken']);
-    }
+    $_SESSION['invalidToken'] = true;
+    FlashMsg::add(_("Session timeout"));
+    header("Location: ../auth/login_form.php");
+    exit();
+  }
+  $sessQ->close();
+  unset($sessQ);
 
-    /**
-     * Checking authorization for this tab
-     * The session authorization flags were set at login in login.php
-     */
-    if (isset($tab))
+  if (isset($_SESSION['invalidToken']))
+  {
+    unset($_SESSION['invalidToken']);
+  }
+
+  /**
+   * Checking authorization for this tab
+   * The session authorization flags were set at login in login.php
+   */
+  if (isset($tab))
+  {
+    if ($tab == "medical")
     {
-      if ($tab == "medical")
+      if ( !$_SESSION['hasMedicalAuth'] && (isset($onlyDoctor) && !$onlyDoctor) )
       {
-        if ( !$_SESSION['hasMedicalAuth'] && (isset($onlyDoctor) && !$onlyDoctor) )
-        {
-          FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Medical Records")));
-          header("Location: ../home/index.php");
-          exit();
-        }
-      }
-      /*elseif ($tab == "stats")
-      {
-        if ( !$_SESSION['hasStatsAuth'] )
-        {
-          FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Stats")));
-          header("Location: ../home/index.php");
-          exit();
-        }
-      }*/
-      elseif ($tab == "admin")
-      {
-        if ( !$_SESSION['hasAdminAuth'] )
-        {
-          FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
-          header("Location: ../home/index.php");
-          exit();
-        }
+        FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Medical Records")));
+        header("Location: ../home/index.php");
+        exit();
       }
     }
+    /*elseif ($tab == "stats")
+    {
+      if ( !$_SESSION['hasStatsAuth'] )
+      {
+        FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Stats")));
+        header("Location: ../home/index.php");
+        exit();
+      }
+    }*/
+    elseif ($tab == "admin")
+    {
+      if ( !$_SESSION['hasAdminAuth'] )
+      {
+        FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
+        header("Location: ../home/index.php");
+        exit();
+      }
+    }
+  }
 
-    if ( !$_SESSION['hasAdminAuth'] && !$_SESSION['hasMedicalAuth'] )
-    {
-      $hasMedicalAdminAuth = (isset($onlyDoctor) ? !($onlyDoctor) : true);
-    }
-    else
-    {
-      $hasMedicalAdminAuth = true;
-    }
+  if ( !$_SESSION['hasAdminAuth'] && !$_SESSION['hasMedicalAuth'] )
+  {
+    $hasMedicalAdminAuth = (isset($onlyDoctor) ? !($onlyDoctor) : true);
   }
   else
   {
