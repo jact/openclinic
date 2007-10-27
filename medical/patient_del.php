@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.23 2007/10/16 20:09:51 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.24 2007/10/27 16:11:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -234,8 +234,8 @@
   /**
    * Update session variables
    */
-  require_once("../medical/visited_list.php");
-  deletePatient($idPatient);
+  require_once("../lib/LastViewedPatient.php");
+  LastViewedPatient::delete($idPatient);
 
   /**
    * Reset abort setting

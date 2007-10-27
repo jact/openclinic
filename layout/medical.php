@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.21 2007/10/26 21:16:00 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.22 2007/10/27 16:13:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo      remove <ul>, <li> (use HTML::*)
  */
@@ -20,6 +20,7 @@
     exit();
   }
 
+  require_once("../lib/LastViewedPatient.php");
   require_once("../layout/component.php");
   echo authInfo();
 
@@ -41,10 +42,11 @@
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
-    if (isset($_SESSION["visitedPatients"]))
+    $_viewedPatients = LastViewedPatient::get();
+    if ($_viewedPatients)
     {
       echo "</li>\n"; // end searchform
-      foreach ($_SESSION["visitedPatients"] as $arrKey => $arrValue)
+      foreach ($_viewedPatients as $arrKey => $arrValue)
       {
         if (isset($idPatient) && $arrKey == $idPatient)
         {
