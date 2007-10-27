@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.2 2007/10/15 20:11:48 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.3 2007/10/27 16:25:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -27,6 +27,7 @@
  *  string menuBar(string $tab, array $section)
  *  string authInfo(void)
  *  string logoInfo(void)
+ *  string patientLinks(int $idPatient, string $nav)
  */
 
   /**
@@ -275,5 +276,49 @@
     $html .= HTML::strEnd('div'); // #sideBarLogo
 
     return $html;
+  }
+
+  /**
+   * string patientLinks(int $idPatient, string $nav)
+   *
+   * Returns a list with links about a patient
+   *
+   * @param int $idPatient
+   * @param string $nav
+   * @return string
+   * @access public
+   * @since 0.8
+   */
+  function patientLinks($idPatient, $nav)
+  {
+    $linkList = array(
+      "relatives" => array(_("View Relatives"), "../medical/relative_list.php?id_patient=" . $idPatient),
+      //"preventive" => array(_("Datos Preventivos"), ""), // I don't know how implement it
+      "history" => array(_("Clinic History"), "../medical/history_list.php?id_patient=" . $idPatient),
+      "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php?id_patient=" . $idPatient)
+    );
+
+    $array = null;
+    foreach ($linkList as $key => $value)
+    {
+      if ($nav == $key)
+      {
+        $array[] = array($value[0], array('class' => 'selected'));
+      }
+      else
+      {
+        $array[] = HTML::strLink($value[0], $value[1]);
+      }
+    }
+    unset($linkList);
+
+    $array[] = ($nav == "print")
+      ? array(_("Print Medical Record"), array('class' => 'selected'))
+      : HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
+          array('id_patient' => $idPatient),
+          array('class' => 'popup')
+        );
+
+    return HTML::strItemList($array, array('class' => 'subnavbar'));
   }
 ?>
