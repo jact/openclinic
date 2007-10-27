@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.27 2007/10/26 21:51:35 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.28 2007/10/27 14:05:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -75,11 +75,16 @@
 
     unset($patient);
   }
+  else
+  {
+    $patName = $formVar["first_name"] . ' ' . $formVar["surname1"] . ' ' . $formVar["surname2"];
+  }
 
   /**
    * Show page
    */
   $title = _("Edit Patient Social Data");
+  $titlePage = $patName . ' (' . $title . ')';
   $focusFormField = "nif"; // to avoid JavaScript mistakes in demo version
   require_once("../layout/header.php");
 

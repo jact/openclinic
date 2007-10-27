@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_view.php,v 1.17 2007/10/26 22:06:15 jact Exp $
+ * @version   CVS: $Id: history_personal_view.php,v 1.18 2007/10/27 14:05:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -68,6 +68,7 @@
    * Show page
    */
   $title = _("View Personal Antecedents");
+  $titlePage = $patient->getName() . ' (' . $title . ')';
   require_once("../layout/header.php");
 
   /**

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_del_confirm.php,v 1.20 2007/10/26 21:41:40 jact Exp $
+ * @version   CVS: $Id: connection_del_confirm.php,v 1.21 2007/10/27 14:05:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,6 +54,7 @@
    * Show page
    */
   $title = _("Delete Connection with Medical Problem");
+  $titlePage = $patient->getName() . ' [' . $problem->getWording() . '] (' . $title . ')';
   require_once("../layout/header.php");
 
   //$returnLocation = "../medical/connection_list.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient; // controlling var

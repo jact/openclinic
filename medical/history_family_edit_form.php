@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_edit_form.php,v 1.20 2007/10/26 21:49:58 jact Exp $
+ * @version   CVS: $Id: history_family_edit_form.php,v 1.21 2007/10/27 14:05:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -77,6 +77,7 @@
    * Show page
    */
   $title = _("Edit Family Antecedents");
+  $titlePage = $patient->getName() . ' (' . $title . ')';
   $focusFormField = "parents_status_health"; // to avoid JavaScript mistakes in demo version
   require_once("../layout/header.php");
 

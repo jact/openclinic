@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit_form.php,v 1.28 2007/10/26 21:57:29 jact Exp $
+ * @version   CVS: $Id: problem_edit_form.php,v 1.29 2007/10/27 14:05:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -73,6 +73,7 @@
    * Show page
    */
   $title = _("Edit Medical Problem");
+  $titlePage = $patient->getName() . ' [' . fieldPreview($problem->getWording()) . '] (' . $title . ')';
   $focusFormField = "wording"; // to avoid JavaScript mistakes in demo version
   require_once("../layout/header.php");
 

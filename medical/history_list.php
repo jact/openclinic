@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_list.php,v 1.20 2007/10/26 22:02:25 jact Exp $
+ * @version   CVS: $Id: history_list.php,v 1.21 2007/10/27 14:05:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,6 +43,7 @@
    * Show page
    */
   $title = _("Clinic History");
+  $titlePage = $patient->getName() . ' (' . $title . ')';
   require_once("../layout/header.php");
 
   /**

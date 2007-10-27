@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.26 2007/10/26 22:04:07 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.27 2007/10/27 14:05:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -61,6 +61,7 @@
    * Show page
    */
   $title = _("View Relatives");
+  $titlePage = $patient->getName() . ' (' . $title . ')';
   require_once("../layout/header.php");
 
   /**

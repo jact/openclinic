@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del_confirm.php,v 1.21 2007/10/26 21:44:44 jact Exp $
+ * @version   CVS: $Id: problem_del_confirm.php,v 1.22 2007/10/27 14:05:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -53,6 +53,7 @@
    * Show page
    */
   $title = _("Delete Medical Problem");
+  $titlePage = $patient->getName() . ' [' . $problem->getWording() . '] (' . $title . ')';
   require_once("../layout/header.php");
 
   //$returnLocation = "../medical/problem_list.php?id_patient=" . $idPatient; // controlling var

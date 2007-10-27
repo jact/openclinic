@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_view.php,v 1.21 2007/10/26 22:07:52 jact Exp $
+ * @version   CVS: $Id: problem_view.php,v 1.22 2007/10/27 14:05:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,6 +64,7 @@
    * Show page
    */
   $title = fieldPreview($problem->getWording()); //_("View Medical Problem");
+  $titlePage = $patient->getName() . ' [' . $title . ']';
   require_once("../layout/header.php");
 
   /**
