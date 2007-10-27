@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.26 2007/10/27 17:52:57 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.27 2007/10/27 19:07:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,10 +21,13 @@
   require_once("../lib/Form.php");
   require_once("../lib/Error.php");
   require_once("../lib/Check.php");
+  require_once("../lib/FlashMsg.php");
 
   session_start(); // to keep token_form
   //Error::debug($_POST);
   //Error::debug($_FILES);
+
+  echo FlashMsg::get();
 
   if (isset($_POST['install_file']))
   {
