@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_form.php,v 1.15 2007/10/16 20:20:04 jact Exp $
+ * @version   CVS: $Id: patient_search_form.php,v 1.16 2007/10/27 11:57:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -62,7 +62,7 @@
   require_once("../medical/problem_search_fields.php");
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: Empty search to see all results."));
+  HTML::message('* ' . _("Note: Empty search to see all results."), OPEN_MSG_HINT);
 
   require_once("../layout/footer.php");
 ?>
