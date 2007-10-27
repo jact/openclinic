@@ -9,16 +9,17 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.3 2007/10/27 17:52:57 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.4 2007/10/27 19:07:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  require_once(dirname(__FILE__) . "/header.php"); // i18n l10n
-  require_once(dirname(__FILE__) . "/parse_sql_file.php");
+  $returnLocation = './index.php';
+
   require_once("../model/Setting_Query.php");
+  require_once("../lib/FlashMsg.php");
   require_once("../lib/File.php"); // File::getDirContent()
 
-  HTML::section(1, _("Upgrade OpenClinic database:"));
+  session_start(); // to keep messages
 
   $setQ = new Setting_Query();
   $setQ->connect();
@@ -27,14 +28,12 @@
   $setQ->select();
   if ($setQ->isError())
   {
-    $setQ->close();
-
-    HTML::para(_("The connection to the database failed with the following error:"));
-    Msg::error($setQ->getDbError());
-    HTML::rule();
-    HTML::para(HTML::strLink(_("Back to installation main page"), './index.php'));
-
-    include_once(dirname(__FILE__) . "/footer.php");
+    FlashMsg::add(
+      sprintf(_("The connection to the database failed with the following error: %s"), $setQ->getDbError()),
+      OPEN_MSG_ERROR
+    );
+    $setQ->close(); // after getDbError
+    header("Location: " . $returnLocation);
     exit();
   }
 
@@ -46,17 +45,12 @@
   }
 
   $version = $set->getVersion();
-
   if ( !preg_match("/\d+(\.\d+){1,2}/", $version) )
   {
-    Msg::error(sprintf(_("Version field doesn't have a valid format (%s)."), $version));
-    HTML::rule();
-    HTML::para(HTML::strLink(_("Back to installation main page"), './index.php'));
-
-    include_once(dirname(__FILE__) . "/footer.php");
+    FlashMsg::add(sprintf(_("Version field doesn't have a valid format (%s)."), $version), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
     exit();
   }
-  HTML::para(sprintf(_("Finded version: %s"), $version));
   if (substr_count($version, '.') == 2)
   {
     $version = substr($version, 0, strrpos($version, '.')); // only 2 groups of ciphers: <number>.<number>
@@ -65,11 +59,16 @@
   $upgrades = File::getDirContent('./upgrades', false, array('sql'));
   if ( !is_array($upgrades) )
   {
-    Msg::error(_("There aren't upgrade files."));
-
-    include_once(dirname(__FILE__) . "/footer.php");
+    FlashMsg::add(_("There aren't upgrade files."), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
     exit();
   }
+
+  require_once(dirname(__FILE__) . "/header.php"); // i18n l10n
+  require_once(dirname(__FILE__) . "/parse_sql_file.php");
+
+  HTML::section(1, _("Upgrade OpenClinic database:"));
+  HTML::para(sprintf(_("Finded version: %s"), $version));
 
   foreach ($upgrades as $value)
   {
