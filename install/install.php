@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.20 2007/10/27 17:14:54 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.21 2007/10/27 17:40:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -77,7 +77,7 @@
       );
       HTML::end('form');
 
-      HTML::para(HTML::strLink(_("Cancel"), '../install/cancel_msg.php'));
+      HTML::para(HTML::strLink(_("Cancel"), './index.php'));
 
       include_once("../install/footer.php");
       exit();
