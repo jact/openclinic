@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.34 2007/10/27 14:05:27 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.35 2007/10/27 17:32:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,7 @@
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
   require_once("../lib/misc_lib.php");
-  require_once("../medical/PatientInfo.php");
+  require_once("../lib/PatientInfo.php");
 
   /**
    * Retrieving vars (PGS) and scrubbing the data

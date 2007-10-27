@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.28 2007/10/27 17:15:26 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.29 2007/10/27 17:32:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   require_once("../auth/login_check.php");
   require_once("../model/Relative_Query.php");
   require_once("../lib/Form.php");
-  require_once("../medical/PatientInfo.php");
+  require_once("../lib/PatientInfo.php");
 
   /**
    * Retrieving vars (PGS)

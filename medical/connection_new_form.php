@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.23 2007/10/27 17:15:25 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.24 2007/10/27 17:32:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,8 +25,8 @@
   require_once("../model/Problem_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/misc_lib.php");
-  require_once("../medical/PatientInfo.php");
-  require_once("../medical/ProblemInfo.php");
+  require_once("../lib/PatientInfo.php");
+  require_once("../lib/ProblemInfo.php");
 
   /**
    * Retrieving vars (PGS)

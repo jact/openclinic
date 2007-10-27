@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.27 2007/10/27 16:12:00 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.28 2007/10/27 17:32:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../medical/PatientInfo.php");
+  require_once("../lib/PatientInfo.php");
   require_once("../model/Staff_Query.php");
 
   /**

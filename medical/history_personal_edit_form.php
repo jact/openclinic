@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit_form.php,v 1.21 2007/10/27 14:05:26 jact Exp $
+ * @version   CVS: $Id: history_personal_edit_form.php,v 1.22 2007/10/27 17:32:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,7 @@
   require_once("../model/History_Query.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
-  require_once("../medical/PatientInfo.php");
+  require_once("../lib/PatientInfo.php");
 
   /**
    * Retrieving var (PGS)
