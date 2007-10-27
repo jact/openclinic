@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.27 2007/10/16 20:21:41 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.28 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -78,7 +78,8 @@ function previewTheme(key)
   if ( !$themeQ->selectWithStats() )
   {
     $themeQ->close();
-    HTML::message(_("No results found."), OPEN_MSG_INFO);
+
+    Msg::info(_("No results found."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -167,8 +168,8 @@ function previewTheme(key)
   unset($themeQ);
   unset($theme);
 
-  HTML::message('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
-  HTML::message('** ' . _("Note: The functions edit and delete are not available on the application themes."));
+  Msg::hint('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
+  Msg::hint('** ' . _("Note: The functions edit and delete are not available on the application themes."));
 
   require_once("../layout/footer.php");
 ?>

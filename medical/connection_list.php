@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_list.php,v 1.25 2007/10/27 14:05:26 jact Exp $
+ * @version   CVS: $Id: connection_list.php,v 1.26 2007/10/27 17:15:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -102,7 +102,7 @@
 
   if (count($connArray) == 0)
   {
-    HTML::message(_("No connections defined for this medical problem."), OPEN_MSG_INFO);
+    Msg::info(_("No connections defined for this medical problem."));
     include_once("../layout/footer.php");
     exit();
   }

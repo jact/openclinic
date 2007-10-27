@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.30 2007/10/17 18:07:55 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.31 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -201,11 +201,10 @@
 
   HTML::table($thead, $tbody, $tfoot, $options);
 
-  HTML::message(_("Sample Error"), OPEN_MSG_ERROR);
-
-  HTML::message(_("Sample Info"), OPEN_MSG_INFO);
-
-  HTML::message(_("Sample Warning"));
+  Msg::error(_("Sample Error"));
+  Msg::warning(_("Sample Warning"));
+  Msg::info(_("Sample Info"));
+  Msg::hint(_("Sample Hint"));
 
   require_once("../layout/footer.php");
 ?>

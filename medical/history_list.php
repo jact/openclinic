@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_list.php,v 1.21 2007/10/27 14:05:26 jact Exp $
+ * @version   CVS: $Id: history_list.php,v 1.22 2007/10/27 17:15:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -79,7 +79,8 @@
   if ( !$problemQ->selectProblems($idPatient, true) )
   {
     $problemQ->close();
-    HTML::message(_("No closed medical problems defined for this patient."), OPEN_MSG_INFO);
+
+    Msg::info(_("No closed medical problems defined for this patient."));
     include_once("../layout/footer.php");
     exit();
   }

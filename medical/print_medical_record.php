@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.25 2007/10/27 11:55:10 jact Exp $
+ * @version   CVS: $Id: print_medical_record.php,v 1.26 2007/10/27 17:15:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -47,7 +47,7 @@
     HTML::end('head');
     HTML::start('body');
 
-    HTML::message(_("No patient selected."), OPEN_MSG_ERROR);
+    Msg::error(_("No patient selected."));
     HTML::para(HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')));
 
     HTML::end('body');
@@ -74,7 +74,7 @@
     HTML::end('head');
     HTML::start('body');
 
-    HTML::message(_("That patient does not exist."), OPEN_MSG_ERROR);
+    Msg::error(_("That patient does not exist."));
     HTML::para(HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')));
 
     HTML::end('body');
@@ -230,7 +230,7 @@
 
   if ( !$problemQ->selectProblems($idPatient) )
   {
-    HTML::message(_("No medical problems defined for this patient."));
+    Msg::info(_("No medical problems defined for this patient."));
   }
 
   while ($problem = $problemQ->fetch())
@@ -455,7 +455,7 @@
 
   if ( !$problemQ->selectProblems($idPatient, true) )
   {
-    HTML::message(_("No closed medical problems defined for this patient."));
+    Msg::info(_("No closed medical problems defined for this patient."));
     HTML::rule();
   }
 

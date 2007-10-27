@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.23 2007/10/16 20:21:28 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.24 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -113,7 +113,8 @@
   if ( !$numRows )
   {
     $staffQ->close();
-    HTML::message(_("No results found."), OPEN_MSG_INFO);
+
+    Msg::info(_("No results found."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -214,8 +215,8 @@
 
   HTML::table($thead, $tbody, null);
 
-  HTML::message('* ' . _("Note: To the create user function must have a correct login."));
-  HTML::message('** ' . _("Note: The del function will not be applicated to the session user."));
+  Msg::hint('* ' . _("Note: To the create user function must have a correct login."));
+  Msg::hint('** ' . _("Note: The del function will not be applicated to the session user."));
 
   require_once("../layout/footer.php");
 ?>

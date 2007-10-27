@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_fields.php,v 1.27 2006/12/28 16:25:39 jact Exp $
+ * @version   CVS: $Id: patient_fields.php,v 1.28 2007/10/27 17:15:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -86,7 +86,7 @@
 
   if ($formError["birth_date"] != "")
   {
-    $row .= HTML::strMessage($formError["birth_date"], OPEN_MSG_ERROR, false);
+    $row .= Msg::strError($formError["birth_date"]);
   }
   $tbody[] = $row;
 
@@ -109,7 +109,7 @@
 
   if ($formError["decease_date"] != "")
   {
-    $row .= HTML::strMessage($formError["decease_date"], OPEN_MSG_ERROR, false);
+    $row .= Msg::strError($formError["decease_date"]);
   }
   $tbody[] = $row;
 

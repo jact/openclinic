@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_del_confirm.php,v 1.23 2007/10/27 14:05:27 jact Exp $
+ * @version   CVS: $Id: test_del_confirm.php,v 1.24 2007/10/27 17:15:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -95,7 +95,9 @@
 
   $tbody = array();
 
-  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete medical test, %s, from list?"), $test->getPathFilename()), OPEN_MSG_WARNING, false);
+  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete medical test, %s, from list?"),
+    $test->getPathFilename())
+  );
 
   $row = Form::strHidden("id_problem", $idProblem);
   $row .= Form::strHidden("id_test", $idTest);

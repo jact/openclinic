@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del_confirm.php,v 1.22 2007/10/27 14:05:27 jact Exp $
+ * @version   CVS: $Id: problem_del_confirm.php,v 1.23 2007/10/27 17:15:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -83,7 +83,7 @@
 
   $wording = $problem->getObject();
   $wording = $wording->getWording();
-  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete medical problem, %s, from list?"), $wording), OPEN_MSG_WARNING, false);
+  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete medical problem, %s, from list?"), $wording));
 
   $row = Form::strHidden("id_problem", $idProblem);
   $row .= Form::strHidden("id_patient", $idPatient);

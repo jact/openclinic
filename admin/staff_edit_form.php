@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit_form.php,v 1.23 2007/10/16 19:57:16 jact Exp $
+ * @version   CVS: $Id: staff_edit_form.php,v 1.24 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,11 +55,9 @@
     if ( !$staffQ->select($idMember) )
     {
       $staffQ->close();
-      include_once("../layout/header.php");
 
-      HTML::message(_("That staff member does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../layout/footer.php");
+      FlashMsg::add(_("That staff member does not exist."), OPEN_MSG_ERROR);
+      header("Location: " . $returnLocation);
       exit();
     }
 
@@ -135,7 +133,7 @@
 
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: The fields with * are required."));
+  Msg::hint('* ' . _("Note: The fields with * are required."));
 
   HTML::para(HTML::strLink(_("Return"), $returnLocation));
 

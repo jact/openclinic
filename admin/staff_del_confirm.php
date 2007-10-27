@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del_confirm.php,v 1.19 2006/12/28 16:16:24 jact Exp $
+ * @version   CVS: $Id: staff_del_confirm.php,v 1.20 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,7 +66,7 @@
 
   $tbody = array();
 
-  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete staff member, %s %s %s?"), $firstName, $surname1, $surname2), OPEN_MSG_WARNING, false);
+  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete staff member, %s %s %s?"), $firstName, $surname1, $surname2));
 
   $tbody[] = Form::strHidden("id_member", $idMember);
 
@@ -81,7 +81,7 @@
 
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: The del function will delete the related user too (if exists)."));
+  Msg::hint('* ' . _("Note: The del function will delete the related user too (if exists)."));
 
   HTML::para(HTML::strLink(_("Return"), $returnLocation));
 

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.29 2006/12/28 16:18:38 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.30 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,11 +59,9 @@
     if ( !$userQ->select($idUser) )
     {
       $userQ->close();
-      include_once("../layout/header.php");
 
-      HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../layout/footer.php");
+      FlashMsg::add(_("That user does not exist."), OPEN_MSG_ERROR);
+      header("Location: " . $returnLocation);
       exit();
     }
 
@@ -143,11 +141,11 @@
 
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: The fields with * are required."));
+  Msg::hint('* ' . _("Note: The fields with * are required."));
 
   if (isset($_GET["all"]))
   {
-    HTML::message(_("Fill password fields only if you want to change it."), OPEN_MSG_INFO);
+    Msg::hint(_("Fill password fields only if you want to change it."));
   }
 
   HTML::para(HTML::strLink(_("Return"), $returnLocation));

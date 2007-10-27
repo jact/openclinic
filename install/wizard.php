@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.29 2007/10/17 18:08:34 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.30 2007/10/27 17:14:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -36,6 +36,7 @@
   } // end step 8
 
   require_once("../lib/Form.php");
+  require_once("../lib/Msg.php");
   require_once("../lib/Error.php");
   require_once("../lib/Check.php");
 
@@ -435,12 +436,11 @@
     $aux = fopen('../config/database_constants.php', $mode);
     if ( !$aux )
     {
-      HTML::message(
+      Msg::error(
         sprintf(
           _("Incorrect permissions of %s file. Continue is impossible."),
           HTML::strTag('tt', "config/database_constants.php")
-        ),
-        OPEN_MSG_ERROR
+        )
       );
       exit();
     }
@@ -454,9 +454,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.29 2007/10/17 18:08:34 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.30 2007/10/27 17:14:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -481,7 +481,7 @@
 ';
     if ( !fwrite($aux, $fileContent) )
     {
-      HTML::message(_("Error in writing proccess. Continue is impossible."), OPEN_MSG_ERROR);
+      Msg::error(_("Error in writing proccess. Continue is impossible."));
       exit();
     }
     fclose($aux);
@@ -546,7 +546,7 @@
       }
       else
       {
-        HTML::message(_("Last instruction failed"), OPEN_MSG_ERROR);
+        Msg::error(_("Last instruction failed"));
         exit();
       }
     }
@@ -665,15 +665,16 @@
       $text .= HTML::strPara(_("This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."));
       if (defined('PHP_OS') && eregi('win', PHP_OS))
       {
-        $text .= HTML::strMessage(sprintf(_("Deactivate read-only mode in the file properties of %s."), HTML::strTag('tt', 'config/database_constants.php')), OPEN_MSG_ERROR);
+        $text .= Msg::strError(sprintf(_("Deactivate read-only mode in the file properties of %s."),
+          HTML::strTag('tt', 'config/database_constants.php'))
+        );
       }
       else
       {
-        $text .= HTML::strMessage(sprintf(_("Open a shell, go to %s directory and type %s."),
+        $text .= Msg::strError(sprintf(_("Open a shell, go to %s directory and type %s."),
             HTML::strTag('tt', 'openclinic'),
             HTML::strTag('tt', sprintf("chmod 666 %s", "config/database_constants.php"))
-          ),
-          OPEN_MSG_ERROR
+          )
         );
       }
       $text .= HTML::strPara(_("Once made it, click in Next button."));
@@ -808,38 +809,38 @@ function _warnIfExtNotLoaded($extensionName, $echoWhenOk = false)
  */
 function _validateSettings()
 {
-  $warning = "";
+  $error = "";
   if (empty($_POST['dbHost']))
   {
-    $warning .= _("Database Host is empty.") . PHP_EOL;
+    $error .= _("Database Host is empty.") . PHP_EOL;
   }
   if (empty($_POST['dbUser']))
   {
-    $warning .= _("Database User is empty.") . PHP_EOL;
+    $error .= _("Database User is empty.") . PHP_EOL;
   }
   if (empty($_POST['dbName']))
   {
-    $warning .= _("Database Name is empty.") . PHP_EOL;
+    $error .= _("Database Name is empty.") . PHP_EOL;
   }
   if ($_POST['timeout'] <= 0)
   {
-    $warning .= _("Session Timeout must be great than zero.") . PHP_EOL;
+    $error .= _("Session Timeout must be great than zero.") . PHP_EOL;
   }
   if ($_POST['itemsPage'] <= 0)
   {
-    $warning .= _("Items per page must be great than zero.") . PHP_EOL;
+    $error .= _("Items per page must be great than zero.") . PHP_EOL;
   }
   if (strlen($_POST['passwd']) < 4)
   {
-    $warning .= _("Admin password must be at least 4 characters.") . PHP_EOL;
+    $error .= _("Admin password must be at least 4 characters.") . PHP_EOL;
   }
 
-  if ( !empty($warning) )
+  if ( !empty($error) )
   {
     HTML::section(3, _("There were some errors"), array('class' => 'error'));
-    HTML::message($warning, OPEN_MSG_ERROR);
+    Msg::error($error);
   }
 
-  return empty($warning);
+  return empty($error);
 }
 ?>

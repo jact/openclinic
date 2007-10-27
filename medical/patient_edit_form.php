@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.28 2007/10/27 14:05:26 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.29 2007/10/27 17:15:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -117,7 +117,7 @@
 
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: The fields with * are required."), OPEN_MSG_HINT);
+  Msg::hint('* ' . _("Note: The fields with * are required."));
 
   /**
    * Destroy form values and errors

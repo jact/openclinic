@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.1 2007/01/29 15:28:07 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.2 2007/10/27 17:14:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,7 +30,7 @@
     $setQ->close();
 
     HTML::para(_("The connection to the database failed with the following error:"));
-    HTML::message($setQ->getDbError(), OPEN_MSG_ERROR);
+    Msg::error($setQ->getDbError());
     HTML::rule();
     HTML::para(HTML::strLink(_("Back to installation main page"), './index.php'));
 
@@ -49,7 +49,7 @@
 
   if ( !preg_match("/\d+(\.\d+){1,2}/", $version) )
   {
-    HTML::message(sprintf(_("Version field doesn't have a valid format (%s)."), $version), OPEN_MSG_ERROR);
+    Msg::error(sprintf(_("Version field doesn't have a valid format (%s)."), $version));
     HTML::rule();
     HTML::para(HTML::strLink(_("Back to installation main page"), './index.php'));
 
@@ -65,7 +65,7 @@
   $upgrades = File::getDirContent('./upgrades', false, array('sql'));
   if ( !is_array($upgrades) )
   {
-    HTML::message(_("There aren't upgrade files."), OPEN_MSG_ERROR);
+    Msg::error(_("There aren't upgrade files."));
 
     include_once("../install/footer.php");
     exit();
@@ -83,7 +83,7 @@
       if ( !parseSQLFile('./upgrades/' . $file, '', false) )
       {
         //Error::debug($file); // debug
-        //HTML::message(sprintf(_("Error processing file: %s"), $value), OPEN_MSG_ERROR);
+        //Msg::error(sprintf(_("Error processing file: %s"), $value));
 
         include_once("../install/footer.php");
         exit();
@@ -100,7 +100,7 @@
   unset($setQ);
   unset($set);
 
-  HTML::message(_("Database upgrade finished correctly!"));
+  Msg::info(_("Database upgrade finished correctly!"));
 
   HTML::section(1, HTML::strLink(_("Start using OpenClinic"), '../home/index.php'));
 

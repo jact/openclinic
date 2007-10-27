@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.19 2007/10/15 20:10:54 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.20 2007/10/27 17:14:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,7 +34,7 @@
    */
   $setQ = new Setting_Query();
   $setQ->connect();
-  HTML::message(_("Database connection is good."), OPEN_MSG_INFO);
+  Msg::info(_("Database connection is good."));
 
   /**
    * Show warning message if database exists
@@ -61,11 +61,8 @@
 
       HTML::rule();
 
-      HTML::message(
-        _("Are you sure you want to delete all clinic data and create new OpenClinic tables?"),
-        OPEN_MSG_ERROR
-      );
-      HTML::message(_("If you continue all data will be lost."));
+      Msg::warning(_("Are you sure you want to delete all clinic data and create new OpenClinic tables?"));
+      Msg::warning(_("If you continue all data will be lost."));
 
       // @todo use fieldset
       HTML::start('form',
@@ -107,12 +104,12 @@
     }
     else
     {
-      HTML::message(_("Last instruction failed"), OPEN_MSG_ERROR);
+      Msg::error(_("Last instruction failed"));
       exit();
     }
   }
 
-  HTML::message(_("OpenClinic tables have been created successfully!"));
+  Msg::info(_("OpenClinic tables have been created successfully!"));
 
   HTML::section(1, HTML::strLink(_("Start using OpenClinic"), '../home/index.php'));
 

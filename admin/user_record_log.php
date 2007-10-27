@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_record_log.php,v 1.30 2006/10/13 19:49:47 jact Exp $
+ * @version   CVS: $Id: user_record_log.php,v 1.31 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -80,7 +80,7 @@
   if ($recordQ->getRowCount() == 0)
   {
     $recordQ->close();
-    HTML::message(_("No logs for this user."), OPEN_MSG_INFO);
+    Msg::info(_("No logs for this user."));
   }
   else
   {

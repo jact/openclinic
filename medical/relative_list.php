@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.27 2007/10/27 14:05:27 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.28 2007/10/27 17:15:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,12 +92,12 @@
 
     HTML::end('form');
 
-    HTML::message('* ' . _("Note: Empty search to see all results."), OPEN_MSG_HINT);
+    Msg::hint('* ' . _("Note: Empty search to see all results."));
   } // end if
 
   if (count($relArray) == 0)
   {
-    HTML::message(_("No relatives defined for this patient."), OPEN_MSG_INFO);
+    Msg::info(_("No relatives defined for this patient."));
     include_once("../layout/footer.php");
     exit();
   }

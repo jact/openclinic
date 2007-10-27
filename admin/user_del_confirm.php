@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del_confirm.php,v 1.18 2006/12/28 16:18:25 jact Exp $
+ * @version   CVS: $Id: user_del_confirm.php,v 1.19 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,7 +64,7 @@
 
   $tbody = array();
 
-  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete user, %s?"), $login), OPEN_MSG_WARNING, false);
+  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete user, %s?"), $login));
 
   $row = Form::strHidden("id_user", $idUser);
   $row .= Form::strHidden("login", $login);

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_optimize_db.php,v 1.14 2006/10/16 18:10:57 jact Exp $
+ * @version   CVS: $Id: dump_optimize_db.php,v 1.15 2007/10/27 17:14:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -63,7 +63,8 @@
   if ( !$numTables )
   {
     $auxConn->close();
-    HTML::message(_("Database is empty."), OPEN_MSG_ERROR);
+
+    Msg::error(_("Database is empty."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -141,8 +142,8 @@
   $totalGain = round($totalGain, 3);
   HTML::section(3, _("Optimization Results") . ":");
 
-  HTML::message(sprintf(_("Total Database Size: %d KB"), $totalAll), OPEN_MSG_INFO);
-  HTML::message(sprintf(_("Total Space Saved: %d KB"), $totalGain), OPEN_MSG_INFO);
+  Msg::info(sprintf(_("Total Database Size: %d KB"), $totalAll));
+  Msg::info(sprintf(_("Total Space Saved: %d KB"), $totalGain));
 
   HTML::para(HTML::strlink(_("Back return"), '../admin/dump_view_form.php'));
 

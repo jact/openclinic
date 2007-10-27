@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_access_list.php,v 1.20 2007/01/29 16:52:35 jact Exp $
+ * @version   CVS: $Id: log_access_list.php,v 1.21 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -66,7 +66,7 @@
   if ($total == 0)
   {
     $accessQ->close();
-    HTML::message(_("No logs in this date."), OPEN_MSG_INFO);
+    Msg::info(_("No logs in this date."));
     include_once("../layout/footer.php");
     exit();
   }

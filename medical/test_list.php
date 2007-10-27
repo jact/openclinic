@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.26 2007/10/27 14:05:27 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.27 2007/10/27 17:15:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,7 +92,8 @@
   if ( !$testQ->select($idProblem) )
   {
     $testQ->close();
-    HTML::message(_("No medical tests defined for this medical problem."), OPEN_MSG_INFO);
+
+    Msg::info(_("No medical tests defined for this medical problem."));
     include_once("../layout/footer.php");
     exit();
   }

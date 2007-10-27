@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: view_source.php,v 1.11 2006/10/13 19:48:56 jact Exp $
+ * @version   CVS: $Id: view_source.php,v 1.12 2007/10/27 17:15:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -56,14 +56,14 @@
     }
     else
     {
-      HTML::message(_("No file found."), OPEN_MSG_ERROR);
+      Msg::error(_("No file found."));
 
       HTML::para(HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;')));
     }
   }
   else
   {
-    HTML::message(sprintf(_("You are not authorized to use %s tab."), _("Admin"))); // maybe change
+    Msg::warning(sprintf(_("You are not authorized to use %s tab."), _("Admin"))); // maybe change
   }
 
   HTML::end('body');

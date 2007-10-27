@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.3 2007/10/01 19:56:36 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.4 2007/10/27 17:14:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -56,7 +56,7 @@
   if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION["loginAttempts"])
       && $_SESSION["loginAttempts"] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
   {
-    HTML::message(_("Last attempt to type correct password before suspend this user account."));
+    Msg::warning(_("Last attempt to type correct password before suspend this user account."));
   }
 
   /**
@@ -97,7 +97,7 @@
   Form::fieldset($title, $tbody, $tfoot);
   HTML::end('form');
 
-  HTML::message(_("You must have cookies enabled to access your account."));
+  Msg::hint(_("You must have cookies enabled to access your account."));
 
   /**
    * Destroy form values and errors

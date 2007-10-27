@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.27 2006/12/28 16:19:17 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.28 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -56,11 +56,9 @@
     if ( !$userQ->select($idUser) )
     {
       $userQ->close();
-      include_once("../layout/header.php");
 
-      HTML::message(_("That user does not exist."), OPEN_MSG_ERROR);
-
-      include_once("../layout/footer.php");
+      FlashMsg::add(_("That user does not exist."), OPEN_MSG_ERROR);
+      header("Location: " . $returnLocation);
       exit();
     }
 

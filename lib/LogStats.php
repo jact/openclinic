@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.6 2007/10/15 20:12:23 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.7 2007/10/27 17:15:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -138,7 +138,7 @@ class LogStats
     if ($totalHits == 0)
     {
       $logQ->close();
-      HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
+      Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -203,7 +203,7 @@ class LogStats
     if ($totalHits == 0)
     {
       $logQ->close();
-      HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
+      Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -279,7 +279,7 @@ class LogStats
     if ($totalHits == 0)
     {
       $logQ->close();
-      HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
+      Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -366,7 +366,7 @@ class LogStats
     if ($totalHits == 0)
     {
       $logQ->close();
-      HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
+      Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -437,7 +437,7 @@ class LogStats
     if ($total == 0)
     {
       $logQ->close();
-      HTML::message(_("There are not statistics"), OPEN_MSG_INFO);
+      Msg::info(_("There are not statistics"));
 
       return;
     }

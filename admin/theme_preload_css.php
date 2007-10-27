@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.21 2006/12/28 16:18:12 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.22 2007/10/27 17:14:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -104,7 +104,7 @@
   Form::fieldset($title, $tbody, $tfoot);
   HTML::end('form');
 
-  HTML::message('* ' . _("Note: The fields with * are required."));
+  Msg::hint('* ' . _("Note: The fields with * are required."));
 
   HTML::para(HTML::strLink(_("Return"), $returnLocation));
 

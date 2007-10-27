@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.4 2007/10/09 18:40:20 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.5 2007/10/27 17:13:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,7 +92,7 @@
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    HTML::message(_("This is a demo version"), OPEN_MSG_INFO);
+    Msg::info(_("This is a demo version"));
   }
 
   /**

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.24 2007/01/29 15:26:16 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.25 2007/10/27 17:14:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,7 +48,7 @@
 
     if ( !parseSQLFile($tmpFile, $table, isset($_POST['drop'])) )
     {
-      HTML::message(_("Parse failed."), OPEN_MSG_ERROR);
+      Msg::error(_("Parse failed."));
       HTML::para(HTML::strLink(_("Back to installation main page"), $_SERVER['PHP_SELF']));
       include_once("../install/footer.php");
       unlink($tmpFile);
@@ -56,7 +56,7 @@
     }
     else
     {
-      HTML::message(_("File installed correctly."), OPEN_MSG_INFO);
+      Msg::info(_("File installed correctly."));
       HTML::para(HTML::strLink(_("Go to OpenClinic"), '../home/index.php'));
       HTML::rule();
       unlink($tmpFile);
@@ -137,7 +137,7 @@
   if ($installQ->isError())
   {
     HTML::para(_("The connection to the database failed with the following error:"));
-    HTML::message($installQ->getDbError(), OPEN_MSG_ERROR);
+    Msg::error($installQ->getDbError());
     HTML::rule();
 
     HTML::para(_("Please make sure the following has been done before running this install script."));

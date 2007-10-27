@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_del_confirm.php,v 1.21 2007/10/27 14:05:27 jact Exp $
+ * @version   CVS: $Id: relative_del_confirm.php,v 1.22 2007/10/27 17:15:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -72,7 +72,9 @@
   $tbody = array();
 
   $relative = new PatientInfo($idRelative);
-  $tbody[] = HTML::strMessage(sprintf(_("Are you sure you want to delete relative, %s, from list?"), $relative->getName()), OPEN_MSG_WARNING, false);
+  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete relative, %s, from list?"),
+    $relative->getName())
+  );
 
   $row = Form::strHidden("id_patient", $idPatient);
   $row .= Form::strHidden("id_relative", $idRelative);
