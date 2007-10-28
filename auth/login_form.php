@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.5 2007/10/28 11:32:02 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.6 2007/10/28 12:07:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,7 +30,7 @@
    */
   if (isset($_GET["ret"]))
   {
-    $_SESSION["returnPage"] = Check::safeText($_GET["ret"]);
+    $_SESSION['auth']['return_page'] = Check::safeText($_GET["ret"]);
   }
 
   /**
@@ -53,8 +53,8 @@
   /**
    * Warning message if loginAttempts == (OPEN_MAX_LOGIN_ATTEMPTS - 1)
    */
-  if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION["loginAttempts"])
-      && $_SESSION["loginAttempts"] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
+  if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION['auth']['login_attempts'])
+      && $_SESSION['auth']['login_attempts'] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
   {
     Msg::warning(_("Last attempt to type correct password before suspend this user account."));
   }

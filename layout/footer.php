@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.5 2007/10/27 17:13:57 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.6 2007/10/28 12:08:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -47,7 +47,7 @@
     );
   }
 
-  if (isset($_SESSION["hasAdminAuth"]) && ($_SESSION["hasAdminAuth"] === true && !OPEN_DEMO))
+  if (isset($_SESSION['auth']['is_admin']) && ($_SESSION['auth']['is_admin'] === true && !OPEN_DEMO))
   {
     $footLinks[] = HTML::strLink(_("View source code"), '../shared/view_source.php',
       array(

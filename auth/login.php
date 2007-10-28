@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.6 2007/10/28 11:32:27 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.7 2007/10/28 12:07:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -101,7 +101,7 @@
          */
         $errorFound = true;
         $formError["pwd_session"] = _("Invalid sign on.");
-        if ( !isset($_SESSION["loginAttempts"]) || ($_SESSION["loginAttempts"] == "") )
+        if ( !isset($_SESSION['auth']['login_attempts']) || ($_SESSION['auth']['login_attempts'] == "") )
         {
           $sessLoginAttempts = 1;
         }
@@ -109,7 +109,7 @@
         {
           if ($loginSession == $lastLogin)
           {
-            $sessLoginAttempts = $_SESSION["loginAttempts"] + 1;
+            $sessLoginAttempts = $_SESSION['auth']['login_attempts'] + 1;
           }
           else
           {
@@ -148,7 +148,7 @@
     Form::setSession(Check::safeArray($_POST), $formError);
     if (isset($sessLoginAttempts))
     {
-      $_SESSION["loginAttempts"] = $sessLoginAttempts;
+      $_SESSION['auth']['login_attempts'] = $sessLoginAttempts;
     }
 
     header("Location: ../auth/login_form.php");
@@ -197,27 +197,26 @@
   Form::unsetSession();
 
   // works in PHP >= 4.1.0
-  $_SESSION["memberUser"] = $user->getIdMember();
-  $_SESSION["loginSession"] = $user->getLogin();
-  $_SESSION["token"] = $token;
+  $_SESSION['auth']['member_user'] = $user->getIdMember();
+  $_SESSION['auth']['login_session'] = $user->getLogin();
+  $_SESSION['auth']['token'] = $token;
   if (isset($sessLoginAttempts))
   {
-    $_SESSION["loginAttempts"] = $sessLoginAttempts;
+    $_SESSION['auth']['login_attempts'] = $sessLoginAttempts;
   }
-  $_SESSION["hasAdminAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
-  $_SESSION["hasMedicalAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
-  //$_SESSION["hasStatsAuth"] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR); // @todo?
-  $_SESSION["userTheme"] = $user->getIdTheme();
-  $_SESSION["userId"] = $user->getIdUser();
-  $_SESSION["loginIP"] = $_SERVER["REMOTE_ADDR"];
-
-  if ( !isset($_SESSION["returnPage"]) )
+  $_SESSION['auth']['is_admin'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
+  $_SESSION['auth']['is_medical'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
+  //$_SESSION['auth']['is_stats'] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR); // @todo?
+  $_SESSION['auth']['user_theme'] = $user->getIdTheme();
+  $_SESSION['auth']['user_id'] = $user->getIdUser();
+  $_SESSION['auth']['login_ip'] = $_SERVER["REMOTE_ADDR"];
+  if ( !isset($_SESSION['auth']['return_page']) )
   {
-    $_SESSION["returnPage"] = "../home/index.php";
+    $_SESSION['auth']['return_page'] = "../home/index.php";
   }
 
   /**
    * Redirect to return page
    */
-  header("Location: " . urldecode($_SESSION["returnPage"]));
+  header("Location: " . urldecode($_SESSION['auth']['return_page']));
 ?>

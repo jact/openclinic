@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: view_source.php,v 1.12 2007/10/27 17:15:33 jact Exp $
+ * @version   CVS: $Id: view_source.php,v 1.13 2007/10/28 12:07:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,7 +42,7 @@
   }
   HTML::start('body', $array);
 
-  if (isset($_SESSION["hasAdminAuth"]))
+  if (isset($_SESSION['auth']['is_admin']))
   {
     $file = basename($_GET["file"]);
 

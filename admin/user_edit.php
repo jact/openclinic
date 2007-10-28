@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit.php,v 1.17 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: user_edit.php,v 1.18 2007/10/28 12:07:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,8 +74,8 @@
      */
     if (isset($_POST["all"]))
     {
-      $_SESSION['loginSession'] = $user->getLogin();
-      $_SESSION['userTheme'] = $user->getIdTheme();
+      $_SESSION['auth']['login_session'] = $user->getLogin();
+      $_SESSION['auth']['user_theme'] = $user->getIdTheme();
     }
   }
 

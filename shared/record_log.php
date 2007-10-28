@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: record_log.php,v 1.17 2006/10/13 19:48:37 jact Exp $
+ * @version   CVS: $Id: record_log.php,v 1.18 2007/10/28 12:07:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.3
  */
@@ -68,7 +68,7 @@
     $recQ = new Record_Page_Query();
     $recQ->connect();
 
-    $recQ->insert($_SESSION['userId'], $_SESSION['loginSession'], $table, $operation, $data);
+    $recQ->insert($_SESSION['auth']['user_id'], $_SESSION['auth']['login_session'], $table, $operation, $data);
 
     $recQ->close();
     unset($recQ);

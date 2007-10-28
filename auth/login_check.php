@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.5 2007/10/27 20:03:42 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.6 2007/10/28 12:07:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,18 +41,18 @@
   }
 
   //works in PHP >= 4.1
-  $_SESSION['returnPage'] = /*urlencode(*/$_SERVER['REQUEST_URI']/*)*/;
+  $_SESSION['auth']['return_page'] = /*urlencode(*/$_SERVER['REQUEST_URI']/*)*/;
 
   /**
    * Checking to see if session variables exist
    */
-  if ( !isset($_SESSION['loginSession']) || ($_SESSION['loginSession'] == "") )
+  if ( !isset($_SESSION['auth']['login_session']) || ($_SESSION['auth']['login_session'] == "") )
   {
     header("Location: ../auth/login_form.php");
     exit();
   }
 
-  if ( !isset($_SESSION['token']) || $_SESSION['token'] == "" )
+  if ( !isset($_SESSION['auth']['token']) || $_SESSION['auth']['token'] == "" )
   {
     header("Location: ../auth/login_form.php");
     exit();
@@ -61,7 +61,7 @@
   /**
    * Checking if the request is from a different IP to previously
    */
-  if (isset($_SESSION['loginIP']) && $_SESSION['loginIP'] != $_SERVER['REMOTE_ADDR'])
+  if (isset($_SESSION['auth']['login_ip']) && $_SESSION['auth']['login_ip'] != $_SERVER['REMOTE_ADDR'])
   {
     // This is possibly a session hijack attempt
     //$_SESSION = array(); // deregister all current session variables
@@ -80,11 +80,11 @@
   $sessQ = new Session_Query();
   $sessQ->connect();
 
-  if ( !$sessQ->validToken($_SESSION['loginSession'], $_SESSION['token']) )
+  if ( !$sessQ->validToken($_SESSION['auth']['login_session'], $_SESSION['auth']['token']) )
   {
     $sessQ->close();
 
-    $_SESSION['invalidToken'] = true;
+    $_SESSION['auth']['invalid_token'] = true;
     FlashMsg::add(_("Session timeout"));
     header("Location: ../auth/login_form.php");
     exit();
@@ -92,9 +92,12 @@
   $sessQ->close();
   unset($sessQ);
 
-  if (isset($_SESSION['invalidToken']))
+  /**
+   * Here, the session is valid!
+   */
+  if (isset($_SESSION['auth']['invalid_token']))
   {
-    unset($_SESSION['invalidToken']);
+    unset($_SESSION['auth']['invalid_token']);
   }
 
   /**
@@ -105,7 +108,7 @@
   {
     if ($tab == "medical")
     {
-      if ( !$_SESSION['hasMedicalAuth'] && (isset($onlyDoctor) && !$onlyDoctor) )
+      if ( !$_SESSION['auth']['is_medical'] && (isset($onlyDoctor) && !$onlyDoctor) )
       {
         FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Medical Records")));
         header("Location: ../home/index.php");
@@ -114,7 +117,7 @@
     }
     /*elseif ($tab == "stats")
     {
-      if ( !$_SESSION['hasStatsAuth'] )
+      if ( !$_SESSION['auth']['is_stats'] )
       {
         FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Stats")));
         header("Location: ../home/index.php");
@@ -123,7 +126,7 @@
     }*/
     elseif ($tab == "admin")
     {
-      if ( !$_SESSION['hasAdminAuth'] )
+      if ( !$_SESSION['auth']['is_admin'] )
       {
         FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
         header("Location: ../home/index.php");
@@ -132,7 +135,7 @@
     }
   }
 
-  if ( !$_SESSION['hasAdminAuth'] && !$_SESSION['hasMedicalAuth'] )
+  if ( !$_SESSION['auth']['is_admin'] && !$_SESSION['auth']['is_medical'] )
   {
     $hasMedicalAdminAuth = (isset($onlyDoctor) ? !($onlyDoctor) : true);
   }

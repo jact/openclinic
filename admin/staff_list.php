@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.24 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.25 2007/10/28 12:07:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -144,7 +144,7 @@
     $row = HTML::strLink(_("edit"), '../admin/staff_edit_form.php', array('key' => $staff->getIdMember()));
     $row .= OPEN_SEPARATOR;
 
-    if ($staff->getIdMember() == $_SESSION["memberUser"])
+    if ($staff->getIdMember() == $_SESSION['auth']['member_user'])
     {
       $row .= "** " . _("del");
     }

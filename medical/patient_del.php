@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.24 2007/10/27 16:11:54 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.25 2007/10/28 12:08:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -113,7 +113,10 @@
     $delPatientQ = new DelPatient_Query();
     $delPatientQ->connect();
 
-    $delPatientQ->insert($patient, $historyP, $historyF, $_SESSION['userId'], $_SESSION['loginSession']);
+    $delPatientQ->insert($patient, $historyP, $historyF,
+      $_SESSION['auth']['user_id'],
+      $_SESSION['auth']['login_session']
+    );
 
     unset($delPatientQ);
     unset($patient);
@@ -158,7 +161,7 @@
 
     for ($i = 0; $i < $numRows; $i++)
     {
-      $delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']);
+      $delProblemQ->insert($array[$i], $_SESSION['auth']['user_id'], $_SESSION['auth']['login_session']);
     }
     $delProblemQ->close();
     unset($delProblemQ);
@@ -206,7 +209,7 @@
 
     for ($i = 0; $i < $numRows; $i++)
     {
-      $delProblemQ->insert($array[$i], $_SESSION['userId'], $_SESSION['loginSession']);
+      $delProblemQ->insert($array[$i], $_SESSION['auth']['user_id'], $_SESSION['auth']['login_session']);
     }
     $delProblemQ->close();
     unset($delProblemQ);

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: environment.php,v 1.2 2007/10/16 19:59:08 jact Exp $
+ * @version   CVS: $Id: environment.php,v 1.3 2007/10/28 12:07:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -95,7 +95,7 @@
   $themeQ = new Theme_Query();
   $themeQ->connect();
 
-  $themeQ->select((isset($_SESSION["userTheme"]) ? $_SESSION["userTheme"] : OPEN_THEME_ID));
+  $themeQ->select((isset($_SESSION['auth']['user_theme']) ? $_SESSION['auth']['user_theme'] : OPEN_THEME_ID));
 
   $theme = $themeQ->fetch();
   if ( !$theme )
@@ -104,15 +104,14 @@
     Error::fetch($themeQ);
   }
 
-  $themeQ->freeResult();
-  $themeQ->close();
-  unset($themeQ);
-
   /**
    * Theme related constants
    */
   define("OPEN_THEME_NAME",     $theme->getName());
   define("OPEN_THEME_CSS_FILE", $theme->getCSSFile());
 
+  $themeQ->freeResult();
+  $themeQ->close();
+  unset($themeQ);
   unset($theme);
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.21 2007/10/26 21:32:04 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.22 2007/10/28 12:08:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -103,7 +103,7 @@
     $delProblemQ = new DelProblem_Query();
     $delProblemQ->connect();
 
-    $delProblemQ->insert($problem, $_SESSION['userId'], $_SESSION['loginSession']);
+    $delProblemQ->insert($problem, $_SESSION['auth']['user_id'], $_SESSION['auth']['login_session']);
 
     unset($delProblemQ);
     unset($problem);

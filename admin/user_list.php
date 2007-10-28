@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.29 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.30 2007/10/28 12:07:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -122,7 +122,7 @@
     $row .= OPEN_SEPARATOR;
     $row .= HTML::strLink(_("pwd"), '../admin/user_pwd_reset_form.php', array('key' => $user->getIdUser()));
     $row .= OPEN_SEPARATOR;
-    if (isset($_SESSION["userId"]) && $user->getIdUser() == $_SESSION["userId"])
+    if (isset($_SESSION['auth']['user_id']) && $user->getIdUser() == $_SESSION['auth']['user_id'])
     {
       $row .= '*' . _("del");
     }

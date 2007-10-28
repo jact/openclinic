@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.4 2007/10/28 11:29:39 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.5 2007/10/28 12:07:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -89,8 +89,8 @@
       return;
     }
 
-    $sessLogin = isset($_SESSION["loginSession"]) ? $_SESSION["loginSession"] : "";
-    if ( !empty($sessLogin) && !isset($_SESSION["invalidToken"]) )
+    $sessLogin = isset($_SESSION['auth']['login_session']) ? $_SESSION['auth']['login_session'] : "";
+    if ( !empty($sessLogin) && !isset($_SESSION['auth']['invalid_token']) )
     {
       $sideBarLogin = HTML::strLink(
           HTML::strStart('img',
@@ -109,7 +109,7 @@
         . '[ '
         . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
           array(
-            'key' => $_SESSION["userId"],
+            'key' => $_SESSION['auth']['user_id'],
             'all' => 'Y'
           ),
           array('title' => _("manage your user account"))
