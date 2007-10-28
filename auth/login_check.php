@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.6 2007/10/28 12:07:25 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.7 2007/10/28 19:50:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -75,9 +75,9 @@
   /**
    * Checking session table to see if token has timed out
    */
-  require_once("../model/Session_Query.php");
+  require_once("../model/Query/Session.php");
 
-  $sessQ = new Session_Query();
+  $sessQ = new Query_Session();
   $sessQ->connect();
 
   if ( !$sessQ->validToken($_SESSION['auth']['login_session'], $_SESSION['auth']['token']) )
