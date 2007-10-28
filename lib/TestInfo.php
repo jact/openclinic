@@ -9,11 +9,11 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: TestInfo.php,v 1.1 2007/10/27 17:27:35 jact Exp $
+ * @version   CVS: $Id: TestInfo.php,v 1.2 2007/10/28 20:57:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../model/Test_Query.php");
+require_once("../model/Query/Test.php");
 
 /**
  * TestInfo data access component for a medical test of a medical problem
@@ -44,7 +44,7 @@ class TestInfo
    */
   function TestInfo($idProblem, $idTest)
   {
-    $_testQ = new Test_Query();
+    $_testQ = new Query_Test();
     $_testQ->connect();
 
     if ( !$_testQ->select($idProblem, $idTest) )

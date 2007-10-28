@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.28 2007/10/27 17:32:54 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.29 2007/10/28 20:57:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Test_Query.php");
+  require_once("../model/Query/Test.php");
   require_once("../lib/misc_lib.php");
   require_once("../lib/PatientInfo.php");
   require_once("../lib/ProblemInfo.php");
@@ -86,7 +86,7 @@
     HTML::rule();
   }
 
-  $testQ = new Test_Query;
+  $testQ = new Query_Test();
   $testQ->connect();
 
   if ( !$testQ->select($idProblem) )

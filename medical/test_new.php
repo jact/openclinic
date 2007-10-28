@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_new.php,v 1.19 2007/10/28 11:31:42 jact Exp $
+ * @version   CVS: $Id: test_new.php,v 1.20 2007/10/28 20:57:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,7 +30,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Test_Query.php");
+  require_once("../model/Query/Test.php");
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -62,7 +62,7 @@
   /**
    * Insert new medical test
    */
-  $testQ = new Test_Query();
+  $testQ = new Query_Test();
   $testQ->connect();
 
   $testQ->insert($test);
@@ -77,7 +77,7 @@
   /**
    * Record log process
    */
-  recordLog("Test_Query", "INSERT", array($idTest));
+  recordLog("Query_Test", "INSERT", array($idTest));
 
   /**
    * Reset abort setting

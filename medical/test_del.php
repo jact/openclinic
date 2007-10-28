@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_del.php,v 1.19 2007/10/26 21:35:11 jact Exp $
+ * @version   CVS: $Id: test_del.php,v 1.20 2007/10/28 20:57:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,7 +34,7 @@
 
   Form::compareToken('../medical/patient_search_form.php');
 
-  require_once("../model/Test_Query.php");
+  require_once("../model/Query/Test.php");
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -53,13 +53,13 @@
   /**
    * Delete medical test
    */
-  $testQ = new Test_Query();
+  $testQ = new Query_Test();
   $testQ->connect();
 
   /**
    * Record log process (before deleting process)
    */
-  recordLog("Test_Query", "DELETE", array($idTest));
+  recordLog("Query_Test", "DELETE", array($idTest));
 
   $testQ->delete($idTest);
 
