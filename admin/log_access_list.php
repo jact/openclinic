@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_access_list.php,v 1.21 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: log_access_list.php,v 1.22 2007/10/28 20:24:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -32,7 +32,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Access_Page_Query.php");
+  require_once("../model/Query/Page/Access.php");
 
   /**
    * Retrieving get vars
@@ -59,13 +59,14 @@
   HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
-  $accessQ = new Access_Page_Query();
+  $accessQ = new Query_Page_Access();
   $accessQ->connect();
 
   $total = $accessQ->select($year, $month, $day, $hour);
   if ($total == 0)
   {
     $accessQ->close();
+
     Msg::info(_("No logs in this date."));
     include_once("../layout/footer.php");
     exit();
@@ -81,7 +82,8 @@
   );
 
   $thead = array(
-    _("Access Date") => array('colspan' => 2),
+    _("#"),
+    _("Access Date"),
     _("Login"),
     _("Profile")
   );
