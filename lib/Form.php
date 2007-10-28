@@ -9,14 +9,14 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.20 2007/10/28 11:33:31 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.21 2007/10/28 20:02:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once("../lib/HTML.php");
-if (file_exists("../model/Description_Query.php"))
+if (file_exists("../model/Query/Description.php"))
 {
-  include_once("../model/Description_Query.php");
+  include_once("../model/Query/Description.php");
 }
 
 /**
@@ -623,7 +623,7 @@ class Form
    */
   function strSelectTable($tableName, $fieldCode, $defaultValue = "", $fieldDescription = "", $size = 0)
   {
-    $desQ = new Description_Query();
+    $desQ = new Query_Description();
     $desQ->connect();
 
     if ( !$desQ->select($tableName, $fieldCode, $fieldDescription) )
