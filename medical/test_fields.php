@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_fields.php,v 1.19 2007/10/15 20:14:24 jact Exp $
+ * @version   CVS: $Id: test_fields.php,v 1.20 2007/10/28 15:17:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,16 +34,15 @@
   $row = Form::strLabel("path_filename", _("Path Filename") . ":", true);
 
   //$row .= Form::strHidden("MAX_FILE_SIZE", "70000");
-  $len = (isset($formVar["path_filename"]) ? strlen($formVar["path_filename"]) : 0);
-  if ($len > 0)
-  {
-    $row .= Form::strText("previous", $len, $formVar['path_filename'],
-      array('readonly')
-    );
-    $row .= "<br />" . PHP_EOL;
-  }
 
-  $row .= Form::strFile("path_filename", isset($formVar['path_filename']) ? $formVar['path_filename'] : null, 50, isset($formError["path_filename"]) ? array('error' => $formError["path_filename"]) : null);
+  //$addendum['readonly'] = true; // does not work in IE, Mozilla
+  isset($formError["path_filename"]) ? $addendum['error'] = $formError["path_filename"] : null;
+  $row .= Form::strFile("path_filename",
+    isset($formVar['path_filename']) ? $formVar['path_filename'] : null, 50,
+    isset($addendum) ? $addendum : null
+  );
+  $row .= Form::strHidden('previous', $formVar['path_filename']);
+  $row .= HTML::strTag('strong', $formVar['path_filename'], array('class' => 'previous_file'));
   $tbody[] = $row;
 
   $tfoot = array(
