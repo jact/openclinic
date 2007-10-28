@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.32 2007/10/28 19:59:50 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.33 2007/10/28 20:06:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -61,12 +61,12 @@
 
   if (isset($_GET["key"]) && intval($_GET["key"]) > 0)
   {
-    include_once("../model/Theme_Query.php");
+    include_once("../model/Query/Theme.php");
 
     /**
      * Reading theme settings
      */
-    $themeQ = new Theme_Query();
+    $themeQ = new Query_Theme();
     $themeQ->connect();
 
     $themeQ->select(intval($_GET["key"]));

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.28 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.29 2007/10/28 20:06:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,7 +21,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Theme_Query.php");
+  require_once("../model/Query/Theme.php");
   require_once("../lib/Form.php");
 
   /**
@@ -72,7 +72,7 @@ function previewTheme(key)
 </script>
 
 <?php
-  $themeQ = new Theme_Query();
+  $themeQ = new Query_Theme();
   $themeQ->connect();
 
   if ( !$themeQ->selectWithStats() )

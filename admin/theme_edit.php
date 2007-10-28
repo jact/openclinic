@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit.php,v 1.16 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: theme_edit.php,v 1.17 2007/10/28 20:06:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,7 +30,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Theme_Query.php");
+  require_once("../model/Query/Theme.php");
 
   /**
    * Validate data
@@ -51,7 +51,7 @@
   /**
    * Update theme
    */
-  $themeQ = new Theme_Query();
+  $themeQ = new Query_Theme();
   $themeQ->connect();
 
   if ($themeQ->existCSSFile($theme->getCSSFile(), $theme->getId()))

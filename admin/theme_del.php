@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del.php,v 1.18 2007/10/16 20:04:33 jact Exp $
+ * @version   CVS: $Id: theme_del.php,v 1.19 2007/10/28 20:06:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,7 +34,7 @@
 
   Form::compareToken($returnLocation);
 
-  require_once("../model/Theme_Query.php");
+  require_once("../model/Query/Theme.php");
 
   /**
    * Retrieving post vars
@@ -46,7 +46,7 @@
   /**
    * Delete theme
    */
-  $themeQ = new Theme_Query();
+  $themeQ = new Query_Theme();
   $themeQ->connect();
 
   $themeQ->delete($idTheme);
