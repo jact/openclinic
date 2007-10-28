@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_del.php,v 1.18 2007/10/26 21:35:29 jact Exp $
+ * @version   CVS: $Id: relative_del.php,v 1.19 2007/10/28 21:02:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,7 @@
 
   Form::compareToken('../medical/patient_search_form.php');
 
-  require_once("../model/Relative_Query.php");
+  require_once("../model/Query/Relative.php");
   require_once("../shared/record_log.php"); // record log
   require_once("../lib/Check.php");
 
@@ -52,13 +52,13 @@
   /**
    * Delete relative
    */
-  $relQ = new Relative_Query();
+  $relQ = new Query_Relative();
   $relQ->connect();
 
   /**
    * Record log process (before deleting process)
    */
-  recordLog("Relative_Query", "DELETE", array($idPatient, $idRelative));
+  recordLog("Query_Relative", "DELETE", array($idPatient, $idRelative));
 
   $relQ->delete($idPatient, $idRelative);
 

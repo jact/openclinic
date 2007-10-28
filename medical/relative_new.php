@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_new.php,v 1.15 2007/10/26 21:33:14 jact Exp $
+ * @version   CVS: $Id: relative_new.php,v 1.16 2007/10/28 21:02:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,7 @@
 
   Form::compareToken('../medical/patient_new_form.php');
 
-  require_once("../model/Relative_Query.php");
+  require_once("../model/Query/Relative.php");
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -49,7 +49,7 @@
   /**
    * Insert new relatives patient
    */
-  $relQ = new Relative_Query();
+  $relQ = new Query_Relative();
   $relQ->connect();
   $relQ->captureError(true);
 
@@ -79,7 +79,7 @@
       /**
        * Record log process
        */
-      recordLog("Relative_Query", "INSERT", array($idPatient, $_POST["check"][$i]));
+      recordLog("Query_Relative", "INSERT", array($idPatient, $_POST["check"][$i]));
     }
   }
   $relQ->close();

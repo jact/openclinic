@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.30 2007/10/28 20:42:58 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.31 2007/10/28 21:02:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Relative_Query.php");
+  require_once("../model/Query/Relative.php");
   require_once("../lib/Form.php");
   require_once("../lib/PatientInfo.php");
 
@@ -42,7 +42,7 @@
   /**
    * Search database for relatives
    */
-  $relQ = new Relative_Query;
+  $relQ = new Query_Relative();
   $relQ->connect();
 
   $relArray = array();
