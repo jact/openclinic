@@ -7,16 +7,16 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.14 2006/10/13 20:11:02 jact Exp $
+ * @version   CVS: $Id: Setting.php,v 1.15 2007/10/28 19:42:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 define("OPEN_SETTING_SESSION_TIMEOUT", 20);
 define("OPEN_SETTING_ITEMS_PER_PAGE",  10);
 
-require_once("../lib/Check.php");
+require_once(dirname(__FILE__) . "/../lib/Check.php");
 
 /**
  * Setting represents the config settings.

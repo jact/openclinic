@@ -7,14 +7,14 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Query.php,v 1.15 2006/10/13 20:11:02 jact Exp $
+ * @version   CVS: $Id: Query.php,v 1.16 2007/10/28 19:42:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../model/DbConnection.php");
-require_once("../lib/Error.php");
+require_once(dirname(__FILE__) . "/DbConnection.php");
+require_once(dirname(__FILE__) . "/../lib/Error.php");
 
 /**
  * Query parent data access component class for all data access components
