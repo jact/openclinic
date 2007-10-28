@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.7 2007/10/28 12:07:25 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.8 2007/10/28 19:52:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -27,9 +27,9 @@
 
   Form::compareToken('../auth/login_form.php');
 
-  require_once("../model/User_Query.php");
-  require_once("../model/Session_Query.php");
-  require_once("../model/Access_Page_Query.php");
+  require_once("../model/Query/User.php");
+  require_once("../model/Query/Session.php");
+  require_once("../model/Query/Page/Access.php");
 
   unset($formError); // to clean previous errors
 
@@ -64,7 +64,7 @@
 
   if ( !isset($formError["pwd_session"]) )
   {
-    $userQ = new User_Query();
+    $userQ = new Query_User();
     $userQ->connect();
 
     if ( !$userQ->existLogin($loginSession) )
@@ -172,7 +172,7 @@
   /**
    * Insert new session row with random token
    */
-  $sessionQ = new Session_Query();
+  $sessionQ = new Query_Session();
   $sessionQ->connect();
 
   $token = $sessionQ->getToken($user->getLogin());
@@ -183,7 +183,7 @@
   /**
    * Insert new user access
    */
-  $accessQ = new Access_Page_Query();
+  $accessQ = new Query_Page_Access();
   $accessQ->connect();
 
   $accessQ->insert($user);
