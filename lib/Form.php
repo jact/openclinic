@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.19 2007/10/15 20:12:57 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.20 2007/10/28 11:33:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,6 +18,13 @@ if (file_exists("../model/Description_Query.php"))
 {
   include_once("../model/Description_Query.php");
 }
+
+/**
+ * Form::unsetSession constants
+ */
+define("OPEN_UNSET_ALL",        0);
+define("OPEN_UNSET_ONLY_ERROR", 1);
+define("OPEN_UNSET_ONLY_VAR",   2);
 
 /**
  * Form set of HTML form tags functions
@@ -49,6 +56,9 @@ if (file_exists("../model/Description_Query.php"))
  *  void fieldset(string $legend, array &$body, array $foot = null, $options = null)
  *  string generateToken(void)
  *  void compareToken(string $url, string $method = 'post')
+ *  void unsetSession(int $option = OPEN_UNSET_ALL)
+ *  void setSession(array $var, array $error = null)
+ *  mixed getSession(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -819,7 +829,7 @@ class Form
   function generateToken()
   {
     $token = md5(uniqid(rand(), true));
-    $_SESSION['token_form'] = $token;
+    $_SESSION['form']['token'] = $token;
 
     return Form::strHidden('token_form', $token);
   }
@@ -831,7 +841,7 @@ class Form
    * Chris Shiflett (Essential PHP Security)
    *
    * @param string $url web address to redirect if fails
-   * @param string $method (optional)
+   * @param string $method (optional) form method
    * @return void
    * @access public
    * @static
@@ -846,19 +856,80 @@ class Form
 
     $token = ($method == 'post') ? $_POST['token_form'] : $_GET['token_form'];
 
-    if ( !isset($_SESSION['token_form']) )
+    if ( !isset($_SESSION['form']['token']) )
     {
-      $_SESSION['token_form'] = md5(uniqid(rand(), true));
+      $_SESSION['form']['token'] = md5(uniqid(rand(), true));
     }
 
-    if ($_SESSION['token_form'] != $token)
+    if ($_SESSION['form']['token'] != $token)
     {
-      unset($_SESSION['token_form']);
+      unset($_SESSION['form']['token']);
       header("Location: " . $url);
       exit();
     }
 
-    unset($_SESSION['token_form']);
+    unset($_SESSION['form']['token']);
+  }
+
+  /**
+   * void unsetSession(int $option = OPEN_UNSET_ALL)
+   *
+   * Unset form session variables
+   *
+   * @param int $option (optional)
+   * @return void
+   * @access public
+   * @static
+   */
+  function unsetSession($option = OPEN_UNSET_ALL)
+  {
+    switch ($option)
+    {
+      case OPEN_UNSET_ONLY_VAR:
+        unset($_SESSION['form']['var']);
+        break;
+
+      case OPEN_UNSET_ONLY_ERROR:
+        unset($_SESSION['form']['error']);
+        break;
+
+      default:
+        unset($_SESSION['form']['var']);
+        unset($_SESSION['form']['error']);
+        break;
+    }
+  }
+
+  /**
+   * void setSession(array $var, array $error = null)
+   *
+   * Set form session variables
+   *
+   * @param array $var
+   * @param array $error (optional)
+   * @return void
+   * @access public
+   * @static
+   */
+  function setSession($var, $error = null)
+  {
+    $_SESSION['form']['var'] = $var;
+    if ($error != null)
+    {
+      $_SESSION['form']['error'] = $error;
+    }
+  }
+
+  /**
+   * mixed getSession(void)
+   *
+   * @return mixed array of form session variables or null if not exists
+   * @access public
+   * @static
+   */
+  function getSession()
+  {
+    return isset($_SESSION['form']) ? $_SESSION['form'] : null;
   }
 } // end class
 ?>
