@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: PatientInfo.php,v 1.1 2007/10/27 17:27:34 jact Exp $
+ * @version   CVS: $Id: PatientInfo.php,v 1.2 2007/10/28 20:43:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-require_once("../model/Patient_Page_Query.php");
-require_once("../lib/HTML.php");
+require_once(dirname(__FILE__) . "/../model/Query/Page/Patient.php");
+require_once(dirname(__FILE__) . "/HTML.php");
 
 /**
  * PatientInfo data access component for a patient
@@ -46,7 +46,7 @@ class PatientInfo
    */
   function PatientInfo($id)
   {
-    $_patQ = new Patient_Page_Query();
+    $_patQ = new Query_Page_Patient();
     $_patQ->connect();
 
     if ( !$_patQ->select($id) )

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.29 2007/10/27 17:32:54 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.30 2007/10/28 20:42:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -118,7 +118,7 @@
     0 => array('align' => 'right')
   );
 
-  $patQ = new Patient_Page_Query();
+  $patQ = new Query_Page_Patient();
   $patQ->connect();
   $patQ->captureError(true);
 

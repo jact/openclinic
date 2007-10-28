@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.32 2007/10/26 22:10:25 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.33 2007/10/28 20:42:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -23,7 +23,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Patient_Page_Query.php");
+  require_once("../model/Query/Page/Patient.php");
   require_once("../model/Problem_Page_Query.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
@@ -198,7 +198,7 @@
   {
     $array = explode(OPEN_SEPARATOR, $arrValue, 6);
 
-    $patQ = new Patient_Page_Query();
+    $patQ = new Query_Page_Patient();
     $patQ->connect();
 
     if ($patQ->select($array[2]))
