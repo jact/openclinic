@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.31 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.32 2007/10/28 19:59:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,13 +29,13 @@
     exit();
   }
 
-  require_once("../model/Setting_Query.php");
+  require_once("../model/Query/Setting.php");
   require_once("../lib/Form.php");
 
   /**
    * Reading general settings
    */
-  $setQ = new Setting_Query();
+  $setQ = new Query_Setting();
   $setQ->connect();
 
   $setQ->select();

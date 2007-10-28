@@ -9,19 +9,19 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.5 2007/10/28 11:34:24 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.6 2007/10/28 19:59:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   $returnLocation = './index.php';
 
-  require_once("../model/Setting_Query.php");
+  require_once("../model/Query/Setting.php");
   require_once("../lib/FlashMsg.php");
   require_once("../lib/File.php"); // File::getDirContent()
 
   session_start(); // to keep messages
 
-  $setQ = new Setting_Query();
+  $setQ = new Query_Setting();
   $setQ->connect();
 
   $setQ->captureError(true);

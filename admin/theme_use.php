@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_use.php,v 1.13 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: theme_use.php,v 1.14 2007/10/28 19:59:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,7 +29,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Setting_Query.php");
+  require_once("../model/Query/Setting.php");
 
   /**
    * Destroy form values and errors
@@ -41,7 +41,7 @@
    */
   $idTheme = intval($_POST["id_theme"]);
 
-  $setQ = new Setting_Query();
+  $setQ = new Query_Setting();
   $setQ->connect();
 
   $setQ->updateTheme($idTheme);

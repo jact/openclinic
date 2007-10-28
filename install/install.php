@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.22 2007/10/27 17:52:57 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.23 2007/10/28 19:59:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,7 +18,7 @@
 
   require_once(dirname(__FILE__) . "/header.php"); // i18n l10n
   require_once(dirname(__FILE__) . "/parse_sql_file.php");
-  require_once("../model/Setting_Query.php");
+  require_once("../model/Query/Setting.php");
   require_once("../lib/Form.php");
 
   session_start(); // to keep token_form
@@ -32,7 +32,7 @@
   /**
    * Testing connection and current version
    */
-  $setQ = new Setting_Query();
+  $setQ = new Query_Setting();
   $setQ->connect();
   Msg::info(_("Database connection is good."));
 
