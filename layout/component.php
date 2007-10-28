@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.3 2007/10/27 16:25:05 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.4 2007/10/28 11:29:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -129,8 +129,7 @@
           ),
           true
         ),
-        '../auth/login_form.php',
-        array('ret' => '../home/index.php')
+        '../auth/login_form.php'
       );
     }
     $html = HTML::strPara($sideBarLogin, array('class' => 'sideBarLogin'));
