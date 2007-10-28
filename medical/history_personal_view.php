@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_view.php,v 1.19 2007/10/27 17:32:54 jact Exp $
+ * @version   CVS: $Id: history_personal_view.php,v 1.20 2007/10/28 20:54:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/History_Query.php");
+  require_once("../model/Query/History.php");
   require_once("../lib/PatientInfo.php");
 
   /**
@@ -41,7 +41,7 @@
   /**
    * Search database for problem
    */
-  $historyQ = new History_Query();
+  $historyQ = new Query_History();
   $historyQ->connect();
 
   if ( !$historyQ->selectPersonal($idPatient) )

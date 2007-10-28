@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.27 2007/10/28 20:50:14 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.28 2007/10/28 20:54:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,7 +34,7 @@
 
   Form::compareToken('../medical/patient_search_form.php');
 
-  require_once("../model/History_Query.php");
+  require_once("../model/Query/History.php");
   require_once("../model/Query/Page/Patient.php");
   require_once("../model/Relative_Query.php"); // referencial integrity
   require_once("../model/DelPatient_Query.php");
@@ -100,7 +100,7 @@
       Error::fetch($patQ);
     }
 
-    $historyQ = new History_Query();
+    $historyQ = new Query_History();
     $historyQ->connect();
 
     $historyQ->selectPersonal($idPatient);

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.29 2007/10/28 20:50:14 jact Exp $
+ * @version   CVS: $Id: print_medical_record.php,v 1.30 2007/10/28 20:54:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,7 @@
   require_once("../model/Query/Page/Patient.php");
   require_once("../model/Query/Staff.php");
   require_once("../model/Query/Page/Problem.php");
-  require_once("../model/History_Query.php");
+  require_once("../model/Query/History.php");
   require_once("../lib/HTML.php");
 
   $style = HTML::strStart('link',
@@ -319,7 +319,7 @@
   /**
    * Show personal antecedents
    */
-  $historyQ = new History_Query();
+  $historyQ = new Query_History();
   $historyQ->connect();
 
   $historyQ->selectPersonal($idPatient);

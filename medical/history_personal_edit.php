@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit.php,v 1.17 2007/10/28 11:31:41 jact Exp $
+ * @version   CVS: $Id: history_personal_edit.php,v 1.18 2007/10/28 20:54:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -35,7 +35,7 @@
 
   Form::compareToken('../medical/patient_search_form.php');
 
-  require_once("../model/History_Query.php");
+  require_once("../model/Query/History.php");
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -108,7 +108,7 @@
   /**
    * Update personal antecedents
    */
-  $historyQ = new History_Query();
+  $historyQ = new Query_History();
   $historyQ->connect();
 
   $historyQ->updatePersonal($history);
@@ -119,7 +119,7 @@
   /**
    * Record log process
    */
-  recordLog("History_Query", "UPDATE", array($idPatient), "selectPersonal");
+  recordLog("Query_History", "UPDATE", array($idPatient), "selectPersonal");
 
   /**
    * Reset abort setting
