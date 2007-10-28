@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.31 2007/10/28 11:31:41 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.32 2007/10/28 20:16:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,6 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
-  require_once("../model/Staff_Query.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
 
   /**
