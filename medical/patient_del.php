@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.30 2007/10/28 21:05:46 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.31 2007/10/28 21:06:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -37,7 +37,7 @@
   require_once("../model/Query/History.php");
   require_once("../model/Query/Page/Patient.php");
   require_once("../model/Query/Relative.php"); // referencial integrity
-  require_once("../model/DelPatient_Query.php");
+  require_once("../model/Query/DelPatient.php");
   require_once("../model/Query/Page/Problem.php"); // referencial integrity
   require_once("../model/Query/DelProblem.php"); // referencial integrity
   require_once("../shared/record_log.php"); // record log
@@ -110,7 +110,7 @@
     $historyF = $historyQ->fetch();
     //Error::debug($patient); Error::debug($historyP); Error::debug($historyF, "", true);
 
-    $delPatientQ = new DelPatient_Query();
+    $delPatientQ = new Query_DelPatient();
     $delPatientQ->connect();
 
     $delPatientQ->insert($patient, $historyP, $historyF,
