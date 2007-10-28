@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.28 2007/10/28 20:42:57 jact Exp $
+ * @version   CVS: $Id: print_medical_record.php,v 1.29 2007/10/28 20:50:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   require_once("../auth/login_check.php");
   require_once("../model/Query/Page/Patient.php");
   require_once("../model/Query/Staff.php");
-  require_once("../model/Problem_Page_Query.php");
+  require_once("../model/Query/Page/Problem.php");
   require_once("../model/History_Query.php");
   require_once("../lib/HTML.php");
 
@@ -220,7 +220,7 @@
   /**
    * Show medical problems
    */
-  $problemQ = new Problem_Page_Query();
+  $problemQ = new Query_Page_Problem();
   $problemQ->connect();
 
   /**
@@ -445,7 +445,7 @@
   /**
    * Show closed medical problems
    */
-  $problemQ = new Problem_Page_Query();
+  $problemQ = new Query_Page_Problem();
   $problemQ->connect();
 
   /**

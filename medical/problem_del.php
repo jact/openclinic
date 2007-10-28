@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.22 2007/10/28 12:08:10 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.23 2007/10/28 20:50:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,7 @@
 
   Form::compareToken('../medical/patient_search_form.php');
 
-  require_once("../model/Problem_Page_Query.php");
+  require_once("../model/Query/Page/Problem.php");
   require_once("../model/Connection_Query.php"); // referencial integrity
   require_once("../model/DelProblem_Query.php");
   require_once("../shared/record_log.php"); // record log
@@ -78,7 +78,7 @@
   /**
    * Delete problem
    */
-  $problemQ = new Problem_Page_Query();
+  $problemQ = new Query_Page_Problem();
   $problemQ->connect();
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
@@ -112,7 +112,7 @@
   /**
    * Record log process (before deleting process)
    */
-  recordLog("Problem_Page_Query", "DELETE", array($idProblem));
+  recordLog("Query_Page_Problem", "DELETE", array($idProblem));
 
   $problemQ->delete($idProblem);
 

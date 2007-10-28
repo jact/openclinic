@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new.php,v 1.19 2007/10/28 11:31:42 jact Exp $
+ * @version   CVS: $Id: problem_new.php,v 1.20 2007/10/28 20:50:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,7 +29,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Problem_Page_Query.php");
+  require_once("../model/Query/Page/Problem.php");
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -60,7 +60,7 @@
   /**
    * Insert new medical problem
    */
-  $problemQ = new Problem_Page_Query();
+  $problemQ = new Query_Page_Problem();
   $problemQ->connect();
 
   $problemQ->insert($problem);
@@ -84,7 +84,7 @@
   /**
    * Record log process
    */
-  recordLog("Problem_Page_Query", "INSERT", array($idProblem));
+  recordLog("Query_Page_Problem", "INSERT", array($idProblem));
 
   /**
    * Reset abort setting

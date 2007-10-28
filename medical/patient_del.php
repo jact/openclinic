@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.26 2007/10/28 20:42:57 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.27 2007/10/28 20:50:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,7 +38,7 @@
   require_once("../model/Query/Page/Patient.php");
   require_once("../model/Relative_Query.php"); // referencial integrity
   require_once("../model/DelPatient_Query.php");
-  require_once("../model/Problem_Page_Query.php"); // referencial integrity
+  require_once("../model/Query/Page/Problem.php"); // referencial integrity
   require_once("../model/DelProblem_Query.php"); // referencial integrity
   require_once("../shared/record_log.php"); // record log
 
@@ -138,7 +138,7 @@
   /**
    * Delete asociated problems
    */
-  $problemQ = new Problem_Page_Query();
+  $problemQ = new Query_Page_Problem();
   $problemQ->connect();
 
   /**
@@ -166,7 +166,7 @@
     $delProblemQ->close();
     unset($delProblemQ);
 
-    $problemQ = new Problem_Page_Query();
+    $problemQ = new Query_Page_Problem();
     $problemQ->connect();
 
     /**
@@ -174,7 +174,7 @@
      */
     for ($i = 0; $i < $numRows; $i++)
     {
-      recordLog("Problem_Page_Query", "DELETE", array($array[$i]->getIdProblem()));
+      recordLog("Query_Page_Problem", "DELETE", array($array[$i]->getIdProblem()));
     }
 
     for ($i = 0; $i < $numRows; $i++)
@@ -189,7 +189,7 @@
   /**
    * Afterwards: closed problems
    */
-  $problemQ = new Problem_Page_Query();
+  $problemQ = new Query_Page_Problem();
   $problemQ->connect();
 
   $numRows = $problemQ->selectProblems($idPatient, true);
@@ -214,7 +214,7 @@
     $delProblemQ->close();
     unset($delProblemQ);
 
-    $problemQ = new Problem_Page_Query();
+    $problemQ = new Query_Page_Problem();
     $problemQ->connect();
 
     /**
@@ -222,7 +222,7 @@
      */
     for ($i = 0; $i < $numRows; $i++)
     {
-      recordLog("Problem_Page_Query", "DELETE", array($array[$i]->getIdProblem()));
+      recordLog("Query_Page_Problem", "DELETE", array($array[$i]->getIdProblem()));
     }
 
     for ($i = 0; $i < $numRows; $i++)

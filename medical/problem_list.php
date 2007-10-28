@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.27 2007/10/27 17:32:54 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.28 2007/10/28 20:50:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Problem_Page_Query.php");
+  require_once("../model/Query/Page/Problem.php");
   require_once("../lib/misc_lib.php");
   require_once("../lib/PatientInfo.php");
 
@@ -59,7 +59,7 @@
 
   $patient->showHeader();
 
-  $problemQ = new Problem_Page_Query();
+  $problemQ = new Query_Page_Problem();
   $problemQ->connect();
 
   $lastOrderNumber = $problemQ->getLastOrderNumber($idPatient);
