@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset.php,v 1.14 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset.php,v 1.15 2007/10/28 19:48:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,7 +30,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/User_Query.php");
+  require_once("../model/Query/User.php");
 
   /**
    * Validate data
@@ -66,7 +66,7 @@
   /**
    * Update user
    */
-  $userQ = new User_Query();
+  $userQ = new Query_User();
   $userQ->connect();
 
   $userQ->resetPwd($user);

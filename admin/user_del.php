@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del.php,v 1.15 2007/10/16 20:05:28 jact Exp $
+ * @version   CVS: $Id: user_del.php,v 1.16 2007/10/28 19:48:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,7 +34,7 @@
 
   Form::compareToken($returnLocation);
 
-  require_once("../model/User_Query.php");
+  require_once("../model/Query/User.php");
   require_once("../lib/Check.php");
 
   /**
@@ -46,7 +46,7 @@
   /**
    * Delete user
    */
-  $userQ = new User_Query();
+  $userQ = new Query_User();
   $userQ->connect();
 
   $userQ->delete($idUser);

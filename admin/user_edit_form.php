@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.31 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.32 2007/10/28 19:48:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,12 +48,12 @@
    */
   if ( !isset($formError) )
   {
-    include_once("../model/User_Query.php");
+    include_once("../model/Query/User.php");
 
     /**
      * Search database
      */
-    $userQ = new User_Query();
+    $userQ = new Query_User();
     $userQ->connect();
 
     if ( !$userQ->select($idUser) )
