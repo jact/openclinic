@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit.php,v 1.16 2007/10/26 21:36:39 jact Exp $
+ * @version   CVS: $Id: history_personal_edit.php,v 1.17 2007/10/28 11:31:41 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -88,8 +88,7 @@
     //$formError["???"] = $history->get???Error();
     //$formError["???"] = $history->get???Error();
 
-    $_SESSION["formVar"] = $_POST;
-    //$_SESSION["formError"] = $formError;
+    Form::setSession($_POST/*, $formError*/);
 
     //header("Location: ../medical/history_personal_edit_form.php?id_patient=" . $idPatient);
     header("Location: ../medical/history_personal_edit_form.php");
@@ -99,8 +98,7 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   /**
    * Prevent user from aborting script

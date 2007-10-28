@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit_form.php,v 1.22 2007/10/27 17:32:53 jact Exp $
+ * @version   CVS: $Id: history_personal_edit_form.php,v 1.23 2007/10/28 11:31:41 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -124,8 +124,7 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   require_once("../layout/footer.php");
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_validate_post.php,v 1.12 2006/12/14 22:30:12 jact Exp $
+ * @version   CVS: $Id: theme_validate_post.php,v 1.13 2007/10/28 11:31:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -38,8 +38,7 @@
     $formError["css_file"] = $theme->getCSSFileError();
     $formError["css_rules"] = $theme->getCSSRulesError();
 
-    $_SESSION["formVar"] = $_POST;
-    $_SESSION["formError"] = $formError;
+    Form::setSession($_POST, $formError);
 
     header("Location: " . $errorLocation);
     exit();

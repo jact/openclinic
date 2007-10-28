@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.27 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: theme_edit_form.php,v 1.28 2007/10/28 11:31:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -155,8 +155,7 @@ function editTheme()
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   require_once("../layout/footer.php");
 ?>

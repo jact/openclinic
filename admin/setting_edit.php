@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit.php,v 1.13 2007/10/25 21:58:08 jact Exp $
+ * @version   CVS: $Id: setting_edit.php,v 1.14 2007/10/28 11:30:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,8 +74,7 @@
     $formError["session_timeout"] = $set->getSessionTimeoutError();
     $formError["items_per_page"] = $set->getItemsPerPageError();
 
-    $_SESSION["formVar"] = $_POST;
-    $_SESSION["formError"] = $formError;
+    Form::setSession($_POST, $formError);
 
     header("Location: ../admin/setting_edit_form.php");
     exit();
@@ -84,8 +83,7 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   /**
    * Update app settings

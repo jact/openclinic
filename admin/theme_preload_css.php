@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.22 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.23 2007/10/28 11:31:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -52,7 +52,7 @@
     $_POST['css_file'] = $_FILES['css_filename']['name'];
     $_POST['css_rules'] = $cssRules;
 
-    $_SESSION["formVar"] = $_POST;
+    Form::setSession($_POST);
 
     header("Location: " . $returnLocation);
     exit();

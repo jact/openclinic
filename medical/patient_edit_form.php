@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.30 2007/10/27 17:32:54 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.31 2007/10/28 11:31:41 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -71,7 +71,7 @@
     $formVar["education"] = $patient->getEducation();
     $formVar["insurance_company"] = $patient->getInsuranceCompany();
 
-    $_SESSION["formVar"] = $formVar;
+    Form::setSession($formVar);
 
     unset($patient);
   }
@@ -122,8 +122,7 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   require_once("../layout/footer.php");
 ?>

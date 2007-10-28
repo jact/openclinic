@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_validate_post.php,v 1.14 2006/12/14 22:43:35 jact Exp $
+ * @version   CVS: $Id: problem_validate_post.php,v 1.15 2007/10/28 11:31:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -75,8 +75,7 @@
   {
     $formError["wording"] = $problem->getWordingError();
 
-    $_SESSION["formVar"] = $_POST;
-    $_SESSION["formError"] = $formError;
+    Form::setSession($_POST, $formError);
 
     header("Location: " . $errorLocation);
     exit();

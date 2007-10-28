@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit.php,v 1.20 2007/10/27 11:53:20 jact Exp $
+ * @version   CVS: $Id: problem_edit.php,v 1.21 2007/10/28 11:31:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,8 +54,7 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   /**
    * Prevent user from aborting script

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.5 2007/10/27 20:04:56 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.6 2007/10/28 11:32:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -85,7 +85,8 @@
         exit();
       }
 
-      $lastLogin = (isset($_SESSION["formVar"]["login_session"])) ? $_SESSION["formVar"]["login_session"] : "";
+      $formSession = Form::getSession();
+      $lastLogin = isset($formSession['var']['login_session']) ? $formSession['var']['login_session'] : '';
       if ( !$userQ->verifySignOn($loginSession, $pwdSession) )
       {
         $userQ->close();
@@ -144,8 +145,7 @@
    */
   if ($errorFound)
   {
-    $_SESSION["formVar"] = Check::safeArray($_POST);
-    $_SESSION["formError"] = $formError;
+    Form::setSession(Check::safeArray($_POST), $formError);
     if (isset($sessLoginAttempts))
     {
       $_SESSION["loginAttempts"] = $sessLoginAttempts;
@@ -194,9 +194,7 @@
   /**
    * Destroy form values and errors and reset sign on variables
    */
-  $_SESSION["formVar"] = null; // for safety's sake
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   // works in PHP >= 4.1.0
   $_SESSION["memberUser"] = $user->getIdMember();

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit.php,v 1.16 2007/10/16 20:05:47 jact Exp $
+ * @version   CVS: $Id: user_edit.php,v 1.17 2007/10/28 11:31:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -88,8 +88,7 @@
       unset($formError);
       $formError["old_pwd"] = ((trim($_POST["md5_old"]) == "") ? _("This is a required field.") : _("This field is not correct."));
 
-      $_SESSION["formVar"] = $_POST;
-      $_SESSION["formError"] = $formError;
+      Form::setSession($_POST, $formError);
 
       header("Location: " . $errorLocation);
       exit();
@@ -104,8 +103,7 @@
   /**
    * Destroy form values and errors
    */
-  unset($_SESSION["formVar"]);
-  unset($_SESSION["formError"]);
+  Form::unsetSession();
 
   /**
    * Redirect to $returnLocation to avoid reload problem

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2006 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_validate_post.php,v 1.12 2006/12/14 22:45:26 jact Exp $
+ * @version   CVS: $Id: test_validate_post.php,v 1.13 2007/10/28 11:31:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -66,8 +66,7 @@
   {
     $formError["path_filename"] = $test->getPathFilenameError();
 
-    $_SESSION["formVar"] = $_POST;
-    $_SESSION["formError"] = $formError;
+    Form::setSession($_POST, $formError);
 
     header("Location: " . $errorLocation);
     exit();
