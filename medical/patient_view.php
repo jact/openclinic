@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.28 2007/10/27 17:32:54 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.29 2007/10/28 20:43:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../lib/PatientInfo.php");
-  require_once("../model/Staff_Query.php");
+  require_once("../model/Query/Staff.php");
 
   /**
    * Retrieving var (PGS)
@@ -189,7 +189,7 @@
 
   if ($patient->getIdMember())
   {
-    $staffQ = new Staff_Query();
+    $staffQ = new Query_Staff();
     $staffQ->connect();
 
     if ($staffQ->select($patient->getIdMember()))
