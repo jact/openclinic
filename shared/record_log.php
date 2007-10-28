@@ -9,9 +9,10 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: record_log.php,v 1.18 2007/10/28 12:07:05 jact Exp $
+ * @version   CVS: $Id: record_log.php,v 1.19 2007/10/28 20:28:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.3
+ * @todo      convert in class
  */
 
   if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
@@ -20,7 +21,7 @@
     exit();
   }
 
-  require_once("../model/Record_Page_Query.php");
+  require_once("../model/Query/Page/Record.php");
 
   /**
    * void recordLog(string $class, string, $operation, array $key, string $method = "select")
@@ -65,7 +66,7 @@
     $queryQ->close();
     unset($queryQ);
 
-    $recQ = new Record_Page_Query();
+    $recQ = new Query_Page_Record();
     $recQ->connect();
 
     $recQ->insert($_SESSION['auth']['user_id'], $_SESSION['auth']['login_session'], $table, $operation, $data);

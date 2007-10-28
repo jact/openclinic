@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_record_list.php,v 1.24 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: log_record_list.php,v 1.25 2007/10/28 20:28:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -32,7 +32,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Record_Page_Query.php");
+  require_once("../model/Query/Page/Record.php");
 
   /**
    * Retrieving get vars
@@ -59,7 +59,7 @@
   HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
-  $recordQ = new Record_Page_Query();
+  $recordQ = new Query_Page_Record();
   $recordQ->connect();
 
   $total = $recordQ->select($year, $month, $day, $hour);
@@ -76,7 +76,8 @@
   HTML::para(HTML::strTag('strong', sprintf(_("%d transactions."), $total)));
 
   $thead = array(
-    _("Access Date") => array('colspan' => 2),
+    _("#"),
+    _("Access Date"),
     _("Login"),
     _("Table"),
     _("Operation"),

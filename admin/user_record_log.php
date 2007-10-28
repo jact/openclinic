@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_record_log.php,v 1.31 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: user_record_log.php,v 1.32 2007/10/28 20:28:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -32,7 +32,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Record_Page_Query.php");
+  require_once("../model/Query/Page/Record.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
   require_once("../lib/Check.php");
@@ -52,7 +52,7 @@
   /**
    * Search user operations
    */
-  $recordQ = new Record_Page_Query();
+  $recordQ = new Query_Page_Record();
   $recordQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $recordQ->connect();
 
