@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit_form.php,v 1.25 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: staff_edit_form.php,v 1.26 2007/10/28 20:14:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -44,12 +44,12 @@
    */
   if ( !isset($formError) )
   {
-    include_once("../model/Staff_Query.php");
+    include_once("../model/Query/Staff.php");
 
     /**
      * Search database
      */
-    $staffQ = new Staff_Query();
+    $staffQ = new Query_Staff();
     $staffQ->connect();
 
     if ( !$staffQ->select($idMember) )

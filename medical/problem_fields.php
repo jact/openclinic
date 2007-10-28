@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_fields.php,v 1.26 2006/12/28 16:26:47 jact Exp $
+ * @version   CVS: $Id: problem_fields.php,v 1.27 2007/10/28 20:15:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,6 +18,8 @@
     header("Location: ../index.php");
     exit();
   }
+
+  require_once("../model/Query/Staff.php");
 
   $tbody = array();
 
@@ -35,7 +37,7 @@
 
   $row = Form::strLabel("id_member", _("Attending Physician") . ":");
 
-  $staffQ = new Staff_Query();
+  $staffQ = new Query_Staff();
   $staffQ->connect();
 
   $array = null;

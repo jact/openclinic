@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.25 2007/10/28 12:07:17 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.26 2007/10/28 20:14:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,7 +21,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Staff_Query.php");
+  require_once("../model/Query/Staff.php");
 
   /**
    * Retrieving get vars
@@ -44,7 +44,7 @@
   HTML::breadCrumb($links, "icon staffIcon");
   unset($links);
 
-  $staffQ = new Staff_Query();
+  $staffQ = new Query_Staff();
   $staffQ->connect();
 
   if ( !empty($memberType) )

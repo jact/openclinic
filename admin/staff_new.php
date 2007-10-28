@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_new.php,v 1.17 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: staff_new.php,v 1.18 2007/10/28 20:14:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,7 @@
   }
 
   require_once("../auth/login_check.php");
-  require_once("../model/Staff_Query.php");
+  require_once("../model/Query/Staff.php");
 
   /**
    * Validate data
@@ -50,7 +50,7 @@
   /**
    * Insert new staff member
    */
-  $staffQ = new Staff_Query();
+  $staffQ = new Query_Staff();
   $staffQ->connect();
 
   if ($staffQ->existLogin($staff->getLogin()))

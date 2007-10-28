@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del.php,v 1.16 2007/10/16 20:03:22 jact Exp $
+ * @version   CVS: $Id: staff_del.php,v 1.17 2007/10/28 20:14:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,7 +34,7 @@
 
   Form::compareToken($returnLocation);
 
-  require_once("../model/Staff_Query.php");
+  require_once("../model/Query/Staff.php");
 
   /**
    * Retrieving post var
@@ -44,7 +44,7 @@
   /**
    * Delete staff member
    */
-  $staffQ = new Staff_Query();
+  $staffQ = new Query_Staff();
   $staffQ->connect();
 
   if ( !$staffQ->select($idMember) )
