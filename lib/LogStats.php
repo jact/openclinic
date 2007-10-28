@@ -9,12 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.7 2007/10/27 17:15:44 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.8 2007/10/28 20:21:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
 
-  require_once("../model/LogStats_Query.php");
+  require_once("../model/Query/LogStats.php");
   require_once("../lib/HTML.php");
 
 /**
@@ -47,6 +47,7 @@ class LogStats
    * @param string $label (optional) alternative text of the images
    * @return string
    * @access private
+   * @static
    */
   function _percBar($percentage, $scale = 1, $label = "")
   {
@@ -128,7 +129,7 @@ class LogStats
    */
   function yearly($table)
   {
-    $logQ = new LogStats_Query($table);
+    $logQ = new Query_LogStats($table);
     $logQ->connect();
 
     $totalHits = $logQ->totalHits();
@@ -193,7 +194,7 @@ class LogStats
    */
   function monthly($table, $year)
   {
-    $logQ = new LogStats_Query($table);
+    $logQ = new Query_LogStats($table);
     $logQ->connect();
 
     $totalHits = $logQ->yearHits($year);
@@ -267,7 +268,7 @@ class LogStats
    */
   function daily($table, $year, $month)
   {
-    $logQ = new LogStats_Query($table);
+    $logQ = new Query_LogStats($table);
     $logQ->connect();
 
     $totalHits = $logQ->monthHits($year, $month);
@@ -354,7 +355,7 @@ class LogStats
    */
   function hourly($table, $year, $month, $day)
   {
-    $logQ = new LogStats_Query($table);
+    $logQ = new Query_LogStats($table);
     $logQ->connect();
 
     $totalHits = $logQ->dayHits($year, $month, $day);
@@ -430,7 +431,7 @@ class LogStats
    */
   function all($table)
   {
-    $logQ = new LogStats_Query($table);
+    $logQ = new Query_LogStats($table);
     $logQ->connect();
 
     $total = $logQ->totalHits();
