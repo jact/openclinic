@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_list.php,v 1.28 2007/10/28 20:50:14 jact Exp $
+ * @version   CVS: $Id: connection_list.php,v 1.29 2007/10/28 21:00:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../model/Connection_Query.php");
+  require_once("../model/Query/Connection.php");
   require_once("../lib/misc_lib.php");
   require_once("../lib/PatientInfo.php");
   require_once("../lib/ProblemInfo.php");
@@ -84,7 +84,7 @@
     );
   }
 
-  $connQ = new Connection_Query;
+  $connQ = new Query_Connection();
   $connQ->connect();
 
   $connArray = array();

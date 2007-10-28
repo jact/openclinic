@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new.php,v 1.15 2007/10/26 21:29:28 jact Exp $
+ * @version   CVS: $Id: connection_new.php,v 1.16 2007/10/28 21:00:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,7 @@
 
   Form::compareToken('../medical/patient_new_form.php');
 
-  require_once("../model/Connection_Query.php");
+  require_once("../model/Query/Connection.php");
   require_once("../shared/record_log.php"); // record log
 
   /**
@@ -50,7 +50,7 @@
   /**
    * Insert new connection problem
    */
-  $connQ = new Connection_Query();
+  $connQ = new Query_Connection();
   $connQ->connect();
 
   $n = count($_POST["check"]);
@@ -80,7 +80,7 @@
       /**
        * Record log process
        */
-      recordLog("Connection_Query", "INSERT", array($idProblem, $_POST["check"][$i]));
+      recordLog("Query_Connection", "INSERT", array($idProblem, $_POST["check"][$i]));
     }
   }
   $connQ->close();

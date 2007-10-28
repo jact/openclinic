@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.23 2007/10/28 20:50:14 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.24 2007/10/28 21:00:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,7 +34,7 @@
   Form::compareToken('../medical/patient_search_form.php');
 
   require_once("../model/Query/Page/Problem.php");
-  require_once("../model/Connection_Query.php"); // referencial integrity
+  require_once("../model/Query/Connection.php"); // referencial integrity
   require_once("../model/DelProblem_Query.php");
   require_once("../shared/record_log.php"); // record log
 
@@ -55,7 +55,7 @@
   /**
    * Delete medical problems connections
    */
-  $connQ = new Connection_Query();
+  $connQ = new Query_Connection();
   $connQ->connect();
 
   $numRows = $connQ->select($idProblem);
