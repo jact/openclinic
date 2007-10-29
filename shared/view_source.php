@@ -9,20 +9,23 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: view_source.php,v 1.13 2007/10/28 12:07:09 jact Exp $
+ * @version   CVS: $Id: view_source.php,v 1.14 2007/10/29 20:16:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../lib/HTML.php");
+  require_once("../lib/Msg.php"); // include HTML.php
 
-  $_GET = Check::safeArray($_GET); // sanitizing parameters
+  /**
+   * Retrieving get var
+   */
+  $_file = Check::safeText($_GET['file']);
 
   /**
    * XHTML Start (XML prolog, DOCTYPE, title page and meta data)
    */
-  $title = sprintf(_("Source file: %s"), $_GET["file"]);
+  $title = sprintf(_("Source file: %s"), $_file);
   require_once("../layout/xhtml_start.php");
 
   HTML::start('link',
@@ -35,8 +38,8 @@
   );
   HTML::end('head');
 
-  $array = array('id' => 'viewSource');
-  if (count($_GET) == 0 || empty($_GET["file"]) || empty($_GET["tab"]))
+  $array['id'] = 'viewSource';
+  if (count($_GET) == 0 || empty($_file))
   {
     $array['onload'] = 'window.close();';
   }
@@ -44,15 +47,9 @@
 
   if (isset($_SESSION['auth']['is_admin']))
   {
-    $file = basename($_GET["file"]);
-
-    if (is_file('../' . $_GET["tab"] . '/' . $file))
+    if (is_file($_file))
     {
-      highlight_file('../' . $_GET["tab"] . '/' . $file);
-    }
-    elseif (is_file('../shared/' . $file))
-    {
-      highlight_file('../shared/' . $file);
+      highlight_file($_file);
     }
     else
     {
