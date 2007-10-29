@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.6 2007/10/28 12:07:25 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.7 2007/10/29 20:10:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -49,6 +49,14 @@
   );
   HTML::breadCrumb($links, "icon userIcon");
   unset($links);
+
+  /**
+   * Error message if not session exists
+   */
+  if ( !is_dir(ini_get('session.save_path')) && ini_get('session.save_handler') == 'files' )
+  {
+    Msg::error(_("No session support. Authentication process will fail. Check your PHP configuration."));
+  }
 
   /**
    * Warning message if loginAttempts == (OPEN_MAX_LOGIN_ATTEMPTS - 1)
