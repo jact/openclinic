@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.7 2007/10/29 20:06:11 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.8 2007/10/29 20:17:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,9 +48,12 @@
 
   if (isset($_SESSION['auth']['is_admin']) && ($_SESSION['auth']['is_admin'] === true && !OPEN_DEMO))
   {
+    $_serverVar = (strpos(PHP_SAPI, 'cgi') !== false)
+      ? $_SERVER['PATH_TRANSLATED']
+      : $_SERVER['SCRIPT_FILENAME'];
     $footLinks[] = HTML::strLink(_("View source code"), '../shared/view_source.php',
       array(
-        'file' => $_SERVER['PATH_TRANSLATED']
+        'file' => $_serverVar
       ),
       array(
         'title' => _("Opens a new window"),
