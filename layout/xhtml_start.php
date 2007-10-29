@@ -9,16 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: xhtml_start.php,v 1.5 2007/10/27 14:06:32 jact Exp $
+ * @version   CVS: $Id: xhtml_start.php,v 1.6 2007/10/29 20:18:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   /**
    * string _convert2Utf8(string $buffer)
@@ -57,6 +54,10 @@
   }
   $_xhtml = ($_xhtml && (defined("OPEN_XML_ACTIVED") ? OPEN_XML_ACTIVED : false));
 
+  $_docType = ($_xhtml)
+    ? '-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd'
+    : '-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd';
+
   $_contentType = ($_xhtml) ? "application/xhtml+xml" : "text/html";
   $_contentType .= "; charset=" . OPEN_CHARSET/*"UTF-8"*/;
 
@@ -65,20 +66,25 @@
 
   /**
    * Force not caching
+   *
+   * @since 0.8
    */
   header("Expires: -1");
   header("Etag: " . md5(uniqid(rand(), true)));
 
+  /**
+   * Compression output if it is possible
+   *
+   * @since 0.8
+   */
+  if (eregi("gzip", $_SERVER['HTTP_ACCEPT_ENCODING']))
+  {
+    ini_set("zlib.output_compression", 'On');
+  }
+
   if (defined("OPEN_BUFFER") && OPEN_BUFFER)
   {
-    if (eregi("gzip", $_SERVER['HTTP_ACCEPT_ENCODING']))
-    {
-      ob_start("ob_gzhandler");
-    }
-    else
-    {
-      ob_start(/*"_convert2Utf8"*/); // _convert2Utf8
-    }
+    ob_start(/*"_convert2Utf8"*/); // _convert2Utf8
   }
 
   if (strpos($_contentType, "application/xhtml+xml") !== false)
@@ -87,14 +93,7 @@
     echo '<?xml version="1.0" encoding="' . OPEN_ENCODING/*"UTF-8"*/ . '" standalone="no" ?>' . PHP_EOL;
   }
 
-  if ($_xhtml)
-  {
-    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">' . PHP_EOL;
-  }
-  else
-  {
-    echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">' . PHP_EOL;
-  }
+  echo '<!DOCTYPE html PUBLIC "' . $_docType . '">' . PHP_EOL;
 
   HTML::start('html',
     array(
