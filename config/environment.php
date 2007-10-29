@@ -9,15 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: environment.php,v 1.3 2007/10/28 12:07:32 jact Exp $
+ * @version   CVS: $Id: environment.php,v 1.4 2007/10/29 20:11:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   /**
    * Start server page generation time
@@ -44,13 +41,13 @@
   /**
    * Reading settings from database
    */
-  require_once("../model/Setting_Query.php");
-  require_once("../model/Theme_Query.php");
+  require_once("../model/Query/Setting.php");
+  require_once("../model/Query/Theme.php");
 
   /**
    * Reading general settings
    */
-  $setQ = new Setting_Query();
+  $setQ = new Query_Setting();
   $setQ->connect();
 
   $setQ->select();
@@ -92,7 +89,7 @@
   /**
    * Reading theme settings
    */
-  $themeQ = new Theme_Query();
+  $themeQ = new Query_Theme();
   $themeQ->connect();
 
   $themeQ->select((isset($_SESSION['auth']['user_theme']) ? $_SESSION['auth']['user_theme'] : OPEN_THEME_ID));
