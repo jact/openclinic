@@ -9,15 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: get_form_vars.php,v 1.9 2007/10/28 11:34:59 jact Exp $
+ * @version   CVS: $Id: get_form_vars.php,v 1.10 2007/10/29 20:07:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   require_once("../lib/Form.php");
 

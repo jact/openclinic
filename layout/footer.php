@@ -9,15 +9,14 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.6 2007/10/28 12:08:00 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.7 2007/10/29 20:06:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
+
+  require_once("../lib/Msg.php");
 
   HTML::end('div'); // #mainZone
 
@@ -51,8 +50,7 @@
   {
     $footLinks[] = HTML::strLink(_("View source code"), '../shared/view_source.php',
       array(
-        'file' => $_SERVER['PHP_SELF'],
-        'tab' => $tab
+        'file' => $_SERVER['PATH_TRANSLATED']
       ),
       array(
         'title' => _("Opens a new window"),

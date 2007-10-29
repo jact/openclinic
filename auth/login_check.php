@@ -10,15 +10,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.7 2007/10/28 19:50:02 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.8 2007/10/29 20:04:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   /**
    * Checking to see if we are in demo mode and if we should not execute this page

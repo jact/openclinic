@@ -7,17 +7,14 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_fields.php,v 1.23 2006/12/28 16:18:53 jact Exp $
+ * @version   CVS: $Id: user_fields.php,v 1.24 2007/10/29 20:03:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   $tbody = array();
 

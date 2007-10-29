@@ -9,9 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: form_errors_msg.php,v 1.11 2007/10/17 19:17:09 jact Exp $
+ * @version   CVS: $Id: form_errors_msg.php,v 1.12 2007/10/29 20:08:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
+
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   if (isset($formError) && count($formError) > 0)
   {

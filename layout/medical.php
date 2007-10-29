@@ -9,16 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.23 2007/10/27 16:24:41 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.24 2007/10/29 20:06:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo      remove <ul>, <li> (use HTML::*)
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   require_once("../lib/LastViewedPatient.php");
   require_once("../layout/component.php");

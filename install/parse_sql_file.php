@@ -9,15 +9,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: parse_sql_file.php,v 1.19 2007/10/27 17:53:38 jact Exp $
+ * @version   CVS: $Id: parse_sql_file.php,v 1.20 2007/10/29 20:05:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\", "/", __FILE__) == str_replace("\\", "/", $_SERVER['SCRIPT_FILENAME']))
-  {
-    header("Location: ../index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
   require_once("../model/Query.php");
   require_once("../lib/Msg.php");
