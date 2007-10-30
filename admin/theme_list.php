@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.29 2007/10/28 20:06:56 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.30 2007/10/30 21:34:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -60,18 +60,10 @@
   HTML::para(HTML::strLink(_("Add New Theme"), '../admin/theme_new_form.php'));
 
   HTML::section(2, _("Themes List:"));
-?>
 
-<script type="text/javascript" defer="defer">
-<!--/*--><![CDATA[/*<!--*/
-function previewTheme(key)
-{
-  return popSecondary("../admin/theme_preview.php?key=" + key);
-}
-/*]]>*///-->
-</script>
-
-<?php
+  /**
+   * Search in database
+   */
   $themeQ = new Query_Theme();
   $themeQ->connect();
 
@@ -85,6 +77,7 @@ function previewTheme(key)
   }
 
   $thead = array(
+    _("#"),
     _("Function") => array('colspan' => 5),
     _("Theme Name"),
     _("Usage")
@@ -96,26 +89,30 @@ function previewTheme(key)
   $validateLink = "http://jigsaw.w3.org/css-validator/validator?uri=" . $validateLink;
 
   $tbody = array();
+  $i = 0;
   while ($theme = $themeQ->fetch())
   {
     /**
      * Row construction
      */
+    $row = ++$i . '.';
+    $row .= OPEN_SEPARATOR;
+
     if (in_array($theme->getCSSFile(), $reservedCSSFiles))
     {
-      $row = "** " . _("edit");
+      $row .= "** " . _("edit");
     }
     else
     {
-      $row = HTML::strLink(_("edit"), '../admin/theme_edit_form.php', array('key' => $theme->getId()));
+      $row = HTML::strLink(_("edit"), '../admin/theme_edit_form.php', array('id_theme' => $theme->getId()));
     }
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("copy"), '../admin/theme_new_form.php', array('key' => $theme->getId()));
+    $row .= HTML::strLink(_("copy"), '../admin/theme_new_form.php', array('id_theme' => $theme->getId()));
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("preview"), '../admin/theme_preview.php', array('key' => $theme->getId()),
-      array('onclick' => 'return previewTheme(' . $theme->getId() . ')')
+    $row .= HTML::strLink(_("preview"), '../admin/theme_preview.php', array('id_theme' => $theme->getId()),
+      array('class' => 'popup')
     );
     $row .= OPEN_SEPARATOR;
 
@@ -134,9 +131,8 @@ function previewTheme(key)
     {
       $row .= HTML::strLink(_("del"), '../admin/theme_del_confirm.php',
         array(
-          'key' => $theme->getId(),
-          'name' => $theme->getName(),
-          'file' => $theme->getCSSFile()
+          'id_theme' => $theme->getId(),
+          'name' => $theme->getName()
         )
       );
     } // end if
@@ -163,7 +159,11 @@ function previewTheme(key)
   $themeQ->freeResult();
   $themeQ->close();
 
-  HTML::table($thead, $tbody, null);
+  $options = array(
+    0 => array('align' => 'right')
+  );
+
+  HTML::table($thead, $tbody, null, $options);
 
   unset($themeQ);
   unset($theme);
