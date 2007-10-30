@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del_confirm.php,v 1.20 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: theme_del_confirm.php,v 1.21 2007/10/30 21:36:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
   /**
    * Checking for query string. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["name"]) || empty($_GET["file"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_theme"]) || empty($_GET["name"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -37,9 +37,8 @@
   /**
    * Retrieving get vars
    */
-  $idTheme = intval($_GET["key"]);
+  $idTheme = intval($_GET["id_theme"]);
   $name = Check::safeText($_GET["name"]);
-  $file = Check::safeText($_GET["file"]);
 
   /**
    * Show page
@@ -68,8 +67,6 @@
   $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete theme, %s?"), $name));
 
   $row = Form::strHidden("id_theme", $idTheme);
-  $row .= Form::strHidden("name", $name);
-  $row .= Form::strHidden("file", $file);
   $tbody[] = $row;
 
   $tfoot = array(
