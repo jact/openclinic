@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del_confirm.php,v 1.20 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: staff_del_confirm.php,v 1.21 2007/10/30 21:28:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,8 @@
   /**
    * Checking for query string. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["sur1"]) || empty($_GET["sur2"]) || empty($_GET["first"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_member"])
+    || empty($_GET["surname1"]) || empty($_GET["surname2"]) || empty($_GET["first_name"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -37,10 +38,10 @@
   /**
    * Retrieving get vars
    */
-  $idMember = intval($_GET["key"]);
-  $surname1 = Check::safeText($_GET["sur1"]);
-  $surname2 = Check::safeText($_GET["sur2"]);
-  $firstName = Check::safeText($_GET["first"]);
+  $idMember = intval($_GET["id_member"]);
+  $surname1 = Check::safeText($_GET["surname1"]);
+  $surname2 = Check::safeText($_GET["surname2"]);
+  $firstName = Check::safeText($_GET["first_name"]);
 
   /**
    * Show page

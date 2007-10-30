@@ -9,14 +9,14 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.32 2007/10/28 19:48:12 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.33 2007/10/30 21:32:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   /**
    * Checking for get vars. Go back to users list if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_user"]))
   {
     header("Location: ../admin/user_list.php");
     exit();
@@ -41,7 +41,7 @@
   /**
    * Retrieving get vars
    */
-  $idUser = intval($_GET["key"]);
+  $idUser = intval($_GET["id_user"]);
 
   /**
    * Checking for $formError to read data from database

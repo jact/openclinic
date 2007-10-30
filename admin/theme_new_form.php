@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_new_form.php,v 1.28 2007/10/28 20:06:56 jact Exp $
+ * @version   CVS: $Id: theme_new_form.php,v 1.29 2007/10/30 21:30:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,9 +29,9 @@
    * Checking for query string flag to read data from database.
    * This is only used when copying an existing theme.
    */
-  if (isset($_GET["key"]))
+  if (isset($_GET["id_theme"]))
   {
-    $idTheme = intval($_GET["key"]);
+    $idTheme = intval($_GET["id_theme"]);
 
     include_once("../model/Query/Theme.php");
 
@@ -109,7 +109,9 @@ function editTheme()
   HTML::para(
     HTML::strLink(_("Preview Theme"), '#', null, array('onclick' => 'previewTheme(); return false;'))
     . ' | '
-    . HTML::strLink(_("Preload CSS file"), '../admin/theme_preload_css.php', (isset($idTheme) ? array('key' => $idTheme, 'copy' => 'Y') : null))
+    . HTML::strLink(_("Preload CSS file"), '../admin/theme_preload_css.php',
+      (isset($idTheme) ? array('id_theme' => $idTheme, 'copy' => 'Y') : null)
+    )
     //. ' | '
     //. HTML::strLink(_("Upload image"), '../admin/theme_upload_image.php') // @todo
   );

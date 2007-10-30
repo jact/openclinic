@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit.php,v 1.19 2007/10/28 19:48:12 jact Exp $
+ * @version   CVS: $Id: user_edit.php,v 1.20 2007/10/30 21:32:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -31,7 +31,7 @@
   /**
    * Controlling vars
    */
-  $errorLocation = "../admin/user_edit_form.php?key=" . intval($_POST["id_user"]) . ((isset($_POST["all"])) ? "&all=Y" : "");
+  $errorLocation = "../admin/user_edit_form.php?id_user=" . intval($_POST["id_user"]) . ((isset($_POST["all"])) ? "&all=Y" : "");
   // Redefinition if it is needed after count($_POST)
   $returnLocation = ((isset($_POST["all"])) ? "../home/index.php" : "../admin/user_list.php");
 
@@ -86,7 +86,9 @@
       $userQ->close();
 
       unset($formError);
-      $formError["old_pwd"] = ((trim($_POST["md5_old"]) == "") ? _("This is a required field.") : _("This field is not correct."));
+      $formError["old_pwd"] = ((trim($_POST["md5_old"]) == "")
+        ? _("This is a required field.")
+        : _("This field is not correct."));
 
       Form::setSession($_POST, $formError);
 

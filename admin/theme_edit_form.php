@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.29 2007/10/28 20:06:56 jact Exp $
+ * @version   CVS: $Id: theme_edit_form.php,v 1.30 2007/10/30 21:30:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
   /**
    * Checking for get vars. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_theme"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -37,7 +37,7 @@
   /**
    * Retrieving get vars
    */
-  $idTheme = intval($_GET["key"]);
+  $idTheme = intval($_GET["id_theme"]);
 
   /**
    * Checking for $formError to read data from database

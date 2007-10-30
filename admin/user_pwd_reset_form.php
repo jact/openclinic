@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.30 2007/10/28 19:48:12 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.31 2007/10/30 21:32:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   /**
    * Checking for get vars. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_user"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -38,7 +38,7 @@
   /**
    * Retrieving get vars
    */
-  $idUser = intval($_GET["key"]);
+  $idUser = intval($_GET["id_user"]);
 
   /**
    * Checking for $formError to read data from database

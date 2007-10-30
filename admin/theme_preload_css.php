@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.23 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.24 2007/10/30 21:31:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -17,7 +17,7 @@
   /**
    * Retrieving get vars
    */
-  $idTheme = ((isset($_GET["key"]) && intval($_GET["key"]) > 0) ? intval($_GET["key"]) : 0);
+  $idTheme = ((isset($_GET["id_theme"]) && intval($_GET["id_theme"]) > 0) ? intval($_GET["id_theme"]) : 0);
   $fromCopy = (isset($_GET["copy"]) ? true : false);
 
   /**
@@ -28,8 +28,8 @@
   $restrictInDemo = true; // To prevent users' malice // We'll see
   $returnLocation = ($idTheme > 0)
     ? (($fromCopy)
-      ? '../admin/theme_new_form.php?key=' . $idTheme
-      : '../admin/theme_edit_form.php?key=' . $idTheme)
+      ? '../admin/theme_new_form.php?id_theme=' . $idTheme
+      : '../admin/theme_edit_form.php?id_theme=' . $idTheme)
     : '../admin/theme_new_form.php';
 
   require_once("../config/environment.php");
@@ -83,7 +83,7 @@
   HTML::start('form',
     array(
       'method' => 'post',
-      'action' => $_SERVER['PHP_SELF'] . ($idTheme ? '?key=' . $idTheme : ''),
+      'action' => $_SERVER['PHP_SELF'] . ($idTheme ? '?id_theme=' . $idTheme : ''),
       'enctype' => 'multipart/form-data'
     )
   );

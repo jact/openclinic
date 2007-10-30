@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit_form.php,v 1.26 2007/10/28 20:14:58 jact Exp $
+ * @version   CVS: $Id: staff_edit_form.php,v 1.27 2007/10/30 21:29:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
   /**
    * Checking for query string. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_member"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -37,7 +37,7 @@
   /**
    * Retrieving get vars
    */
-  $idMember = intval($_GET["key"]);
+  $idMember = intval($_GET["id_member"]);
 
   /**
    * Checking for $formError to read data from database

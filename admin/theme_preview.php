@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.33 2007/10/28 20:06:56 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.34 2007/10/30 21:31:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,7 +59,7 @@
    */
   require_once("../config/i18n.php");
 
-  if (isset($_GET["key"]) && intval($_GET["key"]) > 0)
+  if (isset($_GET["id_theme"]) && intval($_GET["id_theme"]) > 0)
   {
     include_once("../model/Query/Theme.php");
 
@@ -69,7 +69,7 @@
     $themeQ = new Query_Theme();
     $themeQ->connect();
 
-    $themeQ->select(intval($_GET["key"]));
+    $themeQ->select(intval($_GET["id_theme"]));
 
     $theme = $themeQ->fetch();
     if ( !$theme )
@@ -111,6 +111,7 @@
    */
   $title = sprintf(_("%s Theme Preview"), OPEN_THEME_NAME);
   require_once("../layout/xhtml_start.php");
+  require_once("../lib/Msg.php");
 
   HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
 

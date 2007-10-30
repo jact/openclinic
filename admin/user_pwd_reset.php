@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset.php,v 1.15 2007/10/28 19:48:12 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset.php,v 1.16 2007/10/30 21:32:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -35,7 +35,7 @@
   /**
    * Validate data
    */
-  $errorLocation = "../admin/user_pwd_reset_form.php?key=" . intval($_POST["id_user"]); // controlling var
+  $errorLocation = "../admin/user_pwd_reset_form.php?id_user=" . intval($_POST["id_user"]); // controlling var
   $user = new User();
 
   $user->setIdUser($_POST["id_user"]);
