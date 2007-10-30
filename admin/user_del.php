@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del.php,v 1.16 2007/10/28 19:48:12 jact Exp $
+ * @version   CVS: $Id: user_del.php,v 1.17 2007/10/30 21:38:43 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,13 +41,23 @@
    * Retrieving post vars
    */
   $idUser = intval($_POST["id_user"]);
-  $login = Check::safeText($_POST["login"]);
 
   /**
    * Delete user
    */
   $userQ = new Query_User();
   $userQ->connect();
+
+  if ( !$userQ->select($idUser) )
+  {
+    $userQ->close();
+
+    FlashMsg::add(_("That user does not exist."), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
+    exit();
+  }
+
+  $user = $userQ->fetch();
 
   $userQ->delete($idUser);
 
@@ -57,6 +67,6 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  FlashMsg::add(sprintf(_("User, %s, has been deleted."), $login));
+  FlashMsg::add(sprintf(_("User, %s, has been deleted."), $user->getLogin()));
   header("Location: " . $returnLocation);
 ?>
