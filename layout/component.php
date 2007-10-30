@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.6 2007/10/29 20:06:11 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.7 2007/10/30 21:27:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -106,7 +106,7 @@
         . '[ '
         . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
           array(
-            'key' => $_SESSION['auth']['user_id'],
+            'id_user' => $_SESSION['auth']['user_id'],
             'all' => 'Y'
           ),
           array('title' => _("manage your user account"))
