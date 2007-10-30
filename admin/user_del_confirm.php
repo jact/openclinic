@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del_confirm.php,v 1.19 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: user_del_confirm.php,v 1.20 2007/10/30 21:38:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
   /**
    * Checking for query string. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]) || empty($_GET["login"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_user"]) || empty($_GET["login"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -37,7 +37,7 @@
   /**
    * Retrieving get vars
    */
-  $idUser = intval($_GET["key"]);
+  $idUser = intval($_GET["id_user"]);
   $login = Check::safeText($_GET["login"]);
 
   /**
@@ -67,7 +67,6 @@
   $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete user, %s?"), $login));
 
   $row = Form::strHidden("id_user", $idUser);
-  $row .= Form::strHidden("login", $login);
   $tbody[] = $row;
 
   $tfoot = array(
