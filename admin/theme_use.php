@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_use.php,v 1.14 2007/10/28 19:59:50 jact Exp $
+ * @version   CVS: $Id: theme_use.php,v 1.15 2007/10/30 21:39:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,6 +30,7 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/Query/Setting.php");
+  require_once("../lib/Form.php");
 
   /**
    * Destroy form values and errors
@@ -52,5 +53,6 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
+  FlashMsg::add(_("Default theme has been changed."));
   header("Location: " . $returnLocation);
 ?>
