@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.26 2007/10/28 20:14:58 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.27 2007/10/30 21:33:40 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -120,6 +120,7 @@
   }
 
   $thead = array(
+    _("#"),
     _("Function") => array('colspan' => 3),
     _("First Name"),
     _("Surname 1"),
@@ -133,6 +134,7 @@
   }
 
   $tbody = array();
+  $i = 0;
   while ($staff = $staffQ->fetch())
   {
     // to protect admin users
@@ -141,7 +143,10 @@
       continue;
     }
 
-    $row = HTML::strLink(_("edit"), '../admin/staff_edit_form.php', array('key' => $staff->getIdMember()));
+    $row = ++$i . '.';
+    $row .= OPEN_SEPARATOR;
+
+    $row .= HTML::strLink(_("edit"), '../admin/staff_edit_form.php', array('id_member' => $staff->getIdMember()));
     $row .= OPEN_SEPARATOR;
 
     if ($staff->getIdMember() == $_SESSION['auth']['member_user'])
@@ -152,10 +157,10 @@
     {
       $row .= HTML::strLink(_("del"), '../admin/staff_del_confirm.php',
         array(
-          'key' => $staff->getIdMember(),
-          'sur1' => $staff->getSurname1(),
-          'sur2' => $staff->getSurname2(),
-          'first' => $staff->getFirstName()
+          'id_member' => $staff->getIdMember(),
+          'surname1' => $staff->getSurname1(),
+          'surname2' => $staff->getSurname2(),
+          'first_name' => $staff->getFirstName()
         )
       );
     } // end if
@@ -176,7 +181,7 @@
     }
     else
     {
-      $row .= HTML::strLink(_("edit user"), '../admin/user_edit_form.php', array('key' => $staff->getIdUser()));
+      $row .= HTML::strLink(_("edit user"), '../admin/user_edit_form.php', array('id_user' => $staff->getIdUser()));
     } // end if
     $row .= OPEN_SEPARATOR;
 
@@ -213,7 +218,11 @@
   unset($staffQ);
   unset($staff);
 
-  HTML::table($thead, $tbody, null);
+  $options = array(
+    0 => array('align' => 'right')
+  );
+
+  HTML::table($thead, $tbody, null, $options);
 
   Msg::hint('* ' . _("Note: To the create user function must have a correct login."));
   Msg::hint('** ' . _("Note: The del function will not be applicated to the session user."));

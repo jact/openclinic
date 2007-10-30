@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.31 2007/10/28 19:48:12 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.32 2007/10/30 21:34:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,6 +92,7 @@
   );
 
   $thead = array(
+    _("#"),
     _("Function") => array('colspan' => 6),
     _("Login"),
     _("Email"),
@@ -100,11 +101,13 @@
   );
 
   $options = array(
-    8 => array('align' => 'center'),
-    9 => array('align' => 'center')
+    0 => array('align' => 'right'),
+    9 => array('align' => 'center'),
+    10 => array('align' => 'center')
   );
 
   $tbody = array();
+  $i = 0;
   while ($user = $userQ->fetch())
   {
     /**
@@ -118,9 +121,11 @@
     /**
      * Row construction
      */
-    $row = HTML::strLink(_("edit"), '../admin/user_edit_form.php', array('key' => $user->getIdUser()));
+    $row = ++$i . '.';
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(_("pwd"), '../admin/user_pwd_reset_form.php', array('key' => $user->getIdUser()));
+    $row .= HTML::strLink(_("edit"), '../admin/user_edit_form.php', array('id_user' => $user->getIdUser()));
+    $row .= OPEN_SEPARATOR;
+    $row .= HTML::strLink(_("pwd"), '../admin/user_pwd_reset_form.php', array('id_user' => $user->getIdUser()));
     $row .= OPEN_SEPARATOR;
     if (isset($_SESSION['auth']['user_id']) && $user->getIdUser() == $_SESSION['auth']['user_id'])
     {
@@ -130,24 +135,26 @@
     {
       $row .= HTML::strLink(_("del"), '../admin/user_del_confirm.php',
         array(
-          'key' => $user->getIdUser(),
+          'id_user' => $user->getIdUser(),
           'login' => $user->getLogin()
         )
       );
     }
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(_("edit member"), '../admin/staff_edit_form.php', array('key' => $user->getIdMember()));
+    $row .= HTML::strLink(_("edit member"), '../admin/staff_edit_form.php',
+      array('id_member' => $user->getIdMember())
+    );
     $row .= OPEN_SEPARATOR;
     $row .= HTML::strLink(_("accesses"), '../admin/user_access_log.php',
       array(
-        'key' => $user->getIdUser(),
+        'id_user' => $user->getIdUser(),
         'login' => $user->getLogin()
       )
     );
     $row .= OPEN_SEPARATOR;
     $row .= HTML::strLink(_("transactions"), '../admin/user_record_log.php',
       array(
-        'key' => $user->getIdUser(),
+        'id_user' => $user->getIdUser(),
         'login' => $user->getLogin()
       )
     );
