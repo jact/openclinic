@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_new_form.php,v 1.27 2007/10/28 11:31:09 jact Exp $
+ * @version   CVS: $Id: user_new_form.php,v 1.28 2007/10/30 21:39:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,7 +48,7 @@
     $login = Check::safeText($_GET["login"]);
     $formVar["login"] = $login;
   }
-  else
+  else // something wrong in fields...
   {
     $formSession = Form::getSession();
     $formVar["id_member"] = $formSession['var']['id_member'];
