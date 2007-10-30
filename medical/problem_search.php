@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.34 2007/10/28 20:50:14 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.35 2007/10/30 21:26:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -60,6 +60,18 @@
   $problemQ->search($searchType, $arraySearch, $currentPage, $logical, $limit);
 
   /**
+   * No results message if no results returned from search.
+   */
+  if ($problemQ->getRowCount() == 0)
+  {
+    $problemQ->close();
+
+    FlashMsg::add(sprintf(_("No results found for '%s'."), $searchText));
+    header("Location: ../medical/patient_search_form.php");
+    exit();
+  }
+
+  /**
    * Show problem view screen if only one result from query
    */
   if ($problemQ->getRowCount() == 1)
@@ -87,18 +99,6 @@
   );
   HTML::breadCrumb($links, "icon searchIcon");
   unset($links);
-
-  /**
-   * No results message if no results returned from search.
-   */
-  if ($problemQ->getRowCount() == 0)
-  {
-    $problemQ->close();
-
-    FlashMsg::add(_("No results found."));
-    header("Location: ../medical/patient_search_form.php");
-    exit();
-  }
 
   /**
    * Printing result stats and page nav

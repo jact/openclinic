@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.36 2007/10/28 20:42:58 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.37 2007/10/30 21:26:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -63,6 +63,18 @@
   $patQ->search($searchType, $arraySearch, $currentPage, $logical, $limit);
 
   /**
+   * No results message if no results returned from search.
+   */
+  if ($patQ->getRowCount() == 0)
+  {
+    $patQ->close();
+
+    FlashMsg::add(sprintf(_("No results found for '%s'."), $searchText));
+    header("Location: " . $returnLocation);
+    exit();
+  }
+
+  /**
    * Show page
    */
   $title = _("Search Results");
@@ -85,18 +97,6 @@
   unset($links);
 
   $patient->showHeader();
-
-  /**
-   * No results message if no results returned from search.
-   */
-  if ($patQ->getRowCount() == 0)
-  {
-    $patQ->close();
-
-    FlashMsg::add(_("No results found."));
-    header("Location: " . $returnLocation);
-    exit();
-  }
 
   /**
    * Printing result stats and page nav
