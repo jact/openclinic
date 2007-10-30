@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_access_log.php,v 1.30 2007/10/28 19:51:52 jact Exp $
+ * @version   CVS: $Id: user_access_log.php,v 1.31 2007/10/30 21:41:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   /**
    * Checking for get vars. Go back to user list if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_user"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -40,14 +40,9 @@
   /**
    * Retrieving get vars
    */
-  $idUser = intval($_GET["key"]);
+  $idUser = intval($_GET["id_user"]);
   $login = Check::safeText($_GET["login"]);
-
-  /**
-   * Retrieving post vars and scrubbing the data
-   */
-  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
-  $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
+  $currentPage = (isset($_GET["page"])) ? intval($_GET["page"]) : 1;
 
   /**
    * Search user accesses
@@ -56,7 +51,16 @@
   $accessQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $accessQ->connect();
 
-  $accessQ->searchUser($idUser, $currentPage, $limit);
+  $accessQ->searchUser($idUser, $currentPage);
+
+  if ($accessQ->getRowCount() == 0)
+  {
+    $accessQ->close();
+
+    FlashMsg::add(sprintf(_("No logs for user %s."), $login));
+    header("Location: " . $returnLocation);
+    exit();
+  }
 
   /**
    * Show page
@@ -77,73 +81,56 @@
 
   HTML::section(2, sprintf(_("Access Logs List for user %s"), $login) . ":");
 
-  if ($accessQ->getRowCount() == 0)
+  // Printing result stats and page nav
+  HTML::para(HTML::strTag('strong', sprintf(_("%d accesses."), $accessQ->getRowCount())));
+
+  $params = array(
+    'id_user=' . $idUser,
+    'login=' . $login
+  );
+  $params = implode('&', $params);
+
+  $pageCount = $accessQ->getPageCount();
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+
+  $profiles = array(
+    OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
+    OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
+    OPEN_PROFILE_DOCTOR => _("Doctor")
+  );
+
+  $thead = array(
+    _("Access Date") => array('colspan' => 2),
+    _("Login"),
+    _("Profile")
+  );
+
+  $options = array(
+    0 => array('align' => 'right'),
+    2 => array('align' => 'center'),
+    3 => array('align' => 'center')
+  );
+
+  $tbody = array();
+  while ($access = $accessQ->fetch())
   {
-    $accessQ->close();
-    Msg::info(_("No logs for this user."));
+    $row = $accessQ->getCurrentRow() . ".";
+    $row .= OPEN_SEPARATOR;
+    $row .= I18n::localDate($access["access_date"]);
+    $row .= OPEN_SEPARATOR;
+    $row .= $access["login"];
+    $row .= OPEN_SEPARATOR;
+    $row .= $profiles[$access["id_profile"]];
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   }
-  else
-  {
-    // Printing result stats and page nav
-    HTML::para(HTML::strTag('strong', sprintf(_("%d accesses."), $accessQ->getRowCount())));
+  $accessQ->freeResult();
+  $accessQ->close();
 
-    $pageCount = $accessQ->getPageCount();
-    Search::pageLinks($currentPage, $pageCount);
+  HTML::table($thead, $tbody, null, $options);
 
-    Search::changePageJS();
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
 
-    /**
-     * Form used by javascript to post back to this page (id="changePage" important)
-     */
-    HTML::start('form',
-      array(
-        'id' => 'changePage',
-        'method' => 'post',
-        'action' => '../admin/user_access_log.php?key=' . $idUser . '&login=' . urlencode($login)
-      )
-    );
-    Form::hidden("page", $currentPage);
-    Form::hidden("limit", $limit);
-    HTML::end('form');
-
-    $profiles = array(
-      OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
-      OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
-      OPEN_PROFILE_DOCTOR => _("Doctor")
-    );
-
-    $thead = array(
-      _("Access Date") => array('colspan' => 2),
-      _("Login"),
-      _("Profile")
-    );
-
-    $options = array(
-      0 => array('align' => 'right'),
-      2 => array('align' => 'center'),
-      3 => array('align' => 'center')
-    );
-
-    $tbody = array();
-    while ($access = $accessQ->fetch())
-    {
-      $row = $accessQ->getCurrentRow() . ".";
-      $row .= OPEN_SEPARATOR;
-      $row .= I18n::localDate($access["access_date"]);
-      $row .= OPEN_SEPARATOR;
-      $row .= $access["login"];
-      $row .= OPEN_SEPARATOR;
-      $row .= $profiles[$access["id_profile"]];
-
-      $tbody[] = explode(OPEN_SEPARATOR, $row);
-    }
-    $accessQ->freeResult();
-    $accessQ->close();
-
-    HTML::table($thead, $tbody, null, $options);
-
-    Search::pageLinks($currentPage, $pageCount);
-  } // end if-else
   unset($accessQ);
   unset($access);
   unset($profiles);

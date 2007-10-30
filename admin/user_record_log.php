@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_record_log.php,v 1.32 2007/10/28 20:28:23 jact Exp $
+ * @version   CVS: $Id: user_record_log.php,v 1.33 2007/10/30 21:41:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   /**
    * Checking for get vars. Go back to user list if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["key"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_user"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -40,14 +40,9 @@
   /**
    * Retrieving get vars
    */
-  $idUser = intval($_GET["key"]);
+  $idUser = intval($_GET["id_user"]);
   $login = Check::safeText($_GET["login"]);
-
-  /**
-   * Retrieving post vars and scrubbing the data
-   */
-  $currentPage = (isset($_POST["page"])) ? intval($_POST["page"]) : 1;
-  $limit = (isset($_POST["limit"])) ? intval($_POST["limit"]) : 0;
+  $currentPage = (isset($_GET["page"])) ? intval($_GET["page"]) : 1;
 
   /**
    * Search user operations
@@ -56,7 +51,16 @@
   $recordQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
   $recordQ->connect();
 
-  $recordQ->searchUser($idUser, $currentPage, $limit);
+  $recordQ->searchUser($idUser, $currentPage);
+
+  if ($recordQ->getRowCount() == 0)
+  {
+    $recordQ->close();
+
+    FlashMsg::add(sprintf(_("No logs for user %s."), $login));
+    header("Location: " . $returnLocation);
+    exit();
+  }
 
   /**
    * Show page
@@ -77,76 +81,60 @@
 
   HTML::section(2, sprintf(_("Record Logs List for user %s"), $login) . ":");
 
-  if ($recordQ->getRowCount() == 0)
+  // Printing result stats and page nav
+  HTML::para(HTML::strTag('strong', sprintf(_("%d transactions."), $recordQ->getRowCount())));
+
+  $params = array(
+    'id_user=' . $idUser,
+    'login=' . $login
+  );
+  $params = implode('&', $params);
+
+  $pageCount = $recordQ->getPageCount();
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+
+  $thead = array(
+    _("Access Date") => array('colspan' => 2),
+    _("Login"),
+    _("Table"),
+    _("Operation"),
+    _("Data")
+  );
+
+  $options = array(
+    0 => array('align' => 'right'),
+    1 => array('align' => 'center', 'nowrap' => 1),
+    2 => array('align' => 'center'),
+    3 => array('align' => 'center'),
+    4 => array('align' => 'center')
+  );
+
+  $tbody = array();
+  while ($record = $recordQ->fetch())
   {
-    $recordQ->close();
-    Msg::info(_("No logs for this user."));
+    $row = $recordQ->getCurrentRow() . ".";
+    $row .= OPEN_SEPARATOR;
+    $row .= I18n::localDate($record["access_date"]);
+    $row .= OPEN_SEPARATOR;
+    $row .= $record["login"];
+    $row .= OPEN_SEPARATOR;
+    $row .= $record["table_name"];
+    $row .= OPEN_SEPARATOR;
+    $row .= $record["operation"];
+    $row .= OPEN_SEPARATOR;
+    $row .= htmlspecialchars(var_export(unserialize($record["affected_row"]), true));
+
+    $tbody[] = explode(OPEN_SEPARATOR, $row);
   }
-  else
-  {
-    // Printing result stats and page nav
-    HTML::para(HTML::strTag('strong', sprintf(_("%d transactions."), $recordQ->getRowCount())));
+  $recordQ->freeResult();
+  $recordQ->close();
 
-    $pageCount = $recordQ->getPageCount();
-    Search::pageLinks($currentPage, $pageCount);
+  HTML::table($thead, $tbody, null, $options);
 
-    Search::changePageJS();
+  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
 
-    /**
-     * Form used by javascript to post back to this page (id="changePage" important)
-     */
-    HTML::start('form',
-      array(
-        'id' => 'changePage',
-        'method' => 'post',
-        'action' => '../admin/user_record_log.php?key=' . $idUser . '&login=' . urlencode($login)
-      )
-    );
-    Form::hidden("page", $currentPage);
-    Form::hidden("limit", $limit);
-    HTML::end('form');
-
-    $thead = array(
-      _("Access Date") => array('colspan' => 2),
-      _("Login"),
-      _("Table"),
-      _("Operation"),
-      _("Data")
-    );
-
-    $options = array(
-      0 => array('align' => 'right'),
-      1 => array('align' => 'center', 'nowrap' => 1),
-      2 => array('align' => 'center'),
-      3 => array('align' => 'center'),
-      4 => array('align' => 'center')
-    );
-
-    $tbody = array();
-    while ($record = $recordQ->fetch())
-    {
-      $row = $recordQ->getCurrentRow() . ".";
-      $row .= OPEN_SEPARATOR;
-      $row .= I18n::localDate($record["access_date"]);
-      $row .= OPEN_SEPARATOR;
-      $row .= $record["login"];
-      $row .= OPEN_SEPARATOR;
-      $row .= $record["table_name"];
-      $row .= OPEN_SEPARATOR;
-      $row .= $record["operation"];
-      $row .= OPEN_SEPARATOR;
-      $row .= htmlspecialchars(var_export(unserialize($record["affected_row"]), true));
-
-      $tbody[] = explode(OPEN_SEPARATOR, $row);
-    }
-    $recordQ->freeResult();
-    $recordQ->close();
-
-    HTML::table($thead, $tbody, null, $options);
-
-    Search::pageLinks($currentPage, $pageCount);
-  } // end if-else
   unset($recordQ);
+  unset($record);
 
   HTML::para(HTML::strLink(_("Return to users list"), $returnLocation));
 
