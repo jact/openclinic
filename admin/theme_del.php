@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del.php,v 1.19 2007/10/28 20:06:56 jact Exp $
+ * @version   CVS: $Id: theme_del.php,v 1.20 2007/10/30 21:37:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -40,8 +40,6 @@
    * Retrieving post vars
    */
   $idTheme = intval($_POST["id_theme"]);
-  $name = Check::safeText($_POST["name"]);
-  $file = Check::safeText($_POST["file"]);
 
   /**
    * Delete theme
@@ -49,19 +47,31 @@
   $themeQ = new Query_Theme();
   $themeQ->connect();
 
+  if ( !$themeQ->select($idTheme) )
+  {
+    FlashMsg::add(_("That theme does not exist."), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
+    exit();
+  }
+
+  $theme = $themeQ->fetch();
+
   $themeQ->delete($idTheme);
 
   $themeQ->close();
   unset($themeQ);
 
-  if ( !in_array($file, $reservedCSSFiles) )
+  if ( !in_array($theme->getCSSFile(), $reservedCSSFiles) )
   {
-    @unlink(dirname($_SERVER['SCRIPT_FILENAME']) . '/../css/' . basename($file));
+    $_serverVar = (strpos(PHP_SAPI, 'cgi') !== false)
+      ? $_SERVER['PATH_TRANSLATED']
+      : $_SERVER['SCRIPT_FILENAME'];
+    @unlink(dirname($_serverVar) . '/../css/' . basename($theme->getCSSFile()));
   }
 
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  FlashMsg::add(sprintf(_("Theme, %s, has been deleted."), $name));
+  FlashMsg::add(sprintf(_("Theme, %s, has been deleted."), $theme->getName()));
   header("Location: " . $returnLocation);
 ?>
