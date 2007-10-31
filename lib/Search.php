@@ -9,17 +9,20 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Search.php,v 1.11 2007/09/29 10:21:06 jact Exp $
+ * @version   CVS: $Id: Search.php,v 1.12 2007/10/31 19:21:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
+
+  require_once(dirname(__FILE__) . "/HTML.php");
 
 /**
  * Search set of used functions in search's pages
  *
  * Methods:
  *  array explodeQuoted(string $text)
- *  void pageLinks(int $currentPage, int $pageCount, string $url = '')
+ *  void strPageLinks(int $currentPage, int $pageCount, string $url = '')
  *  void changePageJS(void)
+ *  void pageLinks(int $currentPage, int $pageCount, string $url = '')
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -42,36 +45,157 @@ class Search
   {
     if (empty($text))
     {
-      $elements[] = "";
-      return $elements;
+      $_elements[] = "";
+
+      return $_elements;
     }
 
-    $words = explode(" ", $text);
+    $_words = explode(" ", $text);
 
-    $inQuotes = false;
-    foreach ($words as $word)
+    $_inQuotes = false;
+    foreach ($_words as $_word)
     {
-      if ($inQuotes)
+      if ($_inQuotes)
       {
         // add word to the last element
-        $elements[sizeof($elements) - 1] .= urlencode(" " . str_replace('"', '', $word));
-        if ($word[strlen($word) - 1] == "\"")
+        $_elements[sizeof($_elements) - 1] .= urlencode(" " . str_replace('"', '', $_word));
+        if ($_word[strlen($_word) - 1] == "\"")
         {
-          $inQuotes = false;
+          $_inQuotes = false;
         }
       }
       else
       {
         // create a new element
-        $elements[] = urlencode(str_replace('"', '', $word));
-        if ($word[0] == "\"" && $word[strlen($word) - 1] != "\"")
+        $_elements[] = urlencode(str_replace('"', '', $_word));
+        if ($_word[0] == "\"" && $_word[strlen($_word) - 1] != "\"")
         {
-          $inQuotes = true;
+          $_inQuotes = true;
         }
       }
     }
 
-    return $elements;
+    return $_elements;
+  }
+
+  /**
+   * string strPageLinks(int $currentPage, int $pageCount, string $url = '')
+   *
+   * Returns the pagination string in result sets
+   *
+   * @param int $currentPage
+   * @param int $pageCount total pages
+   * @param string $url (optional) if not empty, links with href, else links with onclick
+   * @return string
+   * @see HTML::strLink()
+   * @see HTML::strTag()
+   * @see HTML::para()
+   * @access public
+   * @static
+   * @todo optimize code with constants
+   */
+  function strPageLinks($currentPage, $pageCount, $url = '')
+  {
+    if ($pageCount <= 1)
+    {
+      return;
+    }
+
+    if (empty($url))
+    {
+      $_pageLink = HTML::strLink('%s', '#', null, array('onclick' => 'changePage(%d)'));
+    }
+    else
+    {
+      $_pageLink = HTML::strLink('%s', htmlspecialchars(str_replace('%', '%%', $url))
+        . ((strpos($url, '?') !== false) ? '&amp;' : '?') . 'page=%d');
+    }
+
+    $_pageString = '';
+    if ($pageCount > 10)
+    {
+      $_initPageMax = ($pageCount > 3) ? 3 : $pageCount;
+
+      for ($i = 1; $i < ($_initPageMax + 1); $i++)
+      {
+        $_pageString .= ($i == $currentPage)
+          ? HTML::strTag('strong', $i)
+          : sprintf($_pageLink, $i, $i);
+        if ($i < $_initPageMax)
+        {
+          $_pageString .= ' | ';
+        }
+      }
+
+      if ($pageCount > 3)
+      {
+        if ($currentPage > 1 && $currentPage < $pageCount)
+        {
+          $_pageString .= ($currentPage > 5) ? ' ... ' : ' | ';
+
+          $_initPageMin = ($currentPage > 4) ? $currentPage : 5;
+          $_initPageMax = ($currentPage < ($pageCount - 4)) ? $currentPage : $pageCount - 4;
+
+          for ($i = ($_initPageMin - 1); $i < ($_initPageMax + 2); $i++)
+          {
+            $_pageString .= ($i == $currentPage)
+              ? HTML::strTag('strong', $i)
+              : sprintf($_pageLink, $i, $i);
+            if ($i < ($_initPageMax + 1))
+            {
+              $_pageString .= ' | ';
+            }
+          }
+
+          $_pageString .= ($currentPage < ($pageCount - 4)) ? ' ... ' : ' | ';
+        }
+        else
+        {
+          $_pageString .= ' ... ';
+        }
+
+        for ($i = $pageCount - 2; $i < ($pageCount + 1); $i++)
+        {
+          $_pageString .= ($i == $currentPage)
+            ? HTML::strTag('strong', $i)
+            : sprintf($_pageLink, $i, $i);
+          if ($i < $pageCount)
+          {
+            $_pageString .= ' | ';
+          }
+        }
+      }
+    }
+    else
+    {
+      for ($i = 1; $i < ($pageCount + 1); $i++)
+      {
+        $_pageString .= ($i == $currentPage)
+          ? HTML::strTag('strong', $i)
+          : sprintf($_pageLink, $i, $i);
+        if ($i < $pageCount)
+        {
+          $_pageString .= ' | ';
+        }
+      }
+    }
+
+    if ($currentPage > 1)
+    {
+      $_pageString = ' ' . sprintf($_pageLink, $currentPage - 1, '&laquo;' . _("prev")) . ' | ' . $_pageString;
+    }
+
+    if ($currentPage < $pageCount)
+    {
+      $_pageString .= ' | ' . sprintf($_pageLink, $currentPage + 1, _("next") . '&raquo;');
+    }
+
+    if ( !empty($url) )
+    {
+      $_pageString = str_replace('%%', '%', $_pageString);
+    }
+
+    return HTML::strPara(_("Result Pages") . ': ' . $_pageString, array('class' => 'pageLinks'));
   }
 
   /**
@@ -83,115 +207,12 @@ class Search
    * @param int $pageCount total pages
    * @param string $url (optional) if not empty, links with href, else links with onclick
    * @return void
-   * @see HTML::strLink()
-   * @see HTML::strTag()
-   * @see HTML::para()
    * @access public
    * @static
-   * @todo optimize code with constants
-   * @todo make strPageLinks() function
    */
   function pageLinks($currentPage, $pageCount, $url = '')
   {
-    if ($pageCount <= 1)
-    {
-      return;
-    }
-
-    if (empty($url))
-    {
-      $pageLink = HTML::strLink('%s', '#', null, array('onclick' => 'changePage(%d)'));
-    }
-    else
-    {
-      $pageLink = HTML::strLink('%s', htmlspecialchars(str_replace('%', '%%', $url)) . ((strpos($url, '?') !== false) ? '&amp;' : '?') . 'page=%d');
-    }
-
-    $pageString = '';
-    if ($pageCount > 10)
-    {
-      $initPageMax = ($pageCount > 3) ? 3 : $pageCount;
-
-      for ($i = 1; $i < ($initPageMax + 1); $i++)
-      {
-        $pageString .= ($i == $currentPage)
-          ? HTML::strTag('strong', $i)
-          : sprintf($pageLink, $i, $i);
-        if ($i < $initPageMax)
-        {
-          $pageString .= ' | ';
-        }
-      }
-
-      if ($pageCount > 3)
-      {
-        if ($currentPage > 1 && $currentPage < $pageCount)
-        {
-          $pageString .= ($currentPage > 5) ? ' ... ' : ' | ';
-
-          $initPageMin = ($currentPage > 4) ? $currentPage : 5;
-          $initPageMax = ($currentPage < ($pageCount - 4)) ? $currentPage : $pageCount - 4;
-
-          for ($i = ($initPageMin - 1); $i < ($initPageMax + 2); $i++)
-          {
-            $pageString .= ($i == $currentPage)
-              ? HTML::strTag('strong', $i)
-              : sprintf($pageLink, $i, $i);
-            if ($i < ($initPageMax + 1))
-            {
-              $pageString .= ' | ';
-            }
-          }
-
-          $pageString .= ($currentPage < ($pageCount - 4)) ? ' ... ' : ' | ';
-        }
-        else
-        {
-          $pageString .= ' ... ';
-        }
-
-        for ($i = $pageCount - 2; $i < ($pageCount + 1); $i++)
-        {
-          $pageString .= ($i == $currentPage)
-            ? HTML::strTag('strong', $i)
-            : sprintf($pageLink, $i, $i);
-          if ($i < $pageCount)
-          {
-            $pageString .= ' | ';
-          }
-        }
-      }
-    }
-    else
-    {
-      for ($i = 1; $i < ($pageCount + 1); $i++)
-      {
-        $pageString .= ($i == $currentPage)
-          ? HTML::strTag('strong', $i)
-          : sprintf($pageLink, $i, $i);
-        if ($i < $pageCount)
-        {
-          $pageString .= ' | ';
-        }
-      }
-    }
-
-    if ($currentPage > 1)
-    {
-      $pageString = ' ' . sprintf($pageLink, $currentPage - 1, '&laquo;' . _("prev")) . ' | ' . $pageString;
-    }
-
-    if ($currentPage < $pageCount)
-    {
-      $pageString .= ' | ' . sprintf($pageLink, $currentPage + 1, _("next") . '&raquo;');
-    }
-
-    if ( !empty($url) )
-    {
-      $pageString = str_replace('%%', '%', $pageString);
-    }
-
-    HTML::para(_("Result Pages") . ': ' . $pageString, array('class' => 'pageLinks'));
+    echo Search::strPageLinks($currentPage, $pageCount, $url = '');
   }
 
   /**
