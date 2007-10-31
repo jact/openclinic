@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_access_log.php,v 1.31 2007/10/30 21:41:26 jact Exp $
+ * @version   CVS: $Id: user_access_log.php,v 1.32 2007/10/31 19:19:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,7 +91,8 @@
   $params = implode('&', $params);
 
   $pageCount = $accessQ->getPageCount();
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+  $pageLinks = Search::strPageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+  echo $pageLinks;
 
   $profiles = array(
     OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
@@ -129,7 +130,7 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+  echo $pageLinks;
 
   unset($accessQ);
   unset($access);

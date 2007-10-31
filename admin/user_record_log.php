@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_record_log.php,v 1.33 2007/10/30 21:41:33 jact Exp $
+ * @version   CVS: $Id: user_record_log.php,v 1.34 2007/10/31 19:19:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,7 +91,8 @@
   $params = implode('&', $params);
 
   $pageCount = $recordQ->getPageCount();
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+  $pageLinks = Search::strPageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+  echo $pageLinks;
 
   $thead = array(
     _("Access Date") => array('colspan' => 2),
@@ -131,7 +132,7 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+  echo $pageLinks;
 
   unset($recordQ);
   unset($record);

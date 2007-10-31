@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.37 2007/10/30 21:26:30 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.38 2007/10/31 19:19:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -104,7 +104,8 @@
   HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
 
   $pageCount = $patQ->getPageCount();
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  $pageLinks = Search::strPageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  echo $pageLinks;
 
   $val = "";
   switch ($searchType)
@@ -229,7 +230,7 @@
 
   HTML::end('form');
 
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  echo $pageLinks;
 
   require_once("../layout/footer.php");
 ?>
