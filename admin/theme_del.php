@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del.php,v 1.20 2007/10/30 21:37:36 jact Exp $
+ * @version   CVS: $Id: theme_del.php,v 1.21 2007/10/31 19:18:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -63,10 +63,7 @@
 
   if ( !in_array($theme->getCSSFile(), $reservedCSSFiles) )
   {
-    $_serverVar = (strpos(PHP_SAPI, 'cgi') !== false)
-      ? $_SERVER['PATH_TRANSLATED']
-      : $_SERVER['SCRIPT_FILENAME'];
-    @unlink(dirname($_serverVar) . '/../css/' . basename($theme->getCSSFile()));
+    @unlink(dirname(__FILE__) . '/../css/' . basename($theme->getCSSFile()));
   }
 
   /**
