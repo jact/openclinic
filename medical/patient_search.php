@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search.php,v 1.30 2007/10/30 21:26:24 jact Exp $
+ * @version   CVS: $Id: patient_search.php,v 1.31 2007/10/31 19:20:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,11 +25,11 @@
   require_once("../model/Query/Page/Patient.php");
   require_once("../lib/Search.php");
 
-  if (isset($_POST['token_form']))
+  /*if (isset($_POST['token_form']))
   {
     include_once("../lib/Form.php");
     Form::compareToken('../medical/patient_search_form.php');
-  }
+  }*/
 
   /**
    * Retrieving vars (PGS) and scrubbing the data
@@ -103,7 +103,8 @@
   HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
 
   $pageCount = $patQ->getPageCount();
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  $pageLinks = Search::strPageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  echo $pageLinks;
 
   /**
    * Choose field
@@ -222,7 +223,7 @@
 
   HTML::table($thead, $tbody, null, $options);
 
-  Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  echo $pageLinks;
 
   require_once("../layout/footer.php");
 ?>
