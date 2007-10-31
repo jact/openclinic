@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.10 2007/10/15 20:13:13 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.11 2007/10/31 19:22:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -378,7 +378,8 @@ class Error
 
     if ( !defined("OPEN_SCREEN_ERRORS") || OPEN_SCREEN_ERRORS )
     {
-      echo '<pre>' . wordwrap($error, 78, PHP_EOL/*, true*/) . '</pre>' . PHP_EOL;
+      echo '<pre style="background: #fff; color: #000; border: 2px solid #f00;">';
+      echo wordwrap($error, 78, PHP_EOL/*, true*/) . '</pre>' . PHP_EOL;
     }
 
     if (defined("OPEN_LOG_ERRORS") && OPEN_LOG_ERRORS)
@@ -442,7 +443,7 @@ class Error
   function trace($expression, $message = "", $goOut = false)
   {
     echo PHP_EOL . "<!-- trace -->" . PHP_EOL;
-    echo "<pre>" . PHP_EOL;
+    echo '<pre style="background: #fff; color: #000; border: 2px solid #f00;">' . PHP_EOL;
     if ( !empty($message) )
     {
       echo $message . PHP_EOL;
