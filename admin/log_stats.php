@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_stats.php,v 1.15 2007/01/29 16:52:29 jact Exp $
+ * @version   CVS: $Id: log_stats.php,v 1.16 2007/11/01 12:06:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -24,24 +24,6 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../lib/LogStats.php");
-  require_once("../lib/Check.php");
-
-  /**
-   * Retrieving get vars
-   */
-  if (count($_GET) == 0 || empty($_GET['table']))
-  {
-    $table = "access";
-  }
-  else
-  {
-    $table = Check::safeText($_GET['table']);
-  }
-  if ($table != "access" && $table != "record")
-  {
-    $table = "access";
-  }
-  $option = (isset($_GET["option"])) ? Check::safeText($_GET["option"]) : "";
 
   /**
    * Show page
@@ -59,55 +41,17 @@
   HTML::breadCrumb($links, "icon logIcon");
   unset($links);
 
-  $relatedLinks = "";
-  if ($table != 'access')
-  {
-    $relatedLinks .= HTML::strLink(_("Access Logs"), '../admin/log_stats.php', array('table' => 'access'));
-  }
-  else
-  {
-    $relatedLinks .= _("Access Logs");
-  }
-  $relatedLinks .= ' | ';
-  if ($table != 'record')
-  {
-    $relatedLinks .= HTML::strLink(_("Record Logs"), '../admin/log_stats.php', array('table' => 'record'));
-  }
-  else
-  {
-    $relatedLinks .= _("Record Logs");
-  }
-  HTML::para($relatedLinks);
+  HTML::section(2, HTML::strLink(_("Access Logs"), '../admin/log_list.php', array('table' => 'access')),
+    array('class' => 'icon logIcon')
+  );
+  LogStats::summary('access');
 
   HTML::rule();
 
-  switch ($option)
-  {
-    case "monthly":
-      LogStats::monthly($table, intval($_GET['year']));
-      LogStats::links($table, array('year' => intval($_GET['year'])));
-      break;
-
-    case "daily":
-      LogStats::daily($table, intval($_GET['year']), intval($_GET['month']));
-      LogStats::links($table, array('year' => intval($_GET['year']), 'month' => intval($_GET['month'])));
-      break;
-
-    case "hourly":
-      LogStats::hourly($table, intval($_GET['year']), intval($_GET['month']), intval($_GET['day']));
-      LogStats::links($table,
-        array(
-          'year' => intval($_GET['year']),
-          'month' => intval($_GET['month']),
-          'day' => intval($_GET['day'])
-        )
-      );
-      break;
-
-    default:
-      LogStats::all($table);
-      break;
-  }
+  HTML::section(2, HTML::strLink(_("Record Logs"), '../admin/log_list.php', array('table' => 'record')),
+    array('class' => 'icon logIcon')
+  );
+  LogStats::summary('record');
 
   require_once("../layout/footer.php");
 ?>
