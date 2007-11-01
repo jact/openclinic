@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: license.php,v 1.8 2006/10/13 20:15:24 jact Exp $
+ * @version   CVS: $Id: license.php,v 1.9 2007/11/01 09:33:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,6 +20,10 @@
   $nav = "license";
 
   require_once("../config/environment.php");
+  if (isset($_SESSION['auth']['token']))
+  {
+    include_once("../auth/login_check.php");
+  }
 
   $licenseFile = (is_file("../locale/" . OPEN_LANGUAGE . "/copying.txt"))
     ? "../locale/" . OPEN_LANGUAGE . "/copying.txt"

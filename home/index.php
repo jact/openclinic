@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.15 2007/10/16 20:26:03 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.16 2007/11/01 09:33:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,6 +20,10 @@
   $nav = "home";
 
   require_once("../config/environment.php");
+  if (isset($_SESSION['auth']['token']))
+  {
+    include_once("../auth/login_check.php");
+  }
   require_once("../lib/Check.php");
 
   /**
