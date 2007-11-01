@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.8 2007/10/28 20:21:21 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.9 2007/11/01 12:10:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -22,13 +22,12 @@
  *
  * Methods:
  *  string _percBar(int $percentage, int $scale = 1, string $label = "")
- *  array _getMonths(void)
+ *  mixed getMonthName(int $index = 0)
  *  void yearly(string $table)
  *  void monthly(string $table, int $year)
  *  void daily(string $table, int $year, int $month)
  *  void hourly(string $table, int $year, int $month, int $day)
- *  void all(string $table)
- *  void links(string $table, array $date = null)
+ *  void summary(string $table)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -37,7 +36,7 @@
  */
 class LogStats
 {
-  /*
+  /**
    * string _percBar(int $percentage, int $scale = 1, string $label = "")
    *
    * Returns a percentage bar
@@ -89,35 +88,36 @@ class LogStats
     return $html;
   }
 
-  /*
-   * array _getMonths(void)
+  /**
+   * mixed getMonthName(int $index = 0)
    *
-   * Returns an array with month names
+   * Returns a month name
    *
-   * @return array
-   * @access private
+   * @return mixed string with month name or complete array
+   * @access public
+   * @static
    */
-  function _getMonths()
+  function getMonthName($index = 0)
   {
-    $months = array(
-      _("January"),
-      _("February"),
-      _("March"),
-      _("April"),
-      _("May"),
-      _("June"),
-      _("July"),
-      _("August"),
-      _("September"),
-      _("October"),
-      _("November"),
-      _("December")
+    $_months = array(
+      1 => _("January"),
+      2 => _("February"),
+      3 => _("March"),
+      4 => _("April"),
+      5 => _("May"),
+      6 => _("June"),
+      7 => _("July"),
+      8 => _("August"),
+      9 => _("September"),
+      10 => _("October"),
+      11 => _("November"),
+      12 => _("December")
     );
 
-    return $months;
+    return (isset($_months[$index])) ? $_months[$index] : $_months;
   }
 
-  /*
+  /**
    * void yearly(string $table)
    *
    * Draws a table with yearly stats
@@ -159,10 +159,9 @@ class LogStats
     $tbody = array();
     foreach ($array as $year => $hits)
     {
-      $row = HTML::strLink($year, '../admin/log_stats.php',
+      $row = HTML::strLink($year, '../admin/log_list.php',
         array(
           'table' => $table,
-          'option' => 'monthly',
           'year' => $year
         )
       );
@@ -170,7 +169,7 @@ class LogStats
       $widthImage = round(100 * $hits / $totalHits, 0);
       $percent = substr(100 * $hits / $totalHits, 0, 5);
       $row .= LogStats::_percBar($widthImage);
-      $row .= ' ' . $percent . '% (' . HTML::strLink($hits, '../admin/log_' . $table . '_list.php', array('year' => $year)) . ')';
+      $row .= ' ' . $percent . '% (' . $hits . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
@@ -181,7 +180,7 @@ class LogStats
     unset($logQ);
   }
 
-  /*
+  /**
    * void monthly(string $table, int $year)
    *
    * Draws a table with monthly stats
@@ -221,15 +220,14 @@ class LogStats
 
     $array = $logQ->yearHitsByMonth($year);
 
-    $months = LogStats::_getMonths();
+    $months = LogStats::getMonthName();
 
     $tbody = array();
     foreach ($array as $month => $hits)
     {
-      $row = HTML::strLink($months[intval($month) - 1], '../admin/log_stats.php',
+      $row = HTML::strLink($months[intval($month)], '../admin/log_list.php',
         array(
           'table' => $table,
-          'option' => 'daily',
           'year' => $year,
           'month' => $month
         )
@@ -238,12 +236,7 @@ class LogStats
       $widthImage = round(100 * $hits / $totalHits, 0);
       $percent = substr(100 * $hits / $totalHits, 0, 5);
       $row .= LogStats::_percBar($widthImage);
-      $row .= ' ' . $percent . '% (' . HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
-        array(
-          'year' => $year,
-          'month' => $month
-        )
-      ) . ')';
+      $row .= ' ' . $percent . '% (' . $hits . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
@@ -254,7 +247,7 @@ class LogStats
     unset($logQ);
   }
 
-  /*
+  /**
    * void daily(string $table, int $year, int $month)
    *
    * Draws a table with daily stats
@@ -273,9 +266,11 @@ class LogStats
 
     $totalHits = $logQ->monthHits($year, $month);
 
-    $months = LogStats::_getMonths();
+    $monthName = LogStats::getMonthName($month);
 
-    HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"), $months[intval($month) - 1], intval($year), $totalHits));
+    HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"),
+      $monthName, intval($year), $totalHits)
+    );
 
     if ($totalHits == 0)
     {
@@ -301,10 +296,9 @@ class LogStats
     $tbody = array();
     foreach ($array as $day => $hits)
     {
-      $row = HTML::strLink(intval($day), '../admin/log_stats.php',
+      $row = HTML::strLink(intval($day), '../admin/log_list.php',
         array(
           'table' => $table,
-          'option' => 'hourly',
           'year' => $year,
           'month' => $month,
           'day' => $day
@@ -320,13 +314,6 @@ class LogStats
       {
         $widthImage = round(100 * $hits / $totalHits, 0);
         $percent = substr(100 * $hits / $totalHits, 0, 5);
-        $hits = HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
-          array(
-            'year' => $year,
-            'month' => $month,
-            'day' => $day
-          )
-        );
       }
       $row .= LogStats::_percBar($widthImage);
       $row .= ' ' . $percent . '% (' . $hits . ')';
@@ -340,7 +327,7 @@ class LogStats
     unset($logQ);
   }
 
-  /*
+  /**
    * void hourly(string $table, int $year, int $month, int $day)
    *
    * Draws a table with hourly stats
@@ -360,9 +347,11 @@ class LogStats
 
     $totalHits = $logQ->dayHits($year, $month, $day);
 
-    $months = LogStats::_getMonths();
+    $monthName = LogStats::getMonthName($month);
 
-    HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"), $months[intval($month) - 1], intval($day), intval($year), $totalHits));
+    HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"),
+      $monthName, intval($day), intval($year), $totalHits)
+    );
 
     if ($totalHits == 0)
     {
@@ -398,14 +387,6 @@ class LogStats
       {
         $widthImage = round(100 * $hits / $totalHits, 0);
         $percent = substr(100 * $hits / $totalHits, 0, 5);
-        $hits = HTML::strLink($hits, '../admin/log_' . $table . '_list.php',
-          array(
-            'year' => $year,
-            'month' => $month,
-            'day' => $day,
-            'hour', $hour
-          )
-        );
       }
       $row .= LogStats::_percBar($widthImage);
       $row .= ' ' . $percent . '% (' . $hits . ')';
@@ -419,17 +400,17 @@ class LogStats
     unset($logQ);
   }
 
-  /*
-   * void all(string $table)
+  /**
+   * void summary(string $table)
    *
-   * Draws tables with all stats
+   * Draws summary stats
    *
    * @param string $table
    * @return void
    * @access public
    * @static
    */
-  function all($table)
+  function summary($table)
   {
     $logQ = new Query_LogStats($table);
     $logQ->connect();
@@ -446,18 +427,7 @@ class LogStats
     $today = date("Y-m-d"); // calculated date
     $arrToday = explode("-", $today);
 
-    $sectionTitle = "";
-    switch ($table)
-    {
-      case "access":
-        $sectionTitle .= _("Access Logs");
-        break;
-
-      case "record":
-        $sectionTitle .= _("Record Logs");
-        break;
-    }
-    $sectionTitle .= ': ' . $total . ' ' . strtolower(_("Hits"));
+    $sectionTitle = _("Total") . ': ' . $total . ' ' . strtolower(_("Hits"));
     HTML::section(3, $sectionTitle);
 
     $array = $logQ->busiestYear();
@@ -472,9 +442,9 @@ class LogStats
     if (is_array($array))
     {
       list($year, $month, $hits) = $array;
-      $months = LogStats::_getMonths();
+      $months = LogStats::getMonthName();
 
-      HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month) - 1], intval($year), $hits));
+      HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month)], intval($year), $hits));
     }
 
     $array = $logQ->busiestDay();
@@ -482,7 +452,9 @@ class LogStats
     {
       list($year, $month, $day, $hits) = $array;
 
-      HTML::para(sprintf(_("Busiest Day: %d %s %d (%d hits)"), intval($day), $months[intval($month) - 1], intval($year), $hits));
+      HTML::para(sprintf(_("Busiest Day: %d %s %d (%d hits)"),
+        intval($day), $months[intval($month)], intval($year), $hits)
+      );
     }
 
     $array = $logQ->busiestHour();
@@ -491,54 +463,14 @@ class LogStats
       list($year, $month, $day, $hour, $hits) = $array;
 
       $hour = sprintf("%02d:00 - %02d:59", $hour, $hour);
-      HTML::para(sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"), $hour, $months[intval($month) - 1], intval($day), intval($year), $hits));
+      HTML::para(sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"),
+        $hour, $months[intval($month)], intval($day), intval($year), $hits)
+      );
     }
 
     $logQ->freeResult();
     $logQ->close();
     unset($logQ);
-
-    HTML::rule();
-    LogStats::yearly($table);
-    HTML::rule();
-    LogStats::monthly($table, intval($arrToday[0]));
-    HTML::rule();
-    LogStats::daily($table, intval($arrToday[0]), intval($arrToday[1]));
-    HTML::rule();
-    LogStats::hourly($table, intval($arrToday[0]), intval($arrToday[1]), $arrToday[2]);
-  }
-
-  /*
-   * void links(string $table, array $date = null)
-   *
-   * Displays navigation log links
-   *
-   * @param string $table
-   * @param array $date (optional) array('year' => int[, 'month' => int[, 'day' => int]])
-   * @return void
-   * @access public
-   * @static
-   */
-  function links($table, $date = null)
-  {
-    $page = '../admin/log_stats.php';
-
-    $array[] = HTML::strLink(_("Main Stats"), $page, array('table' => $table));
-    if (is_array($date) && isset($date['year']) && isset($date['month']))
-    {
-      $array[] = HTML::strLink(_("Monthly Stats"), $page,
-        array('table' => $table, 'option' => 'monthly', 'year' => $date['year'])
-      );
-
-      if (isset($date['day']))
-      {
-        $array[] = HTML::strLink(_("Daily Stats"), $page,
-          array('table' => $table, 'option' => 'daily', 'year' => $date['year'], 'month' => $date['month'])
-        );
-      }
-    }
-
-    HTML::para(implode(' | ', $array));
   }
 } // end class
 ?>
