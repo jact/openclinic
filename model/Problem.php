@@ -9,16 +9,21 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.15 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Problem.php,v 1.16 2007/11/02 22:53:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once(dirname(__FILE__) . "/../lib/Check.php");
+require_once(dirname(__FILE__) . "/../lib/HTML.php");
+require_once(dirname(__FILE__) . "/../lib/misc_lib.php");
+require_once(dirname(__FILE__) . "/../lib/I18n.php");
+require_once(dirname(__FILE__) . "/Query/Page/Problem.php");
 
 /*
  * Problem represents a medical problem.
  *
  * Methods:
+ *  mixed Problem(int $id = 0)
  *  bool validateData(void)
  *  int getIdProblem(void)
  *  void setIdProblem(int $value)
@@ -51,6 +56,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  void setPrescription(string $value)
  *  string getLastUpdateDate(void)
  *  void setLastUpdateDate(string $value)
+ *  string getHeader(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -78,9 +84,33 @@ class Problem
 
   var $_trans; // to translate htmlspecialchars()
 
-  function Problem()
+  /**
+   * mixed Problem(int $id = 0)
+   *
+   * Constructor
+   *
+   * @param int $id (optional)
+   * @return mixed void if not argument, null if not exists problem, object otherwise
+   * @access public
+   */
+  function Problem($id = 0)
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
+
+    if ($id)
+    {
+      $_problemQ = new Query_Page_Problem();
+      if ( !$_problemQ->select($id) )
+      {
+        return null;
+      }
+      $this = $_problemQ->fetch();
+
+      $_problemQ->freeResult();
+      $_problemQ->close();
+
+      return $this;
+    }
   }
 
   /*
@@ -457,6 +487,46 @@ class Problem
   function setLastUpdateDate($value)
   {
     $this->_lastUpdateDate = Check::safeText($value);
+  }
+
+  /**
+   * string getWordingPreview(void)
+   *
+   * Returns wording preview of the medical problem
+   *
+   * @return string wording preview of the medical problem
+   * @access public
+   * @since 0.8
+   */
+  function getWordingPreview()
+  {
+    return fieldPreview($this->_wording);
+  }
+
+  /**
+   * string getHeader(void)
+   *
+   * Returns a header with medical problem information
+   *
+   * @return string
+   * @access public
+   * @since 0.8
+   */
+  function getHeader()
+  {
+    $_html = HTML::strStart('div', array('id' => 'problemHeader', 'class' => 'clearfix'));
+    $_html .= HTML::strPara(_("Wording") . ': ' . $this->getWordingPreview());
+    $_html .= HTML::strPara(
+      _("Opening Date") . ': ' . I18n::localDate($this->getOpeningDate()),
+      array('class' => 'right')
+    );
+    $_html .= HTML::strPara(
+      _("Last Update Date") . ': ' . I18n::localDate($this->getLastUpdateDate()),
+      array('class' => 'right')
+    );
+    $_html .= HTML::strEnd('div');
+
+    return $_html;
   }
 } // end class
 ?>
