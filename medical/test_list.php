@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.31 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.32 2007/11/02 22:54:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,9 +24,8 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/Query/Test.php");
-  require_once("../lib/misc_lib.php");
   require_once("../model/Patient.php");
-  require_once("../lib/ProblemInfo.php");
+  require_once("../model/Problem.php");
 
   /**
    * Retrieving vars (PGS)
@@ -42,8 +41,8 @@
     exit();
   }
 
-  $problem = new ProblemInfo($idProblem);
-  if ($problem->getWording() == '')
+  $problem = new Problem($idProblem);
+  if ( !$problem )
   {
     FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     header("Location: ../medical/patient_search_form.php");
@@ -54,7 +53,7 @@
    * Show page
    */
   $title = _("View Medical Tests");
-  $titlePage = $patient->getName() . ' [' . $problem->getWording() . '] (' . $title . ')';
+  $titlePage = $patient->getName() . ' [' . $problem->getWordingPreview() . '] (' . $title . ')';
   require_once("../layout/header.php");
 
   /**
@@ -64,14 +63,14 @@
     _("Medical Records") => "../medical/index.php",
     $patient->getName() => "../medical/patient_view.php",
     _("Medical Problems Report") => "../medical/problem_list.php", //"?id_patient=" . $idPatient,
-    $problem->getWording() => "../medical/problem_view.php",
+    $problem->getWordingPreview() => "../medical/problem_view.php",
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
   echo $patient->getHeader();
-  $problem->showHeader();
+  echo $problem->getHeader();
 
   if ($hasMedicalAdminAuth)
   {
@@ -117,7 +116,7 @@
     {
       $row .= HTML::strLink(_("edit"), '../medical/test_edit_form.php',
         array(
-          'id_problem' => $test->getIdProblem(),
+          'id_problem' => $idProblem,
           'id_patient' => $idPatient,
           'id_test' => $test->getIdTest()
         )

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del_confirm.php,v 1.25 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: problem_del_confirm.php,v 1.26 2007/11/02 22:54:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,7 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
   require_once("../model/Patient.php");
-  require_once("../lib/ProblemInfo.php");
+  require_once("../model/Problem.php");
 
   /**
    * Retrieving vars (PGS)
@@ -41,8 +41,8 @@
     exit();
   }
 
-  $problem = new ProblemInfo($idProblem);
-  if ($problem->getWording() == '')
+  $problem = new Problem($idProblem);
+  if ( !$problem )
   {
     FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     header("Location: ../medical/patient_search_form.php");
@@ -53,7 +53,7 @@
    * Show page
    */
   $title = _("Delete Medical Problem");
-  $titlePage = $patient->getName() . ' [' . $problem->getWording() . '] (' . $title . ')';
+  $titlePage = $patient->getName() . ' [' . $problem->getWordingPreview() . '] (' . $title . ')';
   require_once("../layout/header.php");
 
   //$returnLocation = "../medical/problem_list.php?id_patient=" . $idPatient; // controlling var
@@ -66,7 +66,7 @@
     _("Medical Records") => "../medical/index.php",
     $patient->getName() => "../medical/patient_view.php",
     _("Medical Problems Report") => $returnLocation,
-    $problem->getWording() => "../medical/problem_view.php",
+    $problem->getWordingPreview() => "../medical/problem_view.php",
     $title => ""
   );
   HTML::breadCrumb($links, "icon patientIcon");
@@ -81,8 +81,7 @@
 
   $tbody = array();
 
-  $wording = $problem->getObject();
-  $wording = $wording->getWording();
+  $wording = $problem->getWordingPreview();
   $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete medical problem, %s, from list?"), $wording));
 
   $row = Form::strHidden("id_problem", $idProblem);

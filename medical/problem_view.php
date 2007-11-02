@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_view.php,v 1.27 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: problem_view.php,v 1.28 2007/11/02 22:54:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   require_once("../auth/login_check.php");
   require_once("../model/Query/Staff.php");
   require_once("../model/Patient.php");
-  require_once("../lib/ProblemInfo.php");
+  require_once("../model/Problem.php");
 
   /**
    * Retrieving vars (PGS)
@@ -40,9 +40,8 @@
     exit();
   }
 
-  $problem = new ProblemInfo($idProblem);
-  $problem = $problem->getObject();
-  if ($problem == null)
+  $problem = new Problem($idProblem);
+  if ( !$problem )
   {
     FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     header("Location: ../medical/patient_search_form.php");
@@ -63,7 +62,7 @@
   /**
    * Show page
    */
-  $title = fieldPreview($problem->getWording()); //_("View Medical Problem");
+  $title = $problem->getWordingPreview(); //_("View Medical Problem");
   $titlePage = $patient->getName() . ' [' . $title . ']';
   require_once("../layout/header.php");
 

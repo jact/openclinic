@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_new_form.php,v 1.25 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: test_new_form.php,v 1.26 2007/11/02 22:54:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,9 +24,9 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/Patient.php");
+  require_once("../model/Problem.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
-  require_once("../lib/ProblemInfo.php");
 
   /**
    * Retrieving vars (PGS)
@@ -42,8 +42,8 @@
     exit();
   }
 
-  $problem = new ProblemInfo($idProblem);
-  if ($problem->getWording() == '')
+  $problem = new Problem($idProblem);
+  if ( !$problem )
   {
     FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     header("Location: ../medical/patient_search_form.php");
@@ -58,7 +58,7 @@
    * Show page
    */
   $title = _("Add Medical Test");
-  $titlePage = $patient->getName() . ' [' . $problem->getWording() . '] (' . $title . ')';
+  $titlePage = $patient->getName() . ' [' . $problem->getWordingPreview() . '] (' . $title . ')';
   $focusFormField = "document_type"; // to avoid JavaScript mistakes in demo version
   require_once("../layout/header.php");
 
@@ -72,7 +72,7 @@
     _("Medical Records") => "../medical/index.php",
     $patient->getName() => "../medical/patient_view.php",
     _("Medical Problems Report") => "../medical/problem_list.php", //"?id_patient=" . $idPatient,
-    $problem->getWording() => "../medical/problem_view.php",
+    $problem->getWordingPreview() => "../medical/problem_view.php",
     _("View Medical Tests") => $returnLocation,
     $title => ""
   );
@@ -80,7 +80,7 @@
   unset($links);
 
   echo $patient->getHeader();
-  $problem->showHeader();
+  echo $problem->getHeader();
 
   //Error::debug($formVar);
 

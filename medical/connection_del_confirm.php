@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_del_confirm.php,v 1.24 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: connection_del_confirm.php,v 1.25 2007/11/02 22:54:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,7 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
   require_once("../model/Patient.php");
-  require_once("../lib/ProblemInfo.php");
+  require_once("../model/Problem.php");
 
   /**
    * Retrieving vars (PGS)
@@ -42,8 +42,8 @@
     exit();
   }
 
-  $problem = new ProblemInfo($idProblem);
-  if ($problem->getWording() == '')
+  $problem = new Problem($idProblem);
+  if ( !$problem )
   {
     FlashMsg::add(_("That medical problem does not exist."), OPEN_MSG_ERROR);
     header("Location: ../medical/patient_search_form.php");
@@ -54,7 +54,7 @@
    * Show page
    */
   $title = _("Delete Connection with Medical Problem");
-  $titlePage = $patient->getName() . ' [' . $problem->getWording() . '] (' . $title . ')';
+  $titlePage = $patient->getName() . ' [' . $problem->getWordingPreview() . '] (' . $title . ')';
   require_once("../layout/header.php");
 
   //$returnLocation = "../medical/connection_list.php?id_problem=" . $idProblem . "&id_patient=" . $idPatient; // controlling var
@@ -67,7 +67,7 @@
     _("Medical Records") => "../medical/index.php",
     $patient->getName() => "../medical/patient_view.php",
     _("Medical Problems Report") => "../medical/problem_list.php", //"?id_patient=" . $idPatient,
-    $problem->getWording() => "../medical/problem_view.php",
+    $problem->getWordingPreview() => "../medical/problem_view.php",
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
@@ -75,7 +75,7 @@
   unset($links);
 
   echo $patient->getHeader();
-  $problem->showHeader();
+  echo $problem->getHeader();
 
   /**
    * Form
@@ -84,9 +84,8 @@
 
   $tbody = array();
 
-  $problem = new ProblemInfo($idConnection);
-  $wording = $problem->getObject();
-  $wording = $wording->getWording();
+  $problem = new Problem($idConnection);
+  $wording = $problem->getWordingPreview();
   $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete connection, %s, from list?"), $wording));
 
   $row = Form::strHidden("id_problem", $idProblem);
