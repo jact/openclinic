@@ -9,16 +9,19 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.15 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Patient.php,v 1.16 2007/11/02 22:18:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once(dirname(__FILE__) . "/../lib/Check.php");
+require_once(dirname(__FILE__) . "/../lib/HTML.php");
+require_once(dirname(__FILE__) . "/Query/Page/Patient.php");
 
 /*
  * Patient contains business rules for patient data validation.
  *
  * Methods:
+ *  mixed Patient(int $id = 0)
  *  bool validateData(void)
  *  int getIdPatient(void)
  *  void setIdPatient(int $value)
@@ -37,6 +40,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  string getSurname2(void)
  *  string getSurname2Error(void)
  *  void setSurname2(string $value)
+ *  string getName(void)
  *  string getAddress(void)
  *  void setAddress(string $value)
  *  string getPhone(void)
@@ -69,6 +73,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  void setEducation(string $value)
  *  string getInsuranceCompany(void)
  *  void setInsuranceCompany(string $value)
+ *  string getHeader(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -107,9 +112,33 @@ class Patient
 
   var $_trans; // to translate htmlspecialchars()
 
-  function Patient()
+  /**
+   * mixed Patient(int $id = 0)
+   *
+   * Constructor
+   *
+   * @param int $id (optional)
+   * @return mixed void if not argument, null if not exists patient, object otherwise
+   * @access public
+   */
+  function Patient($id = 0)
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
+
+    if ($id)
+    {
+      $_patQ = new Query_Page_Patient();
+      if ( !$_patQ->select($id) )
+      {
+        return null;
+      }
+      $this = $_patQ->fetch();
+
+      $_patQ->freeResult();
+      $_patQ->close();
+
+      return $this;
+    }
   }
 
   /**
@@ -361,6 +390,20 @@ class Patient
   function setSurname2($value)
   {
     $this->_surname2 = Check::safeText($value);
+  }
+
+  /**
+   * string getName(void)
+   *
+   * @return string
+   * @access public
+   * @since 0.8
+   */
+  function getName()
+  {
+    return trim(stripslashes(strtr(
+      $this->_firstName . ' ' . $this->_surname1 . ' ' . $this->_surname2, $this->_trans))
+    );
   }
 
   /**
@@ -765,5 +808,25 @@ class Patient
   {
     $this->_lastUpdateDate = Check::safeText($value);
   }*/
+
+  /**
+   * string getHeader(void)
+   *
+   * Returns a header with patient information
+   *
+   * @return string
+   * @access public
+   * @since 0.8
+   */
+  function getHeader()
+  {
+    $_html = HTML::strStart('div', array('id' => 'patientHeader', 'class' => 'clearfix'));
+    $_html .= HTML::strPara(_("Patient") . ': ' . $this->getName());
+    $_html .= HTML::strPara(_("Sex") . ': ' . ($this->getSex() == 'V' ? _("Male") : _("Female")));
+    $_html .= HTML::strPara(_("Age") . ': ' . $this->getAge(), array('class' => 'right'));
+    $_html .= HTML::strEnd('div');
+
+    return $_html;
+  }
 } // end class
 ?>
