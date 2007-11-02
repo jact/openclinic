@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_del.php,v 1.19 2007/10/28 21:02:24 jact Exp $
+ * @version   CVS: $Id: relative_del.php,v 1.20 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -53,7 +53,6 @@
    * Delete relative
    */
   $relQ = new Query_Relative();
-  $relQ->connect();
 
   /**
    * Record log process (before deleting process)

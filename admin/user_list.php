@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.32 2007/10/30 21:34:53 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.33 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,8 +25,6 @@
   require_once("../lib/Form.php");
 
   $userQ = new Query_User();
-  $userQ->connect();
-
   $userQ->selectLogins();
 
   $userArray = null;

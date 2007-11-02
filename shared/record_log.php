@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: record_log.php,v 1.20 2007/10/29 20:07:20 jact Exp $
+ * @version   CVS: $Id: record_log.php,v 1.21 2007/11/02 20:42:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.3
  * @todo      convert in class
@@ -41,8 +41,6 @@
     }
 
     $queryQ = new $class;
-    $queryQ->connect();
-
     if ( !call_user_func_array(array($queryQ, $method), $key) )
     {
       $queryQ->close();
@@ -64,8 +62,6 @@
     unset($queryQ);
 
     $recQ = new Query_Page_Record();
-    $recQ->connect();
-
     $recQ->insert($_SESSION['auth']['user_id'], $_SESSION['auth']['login_session'], $table, $operation, $data);
 
     $recQ->close();

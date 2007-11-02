@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.36 2007/10/31 19:20:09 jact Exp $
+ * @version   CVS: $Id: problem_search.php,v 1.37 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -55,8 +55,6 @@
    */
   $problemQ = new Query_Page_Problem();
   $problemQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
-  $problemQ->connect();
-
   $problemQ->search($searchType, $arraySearch, $currentPage, $logical, $limit);
 
   /**
@@ -200,8 +198,6 @@
     $array = explode(OPEN_SEPARATOR, $arrValue, 6);
 
     $patQ = new Query_Page_Patient();
-    $patQ->connect();
-
     if ($patQ->select($array[2]))
     {
       $pat = $patQ->fetch();

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.31 2007/10/30 21:32:00 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.32 2007/11/02 20:40:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -51,8 +51,6 @@
      * Search database
      */
     $userQ = new Query_User();
-    $userQ->connect();
-
     if ( !$userQ->select($idUser) )
     {
       $userQ->close();

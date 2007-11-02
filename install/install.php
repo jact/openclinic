@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.23 2007/10/28 19:59:57 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.24 2007/11/02 20:41:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,6 @@
    * Testing connection and current version
    */
   $setQ = new Query_Setting();
-  $setQ->connect();
   Msg::info(_("Database connection is good."));
 
   /**

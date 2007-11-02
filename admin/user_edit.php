@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit.php,v 1.20 2007/10/30 21:32:52 jact Exp $
+ * @version   CVS: $Id: user_edit.php,v 1.21 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,8 +55,6 @@
    * Update user
    */
   $userQ = new Query_User();
-  $userQ->connect();
-
   if ($userQ->existLogin($user->getLogin(), $user->getIdMember()))
   {
     $loginUsed = true;

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.34 2007/10/30 21:31:31 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.35 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,8 +36,6 @@
    * Reading general settings
    */
   $setQ = new Query_Setting();
-  $setQ->connect();
-
   $setQ->select();
 
   $set = $setQ->fetch();
@@ -67,8 +65,6 @@
      * Reading theme settings
      */
     $themeQ = new Query_Theme();
-    $themeQ->connect();
-
     $themeQ->select(intval($_GET["id_theme"]));
 
     $theme = $themeQ->fetch();

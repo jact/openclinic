@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.9 2007/11/01 12:10:02 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.10 2007/11/02 20:41:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -130,8 +130,6 @@ class LogStats
   function yearly($table)
   {
     $logQ = new Query_LogStats($table);
-    $logQ->connect();
-
     $totalHits = $logQ->totalHits();
 
     HTML::section(4, sprintf(_("Yearly Stats: %d hits"), $totalHits));
@@ -194,8 +192,6 @@ class LogStats
   function monthly($table, $year)
   {
     $logQ = new Query_LogStats($table);
-    $logQ->connect();
-
     $totalHits = $logQ->yearHits($year);
 
     HTML::section(4, sprintf(_("Monthly Stats for %d: %d hits"), intval($year), $totalHits));
@@ -262,8 +258,6 @@ class LogStats
   function daily($table, $year, $month)
   {
     $logQ = new Query_LogStats($table);
-    $logQ->connect();
-
     $totalHits = $logQ->monthHits($year, $month);
 
     $monthName = LogStats::getMonthName($month);
@@ -343,8 +337,6 @@ class LogStats
   function hourly($table, $year, $month, $day)
   {
     $logQ = new Query_LogStats($table);
-    $logQ->connect();
-
     $totalHits = $logQ->dayHits($year, $month, $day);
 
     $monthName = LogStats::getMonthName($month);
@@ -413,8 +405,6 @@ class LogStats
   function summary($table)
   {
     $logQ = new Query_LogStats($table);
-    $logQ->connect();
-
     $total = $logQ->totalHits();
     if ($total == 0)
     {

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_edit.php,v 1.20 2007/10/28 20:57:39 jact Exp $
+ * @version   CVS: $Id: test_edit.php,v 1.21 2007/11/02 20:42:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,8 +66,6 @@
    * Update medical test
    */
   $testQ = new Query_Test();
-  $testQ->connect();
-
   $testQ->update($test);
 
   FlashMsg::add(sprintf(_("Medical test, %s, has been updated."), $test->getPathFilename(false)));

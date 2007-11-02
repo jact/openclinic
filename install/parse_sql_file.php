@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: parse_sql_file.php,v 1.20 2007/10/29 20:05:50 jact Exp $
+ * @version   CVS: $Id: parse_sql_file.php,v 1.21 2007/11/02 20:41:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -60,8 +60,6 @@ function parseSQLFile($file, $table, $drop = true)
 {
   $installQ = new Query();
   $installQ->captureError(true);
-
-  $installQ->connect();
   if ($installQ->isError())
   {
     Error::query($installQ, false);

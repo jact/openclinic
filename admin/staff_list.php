@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.27 2007/10/30 21:33:40 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.28 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,8 +45,6 @@
   unset($links);
 
   $staffQ = new Query_Staff();
-  $staffQ->connect();
-
   if ( !empty($memberType) )
   {
     $numRows = $staffQ->selectType($memberType);

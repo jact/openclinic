@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_new_form.php,v 1.29 2007/10/30 21:30:47 jact Exp $
+ * @version   CVS: $Id: theme_new_form.php,v 1.30 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,8 +36,6 @@
     include_once("../model/Query/Theme.php");
 
     $themeQ = new Query_Theme();
-    $themeQ->connect();
-
     $themeQ->select($idTheme);
 
     $theme = $themeQ->fetch();

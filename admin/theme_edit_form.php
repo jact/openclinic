@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.30 2007/10/30 21:30:27 jact Exp $
+ * @version   CVS: $Id: theme_edit_form.php,v 1.31 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -50,8 +50,6 @@
      * Search database
      */
     $themeQ = new Query_Theme();
-    $themeQ->connect();
-
     if ( !$themeQ->select($idTheme) )
     {
       $themeQ->close();

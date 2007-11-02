@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit_form.php,v 1.27 2007/10/30 21:29:03 jact Exp $
+ * @version   CVS: $Id: staff_edit_form.php,v 1.28 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -50,8 +50,6 @@
      * Search database
      */
     $staffQ = new Query_Staff();
-    $staffQ->connect();
-
     if ( !$staffQ->select($idMember) )
     {
       $staffQ->close();

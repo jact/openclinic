@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_fields.php,v 1.28 2007/10/29 20:06:54 jact Exp $
+ * @version   CVS: $Id: problem_fields.php,v 1.29 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -35,7 +35,6 @@
   $row = Form::strLabel("id_member", _("Attending Physician") . ":");
 
   $staffQ = new Query_Staff();
-  $staffQ->connect();
 
   $array = null;
   $array[0] = ""; // to permit null value

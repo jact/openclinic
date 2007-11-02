@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.27 2007/10/27 19:07:46 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.28 2007/11/02 20:41:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -135,8 +135,6 @@
 
   $installQ = new Query();
   $installQ->captureError(true);
-
-  $installQ->connect();
   if ($installQ->isError())
   {
     HTML::para(_("The connection to the database failed with the following error:"));

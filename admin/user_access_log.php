@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_access_log.php,v 1.32 2007/10/31 19:19:11 jact Exp $
+ * @version   CVS: $Id: user_access_log.php,v 1.33 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -49,8 +49,6 @@
    */
   $accessQ = new Query_Page_Access();
   $accessQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
-  $accessQ->connect();
-
   $accessQ->searchUser($idUser, $currentPage);
 
   if ($accessQ->getRowCount() == 0)

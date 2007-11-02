@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit.php,v 1.21 2007/10/28 20:42:57 jact Exp $
+ * @version   CVS: $Id: patient_edit.php,v 1.22 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -62,8 +62,6 @@
    * Update patient
    */
   $patQ = new Query_Page_Patient();
-  $patQ->connect();
-
   if ($patQ->existName($pat->getFirstName(), $pat->getSurname1(), $pat->getSurname2(), $pat->getIdPatient()))
   {
     $patQ->close();

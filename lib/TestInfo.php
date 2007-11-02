@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: TestInfo.php,v 1.2 2007/10/28 20:57:46 jact Exp $
+ * @version   CVS: $Id: TestInfo.php,v 1.3 2007/11/02 20:41:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,8 +45,6 @@ class TestInfo
   function TestInfo($idProblem, $idTest)
   {
     $_testQ = new Query_Test();
-    $_testQ->connect();
-
     if ( !$_testQ->select($idProblem, $idTest) )
     {
       $_testQ->close();

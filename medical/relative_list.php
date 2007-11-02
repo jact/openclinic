@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.31 2007/10/28 21:02:24 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.32 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,7 +43,6 @@
    * Search database for relatives
    */
   $relQ = new Query_Relative();
-  $relQ->connect();
 
   $relArray = array();
   if ($relQ->select($idPatient))
@@ -119,7 +118,6 @@
   );
 
   $patQ = new Query_Page_Patient();
-  $patQ->connect();
   $patQ->captureError(true);
 
   $tbody = array();

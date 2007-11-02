@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.25 2007/10/28 21:05:46 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.26 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -56,8 +56,6 @@
    * Delete medical problems connections
    */
   $connQ = new Query_Connection();
-  $connQ->connect();
-
   $numRows = $connQ->select($idProblem);
 
   $conn = array();
@@ -79,8 +77,6 @@
    * Delete problem
    */
   $problemQ = new Query_Page_Problem();
-  $problemQ->connect();
-
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     if ( !$problemQ->select($idProblem) )
@@ -101,8 +97,6 @@
     $wording = $problem->getWording();
 
     $delProblemQ = new Query_DelProblem();
-    $delProblemQ->connect();
-
     $delProblemQ->insert($problem, $_SESSION['auth']['user_id'], $_SESSION['auth']['login_session']);
 
     unset($delProblemQ);

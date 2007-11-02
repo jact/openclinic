@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.31 2007/10/28 21:04:11 jact Exp $
+ * @version   CVS: $Id: print_medical_record.php,v 1.32 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,8 +64,6 @@
    * Search database for patient
    */
   $patQ = new Query_Page_Patient();
-  $patQ->connect();
-
   if ( !$patQ->select($idPatient) )
   {
     $patQ->close();
@@ -196,8 +194,6 @@
   if ($pat->getIdMember())
   {
     $staffQ = new Query_Staff();
-    $staffQ->connect();
-
     if ($staffQ->select($pat->getIdMember()))
     {
       $staff = $staffQ->fetch();
@@ -220,14 +216,9 @@
   /**
    * Show medical problems
    */
-  $problemQ = new Query_Page_Problem();
-  $problemQ->connect();
-
-  /**
-   * Show list
-   */
   HTML::section(2, _("Medical Problems List:"));
 
+  $problemQ = new Query_Page_Problem();
   if ( !$problemQ->selectProblems($idPatient) )
   {
     Msg::info(_("No medical problems defined for this patient."));
@@ -241,8 +232,6 @@
     if ($problem->getIdMember())
     {
       $staffQ = new Query_Staff();
-      $staffQ->connect();
-
       if ($staffQ->select($problem->getIdMember()))
       {
         $staff = $staffQ->fetch();
@@ -320,8 +309,6 @@
    * Show personal antecedents
    */
   $historyQ = new Query_History();
-  $historyQ->connect();
-
   $historyQ->selectPersonal($idPatient);
 
   $history = $historyQ->fetch();
@@ -445,14 +432,9 @@
   /**
    * Show closed medical problems
    */
-  $problemQ = new Query_Page_Problem();
-  $problemQ->connect();
-
-  /**
-   * Show list
-   */
   HTML::section(2, _("Closed Medical Problems List:"));
 
+  $problemQ = new Query_Page_Problem();
   if ( !$problemQ->selectProblems($idPatient, true) )
   {
     Msg::info(_("No closed medical problems defined for this patient."));
@@ -467,8 +449,6 @@
     if ($problem->getIdMember())
     {
       $staffQ = new Query_Staff();
-      $staffQ->connect();
-
       if ($staffQ->select($problem->getIdMember()))
       {
         $staff = $staffQ->fetch();

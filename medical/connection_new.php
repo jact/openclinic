@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new.php,v 1.16 2007/10/28 21:00:15 jact Exp $
+ * @version   CVS: $Id: connection_new.php,v 1.17 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -51,7 +51,6 @@
    * Insert new connection problem
    */
   $connQ = new Query_Connection();
-  $connQ->connect();
 
   $n = count($_POST["check"]);
   for ($i = 0; $i < $n; $i++)

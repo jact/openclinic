@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.8 2007/10/29 20:04:08 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.9 2007/11/02 20:40:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -75,8 +75,6 @@
   require_once("../model/Query/Session.php");
 
   $sessQ = new Query_Session();
-  $sessQ->connect();
-
   if ( !$sessQ->validToken($_SESSION['auth']['login_session'], $_SESSION['auth']['token']) )
   {
     $sessQ->close();

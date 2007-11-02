@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.25 2007/10/28 20:50:14 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.26 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -80,7 +80,6 @@
    * Search database
    */
   $problemQ = new Query_Page_Problem();
-  $problemQ->connect();
 
   /**
    * Display no results message if no results returned from search.

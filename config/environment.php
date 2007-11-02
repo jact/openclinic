@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: environment.php,v 1.4 2007/10/29 20:11:05 jact Exp $
+ * @version   CVS: $Id: environment.php,v 1.5 2007/11/02 20:41:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,8 +48,6 @@
    * Reading general settings
    */
   $setQ = new Query_Setting();
-  $setQ->connect();
-
   $setQ->select();
 
   $set = $setQ->fetch();
@@ -90,8 +88,6 @@
    * Reading theme settings
    */
   $themeQ = new Query_Theme();
-  $themeQ->connect();
-
   $themeQ->select((isset($_SESSION['auth']['user_theme']) ? $_SESSION['auth']['user_theme'] : OPEN_THEME_ID));
 
   $theme = $themeQ->fetch();

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit_form.php,v 1.28 2007/10/28 19:59:50 jact Exp $
+ * @version   CVS: $Id: setting_edit_form.php,v 1.29 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -32,8 +32,6 @@
     include_once("../model/Query/Setting.php");
 
     $setQ = new Query_Setting();
-    $setQ->connect();
-
     $setQ->select();
 
     $set = $setQ->fetch();

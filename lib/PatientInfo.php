@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: PatientInfo.php,v 1.2 2007/10/28 20:43:37 jact Exp $
+ * @version   CVS: $Id: PatientInfo.php,v 1.3 2007/11/02 20:41:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -47,8 +47,6 @@ class PatientInfo
   function PatientInfo($id)
   {
     $_patQ = new Query_Page_Patient();
-    $_patQ->connect();
-
     if ( !$_patQ->select($id) )
     {
       $_patQ->close();

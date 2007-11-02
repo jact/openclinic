@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del.php,v 1.21 2007/10/31 19:18:19 jact Exp $
+ * @version   CVS: $Id: theme_del.php,v 1.22 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,8 +45,6 @@
    * Delete theme
    */
   $themeQ = new Query_Theme();
-  $themeQ->connect();
-
   if ( !$themeQ->select($idTheme) )
   {
     FlashMsg::add(_("That theme does not exist."), OPEN_MSG_ERROR);

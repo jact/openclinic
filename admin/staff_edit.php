@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit.php,v 1.16 2007/10/28 20:14:58 jact Exp $
+ * @version   CVS: $Id: staff_edit.php,v 1.17 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -51,8 +51,6 @@
    * Update staff member
    */
   $staffQ = new Query_Staff();
-  $staffQ->connect();
-
   if ($staffQ->existLogin($staff->getLogin(), $staff->getIdMember()))
   {
     FlashMsg::add(sprintf(_("Login, %s, already exists. The changes have no effect."), $staff->getLogin()),

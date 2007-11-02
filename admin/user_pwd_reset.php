@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset.php,v 1.16 2007/10/30 21:32:14 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset.php,v 1.17 2007/11/02 20:40:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -31,6 +31,7 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/Query/User.php");
+  require_once("../lib/Form.php");
 
   /**
    * Validate data
@@ -67,8 +68,6 @@
    * Update user
    */
   $userQ = new Query_User();
-  $userQ->connect();
-
   $userQ->resetPwd($user);
 
   FlashMsg::add(sprintf(_("Password of user, %s, has been reset."), $user->getLogin()));

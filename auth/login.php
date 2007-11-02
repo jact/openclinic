@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.8 2007/10/28 19:52:49 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.9 2007/11/02 20:40:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -65,8 +65,6 @@
   if ( !isset($formError["pwd_session"]) )
   {
     $userQ = new Query_User();
-    $userQ->connect();
-
     if ( !$userQ->existLogin($loginSession) )
     {
       $errorFound = true;
@@ -173,8 +171,6 @@
    * Insert new session row with random token
    */
   $sessionQ = new Query_Session();
-  $sessionQ->connect();
-
   $token = $sessionQ->getToken($user->getLogin());
 
   $sessionQ->close();
@@ -184,8 +180,6 @@
    * Insert new user access
    */
   $accessQ = new Query_Page_Access();
-  $accessQ->connect();
-
   $accessQ->insert($user);
 
   $accessQ->close();

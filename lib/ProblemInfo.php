@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: ProblemInfo.php,v 1.2 2007/10/28 20:50:01 jact Exp $
+ * @version   CVS: $Id: ProblemInfo.php,v 1.3 2007/11/02 20:41:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -50,8 +50,6 @@ class ProblemInfo
   function ProblemInfo($id)
   {
     $_problemQ = new Query_Page_Problem();
-    $_problemQ->connect();
-
     if ( !$_problemQ->select($id) )
     {
       $_problemQ->close();

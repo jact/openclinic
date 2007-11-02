@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.6 2007/10/28 19:59:57 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.7 2007/11/02 20:41:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,8 +22,6 @@
   session_start(); // to keep messages
 
   $setQ = new Query_Setting();
-  $setQ->connect();
-
   $setQ->captureError(true);
   $setQ->select();
   if ($setQ->isError())

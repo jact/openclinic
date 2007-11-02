@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_use.php,v 1.15 2007/10/30 21:39:55 jact Exp $
+ * @version   CVS: $Id: theme_use.php,v 1.16 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,8 +43,6 @@
   $idTheme = intval($_POST["id_theme"]);
 
   $setQ = new Query_Setting();
-  $setQ->connect();
-
   $setQ->updateTheme($idTheme);
 
   $setQ->close();

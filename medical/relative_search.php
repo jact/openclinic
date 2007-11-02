@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.38 2007/10/31 19:19:27 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.39 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -58,8 +58,6 @@
    */
   $patQ = new Query_Page_Patient();
   $patQ->setItemsPerPage(OPEN_ITEMS_PER_PAGE);
-  $patQ->connect();
-
   $patQ->search($searchType, $arraySearch, $currentPage, $logical, $limit);
 
   /**

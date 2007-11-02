@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del.php,v 1.17 2007/10/30 21:38:43 jact Exp $
+ * @version   CVS: $Id: user_del.php,v 1.18 2007/11/02 20:40:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -46,8 +46,6 @@
    * Delete user
    */
   $userQ = new Query_User();
-  $userQ->connect();
-
   if ( !$userQ->select($idUser) )
   {
     $userQ->close();

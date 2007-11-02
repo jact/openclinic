@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.31 2007/10/28 21:06:42 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.32 2007/11/02 20:42:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -57,8 +57,6 @@
    * Delete relatives
    */
   $relQ = new Query_Relative();
-  $relQ->connect();
-
   $numRows = $relQ->select($idPatient);
 
   $rel = array();
@@ -80,8 +78,6 @@
    * Delete patient
    */
   $patQ = new Query_Page_Patient();
-  $patQ->connect();
-
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
   {
     if ( !$patQ->select($idPatient) )
@@ -101,8 +97,6 @@
     }
 
     $historyQ = new Query_History();
-    $historyQ->connect();
-
     $historyQ->selectPersonal($idPatient);
     $historyP = $historyQ->fetch();
 
@@ -111,8 +105,6 @@
     //Error::debug($patient); Error::debug($historyP); Error::debug($historyF, "", true);
 
     $delPatientQ = new Query_DelPatient();
-    $delPatientQ->connect();
-
     $delPatientQ->insert($patient, $historyP, $historyF,
       $_SESSION['auth']['user_id'],
       $_SESSION['auth']['login_session']
@@ -139,7 +131,6 @@
    * Delete asociated problems
    */
   $problemQ = new Query_Page_Problem();
-  $problemQ->connect();
 
   /**
    * First: open problems
@@ -157,8 +148,6 @@
     unset($problemQ);
 
     $delProblemQ = new Query_DelProblem();
-    $delProblemQ->connect();
-
     for ($i = 0; $i < $numRows; $i++)
     {
       $delProblemQ->insert($array[$i], $_SESSION['auth']['user_id'], $_SESSION['auth']['login_session']);
@@ -167,7 +156,6 @@
     unset($delProblemQ);
 
     $problemQ = new Query_Page_Problem();
-    $problemQ->connect();
 
     /**
      * Record log process (before deleting process)
@@ -190,8 +178,6 @@
    * Afterwards: closed problems
    */
   $problemQ = new Query_Page_Problem();
-  $problemQ->connect();
-
   $numRows = $problemQ->selectProblems($idPatient, true);
   if ($numRows)
   {
@@ -205,8 +191,6 @@
     unset($problemQ);
 
     $delProblemQ = new Query_DelProblem();
-    $delProblemQ->connect();
-
     for ($i = 0; $i < $numRows; $i++)
     {
       $delProblemQ->insert($array[$i], $_SESSION['auth']['user_id'], $_SESSION['auth']['login_session']);
@@ -215,7 +199,6 @@
     unset($delProblemQ);
 
     $problemQ = new Query_Page_Problem();
-    $problemQ->connect();
 
     /**
      * Record log process (before deleting process)
