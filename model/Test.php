@@ -9,16 +9,18 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Test.php,v 1.10 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Test.php,v 1.11 2007/11/02 23:00:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once(dirname(__FILE__) . "/../lib/Check.php");
+require_once(dirname(__FILE__) . "/Query/Test.php");
 
 /*
  * Test represents a medical test for a medical problem
  *
  * Methods:
+ *  mixed Test(int $idProblem = 0, int $idTest = 0)
  *  bool validateData(void)
  *  int getIdTest(void)
  *  void setIdTest(string $value)
@@ -44,9 +46,34 @@ class Test
 
   var $_trans; // to translate htmlspecialchars()
 
-  function Test()
+  /**
+   * mixed Test(int $idProblem = 0, int $idTest = 0)
+   *
+   * Constructor
+   *
+   * @param int $idProblem (optional) medical problem identificator
+   * @param int $idTest (optional) medical test identificator
+   * @return mixed void if not argument, null if not exists problem, object otherwise
+   * @access public
+   */
+  function Test($idProblem = 0, $idTest = 0)
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
+
+    if ($idProblem && $idTest)
+    {
+      $_testQ = new Query_Test();
+      if ( !$_testQ->select($idProblem, $idTest) )
+      {
+        return null;
+      }
+      $this = $_testQ->fetch();
+
+      $_testQ->freeResult();
+      $_testQ->close();
+
+      return $this;
+    }
   }
 
   /*
