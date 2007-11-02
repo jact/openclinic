@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LastViewedPatient.php,v 1.1 2007/10/27 16:11:26 jact Exp $
+ * @version   CVS: $Id: LastViewedPatient.php,v 1.2 2007/11/02 22:20:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,6 +45,11 @@ class LastViewedPatient
     if (defined("OPEN_DEMO") && OPEN_DEMO)
     {
       return;
+    }
+
+    if ($idPatient <= 0 || trim($name) == '')
+    {
+      return; // invalid data!
     }
 
     $_SESSION['last_viewed_patient'][$idPatient] = $name;
