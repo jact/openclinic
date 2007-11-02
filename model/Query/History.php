@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: History.php,v 1.1 2007/10/28 19:35:36 jact Exp $
+ * @version   CVS: $Id: History.php,v 1.2 2007/11/02 20:39:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../History.php");
  * Query_History data access component for History class
  *
  * Methods:
- *  void Query_History(void)
+ *  bool Query_History(array $dsn = null)
  *  mixed selectPersonal(int $idPatient = 0)
  *  mixed selectFamily(int $idPatient = 0)
  *  mixed fetch(void)
@@ -34,14 +34,15 @@ require_once(dirname(__FILE__) . "/../History.php");
 class Query_History extends Query
 {
   /**
-   * void Query_History(void)
+   * bool Query_History(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_History()
+  function Query_History($dsn = null)
   {
     $this->_table = "history_tbl";
     $this->_primaryKey = array("id_patient");
@@ -64,6 +65,8 @@ class Query_History extends Query
       'spouse_childs_status_health' => array('mutator' => 'setSpouseChildsStatusHealth'),
       'family_illness' => array('mutator' => 'setFamilyIllness')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

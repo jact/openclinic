@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Staff.php,v 1.1 2007/10/28 19:14:28 jact Exp $
+ * @version   CVS: $Id: Staff.php,v 1.2 2007/11/02 20:39:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../Staff.php");
  * Query_Staff data access component for clinic staff members
  *
  * Methods:
- *  void Query_Staff(void)
+ *  bool Query_Staff(array $dsn = null)
  *  mixed select(int $idMember = 0)
  *  mixed selectType(string $type = 'A')
  *  mixed fetch(void)
@@ -36,14 +36,15 @@ require_once(dirname(__FILE__) . "/../Staff.php");
 class Query_Staff extends Query
 {
   /**
-   * void Query_Staff(void)
+   * bool Query_Staff(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Staff()
+  function Query_Staff($dsn = null)
   {
     $this->_table = "staff_tbl";
     $this->_primaryKey = array("id_member");
@@ -61,6 +62,8 @@ class Query_Staff extends Query
       'login' => array('mutator' => 'setLogin'),
       'id_user' => array('mutator' => 'setIdUser')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

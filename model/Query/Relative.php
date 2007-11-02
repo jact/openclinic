@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Relative.php,v 1.1 2007/10/28 19:23:22 jact Exp $
+ * @version   CVS: $Id: Relative.php,v 1.2 2007/11/02 20:39:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@ require_once(dirname(__FILE__) . "/../Query.php");
  * Query_Relative data access component for relative table
  *
  * Methods:
- *  void Query_Relative(void)
+ *  bool Query_Relative(array $dsn = null)
  *  mixed select(int $idPatient, int $idRelative = 0)
  *  mixed fetch(void)
  *  bool insert(int $idPatient, int $idRelative)
@@ -32,16 +32,19 @@ require_once(dirname(__FILE__) . "/../Query.php");
 class Query_Relative extends Query
 {
   /**
-   * void Query_Relative(void)
+   * bool Query_Relative(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Relative()
+  function Query_Relative($dsn = null)
   {
     $this->_table = "relative_tbl";
+
+    return parent::Query($dsn);
   }
 
   /**

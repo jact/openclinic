@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.1 2007/10/28 19:04:49 jact Exp $
+ * @version   CVS: $Id: Patient.php,v 1.2 2007/11/02 20:39:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../../Patient.php");
  * Query_Page_Patient data access component for patients
  *
  * Methods:
- *  void Query_Page_Patient(void)
+ *  bool Query_Page_Patient(array $dsn = null)
  *  bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
  *  mixed getLastId(void)
  *  mixed select(int $idPatient)
@@ -37,14 +37,15 @@ require_once(dirname(__FILE__) . "/../../Patient.php");
 class Query_Page_Patient extends Query_Page
 {
   /**
-   * void Query_Page_Patient(void)
+   * bool Query_Page_Patient(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Page_Patient()
+  function Query_Page_Patient($dsn = null)
   {
     $this->_table = "patient_tbl";
     $this->_primaryKey = array("id_patient");
@@ -73,6 +74,8 @@ class Query_Page_Patient extends Query_Page
       'education' => array('mutator' => 'setEducation'),
       'insurance_company' => array('mutator' => 'setInsuranceCompany')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.1 2007/10/28 19:10:48 jact Exp $
+ * @version   CVS: $Id: Setting.php,v 1.2 2007/11/02 20:39:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../Setting.php");
  * Query_Setting data access component for setting table
  *
  * Methods:
- *  void Query_Setting(void)
+ *  bool Query_Setting(array $dsn = null)
  *  bool select(void)
  *  mixed fetch(void)
  *  bool update(Setting $set)
@@ -33,14 +33,15 @@ require_once(dirname(__FILE__) . "/../Setting.php");
 class Query_Setting extends Query
 {
   /**
-   * void Query_Setting(void)
+   * bool Query_Setting(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Setting()
+  function Query_Setting($dsn = null)
   {
     $this->_table = "setting_tbl";
     $this->_primaryKey = null;
@@ -59,6 +60,8 @@ class Query_Setting extends Query
       'language' => array('mutator' => 'setLanguage'),
       'id_theme' => array('mutator' => 'setIdTheme')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

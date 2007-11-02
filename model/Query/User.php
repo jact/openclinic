@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: User.php,v 1.1 2007/10/28 19:18:12 jact Exp $
+ * @version   CVS: $Id: User.php,v 1.2 2007/11/02 20:39:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../User.php");
  * Query_User data access component for users
  *
  * Methods:
- *  void Query_User(void)
+ *  bool Query_User(array $dsn = null)
  *  mixed select(int $idUser = 0)
  *  mixed selectLogins(void)
  *  bool existLogin(string $login, int $idMember = 0)
@@ -40,14 +40,15 @@ require_once(dirname(__FILE__) . "/../User.php");
 class Query_User extends Query
 {
   /**
-   * void Query_User(void)
+   * bool Query_User(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_User()
+  function Query_User($dsn = null)
   {
     $this->_table = "user_tbl";
     $this->_primaryKey = array("id_user");
@@ -62,6 +63,8 @@ class Query_User extends Query
       'id_theme' => array(/*'accessor' => 'getIdTheme',*/ 'mutator' => 'setIdTheme'),
       'id_profile' => array(/*'accessor' => 'getIdProfile',*/ 'mutator' => 'setIdProfile')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

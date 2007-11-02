@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Access.php,v 1.1 2007/10/28 19:38:38 jact Exp $
+ * @version   CVS: $Id: Access.php,v 1.2 2007/11/02 20:39:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@ require_once(dirname(__FILE__) . "/../Page.php");
  * Query_Page_Access data access component for application users accesses
  *
  * Methods:
- *  void Query_Page_Access(void)
+ *  bool Query_Page_Access(array $dsn = null)
  *  mixed select(int $year = 0, int $month = 0, int $day = 0, int $hour = 0)
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
  *  mixed fetch(void)
@@ -33,16 +33,19 @@ require_once(dirname(__FILE__) . "/../Page.php");
 class Query_Page_Access extends Query_Page
 {
   /**
-   * void Query_Page_Access(void)
+   * bool Query_Page_Access(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Page_Access()
+  function Query_Page_Access($dsn = null)
   {
     $this->_table = "access_log_tbl";
+
+    return parent::Query($dsn);
   }
 
   /**

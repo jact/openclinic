@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Session.php,v 1.1 2007/10/28 19:12:18 jact Exp $
+ * @version   CVS: $Id: Session.php,v 1.2 2007/11/02 20:39:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@ require_once(dirname(__FILE__) . "/../Query.php");
  * Query_Session data access component for sign on sessions
  *
  * Methods:
- *  void Query_Session(void)
+ *  bool Query_Session(array $dsn = null)
  *  bool validToken(string $login, int $token)
  *  mixed getToken(string $login)
  *  bool _updateToken(int $token)
@@ -31,16 +31,19 @@ require_once(dirname(__FILE__) . "/../Query.php");
 class Query_Session extends Query
 {
   /**
-   * void Query_Session(void)
+   * bool Query_Session(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Session()
+  function Query_Session($dsn = null)
   {
     $this->_table = "session_tbl";
+
+    return parent::Query($dsn);
   }
 
   /**

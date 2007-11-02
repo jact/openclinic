@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.1 2007/10/28 19:41:25 jact Exp $
+ * @version   CVS: $Id: Problem.php,v 1.2 2007/11/02 20:39:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../../Problem.php");
  * Query_Page_Problem data access component for medical problems
  *
  * Methods:
- *  void Query_Page_Problem(void)
+ *  bool Query_Page_Problem(array $dsn = null)
  *  bool search(int $type, array $word, int $page, string $logical, int $limitFrom = 0)
  *  mixed getLastId(void)
  *  mixed select(int $idProblem)
@@ -38,14 +38,15 @@ require_once(dirname(__FILE__) . "/../../Problem.php");
 class Query_Page_Problem extends Query_Page
 {
   /**
-   * void Query_Page_Problem(void)
+   * bool Query_Page_Problem(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Page_Problem()
+  function Query_Page_Problem($dsn = null)
   {
     $this->_table = "problem_tbl";
     $this->_primaryKey = array("id_problem");
@@ -67,6 +68,8 @@ class Query_Page_Problem extends Query_Page
       'action_plan' => array('mutator' => 'setActionPlan'),
       'prescription' => array('mutator' => 'setPrescription')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

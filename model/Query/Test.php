@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Test.php,v 1.1 2007/10/28 19:22:05 jact Exp $
+ * @version   CVS: $Id: Test.php,v 1.2 2007/11/02 20:39:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../Test.php");
  * Query_Test data access component for medical tests
  *
  * Methods:
- *  void Query_Test(void)
+ *  bool Query_Test(array $dsn = null)
  *  mixed getLastId(void)
  *  mixed select(int $idProblem, int $idTest = 0)
  *  mixed fetch(void)
@@ -35,14 +35,15 @@ require_once(dirname(__FILE__) . "/../Test.php");
 class Query_Test extends Query
 {
   /**
-   * void Query_Test(void)
+   * bool Query_Test(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Test()
+  function Query_Test($dsn = null)
   {
     $this->_table = "medical_test_tbl";
     $this->_primaryKey = array("id_test");
@@ -53,6 +54,8 @@ class Query_Test extends Query
       'document_type' => array('mutator' => 'setDocumentType'),
       'path_filename' => array('mutator' => 'setPathFilename')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

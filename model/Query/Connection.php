@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Connection.php,v 1.1 2007/10/28 19:24:42 jact Exp $
+ * @version   CVS: $Id: Connection.php,v 1.2 2007/11/02 20:38:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@ require_once(dirname(__FILE__) . "/../Query.php");
  * Query_Connection data access component for connection table
  *
  * Methods:
- *  void Query_Connection(void)
+ *  bool Query_Connection(array $dsn = null)
  *  mixed select(int $idProblem, int $idConnection = 0)
  *  mixed fetch(void)
  *  bool insert(int $idProblem, int $idConnection)
@@ -32,17 +32,20 @@ require_once(dirname(__FILE__) . "/../Query.php");
 class Query_Connection extends Query
 {
   /**
-   * void Query_Connection(void)
+   * bool Query_Connection(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Connection()
+  function Query_Connection($dsn = null)
   {
     $this->_table = "connection_problem_tbl";
     $this->_primaryKey = array("id_problem", "id_connection");
+
+    return parent::Query($dsn);
   }
 
   /**

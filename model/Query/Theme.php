@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Theme.php,v 1.1 2007/10/28 19:16:19 jact Exp $
+ * @version   CVS: $Id: Theme.php,v 1.2 2007/11/02 20:39:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../Theme.php");
  * Query_Theme data access component for themes
  *
  * Methods:
- *  void Query_Theme(void)
+ *  bool Query_Theme(array $dsn = null)
  *  mixed select(int $id = 0)
  *  mixed selectWithStats(int $id = 0)
  *  mixed fetch(void)
@@ -36,14 +36,15 @@ require_once(dirname(__FILE__) . "/../Theme.php");
 class Query_Theme extends Query
 {
   /**
-   * void Query_Theme(void)
+   * bool Query_Theme(array $dsn = null)
    *
    * Constructor function
    *
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Theme()
+  function Query_Theme($dsn = null)
   {
     $this->_table = "theme_tbl";
     $this->_primaryKey = array("id_theme");
@@ -54,6 +55,8 @@ class Query_Theme extends Query
       'css_file' => array(/*'accessor' => 'getCSSFile',*/ 'mutator' => 'setCSSFile'),
       'row_count' => array(/*'accessor' => 'getCount',*/ 'mutator' => 'setCount')
     );
+
+    return parent::Query($dsn);
   }
 
   /**

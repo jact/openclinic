@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.1 2007/10/28 19:36:55 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.2 2007/11/02 20:39:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,7 @@ require_once(dirname(__FILE__) . "/../Query.php");
  * Query_LogStats data access component for log stats (access and operations)
  *
  * Methods:
- *  void Query_LogStats(string $table)
+ *  bool Query_LogStats(string $table, array $dsn = null)
  *  mixed totalHits(void)
  *  mixed hitsByYear(void)
  *  mixed yearHits(int $year)
@@ -41,21 +41,23 @@ require_once(dirname(__FILE__) . "/../Query.php");
 class Query_LogStats extends Query
 {
   /**
-   * void Query_LogStats(string $table)
+   * bool Query_LogStats(string $table, array $dsn = null)
    *
    * Constructor function
    *
-   * @param string $table table to select ('access' or 'record')
-   * @return void
+   * @param array $dsn (optional) Data Source Name
+   * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_LogStats($table)
+  function Query_LogStats($table, $dsn = null)
   {
     if ($table != 'access' && $table != 'record')
     {
       $table = 'access';
     }
     $this->_table = $table . '_log_tbl';
+
+    return parent::Query($dsn);
   }
 
   /**
