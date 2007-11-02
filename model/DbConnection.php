@@ -7,15 +7,15 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: DbConnection.php,v 1.16 2006/10/13 20:11:02 jact Exp $
+ * @version   CVS: $Id: DbConnection.php,v 1.17 2007/11/02 20:33:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-if (file_exists("../config/database_constants.php"))
+if (file_exists(dirname(__FILE__) . "/../config/database_constants.php"))
 {
-  include_once("../config/database_constants.php");
+  include_once(dirname(__FILE__) . "/../config/database_constants.php");
 }
 
 if ( !defined("OPEN_PERSISTENT") )
@@ -27,7 +27,7 @@ if ( !defined("OPEN_PERSISTENT") )
  * DbConnection encapsulates all database specific functions for the project
  *
  * Methods:
- *  void DbConnection(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
+ *  void DbConnection(array $dsn = null)
  *  bool connect(bool $persistency = OPEN_PERSISTENT)
  *  bool close(void)
  *  bool exec(string $sql, array $params = null)
@@ -124,22 +124,25 @@ class DbConnection
   var $_SQL;
 
   /**
-   * void DbConnection(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
+   * void DbConnection(array $dsn = null)
    *
    * Constructor function
    *
-   * @param string $database (optional)
-   * @param string $user (optional)
-   * @param string $pwd (optional)
-   * @param string $host (optional)
-   * @param int $port (optional)
+   * @param array $dsn (optional) Data Source Name:
+   *  array(
+   *    'db' => string,
+   *    'user' => string,
+   *    'pwd' => string,
+   *    'host' => string,
+   *    'port' => int
+   *  )
    * @return void
    * @access public
    * @since 0.7
    */
-  function DbConnection($database = "", $user = "", $pwd = "", $host = "", $port = 3306)
+  function DbConnection($dsn = null)
   {
-    if (empty($database))
+    if ( !isset($dsn['db']) )
     {
       $this->_host = (defined("OPEN_HOST") ? OPEN_HOST : "localhost");
       $this->_userName = (defined("OPEN_USERNAME")) ? OPEN_USERNAME : "root";
@@ -149,11 +152,11 @@ class DbConnection
     }
     else
     {
-      $this->_host = $host;
-      $this->_userName = $user;
-      $this->_passwd = $pwd;
-      $this->_dbName = $database;
-      $this->_port = intval($port);
+      $this->_host = isset($dsn['host']) ? $dsn['host'] : '';
+      $this->_userName = isset($dsn['user']) ? $dsn['user'] : '';
+      $this->_passwd = isset($dsn['pwd']) ? $dsn['pwd'] : '';
+      $this->_dbName = isset($dsn['db']) ? $dsn['db'] : '';
+      $this->_port = isset($dsn['port']) ? intval($dsn['port']) : 3306;
     }
   }
 
