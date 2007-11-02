@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.39 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.40 2007/11/02 22:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,7 +25,7 @@
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
   require_once("../lib/misc_lib.php");
-  require_once("../lib/PatientInfo.php");
+  require_once("../model/Patient.php");
 
   /**
    * Retrieving vars (PGS) and scrubbing the data
@@ -45,7 +45,7 @@
   // explode data
   $arraySearch = explode("+", $searchText);
 
-  $patient = new PatientInfo($idPatient);
+  $patient = new Patient($idPatient);
   if ($patient->getName() == '')
   {
     FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
@@ -94,7 +94,7 @@
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  $patient->showHeader();
+  echo $patient->getHeader();
 
   /**
    * Printing result stats and page nav

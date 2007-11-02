@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new_form.php,v 1.25 2007/10/28 20:16:25 jact Exp $
+ * @version   CVS: $Id: problem_new_form.php,v 1.26 2007/11/02 22:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,9 +22,9 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  require_once("../model/Patient.php");
   require_once("../lib/Form.php");
   require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
-  require_once("../lib/PatientInfo.php");
 
   /**
    * Retrieving vars (PGS)
@@ -34,7 +34,7 @@
     isset($formVar["order_number"]) ? $formVar["order_number"] - 1 : 0
   );
 
-  $patient = new PatientInfo($idPatient);
+  $patient = new Patient($idPatient);
   if ($patient->getName() == '')
   {
     FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
@@ -72,7 +72,7 @@
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  $patient->showHeader();
+  echo $patient->getHeader();
 
   //Error::debug($formVar);
 

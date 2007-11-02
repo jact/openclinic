@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.32 2007/10/28 20:16:24 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.33 2007/11/02 22:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,12 +34,11 @@
    */
   if ( !isset($formError) )
   {
-    include_once("../lib/PatientInfo.php");
+    include_once("../model/Patient.php");
 
-    $patient = new PatientInfo($idPatient);
+    $patient = new Patient($idPatient);
     $patName = $patient->getName();
-    $patient = $patient->getObject();
-    if ($patient == null)
+    if ($patName == '')
     {
       FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
       header("Location: ../medical/patient_search_form.php");

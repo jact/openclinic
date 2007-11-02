@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del_confirm.php,v 1.24 2007/10/27 17:32:54 jact Exp $
+ * @version   CVS: $Id: problem_del_confirm.php,v 1.25 2007/11/02 22:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
-  require_once("../lib/PatientInfo.php");
+  require_once("../model/Patient.php");
   require_once("../lib/ProblemInfo.php");
 
   /**
@@ -33,7 +33,7 @@
   $idProblem = Check::postGetSessionInt('id_problem');
   $idPatient = Check::postGetSessionInt('id_patient');
 
-  $patient = new PatientInfo($idPatient);
+  $patient = new Patient($idPatient);
   if ($patient->getName() == '')
   {
     FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
@@ -72,7 +72,7 @@
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  $patient->showHeader();
+  echo $patient->getHeader();
 
   /**
    * Confirm form

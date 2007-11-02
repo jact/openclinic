@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.30 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.31 2007/11/02 22:21:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
-  require_once("../lib/PatientInfo.php");
+  require_once("../model/Patient.php");
   require_once("../model/Query/Staff.php");
 
   /**
@@ -30,10 +30,9 @@
    */
   $idPatient = Check::postGetSessionInt('id_patient');
 
-  $patient = new PatientInfo($idPatient);
+  $patient = new Patient($idPatient);
   $patName = $patient->getName();
-  $patient = $patient->getObject();
-  if ($patient == null)
+  if ($patName == '')
   {
     FlashMsg::add(_("That patient does not exist."), OPEN_MSG_ERROR);
     header("Location: ../medical/patient_search_form.php");
