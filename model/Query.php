@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Query.php,v 1.16 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Query.php,v 1.17 2007/11/02 20:36:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,7 +20,7 @@ require_once(dirname(__FILE__) . "/../lib/Error.php");
  * Query parent data access component class for all data access components
  *
  * Methods:
- *  bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
+ *  bool Query(array $dsn = null)
  *  bool close(void)
  *  bool exec(string $sql, array $params = null)
  *  mixed fetchRow(int $arrayType = MYSQL_ASSOC)
@@ -58,27 +58,32 @@ class Query
   var $_map = null; // to extends classes
 
   /**
-   * bool connect(string $database = "", string $user = "", string $pwd = "", string $host = "", int $port = 3306)
+   * bool Query(array $dsn = null)
    *
+   * Constructor function
    * Instantiates private connection var and connects to the database
    *
-   * @param string $database (optional)
-   * @param string $user (optional)
-   * @param string $pwd (optional)
-   * @param string $host (optional)
-   * @param int $port (optional)
-   * @return void
+   * @param array $dsn (optional) Data Source Name:
+   *  array(
+   *    'db' => string,
+   *    'user' => string,
+   *    'pwd' => string,
+   *    'host' => string,
+   *    'port' => int
+   *  )
+   * @return boolean returns false, if error occurs
    * @access public
+   * @since 0.8
    */
-  function connect($database = "", $user = "", $pwd = "", $host = "", $port = 3306)
+  function Query($dsn = null)
   {
-    if (empty($database))
+    if ( !isset($dsn) )
     {
       $this->_conn = new DbConnection();
     }
     else
     {
-      $this->_conn = new DbConnection($database, $user, $pwd, $host, $port);
+      $this->_conn = new DbConnection($dsn);
     }
 
     $result = $this->_conn->connect();
