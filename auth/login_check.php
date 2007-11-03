@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.9 2007/11/02 20:40:47 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.10 2007/11/03 18:22:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -94,6 +94,7 @@
   {
     unset($_SESSION['auth']['invalid_token']);
   }
+  session_regenerate_id(); // to avoid Session Fixation
 
   /**
    * Checking authorization for this tab
