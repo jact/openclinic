@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.11 2007/10/31 19:22:22 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.12 2007/11/03 17:29:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -442,16 +442,15 @@ class Error
    */
   function trace($expression, $message = "", $goOut = false)
   {
-    echo PHP_EOL . "<!-- trace -->" . PHP_EOL;
-    echo '<pre style="background: #fff; color: #000; border: 2px solid #f00;">' . PHP_EOL;
+    echo PHP_EOL . '<!-- trace -->' . PHP_EOL;
+    echo '<pre style="background: #fff; color: #000; border: 2px solid #fc0;">' . PHP_EOL;
     if ( !empty($message) )
     {
-      echo $message . PHP_EOL;
+      echo htmlspecialchars($message) . PHP_EOL;
     }
-    $output = var_export($expression, true);
-    echo htmlspecialchars($output);
-    echo "</pre>" . PHP_EOL;
-    echo "<!-- end trace -->" . PHP_EOL;
+    echo htmlspecialchars(var_export($expression, true));
+    echo '</pre>' . PHP_EOL;
+    echo '<!-- end trace -->' . PHP_EOL;
 
     if ($goOut)
     {
