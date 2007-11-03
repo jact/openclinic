@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: global_constants.php,v 1.4 2007/10/29 20:11:54 jact Exp $
+ * @version   CVS: $Id: global_constants.php,v 1.5 2007/11/03 16:58:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -80,8 +80,6 @@
   /**
    * Miscellaneous constants
    */
-  define("OPEN_EXEC_TIME_LIMIT",     300); // used in dump proccesses
-  define("OPEN_VISITED_ITEMS",       3);   // number of items of visited patients list
-  define("OPEN_FIELD_PREVIEW_LIMIT", 30);  // max length to preview text fields
-  define("OPEN_SEPARATOR",           "|"); // separation character in explode() implode() functions
+  define("OPEN_EXEC_TIME_LIMIT", 300); // (in seconds) used in dump proccesses
+  define("OPEN_SEPARATOR",       "|"); // separation character in explode() implode() functions
 ?>
