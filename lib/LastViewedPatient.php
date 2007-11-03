@@ -9,9 +9,11 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LastViewedPatient.php,v 1.2 2007/11/02 22:20:01 jact Exp $
+ * @version   CVS: $Id: LastViewedPatient.php,v 1.3 2007/11/03 16:56:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
+
+define("OPEN_VISITED_ITEMS", 3);   // number of items of visited patients list
 
 /**
  * LastViewedPatient set of functions to manage visited patients array
