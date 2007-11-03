@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_list.php,v 1.32 2007/11/02 22:54:02 jact Exp $
+ * @version   CVS: $Id: connection_list.php,v 1.33 2007/11/03 16:52:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -155,7 +155,7 @@
     $row .= I18n::localDate($problem->getOpeningDate());
     $row .= OPEN_SEPARATOR;
 
-    $row .= fieldPreview($problem->getWording());
+    $row .= $problem->getWordingPreview();
 
     $tbody[] = explode(OPEN_SEPARATOR, $row);
   } // end for

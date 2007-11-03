@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.30 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.31 2007/11/03 16:53:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,6 @@
   require_once("../auth/login_check.php");
   require_once("../model/Query/Page/Problem.php");
   require_once("../model/Patient.php");
-  require_once("../lib/misc_lib.php");
 
   /**
    * Retrieving vars (PGS)
@@ -148,7 +147,7 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= fieldPreview($problem->getWording());
+    $row .= $problem->getWordingPreview();
     $row .= OPEN_SEPARATOR;
 
     $row .= I18n::localDate($problem->getOpeningDate());
