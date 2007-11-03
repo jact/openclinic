@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.32 2007/11/02 22:54:03 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.33 2007/11/03 16:54:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -107,7 +107,8 @@
   while ($test = $testQ->fetch())
   {
     $temp = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
-    $temp = substr($temp, 0, strrpos($temp, "/")) . "/tests/" . translateBrowser($test->getPathFilename(false));
+    $temp = substr($temp, 0, strrpos($temp, "/")) . "/tests/"
+      . String::translateBrowser($test->getPathFilename(false));
 
     $row = HTML::strLink(_("view"), $temp, null, array('class' => 'popup'));
     $row .= OPEN_SEPARATOR;
