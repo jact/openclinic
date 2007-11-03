@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.40 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.41 2007/11/03 16:53:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@
   require_once("../auth/login_check.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
-  require_once("../lib/misc_lib.php");
+  require_once("../lib/String.php");
   require_once("../model/Patient.php");
 
   /**
@@ -199,7 +199,7 @@
   {
     $row = $patQ->getCurrentRow() . '.';
     $row .= Form::strCheckBox("check[]", $pat->getIdPatient(), false,
-      array('id' => numberToAlphabet($patQ->getCurrentRow()))
+      array('id' => String::numberToAlphabet($patQ->getCurrentRow()))
     );
     $row .= OPEN_SEPARATOR;
 

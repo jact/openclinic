@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.28 2007/11/02 22:54:02 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.29 2007/11/03 16:53:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -112,7 +112,7 @@
   {
     $row = $problem->getOrderNumber() . '.';
     $row .= Form::strCheckBox("check[]", $problem->getIdProblem(), false,
-      array('id' => numberToAlphabet($problem->getOrderNumber()))
+      array('id' => String::numberToAlphabet($problem->getOrderNumber()))
     );
     $row .= OPEN_SEPARATOR;
     $row .= $problem->getWording();
