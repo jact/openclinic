@@ -9,13 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.16 2007/11/02 22:53:31 jact Exp $
+ * @version   CVS: $Id: Problem.php,v 1.17 2007/11/03 16:59:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once(dirname(__FILE__) . "/../lib/Check.php");
 require_once(dirname(__FILE__) . "/../lib/HTML.php");
-require_once(dirname(__FILE__) . "/../lib/misc_lib.php");
+require_once(dirname(__FILE__) . "/../lib/String.php");
 require_once(dirname(__FILE__) . "/../lib/I18n.php");
 require_once(dirname(__FILE__) . "/Query/Page/Problem.php");
 
@@ -500,7 +500,7 @@ class Problem
    */
   function getWordingPreview()
   {
-    return fieldPreview($this->_wording);
+    return String::fieldPreview($this->_wording);
   }
 
   /**
