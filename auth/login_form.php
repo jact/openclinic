@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.8 2007/11/05 13:07:48 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.9 2007/11/05 14:29:47 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,8 +21,6 @@
   $isMd5 = true;
 
   require_once("../config/environment.php");
-  require_once("../shared/get_form_vars.php"); // to retrieve $formVar and $formError
-  require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
   /**
