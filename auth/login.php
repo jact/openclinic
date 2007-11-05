@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.9 2007/11/02 20:40:47 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.10 2007/11/05 19:26:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -208,6 +208,16 @@
   {
     $_SESSION['auth']['return_page'] = "../home/index.php";
   }
+
+  /**
+   * Session validation
+   */
+  $_SESSION['auth']['sign'] = md5(
+    $_SERVER['HTTP_ACCEPT_CHARSET']
+    . $_SERVER['HTTP_ACCEPT_ENCODING']
+    . $_SERVER['HTTP_ACCEPT_LANGUAGE']
+    . $_SERVER['HTTP_USER_AGENT']
+  );
 
   /**
    * Redirect to return page

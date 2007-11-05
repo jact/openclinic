@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.10 2007/11/03 18:22:14 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.11 2007/11/05 19:26:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,7 +38,7 @@
   }
 
   //works in PHP >= 4.1
-  $_SESSION['auth']['return_page'] = /*urlencode(*/$_SERVER['REQUEST_URI']/*)*/;
+  $_SESSION['auth']['return_page'] = $_SERVER['REQUEST_URI'];
 
   /**
    * Checking to see if session variables exist
@@ -65,6 +65,22 @@
     //session_destroy(); // clean up session ID
 
     //header("Location: ../auth/login_form.php");
+    include_once("../auth/logout.php");
+    exit();
+  }
+
+  /**
+   * Checking session validation
+   */
+  $chk = md5(
+    $_SERVER['HTTP_ACCEPT_CHARSET']
+    . $_SERVER['HTTP_ACCEPT_ENCODING']
+    . $_SERVER['HTTP_ACCEPT_LANGUAGE']
+    . $_SERVER['HTTP_USER_AGENT']
+  );
+  if ($_SESSION['auth']['sign'] != $chk)
+  {
+    // This is possibly a session hijack attempt
     include_once("../auth/logout.php");
     exit();
   }
