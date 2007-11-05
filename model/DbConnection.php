@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: DbConnection.php,v 1.17 2007/11/02 20:33:45 jact Exp $
+ * @version   CVS: $Id: DbConnection.php,v 1.18 2007/11/05 12:53:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,6 +21,11 @@ if (file_exists(dirname(__FILE__) . "/../config/database_constants.php"))
 if ( !defined("OPEN_PERSISTENT") )
 {
   define("OPEN_PERSISTENT", true);
+}
+
+if ( !defined("OPEN_SQL_DEBUG") )
+{
+  define("OPEN_SQL_DEBUG", false);
 }
 
 /**
@@ -224,6 +229,7 @@ class DbConnection
    * @param array $params (optional) SQL parameters to prepare sentence
    * @return boolean returns false, if error occurs
    * @access public
+   * @see OPEN_SQL_DEBUG
    */
   function exec($sql, $params = null)
   {
@@ -280,6 +286,10 @@ class DbConnection
     }
 
     $this->_SQL = $sql;
+    if (OPEN_SQL_DEBUG)
+    {
+      Error::trace($sql);
+    }
 
     $this->_result = mysql_query($sql, $this->_link);
     if ($this->_result == false)
