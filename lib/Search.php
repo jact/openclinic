@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Search.php,v 1.12 2007/10/31 19:21:38 jact Exp $
+ * @version   CVS: $Id: Search.php,v 1.13 2007/11/05 19:12:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,8 +21,8 @@
  * Methods:
  *  array explodeQuoted(string $text)
  *  void strPageLinks(int $currentPage, int $pageCount, string $url = '')
- *  void changePageJS(void)
  *  void pageLinks(int $currentPage, int $pageCount, string $url = '')
+ *  void changePageJS(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
