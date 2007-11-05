@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.23 2007/11/05 14:06:11 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.24 2007/11/05 19:35:29 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -945,8 +945,6 @@ class Form
     $_formSession = Form::getSession();
     if (isset($_formSession['error']) && count($_formSession['error']) > 0)
     {
-      echo HTML::insertScript('target_focus.js');
-
       HTML::start('div', array('class' => 'error'));
       HTML::para(_("ERROR: Some fields have been incorrectly filled. Please fix the fields and send the form again. Each incorrectly filled field is marked with specific error message."));
 
@@ -955,9 +953,7 @@ class Form
       {
         if ($_value)
         {
-          $_array[] = HTML::strLink($_value, '#' . $_key, null,
-            array('class' => 'target') // unobtrusive JS
-          );
+          $_array[] = Form::strLabel($_key, $_value);
         }
       }
       if (is_array($_array))
