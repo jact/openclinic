@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.22 2007/11/02 20:41:38 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.23 2007/11/05 14:06:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,6 +59,7 @@ define("OPEN_UNSET_ONLY_VAR",   2);
  *  void unsetSession(int $option = OPEN_UNSET_ALL)
  *  void setSession(array $var, array $error = null)
  *  mixed getSession(void)
+ *  void errorMsg(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -928,6 +929,44 @@ class Form
   function getSession()
   {
     return isset($_SESSION['form']) ? $_SESSION['form'] : null;
+  }
+
+  /**
+   * void errorMsg(void)
+   *
+   * Show message of form errors if it is necessary
+   *
+   * @return void
+   * @access public
+   * @static
+   */
+  function errorMsg()
+  {
+    $_formSession = Form::getSession();
+    if (isset($_formSession['error']) && count($_formSession['error']) > 0)
+    {
+      echo HTML::insertScript('target_focus.js');
+
+      HTML::start('div', array('class' => 'error'));
+      HTML::para(_("ERROR: Some fields have been incorrectly filled. Please fix the fields and send the form again. Each incorrectly filled field is marked with specific error message."));
+
+      $_array = null;
+      foreach ($_formSession['error'] as $_key => $_value)
+      {
+        if ($_value)
+        {
+          $_array[] = HTML::strLink($_value, '#' . $_key, null,
+            array('class' => 'target') // unobtrusive JS
+          );
+        }
+      }
+      if (is_array($_array))
+      {
+        HTML::itemList($_array);
+      }
+
+      HTML::end('div');
+    }
   }
 } // end class
 ?>
