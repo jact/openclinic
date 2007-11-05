@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new_form.php,v 1.26 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: problem_new_form.php,v 1.27 2007/11/05 14:07:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -76,7 +76,7 @@
 
   //Error::debug($formVar);
 
-  require_once("../shared/form_errors_msg.php");
+  Form::errorMsg();
 
   /**
    * New form

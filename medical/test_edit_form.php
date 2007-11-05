@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_edit_form.php,v 1.32 2007/11/02 23:00:44 jact Exp $
+ * @version   CVS: $Id: test_edit_form.php,v 1.33 2007/11/05 14:07:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,7 +91,7 @@
   echo $patient->getHeader();
   echo $problem->getHeader();
 
-  require_once("../shared/form_errors_msg.php");
+  Form::errorMsg();
 
   /**
    * Edit form

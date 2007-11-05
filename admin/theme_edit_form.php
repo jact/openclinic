@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.31 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: theme_edit_form.php,v 1.32 2007/11/05 14:06:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -133,7 +133,7 @@ function editTheme()
 
   HTML::rule();
 
-  require_once("../shared/form_errors_msg.php");
+  Form::errorMsg();
 
   /**
    * Edit form

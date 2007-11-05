@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_new_form.php,v 1.19 2007/10/28 20:16:25 jact Exp $
+ * @version   CVS: $Id: patient_new_form.php,v 1.20 2007/11/05 14:07:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -46,7 +46,7 @@
   HTML::breadCrumb($links, "icon patientIcon");
   unset($links);
 
-  require_once("../shared/form_errors_msg.php");
+  Form::errorMsg();
 
   /**
    * New form
