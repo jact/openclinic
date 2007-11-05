@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: environment.php,v 1.5 2007/11/02 20:41:03 jact Exp $
+ * @version   CVS: $Id: environment.php,v 1.6 2007/11/05 14:27:41 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -107,4 +107,14 @@
   $themeQ->close();
   unset($themeQ);
   unset($theme);
+
+  /**
+   * Getting form errors and previous form variables from session
+   */
+  require_once("../lib/Form.php");
+
+  $formSession = Form::getSession();
+  $formVar = (isset($formSession['var'])) ? $formSession['var'] : null;
+  $formError = (isset($formSession['error'])) ? $formSession['error'] : null;
+  unset($formSession);
 ?>
