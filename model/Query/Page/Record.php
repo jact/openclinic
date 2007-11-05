@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Record.php,v 1.2 2007/11/02 20:39:09 jact Exp $
+ * @version   CVS: $Id: Record.php,v 1.3 2007/11/05 12:51:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,6 +24,7 @@ require_once(dirname(__FILE__) . "/../Page.php");
  *  bool searchUser(int $idUser, int $page, int $limitFrom = 0)
  *  mixed fetch(void)
  *  bool insert(int $idUser, string $login, string $tableName, string $operation, string $affectedRow)
+ *  void log(string $class, string, $operation, array $key, string $method = "select")
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -195,6 +196,53 @@ class Query_Page_Record extends Query_Page
     //echo $sql; exit(); // debug
 
     return $this->exec($sql);
+  }
+
+  /**
+   * void log(string $class, string, $operation, array $key, string $method = "select")
+   *
+   * Inserts a new record in log operations table if it is possible
+   *
+   * @param string $class
+   * @param string $operation one between INSERT, UPDATE, DELETE
+   * @param array $key primary key of the record
+   * @param string $method (optional)
+   * @return void
+   * @access public
+   * @since 0.8
+   * @see OPEN_DEMO
+   */
+  function log($class, $operation, $key, $method = "select")
+  {
+    if (defined("OPEN_DEMO") && OPEN_DEMO)
+    {
+      return; // disabled in demo version
+    }
+
+    $queryQ = new $class;
+    if ( !call_user_func_array(array($queryQ, $method), $key) )
+    {
+      $queryQ->close();
+
+      return;
+    }
+
+    $data = $queryQ->fetchRow(); // obtains an array
+    if ( !$data )
+    {
+      $queryQ->close();
+      Error::fetch($queryQ);
+
+      return;
+    }
+
+    $data = serialize($data);
+
+    $table = $queryQ->getTableName();
+    $queryQ->close();
+    unset($queryQ);
+
+    $this->insert($_SESSION['auth']['user_id'], $_SESSION['auth']['login_session'], $table, $operation, $data);
   }
 } // end class
 ?>
