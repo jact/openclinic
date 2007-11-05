@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.7 2007/10/29 20:10:17 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.8 2007/11/05 13:07:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,6 +59,14 @@
   }
 
   /**
+   * Cookies disabled?
+   */
+  if ( !isset($_COOKIE[session_name()]) )
+  {
+    Msg::error(_("You must have cookies enabled to access your account."));
+  }
+
+  /**
    * Warning message if loginAttempts == (OPEN_MAX_LOGIN_ATTEMPTS - 1)
    */
   if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION['auth']['login_attempts'])
@@ -104,8 +112,6 @@
 
   Form::fieldset($title, $tbody, $tfoot);
   HTML::end('form');
-
-  Msg::hint(_("You must have cookies enabled to access your account."));
 
   /**
    * Destroy form values and errors
