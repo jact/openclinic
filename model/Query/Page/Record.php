@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Record.php,v 1.3 2007/11/05 12:51:18 jact Exp $
+ * @version   CVS: $Id: Record.php,v 1.4 2007/11/05 15:56:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -136,6 +136,10 @@ class Query_Page_Record extends Query_Page
 
     $array = parent::fetchRow();
     parent::_calculateStats($array["row_count"], $limitFrom);
+    if ( !$this->getRowCount() )
+    {
+      return false;
+    }
 
     // Running search sql statement
     return $this->exec($sql);
