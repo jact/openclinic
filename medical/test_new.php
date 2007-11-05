@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_new.php,v 1.21 2007/11/02 20:42:11 jact Exp $
+ * @version   CVS: $Id: test_new.php,v 1.22 2007/11/05 12:51:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -31,7 +31,7 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/Query/Test.php");
-  require_once("../shared/record_log.php"); // record log
+  require_once("../model/Query/Page/Record.php");
 
   /**
    * Retrieving post vars
@@ -75,7 +75,10 @@
   /**
    * Record log process
    */
-  recordLog("Query_Test", "INSERT", array($idTest));
+  $recordQ = new Query_Page_Record();
+  $recordQ->log("Query_Test", "INSERT", array($idTest));
+  $recordQ->close();
+  unset($recordQ);
 
   /**
    * Reset abort setting

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del.php,v 1.32 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: patient_del.php,v 1.33 2007/11/05 12:51:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -40,7 +40,7 @@
   require_once("../model/Query/DelPatient.php");
   require_once("../model/Query/Page/Problem.php"); // referencial integrity
   require_once("../model/Query/DelProblem.php"); // referencial integrity
-  require_once("../shared/record_log.php"); // record log
+  require_once("../model/Query/Page/Record.php");
 
   /**
    * Retrieving post vars
@@ -120,7 +120,10 @@
   /**
    * Record log process (before deleting process)
    */
-  recordLog("Query_Page_Patient", "DELETE", array($idPatient));
+  $recordQ = new Query_Page_Record();
+  $recordQ->log("Query_Page_Patient", "DELETE", array($idPatient));
+  $recordQ->close();
+  unset($recordQ);
 
   $patQ->delete($idPatient);
 
@@ -160,10 +163,13 @@
     /**
      * Record log process (before deleting process)
      */
+    $recordQ = new Query_Page_Record();
     for ($i = 0; $i < $numRows; $i++)
     {
-      recordLog("Query_Page_Problem", "DELETE", array($array[$i]->getIdProblem()));
+      $recordQ->log("Query_Page_Problem", "DELETE", array($array[$i]->getIdProblem()));
     }
+    $recordQ->close();
+    unset($recordQ);
 
     for ($i = 0; $i < $numRows; $i++)
     {
@@ -203,10 +209,13 @@
     /**
      * Record log process (before deleting process)
      */
+    $recordQ = new Query_Page_Record();
     for ($i = 0; $i < $numRows; $i++)
     {
-      recordLog("Query_Page_Problem", "DELETE", array($array[$i]->getIdProblem()));
+      $recordQ->log("Query_Page_Problem", "DELETE", array($array[$i]->getIdProblem()));
     }
+    $recordQ->close();
+    unset($recordQ);
 
     for ($i = 0; $i < $numRows; $i++)
     {

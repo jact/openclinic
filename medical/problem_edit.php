@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit.php,v 1.23 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: problem_edit.php,v 1.24 2007/11/05 12:51:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,7 +30,7 @@
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
   require_once("../model/Query/Page/Problem.php");
-  require_once("../shared/record_log.php"); // record log
+  require_once("../model/Query/Page/Record.php");
 
   /**
    * Retrieving post vars
@@ -85,7 +85,10 @@
   /**
    * Record log process
    */
-  recordLog("Query_Page_Problem", "UPDATE", array($idProblem));
+  $recordQ = new Query_Page_Record();
+  $recordQ->log("Query_Page_Problem", "UPDATE", array($idProblem));
+  $recordQ->close();
+  unset($recordQ);
 
   /**
    * Reset abort setting
@@ -95,7 +98,7 @@
   /**
    * Redirect to $returnLocation to avoid reload problem
    */
-  //$returnLocation = "../medical/problem_list.php?id_patient=" . $idPatient;
+  //$returnLocation = "../medical/problem_view.php?id_patient=" . $idPatient;
   $returnLocation = "../medical/problem_view.php";
   header("Location: " . $returnLocation);
 ?>

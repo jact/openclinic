@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit.php,v 1.19 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: history_personal_edit.php,v 1.20 2007/11/05 12:51:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,7 +36,7 @@
   Form::compareToken('../medical/patient_search_form.php');
 
   require_once("../model/Query/History.php");
-  require_once("../shared/record_log.php"); // record log
+  require_once("../model/Query/Page/Record.php");
 
   /**
    * Retrieving post var
@@ -117,7 +117,10 @@
   /**
    * Record log process
    */
-  recordLog("Query_History", "UPDATE", array($idPatient), "selectPersonal");
+  $recordQ = new Query_Page_Record();
+  $recordQ->log("Query_History", "UPDATE", array($idPatient), "selectPersonal");
+  $recordQ->close();
+  unset($recordQ);
 
   /**
    * Reset abort setting
@@ -128,6 +131,6 @@
    * Redirect to destiny to avoid reload problem
    */
   FlashMsg::add(_("Personal Antecedents have been updated."));
-  //header("Location: ../medical/history_personal_edit_form.php?id_patient=" . $idPatient);
+  //header("Location: ../medical/history_personal_view.php?id_patient=" . $idPatient);
   header("Location: ../medical/history_personal_view.php");
 ?>

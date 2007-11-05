@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.26 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: problem_del.php,v 1.27 2007/11/05 12:51:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,7 +36,7 @@
   require_once("../model/Query/Page/Problem.php");
   require_once("../model/Query/Connection.php"); // referencial integrity
   require_once("../model/Query/DelProblem.php");
-  require_once("../shared/record_log.php"); // record log
+  require_once("../model/Query/Page/Record.php");
 
   /**
    * Retrieving post vars
@@ -106,7 +106,10 @@
   /**
    * Record log process (before deleting process)
    */
-  recordLog("Query_Page_Problem", "DELETE", array($idProblem));
+  $recordQ = new Query_Page_Record();
+  $recordQ->log("Query_Page_Problem", "DELETE", array($idProblem));
+  $recordQ->close();
+  unset($recordQ);
 
   $problemQ->delete($idProblem);
 
