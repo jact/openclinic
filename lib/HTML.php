@@ -9,9 +9,14 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.15 2007/10/17 18:10:53 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.16 2007/11/05 19:12:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
+
+if ( !defined("PHP_EOL") ) // PHP >= 4.3.10
+{
+  define("PHP_EOL", "\n");
+}
 
 /**
  * Messages constants

@@ -9,9 +9,14 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.12 2007/11/03 17:29:20 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.13 2007/11/05 19:12:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
+
+if ( !defined("PHP_EOL") ) // PHP >= 4.3.10
+{
+  define("PHP_EOL", "\n");
+}
 
 /**
  * Error set of show error and debug functions
