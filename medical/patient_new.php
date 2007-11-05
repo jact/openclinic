@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_new.php,v 1.22 2007/11/05 12:51:52 jact Exp $
+ * @version   CVS: $Id: patient_new.php,v 1.23 2007/11/05 14:29:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,7 +91,6 @@
    * Redirect to $returnLocation to avoid reload problem
    */
   FlashMsg::add(_("Patient has been added."));
-  //$returnLocation = "../medical/patient_view.php?id_patient=" . $idPatient;
-  $returnLocation = "../medical/patient_view.php";
+  $returnLocation = "../medical/patient_view.php?id_patient=" . $idPatient;
   header("Location: " . $returnLocation);
 ?>
