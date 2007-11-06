@@ -1,5 +1,5 @@
 /* CSS based in www.serialz.to site */
-/* $Id: serialz.css,v 1.18 2007/01/15 22:37:33 jact Exp $ */
+/* $Id: serialz.css,v 1.19 2007/11/06 22:19:50 jact Exp $ */
 
 /* Layout */
 html, body {
@@ -267,12 +267,20 @@ fieldset label {
   cursor: pointer;
 }
 
+.error label {
+  cursor: pointer;
+}
+
 fieldset.largeArea label {
   width: 25%;
 }
 
 .requiredField {
   font-weight: bold;
+}
+
+.previous_file {
+  margin-left: 41%;
 }
 
 input, textarea, select {
@@ -349,11 +357,11 @@ fieldset#dumpExtended label {
   font-weight: bold;
 }
 
-.advice, .message {
+.warning, .info {
   font-size: 13px;
 }
 
-.message {
+.info {
   background: #f5f5dc;
   color: #000;
   border: 1px solid #000;
@@ -362,7 +370,7 @@ fieldset#dumpExtended label {
   font-weight: bold;
 }
 
-.advice {
+.warning {
   font-weight: bold;
 }
 
@@ -485,6 +493,7 @@ img {
   font-size: 14px;
   font-weight: bold;
   border: 1px solid #dce0d3;
+  margin-bottom: 0.5em;
 }
 
 #problemHeader {
@@ -510,4 +519,14 @@ img {
 #problemHeader p.right {
   float: right;
   width: 32%;
+}
+
+.pageLinks a {
+  padding: 2px 3px;
+  border: 1px solid #dce0d3;
+}
+
+.pageLinks a:hover {
+  background: #dce0d3;
+  color: #374611;
 }
