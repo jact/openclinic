@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.15 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Setting.php,v 1.16 2007/11/06 22:12:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -161,7 +161,9 @@ class Setting
    */
   function setClinicImageUrl($value)
   {
-    $this->_clinicImageUrl = '../img/' . Check::safeText($value);
+    $value = Check::safeText($value);
+    $value = (strpos($value, '../img/') !== false) ? $value : '../img/' . $value;
+    $this->_clinicImageUrl = $value;
   }
 
   /**
