@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.31 2007/10/27 17:53:18 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.32 2007/12/01 12:41:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -456,7 +456,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.31 2007/10/27 17:53:18 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.32 2007/12/01 12:41:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -756,11 +756,11 @@ function _showButton($name, $value, $type = "next")
   if ($type == "next")
   {
     HTML::tag('span', $value);
-    HTML::start('img', array('src' => '../img/arrow_right.png', 'width' => 22, 'height' => 22, 'alt' => $value), true);
+    HTML::image('../img/arrow_right.png', $value, array('width' => 22, 'height' => 22));
   }
   elseif ($type == "back")
   {
-    HTML::start('img', array('src' => '../img/arrow_left.png', 'width' => 22, 'height' => 22, 'alt' => $value), true);
+    HTML::image('../img/arrow_left.png', $value, array('width' => 22, 'height' => 22));
     HTML::tag('span', $value);
   }
 
