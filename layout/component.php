@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.7 2007/10/30 21:27:05 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.8 2007/12/01 12:58:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -17,294 +17,188 @@
   require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
   executionProtection(__FILE__);
 
-  require_once("../lib/HTML.php");
+  require_once(dirname(__FILE__) . "/../lib/HTML.php");
 
 /**
  * Functions:
- *  string menuBar(string $tab, array $section)
- *  string authInfo(void)
- *  string logoInfo(void)
- *  string patientLinks(int $idPatient, string $nav)
+ *  string menuBar(string $tab)
+ *  string logos(void)
+ *  string miniLogos(void)
+ *  array patientLinks(int $idPatient, string $nav)
+ *  string sfLinks(void)
+ *  string shortcuts(string $tab = null, string $nav = null)
+ *  string navigation(array $links)
+ *  string clinicInfo(void)
  */
 
   /**
-   * string menuBar(string $tab, array $section)
+   * string menuBar(string $tab)
    *
-   * Returns a layer called menuBar with a section menu
+   * Returns a layer called tabs with a section menu
    *
    * @param string $tab selected section
    * @param array $section options list
    * @return string layer with a section menu
    * @access public
    */
-  function menuBar($tab, $section)
+  function menuBar($tab)
   {
-    $html = '';
-    if ( !is_array($section) )
+    $_links = array(
+      "home" => array(_("Home"), "../home/index.php"),
+      "medical" => array(_("Medical Records"), "../medical/index.php"),
+      //"stats" => array("Statistics", "../stats/index.php"),
+      "admin" => array(_("Admin"), "../admin/index.php")
+    );
+    /*if ( !isset($_SESSION['auth']['invalid_token'])
+      && isset($_SESSION['auth']['is_admin']) && $_SESSION['auth']['is_admin'])
     {
-      return;
-    }
+      $_links["admin"] = array(_("Admin"), "../admin/index.php");
+    }*/
 
-    $html = HTML::strStart('div', array('class' => 'menuBar'));
+    $_html = HTML::strStart('div', array('id' => 'tabs'));
 
-    $array = null;
-    $sentinel = true;
-    foreach ($section as $key => $value)
+    $_array = null;
+    $_sentinel = true;
+    foreach ($_links as $_key => $_value)
     {
-      $options = null;
-      if ($sentinel)
+      $_options = null;
+      if ($_sentinel)
       {
-        $sentinel = false;
-        $options = array('id' => 'first');
+        $_sentinel = false;
+        $_options = array('class' => 'first');
+      }
+      if ($tab == $_key)
+      {
+        $_options['class'] = (isset($_options['class'])) ? $_options['class'] . ' selected' : 'selected';
       }
 
-      $item = ($tab == $key)
-        ? HTML::strTag('span', $value[0])
-        : HTML::strLink($value[0], $value[1]);
-      $array[] = (is_null($options) ? $item : array($item, $options));
+      $_array[] = HTML::strLink($_value[0], $_value[1], null, $_options);
     }
-    $html .= HTML::strItemList($array, array('id' => 'tabs'));
-    $html .= HTML::strEnd('div'); // .menuBar
+    $_html .= HTML::strItemList($_array);
+    $_html .= HTML::strEnd('div'); // #tabs
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * string authInfo(void)
+   * string logos(void)
    *
-   * Returns a paragraph .sideBarLogin with auth links
+   * Returns ul#logos with links
    *
-   * @return string p.sideBarLogin
-   * @access public
-   * @see OPEN_DEMO
-   */
-  function authInfo()
-  {
-    $html = '';
-    if ( !defined("OPEN_DEMO") || OPEN_DEMO)
-    {
-      return;
-    }
-
-    $sessLogin = isset($_SESSION['auth']['login_session']) ? $_SESSION['auth']['login_session'] : "";
-    if ( !empty($sessLogin) && !isset($_SESSION['auth']['invalid_token']) )
-    {
-      $sideBarLogin = HTML::strLink(
-          HTML::strStart('img',
-            array(
-              'src' => '../img/logout.png',
-              'width' => 96,
-              'height' => 22,
-              'alt' => _("logout"),
-              'title' => _("logout")
-            ),
-            true
-          ),
-          '../auth/logout.php'
-        )
-        . '<br />'
-        . '[ '
-        . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
-          array(
-            'id_user' => $_SESSION['auth']['user_id'],
-            'all' => 'Y'
-          ),
-          array('title' => _("manage your user account"))
-        )
-        . ' ]';
-    }
-    else
-    {
-      $sideBarLogin = HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/login.png',
-            'width' => 96,
-            'height' => 22,
-            'alt' => _("login"),
-            'title' => _("login")
-          ),
-          true
-        ),
-        '../auth/login_form.php'
-      );
-    }
-    $html = HTML::strPara($sideBarLogin, array('class' => 'sideBarLogin'));
-    unset($sideBarLogin);
-    $html .= HTML::strRule();
-
-    return $html;
-  }
-
-  /**
-   * string logoInfo(void)
-   *
-   * Returns a layer called sideBarLogo with logo information
-   *
-   * @return string div#sideBarLogo
+   * @return string ul#logos
    * @access public
    */
-  function logoInfo()
+  function logos()
   {
-    $html = HTML::strStart('div', array('id' => 'sideBarLogo'));
+    $_links = null;
 
-    $html .= HTML::strPara(
-      HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/openclinic-2.png',
-            'width' => 130,
-            'height' => 29,
-            'alt' => _("Powered by OpenClinic"),
-            'title' => _("Powered by OpenClinic")
-          ),
-          true
-        ),
-        'http://openclinic.sourceforge.net'
-      )
+    $_links[] = HTML::strLink(
+      HTML::strImage(
+        '../img/openclinic-2.png',
+        _("Powered by OpenClinic"),
+        array('width' => 130, 'height' => 29)
+      ),
+      'http://openclinic.sourceforge.net'
     );
 
-    $thankCoresis = HTML::strStart('img',
-      array(
-        'src' => '../img/thank.png',
-        'width' => 65,
-        'height' => 30,
-        'alt' => 'OpenClinic Logo thanks to Coresis',
-        'title' => 'OpenClinic Logo thanks to Coresis'
-      ),
-      true
+    $thankCoresis = HTML::strImage('../img/thank.png', 'OpenClinic Logo thanks to Coresis',
+      array('width' => 65, 'height' => 30)
     );
-    $thankCoresis .= HTML::strStart('img',
-      array(
-        'src' => '../img/coresis.png',
-        'width' => 65,
-        'height' => 30,
-        'alt' => 'OpenClinic Logo thanks to Coresis',
-        'title' => 'OpenClinic Logo thanks to Coresis'
-      ),
-      true
+    $thankCoresis .= HTML::strImage('../img/coresis.png', 'OpenClinic Logo thanks to Coresis',
+      array('width' => 65, 'height' => 30)
     );
     $thankCoresis = str_replace(PHP_EOL, '', $thankCoresis);
-    $html .= HTML::strPara(HTML::strLink($thankCoresis, 'http://www.coresis.com'));
+    $_links[] = HTML::strLink($thankCoresis, 'http://www.coresis.com');
     unset($thankCoresis);
 
-    $html .= HTML::strPara(
-      HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/sf-logo.png',
-            'width' => 130,
-            'height' => 37,
-            'alt' => "Project hosted in SourceForge.net",
-            'title' => "Project hosted in SourceForge.net"
-          ),
-          true
-        ),
-        'http://sourceforge.net'
-      )
+    $_links[] = HTML::strLink(
+      HTML::strImage(
+        '../img/sf-logo.png',
+        'Project hosted in SourceForge.net',
+        array('width' => 130, 'height' => 37)
+      ),
+      'http://sourceforge.net'
     );
 
-    $html .= HTML::strPara(
-      HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/php-logo.gif',
-            'width' => 80,
-            'height' => 15,
-            'alt' => "Powered by PHP",
-            'title' => "Powered by PHP"
-          ),
-          true
-        ),
-        'http://www.php.net'
-      )
-    );
-
-    $html .= HTML::strPara(
-      HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/mysql-logo.png',
-            'width' => 80,
-            'height' => 15,
-            'alt' => "Works with MySQL",
-            'title' => "Works with MySQL"
-          ),
-          true
-        ),
-        'http://www.mysql.com'
-      )
-    );
-
-    $html .= HTML::strPara(
-      HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/valid-xhtml11.png',
-            'width' => 80,
-            'height' => 15,
-            'alt' => "Valid XHTML 1.1",
-            'title' => "Valid XHTML 1.1"
-          ),
-          true
-        ),
-        'http://validator.w3.org/check/referer'
-      )
-    );
-
-    $html .= HTML::strPara(
-      HTML::strLink(
-        HTML::strStart('img',
-          array(
-            'src' => '../img/valid-css.png',
-            'width' => 80,
-            'height' => 15,
-            'alt' => "Valid CSS",
-            'title' => "Valid CSS"
-          ),
-          true
-        ),
-        'http://jigsaw.w3.org/css-validator',
-        array('uri' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'])
-      )
-    );
-
-    $html .= HTML::strEnd('div'); // #sideBarLogo
-
-    return $html;
+    return HTML::strItemList($_links, array('id' => 'logos'));
   }
 
   /**
-   * string patientLinks(int $idPatient, string $nav)
+   * string miniLogos(void)
    *
-   * Returns a list with links about a patient
+   * @return string ul#mini_logos
+   * @access public
+   */
+  function miniLogos()
+  {
+    $_links = null;
+
+    $_links[] = HTML::strLink(
+      HTML::strImage(
+        '../img/php-logo.gif',
+        'Powered by PHP',
+        array('width' => 80, 'height' => 15)
+      ),
+      'http://www.php.net'
+    );
+
+    $_links[] = HTML::strLink(
+      HTML::strImage(
+        '../img/mysql-logo.png',
+        'Works with MySQL',
+        array('width' => 80, 'height' => 15)
+      ),
+      'http://www.mysql.com'
+    );
+
+    $_links[] = HTML::strLink(
+      HTML::strImage(
+        '../img/valid-xhtml11.png',
+        'Valid XHTML 1.1',
+        array('width' => 80, 'height' => 15)
+      ),
+      'http://validator.w3.org/check/referer'
+    );
+
+    $_links[] = HTML::strLink(
+      HTML::strImage(
+        '../img/valid-css.png',
+        'Valid CSS',
+        array('width' => 80, 'height' => 15)
+      ),
+      'http://jigsaw.w3.org/css-validator',
+      array('uri' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'])
+    );
+
+    return HTML::strItemList($_links, array('id' => 'mini_logos'));
+  }
+
+  /**
+   * array patientLinks(int $idPatient, string $nav)
+   *
+   * Returns an array with links about a patient
    *
    * @param int $idPatient
    * @param string $nav
-   * @return string
+   * @return array
    * @access public
    * @since 0.8
    */
   function patientLinks($idPatient, $nav)
   {
     $linkList = array(
-      "relatives" => array(_("View Relatives"), "../medical/relative_list.php?id_patient=" . $idPatient),
+      "relatives" => array(_("View Relatives"), "../medical/relative_list.php"),
       //"preventive" => array(_("Datos Preventivos"), ""), // I don't know how implement it
-      "history" => array(_("Clinic History"), "../medical/history_list.php?id_patient=" . $idPatient),
-      "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php?id_patient=" . $idPatient)
+      "history" => array(_("Clinic History"), "../medical/history_list.php"),
+      "problems" => array(_("Medical Problems Report"), "../medical/problem_list.php")
     );
 
     $array = null;
     foreach ($linkList as $key => $value)
     {
-      if ($nav == $key)
-      {
-        $array[] = array($value[0], array('class' => 'selected'));
-      }
-      else
-      {
-        $array[] = HTML::strLink($value[0], $value[1]);
-      }
+      $array[] = HTML::strLink($value[0], $value[1], array('id_patient' => $idPatient),
+        $nav == $key ? array('class' => 'selected') : null
+      );
     }
     unset($linkList);
 
@@ -315,6 +209,214 @@
           array('class' => 'popup')
         );
 
-    return HTML::strItemList($array, array('class' => 'subnavbar'));
+    return $array;
+  }
+
+  /**
+   * string sfLinks(void)
+   *
+   * Returns a layer called sf_links with a links list
+   *
+   * @return string layer with a links list
+   * @access public
+   */
+  function sfLinks()
+  {
+    $_sfLinks = array(
+      _("Project Page") => 'http://sourceforge.net/projects/openclinic/',
+      //_("Mailing Lists") => 'http://sourceforge.net/mail/?group_id=70742',
+      _("Downloads") => 'http://sourceforge.net/project/showfiles.php?group_id=70742',
+      _("Report Bugs") => 'http://sourceforge.net/tracker/?group_id=70742&atid=528857',
+      //_("Tasks") => 'http://sourceforge.net/pm/?group_id=70742',
+      _("Forums") => 'http://sourceforge.net/forum/?group_id=70742',
+      //_("Developers"), 'http://sourceforge.net/project/memberlist.php?group_id=70742'
+    );
+
+    $_array = null;
+    foreach ($_sfLinks as $_key => $_value)
+    {
+      $_array[] = HTML::strLink($_key, $_value);
+    }
+    $_html = HTML::strItemList($_array, array('id' => 'sf_links'));
+
+    return $_html;
+  }
+
+  /**
+   * string shortcuts(string $tab = null, string $nav = null)
+   *
+   * Returns an ul#shortcuts with links
+   *
+   * @param string $tab (optional)
+   * @param string $nav (optional)
+   * @return string ul#shortcuts
+   * @access public
+   * @see OPEN_DEMO
+   */
+  function shortcuts($tab = null, $nav = null)
+  {
+    $_links = null;
+
+    if (defined("OPEN_DEMO") && !OPEN_DEMO)
+    {
+      $sessLogin = isset($_SESSION['auth']['login_session']) ? $_SESSION['auth']['login_session'] : '';
+      if ( !empty($sessLogin) && !isset($_SESSION['auth']['invalid_token']) )
+      {
+        $_links[] = HTML::strLink(_("Logout"), '../auth/logout.php')
+          . ' ['
+          . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
+            array(
+              'id_user' => $_SESSION['auth']['user_id'],
+              'all' => 'Y'
+            ),
+            array('title' => _("manage your user account"))
+          )
+          . ']';
+      }
+      else
+      {
+        $_links[] = HTML::strLink(_("Log in"), '../auth/login_form.php'); // @fixme login
+      }
+    }
+
+    $_links[] = HTML::strLink(_("OpenClinic Readme"), '../index.html');
+
+    if (isset($tab) && isset($nav))
+    {
+      $_links[] = HTML::strLink(_("Help"), '../doc/index.php',
+        array(
+          'tab' => $tab,
+          'nav' => $nav
+        ),
+        array(
+          'title' => _("Opens a new window"),
+          'class' => 'popup'
+        )
+      );
+    }
+
+
+    if (isset($_SESSION['auth']['is_admin']) && ($_SESSION['auth']['is_admin'] === true && !OPEN_DEMO))
+    {
+      $_serverVar = (strpos(PHP_SAPI, 'cgi') !== false)
+        ? $_SERVER['PATH_TRANSLATED']
+        : $_SERVER['SCRIPT_FILENAME'];
+      $_links[] = HTML::strLink(_("View source code"), '../shared/view_source.php',
+        array(
+          'file' => $_serverVar
+        ),
+        array(
+          'title' => _("Opens a new window"),
+          'class' => 'popup'
+        )
+      );
+    }
+
+    if (defined("OPEN_DEMO") && OPEN_DEMO)
+    {
+      $_links[] = HTML::strLink(_("Demo version features"), '../demo_version.html');
+    }
+
+    $_html = HTML::strItemList($_links, array('id' => 'shortcuts'));
+
+    return $_html;
+  }
+
+  /**
+   * string navigation(array $links)
+   *
+   * @param array $links
+   *  array(
+   *    string,
+   *    array(
+   *      string,
+   *      string,
+   *    ),
+   *    string
+   *  )
+   * @return string list of links
+   * @access public
+   */
+  function navigation($links)
+  {
+    $_html = HTML::strStart('ul');
+    foreach ($links as $value)
+    {
+      if (is_array($value))
+      {
+        $_html .= navigation($value);
+      }
+      else
+      {
+        $_html .= HTML::strStart('li') . $value;
+      }
+      if ( !is_array(next($links)) )
+      {
+        $_html .= HTML::strEnd('li');
+      }
+    }
+    $_html .= HTML::strEnd('ul');
+
+    return $_html;
+  }
+
+  /**
+   * string clinicInfo(void)
+   *
+   * @return string div#clinic_info (microformat hCard)
+   * @access public
+   * @see OPEN_CLINIC_NAME
+   * @see OPEN_CLINIC_URL
+   * @see OPEN_CLINIC_HOURS
+   * @see OPEN_CLINIC_ADDRESS
+   * @see OPEN_CLINIC_PHONE
+   */
+  function clinicInfo()
+  {
+    if ( !defined("OPEN_CLINIC_NAME") || !OPEN_CLINIC_NAME )
+    {
+      return;
+    }
+
+    $_html = HTML::strStart('div', array('id' => 'clinic_info', 'class' => 'vcard contact'));
+
+    $_name = OPEN_CLINIC_NAME;
+    if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
+    {
+      $_name = HTML::strLink($_name, OPEN_CLINIC_URL, null, array('class' => 'url'));
+    }
+
+    $_html .= HTML::strPara($_name, array('class' => 'fn org'));
+
+    if (defined("OPEN_CLINIC_HOURS") && OPEN_CLINIC_HOURS)
+    {
+      $_html .= HTML::strPara(sprintf(_("Clinic hours: %s"), OPEN_CLINIC_HOURS));
+    }
+
+    if ((defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
+      || (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE))
+    {
+      $_html .= HTML::strStart('address', array('class' => 'adr'));
+
+      if (defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
+      {
+        $_html .= HTML::strPara(sprintf(_("Clinic address: %s"), HTML::strTag('span', OPEN_CLINIC_ADDRESS,
+          array('class' => 'street-address')))
+        );
+      }
+
+      if (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE)
+      {
+        $_html .= HTML::strPara(sprintf(_("Clinic phone: %s"),
+          HTML::strTag('span', OPEN_CLINIC_PHONE, array('class' => 'tel value')))
+        );
+      }
+
+      $_html .= HTML::strEnd('address');
+    }
+
+    $_html .= HTML::strEnd('div');
+
+    return $_html;
   }
 ?>
