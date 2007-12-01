@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.31 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.32 2007/12/01 12:37:41 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -58,7 +58,7 @@
     _("Medical Records") => "../medical/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   HTML::section(2, _("Social Data"));
@@ -84,7 +84,7 @@
     array('id_patient' => $idPatient)
   );
   $relatedLinks .= ' | ';
-  $relatedLinks .= HTML::strLink(_("Medical Records"), '../medical/problem_list.php',
+  $relatedLinks .= HTML::strLink(_("Medical Problems Report"), '../medical/problem_list.php',
     array('id_patient' => $idPatient)
   );
   $relatedLinks .= ' | ';
