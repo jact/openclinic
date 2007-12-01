@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Check.php,v 1.9 2007/10/26 21:17:15 jact Exp $
+ * @version   CVS: $Id: Check.php,v 1.10 2007/12/01 12:42:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -553,16 +553,16 @@ class Check
     if (isset($_POST[$field]))
     {
       $_value = intval($_POST[$field]);
-      $_SESSION['bread_crumb'][$field] = $_value;
+      $_SESSION['breadcrumb'][$field] = $_value;
     }
     elseif (isset($_GET[$field]))
     {
       $_value = intval($_GET[$field]);
-      $_SESSION['bread_crumb'][$field] = $_value;
+      $_SESSION['breadcrumb'][$field] = $_value;
     }
-    elseif (isset($_SESSION['bread_crumb'][$field]))
+    elseif (isset($_SESSION['breadcrumb'][$field]))
     {
-      $_value = $_SESSION['bread_crumb'][$field];
+      $_value = $_SESSION['breadcrumb'][$field];
     }
 
     return $_value;
@@ -585,16 +585,16 @@ class Check
     if (isset($_POST[$field]))
     {
       $_value = Check::safeText($_POST[$field]);
-      $_SESSION['bread_crumb'][$field] = $_value;
+      $_SESSION['breadcrumb'][$field] = $_value;
     }
     elseif (isset($_GET[$field]))
     {
       $_value = Check::safeText($_GET[$field]);
-      $_SESSION['bread_crumb'][$field] = $_value;
+      $_SESSION['breadcrumb'][$field] = $_value;
     }
-    elseif (isset($_SESSION['bread_crumb'][$field]))
+    elseif (isset($_SESSION['breadcrumb'][$field]))
     {
-      $_value = $_SESSION['bread_crumb'][$field];
+      $_value = $_SESSION['breadcrumb'][$field];
     }
 
     return $_value;
