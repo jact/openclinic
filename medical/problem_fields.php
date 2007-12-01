@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_fields.php,v 1.29 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: problem_fields.php,v 1.30 2007/12/01 12:16:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -97,7 +97,7 @@
   );
 
   $options = array(
-    'class' => 'largeArea'
+    'class' => 'large_area'
   );
 
   Form::fieldset($title, $tbody, $tfoot, $options);
