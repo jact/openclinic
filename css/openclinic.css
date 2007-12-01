@@ -1,0 +1,544 @@
+/**
+ * openclinic.css
+ *
+ * OpenClinic official theme
+ *
+ * Licensed under the GNU GPL. For full terms see the file LICENSE.
+ *
+ * @package   OpenClinic
+ * @copyright 2002-2007 jact
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
+ * @version   CVS: $Id: openclinic.css,v 1.1 2007/12/01 12:51:23 jact Exp $
+ * @author    jact <jachavar@gmail.com>
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: #EBF3FA;
+  color: #000;
+  font-family: "lucida sans unicode", "Trebuchet MS", trebuchet, verdana, helvetica, arial, sans-serif;
+}
+
+#header {
+  border-bottom: 6px solid #3A5266;
+  background: #fff;
+  color: #000;
+}
+
+#logo {
+  width: 300px;
+}
+
+#logo a img {
+  display: block;
+}
+
+#skip_navigation, hr {
+  display: none;
+  visibility: hidden;
+}
+
+#shortcuts {
+  position: absolute;
+  top: 1.5em;
+  right: 1em;
+  text-align: right;
+  font-size: 75%;
+  font-weight: bold;
+}
+
+#shortcuts li {
+  display: inline;
+  padding: 0 0 0 2em;
+}
+
+#shortcuts a {
+  background: inherit;
+  color: #000;
+}
+
+#tabs {
+  clear: both;
+  border-top: 6px solid #000;
+}
+
+#tabs ul {
+  background: #51728D;
+  color: #fff;
+}
+
+#tabs li {
+  display: inline;
+  line-height: 2em;
+}
+
+#tabs li a {
+  border-right: 1px solid #3a5266;
+  padding: 0.4em 1.5em 0.4em;
+  background: inherit;
+  color: #fff;
+  text-decoration: none;
+}
+
+#tabs a.first.selected {
+  border-left: 1px solid #ebf3fa;
+}
+
+#tabs li a:hover,
+#tabs li a.selected:hover {
+  background: #34548f;
+  color: #fff;
+}
+
+#tabs a.selected {
+  border-bottom: 6px solid #EBF3FA;
+  border-left: 1px solid #EBF3FA;
+  background: #EBF3FA;
+  color: #51728d;
+  font-weight: bold;
+}
+
+#main {
+  width: 79%;
+  float: right;
+}
+
+#navigation {
+  width: 20%;
+  float: left;
+}
+
+#navigation ul {
+  margin: 1em 0 2em 0.7em;
+  border: 1px solid #5976b2;
+  border-top: 0;
+  background: #E7E7EF;
+  color: #000;
+  list-style-type: none;
+  font-size: 90%;
+}
+
+#navigation ul li {
+  border-top: 1px solid #5976b2;
+}
+
+#navigation li a,
+#navigation li span {
+  display: block;
+  padding: 0.5em 0.3em;
+  background: inherit;
+  color: #000;
+  text-decoration: none;
+}
+
+#navigation li a:hover,
+#navigation li a.selected:hover {
+  background: #34548f;
+  color: #fff;
+}
+
+#navigation li a.selected,
+#navigation li span.selected {
+  background: #51728d;
+  color: #fff;
+}
+
+#navigation ul li ul {
+  margin: 0 0.3em;
+  background: #fff;
+  color: #000;
+}
+
+#clinic_info {
+  margin: 1em 0 1em 1em;
+  border: 1px solid #5976b2;
+  padding: 2px;
+  background: #fff;
+  color: #000;
+  font-size: 70%;
+  line-height: 175%;
+}
+
+#content {
+  padding: 1em 2em;
+  line-height: 175%;
+  font-size: 80%;
+}
+
+#content h1, #content h2, #content h3 {
+  margin: 1em 0 0.5em;
+}
+
+#content h1 {
+  margin-top: 0;
+}
+
+#content li {
+  margin-left: 2em;
+}
+
+#content hr {
+  display: block;
+  visibility: visible;
+  height: 1px;
+  margin: 0.5em;
+  border: 1px solid #3a5266;
+  background: #3a5266;
+  color: #3a5266;
+}
+
+#footer {
+  clear: both;
+  border-top: 6px solid #000;
+  border-bottom: 2px solid #000;
+  padding: 1em 2em;
+  background: #3a5266;
+  color: #fff;
+  font-size: 80%;
+  line-height: 180%;
+}
+
+#footer a {
+  background: inherit;
+  color: #F7EED4;
+}
+
+#footer ul {
+  list-style-type: none;
+  text-align: center;
+}
+
+#logos a, #mini_logos a {
+  text-decoration: none;
+}
+
+#logos {
+  width: 32%;
+  float: left;
+}
+
+#sf_links {
+  width: 33%;
+  float: left;
+  line-height: 225%;
+}
+
+#mini_logos {
+  width: 32%;
+  float: right;
+  line-height: 225%;
+}
+
+#app_info {
+  clear: both;
+  padding-top: 1em;
+  text-align: center;
+}
+
+a img {
+  border: none;
+}
+
+pre {
+  font-family: "Lucida Sans Typewriter", "Courier New", monospace;
+}
+
+fieldset {
+  margin: 0.5em;
+  border: 1px solid #5976b2;
+  padding: 1em;
+  background: #fff;
+  color: #000;
+  line-height: 250%;
+}
+
+legend {
+  background: #7B60A4;
+  color: #fff;
+  border: 1px solid #51728D;
+  padding: 0 0.3em;
+  font-weight: bold;
+}
+
+fieldset label {
+  display: block;
+  width: 40%;
+  float: left;
+  text-align: right;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+fieldset .action {
+  clear: both;
+  margin: 1em 0;
+  text-align: center;
+}
+
+fieldset span.error {
+  display: block;
+  margin: 2px 0 16px;
+  border-bottom: 1px solid #fff;
+}
+
+.error label {
+  cursor: pointer;
+}
+
+.previous_file {
+  margin-left: 41%;
+}
+
+.required {
+  font-weight: bold;
+}
+
+input, textarea, select {
+  border: 1px solid #000;
+  padding: 1px;
+  background: #374611;
+  color: #fff;
+  font-family: "lucida sans unicode", verdana, helvetica, arial, sans-serif;
+  font-size: 110%;
+}
+
+option {
+  padding: 0 3px;
+}
+
+input:focus, textarea:focus, select:focus {
+  background: #f7eed4;
+  color: #374611;
+}
+
+input[type="submit"], input[type="button"], input[type="reset"] {
+  margin: 2px 10px;
+  border-width: 2px;
+  border-color: #BCCCD8 #3a5266 #3a5266 #BCCCD8;
+  font-weight: bold;
+  background: #51728d;
+  padding: 2px 6px;
+}
+
+input[type="submit"], .action input:first-child {
+  padding: 4px 6px;
+}
+
+input.error, textarea.error, select.error {
+  border: 3px solid #FF8181;
+  padding: 1px;
+  background: #374611;
+  color: #fff;
+}
+
+fieldset#dump_tables {
+  width: 35%;
+  float: left;
+  margin-right: 1em;
+}
+
+fieldset#dump_options label,
+fieldset#dump_extended label {
+  display: inline;
+  float: none;
+}
+
+fieldset#new_user label {
+  width: 55%;
+}
+
+fieldset.large_area label {
+  text-align: left;
+}
+
+table {
+  margin: 0.5em 0;
+  border-collapse: collapse;
+  border: 1px solid #5976b2;
+}
+
+/*table a {
+  text-decoration: none;
+}*/
+
+th, td {
+  border: 1px solid #51728D;
+  padding: 0.3em;
+}
+
+th {
+  background: #7B60A4;
+  color: #fff;
+  font-weight: bold;
+}
+
+tr {
+  background: #fff;
+  color: #000;
+}
+
+.even {
+  background: #F1EBFA;
+  color: #000;
+}
+
+tr.odd:hover,
+tr.even:hover {
+  background: #FAF2EB;
+  color: #000;
+}
+
+.center table {
+  margin: 0 auto;
+  text-align: left;
+}
+
+.center {
+  text-align: center;
+}
+
+.right {
+  text-align: right;
+}
+
+.left {
+  text-align: left;
+}
+
+.icon {
+  margin-top: 5px;
+  padding: 10px 0 10px 40px;
+  background-repeat: no-repeat;
+  background-position: 0% 50%;
+}
+
+.icon_dump {
+  background-image: url(../img/icon_dump.png);
+}
+
+.icon_log {
+  background-image: url(../img/icon_log.png);
+}
+
+.icon_config {
+  background-image: url(../img/icon_config.png);
+}
+
+.icon_staff {
+  background-image: url(../img/icon_staff.png);
+}
+
+.icon_theme {
+  background-image: url(../img/icon_theme.png);
+}
+
+.icon_user {
+  background-image: url(../img/icon_user.png);
+}
+
+.icon_patient {
+  background-image: url(../img/icon_patient.png);
+}
+
+.icon_search {
+  background-image: url(../img/icon_search.png);
+}
+
+.icon_medical {
+  background-image: url(../img/icon_medical.png);
+}
+
+.icon_admin {
+  background-image: url(../img/icon_admin.png);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* clearfix */
+.clearfix {
+  display: inline-block;
+  width: 100%;
+}
+
+/* Hide from IE-mac \*/
+* html .clearfix {
+  height: 1%;
+  width: auto;
+}
+
+.clearfix {
+  display: table;
+}
+/* End hide from IE-mac */
+
+#patient_header, #problem_header {
+  margin-bottom: 0.5em;
+  background: #51728d;
+  color: #fff;
+}
+
+#patient_header p, #problem_header p {
+  float: left;
+  width: 38%;
+  margin: 0;
+  padding: 2px 5px;
+}
+
+#problem_header p {
+  width: 30%;
+}
+
+#patient_header p.right {
+  float: right;
+  width: 18%;
+}
+
+#problem_header p.right {
+  float: right;
+  width: 32%;
+}
+
+.page_links a {
+  padding: 2px 3px;
+  border: 1px solid #51728D;
+}
+
+.page_links a:hover {
+  background: #fff;
+  color: #000;
+}
+
+.error, .warning, .info, .hint {
+  margin: 0.5em 0;
+  padding: 6px 0 6px 40px;
+  font-weight: bold;
+}
+
+.error {
+  background: #FF8181 url(../img/msg_error.png) 2px center no-repeat;
+  color: #fff;
+}
+
+.warning {
+  border: 1px solid #BDB76B;
+  background: #FFFF9A url(../img/msg_warning.png) 2px center no-repeat;
+  color: #000;
+}
+
+.info {
+  border: 1px solid #DFCBB6;
+  background: #FAF2EB url(../img/msg_info.png) 2px center no-repeat;
+  color: #000;
+}
+
+.hint {
+  border: 1px solid #DFCBB6;
+  background: #FAF2EB url(../img/msg_hint.png) 2px center no-repeat;
+  color: #000;
+}
