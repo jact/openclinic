@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.9 2007/11/05 14:29:47 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.10 2007/12/01 12:47:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,7 +45,7 @@
     _("Home") => "../home/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon userIcon");
+  HTML::breadCrumb($links, "icon icon_user");
   unset($links);
 
   /**
