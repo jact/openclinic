@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.16 2007/11/01 09:33:42 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.17 2007/12/01 12:40:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -17,7 +17,7 @@
    * Controlling vars
    */
   $tab = "home";
-  $nav = "home";
+  $nav = "summary";
 
   require_once("../config/environment.php");
   if (isset($_SESSION['auth']['token']))
@@ -37,7 +37,7 @@
   HTML::para(_("OpenClinic is an easy to use, open source, medical records system."));
   HTML::para(_("When you select any of the following tabs you will be prompted to login."));
 
-  HTML::section(2, HTML::strLink(_("Medical Records"), '../medical/index.php'), array('class' => 'bigIcon medicalIcon'));
+  HTML::section(2, HTML::strLink(_("Medical Records"), '../medical/index.php'), array('class' => 'icon icon_medical'));
   HTML::para(_("Use this tab to manage your patient's medical records."));
   HTML::para(_("Patient's Administration:"));
 
@@ -51,7 +51,7 @@
 
   HTML::rule();
 
-  HTML::section(2, HTML::strLink(_("Admin"), '../admin/index.php'), array('class' => 'bigIcon adminIcon'));
+  HTML::section(2, HTML::strLink(_("Admin"), '../admin/index.php'), array('class' => 'icon icon_admin'));
   HTML::para(_("Use this tab to manage administrative options."));
 
   $array = array(
