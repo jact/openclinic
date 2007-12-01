@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.31 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.32 2007/12/01 12:07:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -37,7 +37,7 @@
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon themeIcon");
+  HTML::breadCrumb($links, "icon icon_theme");
   unset($links);
 
   $legend = _("Change Theme by default in application");
@@ -98,36 +98,52 @@
 
     if (in_array($theme->getCSSFile(), $reservedCSSFiles))
     {
-      $row .= "** " . _("edit");
+      $row .= '**'; //"** " . _("edit");
     }
     else
     {
-      $row = HTML::strLink(_("edit"), '../admin/theme_edit_form.php', array('id_theme' => $theme->getId()));
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_edit.png', _("edit")),
+        '../admin/theme_edit_form.php',
+        array('id_theme' => $theme->getId())
+      );
     }
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("copy"), '../admin/theme_new_form.php', array('id_theme' => $theme->getId()));
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_copy.png', _("copy")),
+      '../admin/theme_new_form.php',
+      array('id_theme' => $theme->getId())
+    );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("preview"), '../admin/theme_preview.php', array('id_theme' => $theme->getId()),
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_view.png', _("preview")),
+      '../admin/theme_preview.php',
+      array('id_theme' => $theme->getId()),
       array('class' => 'popup')
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("validate"), $validateLink . $theme->getCSSFile());
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_valid.png', _("validate")),
+      $validateLink . $theme->getCSSFile()
+    );
     $row .= OPEN_SEPARATOR;
 
     if (in_array($theme->getCSSFile(), $reservedCSSFiles))
     {
-      $row .= "** " . _("del");
+      $row .= '**'; //"** " . _("del");
     }
     elseif ($theme->getId() == OPEN_THEME_ID || $theme->getCount() > 0)
     {
-      $row .= "* " . _("del");
+      $row .= '*'; //"* " . _("del");
     }
     else
     {
-      $row .= HTML::strLink(_("del"), '../admin/theme_del_confirm.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_delete.png', _("delete")),
+        '../admin/theme_del_confirm.php',
         array(
           'id_theme' => $theme->getId(),
           'name' => $theme->getName()
@@ -158,7 +174,12 @@
   $themeQ->close();
 
   $options = array(
-    0 => array('align' => 'right')
+    0 => array('align' => 'right'),
+    1 => array('align' => 'center'),
+    2 => array('align' => 'center'),
+    3 => array('align' => 'center'),
+    4 => array('align' => 'center'),
+    5 => array('align' => 'center')
   );
 
   HTML::table($thead, $tbody, null, $options);

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.31 2007/11/03 16:53:36 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.32 2007/12/01 12:16:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -53,7 +53,7 @@
     $patient->getName() => "../medical/patient_view.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -106,7 +106,9 @@
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= HTML::strLink(_("edit"), '../medical/problem_edit_form.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_edit.png', _("edit")),
+        '../medical/problem_edit_form.php',
         array(
           'id_problem' => $problem->getIdProblem(),
           'id_patient' => $problem->getIdPatient()
@@ -114,7 +116,9 @@
       );
       $row .= OPEN_SEPARATOR;
 
-      $row .= HTML::strLink(_("del"), '../medical/problem_del_confirm.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_delete.png', _("delete")),
+        '../medical/problem_del_confirm.php',
         array(
           'id_problem' => $problem->getIdProblem(),
           'id_patient' => $problem->getIdPatient()
@@ -123,7 +127,9 @@
       $row .= OPEN_SEPARATOR;
     } // end if
 
-    $row .= HTML::strLink(_("view"), '../medical/problem_view.php',
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_view.png', _("view")),
+      '../medical/problem_view.php',
       array(
         'id_problem' => $problem->getIdProblem(),
         'id_patient' => $problem->getIdPatient()
@@ -131,7 +137,9 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("tests"), '../medical/test_list.php',
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_test.png', _("tests")),
+      '../medical/test_list.php',
       array(
         'id_problem' => $problem->getIdProblem(),
         'id_patient' => $problem->getIdPatient()
@@ -139,7 +147,9 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("connect"), '../medical/connection_list.php',
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_connection.png', _("connect")),
+      '../medical/connection_list.php',
       array(
         'id_problem' => $problem->getIdProblem(),
         'id_patient' => $problem->getIdPatient()

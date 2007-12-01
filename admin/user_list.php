@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.33 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.34 2007/12/01 12:09:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -47,7 +47,7 @@
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon userIcon");
+  HTML::breadCrumb($links, "icon icon_user");
   unset($links);
 
   $legend = _("Create New User");
@@ -69,7 +69,7 @@
    * New user form
    */
   HTML::start('form', array('method' => 'post', 'action' => '../admin/user_new_form.php'));
-  Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null);
+  Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null, array('id' => 'new_user'));
   HTML::end('form');
 
   HTML::section(2, _("Users List:"));
@@ -100,6 +100,12 @@
 
   $options = array(
     0 => array('align' => 'right'),
+    1 => array('align' => 'center'),
+    2 => array('align' => 'center'),
+    3 => array('align' => 'center'),
+    4 => array('align' => 'center'),
+    5 => array('align' => 'center'),
+    6 => array('align' => 'center'),
     9 => array('align' => 'center'),
     10 => array('align' => 'center')
   );
@@ -121,17 +127,26 @@
      */
     $row = ++$i . '.';
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(_("edit"), '../admin/user_edit_form.php', array('id_user' => $user->getIdUser()));
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_edit.png', _("edit")),
+      '../admin/user_edit_form.php', array('id_user' => $user->getIdUser())
+    );
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(_("pwd"), '../admin/user_pwd_reset_form.php', array('id_user' => $user->getIdUser()));
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_password.png', _("password")),
+      '../admin/user_pwd_reset_form.php',
+      array('id_user' => $user->getIdUser())
+    );
     $row .= OPEN_SEPARATOR;
     if (isset($_SESSION['auth']['user_id']) && $user->getIdUser() == $_SESSION['auth']['user_id'])
     {
-      $row .= '*' . _("del");
+      $row .= '*'; //'*' . _("del");
     }
     else
     {
-      $row .= HTML::strLink(_("del"), '../admin/user_del_confirm.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_delete.png', _("delete")),
+        '../admin/user_del_confirm.php',
         array(
           'id_user' => $user->getIdUser(),
           'login' => $user->getLogin()
@@ -139,18 +154,24 @@
       );
     }
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(_("edit member"), '../admin/staff_edit_form.php',
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_edit_user.png', _("edit member")),
+      '../admin/staff_edit_form.php',
       array('id_member' => $user->getIdMember())
     );
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(_("accesses"), '../admin/user_access_log.php',
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_access.png', _("accesses")),
+      '../admin/user_access_log.php',
       array(
         'id_user' => $user->getIdUser(),
         'login' => $user->getLogin()
       )
     );
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(_("transactions"), '../admin/user_record_log.php',
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_record.png', _("transactions")),
+      '../admin/user_record_log.php',
       array(
         'id_user' => $user->getIdUser(),
         'login' => $user->getLogin()

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.28 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.29 2007/12/01 12:06:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,7 +41,7 @@
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon staffIcon");
+  HTML::breadCrumb($links, "icon icon_staff");
   unset($links);
 
   $staffQ = new Query_Staff();
@@ -144,16 +144,22 @@
     $row = ++$i . '.';
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("edit"), '../admin/staff_edit_form.php', array('id_member' => $staff->getIdMember()));
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_edit.png', _("edit")),
+      '../admin/staff_edit_form.php',
+      array('id_member' => $staff->getIdMember())
+    );
     $row .= OPEN_SEPARATOR;
 
     if ($staff->getIdMember() == $_SESSION['auth']['member_user'])
     {
-      $row .= "** " . _("del");
+      $row .= '**'; //"** " . _("del");
     }
     else
     {
-      $row .= HTML::strLink(_("del"), '../admin/staff_del_confirm.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_delete.png', _("delete")),
+        '../admin/staff_del_confirm.php',
         array(
           'id_member' => $staff->getIdMember(),
           'surname1' => $staff->getSurname1(),
@@ -166,11 +172,13 @@
 
     if ($staff->getIdUser() == 0 && $staff->getLogin() == "")
     {
-      $row .= '* ' . _("create user");
+      $row .= '*'; //'* ' . _("create user");
     }
     elseif ($staff->getIdUser() == 0)
     {
-      $row .= HTML::strLink(_("create user"), '../admin/user_new_form.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_add_user.png', _("create user")),
+        '../admin/user_new_form.php',
         array(
           'id_member' => $staff->getIdMember(),
           'login' => $staff->getLogin()
@@ -179,7 +187,11 @@
     }
     else
     {
-      $row .= HTML::strLink(_("edit user"), '../admin/user_edit_form.php', array('id_user' => $staff->getIdUser()));
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_edit_user.png', _("edit user")),
+        '../admin/user_edit_form.php',
+        array('id_user' => $staff->getIdUser())
+      );
     } // end if
     $row .= OPEN_SEPARATOR;
 
@@ -217,7 +229,10 @@
   unset($staff);
 
   $options = array(
-    0 => array('align' => 'right')
+    0 => array('align' => 'right'),
+    1 => array('align' => 'center'),
+    2 => array('align' => 'center'),
+    3 => array('align' => 'center')
   );
 
   HTML::table($thead, $tbody, null, $options);

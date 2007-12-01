@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.33 2007/11/02 22:21:06 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.34 2007/12/01 12:18:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -71,7 +71,7 @@
     $patient->getName() => "../medical/patient_view.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -142,12 +142,18 @@
     $row = $i + 1 . '.';
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(_("view"), '../medical/patient_view.php', array('id_patient' => $pat->getIdPatient()));
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_view.png', _("view")),
+      '../medical/patient_view.php',
+      array('id_patient' => $pat->getIdPatient())
+    );
     $row .= OPEN_SEPARATOR;
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= HTML::strLink(_("del"), '../medical/relative_del_confirm.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_delete.png', _("delete")),
+        '../medical/relative_del_confirm.php',
         array(
           'id_patient' => $idPatient,
           'id_relative' => $pat->getIdPatient()
