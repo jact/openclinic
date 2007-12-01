@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.41 2007/11/03 16:53:53 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.42 2007/12/01 12:37:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -17,7 +17,7 @@
    * Controlling vars
    */
   $tab = "medical";
-  $nav = "social";
+  $nav = "relatives";
   $onlyDoctor = false;
 
   require_once("../config/environment.php");
@@ -91,7 +91,7 @@
     _("View Relatives") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
