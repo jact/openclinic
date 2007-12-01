@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.12 2007/10/27 16:12:37 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.13 2007/12/01 12:38:14 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,6 +22,7 @@
 
   require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  require_once("../lib/LastViewedPatient.php");
 
   /**
    * Show page
@@ -29,10 +30,12 @@
   $title = _("Medical Records");
   require_once("../layout/header.php");
 
-  HTML::section(1, $title, array('class' => 'bigIcon medicalIcon'));
+  HTML::section(1, $title, array('class' => 'icon icon_medical'));
   HTML::para(_("Use the following functions located in the left hand navigation area to manage your medical records."));
 
-  HTML::section(2, HTML::strLink(_("Search Patient"), '../medical/patient_search_form.php'), array('class' => 'icon searchIcon'));
+  HTML::section(2, HTML::strLink(_("Search Patient"), '../medical/patient_search_form.php'),
+    array('class' => 'icon icon_search')
+  );
   HTML::para(_("Search and view patients. Once a patient is selected you can:"));
 
   $array = array(
@@ -48,7 +51,7 @@
   {
     HTML::rule();
 
-    HTML::section(2, _("Last Viewed Patients"), array('class' => 'icon patientIcon'));
+    HTML::section(2, _("Last Viewed Patients"), array('class' => 'icon icon_patient'));
 
     $array = array();
     foreach ($viewedPatient as $key => $value)
@@ -62,7 +65,9 @@
   {
     HTML::rule();
 
-    HTML::section(2, HTML::strLink(_("New Patient"), '../medical/patient_new_form.php'), array('class' => 'icon patientIcon'));
+    HTML::section(2, HTML::strLink(_("New Patient"), '../medical/patient_new_form.php'),
+      array('class' => 'icon icon_patient')
+    );
     HTML::para(_("Build a new patient information in medical records system."));
   } // end if
 
