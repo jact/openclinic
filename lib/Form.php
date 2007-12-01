@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.24 2007/11/05 19:35:29 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.25 2007/12/01 12:43:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -345,7 +345,7 @@ class Form
    * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
    *    $addendum = array(
    *      'id' => 'address', // id = name by default
-   *      'class' => 'noPrint',
+   *      'class' => 'no_print',
    *      'onclick' => '...'
    *    );
    * @return string input html tag
@@ -697,7 +697,7 @@ class Form
     $addendum['for'] = $field;
     if ($required)
     {
-      $addendum['class'] = 'requiredField';
+      $addendum['class'] = 'required';
       $text = '* ' . $text;
     }
     $html = HTML::strTag('label', $text, $addendum) . PHP_EOL;
@@ -787,7 +787,7 @@ class Form
       {
         $footText .= $row;
       }
-      $html .= HTML::strTag('div', $footText, array('class' => 'formButton'));
+      $html .= HTML::strTag('div', $footText, array('class' => 'action'));
     }
 
     $html .= HTML::strEnd('fieldset');

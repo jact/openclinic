@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Search.php,v 1.13 2007/11/05 19:12:48 jact Exp $
+ * @version   CVS: $Id: Search.php,v 1.14 2007/12/01 12:44:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -195,7 +195,7 @@ class Search
       $_pageString = str_replace('%%', '%', $_pageString);
     }
 
-    return HTML::strPara(_("Result Pages") . ': ' . $_pageString, array('class' => 'pageLinks'));
+    return HTML::strPara(_("Result Pages") . ': ' . $_pageString, array('class' => 'page_links'));
   }
 
   /**

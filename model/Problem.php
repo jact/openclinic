@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.17 2007/11/03 16:59:26 jact Exp $
+ * @version   CVS: $Id: Problem.php,v 1.18 2007/12/01 12:46:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -514,7 +514,7 @@ class Problem
    */
   function getHeader()
   {
-    $_html = HTML::strStart('div', array('id' => 'problemHeader', 'class' => 'clearfix'));
+    $_html = HTML::strStart('div', array('id' => 'problem_header', 'class' => 'clearfix'));
     $_html .= HTML::strPara(_("Wording") . ': ' . $this->getWordingPreview());
     $_html .= HTML::strPara(
       _("Opening Date") . ': ' . I18n::localDate($this->getOpeningDate()),
