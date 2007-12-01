@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_new_form.php,v 1.26 2007/11/05 14:28:25 jact Exp $
+ * @version   CVS: $Id: staff_new_form.php,v 1.27 2007/12/01 12:06:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -53,7 +53,7 @@
     _("Staff Members") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon staffIcon");
+  HTML::breadCrumb($links, "icon icon_staff");
   unset($links);
 
   Form::errorMsg();

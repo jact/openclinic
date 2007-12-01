@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_new_form.php,v 1.28 2007/11/05 14:28:37 jact Exp $
+ * @version   CVS: $Id: test_new_form.php,v 1.29 2007/12/01 12:19:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,7 +74,7 @@
     _("View Medical Tests") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();

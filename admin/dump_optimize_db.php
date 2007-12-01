@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_optimize_db.php,v 1.15 2007/10/27 17:14:30 jact Exp $
+ * @version   CVS: $Id: dump_optimize_db.php,v 1.16 2007/12/01 11:57:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,7 +54,7 @@
     _("Dumps") => "../admin/dump_view_form.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon dumpIcon");
+  HTML::breadCrumb($links, "icon icon_dump");
   unset($links);
 
   HTML::section(2, sprintf(_("Optimizing Database: %s"), OPEN_DATABASE));

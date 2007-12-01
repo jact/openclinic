@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.24 2007/10/30 21:31:11 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.25 2007/12/01 12:08:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -74,7 +74,7 @@
     (strstr($returnLocation, "edit") ? _("Edit Theme") : _("Add New Theme")) => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon themeIcon");
+  HTML::breadCrumb($links, "icon icon_theme");
   unset($links);
 
   /**

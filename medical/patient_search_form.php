@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_form.php,v 1.17 2007/10/27 17:15:25 jact Exp $
+ * @version   CVS: $Id: patient_search_form.php,v 1.18 2007/12/01 12:15:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,7 +41,7 @@
     _("Medical Records") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon searchIcon");
+  HTML::breadCrumb($links, "icon icon_search");
   unset($links);
 
   $tokenForm = Form::generateToken(); // for 2 forms (patient, problem)

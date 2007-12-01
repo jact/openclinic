@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_view.php,v 1.28 2007/11/02 22:54:03 jact Exp $
+ * @version   CVS: $Id: problem_view.php,v 1.29 2007/12/01 12:17:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -79,7 +79,7 @@
         : "../medical/history_list.php"),
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();

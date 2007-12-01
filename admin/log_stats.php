@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_stats.php,v 1.16 2007/11/01 12:06:53 jact Exp $
+ * @version   CVS: $Id: log_stats.php,v 1.17 2007/12/01 12:00:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -38,18 +38,18 @@
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon logIcon");
+  HTML::breadCrumb($links, "icon icon_log");
   unset($links);
 
   HTML::section(2, HTML::strLink(_("Access Logs"), '../admin/log_list.php', array('table' => 'access')),
-    array('class' => 'icon logIcon')
+    array('class' => 'icon icon_log')
   );
   LogStats::summary('access');
 
   HTML::rule();
 
   HTML::section(2, HTML::strLink(_("Record Logs"), '../admin/log_list.php', array('table' => 'record')),
-    array('class' => 'icon logIcon')
+    array('class' => 'icon icon_log')
   );
   LogStats::summary('record');
 

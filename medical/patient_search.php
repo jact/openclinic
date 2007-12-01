@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search.php,v 1.32 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: patient_search.php,v 1.33 2007/12/01 12:15:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,7 +92,7 @@
     _("Search Patient") => "../medical/patient_search_form.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon searchIcon");
+  HTML::breadCrumb($links, "icon icon_search");
   unset($links);
 
   /**

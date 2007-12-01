@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_del_confirm.php,v 1.20 2007/10/30 21:38:06 jact Exp $
+ * @version   CVS: $Id: user_del_confirm.php,v 1.21 2007/12/01 12:09:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,7 +54,7 @@
     _("Users") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon userIcon");
+  HTML::breadCrumb($links, "icon icon_user");
   unset($links);
 
   /**

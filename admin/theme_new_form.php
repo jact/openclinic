@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_new_form.php,v 1.32 2007/11/05 14:28:25 jact Exp $
+ * @version   CVS: $Id: theme_new_form.php,v 1.33 2007/12/01 12:08:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -77,7 +77,7 @@
     _("Themes") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon themeIcon");
+  HTML::breadCrumb($links, "icon icon_theme");
   unset($links);
 ?>
 

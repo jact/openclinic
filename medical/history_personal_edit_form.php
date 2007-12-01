@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit_form.php,v 1.28 2007/11/05 14:28:37 jact Exp $
+ * @version   CVS: $Id: history_personal_edit_form.php,v 1.29 2007/12/01 12:13:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -97,7 +97,7 @@
     _("View Personal Antecedents") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit_form.php,v 1.37 2007/11/05 14:28:37 jact Exp $
+ * @version   CVS: $Id: problem_edit_form.php,v 1.38 2007/12/01 12:16:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -86,7 +86,7 @@
     $problem->getWordingPreview() => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();

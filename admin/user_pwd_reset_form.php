@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.34 2007/11/05 14:28:25 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.35 2007/12/01 12:10:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,7 +92,7 @@
     _("Users") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon userIcon");
+  HTML::breadCrumb($links, "icon icon_user");
   unset($links);
 
   Form::errorMsg();

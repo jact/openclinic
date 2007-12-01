@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_access_log.php,v 1.33 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: user_access_log.php,v 1.34 2007/12/01 12:08:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,7 +74,7 @@
     _("Users") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon userIcon");
+  HTML::breadCrumb($links, "icon icon_user");
   unset($links);
 
   HTML::section(2, sprintf(_("Access Logs List for user %s"), $login) . ":");

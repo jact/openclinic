@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_list.php,v 1.2 2007/11/02 20:40:00 jact Exp $
+ * @version   CVS: $Id: log_list.php,v 1.3 2007/12/01 12:00:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  * @todo      resultset pagination
@@ -85,7 +85,7 @@
   /**
    * Bread Crumb
    */
-  HTML::breadCrumb($links, "icon logIcon");
+  HTML::breadCrumb($links, "icon icon_log");
   unset($links);
 
   if ($day)

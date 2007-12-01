@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.29 2007/11/03 16:53:07 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.30 2007/12/01 12:12:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -69,7 +69,7 @@
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();

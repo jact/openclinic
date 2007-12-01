@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.36 2007/11/05 14:28:25 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.37 2007/12/01 12:09:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -107,7 +107,7 @@
       $title => ""
     );
   }
-  HTML::breadCrumb($links, "icon userIcon");
+  HTML::breadCrumb($links, "icon icon_user");
   unset($links);
 
   Form::errorMsg();
