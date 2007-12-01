@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.10 2007/11/02 20:41:38 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.11 2007/12/01 12:44:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  */
@@ -56,33 +56,9 @@ class LogStats
 
     $perc = round($scale * $percentage, 0);
 
-    $html = HTML::strStart('img',
-      array(
-        'src' => '../img/leftbar.gif',
-        'width' => 7,
-        'height' => 14,
-        'alt' => $label
-      ),
-      true
-    );
-    $html .= HTML::strStart('img',
-      array(
-        'src' => '../img/mainbar.gif',
-        'width' => $perc,
-        'height' => 14,
-        'alt' => $label
-      ),
-      true
-    );
-    $html .= HTML::strStart('img',
-      array(
-        'src' => '../img/rightbar.gif',
-        'width' => 7,
-        'height' => 14,
-        'alt' => $label
-      ),
-      true
-    );
+    $html = HTML::strImage('../img/leftbar.gif', $label, array('width' => 7, 'height' => 14));
+    $html .= HTML::strImage('../img/mainbar.gif', $label, array('width' => $perc, 'height' => 14));
+    $html .= HTML::strImage('../img/rightbar.gif', $label, array('width' => 7, 'height' => 14));
     $html = str_replace(PHP_EOL, '', $html);
 
     return $html;
