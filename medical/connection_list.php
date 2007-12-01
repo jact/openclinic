@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_list.php,v 1.33 2007/11/03 16:52:20 jact Exp $
+ * @version   CVS: $Id: connection_list.php,v 1.34 2007/12/01 12:12:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -65,7 +65,7 @@
     $problem->getWordingPreview() => "../medical/problem_view.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon patientIcon");
+  HTML::breadCrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -107,6 +107,7 @@
   HTML::section(2, _("Connection Problems List:"));
 
   $thead = array(
+    _("#"),
     _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),
     _("Opening Date"),
     _("Wording")
@@ -132,7 +133,12 @@
       Error::fetch($problemQ);
     }
 
-    $row = HTML::strLink(_("view"), '../medical/problem_view.php',
+    $row = $i + 1 . '.';
+    $row .= OPEN_SEPARATOR;
+
+    $row .= HTML::strLink(
+      HTML::strImage('../img/action_view.png', _("view")),
+      '../medical/problem_view.php',
       array(
         'id_problem' => $problem->getIdProblem(),
         'id_patient' => $idPatient
@@ -142,7 +148,9 @@
 
     if ($hasMedicalAdminAuth)
     {
-      $row .= HTML::strLink(_("del"), '../medical/connection_del_confirm.php',
+      $row .= HTML::strLink(
+        HTML::strImage('../img/action_delete.png', _("delete")),
+        '../medical/connection_del_confirm.php',
         array(
           'id_problem' => $idProblem,
           'id_patient' => $idPatient,
@@ -164,7 +172,11 @@
   unset($problemQ);
   unset($problem);
 
-  HTML::table($thead, $tbody, null);
+  $options = array(
+    0 => array('align' => 'right')
+  );
+
+  HTML::table($thead, $tbody, null, $options);
 
   require_once("../layout/footer.php");
 ?>
