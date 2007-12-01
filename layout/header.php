@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.9 2007/10/29 20:06:21 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.10 2007/12/01 13:00:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,6 +41,18 @@
       ),
       true
     );
+
+    echo '<!--[if lt IE 7]>';
+    HTML::start('link',
+      array(
+        'rel' => 'stylesheet',
+        'type' => 'text/css',
+        'href' => '../css/ie6_fix.css',
+        'title' => 'IE 6 Fix'
+      ),
+      true
+    );
+    echo '<![endif]-->';
   }
   HTML::start('link',
     array(
@@ -70,108 +82,35 @@
   HTML::end('head');
   HTML::start('body');
 
+  HTML::start('div', array('id' => 'wrap'));
   HTML::start('div', array('id' => 'header'));
-  HTML::start('div', array('id' => 'subHeader'));
 
-  if (defined("OPEN_CLINIC_USE_IMAGE") && OPEN_CLINIC_USE_IMAGE && is_file(OPEN_CLINIC_IMAGE_URL))
-  {
-    list($width, $height, $type, $attr) = @getimagesize(OPEN_CLINIC_IMAGE_URL);
-    $logo = HTML::strStart('img',
-      array(
-        'src' => OPEN_CLINIC_IMAGE_URL,
-        'alt' => OPEN_CLINIC_NAME,
-        'title' => OPEN_CLINIC_NAME,
-        'width' => $width,
-        'height' => $height
-      ),
-      true
-    );
-  }
-  else
-  {
-    $logo = OPEN_CLINIC_NAME;
-  }
-  if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
-  {
-    $logo = HTML::strLink($logo, OPEN_CLINIC_URL);
-  }
+  $logo = '../img/' . 'openclinic-1.png'; // @fixme OPEN_APP_LOGO
+  list($width, $height, $type, $attr) = getimagesize($logo);
+  $logo = HTML::strImage($logo, 'OpenClinic' /* @fixme OPEN_APP_NAME */, array('width' => $width, 'height' => $height));
+  $logo = HTML::strLink($logo, '../index.php', null, array('accesskey' => 1));
   HTML::para($logo, array('id' => 'logo'));
   unset($logo);
 
-  HTML::start('div', array('id' => 'headerInformation'));
-
-  HTML::para(sprintf(_("Today's date: %s"), date(_("Y-m-d"))));
-
-  if (defined("OPEN_CLINIC_HOURS") && OPEN_CLINIC_HOURS)
-  {
-    HTML::para(sprintf(_("Clinic hours: %s"), OPEN_CLINIC_HOURS));
-  }
-
-  if (defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
-  {
-    HTML::tag('address', sprintf(_("Clinic address: %s"), OPEN_CLINIC_ADDRESS));
-  }
-
-  if (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE)
-  {
-    HTML::tag('address', sprintf(_("Clinic phone: %s"), OPEN_CLINIC_PHONE));
-  }
-
-  HTML::end('div'); // #headerInformation
-  HTML::end('div'); // #subHeader
-
-  HTML::rule();
-
-  HTML::para(HTML::strLink(_("Skip over navigation"), '#mainZone', null, array('accesskey' => 2)),
-    array('id' => 'skipLink')
+  HTML::para(HTML::strLink(_("Skip over navigation"), '#main', null, array('accesskey' => 2)),
+    array('id' => 'skip_navigation')
   );
+
+  require_once("../layout/component.php");
+
+  echo shortcuts(isset($tab) ? $tab : null, isset($nav) ? $nav : null);
 
   if (isset($tab))
   {
-    include_once("../layout/component.php");
-    $mainNav = array(
-      "home" => array(_("Home"), "../home/index.php"),
-      "medical" => array(_("Medical Records"), "../medical/index.php"),
-      //"stats" => array("Statistics", "../stats/index.php"),
-      "admin" => array(_("Admin"), "../admin/index.php")
-    );
-    echo menuBar($tab, $mainNav);
+    echo menuBar($tab);
   }
-
-  $sfLinks = array(
-    _("Project Page") => 'http://sourceforge.net/projects/openclinic/',
-    //_("Mailing Lists") => 'http://sourceforge.net/mail/?group_id=70742',
-    _("Downloads") => 'http://sourceforge.net/project/showfiles.php?group_id=70742',
-    _("Report Bugs") => 'http://sourceforge.net/tracker/?group_id=70742&atid=528857',
-    //_("Tasks") => 'http://sourceforge.net/pm/?group_id=70742',
-    _("Forums") => 'http://sourceforge.net/forum/?group_id=70742',
-    //_("Developers"), 'http://sourceforge.net/project/memberlist.php?group_id=70742'
-  );
-
-  $array = null;
-  foreach ($sfLinks as $key => $value)
-  {
-    $array[] = HTML::strLink($key, $value);
-  }
-  HTML::itemList($array, array('id' => 'sourceForgeLinks'));
-  unset($sfLinks, $array);
 
   HTML::end('div'); // #header
 
   HTML::rule();
 
-  if (isset($tab))
-  {
-    HTML::start('div', array('id' => 'sideBar'));
-    include_once("../layout/" . $tab . ".php");
-    HTML::rule();
-    echo logoInfo();
-    HTML::end('div'); // #sideBar
-
-    HTML::rule();
-  }
-
-  HTML::start('div', array('id' => 'mainZone'));
+  HTML::start('div', array('id' => 'main'));
+  HTML::start('div', array('id' => 'content'));
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
@@ -179,7 +118,7 @@
   }
 
   /**
-   * Display "public" message from controller if available
+   * Display "public" message(s) from controller if available
    */
   echo FlashMsg::get();
 ?>

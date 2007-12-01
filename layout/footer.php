@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.8 2007/10/29 20:17:51 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.9 2007/12/01 12:59:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,58 +18,33 @@
 
   require_once("../lib/Msg.php");
 
-  HTML::end('div'); // #mainZone
-
   //Error::debug($_SESSION);
   //Error::debug($_SERVER);
+
+  HTML::end('div'); // #content
+  HTML::end('div'); // #main
+
+  HTML::rule();
+
+  HTML::start('div', array('id' => 'navigation'));
+  if (isset($tab) && is_file('../layout/' . $tab . '.php'))
+  {
+    include_once("../layout/" . $tab . ".php"); // ul
+  }
+  echo clinicInfo();
+  HTML::end('div'); // #navigation
 
   HTML::rule();
 
   HTML::start('div', array('id' => 'footer'));
 
-  $footLinks = array(
-    HTML::strLink(_("Clinic Home"), '../home/index.php', null, array('accesskey' => 1)),
-    HTML::strLink(_("OpenClinic Readme"), '../index.html')
-  );
+  echo logos();
+  echo sfLinks();
+  echo miniLogos();
 
-  if (isset($tab) && isset($nav))
-  {
-    $footLinks[] = HTML::strLink(_("Help"), '../doc/index.php',
-      array(
-        'tab' => $tab,
-        'nav' => $nav
-      ),
-      array(
-        'title' => _("Opens a new window"),
-        'class' => 'popup'
-      )
-    );
-  }
+  HTML::start('div', array('id' => 'app_info'));
 
-  if (isset($_SESSION['auth']['is_admin']) && ($_SESSION['auth']['is_admin'] === true && !OPEN_DEMO))
-  {
-    $_serverVar = (strpos(PHP_SAPI, 'cgi') !== false)
-      ? $_SERVER['PATH_TRANSLATED']
-      : $_SERVER['SCRIPT_FILENAME'];
-    $footLinks[] = HTML::strLink(_("View source code"), '../shared/view_source.php',
-      array(
-        'file' => $_serverVar
-      ),
-      array(
-        'title' => _("Opens a new window"),
-        'class' => 'popup'
-      )
-    );
-  }
-
-  if (defined("OPEN_DEMO") && OPEN_DEMO)
-  {
-    $footLinks[] = HTML::strLink(_("Demo version features"), '../demo_version.html');
-  }
-
-  HTML::itemList($footLinks, array('id' => 'footerLinks'));
-
-  $text = _("Powered by OpenClinic");
+  $text = HTML::strLink(_("Powered by OpenClinic"), 'http://openclinic.sourceforge.net/');
   if (defined("OPEN_VERSION"))
   {
     $text .= ' ' . _("version") . ' ' . OPEN_VERSION;
@@ -99,16 +74,17 @@
   /**
    * End server page generation time
    */
-  $microTime = explode(" ", microtime());
-  $endTime = $microTime[1] + $microTime[0];
-  $totalTime = sprintf(_("Page generation: %s seconds"), substr(($endTime - $startTime), 0, 6));
-
   if (defined("OPEN_DEBUG") && OPEN_DEBUG)
   {
+    $microTime = explode(" ", microtime());
+    $endTime = $microTime[1] + $microTime[0];
+    $totalTime = sprintf(_("Page generation: %s seconds"), substr(($endTime - $startTime), 0, 6));
     HTML::para($totalTime);
   }
 
+  HTML::end('div'); // #app_info
   HTML::end('div'); // #footer
+  HTML::end('div'); // #wrap
   HTML::end('body');
   HTML::end('html');
 
