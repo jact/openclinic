@@ -6,23 +6,43 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print.css,v 1.5 2006/10/14 11:19:59 jact Exp $
+ * @version   CVS: $Id: print.css,v 1.6 2007/12/01 12:50:42 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 body {
+  background: #fff;
+  color: #000;
   font-family: "Trebuchet MS", trebuchet, verdana, helvetica, arial, sans-serif;
   font-size: 10pt;
   line-height: 160%;
 }
 
-#menu, #extra {
-  display: none;
+table {
+  border-collapse: collapse;
+}
+
+th, td {
+  border-bottom: 1px solid #000;
+}
+
+img {
+  border: none;
+}
+
+#header {
+  margin: 0;
+  border-bottom: 2px solid #000;
+}
+
+#header p {
+  margin: 0;
 }
 
 #footer {
+  border-top: 2px solid #000;
   text-align: center;
   font-size: 8pt;
 }
@@ -39,6 +59,7 @@ a[href^="http"]:after, a[href^="mailto"]:after {
   content: " (link: " attr(href) ")";
 }
 
-#skipLink, .menuBar, #sourceForgeLinks, #sideBar, #footerLinks {
+#skip_navigation, #shortcuts, #tabs, #navigation, #logos, #sf_links, #mini_logos, hr {
   display: none;
+  visibility: hidden;
 }
