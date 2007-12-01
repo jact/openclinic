@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.19 2007/10/27 17:14:31 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.20 2007/12/01 11:58:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,7 +64,7 @@
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon dumpIcon");
+  HTML::breadCrumb($links, "icon icon_dump");
   unset($links);
 
   HTML::para(
@@ -105,7 +105,7 @@
     . HTML::strLink(_("Unselect all"), '#', null, array('id' => 'unselect_all')) // @todo created by JS
   );
 
-  Form::fieldset(_("View dump of database"), $fieldArray, $fieldFoot, array('id' => 'dumpTables'));
+  Form::fieldset(_("View dump of database"), $fieldArray, $fieldFoot, array('id' => 'dump_tables'));
 
   $fieldArray = null;
 
@@ -124,7 +124,7 @@
   $fieldArray[] = Form::strRadioButton("what", "excel", false, array('id' => 'radio_dump_csv'))
     . Form::strLabel("radio_dump_csv", _("Export to CSV format (data only)"));
 
-  Form::fieldset(_("Options"), $fieldArray, null, array('id' => 'dumpOptions'));
+  Form::fieldset(_("Options"), $fieldArray, null, array('id' => 'dump_options'));
 
   $fieldArray = array(
     Form::strCheckBox("drop", "yes") . Form::strLabel("drop", _("Add 'DROP TABLE'")),
@@ -137,7 +137,7 @@
     Form::strCheckBox("as_file", "sendit") . Form::strLabel("as_file", _("Save as file"))
   );
 
-  Form::fieldset(_("Extended options"), $fieldArray, null, array('id' => 'dumpExtended'));
+  Form::fieldset(_("Extended options"), $fieldArray, null, array('id' => 'dump_extended'));
 
   HTML::para(
     Form::strButton("dump", _("Submit")) . Form::generateToken(),
