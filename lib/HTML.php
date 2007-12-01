@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.16 2007/11/05 19:12:24 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.17 2007/12/01 12:45:41 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,6 +59,8 @@ define("OPEN_SCRIPT_PATH", '../js/');
  *  void rule(array $addendum = null)
  *  string strItemList(array &$items, array $addendum = null, bool $ordered = false)
  *  void itemList(array &$items, array $addendum = null, bool $ordered = false)
+ *  string strImage(string $src, string $alt, array $addendum = null)
+ *  void image(string $src, string $alt, array $addendum = null)
  *  string insertScript(string $name)
  *
  * @package OpenClinic
@@ -374,7 +376,7 @@ class HTML
 
           if (isset($options[$numCol]['nowrap']) && $options[$numCol]['nowrap'])
           {
-            $class[] = "noWrap";
+            $class[] = "nowrap";
           }
 
           if (count($class) > 0)
@@ -498,7 +500,7 @@ class HTML
       return;
     }
 
-    $html = HTML::strStart('p', array('id' => 'breadCrumb'));
+    $html = HTML::strStart('p', array('id' => 'breadcrumb'));
 
     $keys = array_keys($links);
     $title = array_pop($keys);
@@ -719,6 +721,7 @@ class HTML
    * @access public
    * @static
    * @since 0.8
+   * @todo nested lists
    */
   function strItemList(&$items, $addendum = null, $ordered = false)
   {
@@ -728,7 +731,7 @@ class HTML
     }
 
     $tag = ($ordered ? 'ol' : 'ul');
-    $html = HTML::strStart($tag, isset($addendum) ? $addendum : null) . PHP_EOL;
+    $html = HTML::strStart($tag, isset($addendum) ? $addendum : null)/* . PHP_EOL*/;
     foreach ($items as $item)
     {
       $content = '';
@@ -743,7 +746,7 @@ class HTML
         $content = $item;
       }
 
-      $html .= HTML::strTag('li', $content, $options) . PHP_EOL;
+      $html .= HTML::strTag('li', $content, $options)/* . PHP_EOL*/;
     }
     $html .= HTML::strEnd($tag);
 
@@ -766,6 +769,53 @@ class HTML
   function itemList(&$items, $addendum = null, $ordered = false)
   {
     echo HTML::strItemList($items, isset($addendum) ? $addendum : null, $ordered);
+  }
+
+  /**
+   * string strImage(string $src, string $alt, array $addendum = null)
+   *
+   * Returns img html tag
+   *
+   * @param string $src image filename
+   * @param string $alt alternative text
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   *  example:
+   *    $addendum = array(
+   *      'title' => 'title text',
+   *      'height' => 31, // px
+   *      'width' => 88, // px
+   *      'onclick' => '...'
+   *    );
+   * @return string img html tag
+   * @access public
+   * @static
+   */
+  function strImage($src, $alt, $addendum = null)
+  {
+    $addendum['src'] = $src;
+    $addendum['alt'] = $alt;
+    $addendum['title'] = (isset($addendum['title']) ? $addendum['title'] : $alt);
+
+    $html = HTML::strStart('img', $addendum, true);
+
+    return $html;
+  }
+
+  /**
+   * void image(string $src, string $alt, array $addendum = null)
+   *
+   * Draws img html tag
+   *
+   * @param string $src image filename
+   * @param string $alt alternative text
+   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @return void
+   * @access public
+   * @static
+   */
+  function image($src, $alt, $addendum = null)
+  {
+    echo HTML::strImage($src, $alt, $addendum);
   }
 
   /**
