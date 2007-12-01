@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.10 2007/11/05 19:26:42 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.11 2007/12/01 12:49:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -69,6 +69,7 @@
     {
       $errorFound = true;
       $formError["login_session"] = _("Login unknown.");
+      $sessLoginAttempts = 1;
     }
     else
     {
@@ -213,7 +214,7 @@
    * Session validation
    */
   $_SESSION['auth']['sign'] = md5(
-    $_SERVER['HTTP_ACCEPT_CHARSET']
+    isset($_SERVER['HTTP_ACCEPT_CHARSET']) ? $_SERVER['HTTP_ACCEPT_CHARSET'] : $_SERVER['HTTP_ACCEPT']
     . $_SERVER['HTTP_ACCEPT_ENCODING']
     . $_SERVER['HTTP_ACCEPT_LANGUAGE']
     . $_SERVER['HTTP_USER_AGENT']
