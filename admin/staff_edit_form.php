@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit_form.php,v 1.31 2007/12/01 12:04:53 jact Exp $
+ * @version   CVS: $Id: staff_edit_form.php,v 1.32 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,8 +29,11 @@
     exit();
   }
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
 
   /**
    * Retrieving get vars

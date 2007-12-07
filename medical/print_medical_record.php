@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.32 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: print_medical_record.php,v 1.33 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "medical";
   $nav = "print";
-  $onlyDoctor = true;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+
   require_once("../model/Query/Page/Patient.php");
   require_once("../model/Query/Staff.php");
   require_once("../model/Query/Page/Problem.php");

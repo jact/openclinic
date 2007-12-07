@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_list.php,v 1.3 2007/12/01 12:00:03 jact Exp $
+ * @version   CVS: $Id: log_list.php,v 1.4 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  * @todo      resultset pagination
@@ -29,10 +29,13 @@
    */
   $tab = "admin";
   $nav = "logs";
-  $restrictInDemo = true; // There are not logs in demo version
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR, false); // There are not logs in demo version
+
   require_once("../lib/LogStats.php");
 
   /**

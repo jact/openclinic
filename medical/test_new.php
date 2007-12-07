@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_new.php,v 1.22 2007/11/05 12:51:52 jact Exp $
+ * @version   CVS: $Id: test_new.php,v 1.23 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,13 +23,11 @@
   }
 
   /**
-   * Controlling vars
+   * Checking permissions
    */
-  $onlyDoctor = false;
-  $restrictInDemo = true; // To prevent users' malice
-
-  require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_DOCTOR, false); // Not in DEMO to prevent users' malice
+
   require_once("../model/Query/Test.php");
   require_once("../model/Query/Page/Record.php");
 

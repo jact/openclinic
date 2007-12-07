@@ -9,14 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit.php,v 1.21 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: user_edit.php,v 1.22 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   /**
    * Controlling vars
    */
-  //$restrictInDemo = true;
   $returnLocation = "../admin/user_list.php";
 
   /**
@@ -38,13 +37,17 @@
   require_once("../config/environment.php");
   if ( !isset($_POST["all"]) )
   {
+    /**
+     * Checking permissions
+     */
     include_once("../auth/login_check.php");
+    loginCheck(OPEN_PROFILE_ADMINISTRATOR);
   }
-  require_once("../model/Query/User.php");
 
   /**
    * Validate data
    */
+  require_once("../model/Query/User.php");
   $user = new User();
 
   $user->setIdUser($_POST["id_user"]);

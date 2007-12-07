@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.25 2007/12/01 12:08:21 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.26 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -25,15 +25,18 @@
    */
   $tab = "admin";
   $nav = "themes";
-  $restrictInDemo = true; // To prevent users' malice // We'll see
   $returnLocation = ($idTheme > 0)
     ? (($fromCopy)
       ? '../admin/theme_new_form.php?id_theme=' . $idTheme
       : '../admin/theme_edit_form.php?id_theme=' . $idTheme)
     : '../admin/theme_new_form.php';
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR, false); // Not in DEMO to prevent users' malice // We'll see
+
   require_once("../lib/Form.php");
 
   if (count($_POST) > 0)

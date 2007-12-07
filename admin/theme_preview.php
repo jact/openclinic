@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.35 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.36 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -108,6 +108,7 @@
   $title = sprintf(_("%s Theme Preview"), OPEN_THEME_NAME);
   require_once("../layout/xhtml_start.php");
   require_once("../lib/Msg.php");
+  require_once("../layout/component.php");
 
   HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
 
@@ -121,19 +122,17 @@
 
   HTML::end('head');
   HTML::start('body', array('id' => 'top'));
+  HTML::start('div', array('id' => 'wrap'));
 
   HTML::start('div', array('id' => 'header'));
-  HTML::start('div', array('id' => 'subHeader'));
 
   HTML::section(1, _("Clinic Name"));
 
-  HTML::start('div', array('id' => 'headerInformation'));
-  HTML::para(_("Information"));
-  HTML::end('div'); // #headerInformation
+  $array = array(
+    HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))
+  );
+  HTML::itemList($array, array('id' => 'shortcuts'));
 
-  HTML::end('div'); // #subHeader
-
-  require_once("../layout/component.php");
   $array = array(
     "home" => array(_("Home"), "#top"),
     "medical" => array(_("Medical Records"), "#top"),
@@ -142,25 +141,19 @@
   );
   echo menuBar('admin', $array);
 
-  HTML::start('div', array('id' => 'sourceForgeLinks'));
-  HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'));
-  HTML::end('div'); // #sourceForgeLinks
-
   HTML::end('div'); // #header
 
-  HTML::start('div', array('id' => 'sideBar'));
+  /*HTML::start('div', array('id' => 'sideBar'));
 
   $array = array(
-    array(_("Theme Preview"), array('class' => 'selected')),
+    HTML::strLink(_("Theme Preview"), '#top', null, array('class' => 'selected')),
     HTML::strLink(_("Sample Link"), '#top')
   );
-  HTML::itemList($array, array('class' => 'linkList'));
+  HTML::itemList($array);
+  HTML::end('div'); // #sideBar*/
 
-  HTML::rule();
-  echo logoInfo();
-  HTML::end('div'); // #sideBar
-
-  HTML::start('div', array('id' => 'mainZone'));
+  HTML::start('div', array('id' => 'main'));
+  HTML::start('div', array('id' => 'content'));
 
   HTML::section(1, sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]));
 

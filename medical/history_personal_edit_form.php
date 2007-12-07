@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_edit_form.php,v 1.29 2007/12/01 12:13:48 jact Exp $
+ * @version   CVS: $Id: history_personal_edit_form.php,v 1.30 2007/12/07 16:51:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "medical";
   $nav = "history";
-  $onlyDoctor = false;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_DOCTOR);
+
   require_once("../model/Query/History.php");
   require_once("../model/Patient.php");
 

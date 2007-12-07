@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_new.php,v 1.19 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: staff_new.php,v 1.20 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +19,6 @@
   /**
    * Controlling vars
    */
-  //$restrictInDemo = true;
   $errorLocation = "../admin/staff_new_form.php?type=" . Check::safeText($_GET['type']);
   $returnLocation = "../admin/staff_list.php";
 
@@ -32,12 +31,16 @@
     exit();
   }
 
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
-  require_once("../model/Query/Staff.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
 
   /**
    * Validate data
    */
+  require_once("../model/Query/Staff.php");
   $staff = new Staff();
 
   require_once("../admin/staff_validate_post.php");

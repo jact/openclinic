@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.32 2007/12/01 12:07:56 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.33 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,8 +19,12 @@
   $tab = "admin";
   $nav = "themes";
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
+
   require_once("../model/Query/Theme.php");
   require_once("../lib/Form.php");
 

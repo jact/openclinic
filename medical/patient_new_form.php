@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_new_form.php,v 1.22 2007/12/01 12:15:15 jact Exp $
+ * @version   CVS: $Id: patient_new_form.php,v 1.23 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,11 +18,13 @@
    */
   $tab = "medical";
   $nav = "new";
-  $onlyDoctor = false;
   $returnLocation = "../medical/index.php";
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   // after clean form vars
   //$formVar["last_update_date"] = date("d-m-Y"); //date("Y-m-d");

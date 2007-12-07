@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.34 2007/12/01 12:36:39 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.35 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,11 +18,13 @@
    */
   $tab = "medical";
   $nav = "problems";
-  $onlyDoctor = true;
-  $restrictInDemo = true; // To prevent users' malice
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE, false); // Not in DEMO to prevent users' malice
+
   require_once("../model/Query/Test.php");
   require_once("../model/Patient.php");
   require_once("../model/Problem.php");
@@ -72,7 +74,7 @@
   echo $patient->getHeader();
   echo $problem->getHeader();
 
-  if ($hasMedicalAdminAuth)
+  if ($_SESSION['auth']['is_medical_doctor'])
   {
     HTML::para(
       HTML::strLink(_("Add New Medical Test"), '../medical/test_new_form.php',
@@ -98,7 +100,7 @@
   HTML::section(2, _("Medical Tests List:"));
 
   $thead = array(
-    _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 3 : 1)),
+    _("Function") => array('colspan' => ($_SESSION['auth']['is_medical_doctor'] ? 3 : 1)),
     _("Document Type"),
     _("Path Filename")
   );
@@ -118,7 +120,7 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    if ($hasMedicalAdminAuth)
+    if ($_SESSION['auth']['is_medical_doctor'])
     {
       $row .= HTML::strLink(
         HTML::strImage('../img/action_edit.png', _("edit")),

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new_form.php,v 1.29 2007/12/01 12:17:10 jact Exp $
+ * @version   CVS: $Id: problem_new_form.php,v 1.30 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,11 +18,12 @@
    */
   $tab = "medical";
   $nav = "problems";
-  $onlyDoctor = false;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
-  require_once("../model/Patient.php");
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   /**
    * Retrieving vars (PGS)
@@ -32,6 +33,7 @@
     isset($formVar["order_number"]) ? $formVar["order_number"] - 1 : 0
   );
 
+  require_once("../model/Patient.php");
   $patient = new Patient($idPatient);
   if ($patient->getName() == '')
   {

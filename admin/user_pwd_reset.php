@@ -9,14 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset.php,v 1.17 2007/11/02 20:40:38 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset.php,v 1.18 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   /**
    * Controlling vars
    */
-  //$restrictInDemo = true;
   $returnLocation = "../admin/user_list.php";
 
   /**
@@ -28,15 +27,19 @@
     exit();
   }
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
-  require_once("../model/Query/User.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
+
   require_once("../lib/Form.php");
 
   /**
    * Validate data
    */
   $errorLocation = "../admin/user_pwd_reset_form.php?id_user=" . intval($_POST["id_user"]); // controlling var
+  require_once("../model/Query/User.php");
   $user = new User();
 
   $user->setIdUser($_POST["id_user"]);

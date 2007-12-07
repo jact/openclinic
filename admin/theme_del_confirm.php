@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del_confirm.php,v 1.22 2007/12/01 12:06:38 jact Exp $
+ * @version   CVS: $Id: theme_del_confirm.php,v 1.23 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -29,8 +29,12 @@
     exit();
   }
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
+
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 

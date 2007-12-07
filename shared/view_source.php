@@ -9,12 +9,16 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: view_source.php,v 1.14 2007/10/29 20:16:00 jact Exp $
+ * @version   CVS: $Id: view_source.php,v 1.15 2007/12/07 16:51:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
+
   require_once("../lib/Msg.php"); // include HTML.php
 
   /**

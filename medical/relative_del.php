@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_del.php,v 1.21 2007/11/05 12:51:52 jact Exp $
+ * @version   CVS: $Id: relative_del.php,v 1.22 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,12 +23,11 @@
   }
 
   /**
-   * Controlling vars
+   * Checking permissions
    */
-  $onlyDoctor = false;
-
-  require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_DOCTOR);
+
   require_once("../lib/Form.php");
 
   Form::compareToken('../medical/patient_search_form.php');

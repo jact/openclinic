@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_form.php,v 1.18 2007/12/01 12:15:37 jact Exp $
+ * @version   CVS: $Id: patient_search_form.php,v 1.19 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "medical";
   $nav = "searchform";
-  $onlyDoctor = true;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+
   require_once("../lib/Form.php");
 
   /**

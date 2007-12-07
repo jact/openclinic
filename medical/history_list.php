@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_list.php,v 1.28 2007/12/01 12:13:26 jact Exp $
+ * @version   CVS: $Id: history_list.php,v 1.29 2007/12/07 16:51:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "medical";
   $nav = "history";
-  $onlyDoctor = true;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+
   require_once("../model/Query/Page/Problem.php");
   require_once("../model/Patient.php");
 
@@ -84,7 +87,7 @@
 
   $thead = array(
     _("Order Number"),
-    _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 4 : 3)),
+    _("Function") => array('colspan' => ($_SESSION['auth']['is_medical_doctor'] ? 4 : 3)),
     _("Wording"),
     _("Opening Date"),
     _("Closing Date")
@@ -112,7 +115,7 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    if ($hasMedicalAdminAuth)
+    if ($_SESSION['auth']['is_medical_doctor'])
     {
       $row .= HTML::strLink(
         HTML::strImage('../img/action_delete.png', _("delete")),

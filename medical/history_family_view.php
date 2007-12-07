@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_view.php,v 1.23 2007/12/01 12:12:47 jact Exp $
+ * @version   CVS: $Id: history_family_view.php,v 1.24 2007/12/07 16:51:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "medical";
   $nav = "history";
-  $onlyDoctor = true;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+
   require_once("../model/Query/History.php");
   require_once("../model/Patient.php");
 
@@ -83,7 +86,7 @@
 
   echo $patient->getHeader();
 
-  if ($hasMedicalAdminAuth)
+  if ($_SESSION['auth']['is_medical_doctor'])
   {
     HTML::para(
       HTML::strLink(_("Edit Family Antecedents"), '../medical/history_family_edit_form.php',

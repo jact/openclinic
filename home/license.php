@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: license.php,v 1.9 2007/11/01 09:33:42 jact Exp $
+ * @version   CVS: $Id: license.php,v 1.10 2007/12/07 16:51:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,11 @@
   require_once("../config/environment.php");
   if (isset($_SESSION['auth']['token']))
   {
+    /**
+     * Checking permissions
+     */
     include_once("../auth/login_check.php");
+    loginCheck();
   }
 
   $licenseFile = (is_file("../locale/" . OPEN_LANGUAGE . "/copying.txt"))

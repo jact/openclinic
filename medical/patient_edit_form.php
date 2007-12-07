@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.36 2007/12/01 12:15:04 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.37 2007/12/07 16:51:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,8 +19,11 @@
   $tab = "medical";
   $nav = "social";
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   /**
    * Retrieving vars (PGS)

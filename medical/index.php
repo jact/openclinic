@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.13 2007/12/01 12:38:14 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.14 2007/12/07 16:51:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "medical";
   $nav = "summary";
-  $onlyDoctor = true;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+
   require_once("../lib/LastViewedPatient.php");
 
   /**
@@ -61,7 +64,7 @@
     HTML::itemList($array);
   }
 
-  if (isset($hasMedicalAdminAuth) && $hasMedicalAdminAuth)
+  if ($_SESSION['auth']['is_medical_doctor'])
   {
     HTML::rule();
 

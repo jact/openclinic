@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.34 2007/12/01 12:18:09 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.35 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "medical";
   $nav = "relatives";
-  $onlyDoctor = true;
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+
   require_once("../model/Query/Relative.php");
   require_once("../model/Patient.php");
   require_once("../lib/Form.php");
@@ -76,7 +79,7 @@
 
   echo $patient->getHeader();
 
-  if ($hasMedicalAdminAuth)
+  if ($_SESSION['auth']['is_medical_doctor'])
   {
     $title = _("Search Relatives to add to list");
 
@@ -107,7 +110,7 @@
 
   $thead = array(
     _("#"),
-    _("Function") => array('colspan' => ($hasMedicalAdminAuth ? 2 : 1)),
+    _("Function") => array('colspan' => ($_SESSION['auth']['is_medical_doctor'] ? 2 : 1)),
     _("Surname 1"),
     _("Surname 2"),
     _("First Name")
@@ -149,7 +152,7 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    if ($hasMedicalAdminAuth)
+    if ($_SESSION['auth']['is_medical_doctor'])
     {
       $row .= HTML::strLink(
         HTML::strImage('../img/action_delete.png', _("delete")),

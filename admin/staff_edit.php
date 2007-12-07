@@ -9,14 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit.php,v 1.17 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: staff_edit.php,v 1.18 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   /**
    * Controlling vars
    */
-  //$restrictInDemo = true;
   $returnLocation = "../admin/staff_list.php";
 
   /**
@@ -28,8 +27,12 @@
     exit();
   }
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
+
   require_once("../model/Query/Staff.php");
 
   /**

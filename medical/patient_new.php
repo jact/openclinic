@@ -9,14 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_new.php,v 1.23 2007/11/05 14:29:23 jact Exp $
+ * @version   CVS: $Id: patient_new.php,v 1.24 2007/12/07 16:51:45 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   /**
    * Controlling vars
    */
-  $onlyDoctor = false;
   $errorLocation = "../medical/patient_new_form.php";
 
   /**
@@ -28,8 +27,12 @@
     exit();
   }
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_DOCTOR);
+
   require_once("../model/Query/Page/Patient.php");
   require_once("../model/Query/Page/Record.php");
 

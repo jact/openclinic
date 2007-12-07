@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.20 2007/12/01 11:58:55 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.21 2007/12/07 16:50:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,10 +18,13 @@
    */
   $tab = "admin";
   $nav = "dump";
-  $restrictInDemo = true; // To prevent users' malice
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR, false); // Not in DEMO to prevent users' malice
+
   require_once("../lib/Dump.php");
   require_once("../lib/Form.php");
 

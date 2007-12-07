@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_record_log.php,v 1.36 2007/12/01 12:10:29 jact Exp $
+ * @version   CVS: $Id: user_record_log.php,v 1.37 2007/12/07 16:50:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,7 +18,6 @@
    */
   $tab = "admin";
   $nav = "users";
-  $restrictInDemo = true; // There are not logs in demo version
   $returnLocation = "../admin/user_list.php";
 
   /**
@@ -30,8 +29,12 @@
     exit();
   }
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR, false); // There are not logs in demo version
+
   require_once("../model/Query/Page/Record.php");
   require_once("../lib/Form.php");
   require_once("../lib/Search.php");
