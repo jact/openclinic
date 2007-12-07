@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.11 2007/12/01 12:49:03 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.12 2007/12/07 16:57:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -70,6 +70,7 @@
       $errorFound = true;
       $formError["login_session"] = _("Login unknown.");
       $sessLoginAttempts = 1;
+      $_SESSION['auth']['last_login'] = '';
     }
     else
     {
@@ -85,7 +86,7 @@
       }
 
       $formSession = Form::getSession();
-      $lastLogin = isset($formSession['var']['login_session']) ? $formSession['var']['login_session'] : '';
+      $lastLogin = isset($_SESSION['auth']['last_login']) ? $_SESSION['auth']['last_login'] : '';
       if ( !$userQ->verifySignOn($loginSession, $pwdSession) )
       {
         $userQ->close();
@@ -145,6 +146,7 @@
   if ($errorFound)
   {
     Form::setSession(Check::safeArray($_POST), $formError);
+    $_SESSION['auth']['last_login'] = $loginSession;
     if (isset($sessLoginAttempts))
     {
       $_SESSION['auth']['login_attempts'] = $sessLoginAttempts;
@@ -191,17 +193,18 @@
    */
   Form::unsetSession();
 
-  // works in PHP >= 4.1.0
+  if (isset($_SESSION['auth']['last_login']))
+  {
+    unset($_SESSION['auth']['last_login']); // is not yet necessary (temporary value)
+  }
+  if (isset($_SESSION['auth']['login_attempts']))
+  {
+    unset($_SESSION['auth']['login_attempts']); // is not yet necessary (temporary value)
+  }
+
   $_SESSION['auth']['member_user'] = $user->getIdMember();
   $_SESSION['auth']['login_session'] = $user->getLogin();
   $_SESSION['auth']['token'] = $token;
-  if (isset($sessLoginAttempts))
-  {
-    $_SESSION['auth']['login_attempts'] = $sessLoginAttempts;
-  }
-  $_SESSION['auth']['is_admin'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
-  $_SESSION['auth']['is_medical'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
-  //$_SESSION['auth']['is_stats'] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR); // @todo?
   $_SESSION['auth']['user_theme'] = $user->getIdTheme();
   $_SESSION['auth']['user_id'] = $user->getIdUser();
   $_SESSION['auth']['login_ip'] = $_SERVER["REMOTE_ADDR"];
@@ -209,6 +212,14 @@
   {
     $_SESSION['auth']['return_page'] = "../home/index.php";
   }
+
+  /**
+   * User's permissions
+   */
+  $_SESSION['auth']['is_admin'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
+  $_SESSION['auth']['is_medical_doctor'] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR);
+  $_SESSION['auth']['is_medical'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
+  //$_SESSION['auth']['is_stats'] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR); // @todo?
 
   /**
    * Session validation
