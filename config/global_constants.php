@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: global_constants.php,v 1.6 2007/11/05 12:54:53 jact Exp $
+ * @version   CVS: $Id: global_constants.php,v 1.7 2007/12/07 17:01:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,9 +74,10 @@
   /**
    * Profile constants
    */
+  define("OPEN_PROFILE_FREE",           0);
   define("OPEN_PROFILE_ADMINISTRATOR",  1);
-  define("OPEN_PROFILE_ADMINISTRATIVE", 2);
-  define("OPEN_PROFILE_DOCTOR",         3);
+  define("OPEN_PROFILE_DOCTOR",         2);
+  define("OPEN_PROFILE_ADMINISTRATIVE", 3);
 
   /**
    * Miscellaneous constants
