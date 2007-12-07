@@ -10,19 +10,38 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.12 2007/12/01 12:48:09 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.13 2007/12/07 16:59:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
-  executionProtection(__FILE__);
+require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+executionProtection(__FILE__);
 
+require_once("../config/environment.php");
+require_once("../model/Query/Session.php");
+
+/**
+ * void loginCheck(int $profilePage = OPEN_PROFILE_FREE, bool $inDemo = true)
+ *
+ * @param int $profilePage (optional) one of this values:
+ *  OPEN_PROFILE_FREE
+ *  OPEN_PROFILE_ADMINISTRATOR
+ *  OPEN_PROFILE_DOCTOR
+ *  OPEN_PROFILE_ADMINISTRATIVE
+ * @param bool $inDemo (optional) restricted in DEMO version?
+ * @return void
+ * @access public
+ * @see OPEN_DEMO
+ * @since 0.8
+ */
+function loginCheck($profilePage = OPEN_PROFILE_FREE, $inDemo = true)
+{
   /**
    * Checking to see if we are in demo mode and if we should not execute this page
    */
-  if (isset($restrictInDemo) && $restrictInDemo && OPEN_DEMO)
+  if ( !$inDemo && (defined("OPEN_DEMO") && OPEN_DEMO) )
   {
-    FlashMsg::add(_("This function is not available in this demo version of OpenClinic."));
+    FlashMsg::add(_("This function is not available in this demo version of OpenClinic.")); // @fixme OPEN_APP_NAME
     header("Location: ../home/index.php");
     exit();
   }
@@ -32,12 +51,14 @@
    */
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    $hasMedicalAdminAuth = true;
+    $_SESSION['auth']['is_admin'] = true;
+    $_SESSION['auth']['is_medical_doctor'] = true;
+    $_SESSION['auth']['is_medical'] = true;
 
     return;
   }
 
-  //works in PHP >= 4.1
+  // before possible login_form.php redirections
   $_SESSION['auth']['return_page'] = $_SERVER['REQUEST_URI'];
 
   /**
@@ -61,10 +82,6 @@
   if (isset($_SESSION['auth']['login_ip']) && $_SESSION['auth']['login_ip'] != $_SERVER['REMOTE_ADDR'])
   {
     // This is possibly a session hijack attempt
-    //$_SESSION = array(); // deregister all current session variables
-    //session_destroy(); // clean up session ID
-
-    //header("Location: ../auth/login_form.php");
     include_once("../auth/logout.php");
     exit();
   }
@@ -88,8 +105,6 @@
   /**
    * Checking session table to see if token has timed out
    */
-  require_once("../model/Query/Session.php");
-
   $sessQ = new Query_Session();
   if ( !$sessQ->validToken($_SESSION['auth']['login_session'], $_SESSION['auth']['token']) )
   {
@@ -113,46 +128,26 @@
   session_regenerate_id(); // to avoid Session Fixation
 
   /**
-   * Checking authorization for this tab
+   * Checking authorization for this page
    * The session authorization flags were set at login in login.php
    */
-  if (isset($tab))
+  if ($profilePage != OPEN_PROFILE_FREE
+    && $profilePage != OPEN_PROFILE_ADMINISTRATOR
+    && $profilePage != OPEN_PROFILE_DOCTOR
+    && $profilePage != OPEN_PROFILE_ADMINISTRATIVE)
   {
-    if ($tab == "medical")
-    {
-      if ( !$_SESSION['auth']['is_medical'] && (isset($onlyDoctor) && !$onlyDoctor) )
-      {
-        FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Medical Records")));
-        header("Location: ../home/index.php");
-        exit();
-      }
-    }
-    /*elseif ($tab == "stats")
-    {
-      if ( !$_SESSION['auth']['is_stats'] )
-      {
-        FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Stats")));
-        header("Location: ../home/index.php");
-        exit();
-      }
-    }*/
-    elseif ($tab == "admin")
-    {
-      if ( !$_SESSION['auth']['is_admin'] )
-      {
-        FlashMsg::add(sprintf(_("You are not authorized to use %s tab."), _("Admin")));
-        header("Location: ../home/index.php");
-        exit();
-      }
-    }
+    FlashMsg::add(_("Invalid profile page"));
+    header("Location: ../auth/login_form.php");
+    exit();
   }
 
-  if ( !$_SESSION['auth']['is_admin'] && !$_SESSION['auth']['is_medical'] )
+  if (($profilePage == OPEN_PROFILE_ADMINISTRATOR && !$_SESSION['auth']['is_admin'])
+    || ($profilePage == OPEN_PROFILE_DOCTOR && !$_SESSION['auth']['is_medical_doctor'])
+    || ($profilePage == OPEN_PROFILE_ADMINISTRATIVE && !$_SESSION['auth']['is_medical']))
   {
-    $hasMedicalAdminAuth = (isset($onlyDoctor) ? !($onlyDoctor) : true);
+    FlashMsg::add(_("You are not authorized to use this page."));
+    header("Location: ../home/index.php");
+    exit();
   }
-  else
-  {
-    $hasMedicalAdminAuth = true;
-  }
+}
 ?>
