@@ -1,298 +1,268 @@
 /* Feel free and change all what you want */
-/* $Id: scheme.css,v 1.11 2006/10/13 19:59:24 jact Exp $ */
+/* $Id: scheme.css,v 1.12 2007/12/15 12:53:17 jact Exp $ */
 
-/* --Layout-- */
-html, body {
+* {
   margin: 0;
   padding: 0;
+}
+
+html, body {
   background: #fff;
   color: #000;
-  font-family: verdana, sans-serif;
-  font-size: 10px;
+  font-family: "lucida sans unicode", "Trebuchet MS", trebuchet, verdana, helvetica, arial, sans-serif;
 }
 
 #header {
-  background: #fff;
-  color: #000;
-  height: 1px; /* Holly hack */
-}
-
-html>body #header {
-  height: auto;
+  border-bottom: 1px solid #000;
 }
 
 #logo {
-  margin: 0;
+  width: 300px;
 }
 
-#subHeader {
-  height: 5em;
+#logo a img {
+  display: block;
 }
 
-#headerInformation {
+#skip_navigation, hr {
+  display: none;
+  visibility: hidden;
+}
+
+#shortcuts {
   position: absolute;
-  top: 0;
-  right: 2ex;
+  top: 1.5em;
+  right: 1em;
+  text-align: right;
+  font-size: 75%;
+  font-weight: bold;
 }
 
-#headerInformation p {
-  margin: 0;
-}
-
-.menuBar {
-  clear: both;
-  margin-top: 12px;
-  height: 0; /* IE 5.0 paranoid */
+#shortcuts li {
+  display: inline;
+  padding: 0 0 0 2em;
 }
 
 #tabs {
-  margin: 0;
-  padding: 0;
-  font-size: 10px;
-  font-weight: bold;
+  clear: both;
+  border-top: 1px solid #000;
 }
 
 #tabs li {
   display: inline;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  line-height: 2em;
 }
 
-li#first a, li#first span {
-  border-left: 1px solid #000;
-}
-
-#tabs a, #tabs span {
+#tabs li a {
   border-right: 1px solid #000;
-  border-top: 1px solid #000;
-  margin: 0;
-  padding: 2px 10px;
+  padding: 0.4em 1.5em 0.4em;
+  text-decoration: none;
+}
+
+#main {
+  width: 79%;
+  float: right;
+}
+
+#navigation {
+  width: 20%;
   float: left;
-  background: #efefef;
 }
 
-#tabs span {
-  background: #fff;
-  color: #000;
-  border-bottom: 1px solid #fff;
+/*#navigation ul {
+  margin: 1em 0 2em 0.7em;
+}*/
+
+#navigation ul li ul {
+  margin: 0 0.3em;
 }
 
-#sourceForgeLinks {
-  clear: both;
-  text-align: right;
-  background: #fff;
-  color: #0ff;
-  padding: 0 2ex 4px 0;
-  margin: -1px 0 0 0;
+#clinic_info {
+  margin: 1em 0 1em 1em;
   border: 1px solid #000;
+  padding: 2px;
+  line-height: 175%;
 }
 
-#sourceForgeLinks li {
-  display: inline;
-  list-style-type: none;
-  padding-left: 5px;
+#content {
+  padding: 1em 2em;
+  line-height: 175%;
+  font-size: 80%;
 }
 
-#sideBar {
-  position: relative; /* IE hack */
-  padding-left: 1ex;
-  margin-top: -1px;
-  width: 150px;
-  float: left;
-  clear: left;
-  border-right: 1px solid #000;
-  border-bottom: 1px solid #000;
-  border-left: 1px solid #000;
-  background: #fff;
-  color: #000;
-  font-size: 10px;
+#content h1, #content h2, #content h3 {
+  margin: 1em 0 0.5em;
 }
 
-.linkList {
-  margin: 0 0 0 4ex;
-  padding: 0;
-  position: relative; /* IE bug fixed */
-}
-
-.linkList li {
-  list-style-image: url(../img/bullet_normal.gif);
-  line-height: 1.25em;
-  margin-bottom: 4ex;
-}
-
-.linkList .selected {
-  list-style-image: url(../img/bullet_selected.gif);
-}
-
-.linkList .subnavbar {
-  margin: 4ex 0 0 -2ex;
-}
-
-* html .linkList .subnavbar {
-  margin-left: 3ex;
-}
-
-.sideBarLogin {
+#content h1 {
   margin-top: 0;
-  margin-bottom: 3ex !important;
 }
 
-#mainZone {
-  line-height: 1.5em;
-  margin-left: 150px;
-  padding: 1ex 1em 1ex 2em; /* top right bottom left */
+#content li {
+  margin-left: 2em;
+}
+
+#content hr {
+  display: block;
+  visibility: visible;
+  height: 1px;
+  margin: 0.5em;
+  border: 1px solid #000;
+  background: #000;
+  color: #000;
 }
 
 #footer {
-  padding: 1ex 4mm;
-  margin-left: 150px;
-  clear: right;
+  clear: both;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 1em 2em;
+  font-size: 80%;
+  line-height: 180%;
+}
+
+#footer ul {
+  list-style-type: none;
   text-align: center;
 }
 
-#footerLinks {
-  margin: 0;
-  padding: 0;
+#logos a, #mini_logos a {
+  text-decoration: none;
 }
 
-#footerLinks li {
-  list-style-type: none;
+#logos {
+  width: 32%;
+  float: left;
+}
+
+#sf_links {
+  width: 33%;
+  float: left;
+  line-height: 225%;
+}
+
+#mini_logos {
+  width: 32%;
+  float: right;
+  line-height: 225%;
+}
+
+#app_info {
+  clear: both;
+  padding-top: 1em;
+  text-align: center;
+}
+
+a img {
+  border: none;
+}
+
+pre {
+  font-family: "Lucida Sans Typewriter", "Courier New", monospace;
+}
+
+fieldset {
+  margin: 0.5em;
+  border: 1px solid #000;
+  padding: 1em;
+  line-height: 250%;
+}
+
+legend {
+  border: 1px solid #000;
+  padding: 0 0.3em;
+  font-weight: bold;
+}
+
+fieldset label {
+  display: block;
+  width: 40%;
+  float: left;
+  text-align: right;
+  padding-right: 5px;
+  cursor: pointer;
+}
+
+fieldset .action {
+  clear: both;
+  margin: 1em 0;
+  text-align: center;
+}
+
+fieldset span.error {
+  display: block;
+  margin: 2px 0 16px;
+  border-bottom: 1px solid #fff;
+}
+
+.error label {
+  cursor: pointer;
+}
+
+.previous_file {
+  margin-left: 41%;
+}
+
+.required {
+  font-weight: bold;
+}
+
+fieldset#dump_tables {
+  width: 35%;
+  float: left;
+  margin-right: 1em;
+}
+
+fieldset#dump_options label,
+fieldset#dump_extended label {
   display: inline;
-  padding: 0 4px;
+  float: none;
 }
 
-/* --Tables-- */
-.center table {
-  margin: 0 auto;
+fieldset#new_user label {
+  width: 55%;
+}
+
+fieldset.large_area label {
   text-align: left;
 }
 
 table {
+  margin: 0.5em 0;
   border-collapse: collapse;
-  padding: 2px;
   border: 1px solid #000;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 0.3em;
 }
 
 th {
-  text-align: center;
-}
-
-td {
-  padding: 2px;
-  border: 1px solid #000;
-}
-
-/* --Links-- */
-.linkList a, .linkList .subnavbar a {
-  padding: 0 2px 0 0;
-}
-
-.sideBarLogin a {
-  display: inline;
-}
-
-#tabs a {
-}
-
-a:link, a:visited {
-  color: #00f;
-}
-
-#sideBar a:link, #sideBar a:visited, #sourceForgeLinks a {
-  color: #00f;
-}
-
-#tabs a:link, #tabs a:visited {
-  color: #00f;
-  text-decoration: none;
-}
-
-#tabs a:hover {
-  text-decoration: underline;
-}
-
-.even a {
-}
-
-/* --Form styles-- */
-input, textarea, select {
-  font-size: 10px;
-  border-width: 1px;
-  border-color: #000;
-  background: #fff;
-  color: #00f;
-}
-input[type="submit"], input[type="button"], input[type="reset"] {
-  border-width: 1px;
-  font-weight: bold;
-}
-
-input[type="radio"], input[type="checkbox"] {
   background: #000;
-  color: inherit;
-}
-
-label {
-  cursor: pointer;
-}
-
-.requiredField {
+  color: #fff;
   font-weight: bold;
 }
 
-/* --Miscellaneous-- */
-#sideBarLogo p {
-  margin-bottom: 2ex;
-  text-align: center;
-}
-
-#mainZone h1 img, #mainZone h2 img, #mainZone h3 img, #mainZone h4 img, #mainZone h5 img {
-  vertical-align: middle;
-}
-
-.error {
-  color: #f00;
+tr {
   background: #fff;
-  font-weight: bold;
-}
-
-.advice {
-}
-
-.message {
+  color: #000;
 }
 
 .even {
-  background: #efefef;
+  background: #dadada;
   color: #000;
 }
 
-img {
-  border: none;
+tr.odd:hover,
+tr.even:hover {
+  background: #BEBEBE;
+  color: #fff;
 }
 
-.sqlcode {
-  font-family: "Courier New", Courier, monospace;
-  font-size: 11px;
-  white-space: pre;
+.center table {
+  margin: 0 auto;
   text-align: left;
-}
-
-.noWrap {
-  white-space: nowrap;
-}
-
-#mainZone hr {
-  display: block;
-  background: #000;
-  color: #000;
-  border: 1px solid #000;
-  margin: 10px 0; /* top-bottom right-left */
-}
-
-.noPrint {
-  display: none;
 }
 
 .center {
@@ -307,62 +277,52 @@ img {
   text-align: left;
 }
 
-#breadCrumb {
-  margin-bottom: 0;
+.nowrap {
+  white-space: nowrap;
 }
 
-.icon {
-  margin-top: 5px;
-  padding: 10px 0 15px 45px;
-  background-position: center left;
+/* clearfix */
+.clearfix {
+  display: inline-block;
+  width: 100%;
 }
 
-.bigIcon {
-  margin-top: 5px;
-  padding: 20px 0 20px 65px;
-  background-position: center left;
+/* Hide from IE-mac \*/
+* html .clearfix {
+  height: 1%;
+  width: auto;
 }
 
-.dumpIcon {
-  background: url(../img/dumps.png) no-repeat;
+.clearfix {
+  display: table;
+}
+/* End hide from IE-mac */
+
+.error, .warning, .info, .hint {
+  margin: 0.5em 0;
+  padding: 6px 0 6px 40px;
+  font-weight: bold;
 }
 
-.logIcon {
-  background: url(../img/logs.png) no-repeat;
+.error {
+  background: #FF8181 url(../img/msg_error.png) 2px center no-repeat;
+  color: #fff;
 }
 
-.configIcon {
-  background: url(../img/config_clinic.png) no-repeat;
+.warning {
+  border: 1px solid #BDB76B;
+  background: #FFFF9A url(../img/msg_warning.png) 2px center no-repeat;
+  color: #000;
 }
 
-.staffIcon {
-  background: url(../img/staff.png) no-repeat;
+.info {
+  border: 1px solid #DFCBB6;
+  background: #FAF2EB url(../img/msg_info.png) 2px center no-repeat;
+  color: #000;
 }
 
-.themeIcon {
-  background: url(../img/themes.png) no-repeat;
-}
-
-.userIcon {
-  background: url(../img/users.png) no-repeat;
-}
-
-.patientIcon {
-  background: url(../img/patient.png) no-repeat;
-}
-
-.searchIcon {
-  background: url(../img/search.png) no-repeat;
-}
-
-.medicalIcon {
-  background: url(../img/medical.png) no-repeat;
-}
-
-.adminIcon {
-  background: url(../img/admin.png) no-repeat;
-}
-
-hr, #skipLink {
-  display: none;
+.hint {
+  border: 1px solid #DFCBB6;
+  background: #FAF2EB url(../img/msg_hint.png) 2px center no-repeat;
+  color: #000;
 }
