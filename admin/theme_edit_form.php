@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.35 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: theme_edit_form.php,v 1.36 2007/12/15 12:46:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -65,8 +65,8 @@
     {
       $formVar["id_theme"] = $idTheme;
       $formVar["theme_name"] = $theme->getName();
-      $formVar["css_file"] = $theme->getCSSFile();
-      $filename = "../css/" . $theme->getCSSFile();
+      $formVar["css_file"] = $theme->getCssFile();
+      $filename = "../css/" . $theme->getCssFile();
       $fp = fopen($filename, 'r');
       if ($fp)
       {

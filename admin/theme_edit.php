@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit.php,v 1.19 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: theme_edit.php,v 1.20 2007/12/15 12:46:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,7 +54,7 @@
    * Update theme
    */
   $themeQ = new Query_Theme();
-  if ($themeQ->existCSSFile($theme->getCSSFile(), $theme->getId()))
+  if ($themeQ->existCssFile($theme->getCssFile(), $theme->getId()))
   {
     FlashMsg:add(sprintf(_("Filename of theme, %s, already exists. The changes have no effect."), $theme->getName()));
   }
