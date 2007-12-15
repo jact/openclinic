@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.26 2007/12/07 16:52:49 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.27 2007/12/15 15:05:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -70,7 +70,7 @@
     }
   }
 
-  if ($_SESSION['auth']['is_medical_doctor'])
+  if ($_SESSION['auth']['is_administrative'])
   {
     $array[] = HTML::strLink(_("New Patient"), '../medical/patient_new_form.php', null,
       $nav == 'new' ? array('class' => 'selected') : null
