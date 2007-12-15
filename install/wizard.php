@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.32 2007/12/01 12:41:35 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.33 2007/12/15 13:07:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -41,10 +41,7 @@
   require_once("../lib/Check.php");
 
   $themes = array(
-    1 => "SerialZ",
-    2 => "SuperfluousBanter",
-    3 => "Sinorca",
-    4 => "Gazetteer Alternate"
+    1 => "OpenClinic"
   );
 
   /**
@@ -456,15 +453,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.32 2007/12/01 12:41:35 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.33 2007/12/15 13:07:11 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  if (str_replace("\\\\", "/", __FILE__) == str_replace("\\\\", "/", $_SERVER[\'SCRIPT_FILENAME\']))
-  {
-    header("Location: ./index.php");
-    exit();
-  }
+  require_once(dirname(__FILE__) . "/../lib/exe_protect.php");
+  executionProtection(__FILE__);
 
 /**
  * A T T E N T I O N !
