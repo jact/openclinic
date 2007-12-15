@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit_form.php,v 1.31 2007/11/05 14:28:24 jact Exp $
+ * @version   CVS: $Id: setting_edit_form.php,v 1.32 2007/12/15 12:43:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,8 +19,11 @@
   $tab = "admin";
   $nav = "settings";
 
-  require_once("../config/environment.php");
+  /**
+   * Checking permissions
+   */
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
 
   /**
    * Checking for $formError to read data from database
@@ -36,8 +39,6 @@
     if ($set)
     {
       $formVar["clinic_name"] = $set->getClinicName();
-      $formVar["clinic_image_url"] = $set->getClinicImageUrl();
-      $formVar["use_image"] = ($set->isUseImageSet() ? "checked" : "");
       $formVar["clinic_hours"] = $set->getClinicHours();
       $formVar["clinic_address"] = $set->getClinicAddress();
       $formVar["clinic_phone"] = $set->getClinicPhone();
@@ -61,7 +62,7 @@
    * Show page
    */
   $title = _("Config settings");
-  $focusFormField = "clinic_name"; // to avoid JavaScript mistakes in demo version
+  $focusFormField = "session_timeout"; // to avoid JavaScript mistakes in demo version
   require_once("../layout/header.php");
 
   /**
@@ -71,7 +72,7 @@
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon configIcon");
+  HTML::breadCrumb($links, "icon icon_config");
   unset($links);
 
   Form::errorMsg();

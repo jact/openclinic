@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit.php,v 1.16 2007/11/02 20:40:22 jact Exp $
+ * @version   CVS: $Id: setting_edit.php,v 1.17 2007/12/15 12:43:25 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,12 +23,11 @@
   }
 
   /**
-   * Controlling vars
+   * Checking permissions
    */
-  //$restrictInDemo = true;
-
-  require_once("../config/environment.php");
   require_once("../auth/login_check.php");
+  loginCheck(OPEN_PROFILE_ADMINISTRATOR);
+
   require_once("../lib/Form.php");
 
   Form::compareToken('../admin/setting_edit_form.php');
@@ -42,11 +41,6 @@
 
   $set->setClinicName($_POST["clinic_name"]);
   $_POST["clinic_name"] = $set->getClinicName();
-
-  $set->setClinicImageUrl($_POST["clinic_image_url"]);
-  $_POST["clinic_image_url"] = $set->getClinicImageUrl();
-
-  $set->setUseImage(isset($_POST["use_image"]));
 
   $set->setClinicHours($_POST["clinic_hours"]);
   $_POST["clinic_hours"] = $set->getClinicHours();
