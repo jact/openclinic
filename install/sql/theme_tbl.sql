@@ -6,9 +6,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_tbl.sql,v 1.7 2006/03/28 19:01:43 jact Exp $
+ * @version   CVS: $Id: theme_tbl.sql,v 1.8 2007/12/15 14:32:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,17 +19,5 @@ CREATE TABLE theme_tbl (
 );
 
 INSERT INTO theme_tbl VALUES (
-  NULL, 'SerialZ', 'serialz.css'
-);
-
-INSERT INTO theme_tbl VALUES (
-  NULL, 'SuperfluousBanter', 'banter.css'
-);
-
-INSERT INTO theme_tbl VALUES (
-  NULL, 'Sinorca', 'sinorca.css'
-);
-
-INSERT INTO theme_tbl VALUES (
-  NULL, 'Gazetteer Alternate', 'gazetteer_alt.css'
+  1, 'OpenClinic', 'openclinic.css'
 );
