@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.22 2007/10/17 18:08:13 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.23 2007/12/15 13:05:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,6 +21,7 @@
   header("Location: book-manual_usuario.htm#" . $_GET['tab'] . "-" . $_GET['nav']);*/
 
   $tab = "doc";
+  $nav = "help";
 
   require_once("../config/environment.php");
   require_once("../lib/HTML.php");
@@ -30,6 +31,7 @@
    */
   $title = _("OpenClinic Help");
   require_once("../layout/xhtml_start.php");
+  require_once("../layout/component.php");
 
   HTML::start('link',
     array(
@@ -45,39 +47,25 @@
 
   HTML::end('head');
   HTML::start('body');
+  HTML::start('div', array('id' => 'wrap'));
 
   HTML::start('div', array('id' => 'header'));
-  HTML::start('div', array('id' => 'subHeader'));
-  HTML::section(1, _("OpenClinic Help"));
-  HTML::end('div'); // #subHeader
 
-  require_once("../layout/component.php");
+  echo appLogo();
+
   $array = array(
-    "help" => array(_("Help"), "#"),
+    HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))
   );
-  echo menuBar('help', $array);
+  HTML::itemList($array, array('id' => 'shortcuts'));
 
-  HTML::start('div', array('id' => 'sourceForgeLinks'));
-  HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'));
-  HTML::end('div'); // #sourceForgeLinks
+  //echo menuBar($nav);
 
   HTML::end('div'); // #header
 
-  HTML::start('div', array('id' => 'sideBar'));
+  HTML::start('div', array('id' => 'main'));
+  HTML::start('div', array('id' => 'content'));
 
-  $array = array(
-    array(_("Help Topic"), array('class' => 'selected')),
-    HTML::strLink(_("Help Topic"), '#')
-  );
-  HTML::itemList($array, array('class' => 'linkList'));
-
-  HTML::rule();
-  echo logoInfo();
-  HTML::end('div'); // #sideBar
-
-  HTML::start('div', array('id' => 'mainZone'));
-
-  HTML::section(3, _("Sample Help Page:"));
+  HTML::section(1, $title);
 
   Error::trace($_GET); // debug
 
