@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.37 2007/12/15 12:49:13 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.38 2007/12/15 13:04:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -127,12 +127,7 @@
 
   HTML::start('div', array('id' => 'header'));
 
-  $logo = '../img/' . 'openclinic-1.png'; // @fixme OPEN_APP_LOGO
-  list($width, $height, $type, $attr) = getimagesize($logo);
-  $logo = HTML::strImage($logo, 'OpenClinic' /* @fixme OPEN_APP_NAME */, array('width' => $width, 'height' => $height));
-  $logo = HTML::strLink($logo, '../index.php', null, array('accesskey' => 1));
-  HTML::para($logo, array('id' => 'logo'));
-  unset($logo);
+  echo appLogo();
 
   $array = array(
     HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))

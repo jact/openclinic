@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.10 2007/12/01 13:00:13 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.11 2007/12/15 13:04:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -82,21 +82,16 @@
   HTML::end('head');
   HTML::start('body');
 
+  require_once("../layout/component.php");
+
   HTML::start('div', array('id' => 'wrap'));
   HTML::start('div', array('id' => 'header'));
 
-  $logo = '../img/' . 'openclinic-1.png'; // @fixme OPEN_APP_LOGO
-  list($width, $height, $type, $attr) = getimagesize($logo);
-  $logo = HTML::strImage($logo, 'OpenClinic' /* @fixme OPEN_APP_NAME */, array('width' => $width, 'height' => $height));
-  $logo = HTML::strLink($logo, '../index.php', null, array('accesskey' => 1));
-  HTML::para($logo, array('id' => 'logo'));
-  unset($logo);
+  echo appLogo();
 
   HTML::para(HTML::strLink(_("Skip over navigation"), '#main', null, array('accesskey' => 2)),
     array('id' => 'skip_navigation')
   );
-
-  require_once("../layout/component.php");
 
   echo shortcuts(isset($tab) ? $tab : null, isset($nav) ? $nav : null);
 
