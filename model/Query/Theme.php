@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Theme.php,v 1.2 2007/11/02 20:39:01 jact Exp $
+ * @version   CVS: $Id: Theme.php,v 1.3 2007/12/15 14:36:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,8 @@ require_once(dirname(__FILE__) . "/../Theme.php");
  *  mixed select(int $id = 0)
  *  mixed selectWithStats(int $id = 0)
  *  mixed fetch(void)
- *  bool existCSSFile(string $file, int $id = 0)
+ *  bool existCssFile(string $file, int $id = 0)
+ *  bool _writeCssFile(string $cssFile, string $cssRules)
  *  bool insert(Theme $theme)
  *  bool update(Theme $theme)
  *  bool delete(int $id)
@@ -52,7 +53,7 @@ class Query_Theme extends Query
     $this->_map = array(
       'id_theme' => array(/*'accessor' => 'getId',*/ 'mutator' => 'setId'),
       'theme_name' => array(/*'accessor' => 'getName',*/ 'mutator' => 'setName'),
-      'css_file' => array(/*'accessor' => 'getCSSFile',*/ 'mutator' => 'setCSSFile'),
+      'css_file' => array(/*'accessor' => 'getCssFile',*/ 'mutator' => 'setCssFile'),
       'row_count' => array(/*'accessor' => 'getCount',*/ 'mutator' => 'setCount')
     );
 
@@ -92,7 +93,7 @@ class Query_Theme extends Query
    */
   function selectWithStats($id = 0)
   {
-    $sql = "SELECT " . $this->_table . ".*, count(user_tbl.id_user) AS row_count";
+    $sql = "SELECT " . $this->_table . ".*, COUNT(user_tbl.id_user) AS row_count";
     $sql .= " FROM " . $this->_table . " LEFT JOIN user_tbl ON " . $this->_table . ".id_theme=user_tbl.id_theme";
     if ($id)
     {
@@ -134,23 +135,25 @@ class Query_Theme extends Query
   }
 
   /**
-   * bool existCSSFile(string $file, int $id = 0)
+   * bool existCssFile(string $file, int $id = 0)
    *
    * Executes a query
    *
-   * @global array $reservedCSSFiles
    * @param string $file filename to know if exists
    * @param int $id (optional) key of theme
    * @return boolean returns true if file already exists or false if error occurs
    * @access public
    */
-  function existCSSFile($file, $id = 0)
+  function existCssFile($file, $id = 0)
   {
-    if (in_array($file, $reservedCSSFiles))
+    $theme = new Theme();
+    if ($theme->isCssReserved($file))
     {
       $this->_error = "That filename is reserved for internal use.";
+
       return false;
     }
+    unset($theme);
 
     $sql = "SELECT COUNT(css_file)";
     $sql .= " FROM " . $this->_table;
@@ -170,13 +173,22 @@ class Query_Theme extends Query
     return ($array[0] > 0);
   }
 
-  function _writeCSSFile($cssFile, $cssRules)
+  /**
+   * bool _writeCssFile(string $cssFile, string $cssRules)
+   *
+   * @param string $cssFile
+   * @param string $cssRules
+   * @return bool
+   * @access private
+   */
+  function _writeCssFile($cssFile, $cssRules)
   {
     $filename = '../css/' . $cssFile;
     $fp = fopen($filename, 'wb');
     if ( !$fp )
     {
       $this->_error = "Error creating css file.";
+
       return false;
     }
 
@@ -184,6 +196,7 @@ class Query_Theme extends Query
     if ( !fwrite($fp, $cssRules, $size) )
     {
       $this->_error = "Error writting css file.";
+
       return false;
     }
     fclose($fp);
@@ -210,14 +223,14 @@ class Query_Theme extends Query
       return false;
     }
 
-    if ( !$this->_writeCSSFile($theme->getCSSFile(), $theme->getCSSRules()) )
+    if ( !$this->_writeCssFile($theme->getCssFile(), $theme->getCssRules()) )
     {
       return false;
     }
 
     $sql = "INSERT INTO " . $this->_table . " VALUES (NULL, ";
     $sql .= "'" . urlencode($theme->getName()) . "', ";
-    $sql .= "'" . urlencode($theme->getCSSFile()) . "');";
+    $sql .= "'" . urlencode($theme->getCssFile()) . "');";
 
     return $this->exec($sql);
   }
@@ -236,24 +249,26 @@ class Query_Theme extends Query
     if (function_exists("is_a") && !is_a($theme, "Theme") ) // SF.net DEMO version PHP 4.1.2
     {
       $this->_error = "Argument is an inappropriate object.";
+
       return false;
     }
 
-    if ($this->existCSSFile($theme->getCSSFile(), $theme->getId()))
+    if ($this->existCssFile($theme->getCssFile(), $theme->getId()))
     {
       $this->_isError = true;
       $this->_error = "File is already in use.";
+
       return false;
     }
 
-    if ( !$this->_writeCSSFile($theme->getCSSFile(), $theme->getCSSRules()) )
+    if ( !$this->_writeCssFile($theme->getCssFile(), $theme->getCssRules()) )
     {
       return false;
     }
 
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "theme_name='" . urlencode($theme->getName()) . "', ";
-    $sql .= "css_file='" . urlencode($theme->getCSSFile()) . "'";
+    $sql .= "css_file='" . urlencode($theme->getCssFile()) . "'";
     $sql .= " WHERE id_theme=" . $theme->getId();
 
     return $this->exec($sql);

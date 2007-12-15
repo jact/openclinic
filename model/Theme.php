@@ -9,22 +9,11 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Theme.php,v 1.15 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Theme.php,v 1.16 2007/12/15 14:35:43 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 require_once(dirname(__FILE__) . "/../lib/Check.php");
-
-// @todo should be a class constant
-$reservedCSSFiles = array(
-  "style.css",
-  "wizard.css",
-  "scheme.css",
-  "serialz.css",
-  "banter.css",
-  "sinorca.css",
-  "gazetteer_alt.css"
-);
 
 /*
  * Theme represents a look and feel theme.
@@ -36,14 +25,15 @@ $reservedCSSFiles = array(
  *  string getName(void)
  *  string getNameError(void)
  *  void setName(string $value)
- *  string getCSSFile(void)
- *  string getCSSFileError(void)
- *  void setCSSFile(string $value)
- *  string getCSSRules(void)
- *  string getCSSRulesError(void)
- *  void setCSSRules(string $value)
+ *  string getCssFile(void)
+ *  string getCssFileError(void)
+ *  void setCssFile(string $value)
+ *  string getCssRules(void)
+ *  string getCssRulesError(void)
+ *  void setCssRules(string $value)
  *  int getCount(void)
  *  void setCount(int $value)
+ *  bool isCssReserved(string $file)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -61,6 +51,15 @@ class Theme
 
   var $_count = 0;
 
+  var $_reservedCssFiles = array(
+    "ie6_fix.css",
+    "openclinic.css",
+    "print.css",
+    "scheme.css",
+    "style.css",
+    "wizard.css"
+  );
+
   var $_trans; // to translate htmlspecialchars()
 
   function Theme()
@@ -71,14 +70,11 @@ class Theme
   /*
    * bool validateData(void)
    *
-   * @global array $reservedCSSFiles
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
   function validateData()
   {
-    global $reservedCSSFiles;
-
     $valid = true;
 
     if ($this->_name == "")
@@ -92,7 +88,7 @@ class Theme
       $valid = false;
       $this->_cssFileError = _("This is a required field.");
     }
-    elseif (in_array($this->_cssFile, $reservedCSSFiles))
+    elseif ($this->isCssReserved($this->_cssFile))
     {
       $valid = false;
       $this->_cssFileError = _("That filename is reserved for internal use.");
@@ -165,70 +161,70 @@ class Theme
   }
 
   /**
-   * string getCSSFile(void)
+   * string getCssFile(void)
    *
    * @return string css file
    * @access public
    */
-  function getCSSFile()
+  function getCssFile()
   {
     return stripslashes(strtr($this->_cssFile, $this->_trans));
   }
 
   /**
-   * string getCSSFileError(void)
+   * string getCssFileError(void)
    *
    * @return string css file error text
    * @access public
    */
-  function getCSSFileError()
+  function getCssFileError()
   {
     return $this->_cssFileError;
   }
 
   /**
-   * void setCSSFile(string $value)
+   * void setCssFile(string $value)
    *
    * @param string $value css file
    * @return void
    * @access public
    */
-  function setCSSFile($value)
+  function setCssFile($value)
   {
     $value = strtolower($value); // sure?
     $this->_cssFile = Check::safeText($value);
   }
 
   /**
-   * string getCSSRules(void)
+   * string getCssRules(void)
    *
    * @return string css rules
    * @access public
    */
-  function getCSSRules()
+  function getCssRules()
   {
     return stripslashes(strtr($this->_cssRules, $this->_trans));
   }
 
   /**
-   * string getCSSRulesError(void)
+   * string getCssRulesError(void)
    *
    * @return string css rules error text
    * @access public
    */
-  function getCSSRulesError()
+  function getCssRulesError()
   {
     return $this->_cssRulesError;
   }
 
   /**
-   * void setCSSRules(string $value)
+   * void setCssRules(string $value)
    *
    * @param string $value css rules
    * @return void
    * @access public
    */
-  function setCSSRules($value)
+  function setCssRules($value)
   {
     $this->_cssRules = Check::safeText($value);
   }
@@ -254,6 +250,19 @@ class Theme
   function setCount($value)
   {
     $this->_count = intval($value);
+  }
+
+  /**
+   * bool isCssReserved(string $file)
+   *
+   * @param string $file
+   * @return bool
+   * @access public
+   * @since 0.8
+   */
+  function isCssReserved($file)
+  {
+    return in_array($file, $this->_reservedCssFiles);
   }
 } // end class
 ?>
