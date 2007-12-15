@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_fields.php,v 1.25 2007/12/07 16:53:30 jact Exp $
+ * @version   CVS: $Id: user_fields.php,v 1.26 2007/12/15 15:01:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -71,8 +71,8 @@
 
     $array = array(
       OPEN_PROFILE_ADMINISTRATOR => _("Administrator"),
-      OPEN_PROFILE_DOCTOR => _("Doctor"),
-      OPEN_PROFILE_ADMINISTRATIVE => _("Administrative")
+      OPEN_PROFILE_ADMINISTRATIVE => _("Administrative"),
+      OPEN_PROFILE_DOCTOR => _("Doctor")
     );
 
     $row = Form::strLabel("id_profile", _("Profile") . ":", true);
