@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.12 2007/12/07 16:57:15 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.13 2007/12/15 15:02:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -217,8 +217,8 @@
    * User's permissions
    */
   $_SESSION['auth']['is_admin'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATOR);
-  $_SESSION['auth']['is_medical_doctor'] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR);
-  $_SESSION['auth']['is_medical'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
+  $_SESSION['auth']['is_administrative'] = ($user->getIdProfile() <= OPEN_PROFILE_ADMINISTRATIVE);
+  $_SESSION['auth']['is_doctor'] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR);
   //$_SESSION['auth']['is_stats'] = ($user->getIdProfile() <= OPEN_PROFILE_DOCTOR); // @todo?
 
   /**

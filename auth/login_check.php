@@ -10,7 +10,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_check.php,v 1.13 2007/12/07 16:59:17 jact Exp $
+ * @version   CVS: $Id: login_check.php,v 1.14 2007/12/15 15:02:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -26,8 +26,8 @@ require_once("../model/Query/Session.php");
  * @param int $profilePage (optional) one of this values:
  *  OPEN_PROFILE_FREE
  *  OPEN_PROFILE_ADMINISTRATOR
- *  OPEN_PROFILE_DOCTOR
  *  OPEN_PROFILE_ADMINISTRATIVE
+ *  OPEN_PROFILE_DOCTOR
  * @param bool $inDemo (optional) restricted in DEMO version?
  * @return void
  * @access public
@@ -52,8 +52,8 @@ function loginCheck($profilePage = OPEN_PROFILE_FREE, $inDemo = true)
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
     $_SESSION['auth']['is_admin'] = true;
-    $_SESSION['auth']['is_medical_doctor'] = true;
-    $_SESSION['auth']['is_medical'] = true;
+    $_SESSION['auth']['is_administrative'] = true;
+    $_SESSION['auth']['is_doctor'] = true;
 
     return;
   }
@@ -142,8 +142,8 @@ function loginCheck($profilePage = OPEN_PROFILE_FREE, $inDemo = true)
   }
 
   if (($profilePage == OPEN_PROFILE_ADMINISTRATOR && !$_SESSION['auth']['is_admin'])
-    || ($profilePage == OPEN_PROFILE_DOCTOR && !$_SESSION['auth']['is_medical_doctor'])
-    || ($profilePage == OPEN_PROFILE_ADMINISTRATIVE && !$_SESSION['auth']['is_medical']))
+    || ($profilePage == OPEN_PROFILE_ADMINISTRATIVE && !$_SESSION['auth']['is_administrative'])
+    || ($profilePage == OPEN_PROFILE_DOCTOR && !$_SESSION['auth']['is_doctor']))
   {
     FlashMsg::add(_("You are not authorized to use this page."));
     header("Location: ../home/index.php");
