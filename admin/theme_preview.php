@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.36 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.37 2007/12/15 12:49:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,6 +19,7 @@
    * Controlling vars
    */
   $tab = "admin";
+  $nav = "themes";
 
   /**
    * Checking for get and post vars. Go back to form if none found.
@@ -79,7 +80,7 @@
     unset($themeQ);
 
     $_POST["theme_name"] = $theme->getName();
-    $filename = '../css/' . $theme->getCSSFile();
+    $filename = '../css/' . $theme->getCssFile();
     $size = filesize($filename);
     $fp = fopen($filename, 'r');
     $_POST["css_rules"] = fread($fp, $size);
@@ -126,31 +127,21 @@
 
   HTML::start('div', array('id' => 'header'));
 
-  HTML::section(1, _("Clinic Name"));
+  $logo = '../img/' . 'openclinic-1.png'; // @fixme OPEN_APP_LOGO
+  list($width, $height, $type, $attr) = getimagesize($logo);
+  $logo = HTML::strImage($logo, 'OpenClinic' /* @fixme OPEN_APP_NAME */, array('width' => $width, 'height' => $height));
+  $logo = HTML::strLink($logo, '../index.php', null, array('accesskey' => 1));
+  HTML::para($logo, array('id' => 'logo'));
+  unset($logo);
 
   $array = array(
     HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))
   );
   HTML::itemList($array, array('id' => 'shortcuts'));
 
-  $array = array(
-    "home" => array(_("Home"), "#top"),
-    "medical" => array(_("Medical Records"), "#top"),
-    //"stats" => array("Statistics", "#top"),
-    "admin" => array(_("Admin"), "#top")
-  );
-  echo menuBar('admin', $array);
+  echo menuBar($tab);
 
   HTML::end('div'); // #header
-
-  /*HTML::start('div', array('id' => 'sideBar'));
-
-  $array = array(
-    HTML::strLink(_("Theme Preview"), '#top', null, array('class' => 'selected')),
-    HTML::strLink(_("Sample Link"), '#top')
-  );
-  HTML::itemList($array);
-  HTML::end('div'); // #sideBar*/
 
   HTML::start('div', array('id' => 'main'));
   HTML::start('div', array('id' => 'content'));
