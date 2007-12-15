@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: environment.php,v 1.6 2007/11/05 14:27:41 jact Exp $
+ * @version   CVS: $Id: environment.php,v 1.7 2007/12/15 12:50:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -69,13 +69,12 @@
   define("OPEN_CLINIC_ADDRESS",   $set->getClinicAddress());
   define("OPEN_CLINIC_PHONE",     $set->getClinicPhone());
   define("OPEN_CLINIC_URL",       $set->getClinicUrl());
+
   define("OPEN_SESSION_TIMEOUT",  $set->getSessionTimeout());
   define("OPEN_ITEMS_PER_PAGE",   $set->getItemsPerPage());
   define("OPEN_VERSION",          $set->getVersion());
   define("OPEN_THEME_ID",         $set->getIdTheme());
   define("OPEN_LANGUAGE",         $set->getLanguage());
-  define("OPEN_CLINIC_USE_IMAGE", $set->isUseImageSet());
-  define("OPEN_CLINIC_IMAGE_URL", $set->getClinicImageUrl());
 
   unset($set);
 
@@ -101,7 +100,7 @@
    * Theme related constants
    */
   define("OPEN_THEME_NAME",     $theme->getName());
-  define("OPEN_THEME_CSS_FILE", $theme->getCSSFile());
+  define("OPEN_THEME_CSS_FILE", $theme->getCssFile());
 
   $themeQ->freeResult();
   $themeQ->close();
