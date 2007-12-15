@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.8 2007/12/01 12:58:31 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.9 2007/12/15 13:04:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -21,6 +21,7 @@
 
 /**
  * Functions:
+ *  string appLogo(void)
  *  string menuBar(string $tab)
  *  string logos(void)
  *  string miniLogos(void)
@@ -30,6 +31,26 @@
  *  string navigation(array $links)
  *  string clinicInfo(void)
  */
+
+  /**
+   * string appLogo(void)
+   *
+   * Returns a paragraph with the application's logo
+   *
+   * @return string p#logo
+   * @access public
+   */
+  function appLogo()
+  {
+    $logo = '../img/' . 'openclinic-1.png'; // @fixme OPEN_APP_LOGO
+    list($width, $height, $type, $attr) = getimagesize($logo);
+    $logo = HTML::strImage($logo, 'OpenClinic' /* @fixme OPEN_APP_NAME */, array('width' => $width, 'height' => $height));
+    $logo = HTML::strLink($logo, '../index.php', null, array('accesskey' => 1));
+
+    $html = HTML::strPara($logo, array('id' => 'logo'));
+
+    return $html;
+  }
 
   /**
    * string menuBar(string $tab)
