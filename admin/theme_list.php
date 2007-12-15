@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.33 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.34 2007/12/15 12:48:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -44,26 +44,7 @@
   HTML::breadCrumb($links, "icon icon_theme");
   unset($links);
 
-  $legend = _("Change Theme by default in application");
-
-  $content = Form::strLabel("id_theme", _("Choose a New Theme:"));
-
-  $content .= Form::strSelectTable("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
-
-  $tbody = array($content);
-
-  $tfoot = array(Form::strButton("button1", _("Update")));
-
-  /**
-   * Theme use form
-   */
-  HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_use.php'));
-  Form::fieldset($legend, $tbody, $tfoot);
-  HTML::end('form');
-
   HTML::para(HTML::strLink(_("Add New Theme"), '../admin/theme_new_form.php'));
-
-  HTML::section(2, _("Themes List:"));
 
   /**
    * Search in database
@@ -77,6 +58,27 @@
     include_once("../layout/footer.php");
     exit();
   }
+
+  if ($themeQ->numRows() > 1)
+  {
+    $legend = _("Change Theme by default in application");
+
+    $content = Form::strLabel("id_theme", _("Choose a New Theme:"));
+    $content .= Form::strSelectTable("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
+
+    $body = array($content);
+
+    $foot = array(Form::strButton("button1", _("Update")));
+
+    /**
+     * Theme use form
+     */
+    HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_use.php'));
+    Form::fieldset($legend, $body, $foot);
+    HTML::end('form');
+  }
+
+  HTML::section(2, _("Themes List:"));
 
   $thead = array(
     _("#"),
@@ -100,7 +102,7 @@
     $row = ++$i . '.';
     $row .= OPEN_SEPARATOR;
 
-    if (in_array($theme->getCSSFile(), $reservedCSSFiles))
+    if ($theme->isCssReserved($theme->getCssFile()))
     {
       $row .= '**'; //"** " . _("edit");
     }
@@ -131,11 +133,11 @@
 
     $row .= HTML::strLink(
       HTML::strImage('../img/action_valid.png', _("validate")),
-      $validateLink . $theme->getCSSFile()
+      $validateLink . $theme->getCssFile()
     );
     $row .= OPEN_SEPARATOR;
 
-    if (in_array($theme->getCSSFile(), $reservedCSSFiles))
+    if ($theme->isCssReserved($theme->getCssFile()))
     {
       $row .= '**'; //"** " . _("del");
     }
