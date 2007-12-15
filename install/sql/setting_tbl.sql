@@ -8,14 +8,12 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_tbl.sql,v 1.15 2007/11/06 22:17:54 jact Exp $
+ * @version   CVS: $Id: setting_tbl.sql,v 1.16 2007/12/15 14:32:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 CREATE TABLE setting_tbl (
   clinic_name VARCHAR(128) NULL,
-  clinic_image_url TEXT NULL,
-  use_image ENUM('N','Y') NOT NULL DEFAULT 'N',
   clinic_hours VARCHAR(128) NULL,
   clinic_address TEXT NULL,
   clinic_phone VARCHAR(40) NULL,
@@ -30,15 +28,13 @@ CREATE TABLE setting_tbl (
 
 INSERT INTO setting_tbl VALUES (
   'My Clinic',
-  '../images/openclinic-1.png',
-  'Y',
   'L-V 9am-3pm, S 10am-1pm',
   'Sesame Street',
   '999 66 66 66',
   'http://www.example.com',
   20,
   10,
-  '0.8.20071106',
+  '0.8.20071212',
   'en',
   1
 );

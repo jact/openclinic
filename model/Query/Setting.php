@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.2 2007/11/02 20:39:01 jact Exp $
+ * @version   CVS: $Id: Setting.php,v 1.3 2007/12/15 14:34:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,8 +48,6 @@ class Query_Setting extends Query
 
     $this->_map = array(
       'clinic_name' => array('mutator' => 'setClinicName'),
-      'clinic_image_url' => array('mutator' => 'setClinicImageUrl'),
-      'use_image' => array('mutator' => 'setUseImage'),
       'clinic_hours' => array('mutator' => 'setClinicHours'),
       'clinic_address' => array('mutator' => 'setClinicAddress'),
       'clinic_phone' => array('mutator' => 'setClinicPhone'),
@@ -127,8 +125,6 @@ class Query_Setting extends Query
 
     $sql = "UPDATE " . $this->_table . " SET "
          . "clinic_name=?, "
-         . "clinic_image_url=?, "
-         . "use_image=?, "
          . "clinic_hours=?, "
          . "clinic_address=?, "
          . "clinic_phone=?, "
@@ -139,8 +135,6 @@ class Query_Setting extends Query
 
     $params = array(
       urlencode($set->getClinicName()),
-      urlencode($set->getClinicImageUrl()),
-      ($set->isUseImageSet() ? "Y" : "N"),
       urlencode($set->getClinicHours()),
       urlencode($set->getClinicAddress()),
       urlencode($set->getClinicPhone()),

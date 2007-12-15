@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.16 2007/11/06 22:12:48 jact Exp $
+ * @version   CVS: $Id: Setting.php,v 1.17 2007/12/15 14:34:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,10 +25,6 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  bool validateData(void)
  *  string getClinicName(void)
  *  void setClinicName(string $value)
- *  string getClinicImageUrl(void)
- *  void setClinicImageUrl(string $value)
- *  bool isUseImageSet(void)
- *  void setUseImage(mixed $value)
  *  string getClinicHours(void)
  *  void setClinicHours(string $value)
  *  string getClinicAddress(void)
@@ -57,8 +53,6 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
 class Setting
 {
   var $_clinicName = "";
-  var $_clinicImageUrl = "";
-  var $_useImageSet = false;
   var $_clinicHours = "";
   var $_clinicAddress = "";
   var $_clinicPhone = "";
@@ -139,58 +133,6 @@ class Setting
   function setClinicName($value)
   {
     $this->_clinicName = Check::safeText($value);
-  }
-
-  /**
-   * string getClinicImageUrl(void)
-   *
-   * @return string
-   * @access public
-   */
-  function getClinicImageUrl()
-  {
-    return stripslashes(strtr($this->_clinicImageUrl, $this->_trans));
-  }
-
-  /**
-   * void setClinicImageUrl(string $value)
-   *
-   * @param string $value new value to set
-   * @return void
-   * @access public
-   */
-  function setClinicImageUrl($value)
-  {
-    $value = Check::safeText($value);
-    $value = (strpos($value, '../img/') !== false) ? $value : '../img/' . $value;
-    $this->_clinicImageUrl = $value;
-  }
-
-  /**
-   * bool isUseImageSet(void)
-   *
-   * @return bool
-   * @access public
-   */
-  function isUseImageSet()
-  {
-    return ($this->_useImageSet == true);
-  }
-
-  /**
-   * void setUseImage(mixed $value)
-   *
-   * @param mixed $value new value to set
-   * @return void
-   * @access public
-   */
-  function setUseImage($value)
-  {
-    if (gettype($value) == 'string')
-    {
-      $value = strtolower($value);
-    }
-    $this->_useImageSet = ($value == 1 || $value == 'on' || $value == 'y' || $value == 'yes');
   }
 
   /**
