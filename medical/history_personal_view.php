@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_view.php,v 1.24 2007/12/07 16:51:44 jact Exp $
+ * @version   CVS: $Id: history_personal_view.php,v 1.25 2007/12/15 15:05:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
    * Checking permissions
    */
   require_once("../auth/login_check.php");
-  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   require_once("../model/Query/History.php");
   require_once("../model/Patient.php");
@@ -86,7 +86,7 @@
 
   echo $patient->getHeader();
 
-  if ($_SESSION['auth']['is_medical_doctor'])
+  if ($_SESSION['auth']['is_administrative'])
   {
     HTML::para(
       HTML::strLink(_("Edit Personal Antecedents"), '../medical/history_personal_edit_form.php',

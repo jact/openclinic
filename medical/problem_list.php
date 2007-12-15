@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.33 2007/12/07 16:51:45 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.34 2007/12/15 15:05:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
    * Checking permissions
    */
   require_once("../auth/login_check.php");
-  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   require_once("../model/Query/Page/Problem.php");
   require_once("../model/Patient.php");
@@ -64,7 +64,7 @@
   $problemQ = new Query_Page_Problem();
   $lastOrderNumber = $problemQ->getLastOrderNumber($idPatient);
 
-  if ($_SESSION['auth']['is_medical_doctor'])
+  if ($_SESSION['auth']['is_administrative'])
   {
     HTML::para(
       HTML::strLink(_("Add New Medical Problem"), '../medical/problem_new_form.php',
@@ -91,7 +91,7 @@
 
   $thead = array(
     _("Order Number"),
-    _("Function") => array('colspan' => ($_SESSION['auth']['is_medical_doctor'] ? 5 : 3)),
+    _("Function") => array('colspan' => ($_SESSION['auth']['is_administrative'] ? 5 : 3)),
     _("Wording"),
     _("Opening Date"),
     _("Last Update Date")
@@ -107,7 +107,7 @@
     $row = $problem->getOrderNumber();
     $row .= OPEN_SEPARATOR;
 
-    if ($_SESSION['auth']['is_medical_doctor'])
+    if ($_SESSION['auth']['is_administrative'])
     {
       $row .= HTML::strLink(
         HTML::strImage('../img/action_edit.png', _("edit")),

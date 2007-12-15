@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.35 2007/12/07 16:51:45 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.36 2007/12/15 15:05:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
    * Checking permissions
    */
   require_once("../auth/login_check.php");
-  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   require_once("../model/Query/Relative.php");
   require_once("../model/Patient.php");
@@ -79,7 +79,7 @@
 
   echo $patient->getHeader();
 
-  if ($_SESSION['auth']['is_medical_doctor'])
+  if ($_SESSION['auth']['is_administrative'])
   {
     $title = _("Search Relatives to add to list");
 
@@ -110,7 +110,7 @@
 
   $thead = array(
     _("#"),
-    _("Function") => array('colspan' => ($_SESSION['auth']['is_medical_doctor'] ? 2 : 1)),
+    _("Function") => array('colspan' => ($_SESSION['auth']['is_administrative'] ? 2 : 1)),
     _("Surname 1"),
     _("Surname 2"),
     _("First Name")
@@ -152,7 +152,7 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    if ($_SESSION['auth']['is_medical_doctor'])
+    if ($_SESSION['auth']['is_administrative'])
     {
       $row .= HTML::strLink(
         HTML::strImage('../img/action_delete.png', _("delete")),

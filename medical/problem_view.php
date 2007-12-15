@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_view.php,v 1.30 2007/12/07 16:51:45 jact Exp $
+ * @version   CVS: $Id: problem_view.php,v 1.31 2007/12/15 15:05:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
    * Checking permissions
    */
   require_once("../auth/login_check.php");
-  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   require_once("../model/Query/Staff.php");
   require_once("../model/Patient.php");
@@ -88,7 +88,7 @@
   echo $patient->getHeader();
 
   $relatedLinks = "";
-  if ($_SESSION['auth']['is_medical_doctor'])
+  if ($_SESSION['auth']['is_administrative'])
   {
     if ($problem->getClosingDate() == "" || $problem->getClosingDate() == '0000-00-00')
     {

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.35 2007/12/07 16:51:45 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.36 2007/12/15 15:05:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
    * Checking permissions
    */
   require_once("../auth/login_check.php");
-  loginCheck(OPEN_PROFILE_ADMINISTRATIVE, false); // Not in DEMO to prevent users' malice
+  loginCheck(OPEN_PROFILE_DOCTOR, false); // Not in DEMO to prevent users' malice
 
   require_once("../model/Query/Test.php");
   require_once("../model/Patient.php");
@@ -74,7 +74,7 @@
   echo $patient->getHeader();
   echo $problem->getHeader();
 
-  if ($_SESSION['auth']['is_medical_doctor'])
+  if ($_SESSION['auth']['is_administrative'])
   {
     HTML::para(
       HTML::strLink(_("Add New Medical Test"), '../medical/test_new_form.php',
@@ -100,7 +100,7 @@
   HTML::section(2, _("Medical Tests List:"));
 
   $thead = array(
-    _("Function") => array('colspan' => ($_SESSION['auth']['is_medical_doctor'] ? 3 : 1)),
+    _("Function") => array('colspan' => ($_SESSION['auth']['is_administrative'] ? 3 : 1)),
     _("Document Type"),
     _("Path Filename")
   );
@@ -120,7 +120,7 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    if ($_SESSION['auth']['is_medical_doctor'])
+    if ($_SESSION['auth']['is_administrative'])
     {
       $row .= HTML::strLink(
         HTML::strImage('../img/action_edit.png', _("edit")),

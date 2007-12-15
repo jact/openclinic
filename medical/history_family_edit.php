@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_edit.php,v 1.20 2007/12/07 16:51:44 jact Exp $
+ * @version   CVS: $Id: history_family_edit.php,v 1.21 2007/12/15 15:05:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -32,7 +32,7 @@
    * Checking permissions
    */
   require_once("../auth/login_check.php");
-  loginCheck(OPEN_PROFILE_DOCTOR);
+  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
 
   require_once("../lib/Form.php");
 

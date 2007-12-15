@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.33 2007/12/07 16:51:45 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.34 2007/12/15 15:05:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,7 +23,7 @@
    * Checking permissions
    */
   require_once("../auth/login_check.php");
-  loginCheck(OPEN_PROFILE_ADMINISTRATIVE);
+  loginCheck(OPEN_PROFILE_DOCTOR);
 
   require_once("../model/Patient.php");
   require_once("../model/Query/Staff.php");
@@ -67,7 +67,7 @@
   HTML::section(2, _("Social Data"));
 
   $relatedLinks = "";
-  if ($_SESSION['auth']['is_medical_doctor'])
+  if ($_SESSION['auth']['is_administrative'])
   {
     $relatedLinks .= HTML::strLink(_("Edit Social Data"), '../medical/patient_edit_form.php',
       array('id_patient' => $idPatient)
