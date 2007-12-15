@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del.php,v 1.23 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: theme_del.php,v 1.24 2007/12/15 12:45:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -61,9 +61,9 @@
   $themeQ->close();
   unset($themeQ);
 
-  if ( !in_array($theme->getCSSFile(), $reservedCSSFiles) )
+  if ( !$theme->isCssReserved($theme->getCssFile()) )
   {
-    @unlink(dirname(__FILE__) . '/../css/' . basename($theme->getCSSFile()));
+    @unlink(dirname(__FILE__) . '/../css/' . basename($theme->getCssFile()));
   }
 
   /**
