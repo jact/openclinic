@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: parse_sql_file.php,v 1.21 2007/11/02 20:41:23 jact Exp $
+ * @version   CVS: $Id: parse_sql_file.php,v 1.22 2007/12/15 13:12:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -58,6 +58,11 @@ $tables = array(
  */
 function parseSQLFile($file, $table, $drop = true)
 {
+  $controlledErrors = array(
+    1060, // duplicate column
+    1091 // Check that column/key exists
+  );
+
   $installQ = new Query();
   $installQ->captureError(true);
   if ($installQ->isError())
@@ -105,7 +110,7 @@ function parseSQLFile($file, $table, $drop = true)
     if ($char == ";" && $outBracket)
     {
       $result = $installQ->exec($sqlSentence);
-      if ($installQ->isError() && $installQ->getDbErrno() != 1060) // duplicate column
+      if ($installQ->isError() && !in_array($installQ->getDbErrno(), $controlledErrors))
       {
         HTML::para(sprintf(_("Process sql [%s]"), $sqlSentence));
         $installQ->close();
