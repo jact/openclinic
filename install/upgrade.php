@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.7 2007/11/02 20:41:23 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.8 2007/12/15 14:27:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -99,7 +99,7 @@
 
   Msg::info(_("Database upgrade finished correctly!"));
 
-  HTML::section(1, HTML::strLink(_("Start using OpenClinic"), '../home/index.php'));
+  HTML::para(HTML::strLink(_("Start using OpenClinic"), '../home/index.php'));
 
   require_once(dirname(__FILE__) . "/footer.php");
 ?>
