@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.28 2007/11/02 20:41:23 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.29 2007/12/15 14:31:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,12 +36,12 @@
     $table = basename($_POST['sql_file']);
     $table = str_replace('.sql', '', $table);
 
+    // @fixme gecko browsers (Mozilla 1.7.8) cause to disappear CR/LF (and I don't know why)
+    /*$_POST['sql_query'] = Check::safeText($_POST['sql_query'], false);
     if (get_magic_quotes_gpc())
     {
       $_POST['sql_query'] = stripslashes($_POST['sql_query']);
-    }
-    // @fixme gecko browsers (Mozilla 1.7.8) cause to disappear CR/LF (and I don't know why)
-    $_POST['sql_query'] = Check::safeText($_POST['sql_query'], false);
+    }*/
 
     $tmpFile = tempnam(dirname(realpath(__FILE__)), "foo");
     $handle = fopen($tmpFile, "w"); // as text, not binary
@@ -59,6 +59,10 @@
     }
     else
     {
+      // to prevent ghosts...
+      $_SESSION = array();
+      session_destroy();
+
       Msg::info(_("File installed correctly."));
       HTML::para(HTML::strLink(_("Go to OpenClinic"), '../home/index.php'));
       HTML::rule();
@@ -88,6 +92,7 @@
       $_POST['sql_file'] = $_POST['secret_file'];
     }
   }
+  //Error::debug($_POST); // @debug
 
   /**
    * In Mozilla there no path file, only name and extension. Why? Is it an error?
@@ -97,30 +102,28 @@
     $fp = fopen($_FILES['sql_file']['tmp_name'], 'r');
     $sqlQuery = fread($fp, $_FILES['sql_file']['size']);
     fclose($fp);
-    $sqlQuery = Check::safeText($sqlQuery, false);
-
-    HTML::tag('pre', $sqlQuery);
-
-    HTML::rule();
+    //$sqlQuery = Check::safeText($sqlQuery, false);
 
     HTML::start('form', array('method' => 'post', 'action' => $_SERVER['PHP_SELF']));
-    Form::hidden("sql_file", Check::safeText($_POST['sql_file']));
-    Form::hidden("sql_query", $sqlQuery);
+
+    $body = array();
+    $body[] = HTML::strTag('pre', $sqlQuery);
+
+    $body[] = Form::strHidden("sql_file", Check::safeText($_POST['sql_file']));
+    $body[] = Form::strHidden("sql_query", $sqlQuery);
 
     $filename = explode("-", $_FILES['sql_file']['name']);
     if (in_array($filename[0], $tables))
     {
-      HTML::para(
-        Form::strCheckBox("drop", "true")
-        . Form::strLabel("drop", _("Add 'DROP table' sentence"))
-      );
+      $body[] = Form::strCheckBox("drop", "true") . Form::strLabel("drop", _("Add 'DROP table' sentence"));
     }
 
-    HTML::para(
+    $foot = array(
       Form::strButton("install_file", _("Install file"))
       . Form::generateToken()
     );
 
+    Form::fieldset(_("Install file"), $body, $foot);
     HTML::end('form');
 
     HTML::para(HTML::strLink(_("Cancel"), './index.php'));
@@ -162,33 +165,30 @@
     include_once(dirname(__FILE__) . "/footer.php");
     exit();
   } // end if
-  HTML::para(_("Database connection is good."));
+  Msg::info(_("Database connection is good."));
 
   $installQ->close();
 
   HTML::para(HTML::strLink(_("Create OpenClinic tables"), './install.php'));
   HTML::para(HTML::strLink(_("Upgrade OpenClinic database"), './upgrade.php'));
 
-  HTML::rule();
-
-  HTML::section(2, _("Install a SQL file:"));
-
-  // @todo use fieldset
   HTML::start('form',
     array(
       'method' => 'post',
       'action' => $_SERVER['PHP_SELF'],
+      'enctype' => 'multipart/form-data',
       'onsubmit' => 'this.secret_file.value = this.sql_file.value; return true;'
     )
   );
-  Form::hidden("secret_file");
 
-  HTML::para(Form::strFile("sql_file", "", 50));
+  $body = array();
+  $body[] = Form::strHidden("secret_file");
+  $body[] = Form::strFile("sql_file", "", 50);
 
-  HTML::para(Form::strButton("view_file", _("View file")));
+  $foot = array(Form::strButton("view_file", _("View file")));
+
+  Form::fieldset(_("Install a SQL file"), $body, $foot);
   HTML::end('form');
-
-  HTML::rule();
 
   require_once(dirname(__FILE__) . "/footer.php");
 ?>
