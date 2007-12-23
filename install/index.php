@@ -9,25 +9,25 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.29 2007/12/15 14:31:05 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.30 2007/12/23 13:25:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  error_reporting(E_ALL & ~E_NOTICE); // normal mode
-  //error_reporting(E_ALL); // debug mode
+  $tab = "install";
+  $nav = "index";
 
-  require_once(dirname(__FILE__) . "/header.php"); // i18n l10n
+  require_once("../config/environment.php");
+
+  $title = _("OpenClinic Install");
+  require_once("../layout/header.php");
+  HTML::section(1, $title);
+
   require_once(dirname(__FILE__) . "/parse_sql_file.php");
   require_once("../lib/Form.php");
-  require_once("../lib/Error.php");
   require_once("../lib/Check.php");
-  require_once("../lib/FlashMsg.php");
 
-  session_start(); // to keep token_form
   //Error::debug($_POST);
   //Error::debug($_FILES);
-
-  echo FlashMsg::get();
 
   if (isset($_POST['install_file']))
   {
@@ -53,7 +53,7 @@
     {
       Msg::error(_("Parse failed."));
       HTML::para(HTML::strLink(_("Back to installation main page"), $_SERVER['PHP_SELF']));
-      include_once(dirname(__FILE__) . "/footer.php");
+      include_once("../layout/footer.php");
       unlink($tmpFile);
       exit();
     }
@@ -85,6 +85,10 @@
   /**
    * If JavaScript is actived and works fine, we prevent Mozilla's problem
    */
+  if ( !isset($_POST['sql_file']) )
+  {
+    $_POST['sql_file'] = '';
+  }
   if (isset($_POST['secret_file']))
   {
     if (strlen($_POST['secret_file']) > 0 && $_POST['secret_file'] != $_POST['sql_file'])
@@ -128,11 +132,9 @@
 
     HTML::para(HTML::strLink(_("Cancel"), './index.php'));
 
-    include_once(dirname(__FILE__) . "/footer.php");
+    include_once("../layout/footer.php");
     exit();
   } // end if
-
-  HTML::section(1, _("OpenClinic Installation:"));
 
   require_once("../model/Query.php");
 
@@ -162,15 +164,12 @@
 
     HTML::para(sprintf(_("See %s for more details."), HTML::strLink(_("Install Instructions"), '../install.html')));
 
-    include_once(dirname(__FILE__) . "/footer.php");
+    include_once("../layout/footer.php");
     exit();
   } // end if
   Msg::info(_("Database connection is good."));
 
   $installQ->close();
-
-  HTML::para(HTML::strLink(_("Create OpenClinic tables"), './install.php'));
-  HTML::para(HTML::strLink(_("Upgrade OpenClinic database"), './upgrade.php'));
 
   HTML::start('form',
     array(
@@ -190,5 +189,5 @@
   Form::fieldset(_("Install a SQL file"), $body, $foot);
   HTML::end('form');
 
-  require_once(dirname(__FILE__) . "/footer.php");
+  require_once("../layout/footer.php");
 ?>

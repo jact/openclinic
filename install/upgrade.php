@@ -9,17 +9,17 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.8 2007/12/15 14:27:05 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.9 2007/12/23 13:24:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
+  $tab = "install";
+  $nav = "upgrade";
   $returnLocation = './index.php';
 
+  require_once("../config/environment.php");
   require_once("../model/Query/Setting.php");
-  require_once("../lib/FlashMsg.php");
   require_once("../lib/File.php"); // File::getDirContent()
-
-  session_start(); // to keep messages
 
   $setQ = new Query_Setting();
   $setQ->captureError(true);
@@ -62,10 +62,11 @@
     exit();
   }
 
-  require_once(dirname(__FILE__) . "/header.php"); // i18n l10n
+  $title = _("Upgrade Database");
+  require_once("../layout/header.php");
   require_once(dirname(__FILE__) . "/parse_sql_file.php");
 
-  HTML::section(1, _("Upgrade OpenClinic database"));
+  HTML::section(1, $title);
   HTML::para(sprintf(_("Finded version: %s"), $version));
 
   foreach ($upgrades as $value)
@@ -82,7 +83,7 @@
         //Error::debug($file); // debug
         //Msg::error(sprintf(_("Error processing file: %s"), $value));
 
-        include_once(dirname(__FILE__) . "/footer.php");
+        include_once("../layout/footer.php");
         exit();
       }
     }
@@ -99,7 +100,7 @@
 
   Msg::info(_("Database upgrade finished correctly!"));
 
-  HTML::para(HTML::strLink(_("Start using OpenClinic"), '../home/index.php'));
+  HTML::para(HTML::strLink(_("Go to OpenClinic"), '../home/index.php'));
 
-  require_once(dirname(__FILE__) . "/footer.php");
+  require_once("../layout/footer.php");
 ?>

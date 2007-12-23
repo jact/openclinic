@@ -9,25 +9,28 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.24 2007/11/02 20:41:23 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.25 2007/12/23 13:24:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-  error_reporting(E_ALL & ~E_NOTICE); // normal mode
-  //error_reporting(E_ALL); // debug mode
+  $tab = "install";
+  $nav = "create";
 
-  require_once(dirname(__FILE__) . "/header.php"); // i18n l10n
+  require_once("../config/environment.php");
+
+  $title = _("Database Creation");
+  require_once("../layout/header.php");
+
   require_once(dirname(__FILE__) . "/parse_sql_file.php");
   require_once("../model/Query/Setting.php");
   require_once("../lib/Form.php");
 
-  session_start(); // to keep token_form
   if (isset($_GET["confirm"]) && $_GET["confirm"] == "yes")
   {
     Form::compareToken('./index.php');
   }
 
-  HTML::section(1, _("OpenClinic Installation:"));
+  HTML::section(1, $title);
 
   /**
    * Testing connection and current version
@@ -58,8 +61,6 @@
       HTML::para(sprintf(_("OpenClinic (version %s) is already installed."), $set->getVersion()));
       $setQ->close();
 
-      HTML::rule();
-
       Msg::warning(_("Are you sure you want to delete all clinic data and create new OpenClinic tables?"));
       Msg::warning(_("If you continue all data will be lost."));
 
@@ -78,7 +79,7 @@
 
       HTML::para(HTML::strLink(_("Cancel"), './index.php'));
 
-      include_once(dirname(__FILE__) . "/footer.php");
+      include_once("../layout/footer.php");
       exit();
     }
   }
@@ -112,5 +113,5 @@
 
   HTML::section(1, HTML::strLink(_("Start using OpenClinic"), '../home/index.php'));
 
-  require_once(dirname(__FILE__) . "/footer.php");
+  require_once("../layout/footer.php");
 ?>
