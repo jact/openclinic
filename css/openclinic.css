@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: openclinic.css,v 1.1 2007/12/01 12:51:23 jact Exp $
+ * @version   CVS: $Id: openclinic.css,v 1.2 2007/12/23 13:20:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -110,6 +110,11 @@ html, body {
 #navigation {
   width: 20%;
   float: left;
+}
+
+#navigation h2 {
+  display: none;
+  visibility: hidden;
 }
 
 #navigation ul {
@@ -541,4 +546,73 @@ tr.even:hover {
   border: 1px solid #DFCBB6;
   background: #FAF2EB url(../img/msg_hint.png) 2px center no-repeat;
   color: #000;
+}
+
+#hosting {
+  padding-left: 0.5em;
+}
+
+#hosting a { /* variation of phark ir method */
+  display: block;
+  width: 125px;
+  height: 37px;
+  border: 1px solid #fff;
+  background: url(../img/sf-logo.png) no-repeat;
+  text-indent: -5000px;
+  text-decoration: none;
+}
+
+#footer a#xhtml11, #footer a#xhtml11:hover { /* variation of phark ir method */
+  display: block;
+  width: 80px;
+  height: 15px;
+  background: url(../img/valid-xhtml11.png) no-repeat;
+  text-indent: -5000px;
+  text-decoration: none;
+}
+
+html>body a#xhtml11 { /* gecko browsers */
+  margin-left: 46%;
+  border: 1px solid #000;
+}
+
+#doc_links li {
+  display: inline;
+  padding: 0 0.8em;
+}
+
+kbd {
+  font-weight: bold;
+}
+
+code {
+  font-size: 120%;
+}
+
+dl dl {
+  margin-left: 2em;
+}
+
+.programlisting {
+  padding-right: 10px;
+  padding-left: 20px;
+  background: #fff;
+  color: #000;
+  border: 1px solid #3a5266;
+  overflow: auto;
+}
+
+.add {
+  background: inherit;
+  color: #f30;
+}
+
+.fix {
+  background: inherit;
+  color: #08679C;
+}
+
+.change {
+  background: inherit;
+  color: #107B0B;
 }
