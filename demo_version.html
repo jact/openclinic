@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<!-- $Id: demo_version.html,v 1.12 2006/10/13 19:24:15 jact Exp $ -->
+<!-- $Id: demo_version.html,v 1.13 2007/12/23 13:26:08 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -13,13 +13,19 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2006 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2008 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
 <meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
 
-<link rel="stylesheet" type="text/css" href="./css/style.css" media="screen" title="OpenClinic" />
+<link rel="stylesheet" type="text/css" href="./css/openclinic.css" media="screen" title="OpenClinic" />
+
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="./css/ie6_fix.css" title="IE 6 Fix" />
+<![endif]-->
+
+<link rel="stylesheet" type="text/css" href="./css/print.css" media="print" />
 
 <link rel="stylesheet" type="text/css" href="./css/print.css" media="print" />
 
@@ -28,134 +34,146 @@
 <link rel="bookmark icon" type="image/png" href="./img/miniopc.png" />
 </head>
 <body id="top">
-<div id="content">
-  <h1>Demo Version Features</h1>
+<div id="wrap">
+  <div id="header">
+    <p id="logo">
+      <a accesskey="1" href="../index.php">
+        <img src="./img/openclinic-1.png" alt="OpenClinic" title="OpenClinic" height="58" width="291" />
+      </a>
+    </p>
 
-  <h2 id="enable"><a href="#top" title="To top of the page">Enable/Disable Demo</a></h2>
-
-  <p>
-    To enable/disable OpenClinic demo behavior there must be set as <code>true</code> or <code>false</code> the constant <code>OPEN_DEMO</code> in file <code class="note">shared/read_settings.php</code>.
-  </p>
-
-<pre class="programlisting">
-define("OPEN_DEMO", <var class="note">false</var>); // normal version
-
-define("OPEN_DEMO", <var class="note">true</var>); // demo version
-</pre>
-
-  <hr />
-
-  <h2 id="disabled"><a href="#top" title="To top of the page">Disabled Options in Demo</a></h2>
-
-  <p>
-    For security reasons, in demo version there have been disabled some features. In normal version this features would be tested. You could do so <a href="http://sourceforge.net/project/showfiles.php?group_id=70742">downloading the normal version</a> and testing it by yourself.
-  </p>
-
-  <ul>
-    <li><strong class="note">Admin &raquo; Dumps</strong> - This option is used to back-up the application database in different formats.</li>
-
-    <li><strong class="note">Install script page</strong> - This page is needed to install the application and to restore the back-ups of the database. As into this site everything is set up to start using the application, it is unnecesary its use.</li>
-
-    <li>In the option <strong class="note">Admin &raquo; Config Settings</strong> you can choose the application language. But in this demo version it is disabled for clearness reasons.</li>
-
-    <li>Disabling security for demo since sourceforge.net seems to be using mirrored servers that do not share session info. That is why, in demo version there isn't user's control.</li>
-
-    <li>Historical and log tables would not be used for lack of space reasons.</li>
-
-    <li><strong class="note">Admin &raquo; Logs Statistics</strong> - Log tables would not be used.</li>
-
-    <li>In <strong class="note">Medical Records</strong> tab doesn't exist a list of lastest viewed patients.</li>
-
-    <li>In <strong class="note">Medical Records</strong> tab can't manage <strong class="note">medical problem tests</strong> because server's space disk is limited.</li>
-
-    <li>Patients and medical problems can't be deleted.</li>
-  </ul>
+    <div id="shortcuts">
+      <ul>
+        <li><a href="./index.php">Start OpenClinic</a></li>
+      </ul>
+    </div><!-- #shortcuts -->
+  </div><!-- #header -->
 
   <hr />
 
-  <h2 id="profiles"><a href="#top" title="To top of the page">User Profiles</a></h2>
+  <div id="main">
+    <div id="content">
+      <h1>Demo Version Features</h1>
 
-  <p>
-    There are other three profiles defined in OpenClinic. Their features are:
-  </p>
+      <h2 id="enable"><a href="#top" title="To top of the page">Enable/Disable Demo</a></h2>
 
-  <ul>
-    <li><strong class="note">Administrator</strong> - Users with this profile would have total access available into the program.</li>
+      <p>
+        To enable/disable OpenClinic demo behavior there must be set as <code>true</code> or <code>false</code> the constant <code>OPEN_DEMO</code> in file <code class="note">shared/read_settings.php</code>.
+      </p>
 
-    <li><strong class="note">Administrative</strong> - Users with this profile would have access to <strong class="note">Medical Records</strong> tab and <strong class="note">Home</strong> tab only.</li>
+<pre class="programlisting"><code>
+define("OPEN_DEMO", <var>false</var>); // normal version
 
-    <li><strong class="note">Doctor</strong> - This profile, at this application developing stage, has only access to the <strong class="note">Home</strong> tab and some of the options of <strong class="note">Medical Records</strong> tab. It only can see patient's data, not edit them.</li>
-  </ul>
+define("OPEN_DEMO", <var>true</var>); // demo version
+</code></pre>
+
+      <h2 id="disabled"><a href="#top" title="To top of the page">Disabled Options in Demo</a></h2>
+
+      <p>
+        For security reasons, in demo version there have been disabled some features. In normal version this features would be tested. You could do so <a href="http://sourceforge.net/project/showfiles.php?group_id=70742">downloading the normal version</a> and testing it by yourself.
+      </p>
+
+      <ul>
+        <li><strong class="note">Admin &raquo; Dumps</strong> - This option is used to back-up the application database in different formats.</li>
+
+        <li><strong class="note">Install script page</strong> - This page is needed to install the application and to restore the back-ups of the database. As into this site everything is set up to start using the application, it is unnecesary its use.</li>
+
+        <li>In the option <strong class="note">Admin &raquo; Config Settings</strong> you can choose the application language. But in this demo version it is disabled for clearness reasons.</li>
+
+        <li>Disabling security for demo since sourceforge.net seems to be using mirrored servers that do not share session info. That is why, in demo version there isn't user's control.</li>
+
+        <li>Historical and log tables would not be used for lack of space reasons.</li>
+
+        <li><strong class="note">Admin &raquo; Logs Statistics</strong> - Log tables would not be used.</li>
+
+        <li>In <strong class="note">Medical Records</strong> tab doesn't exist a list of lastest viewed patients.</li>
+
+        <li>In <strong class="note">Medical Records</strong> tab can't manage <strong class="note">medical problem tests</strong> because server's space disk is limited.</li>
+
+        <li>Patients and medical problems can't be deleted.</li>
+      </ul>
+
+      <h2 id="profiles"><a href="#top" title="To top of the page">User Profiles</a></h2>
+
+      <p>
+        There are other three profiles defined in OpenClinic. Their features are:
+      </p>
+
+      <ul>
+        <li><strong class="note">Administrator</strong> - Users with this profile would have total access available into the program.</li>
+
+        <li><strong class="note">Administrative</strong> - Users with this profile would have access to <strong class="note">Medical Records</strong> tab and <strong class="note">Home</strong> tab only.</li>
+
+        <li><strong class="note">Doctor</strong> - This profile, at this application developing stage, has only access to the <strong class="note">Home</strong> tab and some of the options of <strong class="note">Medical Records</strong> tab. It only can see patient's data, not edit them.</li>
+      </ul>
+
+      <h2 id="private"><a href="#top" title="To top of the page">Patient Private Data</a></h2>
+
+      <p>
+        Patient's data should be ficticious. This is so because they should be used only for <strong class="note">Medical Records</strong> tab aplication testing purposes. Therefore, as author's site, I don't take charge of any liability derived from the data that this application could hold.
+      </p>
+
+      <h2 id="bugs"><a href="#top" title="To top of the page">Bugs and Suggestions</a></h2>
+
+      <p>
+        OpenClinic isn't perfect, but your suggestions, feedback and bug reports can help us to have a very well done medical records system! You can do this, mailing to <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic">Jose Antonio Chavarría</a> with <strong class="note">subject OpenClinic</strong>.
+      </p>
+
+      <h1><a href="./index.php">Start using OpenClinic demo version</a></h1>
+    </div><!-- #content -->
+  </div><!-- #main -->
 
   <hr />
 
-  <h2 id="private"><a href="#top" title="To top of the page">Patient Private Data</a></h2>
+  <div id="navigation">
+    <h2>Table of contents</h2>
 
-  <p>
-    Patient's data should be ficticious. This is so because they should be used only for <strong class="note">Medical Records</strong> tab aplication testing purposes. Therefore, as author's site, I don't take charge of any liability derived from the data that this application could hold.
-  </p>
+    <ul>
+      <li><a href="#enable">Enable/Disable Demo</a></li>
+
+      <li><a href="#disabled">Disabled Options in Demo</a></li>
+
+      <li><a href="#profiles">User Profiles</a></li>
+
+      <li><a href="#private">Patient Private Data</a></li>
+
+      <li><a href="#bugs">Bugs and Suggestions</a></li>
+    </ul>
+
+    <p id="hosting">
+      <a href="http://sourceforge.net" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
+    </p>
+  </div><!-- #navigation -->
 
   <hr />
 
-  <h2 id="bugs"><a href="#top" title="To top of the page">Bugs and Suggestions</a></h2>
+  <div id="footer">
+    <ul id="doc_links">
+      <li><a href="./index.html">Readme</a></li>
 
-  <p>
-    OpenClinic isn't perfect, but your suggestions, feedback and bug reports can help us to have a very well done medical records system! You can do this, mailing to <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic">Jose Antonio Chavarría</a> with <strong class="note">subject OpenClinic</strong>.
-  </p>
+      <li><a href="./install.html">Install Instructions</a></li>
 
-  <hr />
+      <li><a href="./changelog.html">Changelog</a></li>
 
-  <h1><a href="./index.php">Start using OpenClinic demo version</a></h1>
-</div><!-- End #content -->
+      <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
+    </ul>
 
-<div id="menu">
-  <p>
-    <a href="http://openclinic.sourceforge.net" id="logo" title="OpenClinic web site">OpenClinic web site</a>
-  </p>
+    <div id="app_info">
+      <p>Powered by OpenClinic</p>
 
-  <h2>Table of contents</h2>
+      <p>
+        Copyright &copy; 2002-2008 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
+      </p>
 
-  <ul>
-    <li><a href="#enable">Enable/Disable Demo</a></li>
+      <p>
+        Under the <a href="./LICENSE" rel="license">GNU General Public License</a>
+      </p>
 
-    <li><a href="#disabled">Disabled Options in Demo</a></li>
-
-    <li><a href="#profiles">User Profiles</a></li>
-
-    <li><a href="#private">Patient Private Data</a></li>
-
-    <li><a href="#bugs">Bugs and Suggestions</a></li>
-  </ul>
-</div><!-- End #menu -->
-
-<div id="extra">
-  <h2>Related links</h2>
-
-  <ul>
-    <li><a href="./index.php"><strong>Start OpenClinic</strong></a></li>
-
-    <li><a href="./index.html">Readme</a></li>
-
-    <li><a href="./install.html">Install Instructions</a></li>
-
-    <li><a href="./changelog.html">Changelog</a></li>
-
-    <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
-  </ul>
-
-  <p>
-    <a href="http://sourceforge.net" id="hosting" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
-  </p>
-</div><!-- End #extra -->
-
-<div id="footer">
-  <p>Powered by OpenClinic</p>
-
-  <p>Copyright &copy; 2002-2006 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a><br />under the <a href="./LICENSE">GNU General Public License</a></p>
-
-  <p>
-    <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
-  </p>
-</div><!-- End #footer -->
+      <p>
+        <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
+      </p>
+    </div><!-- #app_info -->
+  </div><!-- #footer -->
+</div><!-- #wrap -->
 </body>
 </html>

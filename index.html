@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<!-- $Id: index.html,v 1.15 2006/10/13 19:24:39 jact Exp $ -->
+<!-- $Id: index.html,v 1.16 2007/12/23 13:26:08 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -13,13 +13,17 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2006 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2008 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
 <meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
 
-<link rel="stylesheet" type="text/css" href="./css/style.css" media="screen" title="OpenClinic" />
+<link rel="stylesheet" type="text/css" href="./css/openclinic.css" media="screen" title="OpenClinic" />
+
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="./css/ie6_fix.css" title="IE 6 Fix" />
+<![endif]-->
 
 <link rel="stylesheet" type="text/css" href="./css/print.css" media="print" />
 
@@ -28,248 +32,256 @@
 <link rel="bookmark icon" type="image/png" href="./img/miniopc.png" />
 </head>
 <body id="top">
-<div id="content">
-  <h1>OpenClinic Readme</h1>
+<div id="wrap">
+  <div id="header">
+    <p id="logo">
+      <a accesskey="1" href="../index.php">
+        <img src="./img/openclinic-1.png" alt="OpenClinic" title="OpenClinic" height="58" width="291" />
+      </a>
+    </p>
 
-  <p>Welcome to OpenClinic!</p>
-
-  <!--h2><a href="./demo_version.html">View demo version features</a> | <a href="./index.php">Start using OpenClinic demo version</a></h2-->
-
-  <p>First of all, thanks a lot to download this software, I hope that you can enjoy it.</p>
-
-  <p>
-    OpenClinic is free software, released under GNU GPL Licence version 2.0 (see <a href="./LICENSE">LICENSE</a> file for details).
-  </p>
+    <div id="shortcuts">
+      <ul>
+        <li><a href="./index.php">Start OpenClinic</a></li>
+      </ul>
+    </div><!-- #shortcuts -->
+  </div><!-- #header -->
 
   <hr />
 
-  <h2 id="intro"><a href="#top" title="To top of the page">Introduction</a></h2>
+  <div id="main">
+    <div id="content">
+      <h1>OpenClinic Readme</h1>
 
-  <p>
-    OpenClinic is an easy to use, open source, medical records system written in PHP. It has been mainly thougth for private clinics, surgeries and private doctors. It is platform independent and it has multilanguage architecture.
-  </p>
+      <p>Welcome to OpenClinic!</p>
 
-  <p>
-    Currently OpenClinic has the following options:
-  </p>
+      <!--h2><a href="./demo_version.html">View demo version features</a> | <a href="./index.php">Start using OpenClinic demo version</a></h2-->
 
-  <ul>
-    <li>Medical Records
-      <p>Use this option to manage your patient's medical records.</p>
+      <p>First of all, thanks a lot to download this software, I hope that you can enjoy it.</p>
 
-      <p>Patient's Administration:</p>
+      <p>
+        OpenClinic is free software, released under GNU GPL Licence version 2.0 (see <a href="./LICENSE">LICENSE</a> file for details).
+      </p>
+
+      <h2 id="intro"><a href="#top" title="To top of the page">Introduction</a></h2>
+
+      <p>
+        OpenClinic is an easy to use, open source, medical records system written in PHP. It has been mainly thougth for private clinics, surgeries and private doctors. It is platform independent and it has multilanguage architecture.
+      </p>
+
+      <p>
+        Currently OpenClinic has the following options:
+      </p>
 
       <ul>
-        <li>Search, new, delete, edit</li>
+        <li>Medical Records
+          <p>Use this option to manage your patient's medical records.</p>
 
-        <li>Social Data</li>
+          <p>Patient's Administration:</p>
 
-        <li>Clinic History</li>
+          <ul>
+            <li>Search, new, delete, edit</li>
 
-        <li>Problem Reports</li>
+            <li>Social Data</li>
+
+            <li>Clinic History</li>
+
+            <li>Problem Reports</li>
+          </ul>
+        </li>
+
+        <li>Admin
+          <p>Use this option to manage administrative options.</p>
+
+          <ul>
+            <li>Config settings</li>
+
+            <li>Theme editor</li>
+
+            <li>Staff members</li>
+
+            <li>System Users</li>
+
+            <li>Dumps</li>
+
+            <li>Log Statistics</li>
+          </ul>
+        </li>
       </ul>
-    </li>
 
-    <li>Admin
-      <p>Use this option to manage administrative options.</p>
+      <h2 id="require"><a href="#top" title="To top of the page">Requirements</a></h2>
 
       <ul>
-        <li>Config settings</li>
+        <li>
+          PHP4 &gt;= 4.3.0 (due to use of mysql_real_escape_string function) <strong class="note">compiled with MySQL support</strong> (tested with versions 4.3.*, 4.4.*);
+        </li>
 
-        <li>Theme editor</li>
+        <li>
+          MySQL (tested with versions 3.23.36, 3.23.49, 3.23.51, 3.23.52, 3.23.54, 3.23.55, 4.0.16 and 4.0.18);
+        </li>
 
-        <li>Staff members</li>
+        <li>
+          a web server prepared to execute <acronym title="PHP: Hypertext Preprocessor">PHP</acronym> code (recommended <a href="http://httpd.apache.org/">Apache</a>);
+        </li>
 
-        <li>System Users</li>
-
-        <li>Dumps</li>
-
-        <li>Log Statistics</li>
+        <li>
+          and, of course, a web browser (with JavaScript and good CSS2 support). Recommended <a href="http://www.mozilla.org/">Mozilla</a> or <a href="http://www.mozilla.org/products/firefox/">Firefox</a>. Advice: Microsoft Interner Explorer could not show application pages accurate.
+        </li>
       </ul>
-    </li>
-  </ul>
+
+      <p>
+        For more details, see <a href="./install.html">Install instructions</a>.
+      </p>
+
+      <h2 id="feature"><a href="#top" title="To top of the page">Features</a></h2>
+
+      <ul>
+        <li>Environment: Web Environment</li>
+
+        <li>Intended Audience: Education, Healthcare industry</li>
+
+        <li>License: <a href="./LICENSE">GNU General Public License (GPL)</a></li>
+
+        <li>Natural Language: English, Spanish, Bulgarian, Dutch, Traditional Chinese</li>
+
+        <li>Operating System: OS Independent</li>
+
+        <li>Programming Language: PHP</li>
+
+        <li>Topic: Dynamic Content</li>
+      </ul>
+
+      <h2 id="language"><a href="#top" title="To top of the page">Multilingual Support</a></h2>
+
+      <p>
+        OpenClinic offers multilingual support, so anyone who wants to contribute a language can create a new .po file (portable object) and enjoy his/her own language. Every language that it send to me will be included in the next release.
+      </p>
+
+      <h2 id="down"><a href="#top" title="To top of the page">Download</a></h2>
+
+      <p>
+        You can get the newest version at <a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Sourceforge</a>.
+      </p>
+
+      <h2 id="devel"><a href="#top" title="To top of the page">Developers Information</a></h2>
+
+      <p>
+        [jact] - Jose Antonio Chavarría &lt;<a href="mailto:CUT-THIS.openclinic&#64;gmail.com">openclinic at gmail dot com</a>&gt;
+      </p>
+
+      <ul>
+        <li>principal developer of OpenClinic project</li>
+
+        <li>person in charge of OpenClinic's maintenance service since autumn 2002</li>
+
+        <li>person in charge of the project <cite><a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Control y Seguimiento de Historias Clínicas: Diseño e implementación</a></cite></li>
+      </ul>
+
+      <p>
+        [eco] - Emilio M. Cazcarra &lt;<a href="mailto:CUT-THIS.eco3d&#64;yahoo.es">eco3d at yahoo dot es</a>&gt;
+      </p>
+
+      <ul>
+        <li>official beta-tester of OpenClinic project</li>
+
+        <li>person in charge of the project <cite><a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Control y Seguimiento de Historias Clínicas: Diseño del sistema seguro</a></cite></li>
+      </ul>
+
+      <p>
+        [pazoff] - Plamen Rumenov Vatev &lt;<a href="mailto:CUT-THIS.pazoff&#64;yahoo.com">pazoff at yahoo dot com</a>&gt;
+      </p>
+
+      <ul>
+        <li>bulgarian (bg_BG) translator: 0.3, 0.4, 0.5 versions</li>
+      </ul>
+
+      <p>
+        [dirk] - Dirk De Naegel &lt;<a href="mailto:CUT-THIS.dirk.de.naegel&#64;scarlet.be">dirk dot de dot naegel at scarlet dot be</a>&gt;
+      </p>
+
+      <ul>
+        <li>dutch (nl_BE) translator: 0.6, 0.7 versions</li>
+      </ul>
+
+      <p>
+        [senz] - Eric Tang &lt;<a href="mailto:CUT-THIS.senzhk&#64;gmail.com">senzhk at gmail dot com</a>&gt;
+      </p>
+
+      <ul>
+        <li>traditional chinese (zh_TW BIG5) translator: 0.7 version</li>
+      </ul>
+
+      <h2 id="bye"><a href="#top" title="To top of the page">Farewell</a></h2>
+
+      <p>
+        Please, enjoy OpenClinic and remember that this is free GPL software and comes without any warranty and without technical support, so please don't email me asking how to make this or that, I'll ignore that type of emails.
+      </p>
+
+      <p>
+        OpenClinic isn't perfect, but your <a href="http://sourceforge.net/forum/?group_id=70742">suggestions, feedback</a> and <a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857">bug reports</a> can help us to have a very well done medical records system!
+      </p>
+
+      <p>
+        PS: Please, excuse my English, I'm not a native speaker. Also, remember I receive too many emails, so I can't answer to all you, but for sure I'll read all emails I receive.
+      </p>
+    </div><!-- #content -->
+  </div><!-- #main -->
 
   <hr />
 
-  <h2 id="require"><a href="#top" title="To top of the page">Requirements</a></h2>
+  <div id="navigation">
+    <h2>Table of contents</h2>
 
-  <ul>
-    <li>
-      PHP4 &gt;= 4.3.0 (due to use of mysql_real_escape_string function) <strong class="note">compiled with MySQL support</strong> (tested with versions 4.3.*, 4.4.*);
-    </li>
+    <ul>
+      <li><a href="#intro">Introduction</a></li>
 
-    <li>
-      MySQL (tested with versions 3.23.36, 3.23.49, 3.23.51, 3.23.52, 3.23.54, 3.23.55, 4.0.16 and 4.0.18);
-    </li>
+      <li><a href="#require">Requirements</a></li>
 
-    <li>
-      a web server prepared to execute <acronym title="PHP: Hypertext Preprocessor">PHP</acronym> code (recommended <a href="http://httpd.apache.org/">Apache</a>);
-    </li>
+      <li><a href="#feature">Features</a></li>
 
-    <li>
-      and, of course, a web browser (with JavaScript and good CSS2 support). Recommended <a href="http://www.mozilla.org/">Mozilla</a> or <a href="http://www.mozilla.org/products/firefox/">Firefox</a>. Advice: Microsoft Interner Explorer could not show application pages accurate.
-    </li>
-  </ul>
+      <li><a href="#language">Multilingual Support</a></li>
 
-  <p>
-    For more details, see <a href="./install.html">Install instructions</a>.
-  </p>
+      <li><a href="#down">Download</a></li>
 
-  <hr />
+      <li><a href="#devel">Developers Information</a></li>
 
-  <h2 id="feature"><a href="#top" title="To top of the page">Features</a></h2>
+      <li><a href="#bye">Farewell</a></li>
+    </ul>
 
-  <ul>
-    <li>Environment: Web Environment</li>
-
-    <li>Intended Audience: Education, Healthcare industry</li>
-
-    <li>License: <a href="./LICENSE">GNU General Public License (GPL)</a></li>
-
-    <li>Natural Language: English, Spanish, Bulgarian, Dutch, Traditional Chinese</li>
-
-    <li>Operating System: OS Independent</li>
-
-    <li>Programming Language: PHP</li>
-
-    <li>Topic: Dynamic Content</li>
-  </ul>
+    <p id="hosting">
+      <a href="http://sourceforge.net" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
+    </p>
+  </div><!-- End #navigation -->
 
   <hr />
 
-  <h2 id="language"><a href="#top" title="To top of the page">Multilingual Support</a></h2>
+  <div id="footer">
+    <ul id="doc_links">
+      <li><a href="./install.html">Install Instructions</a></li>
 
-  <p>
-    OpenClinic offers multilingual support, so anyone who wants to contribute a language can create a new .po file (portable object) and enjoy his/her own language. Every language that it send to me will be included in the next release.
-  </p>
+      <li><a href="./changelog.html">Changelog</a></li>
 
-  <hr />
+      <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
 
-  <h2 id="down"><a href="#top" title="To top of the page">Download</a></h2>
+      <li><a href="./demo_version.html">Demo Version Features</a></li>
+    </ul>
 
-  <p>
-    You can get the newest version at <a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Sourceforge</a>.
-  </p>
+    <div id="app_info">
+      <p>Powered by OpenClinic</p>
 
-  <hr />
+      <p>
+        Copyright &copy; 2002-2008 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
+      </p>
 
-  <h2 id="devel"><a href="#top" title="To top of the page">Developers Information</a></h2>
+      <p>
+        Under the <a href="./LICENSE" rel="license">GNU General Public License</a>
+      </p>
 
-  <p>
-    [jact] - Jose Antonio Chavarría &lt;<a href="mailto:CUT-THIS.openclinic&#64;gmail.com">openclinic at gmail dot com</a>&gt;
-  </p>
-
-  <ul>
-    <li>principal developer of OpenClinic project</li>
-
-    <li>person in charge of OpenClinic's maintenance service since autumn 2002</li>
-
-    <li>person in charge of the project <cite><a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Control y Seguimiento de Historias Clínicas: Diseño e implementación</a></cite></li>
-  </ul>
-
-  <p>
-    [eco] - Emilio M. Cazcarra &lt;<a href="mailto:CUT-THIS.eco3d&#64;yahoo.es">eco3d at yahoo dot es</a>&gt;
-  </p>
-
-  <ul>
-    <li>official beta-tester of OpenClinic project</li>
-
-    <li>person in charge of the project <cite><a href="http://sourceforge.net/project/showfiles.php?group_id=70742">Control y Seguimiento de Historias Clínicas: Diseño del sistema seguro</a></cite></li>
-  </ul>
-
-  <p>
-    [pazoff] - Plamen Rumenov Vatev &lt;<a href="mailto:CUT-THIS.pazoff&#64;yahoo.com">pazoff at yahoo dot com</a>&gt;
-  </p>
-
-  <ul>
-    <li>bulgarian (bg_BG) translator: 0.3, 0.4, 0.5 versions</li>
-  </ul>
-
-  <p>
-    [dirk] - Dirk De Naegel &lt;<a href="mailto:CUT-THIS.dirk.de.naegel&#64;scarlet.be">dirk dot de dot naegel at scarlet dot be</a>&gt;
-  </p>
-
-  <ul>
-    <li>dutch (nl_BE) translator: 0.6, 0.7 versions</li>
-  </ul>
-
-  <p>
-    [senz] - Eric Tang &lt;<a href="mailto:CUT-THIS.senzhk&#64;gmail.com">senzhk at gmail dot com</a>&gt;
-  </p>
-
-  <ul>
-    <li>traditional chinese (zh_TW BIG5) translator: 0.7 version</li>
-  </ul>
-
-  <hr />
-
-  <h2 id="bye"><a href="#top" title="To top of the page">Farewell</a></h2>
-
-  <p>
-    Please, enjoy OpenClinic and remember that this is free GPL software and comes without any warranty and without technical support, so please don't email me asking how to make this or that, I'll ignore that type of emails.
-  </p>
-
-  <p>
-    OpenClinic isn't perfect, but your <a href="http://sourceforge.net/forum/?group_id=70742">suggestions, feedback</a> and <a href="http://sourceforge.net/tracker/?group_id=70742&amp;atid=528857">bug reports</a> can help us to have a very well done medical records system!
-  </p>
-
-  <p>
-    PS: Please, excuse my English, I'm not a native speaker. Also, remember I receive too many emails, so I can't answer to all you, but for sure I'll read all emails I receive.
-  </p>
-</div><!-- End #content -->
-
-<div id="menu">
-  <p>
-    <a href="http://openclinic.sourceforge.net" id="logo" title="OpenClinic web site">OpenClinic web site</a>
-  </p>
-
-  <h2>Table of contents</h2>
-
-  <ul>
-    <li><a href="#intro">Introduction</a></li>
-
-    <li><a href="#require">Requirements</a></li>
-
-    <li><a href="#feature">Features</a></li>
-
-    <li><a href="#language">Multilingual Support</a></li>
-
-    <li><a href="#down">Download</a></li>
-
-    <li><a href="#devel">Developers Information</a></li>
-
-    <li><a href="#bye">Farewell</a></li>
-  </ul>
-</div><!-- End #menu -->
-
-<div id="extra">
-  <h2>Related links</h2>
-
-  <ul>
-    <li><a href="./index.php"><strong>Start OpenClinic</strong></a></li>
-
-    <li><a href="./install.html">Install Instructions</a></li>
-
-    <li><a href="./changelog.html">Changelog</a></li>
-
-    <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
-
-    <li><a href="./demo_version.html">Demo Version Features</a></li>
-  </ul>
-
-  <p>
-    <a href="http://sourceforge.net" id="hosting" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
-  </p>
-</div><!-- End #extra -->
-
-<div id="footer">
-  <p>Powered by OpenClinic</p>
-
-  <p>Copyright &copy; 2002-2006 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a><br />under the <a href="./LICENSE">GNU General Public License</a></p>
-
-  <p>
-    <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
-  </p>
-</div><!-- End #footer -->
+      <p>
+        <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
+      </p>
+    </div><!-- #app_info -->
+  </div><!-- #footer -->
+</div><!-- #wrap -->
 </body>
 </html>

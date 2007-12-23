@@ -1,6 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<!-- $Id: changelog.html,v 1.18 2006/10/13 19:24:03 jact Exp $ -->
+<!-- $Id: changelog.html,v 1.19 2007/12/23 13:26:07 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -13,13 +13,17 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2006 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2008 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
 <meta name="description" content="OpenClinic is an easy to use, open source, medical records system written in PHP" />
 
-<link rel="stylesheet" type="text/css" href="./css/style.css" media="screen" title="OpenClinic" />
+<link rel="stylesheet" type="text/css" href="./css/openclinic.css" media="screen" title="OpenClinic" />
+
+<!--[if lt IE 7]>
+<link rel="stylesheet" type="text/css" href="./css/ie6_fix.css" title="IE 6 Fix" />
+<![endif]-->
 
 <link rel="stylesheet" type="text/css" href="./css/print.css" media="print" />
 
@@ -28,460 +32,468 @@
 <link rel="bookmark icon" type="image/png" href="./img/miniopc.png" />
 </head>
 <body id="top">
-<div id="content">
-  <h1>OpenClinic Changelog</h1>
+<div id="wrap">
+  <div id="header">
+    <p id="logo">
+      <a accesskey="1" href="../index.php">
+        <img src="./img/openclinic-1.png" alt="OpenClinic" title="OpenClinic" height="58" width="291" />
+      </a>
+    </p>
 
-  <p>
-    This is a non-exhaustive (but still near complete) changelog for OpenClinic including beta and release candidate versions.
-  </p>
-
-  <hr />
-
-  <h2 id="legend"><a href="#top" title="To top of the page">Legend</a></h2>
-
-  <ul>
-    <li class="add">Add</li>
-
-    <li class="fix">Fix</li>
-
-    <li class="change">Change</li>
-
-    <!--li>Other</li-->
-  </ul>
+    <div id="shortcuts">
+      <ul>
+        <li><a href="./index.php">Start OpenClinic</a></li>
+      </ul>
+    </div><!-- #shortcuts -->
+  </div><!-- #header -->
 
   <hr />
 
-  <h2 id="c-06"><a href="#top" title="To top of the page">Changes since 0.6</a></h2>
+  <div id="main">
+    <div id="content">
+      <h1>OpenClinic Changelog</h1>
 
-  <ol>
-    <li class="add">Session has an own name</li>
+      <p>
+        This is a non-exhaustive (but still near complete) changelog for OpenClinic including beta and release candidate versions.
+      </p>
 
-    <li class="fix">Action delete had been actived if login of the current user was changed</li>
+      <h2 id="legend"><a href="#top" title="To top of the page">Legend</a></h2>
 
-    <li class="fix">Link 'Report Bugs' had an incorrect CSS class</li>
+      <ul>
+        <li class="add">Add</li>
 
-    <li class="change">Improvements in accessibility to open new windows</li>
+        <li class="fix">Fix</li>
 
-    <li class="fix">Existing login message in user_new.php fixed</li>
+        <li class="change">Change</li>
 
-    <li class="change">DbConnection class: connection parameters are set in constructor function</li>
+        <!--li>Other</li-->
+      </ul>
 
-    <li class="change">Improvements in file shared/navigation_links.php</li>
+      <h2 id="c-06"><a href="#top" title="To top of the page">Changes since 0.6</a></h2>
 
-    <li class="add">New file lib/debug_lib.php: new application constant OPEN_DEBUG (true | false)</li>
+      <ol>
+        <li class="add">Session has an own name</li>
 
-    <li class="add">Added searchUser() method to Access_Query class</li>
+        <li class="fix">Action delete had been actived if login of the current user was changed</li>
 
-    <li class="add">Added Id CVS variable in header of all SQL files</li>
+        <li class="fix">Link 'Report Bugs' had an incorrect CSS class</li>
 
-    <li class="change">Suppression of javascript protocol in href attributes</li>
+        <li class="change">Improvements in accessibility to open new windows</li>
 
-    <li class="add">New file lib/misc_lib.php: new global constant OPEN_FIELD_PREVIEW_LIMIT</li>
+        <li class="fix">Existing login message in user_new.php fixed</li>
 
-    <li class="add">Addition of bread crumb in all pages than need it</li>
+        <li class="change">DbConnection class: connection parameters are set in constructor function</li>
 
-    <li class="fix">Fixed problems with inexistent things</li>
+        <li class="change">Improvements in file shared/navigation_links.php</li>
 
-    <li class="change">Changes in connect method of Query class to permit connection parameters</li>
+        <li class="add">New file lib/debug_lib.php: new application constant OPEN_DEBUG (true | false)</li>
 
-    <li class="change">In $returnPage variable saves GET and POST parameters also</li>
+        <li class="add">Added searchUser() method to Access_Query class</li>
 
-    <li class="change">DTD XHTML 1.1 in all project pages</li>
+        <li class="add">Added Id CVS variable in header of all SQL files</li>
 
-    <li class="add">Added affectedRows() method to Query class</li>
+        <li class="change">Suppression of javascript protocol in href attributes</li>
 
-    <li class="change">Changes in input_lib.php file (new parameter $disabled in showCheckBox and showRadioButton functions, $events paremeter becomes $addendum, new parameter $error in showSelectArray function)</li>
+        <li class="add">New file lib/misc_lib.php: new global constant OPEN_FIELD_PREVIEW_LIMIT</li>
 
-    <li class="change">No GET values to *_del.php files (via POST now)</li>
+        <li class="add">Addition of bread crumb in all pages than need it</li>
 
-    <li class="change">existLogin() method has changed idUser parameter for idMember</li>
+        <li class="fix">Fixed problems with inexistent things</li>
 
-    <li class="fix">Fixed logout link in timeout session</li>
+        <li class="change">Changes in connect method of Query class to permit connection parameters</li>
 
-    <li class="change">If items per page equal to zero, searchs return all results without pagination</li>
+        <li class="change">In $returnPage variable saves GET and POST parameters also</li>
 
-    <li class="change">Function getFiles() has a new parameter to indicate allowed extensions of files</li>
+        <li class="change">DTD XHTML 1.1 in all project pages</li>
 
-    <li class="change">Better i18n of dates</li>
+        <li class="add">Added affectedRows() method to Query class</li>
 
-    <li class="fix">Fixed problem with NULL closing_date in medical problems</li>
+        <li class="change">Changes in input_lib.php file (new parameter $disabled in showCheckBox and showRadioButton functions, $events paremeter becomes $addendum, new parameter $error in showSelectArray function)</li>
 
-    <li class="fix">Fixed XSS attacks with JavaScript event handlers in input fields and GET and POST vars</li>
+        <li class="change">No GET values to *_del.php files (via POST now)</li>
 
-    <li class="add">Added localDate() function to lang_lib.php file</li>
+        <li class="change">existLogin() method has changed idUser parameter for idMember</li>
 
-    <li class="change">All methods named fetch*() have been renamed to fetch()</li>
+        <li class="fix">Fixed logout link in timeout session</li>
 
-    <li class="add">New option CREATE DATABASE __dbname__ in MySQL dumps and table summary</li>
+        <li class="change">If items per page equal to zero, searchs return all results without pagination</li>
 
-    <li class="add">Three new files in directory shared to clear code: i18n.php, session_info.php, xhtml_start.php</li>
+        <li class="change">Function getFiles() has a new parameter to indicate allowed extensions of files</li>
 
-    <li class="change">Profiles option in admin tab has been removed (and profile_tbl from database too)</li>
+        <li class="change">Better i18n of dates</li>
 
-    <li class="fix">Fixed MSIE bugs relationship with table less design</li>
+        <li class="fix">Fixed problem with NULL closing_date in medical problems</li>
 
-    <li class="fix">All application constants have OPEN_ or DLIB_ prefix to avoid interferences with PHP constants</li>
+        <li class="fix">Fixed XSS attacks with JavaScript event handlers in input fields and GET and POST vars</li>
 
-    <li class="add">New function showFetchError() in lib/error_lib.php file (changes in DbConnection and Query classes)</li>
+        <li class="add">Added localDate() function to lang_lib.php file</li>
 
-    <li class="change">errorOccurred() method changes name to isError() in Query class</li>
+        <li class="change">All methods named fetch*() have been renamed to fetch()</li>
 
-    <li class="fix">user_edit.php redirects correctly now to user_edit_form.php in case of error</li>
+        <li class="add">New option CREATE DATABASE __dbname__ in MySQL dumps and table summary</li>
 
-    <li class="fix">Redirections to avoid reload problem in insertions, updates or deletions processes</li>
+        <li class="add">Three new files in directory shared to clear code: i18n.php, session_info.php, xhtml_start.php</li>
 
-    <li class="fix">Problems with dumps as files (urldecode of data is unnecessary)</li>
+        <li class="change">Profiles option in admin tab has been removed (and profile_tbl from database too)</li>
 
-    <li class="add">New method isActivated() in User_Query class to know if a login is activated or not</li>
+        <li class="fix">Fixed MSIE bugs relationship with table less design</li>
 
-    <li class="fix">If an user is deactivated, is redirected to login suspended page at first time</li>
+        <li class="fix">All application constants have OPEN_ or DLIB_ prefix to avoid interferences with PHP constants</li>
 
-    <li class="add">Custom error handler for log to screen or/and to a file (new constants in read_settings.php file: OPEN_SCREEN_ERRORS, OPEN_LOG_ERRORS, OPEN_LOG_FILE)</li>
+        <li class="add">New function showFetchError() in lib/error_lib.php file (changes in DbConnection and Query classes)</li>
 
-    <li class="add">New methods in Query class: getPrimaryKey(), getRowData()</li>
+        <li class="change">errorOccurred() method changes name to isError() in Query class</li>
 
-    <li class="change">Record log process improvements: now is saved entire record data</li>
+        <li class="fix">user_edit.php redirects correctly now to user_edit_form.php in case of error</li>
 
-    <li class="add">New constant in global_constants.php file: OPEN_SEPARATOR for implode(), explode() functions; OPEN_MSG_INFO, OPEN_MSG_WARNING, OPEN_MSG_ERROR for messages</li>
+        <li class="fix">Redirections to avoid reload problem in insertions, updates or deletions processes</li>
 
-    <li class="add">New functions html*() in input_lib.php file</li>
+        <li class="fix">Problems with dumps as files (urldecode of data is unnecessary)</li>
 
-    <li class="add">Added html_lib.php file in lib directory: htmlTable(), showTable(), htmlMessage(), showMessage() functions</li>
+        <li class="add">New method isActivated() in User_Query class to know if a login is activated or not</li>
 
-    <li class="change">CSS2 table less based themes, changes in theme_tbl table and admin/theme_*.php files (new file admin/theme_preload_css.php)</li>
+        <li class="fix">If an user is deactivated, is redirected to login suspended page at first time</li>
 
-    <li class="fix">Changes in current user are made immediately</li>
+        <li class="add">Custom error handler for log to screen or/and to a file (new constants in read_settings.php file: OPEN_SCREEN_ERRORS, OPEN_LOG_ERRORS, OPEN_LOG_FILE)</li>
 
-    <li class="add">New constant OPEN_BUFFER in read_settings.php file to use ob_*() functions (but by default, value is false) (experimental support)</li>
+        <li class="add">New methods in Query class: getPrimaryKey(), getRowData()</li>
 
-    <li class="change">Field collegiate_number has been replaced with id_member in patient_tbl and problem_tbl tables. Field id_member has been added in deleted_patient_tbl, deleted_problem_tbl tables too. After upgrade OpenClinic from 0.6 version is recommended check all patients and problems information (doctor you are assigned to, doctor who treated you)</li>
-  </ol>
+        <li class="change">Record log process improvements: now is saved entire record data</li>
+
+        <li class="add">New constant in global_constants.php file: OPEN_SEPARATOR for implode(), explode() functions; OPEN_MSG_INFO, OPEN_MSG_WARNING, OPEN_MSG_ERROR for messages</li>
+
+        <li class="add">New functions html*() in input_lib.php file</li>
+
+        <li class="add">Added html_lib.php file in lib directory: htmlTable(), showTable(), htmlMessage(), showMessage() functions</li>
+
+        <li class="change">CSS2 table less based themes, changes in theme_tbl table and admin/theme_*.php files (new file admin/theme_preload_css.php)</li>
+
+        <li class="fix">Changes in current user are made immediately</li>
+
+        <li class="add">New constant OPEN_BUFFER in read_settings.php file to use ob_*() functions (but by default, value is false) (experimental support)</li>
+
+        <li class="change">Field collegiate_number has been replaced with id_member in patient_tbl and problem_tbl tables. Field id_member has been added in deleted_patient_tbl, deleted_problem_tbl tables too. After upgrade OpenClinic from 0.6 version is recommended check all patients and problems information (doctor you are assigned to, doctor who treated you)</li>
+      </ol>
+
+      <h2 id="c-05"><a href="#top" title="To top of the page">Changes since 0.5</a></h2>
+
+      <ol>
+        <li class="add">Added new themes to the project: LibXML, SerialZ, Closer, GG Interactive</li>
+
+        <li class="change">Changes in DbConnection class (documentation)</li>
+
+        <li class="add">Added exec() method to Query class (this implicates changes in all *_Query.php files)</li>
+
+        <li class="change">classes/Install_Query.php file (Install_Query class) has been removed from project (this implicates changes in parse_sql_file.php and install.php files)</li>
+
+        <li class="change">Changed passwords coded method in MySQL fields (it is <acronym>MD5</acronym> now)</li>
+
+        <li class="fix">Error in medical/test_edit.php file (path_filename)</li>
+
+        <li class="change">Internal changes in classes (coding_guidelines.html)</li>
+
+        <li class="change">$HTTP_*_VARS now are $_* superglobals arrays</li>
+
+        <li class="change">Now current password is needed to change the password</li>
+
+        <li class="add">It is possible define a color as #rgb format in New/Edit Theme pages</li>
+
+        <li class="add">Added new options in dumps: DELETE * FROM __table__, USE __dbname__</li>
+
+        <li class="add">Added new files to the project: lib/lang_lib.php, lib/nls.php</li>
+
+        <li class="change">Files named noauth.php are no_authorization.php now</li>
+
+        <li class="add">Added Id CVS variable in header of all PHP, HTML and JavaScript files</li>
+
+        <li class="add">Added new files to the project: admin/staff_validate_post.php, admin/theme_validate_post.php, admin/user_validate_post.php, medical/patient_validate_post.php, medical/problem_validate_post.php, medical/test_validate_post.php</li>
+
+        <li class="fix">Fixed mess between opened and closed medical problems (medical/problem_view.php file)</li>
+
+        <li class="change">Translation method has been changed. Now it is made with GNU gettext and PO (and binary MO) files (classes/Localize.php file has been deleted from project)</li>
+
+        <li class="change">All 'print' language constructions have been changed for 'echo' language constructions</li>
+
+        <li class="change">Now OpenClinic installation is also translated (to the browser language if it is available)</li>
+
+        <li class="change">Better internal documentation in class files</li>
+
+        <li class="fix">Fixed SELECT sentences with text fields (urlencode)</li>
+
+        <li class="add">Added showInputButton(), showInputFile(), showRadioButton() functions in lib/input_lib.php file</li>
+
+        <li class="change">Changes in lib/input_lib.php functions</li>
+
+        <li class="change">shared/suspended.php file is shared/login_suspended.php now</li>
+
+        <li class="change">Constants OPEN_NUM, OPEN_ASSOC, OPEN_BOTH have been deleted from file shared/global_constants.php (this implicates changes in various classes/*_Query.php files)</li>
+
+        <li class="change">Now shared/global_constants.php is required in shared/read_settings.php file</li>
+
+        <li class="change">All form passwords are encoded with <acronym>MD5</acronym> method</li>
+
+        <li class="add">Added lib/file_lib.php file to the project</li>
+
+        <li class="add">Created a directory to store medical problem tests</li>
+
+        <li class="change">It is possible making a remote installation of a SQL file</li>
+
+        <li class="add">Added new field in problem_tbl and deleted_problem_tbl tables (last_update_date)</li>
+
+        <li class="change">OpenClinic CSS changed. New design does not use tables for layout purposes. Layout is made with div and span tags. It looks fine in last generation browsers</li>
+
+        <li class="add">Added new constant ALLOWED_HTML_TAGS in global_constants.php file (more secure classes)</li>
+
+        <li class="change">Now session_cache_limiter() function is in read_settings.php file</li>
+
+        <li class="add">All visible pages have a title page</li>
+
+        <li class="fix">'Delete Connection with Medical Problem' shows medical problem header information now</li>
+
+        <li class="fix">Function showResultPages displays all pages when it is necessary now</li>
+
+        <li class="add">New link 'OpenClinic Readme' in footer pages</li>
+
+        <li class="change">Various database fields have changed: subjetive -&gt; subjective (problem_tbl, deleted_problem_tbl), objetive -&gt; objective (problem_tbl, deleted_problem_tbl), wife_childs_status_health -&gt; spouse_childs_status_health (deleted_patient_tbl, history_tbl), sur_name1 -&gt; surname1 (staff_tbl, patient_tbl, deleted_patient_tbl), sur_name2 -&gt; surname2 (staff_tbl, patient_tbl, deleted_patient_tbl)</li>
+
+        <li class="add">Inclusion of OpenClinic version in database dumps downloads</li>
+
+        <li class="fix">In login_form.php direct connections, it redirects to home/index.php now</li>
+
+        <li class="change">Changes in input_lib.php functions parameters</li>
+      </ol>
+
+      <h2 id="c-04"><a href="#top" title="To top of the page">Changes since 0.4</a></h2>
+
+      <ol>
+        <li class="add">Added install/wizard.php file to the project</li>
+
+        <li class="add">Added css/wizard.css file to the project</li>
+
+        <li class="add">Added DLIB_MYSQL_VERSION constant to the admin/dump_defines.php file</li>
+
+        <li class="add">Added new themes to the project: Thai Appserv, OpenClinic Wizard, Izhal, Invision</li>
+
+        <li class="change">Tables array is now in install/parse_sql_file.php file</li>
+
+        <li class="change">The file openclinic/index.php has been modified (checks if database connection is good)</li>
+
+        <li class="fix">Error in new user process (classes/User.php file, $value =&gt; $pwd)</li>
+
+        <li class="change">The files medical/test_new.php and medical/test_new_form.php have been modified</li>
+
+        <li class="fix">Error in new/edit medical test process (in Opera and Mozilla browsers)</li>
+
+        <li class="fix">Error in patient deletion process (medical problems)</li>
+
+        <li class="change">The file medical/problem_search.php has been modified (more secure)</li>
+
+        <li class="fix">Error in restore backup process when there is a semicolon in data (parse_sql_file.php)</li>
+
+        <li class="change">The file scripts/.htaccess has been removed</li>
+
+        <li class="fix">Doctor can not edit or delete medical tests of a medical problem</li>
+
+        <li class="change">OpenClinic Logos changed thanks to <a href="http://www.coresis.com">Coresis</a> (project <a href="http://www.coresis.com/opengraphics/">OpenGraphics</a>)</li>
+
+        <li class="add">Added scripts/wizard.js file to the project</li>
+
+        <li class="add">Added nl2br() function to medical/*_view.php files</li>
+      </ol>
+
+      <h2 id="c-03"><a href="#top" title="To top of the page">Changes since 0.3</a></h2>
+
+      <ol>
+        <li class="add">Added bulgarian language (pazoff)</li>
+
+        <li class="add">Added showNavLinks() function (shared/navigation_links.php file)</li>
+
+        <li class="change">Improvements in search engine (medical/patient_fields.php, medical/patient_search.php, classes/Patient_Query.php)</li>
+
+        <li class="add">Added setItemsPerPage(), getCurrentRow(), getRowCount(), getPageCount(), search() methods to Problem_Query class</li>
+
+        <li class="add">Added medical/problem_search.php, medical/problem_search_fields.php files to the project</li>
+
+        <li class="add">Added freeResult() method to DbConnection and Query classes</li>
+
+        <li class="fix">Fixed medical/print_medical_record.php errors ($staff)</li>
+
+        <li class="fix">Fixed medical/problem_view.php errors ($staff, new != reset)</li>
+
+        <li class="fix">Fixed medical/patient_view.php errors ($staff)</li>
+
+        <li class="add">Added numRows() method to Query class</li>
+
+        <li class="fix">Fixed medical/problem_new.php and medical/problem_edit.php errors (key=)</li>
+
+        <li class="fix">Fixed medical/connection_new.php errors (key=)</li>
+
+        <li class="add">Added medical/visited_list.php file to the project</li>
+
+        <li class="add">Added new themes to the project: XP Style (jact), Autumn Violets (pazoff)</li>
+
+        <li class="add">New patient list (3 last visited patients) in normal version</li>
+
+        <li class="change">More visual improvements (CSS and images)</li>
+
+        <li class="fix">Fixed more XHTML 1.0 errors (nested lists)</li>
+
+        <li class="fix">Fixed stranger characters introduction in login_form.php (urlencode in login.php)</li>
+
+        <li class="add">Added lib/validator_lib.php file to the project</li>
+
+        <li class="add">Added fetchAll() method to DbConnection class</li>
+
+        <li class="add">Added fetchRow() and fetchAll() methods to Query class (changes in all *_Query.php files)</li>
+
+        <li class="add">New feature in Admin tab: Log Statistics</li>
+
+        <li class="add">Added fetchAccess() and select() methods to Access_Query class</li>
+
+        <li class="add">Added fetchRecord() and select() methods to Record_Query class</li>
+
+        <li class="add">Added admin/log_stats.php, admin/log_access_list.php and admin/log_record_list.php files to the project</li>
+
+        <li class="add">Added htmlspecialchars(), intval() functions to classes files</li>
+
+        <li class="change">Use of showInputHidden() function in the web forms</li>
+
+        <li class="add">Added showCheckBox() function (lib/input_lib.php file)</li>
+
+        <li class="change">Checking of magic_quotes_gpc in setter methods</li>
+
+        <li class="add">Added emulation of transactions in critical operations (ignore_user_abort function)</li>
+
+        <li class="add">Added coding_guidelines.html file to the project</li>
+      </ol>
+
+      <h2 id="c-02"><a href="#top" title="To top of the page">Changes since 0.2</a></h2>
+
+      <ol>
+        <li class="change">Visual improvements (CSS)</li>
+
+        <li class="fix">Fixed medical/relative_list.php errors (medical/patient_del.php)</li>
+
+        <li class="fix">Fixed admin/setting_edit.php errors</li>
+
+        <li class="fix">Fixed medical/connection_list.php errors (medical/problem_del.php)</li>
+
+        <li class="add">Added access_log_tbl table to database. It is necessary to store application user's accesses</li>
+
+        <li class="add">Added Access_Query class</li>
+
+        <li class="change">Changed link to admin/user_new_form.php in admin/staff_list.php</li>
+
+        <li class="change">Improved internationalization of the application (encoding, charset, dir). Changes in locale/*/header.php files</li>
+
+        <li class="add">Added record_log_tbl table to database. It is necessary to log record operations</li>
+
+        <li class="add">Added Record_Query class</li>
+
+        <li class="add">Added shared/record_log.php file</li>
+
+        <li class="add">Added getLastId() method to the Problem_Query class</li>
+
+        <li class="add">Added getLastId() method to the Test_Query class</li>
+      </ol>
+
+      <h2 id="c-01"><a href="#top" title="To top of the page">Changes since 0.1</a></h2>
+
+      <ol>
+        <li class="fix">Fixed medical/problem_edit_form.php errors</li>
+
+        <li class="change">Improved date format</li>
+
+        <li class="fix">Fixed some XHTML 1.0 errors</li>
+
+        <li class="change">Better clinic image selection (&lt;select&gt; tag)</li>
+
+        <li class="change">Demo version doesn't have user's control</li>
+
+        <li class="change">Modified connect() method in DbConnection class</li>
+
+        <li class="add">Added affectedRows() method to DbConnection class</li>
+
+        <li class="add">Added rowSeek() method to DbConnection class</li>
+
+        <li class="add">Added lastInsertId() method to DbConnection class</li>
+
+        <li class="add">Added medical/history_personal_view.php and medical/history_family_view.php files</li>
+
+        <li class="add">Added $onlyDoctor and $hasMedicalAdminAuth variables</li>
+
+        <li class="add">Added admin/dump_optimize_db.php file</li>
+
+        <li class="add">Added htmlspecialchars() function to the lib/input_lib.php functions</li>
+
+        <li class="add">Added showInputHidden() function to the lib/input_lib.php file</li>
+
+        <li class="change">Improved SQL dumps of database</li>
+
+        <li class="fix">Fixed History_Query errors</li>
+
+        <li class="add">Added historic tables: deleted_patient_tbl, deleted_problem_tbl</li>
+
+        <li class="fix">Fixed date format errors</li>
+      </ol>
+    </div><!-- #content -->
+  </div><!-- #main -->
 
   <hr />
 
-  <h2 id="c-05"><a href="#top" title="To top of the page">Changes since 0.5</a></h2>
+  <div id="navigation">
+    <h2>Table of contents</h2>
 
-  <ol>
-    <li class="add">Added new themes to the project: LibXML, SerialZ, Closer, GG Interactive</li>
+    <ul>
+      <li><a href="#legend">Legend</a></li>
 
-    <li class="change">Changes in DbConnection class (documentation)</li>
+      <li><a href="#c-06">Changes since 0.6</a></li>
 
-    <li class="add">Added exec() method to Query class (this implicates changes in all *_Query.php files)</li>
+      <li><a href="#c-05">Changes since 0.5</a></li>
 
-    <li class="change">classes/Install_Query.php file (Install_Query class) has been removed from project (this implicates changes in parse_sql_file.php and install.php files)</li>
+      <li><a href="#c-04">Changes since 0.4</a></li>
 
-    <li class="change">Changed passwords coded method in MySQL fields (it is <acronym>MD5</acronym> now)</li>
+      <li><a href="#c-03">Changes since 0.3</a></li>
 
-    <li class="fix">Error in medical/test_edit.php file (path_filename)</li>
+      <li><a href="#c-02">Changes since 0.2</a></li>
 
-    <li class="change">Internal changes in classes (coding_guidelines.html)</li>
+      <li><a href="#c-01">Changes since 0.1</a></li>
+    </ul>
 
-    <li class="change">$HTTP_*_VARS now are $_* superglobals arrays</li>
-
-    <li class="change">Now current password is needed to change the password</li>
-
-    <li class="add">It is possible define a color as #rgb format in New/Edit Theme pages</li>
-
-    <li class="add">Added new options in dumps: DELETE * FROM __table__, USE __dbname__</li>
-
-    <li class="add">Added new files to the project: lib/lang_lib.php, lib/nls.php</li>
-
-    <li class="change">Files named noauth.php are no_authorization.php now</li>
-
-    <li class="add">Added Id CVS variable in header of all PHP, HTML and JavaScript files</li>
-
-    <li class="add">Added new files to the project: admin/staff_validate_post.php, admin/theme_validate_post.php, admin/user_validate_post.php, medical/patient_validate_post.php, medical/problem_validate_post.php, medical/test_validate_post.php</li>
-
-    <li class="fix">Fixed mess between opened and closed medical problems (medical/problem_view.php file)</li>
-
-    <li class="change">Translation method has been changed. Now it is made with GNU gettext and PO (and binary MO) files (classes/Localize.php file has been deleted from project)</li>
-
-    <li class="change">All 'print' language constructions have been changed for 'echo' language constructions</li>
-
-    <li class="change">Now OpenClinic installation is also translated (to the browser language if it is available)</li>
-
-    <li class="change">Better internal documentation in class files</li>
-
-    <li class="fix">Fixed SELECT sentences with text fields (urlencode)</li>
-
-    <li class="add">Added showInputButton(), showInputFile(), showRadioButton() functions in lib/input_lib.php file</li>
-
-    <li class="change">Changes in lib/input_lib.php functions</li>
-
-    <li class="change">shared/suspended.php file is shared/login_suspended.php now</li>
-
-    <li class="change">Constants OPEN_NUM, OPEN_ASSOC, OPEN_BOTH have been deleted from file shared/global_constants.php (this implicates changes in various classes/*_Query.php files)</li>
-
-    <li class="change">Now shared/global_constants.php is required in shared/read_settings.php file</li>
-
-    <li class="change">All form passwords are encoded with <acronym>MD5</acronym> method</li>
-
-    <li class="add">Added lib/file_lib.php file to the project</li>
-
-    <li class="add">Created a directory to store medical problem tests</li>
-
-    <li class="change">It is possible making a remote installation of a SQL file</li>
-
-    <li class="add">Added new field in problem_tbl and deleted_problem_tbl tables (last_update_date)</li>
-
-    <li class="change">OpenClinic CSS changed. New design does not use tables for layout purposes. Layout is made with div and span tags. It looks fine in last generation browsers</li>
-
-    <li class="add">Added new constant ALLOWED_HTML_TAGS in global_constants.php file (more secure classes)</li>
-
-    <li class="change">Now session_cache_limiter() function is in read_settings.php file</li>
-
-    <li class="add">All visible pages have a title page</li>
-
-    <li class="fix">'Delete Connection with Medical Problem' shows medical problem header information now</li>
-
-    <li class="fix">Function showResultPages displays all pages when it is necessary now</li>
-
-    <li class="add">New link 'OpenClinic Readme' in footer pages</li>
-
-    <li class="change">Various database fields have changed: subjetive -&gt; subjective (problem_tbl, deleted_problem_tbl), objetive -&gt; objective (problem_tbl, deleted_problem_tbl), wife_childs_status_health -&gt; spouse_childs_status_health (deleted_patient_tbl, history_tbl), sur_name1 -&gt; surname1 (staff_tbl, patient_tbl, deleted_patient_tbl), sur_name2 -&gt; surname2 (staff_tbl, patient_tbl, deleted_patient_tbl)</li>
-
-    <li class="add">Inclusion of OpenClinic version in database dumps downloads</li>
-
-    <li class="fix">In login_form.php direct connections, it redirects to home/index.php now</li>
-
-    <li class="change">Changes in input_lib.php functions parameters</li>
-  </ol>
+    <p id="hosting">
+      <a href="http://sourceforge.net" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
+    </p>
+  </div><!-- #navigation -->
 
   <hr />
 
-  <h2 id="c-04"><a href="#top" title="To top of the page">Changes since 0.4</a></h2>
+  <div id="footer">
+    <ul id="doc_links">
+      <li><a href="./index.html">Readme</a></li>
 
-  <ol>
-    <li class="add">Added install/wizard.php file to the project</li>
+      <li><a href="./install.html">Install Instructions</a></li>
 
-    <li class="add">Added css/wizard.css file to the project</li>
+      <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
 
-    <li class="add">Added DLIB_MYSQL_VERSION constant to the admin/dump_defines.php file</li>
+      <li><a href="./demo_version.html">Demo Version Features</a></li>
+    </ul>
 
-    <li class="add">Added new themes to the project: Thai Appserv, OpenClinic Wizard, Izhal, Invision</li>
+    <div id="app_info">
+      <p>Powered by OpenClinic</p>
 
-    <li class="change">Tables array is now in install/parse_sql_file.php file</li>
+      <p>
+        Copyright &copy; 2002-2008 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
+      </p>
 
-    <li class="change">The file openclinic/index.php has been modified (checks if database connection is good)</li>
+      <p>
+        Under the <a href="./LICENSE" rel="license">GNU General Public License</a>
+      </p>
 
-    <li class="fix">Error in new user process (classes/User.php file, $value =&gt; $pwd)</li>
-
-    <li class="change">The files medical/test_new.php and medical/test_new_form.php have been modified</li>
-
-    <li class="fix">Error in new/edit medical test process (in Opera and Mozilla browsers)</li>
-
-    <li class="fix">Error in patient deletion process (medical problems)</li>
-
-    <li class="change">The file medical/problem_search.php has been modified (more secure)</li>
-
-    <li class="fix">Error in restore backup process when there is a semicolon in data (parse_sql_file.php)</li>
-
-    <li class="change">The file scripts/.htaccess has been removed</li>
-
-    <li class="fix">Doctor can not edit or delete medical tests of a medical problem</li>
-
-    <li class="change">OpenClinic Logos changed thanks to <a href="http://www.coresis.com">Coresis</a> (project <a href="http://www.coresis.com/opengraphics/">OpenGraphics</a>)</li>
-
-    <li class="add">Added scripts/wizard.js file to the project</li>
-
-    <li class="add">Added nl2br() function to medical/*_view.php files</li>
-  </ol>
-
-  <hr />
-
-  <h2 id="c-03"><a href="#top" title="To top of the page">Changes since 0.3</a></h2>
-
-  <ol>
-    <li class="add">Added bulgarian language (pazoff)</li>
-
-    <li class="add">Added showNavLinks() function (shared/navigation_links.php file)</li>
-
-    <li class="change">Improvements in search engine (medical/patient_fields.php, medical/patient_search.php, classes/Patient_Query.php)</li>
-
-    <li class="add">Added setItemsPerPage(), getCurrentRow(), getRowCount(), getPageCount(), search() methods to Problem_Query class</li>
-
-    <li class="add">Added medical/problem_search.php, medical/problem_search_fields.php files to the project</li>
-
-    <li class="add">Added freeResult() method to DbConnection and Query classes</li>
-
-    <li class="fix">Fixed medical/print_medical_record.php errors ($staff)</li>
-
-    <li class="fix">Fixed medical/problem_view.php errors ($staff, new != reset)</li>
-
-    <li class="fix">Fixed medical/patient_view.php errors ($staff)</li>
-
-    <li class="add">Added numRows() method to Query class</li>
-
-    <li class="fix">Fixed medical/problem_new.php and medical/problem_edit.php errors (key=)</li>
-
-    <li class="fix">Fixed medical/connection_new.php errors (key=)</li>
-
-    <li class="add">Added medical/visited_list.php file to the project</li>
-
-    <li class="add">Added new themes to the project: XP Style (jact), Autumn Violets (pazoff)</li>
-
-    <li class="add">New patient list (3 last visited patients) in normal version</li>
-
-    <li class="change">More visual improvements (CSS and images)</li>
-
-    <li class="fix">Fixed more XHTML 1.0 errors (nested lists)</li>
-
-    <li class="fix">Fixed stranger characters introduction in login_form.php (urlencode in login.php)</li>
-
-    <li class="add">Added lib/validator_lib.php file to the project</li>
-
-    <li class="add">Added fetchAll() method to DbConnection class</li>
-
-    <li class="add">Added fetchRow() and fetchAll() methods to Query class (changes in all *_Query.php files)</li>
-
-    <li class="add">New feature in Admin tab: Log Statistics</li>
-
-    <li class="add">Added fetchAccess() and select() methods to Access_Query class</li>
-
-    <li class="add">Added fetchRecord() and select() methods to Record_Query class</li>
-
-    <li class="add">Added admin/log_stats.php, admin/log_access_list.php and admin/log_record_list.php files to the project</li>
-
-    <li class="add">Added htmlspecialchars(), intval() functions to classes files</li>
-
-    <li class="change">Use of showInputHidden() function in the web forms</li>
-
-    <li class="add">Added showCheckBox() function (lib/input_lib.php file)</li>
-
-    <li class="change">Checking of magic_quotes_gpc in setter methods</li>
-
-    <li class="add">Added emulation of transactions in critical operations (ignore_user_abort function)</li>
-
-    <li class="add">Added coding_guidelines.html file to the project</li>
-  </ol>
-
-  <hr />
-
-  <h2 id="c-02"><a href="#top" title="To top of the page">Changes since 0.2</a></h2>
-
-  <ol>
-    <li class="change">Visual improvements (CSS)</li>
-
-    <li class="fix">Fixed medical/relative_list.php errors (medical/patient_del.php)</li>
-
-    <li class="fix">Fixed admin/setting_edit.php errors</li>
-
-    <li class="fix">Fixed medical/connection_list.php errors (medical/problem_del.php)</li>
-
-    <li class="add">Added access_log_tbl table to database. It is necessary to store application user's accesses</li>
-
-    <li class="add">Added Access_Query class</li>
-
-    <li class="change">Changed link to admin/user_new_form.php in admin/staff_list.php</li>
-
-    <li class="change">Improved internationalization of the application (encoding, charset, dir). Changes in locale/*/header.php files</li>
-
-    <li class="add">Added record_log_tbl table to database. It is necessary to log record operations</li>
-
-    <li class="add">Added Record_Query class</li>
-
-    <li class="add">Added shared/record_log.php file</li>
-
-    <li class="add">Added getLastId() method to the Problem_Query class</li>
-
-    <li class="add">Added getLastId() method to the Test_Query class</li>
-  </ol>
-
-  <hr />
-
-  <h2 id="c-01"><a href="#top" title="To top of the page">Changes since 0.1</a></h2>
-
-  <ol>
-    <li class="fix">Fixed medical/problem_edit_form.php errors</li>
-
-    <li class="change">Improved date format</li>
-
-    <li class="fix">Fixed some XHTML 1.0 errors</li>
-
-    <li class="change">Better clinic image selection (&lt;select&gt; tag)</li>
-
-    <li class="change">Demo version doesn't have user's control</li>
-
-    <li class="change">Modified connect() method in DbConnection class</li>
-
-    <li class="add">Added affectedRows() method to DbConnection class</li>
-
-    <li class="add">Added rowSeek() method to DbConnection class</li>
-
-    <li class="add">Added lastInsertId() method to DbConnection class</li>
-
-    <li class="add">Added medical/history_personal_view.php and medical/history_family_view.php files</li>
-
-    <li class="add">Added $onlyDoctor and $hasMedicalAdminAuth variables</li>
-
-    <li class="add">Added admin/dump_optimize_db.php file</li>
-
-    <li class="add">Added htmlspecialchars() function to the lib/input_lib.php functions</li>
-
-    <li class="add">Added showInputHidden() function to the lib/input_lib.php file</li>
-
-    <li class="change">Improved SQL dumps of database</li>
-
-    <li class="fix">Fixed History_Query errors</li>
-
-    <li class="add">Added historic tables: deleted_patient_tbl, deleted_problem_tbl</li>
-
-    <li class="fix">Fixed date format errors</li>
-  </ol>
-</div><!-- End #content -->
-
-<div id="menu">
-  <p>
-    <a href="http://openclinic.sourceforge.net" id="logo" title="OpenClinic web site">OpenClinic web site</a>
-  </p>
-
-  <h2>Table of contents</h2>
-
-  <ul>
-    <li><a href="#legend">Legend</a></li>
-
-    <li><a href="#c-06">Changes since 0.6</a></li>
-
-    <li><a href="#c-05">Changes since 0.5</a></li>
-
-    <li><a href="#c-04">Changes since 0.4</a></li>
-
-    <li><a href="#c-03">Changes since 0.3</a></li>
-
-    <li><a href="#c-02">Changes since 0.2</a></li>
-
-    <li><a href="#c-01">Changes since 0.1</a></li>
-  </ul>
-</div><!-- End #menu -->
-
-<div id="extra">
-  <h2>Related links</h2>
-
-  <ul>
-    <li><a href="./index.php"><strong>Start OpenClinic</strong></a></li>
-
-    <li><a href="./index.html">Readme</a></li>
-
-    <li><a href="./install.html">Install Instructions</a></li>
-
-    <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
-
-    <li><a href="./demo_version.html">Demo Version Features</a></li>
-  </ul>
-
-  <p>
-    <a href="http://sourceforge.net" id="hosting" title="Project hosted in SourceForge.net">Project hosted in SF.net</a>
-  </p>
-</div><!-- End #extra -->
-
-<div id="footer">
-  <p>Powered by OpenClinic</p>
-
-  <p>Copyright &copy; 2002-2006 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a><br />under the <a href="./LICENSE">GNU General Public License</a></p>
-
-  <p>
-    <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
-  </p>
-</div><!-- End #footer -->
+      <p>
+        <a href="http://validator.w3.org/check/referer" id="xhtml11" title="Valid XHTML 1.1">Valid XHTML 1.1</a>
+      </p>
+    </div><!-- #app_info -->
+  </div><!-- #footer -->
+</div><!-- #wrap -->
 </body>
 </html>
