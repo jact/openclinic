@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.25 2007/12/23 13:24:50 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.26 2008/01/07 14:13:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,9 +91,10 @@
   /**
    * Creating each table listed in the $tables array
    */
+  $tables = getTables();
   foreach ($tables as $tableName)
   {
-    $result = parseSQLFile("./sql/" . $tableName . ".sql", $tableName, true);
+    $result = parseSqlFile("./sql/" . $tableName . ".sql", $tableName, true);
 
     if ($result)
     {
@@ -105,6 +106,7 @@
     else
     {
       Msg::error(_("Last instruction failed"));
+      include_once("../layout/footer.php");
       exit();
     }
   }
