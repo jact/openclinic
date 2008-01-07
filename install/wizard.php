@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.33 2007/12/15 13:07:11 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.34 2008/01/07 14:14:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -453,7 +453,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.33 2007/12/15 13:07:11 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.34 2008/01/07 14:14:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -528,9 +528,10 @@
      */
     require_once(dirname(__FILE__) . "/parse_sql_file.php");
 
+    $tables = getTables();
     foreach ($tables as $tableName)
     {
-      $result = parseSQLFile("./sql/" . $tableName . ".sql", $tableName, true);
+      $result = parseSqlFile("./sql/" . $tableName . ".sql", $tableName, true);
 
       if ($result)
       {
