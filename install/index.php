@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.30 2007/12/23 13:25:10 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.31 2008/01/07 14:17:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,9 +33,6 @@
   {
     Form::compareToken('./index.php');
 
-    $table = basename($_POST['sql_file']);
-    $table = str_replace('.sql', '', $table);
-
     // @fixme gecko browsers (Mozilla 1.7.8) cause to disappear CR/LF (and I don't know why)
     /*$_POST['sql_query'] = Check::safeText($_POST['sql_query'], false);
     if (get_magic_quotes_gpc())
@@ -43,18 +40,11 @@
       $_POST['sql_query'] = stripslashes($_POST['sql_query']);
     }*/
 
-    $tmpFile = tempnam(dirname(realpath(__FILE__)), "foo");
-    $handle = fopen($tmpFile, "w"); // as text, not binary
-    fwrite($handle, $_POST['sql_query']);
-    fclose($handle);
-    chmod($tmpFile, 0644); // without execution permissions if it is possible
-
-    if ( !parseSQLFile($tmpFile, $table, isset($_POST['drop'])) )
+    if ( !parseSql($_POST['sql_query']) )
     {
       Msg::error(_("Parse failed."));
       HTML::para(HTML::strLink(_("Back to installation main page"), $_SERVER['PHP_SELF']));
       include_once("../layout/footer.php");
-      unlink($tmpFile);
       exit();
     }
     else
@@ -66,37 +56,8 @@
       Msg::info(_("File installed correctly."));
       HTML::para(HTML::strLink(_("Go to OpenClinic"), '../home/index.php'));
       HTML::rule();
-      unlink($tmpFile);
     }
   }
-
-  /**
-   * To Opera navigators
-   */
-  if (isset($_POST['sql_file']))
-  {
-    $_POST['sql_file'] = str_replace('\"', '', $_POST['sql_file']);
-  }
-  if (isset($_POST['secret_file']))
-  {
-    $_POST['secret_file'] = str_replace('\"', '', $_POST['secret_file']);
-  }
-
-  /**
-   * If JavaScript is actived and works fine, we prevent Mozilla's problem
-   */
-  if ( !isset($_POST['sql_file']) )
-  {
-    $_POST['sql_file'] = '';
-  }
-  if (isset($_POST['secret_file']))
-  {
-    if (strlen($_POST['secret_file']) > 0 && $_POST['secret_file'] != $_POST['sql_file'])
-    {
-      $_POST['sql_file'] = $_POST['secret_file'];
-    }
-  }
-  //Error::debug($_POST); // @debug
 
   /**
    * In Mozilla there no path file, only name and extension. Why? Is it an error?
@@ -113,14 +74,7 @@
     $body = array();
     $body[] = HTML::strTag('pre', $sqlQuery);
 
-    $body[] = Form::strHidden("sql_file", Check::safeText($_POST['sql_file']));
     $body[] = Form::strHidden("sql_query", $sqlQuery);
-
-    $filename = explode("-", $_FILES['sql_file']['name']);
-    if (in_array($filename[0], $tables))
-    {
-      $body[] = Form::strCheckBox("drop", "true") . Form::strLabel("drop", _("Add 'DROP table' sentence"));
-    }
 
     $foot = array(
       Form::strButton("install_file", _("Install file"))
@@ -167,21 +121,19 @@
     include_once("../layout/footer.php");
     exit();
   } // end if
-  Msg::info(_("Database connection is good."));
-
   $installQ->close();
+
+  Msg::info(_("Database connection is good."));
 
   HTML::start('form',
     array(
       'method' => 'post',
       'action' => $_SERVER['PHP_SELF'],
-      'enctype' => 'multipart/form-data',
-      'onsubmit' => 'this.secret_file.value = this.sql_file.value; return true;'
+      'enctype' => 'multipart/form-data'
     )
   );
 
   $body = array();
-  $body[] = Form::strHidden("secret_file");
   $body[] = Form::strFile("sql_file", "", 50);
 
   $foot = array(Form::strButton("view_file", _("View file")));
