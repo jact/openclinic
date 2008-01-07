@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.34 2008/01/07 14:14:54 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.35 2008/01/07 14:28:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -62,7 +62,7 @@
     $_POST['clinicPhone'] = "";
     $_POST['timeout'] = 20;
     $_POST['itemsPage'] = 10;
-    $_POST['clinicTheme'] = 1; // SerialZ theme by default
+    $_POST['clinicTheme'] = 1; // OpenClinic theme by default
 
     $_POST['firstName'] = "John";
     $_POST['surname1'] = "Doe";
@@ -71,7 +71,7 @@
     $_POST['adminPhone'] = "";
     $_POST['passwd'] = "";
     $_POST['email'] = "";
-    $_POST['adminTheme'] = 3; // Sinorca by default
+    $_POST['adminTheme'] = 1; // OpenClinic theme by default
   } // end step 0
 
   /**
@@ -453,7 +453,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.34 2008/01/07 14:14:54 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.35 2008/01/07 14:28:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
