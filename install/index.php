@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.31 2008/01/07 14:17:06 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.32 2008/01/07 14:29:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,17 +64,13 @@
    */
   if (isset($_POST['view_file']) && !empty($_FILES['sql_file']['name']) && $_FILES['sql_file']['size'] > 0)
   {
-    $fp = fopen($_FILES['sql_file']['tmp_name'], 'r');
-    $sqlQuery = fread($fp, $_FILES['sql_file']['size']);
-    fclose($fp);
+    $sqlQuery = file_get_contents($_FILES['sql_file']['tmp_name']);
     //$sqlQuery = Check::safeText($sqlQuery, false);
 
     HTML::start('form', array('method' => 'post', 'action' => $_SERVER['PHP_SELF']));
 
     $body = array();
-    $body[] = HTML::strTag('pre', $sqlQuery);
-
-    $body[] = Form::strHidden("sql_query", $sqlQuery);
+    $body[] = Form::strTextArea("sql_query", 15, 75, $sqlQuery, array('readonly' => true));
 
     $foot = array(
       Form::strButton("install_file", _("Install file"))
@@ -129,7 +125,7 @@
     array(
       'method' => 'post',
       'action' => $_SERVER['PHP_SELF'],
-      'enctype' => 'multipart/form-data'
+      'enctype' => 'multipart/form-data' // input[file]
     )
   );
 
