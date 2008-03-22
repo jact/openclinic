@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.13 2007/11/05 19:12:24 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.14 2008/03/22 16:23:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -447,15 +447,29 @@ class Error
    */
   function trace($expression, $message = "", $goOut = false)
   {
-    echo PHP_EOL . '<!-- trace -->' . PHP_EOL;
-    echo '<pre style="background: #fff; color: #000; border: 2px solid #fc0;">' . PHP_EOL;
-    if ( !empty($message) )
+    if (PHP_SAPI == 'cli')
     {
-      echo htmlspecialchars($message) . PHP_EOL;
+      $echo = PHP_EOL . '### Trace ###' . PHP_EOL;
+      if ( !empty($message) )
+      {
+        $echo .= $message . PHP_EOL;
+      }
+      $echo .= var_export($expression, true) . PHP_EOL;
+      $echo .= '### End trace ###' . PHP_EOL;
     }
-    echo htmlspecialchars(var_export($expression, true));
-    echo '</pre>' . PHP_EOL;
-    echo '<!-- end trace -->' . PHP_EOL;
+    else
+    {
+      $echo = PHP_EOL . '<!-- trace -->' . PHP_EOL;
+      $echo .= '<pre style="background: #fff; color: #000; border: 2px solid #fc0;">' . PHP_EOL;
+      if ( !empty($message) )
+      {
+        $echo .= htmlspecialchars($message) . PHP_EOL;
+      }
+      $echo .= htmlspecialchars(var_export($expression, true));
+      $echo .= '</pre>' . PHP_EOL;
+      $echo .= '<!-- end trace -->' . PHP_EOL;
+    }
+    echo $echo;
 
     if ($goOut)
     {
