@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_list.php,v 1.34 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: problem_list.php,v 1.35 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -49,14 +49,14 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     $patient->getName() => "../medical/patient_view.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -66,8 +66,8 @@
 
   if ($_SESSION['auth']['is_administrative'])
   {
-    HTML::para(
-      HTML::strLink(_("Add New Medical Problem"), '../medical/problem_new_form.php',
+    echo HTML::para(
+      HTML::link(_("Add New Medical Problem"), '../medical/problem_new_form.php',
         array(
           'id_patient' => $idPatient,
           'order_number' => $lastOrderNumber
@@ -76,15 +76,15 @@
     );
   }
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::section(2, _("Medical Problems List:"));
+  echo HTML::section(2, _("Medical Problems List:"));
 
   if ( !$problemQ->selectProblems($idPatient) )
   {
     $problemQ->close();
 
-    Msg::info(_("No medical problems defined for this patient."));
+    echo Msg::info(_("No medical problems defined for this patient."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -109,8 +109,8 @@
 
     if ($_SESSION['auth']['is_administrative'])
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_edit.png', _("edit")),
+      $row .= HTML::link(
+        HTML::image('../img/action_edit.png', _("edit")),
         '../medical/problem_edit_form.php',
         array(
           'id_problem' => $problem->getIdProblem(),
@@ -119,8 +119,8 @@
       );
       $row .= OPEN_SEPARATOR;
 
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_delete.png', _("delete")),
+      $row .= HTML::link(
+        HTML::image('../img/action_delete.png', _("delete")),
         '../medical/problem_del_confirm.php',
         array(
           'id_problem' => $problem->getIdProblem(),
@@ -130,8 +130,8 @@
       $row .= OPEN_SEPARATOR;
     } // end if
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_view.png', _("view")),
+    $row .= HTML::link(
+      HTML::image('../img/action_view.png', _("view")),
       '../medical/problem_view.php',
       array(
         'id_problem' => $problem->getIdProblem(),
@@ -140,8 +140,8 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_test.png', _("tests")),
+    $row .= HTML::link(
+      HTML::image('../img/action_test.png', _("tests")),
       '../medical/test_list.php',
       array(
         'id_problem' => $problem->getIdProblem(),
@@ -150,8 +150,8 @@
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_connection.png', _("connect")),
+    $row .= HTML::link(
+      HTML::image('../img/action_connection.png', _("connect")),
       '../medical/connection_list.php',
       array(
         'id_problem' => $problem->getIdProblem(),
@@ -175,7 +175,7 @@
   unset($problemQ);
   unset($problem);
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
   require_once("../layout/footer.php");
 ?>

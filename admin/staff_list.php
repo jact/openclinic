@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.30 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: staff_list.php,v 1.31 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -39,13 +39,13 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_staff");
+  echo HTML::breadcrumb($links, "icon icon_staff");
   unset($links);
 
   $staffQ = new Query_Staff();
@@ -73,20 +73,20 @@
 
   //Error::debug($_SESSION);
 
-  HTML::para(
-    HTML::strLink(_("Add New Administrative"), '../admin/staff_new_form.php', array('type' => 'A'))
+  echo HTML::para(
+    HTML::link(_("Add New Administrative"), '../admin/staff_new_form.php', array('type' => 'A'))
     . ' | '
-    . HTML::strLink(_("Add New Doctor"), '../admin/staff_new_form.php', array('type' => 'D'))
+    . HTML::link(_("Add New Doctor"), '../admin/staff_new_form.php', array('type' => 'D'))
   );
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::section(3, $listTitle);
+  echo HTML::section(3, $listTitle);
 
   $relatedLinks = "";
   if ( !empty($memberType) )
   {
-    $relatedLinks .= HTML::strLink(_("View all staff members"), '../admin/staff_list.php');
+    $relatedLinks .= HTML::link(_("View all staff members"), '../admin/staff_list.php');
   }
   else
   {
@@ -95,7 +95,7 @@
   $relatedLinks .= ' | ';
   if ($memberType != 'A')
   {
-    $relatedLinks .= HTML::strLink(_("View only administratives"), '../admin/staff_list.php', array('type' => 'A'));
+    $relatedLinks .= HTML::link(_("View only administratives"), '../admin/staff_list.php', array('type' => 'A'));
   }
   else
   {
@@ -104,19 +104,19 @@
   $relatedLinks .= ' | ';
   if ($memberType != 'D')
   {
-    $relatedLinks .= HTML::strLink(_("View only doctors"), '../admin/staff_list.php', array('type' => 'D'));
+    $relatedLinks .= HTML::link(_("View only doctors"), '../admin/staff_list.php', array('type' => 'D'));
   }
   else
   {
     $relatedLinks .= _("View only doctors");
   }
-  HTML::para($relatedLinks);
+  echo HTML::para($relatedLinks);
 
   if ( !$numRows )
   {
     $staffQ->close();
 
-    Msg::info(_("No results found."));
+    echo Msg::info(_("No results found."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -148,8 +148,8 @@
     $row = ++$i . '.';
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_edit.png', _("edit")),
+    $row .= HTML::link(
+      HTML::image('../img/action_edit.png', _("edit")),
       '../admin/staff_edit_form.php',
       array('id_member' => $staff->getIdMember())
     );
@@ -161,8 +161,8 @@
     }
     else
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_delete.png', _("delete")),
+      $row .= HTML::link(
+        HTML::image('../img/action_delete.png', _("delete")),
         '../admin/staff_del_confirm.php',
         array(
           'id_member' => $staff->getIdMember(),
@@ -180,8 +180,8 @@
     }
     elseif ($staff->getIdUser() == 0)
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_add_user.png', _("create user")),
+      $row .= HTML::link(
+        HTML::image('../img/action_add_user.png', _("create user")),
         '../admin/user_new_form.php',
         array(
           'id_member' => $staff->getIdMember(),
@@ -191,8 +191,8 @@
     }
     else
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_edit_user.png', _("edit user")),
+      $row .= HTML::link(
+        HTML::image('../img/action_edit_user.png', _("edit user")),
         '../admin/user_edit_form.php',
         array('id_user' => $staff->getIdUser())
       );
@@ -239,10 +239,10 @@
     3 => array('align' => 'center')
   );
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
-  Msg::hint('* ' . _("Note: To the create user function must have a correct login."));
-  Msg::hint('** ' . _("Note: The del function will not be applicated to the session user."));
+  echo Msg::hint('* ' . _("Note: To the create user function must have a correct login."));
+  echo Msg::hint('** ' . _("Note: The del function will not be applicated to the session user."));
 
   require_once("../layout/footer.php");
 ?>

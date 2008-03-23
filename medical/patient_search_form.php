@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_form.php,v 1.20 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: patient_search_form.php,v 1.21 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,13 +38,13 @@
   $returnLocation = "../medical/index.php";
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_search");
+  echo HTML::breadcrumb($links, "icon icon_search");
   unset($links);
 
   $tokenForm = Form::generateToken(); // for 2 forms (patient, problem)
@@ -52,20 +52,20 @@
   /**
    * Patient search form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_search.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_search.php'));
   require_once("../medical/patient_search_fields.php");
-  HTML::end('form');
+  echo HTML::end('form');
 
-  HTML::rule();
+  echo HTML::rule();
 
   /**
    * Problem search form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_search.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_search.php'));
   require_once("../medical/problem_search_fields.php");
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: Empty search to see all results."));
+  echo Msg::hint('* ' . _("Note: Empty search to see all results."));
 
   require_once("../layout/footer.php");
 ?>

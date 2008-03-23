@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_list.php,v 1.34 2007/12/15 12:48:37 jact Exp $
+ * @version   CVS: $Id: theme_list.php,v 1.35 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -35,16 +35,16 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_theme");
+  echo HTML::breadcrumb($links, "icon icon_theme");
   unset($links);
 
-  HTML::para(HTML::strLink(_("Add New Theme"), '../admin/theme_new_form.php'));
+  echo HTML::para(HTML::link(_("Add New Theme"), '../admin/theme_new_form.php'));
 
   /**
    * Search in database
@@ -54,7 +54,7 @@
   {
     $themeQ->close();
 
-    Msg::info(_("No results found."));
+    echo Msg::info(_("No results found."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -63,22 +63,22 @@
   {
     $legend = _("Change Theme by default in application");
 
-    $content = Form::strLabel("id_theme", _("Choose a New Theme:"));
-    $content .= Form::strSelectTable("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
+    $content = Form::label("id_theme", _("Choose a New Theme:"));
+    $content .= Form::selectTable("theme_tbl", "id_theme", OPEN_THEME_ID, "theme_name");
 
     $body = array($content);
 
-    $foot = array(Form::strButton("button1", _("Update")));
+    $foot = array(Form::button("button1", _("Update")));
 
     /**
      * Theme use form
      */
-    HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_use.php'));
-    Form::fieldset($legend, $body, $foot);
-    HTML::end('form');
+    echo HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_use.php'));
+    echo Form::fieldset($legend, $body, $foot);
+    echo HTML::end('form');
   }
 
-  HTML::section(2, _("Themes List:"));
+  echo HTML::section(2, _("Themes List:"));
 
   $thead = array(
     _("#"),
@@ -108,31 +108,31 @@
     }
     else
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_edit.png', _("edit")),
+      $row .= HTML::link(
+        HTML::image('../img/action_edit.png', _("edit")),
         '../admin/theme_edit_form.php',
         array('id_theme' => $theme->getId())
       );
     }
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_copy.png', _("copy")),
+    $row .= HTML::link(
+      HTML::image('../img/action_copy.png', _("copy")),
       '../admin/theme_new_form.php',
       array('id_theme' => $theme->getId())
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_view.png', _("preview")),
+    $row .= HTML::link(
+      HTML::image('../img/action_view.png', _("preview")),
       '../admin/theme_preview.php',
       array('id_theme' => $theme->getId()),
       array('class' => 'popup')
     );
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_valid.png', _("validate")),
+    $row .= HTML::link(
+      HTML::image('../img/action_valid.png', _("validate")),
       $validateLink . $theme->getCssFile()
     );
     $row .= OPEN_SEPARATOR;
@@ -147,8 +147,8 @@
     }
     else
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_delete.png', _("delete")),
+      $row .= HTML::link(
+        HTML::image('../img/action_delete.png', _("delete")),
         '../admin/theme_del_confirm.php',
         array(
           'id_theme' => $theme->getId(),
@@ -188,13 +188,13 @@
     5 => array('align' => 'center')
   );
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
   unset($themeQ);
   unset($theme);
 
-  Msg::hint('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
-  Msg::hint('** ' . _("Note: The functions edit and delete are not available on the application themes."));
+  echo Msg::hint('* ' . _("Note: The delete function is not available on the themes that are currently in use by some user or by the application."));
+  echo Msg::hint('** ' . _("Note: The functions edit and delete are not available on the application themes."));
 
   require_once("../layout/footer.php");
 ?>

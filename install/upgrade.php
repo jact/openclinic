@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.10 2008/01/07 14:14:22 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.11 2008/03/23 11:59:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,8 +66,8 @@
   require_once("../layout/header.php");
   require_once(dirname(__FILE__) . "/parse_sql_file.php");
 
-  HTML::section(1, $title);
-  HTML::para(sprintf(_("Finded version: %s"), $version));
+  echo HTML::section(1, $title);
+  echo HTML::para(sprintf(_("Finded version: %s"), $version));
 
   foreach ($upgrades as $value)
   {
@@ -77,11 +77,11 @@
     $initialVersion = $array[0]; // <number>.<number>
     if (version_compare($version, $initialVersion, '<='))
     {
-      HTML::para(sprintf(_("Aplying %s file..."), HTML::strTag('strong', $file)));
+      echo HTML::para(sprintf(_("Aplying %s file..."), HTML::tag('strong', $file)));
       if ( !parseSqlFile('./upgrades/' . $file) )
       {
         //Error::debug($file); // debug
-        //Msg::error(sprintf(_("Error processing file: %s"), $value));
+        //echo Msg::error(sprintf(_("Error processing file: %s"), $value));
 
         include_once("../layout/footer.php");
         exit();
@@ -92,15 +92,15 @@
   $setQ->captureError(false);
   $setQ->select();
   $set = $setQ->fetch();
-  HTML::para(sprintf(_("Upgraded to version: %s"), $set->getVersion()));
+  echo HTML::para(sprintf(_("Upgraded to version: %s"), $set->getVersion()));
 
   $setQ->close();
   unset($setQ);
   unset($set);
 
-  Msg::info(_("Database upgrade finished correctly!"));
+  echo Msg::info(_("Database upgrade finished correctly!"));
 
-  HTML::para(HTML::strLink(_("Go to OpenClinic"), '../home/index.php'));
+  echo HTML::para(HTML::link(_("Go to OpenClinic"), '../home/index.php'));
 
   require_once("../layout/footer.php");
 ?>

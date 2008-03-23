@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search_fields.php,v 1.18 2007/10/29 20:06:54 jact Exp $
+ * @version   CVS: $Id: patient_search_fields.php,v 1.19 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -22,7 +22,7 @@
 
   $tbody = array();
 
-  $row = Form::strLabel("search_type", _("Field") . ': ');
+  $row = Form::label("search_type", _("Field") . ': ');
 
   $array = null;
   $array[OPEN_SEARCH_SURNAME1] = _("Surname 1");
@@ -37,29 +37,29 @@
   $array[OPEN_SEARCH_INSURANCE] = _("Insurance Company");
   $array[OPEN_SEARCH_COLLEGIATE] = _("Collegiate Number");
 
-  $row .= Form::strSelect("search_type", $array, OPEN_SEARCH_SURNAME1);
+  $row .= Form::select("search_type", $array, OPEN_SEARCH_SURNAME1);
   unset($array);
 
   $tbody[] = array($row);
 
-  $row = '* ' . Form::strText("search_text", 40, "", array('maxlength' => 80));
-  $row .= Form::strButton("search_patient", _("Search"));
+  $row = '* ' . Form::text("search_text", null, array('size' => 40, 'maxlength' => 80));
+  $row .= Form::button("search_patient", _("Search"));
 
   $tbody[] = array($row);
 
-  $row = Form::strLabel("logical", _("Logical") . ': ');
+  $row = Form::label("logical", _("Logical") . ': ');
 
   $array = null;
   $array[OPEN_OR] = "OR";
   $array[OPEN_NOT] = "NOT";
   $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
 
-  $row .= Form::strSelect("logical", $array, OPEN_OR);
+  $row .= Form::select("logical", $array, OPEN_OR);
   unset($array);
 
   $row .= OPEN_SEPARATOR;
 
-  $row .= Form::strLabel("limit", _("Limit") . ': ');
+  $row .= Form::label("limit", _("Limit") . ': ');
 
   $array = null;
   $array["0"] = _("All");
@@ -67,7 +67,7 @@
   $array["20"] = 20;
   $array["50"] = 50;
   $array["100"] = 100;
-  $row .= Form::strSelect("limit", $array);
+  $row .= Form::select("limit", $array);
   unset($array);
 
   if (isset($tokenForm)) // defined in patient_search_form.php
@@ -78,7 +78,7 @@
   {
     $row .= Form::generateToken();
   }
-  $row .= Form::strHidden("page", 1);
+  $row .= Form::hidden("page", 1);
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -91,5 +91,5 @@
     'align' => 'center'
   );
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 ?>

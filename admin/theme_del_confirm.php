@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_del_confirm.php,v 1.23 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: theme_del_confirm.php,v 1.24 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -51,40 +51,40 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Themes") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_theme");
+  echo HTML::breadcrumb($links, "icon icon_theme");
   unset($links);
 
   /**
    * Form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_del.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_del.php'));
 
   $tbody = array();
 
-  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete theme, %s?"), $name));
+  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete theme, %s?"), $name));
 
-  $row = Form::strHidden("id_theme", $idTheme);
+  $row = Form::hidden("id_theme", $idTheme);
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("delete", _("Delete"))
+    Form::button("delete", _("Delete"))
     . Form::generateToken()
   );
 
   $options = array('class' => 'center');
 
-  Form::fieldset($title, $tbody, $tfoot, $options);
+  echo Form::fieldset($title, $tbody, $tfoot, $options);
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>

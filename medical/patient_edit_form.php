@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_edit_form.php,v 1.38 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: patient_edit_form.php,v 1.39 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,31 +92,31 @@
   //Error::debug($formVar);
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     $patName => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_edit.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_edit.php'));
 
-  Form::hidden("id_patient", $formVar["id_patient"]);
-  //Form::hidden("last_update_date", $formVar["last_update_date"]);
+  echo Form::hidden("id_patient", $formVar["id_patient"]);
+  //echo Form::hidden("last_update_date", $formVar["last_update_date"]);
 
   require_once("../medical/patient_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
   /**
    * Destroy form values and errors

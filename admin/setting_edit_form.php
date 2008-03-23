@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_edit_form.php,v 1.32 2007/12/15 12:43:46 jact Exp $
+ * @version   CVS: $Id: setting_edit_form.php,v 1.33 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,26 +66,26 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_config");
+  echo HTML::breadcrumb($links, "icon icon_config");
   unset($links);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../admin/setting_edit.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../admin/setting_edit.php'));
   require_once("../admin/setting_fields.php");
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
-  Msg::hint('** ' . _("Note: If zero, searchs return all results without pagination."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('** ' . _("Note: If zero, searchs return all results without pagination."));
 
   /**
    * Destroy form values and errors

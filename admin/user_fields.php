@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_fields.php,v 1.26 2007/12/15 15:01:17 jact Exp $
+ * @version   CVS: $Id: user_fields.php,v 1.27 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,50 +18,73 @@
 
   $tbody = array();
 
-  $row = ($action == "new") ? _("Login") . ":" : Form::strLabel("login", _("Login") . ":", true);
-  $row .= ($action == "new") ? $formVar["login"] : Form::strText("login", 20, isset($formVar["login"]) ? $formVar["login"] : null, isset($formError["login"]) ? array('error' => $formError["login"]) : null);
+  $row = ($action == "new") ? _("Login") . ":" : Form::label("login", _("Login") . ":", array('class' => 'required'));
+  $row .= ($action == "new")
+    ? $formVar["login"]
+    : Form::text("login",
+        isset($formVar["login"]) ? $formVar["login"] : null,
+        array(
+          'size' => 20,
+          'error' => isset($formError["login"]) ? $formError["login"] : null
+        )
+      );
   $tbody[] = $row;
 
   if (isset($_GET["all"]))
   {
-    $row = Form::strLabel("old_pwd", _("Current Password") . ":", true);
-    $row .= Form::strPassword("old_pwd", 20,
+    $row = Form::label("old_pwd", _("Current Password") . ":", array('class' => 'required'));
+    $row .= Form::password("old_pwd",
       isset($formVar["old_pwd"]) ? $formVar["old_pwd"] : null,
-      isset($formError["old_pwd"]) ? array('error' => $formError["old_pwd"]) : null
+      array(
+        'size' => 20,
+        'error' => isset($formError["old_pwd"]) ? $formError["old_pwd"] : null
+      )
     );
-    $row .= Form::strHidden("md5_old");
+    $row .= Form::hidden("md5_old");
     $tbody[] = $row;
   }
 
   if ($action == "new" || isset($_GET["all"]))
   {
-    $row = Form::strLabel("pwd", _("Password") . ":", true);
-    $row .= Form::strPassword("pwd", 20,
+    $row = Form::label("pwd", _("Password") . ":", array('class' => 'required'));
+    $row .= Form::password("pwd",
       isset($formVar["pwd"]) ? $formVar["pwd"] : null,
-      isset($formError["pwd"]) ? array('error' => $formError["pwd"]) : null
+      array(
+        'size' => 20,
+        'error' => isset($formError["pwd"]) ? $formError["pwd"] : null
+      )
     );
-    $row .= Form::strHidden("md5");
+    $row .= Form::hidden("md5");
     $tbody[] = $row;
 
-    $row = Form::strLabel("pw2", _("Re-enter Password") . ":", true);
-    $row .= Form::strPassword("pwd2", 20,
+    $row = Form::label("pw2", _("Re-enter Password") . ":", array('class' => 'required'));
+    $row .= Form::password("pwd2",
       isset($formVar["pwd2"]) ? $formVar["pwd2"] : null,
-      isset($formError["pwd2"]) ? array('error' => $formError["pwd2"]) : null
+      array(
+        'size' => 20,
+        'error' => isset($formError["pwd2"]) ? $formError["pwd2"] : null
+      )
     );
-    $row .= Form::strHidden("md5_confirm");
+    $row .= Form::hidden("md5_confirm");
     $tbody[] = $row;
   }
 
-  $row = Form::strLabel("email", _("Email") . ":");
-  $row .= Form::strText("email", 40, isset($formVar["email"]) ? $formVar["email"] : null,
-    isset($formError["email"]) ? array('error' => $formError["email"]) : null
+  $row = Form::label("email", _("Email") . ":");
+  $row .= Form::text("email",
+    isset($formVar["email"]) ? $formVar["email"] : null,
+    array(
+      'size' => 40,
+      'error' => isset($formError["email"]) ? $formError["email"] : null
+    )
   );
   $tbody[] = $row;
 
   if ( !isset($_GET["all"]) )
   {
-    $row = Form::strLabel("actived", _("Actived") . ":");
-    $row .= Form::strCheckBox("actived", 1, isset($formVar["actived"]) ? $formVar["actived"] != "" : false);
+    $row = Form::label("actived", _("Actived") . ":");
+    $row .= Form::checkBox("actived", 1,
+      array('checked' => isset($formVar["actived"]) ? $formVar["actived"] != "" : false)
+    );
     $tbody[] = $row;
 
     if ( !isset($formVar["id_profile"]) || $formVar["id_profile"] == "" )
@@ -75,26 +98,26 @@
       OPEN_PROFILE_DOCTOR => _("Doctor")
     );
 
-    $row = Form::strLabel("id_profile", _("Profile") . ":", true);
-    $row .= Form::strSelect("id_profile", $array, $formVar["id_profile"]);
+    $row = Form::label("id_profile", _("Profile") . ":", array('class' => 'required'));
+    $row .= Form::select("id_profile", $array, $formVar["id_profile"]);
     unset($array);
     $tbody[] = $row;
   }
 
-  $row = Form::strLabel("id_theme", _("Theme") . ":");
-  $row .= Form::strSelectTable("theme_tbl", "id_theme", isset($formVar["id_theme"]) ? $formVar["id_theme"] : null, "theme_name");
+  $row = Form::label("id_theme", _("Theme") . ":");
+  $row .= Form::selectTable("theme_tbl", "id_theme", isset($formVar["id_theme"]) ? $formVar["id_theme"] : null, "theme_name");
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("save", _("Submit"))
+    Form::button("save", _("Submit"))
     . Form::generateToken()
   );
 
-  Form::fieldset($title, $tbody, $tfoot);
+  echo Form::fieldset($title, $tbody, $tfoot);
 
   if (isset($_GET["all"]))
   {
-    Form::hidden("actived", "checked");
-    Form::hidden("id_profile", $formVar["id_profile"]);
+    echo Form::hidden("actived", "checked");
+    echo Form::hidden("id_profile", $formVar["id_profile"]);
   }
 ?>

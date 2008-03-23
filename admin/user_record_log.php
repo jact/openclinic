@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_record_log.php,v 1.37 2007/12/07 16:50:51 jact Exp $
+ * @version   CVS: $Id: user_record_log.php,v 1.38 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -70,20 +70,20 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Users") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_user");
+  echo HTML::breadcrumb($links, "icon icon_user");
   unset($links);
 
-  HTML::section(2, sprintf(_("Record Logs List for user %s"), $login) . ":");
+  echo HTML::section(2, sprintf(_("Record Logs List for user %s"), $login) . ":");
 
   // Printing result stats and page nav
-  HTML::para(HTML::strTag('strong', sprintf(_("%d transactions."), $recordQ->getRowCount())));
+  echo HTML::para(HTML::tag('strong', sprintf(_("%d transactions."), $recordQ->getRowCount())));
 
   $params = array(
     'id_user=' . $idUser,
@@ -92,7 +92,7 @@
   $params = implode('&', $params);
 
   $pageCount = $recordQ->getPageCount();
-  $pageLinks = Search::strPageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
+  $pageLinks = Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF'] . '?' . $params);
   echo $pageLinks;
 
   $thead = array(
@@ -131,14 +131,14 @@
   $recordQ->freeResult();
   $recordQ->close();
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
   echo $pageLinks;
 
   unset($recordQ);
   unset($record);
 
-  HTML::para(HTML::strLink(_("Return to users list"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return to users list"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>

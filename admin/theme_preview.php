@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.38 2007/12/15 13:04:12 jact Exp $
+ * @version   CVS: $Id: theme_preview.php,v 1.39 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -111,43 +111,43 @@
   require_once("../lib/Msg.php");
   require_once("../layout/component.php");
 
-  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
+  echo HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
 
-  HTML::start('style', array('type' => 'text/css', 'title' => OPEN_THEME_NAME));
+  echo HTML::start('style', array('type' => 'text/css', 'title' => OPEN_THEME_NAME));
   echo "<!--/*--><![CDATA[/*<!--*/\n";
   echo OPEN_THEME_CSS_RULES;
   echo "/*]]>*/-->\n";
-  HTML::end('style');
+  echo HTML::end('style');
 
   echo HTML::insertScript('pop_window.js');
 
-  HTML::end('head');
-  HTML::start('body', array('id' => 'top'));
-  HTML::start('div', array('id' => 'wrap'));
+  echo HTML::end('head');
+  echo HTML::start('body', array('id' => 'top'));
+  echo HTML::start('div', array('id' => 'wrap'));
 
-  HTML::start('div', array('id' => 'header'));
+  echo HTML::start('div', array('id' => 'header'));
 
   echo appLogo();
 
   $array = array(
-    HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))
+    HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))
   );
-  HTML::itemList($array, array('id' => 'shortcuts'));
+  echo HTML::itemList($array, array('id' => 'shortcuts'));
 
   echo menuBar($tab);
 
-  HTML::end('div'); // #header
+  echo HTML::end('div'); // #header
 
-  HTML::start('div', array('id' => 'main'));
-  HTML::start('div', array('id' => 'content'));
+  echo HTML::start('div', array('id' => 'main'));
+  echo HTML::start('div', array('id' => 'content'));
 
-  HTML::section(1, sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]));
+  echo HTML::section(1, sprintf(_("This is a preview of the %s theme."), $_POST["theme_name"]));
 
-  HTML::para(HTML::strLink(_("Sample Link"), '#top'));
+  echo HTML::para(HTML::link(_("Sample Link"), '#top'));
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::section(2, _("Subtitle Sample:"));
+  echo HTML::section(2, _("Subtitle Sample:"));
 
   $thead = array(
     _("Table Heading") => array('colspan' => 2)
@@ -159,9 +159,9 @@
 
   $tbody[] = array(sprintf(_("Sample data row %d"), 2));
 
-  $row = Form::strLabel("sample_text", _("Required Field") . ":", true);
+  $row = Form::label("sample_text", _("Required Field") . ":", array('class' => 'required'));
   $row .= OPEN_SEPARATOR;
-  $row .= Form::strText("sample_text", 50, _("Sample Input Text"), array('readonly' => true));
+  $row .= Form::text("sample_text", _("Sample Input Text"), array('size' => 50, 'readonly' => true));
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -172,15 +172,15 @@
   );
 
   $tfoot = array(
-    Form::strButton("sample_button", _("Sample Button"), "button")
+    Form::button("sample_button", _("Sample Button"), array('type' => 'button'))
   );
 
-  HTML::table($thead, $tbody, $tfoot, $options);
+  echo HTML::table($thead, $tbody, $tfoot, $options);
 
-  Msg::error(_("Sample Error"));
-  Msg::warning(_("Sample Warning"));
-  Msg::info(_("Sample Info"));
-  Msg::hint(_("Sample Hint"));
+  echo Msg::error(_("Sample Error"));
+  echo Msg::warning(_("Sample Warning"));
+  echo Msg::info(_("Sample Info"));
+  echo Msg::hint(_("Sample Hint"));
 
   require_once("../layout/footer.php");
 ?>

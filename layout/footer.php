@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.9 2007/12/01 12:59:44 jact Exp $
+ * @version   CVS: $Id: footer.php,v 1.10 2008/03/23 11:59:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,54 +21,54 @@
   //Error::debug($_SESSION);
   //Error::debug($_SERVER);
 
-  HTML::end('div'); // #content
-  HTML::end('div'); // #main
+  echo HTML::end('div'); // #content
+  echo HTML::end('div'); // #main
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::start('div', array('id' => 'navigation'));
+  echo HTML::start('div', array('id' => 'navigation'));
   if (isset($tab) && is_file('../layout/' . $tab . '.php'))
   {
     include_once("../layout/" . $tab . ".php"); // ul
   }
   echo clinicInfo();
-  HTML::end('div'); // #navigation
+  echo HTML::end('div'); // #navigation
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::start('div', array('id' => 'footer'));
+  echo HTML::start('div', array('id' => 'footer'));
 
   echo logos();
   echo sfLinks();
   echo miniLogos();
 
-  HTML::start('div', array('id' => 'app_info'));
+  echo HTML::start('div', array('id' => 'app_info'));
 
-  $text = HTML::strLink(_("Powered by OpenClinic"), 'http://openclinic.sourceforge.net/');
+  $text = HTML::link(_("Powered by OpenClinic"), 'http://openclinic.sourceforge.net/');
   if (defined("OPEN_VERSION"))
   {
     $text .= ' ' . _("version") . ' ' . OPEN_VERSION;
   }
-  HTML::para($text);
+  echo HTML::para($text);
 
-  HTML::para(
+  echo HTML::para(
     sprintf('Copyright &copy; 2002-%d %s',
       date("Y"),
-      HTML::strLink('Jose Antonio Chavarría', 'mailto:CUT-THIS.openclinic&#64;gmail.com', null,
+      HTML::link('Jose Antonio Chavarría', 'mailto:CUT-THIS.openclinic&#64;gmail.com', null,
         array('accesskey' => 9)
       )
     )
   );
 
-  HTML::para(
+  echo HTML::para(
     sprintf(_("Under the %s"),
-      HTML::strLink('GNU General Public License', '../home/license.php', null, array('rel' => 'license'))
+      HTML::link('GNU General Public License', '../home/license.php', null, array('rel' => 'license'))
     )
   );
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    Msg::info(_("This is a demo version"));
+    echo Msg::info(_("This is a demo version"));
   }
 
   /**
@@ -79,14 +79,14 @@
     $microTime = explode(" ", microtime());
     $endTime = $microTime[1] + $microTime[0];
     $totalTime = sprintf(_("Page generation: %s seconds"), substr(($endTime - $startTime), 0, 6));
-    HTML::para($totalTime);
+    echo HTML::para($totalTime);
   }
 
-  HTML::end('div'); // #app_info
-  HTML::end('div'); // #footer
-  HTML::end('div'); // #wrap
-  HTML::end('body');
-  HTML::end('html');
+  echo HTML::end('div'); // #app_info
+  echo HTML::end('div'); // #footer
+  echo HTML::end('div'); // #wrap
+  echo HTML::end('body');
+  echo HTML::end('html');
 
   if (defined("OPEN_BUFFER") && OPEN_BUFFER)
   {

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: medical.php,v 1.27 2007/12/15 15:05:31 jact Exp $
+ * @version   CVS: $Id: medical.php,v 1.28 2008/03/23 11:59:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -21,18 +21,18 @@
 
   $array = null;
 
-  $array[] = HTML::strLink(_("Summary"), '../medical/index.php', null,
+  $array[] = HTML::link(_("Summary"), '../medical/index.php', null,
     $nav == 'summary' ? array('class' => 'selected') : null
   );
 
-  $array[] = HTML::strLink(_("Search Patient"), '../medical/patient_search_form.php', null,
+  $array[] = HTML::link(_("Search Patient"), '../medical/patient_search_form.php', null,
     ($nav == 'searchform' || $nav == 'search') ? array('class' => 'selected') : null
   );
 
   if ($nav == 'search')
   {
-    //$array[] = array(HTML::strLink(_("Search Results"), '../medical/???.php', null, array('class' => 'selected')));
-    $array[] = array(HTML::strTag('span', _("Search Results"), array('class' => 'selected')));
+    //$array[] = array(HTML::link(_("Search Results"), '../medical/???.php', null, array('class' => 'selected')));
+    $array[] = array(HTML::tag('span', _("Search Results"), array('class' => 'selected')));
   }
 
   if (defined("OPEN_DEMO") && !OPEN_DEMO)
@@ -44,7 +44,7 @@
       {
         if (isset($idPatient) && $arrKey == $idPatient)
         {
-          $array[] = HTML::strLink(HTML::strTag('em', $arrValue), '../medical/patient_view.php',
+          $array[] = HTML::link(HTML::tag('em', $arrValue), '../medical/patient_view.php',
             array('id_patient' => $arrKey),
             /*$nav == 'social' ?*/ array('class' => 'selected') /*: null*/
           );
@@ -55,7 +55,7 @@
         }
         else
         {
-          $array[] = HTML::strLink(HTML::strTag('em', $arrValue), '../medical/patient_view.php',
+          $array[] = HTML::link(HTML::tag('em', $arrValue), '../medical/patient_view.php',
             array('id_patient' => $arrKey)
           );
         }
@@ -72,12 +72,12 @@
 
   if ($_SESSION['auth']['is_administrative'])
   {
-    $array[] = HTML::strLink(_("New Patient"), '../medical/patient_new_form.php', null,
+    $array[] = HTML::link(_("New Patient"), '../medical/patient_new_form.php', null,
       $nav == 'new' ? array('class' => 'selected') : null
     );
   }
 
-  $array[] = HTML::strLink(_("Help"), '../doc/index.php',
+  $array[] = HTML::link(_("Help"), '../doc/index.php',
     array(
       'tab' => $tab,
       'nav' => $nav

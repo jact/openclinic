@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_fields.php,v 1.21 2007/10/29 20:06:54 jact Exp $
+ * @version   CVS: $Id: test_fields.php,v 1.22 2008/03/23 12:00:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,34 +18,39 @@
 
   $tbody = array();
 
-  $row = Form::strLabel("document_type", _("Document Type") . ":");
-  $row .= Form::strText("document_type", 40,
+  $row = Form::label("document_type", _("Document Type") . ":");
+  $row .= Form::text("document_type",
     isset($formVar["document_type"]) ? $formVar["document_type"] : null,
     array(
+      'size' => 40,
       'maxlength' => 128,
       'error' => isset($formError["document_type"]) ? $formError["document_type"] : null
     )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("path_filename", _("Path Filename") . ":", true);
-
-  //$row .= Form::strHidden("MAX_FILE_SIZE", "70000");
-
-  //$addendum['readonly'] = true; // does not work in IE, Mozilla
-  isset($formError["path_filename"]) ? $addendum['error'] = $formError["path_filename"] : null;
-  $row .= Form::strFile("path_filename",
-    isset($formVar['path_filename']) ? $formVar['path_filename'] : null, 50,
-    isset($addendum) ? $addendum : null
+  //$row .= Form::hidden("MAX_FILE_SIZE", "70000");
+  // @todo hacer helper para esta estructura
+  $row = Form::label("path_filename", _("Path Filename") . ":", array('class' => 'required'));
+  $row .= Form::file("path_filename",
+    isset($formVar['path_filename']) ? $formVar['path_filename'] : null,
+    array(
+      'size' => 50,
+      'readonly' => true, // does not work in IE, Mozilla
+      'error' => isset($formError["path_filename"]) ? $formError["path_filename"] : null
+    )
   );
-  $row .= Form::strHidden('previous', $formVar['path_filename']);
-  $row .= HTML::strTag('strong', $formVar['path_filename'], array('class' => 'previous_file'));
+  if (isset($formVar['path_filename']))
+  {
+    $row .= Form::hidden('previous', $formVar['path_filename']);
+    $row .= HTML::tag('strong', $formVar['path_filename'], array('class' => 'previous_file'));
+  }
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("save", _("Submit"))
+    Form::button("save", _("Submit"))
     . Form::generateToken()
   );
 
-  Form::fieldset($title, $tbody, $tfoot);
+  echo Form::fieldset($title, $tbody, $tfoot);
 ?>

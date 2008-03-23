@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_edit_form.php,v 1.38 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: user_edit_form.php,v 1.39 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -94,7 +94,7 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   if ( !isset($_GET["all"]) )
   {
@@ -111,15 +111,15 @@
       $title => ""
     );
   }
-  HTML::breadCrumb($links, "icon icon_user");
+  echo HTML::breadcrumb($links, "icon icon_user");
   unset($links);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form',
+  echo HTML::start('form',
     array(
       'id' => 'userEdit',
       'method' => 'post',
@@ -127,28 +127,28 @@
     )
   );
 
-  Form::hidden("referer", "edit"); // to user_validate_post.php
-  Form::hidden("id_user", $formVar["id_user"]);
-  Form::hidden("id_member", $formVar["id_member"]);
+  echo Form::hidden("referer", "edit"); // to user_validate_post.php
+  echo Form::hidden("id_user", $formVar["id_user"]);
+  echo Form::hidden("id_member", $formVar["id_member"]);
 
   if (isset($_GET["all"]))
   {
-    Form::hidden("all", "Y");
+    echo Form::hidden("all", "Y");
   }
 
   $action = "edit";
   require_once("../admin/user_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
   if (isset($_GET["all"]))
   {
-    Msg::hint(_("Fill password fields only if you want to change it."));
+    echo Msg::hint(_("Fill password fields only if you want to change it."));
   }
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.26 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: theme_preload_css.php,v 1.27 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -69,7 +69,7 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
@@ -77,13 +77,13 @@
     (strstr($returnLocation, "edit") ? _("Edit Theme") : _("Add New Theme")) => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_theme");
+  echo HTML::breadcrumb($links, "icon icon_theme");
   unset($links);
 
   /**
    * Form
    */
-  HTML::start('form',
+  echo HTML::start('form',
     array(
       'method' => 'post',
       'action' => $_SERVER['PHP_SELF'] . ($idTheme ? '?id_theme=' . $idTheme : ''),
@@ -93,23 +93,28 @@
 
   $tbody = array();
 
-  $row = Form::strLabel("css_filename", _("Path Filename") . ":", true);
-  //$row .= Form::strHidden("MAX_FILE_SIZE", "10000");
-  $row .= Form::strFile("css_filename", "", 50/*, array('error' => $formError["css_filename"])*/);
+  $row = Form::label("css_filename", _("Path Filename") . ":", array('class' => 'required'));
+  //$row .= Form::hidden("MAX_FILE_SIZE", "10000");
+  $row .= Form::file("css_filename", null,
+    array(
+      'size' => 50,
+      //'error' => $formError["css_filename"])
+    )
+  );
 
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("preload", _("Submit"))
+    Form::button("preload", _("Submit"))
     . Form::generateToken()
   );
 
-  Form::fieldset($title, $tbody, $tfoot);
-  HTML::end('form');
+  echo Form::fieldset($title, $tbody, $tfoot);
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>

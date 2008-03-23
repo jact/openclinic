@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del_confirm.php,v 1.23 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: staff_del_confirm.php,v 1.24 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,41 +54,41 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Staff Members") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_staff");
+  echo HTML::breadcrumb($links, "icon icon_staff");
   unset($links);
 
   /**
    * Form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../admin/staff_del.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../admin/staff_del.php'));
 
   $tbody = array();
 
-  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete staff member, %s %s %s?"), $firstName, $surname1, $surname2));
+  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete staff member, %s %s %s?"), $firstName, $surname1, $surname2));
 
-  $tbody[] = Form::strHidden("id_member", $idMember);
+  $tbody[] = Form::hidden("id_member", $idMember);
 
   $tfoot = array(
-    Form::strButton("delete", _("Delete"))
+    Form::button("delete", _("Delete"))
     . Form::generateToken()
   );
 
   $options = array('class' => 'center');
 
-  Form::fieldset($title, $tbody, $tfoot, $options);
+  echo Form::fieldset($title, $tbody, $tfoot, $options);
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The del function will delete the related user too (if exists)."));
+  echo Msg::hint('* ' . _("Note: The del function will delete the related user too (if exists)."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>

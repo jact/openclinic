@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_view.php,v 1.25 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: history_personal_view.php,v 1.26 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -73,7 +73,7 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -81,15 +81,15 @@
     _("Clinic History") => "../medical/history_list.php", //"?id_patient=" . $idPatient,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
 
   if ($_SESSION['auth']['is_administrative'])
   {
-    HTML::para(
-      HTML::strLink(_("Edit Personal Antecedents"), '../medical/history_personal_edit_form.php',
+    echo HTML::para(
+      HTML::link(_("Edit Personal Antecedents"), '../medical/history_personal_edit_form.php',
         array('id_patient' => $idPatient)
       )
     );
@@ -98,72 +98,72 @@
   /**
    * Show personal antecedents
    */
-  HTML::section(2, _("Personal Antecedents"));
+  echo HTML::section(2, _("Personal Antecedents"));
 
   if ($history->getBirthGrowth())
   {
-    HTML::section(3, _("Birth and Growth"));
-    HTML::para(nl2br($history->getBirthGrowth()));
+    echo HTML::section(3, _("Birth and Growth"));
+    echo HTML::para(nl2br($history->getBirthGrowth()));
   }
 
   if ($history->getGrowthSexuality())
   {
-    HTML::section(3, _("Growth and Sexuality"));
-    HTML::para(nl2br($history->getGrowthSexuality()));
+    echo HTML::section(3, _("Growth and Sexuality"));
+    echo HTML::para(nl2br($history->getGrowthSexuality()));
   }
 
   if ($history->getFeed())
   {
-    HTML::section(3, _("Feed"));
-    HTML::para(nl2br($history->getFeed()));
+    echo HTML::section(3, _("Feed"));
+    echo HTML::para(nl2br($history->getFeed()));
   }
 
   if ($history->getHabits())
   {
-    HTML::section(3, _("Habits"));
-    HTML::para(nl2br($history->getHabits()));
+    echo HTML::section(3, _("Habits"));
+    echo HTML::para(nl2br($history->getHabits()));
   }
 
   if ($history->getPeristalticConditions())
   {
-    HTML::section(3, _("Peristaltic Conditions"));
-    HTML::para(nl2br($history->getPeristalticConditions()));
+    echo HTML::section(3, _("Peristaltic Conditions"));
+    echo HTML::para(nl2br($history->getPeristalticConditions()));
   }
 
   if ($history->getPsychological())
   {
-    HTML::section(3, _("Psychological Conditions"));
-    HTML::para(nl2br($history->getPsychological()));
+    echo HTML::section(3, _("Psychological Conditions"));
+    echo HTML::para(nl2br($history->getPsychological()));
   }
 
   if ($history->getChildrenComplaint())
   {
-    HTML::section(3, _("Children Complaint"));
-    HTML::para(nl2br($history->getChildrenComplaint()));
+    echo HTML::section(3, _("Children Complaint"));
+    echo HTML::para(nl2br($history->getChildrenComplaint()));
   }
 
   if ($history->getVenerealDisease())
   {
-    HTML::section(3, _("Venereal Disease"));
-    HTML::para(nl2br($history->getVenerealDisease()));
+    echo HTML::section(3, _("Venereal Disease"));
+    echo HTML::para(nl2br($history->getVenerealDisease()));
   }
 
   if ($history->getAccidentSurgicalOperation())
   {
-    HTML::section(3, _("Accidents and Surgical Operations"));
-    HTML::para(nl2br($history->getAccidentSurgicalOperation()));
+    echo HTML::section(3, _("Accidents and Surgical Operations"));
+    echo HTML::para(nl2br($history->getAccidentSurgicalOperation()));
   }
 
   if ($history->getMedicinalIntolerance())
   {
-    HTML::section(3, _("Medicinal Intolerance"));
-    HTML::para(nl2br($history->getMedicinalIntolerance()));
+    echo HTML::section(3, _("Medicinal Intolerance"));
+    echo HTML::para(nl2br($history->getMedicinalIntolerance()));
   }
 
   if ($history->getMentalIllness())
   {
-    HTML::section(3, _("Mental Illness"));
-    HTML::para(nl2br($history->getMentalIllness()));
+    echo HTML::section(3, _("Mental Illness"));
+    echo HTML::para(nl2br($history->getMentalIllness()));
   }
 
   require_once("../layout/footer.php");

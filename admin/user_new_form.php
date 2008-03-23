@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_new_form.php,v 1.32 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: user_new_form.php,v 1.33 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -65,22 +65,22 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Users") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_user");
+  echo HTML::breadcrumb($links, "icon icon_user");
   unset($links);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form',
+  echo HTML::start('form',
     array(
       'id' => 'userNew',
       'method' => 'post',
@@ -88,18 +88,18 @@
     )
   );
 
-  Form::hidden("referer", "new"); // to user_validate_post.php
-  Form::hidden("id_member", $formVar["id_member"]);
-  Form::hidden("login", $formVar["login"]);
+  echo Form::hidden("referer", "new"); // to user_validate_post.php
+  echo Form::hidden("id_member", $formVar["id_member"]);
+  echo Form::hidden("login", $formVar["login"]);
 
   $action = "new";
   require_once("../admin/user_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

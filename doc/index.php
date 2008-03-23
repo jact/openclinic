@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.23 2007/12/15 13:05:31 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.24 2008/03/23 11:59:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +33,7 @@
   require_once("../layout/xhtml_start.php");
   require_once("../layout/component.php");
 
-  HTML::start('link',
+  echo HTML::start('link',
     array(
       'rel' => 'stylesheet',
       'type' => 'text/css',
@@ -45,27 +45,27 @@
 
   echo HTML::insertScript('pop_window.js');
 
-  HTML::end('head');
-  HTML::start('body');
-  HTML::start('div', array('id' => 'wrap'));
+  echo HTML::end('head');
+  echo HTML::start('body');
+  echo HTML::start('div', array('id' => 'wrap'));
 
-  HTML::start('div', array('id' => 'header'));
+  echo HTML::start('div', array('id' => 'header'));
 
   echo appLogo();
 
   $array = array(
-    HTML::strLink(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))
+    HTML::link(_("Close Window"), '#', null, array('onclick' => 'window.close(); return false;'))
   );
-  HTML::itemList($array, array('id' => 'shortcuts'));
+  echo HTML::itemList($array, array('id' => 'shortcuts'));
 
   //echo menuBar($nav);
 
-  HTML::end('div'); // #header
+  echo HTML::end('div'); // #header
 
-  HTML::start('div', array('id' => 'main'));
-  HTML::start('div', array('id' => 'content'));
+  echo HTML::start('div', array('id' => 'main'));
+  echo HTML::start('div', array('id' => 'content'));
 
-  HTML::section(1, $title);
+  echo HTML::section(1, $title);
 
   Error::trace($_GET); // debug
 

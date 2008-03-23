@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit_form.php,v 1.32 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: staff_edit_form.php,v 1.33 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -108,33 +108,33 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Staff Members") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_staff");
+  echo HTML::breadcrumb($links, "icon icon_staff");
   unset($links);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../admin/staff_edit.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../admin/staff_edit.php'));
 
-  Form::hidden("id_member", $formVar["id_member"]);
-  Form::hidden("member_type", $formVar["member_type"]);
+  echo Form::hidden("id_member", $formVar["id_member"]);
+  echo Form::hidden("member_type", $formVar["member_type"]);
 
   require_once("../admin/staff_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

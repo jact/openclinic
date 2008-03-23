@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_view_form.php,v 1.21 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: dump_view_form.php,v 1.22 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -61,19 +61,19 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_dump");
+  echo HTML::breadcrumb($links, "icon icon_dump");
   unset($links);
 
-  HTML::para(
-    HTML::strLink(_("Install dump from file"), '../install/index.php')
+  echo HTML::para(
+    HTML::link(_("Install dump from file"), '../install/index.php')
     . ' | '
-    . HTML::strLink(_("Optimize Database"), '../admin/dump_optimize_db.php')
+    . HTML::link(_("Optimize Database"), '../admin/dump_optimize_db.php')
   );
 
   if ($numTables < 1)
@@ -85,7 +85,7 @@
 
   echo HTML::insertScript('dump_functions.js');
 
-  HTML::start('form', array('method' => 'post', 'action' => './dump_process.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => './dump_process.php'));
 
   $i = 0;
   $table = null;
@@ -98,57 +98,57 @@
   }
 
   $fieldArray = array(
-    Form::strSelect("table_select", $table, null, array('size' => 15))
+    Form::select("table_select", $table, null, array('size' => 15))
   );
   unset($table);
 
   $fieldFoot = array(
-    HTML::strLink(_("Select all"), '#', null, array('id' => 'select_all')) // @todo created by JS
+    HTML::link(_("Select all"), '#', null, array('id' => 'select_all')) // @todo created by JS
     . ' / '
-    . HTML::strLink(_("Unselect all"), '#', null, array('id' => 'unselect_all')) // @todo created by JS
+    . HTML::link(_("Unselect all"), '#', null, array('id' => 'unselect_all')) // @todo created by JS
   );
 
-  Form::fieldset(_("View dump of database"), $fieldArray, $fieldFoot, array('id' => 'dump_tables'));
+  echo Form::fieldset(_("View dump of database"), $fieldArray, $fieldFoot, array('id' => 'dump_tables'));
 
   $fieldArray = null;
 
-  $fieldArray[] = Form::strRadioButton("what", "data", true, array('id' => 'radio_dump_data'))
-    . Form::strLabel("radio_dump_data", _("Structure and data"));
+  $fieldArray[] = Form::radioButton("what", "data", array('id' => 'radio_dump_data', 'checked' => true))
+    . Form::label("radio_dump_data", _("Structure and data"));
 
-  $fieldArray[] = Form::strRadioButton("what", "structure", false, array('id' => 'radio_dump_structure'))
-    . Form::strLabel("radio_dump_structure", _("Structure only"));
+  $fieldArray[] = Form::radioButton("what", "structure", array('id' => 'radio_dump_structure'))
+    . Form::label("radio_dump_structure", _("Structure only"));
 
-  $fieldArray[] = Form::strRadioButton("what", "dataonly", false, array('id' => 'radio_dump_dataonly'))
-    . Form::strLabel("radio_dump_dataonly", _("Data only"));
+  $fieldArray[] = Form::radioButton("what", "dataonly", array('id' => 'radio_dump_dataonly'))
+    . Form::label("radio_dump_dataonly", _("Data only"));
 
-  $fieldArray[] = Form::strRadioButton("what", "xml", false, array('id' => 'radio_dump_xml'))
-    . Form::strLabel("radio_dump_xml", _("Export to XML format"));
+  $fieldArray[] = Form::radioButton("what", "xml", array('id' => 'radio_dump_xml'))
+    . Form::label("radio_dump_xml", _("Export to XML format"));
 
-  $fieldArray[] = Form::strRadioButton("what", "excel", false, array('id' => 'radio_dump_csv'))
-    . Form::strLabel("radio_dump_csv", _("Export to CSV format (data only)"));
+  $fieldArray[] = Form::radioButton("what", "excel", array('id' => 'radio_dump_csv'))
+    . Form::label("radio_dump_csv", _("Export to CSV format (data only)"));
 
-  Form::fieldset(_("Options"), $fieldArray, null, array('id' => 'dump_options'));
+  echo Form::fieldset(_("Options"), $fieldArray, null, array('id' => 'dump_options'));
 
   $fieldArray = array(
-    Form::strCheckBox("drop", "yes") . Form::strLabel("drop", _("Add 'DROP TABLE'")),
-    Form::strCheckBox("show_columns", "yes") . Form::strLabel("show_columns", _("Complete 'INSERTs'")),
-    Form::strCheckBox("extended_inserts", "yes") . Form::strLabel("extended_inserts", _("Extended 'INSERTs'")),
-    Form::strCheckBox("use_backquotes", "yes") . Form::strLabel("use_backquotes", _("Enclose table and field names with backquotes")),
-    Form::strCheckBox("add_delete", "yes") . Form::strLabel("add_delete", _("Add 'DELETE * FROM __table__'")),
-    Form::strCheckBox("use_dbname", "yes") . Form::strLabel("use_dbname", _("Add 'USE __dbname__'")),
-    Form::strCheckBox("create_db", "yes") . Form::strLabel("create_db", _("Add 'CREATE DATABASE __dbname__'")),
-    Form::strCheckBox("as_file", "sendit") . Form::strLabel("as_file", _("Save as file"))
+    Form::checkBox("drop", "yes") . Form::label("drop", _("Add 'DROP TABLE'")),
+    Form::checkBox("show_columns", "yes") . Form::label("show_columns", _("Complete 'INSERTs'")),
+    Form::checkBox("extended_inserts", "yes") . Form::label("extended_inserts", _("Extended 'INSERTs'")),
+    Form::checkBox("use_backquotes", "yes") . Form::label("use_backquotes", _("Enclose table and field names with backquotes")),
+    Form::checkBox("add_delete", "yes") . Form::label("add_delete", _("Add 'DELETE * FROM __table__'")),
+    Form::checkBox("use_dbname", "yes") . Form::label("use_dbname", _("Add 'USE __dbname__'")),
+    Form::checkBox("create_db", "yes") . Form::label("create_db", _("Add 'CREATE DATABASE __dbname__'")),
+    Form::checkBox("as_file", "sendit") . Form::label("as_file", _("Save as file"))
   );
 
-  Form::fieldset(_("Extended options"), $fieldArray, null, array('id' => 'dump_extended'));
+  echo Form::fieldset(_("Extended options"), $fieldArray, null, array('id' => 'dump_extended'));
 
-  HTML::para(
-    Form::strButton("dump", _("Submit")) . Form::generateToken(),
+  echo HTML::para(
+    Form::button("dump", _("Submit")) . Form::generateToken(),
     array('class' => 'center')
   );
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint(_("Note: Some check options are exclusive. Be carefully!"));
+  echo Msg::hint(_("Note: Some check options are exclusive. Be carefully!"));
 
   require_once("../layout/footer.php");
 ?>

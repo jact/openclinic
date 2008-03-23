@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_edit_form.php,v 1.40 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: problem_edit_form.php,v 1.41 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -80,7 +80,7 @@
   $returnLocation = "../medical/problem_view.php";
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -89,29 +89,29 @@
     $problem->getWordingPreview() => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_edit.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_edit.php'));
 
-  Form::hidden("id_problem", $formVar["id_problem"]);
-  Form::hidden("last_update_date", $formVar["last_update_date"]);
-  Form::hidden("id_patient", $formVar["id_patient"]);
+  echo Form::hidden("id_problem", $formVar["id_problem"]);
+  echo Form::hidden("last_update_date", $formVar["last_update_date"]);
+  echo Form::hidden("id_patient", $formVar["id_patient"]);
 
   require_once("../medical/problem_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

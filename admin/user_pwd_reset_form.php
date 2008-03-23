@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.36 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.37 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -88,23 +88,23 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Users") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_user");
+  echo HTML::breadcrumb($links, "icon icon_user");
   unset($links);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    * @todo use user_fields.php with some controlling var to display adecuated fields
    */
-  HTML::start('form',
+  echo HTML::start('form',
     array(
       'id' => 'userPwd',
       'method' => 'post',
@@ -112,20 +112,20 @@
     )
   );
 
-  Form::hidden("id_user", $formVar["id_user"]);
-  Form::hidden("login", $formVar["login"]);
+  echo Form::hidden("id_user", $formVar["id_user"]);
+  echo Form::hidden("login", $formVar["login"]);
 
-  Form::hidden("md5");
-  Form::hidden("md5_confirm");
+  echo Form::hidden("md5");
+  echo Form::hidden("md5_confirm");
 
   $tbody = array();
 
   $row = _("Login") . ": ";
-  $row .= HTML::strTag('strong', $formVar["login"]);
+  $row .= HTML::tag('strong', $formVar["login"]);
 
   $tbody[] = $row;
 
-  $row = Form::strLabel("pwd", _("Password") . ":");
+  $row = Form::label("pwd", _("Password") . ":");
   $row .= Form::strPassword("pwd", 20,
     isset($formVar["pwd"]) ? $formVar["pwd"] : null,
     isset($formError["pwd"]) ? array('error' => $formError["pwd"]) : null
@@ -133,7 +133,7 @@
 
   $tbody[] = $row;
 
-  $row = Form::strLabel("pwd2", _("Re-enter Password") . ":");
+  $row = Form::label("pwd2", _("Re-enter Password") . ":");
   $row .= Form::strPassword("pwd2", 20,
     isset($formVar["pwd2"]) ? $formVar["pwd2"] : null,
     isset($formError["pwd2"]) ? array('error' => $formError["pwd2"]) : null
@@ -142,14 +142,14 @@
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("change", _("Submit"))
+    Form::button("change", _("Submit"))
   );
 
-  Form::fieldset($title, $tbody, $tfoot);
+  echo Form::fieldset($title, $tbody, $tfoot);
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

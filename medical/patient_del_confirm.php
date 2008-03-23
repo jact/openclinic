@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_del_confirm.php,v 1.28 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: patient_del_confirm.php,v 1.29 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -53,41 +53,41 @@
   $returnLocation = "../medical/patient_view.php"; // controlling var
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     $patient->getName() => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   /**
    * Confirm form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_del.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_del.php'));
 
   $tbody = array();
 
-  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete patient, %s?"), $patient->getName()));
+  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete patient, %s?"), $patient->getName()));
 
-  $row = Form::strHidden("id_patient", $idPatient);
-  $row .= Form::strHidden("name", $patient->getName());
+  $row = Form::hidden("id_patient", $idPatient);
+  $row .= Form::hidden("name", $patient->getName());
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("delete", _("Delete"))
+    Form::button("delete", _("Delete"))
     . Form::generateToken()
   );
 
   $options = array('class' => 'center');
 
-  Form::fieldset($title, $tbody, $tfoot, $options);
+  echo Form::fieldset($title, $tbody, $tfoot, $options);
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>

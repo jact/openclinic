@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_list.php,v 1.35 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: user_list.php,v 1.36 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,13 +45,13 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_user");
+  echo HTML::breadcrumb($links, "icon icon_user");
   unset($links);
 
   $legend = _("Create New User");
@@ -62,9 +62,9 @@
   }
   else
   {
-    $content = Form::strLabel("id_member_login", _("Select a login to create a new user") . ": ");
-    $content .= Form::strSelect("id_member_login", $userArray);
-    $tfoot = array(Form::strButton("new", _("Create")) . Form::generateToken());
+    $content = Form::label("id_member_login", _("Select a login to create a new user") . ": ");
+    $content .= Form::select("id_member_login", $userArray);
+    $tfoot = array(Form::button("new", _("Create")) . Form::generateToken());
   }
 
   $tbody = array($content);
@@ -72,17 +72,17 @@
   /**
    * New user form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../admin/user_new_form.php'));
-  Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null, array('id' => 'new_user'));
-  HTML::end('form');
+  echo HTML::start('form', array('method' => 'post', 'action' => '../admin/user_new_form.php'));
+  echo Form::fieldset($legend, $tbody, isset($tfoot) ? $tfoot : null, array('id' => 'new_user'));
+  echo HTML::end('form');
 
-  HTML::section(2, _("Users List:"));
+  echo HTML::section(2, _("Users List:"));
 
   if ( !$userQ->select() )
   {
     $userQ->close();
 
-    Msg::info(_("No results found."));
+    echo Msg::info(_("No results found."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -131,13 +131,13 @@
      */
     $row = ++$i . '.';
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_edit.png', _("edit")),
+    $row .= HTML::link(
+      HTML::image('../img/action_edit.png', _("edit")),
       '../admin/user_edit_form.php', array('id_user' => $user->getIdUser())
     );
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_password.png', _("password")),
+    $row .= HTML::link(
+      HTML::image('../img/action_password.png', _("password")),
       '../admin/user_pwd_reset_form.php',
       array('id_user' => $user->getIdUser())
     );
@@ -148,8 +148,8 @@
     }
     else
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_delete.png', _("delete")),
+      $row .= HTML::link(
+        HTML::image('../img/action_delete.png', _("delete")),
         '../admin/user_del_confirm.php',
         array(
           'id_user' => $user->getIdUser(),
@@ -158,14 +158,14 @@
       );
     }
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_edit_user.png', _("edit member")),
+    $row .= HTML::link(
+      HTML::image('../img/action_edit_user.png', _("edit member")),
       '../admin/staff_edit_form.php',
       array('id_member' => $user->getIdMember())
     );
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_access.png', _("accesses")),
+    $row .= HTML::link(
+      HTML::image('../img/action_access.png', _("accesses")),
       '../admin/user_access_log.php',
       array(
         'id_user' => $user->getIdUser(),
@@ -173,8 +173,8 @@
       )
     );
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_record.png', _("transactions")),
+    $row .= HTML::link(
+      HTML::image('../img/action_record.png', _("transactions")),
       '../admin/user_record_log.php',
       array(
         'id_user' => $user->getIdUser(),
@@ -186,7 +186,7 @@
     $row .= OPEN_SEPARATOR;
     $row .= $user->getEmail();
     $row .= OPEN_SEPARATOR;
-    $row .= ($user->isActived() ? _("yes") : HTML::strTag('strong', _("no")));
+    $row .= ($user->isActived() ? _("yes") : HTML::tag('strong', _("no")));
     $row .= OPEN_SEPARATOR;
     $row .= $profiles[$user->getIdProfile()];
 
@@ -195,13 +195,13 @@
   $userQ->freeResult();
   $userQ->close();
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
   unset($user);
   unset($userQ);
   unset($profiles);
 
-  Msg::hint('* ' . _("Note: The del function will not be applicated to the session user."));
+  echo Msg::hint('* ' . _("Note: The del function will not be applicated to the session user."));
 
   require_once("../layout/footer.php");
 ?>

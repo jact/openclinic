@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_fields.php,v 1.19 2007/12/01 12:14:14 jact Exp $
+ * @version   CVS: $Id: history_personal_fields.php,v 1.20 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,52 +18,118 @@
 
   $tbody = array();
 
-  $row = Form::strLabel("birth_growth", _("Birth and Growth") . ":");
-  $row .= Form::strTextArea("birth_growth", 4, 90, $formVar["birth_growth"]);
+  $row = Form::label("birth_growth", _("Birth and Growth") . ":");
+  $row .= Form::textArea("birth_growth",
+    $formVar["birth_growth"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("growth_sexuality", _("Growth and Sexuality") . ":");
-  $row .= Form::strTextArea("growth_sexuality", 4, 90, $formVar["growth_sexuality"]);
+  $row = Form::label("growth_sexuality", _("Growth and Sexuality") . ":");
+  $row .= Form::textArea("growth_sexuality",
+    $formVar["growth_sexuality"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("feed", _("Feed") . ":");
-  $row .= Form::strTextArea("feed", 4, 90, $formVar["feed"]);
+  $row = Form::label("feed", _("Feed") . ":");
+  $row .= Form::textArea("feed",
+    $formVar["feed"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("habits", _("Habits") . ":");
-  $row .= Form::strTextArea("habits", 4, 90, $formVar["habits"]);
+  $row = Form::label("habits", _("Habits") . ":");
+  $row .= Form::textArea("habits",
+    $formVar["habits"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("peristaltic_conditions", _("Peristaltic Conditions") . ":");
-  $row .= Form::strTextArea("peristaltic_conditions", 4, 90, $formVar["peristaltic_conditions"]);
+  $row = Form::label("peristaltic_conditions", _("Peristaltic Conditions") . ":");
+  $row .= Form::textArea("peristaltic_conditions",
+    $formVar["peristaltic_conditions"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("psychological", _("Psychological Conditions") . ":");
-  $row .= Form::strTextArea("psychological", 4, 90, $formVar["psychological"]);
+  $row = Form::label("psychological", _("Psychological Conditions") . ":");
+  $row .= Form::textArea("psychological",
+    $formVar["psychological"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("children_complaint", _("Children Complaint") . ":");
-  $row .= Form::strTextArea("children_complaint", 4, 90, $formVar["children_complaint"]);
+  $row = Form::label("children_complaint", _("Children Complaint") . ":");
+  $row .= Form::textArea("children_complaint",
+    $formVar["children_complaint"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("venereal_disease", _("Venereal Disease") . ":");
-  $row .= Form::strTextArea("venereal_disease", 4, 90, $formVar["venereal_disease"]);
+  $row = Form::label("venereal_disease", _("Venereal Disease") . ":");
+  $row .= Form::textArea("venereal_disease",
+    $formVar["venereal_disease"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("accident_surgical_operation", _("Accidents and Surgical Operations") . ":");
-  $row .= Form::strTextArea("accident_surgical_operation", 4, 90, $formVar["accident_surgical_operation"]);
+  $row = Form::label("accident_surgical_operation", _("Accidents and Surgical Operations") . ":");
+  $row .= Form::textArea("accident_surgical_operation",
+    $formVar["accident_surgical_operation"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("medicinal_intolerance", _("Medicinal Intolerance") . ":");
-  $row .= Form::strTextArea("medicinal_intolerance", 4, 90, $formVar["medicinal_intolerance"]);
+  $row = Form::label("medicinal_intolerance", _("Medicinal Intolerance") . ":");
+  $row .= Form::textArea("medicinal_intolerance",
+    $formVar["medicinal_intolerance"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("mental_illness", _("Mental Illness") . ":");
-  $row .= Form::strTextArea("mental_illness", 4, 90, $formVar["mental_illness"]);
+  $row = Form::label("mental_illness", _("Mental Illness") . ":");
+  $row .= Form::textArea("mental_illness",
+    $formVar["mental_illness"],
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("update", _("Update"))
+    Form::button("update", _("Update"))
     . Form::generateToken()
   );
 
@@ -71,5 +137,5 @@
     'class' => 'large_area'
   );
 
-  Form::fieldset($title, $tbody, $tfoot, $options);
+  echo Form::fieldset($title, $tbody, $tfoot, $options);
 ?>

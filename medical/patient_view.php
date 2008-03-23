@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_view.php,v 1.34 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: patient_view.php,v 1.35 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,138 +55,138 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
-  HTML::section(2, _("Social Data"));
+  echo HTML::section(2, _("Social Data"));
 
   $relatedLinks = "";
   if ($_SESSION['auth']['is_administrative'])
   {
-    $relatedLinks .= HTML::strLink(_("Edit Social Data"), '../medical/patient_edit_form.php',
+    $relatedLinks .= HTML::link(_("Edit Social Data"), '../medical/patient_edit_form.php',
       array('id_patient' => $idPatient)
     );
     $relatedLinks .= ' | ';
-    $relatedLinks .= HTML::strLink(_("Delete Patient"), '../medical/patient_del_confirm.php',
+    $relatedLinks .= HTML::link(_("Delete Patient"), '../medical/patient_del_confirm.php',
       array('id_patient' => $idPatient)
     );
   }
-  HTML::para($relatedLinks);
+  echo HTML::para($relatedLinks);
 
-  $relatedLinks = HTML::strLink(_("View Relatives"), '../medical/relative_list.php',
+  $relatedLinks = HTML::link(_("View Relatives"), '../medical/relative_list.php',
     array('id_patient' => $idPatient)
   );
   $relatedLinks .= ' | ';
-  $relatedLinks .= HTML::strLink(_("Clinic History"), '../medical/history_list.php',
+  $relatedLinks .= HTML::link(_("Clinic History"), '../medical/history_list.php',
     array('id_patient' => $idPatient)
   );
   $relatedLinks .= ' | ';
-  $relatedLinks .= HTML::strLink(_("Medical Problems Report"), '../medical/problem_list.php',
+  $relatedLinks .= HTML::link(_("Medical Problems Report"), '../medical/problem_list.php',
     array('id_patient' => $idPatient)
   );
   $relatedLinks .= ' | ';
-  $relatedLinks .= HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
+  $relatedLinks .= HTML::link(_("Print Medical Record"), '../medical/print_medical_record.php',
     array('id_patient' => $idPatient),
     array('class' => 'popup')
   );
-  HTML::para($relatedLinks);
+  echo HTML::para($relatedLinks);
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::section(3, _("Patient"));
-  HTML::para($patient->getSurname1() . ' ' . $patient->getSurname2() . ', ' . $patient->getFirstName());
+  echo HTML::section(3, _("Patient"));
+  echo HTML::para($patient->getSurname1() . ' ' . $patient->getSurname2() . ', ' . $patient->getFirstName());
 
-  //HTML::section(3, _("Last Update Date"));
-  //HTML::para(I18n::localDate($patient->getLastUpdateDate()));
+  //echo HTML::section(3, _("Last Update Date"));
+  //echo HTML::para(I18n::localDate($patient->getLastUpdateDate()));
 
   if ($patient->getNIF())
   {
-    HTML::section(3, _("Tax Identification Number (TIN)"));
-    HTML::para($patient->getNIF());
+    echo HTML::section(3, _("Tax Identification Number (TIN)"));
+    echo HTML::para($patient->getNIF());
   }
 
   if ($patient->getAddress())
   {
-    HTML::section(3, _("Address"));
-    HTML::para(nl2br($patient->getAddress()));
+    echo HTML::section(3, _("Address"));
+    echo HTML::para(nl2br($patient->getAddress()));
   }
 
   if ($patient->getPhone())
   {
-    HTML::section(3, _("Phone Contact"));
-    HTML::para(nl2br($patient->getPhone()));
+    echo HTML::section(3, _("Phone Contact"));
+    echo HTML::para(nl2br($patient->getPhone()));
   }
 
-  HTML::section(3, _("Sex"));
-  HTML::para(($patient->getSex() == 'V') ? _("Male") : _("Female"));
+  echo HTML::section(3, _("Sex"));
+  echo HTML::para(($patient->getSex() == 'V') ? _("Male") : _("Female"));
 
   if ($patient->getRace())
   {
-    HTML::section(3, _("Race"));
-    HTML::para($patient->getRace());
+    echo HTML::section(3, _("Race"));
+    echo HTML::para($patient->getRace());
   }
 
   if ($patient->getBirthDate() != "" && $patient->getBirthDate() != "0000-00-00")
   {
-    HTML::section(3, _("Birth Date"));
-    HTML::para(I18n::localDate($patient->getBirthDate()));
+    echo HTML::section(3, _("Birth Date"));
+    echo HTML::para(I18n::localDate($patient->getBirthDate()));
 
-    HTML::section(3, _("Age"));
-    HTML::para($patient->getAge());
+    echo HTML::section(3, _("Age"));
+    echo HTML::para($patient->getAge());
   }
 
   if ($patient->getBirthPlace())
   {
-    HTML::section(3, _("Birth Place"));
-    HTML::para($patient->getBirthPlace());
+    echo HTML::section(3, _("Birth Place"));
+    echo HTML::para($patient->getBirthPlace());
   }
 
   if ($patient->getDeceaseDate() != "" && $patient->getDeceaseDate() != "0000-00-00")
   {
-    HTML::section(3, _("Decease Date"));
-    HTML::para(I18n::localDate($patient->getDeceaseDate()));
+    echo HTML::section(3, _("Decease Date"));
+    echo HTML::para(I18n::localDate($patient->getDeceaseDate()));
   }
 
   if ($patient->getNTS())
   {
-    HTML::section(3, _("Sanitary Card Number (SCN)"));
-    HTML::para($patient->getNTS());
+    echo HTML::section(3, _("Sanitary Card Number (SCN)"));
+    echo HTML::para($patient->getNTS());
   }
 
   if ($patient->getNSS())
   {
-    HTML::section(3, _("National Health Service Number (NHSN)"));
-    HTML::para($patient->getNSS());
+    echo HTML::section(3, _("National Health Service Number (NHSN)"));
+    echo HTML::para($patient->getNSS());
   }
 
   if ($patient->getFamilySituation())
   {
-    HTML::section(3, _("Family Situation"));
-    HTML::para(nl2br($patient->getFamilySituation()));
+    echo HTML::section(3, _("Family Situation"));
+    echo HTML::para(nl2br($patient->getFamilySituation()));
   }
 
   if ($patient->getLabourSituation())
   {
-    HTML::section(3, _("Labour Situation"));
-    HTML::para(nl2br($patient->getLabourSituation()));
+    echo HTML::section(3, _("Labour Situation"));
+    echo HTML::para(nl2br($patient->getLabourSituation()));
   }
 
   if ($patient->getEducation())
   {
-    HTML::section(3, _("Education"));
-    HTML::para(nl2br($patient->getEducation()));
+    echo HTML::section(3, _("Education"));
+    echo HTML::para(nl2br($patient->getEducation()));
   }
 
   if ($patient->getInsuranceCompany())
   {
-    HTML::section(3, _("Insurance Company"));
-    HTML::para($patient->getInsuranceCompany());
+    echo HTML::section(3, _("Insurance Company"));
+    echo HTML::para($patient->getInsuranceCompany());
   }
 
   if ($patient->getIdMember())
@@ -197,8 +197,8 @@
       $staff = $staffQ->fetch();
       if ($staff)
       {
-        HTML::section(3, _("Doctor you are assigned to"));
-        HTML::para($staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName());
+        echo HTML::section(3, _("Doctor you are assigned to"));
+        echo HTML::para($staff->getSurname1() . ' ' . $staff->getSurname2() . ', ' . $staff->getFirstName());
       }
       $staffQ->freeResult();
     }

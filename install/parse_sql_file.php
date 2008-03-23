@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: parse_sql_file.php,v 1.23 2008/01/07 14:12:04 jact Exp $
+ * @version   CVS: $Id: parse_sql_file.php,v 1.24 2008/03/23 11:59:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -133,10 +133,10 @@ function parseSql($text)
       $result = $installQ->exec($sqlSentence);
       if ($installQ->isError() && !in_array($installQ->getDbErrno(), $controlledErrors))
       {
-        HTML::para(sprintf(_("Process sql [%s]"), $sqlSentence));
+        echo HTML::para(sprintf(_("Process sql [%s]"), $sqlSentence));
         $installQ->close();
         Error::query($installQ, false);
-        Msg::error(sprintf(_("Error: %s"), $installQ->getDbError()));
+        echo Msg::error(sprintf(_("Error: %s"), $installQ->getDbError()));
 
         return false;
       }

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.11 2007/12/07 16:54:45 jact Exp $
+ * @version   CVS: $Id: login_form.php,v 1.12 2008/03/23 11:59:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -39,13 +39,13 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Home") => "../home/index.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_user");
+  echo HTML::breadcrumb($links, "icon icon_user");
   unset($links);
 
   /**
@@ -53,7 +53,7 @@
    */
   if ( !is_dir(ini_get('session.save_path')) && ini_get('session.save_handler') == 'files' )
   {
-    Msg::error(_("No session support. Authentication process will fail. Check your PHP configuration."));
+    echo Msg::error(_("No session support. Authentication process will fail. Check your PHP configuration."));
   }
 
   /**
@@ -61,7 +61,7 @@
    */
   if ( !isset($_COOKIE[session_name()]) )
   {
-    Msg::error(_("You must have cookies enabled to access your account."));
+    echo Msg::error(_("You must have cookies enabled to access your account."));
   }
 
   /**
@@ -70,13 +70,13 @@
   if (OPEN_MAX_LOGIN_ATTEMPTS && isset($_SESSION['auth']['login_attempts'])
       && $_SESSION['auth']['login_attempts'] == (OPEN_MAX_LOGIN_ATTEMPTS - 1))
   {
-    Msg::warning(_("Last attempt to type correct password before suspend this user account."));
+    echo Msg::warning(_("Last attempt to type correct password before suspend this user account."));
   }
 
   /**
    * Login form
    */
-  HTML::start('form',
+  echo HTML::start('form',
     array(
       'id' => 'loginForm',
       'method' => 'post',
@@ -86,30 +86,36 @@
 
   $tbody = array();
 
-  $row = Form::strHidden("md5_session");
+  $row = Form::hidden("md5_session");
   $tbody[] = $row;
 
-  $row = Form::strLabel("login_session", _("Login") . ":");
-  $row .= Form::strText("login_session", 20,
+  $row = Form::label("login_session", _("Login") . ":");
+  $row .= Form::text("login_session",
     isset($formVar["login_session"]) ? $formVar["login_session"] : null,
-    isset($formError["login_session"]) ? array('error' => $formError["login_session"]) : null
+    array(
+      'size' => 20,
+      'error' => isset($formError["login_session"]) ? $formError["login_session"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("pwd_session", _("Password") . ":");
-  $row .= Form::strPassword("pwd_session", 20,
+  $row = Form::label("pwd_session", _("Password") . ":");
+  $row .= Form::password("pwd_session",
     isset($formVar["pwd_session"]) ? $formVar["pwd_session"] : null,
-    isset($formError["pwd_session"]) ? array('error' => $formError["pwd_session"]) : null
+    array(
+      'size' => 20,
+      'error' => isset($formError["pwd_session"]) ? $formError["pwd_session"] : null
+    )
   );
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("login", _("Enter"))
+    Form::button("login", _("Enter"))
     . Form::generateToken()
   );
 
-  Form::fieldset($title, $tbody, $tfoot);
-  HTML::end('form');
+  echo Form::fieldset($title, $tbody, $tfoot);
+  echo HTML::end('form');
 
   /**
    * Destroy form values and errors

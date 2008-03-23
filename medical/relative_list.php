@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_list.php,v 1.36 2007/12/15 15:05:02 jact Exp $
+ * @version   CVS: $Id: relative_list.php,v 1.37 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -67,14 +67,14 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     $patient->getName() => "../medical/patient_view.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -86,27 +86,27 @@
     /**
      * Search form
      */
-    HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_search.php'));
+    echo HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_search.php'));
 
-    Form::hidden("id_patient", $idPatient);
+    echo Form::hidden("id_patient", $idPatient);
 
     require_once("../medical/patient_search_fields.php");
 
-    HTML::end('form');
+    echo HTML::end('form');
 
-    Msg::hint('* ' . _("Note: Empty search to see all results."));
+    echo Msg::hint('* ' . _("Note: Empty search to see all results."));
   } // end if
 
   if (count($relArray) == 0)
   {
-    Msg::info(_("No relatives defined for this patient."));
+    echo Msg::info(_("No relatives defined for this patient."));
     include_once("../layout/footer.php");
     exit();
   }
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::section(2, _("Relatives List:"));
+  echo HTML::section(2, _("Relatives List:"));
 
   $thead = array(
     _("#"),
@@ -145,8 +145,8 @@
     $row = $i + 1 . '.';
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_view.png', _("view")),
+    $row .= HTML::link(
+      HTML::image('../img/action_view.png', _("view")),
       '../medical/patient_view.php',
       array('id_patient' => $pat->getIdPatient())
     );
@@ -154,8 +154,8 @@
 
     if ($_SESSION['auth']['is_administrative'])
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_delete.png', _("delete")),
+      $row .= HTML::link(
+        HTML::image('../img/action_delete.png', _("delete")),
         '../medical/relative_del_confirm.php',
         array(
           'id_patient' => $idPatient,
@@ -180,7 +180,7 @@
   unset($patQ);
   unset($pat);
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
   require_once("../layout/footer.php");
 ?>

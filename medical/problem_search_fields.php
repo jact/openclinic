@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search_fields.php,v 1.18 2007/10/29 20:06:54 jact Exp $
+ * @version   CVS: $Id: problem_search_fields.php,v 1.19 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -23,7 +23,7 @@
 
   $tbody = array();
 
-  $row = Form::strLabel("search_type_problem", _("Field") . ': ');
+  $row = Form::label("search_type_problem", _("Field") . ': ');
 
   $array = null;
   $array[OPEN_SEARCH_WORDING] = _("Wording");
@@ -33,28 +33,28 @@
   $array[OPEN_SEARCH_ACTIONPLAN] = _("Action Plan");
   $array[OPEN_SEARCH_PRESCRIPTION] = _("Prescription");
 
-  $row .= Form::strSelect("search_type_problem", $array, OPEN_SEARCH_WORDING);
+  $row .= Form::select("search_type_problem", $array, OPEN_SEARCH_WORDING);
   unset($array);
 
   $tbody[] = array($row);
 
-  $row = '* ' . Form::strText("search_text_problem", 40, "", array('maxlength' => 120));
-  $row .= Form::strButton("search_problem", _("Search"));
+  $row = '* ' . Form::text("search_text_problem", null, array('size' => 40, 'maxlength' => 120));
+  $row .= Form::button("search_problem", _("Search"));
 
   $tbody[] = array($row);
 
-  $row = Form::strLabel("logical_problem", _("Logical") . ': ');
+  $row = Form::label("logical_problem", _("Logical") . ': ');
 
   $array = null;
   $array[OPEN_OR] = "OR";
   $array[OPEN_NOT] = "NOT";
   $array[OPEN_AND] = "AND"; // it makes sense in fields with two or more words
 
-  $row .= Form::strSelect("logical_problem", $array, OPEN_OR);
+  $row .= Form::select("logical_problem", $array, OPEN_OR);
   unset($array);
 
   $row .= OPEN_SEPARATOR;
-  $row .= Form::strLabel("limit_problem", _("Limit") . ': ');
+  $row .= Form::label("limit_problem", _("Limit") . ': ');
 
   $array = null;
   $array["0"] = _("All");
@@ -63,11 +63,11 @@
   $array["50"] = 50;
   $array["100"] = 100;
 
-  $row .= Form::strSelect("limit_problem", $array);
+  $row .= Form::select("limit_problem", $array);
   unset($array);
 
   $row .= str_replace('id="token_form"', 'id="token_form_2"', $tokenForm); // defined in patient_search_form.php
-  $row .= Form::strHidden("page", 1, array('id' => 'page_problem'));
+  $row .= Form::hidden("page", 1, array('id' => 'page_problem'));
 
   $tbody[] = explode(OPEN_SEPARATOR, $row);
 
@@ -80,5 +80,5 @@
     'align' => 'center'
   );
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 ?>

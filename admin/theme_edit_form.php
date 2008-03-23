@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.36 2007/12/15 12:46:36 jact Exp $
+ * @version   CVS: $Id: theme_edit_form.php,v 1.37 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -92,14 +92,14 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
   $links = array(
     _("Admin") => "../admin/index.php",
     _("Themes") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_theme");
+  echo HTML::breadcrumb($links, "icon icon_theme");
   unset($links);
 ?>
 
@@ -124,32 +124,32 @@ function editTheme()
 </script>
 
 <?php
-  HTML::para(
-    HTML::strLink(_("Preview Theme"), '#', null, array('onclick' => 'previewTheme(); return false;'))
+  echo HTML::para(
+    HTML::link(_("Preview Theme"), '#', null, array('onclick' => 'previewTheme(); return false;'))
     . ' | '
-    . HTML::strLink(_("Preload CSS file"), '../admin/theme_preload_css.php', array('key' => $idTheme))
+    . HTML::link(_("Preload CSS file"), '../admin/theme_preload_css.php', array('key' => $idTheme))
     //. ' | '
-    //. HTML::strLink(_("Upload image"), '../admin/theme_upload_image.php') // @todo
+    //. HTML::link(_("Upload image"), '../admin/theme_upload_image.php') // @todo
   );
 
-  HTML::rule();
+  echo HTML::rule();
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_edit.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../admin/theme_edit.php'));
 
-  Form::hidden("id_theme", $formVar["id_theme"]);
+  echo Form::hidden("id_theme", $formVar["id_theme"]);
 
   require_once("../admin/theme_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

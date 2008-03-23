@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.32 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: connection_new_form.php,v 1.33 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -62,7 +62,7 @@
   $returnLocation = "../medical/connection_list.php";
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -72,7 +72,7 @@
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -90,20 +90,20 @@
   {
     $problemQ->close();
 
-    Msg::info(_("No medical problems defined for this patient."));
+    echo Msg::info(_("No medical problems defined for this patient."));
     include_once("../layout/footer.php");
     exit();
   }
 
-  HTML::section(2, _("Medical Problems List:"));
+  echo HTML::section(2, _("Medical Problems List:"));
 
   /**
    * New form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/connection_new.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/connection_new.php'));
 
-  Form::hidden("id_problem", $idProblem);
-  Form::hidden("id_patient", $idPatient);
+  echo Form::hidden("id_problem", $idProblem);
+  echo Form::hidden("id_patient", $idPatient);
 
   $thead = array(
     _("Order Number"),
@@ -114,7 +114,7 @@
   while ($problem = $problemQ->fetch())
   {
     $row = $problem->getOrderNumber() . '.';
-    $row .= Form::strCheckBox("check[]", $problem->getIdProblem(), false,
+    $row .= Form::checkBox("check[]", $problem->getIdProblem(),
       array('id' => String::numberToAlphabet($problem->getOrderNumber()))
     );
     $row .= OPEN_SEPARATOR;
@@ -128,7 +128,7 @@
   unset($problem);
 
   $tfoot = array(
-    Form::strButton("add", _("Add selected to Connection Problems List"))
+    Form::button("add", _("Add selected to Connection Problems List"))
     . Form::generateToken()
   );
 
@@ -137,8 +137,8 @@
     'tfoot' => array('align' => 'center')
   );
 
-  HTML::table($thead, $tbody, $tfoot, $options);
-  HTML::end('form');
+  echo HTML::table($thead, $tbody, $tfoot, $options);
+  echo HTML::end('form');
 
   require_once("../layout/footer.php");
 ?>

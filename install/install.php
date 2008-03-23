@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.26 2008/01/07 14:13:37 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.27 2008/03/23 11:59:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -30,13 +30,13 @@
     Form::compareToken('./index.php');
   }
 
-  HTML::section(1, $title);
+  echo HTML::section(1, $title);
 
   /**
    * Testing connection and current version
    */
   $setQ = new Query_Setting();
-  Msg::info(_("Database connection is good."));
+  echo Msg::info(_("Database connection is good."));
 
   /**
    * Show warning message if database exists
@@ -45,7 +45,7 @@
   $setQ->select();
   if ($setQ->isError())
   {
-    HTML::para(_("Building OpenClinic tables..."));
+    echo HTML::para(_("Building OpenClinic tables..."));
   }
   else
   {
@@ -58,26 +58,26 @@
 
     if ( !isset($_GET["confirm"]) || ($_GET["confirm"] != "yes") )
     {
-      HTML::para(sprintf(_("OpenClinic (version %s) is already installed."), $set->getVersion()));
+      echo HTML::para(sprintf(_("OpenClinic (version %s) is already installed."), $set->getVersion()));
       $setQ->close();
 
-      Msg::warning(_("Are you sure you want to delete all clinic data and create new OpenClinic tables?"));
-      Msg::warning(_("If you continue all data will be lost."));
+      echo Msg::warning(_("Are you sure you want to delete all clinic data and create new OpenClinic tables?"));
+      echo Msg::warning(_("If you continue all data will be lost."));
 
       // @todo use fieldset
-      HTML::start('form',
+      echo HTML::start('form',
         array(
           'method' => 'post',
           'action' => $_SERVER['PHP_SELF'] . '?confirm=yes'
         )
       );
-      HTML::para(
-        Form::strButton("continue", _("Continue"))
+      echo HTML::para(
+        Form::button("continue", _("Continue"))
         . Form::generateToken()
       );
-      HTML::end('form');
+      echo HTML::end('form');
 
-      HTML::para(HTML::strLink(_("Cancel"), './index.php'));
+      echo HTML::para(HTML::link(_("Cancel"), './index.php'));
 
       include_once("../layout/footer.php");
       exit();
@@ -101,19 +101,19 @@
       $text = sprintf(_("Table %s dropped."), $tableName) . PHP_EOL;
       $text .= sprintf(_("Table %s created."), $tableName) . PHP_EOL;
       $text .= str_repeat(".", 50);
-      HTML::para(nl2br($text));
+      echo HTML::para(nl2br($text));
     }
     else
     {
-      Msg::error(_("Last instruction failed"));
+      echo Msg::error(_("Last instruction failed"));
       include_once("../layout/footer.php");
       exit();
     }
   }
 
-  Msg::info(_("OpenClinic tables have been created successfully!"));
+  echo Msg::info(_("OpenClinic tables have been created successfully!"));
 
-  HTML::section(1, HTML::strLink(_("Start using OpenClinic"), '../home/index.php'));
+  echo HTML::section(1, HTML::link(_("Start using OpenClinic"), '../home/index.php'));
 
   require_once("../layout/footer.php");
 ?>

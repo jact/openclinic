@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_edit_form.php,v 1.37 2007/12/15 15:05:02 jact Exp $
+ * @version   CVS: $Id: test_edit_form.php,v 1.38 2008/03/23 12:00:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -75,7 +75,7 @@
   $returnLocation = "../medical/test_list.php";
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -85,18 +85,18 @@
     _("View Medical Tests") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
   echo $problem->getHeader();
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * Edit form
    */
-  HTML::start('form',
+  echo HTML::start('form',
     array(
       'method' => 'post',
       'action' => '../medical/test_edit.php',
@@ -105,18 +105,18 @@
     )
   );
 
-  Form::hidden("id_problem", $idProblem);
-  Form::hidden("id_patient", $idPatient);
-  Form::hidden("id_test", $idTest);
-  Form::hidden("upload_file", $formVar["path_filename"]);
+  echo Form::hidden("id_problem", $idProblem);
+  echo Form::hidden("id_patient", $idPatient);
+  echo Form::hidden("id_test", $idTest);
+  echo Form::hidden("upload_file", $formVar["path_filename"]);
 
   require_once("../medical/test_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

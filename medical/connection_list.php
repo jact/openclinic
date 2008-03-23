@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_list.php,v 1.36 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: connection_list.php,v 1.37 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,7 +59,7 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -68,7 +68,7 @@
     $problem->getWordingPreview() => "../medical/problem_view.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -76,8 +76,8 @@
 
   if ($_SESSION['auth']['is_administrative'])
   {
-    HTML::para(
-      HTML::strLink(_("Add New Connection Problems"), '../medical/connection_new_form.php',
+    echo HTML::para(
+      HTML::link(_("Add New Connection Problems"), '../medical/connection_new_form.php',
         array(
           'id_problem' => $idProblem,
           'id_patient' => $idPatient
@@ -102,12 +102,12 @@
 
   if (count($connArray) == 0)
   {
-    Msg::info(_("No connections defined for this medical problem."));
+    echo Msg::info(_("No connections defined for this medical problem."));
     include_once("../layout/footer.php");
     exit();
   }
 
-  HTML::section(2, _("Connection Problems List:"));
+  echo HTML::section(2, _("Connection Problems List:"));
 
   $thead = array(
     _("#"),
@@ -139,8 +139,8 @@
     $row = $i + 1 . '.';
     $row .= OPEN_SEPARATOR;
 
-    $row .= HTML::strLink(
-      HTML::strImage('../img/action_view.png', _("view")),
+    $row .= HTML::link(
+      HTML::image('../img/action_view.png', _("view")),
       '../medical/problem_view.php',
       array(
         'id_problem' => $problem->getIdProblem(),
@@ -151,8 +151,8 @@
 
     if ($_SESSION['auth']['is_administrative'])
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_delete.png', _("delete")),
+      $row .= HTML::link(
+        HTML::image('../img/action_delete.png', _("delete")),
         '../medical/connection_del_confirm.php',
         array(
           'id_problem' => $idProblem,
@@ -179,7 +179,7 @@
     0 => array('align' => 'right')
   );
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
   require_once("../layout/footer.php");
 ?>

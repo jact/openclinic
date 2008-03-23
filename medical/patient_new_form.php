@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_new_form.php,v 1.24 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: patient_new_form.php,v 1.25 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -37,31 +37,31 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => $returnLocation,
     _("New Patient") => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * New form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_new.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/patient_new.php'));
 
-  //Form::hidden("last_update_date", $formVar['last_update_date']);
+  //echo Form::hidden("last_update_date", $formVar['last_update_date']);
 
   require_once("../medical/patient_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

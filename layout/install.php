@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.1 2007/12/23 13:22:58 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.2 2008/03/23 11:59:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -34,11 +34,11 @@
   }
   foreach ($linkList as $key => $value)
   {
-    $array[] = HTML::strLink($value[0], $value[1], null, $nav == $key ? array('class' => 'selected') : null);
+    $array[] = HTML::link($value[0], $value[1], null, $nav == $key ? array('class' => 'selected') : null);
   }
   unset($linkList);
 
-  $array[] = HTML::strLink(_("Help"), '../doc/index.php',
+  $array[] = HTML::link(_("Help"), '../doc/index.php',
     array(
       'tab' => $tab,
       'nav' => $nav

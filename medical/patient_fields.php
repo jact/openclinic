@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_fields.php,v 1.31 2007/11/02 20:42:10 jact Exp $
+ * @version   CVS: $Id: patient_fields.php,v 1.32 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,128 +24,203 @@
   //$row .= I18n::localDate($formVar["last_update_date"]);
   //$tbody[] = $row;
 
-  $row = Form::strLabel("nif", _("Tax Identification Number (TIN)") . ":");
-  $row .= Form::strText("nif", 20,
+  $row = Form::label("nif", _("Tax Identification Number (TIN)") . ":");
+  $row .= Form::text("nif",
     isset($formVar["nif"]) ? $formVar["nif"] : null,
-    isset($formError["nif"]) ? array('error' => $formError["nif"]) : null
+    array(
+      'size' => 20,
+      'error' => isset($formError["nif"]) ? $formError["nif"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("first_name", _("First Name") . ":", true);
-  $row .= Form::strText("first_name", 25, $formVar["first_name"],
-    array('error' => $formError["first_name"])
+  $row = Form::label("first_name", _("First Name") . ":", array('class' => 'required'));
+  $row .= Form::text("first_name",
+    isset($formVar["first_name"]) ? $formVar["first_name"] : null,
+    array(
+      'size' => 25,
+      'error' => isset($formError["first_name"]) ? $formError["first_name"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("surname1", _("Surname 1") . ":", true);
-  $row .= Form::strText("surname1", 30, $formVar["surname1"],
-    array('error' => $formError["surname1"])
+  $row = Form::label("surname1", _("Surname 1") . ":", array('class' => 'required'));
+  $row .= Form::text("surname1",
+    isset($formVar["surname1"]) ? $formVar["surname1"] : null,
+    array(
+      'size' => 30,
+      'error' => isset($formError["surname1"]) ? $formError["surname1"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("surname2", _("Surname 2") . ":", true);
-  $row .= Form::strText("surname2", 30, $formVar["surname2"],
-    array('error' => $formError["surname2"])
+  $row = Form::label("surname2", _("Surname 2") . ":", array('class' => 'required'));
+  $row .= Form::text("surname2",
+    isset($formVar["surname2"]) ? $formVar["surname2"] : null,
+    array(
+      'size' => 30,
+      'error' => isset($formError["surname2"]) ? $formError["surname2"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("address", _("Address") . ":");
-  $row .= Form::strTextArea("address", 3, 30, $formVar["address"]);
+  $row = Form::label("address", _("Address") . ":");
+  $row .= Form::textArea("address",
+    $formVar["address"],
+    array(
+      'rows' => 3,
+      'cols' => 30
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("phone_contact", _("Phone Contact") . ":");
-  $row .= Form::strTextArea("phone_contact", 3, 30, $formVar["phone_contact"]);
+  $row = Form::label("phone_contact", _("Phone Contact") . ":");
+  $row .= Form::textArea("phone_contact",
+    $formVar["phone_contact"],
+    array(
+      'rows' => 3,
+      'cols' => 30
+    )
+  );
   $tbody[] = $row;
 
   $array = null;
   $array['V'] = _("Male");
   $array['H'] = _("Female");
 
-  $row = Form::strLabel("sex", _("Sex") . ":");
-  $row .= Form::strSelect("sex", $array, $formVar["sex"]);
+  $row = Form::label("sex", _("Sex") . ":");
+  $row .= Form::select("sex", $array, $formVar["sex"]);
   unset($array);
   $tbody[] = $row;
 
-  $row = Form::strLabel("race", _("Race") . ":");
-  $row .= Form::strText("race", 25,
+  $row = Form::label("race", _("Race") . ":");
+  $row .= Form::text("race",
     isset($formVar["race"]) ? $formVar["race"] : null,
-    isset($formError["race"]) ? array('error' => $formError["race"]) : null
+    array(
+      'size' => 25,
+      'error' => isset($formError["race"]) ? $formError["race"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("year", _("Birth Date") . ":");
+  // @todo hacer un helper para esta estructura
+  $row = Form::label("year", _("Birth Date") . ":");
   $aux = explode("-", ( !empty($formVar["birth_date"]) ) ? $formVar["birth_date"] : '0000-00-00');
-  $row .= Form::strText("year", 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
+  $row .= Form::text("year",
+    (intval($aux[0]) != 0) ? intval($aux[0]) : null,
+    array('size' => 4)
+  );
   $row .= " - ";
-  $row .= Form::strText("month", 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
+  $row .= Form::text("month",
+    (intval($aux[1]) != 0) ? intval($aux[1]) : null,
+    array('size' => 2)
+  );
   $row .= " - ";
-  $row .= Form::strText("day", 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
+  $row .= Form::text("day",
+    (intval($aux[2]) != 0) ? intval($aux[2]) : null,
+    array('size' => 2)
+  );
   $row .= " " . _("(yyyy-mm-dd)");
   unset($aux);
-
   if ($formError["birth_date"] != "")
   {
-    $row .= Msg::strError($formError["birth_date"]);
+    $row .= Msg::error($formError["birth_date"]);
   }
   $tbody[] = $row;
 
-  $row = Form::strLabel("birth_place", _("Birth Place") . ":");
-  $row .= Form::strText("birth_place", 40,
+  $row = Form::label("birth_place", _("Birth Place") . ":");
+  $row .= Form::text("birth_place",
     isset($formVar["birth_place"]) ? $formVar["birth_place"] : null,
-    isset($formError["birth_place"]) ? array('error' => $formError["birth_place"]) : null
+    array(
+      'size' => 40,
+      'error' => isset($formError["birth_place"]) ? $formError["birth_place"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("dyear", _("Decease Date") . ":");
+  $row = Form::label("dyear", _("Decease Date") . ":");
   $aux = explode("-", ( !empty($formVar["decease_date"]) ) ? $formVar["decease_date"] : '0000-00-00');
-  $row .= Form::strText("dyear", 4, ((intval($aux[0]) != 0) ? intval($aux[0]) : ''));
+  $row .= Form::text("dyear",
+    (intval($aux[0]) != 0) ? intval($aux[0]) : null,
+    array('size' => 4)
+  );
   $row .= " - ";
-  $row .= Form::strText("dmonth", 2, ((intval($aux[1]) != 0) ? intval($aux[1]) : ''));
+  $row .= Form::text("dmonth",
+    (intval($aux[1]) != 0) ? intval($aux[1]) : null,
+    array('size' => 2)
+  );
   $row .= " - ";
-  $row .= Form::strText("dday", 2, ((intval($aux[2]) != 0) ? intval($aux[2]) : ''));
+  $row .= Form::text("dday",
+    (intval($aux[2]) != 0) ? intval($aux[2]) : null,
+    array('size' => 2)
+  );
   $row .= " " . _("(yyyy-mm-dd)");
   unset($aux);
-
   if ($formError["decease_date"] != "")
   {
-    $row .= Msg::strError($formError["decease_date"]);
+    $row .= Msg::error($formError["decease_date"]);
   }
   $tbody[] = $row;
 
-  $row = Form::strLabel("nts", _("Sanitary Card Number (SCN)") . ":");
-  $row .= Form::strText("nts", 30,
+  $row = Form::label("nts", _("Sanitary Card Number (SCN)") . ":");
+  $row .= Form::text("nts",
     isset($formVar["nts"]) ? $formVar["nts"] : null,
-    isset($formError["nts"]) ? array('error' => $formError["nts"]) : null
+    array(
+      'size' => 30,
+      'error' => isset($formError["nts"]) ? $formError["nts"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("nss", _("National Health Service Number (NHSN)") . ":");
-  $row .= Form::strText("nss", 30,
+  $row = Form::label("nss", _("National Health Service Number (NHSN)") . ":");
+  $row .= Form::text("nss",
     isset($formVar["nss"]) ? $formVar["nss"] : null,
-    isset($formError["nss"]) ? array('error' => $formError["nss"]) : null
+    array(
+      'size' => 30,
+      'error' => isset($formError["nss"]) ? $formError["nss"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("family_situation", _("Family Situation") . ":");
-  $row .= Form::strTextArea("family_situation", 3, 30, $formVar["family_situation"]);
+  $row = Form::label("family_situation", _("Family Situation") . ":");
+  $row .= Form::textArea("family_situation",
+    $formVar["family_situation"],
+    array(
+      'rows' => 3,
+      'cols' => 30
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("labour_situation", _("Labour Situation") . ":");
-  $row .= Form::strTextArea("labour_situation", 3, 30, $formVar["labour_situation"]);
+  $row = Form::label("labour_situation", _("Labour Situation") . ":");
+  $row .= Form::textArea("labour_situation",
+    $formVar["labour_situation"],
+    array(
+      'rows' => 3,
+      'cols' => 30
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("education", _("Education") . ":");
-  $row .= Form::strTextArea("education", 3, 30, $formVar["education"]);
+  $row = Form::label("education", _("Education") . ":");
+  $row .= Form::textArea("education",
+    $formVar["education"],
+    array(
+      'rows' => 3,
+      'cols' => 30
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("insurance_company", _("Insurance Company") . ":");
-  $row .= Form::strText("insurance_company", 30,
+  $row = Form::label("insurance_company", _("Insurance Company") . ":");
+  $row .= Form::text("insurance_company",
     isset($formVar["insurance_company"]) ? $formVar["insurance_company"] : null,
-    isset($formError["insurance_company"]) ? array('error' => $formError["insurance_company"]) : null
+    array(
+      'size' => 30,
+      'error' => isset($formError["insurance_company"]) ? $formError["insurance_company"] : null
+    )
   );
   $tbody[] = $row;
-
-  $row = Form::strLabel("id_member", _("Doctor you are assigned to") . ":");
 
   $staffQ = new Query_Staff();
 
@@ -162,14 +237,15 @@
   $staffQ->close();
   unset($staffQ);
 
-  $row .= Form::strSelect("id_member", $array, $formVar["id_member"]);
+  $row = Form::label("id_member", _("Doctor you are assigned to") . ":");
+  $row .= Form::select("id_member", $array, $formVar["id_member"]);
   unset($array);
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("save", _("Submit"))
+    Form::button("save", _("Submit"))
     . Form::generateToken()
   );
 
-  Form::fieldset($title, $tbody, $tfoot);
+  echo Form::fieldset($title, $tbody, $tfoot);
 ?>

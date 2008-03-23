@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.44 2007/12/15 15:05:02 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.45 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -86,7 +86,7 @@
   $returnLocation = "../medical/relative_list.php";
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -94,7 +94,7 @@
     _("View Relatives") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -102,10 +102,10 @@
   /**
    * Printing result stats and page nav
    */
-  HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
+  HTML::para(HTML::tag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
 
   $pageCount = $patQ->getPageCount();
-  $pageLinks = Search::strPageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  $pageLinks = Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
   echo $pageLinks;
 
   $val = "";
@@ -185,9 +185,9 @@
 
   echo HTML::insertScript('checkboxes.js');
 
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_new.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/relative_new.php'));
 
-  Form::hidden("id_patient", $idPatient, array('id' => 'r_id_patient'));
+  echo Form::hidden("id_patient", $idPatient, array('id' => 'r_id_patient'));
 
   $thead = array(
     sprintf(_("Search Results From Query: %s"), $query) => array('colspan' => 2)
@@ -201,7 +201,7 @@
   while ($pat = $patQ->fetch())
   {
     $row = $patQ->getCurrentRow() . '.';
-    $row .= Form::strCheckBox("check[]", $pat->getIdPatient(), false,
+    $row .= Form::checkBox("check[]", $pat->getIdPatient(),
       array('id' => String::numberToAlphabet($patQ->getCurrentRow()))
     );
     $row .= OPEN_SEPARATOR;
@@ -221,15 +221,15 @@
   unset($patQ);
 
   $tfoot = array(
-    0 => HTML::strLink(_("Select all"), '#', null, array('id' => 'select_all_checks')) // @todo created by JS
+    0 => HTML::link(_("Select all"), '#', null, array('id' => 'select_all_checks')) // @todo created by JS
       . ' / '
-      . HTML::strLink(_("Unselect all"), '#', null, array('id' => 'unselect_all_checks')), // @todo created by JS
-    1 => Form::strButton("add", _("Add selected to Relatives List")) . Form::generateToken(),
+      . HTML::link(_("Unselect all"), '#', null, array('id' => 'unselect_all_checks')), // @todo created by JS
+    1 => Form::button("add", _("Add selected to Relatives List")) . Form::generateToken(),
   );
 
-  HTML::table($thead, $tbody, $tfoot, $options);
+  echo HTML::table($thead, $tbody, $tfoot, $options);
 
-  HTML::end('form');
+  echo HTML::end('form');
 
   echo $pageLinks;
 

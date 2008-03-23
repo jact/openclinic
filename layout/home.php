@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: home.php,v 1.19 2007/12/01 12:55:14 jact Exp $
+ * @version   CVS: $Id: home.php,v 1.20 2008/03/23 11:59:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,11 +19,11 @@
   require_once("../layout/component.php");
 
   $array = null;
-  $array[] = HTML::strLink(_("Summary"), '../home/index.php', null,
+  $array[] = HTML::link(_("Summary"), '../home/index.php', null,
     $nav == 'summary' ? array('class' => 'selected') : null
   );
 
-  $array[] = HTML::strLink(_("License"), '../home/license.php', null,
+  $array[] = HTML::link(_("License"), '../home/license.php', null,
     $nav == 'license' ? array('class' => 'selected') : null
   );
 
@@ -32,17 +32,17 @@
     $sessLogin = isset($_SESSION['auth']['login_session']) ? $_SESSION['auth']['login_session'] : '';
     if ( !empty($sessLogin) && !isset($_SESSION['auth']['invalid_token']) )
     {
-      $array[] = HTML::strLink(_("Logout"), '../auth/logout.php');
+      $array[] = HTML::link(_("Logout"), '../auth/logout.php');
     }
     else
     {
-      $array[] = HTML::strLink(_("Log in"), '../auth/login_form.php', null,
+      $array[] = HTML::link(_("Log in"), '../auth/login_form.php', null,
         $nav == 'login' ? array('class' => 'selected') : null
       ); // @fixme login
     }
   }
 
-  $array[] = HTML::strLink(_("Help"), '../doc/index.php',
+  $array[] = HTML::link(_("Help"), '../doc/index.php',
     array(
       'tab' => $tab,
       'nav' => $nav

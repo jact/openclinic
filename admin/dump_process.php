@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_process.php,v 1.20 2007/12/07 16:50:49 jact Exp $
+ * @version   CVS: $Id: dump_process.php,v 1.21 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -52,17 +52,17 @@
     include_once("../layout/header.php");
 
     /**
-     * Bread crumb
+     * Breadcrumb
      */
     $links = array(
       _("Admin") => "../admin/index.php",
       _("Dumps") => "../admin/dump_view_form.php",
       $title => ""
     );
-    HTML::breadCrumb($links, "icon icon_dump");
+    echo HTML::breadcrumb($links, "icon icon_dump");
     unset($links);
 
-    HTML::start('pre', array('width' => 80, 'class' => 'sqlcode'));
+    echo HTML::start('pre', array('width' => 80, 'class' => 'sqlcode'));
   }
   else // Download
   {
@@ -367,8 +367,8 @@
    */
   if (empty($_POST['as_file']))
   {
-    HTML::end('pre');
-    HTML::para(HTML::strLink(_("Back return"), "../admin/dump_view_form.php"));
+    echo HTML::end('pre');
+    echo HTML::para(HTML::link(_("Back return"), "../admin/dump_view_form.php"));
 
     include_once('../layout/footer.php');
   } // end if

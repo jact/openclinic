@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_fields.php,v 1.30 2007/12/01 12:16:33 jact Exp $
+ * @version   CVS: $Id: problem_fields.php,v 1.31 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -32,7 +32,7 @@
   $row .= I18n::localDate($formVar["last_update_date"]);
   $tbody[] = $row;
 
-  $row = Form::strLabel("id_member", _("Attending Physician") . ":");
+  $row = Form::label("id_member", _("Attending Physician") . ":");
 
   $staffQ = new Query_Staff();
 
@@ -49,50 +49,89 @@
   $staffQ->close();
   unset($staffQ);
 
-  $row .= Form::strSelect("id_member", $array, isset($formVar["id_member"]) ? $formVar["id_member"] : null);
+  $row .= Form::select("id_member", $array, isset($formVar["id_member"]) ? $formVar["id_member"] : null);
   unset($array);
   $tbody[] = $row;
 
-  $row = Form::strLabel("meeting_place", _("Meeting Place") . ":");
-  $row .= Form::strText("meeting_place", 40,
+  $row = Form::label("meeting_place", _("Meeting Place") . ":");
+  $row .= Form::text("meeting_place",
     isset($formVar["meeting_place"]) ? $formVar["meeting_place"] : null,
-    isset($formError["meeting_place"]) ? array('error' => $formError["meeting_place"]) : null
+    array(
+      'size' => 40,
+      'error' => isset($formError["meeting_place"]) ? $formError["meeting_place"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("wording", _("Wording") . ":", true);
-  $row .= Form::strTextArea("wording", 4, 90,
+  $row = Form::label("wording", _("Wording") . ":", array('class' => 'required'));
+  $row .= Form::textArea("wording",
     isset($formVar["wording"]) ? $formVar["wording"] : null,
-    isset($formError["wording"]) ? array('error' => $formError["wording"]) : null
+    array(
+      'rows' => 4,
+      'cols' => 90,
+      'error' => isset($formError["wording"]) ? $formError["wording"] : null
+    )
   );
   $tbody[] = $row;
 
-  $row = Form::strLabel("subjective", _("Subjective") . ":");
-  $row .= Form::strTextArea("subjective", 4, 90, isset($formVar["subjective"]) ? $formVar["subjective"] : null);
+  $row = Form::label("subjective", _("Subjective") . ":");
+  $row .= Form::textArea("subjective",
+    isset($formVar["subjective"]) ? $formVar["subjective"] : null,
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("objective", _("Objective") . ":");
-  $row .= Form::strTextArea("objective", 4, 90, isset($formVar["objective"]) ? $formVar["objective"] : null);
+  $row = Form::label("objective", _("Objective") . ":");
+  $row .= Form::textArea("objective",
+    isset($formVar["objective"]) ? $formVar["objective"] : null,
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("appreciation", _("Appreciation") . ":");
-  $row .= Form::strTextArea("appreciation", 4, 90, isset($formVar["appreciation"]) ? $formVar["appreciation"] : null);
+  $row = Form::label("appreciation", _("Appreciation") . ":");
+  $row .= Form::textArea("appreciation",
+    isset($formVar["appreciation"]) ? $formVar["appreciation"] : null,
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("action_plan", _("Action Plan") . ":");
-  $row .= Form::strTextArea("action_plan", 4, 90, isset($formVar["action_plan"]) ? $formVar["action_plan"] : null);
+  $row = Form::label("action_plan", _("Action Plan") . ":");
+  $row .= Form::textArea("action_plan",
+    isset($formVar["action_plan"]) ? $formVar["action_plan"] : null,
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("prescription", _("Prescription") . ":");
-  $row .= Form::strTextArea("prescription", 4, 90, isset($formVar["prescription"]) ? $formVar["prescription"] : null);
+  $row = Form::label("prescription", _("Prescription") . ":");
+  $row .= Form::textArea("prescription",
+    isset($formVar["prescription"]) ? $formVar["prescription"] : null,
+    array(
+      'rows' => 4,
+      'cols' => 90
+    )
+  );
   $tbody[] = $row;
 
-  $row = Form::strLabel("closed_problem", _("Closed Problem") . ":");
-  $row .= Form::strCheckBox("closed_problem", "closed", isset($formVar["closed_problem"]) ? $formVar["closed_problem"] != "" : false);
+  $row = Form::label("closed_problem", _("Closed Problem") . ":");
+  $row .= Form::checkBox("closed_problem", "closed",
+    array('checked' => isset($formVar["closed_problem"]) ? $formVar["closed_problem"] != "" : false)
+  );
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("save", _("Submit"))
+    Form::button("save", _("Submit"))
     . Form::generateToken()
   );
 
@@ -100,5 +139,5 @@
     'class' => 'large_area'
   );
 
-  Form::fieldset($title, $tbody, $tfoot, $options);
+  echo Form::fieldset($title, $tbody, $tfoot, $options);
 ?>

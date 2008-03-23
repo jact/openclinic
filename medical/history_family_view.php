@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_view.php,v 1.25 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: history_family_view.php,v 1.26 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -73,7 +73,7 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -81,15 +81,15 @@
     _("Clinic History") => "../medical/history_list.php", //"?id_patient=" . $idPatient,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
 
   if ($_SESSION['auth']['is_administrative'])
   {
-    HTML::para(
-      HTML::strLink(_("Edit Family Antecedents"), '../medical/history_family_edit_form.php',
+    echo HTML::para(
+      HTML::link(_("Edit Family Antecedents"), '../medical/history_family_edit_form.php',
         array('id_patient' => $idPatient)
       )
     );
@@ -98,30 +98,30 @@
   /**
    * Show family antecedents
    */
-  HTML::section(2, _("Family Antecedents"));
+  echo HTML::section(2, _("Family Antecedents"));
 
   if ($history->getParentsStatusHealth())
   {
-    HTML::section(3, _("Parents Status Health"));
-    HTML::para(nl2br($history->getParentsStatusHealth()));
+    echo HTML::section(3, _("Parents Status Health"));
+    echo HTML::para(nl2br($history->getParentsStatusHealth()));
   }
 
   if ($history->getBrothersStatusHealth())
   {
-    HTML::section(3, _("Brothers and Sisters Status Health"));
-    HTML::para(nl2br($history->getBrothersStatusHealth()));
+    echo HTML::section(3, _("Brothers and Sisters Status Health"));
+    echo HTML::para(nl2br($history->getBrothersStatusHealth()));
   }
 
   if ($history->getSpouseChildsStatusHealth())
   {
-    HTML::section(3, _("Spouse and Childs Status Health"));
-    HTML::para(nl2br($history->getSpouseChildsStatusHealth()));
+    echo HTML::section(3, _("Spouse and Childs Status Health"));
+    echo HTML::para(nl2br($history->getSpouseChildsStatusHealth()));
   }
 
   if ($history->getFamilyIllness())
   {
-    HTML::section(3, _("Family Illness"));
-    HTML::para(nl2br($history->getFamilyIllness()));
+    echo HTML::section(3, _("Family Illness"));
+    echo HTML::para(nl2br($history->getFamilyIllness()));
   }
 
   require_once("../layout/footer.php");

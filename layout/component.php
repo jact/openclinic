@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.9 2007/12/15 13:04:49 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.10 2008/03/23 11:59:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -44,10 +44,10 @@
   {
     $logo = '../img/' . 'openclinic-1.png'; // @fixme OPEN_APP_LOGO
     list($width, $height, $type, $attr) = getimagesize($logo);
-    $logo = HTML::strImage($logo, 'OpenClinic' /* @fixme OPEN_APP_NAME */, array('width' => $width, 'height' => $height));
-    $logo = HTML::strLink($logo, '../index.php', null, array('accesskey' => 1));
+    $logo = HTML::image($logo, 'OpenClinic' /* @fixme OPEN_APP_NAME */, array('width' => $width, 'height' => $height));
+    $logo = HTML::link($logo, '../index.php', null, array('accesskey' => 1));
 
-    $html = HTML::strPara($logo, array('id' => 'logo'));
+    $html = HTML::para($logo, array('id' => 'logo'));
 
     return $html;
   }
@@ -76,7 +76,7 @@
       $_links["admin"] = array(_("Admin"), "../admin/index.php");
     }*/
 
-    $_html = HTML::strStart('div', array('id' => 'tabs'));
+    $_html = HTML::start('div', array('id' => 'tabs'));
 
     $_array = null;
     $_sentinel = true;
@@ -93,10 +93,10 @@
         $_options['class'] = (isset($_options['class'])) ? $_options['class'] . ' selected' : 'selected';
       }
 
-      $_array[] = HTML::strLink($_value[0], $_value[1], null, $_options);
+      $_array[] = HTML::link($_value[0], $_value[1], null, $_options);
     }
-    $_html .= HTML::strItemList($_array);
-    $_html .= HTML::strEnd('div'); // #tabs
+    $_html .= HTML::itemList($_array);
+    $_html .= HTML::end('div'); // #tabs
 
     return $_html;
   }
@@ -113,8 +113,8 @@
   {
     $_links = null;
 
-    $_links[] = HTML::strLink(
-      HTML::strImage(
+    $_links[] = HTML::link(
+      HTML::image(
         '../img/openclinic-2.png',
         _("Powered by OpenClinic"),
         array('width' => 130, 'height' => 29)
@@ -122,18 +122,18 @@
       'http://openclinic.sourceforge.net'
     );
 
-    $thankCoresis = HTML::strImage('../img/thank.png', 'OpenClinic Logo thanks to Coresis',
+    $thankCoresis = HTML::image('../img/thank.png', 'OpenClinic Logo thanks to Coresis',
       array('width' => 65, 'height' => 30)
     );
-    $thankCoresis .= HTML::strImage('../img/coresis.png', 'OpenClinic Logo thanks to Coresis',
+    $thankCoresis .= HTML::image('../img/coresis.png', 'OpenClinic Logo thanks to Coresis',
       array('width' => 65, 'height' => 30)
     );
     $thankCoresis = str_replace(PHP_EOL, '', $thankCoresis);
-    $_links[] = HTML::strLink($thankCoresis, 'http://www.coresis.com');
+    $_links[] = HTML::link($thankCoresis, 'http://www.coresis.com');
     unset($thankCoresis);
 
-    $_links[] = HTML::strLink(
-      HTML::strImage(
+    $_links[] = HTML::link(
+      HTML::image(
         '../img/sf-logo.png',
         'Project hosted in SourceForge.net',
         array('width' => 130, 'height' => 37)
@@ -141,7 +141,7 @@
       'http://sourceforge.net'
     );
 
-    return HTML::strItemList($_links, array('id' => 'logos'));
+    return HTML::itemList($_links, array('id' => 'logos'));
   }
 
   /**
@@ -154,8 +154,8 @@
   {
     $_links = null;
 
-    $_links[] = HTML::strLink(
-      HTML::strImage(
+    $_links[] = HTML::link(
+      HTML::image(
         '../img/php-logo.gif',
         'Powered by PHP',
         array('width' => 80, 'height' => 15)
@@ -163,8 +163,8 @@
       'http://www.php.net'
     );
 
-    $_links[] = HTML::strLink(
-      HTML::strImage(
+    $_links[] = HTML::link(
+      HTML::image(
         '../img/mysql-logo.png',
         'Works with MySQL',
         array('width' => 80, 'height' => 15)
@@ -172,8 +172,8 @@
       'http://www.mysql.com'
     );
 
-    $_links[] = HTML::strLink(
-      HTML::strImage(
+    $_links[] = HTML::link(
+      HTML::image(
         '../img/valid-xhtml11.png',
         'Valid XHTML 1.1',
         array('width' => 80, 'height' => 15)
@@ -181,8 +181,8 @@
       'http://validator.w3.org/check/referer'
     );
 
-    $_links[] = HTML::strLink(
-      HTML::strImage(
+    $_links[] = HTML::link(
+      HTML::image(
         '../img/valid-css.png',
         'Valid CSS',
         array('width' => 80, 'height' => 15)
@@ -191,7 +191,7 @@
       array('uri' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'])
     );
 
-    return HTML::strItemList($_links, array('id' => 'mini_logos'));
+    return HTML::itemList($_links, array('id' => 'mini_logos'));
   }
 
   /**
@@ -217,7 +217,7 @@
     $array = null;
     foreach ($linkList as $key => $value)
     {
-      $array[] = HTML::strLink($value[0], $value[1], array('id_patient' => $idPatient),
+      $array[] = HTML::link($value[0], $value[1], array('id_patient' => $idPatient),
         $nav == $key ? array('class' => 'selected') : null
       );
     }
@@ -225,7 +225,7 @@
 
     $array[] = ($nav == "print")
       ? array(_("Print Medical Record"), array('class' => 'selected'))
-      : HTML::strLink(_("Print Medical Record"), '../medical/print_medical_record.php',
+      : HTML::link(_("Print Medical Record"), '../medical/print_medical_record.php',
           array('id_patient' => $idPatient),
           array('class' => 'popup')
         );
@@ -256,9 +256,9 @@
     $_array = null;
     foreach ($_sfLinks as $_key => $_value)
     {
-      $_array[] = HTML::strLink($_key, $_value);
+      $_array[] = HTML::link($_key, $_value);
     }
-    $_html = HTML::strItemList($_array, array('id' => 'sf_links'));
+    $_html = HTML::itemList($_array, array('id' => 'sf_links'));
 
     return $_html;
   }
@@ -283,9 +283,9 @@
       $sessLogin = isset($_SESSION['auth']['login_session']) ? $_SESSION['auth']['login_session'] : '';
       if ( !empty($sessLogin) && !isset($_SESSION['auth']['invalid_token']) )
       {
-        $_links[] = HTML::strLink(_("Logout"), '../auth/logout.php')
+        $_links[] = HTML::link(_("Logout"), '../auth/logout.php')
           . ' ['
-          . HTML::strLink($sessLogin, '../admin/user_edit_form.php',
+          . HTML::link($sessLogin, '../admin/user_edit_form.php',
             array(
               'id_user' => $_SESSION['auth']['user_id'],
               'all' => 'Y'
@@ -296,15 +296,15 @@
       }
       else
       {
-        $_links[] = HTML::strLink(_("Log in"), '../auth/login_form.php'); // @fixme login
+        $_links[] = HTML::link(_("Log in"), '../auth/login_form.php'); // @fixme login
       }
     }
 
-    $_links[] = HTML::strLink(_("OpenClinic Readme"), '../index.html');
+    $_links[] = HTML::link(_("OpenClinic Readme"), '../index.html');
 
     if (isset($tab) && isset($nav))
     {
-      $_links[] = HTML::strLink(_("Help"), '../doc/index.php',
+      $_links[] = HTML::link(_("Help"), '../doc/index.php',
         array(
           'tab' => $tab,
           'nav' => $nav
@@ -322,7 +322,7 @@
       $_serverVar = (strpos(PHP_SAPI, 'cgi') !== false)
         ? $_SERVER['PATH_TRANSLATED']
         : $_SERVER['SCRIPT_FILENAME'];
-      $_links[] = HTML::strLink(_("View source code"), '../shared/view_source.php',
+      $_links[] = HTML::link(_("View source code"), '../shared/view_source.php',
         array(
           'file' => $_serverVar
         ),
@@ -335,10 +335,10 @@
 
     if (defined("OPEN_DEMO") && OPEN_DEMO)
     {
-      $_links[] = HTML::strLink(_("Demo version features"), '../demo_version.html');
+      $_links[] = HTML::link(_("Demo version features"), '../demo_version.html');
     }
 
-    $_html = HTML::strItemList($_links, array('id' => 'shortcuts'));
+    $_html = HTML::itemList($_links, array('id' => 'shortcuts'));
 
     return $_html;
   }
@@ -360,7 +360,7 @@
    */
   function navigation($links)
   {
-    $_html = HTML::strStart('ul');
+    $_html = HTML::start('ul');
     foreach ($links as $value)
     {
       if (is_array($value))
@@ -369,14 +369,14 @@
       }
       else
       {
-        $_html .= HTML::strStart('li') . $value;
+        $_html .= HTML::start('li') . $value;
       }
       if ( !is_array(next($links)) )
       {
-        $_html .= HTML::strEnd('li');
+        $_html .= HTML::end('li');
       }
     }
-    $_html .= HTML::strEnd('ul');
+    $_html .= HTML::end('ul');
 
     return $_html;
   }
@@ -399,44 +399,44 @@
       return;
     }
 
-    $_html = HTML::strStart('div', array('id' => 'clinic_info', 'class' => 'vcard contact'));
+    $_html = HTML::start('div', array('id' => 'clinic_info', 'class' => 'vcard contact'));
 
     $_name = OPEN_CLINIC_NAME;
     if (defined("OPEN_CLINIC_URL") && OPEN_CLINIC_URL)
     {
-      $_name = HTML::strLink($_name, OPEN_CLINIC_URL, null, array('class' => 'url'));
+      $_name = HTML::link($_name, OPEN_CLINIC_URL, null, array('class' => 'url'));
     }
 
-    $_html .= HTML::strPara($_name, array('class' => 'fn org'));
+    $_html .= HTML::para($_name, array('class' => 'fn org'));
 
     if (defined("OPEN_CLINIC_HOURS") && OPEN_CLINIC_HOURS)
     {
-      $_html .= HTML::strPara(sprintf(_("Clinic hours: %s"), OPEN_CLINIC_HOURS));
+      $_html .= HTML::para(sprintf(_("Clinic hours: %s"), OPEN_CLINIC_HOURS));
     }
 
     if ((defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
       || (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE))
     {
-      $_html .= HTML::strStart('address', array('class' => 'adr'));
+      $_html .= HTML::start('address', array('class' => 'adr'));
 
       if (defined("OPEN_CLINIC_ADDRESS") && OPEN_CLINIC_ADDRESS)
       {
-        $_html .= HTML::strPara(sprintf(_("Clinic address: %s"), HTML::strTag('span', OPEN_CLINIC_ADDRESS,
+        $_html .= HTML::para(sprintf(_("Clinic address: %s"), HTML::tag('span', OPEN_CLINIC_ADDRESS,
           array('class' => 'street-address')))
         );
       }
 
       if (defined("OPEN_CLINIC_PHONE") && OPEN_CLINIC_PHONE)
       {
-        $_html .= HTML::strPara(sprintf(_("Clinic phone: %s"),
-          HTML::strTag('span', OPEN_CLINIC_PHONE, array('class' => 'tel value')))
+        $_html .= HTML::para(sprintf(_("Clinic phone: %s"),
+          HTML::tag('span', OPEN_CLINIC_PHONE, array('class' => 'tel value')))
         );
       }
 
-      $_html .= HTML::strEnd('address');
+      $_html .= HTML::end('address');
     }
 
-    $_html .= HTML::strEnd('div');
+    $_html .= HTML::end('div');
 
     return $_html;
   }

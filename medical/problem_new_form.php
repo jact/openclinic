@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new_form.php,v 1.31 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: problem_new_form.php,v 1.32 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -61,7 +61,7 @@
   $returnLocation = "../medical/problem_list.php";
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -69,32 +69,32 @@
     _("Medical Problems Report") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
 
   //Error::debug($formVar);
 
-  Form::errorMsg();
+  echo Form::errorMsg();
 
   /**
    * New form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_new.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/problem_new.php'));
 
-  Form::hidden("last_update_date", $formVar['last_update_date']);
-  Form::hidden("id_patient", $idPatient);
-  Form::hidden("opening_date", $formVar['opening_date']);
-  Form::hidden("order_number", $formVar['order_number']);
+  echo Form::hidden("last_update_date", $formVar['last_update_date']);
+  echo Form::hidden("id_patient", $idPatient);
+  echo Form::hidden("opening_date", $formVar['opening_date']);
+  echo Form::hidden("order_number", $formVar['order_number']);
 
   require_once("../medical/problem_fields.php");
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  Msg::hint('* ' . _("Note: The fields with * are required."));
+  echo Msg::hint('* ' . _("Note: The fields with * are required."));
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   /**
    * Destroy form values and errors

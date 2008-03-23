@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: header.php,v 1.11 2007/12/15 13:04:28 jact Exp $
+ * @version   CVS: $Id: header.php,v 1.12 2008/03/23 11:59:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,15 +23,15 @@
    */
   require_once("../layout/xhtml_start.php");
 
-  HTML::start('link', array('rel' => 'home', 'title' => _("Clinic Home"), 'href' => '../home/index.php'), true);
+  echo HTML::start('link', array('rel' => 'home', 'title' => _("Clinic Home"), 'href' => '../home/index.php'), true);
 
-  HTML::start('link', array('rel' => 'icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
-  HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
-  HTML::start('link', array('rel' => 'bookmark icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
+  echo HTML::start('link', array('rel' => 'icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
+  echo HTML::start('link', array('rel' => 'shortcut icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
+  echo HTML::start('link', array('rel' => 'bookmark icon', 'type' => 'image/png', 'href' => '../img/miniopc.png'), true);
 
   if ( !(isset($_GET['css']) && ($_GET['css'] == 'off' || $_GET['css'] == 'print')) )
   {
-    HTML::start('link',
+    echo HTML::start('link',
       array(
         'rel' => 'stylesheet',
         'type' => 'text/css',
@@ -43,7 +43,7 @@
     );
 
     echo '<!--[if lt IE 7]>';
-    HTML::start('link',
+    echo HTML::start('link',
       array(
         'rel' => 'stylesheet',
         'type' => 'text/css',
@@ -54,7 +54,7 @@
     );
     echo '<![endif]-->';
   }
-  HTML::start('link',
+  echo HTML::start('link',
     array(
       'rel' => 'stylesheet',
       'type' => 'text/css',
@@ -75,21 +75,21 @@
 
   if (isset($focusFormField) && !empty($focusFormField))
   {
-    HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
-    HTML::end('script');
+    echo HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
+    echo HTML::end('script');
   }
 
-  HTML::end('head');
-  HTML::start('body');
+  echo HTML::end('head');
+  echo HTML::start('body');
 
   require_once("../layout/component.php");
 
-  HTML::start('div', array('id' => 'wrap'));
-  HTML::start('div', array('id' => 'header'));
+  echo HTML::start('div', array('id' => 'wrap'));
+  echo HTML::start('div', array('id' => 'header'));
 
   echo appLogo();
 
-  HTML::para(HTML::strLink(_("Skip over navigation"), '#main', null, array('accesskey' => 2)),
+  echo HTML::para(HTML::link(_("Skip over navigation"), '#main', null, array('accesskey' => 2)),
     array('id' => 'skip_navigation')
   );
 
@@ -100,16 +100,16 @@
     echo menuBar($tab);
   }
 
-  HTML::end('div'); // #header
+  echo HTML::end('div'); // #header
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::start('div', array('id' => 'main'));
-  HTML::start('div', array('id' => 'content'));
+  echo HTML::start('div', array('id' => 'main'));
+  echo HTML::start('div', array('id' => 'content'));
 
   if (defined("OPEN_DEMO") && OPEN_DEMO)
   {
-    Msg::info(_("This is a demo version"));
+    echo Msg::info(_("This is a demo version"));
   }
 
   /**

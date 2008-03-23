@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.36 2007/12/15 15:05:02 jact Exp $
+ * @version   CVS: $Id: test_list.php,v 1.37 2008/03/23 12:00:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -59,7 +59,7 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -68,7 +68,7 @@
     $problem->getWordingPreview() => "../medical/problem_view.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -76,15 +76,15 @@
 
   if ($_SESSION['auth']['is_administrative'])
   {
-    HTML::para(
-      HTML::strLink(_("Add New Medical Test"), '../medical/test_new_form.php',
+    echo HTML::para(
+      HTML::link(_("Add New Medical Test"), '../medical/test_new_form.php',
         array(
           'id_problem' => $idProblem,
           'id_patient' => $idPatient
         )
       )
     );
-    HTML::rule();
+    echo HTML::rule();
   }
 
   $testQ = new Query_Test();
@@ -92,12 +92,12 @@
   {
     $testQ->close();
 
-    Msg::info(_("No medical tests defined for this medical problem."));
+    echo Msg::info(_("No medical tests defined for this medical problem."));
     include_once("../layout/footer.php");
     exit();
   }
 
-  HTML::section(2, _("Medical Tests List:"));
+  echo HTML::section(2, _("Medical Tests List:"));
 
   $thead = array(
     _("Function") => array('colspan' => ($_SESSION['auth']['is_administrative'] ? 3 : 1)),
@@ -112,8 +112,8 @@
     $temp = substr($temp, 0, strrpos($temp, "/")) . "/tests/"
       . String::translateBrowser($test->getPathFilename(false));
 
-    $row = HTML::strLink(
-      HTML::strImage('../img/action_view.png', _("view")),
+    $row = HTML::link(
+      HTML::image('../img/action_view.png', _("view")),
       $temp,
       null,
       array('class' => 'popup')
@@ -122,8 +122,8 @@
 
     if ($_SESSION['auth']['is_administrative'])
     {
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_edit.png', _("edit")),
+      $row .= HTML::link(
+        HTML::image('../img/action_edit.png', _("edit")),
         '../medical/test_edit_form.php',
         array(
           'id_problem' => $idProblem,
@@ -133,8 +133,8 @@
       );
       $row .= OPEN_SEPARATOR;
 
-      $row .= HTML::strLink(
-        HTML::strImage('../img/action_delete.png', _("delete")),
+      $row .= HTML::link(
+        HTML::image('../img/action_delete.png', _("delete")),
         '../medical/test_del_confirm.php',
         array(
           'id_problem' => $idProblem,
@@ -157,7 +157,7 @@
   unset($testQ);
   unset($test);
 
-  HTML::table($thead, $tbody);
+  echo HTML::table($thead, $tbody);
 
   require_once("../layout/footer.php");
 ?>

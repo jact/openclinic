@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_search.php,v 1.35 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: patient_search.php,v 1.36 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -88,23 +88,23 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
     _("Search Patient") => "../medical/patient_search_form.php",
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_search");
+  echo HTML::breadcrumb($links, "icon icon_search");
   unset($links);
 
   /**
    * Printing result stats and page nav
    */
-  HTML::para(HTML::strTag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
+  echo HTML::para(HTML::tag('strong', sprintf(_("%d matches found."), $patQ->getRowCount())));
 
   $pageCount = $patQ->getPageCount();
-  $pageLinks = Search::strPageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
+  $pageLinks = Search::pageLinks($currentPage, $pageCount, $_SERVER['PHP_SELF']);
   echo $pageLinks;
 
   /**
@@ -206,7 +206,7 @@
   {
     $row = $patQ->getCurrentRow() . '.';
     $row .= OPEN_SEPARATOR;
-    $row .= HTML::strLink($pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName(),
+    $row .= HTML::link($pat->getSurname1() . " " . $pat->getSurname2() . ", " . $pat->getFirstName(),
       '../medical/patient_view.php', array('id_patient' => $pat->getIdPatient())
     );
 
@@ -222,7 +222,7 @@
   $patQ->close();
   unset($patQ);
 
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::table($thead, $tbody, null, $options);
 
   echo $pageLinks;
 

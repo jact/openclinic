@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.18 2007/12/07 16:51:15 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.19 2008/03/23 11:59:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,14 +36,14 @@
   $title = _("Welcome to OpenClinic");
   require_once("../layout/header.php");
 
-  HTML::section(1, $title);
+  echo HTML::section(1, $title);
 
-  HTML::para(_("OpenClinic is an easy to use, open source, medical records system."));
-  HTML::para(_("When you select any of the following tabs you will be prompted to login."));
+  echo HTML::para(_("OpenClinic is an easy to use, open source, medical records system."));
+  echo HTML::para(_("When you select any of the following tabs you will be prompted to login."));
 
-  HTML::section(2, HTML::strLink(_("Medical Records"), '../medical/index.php'), array('class' => 'icon icon_medical'));
-  HTML::para(_("Use this tab to manage your patient's medical records."));
-  HTML::para(_("Patient's Administration:"));
+  echo HTML::section(2, HTML::link(_("Medical Records"), '../medical/index.php'), array('class' => 'icon icon_medical'));
+  echo HTML::para(_("Use this tab to manage your patient's medical records."));
+  echo HTML::para(_("Patient's Administration:"));
 
   $array = array(
     _("Search, new, delete, edit"),
@@ -51,12 +51,12 @@
     _("Clinic History"),
     _("Problem Reports")
   );
-  HTML::itemList($array);
+  echo HTML::itemList($array);
 
-  HTML::rule();
+  echo HTML::rule();
 
-  HTML::section(2, HTML::strLink(_("Admin"), '../admin/index.php'), array('class' => 'icon icon_admin'));
-  HTML::para(_("Use this tab to manage administrative options."));
+  echo HTML::section(2, HTML::link(_("Admin"), '../admin/index.php'), array('class' => 'icon icon_admin'));
+  echo HTML::para(_("Use this tab to manage administrative options."));
 
   $array = array(
     _("Staff members"),
@@ -66,7 +66,7 @@
     _("Dumps"),
     _("Logs")
   );
-  HTML::itemList($array);
+  echo HTML::itemList($array);
 
   require_once("../layout/footer.php");
 ?>

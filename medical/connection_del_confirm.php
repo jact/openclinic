@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_del_confirm.php,v 1.28 2007/12/15 15:05:01 jact Exp $
+ * @version   CVS: $Id: connection_del_confirm.php,v 1.29 2008/03/23 12:00:16 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,7 +64,7 @@
   $returnLocation = "../medical/connection_list.php"; // controlling var
 
   /**
-   * Bread crumb
+   * Breadcrumb
    */
   $links = array(
     _("Medical Records") => "../medical/index.php",
@@ -74,7 +74,7 @@
     _("View Connection Problems") => $returnLocation,
     $title => ""
   );
-  HTML::breadCrumb($links, "icon icon_patient");
+  echo HTML::breadcrumb($links, "icon icon_patient");
   unset($links);
 
   echo $patient->getHeader();
@@ -83,32 +83,32 @@
   /**
    * Form
    */
-  HTML::start('form', array('method' => 'post', 'action' => '../medical/connection_del.php'));
+  echo HTML::start('form', array('method' => 'post', 'action' => '../medical/connection_del.php'));
 
   $tbody = array();
 
   $problem = new Problem($idConnection);
   $wording = $problem->getWordingPreview();
-  $tbody[] = Msg::strWarning(sprintf(_("Are you sure you want to delete connection, %s, from list?"), $wording));
+  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete connection, %s, from list?"), $wording));
 
-  $row = Form::strHidden("id_problem", $idProblem);
-  $row .= Form::strHidden("id_connection", $idConnection);
-  $row .= Form::strHidden("id_patient", $idPatient);
-  $row .= Form::strHidden("wording", $wording);
+  $row = Form::hidden("id_problem", $idProblem);
+  $row .= Form::hidden("id_connection", $idConnection);
+  $row .= Form::hidden("id_patient", $idPatient);
+  $row .= Form::hidden("wording", $wording);
   $tbody[] = $row;
 
   $tfoot = array(
-    Form::strButton("delete", _("Delete"))
+    Form::button("delete", _("Delete"))
     . Form::generateToken()
   );
 
   $options = array('class' => 'center');
 
-  Form::fieldset($title, $tbody, $tfoot, $options);
+  echo Form::fieldset($title, $tbody, $tfoot, $options);
 
-  HTML::end('form');
+  echo HTML::end('form');
 
-  HTML::para(HTML::strLink(_("Return"), $returnLocation));
+  echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
 ?>

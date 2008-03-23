@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.35 2008/01/07 14:28:13 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.36 2008/03/23 11:59:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -88,15 +88,15 @@
   $title = _("OpenClinic Install Wizard");
   require_once("../layout/xhtml_start.php");
 
-  HTML::start('link', array('rel' => 'stylesheet', 'href' => '../css/wizard.css', 'type' => 'text/css'), true);
+  echo HTML::start('link', array('rel' => 'stylesheet', 'href' => '../css/wizard.css', 'type' => 'text/css'), true);
 
   echo HTML::insertScript('wizard.js');
 
-  HTML::end('head');
-  HTML::start('body');
+  echo HTML::end('head');
+  echo HTML::start('body');
   //echo "<!-- Header -->\n";
 
-  HTML::start('form',
+  echo HTML::start('form',
     array(
       'method' => 'post',
       'action' => $_SERVER['PHP_SELF'],
@@ -106,34 +106,34 @@
   //Error::debug($_POST);
   $_POST = Check::safeArray($_POST);
 
-  Form::hidden("alreadyVisited", 1, array('id' => 'h_alreadyVisited'));
-  Form::hidden("buttonPressed", null, array('id' => 'h_buttonPressed'));
+  echo Form::hidden("alreadyVisited", 1, array('id' => 'h_alreadyVisited'));
+  echo Form::hidden("buttonPressed", null, array('id' => 'h_buttonPressed'));
 
-  Form::hidden("dbHost", ereg_replace(" ", "", $_POST['dbHost']), array('id' => 'h_dbHost'));
-  Form::hidden("dbUser", ereg_replace(" ", "", $_POST['dbUser']), array('id' => 'h_dbUser'));
-  Form::hidden("dbPasswd", $_POST['dbPasswd'], array('id' => 'h_dbPasswd'));
-  Form::hidden("dbName", ereg_replace(" ", "", $_POST['dbName']), array('id' => 'h_dbName'));
+  echo Form::hidden("dbHost", ereg_replace(" ", "", $_POST['dbHost']), array('id' => 'h_dbHost'));
+  echo Form::hidden("dbUser", ereg_replace(" ", "", $_POST['dbUser']), array('id' => 'h_dbUser'));
+  echo Form::hidden("dbPasswd", $_POST['dbPasswd'], array('id' => 'h_dbPasswd'));
+  echo Form::hidden("dbName", ereg_replace(" ", "", $_POST['dbName']), array('id' => 'h_dbName'));
 
-  Form::hidden("clinicLanguage", $_POST['clinicLanguage'], array('id' => 'h_clinicLanguage'));
-  Form::hidden("clinicName", $_POST['clinicName'], array('id' => 'h_clinicName'));
-  Form::hidden("clinicHours", $_POST['clinicHours'], array('id' => 'h_clinicHours'));
-  Form::hidden("clinicAddress", $_POST['clinicAddress'], array('id' => 'h_clinicAddress'));
-  Form::hidden("clinicPhone", $_POST['clinicPhone'], array('id' => 'h_clinicPhone'));
-  Form::hidden("timeout", intval($_POST['timeout']), array('id' => 'h_timeout'));
-  Form::hidden("itemsPage", intval($_POST['itemsPage']), array('id' => 'h_itemsPage'));
-  Form::hidden("clinicTheme", $_POST['clinicTheme'], array('id' => 'h_clinicTheme'));
+  echo Form::hidden("clinicLanguage", $_POST['clinicLanguage'], array('id' => 'h_clinicLanguage'));
+  echo Form::hidden("clinicName", $_POST['clinicName'], array('id' => 'h_clinicName'));
+  echo Form::hidden("clinicHours", $_POST['clinicHours'], array('id' => 'h_clinicHours'));
+  echo Form::hidden("clinicAddress", $_POST['clinicAddress'], array('id' => 'h_clinicAddress'));
+  echo Form::hidden("clinicPhone", $_POST['clinicPhone'], array('id' => 'h_clinicPhone'));
+  echo Form::hidden("timeout", intval($_POST['timeout']), array('id' => 'h_timeout'));
+  echo Form::hidden("itemsPage", intval($_POST['itemsPage']), array('id' => 'h_itemsPage'));
+  echo Form::hidden("clinicTheme", $_POST['clinicTheme'], array('id' => 'h_clinicTheme'));
 
-  Form::hidden("firstName", $_POST['firstName'], array('id' => 'h_firstName'));
-  Form::hidden("surname1", $_POST['surname1'], array('id' => 'h_surname1'));
-  Form::hidden("surname2", $_POST['surname2'], array('id' => 'h_surname2'));
-  Form::hidden("adminAddress", $_POST['adminAddress'], array('id' => 'h_adminAddress'));
-  Form::hidden("adminPhone", $_POST['adminPhone'], array('id' => 'h_adminPhone'));
-  Form::hidden("passwd", $_POST['passwd'], array('id' => 'h_passwd'));
-  Form::hidden("email", ereg_replace(" ", "", $_POST['email']), array('id' => 'h_email'));
-  Form::hidden("adminTheme", $_POST['adminTheme'], array('id' => 'h_adminTheme'));
+  echo Form::hidden("firstName", $_POST['firstName'], array('id' => 'h_firstName'));
+  echo Form::hidden("surname1", $_POST['surname1'], array('id' => 'h_surname1'));
+  echo Form::hidden("surname2", $_POST['surname2'], array('id' => 'h_surname2'));
+  echo Form::hidden("adminAddress", $_POST['adminAddress'], array('id' => 'h_adminAddress'));
+  echo Form::hidden("adminPhone", $_POST['adminPhone'], array('id' => 'h_adminPhone'));
+  echo Form::hidden("passwd", $_POST['passwd'], array('id' => 'h_passwd'));
+  echo Form::hidden("email", ereg_replace(" ", "", $_POST['email']), array('id' => 'h_email'));
+  echo Form::hidden("adminTheme", $_POST['adminTheme'], array('id' => 'h_adminTheme'));
 
-  HTML::start('div', array('id' => 'window'));
-  HTML::section(1, _("OpenClinic Install Wizard"));
+  echo HTML::start('div', array('id' => 'window'));
+  echo HTML::section(1, _("OpenClinic Install Wizard"));
   //echo "<!-- End Header -->\n";
 
   /**
@@ -144,21 +144,26 @@
     $focusFormField = "license";
     //Error::debug(OPEN_LANGUAGE);
 
-    HTML::section(2, sprintf(_("Step %d of %d: "), 2, 7) . _("License"));
+    echo HTML::section(2, sprintf(_("Step %d of %d: "), 2, 7) . _("License"));
 
-    HTML::para(_("OpenClinic is free software, distributed under GNU General Public License (GPL). Please read the license and, if you agree, click on 'I accept' button."));
+    echo HTML::para(_("OpenClinic is free software, distributed under GNU General Public License (GPL). Please read the license and, if you agree, click on 'I accept' button."));
 
-    HTML::para(
-      Form::strTextArea("license", 15, 75, file_get_contents("../LICENSE")),
+    echo HTML::para(
+      Form::textArea("license", file_get_contents("../LICENSE"),
+        array(
+          'rows' => 15,
+          'cols' => 75
+        )
+      ),
       array('class' => 'center')
     );
 
-    HTML::start('div', array('id' => 'buttons'));
+    echo HTML::start('div', array('id' => 'buttons'));
     _showButton("back1", _("Back"), "back");
     _showButton("next2", _("I accept"));
-    HTML::end('div');
+    echo HTML::end('div');
 
-    HTML::para(_("Read the license before continue"), array('id' => 'status'));
+    echo HTML::para(_("Read the license before continue"), array('id' => 'status'));
   } // end step license
 
   /**
@@ -168,46 +173,66 @@
   {
     $focusFormField = "dbHost[1]";
 
-    HTML::section(2, sprintf(_("Step %d of %d: "), 3, 7) . _("MySQL Database Settings"));
+    echo HTML::section(2, sprintf(_("Step %d of %d: "), 3, 7) . _("MySQL Database Settings"));
 
-    HTML::para(sprintf(_("Install script create OpenClinic database. These following values will be written in %s file. All fields are required."), HTML::strTag('code', 'config/database_constants.php')));
+    echo HTML::para(sprintf(_("Install script create OpenClinic database. These following values will be written in %s file. All fields are required."), HTML::tag('code', 'config/database_constants.php')));
 
     $tbody = array();
 
     $tbody[] = array(
-      Form::strLabel("dbHost", _("Database Host:")),
-      Form::strText("dbHost", 25, $_POST['dbHost'], array('maxlength' => 100)),
+      Form::label("dbHost", _("Database Host:")),
+      Form::text("dbHost", $_POST['dbHost'],
+        array(
+          'size' => 25,
+          'maxlength' => 100
+        )
+      ),
       _("e. g.") . " localhost"
     );
 
     $tbody[] = array(
-      Form::strLabel("dbUser", _("Database User:")),
-      Form::strText("dbUser", 25, $_POST['dbUser'], array('maxlength' => 100)),
+      Form::label("dbUser", _("Database User:")),
+      Form::text("dbUser", $_POST['dbUser'],
+        array(
+          'size' => 25,
+          'maxlength' => 100
+        )
+      ),
       _("e. g.") . " openclinic_user"
     );
 
     $tbody[] = array(
-      Form::strLabel("dbPasswd", _("Database Password:")),
-      Form::strText("dbPasswd", 25, $_POST['dbPasswd'], array('maxlength' => 100)),
+      Form::label("dbPasswd", _("Database Password:")),
+      Form::text("dbPasswd", $_POST['dbPasswd'],
+        array(
+          'size' => 25,
+          'maxlength' => 100
+        )
+      ),
       _("e. g.") . " s45gh72cv"
     );
 
     $tbody[] = array(
-      Form::strLabel("dbName", _("Database Name:")),
-      Form::strText("dbName", 25, $_POST['dbName'], array('maxlength' => 100)),
+      Form::label("dbName", _("Database Name:")),
+      Form::text("dbName", $_POST['dbName'],
+        array(
+          'size' => 25,
+          'maxlength' => 100
+        )
+      ),
       _("e. g.") . " openclinic"
     );
 
     $thead = array(/*_("MySQL Database Settings")*/'' => array('colspan' => 3));
 
-    HTML::table($thead, $tbody, null, array('align' => 'center'));
+    echo HTML::table($thead, $tbody, null, array('align' => 'center'));
 
-    HTML::start('div', array('id' => 'buttons'));
+    echo HTML::start('div', array('id' => 'buttons'));
     _showButton("back2", _("Back"), "back");
     _showButton("next3", _("Next"));
-    HTML::end('div');
+    echo HTML::end('div');
 
-    HTML::para(_("Check data before continue"), array('id' => 'status'));
+    echo HTML::para(_("Check data before continue"), array('id' => 'status'));
   } // end step mysql
 
   /**
@@ -217,68 +242,98 @@
   {
     $focusFormField = "clinicLanguage[1]";
 
-    HTML::section(2, sprintf(_("Step %d of %d: "), 4, 7) . _("Config Settings"));
+    echo HTML::section(2, sprintf(_("Step %d of %d: "), 4, 7) . _("Config Settings"));
 
-    HTML::para(_("These are OpenClinic config settings."));
+    echo HTML::para(_("These are OpenClinic config settings."));
 
     $tbody = array();
 
     $tbody[] = array(
-      Form::strLabel("clinicLanguage", _("Language") . ":"),
-      Form::strSelect("clinicLanguage", $locale, $_POST['clinicLanguage'])
+      Form::label("clinicLanguage", _("Language") . ":"),
+      Form::select("clinicLanguage", $locale, $_POST['clinicLanguage'])
     );
 
     $tbody[] = array(
-      Form::strLabel("clinicName", _("Clinic Name") . ":"),
-      Form::strText("clinicName", 30, $_POST['clinicName'], array('maxlength' => 128)),
+      Form::label("clinicName", _("Clinic Name") . ":"),
+      Form::text("clinicName", $_POST['clinicName'],
+        array(
+          'size' => 30,
+          'maxlength' => 128
+        )
+      ),
       _("e. g.") . " My Clinic"
     );
 
     $tbody[] = array(
-      Form::strLabel("clinicHours", _("Clinic Hours") . ":"),
-      Form::strText("clinicHours", 30, $_POST['clinicHours'], array('maxlength' => 128)),
+      Form::label("clinicHours", _("Clinic Hours") . ":"),
+      Form::text("clinicHours", $_POST['clinicHours'],
+        array(
+          'size' => 30,
+          'maxlength' => 128
+        )
+      ),
       _("e. g.") . " L-V 9am-5pm"
     );
 
     $tbody[] = array(
-      Form::strLabel("clinicAddress", _("Clinic Address") . ":"),
-      Form::strText("clinicAddress", 30, $_POST['clinicAddress'], array('maxlength' => 200)),
+      Form::label("clinicAddress", _("Clinic Address") . ":"),
+      Form::text("clinicAddress", $_POST['clinicAddress'],
+        array(
+          'size' => 30,
+          'maxlength' => 200
+        )
+      ),
       _("e. g.") . " Sesame Street"
     );
 
     $tbody[] = array(
-      Form::strLabel("clinicPhone", _("Clinic Phone") . ":"),
-      Form::strText("clinicPhone", 30, $_POST['clinicPhone'], array('maxlength' => 40)),
+      Form::label("clinicPhone", _("Clinic Phone") . ":"),
+      Form::text("clinicPhone", $_POST['clinicPhone'],
+        array(
+          'size' => 30,
+          'maxlength' => 40
+        )
+      ),
       _("e. g.") . " 999 66 66 66"
     );
 
     $tbody[] = array(
-      Form::strLabel("timeout", _("Session Timeout (minutes):")),
-      Form::strText("timeout", 30, $_POST['timeout'], array('maxlength' => 3)),
+      Form::label("timeout", _("Session Timeout (minutes):")),
+      Form::text("timeout", $_POST['timeout'],
+        array(
+          'size' => 30,
+          'maxlength' => 3
+        )
+      ),
       _("e. g.") . " 20"
     );
 
     $tbody[] = array(
-      Form::strLabel("itemsPage", _("Search Results (items per page):")),
-      Form::strText("itemsPage", 30, $_POST['itemsPage'], array('maxlength' => 2)),
+      Form::label("itemsPage", _("Search Results (items per page):")),
+      Form::text("itemsPage", $_POST['itemsPage'],
+        array(
+          'size' => 30,
+          'maxlength' => 2
+        )
+      ),
       _("e. g.") . " 10"
     );
 
     $tbody[] = array(
-      Form::strLabel("clinicTheme", _("Theme by default") . ":"),
-      Form::strSelect("clinicTheme", $themes, $_POST['clinicTheme'])
+      Form::label("clinicTheme", _("Theme by default") . ":"),
+      Form::select("clinicTheme", $themes, $_POST['clinicTheme'])
     );
 
     $thead = array(/*_("Config Settings")*/'' => array('colspan' => 3));
 
-    HTML::table($thead, $tbody, null, array('align' => 'center'));
+    echo HTML::table($thead, $tbody, null, array('align' => 'center'));
 
-    HTML::start('div', array('id' => 'buttons'));
+    echo HTML::start('div', array('id' => 'buttons'));
     _showButton("back3", _("Back"), "back");
     _showButton("next4", _("Next"));
-    HTML::end('div');
+    echo HTML::end('div');
 
-    HTML::para(_("Customize your site"), array('id' => 'status'));
+    echo HTML::para(_("Customize your site"), array('id' => 'status'));
   } // end step config settings
 
   /**
@@ -288,69 +343,94 @@
   {
     $focusFormField = "firstName[1]";
 
-    HTML::section(2, sprintf(_("Step %d of %d: "), 5, 7) . _("Admin Data"));
+    echo HTML::section(2, sprintf(_("Step %d of %d: "), 5, 7) . _("Admin Data"));
 
     $tbody = array();
 
     $tbody[] = array(
-      Form::strLabel("firstName", _("First Name") . ":"),
-      Form::strText("firstName", 30, $_POST['firstName'], array('maxlength' => 25)),
+      Form::label("firstName", _("First Name") . ":"),
+      Form::text("firstName", $_POST['firstName'],
+        array(
+          'size' => 30,
+          'maxlength' => 25
+        )
+      ),
       _("e. g.") . " John"
     );
 
     $tbody[] = array(
-      Form::strLabel("surname1", _("Surname 1") . ":"),
-      Form::strText("surname1", 30, $_POST['surname1']),
+      Form::label("surname1", _("Surname 1") . ":"),
+      Form::text("surname1", $_POST['surname1'], array('size' => 30)),
       _("e. g.") . " Doe"
     );
 
     $tbody[] = array(
-      Form::strLabel("surname2", _("Surname 2") . ":"),
-      Form::strText("surname2", 30, $_POST['surname2']),
+      Form::label("surname2", _("Surname 2") . ":"),
+      Form::text("surname2", $_POST['surname2'], array('size' => 30)),
       _("e. g.") . " Smith"
     );
 
     $tbody[] = array(
-      Form::strLabel("adminAddress", _("Address") . ":"),
-      Form::strText("adminAddress", 30, $_POST['adminAddress'], array('maxlength' => 200))
+      Form::label("adminAddress", _("Address") . ":"),
+      Form::text("adminAddress", $_POST['adminAddress'],
+        array(
+          'size' => 30,
+          'maxlength' => 200
+        )
+      )
     );
 
     $tbody[] = array(
-      Form::strLabel("adminPhone", _("Phone Contact") . ":"),
-      Form::strText("adminPhone", 30, $_POST['adminPhone'], array('maxlength' => 40))
+      Form::label("adminPhone", _("Phone Contact") . ":"),
+      Form::text("adminPhone", $_POST['adminPhone'],
+        array(
+          'size' => 30,
+          'maxlength' => 40
+        )
+      )
     );
 
     $tbody[] = array(
       _("Login"),
-      HTML::strTag('span', "admin", array('class' => 'note'))
+      HTML::tag('span', "admin", array('class' => 'note'))
     );
 
     $tbody[] = array(
-      Form::strLabel("passwd", _("Password") . ":"),
-      Form::strText("passwd", 30, $_POST['passwd'], array('maxlength' => 20)),
-      HTML::strTag('span', _("required"), array('class' => 'note'))
+      Form::label("passwd", _("Password") . ":"),
+      Form::text("passwd", $_POST['passwd'],
+        array(
+          'size' => 30,
+          'maxlength' => 20
+        )
+      ),
+      HTML::tag('span', _("required"), array('class' => 'note'))
     );
 
     $tbody[] = array(
-      Form::strLabel("email", _("Email") . ":"),
-      Form::strText("email", 30, $_POST['email'], array('maxlength' => 40))
+      Form::label("email", _("Email") . ":"),
+      Form::text("email", $_POST['email'],
+        array(
+          'size' => 30,
+          'maxlength' => 40
+        )
+      )
     );
 
     $tbody[] = array(
-      Form::strLabel("adminTheme", _("Theme") . ":"),
-      Form::strSelect("adminTheme", $themes, $_POST['adminTheme'])
+      Form::label("adminTheme", _("Theme") . ":"),
+      Form::select("adminTheme", $themes, $_POST['adminTheme'])
     );
 
     $thead = array(/*_("Admin Data")*/'' => array('colspan' => 3));
 
-    HTML::table($thead, $tbody, null, array('align' => 'center'));
+    echo HTML::table($thead, $tbody, null, array('align' => 'center'));
 
-    HTML::start('div', array('id' => 'buttons'));
+    echo HTML::start('div', array('id' => 'buttons'));
     _showButton("back4", _("Back"), "back");
     _showButton("next5", _("Next"));
-    HTML::end('div');
+    echo HTML::end('div');
 
-    HTML::para(_("Password is the most important field"), array('id' => 'status'));
+    echo HTML::para(_("Password is the most important field"), array('id' => 'status'));
   } // end step admin data
 
   /**
@@ -360,28 +440,28 @@
   {
     //$focusFormField = "back5";
 
-    HTML::section(2, sprintf(_("Step %d of %d: "), 6, 7) . _("Last Check before Install"));
+    echo HTML::section(2, sprintf(_("Step %d of %d: "), 6, 7) . _("Last Check before Install"));
 
-    HTML::para(
+    echo HTML::para(
       sprintf(_("Here are the values you entered. %s to remember your admin password and other settings."),
-        HTML::strLink(_("Print this page"), '#', null, array('onclick' => 'window.print(); return false;'))
+        HTML::link(_("Print this page"), '#', null, array('onclick' => 'window.print(); return false;'))
       )
     );
 
     $continue = _validateSettings();
 
-    HTML::section(3, _("MySQL Database Settings"));
+    echo HTML::section(3, _("MySQL Database Settings"));
 
-    HTML::start('blockquote');
+    echo HTML::start('blockquote');
     echo _("Database Host:") . ' ' . $_POST['dbHost'] . "<br />";
     echo _("Database User:") . ' ' . $_POST['dbUser'] . "<br />";
     echo _("Database Password:") . ' ' . $_POST['dbPasswd'] . "<br />";
     echo _("Database Name:") . ' ' . $_POST['dbName'];
-    HTML::end('blockquote');
+    echo HTML::end('blockquote');
 
-    HTML::section(3, _("Config Settings"));
+    echo HTML::section(3, _("Config Settings"));
 
-    HTML::start('blockquote');
+    echo HTML::start('blockquote');
     echo _("Language") . ': ' . $locale[$_POST['clinicLanguage']] . "<br />";
     echo _("Clinic Name") . ': ' . $_POST['clinicName'] . "<br />";
     echo _("Clinic Hours") . ': ' . $_POST['clinicHours'] . "<br />";
@@ -390,31 +470,31 @@
     echo _("Session Timeout") . ': ' . $_POST['timeout'] . "<br />";
     echo _("Search Results") . ': ' . $_POST['itemsPage'] . "<br />";
     echo _("Theme by default") . ': ' . $themes[$_POST['clinicTheme']];
-    HTML::end('blockquote');
+    echo HTML::end('blockquote');
 
-    HTML::section(3, _("Admin Data"));
+    echo HTML::section(3, _("Admin Data"));
 
-    HTML::start('blockquote');
+    echo HTML::start('blockquote');
     echo _("First Name") . ': ' . $_POST['firstName'] . "<br />";
     echo _("Surname 1") . ': ' . $_POST['surname1'] . "<br />";
     echo _("Surname 2") . ': ' . $_POST['surname2'] . "<br />";
     echo _("Address") . ': ' . $_POST['adminAddress'] . "<br />";
     echo _("Phone Contact") . ': ' . $_POST['adminPhone'] . "<br />";
-    echo _("Login") . ': ' . HTML::strTag('span', "admin", array('class' => 'note')) . "<br />";
-    echo _("Password") . ': ' . HTML::strTag('span', $_POST['passwd'], array('class' => 'note')) . "<br />";
+    echo _("Login") . ': ' . HTML::tag('span', "admin", array('class' => 'note')) . "<br />";
+    echo _("Password") . ': ' . HTML::tag('span', $_POST['passwd'], array('class' => 'note')) . "<br />";
     echo _("Email") . ': ' . $_POST['email'] . "<br />";
     echo _("Theme") . ': ' . $themes[$_POST['adminTheme']];
-    HTML::end('blockquote');
+    echo HTML::end('blockquote');
 
-    HTML::start('div', array('id' => 'buttons'));
+    echo HTML::start('div', array('id' => 'buttons'));
     _showButton("back5", _("Back"), "back");
     if ($continue)
     {
       _showButton("next6", _("Install"));
     }
-    HTML::end('div');
+    echo HTML::end('div');
 
-    HTML::para(_("If you are not sure in any value, go back before install"), array('id' => 'status'));
+    echo HTML::para(_("If you are not sure in any value, go back before install"), array('id' => 'status'));
   } // end step last check
 
   /**
@@ -424,7 +504,7 @@
   {
     $focusFormField = "next7";
 
-    HTML::section(2, sprintf(_("Step %d of %d: "), 7, 7) . _("Start using OpenClinic"));
+    echo HTML::section(2, sprintf(_("Step %d of %d: "), 7, 7) . _("Start using OpenClinic"));
 
     /**
      * Write config/database_constants.php file
@@ -433,10 +513,10 @@
     $aux = fopen('../config/database_constants.php', $mode);
     if ( !$aux )
     {
-      Msg::error(
+      echo Msg::error(
         sprintf(
           _("Incorrect permissions of %s file. Continue is impossible."),
-          HTML::strTag('tt', "config/database_constants.php")
+          HTML::tag('tt', "config/database_constants.php")
         )
       );
       exit();
@@ -451,9 +531,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-' . date('Y') . ' jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.35 2008/01/07 14:28:13 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.36 2008/03/23 11:59:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -475,7 +555,7 @@
 ';
     if ( !fwrite($aux, $fileContent) )
     {
-      Msg::error(_("Error in writing proccess. Continue is impossible."));
+      echo Msg::error(_("Error in writing proccess. Continue is impossible."));
       exit();
     }
     fclose($aux);
@@ -497,19 +577,19 @@
       $no = mysql_errno();
       $msg = mysql_error();
 
-      HTML::rule();
-      HTML::para($no . PHP_EOL . $msg);
-      HTML::rule();
+      echo HTML::rule();
+      echo HTML::para($no . PHP_EOL . $msg);
+      echo HTML::rule();
 
-      HTML::para(_("The MySQL server does not work or login pass is false."));
-      HTML::para(_("Please check these values and if any is wrong back to step 2:"));
+      echo HTML::para(_("The MySQL server does not work or login pass is false."));
+      echo HTML::para(_("Please check these values and if any is wrong back to step 2:"));
 
       $array = array(
         _("Database Host:") . ' ' . $_POST['dbHost'],
         _("Database User:") . ' ' . $_POST['dbUser'],
         _("Database Password:") . ' ' . $_POST['dbPasswd']
       );
-      HTML::itemList($array);
+      echo HTML::itemList($array);
 
       exit();
     }
@@ -537,11 +617,11 @@
       {
         $text = sprintf(_("Table %s dropped."), $tableName) . PHP_EOL;
         $text .= sprintf(_("Table %s created."), $tableName);
-        HTML::para($text);
+        echo HTML::para($text);
       }
       else
       {
-        Msg::error(_("Last instruction failed"));
+        echo Msg::error(_("Last instruction failed"));
         exit();
       }
     }
@@ -580,20 +660,20 @@
     $sql .= " WHERE id_user=2;";
     mysql_query($sql) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
 
-    HTML::para(_("OpenClinic tables have been created successfully!"));
-    HTML::para(
+    echo HTML::para(_("OpenClinic tables have been created successfully!"));
+    echo HTML::para(
       sprintf(_("%s: To protect your site, make %s and %s files read only (chmod 400)."),
-        HTML::strTag('span', _("Security advice"), array('class' => 'note')),
-        HTML::strTag('tt', 'config/database_constants.php'),
-        HTML::strTag('tt', 'openclinic/install/')
+        HTML::tag('span', _("Security advice"), array('class' => 'note')),
+        HTML::tag('tt', 'config/database_constants.php'),
+        HTML::tag('tt', 'openclinic/install/')
       )
     );
 
-    HTML::start('div', array('id' => 'buttons'));
+    echo HTML::start('div', array('id' => 'buttons'));
     _showButton("next7", _("Start OpenClinic"));
-    HTML::end('div');
+    echo HTML::end('div');
 
-    HTML::para(_("That's folks!!!"), array('id' => 'status'));
+    echo HTML::para(_("That's folks!!!"), array('id' => 'status'));
   } // end step 7
 
   /**
@@ -603,39 +683,39 @@
   {
     //$focusFormField = "next1";
 
-    HTML::section(2, sprintf(_("Step %d of %d: "), 1, 7) . _("Requirements"));
+    echo HTML::section(2, sprintf(_("Step %d of %d: "), 1, 7) . _("Requirements"));
 
-    HTML::para(
+    echo HTML::para(
       sprintf(_("This script will configure OpenClinic database and %s file."),
-        HTML::strTag('tt', 'config/database_constants.php')
+        HTML::tag('tt', 'config/database_constants.php')
       )
     );
 
-    HTML::start('blockquote', array('class' => 'error'));
+    echo HTML::start('blockquote', array('class' => 'error'));
     echo sprintf(_("The file %s already exists in your system! This script INSTALLS and DOES NOT UPGRADE. It will remove all OpenClinic data. If this is what you want, you can go on. If you want upgrade go to the %s."),
-      HTML::strTag('tt', 'config/database_constants.php'),
-      HTML::strLink(_("upgrade script"), './index.php')
+      HTML::tag('tt', 'config/database_constants.php'),
+      HTML::link(_("upgrade script"), './index.php')
     );
-    HTML::end('blockquote');
+    echo HTML::end('blockquote');
 
-    HTML::section(3, _("Read Thouroughly") . ":");
+    echo HTML::section(3, _("Read Thouroughly") . ":");
 
-    HTML::para(_("For OpenClinic to work, you need the following on the server:"));
+    echo HTML::para(_("For OpenClinic to work, you need the following on the server:"));
 
     $itemArray = array(
-      sprintf(_("Webserver (you have %s)"), HTML::strTag('strong', $_SERVER['SERVER_SOFTWARE']))
+      sprintf(_("Webserver (you have %s)"), HTML::tag('strong', $_SERVER['SERVER_SOFTWARE']))
     );
 
-    $text = sprintf(_("PHP >= %s (you have PHP %s)"), OPEN_PHP_VERSION, HTML::strTag('strong', phpversion()));
+    $text = sprintf(_("PHP >= %s (you have PHP %s)"), OPEN_PHP_VERSION, HTML::tag('strong', phpversion()));
     if (version_compare(phpversion(), OPEN_PHP_VERSION) >= 0)
     {
       $text .= ' - ';
-      $text .= HTML::strTag('strong', _("ok"));
+      $text .= HTML::tag('strong', _("ok"));
     }
     else
     {
       $text .= ' - ';
-      $text .= HTML::strTag('strong', _("error"), array('class' => 'error'));
+      $text .= HTML::tag('strong', _("error"), array('class' => 'error'));
       $notPHP = true;
     }
 
@@ -646,7 +726,7 @@
       _warnIfExtNotLoaded("pcre", true),
       _warnIfExtNotLoaded("gettext", true)
     );
-    $text .= HTML::strItemList($extArray);
+    $text .= HTML::itemList($extArray);
     unset($extArray);
 
     $itemArray[] = $text;
@@ -654,75 +734,75 @@
 
     $itemArray[] = 'MySQL >= 3.23.36';
 
-    $text =sprintf(_("Write access to %s file"), HTML::strTag('tt', 'config/database_constants.php'));
+    $text =sprintf(_("Write access to %s file"), HTML::tag('tt', 'config/database_constants.php'));
     if (chmod("../config/database_constants.php", 0666) == false)
     {
-      $text .= HTML::strPara(_("This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."));
+      $text .= HTML::para(_("This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."));
       if (defined('PHP_OS') && eregi('win', PHP_OS))
       {
-        $text .= Msg::strError(sprintf(_("Deactivate read-only mode in the file properties of %s."),
-          HTML::strTag('tt', 'config/database_constants.php'))
+        $text .= Msg::error(sprintf(_("Deactivate read-only mode in the file properties of %s."),
+          HTML::tag('tt', 'config/database_constants.php'))
         );
       }
       else
       {
-        $text .= Msg::strError(sprintf(_("Open a shell, go to %s directory and type %s."),
-            HTML::strTag('tt', 'openclinic'),
-            HTML::strTag('tt', sprintf("chmod 666 %s", "config/database_constants.php"))
+        $text .= Msg::error(sprintf(_("Open a shell, go to %s directory and type %s."),
+            HTML::tag('tt', 'openclinic'),
+            HTML::tag('tt', sprintf("chmod 666 %s", "config/database_constants.php"))
           )
         );
       }
-      $text .= HTML::strPara(_("Once made it, click in Next button."));
+      $text .= HTML::para(_("Once made it, click in Next button."));
     }
     else
     {
       $text .= ' - ';
-      $text .= HTML::strTag('strong', _("ok"));
+      $text .= HTML::tag('strong', _("ok"));
     }
     $itemArray[] = $text;
     unset($text);
 
-    HTML::itemList($itemArray);
+    echo HTML::itemList($itemArray);
     unset($itemArray);
 
-    HTML::para(
+    echo HTML::para(
       sprintf(
         _("To install OpenClinic on a Windows machine for test, you just need to install %s before."),
-        HTML::strLink("AppServ", 'http://academic.cmri.ac.th/appserv')
+        HTML::link("AppServ", 'http://academic.cmri.ac.th/appserv')
       )
     );
 
-    HTML::para(
+    echo HTML::para(
       sprintf(
         _("For more details, see %s."),
-        HTML::strLink(_("Install Instructions"), '../install.html')
+        HTML::link(_("Install Instructions"), '../install.html')
       )
     );
 
     if ( !isset($notPHP) )
     {
-      HTML::start('div', array('id' => 'buttons'));
+      echo HTML::start('div', array('id' => 'buttons'));
       _showButton("next1", _("Next"));
-      HTML::end('div');
+      echo HTML::end('div');
 
-      HTML::para(_("Press Next button to continue"), array('id' => 'status'));
+      echo HTML::para(_("Press Next button to continue"), array('id' => 'status'));
     }
   } // end step 1: requirements
 
   //echo "<!-- Footer -->\n";
-  HTML::end('div'); // #window
-  HTML::end('form');
+  echo HTML::end('div'); // #window
+  echo HTML::end('form');
 
   if (isset($focusFormField) && ( !empty($focusFormField) ))
   {
     echo HTML::insertScript('event.js');
 
-    HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
-    HTML::end('script');
+    echo HTML::start('script', array('src' => '../js/focus.php?field=' . $focusFormField, 'type' => 'text/javascript'));
+    echo HTML::end('script');
   }
 
-  HTML::end('body');
-  HTML::end('html');
+  echo HTML::end('body');
+  echo HTML::end('html');
   //echo "<!-- End Footer -->\n";
 
 /**
@@ -735,10 +815,11 @@
  * @param string $type (optional) values: "next" (default), "back"
  * @return void
  * @access private
+ * @todo helper that returns string (not echo)
  */
 function _showButton($name, $value, $type = "next")
 {
-  HTML::start('button',
+  $_html = HTML::start('button',
     array(
       'id' => $name,
       'name' => $name,
@@ -750,16 +831,18 @@ function _showButton($name, $value, $type = "next")
 
   if ($type == "next")
   {
-    HTML::tag('span', $value);
-    HTML::image('../img/arrow_right.png', $value, array('width' => 22, 'height' => 22));
+    $_html .= HTML::tag('span', $value);
+    $_html .= HTML::image('../img/arrow_right.png', $value, array('width' => 22, 'height' => 22));
   }
   elseif ($type == "back")
   {
-    HTML::image('../img/arrow_left.png', $value, array('width' => 22, 'height' => 22));
-    HTML::tag('span', $value);
+    $_html .= HTML::image('../img/arrow_left.png', $value, array('width' => 22, 'height' => 22));
+    $_html .= HTML::tag('span', $value);
   }
 
-  HTML::end('button');
+  $_html .= HTML::end('button');
+
+  echo $_html;
 }
 
 /**
@@ -781,13 +864,13 @@ function _warnIfExtNotLoaded($extensionName, $echoWhenOk = false)
   {
     if ($echoWhenOk)
     {
-      $msg = $extensionName . ' - ' . HTML::strTag('strong', _("ok"));
+      $msg = $extensionName . ' - ' . HTML::tag('strong', _("ok"));
     }
   }
   else
   {
-    $msg = HTML::strLink(HTML::strTag('strong', $extensionName), 'http://www.php.net/' . $extensionName);
-    $msg .= ' - ' . HTML::strTag('strong', _("is missing!!"), array('class' => 'error'));
+    $msg = HTML::link(HTML::tag('strong', $extensionName), 'http://www.php.net/' . $extensionName);
+    $msg .= ' - ' . HTML::tag('strong', _("is missing!!"), array('class' => 'error'));
   }
 
   return $msg;
@@ -832,8 +915,8 @@ function _validateSettings()
 
   if ( !empty($error) )
   {
-    HTML::section(3, _("There were some errors"), array('class' => 'error'));
-    Msg::error($error);
+    echo HTML::section(3, _("There were some errors"), array('class' => 'error'));
+    echo Msg::error($error);
   }
 
   return empty($error);

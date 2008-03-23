@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: log_list.php,v 1.4 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: log_list.php,v 1.5 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  * @todo      resultset pagination
@@ -86,9 +86,9 @@
   require_once("../layout/header.php");
 
   /**
-   * Bread Crumb
+   * Breadcrumb
    */
-  HTML::breadCrumb($links, "icon icon_log");
+  echo HTML::breadcrumb($links, "icon icon_log");
   unset($links);
 
   if ($day)
@@ -129,7 +129,7 @@
   {
     $logQ->close();
 
-    Msg::info(_("No logs in this date."));
+    echo Msg::info(_("No logs in this date."));
     include_once("../layout/footer.php");
     exit();
   }
@@ -190,8 +190,8 @@
   unset($logQ);
   unset($log);
 
-  HTML::rule();
-  HTML::table($thead, $tbody, null, $options);
+  echo HTML::rule();
+  echo HTML::table($thead, $tbody, null, $options);
 
   require_once("../layout/footer.php");
 ?>
