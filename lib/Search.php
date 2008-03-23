@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Search.php,v 1.14 2007/12/01 12:44:32 jact Exp $
+ * @version   CVS: $Id: Search.php,v 1.15 2008/03/23 11:57:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,8 +20,7 @@
  *
  * Methods:
  *  array explodeQuoted(string $text)
- *  void strPageLinks(int $currentPage, int $pageCount, string $url = '')
- *  void pageLinks(int $currentPage, int $pageCount, string $url = '')
+ *  string pageLinks(int $currentPage, int $pageCount, string $url = '')
  *  void changePageJS(void)
  *
  * @package OpenClinic
@@ -79,7 +78,7 @@ class Search
   }
 
   /**
-   * string strPageLinks(int $currentPage, int $pageCount, string $url = '')
+   * string pageLinks(int $currentPage, int $pageCount, string $url = '')
    *
    * Returns the pagination string in result sets
    *
@@ -87,14 +86,14 @@ class Search
    * @param int $pageCount total pages
    * @param string $url (optional) if not empty, links with href, else links with onclick
    * @return string
-   * @see HTML::strLink()
-   * @see HTML::strTag()
+   * @see HTML::link()
+   * @see HTML::tag()
    * @see HTML::para()
    * @access public
    * @static
    * @todo optimize code with constants
    */
-  function strPageLinks($currentPage, $pageCount, $url = '')
+  function pageLinks($currentPage, $pageCount, $url = '')
   {
     if ($pageCount <= 1)
     {
@@ -103,11 +102,11 @@ class Search
 
     if (empty($url))
     {
-      $_pageLink = HTML::strLink('%s', '#', null, array('onclick' => 'changePage(%d)'));
+      $_pageLink = HTML::link('%s', '#', null, array('onclick' => 'changePage(%d)'));
     }
     else
     {
-      $_pageLink = HTML::strLink('%s', htmlspecialchars(str_replace('%', '%%', $url))
+      $_pageLink = HTML::link('%s', htmlspecialchars(str_replace('%', '%%', $url))
         . ((strpos($url, '?') !== false) ? '&amp;' : '?') . 'page=%d');
     }
 
@@ -119,7 +118,7 @@ class Search
       for ($i = 1; $i < ($_initPageMax + 1); $i++)
       {
         $_pageString .= ($i == $currentPage)
-          ? HTML::strTag('strong', $i)
+          ? HTML::tag('strong', $i)
           : sprintf($_pageLink, $i, $i);
         if ($i < $_initPageMax)
         {
@@ -139,7 +138,7 @@ class Search
           for ($i = ($_initPageMin - 1); $i < ($_initPageMax + 2); $i++)
           {
             $_pageString .= ($i == $currentPage)
-              ? HTML::strTag('strong', $i)
+              ? HTML::tag('strong', $i)
               : sprintf($_pageLink, $i, $i);
             if ($i < ($_initPageMax + 1))
             {
@@ -157,7 +156,7 @@ class Search
         for ($i = $pageCount - 2; $i < ($pageCount + 1); $i++)
         {
           $_pageString .= ($i == $currentPage)
-            ? HTML::strTag('strong', $i)
+            ? HTML::tag('strong', $i)
             : sprintf($_pageLink, $i, $i);
           if ($i < $pageCount)
           {
@@ -171,7 +170,7 @@ class Search
       for ($i = 1; $i < ($pageCount + 1); $i++)
       {
         $_pageString .= ($i == $currentPage)
-          ? HTML::strTag('strong', $i)
+          ? HTML::tag('strong', $i)
           : sprintf($_pageLink, $i, $i);
         if ($i < $pageCount)
         {
@@ -195,24 +194,7 @@ class Search
       $_pageString = str_replace('%%', '%', $_pageString);
     }
 
-    return HTML::strPara(_("Result Pages") . ': ' . $_pageString, array('class' => 'page_links'));
-  }
-
-  /**
-   * void pageLinks(int $currentPage, int $pageCount, string $url = '')
-   *
-   * Creates the pagination string in result sets
-   *
-   * @param int $currentPage
-   * @param int $pageCount total pages
-   * @param string $url (optional) if not empty, links with href, else links with onclick
-   * @return void
-   * @access public
-   * @static
-   */
-  function pageLinks($currentPage, $pageCount, $url = '')
-  {
-    echo Search::strPageLinks($currentPage, $pageCount, $url = '');
+    return HTML::para(_("Result Pages") . ': ' . $_pageString, array('class' => 'page_links'));
   }
 
   /**
