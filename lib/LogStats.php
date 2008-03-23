@@ -7,11 +7,12 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.11 2007/12/01 12:44:13 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.12 2008/03/23 11:58:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
+ * @todo methods only return string (not echos)
  */
 
   require_once("../model/Query/LogStats.php");
@@ -56,9 +57,9 @@ class LogStats
 
     $perc = round($scale * $percentage, 0);
 
-    $html = HTML::strImage('../img/leftbar.gif', $label, array('width' => 7, 'height' => 14));
-    $html .= HTML::strImage('../img/mainbar.gif', $label, array('width' => $perc, 'height' => 14));
-    $html .= HTML::strImage('../img/rightbar.gif', $label, array('width' => 7, 'height' => 14));
+    $html = HTML::image('../img/leftbar.gif', $label, array('width' => 7, 'height' => 14));
+    $html .= HTML::image('../img/mainbar.gif', $label, array('width' => $perc, 'height' => 14));
+    $html .= HTML::image('../img/rightbar.gif', $label, array('width' => 7, 'height' => 14));
     $html = str_replace(PHP_EOL, '', $html);
 
     return $html;
@@ -108,12 +109,12 @@ class LogStats
     $logQ = new Query_LogStats($table);
     $totalHits = $logQ->totalHits();
 
-    HTML::section(4, sprintf(_("Yearly Stats: %d hits"), $totalHits));
+    echo HTML::section(4, sprintf(_("Yearly Stats: %d hits"), $totalHits));
 
     if ($totalHits == 0)
     {
       $logQ->close();
-      Msg::info(_("There are not statistics"));
+      echo Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -133,7 +134,7 @@ class LogStats
     $tbody = array();
     foreach ($array as $year => $hits)
     {
-      $row = HTML::strLink($year, '../admin/log_list.php',
+      $row = HTML::link($year, '../admin/log_list.php',
         array(
           'table' => $table,
           'year' => $year
@@ -147,7 +148,7 @@ class LogStats
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    HTML::table($thead, $tbody, null, $options);
+    echo HTML::table($thead, $tbody, null, $options);
 
     $logQ->freeResult();
     $logQ->close();
@@ -170,12 +171,12 @@ class LogStats
     $logQ = new Query_LogStats($table);
     $totalHits = $logQ->yearHits($year);
 
-    HTML::section(4, sprintf(_("Monthly Stats for %d: %d hits"), intval($year), $totalHits));
+    echo HTML::section(4, sprintf(_("Monthly Stats for %d: %d hits"), intval($year), $totalHits));
 
     if ($totalHits == 0)
     {
       $logQ->close();
-      Msg::info(_("There are not statistics"));
+      echo Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -197,7 +198,7 @@ class LogStats
     $tbody = array();
     foreach ($array as $month => $hits)
     {
-      $row = HTML::strLink($months[intval($month)], '../admin/log_list.php',
+      $row = HTML::link($months[intval($month)], '../admin/log_list.php',
         array(
           'table' => $table,
           'year' => $year,
@@ -212,7 +213,7 @@ class LogStats
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    HTML::table($thead, $tbody, null, $options);
+    echo HTML::table($thead, $tbody, null, $options);
 
     $logQ->freeResult();
     $logQ->close();
@@ -238,14 +239,14 @@ class LogStats
 
     $monthName = LogStats::getMonthName($month);
 
-    HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"),
+    echo HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"),
       $monthName, intval($year), $totalHits)
     );
 
     if ($totalHits == 0)
     {
       $logQ->close();
-      Msg::info(_("There are not statistics"));
+      echo Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -266,7 +267,7 @@ class LogStats
     $tbody = array();
     foreach ($array as $day => $hits)
     {
-      $row = HTML::strLink(intval($day), '../admin/log_list.php',
+      $row = HTML::link(intval($day), '../admin/log_list.php',
         array(
           'table' => $table,
           'year' => $year,
@@ -290,7 +291,7 @@ class LogStats
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    HTML::table($thead, $tbody, null, $options);
+    echo HTML::table($thead, $tbody, null, $options);
 
     $logQ->freeResult();
     $logQ->close();
@@ -317,14 +318,14 @@ class LogStats
 
     $monthName = LogStats::getMonthName($month);
 
-    HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"),
+    echo HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"),
       $monthName, intval($day), intval($year), $totalHits)
     );
 
     if ($totalHits == 0)
     {
       $logQ->close();
-      Msg::info(_("There are not statistics"));
+      echo Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -361,7 +362,7 @@ class LogStats
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
     }
-    HTML::table($thead, $tbody, null, $options);
+    echo HTML::table($thead, $tbody, null, $options);
 
     $logQ->freeResult();
     $logQ->close();
@@ -385,7 +386,7 @@ class LogStats
     if ($total == 0)
     {
       $logQ->close();
-      Msg::info(_("There are not statistics"));
+      echo Msg::info(_("There are not statistics"));
 
       return;
     }
@@ -394,14 +395,14 @@ class LogStats
     $arrToday = explode("-", $today);
 
     $sectionTitle = _("Total") . ': ' . $total . ' ' . strtolower(_("Hits"));
-    HTML::section(3, $sectionTitle);
+    echo HTML::section(3, $sectionTitle);
 
     $array = $logQ->busiestYear();
     if (is_array($array))
     {
       list($year, $hits) = $array;
 
-      HTML::para(sprintf(_("Busiest Year: %d (%d hits)"), intval($year), $hits));
+      echo HTML::para(sprintf(_("Busiest Year: %d (%d hits)"), intval($year), $hits));
     }
 
     $array = $logQ->busiestMonth();
@@ -410,7 +411,7 @@ class LogStats
       list($year, $month, $hits) = $array;
       $months = LogStats::getMonthName();
 
-      HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month)], intval($year), $hits));
+      echo HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month)], intval($year), $hits));
     }
 
     $array = $logQ->busiestDay();
@@ -418,7 +419,7 @@ class LogStats
     {
       list($year, $month, $day, $hits) = $array;
 
-      HTML::para(sprintf(_("Busiest Day: %d %s %d (%d hits)"),
+      echo HTML::para(sprintf(_("Busiest Day: %d %s %d (%d hits)"),
         intval($day), $months[intval($month)], intval($year), $hits)
       );
     }
@@ -429,7 +430,7 @@ class LogStats
       list($year, $month, $day, $hour, $hits) = $array;
 
       $hour = sprintf("%02d:00 - %02d:59", $hour, $hour);
-      HTML::para(sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"),
+      echo HTML::para(sprintf(_("Busiest Hour: %s on %s %d, %d (%d hits)"),
         $hour, $months[intval($month)], intval($day), intval($year), $hits)
       );
     }
