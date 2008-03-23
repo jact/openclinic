@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: FlashMsg.php,v 1.2 2007/10/17 18:11:29 jact Exp $
+ * @version   CVS: $Id: FlashMsg.php,v 1.3 2008/03/23 11:57:54 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -76,7 +76,7 @@ class FlashMsg
       {
         foreach ($_SESSION['flash_msg_public'] as $_value)
         {
-          $_html .= HTML::strMessage($_value['msg'], $_value['type']);
+          $_html .= HTML::message($_value['msg'], $_value['type']);
         }
         unset($_SESSION['flash_msg_public']);
       }
@@ -87,7 +87,7 @@ class FlashMsg
       {
         foreach ($_SESSION['flash_msg'][$key] as $_value)
         {
-          $_html .= HTML::strMessage($_value['msg'], $_value['type']);
+          $_html .= HTML::message($_value['msg'], $_value['type']);
         }
         unset($_SESSION['flash_msg'][$key]);
       }

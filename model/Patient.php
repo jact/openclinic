@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.17 2007/12/01 12:46:11 jact Exp $
+ * @version   CVS: $Id: Patient.php,v 1.18 2008/03/23 12:00:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -820,11 +820,11 @@ class Patient
    */
   function getHeader()
   {
-    $_html = HTML::strStart('div', array('id' => 'patient_header', 'class' => 'clearfix'));
-    $_html .= HTML::strPara(_("Patient") . ': ' . $this->getName());
-    $_html .= HTML::strPara(_("Sex") . ': ' . ($this->getSex() == 'V' ? _("Male") : _("Female")));
-    $_html .= HTML::strPara(_("Age") . ': ' . $this->getAge(), array('class' => 'right'));
-    $_html .= HTML::strEnd('div');
+    $_html = HTML::start('div', array('id' => 'patient_header', 'class' => 'clearfix'));
+    $_html .= HTML::para(_("Patient") . ': ' . $this->getName());
+    $_html .= HTML::para(_("Sex") . ': ' . ($this->getSex() == 'V' ? _("Male") : _("Female")));
+    $_html .= HTML::para(_("Age") . ': ' . $this->getAge(), array('class' => 'right'));
+    $_html .= HTML::end('div');
 
     return $_html;
   }

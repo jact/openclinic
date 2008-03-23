@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.18 2007/12/01 12:46:22 jact Exp $
+ * @version   CVS: $Id: Problem.php,v 1.19 2008/03/23 12:00:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -514,17 +514,17 @@ class Problem
    */
   function getHeader()
   {
-    $_html = HTML::strStart('div', array('id' => 'problem_header', 'class' => 'clearfix'));
-    $_html .= HTML::strPara(_("Wording") . ': ' . $this->getWordingPreview());
-    $_html .= HTML::strPara(
+    $_html = HTML::start('div', array('id' => 'problem_header', 'class' => 'clearfix'));
+    $_html .= HTML::para(_("Wording") . ': ' . $this->getWordingPreview());
+    $_html .= HTML::para(
       _("Opening Date") . ': ' . I18n::localDate($this->getOpeningDate()),
       array('class' => 'right')
     );
-    $_html .= HTML::strPara(
+    $_html .= HTML::para(
       _("Last Update Date") . ': ' . I18n::localDate($this->getLastUpdateDate()),
       array('class' => 'right')
     );
-    $_html .= HTML::strEnd('div');
+    $_html .= HTML::end('div');
 
     return $_html;
   }
