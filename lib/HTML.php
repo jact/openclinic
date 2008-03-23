@@ -7,10 +7,11 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.17 2007/12/01 12:45:41 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.18 2008/03/23 11:53:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
+ * @todo rename file to Html.php
  */
 
 if ( !defined("PHP_EOL") ) // PHP >= 4.3.10
@@ -37,30 +38,18 @@ define("OPEN_SCRIPT_PATH", '../js/');
  *
  * Methods:
  *  string xmlEntities(string $text, int $quoteStyle = ENT_QUOTES)
- *  string strStart(string $tag, array $options = null, bool $closed = false)
- *  void start(string $tag, array $options = null, bool $closed = false)
- *  string strEnd(string $tag)
- *  void end(string $tag)
- *  string strTag(string $tag, string $text, array $options = null)
- *  void tag(string $tag, string $text, array $options = null)
- *  string strTable(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
- *  void table(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
- *  string strMessage(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
- *  void message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
- *  string strBreadCrumb(array &$links, string $class = "")
- *  void breadCrumb(array &$links, string $class = "")
- *  string strLink(string $text, string $url, array $arg = null, array $addendum = null)
- *  void link(string $text, string $url, array $arg = null, array $addendum = null)
- *  string strSection(int $level, string $text, array $addendum = null)
- *  void section(int $level, string $text, array $addendum = null)
- *  string strPara(string $text, array $addendum = null)
- *  void para(string $text, array $addendum = null)
- *  string strRule(array $addendum = null)
- *  void rule(array $addendum = null)
- *  string strItemList(array &$items, array $addendum = null, bool $ordered = false)
- *  void itemList(array &$items, array $addendum = null, bool $ordered = false)
- *  string strImage(string $src, string $alt, array $addendum = null)
- *  void image(string $src, string $alt, array $addendum = null)
+ *  string start(string $tag, array $attribs = null, bool $closed = false)
+ *  string end(string $tag)
+ *  string tag(string $tag, string $text, array $attribs = null)
+ *  string table(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
+ *  string message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
+ *  string breadcrumb(array &$links, string $class = "")
+ *  string link(string $text, string $url, array $arg = null, array $attribs = null)
+ *  string section(int $level, string $text, array $attribs = null)
+ *  string para(string $text, array $attribs = null)
+ *  string rule(array $attribs = null)
+ *  string itemList(array &$items, array $attribs = null, bool $ordered = false)
+ *  string image(string $src, string $alt, array $attribs = null)
  *  string insertScript(string $name)
  *
  * @package OpenClinic
@@ -85,30 +74,30 @@ class HTML
    */
   function xmlEntities($text, $quoteStyle = ENT_QUOTES)
   {
-    static $trans;
-    if ( !isset($trans) )
+    static $_trans;
+    if ( !isset($_trans) )
     {
-      $trans = get_html_translation_table(HTML_ENTITIES, $quoteStyle);
-      foreach ($trans as $key => $value)
+      $_trans = get_html_translation_table(HTML_ENTITIES, $quoteStyle);
+      foreach ($_trans as $_key => $_value)
       {
-        $trans[$key] = '&#' . ord($key) . ';';
+        $_trans[$_key] = '&#' . ord($_key) . ';';
       }
       // don't translate the '&' in case it is part of &xxx;
-      $trans[chr(38)] = '&';
+      $_trans[chr(38)] = '&';
     }
 
     // after the initial translation, _do_ map standalone '&' into '&amp;' Duane (09-Jan-2005 01:34)
-    return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[x0-9a-f]{2,6};)/", "&amp;", strtr($text, $trans));
+    return preg_replace("/&(?![A-Za-z]{0,4}\w{2,3};|#[x0-9a-f]{2,6};)/", "&amp;", strtr($text, $_trans));
     //return $text; // debug
   }
 
   /**
-   * string strStart(string $tag, array $options = null, bool $closed = false)
+   * string start(string $tag, array $attribs = null, bool $closed = false)
    *
    * Returns an HTML start tag
    *
    * @param string $tag HTML tag
-   * @param array $options (optional)
+   * @param array $attribs (optional)
    *  example:
    *    $options = array(
    *      'id' => 'address',
@@ -125,46 +114,28 @@ class HTML
    * @static
    * @since 0.8
    */
-  function strStart($tag, $options = null, $closed = false)
+  function start($tag, $attribs = null, $closed = false)
   {
-    $html = '<' . $tag;
-    if (is_array($options))
+    $_html = '<' . $tag;
+    if (is_array($attribs))
     {
-      foreach ($options as $key => $value)
+      foreach ($attribs as $_key => $_value)
       {
-        if ($key == 'error') // Form::*
+        if ($_key == 'error') // Form::*
         {
           continue;
         }
 
-        $html .= ' ' . $key . '="' . HTML::xmlEntities(($value === true) ? $key : $value) . '"';
+        $_html .= ' ' . $_key . '="' . HTML::xmlEntities(($_value === true) ? $_key : $_value) . '"';
       }
     }
-    $html .= ($closed ? ' />' . PHP_EOL : '>');
+    $_html .= ($closed ? ' />' . PHP_EOL : '>');
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void start(string $tag, array $options = null, bool $closed = false)
-   *
-   * Draws an HTML start tag
-   *
-   * @param string $tag HTML tag
-   * @param array $options (optional)
-   * @param bool $closed (optional) closed or not?
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function start($tag, $options = null, $closed = false)
-  {
-    echo HTML::strStart($tag, isset($options) ? $options : null, $closed);
-  }
-
-  /**
-   * string strEnd(string $tag)
+   * string end(string $tag)
    *
    * Returns an HTML end tag
    *
@@ -174,77 +145,43 @@ class HTML
    * @static
    * @since 0.8
    */
-  function strEnd($tag)
-  {
-    $html = '</' . $tag . '>' . PHP_EOL;
-
-    return $html;
-  }
-
-  /**
-   * void end(string $tag)
-   *
-   * Draws an HTML end tag
-   *
-   * @param string $tag HTML tag
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
   function end($tag)
   {
-    echo HTML::strEnd($tag);
+    $_html = '</' . $tag . '>' . PHP_EOL;
+
+    return $_html;
   }
 
   /**
-   * string strTag(string $tag, string $text, array $options = null)
+   * string tag(string $tag, string $text, array $attribs = null)
    *
    * Returns an HTML tag with text content
    *
    * @param string $tag HTML tag
    * @param string $text
-   * @param array $options (optional)
+   * @param array $attribs (optional)
    * @return string HTML tag with text content
    * @access public
    * @static
    * @since 0.8
    */
-  function strTag($tag, $text, $options = null)
+  function tag($tag, $text, $attribs = null)
   {
-    $rawText = strip_tags($text);
-    if ($rawText == $text)
+    $_rawText = strip_tags($text);
+    if ($_rawText == $text)
     {
       $text = HTML::xmlEntities($text);
     }
 
-    $html = HTML::strStart($tag, isset($options) ? $options : null);
-    $html .= $text;
-    $html .= '</' . $tag . '>'; //HTML::strEnd($tag);
+    $_html = HTML::start($tag, isset($attribs) ? $attribs : null);
+    $_html .= $text;
+    $_html .= '</' . $tag . '>'; //HTML::end($tag);
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void tag(string $tag, string $text, array $options = null)
-   *
-   * Draws an HTML tag with text content
-   *
-   * @param string $tag HTML tag
-   * @param string $text
-   * @param array $options (optional)
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function tag($tag, $text, $options = null)
-  {
-    echo HTML::strTag($tag, $text, isset($options) ? $options : null);
-  }
-
-  /**
-   * string strTable(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
+   * string table(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
    *
    * Returns html table
    * Options example:
@@ -266,172 +203,150 @@ class HTML
    * @access public
    * @static
    */
-  function strTable(&$head, &$body, $foot = null, $options = null, $caption = "")
+  function table(&$head, &$body, $foot = null, $options = null, $caption = "")
   {
-    $html = "";
+    $_html = '';
     if (count($head) == 0 && count($body) == 0)
     {
-      return $html; // no data, no table
+      return $_html; // no data, no table
     }
 
     if ((isset($options['align']) && $options['align'] == "center"))
     {
-      $html .= HTML::strStart('div', array('class' => 'center')) . PHP_EOL;
+      $_html .= HTML::start('div', array('class' => 'center')) . PHP_EOL;
     }
-    $html .= HTML::strStart('table') . PHP_EOL;
+    $_html .= HTML::start('table') . PHP_EOL;
 
     if ( !empty($caption) )
     {
-      $html .= HTML::strTag('caption', $caption) . PHP_EOL;
+      $_html .= HTML::tag('caption', $caption) . PHP_EOL;
     }
 
     if (count($head) > 0)
     {
-      $html .= HTML::strStart('thead') . PHP_EOL;
-      $html .= HTML::strStart('tr') . PHP_EOL;
-      foreach ($head as $key => $value)
+      $_html .= HTML::start('thead') . PHP_EOL;
+      $_html .= HTML::start('tr') . PHP_EOL;
+      foreach ($head as $_key => $_value)
       {
-        $html .= HTML::strTag('th',
-          gettype($value) == "array" ? $key : $value,
-          gettype($value) == "array" ? $value : null
+        $_html .= HTML::tag('th',
+          gettype($_value) == "array" ? $_key : $_value,
+          gettype($_value) == "array" ? $_value : null
         ) . PHP_EOL;
       }
-      $html .= HTML::strEnd('tr');
-      $html .= HTML::strEnd('thead');
+      $_html .= HTML::end('tr');
+      $_html .= HTML::end('thead');
     }
 
-    $maxCol = 1;
-    foreach ($body as $row)
+    $_maxCol = 1;
+    foreach ($body as $_row)
     {
-      if (count($row) > $maxCol)
+      if (count($_row) > $_maxCol)
       {
-        $maxCol = count($row);
+        $_maxCol = count($_row);
       }
     }
 
     if (count($foot) > 0)
     {
-      $html .= HTML::strStart('tfoot') . PHP_EOL;
-      foreach ($foot as $row)
+      $_html .= HTML::start('tfoot') . PHP_EOL;
+      foreach ($foot as $_row)
       {
-        $html .= HTML::strStart('tr') . PHP_EOL;
+        $_html .= HTML::start('tr') . PHP_EOL;
 
-        $cellOptions = null;
-        if ($maxCol > 1)
+        $_cellOptions = null;
+        if ($_maxCol > 1)
         {
-          $cellOptions['colspan'] = $maxCol;
+          $_cellOptions['colspan'] = $_maxCol;
         }
         if (isset($options['tfoot']['align']) && $options['tfoot']['align'] == 'left')
         {
-          $cellOptions['class'] = 'left';
+          $_cellOptions['class'] = 'left';
         }
         elseif (isset($options['tfoot']['align']) && $options['tfoot']['align'] == 'right')
         {
-          $cellOptions['class'] = 'right';
+          $_cellOptions['class'] = 'right';
         }
         else
         {
-          $cellOptions['class'] = 'center';
+          $_cellOptions['class'] = 'center';
         }
-        $html .= HTML::strTag('td', $row, $cellOptions);
+        $_html .= HTML::tag('td', $_row, $_cellOptions);
 
-        $html .= HTML::strEnd('tr');
+        $_html .= HTML::end('tr');
       }
-      $html .= HTML::strEnd('tfoot');
+      $_html .= HTML::end('tfoot');
     }
 
     if (count($body) > 0)
     {
-      $rowClass = "odd";
-      $html .= HTML::strStart('tbody') . PHP_EOL;
-      $numRow = 0;
-      foreach ($body as $row)
+      $_rowClass = "odd";
+      $_html .= HTML::start('tbody') . PHP_EOL;
+      $_numRow = 0;
+      foreach ($body as $_row)
       {
-        $cellOptions = null;
+        $_cellOptions = null;
         if ( !isset($options['shaded']) || (isset($options['shaded']) && $options['shaded']))
         {
-          $cellOptions['class'] = $rowClass;
+          $_cellOptions['class'] = $_rowClass;
         }
-        $html .= HTML::strStart('tr', $cellOptions);
+        $_html .= HTML::start('tr', $_cellOptions);
 
-        $numCol = 0;
-        foreach ($row as $data)
+        $_numCol = 0;
+        foreach ($_row as $_data)
         {
-          $cellOptions = null;
+          $_cellOptions = null;
 
-          if (isset($options['r' . $numRow]['colspan']) && $options['r' . $numRow]['colspan'] > 0)
+          if (isset($options['r' . $_numRow]['colspan']) && $options['r' . $_numRow]['colspan'] > 0)
           {
-            $cellOptions['colspan'] = $options['r' . $numRow]['colspan'];
+            $_cellOptions['colspan'] = $options['r' . $_numRow]['colspan'];
           }
 
-          $class = array();
-          if (isset($options[$numCol]['align']) && $options[$numCol]['align'] == 'center')
+          $_class = array();
+          if (isset($options[$_numCol]['align']) && $options[$_numCol]['align'] == 'center')
           {
-            $class[] = "center";
+            $_class[] = "center";
           }
-          elseif (isset($options[$numCol]['align']) && $options[$numCol]['align'] == 'right')
+          elseif (isset($options[$_numCol]['align']) && $options[$_numCol]['align'] == 'right')
           {
-            $class[] = "right";
-          }
-
-          if (isset($options[$numCol]['nowrap']) && $options[$numCol]['nowrap'])
-          {
-            $class[] = "nowrap";
+            $_class[] = "right";
           }
 
-          if (count($class) > 0)
+          if (isset($options[$_numCol]['nowrap']) && $options[$_numCol]['nowrap'])
           {
-            $cellOptions['class'] = implode(" ", $class);
+            $_class[] = "nowrap";
           }
 
-          $html .= HTML::strTag('td', $data, $cellOptions);
-          $numCol++;
+          if (count($_class) > 0)
+          {
+            $_cellOptions['class'] = implode(" ", $_class);
+          }
+
+          $_html .= HTML::tag('td', $_data, $_cellOptions);
+          $_numCol++;
         }
-        $html .= HTML::strEnd('tr');
-        $numRow++;
+        $_html .= HTML::end('tr');
+        $_numRow++;
+
         // swap row color
-        $rowClass = ($rowClass == "odd") ? "even" : "odd";
+        $_rowClass = ($_rowClass == "odd") ? "even" : "odd";
       }
-      $html .= HTML::strEnd('tbody');
+      $_html .= HTML::end('tbody');
     }
 
-    $html .= HTML::strEnd('table');
+    $_html .= HTML::end('table');
     if ((isset($options['align']) && $options['align'] == "center"))
     {
-      $html .= HTML::strEnd('div');
+      $_html .= HTML::end('div');
     }
 
     unset($head);
     unset($body);
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void table(array &$head, array &$body, array $foot = null, array $options = null, string $caption = "")
-   *
-   * Draws html table
-   *
-   * @param array &$head headers of table columns
-   * @param array &$body tabular data
-   * @param array $foot (optional) table footer
-   * @param array $options (optional) options of table and columns
-   * @param string $caption (optional)
-   * @return void
-   * @access public
-   * @static
-   */
-  function table(&$head, &$body, $foot = null, $options = null, $caption = "")
-  {
-    echo HTML::strTable($head, $body,
-      isset($foot) ? $foot : null,
-      isset($options) ? $options : null,
-      isset($caption) ? $caption : null
-    );
-  }
-
-  /**
-   * string strMessage(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
+   * string message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
    *
    * Returns an html paragraph with a message
    *
@@ -442,7 +357,7 @@ class HTML
    * @access public
    * @static
    */
-  function strMessage($text, $type = OPEN_MSG_WARNING, $block = true)
+  function message($text, $type = OPEN_MSG_WARNING, $block = true)
   {
     static $_list = array(
       OPEN_MSG_DEBUG   => 'debug',
@@ -458,246 +373,142 @@ class HTML
     }
 
     $_class = (isset($_list[$type]) ? $_list[$type] : 'warning');
-    $_html = HTML::strTag($block ? 'p' : 'span', $text, array('class' => $_class)) . PHP_EOL;
+    $_html = HTML::tag($block ? 'p' : 'span', $text, array('class' => $_class)) . PHP_EOL;
 
     return $_html;
   }
 
   /**
-   * void message(string $text, int $type = OPEN_MSG_WARNING, bool $block = true)
+   * string breadcrumb(array &$links, string $class = "")
    *
-   * Draws an html paragraph with a message
-   *
-   * @param string $text message
-   * @param int $type (optional) possible values: OPEN_MSG_ERROR, OPEN_MSG_WARNING (default), OPEN_MSG_INFO
-   * @param bool $block (optional) if false, inline tag (span), block tag otherwise (p)
-   * @return void
-   * @access public
-   * @static
-   */
-  function message($text, $type = OPEN_MSG_WARNING, $block = true)
-  {
-    echo HTML::strMessage($text, isset($type) ? $type : OPEN_MSG_WARNING, isset($block) ? $block : true);
-  }
-
-  /**
-   * string strBreadCrumb(array &$links, string $class = "")
-   *
-   * Returns a bread crumb and a title page.
+   * Returns a breadcrumb and a title page.
    *
    * @param array (associative - strings) $links texts and links to show in header
    * @param string $class (optional) to put a background-image
    * @return string bread crumb and title page
    * @access public
    * @static
-   * @see strLink
+   * @see HTML::link
+   * @see HTML::section
    * @since 0.8
    */
-  function strBreadCrumb(&$links, $class = "")
+  function breadcrumb(&$links, $class = "")
   {
     if ( !count($links) )
     {
       return;
     }
 
-    $html = HTML::strStart('p', array('id' => 'breadcrumb'));
+    $_html = HTML::start('p', array('id' => 'breadcrumb'));
 
-    $keys = array_keys($links);
-    $title = array_pop($keys);
+    $_keys = array_keys($links);
+    $_title = array_pop($_keys);
     array_pop($links);
-    foreach ($links as $key => $value)
+    foreach ($links as $_key => $_value)
     {
-      $html .= ($value) ? HTML::strLink($key, $value) : $key;
-      $html .= ' &raquo; ';
+      $_html .= ($_value) ? HTML::link($_key, $_value) : $_key;
+      $_html .= ' &raquo; ';
     }
 
-    $html .= HTML::strEnd('p');
+    $_html .= HTML::end('p');
 
-    $html .= HTML::strSection(1, $title, !empty($class) ? array('class' => $class) : null);
+    $_html .= HTML::section(1, $_title, !empty($class) ? array('class' => $class) : null);
 
     unset($links);
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void breadCrumb(array &$links, string $class = "")
-   *
-   * Draws a bread crumb and a title page.
-   *
-   * @param array (associative - strings) $links texts and links to show in header
-   * @param string $class (optional) to put a background-image
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function breadCrumb(&$links, $class = "")
-  {
-    echo HTML::strBreadCrumb($links, isset($class) ? $class : "");
-  }
-
-  /**
-   * string strLink(string $text, string $url, array $arg = null, array $addendum = null)
+   * string link(string $text, string $url, array $arg = null, array $attribs = null)
    *
    * Returns an HTML anchor link.
    *
    * @param string $text
    * @param string $url
    * @param array $arg (optional) arguments of $url
-   * @param array $addendum (optional)
+   * @param array $attribs (optional)
    * @return string HTML anchor link
    * @access public
    * @static
    * @since 0.8
    */
-  function strLink($text, $url, $arg = null, $addendum = null)
+  function link($text, $url, $arg = null, $attribs = null)
   {
-    $query = "";
+    $_query = '';
     if (is_array($arg))
     {
-      $query .= '?';
-      foreach ($arg as $key => $value)
+      foreach ($arg as $_key => $_value)
       {
-        $query .= urlencode($key) . '=' . urlencode($value) . '&';
+        $_query[] = urlencode($_key) . '=' . urlencode($_value);
       }
-      $query = rtrim($query, '&'); // remove last '&'
+      $_query = '?' . implode('&', $_query);
     }
-    $addendum['href'] = $url . $query;
+    $attribs['href'] = $url . $_query;
 
-    $html = HTML::strTag('a', $text, $addendum);
+    $_html = HTML::tag('a', $text, $attribs);
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void link(string $text, string $url, array $arg = null, array $addendum = null)
-   *
-   * Draws an HTML anchor link.
-   *
-   * @param string $text
-   * @param string $url
-   * @param array $arg (optional) arguments of $url
-   * @param array $addendum (optional)
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function link($text, $url, $arg = null, $addendum = null)
-  {
-    echo HTML::strLink($text, $url, is_array($arg) ? $arg : null, isset($addendum) ? $addendum : null);
-  }
-
-  /**
-   * string strSection(int $level, string $text, array $addendum = null)
+   * string section(int $level, string $text, array $attribs = null)
    *
    * Returns an HTML section
    *
    * @param int $level (1..6)
    * @param string $text
-   * @param array $addendum (optional)
+   * @param array $attribs (optional)
    * @return string HTML section
    * @access public
    * @static
    * @since 0.8
    */
-  function strSection($level, $text, $addendum = null)
+  function section($level, $text, $attribs = null)
   {
     $level = ($level > 0 && $level < 7) ? intval($level) : 1;
-    $html = HTML::strTag('h' . $level, $text, isset($addendum) ? $addendum : null) . PHP_EOL;
+    $_html = HTML::tag('h' . $level, $text, isset($attribs) ? $attribs : null) . PHP_EOL;
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void section(int $level, string $text, array $addendum = null)
-   *
-   * Draws an HTML section
-   *
-   * @param int $level (1..6)
-   * @param string $text
-   * @param array $addendum (optional)
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function section($level, $text, $addendum = null)
-  {
-    echo HTML::strSection($level, $text, isset($addendum) ? $addendum : null);
-  }
-
-  /**
-   * string strPara(string $text, array $addendum = null)
+   * string para(string $text, array $attribs = null)
    *
    * Returns an HTML paragraph
    *
    * @param string $text
-   * @param array $addendum (optional)
+   * @param array $attribs (optional)
    * @return string HTML paragraph
    * @access public
    * @static
    * @since 0.8
    */
-  function strPara($text, $addendum = null)
+  function para($text, $attribs = null)
   {
-    $html = HTML::strTag('p', $text, isset($addendum) ? $addendum : null) . PHP_EOL;
+    $_html = HTML::tag('p', $text, isset($attribs) ? $attribs : null) . PHP_EOL;
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void para(string $text, array $addendum = null)
-   *
-   * Draws an HTML paragraph
-   *
-   * @param string $text
-   * @param array $addendum (optional)
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function para($text, $addendum = null)
-  {
-    echo HTML::strPara($text, isset($addendum) ? $addendum : null);
-  }
-
-  /**
-   * string strRule(array $addendum = null)
+   * string rule(array $attribs = null)
    *
    * Returns an HTML horizontal rule
    *
-   * @param array $addendum (optional)
+   * @param array $attribs (optional)
    * @return string HTML horizontal rule
    * @access public
    * @static
    * @since 0.8
    */
-  function strRule($addendum = null)
+  function rule($attribs = null)
   {
-    return HTML::strStart('hr', isset($addendum) ? $addendum : null, true);
+    return HTML::start('hr', isset($attribs) ? $attribs : null, true);
   }
 
   /**
-   * void rule(array $addendum = null)
-   *
-   * Draws an HTML horizontal rule
-   *
-   * @param array $addendum (optional)
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function rule($addendum = null)
-  {
-    echo HTML::strRule(isset($addendum) ? $addendum : null);
-  }
-
-  /**
-   * string strItemList(array &$items, array $addendum = null, bool $ordered = false)
+   * string itemList(array &$items, array $attribs = null, bool $ordered = false)
    *
    * Returns an HTML ordered or unordered list
    *
@@ -715,7 +526,7 @@ class HTML
    *      2 => 'item text',
    *      3 => 'item text'
    *    );
-   * @param array $addendum (optional)
+   * @param array $attribs (optional)
    * @param bool $ordered (optional) ordered list or not
    * @return string HTML ordered or unordered list
    * @access public
@@ -723,64 +534,46 @@ class HTML
    * @since 0.8
    * @todo nested lists
    */
-  function strItemList(&$items, $addendum = null, $ordered = false)
+  function itemList(&$items, $attribs = null, $ordered = false)
   {
     if ( !is_array($items) )
     {
       return;
     }
 
-    $tag = ($ordered ? 'ol' : 'ul');
-    $html = HTML::strStart($tag, isset($addendum) ? $addendum : null)/* . PHP_EOL*/;
-    foreach ($items as $item)
+    $_tag = ($ordered ? 'ol' : 'ul');
+    $_html = HTML::start($_tag, isset($attribs) ? $attribs : null)/* . PHP_EOL*/;
+    foreach ($items as $_item)
     {
-      $content = '';
-      $options = null;
-      if (is_array($item))
+      $_content = '';
+      $_options = null;
+      if (is_array($_item))
       {
-        $content = $item[0];
-        $options = $item[1];
+        $_content = $_item[0];
+        $_options = $_item[1];
       }
       else
       {
-        $content = $item;
+        $_content = $_item;
       }
 
-      $html .= HTML::strTag('li', $content, $options)/* . PHP_EOL*/;
+      $_html .= HTML::tag('li', $_content, $_options)/* . PHP_EOL*/;
     }
-    $html .= HTML::strEnd($tag);
+    $_html .= HTML::end($_tag);
 
-    return $html;
+    return $_html;
   }
 
   /**
-   * void itemList(array &$items, array $addendum = null, bool $ordered = false)
-   *
-   * Draws an HTML ordered or unordered list
-   *
-   * @param array $items
-   * @param array $addendum (optional)
-   * @param bool $ordered (optional) ordered list or not
-   * @return void
-   * @access public
-   * @static
-   * @since 0.8
-   */
-  function itemList(&$items, $addendum = null, $ordered = false)
-  {
-    echo HTML::strItemList($items, isset($addendum) ? $addendum : null, $ordered);
-  }
-
-  /**
-   * string strImage(string $src, string $alt, array $addendum = null)
+   * string image(string $src, string $alt, array $attribs = null)
    *
    * Returns img html tag
    *
    * @param string $src image filename
    * @param string $alt alternative text
-   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
+   * @param array $attribs (optional) JavaScript event handlers, class attribute, etc
    *  example:
-   *    $addendum = array(
+   *    $attribs = array(
    *      'title' => 'title text',
    *      'height' => 31, // px
    *      'width' => 88, // px
@@ -790,32 +583,15 @@ class HTML
    * @access public
    * @static
    */
-  function strImage($src, $alt, $addendum = null)
+  function image($src, $alt, $attribs = null)
   {
-    $addendum['src'] = $src;
-    $addendum['alt'] = $alt;
-    $addendum['title'] = (isset($addendum['title']) ? $addendum['title'] : $alt);
+    $attribs['src']   = $src;
+    $attribs['alt']   = $alt;
+    $attribs['title'] = isset($attribs['title']) ? $attribs['title'] : $alt;
 
-    $html = HTML::strStart('img', $addendum, true);
+    $_html = HTML::start('img', $attribs, true);
 
-    return $html;
-  }
-
-  /**
-   * void image(string $src, string $alt, array $addendum = null)
-   *
-   * Draws img html tag
-   *
-   * @param string $src image filename
-   * @param string $alt alternative text
-   * @param array $addendum (optional) JavaScript event handlers, class attribute, etc
-   * @return void
-   * @access public
-   * @static
-   */
-  function image($src, $alt, $addendum = null)
-  {
-    echo HTML::strImage($src, $alt, $addendum);
+    return $_html;
   }
 
   /**
@@ -837,8 +613,8 @@ class HTML
 
     if ( !in_array($name, $_list) && is_file(OPEN_SCRIPT_PATH . $name))
     {
-      $_html = HTML::strStart('script', array('src' => OPEN_SCRIPT_PATH . $name, 'type' => 'text/javascript'));
-      $_html .= HTML::strEnd('script');
+      $_html = HTML::start('script', array('src' => OPEN_SCRIPT_PATH . $name, 'type' => 'text/javascript'));
+      $_html .= HTML::end('script');
       $_list[] = $name;
     }
 
