@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: I18n.php,v 1.10 2007/10/09 18:44:40 jact Exp $
+ * @version   CVS: $Id: I18n.php,v 1.11 2008/04/02 19:16:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -46,6 +46,7 @@ class I18n
    * @return string new language setted
    * @access public
    * @static
+   * @see OPEN_LANG_DEFAULT
    */
   function setLanguage($lang = "")
   {
@@ -104,6 +105,7 @@ class I18n
    * @return void
    * @access public
    * @static
+   * @see OPEN_LANG_FILENAME, OPEN_LANG_DIR, OPEN_CHARSET
    */
   function initLanguage($lang)
   {
@@ -117,10 +119,7 @@ class I18n
       $textDomain = $lang . "-" . OPEN_LANG_FILENAME;
       bindtextdomain($textDomain, realpath(OPEN_LANG_DIR));
       textdomain($textDomain);
-      $nls = I18n::getNLS();
-      bind_textdomain_codeset($textDomain,
-        isset($nls['charset'][$lang]) ? $nls['charset'][$lang] : $nls['default']['charset']
-      );
+      bind_textdomain_codeset($textDomain, OPEN_CHARSET);
     }
     else
     {
@@ -188,6 +187,7 @@ class I18n
    * @return mixed false if .po file doesn't exist or string with filename if it exists
    * @access public
    * @static
+   * @see OPEN_LANGUAGE, OPEN_LANG_DIR, OPEN_LANG_FILENAME
    */
   function poFilename($lang = "")
   {
@@ -226,6 +226,7 @@ class I18n
    * @return bool returns true if gettext is defined, and the .mo file is found for language, or no gettext, and a .po file is found
    * @access public
    * @static
+   * @see OPEN_LANG_DEFAULT, OPEN_LANG_DIR, OPEN_LANG_FILENAME
    */
   function languageExists($lang)
   {
@@ -313,6 +314,7 @@ class I18n
    * @access public
    * @static
    * @since 0.7
+   * @see OPEN_LANG_DIR, OPEN_LANG_DIR, OPEN_CHARSET
    */
   function languageList()
   {
