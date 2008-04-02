@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: i18n.php,v 1.2 2007/10/29 20:05:05 jact Exp $
+ * @version   CVS: $Id: i18n.php,v 1.3 2008/04/02 19:14:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -28,7 +28,6 @@
   {
     I18n::setLanguage(OPEN_LANGUAGE);
   }
-  I18n::initLanguage(OPEN_LANGUAGE);
 
   define("OPEN_CHARSET",
     (isset($nls['charset'][OPEN_LANGUAGE])
@@ -48,4 +47,6 @@
       : $nls['default']['encoding']
     )
   );
+
+  I18n::initLanguage(OPEN_LANGUAGE);
 ?>
