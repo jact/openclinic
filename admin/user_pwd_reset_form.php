@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: user_pwd_reset_form.php,v 1.37 2008/03/23 11:58:57 jact Exp $
+ * @version   CVS: $Id: user_pwd_reset_form.php,v 1.38 2008/09/28 20:19:30 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -126,7 +126,7 @@
   $tbody[] = $row;
 
   $row = Form::label("pwd", _("Password") . ":");
-  $row .= Form::strPassword("pwd", 20,
+  $row .= Form::password("pwd", 20,
     isset($formVar["pwd"]) ? $formVar["pwd"] : null,
     isset($formError["pwd"]) ? array('error' => $formError["pwd"]) : null
   );
@@ -134,7 +134,7 @@
   $tbody[] = $row;
 
   $row = Form::label("pwd2", _("Re-enter Password") . ":");
-  $row .= Form::strPassword("pwd2", 20,
+  $row .= Form::password("pwd2", 20,
     isset($formVar["pwd2"]) ? $formVar["pwd2"] : null,
     isset($formError["pwd2"]) ? array('error' => $formError["pwd2"]) : null
   );
