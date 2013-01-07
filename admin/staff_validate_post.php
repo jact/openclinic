@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_validate_post.php,v 1.13 2007/10/29 20:03:54 jact Exp $
+ * @version   CVS: $Id: staff_validate_post.php,v 1.14 2013/01/07 18:08:05 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -56,7 +56,7 @@
     $formError["nif"] = $staff->getNIFError();
     $formError["first_name"] = $staff->getFirstNameError();
     $formError["surname1"] = $staff->getSurname1Error();
-    $formError["surname2"] = $staff->getSurname2Error();
+    //$formError["surname2"] = $staff->getSurname2Error();
     $formError["login"] = $staff->getLoginError();
 
     Form::setSession($_POST, $formError);
