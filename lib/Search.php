@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Search.php,v 1.15 2008/03/23 11:57:05 jact Exp $
+ * @version   CVS: $Id: Search.php,v 1.16 2013/01/07 18:37:12 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -40,7 +40,7 @@ class Search
    * @access public
    * @static
    */
-  function explodeQuoted($text)
+  public static function explodeQuoted($text)
   {
     if (empty($text))
     {
@@ -93,7 +93,7 @@ class Search
    * @static
    * @todo optimize code with constants
    */
-  function pageLinks($currentPage, $pageCount, $url = '')
+  public static function pageLinks($currentPage, $pageCount, $url = '')
   {
     if ($pageCount <= 1)
     {
@@ -206,7 +206,7 @@ class Search
    * @access public
    * @static
    */
-  function changePageJS()
+  public static function changePageJS()
   {
     echo <<<EOT
 <!-- JavaScript to post back to this page -->

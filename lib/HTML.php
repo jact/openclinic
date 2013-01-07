@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: HTML.php,v 1.18 2008/03/23 11:53:44 jact Exp $
+ * @version   CVS: $Id: HTML.php,v 1.19 2013/01/07 18:34:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo rename file to Html.php
  */
@@ -72,7 +72,7 @@ class HTML
    * @static
    * @since 0.8
    */
-  function xmlEntities($text, $quoteStyle = ENT_QUOTES)
+  public static function xmlEntities($text, $quoteStyle = ENT_QUOTES)
   {
     static $_trans;
     if ( !isset($_trans) )
@@ -114,7 +114,7 @@ class HTML
    * @static
    * @since 0.8
    */
-  function start($tag, $attribs = null, $closed = false)
+  public static function start($tag, $attribs = null, $closed = false)
   {
     $_html = '<' . $tag;
     if (is_array($attribs))
@@ -126,7 +126,7 @@ class HTML
           continue;
         }
 
-        $_html .= ' ' . $_key . '="' . HTML::xmlEntities(($_value === true) ? $_key : $_value) . '"';
+        $_html .= ' ' . $_key . '="' . self::xmlEntities(($_value === true) ? $_key : $_value) . '"';
       }
     }
     $_html .= ($closed ? ' />' . PHP_EOL : '>');
@@ -145,7 +145,7 @@ class HTML
    * @static
    * @since 0.8
    */
-  function end($tag)
+  public static function end($tag)
   {
     $_html = '</' . $tag . '>' . PHP_EOL;
 
@@ -165,17 +165,17 @@ class HTML
    * @static
    * @since 0.8
    */
-  function tag($tag, $text, $attribs = null)
+  public static function tag($tag, $text, $attribs = null)
   {
     $_rawText = strip_tags($text);
     if ($_rawText == $text)
     {
-      $text = HTML::xmlEntities($text);
+      $text = self::xmlEntities($text);
     }
 
-    $_html = HTML::start($tag, isset($attribs) ? $attribs : null);
+    $_html = self::start($tag, isset($attribs) ? $attribs : null);
     $_html .= $text;
-    $_html .= '</' . $tag . '>'; //HTML::end($tag);
+    $_html .= self::end($tag);
 
     return $_html;
   }
@@ -203,7 +203,7 @@ class HTML
    * @access public
    * @static
    */
-  function table(&$head, &$body, $foot = null, $options = null, $caption = "")
+  public static function table(&$head, &$body, $foot = null, $options = null, $caption = "")
   {
     $_html = '';
     if (count($head) == 0 && count($body) == 0)
@@ -213,28 +213,28 @@ class HTML
 
     if ((isset($options['align']) && $options['align'] == "center"))
     {
-      $_html .= HTML::start('div', array('class' => 'center')) . PHP_EOL;
+      $_html .= self::start('div', array('class' => 'center')) . PHP_EOL;
     }
-    $_html .= HTML::start('table') . PHP_EOL;
+    $_html .= self::start('table') . PHP_EOL;
 
     if ( !empty($caption) )
     {
-      $_html .= HTML::tag('caption', $caption) . PHP_EOL;
+      $_html .= self::tag('caption', $caption) . PHP_EOL;
     }
 
     if (count($head) > 0)
     {
-      $_html .= HTML::start('thead') . PHP_EOL;
-      $_html .= HTML::start('tr') . PHP_EOL;
+      $_html .= self::start('thead') . PHP_EOL;
+      $_html .= self::start('tr') . PHP_EOL;
       foreach ($head as $_key => $_value)
       {
-        $_html .= HTML::tag('th',
+        $_html .= self::tag('th',
           gettype($_value) == "array" ? $_key : $_value,
           gettype($_value) == "array" ? $_value : null
         ) . PHP_EOL;
       }
-      $_html .= HTML::end('tr');
-      $_html .= HTML::end('thead');
+      $_html .= self::end('tr');
+      $_html .= self::end('thead');
     }
 
     $_maxCol = 1;
@@ -248,10 +248,10 @@ class HTML
 
     if (count($foot) > 0)
     {
-      $_html .= HTML::start('tfoot') . PHP_EOL;
+      $_html .= self::start('tfoot') . PHP_EOL;
       foreach ($foot as $_row)
       {
-        $_html .= HTML::start('tr') . PHP_EOL;
+        $_html .= self::start('tr') . PHP_EOL;
 
         $_cellOptions = null;
         if ($_maxCol > 1)
@@ -270,17 +270,17 @@ class HTML
         {
           $_cellOptions['class'] = 'center';
         }
-        $_html .= HTML::tag('td', $_row, $_cellOptions);
+        $_html .= self::tag('td', $_row, $_cellOptions);
 
-        $_html .= HTML::end('tr');
+        $_html .= self::end('tr');
       }
-      $_html .= HTML::end('tfoot');
+      $_html .= self::end('tfoot');
     }
 
     if (count($body) > 0)
     {
       $_rowClass = "odd";
-      $_html .= HTML::start('tbody') . PHP_EOL;
+      $_html .= self::start('tbody') . PHP_EOL;
       $_numRow = 0;
       foreach ($body as $_row)
       {
@@ -289,7 +289,7 @@ class HTML
         {
           $_cellOptions['class'] = $_rowClass;
         }
-        $_html .= HTML::start('tr', $_cellOptions);
+        $_html .= self::start('tr', $_cellOptions);
 
         $_numCol = 0;
         foreach ($_row as $_data)
@@ -321,22 +321,22 @@ class HTML
             $_cellOptions['class'] = implode(" ", $_class);
           }
 
-          $_html .= HTML::tag('td', $_data, $_cellOptions);
+          $_html .= self::tag('td', $_data, $_cellOptions);
           $_numCol++;
         }
-        $_html .= HTML::end('tr');
+        $_html .= self::end('tr');
         $_numRow++;
 
         // swap row color
         $_rowClass = ($_rowClass == "odd") ? "even" : "odd";
       }
-      $_html .= HTML::end('tbody');
+      $_html .= self::end('tbody');
     }
 
-    $_html .= HTML::end('table');
+    $_html .= self::end('table');
     if ((isset($options['align']) && $options['align'] == "center"))
     {
-      $_html .= HTML::end('div');
+      $_html .= self::end('div');
     }
 
     unset($head);
@@ -357,7 +357,7 @@ class HTML
    * @access public
    * @static
    */
-  function message($text, $type = OPEN_MSG_WARNING, $block = true)
+  public static function message($text, $type = OPEN_MSG_WARNING, $block = true)
   {
     static $_list = array(
       OPEN_MSG_DEBUG   => 'debug',
@@ -373,7 +373,7 @@ class HTML
     }
 
     $_class = (isset($_list[$type]) ? $_list[$type] : 'warning');
-    $_html = HTML::tag($block ? 'p' : 'span', $text, array('class' => $_class)) . PHP_EOL;
+    $_html = self::tag($block ? 'p' : 'span', $text, array('class' => $_class)) . PHP_EOL;
 
     return $_html;
   }
@@ -392,27 +392,27 @@ class HTML
    * @see HTML::section
    * @since 0.8
    */
-  function breadcrumb(&$links, $class = "")
+  public static function breadcrumb(&$links, $class = "")
   {
     if ( !count($links) )
     {
       return;
     }
 
-    $_html = HTML::start('p', array('id' => 'breadcrumb'));
+    $_html = self::start('p', array('id' => 'breadcrumb'));
 
     $_keys = array_keys($links);
     $_title = array_pop($_keys);
     array_pop($links);
     foreach ($links as $_key => $_value)
     {
-      $_html .= ($_value) ? HTML::link($_key, $_value) : $_key;
+      $_html .= ($_value) ? self::link($_key, $_value) : $_key;
       $_html .= ' &raquo; ';
     }
 
-    $_html .= HTML::end('p');
+    $_html .= self::end('p');
 
-    $_html .= HTML::section(1, $_title, !empty($class) ? array('class' => $class) : null);
+    $_html .= self::section(1, $_title, !empty($class) ? array('class' => $class) : null);
 
     unset($links);
 
@@ -433,7 +433,7 @@ class HTML
    * @static
    * @since 0.8
    */
-  function link($text, $url, $arg = null, $attribs = null)
+  public static function link($text, $url, $arg = null, $attribs = null)
   {
     $_query = '';
     if (is_array($arg))
@@ -446,7 +446,7 @@ class HTML
     }
     $attribs['href'] = $url . $_query;
 
-    $_html = HTML::tag('a', $text, $attribs);
+    $_html = self::tag('a', $text, $attribs);
 
     return $_html;
   }
@@ -464,10 +464,10 @@ class HTML
    * @static
    * @since 0.8
    */
-  function section($level, $text, $attribs = null)
+  public static function section($level, $text, $attribs = null)
   {
     $level = ($level > 0 && $level < 7) ? intval($level) : 1;
-    $_html = HTML::tag('h' . $level, $text, isset($attribs) ? $attribs : null) . PHP_EOL;
+    $_html = self::tag('h' . $level, $text, isset($attribs) ? $attribs : null) . PHP_EOL;
 
     return $_html;
   }
@@ -484,9 +484,9 @@ class HTML
    * @static
    * @since 0.8
    */
-  function para($text, $attribs = null)
+  public static function para($text, $attribs = null)
   {
-    $_html = HTML::tag('p', $text, isset($attribs) ? $attribs : null) . PHP_EOL;
+    $_html = self::tag('p', $text, isset($attribs) ? $attribs : null) . PHP_EOL;
 
     return $_html;
   }
@@ -502,9 +502,9 @@ class HTML
    * @static
    * @since 0.8
    */
-  function rule($attribs = null)
+  public static function rule($attribs = null)
   {
-    return HTML::start('hr', isset($attribs) ? $attribs : null, true);
+    return self::start('hr', isset($attribs) ? $attribs : null, true);
   }
 
   /**
@@ -534,7 +534,7 @@ class HTML
    * @since 0.8
    * @todo nested lists
    */
-  function itemList(&$items, $attribs = null, $ordered = false)
+  public static function itemList(&$items, $attribs = null, $ordered = false)
   {
     if ( !is_array($items) )
     {
@@ -542,7 +542,7 @@ class HTML
     }
 
     $_tag = ($ordered ? 'ol' : 'ul');
-    $_html = HTML::start($_tag, isset($attribs) ? $attribs : null)/* . PHP_EOL*/;
+    $_html = self::start($_tag, isset($attribs) ? $attribs : null)/* . PHP_EOL*/;
     foreach ($items as $_item)
     {
       $_content = '';
@@ -557,9 +557,9 @@ class HTML
         $_content = $_item;
       }
 
-      $_html .= HTML::tag('li', $_content, $_options)/* . PHP_EOL*/;
+      $_html .= self::tag('li', $_content, $_options)/* . PHP_EOL*/;
     }
-    $_html .= HTML::end($_tag);
+    $_html .= self::end($_tag);
 
     return $_html;
   }
@@ -583,13 +583,13 @@ class HTML
    * @access public
    * @static
    */
-  function image($src, $alt, $attribs = null)
+  public static function image($src, $alt, $attribs = null)
   {
     $attribs['src']   = $src;
     $attribs['alt']   = $alt;
     $attribs['title'] = isset($attribs['title']) ? $attribs['title'] : $alt;
 
-    $_html = HTML::start('img', $attribs, true);
+    $_html = self::start('img', $attribs, true);
 
     return $_html;
   }
@@ -606,15 +606,15 @@ class HTML
    * @see OPEN_SCRIPT_PATH
    * @since 0.8
    */
-  function insertScript($name)
+  public static function insertScript($name)
   {
     static $_list = array();
     $_html = '';
 
     if ( !in_array($name, $_list) && is_file(OPEN_SCRIPT_PATH . $name))
     {
-      $_html = HTML::start('script', array('src' => OPEN_SCRIPT_PATH . $name, 'type' => 'text/javascript'));
-      $_html .= HTML::end('script');
+      $_html = self::start('script', array('src' => OPEN_SCRIPT_PATH . $name, 'type' => 'text/javascript'));
+      $_html .= self::end('script');
       $_list[] = $name;
     }
 

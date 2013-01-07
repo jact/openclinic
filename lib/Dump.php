@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Dump.php,v 1.3 2007/09/29 10:21:06 jact Exp $
+ * @version   CVS: $Id: Dump.php,v 1.4 2013/01/07 18:32:44 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -196,7 +196,7 @@ class Dump
    * @access public
    * @static
    */
-  function backQuote($mixedVar, $doIt = true)
+  public static function backQuote($mixedVar, $doIt = true)
   {
     if ($doIt == false || DUMP_MYSQL_INT_VERSION < 32306 || empty($mixedVar) || $mixedVar == '*')
     {
@@ -232,7 +232,7 @@ class Dump
    * @access public
    * @static
    */
-  function addSlashes($text, $isLike = false)
+  public static function addSlashes($text, $isLike = false)
   {
     $text = ($isLike)
       ? str_replace('\\', '\\\\\\\\', $text)
@@ -256,13 +256,13 @@ class Dump
    * @static
    * @see DUMP_CRLF, DUMP_MYSQL_INT_VERSION
    */
-  function SQLDefinition($db, $table, $options = null)
+  public static function SQLDefinition($db, $table, $options = null)
   {
     $schemaCreate = '';
     $useBackquote = (isset($options['use_backquotes']) ? $options['use_backquotes'] : false);
     if (isset($options['drop']) && $options['drop'])
     {
-      $schemaCreate .= 'DROP TABLE IF EXISTS ' . Dump::backQuote($table, $useBackquote) . ';' . DUMP_CRLF;
+      $schemaCreate .= 'DROP TABLE IF EXISTS ' . self::backQuote($table, $useBackquote) . ';' . DUMP_CRLF;
     }
 
     $localConn = new DbConnection();
@@ -273,7 +273,7 @@ class Dump
 
     if (DUMP_MYSQL_INT_VERSION >= 32321)
     {
-      $result = $localConn->exec('SHOW TABLE STATUS FROM ' . $db . ' LIKE "' . Dump::addSlashes($table) . '"');
+      $result = $localConn->exec('SHOW TABLE STATUS FROM ' . $db . ' LIKE "' . self::addSlashes($table) . '"');
       if ($result != false && $localConn->numRows() > 0)
       {
         $tmpRes = $localConn->fetchRow(MYSQL_ASSOC);
@@ -299,14 +299,14 @@ class Dump
       // Whether to quote table and fields names or not
       $localConn->exec('SET SQL_QUOTE_SHOW_CREATE=' . ($useBackquote ? 1 : 0));
 
-      $localQuery = 'SHOW CREATE TABLE ' . Dump::backQuote($db) . '.' . Dump::backQuote($table);
+      $localQuery = 'SHOW CREATE TABLE ' . self::backQuote($db) . '.' . self::backQuote($table);
       $result = $localConn->exec($localQuery);
       if ($result != false && $localConn->numRows() > 0)
       {
         $tmpRes    = $localConn->fetchRow(MYSQL_NUM);
         $pos       = strpos($tmpRes[1], ' (');
         $tmpRes[1] = substr($tmpRes[1], 0, 13) // strlen('CREATE TABLE ') = 13
-                   . ($useBackquote ? Dump::backQuote($tmpRes[0]) : $tmpRes[0])
+                   . ($useBackquote ? self::backQuote($tmpRes[0]) : $tmpRes[0])
                    . substr($tmpRes[1], $pos);
         $schemaCreate .= str_replace("\n", DUMP_CRLF, $tmpRes[1]);
       }
@@ -316,9 +316,9 @@ class Dump
     } // end if MySQL >= 3.23.21
 
     // For MySQL < 3.23.20
-    $schemaCreate .= 'CREATE TABLE ' . Dump::backQuote($table, $useBackquote) . ' (' . DUMP_CRLF;
+    $schemaCreate .= 'CREATE TABLE ' . self::backQuote($table, $useBackquote) . ' (' . DUMP_CRLF;
 
-    $localQuery = 'SHOW FIELDS FROM ' . Dump::backQuote($db) . '.' . Dump::backQuote($table);
+    $localQuery = 'SHOW FIELDS FROM ' . self::backQuote($db) . '.' . self::backQuote($table);
     if ( !$localConn->exec($localQuery) )
     {
       return false;
@@ -326,10 +326,10 @@ class Dump
 
     while ($row = $localConn->fetchRow())
     {
-      $schemaCreate .= '   ' . Dump::backQuote($row['Field'], $useBackquote) . ' ' . strtoupper($row['Type']);
+      $schemaCreate .= '   ' . self::backQuote($row['Field'], $useBackquote) . ' ' . strtoupper($row['Type']);
       if (isset($row['Default']) && !empty($row['Default']) )
       {
-        $schemaCreate .= ' DEFAULT "' . Dump::addSlashes($row['Default']) . '"';
+        $schemaCreate .= ' DEFAULT "' . self::addSlashes($row['Default']) . '"';
       }
 
       if ($row['Null'] != 'YES')
@@ -346,7 +346,7 @@ class Dump
     } // end while
     $schemaCreate = ereg_replace(',' . DUMP_CRLF . '$', '', $schemaCreate);
 
-    $localQuery = 'SHOW KEYS FROM ' . Dump::backQuote($db) . '.' . Dump::backQuote($table);
+    $localQuery = 'SHOW KEYS FROM ' . self::backQuote($db) . '.' . self::backQuote($table);
     if ( !$localConn->exec($localQuery) )
     {
       return false;
@@ -375,11 +375,11 @@ class Dump
 
       if ($subPart > 1)
       {
-        $index[$kname][] = Dump::backQuote($row['Column_name'], $useBackquote) . '(' . $subPart . ')';
+        $index[$kname][] = self::backQuote($row['Column_name'], $useBackquote) . '(' . $subPart . ')';
       }
       else
       {
-        $index[$kname][] = Dump::backQuote($row['Column_name'], $useBackquote);
+        $index[$kname][] = self::backQuote($row['Column_name'], $useBackquote);
       }
     } // end while
     $localConn->close();
@@ -425,7 +425,7 @@ class Dump
    * @static
    * @see DUMP_CRLF
    */
-  function SQLData($db, $table, $options = null)
+  public static function SQLData($db, $table, $options = null)
   {
     $useBackquote = (isset($options['use_backquotes']) ? $options['use_backquotes'] : false);
 
@@ -440,7 +440,7 @@ class Dump
       return false;
     }
 
-    $localQuery = 'SELECT * FROM ' . Dump::backQuote($db) . '.' . Dump::backQuote($table) . $limitClause;
+    $localQuery = 'SELECT * FROM ' . self::backQuote($db) . '.' . self::backQuote($table) . $limitClause;
     if ( !$localConn->exec($localQuery) )
     {
       return false;
@@ -452,7 +452,7 @@ class Dump
     // Checks whether the field is an integer or not
     for ($j = 0; $j < $numFields; $j++)
     {
-      $fieldSet[$j] = Dump::backQuote($localConn->fieldName($j), $useBackquote);
+      $fieldSet[$j] = self::backQuote($localConn->fieldName($j), $useBackquote);
       $type         = $localConn->fieldType($j);
 
       $fieldNum[$j] = ($type == 'tinyint' || $type == 'smallint' || $type == 'mediumint' ||
@@ -460,7 +460,7 @@ class Dump
     } // end for
 
     // Sets the scheme
-    $schemaInsert = 'INSERT INTO ' . Dump::backQuote($table, $useBackquote);
+    $schemaInsert = 'INSERT INTO ' . self::backQuote($table, $useBackquote);
     if (isset($options['show_columns']) && $options['show_columns'])
     {
       $fields       = implode(', ', $fieldSet);
@@ -494,7 +494,7 @@ class Dump
           // a string
           else
           {
-            $values[] = "'" . str_replace($search, $replace, Dump::addSlashes($row[$j])) . "'";
+            $values[] = "'" . str_replace($search, $replace, self::addSlashes($row[$j])) . "'";
           }
         }
         else
@@ -549,7 +549,7 @@ class Dump
    * @static
    * @see DUMP_CRLF
    */
-  function CSVData($db, $table, $options = null)
+  public static function CSVData($db, $table, $options = null)
   {
     $what = isset($options['what']) ? $options['what'] : 'excel';
 
@@ -618,7 +618,7 @@ class Dump
     }
 
     // Gets the data from the database
-    $localQuery = 'SELECT * FROM ' . Dump::backQuote($db) . '.' . Dump::backQuote($table) . $limitClause;
+    $localQuery = 'SELECT * FROM ' . self::backQuote($db) . '.' . self::backQuote($table) . $limitClause;
     if ( !$localConn->exec($localQuery) )
     {
       return false;
@@ -700,7 +700,7 @@ class Dump
    * @static
    * @see DUMP_CRLF
    */
-  function XMLData($db, $table, $options = null)
+  public static function XMLData($db, $table, $options = null)
   {
     $localConn = new DbConnection();
     if ( !$localConn->connect() )
@@ -708,7 +708,7 @@ class Dump
       return false;
     }
 
-    $localQuery = 'SHOW COLUMNS FROM ' . Dump::backQuote($table) . ' FROM ' . Dump::backQuote($db);
+    $localQuery = 'SHOW COLUMNS FROM ' . self::backQuote($table) . ' FROM ' . self::backQuote($db);
     if ( !$localConn->exec($localQuery) )
     {
       return false;
@@ -730,7 +730,7 @@ class Dump
       ? ' LIMIT ' . (($options['from'] > 0) ? $options['from'] . ', ' : '') . $options['to']
       : '';
 
-    $localQuery = 'SELECT * FROM ' . Dump::backQuote($db) . '.' . Dump::backQuote($table) . $limitClause;
+    $localQuery = 'SELECT * FROM ' . self::backQuote($db) . '.' . self::backQuote($table) . $limitClause;
     if ( !$localConn->exec($localQuery) )
     {
       return false;

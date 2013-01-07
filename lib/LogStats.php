@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.12 2008/03/23 11:58:23 jact Exp $
+ * @version   CVS: $Id: LogStats.php,v 1.13 2013/01/07 18:36:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  * @todo methods only return string (not echos)
@@ -49,7 +49,7 @@ class LogStats
    * @access private
    * @static
    */
-  function _percBar($percentage, $scale = 1, $label = "")
+  private static function _percBar($percentage, $scale = 1, $label = "")
   {
     //$leftSize = getimagesize("../img/leftbar.gif");
     //$mainSize = getimagesize("../img/mainbar.gif");
@@ -74,7 +74,7 @@ class LogStats
    * @access public
    * @static
    */
-  function getMonthName($index = 0)
+  public static function getMonthName($index = 0)
   {
     $_months = array(
       1 => _("January"),
@@ -104,7 +104,7 @@ class LogStats
    * @access public
    * @static
    */
-  function yearly($table)
+  public static function yearly($table)
   {
     $logQ = new Query_LogStats($table);
     $totalHits = $logQ->totalHits();
@@ -143,7 +143,7 @@ class LogStats
       $row .= OPEN_SEPARATOR;
       $widthImage = round(100 * $hits / $totalHits, 0);
       $percent = substr(100 * $hits / $totalHits, 0, 5);
-      $row .= LogStats::_percBar($widthImage);
+      $row .= self::_percBar($widthImage);
       $row .= ' ' . $percent . '% (' . $hits . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -166,7 +166,7 @@ class LogStats
    * @access public
    * @static
    */
-  function monthly($table, $year)
+  public static function monthly($table, $year)
   {
     $logQ = new Query_LogStats($table);
     $totalHits = $logQ->yearHits($year);
@@ -193,7 +193,7 @@ class LogStats
 
     $array = $logQ->yearHitsByMonth($year);
 
-    $months = LogStats::getMonthName();
+    $months = self::getMonthName();
 
     $tbody = array();
     foreach ($array as $month => $hits)
@@ -208,7 +208,7 @@ class LogStats
       $row .= OPEN_SEPARATOR;
       $widthImage = round(100 * $hits / $totalHits, 0);
       $percent = substr(100 * $hits / $totalHits, 0, 5);
-      $row .= LogStats::_percBar($widthImage);
+      $row .= self::_percBar($widthImage);
       $row .= ' ' . $percent . '% (' . $hits . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -232,12 +232,12 @@ class LogStats
    * @access public
    * @static
    */
-  function daily($table, $year, $month)
+  public static function daily($table, $year, $month)
   {
     $logQ = new Query_LogStats($table);
     $totalHits = $logQ->monthHits($year, $month);
 
-    $monthName = LogStats::getMonthName($month);
+    $monthName = self::getMonthName($month);
 
     echo HTML::section(4, sprintf(_("Daily Stats for %s, %d: %d hits"),
       $monthName, intval($year), $totalHits)
@@ -286,7 +286,7 @@ class LogStats
         $widthImage = round(100 * $hits / $totalHits, 0);
         $percent = substr(100 * $hits / $totalHits, 0, 5);
       }
-      $row .= LogStats::_percBar($widthImage);
+      $row .= self::_percBar($widthImage);
       $row .= ' ' . $percent . '% (' . $hits . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -311,12 +311,12 @@ class LogStats
    * @access public
    * @static
    */
-  function hourly($table, $year, $month, $day)
+  public static function hourly($table, $year, $month, $day)
   {
     $logQ = new Query_LogStats($table);
     $totalHits = $logQ->dayHits($year, $month, $day);
 
-    $monthName = LogStats::getMonthName($month);
+    $monthName = self::getMonthName($month);
 
     echo HTML::section(4, sprintf(_("Hourly Stats for %s %d, %d: %d hits"),
       $monthName, intval($day), intval($year), $totalHits)
@@ -357,7 +357,7 @@ class LogStats
         $widthImage = round(100 * $hits / $totalHits, 0);
         $percent = substr(100 * $hits / $totalHits, 0, 5);
       }
-      $row .= LogStats::_percBar($widthImage);
+      $row .= self::_percBar($widthImage);
       $row .= ' ' . $percent . '% (' . $hits . ')';
 
       $tbody[] = explode(OPEN_SEPARATOR, $row);
@@ -379,7 +379,7 @@ class LogStats
    * @access public
    * @static
    */
-  function summary($table)
+  public static function summary($table)
   {
     $logQ = new Query_LogStats($table);
     $total = $logQ->totalHits();
@@ -409,7 +409,7 @@ class LogStats
     if (is_array($array))
     {
       list($year, $month, $hits) = $array;
-      $months = LogStats::getMonthName();
+      $months = self::getMonthName();
 
       echo HTML::para(sprintf(_("Busiest Month: %s %d (%d hits)"), $months[intval($month)], intval($year), $hits));
     }

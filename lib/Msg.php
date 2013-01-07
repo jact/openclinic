@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Msg.php,v 1.2 2008/03/23 11:56:08 jact Exp $
+ * @version   CVS: $Id: Msg.php,v 1.3 2013/01/07 18:36:19 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -39,7 +39,7 @@ class Msg
    * @access public
    * @static
    */
-  function hint($text)
+  public static function hint($text)
   {
     return HTML::message($text, OPEN_MSG_HINT);
   }
@@ -52,7 +52,7 @@ class Msg
    * @access public
    * @static
    */
-  function info($text)
+  public static function info($text)
   {
     return HTML::message($text, OPEN_MSG_INFO);
   }
@@ -65,7 +65,7 @@ class Msg
    * @access public
    * @static
    */
-  function warning($text)
+  public static function warning($text)
   {
     return HTML::message($text, OPEN_MSG_WARNING);
   }
@@ -78,7 +78,7 @@ class Msg
    * @access public
    * @static
    */
-  function error($text)
+  public static function error($text)
   {
     return HTML::message($text, OPEN_MSG_ERROR);
   }

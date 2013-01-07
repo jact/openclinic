@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: String.php,v 1.1 2007/11/03 16:56:05 jact Exp $
+ * @version   CVS: $Id: String.php,v 1.2 2013/01/07 18:37:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,7 +41,7 @@ class String
    * @access public
    * @static
    */
-  function fieldPreview($field)
+  public static function fieldPreview($field)
   {
     if ( !defined("OPEN_FIELD_PREVIEW_LIMIT") )
     {
@@ -75,7 +75,7 @@ class String
    * @access public
    * @static
    */
-  function translateBrowser($text)
+  public static function translateBrowser($text)
   {
     return ((strpos($_SERVER["HTTP_USER_AGENT"], "Gecko") === false) ? $text : utf8_encode($text));
   }
@@ -90,7 +90,7 @@ class String
    * @access public
    * @static
    */
-  function unTranslateBrowser($text)
+  public static function unTranslateBrowser($text)
   {
     return ((strpos($_SERVER["HTTP_USER_AGENT"], "Gecko") === false) ? $text : utf8_decode($text));
   }
@@ -106,7 +106,7 @@ class String
    * @access public
    * @static
    */
-  function numberToAlphabet($number)
+  public static function numberToAlphabet($number)
   {
     return ($number-- > 26 ? chr(($number / 26 + 25) % 26 + ord('A')) : '') . chr($number % 26 + ord('A'));
   }

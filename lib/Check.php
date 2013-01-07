@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Check.php,v 1.10 2007/12/01 12:42:51 jact Exp $
+ * @version   CVS: $Id: Check.php,v 1.11 2013/01/07 18:32:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -105,7 +105,7 @@ class Check
    * @access public
    * @static
    */
-  function hasMetas($text)
+  public static function hasMetas($text)
   {
     if (empty($text))
     {
@@ -129,7 +129,7 @@ class Check
    * @static
    * @see customStrip() for how they are removed
    */
-  function stripMetas($text)
+  public static function stripMetas($text)
   {
     if (empty($text))
     {
@@ -137,7 +137,7 @@ class Check
     }
 
     $metas = array('.', '+', '*', '?', '[', '^', ']', '(', '$', ')', '\\');
-    $new = Check::customStrip($metas, $text);
+    $new = self::customStrip($metas, $text);
 
     return $new;
   }
@@ -155,7 +155,7 @@ class Check
    * @access public
    * @static
    */
-  function customStrip($chars, $text, $insensitive = false)
+  public static function customStrip($chars, $text, $insensitive = false)
   {
     if (empty($text))
     {
@@ -207,7 +207,7 @@ class Check
    * @static
    * @see customStrip() for how they are removed
    */
-  function safeText($text, $allowTags = true, $includeEvents = true)
+  public static function safeText($text, $allowTags = true, $includeEvents = true)
   {
     if ($allowTags)
     {
@@ -228,7 +228,7 @@ class Check
         "onload", "onunload", "onresize",
         "onabort", "onchange", "onerror"
       );
-      $value = Check::customStrip($events, $value, true); // case insensitive
+      $value = self::customStrip($events, $value, true); // case insensitive
       unset($events);
     }
 
@@ -249,7 +249,7 @@ class Check
    * @see safeText() for how they are removed
    * @since 0.7
    */
-  function safeArray(&$array)
+  public static function safeArray(&$array)
   {
     if ( !is_array($array) )
     {
@@ -261,11 +261,11 @@ class Check
     {
       if (is_array($value))
       {
-        $safeArray[$key] = Check::safeArray($value);
+        $safeArray[$key] = self::safeArray($value);
       }
       else
       {
-        $safeArray[$key] = Check::safeText($value, false, false);
+        $safeArray[$key] = self::safeText($value, false, false);
       }
     }
 
@@ -285,7 +285,7 @@ class Check
    * @static
    * @since 0.8
    */
-  function basicClean($string)
+  public static function basicClean($string)
   {
     if (get_magic_quotes_gpc())
     {
@@ -332,7 +332,7 @@ class Check
    * @static
    * @since 0.8
    */
-  function removeMagicQuotes($data)
+  public static function removeMagicQuotes($data)
   {
     if (get_magic_quotes_gpc())
     {
@@ -342,7 +342,7 @@ class Check
         $name = stripslashes($name);
         if (is_array($value))
         {
-          $newdata[$name] = Check::removeMagicQuotes($value); //self::removeMagicQuotes($value);
+          $newdata[$name] = self::removeMagicQuotes($value);
         }
         else
         {
@@ -369,21 +369,20 @@ class Check
    * @static
    * @since 0.8
    */
-  function getVar($source, $name, $filter = CHK_NO_FILTER, $options = null, $characterset = "")
+  public static function getVar($source, $name, $filter = CHK_NO_FILTER, $options = null, $characterset = "")
   {
-    if ( !Check::isVar($source, $name) ) // self::isVar($source, $name)
+    if ( !self::isVar($source, $name) )
     {
       return false;
     }
 
-    $value = Check::_rawVar($source, $name); // self::_rawVar($source, $name);
+    $value = self::_rawVar($source, $name);
     if ($filter == CHK_NO_FILTER || $filter == CHK_UNSAFE_RAW)
     {
       return $value;
     }
 
-    //return self::filter($value, $filter, $options, $characterset);
-    return Check::filter($value, $filter, $options, $characterset);
+    return self::filter($value, $filter, $options, $characterset);
   }
 
   /**
@@ -398,7 +397,7 @@ class Check
    * @static
    * @since 0.8
    */
-  function filter($value, $filter, $options = null, $characterset = "")
+  public static function filter($value, $filter, $options = null, $characterset = "")
   {
     $ret = $value;
     switch ($filter)
@@ -430,7 +429,7 @@ class Check
 
       case CHK_SF_STRING:
         // @todo filter options CHK_STRIP_LOW, CHK_STRIP_HIGH, CHK_ENCODE_LOW, CHK_ENCODE_HIGH, CHK_ENCODE_AMP
-        $ret = Check::safeText($value); // self::safeText($value);
+        $ret = self::safeText($value);
         break;
 
       case CHK_SF_ENCODED:
@@ -455,7 +454,7 @@ class Check
    * @static
    * @since 0.8
    */
-  function isVar($source, $name)
+  public static function isVar($source, $name)
   {
     $ret = false;
     switch ($source)
@@ -498,9 +497,9 @@ class Check
    * @static
    * @since 0.8
    */
-  function _rawVar($source, $name)
+  private static function _rawVar($source, $name)
   {
-    /*if ( !Check::isVar($source, $name) )
+    /*if ( !self::isVar($source, $name) )
     {
       return false;
     }*/
@@ -547,7 +546,7 @@ class Check
    * @access public
    * @static
    */
-  function postGetSessionInt($field, $default = 0)
+  public static function postGetSessionInt($field, $default = 0)
   {
     $_value = $default;
     if (isset($_POST[$field]))
@@ -579,17 +578,17 @@ class Check
    * @access public
    * @static
    */
-  function postGetSessionString($field, $default = "")
+  public static function postGetSessionString($field, $default = "")
   {
     $_value = $default;
     if (isset($_POST[$field]))
     {
-      $_value = Check::safeText($_POST[$field]);
+      $_value = self::safeText($_POST[$field]);
       $_SESSION['breadcrumb'][$field] = $_value;
     }
     elseif (isset($_GET[$field]))
     {
-      $_value = Check::safeText($_GET[$field]);
+      $_value = self::safeText($_GET[$field]);
       $_SESSION['breadcrumb'][$field] = $_value;
     }
     elseif (isset($_SESSION['breadcrumb'][$field]))

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Registry.php,v 1.1 2008/02/10 12:35:36 jact Exp $
+ * @version   CVS: $Id: Registry.php,v 1.2 2013/01/07 18:36:43 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -31,7 +31,7 @@
  */
 class Registry
 {
-  //private static $_registry = null; // PHP5
+  private static $_registry = null;
 
   /**
    * mixed getInstance(void)
@@ -40,10 +40,9 @@ class Registry
    * @access public
    * @static
    */
-  function getInstance()
+  public static function getInstance()
   {
-    return $_SESSION['registry'];
-    //return self::$_registry; // PHP5
+    return self::$_registry;
   }
 
   /**
@@ -53,10 +52,9 @@ class Registry
    * @access public
    * @static
    */
-  function unsetInstance()
+  public static function unsetInstance()
   {
-    $_SESSION['registry'] = null;
-    //self::$_registry = null; // PHP5
+    self::$_registry = null;
   }
 
   /**
@@ -67,10 +65,9 @@ class Registry
    * @access public
    * @static
    */
-  function get($index)
+  public static function get($index)
   {
-    return (Registry::isRegistered($index)) ? $_SESSION['registry'][$index] : null;
-    //return (self::isRegistered($index)) ? self::$_registry[$index] : null; // PHP5
+    return (self::isRegistered($index)) ? self::$_registry[$index] : null;
   }
 
   /**
@@ -81,10 +78,9 @@ class Registry
    * @access public
    * @static
    */
-  function isRegistered($index)
+  public static function isRegistered($index)
   {
-    return isset($_SESSION['registry'][$index]);
-    //return isset(self::$_registry[$index]); // PHP5
+    return isset(self::$_registry[$index]);
   }
 
   /**
@@ -96,10 +92,9 @@ class Registry
    * @access public
    * @static
    */
-  function set($index, $value)
+  public static function set($index, $value)
   {
-    $_SESSION['registry'][$index] = $value;
-    //self::$_registry[$index] = $value; // PHP5
+    self::$_registry[$index] = $value;
   }
 
   /**
@@ -110,10 +105,9 @@ class Registry
    * @access public
    * @static
    */
-  function delete($index)
+  public static function delete($index)
   {
-    unset($_SESSION['registry'][$index]);
-    //unset(self::$_registry[$index]); // PHP5
+    unset(self::$_registry[$index]);
   }
 }
 ?>

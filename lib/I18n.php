@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: I18n.php,v 1.11 2008/04/02 19:16:00 jact Exp $
+ * @version   CVS: $Id: I18n.php,v 1.12 2013/01/07 18:35:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,7 +48,7 @@ class I18n
    * @static
    * @see OPEN_LANG_DEFAULT
    */
-  function setLanguage($lang = "")
+  public static function setLanguage($lang = "")
   {
     $newLang = OPEN_LANG_DEFAULT;
     if (empty($lang))
@@ -67,7 +67,7 @@ class I18n
         {
           $browserLanguage = strtolower($langPieces[0]). "_" . strtoupper($langPieces[1]);
         }
-        if (I18n::languageExists($browserLanguage))
+        if (self::languageExists($browserLanguage))
         {
           $newLang = $browserLanguage;
         }
@@ -75,7 +75,7 @@ class I18n
     }
     else
     {
-      if (I18n::languageExists($lang))
+      if (self::languageExists($lang))
       {
         $newLang = $lang;
       }
@@ -107,7 +107,7 @@ class I18n
    * @static
    * @see OPEN_LANG_FILENAME, OPEN_LANG_DIR, OPEN_CHARSET
    */
-  function initLanguage($lang)
+  public static function initLanguage($lang)
   {
     /**
      * Test if we're using gettext. If yes, do some gettext settings.
@@ -123,7 +123,7 @@ class I18n
     }
     else
     {
-      I18n::emulateGetText();
+      self::emulateGetText();
     }
   }
 
@@ -137,11 +137,11 @@ class I18n
    * @access public
    * @static
    */
-  function emulateGetText()
+  public static function emulateGetText()
   {
     global $translation;
 
-    $filename = I18n::poFilename();
+    $filename = self::poFilename();
     if ($filename)
     {
       $lines = file($filename);
@@ -189,7 +189,7 @@ class I18n
    * @static
    * @see OPEN_LANGUAGE, OPEN_LANG_DIR, OPEN_LANG_FILENAME
    */
-  function poFilename($lang = "")
+  public static function poFilename($lang = "")
   {
     if ($lang == "")
     {
@@ -228,7 +228,7 @@ class I18n
    * @static
    * @see OPEN_LANG_DEFAULT, OPEN_LANG_DIR, OPEN_LANG_FILENAME
    */
-  function languageExists($lang)
+  public static function languageExists($lang)
   {
     if ($lang == OPEN_LANG_DEFAULT)
     {
@@ -242,7 +242,7 @@ class I18n
     }
     else
     {
-      return (I18n::poFilename($lang) ? true : false);
+      return (self::poFilename($lang) ? true : false);
     }
   }
 
@@ -257,7 +257,7 @@ class I18n
    * @static
    * @since 0.7
    */
-  function localDate($date = "")
+  public static function localDate($date = "")
   {
     $local = "";
     $winOS = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN');
@@ -316,9 +316,9 @@ class I18n
    * @since 0.7
    * @see OPEN_LANG_DIR, OPEN_LANG_DIR, OPEN_CHARSET
    */
-  function languageList()
+  public static function languageList()
   {
-    $nls = I18n::getNLS();
+    $nls = self::getNLS();
     $array = null;
     $handle = opendir(OPEN_LANG_DIR);
 
@@ -356,7 +356,7 @@ class I18n
    * @static
    * @since 0.6
    */
-  function getNLS()
+  public static function getNLS()
   {
     $nls['language']['bg_BG'] = '&#x0411;&#x044a;&#x043b;&#x0433;&#x0430;&#x0440;&#x0441;&#x043a;&#x0438;';
     //$nls['language']['zh_CN'] = 'Simplified Chinese (&#31616;&#20307;&#20013;&#25991;)';
