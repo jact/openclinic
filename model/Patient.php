@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.18 2008/03/23 12:00:55 jact Exp $
+ * @version   CVS: $Id: Patient.php,v 1.19 2013/01/07 17:59:53 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -81,36 +81,36 @@ require_once(dirname(__FILE__) . "/Query/Page/Patient.php");
  */
 class Patient
 {
-  var $_idPatient = 0;
-  var $_idMember = 0;
-  var $_collegiateNumber = "";
-  var $_nif = "";
-  var $_firstName = "";
-  var $_firstNameError = "";
-  var $_surname1 = "";
-  var $_surname1Error = "";
-  var $_surname2 = "";
-  var $_surname2Error = "";
-  var $_address = "";
-  var $_phone = "";
-  var $_sex = "";
-  var $_race = "";
-  var $_birthDate = "";
-  var $_birthDateError = "";
-  var $_age = 0;
-  var $_birthPlace = "";
-  var $_deceaseDate = "";
-  var $_deceaseDateError = "";
-  var $_nts = "";
-  var $_nss = "";
-  var $_familySituation = "";
-  var $_labourSituation = "";
-  var $_education = "";
-  var $_insuranceCompany = "";
-  //var $_createDate = "";
-  //var $_lastUpdateDate = "";
+  private $_idPatient = 0;
+  private $_idMember = 0;
+  private $_collegiateNumber = "";
+  private $_nif = "";
+  private $_firstName = "";
+  private $_firstNameError = "";
+  private $_surname1 = "";
+  private $_surname1Error = "";
+  private $_surname2 = "";
+  private $_surname2Error = "";
+  private $_address = "";
+  private $_phone = "";
+  private $_sex = "";
+  private $_race = "";
+  private $_birthDate = "";
+  private $_birthDateError = "";
+  private $_age = 0;
+  private $_birthPlace = "";
+  private $_deceaseDate = "";
+  private $_deceaseDateError = "";
+  private $_nts = "";
+  private $_nss = "";
+  private $_familySituation = "";
+  private $_labourSituation = "";
+  private $_education = "";
+  private $_insuranceCompany = "";
+  //private $_createDate = "";
+  //private $_lastUpdateDate = "";
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
   /**
    * mixed Patient(int $id = 0)
@@ -132,12 +132,14 @@ class Patient
       {
         return null;
       }
-      $this = $_patQ->fetch();
+
+      foreach (get_object_vars($_patQ->fetch()) as $key => $value)
+      {
+        $this->$key = $value;
+      }
 
       $_patQ->freeResult();
       $_patQ->close();
-
-      return $this;
     }
   }
 
@@ -163,11 +165,11 @@ class Patient
       $this->_surname1Error = _("This is a required field.");
     }
 
-    if ($this->_surname2 == "")
+    /*if ($this->_surname2 == "")
     {
       $valid = false;
       $this->_surname2Error = _("This is a required field.");
-    }
+    }*/
 
     if ($this->_birthDate != "" && $this->_birthDate != "0000-00-00")
     {
