@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_edit.php,v 1.18 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: staff_edit.php,v 1.19 2013/01/07 18:07:06 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,7 +38,7 @@
   /**
    * Validate data
    */
-  $errorLocation = "../admin/staff_edit_form.php?key=" . intval($_POST["id_member"]); // controlling var
+  $errorLocation = "../admin/staff_edit_form.php?id_member=" . intval($_POST["id_member"]); // controlling var
   $staff = new Staff();
 
   $staff->setIdMember($_POST["id_member"]);
