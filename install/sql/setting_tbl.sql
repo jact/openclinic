@@ -6,9 +6,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: setting_tbl.sql,v 1.16 2007/12/15 14:32:16 jact Exp $
+ * @version   CVS: $Id: setting_tbl.sql,v 1.17 2013/01/07 18:22:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -24,7 +24,7 @@ CREATE TABLE setting_tbl (
   language VARCHAR(10) NOT NULL DEFAULT 'en',
   id_theme SMALLINT UNSIGNED NOT NULL DEFAULT 1,
   FOREIGN KEY (id_theme) REFERENCES theme_tbl(id_theme) ON DELETE SET DEFAULT
-) MIN_ROWS=1 MAX_ROWS=1;
+) MIN_ROWS=1 MAX_ROWS=1 ENGINE=MyISAM;
 
 INSERT INTO setting_tbl VALUES (
   'My Clinic',
@@ -34,7 +34,7 @@ INSERT INTO setting_tbl VALUES (
   'http://www.example.com',
   20,
   10,
-  '0.8.20071212',
+  '0.8.20130107',
   'en',
   1
 );
