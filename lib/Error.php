@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.14 2008/03/22 16:23:10 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.15 2013/01/07 18:39:43 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -50,9 +50,9 @@ class Error
    * @return void
    * @access public
    */
-  function query($query, $goOut = true)
+  public static function query($query, $goOut = true)
   {
-    Error::message($query->getError() . " " . $query->getDbErrno()
+    self::message($query->getError() . " " . $query->getDbErrno()
       . " - " . $query->getDbError() . "." . $query->getSQL()
     );
 
@@ -89,7 +89,7 @@ class Error
    */
   function connection($conn, $goOut = true)
   {
-    Error::message($conn->getError() . " " . $conn->getDbErrno()
+    self::message($conn->getError() . " " . $conn->getDbErrno()
       . " - " . $conn->getDbError() . "." . $conn->getSQL()
     );
 
@@ -148,7 +148,7 @@ class Error
    * @return void
    * @access public
    */
-  function message($errorMsg, $errorType = E_USER_WARNING)
+  public static function message($errorMsg, $errorType = E_USER_WARNING)
   {
     trigger_error($errorMsg, $errorType);
   }
@@ -163,7 +163,7 @@ class Error
    * @access public
    * @since 0.7
    */
-  function backTrace($context)
+  public static function backTrace($context)
   {
     $calls = PHP_EOL . "Backtrace:";
     $trace = (function_exists("debug_backtrace") ? debug_backtrace() : null); // SF.net DEMO version PHP 4.1.2
@@ -175,8 +175,8 @@ class Error
       $calls .= PHP_EOL . " " . $callNo . ": ";
       $calls .= (isset($trace[$x]["class"]) ? $trace[$x]["class"] . $trace[$x]["type"] : '');
       $calls .= $trace[$x]["function"];
-      $calls .= (isset($trace[$x]["args"]) && is_array($trace[$x]["args"]))
-        ? '(' . implode(', ', $trace[$x]["args"]) . ')'
+      $calls .= (isset($trace[$x]["args"]) && is_array($trace[$x]["args"]) && count($trace[$x]["args"]) > 0)
+        ? '(' . implode(', ', serialize($trace[$x]["args"])) . ')'
         : '';
       $calls .= " (line " . $trace[$x]["line"] . " in " . $trace[$x]["file"] . ")";
     }
@@ -206,7 +206,7 @@ class Error
    * @access public
    * @since 0.8
    */
-  function getSourceContext($file, $line, $context)
+  public static function getSourceContext($file, $line, $context)
   {
     // check that file exists
     if ( !file_exists($file) )
@@ -260,7 +260,7 @@ class Error
     $length = $finish - $start;
     $code = implode("", array_slice($lines, $start, $length));
 
-    $variables = Error::_getVariables($code);
+    $variables = self::_getVariables($code);
 
     // remove all but the 'relevant' variables
     $relevant = null;
@@ -291,7 +291,7 @@ class Error
    * @access private
    * @since 0.8
    */
-  function _getVariables($code)
+  private static function _getVariables($code)
   {
     $tokens = token_get_all('<?php {$code} ?>');
 
@@ -322,7 +322,7 @@ class Error
    * @access public
    * @since 0.7
    */
-  function customHandler($number, $message, $file, $line, $context)
+  public static function customHandler($number, $message, $file, $line, $context)
   {
     $goOut = false;
 
@@ -372,8 +372,8 @@ class Error
     $error .= " on line " . $line . " in " . $file . "." . PHP_EOL;
     $error .= PHP_EOL . "Message: " . $message;
     $error .= PHP_EOL . "Source:" . PHP_EOL;
-    $error .= Error::getSourceContext($file, $line, $context);
-    $error .= Error::backTrace($context);
+    $error .= self::getSourceContext($file, $line, $context);
+    $error .= self::backTrace($context);
     $error .= PHP_EOL . "Client IP: " . $_SERVER["REMOTE_ADDR"];
 
     $prepend = PHP_EOL . "[PHP " . $prepend . " " . date("Y-m-d H:i:s") . "]";
@@ -423,14 +423,14 @@ class Error
    * @access public
    * @since 0.7
    */
-  function debug($expression, $message = "", $goOut = false)
+  public static function debug($expression, $message = "", $goOut = false)
   {
     if ( defined("OPEN_DEBUG") && !OPEN_DEBUG )
     {
       return;
     }
 
-    Error::trace($expression, isset($message) ? $message : "", isset($goOut) ? $goOut : false);
+    self::trace($expression, isset($message) ? $message : "", isset($goOut) ? $goOut : false);
   }
 
   /**
@@ -445,7 +445,7 @@ class Error
    * @access public
    * @since 0.8
    */
-  function trace($expression, $message = "", $goOut = false)
+  public static function trace($expression, $message = "", $goOut = false)
   {
     if (PHP_SAPI == 'cli')
     {
