@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: History.php,v 1.2 2007/11/02 20:39:00 jact Exp $
+ * @version   CVS: $Id: History.php,v 1.3 2013/01/07 18:02:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -156,7 +156,7 @@ class Query_History extends Query
    */
   function updatePersonal($history)
   {
-    if (function_exists("is_a") && !is_a($history, "History") ) // SF.net DEMO version PHP 4.1.2
+    if ( !$history instanceof History )
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -205,7 +205,7 @@ class Query_History extends Query
    */
   function updateFamily($history)
   {
-    if (function_exists("is_a") && !is_a($history, "History") ) // SF.net DEMO version PHP 4.1.2
+    if ( !$history instanceof History )
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;

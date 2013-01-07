@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Description.php,v 1.1 2007/10/28 19:33:33 jact Exp $
+ * @version   CVS: $Id: Description.php,v 1.2 2013/01/07 18:02:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -123,7 +123,7 @@ class Query_Description extends Query
    */
   function update($tableName, $des)
   {
-    if (function_exists("is_a") && !is_a($des, "Description") ) // SF.net DEMO version PHP 4.1.2
+    if ( !$des instanceof Description )
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;

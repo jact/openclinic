@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Test.php,v 1.2 2007/11/02 20:39:01 jact Exp $
+ * @version   CVS: $Id: Test.php,v 1.3 2013/01/07 18:03:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -144,7 +144,7 @@ class Query_Test extends Query
    */
   function insert($test)
   {
-    if (function_exists("is_a") && !is_a($test, "Test") ) // SF.net DEMO version PHP 4.1.2
+    if ( !$test instanceof Test )
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -173,7 +173,7 @@ class Query_Test extends Query
    */
   function update($test)
   {
-    if (function_exists("is_a") && !is_a($test, "Test") ) // SF.net DEMO version PHP 4.1.2
+    if ( !$test instanceof Test )
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;

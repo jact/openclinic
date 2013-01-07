@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Theme.php,v 1.3 2007/12/15 14:36:10 jact Exp $
+ * @version   CVS: $Id: Theme.php,v 1.4 2013/01/07 18:04:08 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -217,7 +217,7 @@ class Query_Theme extends Query
    */
   function insert($theme)
   {
-    if (function_exists("is_a") && !is_a($theme, "Theme") ) // SF.net DEMO version PHP 4.1.2
+    if ( !$theme instanceof Theme )
     {
       $this->_error = "Argument is an inappropriate object.";
       return false;
@@ -246,7 +246,7 @@ class Query_Theme extends Query
    */
   function update($theme)
   {
-    if (function_exists("is_a") && !is_a($theme, "Theme") ) // SF.net DEMO version PHP 4.1.2
+    if ( !$theme instanceof Theme )
     {
       $this->_error = "Argument is an inappropriate object.";
 
