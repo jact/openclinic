@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2009 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login.php,v 1.13 2007/12/15 15:02:24 jact Exp $
+ * @version   CVS: $Id: login.php,v 1.14 2013/01/07 18:10:21 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,9 +23,9 @@
   }
 
   require_once("../config/environment.php");
-  require_once("../lib/Form.php");
 
-  Form::compareToken('../auth/login_form.php');
+  // @fixme not compare first time because there is not session available!!! why?
+  //Form::compareToken('../auth/login_form.php');
 
   require_once("../model/Query/User.php");
   require_once("../model/Query/Session.php");
