@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.19 2008/03/23 12:00:55 jact Exp $
+ * @version   CVS: $Id: Problem.php,v 1.20 2013/01/07 18:00:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -64,25 +64,25 @@ require_once(dirname(__FILE__) . "/Query/Page/Problem.php");
  */
 class Problem
 {
-  var $_idProblem = 0;
-  var $_idPatient = 0;
-  var $_idMember = 0;
-  var $_collegiateNumber = "";
-  var $_orderNumber = 0;
-  var $_openingDate = "";
-  var $_closingDate = "";
-  var $_meetingPlace = "";
-  var $_wording = "";
-  var $_wordingError = "";
-  var $_subjective = "";
-  var $_objective = "";
-  var $_appreciation = "";
-  var $_actionPlan = "";
-  var $_prescription = "";
-  //var $_createDate = "";
-  var $_lastUpdateDate = "";
+  private $_idProblem = 0;
+  private $_idPatient = 0;
+  private $_idMember = 0;
+  private $_collegiateNumber = "";
+  private $_orderNumber = 0;
+  private $_openingDate = "";
+  private $_closingDate = "";
+  private $_meetingPlace = "";
+  private $_wording = "";
+  private $_wordingError = "";
+  private $_subjective = "";
+  private $_objective = "";
+  private $_appreciation = "";
+  private $_actionPlan = "";
+  private $_prescription = "";
+  //private $_createDate = "";
+  private $_lastUpdateDate = "";
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
   /**
    * mixed Problem(int $id = 0)
@@ -104,12 +104,14 @@ class Problem
       {
         return null;
       }
-      $this = $_problemQ->fetch();
+
+      foreach (get_object_vars($_problemQ->fetch()) as $key => $value)
+      {
+        $this->$key = $value;
+      }
 
       $_problemQ->freeResult();
       $_problemQ->close();
-
-      return $this;
     }
   }
 
