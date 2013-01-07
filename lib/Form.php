@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Form.php,v 1.26 2008/03/23 11:55:46 jact Exp $
+ * @version   CVS: $Id: Form.php,v 1.27 2013/01/07 18:38:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo more helpers (dates, files...)
  */
@@ -81,7 +81,7 @@ class Form
    * @static
    * @since 0.7
    */
-  function text($name, $value = null, $attribs = null)
+  public static function text($name, $value = null, $attribs = null)
   {
     $attribs['type']  = isset($attribs['type']) ? $attribs['type'] : 'text';
     $attribs['id']    = isset($attribs['id']) ? $attribs['id'] : $name;
@@ -119,11 +119,11 @@ class Form
    * @static
    * @since 0.8
    */
-  function password($name, $value = null, $attribs = null)
+  public static function password($name, $value = null, $attribs = null)
   {
     $attribs['type'] = 'password';
 
-    return Form::text($name, $value, $attribs);
+    return self::text($name, $value, $attribs);
   }
 
   /**
@@ -148,14 +148,14 @@ class Form
    * @static
    * @since 0.7
    */
-  function select($name, &$array, $defaultValue = null, $attribs = null)
+  public static function select($name, &$array, $defaultValue = null, $attribs = null)
   {
     $size = isset($attribs['size']) ? $attribs['size'] : 0;
     $attribs['id'] = isset($attribs['id']) ? $attribs['id'] : $name;
     $attribs['name'] = $name . ($size > 0 ? '[]' : '');
     if (isset($attribs['size']) && $attribs['size'] > 0)
     {
-      $addendum['multiple'] = true;
+      $attribs['multiple'] = true;
     }
     if (isset($attribs['error']) && !empty($attribs['error']))
     {
@@ -230,7 +230,7 @@ class Form
    * @static
    * @since 0.7
    */
-  function textArea($name, $value = null, $attribs = null)
+  public static function textArea($name, $value = null, $attribs = null)
   {
     $attribs['id']   = isset($attribs['id']) ? $attribs['id'] : $name;
     $attribs['name'] = $name;
@@ -268,7 +268,7 @@ class Form
    * @static
    * @since 0.2
    */
-  function hidden($name, $value = null, $attribs = null)
+  public static function hidden($name, $value = null, $attribs = null)
   {
     $attribs['type']  = 'hidden';
     $attribs['id']    = isset($attribs['id']) ? $attribs['id'] : $name;
@@ -299,7 +299,7 @@ class Form
    * @static
    * @since 0.4
    */
-  function checkBox($name, $value = null, $attribs = null)
+  public static function checkBox($name, $value = null, $attribs = null)
   {
     $attribs['type']  = 'checkbox';
     $attribs['id']    = isset($attribs['id']) ? $attribs['id'] : $name;
@@ -338,7 +338,7 @@ class Form
    * @static
    * @since 0.6
    */
-  function radioButton($name, $value = null, $attribs = null)
+  public static function radioButton($name, $value = null, $attribs = null)
   {
     $attribs['type']  = 'radio';
     $attribs['id']    = isset($attribs['id']) ? $attribs['id'] : $name;
@@ -377,7 +377,7 @@ class Form
    * @static
    * @since 0.6
    */
-  function button($name, $value = null, $attribs = "")
+  public static function button($name, $value = null, $attribs = "")
   {
     $attribs['id']    = isset($attribs['id']) ? $attribs['id'] : $name;
     $attribs['name']  = $name;
@@ -413,7 +413,7 @@ class Form
    * @since 0.6
    * @todo $error
    */
-  function file($name, $value = "", $attribs = null)
+  public static function file($name, $value = "", $attribs = null)
   {
     $attribs['type']  = 'file';
     $attribs['id']    = isset($attribs['id']) ? $attribs['id'] : $name;
@@ -449,7 +449,7 @@ class Form
    * @static
    * @since 0.1
    */
-  function selectTable($tableName, $fieldCode, $defaultValue = "", $fieldDescription = "", $size = 0)
+  public static function selectTable($tableName, $fieldCode, $defaultValue = "", $fieldDescription = "", $size = 0)
   {
     $desQ = new Query_Description();
     if ( !$desQ->select($tableName, $fieldCode, $fieldDescription) )
@@ -505,7 +505,7 @@ class Form
    * @static
    * @since 0.8
    */
-  function label($name, $value = null, $attribs = null)
+  public static function label($name, $value = null, $attribs = null)
   {
     $attribs['for'] = $name;
     if (isset($attribs['class']) && strpos($attribs['class'], 'required') !== false)
@@ -535,7 +535,7 @@ class Form
    * @access public
    * @static
    */
-  function fieldset($legend, &$body, $foot = null, $options = null)
+  public static function fieldset($legend, &$body, $foot = null, $options = null)
   {
     $_html = '';
     if (count($body) == 0)
@@ -601,12 +601,12 @@ class Form
    * @access public
    * @static
    */
-  function generateToken()
+  public static function generateToken()
   {
     $token = md5(uniqid(rand(), true));
     $_SESSION['form']['token'] = $token;
 
-    return Form::hidden('token_form', $token);
+    return self::hidden('token_form', $token);
   }
 
   /**
@@ -621,7 +621,7 @@ class Form
    * @access public
    * @static
    */
-  function compareToken($url, $method = 'post')
+  public static function compareToken($url, $method = 'post')
   {
     if ($method != 'post' && $method != 'get')
     {
@@ -656,7 +656,7 @@ class Form
    * @access public
    * @static
    */
-  function unsetSession($option = OPEN_UNSET_ALL)
+  public static function unsetSession($option = OPEN_UNSET_ALL)
   {
     switch ($option)
     {
@@ -686,7 +686,7 @@ class Form
    * @access public
    * @static
    */
-  function setSession($var, $error = null)
+  public static function setSession($var, $error = null)
   {
     $_SESSION['form']['var'] = $var;
     if ($error != null)
@@ -702,7 +702,7 @@ class Form
    * @access public
    * @static
    */
-  function getSession()
+  public static function getSession()
   {
     return isset($_SESSION['form']) ? $_SESSION['form'] : null;
   }
@@ -716,9 +716,9 @@ class Form
    * @access public
    * @static
    */
-  function errorMsg()
+  public static function errorMsg()
   {
-    $_formSession = Form::getSession();
+    $_formSession = self::getSession();
     if (isset($_formSession['error']) && count($_formSession['error']) > 0)
     {
       $_html = HTML::start('div', array('class' => 'error'));
@@ -729,7 +729,7 @@ class Form
       {
         if ($_value)
         {
-          $_array[] = Form::label($_key, $_value);
+          $_array[] = self::label($_key, $_value);
         }
       }
       if (is_array($_array))
