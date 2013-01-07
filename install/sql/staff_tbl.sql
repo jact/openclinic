@@ -6,26 +6,26 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_tbl.sql,v 1.6 2006/03/28 19:01:43 jact Exp $
+ * @version   CVS: $Id: staff_tbl.sql,v 1.7 2013/01/07 18:21:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 CREATE TABLE staff_tbl (
   id_member INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   member_type ENUM('Administrative','Doctor') NOT NULL DEFAULT 'Administrative',
-  collegiate_number VARCHAR(20) NULL, /* número de colegiado */
+  collegiate_number VARCHAR(20) NULL, /* nÃºmero de colegiado */
   nif VARCHAR(20) NULL,
   first_name VARCHAR(25) NOT NULL,
   surname1 VARCHAR(30) NOT NULL,
-  surname2 VARCHAR(30) NOT NULL,
+  surname2 VARCHAR(30) NULL DEFAULT '',
   address TEXT NULL DEFAULT '',
   phone_contact TEXT NULL DEFAULT '',
   id_user INT UNSIGNED NULL,
   login VARCHAR(20) NULL,
   FOREIGN KEY (id_user) REFERENCES user_tbl(id_user) ON DELETE SET NULL
-);
+) ENGINE=MyISAM;
 
 INSERT INTO staff_tbl VALUES (
   4,
@@ -34,7 +34,7 @@ INSERT INTO staff_tbl VALUES (
   '123456785',
   'Benito',
   'Camelas',
-  'Unmontón',
+  'UnmontÃ³n',
   'Camino de las Torres 777',
   '555-45 45 45',
   NULL,
@@ -47,9 +47,9 @@ INSERT INTO staff_tbl VALUES (
   '342343445',
   '34567123',
   'Carmelo',
-  'Cotón',
-  'Cotón',
-  'Plaza España 222',
+  'CotÃ³n',
+  'CotÃ³n',
+  'Plaza EspaÃ±a 222',
   '555-23 24 23',
   NULL,
   'carmelo'
