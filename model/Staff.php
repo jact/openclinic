@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Staff.php,v 1.11 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Staff.php,v 1.12 2013/01/07 18:01:22 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -109,11 +109,11 @@ class Staff
       $this->_surname1Error = _("This is a required field.");
     }
 
-    if ($this->_surname2 == "")
+    /*if ($this->_surname2 == "")
     {
       $valid = false;
       $this->_surname2Error = _("This is a required field.");
-    }
+    }*/
 
     if (strlen($this->_login) > 0 && strlen($this->_login) < 4)
     {
