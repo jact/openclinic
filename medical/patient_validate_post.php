@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_validate_post.php,v 1.13 2007/10/29 20:06:54 jact Exp $
+ * @version   CVS: $Id: patient_validate_post.php,v 1.14 2013/01/07 18:24:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.6
  */
@@ -81,7 +81,7 @@
   {
     $formError["first_name"] = $pat->getFirstNameError();
     $formError["surname1"] = $pat->getSurname1Error();
-    $formError["surname2"] = $pat->getSurname2Error();
+    //$formError["surname2"] = $pat->getSurname2Error();
     $formError["birth_date"] = $pat->getBirthDateError();
     $formError["decease_date"] = $pat->getDeceaseDateError();
 

@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_fields.php,v 1.32 2008/03/23 12:00:17 jact Exp $
+ * @version   CVS: $Id: patient_fields.php,v 1.33 2013/01/07 18:24:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,7 +54,7 @@
   );
   $tbody[] = $row;
 
-  $row = Form::label("surname2", _("Surname 2") . ":", array('class' => 'required'));
+  $row = Form::label("surname2", _("Surname 2") . ":"/*, array('class' => 'required')*/);
   $row .= Form::text("surname2",
     isset($formVar["surname2"]) ? $formVar["surname2"] : null,
     array(
