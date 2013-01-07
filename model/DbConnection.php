@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: DbConnection.php,v 1.18 2007/11/05 12:53:25 jact Exp $
+ * @version   CVS: $Id: DbConnection.php,v 1.19 2013/01/07 17:57:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,67 +66,67 @@ class DbConnection
    * @var string
    * @access private
    */
-  var $_host;
+  private $_host;
 
   /**
    * @var int
    * @access private
    */
-  var $_port;
+  private $_port;
 
   /**
    * @var string
    * @access private
    */
-  var $_userName;
+  private $_userName;
 
   /**
    * @var string
    * @access private
    */
-  var $_passwd;
+  private $_passwd;
 
   /**
    * @var string
    * @access private
    */
-  var $_dbName;
+  private $_dbName;
 
   /**
    * @var mixed
    * @access private
    */
-  var $_link;
+  private $_link;
 
   /**
    * @var mixed
    * @access private
    */
-  var $_result;
+  private $_result;
 
   /**
    * @var string
    * @access private
    */
-  var $_error;
+  private $_error;
 
   /**
    * @var int
    * @access private
    */
-  var $_dbErrno;
+  private $_dbErrno;
 
   /**
    * @var string
    * @access private
    */
-  var $_dbError;
+  private $_dbError;
 
   /**
    * @var string
    * @access private
    */
-  var $_SQL;
+  private $_SQL;
 
   /**
    * void DbConnection(array $dsn = null)
@@ -145,7 +145,7 @@ class DbConnection
    * @access public
    * @since 0.7
    */
-  function DbConnection($dsn = null)
+  public function DbConnection($dsn = null)
   {
     if ( !isset($dsn['db']) )
     {
@@ -174,7 +174,7 @@ class DbConnection
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function connect($persistency = OPEN_PERSISTENT)
+  public function connect($persistency = OPEN_PERSISTENT)
   {
     $this->_link = ($persistency)
       ? mysql_pconnect($this->_host . ":" . $this->_port, $this->_userName, $this->_passwd)
@@ -207,7 +207,7 @@ class DbConnection
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function close()
+  public function close()
   {
     $this->_result = mysql_close($this->_link);
     if ($this->_result == false)
@@ -231,7 +231,7 @@ class DbConnection
    * @access public
    * @see OPEN_SQL_DEBUG
    */
-  function exec($sql, $params = null)
+  public function exec($sql, $params = null)
   {
     if (is_array($params))
     {
@@ -311,7 +311,7 @@ class DbConnection
    * @return array resulting array. Returns false, if no more rows to fetch.
    * @access public
    */
-  function fetchRow($arrayType = MYSQL_ASSOC)
+  public function fetchRow($arrayType = MYSQL_ASSOC)
   {
     if ($this->_result == false)
     {
@@ -343,7 +343,7 @@ class DbConnection
    * @see fetchRow
    * @access public
    */
-  function fetchAll($arrayType = MYSQL_ASSOC)
+  public function fetchAll($arrayType = MYSQL_ASSOC)
   {
     if ($this->_result == false)
     {
@@ -375,7 +375,7 @@ class DbConnection
    * @access public
    * @since 0.2
    */
-  function affectedRows()
+  public function affectedRows()
   {
     return ($this->_link ? mysql_affected_rows($this->_link) : false);
   }
@@ -389,7 +389,7 @@ class DbConnection
    * @access public
    * @since 0.2
    */
-  function lastInsertId()
+  public function lastInsertId()
   {
     return ($this->_link ? mysql_insert_id($this->_link) : false);
   }
@@ -402,7 +402,7 @@ class DbConnection
    * @return false, if no more rows to fetch, true otherwise.
    * @access public
    */
-  function resetResult()
+  public function resetResult()
   {
     return ($this->_result ? (mysql_data_seek($this->_result, 0) != 0) : false);
   }
@@ -417,7 +417,7 @@ class DbConnection
    * @access public
    * @since 0.2
    */
-  function rowSeek($row = 0)
+  public function rowSeek($row = 0)
   {
     return ($this->_result ? (mysql_data_seek($this->_result, $row) != 0) : false);
   }
@@ -430,7 +430,7 @@ class DbConnection
    * @return int number of rows in the result
    * @access public
    */
-  function numRows()
+  public function numRows()
   {
     return mysql_num_rows($this->_result);
   }
@@ -443,7 +443,7 @@ class DbConnection
    * @return int number of fields in result
    * @access public
    */
-  function numFields()
+  public function numFields()
   {
     return mysql_num_fields($this->_result);
   }
@@ -457,7 +457,7 @@ class DbConnection
    * @return string type of the field
    * @access public
    */
-  function fieldType($index = 0)
+  public function fieldType($index = 0)
   {
     return mysql_field_type($this->_result, $index);
   }
@@ -470,9 +470,9 @@ class DbConnection
    * @return bool false if an error occurs
    * @access public
    */
-  function listTables()
+  public function listTables()
   {
-    return (($this->_result = mysql_list_tables($this->_dbName, $this->_link)) != 0);
+    return (($this->_result = mysql_query("SHOW TABLES", $this->_link)) != 0);
   }
 
   /**
@@ -484,7 +484,7 @@ class DbConnection
    * @return string name of the table
    * @access public
    */
-  function tableName($index = 0)
+  public function tableName($index = 0)
   {
     return mysql_tablename($this->_result, $index);
   }
@@ -498,9 +498,9 @@ class DbConnection
    * @return bool false if an error occurs
    * @access public
    */
-  function listFields($table)
+  public function listFields($table)
   {
-    return (($this->_result = mysql_list_fields($this->_dbName, $table, $this->_link)) != 0);
+    return (($this->_result = mysql_query("SHOW COLUMNS FROM " . $table, $this->_link)) != 0);
   }
 
   /**
@@ -512,7 +512,7 @@ class DbConnection
    * @return string name of the field
    * @access public
    */
-  function fieldName($index = 0)
+  public function fieldName($index = 0)
   {
     return mysql_field_name($this->_result, $index);
   }
@@ -523,7 +523,7 @@ class DbConnection
    * @return mixed connection link or false
    * @access public
    */
-  function getLink()
+  public function getLink()
   {
     return $this->_link;
   }
@@ -534,7 +534,7 @@ class DbConnection
    * @return string error message
    * @access public
    */
-  function getError()
+  public function getError()
   {
     return $this->_error;
   }
@@ -545,7 +545,7 @@ class DbConnection
    * @return int error number returned from database
    * @access public
    */
-  function getDbErrno()
+  public function getDbErrno()
   {
     return $this->_dbErrno;
   }
@@ -556,7 +556,7 @@ class DbConnection
    * @return string error message returned from database
    * @access public
    */
-  function getDbError()
+  public function getDbError()
   {
     return $this->_dbError;
   }
@@ -567,7 +567,7 @@ class DbConnection
    * @return string SQL used in exec when an error occurs in query execution
    * @access public
    */
-  function getSQL()
+  public function getSQL()
   {
     return $this->_SQL;
   }
@@ -581,7 +581,7 @@ class DbConnection
    * @access public
    * @since 0.4
    */
-  function freeResult()
+  public function freeResult()
   {
     return ($this->_result ? (mysql_free_result($this->_result) != 0) : false);
   }
