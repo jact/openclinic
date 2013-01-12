@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<!-- $Id: install.html,v 1.13 2007/12/23 13:26:08 jact Exp $ -->
+<!-- $Id: install.html,v 1.14 2013/01/12 22:41:42 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -13,7 +13,7 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2008 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2013 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
@@ -77,16 +77,13 @@
 
       <ol>
         <li>
-          Install a web server such as <a href="http://httpd.apache.org">Apache</a> that can execute cgi applications. If you install Apache, get familiar with starting and stopping your Apache Web Server. If you are running Windows 95 or Windows 98 there will be <q><strong>Start Apache</strong></q> and <q><strong>Stop Apache</strong></q> icons that will help you start and stop your web server. You may want to consider adding the <q><strong>Start Apache</strong></q> icon to your startup folder. If you are running NT you can add Apache as a service which will be running, even if you are logged off. If you are running Linux your Apache server should be packaged with your Linux installation and will start when you start Linux.
+          <p>Install a web server such as <a href="http://httpd.apache.org">Apache</a> that can execute cgi applications.</p>
+          <p>If you are running Linux, your Apache server should be packaged with your Linux installation and will start when you start Linux.</p>
         </li>
 
         <li>
           <p>
-            Install the MySQL database from <a href="http://www.mysql.com">MySQL web site</a>. Get familiar with starting and stopping your MySQL Server. See <a href="http://www.mysql.com/doc/W/i/Win95_start.html">Starting MySQL on Windows 95 or Windows 98</a> for more information. <strong class="note">Version recommended: &gt;= 3.23.36.</strong>
-          </p>
-
-          <p>
-            If you are running NT, setup MySQL as a service so it starts whenever the machine powers up. See <a href="http://www.mysql.com/doc/N/T/NT_start.html">Starting MySQL on Windows NT or Windows 2000</a> for more information on starting MySQL as a service.
+            Install the MySQL database from <a href="http://www.mysql.com">MySQL web site</a>.
           </p>
 
           <p>
@@ -98,10 +95,10 @@
           Get familiar with logging into MySQL with your admin account within a DOS prompt window. You can use the following command sequence as a test.
 
 <pre class="sqlcode"><code>
-C:\&gt;<kbd>c:\mysql\bin\mysql -uadmin -p mysql</kbd>
+C:\&gt;<kbd>c:\mysql\bin\mysql -u root -p mysql</kbd>
 Enter password: <kbd>*********</kbd>
 Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 1 to server version: 3.23.52-max-debug
+Your MySQL connection id is 1 to server version: x.xx.xx
 
 Type 'help;' or '\h' for help. Type '\c' to clear the buffer
 
@@ -167,7 +164,7 @@ C:\&gt;<kbd>C:\mysql\bin\mysql -u <var>openclinic_user</var> -p<var>openclinic_p
         </li>
 
         <li id="step8">
-          Edit the <code class="note">database_constants.php</code> file (located in the <code>openclinic/config/</code> directory) with the text editor of your choice. Change the username and password to match the new MySQL user and password that you created in the previous steps.
+          Edit the <code class="note">database_constants.php</code> file (located in the <code>openclinic/config/</code> directory) with the text editor of your choice. Change username and password to match the new MySQL user and password that you created in the previous steps.
         </li>
 
         <li>
@@ -175,7 +172,7 @@ C:\&gt;<kbd>C:\mysql\bin\mysql -u <var>openclinic_user</var> -p<var>openclinic_p
         </li>
 
         <li>
-          Make <code>css</code> and <code>test</code> directories writtable for Apache user to allow upload files.
+          Make <code>css</code> and <code>tests</code> directories writtable for Apache user to allow upload files.
         </li>
 
         <li>
@@ -218,7 +215,7 @@ C:\&gt;<kbd>C:\mysql\bin\mysql -u <var>openclinic_user</var> -p<var>openclinic_p
       <p>Powered by OpenClinic</p>
 
       <p>
-        Copyright &copy; 2002-2008 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
+        Copyright &copy; 2002-2013 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
       </p>
 
       <p>
