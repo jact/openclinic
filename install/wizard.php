@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.36 2008/03/23 11:59:27 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.37 2013/01/12 22:37:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -21,7 +21,7 @@
  *  bool _validateSettings(void)
  */
 
-  define("OPEN_PHP_VERSION", '4.3.0'); // @fixme in global_constants.php
+  define("OPEN_PHP_VERSION", '5.1.0'); // @fixme in global_constants.php
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
   //error_reporting(E_ALL); // debug mode
@@ -533,7 +533,7 @@
  * @package   OpenClinic
  * @copyright 2002-' . date('Y') . ' jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.36 2008/03/23 11:59:27 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.37 2013/01/12 22:37:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 

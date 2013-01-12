@@ -7,15 +7,15 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.8 2006/10/13 19:25:55 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.9 2013/01/12 22:38:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo      i18n and HTML.php inclusion
  */
 
   // Ensuring a minimum version of PHP
-  define("OPEN_PHP_VERSION", '4.3.0'); // @fixme in global_constants.php
+  define("OPEN_PHP_VERSION", '5.1.0'); // @fixme in global_constants.php
   if (version_compare(phpversion(), OPEN_PHP_VERSION) < 0)
   {
     exit(sprintf('PHP %s or higher is required.', OPEN_PHP_VERSION));
@@ -41,7 +41,11 @@
     exit();
   }
 
-  $db = @mysql_connect(OPEN_HOST . (defined("OPEN_PORT") ? ':' . OPEN_PORT : ''), OPEN_USERNAME, OPEN_PWD);
+  $db = @mysql_connect(
+    OPEN_HOST . (defined("OPEN_PORT") ? ':' . OPEN_PORT : ''),
+    OPEN_USERNAME,
+    OPEN_PWD
+  );
   if ( !$db )
   {
     _message();
