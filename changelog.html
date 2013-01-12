@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<!-- $Id: changelog.html,v 1.19 2007/12/23 13:26:07 jact Exp $ -->
+<!-- $Id: changelog.html,v 1.20 2013/01/12 22:42:54 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -13,7 +13,7 @@
 
 <meta name="author" content="Jose Antonio Chavarría" />
 
-<meta name="copyright" content="2002-2008 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2013 Jose Antonio Chavarría" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
@@ -68,6 +68,46 @@
 
         <!--li>Other</li-->
       </ul>
+
+      <h2 id="c-07"><a href="#top" title="To top of the page">Changes since 0.7</a> (2004-12-26)</h2>
+
+      <ol>
+        <li class="change">Compatibilidad del código con PHP5 (incompatible con PHP4) y MySQL 5.5</li>
+
+        <li class="change">El motor de almacenamiento usado en MySQL sigue siendo MyISAM aunque el de por defecto sea InnoDB</li>
+
+        <li class="change">Se eliminan todos los temas y sólo se incluye uno por defecto (nueva estructura de las páginas)</li>
+
+        <li class="add">Se activa el chino tradicional y se añade la traducción en este idioma</li>
+
+        <li class="add">Se actualiza la traducción en dutch</li>
+
+        <li class="change">Reorganización de directorios y ficheros del proyecto (muy extensa y profunda..., el código no se parece en nada al de la versión anterior)</li>
+
+        <li class="change">Se cambia el estilo de las páginas con HTML estático</li>
+
+        <li class="add">Se añade una CSS de impresión para las páginas con HTML estático</li>
+
+        <li class="fix">Se quitan los botones Restablecer de los formularios</li>
+
+        <li class="add">Se añade una lista de enlaces a los campos con errores en los formularios con errores</li>
+
+        <li class="fix">Se corrige el error al borrar un paciente o un problema médico en la versión 0.7</li>
+
+        <li class="add">Protección CSRF y Session Fixation</li>
+
+        <li class="add">Unobtrusive JavaScript en todas las páginas</li>
+
+        <li class="change">Se cambia la estructura XML de los volcados de la base de datos (basada en Propel)</li>
+
+        <li class="add">Se crea un script para actualizar la base de datos automáticamente</li>
+
+        <li class="add">Se crea una clase para usar flash messages y evitar el paso de parámetros en las URLs</li>
+
+        <li class="fix">Mejoras en las breadcrumbs de las páginas</li>
+
+        <li class="change">El segundo apellido no es obligatorio de rellenar en los formularios</li>
+      </ol>
 
       <h2 id="c-06"><a href="#top" title="To top of the page">Changes since 0.6</a></h2>
 
@@ -447,6 +487,8 @@
     <ul>
       <li><a href="#legend">Legend</a></li>
 
+      <li><a href="#c-07">Changes since 0.7</a></li>
+
       <li><a href="#c-06">Changes since 0.6</a></li>
 
       <li><a href="#c-05">Changes since 0.5</a></li>
@@ -482,7 +524,7 @@
       <p>Powered by OpenClinic</p>
 
       <p>
-        Copyright &copy; 2002-2008 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
+        Copyright &copy; 2002-2013 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
       </p>
 
       <p>
