@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Query.php,v 1.17 2007/11/02 20:36:15 jact Exp $
+ * @version   CVS: $Id: Query.php,v 1.18 2013/01/13 14:29:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -39,6 +39,7 @@ require_once(dirname(__FILE__) . "/../lib/Error.php");
  *  string getDbError(void)
  *  string getSQL(void)
  *  string getTableName(void)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -46,16 +47,16 @@ require_once(dirname(__FILE__) . "/../lib/Error.php");
  */
 class Query
 {
-  var $_conn;
-  var $_isError = false;
-  var $_captureError = false;
-  var $_error = ""; // so it could change the error message
-  var $_dbErrno = 0; // it is not superfluous
-  var $_dbError = ""; // it is not superfluous
-  var $_SQL = ""; // it is not superfluous
-  var $_table = ""; // to extends classes
-  var $_primaryKey = null; // to extends classes
-  var $_map = null; // to extends classes
+  private $_conn;
+  private $_isError = false;
+  private $_captureError = false;
+  private $_error = ""; // so it could change the error message
+  private $_dbErrno = 0; // it is not superfluous
+  private $_dbError = ""; // it is not superfluous
+  private $_SQL = ""; // it is not superfluous
+  private $_table = ""; // to extends classes
+  private $_primaryKey = null; // to extends classes
+  private $_map = null; // to extends classes
 
   /**
    * bool Query(array $dsn = null)
@@ -75,7 +76,7 @@ class Query
    * @access public
    * @since 0.8
    */
-  function Query($dsn = null)
+  public function Query($dsn = null)
   {
     if ( !isset($dsn) )
     {
@@ -111,7 +112,7 @@ class Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function close()
+  public function close()
   {
     $result = $this->_conn->close();
     if ($result === false)
@@ -142,7 +143,7 @@ class Query
    * @access public
    * @since 0.6
    */
-  function exec($sql, $params = null)
+  public function exec($sql, $params = null)
   {
     $this->_SQL = $sql;
 
@@ -174,7 +175,7 @@ class Query
    * @access public
    * @since 0.4
    */
-  function fetchRow($arrayType = MYSQL_ASSOC)
+  public function fetchRow($arrayType = MYSQL_ASSOC)
   {
     $result = $this->_conn->fetchRow($arrayType);
     /*if ($result === false)
@@ -202,7 +203,7 @@ class Query
    * @access public
    * @since 0.4
    */
-  function fetchAll($arrayType = MYSQL_ASSOC)
+  public function fetchAll($arrayType = MYSQL_ASSOC)
   {
     $result = $this->_conn->fetchAll($arrayType);
     /*if ($result === false)
@@ -231,7 +232,7 @@ class Query
    * @access public
    * @since 0.4
    */
-  function numRows()
+  public function numRows()
   {
     return $this->_conn->numRows();
   }
@@ -242,7 +243,7 @@ class Query
    * @return boolean false if error occurred
    * @access public
    */
-  function resetResult()
+  public function resetResult()
   {
     return $this->_conn->resetResult();
   }
@@ -253,7 +254,7 @@ class Query
    * @return boolean false if error occurred
    * @access public
    */
-  function freeResult()
+  public function freeResult()
   {
     return $this->_conn->freeResult();
   }
@@ -265,7 +266,7 @@ class Query
    * @access public
    * @since 0.7
    */
-  function affectedRows()
+  public function affectedRows()
   {
     return $this->_conn->affectedRows();
   }
@@ -280,7 +281,7 @@ class Query
    * @access public
    * @since 0.7
    */
-  function getPrimaryKey($table = "")
+  public function getPrimaryKey($table = "")
   {
     if (empty($this->_table) && empty($table))
     {
@@ -322,7 +323,7 @@ class Query
    * @access public
    * @since 0.7
    */
-  function getRowData($key, $value, $table = "")
+  public function getRowData($key, $value, $table = "")
   {
     if (count($key) == 0 || count($value) == 0)
     {
@@ -361,7 +362,7 @@ class Query
    *
    * @access public
    */
-  function clearErrors()
+  public function clearErrors()
   {
     $this->_isError = false;
     $this->_error = "";
@@ -376,7 +377,7 @@ class Query
    * @return boolean true if error occurred
    * @access public
    */
-  function isError()
+  public function isError()
   {
     return $this->_isError;
   }
@@ -388,7 +389,7 @@ class Query
    * @access public
    * @since 0.8
    */
-  function captureError($value)
+  public function captureError($value)
   {
     $this->_captureError = ($value != false);
   }
@@ -399,7 +400,7 @@ class Query
    * @return string error message
    * @access public
    */
-  function getError()
+  public function getError()
   {
     return $this->_error;
   }
@@ -410,7 +411,7 @@ class Query
    * @return int error number returned from database
    * @access public
    */
-  function getDbErrno()
+  public function getDbErrno()
   {
     return $this->_dbErrno;
   }
@@ -421,7 +422,7 @@ class Query
    * @return string error message returned from database
    * @access public
    */
-  function getDbError()
+  public function getDbError()
   {
     return $this->_dbError;
   }
@@ -432,7 +433,7 @@ class Query
    * @return string SQL used in query when an error occurs in Query execution
    * @access public
    */
-  function getSQL()
+  public function getSQL()
   {
     return $this->_SQL;
   }
@@ -443,9 +444,21 @@ class Query
    * @return string table name
    * @access public
    */
-  function getTableName()
+  public function getTableName()
   {
     return $this->_table;
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return __CLASS__;
   }
 } // end class
 ?>
