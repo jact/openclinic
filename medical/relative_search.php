@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: relative_search.php,v 1.45 2008/03/23 12:00:17 jact Exp $
+ * @version   CVS: $Id: relative_search.php,v 1.46 2013/01/13 14:24:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,7 +42,7 @@
   // remove slashes added by form post
   $searchText = stripslashes(Check::postGetSessionString('search_text'));
   // remove redundant whitespace
-  $searchText = eregi_replace("[[:space:]]+", " ", $searchText);
+  $searchText = preg_replace("/[[:space:]]+/i", " ", $searchText);
   // secure data
   $searchText = urlencode($searchText);
   // explode data

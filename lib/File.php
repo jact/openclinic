@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: File.php,v 1.8 2013/01/07 18:33:26 jact Exp $
+ * @version   CVS: $Id: File.php,v 1.9 2013/01/13 14:23:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,7 +66,7 @@ class File
         {
           foreach ($allowedExtensions as $value)
           {
-            if (ereg($value . "$", $file))
+            if (preg_match("/" . $value . "$/", $file))
             {
               $arrayFiles["$file"] = $file;
               break;

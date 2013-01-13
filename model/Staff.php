@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Staff.php,v 1.12 2013/01/07 18:01:22 jact Exp $
+ * @version   CVS: $Id: Staff.php,v 1.13 2013/01/13 14:26:20 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -56,27 +56,27 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
 
 class Staff
 {
-  var $_idMember = 0;
-  var $_idUser = 0;
-  var $_collegiateNumber = "";
-  var $_collegiateNumberError = "";
-  var $_memberType = "";
-  var $_nif = "";
-  var $_nifError = "";
-  var $_firstName = "";
-  var $_firstNameError = "";
-  var $_surname1 = "";
-  var $_surname1Error = "";
-  var $_surname2 = "";
-  var $_surname2Error = "";
-  var $_address = "";
-  var $_phone = "";
-  var $_login = "";
-  var $_loginError = "";
+  private $_idMember = 0;
+  private $_idUser = 0;
+  private $_collegiateNumber = "";
+  private $_collegiateNumberError = "";
+  private $_memberType = "";
+  private $_nif = "";
+  private $_nifError = "";
+  private $_firstName = "";
+  private $_firstNameError = "";
+  private $_surname1 = "";
+  private $_surname1Error = "";
+  private $_surname2 = "";
+  private $_surname2Error = "";
+  private $_address = "";
+  private $_phone = "";
+  private $_login = "";
+  private $_loginError = "";
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
-  function Staff()
+  public function Staff()
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
   }
@@ -87,7 +87,7 @@ class Staff
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validateData()
+  public function validateData()
   {
     $valid = true;
 
@@ -125,7 +125,7 @@ class Staff
       $valid = false;
       $this->_loginError = _("This field must not contain any spaces.");
     }
-    elseif (ereg("['\\]", $this->_login))
+    elseif (preg_match("/['\\]/", $this->_login))
     {
       $valid = false;
       $this->_loginError = sprintf(_("This field can't contain the symbols %s"), "'\\");
@@ -147,7 +147,7 @@ class Staff
    * @return int Staff Id Member
    * @access public
    */
-  function getIdMember()
+  public function getIdMember()
   {
     return intval($this->_idMember);
   }
@@ -159,7 +159,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setIdMember($value)
+  public function setIdMember($value)
   {
     $this->_idMember = intval($value);
   }
@@ -170,7 +170,7 @@ class Staff
    * @return int Id User
    * @access public
    */
-  function getIdUser()
+  public function getIdUser()
   {
     return intval($this->_idUser);
   }
@@ -182,7 +182,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setIdUser($value)
+  public function setIdUser($value)
   {
     $this->_idUser = intval($value);
   }
@@ -193,7 +193,7 @@ class Staff
    * @return string Staff Member Type
    * @access public
    */
-  function getMemberType()
+  public function getMemberType()
   {
     return stripslashes(strtr($this->_memberType, $this->_trans));
   }
@@ -205,7 +205,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setMemberType($value)
+  public function setMemberType($value)
   {
     $temp = trim($value);
     $this->_memberType = (($temp == "") ? OPEN_ADMINISTRATIVE : $temp);
@@ -217,7 +217,7 @@ class Staff
    * @return string doctor collegiate number
    * @access public
    */
-  function getCollegiateNumber()
+  public function getCollegiateNumber()
   {
     return stripslashes(strtr($this->_collegiateNumber, $this->_trans));
   }
@@ -228,7 +228,7 @@ class Staff
    * @return string Collegiate Number error text
    * @access public
    */
-  function getCollegiateNumberError()
+  public function getCollegiateNumberError()
   {
     return $this->_collegiateNumberError;
   }
@@ -240,7 +240,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setCollegiateNumber($value)
+  public function setCollegiateNumber($value)
   {
     $this->_collegiateNumber = Check::safeText($value);
   }
@@ -251,7 +251,7 @@ class Staff
    * @return string Staff NIF
    * @access public
    */
-  function getNIF()
+  public function getNIF()
   {
     return stripslashes(strtr($this->_nif, $this->_trans));
   }
@@ -262,7 +262,7 @@ class Staff
    * @return string NIF error text
    * @access public
    */
-  function getNIFError()
+  public function getNIFError()
   {
     return $this->_nifError;
   }
@@ -274,7 +274,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setNIF($value)
+  public function setNIF($value)
   {
     $this->_nif = Check::safeText($value);
   }
@@ -285,7 +285,7 @@ class Staff
    * @return string Staff first name
    * @access public
    */
-  function getFirstName()
+  public function getFirstName()
   {
     return stripslashes(strtr($this->_firstName, $this->_trans));
   }
@@ -296,7 +296,7 @@ class Staff
    * @return string first name error text
    * @access public
    */
-  function getFirstNameError()
+  public function getFirstNameError()
   {
     return $this->_firstNameError;
   }
@@ -308,7 +308,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setFirstName($value)
+  public function setFirstName($value)
   {
     $this->_firstName = Check::safeText($value);
   }
@@ -319,7 +319,7 @@ class Staff
    * @return string surname1 of staff member
    * @access public
    */
-  function getSurname1()
+  public function getSurname1()
   {
     return stripslashes(strtr($this->_surname1, $this->_trans));
   }
@@ -330,7 +330,7 @@ class Staff
    * @return string surname1 error text
    * @access public
    */
-  function getSurname1Error()
+  public function getSurname1Error()
   {
     return $this->_surname1Error;
   }
@@ -342,7 +342,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setSurname1($value)
+  public function setSurname1($value)
   {
     $this->_surname1 = Check::safeText($value);
   }
@@ -353,7 +353,7 @@ class Staff
    * @return string surname2 of staff member
    * @access public
    */
-  function getSurname2()
+  public function getSurname2()
   {
     return stripslashes(strtr($this->_surname2, $this->_trans));
   }
@@ -364,7 +364,7 @@ class Staff
    * @return string surname2 error text
    * @access public
    */
-  function getSurname2Error()
+  public function getSurname2Error()
   {
     return $this->_surname2Error;
   }
@@ -376,7 +376,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setSurname2($value)
+  public function setSurname2($value)
   {
     $this->_surname2 = Check::safeText($value);
   }
@@ -387,7 +387,7 @@ class Staff
    * @return string Staff login
    * @access public
    */
-  function getLogin()
+  public function getLogin()
   {
     return stripslashes(strtr($this->_login, $this->_trans));
   }
@@ -398,7 +398,7 @@ class Staff
    * @return string Login error text
    * @access public
    */
-  function getLoginError()
+  public function getLoginError()
   {
     return $this->_loginError;
   }
@@ -410,7 +410,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setLogin($value)
+  public function setLogin($value)
   {
     $value = strtolower($value); // sure?
     $this->_login = Check::safeText($value);
@@ -422,7 +422,7 @@ class Staff
    * @return string Staff address
    * @access public
    */
-  function getAddress()
+  public function getAddress()
   {
     return stripslashes(strtr($this->_address, $this->_trans));
   }
@@ -434,7 +434,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setAddress($value)
+  public function setAddress($value)
   {
     $this->_address = Check::safeText($value);
   }
@@ -445,7 +445,7 @@ class Staff
    * @return string Staff phone contact
    * @access public
    */
-  function getPhone()
+  public function getPhone()
   {
     return stripslashes(strtr($this->_phone, $this->_trans));
   }
@@ -457,7 +457,7 @@ class Staff
    * @return void
    * @access public
    */
-  function setPhone($value)
+  public function setPhone($value)
   {
     $this->_phone = Check::safeText($value);
   }

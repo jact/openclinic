@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: User.php,v 1.11 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: User.php,v 1.12 2013/01/13 14:27:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -49,22 +49,22 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  */
 class User
 {
-  var $_idUser = 0;
-  var $_idMember = 0;
-  var $_login = "";
-  var $_loginError = "";
-  var $_pwd = "";
-  var $_pwdError = "";
-  var $_pwd2 = "";
-  var $_email = "";
-  var $_emailError = "";
-  var $_actived = false;
-  var $_idTheme = 1;
-  var $_idProfile = OPEN_PROFILE_DOCTOR; // by default doctor profile
+  private $_idUser = 0;
+  private $_idMember = 0;
+  private $_login = "";
+  private $_loginError = "";
+  private $_pwd = "";
+  private $_pwdError = "";
+  private $_pwd2 = "";
+  private $_email = "";
+  private $_emailError = "";
+  private $_actived = false;
+  private $_idTheme = 1;
+  private $_idProfile = OPEN_PROFILE_DOCTOR; // by default doctor profile
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
-  function User()
+  public function User()
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
   }
@@ -75,7 +75,7 @@ class User
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validateData()
+  public function validateData()
   {
     $valid = true;
 
@@ -95,7 +95,7 @@ class User
       $valid = false;
       $this->_loginError = _("This field must not contain any spaces.");
     }
-    elseif (ereg("['\\]", $this->_login))
+    elseif (preg_match("/['\\]/", $this->_login))
     {
       $valid = false;
       $this->_loginError = sprintf(_("This field can't contain the symbols %s"), "'\\");
@@ -103,14 +103,14 @@ class User
 
     if (trim($this->_email) != "")
     {
-      if ( !ereg("@", $this->_email) )
+      if ( !preg_match("/@/", $this->_email) )
       {
         $valid = false;
         $this->_emailError = _("Invalid email, no @ symbol in string.");
       }
       else
       {
-        list($user, $host) = split("@", $this->_email);
+        list($user, $host) = preg_split("/@/", $this->_email);
 
         if ( (empty($user)) || (empty($host)) )
         {
@@ -118,7 +118,7 @@ class User
           $this->_emailError = sprintf(_("Missing data [%s]@[%s]"), $user, $host);
         }
 
-        if(ereg("[ \t]", $user) || ereg("[ \t]", $host))
+        if (preg_match("/[ \t]/", $user) || preg_match("/[ \t]/", $host))
         {
           $valid = false;
           $this->_emailError = sprintf(_("Whitespace in [%s]@[%s]"), $user, $host);
@@ -135,7 +135,7 @@ class User
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validatePwd()
+  public function validatePwd()
   {
     $valid = true;
 
@@ -169,7 +169,7 @@ class User
    * @return int id user
    * @access public
    */
-  function getIdUser()
+  public function getIdUser()
   {
     return intval($this->_idUser);
   }
@@ -181,7 +181,7 @@ class User
    * @return void
    * @access public
    */
-  function setIdUser($value)
+  public function setIdUser($value)
   {
     $this->_idUser = intval($value);
   }
@@ -192,7 +192,7 @@ class User
    * @return int id member user
    * @access public
    */
-  function getIdMember()
+  public function getIdMember()
   {
     return intval($this->_idMember);
   }
@@ -204,7 +204,7 @@ class User
    * @return void
    * @access public
    */
-  function setIdMember($value)
+  public function setIdMember($value)
   {
     $this->_idMember = intval($value);
   }
@@ -215,7 +215,7 @@ class User
    * @return string User login
    * @access public
    */
-  function getLogin()
+  public function getLogin()
   {
     return stripslashes(strtr($this->_login, $this->_trans));
   }
@@ -226,7 +226,7 @@ class User
    * @return string login error text
    * @access public
    */
-  function getLoginError()
+  public function getLoginError()
   {
     return $this->_loginError;
   }
@@ -238,7 +238,7 @@ class User
    * @return void
    * @access public
    */
-  function setLogin($value)
+  public function setLogin($value)
   {
     $value = strtolower($value); // sure?
     $this->_login = Check::safeText($value);
@@ -250,7 +250,7 @@ class User
    * @return string User password
    * @access public
    */
-  function getPwd()
+  public function getPwd()
   {
     return $this->_pwd;
   }
@@ -261,7 +261,7 @@ class User
    * @return string password error text
    * @access public
    */
-  function getPwdError()
+  public function getPwdError()
   {
     return $this->_pwdError;
   }
@@ -273,7 +273,7 @@ class User
    * @return void
    * @access public
    */
-  function setPwd($value)
+  public function setPwd($value)
   {
     $this->_pwd = Check::safeText($value);
   }
@@ -284,7 +284,7 @@ class User
    * @return string user's password confirmation
    * @access public
    */
-  function getPwd2()
+  public function getPwd2()
   {
     return $this->_pwd2;
   }
@@ -296,7 +296,7 @@ class User
    * @return void
    * @access public
    */
-  function setPwd2($value)
+  public function setPwd2($value)
   {
     $this->_pwd2 = Check::safeText($value);
   }
@@ -307,7 +307,7 @@ class User
    * @return string user email
    * @access public
    */
-  function getEmail()
+  public function getEmail()
   {
     return stripslashes(strtr($this->_email, $this->_trans));
   }
@@ -318,7 +318,7 @@ class User
    * @return string email error text
    * @access public
    */
-  function getEmailError()
+  public function getEmailError()
   {
     return $this->_emailError;
   }
@@ -330,7 +330,7 @@ class User
    * @return void
    * @access public
    */
-  function setEmail($value)
+  public function setEmail($value)
   {
     $this->_email = Check::safeText($value);
   }
@@ -341,7 +341,7 @@ class User
    * @return boolean user is actived?
    * @access public
    */
-  function isActived()
+  public function isActived()
   {
     return ($this->_actived == true);
   }
@@ -353,7 +353,7 @@ class User
    * @return void
    * @access public
    */
-  function setActived($value)
+  public function setActived($value)
   {
     if (gettype($value) == 'string')
     {
@@ -368,7 +368,7 @@ class User
    * @return int id theme
    * @access public
    */
-  function getIdTheme()
+  public function getIdTheme()
   {
     return intval($this->_idTheme);
   }
@@ -380,7 +380,7 @@ class User
    * @return void
    * @access public
    */
-  function setIdTheme($value)
+  public function setIdTheme($value)
   {
     $temp = intval($value);
     $this->_idTheme = (($temp == 0) ? 1 : $temp);
@@ -392,7 +392,7 @@ class User
    * @return int id profile
    * @access public
    */
-  function getIdProfile()
+  public function getIdProfile()
   {
     return intval($this->_idProfile);
   }
@@ -404,7 +404,7 @@ class User
    * @return void
    * @access public
    */
-  function setIdProfile($value)
+  public function setIdProfile($value)
   {
     $temp = intval($value);
     $this->_idProfile = (($temp == 0) ? OPEN_PROFILE_DOCTOR : $temp);

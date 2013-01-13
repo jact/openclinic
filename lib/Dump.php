@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Dump.php,v 1.4 2013/01/07 18:32:44 jact Exp $
+ * @version   CVS: $Id: Dump.php,v 1.5 2013/01/13 14:22:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -118,27 +118,27 @@ if ( !defined('DUMP_USR_OS') )
   }
 
   // 2. browser and version
-  if (ereg('Opera(/| )([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $logVersion))
+  if (preg_match('/Opera(\/| )([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $logVersion))
   {
     define('DUMP_USR_BROWSER_VER', $logVersion[2]);
     define('DUMP_USR_BROWSER_AGENT', 'OPERA');
   }
-  elseif (ereg('MSIE ([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $logVersion))
+  elseif (preg_match('/MSIE ([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $logVersion))
   {
     define('DUMP_USR_BROWSER_VER', $logVersion[1]);
     define('DUMP_USR_BROWSER_AGENT', 'IE');
   }
-  elseif (ereg('OmniWeb/([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $logVersion))
+  elseif (preg_match('/OmniWeb\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $logVersion))
   {
     define('DUMP_USR_BROWSER_VER', $logVersion[1]);
     define('DUMP_USR_BROWSER_AGENT', 'OMNIWEB');
   }
-  elseif (ereg('Mozilla/([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $logVersion))
+  elseif (preg_match('/Mozilla\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $logVersion))
   {
     define('DUMP_USR_BROWSER_VER', $logVersion[1]);
     define('DUMP_USR_BROWSER_AGENT', 'MOZILLA');
   }
-  elseif (ereg('Konqueror/([0-9].[0-9]{1,2})', $HTTP_USER_AGENT, $logVersion))
+  elseif (preg_match('/Konqueror\/([0-9].[0-9]{1,2})/', $HTTP_USER_AGENT, $logVersion))
   {
     define('DUMP_USR_BROWSER_VER', $logVersion[1]);
     define('DUMP_USR_BROWSER_AGENT', 'KONQUEROR');
@@ -344,7 +344,7 @@ class Dump
 
       $schemaCreate .= ',' . DUMP_CRLF;
     } // end while
-    $schemaCreate = ereg_replace(',' . DUMP_CRLF . '$', '', $schemaCreate);
+    $schemaCreate = preg_replace('/,' . DUMP_CRLF . '$/', '', $schemaCreate);
 
     $localQuery = 'SHOW KEYS FROM ' . self::backQuote($db) . '.' . self::backQuote($table);
     if ( !$localConn->exec($localQuery) )
@@ -661,7 +661,7 @@ class Dump
           // always enclose fields
           if ($what == 'excel')
           {
-            $row[$j] = ereg_replace("\015(\012)?", "\012", $row[$j]);
+            $row[$j] = preg_replace("/\015(\012)?/", "\012", $row[$j]);
           }
 
           ($encBy == '')

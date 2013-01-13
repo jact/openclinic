@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: I18n.php,v 1.12 2013/01/07 18:35:10 jact Exp $
+ * @version   CVS: $Id: I18n.php,v 1.13 2013/01/13 14:23:51 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -84,7 +84,7 @@ class I18n
     setlocale(LC_ALL, $newLang);
 
     /*$nls = I18n::getNLS();
-    if (defined("PHP_OS") && eregi("win", PHP_OS))
+    if (defined("PHP_OS") && preg_match("/win/i", PHP_OS))
     {
       setlocale(LC_ALL, (isset($nls['win32'][$newLang]) ? $nls['win32'][$newLang] : $newLang));
     }
