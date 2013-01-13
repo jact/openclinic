@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.37 2013/01/12 22:37:49 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.38 2013/01/13 14:17:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -21,7 +21,7 @@
  *  bool _validateSettings(void)
  */
 
-  define("OPEN_PHP_VERSION", '5.1.0'); // @fixme in global_constants.php
+  define("OPEN_PHP_VERSION", '5.3.1'); // @fixme in global_constants.php
 
   error_reporting(E_ALL & ~E_NOTICE); // normal mode
   //error_reporting(E_ALL); // debug mode
@@ -29,7 +29,7 @@
   /**
    * Step 8: If we have concluded...
    */
-  if ($_POST['buttonPressed'] == "next7")
+  if (isset($_POST['buttonPressed']) && $_POST['buttonPressed'] == "next7")
   {
     header("Location: ../index.php");
     exit();
@@ -47,7 +47,7 @@
   /**
    * Step 0: Variables initialization if first visit
    */
-  if ( !$_POST['alreadyVisited'] )
+  if ( !isset($_POST['alreadyVisited']) || !$_POST['alreadyVisited'] )
   {
     //init variables
     $_POST['dbHost'] = "localhost";
@@ -109,10 +109,10 @@
   echo Form::hidden("alreadyVisited", 1, array('id' => 'h_alreadyVisited'));
   echo Form::hidden("buttonPressed", null, array('id' => 'h_buttonPressed'));
 
-  echo Form::hidden("dbHost", ereg_replace(" ", "", $_POST['dbHost']), array('id' => 'h_dbHost'));
-  echo Form::hidden("dbUser", ereg_replace(" ", "", $_POST['dbUser']), array('id' => 'h_dbUser'));
+  echo Form::hidden("dbHost", preg_replace("/ /", "", $_POST['dbHost']), array('id' => 'h_dbHost'));
+  echo Form::hidden("dbUser", preg_replace("/ /", "", $_POST['dbUser']), array('id' => 'h_dbUser'));
   echo Form::hidden("dbPasswd", $_POST['dbPasswd'], array('id' => 'h_dbPasswd'));
-  echo Form::hidden("dbName", ereg_replace(" ", "", $_POST['dbName']), array('id' => 'h_dbName'));
+  echo Form::hidden("dbName", preg_replace("/ /", "", $_POST['dbName']), array('id' => 'h_dbName'));
 
   echo Form::hidden("clinicLanguage", $_POST['clinicLanguage'], array('id' => 'h_clinicLanguage'));
   echo Form::hidden("clinicName", $_POST['clinicName'], array('id' => 'h_clinicName'));
@@ -129,7 +129,7 @@
   echo Form::hidden("adminAddress", $_POST['adminAddress'], array('id' => 'h_adminAddress'));
   echo Form::hidden("adminPhone", $_POST['adminPhone'], array('id' => 'h_adminPhone'));
   echo Form::hidden("passwd", $_POST['passwd'], array('id' => 'h_passwd'));
-  echo Form::hidden("email", ereg_replace(" ", "", $_POST['email']), array('id' => 'h_email'));
+  echo Form::hidden("email", preg_replace("/ /", "", $_POST['email']), array('id' => 'h_email'));
   echo Form::hidden("adminTheme", $_POST['adminTheme'], array('id' => 'h_adminTheme'));
 
   echo HTML::start('div', array('id' => 'window'));
@@ -139,7 +139,7 @@
   /**
    * Step 2: License
    */
-  if ($_POST['buttonPressed'] == "next1" || $_POST['buttonPressed'] == "back2")
+  if (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next1" || $_POST['buttonPressed'] == "back2"))
   {
     $focusFormField = "license";
     //Error::debug(OPEN_LANGUAGE);
@@ -169,7 +169,7 @@
   /**
    * Step 3: MySQL database settings
    */
-  elseif ($_POST['buttonPressed'] == "next2" || $_POST['buttonPressed'] == "back3")
+  elseif (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next2" || $_POST['buttonPressed'] == "back3"))
   {
     $focusFormField = "dbHost[1]";
 
@@ -238,7 +238,7 @@
   /**
    * Step 4: Config Settings
    */
-  elseif ($_POST['buttonPressed'] == "next3" || $_POST['buttonPressed'] == "back4")
+  elseif (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next3" || $_POST['buttonPressed'] == "back4"))
   {
     $focusFormField = "clinicLanguage[1]";
 
@@ -339,7 +339,7 @@
   /**
    * Step 5: Admin data
    */
-  elseif ($_POST['buttonPressed'] == "next4" || $_POST['buttonPressed'] == "back5")
+  elseif (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next4" || $_POST['buttonPressed'] == "back5"))
   {
     $focusFormField = "firstName[1]";
 
@@ -436,7 +436,7 @@
   /**
    * Step 6: Last Check
    */
-  elseif ($_POST['buttonPressed'] == "next5")
+  elseif (isset($_POST['buttonPressed']) && $_POST['buttonPressed'] == "next5")
   {
     //$focusFormField = "back5";
 
@@ -500,7 +500,7 @@
   /**
    * Step 7: Start using OpenClinic
    */
-  elseif ($_POST['buttonPressed'] == "next6")
+  elseif (isset($_POST['buttonPressed']) && $_POST['buttonPressed'] == "next6")
   {
     $focusFormField = "next7";
 
@@ -509,7 +509,7 @@
     /**
      * Write config/database_constants.php file
      */
-    $mode = (ereg('Win', $_SERVER["HTTP_USER_AGENT"])) ? 'wb' : 'w';
+    $mode = (preg_match('/win/i', $_SERVER["HTTP_USER_AGENT"])) ? 'wb' : 'w';
     $aux = fopen('../config/database_constants.php', $mode);
     if ( !$aux )
     {
@@ -533,7 +533,7 @@
  * @package   OpenClinic
  * @copyright 2002-' . date('Y') . ' jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.37 2013/01/12 22:37:49 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.38 2013/01/13 14:17:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -738,7 +738,7 @@
     if (chmod("../config/database_constants.php", 0666) == false)
     {
       $text .= HTML::para(_("This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."));
-      if (defined('PHP_OS') && eregi('win', PHP_OS))
+      if (defined('PHP_OS') && preg_match('/win/i', PHP_OS))
       {
         $text .= Msg::error(sprintf(_("Deactivate read-only mode in the file properties of %s."),
           HTML::tag('tt', 'config/database_constants.php'))
@@ -850,7 +850,7 @@ function _showButton($name, $value, $type = "next")
  *
  * Checks extension and returns a message
  *
- * @author Christophe Gesché
+ * @author Christophe GeschÃ©
  * @param string $extensionName name of php extension to be checked
  * @param boolean $echoWhenOk true => show ok when extension exists
  * @return string message (empty or not)
