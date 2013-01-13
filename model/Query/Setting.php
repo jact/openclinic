@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.4 2013/01/07 18:03:15 jact Exp $
+ * @version   CVS: $Id: Setting.php,v 1.5 2013/01/13 14:25:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,7 +41,7 @@ class Query_Setting extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Setting($dsn = null)
+  public function Query_Setting($dsn = null)
   {
     $this->_table = "setting_tbl";
     $this->_primaryKey = null;
@@ -70,7 +70,7 @@ class Query_Setting extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function select()
+  public function select()
   {
     $sql = "SELECT * FROM " . $this->_table;
 
@@ -85,7 +85,7 @@ class Query_Setting extends Query
    * @return Setting returns settings object or false if no more rows to fetch
    * @access public
    */
-  function fetch()
+  public function fetch()
   {
     $array = parent::fetchRow();
     if ($array == false)
@@ -115,7 +115,7 @@ class Query_Setting extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function update($set)
+  public function update($set)
   {
     if ( !$set instanceof Setting )
     {
@@ -156,7 +156,7 @@ class Query_Setting extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function updateTheme($idTheme)
+  public function updateTheme($idTheme)
   {
     $sql = "UPDATE " . $this->_table . " SET ";
     $sql .= "id_theme=" . intval($idTheme) . ";";
