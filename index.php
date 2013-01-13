@@ -9,13 +9,13 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.9 2013/01/12 22:38:34 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.10 2013/01/13 14:13:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo      i18n and HTML.php inclusion
  */
 
   // Ensuring a minimum version of PHP
-  define("OPEN_PHP_VERSION", '5.1.0'); // @fixme in global_constants.php
+  define("OPEN_PHP_VERSION", '5.3.1'); // @fixme in global_constants.php
   if (version_compare(phpversion(), OPEN_PHP_VERSION) < 0)
   {
     exit(sprintf('PHP %s or higher is required.', OPEN_PHP_VERSION));
