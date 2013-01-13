@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: admin.php,v 1.19 2008/03/23 11:59:38 jact Exp $
+ * @version   CVS: $Id: admin.php,v 1.20 2013/01/13 16:27:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -36,7 +36,7 @@
   }
   unset($linkList);
 
-  $array[] = HTML::link(_("Help"), '../doc/index.php',
+  /*$array[] = HTML::link(_("Help"), '../doc/index.php',
     array(
       'tab' => $tab,
       'nav' => $nav
@@ -45,7 +45,7 @@
       'title' => _("Opens a new window"),
       'class' => 'popup'
     )
-  );
+  );*/
 
   echo navigation($array);
   unset($array);

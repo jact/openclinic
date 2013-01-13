@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: component.php,v 1.10 2008/03/23 11:59:38 jact Exp $
+ * @version   CVS: $Id: component.php,v 1.11 2013/01/13 16:28:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -302,7 +302,7 @@
 
     $_links[] = HTML::link(_("OpenClinic Readme"), '../index.html');
 
-    if (isset($tab) && isset($nav))
+    /*if (isset($tab) && isset($nav))
     {
       $_links[] = HTML::link(_("Help"), '../doc/index.php',
         array(
@@ -314,7 +314,7 @@
           'class' => 'popup'
         )
       );
-    }
+    }*/
 
 
     if (isset($_SESSION['auth']['is_admin']) && ($_SESSION['auth']['is_admin'] === true && !OPEN_DEMO))

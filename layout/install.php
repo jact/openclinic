@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2008 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.2 2008/03/23 11:59:38 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.3 2013/01/13 16:28:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.8
  */
@@ -38,7 +38,7 @@
   }
   unset($linkList);
 
-  $array[] = HTML::link(_("Help"), '../doc/index.php',
+  /*$array[] = HTML::link(_("Help"), '../doc/index.php',
     array(
       'tab' => $tab,
       'nav' => $nav
@@ -47,7 +47,7 @@
       'title' => _("Opens a new window"),
       'class' => 'popup'
     )
-  );
+  );*/
 
   echo navigation($array);
   unset($array);
