@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.15 2013/01/07 18:39:43 jact Exp $
+ * @version   CVS: $Id: Error.php,v 1.16 2013/01/13 14:22:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -176,7 +176,7 @@ class Error
       $calls .= (isset($trace[$x]["class"]) ? $trace[$x]["class"] . $trace[$x]["type"] : '');
       $calls .= $trace[$x]["function"];
       $calls .= (isset($trace[$x]["args"]) && is_array($trace[$x]["args"]) && count($trace[$x]["args"]) > 0)
-        ? '(' . implode(', ', serialize($trace[$x]["args"])) . ')'
+        ? '(' . implode(', ', $trace[$x]["args"]) . ')'
         : '';
       $calls .= " (line " . $trace[$x]["line"] . " in " . $trace[$x]["file"] . ")";
     }
@@ -221,7 +221,7 @@ class Error
     }
 
     $source = highlight_file($file, true);
-    $source = split("<br />", $source);
+    $source = preg_split("/<br \/>/", $source);
     $lines = file($file);
 
     // get line numbers
@@ -377,7 +377,7 @@ class Error
     $error .= PHP_EOL . "Client IP: " . $_SERVER["REMOTE_ADDR"];
 
     $prepend = PHP_EOL . "[PHP " . $prepend . " " . date("Y-m-d H:i:s") . "]";
-    //$error = ereg_replace(PHP_EOL, $prepend, $error);
+    //$error = preg_replace('/' . PHP_EOL . '/', $prepend, $error);
     $error = $prepend . $error;
     $error .= PHP_EOL . str_repeat("_", 78); // separator line
 
