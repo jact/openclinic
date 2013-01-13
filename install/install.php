@@ -7,16 +7,21 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.27 2008/03/23 11:59:27 jact Exp $
+ * @version   CVS: $Id: install.php,v 1.28 2013/01/13 16:24:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   $tab = "install";
   $nav = "create";
 
-  require_once("../config/environment.php");
+  // Instead of include environment.php (because maybe database connection doesn't exists)
+  define("OPEN_THEME_NAME",     "OpenClinic");
+  define("OPEN_THEME_CSS_FILE", "openclinic.css");
+  require_once("../config/i18n.php");
+  require_once("../config/session_info.php");
+  require_once("../lib/FlashMsg.php");
 
   $title = _("Database Creation");
   require_once("../layout/header.php");

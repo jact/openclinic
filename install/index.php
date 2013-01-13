@@ -7,16 +7,21 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: index.php,v 1.33 2008/03/23 11:59:26 jact Exp $
+ * @version   CVS: $Id: index.php,v 1.34 2013/01/13 16:24:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
   $tab = "install";
   $nav = "index";
 
-  require_once("../config/environment.php");
+  // Instead of include environment.php (because maybe database connection doesn't exists)
+  define("OPEN_THEME_NAME",     "OpenClinic");
+  define("OPEN_THEME_CSS_FILE", "openclinic.css");
+  require_once("../config/i18n.php");
+  require_once("../config/session_info.php");
+  require_once("../lib/FlashMsg.php");
 
   $title = _("OpenClinic Install");
   require_once("../layout/header.php");
@@ -112,7 +117,7 @@
         HTML::link(sprintf(_("step %d"), 5), '../install.html#step5')
       ),
       sprintf(_("Update %s with your new database username and password (%s of the install instructions)"),
-        HTML::tag('strong', 'openclinic/database_constants.php'),
+        HTML::tag('strong', 'openclinic/config/database_constants.php'),
         HTML::link(sprintf(_("step %d"), 8), '../install.html#step8')
       )
     );
