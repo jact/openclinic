@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: File.php,v 1.9 2013/01/13 14:23:13 jact Exp $
+ * @version   CVS: $Id: File.php,v 1.10 2013/01/13 16:26:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -89,12 +89,13 @@ class File
       asort($arrayFiles);
     }
 
-    if ($arrayDirs)
+    if ($arrayDirs != null)
     {
       asort($arrayDirs);
+      $arrayFiles = array_merge($arrayDirs, $arrayFiles);
     }
 
-    return array_merge($arrayDirs, $arrayFiles);
+    return $arrayFiles;
   }
 
   /*
