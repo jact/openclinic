@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: patient_tbl.sql,v 1.8 2013/01/07 18:21:16 jact Exp $
+ * @version   CVS: $Id: patient_tbl.sql,v 1.9 2013/01/13 14:19:34 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,8 +19,8 @@ CREATE TABLE patient_tbl (
   first_name VARCHAR(25) NOT NULL,
   surname1 VARCHAR(30) NOT NULL,
   surname2 VARCHAR(30) NULL DEFAULT '',
-  address TEXT NULL DEFAULT '',
-  phone_contact TEXT NULL DEFAULT '',
+  address TEXT NULL,
+  phone_contact TEXT NULL,
   sex ENUM('V','H') NOT NULL DEFAULT 'V',
   race VARCHAR(25) NULL, /* raza: amarilla, blanca, cobriza, negra */
   birth_date DATE NULL, /* fecha de nacimiento */

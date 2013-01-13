@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_tbl.sql,v 1.7 2013/01/07 18:21:37 jact Exp $
+ * @version   CVS: $Id: staff_tbl.sql,v 1.8 2013/01/13 14:19:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,8 +20,8 @@ CREATE TABLE staff_tbl (
   first_name VARCHAR(25) NOT NULL,
   surname1 VARCHAR(30) NOT NULL,
   surname2 VARCHAR(30) NULL DEFAULT '',
-  address TEXT NULL DEFAULT '',
-  phone_contact TEXT NULL DEFAULT '',
+  address TEXT NULL,
+  phone_contact TEXT NULL,
   id_user INT UNSIGNED NULL,
   login VARCHAR(20) NULL,
   FOREIGN KEY (id_user) REFERENCES user_tbl(id_user) ON DELETE SET NULL

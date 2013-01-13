@@ -20,6 +20,17 @@ UPDATE user_tbl SET id_theme=1;
 ALTER TABLE patient_tbl CHANGE surname2 VARCHAR(30) NULL DEFAULT '';
 ALTER TABLE staff_tbl CHANGE surname2 VARCHAR(30) NULL DEFAULT '';
 
+# BLOB/TEXT columns cannot have default values
+
+ALTER TABLE deleted_patient_tbl CHANGE address TEXT NULL;
+ALTER TABLE deleted_patient_tbl CHANGE phone_contact TEXT NULL;
+
+ALTER TABLE patient_tbl CHANGE address TEXT NULL;
+ALTER TABLE patient_tbl CHANGE phone_contact TEXT NULL;
+
+ALTER TABLE staff_tbl CHANGE address TEXT NULL;
+ALTER TABLE staff_tbl CHANGE phone_contact TEXT NULL;
+
 # Change storage engine!!!
 
 ALTER TABLE access_log_tbl ENGINE=MyISAM;
