@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.12 2013/01/13 16:25:00 jact Exp $
+ * @version   CVS: $Id: upgrade.php,v 1.13 2013/01/16 20:58:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -87,7 +87,7 @@
       if ( !parseSqlFile('./upgrades/' . $file) )
       {
         //Error::debug($file); // debug
-        //echo Msg::error(sprintf(_("Error processing file: %s"), $value));
+        echo Msg::error(sprintf(_("Error processing file: %s"), $file));
 
         include_once("../layout/footer.php");
         exit();
