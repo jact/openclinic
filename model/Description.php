@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Description.php,v 1.9 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: Description.php,v 1.10 2013/01/16 19:03:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -25,6 +25,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  string getDescriptionError(void)
  *  void setCode(string $value)
  *  void setDescription(string $value)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -32,11 +33,11 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  */
 class Description
 {
-  var $_code = "";
-  var $_description = "";
-  var $_descriptionError = "";
+  private $_code = "";
+  private $_description = "";
+  private $_descriptionError = "";
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
   function Description()
   {
@@ -49,7 +50,7 @@ class Description
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validateData()
+  public function validateData()
   {
     $valid = true;
 
@@ -68,7 +69,7 @@ class Description
    * @return string
    * @access public
    */
-  function getCode()
+  public function getCode()
   {
     return stripslashes(strtr($this->_code, $this->_trans));
   }
@@ -79,7 +80,7 @@ class Description
    * @return string
    * @access public
    */
-  function getDescription()
+  public function getDescription()
   {
     return stripslashes(strtr($this->_description, $this->_trans));
   }
@@ -90,7 +91,7 @@ class Description
    * @return string
    * @access public
    */
-  function getDescriptionError()
+  public function getDescriptionError()
   {
     return $this->_descriptionError;
   }
@@ -102,7 +103,7 @@ class Description
    * @return void
    * @access public
    */
-  function setCode($value)
+  public function setCode($value)
   {
     $this->_code = Check::safeText($value);
   }
@@ -114,9 +115,21 @@ class Description
    * @return void
    * @access public
    */
-  function setDescription($value)
+  public function setDescription($value)
   {
     $this->_description = Check::safeText($value);
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return __CLASS__;
   }
 } // end class
 ?>

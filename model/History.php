@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: History.php,v 1.9 2007/10/28 19:42:58 jact Exp $
+ * @version   CVS: $Id: History.php,v 1.10 2013/01/16 19:04:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -52,6 +52,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  void setBrothersStatusHealth(string $value)
  *  void setSpouseChildsStatusHealth(string $value)
  *  void setFamilyIllness(string $value)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -59,29 +60,29 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  */
 class History
 {
-  var $_idPatient = 0;
+  private $_idPatient = 0;
 
-  var $_birthGrowth = "";
-  var $_growthSexuality = "";
-  var $_feed = "";
-  var $_habits = "";
-  var $_peristalticConditions = "";
-  var $_psychological = "";
+  private $_birthGrowth = "";
+  private $_growthSexuality = "";
+  private $_feed = "";
+  private $_habits = "";
+  private $_peristalticConditions = "";
+  private $_psychological = "";
 
-  var $_childrenComplaint = "";
-  var $_venerealDisease = "";
-  var $_accidentSurgicalOperation = "";
-  var $_medicinalIntolerance = "";
-  var $_mentalIllness = "";
+  private $_childrenComplaint = "";
+  private $_venerealDisease = "";
+  private $_accidentSurgicalOperation = "";
+  private $_medicinalIntolerance = "";
+  private $_mentalIllness = "";
 
-  var $_parentsStatusHealth = "";
-  var $_brothersStatusHealth = "";
-  var $_spouseChildsStatusHealth = "";
-  var $_familyIllness = "";
+  private $_parentsStatusHealth = "";
+  private $_brothersStatusHealth = "";
+  private $_spouseChildsStatusHealth = "";
+  private $_familyIllness = "";
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
-  function History()
+  public function History()
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
   }
@@ -92,7 +93,7 @@ class History
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validateData()
+  public function validateData()
   {
     $valid = true;
 
@@ -105,7 +106,7 @@ class History
    * @return int
    * @access public
    */
-  function getIdPatient()
+  public function getIdPatient()
   {
     return intval($this->_idPatient);
   }
@@ -116,7 +117,7 @@ class History
    * @return string
    * @access public
    */
-  function getBirthGrowth()
+  public function getBirthGrowth()
   {
     return stripslashes(strtr($this->_birthGrowth, $this->_trans));
   }
@@ -127,7 +128,7 @@ class History
    * @return string
    * @access public
    */
-  function getGrowthSexuality()
+  public function getGrowthSexuality()
   {
     return stripslashes(strtr($this->_growthSexuality, $this->_trans));
   }
@@ -138,7 +139,7 @@ class History
    * @return string
    * @access public
    */
-  function getFeed()
+  public function getFeed()
   {
     return stripslashes(strtr($this->_feed, $this->_trans));
   }
@@ -149,7 +150,7 @@ class History
    * @return string
    * @access public
    */
-  function getHabits()
+  public function getHabits()
   {
     return stripslashes(strtr($this->_habits, $this->_trans));
   }
@@ -160,7 +161,7 @@ class History
    * @return string
    * @access public
    */
-  function getPeristalticConditions()
+  public function getPeristalticConditions()
   {
     return stripslashes(strtr($this->_peristalticConditions, $this->_trans));
   }
@@ -171,7 +172,7 @@ class History
    * @return string
    * @access public
    */
-  function getPsychological()
+  public function getPsychological()
   {
     return stripslashes(strtr($this->_psychological, $this->_trans));
   }
@@ -182,7 +183,7 @@ class History
    * @return string
    * @access public
    */
-  function getChildrenComplaint()
+  public function getChildrenComplaint()
   {
     return stripslashes(strtr($this->_childrenComplaint, $this->_trans));
   }
@@ -193,7 +194,7 @@ class History
    * @return string
    * @access public
    */
-  function getVenerealDisease()
+  public function getVenerealDisease()
   {
     return stripslashes(strtr($this->_venerealDisease, $this->_trans));
   }
@@ -204,7 +205,7 @@ class History
    * @return string
    * @access public
    */
-  function getAccidentSurgicalOperation()
+  public function getAccidentSurgicalOperation()
   {
     return stripslashes(strtr($this->_accidentSurgicalOperation, $this->_trans));
   }
@@ -215,7 +216,7 @@ class History
    * @return string
    * @access public
    */
-  function getMedicinalIntolerance()
+  public function getMedicinalIntolerance()
   {
     return stripslashes(strtr($this->_medicinalIntolerance, $this->_trans));
   }
@@ -226,7 +227,7 @@ class History
    * @return string
    * @access public
    */
-  function getMentalIllness()
+  public function getMentalIllness()
   {
     return stripslashes(strtr($this->_mentalIllness, $this->_trans));
   }
@@ -237,7 +238,7 @@ class History
    * @return string
    * @access public
    */
-  function getParentsStatusHealth()
+  public function getParentsStatusHealth()
   {
     return stripslashes(strtr($this->_parentsStatusHealth, $this->_trans));
   }
@@ -248,7 +249,7 @@ class History
    * @return string
    * @access public
    */
-  function getBrothersStatusHealth()
+  public function getBrothersStatusHealth()
   {
     return stripslashes(strtr($this->_brothersStatusHealth, $this->_trans));
   }
@@ -259,7 +260,7 @@ class History
    * @return string
    * @access public
    */
-  function getSpouseChildsStatusHealth()
+  public function getSpouseChildsStatusHealth()
   {
     return stripslashes(strtr($this->_spouseChildsStatusHealth, $this->_trans));
   }
@@ -270,7 +271,7 @@ class History
    * @return string
    * @access public
    */
-  function getFamilyIllness()
+  public function getFamilyIllness()
   {
     return stripslashes(strtr($this->_familyIllness, $this->_trans));
   }
@@ -282,7 +283,7 @@ class History
    * @return void
    * @access public
    */
-  function setIdPatient($value)
+  public function setIdPatient($value)
   {
     $this->_idPatient = intval($value);
   }
@@ -294,7 +295,7 @@ class History
    * @return void
    * @access public
    */
-  function setBirthGrowth($value)
+  public function setBirthGrowth($value)
   {
     $this->_birthGrowth = Check::safeText($value);
   }
@@ -306,7 +307,7 @@ class History
    * @return void
    * @access public
    */
-  function setGrowthSexuality($value)
+  public function setGrowthSexuality($value)
   {
     $this->_growthSexuality = Check::safeText($value);
   }
@@ -318,7 +319,7 @@ class History
    * @return void
    * @access public
    */
-  function setFeed($value)
+  public function setFeed($value)
   {
     $this->_feed = Check::safeText($value);
   }
@@ -330,7 +331,7 @@ class History
    * @return void
    * @access public
    */
-  function setHabits($value)
+  public function setHabits($value)
   {
     $this->_habits = Check::safeText($value);
   }
@@ -342,7 +343,7 @@ class History
    * @return void
    * @access public
    */
-  function setPeristalticConditions($value)
+  public function setPeristalticConditions($value)
   {
     $this->_peristalticConditions = Check::safeText($value);
   }
@@ -354,7 +355,7 @@ class History
    * @return void
    * @access public
    */
-  function setPsychological($value)
+  public function setPsychological($value)
   {
     $this->_psychological = Check::safeText($value);
   }
@@ -366,7 +367,7 @@ class History
    * @return void
    * @access public
    */
-  function setChildrenComplaint($value)
+  public function setChildrenComplaint($value)
   {
     $this->_childrenComplaint = Check::safeText($value);
   }
@@ -378,7 +379,7 @@ class History
    * @return void
    * @access public
    */
-  function setVenerealDisease($value)
+  public function setVenerealDisease($value)
   {
     $this->_venerealDisease = Check::safeText($value);
   }
@@ -390,7 +391,7 @@ class History
    * @return void
    * @access public
    */
-  function setAccidentSurgicalOperation($value)
+  public function setAccidentSurgicalOperation($value)
   {
     $this->_accidentSurgicalOperation = Check::safeText($value);
   }
@@ -402,7 +403,7 @@ class History
    * @return void
    * @access public
    */
-  function setMedicinalIntolerance($value)
+  public function setMedicinalIntolerance($value)
   {
     $this->_medicinalIntolerance = Check::safeText($value);
   }
@@ -414,7 +415,7 @@ class History
    * @return void
    * @access public
    */
-  function setMentalIllness($value)
+  public function setMentalIllness($value)
   {
     $this->_mentalIllness = Check::safeText($value);
   }
@@ -426,7 +427,7 @@ class History
    * @return void
    * @access public
    */
-  function setParentsStatusHealth($value)
+  public function setParentsStatusHealth($value)
   {
     $this->_parentsStatusHealth = Check::safeText($value);
   }
@@ -438,7 +439,7 @@ class History
    * @return void
    * @access public
    */
-  function setBrothersStatusHealth($value)
+  public function setBrothersStatusHealth($value)
   {
     $this->_brothersStatusHealth = Check::safeText($value);
   }
@@ -450,7 +451,7 @@ class History
    * @return void
    * @access public
    */
-  function setSpouseChildsStatusHealth($value)
+  public function setSpouseChildsStatusHealth($value)
   {
     $this->_spouseChildsStatusHealth = Check::safeText($value);
   }
@@ -462,9 +463,21 @@ class History
    * @return void
    * @access public
    */
-  function setFamilyIllness($value)
+  public function setFamilyIllness($value)
   {
     $this->_familyIllness = Check::safeText($value);
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return __CLASS__;
   }
 } // end class
 ?>

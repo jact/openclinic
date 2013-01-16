@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.19 2013/01/07 17:59:53 jact Exp $
+ * @version   CVS: $Id: Patient.php,v 1.20 2013/01/16 19:04:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,6 +74,7 @@ require_once(dirname(__FILE__) . "/Query/Page/Patient.php");
  *  string getInsuranceCompany(void)
  *  void setInsuranceCompany(string $value)
  *  string getHeader(void)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -121,7 +122,7 @@ class Patient
    * @return mixed void if not argument, null if not exists patient, object otherwise
    * @access public
    */
-  function Patient($id = 0)
+  public function Patient($id = 0)
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
 
@@ -149,7 +150,7 @@ class Patient
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validateData()
+  public function validateData()
   {
     $valid = true;
 
@@ -206,7 +207,7 @@ class Patient
    * @return int
    * @access public
    */
-  function getIdPatient()
+  public function getIdPatient()
   {
     return intval($this->_idPatient);
   }
@@ -218,7 +219,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setIdPatient($value)
+  public function setIdPatient($value)
   {
     $this->_idPatient = intval($value);
   }
@@ -229,7 +230,7 @@ class Patient
    * @return int
    * @access public
    */
-  function getIdMember()
+  public function getIdMember()
   {
     return intval($this->_idMember);
   }
@@ -241,7 +242,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setIdMember($value)
+  public function setIdMember($value)
   {
     $this->_idMember = intval($value);
   }
@@ -252,7 +253,7 @@ class Patient
    * @return string collegiate number
    * @access public
    */
-  function getCollegiateNumber()
+  public function getCollegiateNumber()
   {
     return stripslashes(strtr($this->_collegiateNumber, $this->_trans));
   }
@@ -264,7 +265,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setCollegiateNumber($value)
+  public function setCollegiateNumber($value)
   {
     $this->_collegiateNumber = Check::safeText($value);
   }
@@ -275,7 +276,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getNIF()
+  public function getNIF()
   {
     return stripslashes(strtr($this->_nif, $this->_trans));
   }
@@ -287,7 +288,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setNIF($value)
+  public function setNIF($value)
   {
     $this->_nif = Check::safeText($value);
   }
@@ -298,7 +299,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getFirstName()
+  public function getFirstName()
   {
     return stripslashes(strtr($this->_firstName, $this->_trans));
   }
@@ -309,7 +310,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getFirstNameError()
+  public function getFirstNameError()
   {
     return $this->_firstNameError;
   }
@@ -321,7 +322,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setFirstName($value)
+  public function setFirstName($value)
   {
     $this->_firstName = Check::safeText($value);
   }
@@ -332,7 +333,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getSurname1()
+  public function getSurname1()
   {
     return stripslashes(strtr($this->_surname1, $this->_trans));
   }
@@ -343,7 +344,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getSurname1Error()
+  public function getSurname1Error()
   {
     return $this->_surname1Error;
   }
@@ -355,7 +356,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setSurname1($value)
+  public function setSurname1($value)
   {
     $this->_surname1 = Check::safeText($value);
   }
@@ -366,7 +367,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getSurname2()
+  public function getSurname2()
   {
     return stripslashes(strtr($this->_surname2, $this->_trans));
   }
@@ -377,7 +378,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getSurname2Error()
+  public function getSurname2Error()
   {
     return $this->_surname2Error;
   }
@@ -389,7 +390,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setSurname2($value)
+  public function setSurname2($value)
   {
     $this->_surname2 = Check::safeText($value);
   }
@@ -401,7 +402,7 @@ class Patient
    * @access public
    * @since 0.8
    */
-  function getName()
+  public function getName()
   {
     return trim(stripslashes(strtr(
       $this->_firstName . ' ' . $this->_surname1 . ' ' . $this->_surname2, $this->_trans))
@@ -414,7 +415,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getAddress()
+  public function getAddress()
   {
     return stripslashes(strtr($this->_address, $this->_trans));
   }
@@ -426,7 +427,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setAddress($value)
+  public function setAddress($value)
   {
     $this->_address = Check::safeText($value);
   }
@@ -437,7 +438,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getPhone()
+  public function getPhone()
   {
     return stripslashes(strtr($this->_phone, $this->_trans));
   }
@@ -449,7 +450,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setPhone($value)
+  public function setPhone($value)
   {
     $this->_phone = Check::safeText($value);
   }
@@ -460,7 +461,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getSex()
+  public function getSex()
   {
     return stripslashes(strtr($this->_sex, $this->_trans));
   }
@@ -472,7 +473,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setSex($value)
+  public function setSex($value)
   {
     $this->_sex = Check::safeText($value);
   }
@@ -483,7 +484,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getRace()
+  public function getRace()
   {
     return stripslashes(strtr($this->_race, $this->_trans));
   }
@@ -495,7 +496,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setRace($value)
+  public function setRace($value)
   {
     $this->_race = Check::safeText($value);
   }
@@ -506,7 +507,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getBirthDate()
+  public function getBirthDate()
   {
     return $this->_birthDate;
   }
@@ -517,7 +518,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getBirthDateError()
+  public function getBirthDateError()
   {
     return $this->_birthDateError;
   }
@@ -529,7 +530,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setBirthDate($value)
+  public function setBirthDate($value)
   {
     $this->_birthDate = Check::safeText($value);
   }
@@ -543,7 +544,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setBirthDateFromParts($month, $day, $year)
+  public function setBirthDateFromParts($month, $day, $year)
   {
     if (strlen($year) > 1 && strlen($year) < 3)
     {
@@ -558,7 +559,7 @@ class Patient
    * @return int
    * @access public
    */
-  function getAge()
+  public function getAge()
   {
     return intval($this->_age);
   }
@@ -570,7 +571,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setAge($value)
+  public function setAge($value)
   {
     $this->_age = intval($value);
   }
@@ -581,7 +582,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getBirthPlace()
+  public function getBirthPlace()
   {
     return stripslashes(strtr($this->_birthPlace, $this->_trans));
   }
@@ -593,7 +594,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setBirthPlace($value)
+  public function setBirthPlace($value)
   {
     $this->_birthPlace = Check::safeText($value);
   }
@@ -604,7 +605,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getDeceaseDate()
+  public function getDeceaseDate()
   {
     return $this->_deceaseDate;
   }
@@ -615,7 +616,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getDeceaseDateError()
+  public function getDeceaseDateError()
   {
     return $this->_deceaseDateError;
   }
@@ -627,7 +628,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setDeceaseDate($value)
+  public function setDeceaseDate($value)
   {
     $this->_deceaseDate = Check::safeText($value);
   }
@@ -641,7 +642,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setDeceaseDateFromParts($month, $day, $year)
+  public function setDeceaseDateFromParts($month, $day, $year)
   {
     if (strlen($year) > 1 && strlen($year) < 3)
     {
@@ -656,7 +657,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getNTS()
+  public function getNTS()
   {
     return stripslashes(strtr($this->_nts, $this->_trans));
   }
@@ -668,7 +669,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setNTS($value)
+  public function setNTS($value)
   {
     $this->_nts = Check::safeText($value);
   }
@@ -679,7 +680,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getNSS()
+  public function getNSS()
   {
     return stripslashes(strtr($this->_nss, $this->_trans));
   }
@@ -691,7 +692,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setNSS($value)
+  public function setNSS($value)
   {
     $this->_nss = Check::safeText($value);
   }
@@ -702,7 +703,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getFamilySituation()
+  public function getFamilySituation()
   {
     return stripslashes(strtr($this->_familySituation, $this->_trans));
   }
@@ -714,7 +715,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setFamilySituation($value)
+  public function setFamilySituation($value)
   {
     $this->_familySituation = Check::safeText($value);
   }
@@ -725,7 +726,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getLabourSituation()
+  public function getLabourSituation()
   {
     return stripslashes(strtr($this->_labourSituation, $this->_trans));
   }
@@ -737,7 +738,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setLabourSituation($value)
+  public function setLabourSituation($value)
   {
     $this->_labourSituation = Check::safeText($value);
   }
@@ -748,7 +749,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getEducation()
+  public function getEducation()
   {
     return stripslashes(strtr($this->_education, $this->_trans));
   }
@@ -760,7 +761,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setEducation($value)
+  public function setEducation($value)
   {
     $this->_education = Check::safeText($value);
   }
@@ -771,7 +772,7 @@ class Patient
    * @return string
    * @access public
    */
-  function getInsuranceCompany()
+  public function getInsuranceCompany()
   {
     return stripslashes(strtr($this->_insuranceCompany, $this->_trans));
   }
@@ -783,7 +784,7 @@ class Patient
    * @return void
    * @access public
    */
-  function setInsuranceCompany($value)
+  public function setInsuranceCompany($value)
   {
     $this->_insuranceCompany = Check::safeText($value);
   }
@@ -794,7 +795,7 @@ class Patient
    * @return string last update date of the patient data
    * @access public
    */
-/*  function getLastUpdateDate()
+/*  public function getLastUpdateDate()
   {
     return stripslashes(strtr($this->_lastUpdateDate, $this->_trans));
   }*/
@@ -806,7 +807,7 @@ class Patient
    * @return void
    * @access public
    */
-/*  function setLastUpdateDate($value)
+/*  public function setLastUpdateDate($value)
   {
     $this->_lastUpdateDate = Check::safeText($value);
   }*/
@@ -820,7 +821,7 @@ class Patient
    * @access public
    * @since 0.8
    */
-  function getHeader()
+  public function getHeader()
   {
     $_html = HTML::start('div', array('id' => 'patient_header', 'class' => 'clearfix'));
     $_html .= HTML::para(_("Patient") . ': ' . $this->getName());
@@ -829,6 +830,19 @@ class Patient
     $_html .= HTML::end('div');
 
     return $_html;
+  }
+
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return $this->getName();
   }
 } // end class
 ?>
