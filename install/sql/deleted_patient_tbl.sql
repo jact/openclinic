@@ -8,7 +8,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: deleted_patient_tbl.sql,v 1.11 2013/01/13 14:19:27 jact Exp $
+ * @version   CVS: $Id: deleted_patient_tbl.sql,v 1.12 2013/01/16 19:02:26 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.2
  */
@@ -18,7 +18,7 @@ CREATE TABLE deleted_patient_tbl (
   nif VARCHAR(20) NULL,
   first_name VARCHAR(25) NOT NULL,
   surname1 VARCHAR(30) NOT NULL,
-  surname2 VARCHAR(30) NOT NULL,
+  surname2 VARCHAR(30) NULL DEFAULT '',
   address TEXT NULL,
   phone_contact TEXT NULL,
   sex ENUM('V','H') NOT NULL DEFAULT 'V',
