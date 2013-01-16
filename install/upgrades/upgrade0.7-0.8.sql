@@ -2,8 +2,10 @@
 # After use this, you can delete it
 
 ALTER TABLE deleted_patient_tbl ADD id_member INT UNSIGNED NULL AFTER insurance_company;
+ALTER TABLE deleted_patient_tbl ADD collegiate_number VARCHAR(20) NULL AFTER id_member;
 
 ALTER TABLE deleted_problem_tbl ADD id_member INT UNSIGNED NULL AFTER id_patient;
+ALTER TABLE deleted_problem_tbl ADD collegiate_number VARCHAR(20) NULL AFTER id_member;
 
 DELETE FROM theme_tbl;
 
