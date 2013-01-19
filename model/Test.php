@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Test.php,v 1.12 2013/01/13 14:26:40 jact Exp $
+ * @version   CVS: $Id: Test.php,v 1.13 2013/01/19 10:28:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -31,6 +31,7 @@ require_once(dirname(__FILE__) . "/Query/Test.php");
  *  string getPathFilename(boolean $withPath = true)
  *  string getPathFilenameError(void)
  *  void setPathFilename(string $value)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -67,12 +68,14 @@ class Test
       {
         return null;
       }
-      $this = $_testQ->fetch();
+
+      foreach (get_object_vars($_testQ->fetch()) as $key => $value)
+      {
+        $this->$key = $value;
+      }
 
       $_testQ->freeResult();
       $_testQ->close();
-
-      return $this;
     }
   }
 
@@ -218,6 +221,18 @@ class Test
   {
     $value = preg_replace('/\"/', '', $value); // To Opera navigators
     $this->_pathFilename = trim(preg_replace('/\\+/', '\\', $value));
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return $this->getPathFilename();
   }
 } // end class
 ?>
