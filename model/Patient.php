@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.20 2013/01/16 19:04:13 jact Exp $
+ * @version   CVS: $Id: Patient.php,v 1.21 2013/01/19 10:25:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -831,7 +831,6 @@ class Patient
 
     return $_html;
   }
-
 
   /**
    * string __toString(void)
