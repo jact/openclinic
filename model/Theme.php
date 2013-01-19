@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Theme.php,v 1.16 2007/12/15 14:35:43 jact Exp $
+ * @version   CVS: $Id: Theme.php,v 1.17 2013/01/19 10:26:59 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,6 +34,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  int getCount(void)
  *  void setCount(int $value)
  *  bool isCssReserved(string $file)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -41,17 +42,17 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  */
 class Theme
 {
-  var $_id = 0;
-  var $_name = "";
-  var $_nameError = "";
-  var $_cssFile = "";
-  var $_cssFileError = "";
-  var $_cssRules = "";
-  var $_cssRulesError = "";
+  private $_id = 0;
+  private $_name = "";
+  private $_nameError = "";
+  private $_cssFile = "";
+  private $_cssFileError = "";
+  private $_cssRules = "";
+  private $_cssRulesError = "";
 
-  var $_count = 0;
+  private $_count = 0;
 
-  var $_reservedCssFiles = array(
+  private $_reservedCssFiles = array(
     "ie6_fix.css",
     "openclinic.css",
     "print.css",
@@ -60,9 +61,9 @@ class Theme
     "wizard.css"
   );
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
-  function Theme()
+  public function Theme()
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
   }
@@ -73,7 +74,7 @@ class Theme
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validateData()
+  public function validateData()
   {
     $valid = true;
 
@@ -109,7 +110,7 @@ class Theme
    * @return int id theme
    * @access public
    */
-  function getId()
+  public function getId()
   {
     return intval($this->_id);
   }
@@ -121,7 +122,7 @@ class Theme
    * @return void
    * @access public
    */
-  function setId($value)
+  public function setId($value)
   {
     $this->_id = intval($value);
   }
@@ -132,7 +133,7 @@ class Theme
    * @return string theme name
    * @access public
    */
-  function getName()
+  public function getName()
   {
     return stripslashes(strtr($this->_name, $this->_trans));
   }
@@ -143,7 +144,7 @@ class Theme
    * @return string theme name error text
    * @access public
    */
-  function getNameError()
+  public function getNameError()
   {
     return $this->_nameError;
   }
@@ -155,7 +156,7 @@ class Theme
    * @return void
    * @access public
    */
-  function setName($value)
+  public function setName($value)
   {
     $this->_name = Check::safeText($value);
   }
@@ -166,7 +167,7 @@ class Theme
    * @return string css file
    * @access public
    */
-  function getCssFile()
+  public function getCssFile()
   {
     return stripslashes(strtr($this->_cssFile, $this->_trans));
   }
@@ -177,7 +178,7 @@ class Theme
    * @return string css file error text
    * @access public
    */
-  function getCssFileError()
+  public function getCssFileError()
   {
     return $this->_cssFileError;
   }
@@ -189,7 +190,7 @@ class Theme
    * @return void
    * @access public
    */
-  function setCssFile($value)
+  public function setCssFile($value)
   {
     $value = strtolower($value); // sure?
     $this->_cssFile = Check::safeText($value);
@@ -201,7 +202,7 @@ class Theme
    * @return string css rules
    * @access public
    */
-  function getCssRules()
+  public function getCssRules()
   {
     return stripslashes(strtr($this->_cssRules, $this->_trans));
   }
@@ -212,7 +213,7 @@ class Theme
    * @return string css rules error text
    * @access public
    */
-  function getCssRulesError()
+  public function getCssRulesError()
   {
     return $this->_cssRulesError;
   }
@@ -224,7 +225,7 @@ class Theme
    * @return void
    * @access public
    */
-  function setCssRules($value)
+  public function setCssRules($value)
   {
     $this->_cssRules = Check::safeText($value);
   }
@@ -235,7 +236,7 @@ class Theme
    * @return int count
    * @access public
    */
-  function getCount()
+  public function getCount()
   {
     return intval($this->_count);
   }
@@ -247,7 +248,7 @@ class Theme
    * @return void
    * @access public
    */
-  function setCount($value)
+  public function setCount($value)
   {
     $this->_count = intval($value);
   }
@@ -260,9 +261,21 @@ class Theme
    * @access public
    * @since 0.8
    */
-  function isCssReserved($file)
+  public function isCssReserved($file)
   {
     return in_array($file, $this->_reservedCssFiles);
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return $this->getName();
   }
 } // end class
 ?>

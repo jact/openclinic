@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.17 2007/12/15 14:34:17 jact Exp $
+ * @version   CVS: $Id: Setting.php,v 1.18 2013/01/19 10:26:23 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,6 +45,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  void setLanguage(string $value)
  *  int getIdTheme(void)
  *  void setIdTheme(int $value)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -52,22 +53,22 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  */
 class Setting
 {
-  var $_clinicName = "";
-  var $_clinicHours = "";
-  var $_clinicAddress = "";
-  var $_clinicPhone = "";
-  var $_clinicUrl = "";
-  var $_sessionTimeout = OPEN_SETTING_SESSION_TIMEOUT;
-  var $_sessionTimeoutError = "";
-  var $_itemsPerPage = OPEN_SETTING_ITEMS_PER_PAGE;
-  var $_itemsPerPageError = "";
-  var $_version = "";
-  var $_lang = "en";
-  var $_idTheme = 1;
+  private $_clinicName = "";
+  private $_clinicHours = "";
+  private $_clinicAddress = "";
+  private $_clinicPhone = "";
+  private $_clinicUrl = "";
+  private $_sessionTimeout = OPEN_SETTING_SESSION_TIMEOUT;
+  private $_sessionTimeoutError = "";
+  private $_itemsPerPage = OPEN_SETTING_ITEMS_PER_PAGE;
+  private $_itemsPerPageError = "";
+  private $_version = "";
+  private $_lang = "en";
+  private $_idTheme = 1;
 
-  var $_trans; // to translate htmlspecialchars()
+  private $_trans; // to translate htmlspecialchars()
 
-  function Setting()
+  public function Setting()
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
   }
@@ -78,7 +79,7 @@ class Setting
    * @return boolean true if data is valid, otherwise false.
    * @access public
    */
-  function validateData()
+  public function validateData()
   {
     $valid = true;
 
@@ -118,7 +119,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getClinicName()
+  public function getClinicName()
   {
     return stripslashes(strtr($this->_clinicName, $this->_trans));
   }
@@ -130,7 +131,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setClinicName($value)
+  public function setClinicName($value)
   {
     $this->_clinicName = Check::safeText($value);
   }
@@ -141,7 +142,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getClinicHours()
+  public function getClinicHours()
   {
     return stripslashes(strtr($this->_clinicHours, $this->_trans));
   }
@@ -153,7 +154,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setClinicHours($value)
+  public function setClinicHours($value)
   {
     $this->_clinicHours = Check::safeText($value);
   }
@@ -164,7 +165,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getClinicAddress()
+  public function getClinicAddress()
   {
     return stripslashes(strtr($this->_clinicAddress, $this->_trans));
   }
@@ -176,7 +177,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setClinicAddress($value)
+  public function setClinicAddress($value)
   {
     $this->_clinicAddress = Check::safeText($value);
   }
@@ -187,7 +188,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getClinicPhone()
+  public function getClinicPhone()
   {
     return stripslashes(strtr($this->_clinicPhone, $this->_trans));
   }
@@ -199,7 +200,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setClinicPhone($value)
+  public function setClinicPhone($value)
   {
     $this->_clinicPhone = Check::safeText($value);
   }
@@ -210,7 +211,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getClinicUrl()
+  public function getClinicUrl()
   {
     return stripslashes(strtr($this->_clinicUrl, $this->_trans));
   }
@@ -222,7 +223,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setClinicUrl($value)
+  public function setClinicUrl($value)
   {
     $this->_clinicUrl = Check::safeText($value);
   }
@@ -233,7 +234,7 @@ class Setting
    * @return int
    * @access public
    */
-  function getSessionTimeout()
+  public function getSessionTimeout()
   {
     return intval($this->_sessionTimeout);
   }
@@ -244,7 +245,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getSessionTimeoutError()
+  public function getSessionTimeoutError()
   {
     return $this->_sessionTimeoutError;
   }
@@ -256,7 +257,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setSessionTimeout($value)
+  public function setSessionTimeout($value)
   {
     $temp = intval($value);
     $this->_sessionTimeout = (($temp == 0) ? OPEN_SETTING_SESSION_TIMEOUT : $temp);
@@ -268,7 +269,7 @@ class Setting
    * @return int
    * @access public
    */
-  function getItemsPerPage()
+  public function getItemsPerPage()
   {
     return intval($this->_itemsPerPage);
   }
@@ -279,7 +280,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getItemsPerPageError()
+  public function getItemsPerPageError()
   {
     return $this->_itemsPerPageError;
   }
@@ -291,7 +292,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setItemsPerPage($value)
+  public function setItemsPerPage($value)
   {
     $temp = intval($value);
     $this->_itemsPerPage = (($temp < 0) ? OPEN_SETTING_ITEMS_PER_PAGE : $temp);
@@ -303,7 +304,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getVersion()
+  public function getVersion()
   {
     return stripslashes(strtr($this->_version, $this->_trans));
   }
@@ -315,7 +316,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setVersion($value)
+  public function setVersion($value)
   {
     $this->_version = Check::safeText($value);
   }
@@ -326,7 +327,7 @@ class Setting
    * @return string
    * @access public
    */
-  function getLanguage()
+  public function getLanguage()
   {
     return stripslashes(strtr($this->_lang, $this->_trans));
   }
@@ -338,7 +339,7 @@ class Setting
    * @return void
    * @access public
    */
-  function setLanguage($value)
+  public function setLanguage($value)
   {
     $this->_lang = Check::safeText($value);
   }
@@ -349,7 +350,7 @@ class Setting
    * @return int
    * @access public
    */
-  function getIdTheme()
+  public function getIdTheme()
   {
     return intval($this->_idTheme);
   }
@@ -361,10 +362,22 @@ class Setting
    * @return void
    * @access public
    */
-  function setIdTheme($value)
+  public function setIdTheme($value)
   {
     $temp = intval($value);
     $this->_idTheme = (($temp == 0) ? 1 : $temp);
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return __CLASS__;
   }
 } // end class
 ?>
