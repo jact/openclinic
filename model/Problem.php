@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.20 2013/01/07 18:00:38 jact Exp $
+ * @version   CVS: $Id: Problem.php,v 1.21 2013/01/19 10:25:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -57,6 +57,7 @@ require_once(dirname(__FILE__) . "/Query/Page/Problem.php");
  *  string getLastUpdateDate(void)
  *  void setLastUpdateDate(string $value)
  *  string getHeader(void)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -529,6 +530,18 @@ class Problem
     $_html .= HTML::end('div');
 
     return $_html;
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return $this->getWording();
   }
 } // end class
 ?>

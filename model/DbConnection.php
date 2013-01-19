@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: DbConnection.php,v 1.19 2013/01/07 17:57:48 jact Exp $
+ * @version   CVS: $Id: DbConnection.php,v 1.20 2013/01/19 10:25:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -55,6 +55,7 @@ if ( !defined("OPEN_SQL_DEBUG") )
  *  string getDbError(void)
  *  string getSQL(void)
  *  bool freeResult(void)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -584,6 +585,18 @@ class DbConnection
   public function freeResult()
   {
     return ($this->_result ? (mysql_free_result($this->_result) != 0) : false);
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return __CLASS__;
   }
 } // end class
 ?>

@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Staff.php,v 1.13 2013/01/13 14:26:20 jact Exp $
+ * @version   CVS: $Id: Staff.php,v 1.14 2013/01/19 10:26:40 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -48,6 +48,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  void setAddress(string $value)
  *  string getPhone(void)
  *  void setPhone(string $value)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -460,6 +461,18 @@ class Staff
   public function setPhone($value)
   {
     $this->_phone = Check::safeText($value);
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return trim($this->getFirstName() . ' ' . $this->getSurname1() . ' ' . $this->getSurname2());
   }
 } // end class
 ?>

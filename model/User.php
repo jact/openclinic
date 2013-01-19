@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: User.php,v 1.12 2013/01/13 14:27:01 jact Exp $
+ * @version   CVS: $Id: User.php,v 1.13 2013/01/19 10:27:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,6 +42,7 @@ require_once(dirname(__FILE__) . "/../lib/Check.php");
  *  void setIdTheme(int $value)
  *  int getIdProfile(void)
  *  void setIdProfile(int $value)
+ *  string __toString(void)
  *
  * @package OpenClinic
  * @author jact <jachavar@gmail.com>
@@ -408,6 +409,18 @@ class User
   {
     $temp = intval($value);
     $this->_idProfile = (($temp == 0) ? OPEN_PROFILE_DOCTOR : $temp);
+  }
+
+  /**
+   * string __toString(void)
+   *
+   * @return string class name
+   * @access public
+   * @since 0.8
+   */
+  public function __toString()
+  {
+    return $this->getLogin();
   }
 } // end class
 ?>
