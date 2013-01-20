@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<!-- $Id: changelog.html,v 1.21 2013/01/16 19:04:56 jact Exp $ -->
+<!-- $Id: changelog.html,v 1.22 2013/01/20 12:17:58 jact Exp $ -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" dir="ltr">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <title>OpenClinic Changelog</title>
 
@@ -11,9 +11,9 @@
 
 <meta name="MSSmartTagsPreventParsing" content="TRUE" />
 
-<meta name="author" content="Jose Antonio Chavarría" />
+<meta name="author" content="Jose Antonio ChavarrÃ­a" />
 
-<meta name="copyright" content="2002-2013 Jose Antonio Chavarría" />
+<meta name="copyright" content="2002-2013 Jose Antonio ChavarrÃ­a" />
 
 <meta name="keywords" content="OpenClinic, open source, gpl, healthcare, php, mysql, coresis" />
 
@@ -45,6 +45,20 @@
         <li><a href="./index.php">Start OpenClinic</a></li>
       </ul>
     </div><!-- #shortcuts -->
+
+    <div id="tabs">
+      <ul>
+        <li><a href="./index.html" class="first">Readme</a></li>
+
+        <li><a href="./install.html">Install Instructions</a></li>
+
+        <li><a href="./changelog.html" class="selected">Changelog</a></li>
+
+        <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
+
+        <li><a href="./demo_version.html">Demo Version Features</a></li>
+      </ul>
+    </div><!-- #tabs -->
   </div><!-- #header -->
 
   <hr />
@@ -71,44 +85,44 @@
 
       <h2 id="c-07"><a href="#top" title="To top of the page">Changes since 0.7</a> (2004-12-26)</h2>
 
-      <ol>
-        <li class="change">Compatibilidad del código con PHP5 (incompatible con PHP4) y MySQL 5.5</li>
+     <ol>
+        <li class="change">Code compatibility with PHP5 (incompatible with PHP4) and MySQL 5.5</li>
 
-        <li class="change">El motor de almacenamiento usado en MySQL sigue siendo MyISAM aunque el de por defecto sea InnoDB</li>
+        <li class="change">The storage engine used in MySQL is MyISAM although the default is InnoDB</li>
 
-        <li class="change">Se eliminan todos los temas y sólo se incluye uno por defecto (nueva estructura de las páginas)</li>
+        <li class="change">Removed all CSS themes and only includes one by default (new page structure)</li>
 
-        <li class="add">Se activa el chino tradicional y se añade la traducción en este idioma</li>
+        <li class="add">Traditional Chinese is activated and added the translation in this language</li>
 
-        <li class="add">Se actualiza la traducción en dutch</li>
+        <li class="add">Updated the dutch translation</li>
 
-        <li class="change">Reorganización de directorios y ficheros del proyecto (muy extensa y profunda..., el código no se parece en nada al de la versión anterior)</li>
+        <li class="change">Reorganization of directories and files in the project (very extensive and deep..., the code does not look anything like the previous version)</li>
 
-        <li class="change">Se cambia el estilo de las páginas con HTML estático</li>
+        <li class="change">Changed the style of static HTML pages</li>
 
-        <li class="add">Se añade una CSS de impresión para las páginas con HTML estático</li>
+        <li class="add">Added a print CSS for static HTML pages</li>
 
-        <li class="fix">Se quitan los botones Restablecer de los formularios</li>
+        <li class="fix">Reset buttons are removed from the forms</li>
 
-        <li class="add">Se añade una lista de enlaces a los campos con errores en los formularios con errores</li>
+        <li class="add">Added a list of links to the fields with errors on forms with errors</li>
 
-        <li class="fix">Se corrige el error al borrar un paciente o un problema médico en la versión 0.7</li>
+        <li class="fix">Fixed the error when deleting a patient or a medical problem in version 0.7</li>
 
-        <li class="add">Protección CSRF y Session Fixation</li>
+        <li class="add">CSRF and Session Fixation Protection</li>
 
-        <li class="add">Unobtrusive JavaScript en todas las páginas</li>
+        <li class="add">Unobtrusive JavaScript in all pages</li>
 
-        <li class="change">Se cambia la estructura XML de los volcados de la base de datos (basada en Propel)</li>
+        <li class="change">Changed the structure of XML database dumps (based on Propel)</li>
 
-        <li class="add">Se crea un script para actualizar la base de datos automáticamente</li>
+        <li class="add">Created a script to update the database automatically</li>
 
-        <li class="add">Se crea una clase para usar flash messages y evitar el paso de parámetros en las URLs</li>
+        <li class="add">Created a class to use flash messages and avoid passing parameters in URLs</li>
 
-        <li class="fix">Mejoras en las breadcrumbs de las páginas</li>
+        <li class="fix">Improvements in the breadcrumbs on pages</li>
 
-        <li class="change">El segundo apellido no es obligatorio de rellenar en los formularios</li>
+        <li class="change">The second surname is not required to fill in forms</li>
 
-        <li class="change">Se eliminan los enlaces a la ayuda contextual (porque no está hecha)</li>
+        <li class="change">Contextual help links are eliminated (because help is not made)</li>
       </ol>
 
       <h2 id="c-06"><a href="#top" title="To top of the page">Changes since 0.6</a> (2003-12-21)</h2>
@@ -512,21 +526,11 @@
   <hr />
 
   <div id="footer">
-    <ul id="doc_links">
-      <li><a href="./index.html">Readme</a></li>
-
-      <li><a href="./install.html">Install Instructions</a></li>
-
-      <li><a href="./coding_guidelines.html">Coding Guidelines</a></li>
-
-      <li><a href="./demo_version.html">Demo Version Features</a></li>
-    </ul>
-
     <div id="app_info">
-      <p>Powered by OpenClinic</p>
+      <p><a href="http://openclinic.sourceforge.net/">Powered by OpenClinic</a></p>
 
       <p>
-        Copyright &copy; 2002-2013 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio Chavarría</a>
+        Copyright &copy; 2002-2013 <a href="mailto:CUT-THIS.openclinic&#64;gmail.com?subject=OpenClinic" accesskey="9">Jose Antonio ChavarrÃ­a</a>
       </p>
 
       <p>
