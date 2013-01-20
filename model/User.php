@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: User.php,v 1.13 2013/01/19 10:27:17 jact Exp $
+ * @version   CVS: $Id: User.php,v 1.14 2013/01/20 12:48:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -96,7 +96,7 @@ class User
       $valid = false;
       $this->_loginError = _("This field must not contain any spaces.");
     }
-    elseif (preg_match("/['\\]/", $this->_login))
+    elseif (preg_match("/['\\\\]/", $this->_login))
     {
       $valid = false;
       $this->_loginError = sprintf(_("This field can't contain the symbols %s"), "'\\");
