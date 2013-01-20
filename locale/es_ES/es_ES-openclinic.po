@@ -2,40 +2,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenClinic 0.8\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-05-28 20:20+0100\n"
-"PO-Revision-Date: 2008-05-28 20:21+0100\n"
+"POT-Creation-Date: 2013-01-20 14:29+0100\n"
+"PO-Revision-Date: 2013-01-20 14:30+0100\n"
 "Last-Translator: jact <jachavar@gmail.com>\n"
 "Language-Team:  <openclinic@gmail.com>\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Poedit-Language: Spanish\n"
-"X-Poedit-Country: SPAIN\n"
 "X-Poedit-SourceCharset: iso-8859-1\n"
+"X-Generator: Poedit 1.5.4\n"
 
-#: admin/dump_optimize_db.php:49
-#: admin/dump_view_form.php:76
+#: admin/dump_optimize_db.php:49 admin/dump_view_form.php:76
 msgid "Optimize Database"
 msgstr "Optimizar Base de Datos"
 
-#: admin/dump_optimize_db.php:56
-#: admin/dump_process.php:58
-#: admin/dump_view_form.php:67
-#: admin/index.php:31
-#: admin/log_stats.php:39
-#: admin/setting_edit_form.php:72
-#: admin/staff_del_confirm.php:60
-#: admin/staff_edit_form.php:101
-#: admin/staff_edit_form.php:114
-#: admin/staff_list.php:45
-#: admin/staff_new_form.php:56
+#: admin/dump_optimize_db.php:56 admin/dump_process.php:58
+#: admin/dump_view_form.php:67 admin/index.php:31 admin/log_list.php:64
+#: admin/log_stats.php:39 admin/setting_edit_form.php:72
+#: admin/staff_del_confirm.php:60 admin/staff_edit_form.php:101
+#: admin/staff_edit_form.php:114 admin/staff_list.php:45
+#: admin/staff_new_form.php:56 admin/theme_del_confirm.php:57
+#: admin/theme_edit_form.php:98 admin/theme_list.php:41
+#: admin/theme_new_form.php:79 admin/theme_preload_css.php:75
+#: admin/user_access_log.php:76 admin/user_del_confirm.php:57
+#: admin/user_edit_form.php:102 admin/user_list.php:51
+#: admin/user_new_form.php:71 admin/user_pwd_reset_form.php:94
+#: admin/user_record_log.php:76 home/index.php:58 layout/component.php:71
+#: shared/view_source.php:67
 msgid "Admin"
 msgstr "Administración"
 
-#: admin/dump_optimize_db.php:57
-#: admin/dump_process.php:59
-#: admin/dump_view_form.php:60
-#: admin/index.php:84
+#: admin/dump_optimize_db.php:57 admin/dump_process.php:59
+#: admin/dump_view_form.php:60 admin/index.php:84 home/index.php:66
+#: layout/admin.php:28
 msgid "Dumps"
 msgstr "Volcados"
 
@@ -86,8 +86,7 @@ msgstr "Tamaño total de la base de datos: %d KB"
 msgid "Total Space Saved: %d KB"
 msgstr "Espacio total optimizado: %d KB"
 
-#: admin/dump_optimize_db.php:151
-#: admin/dump_process.php:371
+#: admin/dump_optimize_db.php:151 admin/dump_process.php:371
 msgid "Back return"
 msgstr "Volver atrás"
 
@@ -99,58 +98,47 @@ msgstr "Volcado"
 msgid "No tables found in database."
 msgstr "No se han encontrado tablas en la base de datos."
 
-#: admin/dump_process.php:151
-#: admin/dump_view_form.php:116
+#: admin/dump_process.php:151 admin/dump_view_form.php:116
 msgid "Structure and data"
 msgstr "Estructura y datos"
 
-#: admin/dump_process.php:155
-#: admin/dump_view_form.php:119
+#: admin/dump_process.php:155 admin/dump_view_form.php:119
 msgid "Structure only"
 msgstr "Únicamente la estructura"
 
-#: admin/dump_process.php:159
-#: admin/dump_view_form.php:122
+#: admin/dump_process.php:159 admin/dump_view_form.php:122
 msgid "Data only"
 msgstr "Solamente datos"
 
-#: admin/dump_process.php:167
-#: admin/staff_list.php:135
+#: admin/dump_process.php:167 admin/staff_list.php:135
 msgid "Type"
 msgstr "Tipo"
 
-#: admin/dump_process.php:168
-#: admin/dump_process.php:269
+#: admin/dump_process.php:168 admin/dump_process.php:269
 msgid "Host"
 msgstr "Servidor"
 
-#: admin/dump_process.php:169
-#: admin/dump_process.php:270
+#: admin/dump_process.php:169 admin/dump_process.php:270
 msgid "Generation Time"
 msgstr "Fecha y hora de generación"
 
-#: admin/dump_process.php:170
-#: admin/dump_process.php:271
+#: admin/dump_process.php:170 admin/dump_process.php:271
 msgid "Server Version"
 msgstr "Versión del servidor"
 
-#: admin/dump_process.php:171
-#: admin/dump_process.php:272
+#: admin/dump_process.php:171 admin/dump_process.php:272
 msgid "PHP Version"
 msgstr "Versión de PHP"
 
-#: admin/dump_process.php:172
-#: admin/dump_process.php:273
+#: admin/dump_process.php:172 admin/dump_process.php:273
 msgid "Database"
 msgstr "Base de datos"
 
-#: admin/dump_process.php:182
-#: admin/dump_process.php:283
+#: admin/dump_process.php:182 admin/dump_process.php:283
 msgid "All Tables"
 msgstr "Todas las tablas"
 
-#: admin/dump_process.php:184
-#: admin/dump_process.php:285
+#: admin/dump_process.php:184 admin/dump_process.php:285
 #, php-format
 msgid "Table Summary: %s"
 msgstr "Resumen de tablas: %s"
@@ -169,11 +157,11 @@ msgstr "Volcado de datos para la tabla %s"
 msgid "Install dump from file"
 msgstr "Instalar volcado desde archivo"
 
-#: admin/dump_view_form.php:106
+#: admin/dump_view_form.php:106 medical/relative_search.php:224
 msgid "Select all"
 msgstr "Seleccionar todo"
 
-#: admin/dump_view_form.php:108
+#: admin/dump_view_form.php:108 medical/relative_search.php:226
 msgid "Unselect all"
 msgstr "Deseleccionar todo"
 
@@ -229,21 +217,30 @@ msgstr "Descargar volcado"
 msgid "Extended options"
 msgstr "Opciones extendidas"
 
-#: admin/dump_view_form.php:146
-#: admin/staff_fields.php:106
+#: admin/dump_view_form.php:146 admin/staff_fields.php:106
+#: admin/theme_fields.php:53 admin/theme_preload_css.php:108
+#: admin/user_fields.php:112 admin/user_pwd_reset_form.php:145
+#: medical/patient_fields.php:246 medical/problem_fields.php:134
+#: medical/test_fields.php:51
 msgid "Submit"
 msgstr "Enviar"
 
 #: admin/dump_view_form.php:151
 msgid "Note: Some check options are exclusive. Be carefully!"
-msgstr "Nota: Algunas opciones de las casillas de verificación son excluyentes. Tenga cuidado."
+msgstr ""
+"Nota: Algunas opciones de las casillas de verificación son excluyentes. "
+"Tenga cuidado."
 
 #: admin/index.php:35
-msgid "Use the following functions located in the left hand navigation area to manage your clinic's staff and administrative records."
-msgstr "Use las opciones que están en el área de navegación de la izquierda para manejar los distintos apartados de administración."
+msgid ""
+"Use the following functions located in the left hand navigation area to "
+"manage your clinic's staff and administrative records."
+msgstr ""
+"Use las opciones que están en el área de navegación de la izquierda para "
+"manejar los distintos apartados de administración."
 
-#: admin/index.php:37
-#: admin/setting_edit_form.php:64
+#: admin/index.php:37 admin/setting_edit_form.php:64 home/index.php:63
+#: layout/admin.php:23
 msgid "Config settings"
 msgstr "Configuración"
 
@@ -251,12 +248,9 @@ msgstr "Configuración"
 msgid "Update config settings."
 msgstr "Actualizar los parámetros generales de la aplicación."
 
-#: admin/index.php:44
-#: admin/staff_del_confirm.php:61
-#: admin/staff_edit_form.php:115
-#: admin/staff_list.php:38
-#: admin/staff_list.php:70
-#: admin/staff_new_form.php:57
+#: admin/index.php:44 admin/staff_del_confirm.php:61
+#: admin/staff_edit_form.php:115 admin/staff_list.php:38
+#: admin/staff_list.php:70 admin/staff_new_form.php:57 layout/admin.php:24
 msgid "Staff Members"
 msgstr "Miembros del Personal"
 
@@ -264,9 +258,7 @@ msgstr "Miembros del Personal"
 msgid "View the clinic staff member list."
 msgstr "Ver la lista de los miembros del personal."
 
-#: admin/index.php:45
-#: admin/index.php:58
-#: admin/index.php:72
+#: admin/index.php:45 admin/index.php:58 admin/index.php:72
 msgid "From this list you can:"
 msgstr "Desde esta lista se puede:"
 
@@ -274,20 +266,24 @@ msgstr "Desde esta lista se puede:"
 msgid "build a new staff member"
 msgstr "crear un nuevo miembro del personal"
 
-#: admin/index.php:49
-#: admin/index.php:63
+#: admin/index.php:49 admin/index.php:63
 msgid "edit the staff member information"
 msgstr "editar la información de un determinado miembro del personal"
 
 #: admin/index.php:50
 msgid "build or edit the clinic user associated"
-msgstr "crear o editar el usuario de la aplicación asociado a un miembro del personal"
+msgstr ""
+"crear o editar el usuario de la aplicación asociado a un miembro del personal"
 
 #: admin/index.php:51
 msgid "delete a staff member"
 msgstr "borrar un miembro del personal"
 
-#: admin/index.php:57
+#: admin/index.php:57 admin/user_access_log.php:77
+#: admin/user_del_confirm.php:58 admin/user_edit_form.php:103
+#: admin/user_list.php:44 admin/user_new_form.php:72
+#: admin/user_pwd_reset_form.php:95 admin/user_record_log.php:77
+#: layout/admin.php:25
 msgid "Users"
 msgstr "Usuarios"
 
@@ -311,7 +307,10 @@ msgstr "cambiar la contraseña de un usuario"
 msgid "delete a clinic user"
 msgstr "borrar un usuario"
 
-#: admin/index.php:71
+#: admin/index.php:71 admin/theme_del_confirm.php:58
+#: admin/theme_edit_form.php:99 admin/theme_list.php:34
+#: admin/theme_new_form.php:80 admin/theme_preload_css.php:76
+#: layout/admin.php:27
 msgid "Themes"
 msgstr "Temas"
 
@@ -343,9 +342,7 @@ msgstr "Esta opción sirve para:"
 msgid "install dump from file"
 msgstr "instalar un volcado desde un archivo"
 
-#: admin/index.php:89
-#: admin/index.php:90
-#: admin/index.php:91
+#: admin/index.php:89 admin/index.php:90 admin/index.php:91
 #, php-format
 msgid "export database dump to %s format"
 msgstr "exportar los datos a formato %s"
@@ -354,7 +351,7 @@ msgstr "exportar los datos a formato %s"
 msgid "optimize database"
 msgstr "optimizar la base de datos"
 
-#: admin/index.php:98
+#: admin/index.php:98 home/index.php:67
 msgid "Logs"
 msgstr "Logs"
 
@@ -374,33 +371,106 @@ msgstr "logs de operaciones con registros médicos"
 msgid "statistics for years, months, days and hours"
 msgstr "estadísticas por años, meses, días y horas"
 
-#: admin/log_stats.php:32
-msgid "Log Statistics"
-msgstr "Estadísticas de los Logs"
+#: admin/log_list.php:55 admin/log_stats.php:54 admin/user_record_log.php:69
+msgid "Record Logs"
+msgstr "Logs de operaciones con registros"
 
-#: admin/log_stats.php:45
+#: admin/log_list.php:59 admin/log_stats.php:45 admin/user_access_log.php:69
 msgid "Access Logs"
 msgstr "Logs de acceso"
 
-#: admin/log_stats.php:54
-msgid "Record Logs"
-msgstr "Logs de operaciones con registros"
+#: admin/log_list.php:65 admin/log_stats.php:32 layout/admin.php:29
+msgid "Log Statistics"
+msgstr "Estadísticas de los Logs"
+
+#: admin/log_list.php:70
+#, php-format
+msgid "Year %d"
+msgstr "Año %d"
+
+#: admin/log_list.php:82
+#, php-format
+msgid "Day %d"
+msgstr "Día %d"
+
+#: admin/log_list.php:122 admin/user_access_log.php:99
+#: admin/user_fields.php:96 admin/user_list.php:91
+msgid "Administrator"
+msgstr "Administrador"
+
+#: admin/log_list.php:123 admin/staff_list.php:219
+#: admin/user_access_log.php:100 admin/user_fields.php:97
+#: admin/user_list.php:92
+msgid "Administrative"
+msgstr "Administrativo"
+
+#: admin/log_list.php:124 admin/staff_list.php:223
+#: admin/user_access_log.php:101 admin/user_fields.php:98
+#: admin/user_list.php:93
+msgid "Doctor"
+msgstr "Médico"
+
+#: admin/log_list.php:132
+msgid "No logs in this date."
+msgstr "No hay logs para esa fecha."
+
+#: admin/log_list.php:138 admin/staff_list.php:125 admin/theme_list.php:84
+#: admin/user_list.php:97 medical/connection_list.php:113
+#: medical/relative_list.php:112
+msgid "#"
+msgstr "Nº"
+
+#: admin/log_list.php:139 admin/user_access_log.php:105
+#: admin/user_record_log.php:99
+msgid "Access Date"
+msgstr "Fecha de Acceso"
+
+#: admin/log_list.php:140 admin/staff_fields.php:95 admin/staff_list.php:130
+#: admin/user_access_log.php:106 admin/user_fields.php:21
+#: admin/user_list.php:99 admin/user_pwd_reset_form.php:123
+#: admin/user_record_log.php:100 auth/login_form.php:92 install/wizard.php:394
+#: install/wizard.php:483
+msgid "Login"
+msgstr "Nombre de Usuario"
+
+#: admin/log_list.php:144 admin/user_record_log.php:101
+msgid "Table"
+msgstr "Tabla"
+
+#: admin/log_list.php:145 admin/user_record_log.php:102
+msgid "Operation"
+msgstr "Operación"
+
+#: admin/log_list.php:146 admin/user_record_log.php:103
+msgid "Data"
+msgstr "Datos"
+
+#: admin/log_list.php:150 admin/user_access_log.php:107
+#: admin/user_fields.php:101 admin/user_list.php:102
+msgid "Profile"
+msgstr "Perfil"
 
 #: admin/setting_edit.php:99
 msgid "Data has been updated."
 msgstr "Los datos han sido actualizados."
 
-#: admin/setting_edit_form.php:87
-#: admin/staff_edit_form.php:135
-#: admin/staff_new_form.php:76
+#: admin/setting_edit_form.php:87 admin/staff_edit_form.php:135
+#: admin/staff_new_form.php:76 admin/theme_edit_form.php:150
+#: admin/theme_new_form.php:129 admin/theme_preload_css.php:115
+#: admin/user_edit_form.php:144 admin/user_new_form.php:100
+#: medical/patient_edit_form.php:119 medical/patient_new_form.php:62
+#: medical/problem_edit_form.php:112 medical/problem_new_form.php:95
+#: medical/test_edit_form.php:117 medical/test_new_form.php:109
 msgid "Note: The fields with * are required."
 msgstr "Nota: Los campos con * son imprescindibles."
 
 #: admin/setting_edit_form.php:88
 msgid "Note: If zero, searchs return all results without pagination."
-msgstr "Nota: Si es cero, las búsquedas devolverán todos los resultados sin paginación."
+msgstr ""
+"Nota: Si es cero, las búsquedas devolverán todos los resultados sin "
+"paginación."
 
-#: admin/setting_fields.php:23
+#: admin/setting_fields.php:23 install/wizard.php:470
 msgid "Session Timeout"
 msgstr "Límite de tiempo de sesión"
 
@@ -408,7 +478,9 @@ msgstr "Límite de tiempo de sesión"
 msgid "minutes"
 msgstr "minutos"
 
-#: admin/setting_fields.php:33
+#: admin/setting_fields.php:33 install/wizard.php:471 layout/medical.php:35
+#: medical/patient_search.php:87 medical/problem_search.php:90
+#: medical/relative_search.php:81
 msgid "Search Results"
 msgstr "Resultados de la búsqueda"
 
@@ -416,48 +488,49 @@ msgstr "Resultados de la búsqueda"
 msgid "items per page"
 msgstr "(elementos por página)"
 
-#: admin/setting_fields.php:45
+#: admin/setting_fields.php:45 install/wizard.php:252 install/wizard.php:465
 msgid "Language"
 msgstr "Idioma"
 
-#: admin/setting_fields.php:55
+#: admin/setting_fields.php:56 install/wizard.php:323 install/wizard.php:472
 msgid "Theme by default"
 msgstr "Tema por defecto"
 
-#: admin/setting_fields.php:59
+#: admin/setting_fields.php:60
 msgid "Application"
 msgstr "Aplicación"
 
-#: admin/setting_fields.php:63
+#: admin/setting_fields.php:64 install/wizard.php:257 install/wizard.php:466
 msgid "Clinic Name"
 msgstr "Nombre de la Clínica"
 
-#: admin/setting_fields.php:74
+#: admin/setting_fields.php:75 install/wizard.php:268 install/wizard.php:467
 msgid "Clinic Hours"
 msgstr "Horario de consulta"
 
-#: admin/setting_fields.php:85
+#: admin/setting_fields.php:86 install/wizard.php:279 install/wizard.php:468
 msgid "Clinic Address"
 msgstr "Dirección de la Clínica"
 
-#: admin/setting_fields.php:95
+#: admin/setting_fields.php:96 install/wizard.php:290 install/wizard.php:469
 msgid "Clinic Phone"
 msgstr "Teléfono de atención"
 
-#: admin/setting_fields.php:105
+#: admin/setting_fields.php:106
 msgid "Clinic URL"
 msgstr "URL Clínica"
 
-#: admin/setting_fields.php:116
+#: admin/setting_fields.php:117
 msgid "Clinic"
 msgstr "Clínica"
 
-#: admin/setting_fields.php:121
+#: admin/setting_fields.php:122 admin/theme_list.php:71
+#: medical/history_family_fields.php:62
+#: medical/history_personal_fields.php:132
 msgid "Update"
 msgstr "Actualizar"
 
-#: admin/staff_del.php:55
-#: admin/staff_edit_form.php:58
+#: admin/staff_del.php:55 admin/staff_edit_form.php:58
 msgid "That staff member does not exist."
 msgstr "Ese miembro del personal no existe."
 
@@ -475,25 +548,42 @@ msgstr "Borrar Miembro del Personal"
 msgid "Are you sure you want to delete staff member, %s %s %s?"
 msgstr "¿Está seguro de querer borrar el miembro del personal, %s %s %s?"
 
-#: admin/staff_del_confirm.php:79
+#: admin/staff_del_confirm.php:79 admin/theme_del_confirm.php:77
+#: admin/user_del_confirm.php:77 medical/connection_del_confirm.php:101
+#: medical/patient_del_confirm.php:80 medical/problem_del_confirm.php:95
+#: medical/relative_del_confirm.php:88 medical/test_del_confirm.php:110
 msgid "Delete"
 msgstr "Borrar"
 
 #: admin/staff_del_confirm.php:89
 msgid "Note: The del function will delete the related user too (if exists)."
-msgstr "Nota: La operación de borrado también eliminará el usuario relacionado (si existe)."
+msgstr ""
+"Nota: La operación de borrado también eliminará el usuario relacionado (si "
+"existe)."
 
-#: admin/staff_del_confirm.php:91
-#: admin/staff_edit_form.php:137
-#: admin/staff_new_form.php:78
+#: admin/staff_del_confirm.php:91 admin/staff_edit_form.php:137
+#: admin/staff_new_form.php:78 admin/theme_del_confirm.php:87
+#: admin/theme_edit_form.php:152 admin/theme_new_form.php:131
+#: admin/theme_preload_css.php:117 admin/user_del_confirm.php:87
+#: admin/user_edit_form.php:151 admin/user_new_form.php:102
+#: admin/user_pwd_reset_form.php:152 medical/connection_del_confirm.php:111
+#: medical/history_family_edit_form.php:114
+#: medical/history_personal_edit_form.php:121
+#: medical/patient_del_confirm.php:90 medical/patient_new_form.php:64
+#: medical/problem_del_confirm.php:105 medical/problem_edit_form.php:114
+#: medical/problem_new_form.php:97 medical/relative_del_confirm.php:98
+#: medical/test_del_confirm.php:120 medical/test_edit_form.php:119
+#: medical/test_new_form.php:111
 msgid "Return"
 msgstr "Volver"
 
-#: admin/staff_edit.php:59
-#: admin/staff_new.php:59
+#: admin/staff_edit.php:59 admin/staff_new.php:59 admin/user_edit.php:64
+#: admin/user_new.php:56
 #, php-format
 msgid "Login, %s, already exists. The changes have no effect."
-msgstr "El nombre de usuario, %s, ya existe en otro usuario. Los cambios no han tenido lugar."
+msgstr ""
+"El nombre de usuario, %s, ya existe en otro usuario. Los cambios no han "
+"tenido lugar."
 
 #: admin/staff_edit.php:67
 #, php-format
@@ -508,46 +598,57 @@ msgstr "Editar Información del Administrativo"
 msgid "Edit Doctor Information"
 msgstr "Editar Información del Médico"
 
-#: admin/staff_edit_form.php:101
+#: admin/staff_edit_form.php:101 shared/view_source.php:67
 #, php-format
 msgid "You are not authorized to use %s tab."
 msgstr "No está autorizado para usar la pestaña de %s."
 
-#: admin/staff_fields.php:21
+#: admin/staff_fields.php:21 medical/patient_fields.php:27
+#: medical/patient_search.php:129 medical/patient_search_fields.php:31
+#: medical/patient_view.php:110 medical/print_medical_record.php:115
+#: medical/relative_search.php:115
 msgid "Tax Identification Number (TIN)"
 msgstr "Número de Identificación Fiscal (NIF)"
 
-#: admin/staff_fields.php:34
+#: admin/staff_fields.php:34 medical/patient_search.php:164
+#: medical/patient_search_fields.php:38 medical/relative_search.php:150
 msgid "Collegiate Number"
 msgstr "Número de Colegiado"
 
-#: admin/staff_fields.php:45
-#: admin/staff_list.php:127
+#: admin/staff_fields.php:45 admin/staff_list.php:127 install/wizard.php:351
+#: install/wizard.php:478 medical/patient_fields.php:37
+#: medical/patient_search.php:125 medical/patient_search_fields.php:30
+#: medical/relative_list.php:116
 msgid "First Name"
 msgstr "Nombre"
 
-#: admin/staff_fields.php:55
-#: admin/staff_list.php:128
+#: admin/staff_fields.php:55 admin/staff_list.php:128 install/wizard.php:362
+#: install/wizard.php:479 medical/patient_fields.php:47
+#: medical/patient_search.php:117 medical/patient_search_fields.php:28
+#: medical/relative_list.php:114
 msgid "Surname 1"
 msgstr "Primer apellido"
 
-#: admin/staff_fields.php:65
-#: admin/staff_list.php:129
+#: admin/staff_fields.php:65 admin/staff_list.php:129 install/wizard.php:368
+#: install/wizard.php:480 medical/patient_fields.php:57
+#: medical/patient_search.php:121 medical/patient_search_fields.php:29
+#: medical/relative_list.php:115
 msgid "Surname 2"
 msgstr "Segundo apellido"
 
-#: admin/staff_fields.php:75
+#: admin/staff_fields.php:75 install/wizard.php:374 install/wizard.php:481
+#: medical/patient_fields.php:67 medical/patient_search.php:149
+#: medical/patient_search_fields.php:35 medical/patient_view.php:116
+#: medical/print_medical_record.php:121 medical/relative_search.php:135
 msgid "Address"
 msgstr "Dirección"
 
-#: admin/staff_fields.php:85
+#: admin/staff_fields.php:85 install/wizard.php:384 install/wizard.php:482
+#: medical/patient_fields.php:77 medical/patient_search.php:154
+#: medical/patient_search_fields.php:36 medical/patient_view.php:122
+#: medical/print_medical_record.php:127 medical/relative_search.php:140
 msgid "Phone Contact"
 msgstr "Contactos telefónicos"
-
-#: admin/staff_fields.php:95
-#: admin/staff_list.php:130
-msgid "Login"
-msgstr "Nombre de Usuario"
 
 #: admin/staff_list.php:58
 msgid "Administratives:"
@@ -565,38 +666,38 @@ msgstr "Añadir un Nuevo Administrativo"
 msgid "Add New Doctor"
 msgstr "Añadir un Nuevo Médico"
 
-#: admin/staff_list.php:89
-#: admin/staff_list.php:93
+#: admin/staff_list.php:89 admin/staff_list.php:93
 msgid "View all staff members"
 msgstr "Ver todos los miembros del personal"
 
-#: admin/staff_list.php:98
-#: admin/staff_list.php:102
+#: admin/staff_list.php:98 admin/staff_list.php:102
 msgid "View only administratives"
 msgstr "Ver sólo los administrativos"
 
-#: admin/staff_list.php:107
-#: admin/staff_list.php:111
+#: admin/staff_list.php:107 admin/staff_list.php:111
 msgid "View only doctors"
 msgstr "Ver sólo los médicos"
 
-#: admin/staff_list.php:119
+#: admin/staff_list.php:119 admin/theme_list.php:57 admin/user_list.php:85
 msgid "No results found."
 msgstr "No se han encontrado coincidencias."
 
-#: admin/staff_list.php:125
-msgid "#"
-msgstr "Nº"
-
-#: admin/staff_list.php:126
+#: admin/staff_list.php:126 admin/theme_list.php:85 admin/user_list.php:98
+#: medical/connection_list.php:114 medical/history_list.php:90
+#: medical/problem_list.php:94 medical/relative_list.php:113
+#: medical/test_list.php:103
 msgid "Function"
 msgstr "Acción"
 
-#: admin/staff_list.php:152
+#: admin/staff_list.php:152 admin/theme_list.php:112 admin/user_list.php:135
+#: medical/problem_list.php:113 medical/test_list.php:126
 msgid "edit"
 msgstr "editar"
 
-#: admin/staff_list.php:165
+#: admin/staff_list.php:165 admin/theme_list.php:151 admin/user_list.php:152
+#: medical/connection_list.php:155 medical/history_list.php:121
+#: medical/problem_list.php:123 medical/relative_list.php:158
+#: medical/test_list.php:137
 msgid "delete"
 msgstr "borrar"
 
@@ -608,21 +709,16 @@ msgstr "crear usuario"
 msgid "edit user"
 msgstr "editar usuario"
 
-#: admin/staff_list.php:219
-msgid "Administrative"
-msgstr "Administrativo"
-
-#: admin/staff_list.php:223
-msgid "Doctor"
-msgstr "Médico"
-
 #: admin/staff_list.php:244
 msgid "Note: To the create user function must have a correct login."
-msgstr "Nota: Para la acción crear usuario hace falta un nombre de usuario correcto."
+msgstr ""
+"Nota: Para la acción crear usuario hace falta un nombre de usuario correcto."
 
-#: admin/staff_list.php:245
+#: admin/staff_list.php:245 admin/user_list.php:204
 msgid "Note: The del function will not be applicated to the session user."
-msgstr "Nota: La acción borrar no será aplicable al usuario que ha iniciado la sesión."
+msgstr ""
+"Nota: La acción borrar no será aplicable al usuario que ha iniciado la "
+"sesión."
 
 #: admin/staff_new.php:67
 #, php-format
@@ -637,8 +733,7 @@ msgstr "Nuevo Administrativo"
 msgid "Add New Doctor Information"
 msgstr "Nuevo Médico"
 
-#: admin/theme_del.php:52
-#: admin/theme_edit_form.php:58
+#: admin/theme_del.php:52 admin/theme_edit_form.php:58
 msgid "That theme does not exist."
 msgstr "Ese tema no existe."
 
@@ -656,33 +751,32 @@ msgstr "Borrar Tema"
 msgid "Are you sure you want to delete theme, %s?"
 msgstr "¿Está seguro de querer borrar el tema, %s?"
 
-#: admin/theme_edit.php:59
-#: admin/theme_new.php:56
+#: admin/theme_edit.php:59 admin/theme_new.php:56
 #, php-format
 msgid "Filename of theme, %s, already exists. The changes have no effect."
-msgstr "El nombre de archivo del tema, %s, ya existe en otro tema. Los cambios no han tenido lugar."
+msgstr ""
+"El nombre de archivo del tema, %s, ya existe en otro tema. Los cambios no "
+"han tenido lugar."
 
 #: admin/theme_edit.php:64
 #, php-format
 msgid "Theme, %s, has been updated."
 msgstr "El tema, %s, ha sido actualizado."
 
-#: admin/theme_edit_form.php:90
+#: admin/theme_edit_form.php:90 admin/theme_preload_css.php:77
 msgid "Edit Theme"
 msgstr "Editar Tema"
 
-#: admin/theme_edit_form.php:128
-#: admin/theme_new_form.php:109
+#: admin/theme_edit_form.php:128 admin/theme_new_form.php:109
 msgid "Preview Theme"
 msgstr "Previsualizar Tema"
 
-#: admin/theme_edit_form.php:130
-#: admin/theme_new_form.php:111
+#: admin/theme_edit_form.php:130 admin/theme_new_form.php:111
+#: admin/theme_preload_css.php:67
 msgid "Preload CSS file"
 msgstr "Precargar fichero CSS"
 
-#: admin/theme_fields.php:21
-#: admin/theme_list.php:86
+#: admin/theme_fields.php:21 admin/theme_list.php:86
 msgid "Theme Name"
 msgstr "Nombre"
 
@@ -694,8 +788,8 @@ msgstr "Fichero CSS"
 msgid "CSS Rules"
 msgstr "Reglas CSS"
 
-#: admin/theme_list.php:47
-#: admin/theme_new_form.php:71
+#: admin/theme_list.php:47 admin/theme_new_form.php:71
+#: admin/theme_preload_css.php:77
 msgid "Add New Theme"
 msgstr "Añadir un Nuevo Tema"
 
@@ -727,8 +821,7 @@ msgstr "previsualizar"
 msgid "validate"
 msgstr "validar"
 
-#: admin/theme_list.php:166
-#: admin/theme_list.php:170
+#: admin/theme_list.php:166 admin/theme_list.php:170
 msgid "in use"
 msgstr "en uso"
 
@@ -742,24 +835,39 @@ msgid "%d user(s)"
 msgstr "%d usuario(s)"
 
 #: admin/theme_list.php:196
-msgid "Note: The delete function is not available on the themes that are currently in use by some user or by the application."
-msgstr "Nota: La acción borrar no está disponible para los temas que están actualmente en uso por algún usuario o por la aplicación."
+msgid ""
+"Note: The delete function is not available on the themes that are currently "
+"in use by some user or by the application."
+msgstr ""
+"Nota: La acción borrar no está disponible para los temas que están "
+"actualmente en uso por algún usuario o por la aplicación."
 
 #: admin/theme_list.php:197
-msgid "Note: The functions edit and delete are not available on the application themes."
-msgstr "Nota: La acciones editar y borrar no serán aplicables a los temas reservados para la aplicación."
+msgid ""
+"Note: The functions edit and delete are not available on the application "
+"themes."
+msgstr ""
+"Nota: La acciones editar y borrar no serán aplicables a los temas reservados "
+"para la aplicación."
 
 #: admin/theme_new.php:61
 #, php-format
 msgid "Theme, %s, has been added."
 msgstr "El tema, %s, ha sido añadido."
 
+#: admin/theme_preload_css.php:96 medical/test_fields.php:34
+#: medical/test_list.php:105
+msgid "Path Filename"
+msgstr "Ruta del archivo"
+
 #: admin/theme_preview.php:109
 #, php-format
 msgid "%s Theme Preview"
 msgstr "Previsualización de %s"
 
-#: admin/theme_preview.php:133
+#: admin/theme_preview.php:133 doc/index.php:57
+#: medical/print_medical_record.php:54 medical/print_medical_record.php:79
+#: shared/view_source.php:62
 msgid "Close Window"
 msgstr "Cerrar Ventana"
 
@@ -780,8 +888,7 @@ msgstr "Subtítulo de ejemplo:"
 msgid "Table Heading"
 msgstr "Encabezado de Tabla"
 
-#: admin/theme_preview.php:158
-#: admin/theme_preview.php:160
+#: admin/theme_preview.php:158 admin/theme_preview.php:160
 #, php-format
 msgid "Sample data row %d"
 msgstr "Datos de la fila %d"
@@ -818,8 +925,27 @@ msgstr "Ejemplo de sugerencia"
 msgid "Default theme has been changed."
 msgstr "El tema por defecto ha sido cambiado."
 
-#: admin/user_del.php:56
-#: admin/user_edit_form.php:63
+#: admin/user_access_log.php:61 admin/user_record_log.php:61
+#, php-format
+msgid "No logs for user %s."
+msgstr "No hay logs para el usuario %s."
+
+#: admin/user_access_log.php:83
+#, php-format
+msgid "Access Logs List for user %s"
+msgstr "Listado de logs de acceso para el usuario %s"
+
+#: admin/user_access_log.php:86
+#, php-format
+msgid "%d accesses."
+msgstr "%d accesos."
+
+#: admin/user_access_log.php:140 admin/user_record_log.php:141
+msgid "Return to users list"
+msgstr "Volver a la lista de usuarios"
+
+#: admin/user_del.php:56 admin/user_edit_form.php:63
+#: admin/user_pwd_reset_form.php:59
 msgid "That user does not exist."
 msgstr "Ese usuario no existe."
 
@@ -842,11 +968,15 @@ msgstr "¿Está seguro de querer borrar al usuario, %s?"
 msgid "User, %s, has been updated."
 msgstr "El usuario, %s, ha sido actualizado."
 
-#: admin/user_edit.php:91
+#: admin/user_edit.php:91 auth/login.php:44 auth/login.php:57
+#: model/Description.php:60 model/Patient.php:160 model/Patient.php:166
+#: model/Problem.php:132 model/Staff.php:104 model/Staff.php:110
+#: model/Staff.php:139 model/Test.php:95 model/Theme.php:84 model/Theme.php:90
+#: model/Theme.php:101 model/User.php:86
 msgid "This is a required field."
 msgstr "Este es un campo imprescindible."
 
-#: admin/user_edit.php:92
+#: admin/user_edit.php:92 model/Patient.php:181 model/Patient.php:191
 msgid "This field is not correct."
 msgstr "Este campo no es correcto."
 
@@ -858,7 +988,8 @@ msgstr "Cambiar datos del Usuario"
 msgid "Edit User"
 msgstr "Editar Usuario"
 
-#: admin/user_edit_form.php:110
+#: admin/user_edit_form.php:110 auth/login_form.php:45 home/license.php:48
+#: layout/component.php:68
 msgid "Home"
 msgstr "Inicio"
 
@@ -870,42 +1001,25 @@ msgstr "Rellene los campos de la contraseña sólo si desea cambiarla."
 msgid "Current Password"
 msgstr "Contraseña actual"
 
-#: admin/user_fields.php:49
-#: admin/user_pwd_reset_form.php:128
-#: auth/login_form.php:102
+#: admin/user_fields.php:49 admin/user_pwd_reset_form.php:128
+#: auth/login_form.php:102 install/wizard.php:399 install/wizard.php:484
 msgid "Password"
 msgstr "Contraseña"
 
-#: admin/user_fields.php:60
-#: admin/user_pwd_reset_form.php:136
+#: admin/user_fields.php:60 admin/user_pwd_reset_form.php:136
 msgid "Re-enter Password"
 msgstr "Confirmación de contraseña"
 
-#: admin/user_fields.php:72
-#: admin/user_list.php:100
+#: admin/user_fields.php:72 admin/user_list.php:100 install/wizard.php:410
+#: install/wizard.php:485
 msgid "Email"
 msgstr "Email"
 
-#: admin/user_fields.php:84
-#: admin/user_list.php:101
+#: admin/user_fields.php:84 admin/user_list.php:101
 msgid "Actived"
 msgstr "Activado"
 
-#: admin/user_fields.php:96
-#: admin/user_list.php:91
-#: admin/user_access_log.php:99
-#: admin/log_list.php:122
-msgid "Administrator"
-msgstr "Administrador"
-
-#: admin/user_fields.php:101
-#: admin/user_list.php:102
-#: admin/user_access_log.php:107
-#: admin/log_list.php:150
-msgid "Profile"
-msgstr "Perfil"
-
-#: admin/user_fields.php:107
+#: admin/user_fields.php:107 install/wizard.php:420 install/wizard.php:486
 msgid "Theme"
 msgstr "Tema"
 
@@ -914,8 +1028,10 @@ msgid "Create New User"
 msgstr "Crear Nuevo Usuario"
 
 #: admin/user_list.php:61
-msgid "There no more users to create. You must create more staff members first."
-msgstr "No hay usuarios para crear. Debe crear primero más miembros del personal."
+msgid ""
+"There no more users to create. You must create more staff members first."
+msgstr ""
+"No hay usuarios para crear. Debe crear primero más miembros del personal."
 
 #: admin/user_list.php:65
 msgid "Select a login to create a new user"
@@ -971,33 +1087,6 @@ msgstr "La contraseña del usuario, %s, ha sido cambiada."
 msgid "Reset User Password"
 msgstr "Cambiar Contraseña de Usuario"
 
-#: admin/user_access_log.php:61
-#: admin/user_record_log.php:61
-#, php-format
-msgid "No logs for user %s."
-msgstr "No hay logs para el usuario %s."
-
-#: admin/user_access_log.php:83
-#, php-format
-msgid "Access Logs List for user %s"
-msgstr "Listado de logs de acceso para el usuario %s"
-
-#: admin/user_access_log.php:86
-#, php-format
-msgid "%d accesses."
-msgstr "%d accesos."
-
-#: admin/user_access_log.php:105
-#: admin/user_record_log.php:99
-#: admin/log_list.php:139
-msgid "Access Date"
-msgstr "Fecha de Acceso"
-
-#: admin/user_access_log.php:140
-#: admin/user_record_log.php:141
-msgid "Return to users list"
-msgstr "Volver a la lista de usuarios"
-
 #: admin/user_record_log.php:83
 #, php-format
 msgid "Record Logs List for user %s"
@@ -1008,48 +1097,17 @@ msgstr "Listado de logs de operaciones con registros para el usuario %s"
 msgid "%d transactions."
 msgstr "%d transacciones."
 
-#: admin/user_record_log.php:101
-#: admin/log_list.php:144
-msgid "Table"
-msgstr "Tabla"
-
-#: admin/user_record_log.php:102
-#: admin/log_list.php:145
-msgid "Operation"
-msgstr "Operación"
-
-#: admin/user_record_log.php:103
-#: admin/log_list.php:146
-msgid "Data"
-msgstr "Datos"
-
-#: admin/theme_preload_css.php:96
-msgid "Path Filename"
-msgstr "Ruta del archivo"
-
-#: admin/log_list.php:70
-#, php-format
-msgid "Year %d"
-msgstr "Año %d"
-
-#: admin/log_list.php:82
-#, php-format
-msgid "Day %d"
-msgstr "Día %d"
-
-#: admin/log_list.php:132
-msgid "No logs in this date."
-msgstr "No hay logs para esa fecha."
-
 #: auth/login.php:71
 msgid "Login unknown."
 msgstr "Nombre de Usuario desconocido."
 
-#: auth/login.php:83
-#: auth/login.php:132
-#: auth/login.php:166
-msgid "Your user account has been suspended. Contact with administrator to resolve this problem."
-msgstr "Su cuenta de usuario ha sido suspendida. Póngase en contacto con el administrador para solucionar el problema."
+#: auth/login.php:83 auth/login.php:132 auth/login.php:166
+msgid ""
+"Your user account has been suspended. Contact with administrator to resolve "
+"this problem."
+msgstr ""
+"Su cuenta de usuario ha sido suspendida. Póngase en contacto con el "
+"administrador para solucionar el problema."
 
 #: auth/login.php:103
 msgid "Invalid sign on."
@@ -1076,16 +1134,23 @@ msgid "User Login"
 msgstr "Autentificación de Usuario"
 
 #: auth/login_form.php:56
-msgid "No session support. Authentication process will fail. Check your PHP configuration."
-msgstr "No hay soporte para sesiones. El proceso de autentificación fallará. Revise la configuración de PHP."
+msgid ""
+"No session support. Authentication process will fail. Check your PHP "
+"configuration."
+msgstr ""
+"No hay soporte para sesiones. El proceso de autentificación fallará. Revise "
+"la configuración de PHP."
 
 #: auth/login_form.php:64
 msgid "You must have cookies enabled to access your account."
-msgstr "Debe tener habilitadas las cookies para acceder a su cuenta de usuario."
+msgstr ""
+"Debe tener habilitadas las cookies para acceder a su cuenta de usuario."
 
 #: auth/login_form.php:73
 msgid "Last attempt to type correct password before suspend this user account."
-msgstr "Último intento para introducir correctamente la contraseña antes de suspender esta cuenta de usuario."
+msgstr ""
+"Último intento para introducir correctamente la contraseña antes de "
+"suspender esta cuenta de usuario."
 
 #: auth/login_form.php:113
 msgid "Enter"
@@ -1101,14 +1166,34 @@ msgstr "Bienvenido a OpenClinic"
 
 #: home/index.php:41
 msgid "OpenClinic is an easy to use, open source, medical records system."
-msgstr "OpenClinic es un sistema de código abierto y de fácil uso para manejar historias clínicas."
+msgstr ""
+"OpenClinic es un sistema de código abierto y de fácil uso para manejar "
+"historias clínicas."
 
 #: home/index.php:42
-msgid "When you select any of the following tabs you will be prompted to login."
-msgstr "Cuando elija alguna de las siguientes opciones, será necesario registrarse antes en la aplicación mediante un nombre de usuario y una contraseña adecuados."
+msgid ""
+"When you select any of the following tabs you will be prompted to login."
+msgstr ""
+"Cuando elija alguna de las siguientes opciones, será necesario registrarse "
+"antes en la aplicación mediante un nombre de usuario y una contraseña "
+"adecuados."
 
-#: home/index.php:44
-#: layout/component.php:69
+#: home/index.php:44 layout/component.php:69
+#: medical/connection_del_confirm.php:70 medical/connection_list.php:65
+#: medical/connection_new_form.php:68 medical/history_family_edit_form.php:90
+#: medical/history_family_view.php:79 medical/history_list.php:55
+#: medical/history_personal_edit_form.php:97
+#: medical/history_personal_view.php:79 medical/index.php:33
+#: medical/patient_del_confirm.php:59 medical/patient_edit_form.php:98
+#: medical/patient_new_form.php:43 medical/patient_search.php:94
+#: medical/patient_search_form.php:44 medical/patient_view.php:61
+#: medical/problem_del_confirm.php:69 medical/problem_edit_form.php:86
+#: medical/problem_list.php:55 medical/problem_new_form.php:67
+#: medical/problem_search.php:97 medical/problem_view.php:76
+#: medical/relative_del_confirm.php:60 medical/relative_list.php:73
+#: medical/relative_search.php:92 medical/test_del_confirm.php:79
+#: medical/test_edit_form.php:81 medical/test_list.php:65
+#: medical/test_new_form.php:72
 msgid "Medical Records"
 msgstr "Historias Clínicas"
 
@@ -1124,12 +1209,16 @@ msgstr "Administración de Pacientes:"
 msgid "Search, new, delete, edit"
 msgstr "Búsqueda, adición, edición, borrado"
 
-#: home/index.php:50
+#: home/index.php:50 medical/patient_view.php:67
+#: medical/print_medical_record.php:109
 msgid "Social Data"
 msgstr "Datos Sociales"
 
-#: home/index.php:51
-#: layout/component.php:213
+#: home/index.php:51 layout/component.php:213
+#: medical/history_family_edit_form.php:92 medical/history_family_view.php:81
+#: medical/history_list.php:47 medical/history_personal_edit_form.php:99
+#: medical/history_personal_view.php:81 medical/patient_view.php:86
+#: medical/problem_view.php:80
 msgid "Clinic History"
 msgstr "Antecedentes Clínicos"
 
@@ -1153,145 +1242,147 @@ msgstr "Editor de temas"
 msgid "System users"
 msgstr "Usuarios"
 
-#: home/license.php:41
-#: install/wizard.php:147
-#: layout/home.php:26
+#: home/license.php:41 install/wizard.php:147 layout/home.php:26
 msgid "License"
 msgstr "Licencia"
 
-#: install/index.php:21
+#: install/index.php:26 layout/install.php:23
 msgid "OpenClinic Install"
 msgstr "Instalación de OpenClinic"
 
-#: install/index.php:45
+#: install/index.php:50
 msgid "Parse failed."
 msgstr "Análisis fallido."
 
-#: install/index.php:46
+#: install/index.php:51
 msgid "Back to installation main page"
 msgstr "Volver a la página inicial de instalación"
 
-#: install/index.php:56
+#: install/index.php:61
 msgid "File installed correctly."
 msgstr "Fichero instalado correctamente."
 
-#: install/index.php:57
-#: install/upgrade.php:103
+#: install/index.php:62 install/upgrade.php:109
 msgid "Go to OpenClinic"
 msgstr "Ir a OpenClinic"
 
-#: install/index.php:82
-#: install/index.php:86
+#: install/index.php:87 install/index.php:91
 msgid "Install file"
 msgstr "Instalar archivo"
 
-#: install/index.php:89
-#: install/install.php:80
+#: install/index.php:94 install/install.php:85
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: install/index.php:101
+#: install/index.php:106
 msgid "The connection to the database failed with the following error:"
 msgstr "Se produjo el siguiente error en la conexión con la base de datos:"
 
-#: install/index.php:105
-msgid "Please make sure the following has been done before running this install script."
-msgstr "Asegúrese de haber hecho lo siguiente antes de ejecutar este script de instalación."
+#: install/index.php:110
+msgid ""
+"Please make sure the following has been done before running this install "
+"script."
+msgstr ""
+"Asegúrese de haber hecho lo siguiente antes de ejecutar este script de "
+"instalación."
 
-#: install/index.php:108
+#: install/index.php:113
 #, php-format
 msgid "Create OpenClinic database (%s of the install instructions)"
-msgstr "Crear la base de datos de OpenClinic (%s de las instrucciones de instalación)"
+msgstr ""
+"Crear la base de datos de OpenClinic (%s de las instrucciones de instalación)"
 
-#: install/index.php:109
-#: install/index.php:112
-#: install/index.php:116
+#: install/index.php:114 install/index.php:117 install/index.php:121
 #, php-format
 msgid "step %d"
 msgstr "paso %d"
 
-#: install/index.php:111
+#: install/index.php:116
 #, php-format
 msgid "Create OpenClinic database user (%s of the install instructions)"
-msgstr "Crear el usuario de la base de datos de OpenClinic (%s de las instrucciones de instalación)"
+msgstr ""
+"Crear el usuario de la base de datos de OpenClinic (%s de las instrucciones "
+"de instalación)"
 
-#: install/index.php:114
+#: install/index.php:119
 #, php-format
-msgid "Update %s with your new database username and password (%s of the install instructions)"
-msgstr "Actualizar el fichero %s con el usuario y la contraseña necesarios para acceder a la base de datos (%s de las instrucciones de instalación)"
+msgid ""
+"Update %s with your new database username and password (%s of the install "
+"instructions)"
+msgstr ""
+"Actualizar el fichero %s con el usuario y la contraseña necesarios para "
+"acceder a la base de datos (%s de las instrucciones de instalación)"
 
-#: install/index.php:121
+#: install/index.php:126
 #, php-format
 msgid "See %s for more details."
 msgstr "Para más detalles, mire en las %s."
 
-#: install/index.php:121
-#: install/wizard.php:778
+#: install/index.php:126 install/wizard.php:778 layout/install.php:27
 msgid "Install Instructions"
 msgstr "Instrucciones de Instalación"
 
-#: install/index.php:128
-#: install/install.php:39
+#: install/index.php:133 install/install.php:44
 msgid "Database connection is good."
 msgstr "La conexión con la base de datos es correcta."
 
-#: install/index.php:141
+#: install/index.php:146
 msgid "View file"
 msgstr "Ver archivo"
 
-#: install/index.php:143
+#: install/index.php:148
 msgid "Install a SQL file"
 msgstr "Instalar un archivo SQL"
 
-#: install/install.php:21
+#: install/install.php:26 layout/install.php:24
 msgid "Database Creation"
 msgstr "Crear base de datos"
 
-#: install/install.php:48
+#: install/install.php:53
 msgid "Building OpenClinic tables..."
 msgstr "Creando las tablas de OpenClinic..."
 
-#: install/install.php:61
+#: install/install.php:66
 #, php-format
 msgid "OpenClinic (version %s) is already installed."
 msgstr "La versión %s de OpenClinic está ya instalada."
 
-#: install/install.php:64
-msgid "Are you sure you want to delete all clinic data and create new OpenClinic tables?"
-msgstr "¿Está seguro de querer borrar todos los datos y crear de nuevo las tablas de OpenClinic?"
+#: install/install.php:69
+msgid ""
+"Are you sure you want to delete all clinic data and create new OpenClinic "
+"tables?"
+msgstr ""
+"¿Está seguro de querer borrar todos los datos y crear de nuevo las tablas de "
+"OpenClinic?"
 
-#: install/install.php:65
+#: install/install.php:70
 msgid "If you continue all data will be lost."
 msgstr "Si continúa se perderán todos los datos actuales."
 
-#: install/install.php:75
+#: install/install.php:80
 msgid "Continue"
 msgstr "Continuar"
 
-#: install/install.php:101
-#: install/wizard.php:618
+#: install/install.php:106 install/wizard.php:618
 #, php-format
 msgid "Table %s dropped."
 msgstr "Tabla %s borrada."
 
-#: install/install.php:102
-#: install/wizard.php:619
+#: install/install.php:107 install/wizard.php:619
 #, php-format
 msgid "Table %s created."
 msgstr "Tabla %s creada."
 
-#: install/install.php:108
-#: install/wizard.php:624
+#: install/install.php:113 install/wizard.php:624
 msgid "Last instruction failed"
 msgstr "Fallo en la última instrucción"
 
-#: install/install.php:114
-#: install/wizard.php:663
+#: install/install.php:119 install/wizard.php:663
 msgid "OpenClinic tables have been created successfully!"
-msgstr "¡Las tablas de la base de datos de OpenClinic han sido creadas correctamente!"
+msgstr ""
+"¡Las tablas de la base de datos de OpenClinic han sido creadas correctamente!"
 
-#: install/install.php:116
-#: install/wizard.php:507
+#: install/install.php:121 install/wizard.php:507
 msgid "Start using OpenClinic"
 msgstr "Usar OpenClinic"
 
@@ -1305,31 +1396,69 @@ msgstr "Procesando sql [%s]"
 msgid "Error: %s"
 msgstr "Error: %s"
 
-#: install/wizard.php:88
-#: install/wizard.php:136
+#: install/upgrade.php:36
+#, php-format
+msgid "The connection to the database failed with the following error: %s"
+msgstr "Se produjo el siguiente error en la conexión con la base de datos: %s"
+
+#: install/upgrade.php:54
+#, php-format
+msgid "Version field doesn't have a valid format (%s)."
+msgstr "El campo de la versión no tiene un formato válido (%s)."
+
+#: install/upgrade.php:66
+msgid "There aren't upgrade files."
+msgstr "No hay ficheros de actualización."
+
+#: install/upgrade.php:71 layout/install.php:25
+msgid "Upgrade Database"
+msgstr "Actualización de la base de datos"
+
+#: install/upgrade.php:76
+#, php-format
+msgid "Finded version: %s"
+msgstr "Versión encontrada: %s"
+
+#: install/upgrade.php:86
+#, php-format
+msgid "Aplying %s file..."
+msgstr "Aplicando fichero %s..."
+
+#: install/upgrade.php:90
+#, php-format
+msgid "Error processing file: %s"
+msgstr "Error procesando el fichero: %s"
+
+#: install/upgrade.php:101
+#, php-format
+msgid "Upgraded to version: %s"
+msgstr "Actualizada a la versión: %s"
+
+#: install/upgrade.php:107
+msgid "Database upgrade finished correctly!"
+msgstr "La actualización de la base de datos se ha completado correctamente."
+
+#: install/wizard.php:88 install/wizard.php:136
 msgid "OpenClinic Install Wizard"
 msgstr "Asistente de configuración de OpenClinic"
 
-#: install/wizard.php:147
-#: install/wizard.php:176
-#: install/wizard.php:245
-#: install/wizard.php:346
-#: install/wizard.php:443
-#: install/wizard.php:507
+#: install/wizard.php:147 install/wizard.php:176 install/wizard.php:245
+#: install/wizard.php:346 install/wizard.php:443 install/wizard.php:507
 #: install/wizard.php:686
 #, php-format
 msgid "Step %d of %d: "
 msgstr "Paso %d de %d: "
 
 #: install/wizard.php:149
-msgid "OpenClinic is free software, distributed under GNU General Public License (GPL). Please read the license and, if you agree, click on 'I accept' button."
-msgstr "OpenClinic es software libre, distribuido bajo licencia GPL. Lea esta licencia y, si está de acuerdo, pulse en el botón 'Aceptar'."
+msgid ""
+"OpenClinic is free software, distributed under GNU General Public License "
+"(GPL). Please read the license and, if you agree, click on 'I accept' button."
+msgstr ""
+"OpenClinic es software libre, distribuido bajo licencia GPL. Lea esta "
+"licencia y, si está de acuerdo, pulse en el botón 'Aceptar'."
 
-#: install/wizard.php:162
-#: install/wizard.php:231
-#: install/wizard.php:332
-#: install/wizard.php:429
-#: install/wizard.php:490
+#: install/wizard.php:162 install/wizard.php:231 install/wizard.php:332
+#: install/wizard.php:429 install/wizard.php:490
 msgid "Back"
 msgstr "Atrás"
 
@@ -1341,58 +1470,45 @@ msgstr "Aceptar"
 msgid "Read the license before continue"
 msgstr "Lea atentamente la licencia antes de continuar"
 
-#: install/wizard.php:176
-#: install/wizard.php:453
+#: install/wizard.php:176 install/wizard.php:453
 msgid "MySQL Database Settings"
 msgstr "Parámetros de la base de datos MySQL"
 
 #: install/wizard.php:178
 #, php-format
-msgid "Install script create OpenClinic database. These following values will be written in %s file. All fields are required."
-msgstr "El script de instalación crea la base de datos de OpenClinic. Los siguientes valores serán escritos en el fichero %s. Todos los campos son imprescindibles."
+msgid ""
+"Install script create OpenClinic database. These following values will be "
+"written in %s file. All fields are required."
+msgstr ""
+"El script de instalación crea la base de datos de OpenClinic. Los siguientes "
+"valores serán escritos en el fichero %s. Todos los campos son "
+"imprescindibles."
 
-#: install/wizard.php:183
-#: install/wizard.php:456
-#: install/wizard.php:588
+#: install/wizard.php:183 install/wizard.php:456 install/wizard.php:588
 msgid "Database Host:"
 msgstr "Máquina donde está la base de datos:"
 
-#: install/wizard.php:190
-#: install/wizard.php:201
-#: install/wizard.php:212
-#: install/wizard.php:223
-#: install/wizard.php:264
-#: install/wizard.php:275
-#: install/wizard.php:286
-#: install/wizard.php:297
-#: install/wizard.php:308
-#: install/wizard.php:319
-#: install/wizard.php:358
-#: install/wizard.php:364
+#: install/wizard.php:190 install/wizard.php:201 install/wizard.php:212
+#: install/wizard.php:223 install/wizard.php:264 install/wizard.php:275
+#: install/wizard.php:286 install/wizard.php:297 install/wizard.php:308
+#: install/wizard.php:319 install/wizard.php:358 install/wizard.php:364
 #: install/wizard.php:370
 msgid "e. g."
 msgstr "p. e."
 
-#: install/wizard.php:194
-#: install/wizard.php:457
-#: install/wizard.php:589
+#: install/wizard.php:194 install/wizard.php:457 install/wizard.php:589
 msgid "Database User:"
 msgstr "Usuario de la base de datos:"
 
-#: install/wizard.php:205
-#: install/wizard.php:458
-#: install/wizard.php:590
+#: install/wizard.php:205 install/wizard.php:458 install/wizard.php:590
 msgid "Database Password:"
 msgstr "Contraseña de la base de datos:"
 
-#: install/wizard.php:216
-#: install/wizard.php:459
+#: install/wizard.php:216 install/wizard.php:459
 msgid "Database Name:"
 msgstr "Nombre de la base de datos:"
 
-#: install/wizard.php:232
-#: install/wizard.php:333
-#: install/wizard.php:430
+#: install/wizard.php:232 install/wizard.php:333 install/wizard.php:430
 #: install/wizard.php:785
 msgid "Next"
 msgstr "Siguiente"
@@ -1401,8 +1517,7 @@ msgstr "Siguiente"
 msgid "Check data before continue"
 msgstr "Verifique los datos antes de continuar"
 
-#: install/wizard.php:245
-#: install/wizard.php:462
+#: install/wizard.php:245 install/wizard.php:462
 msgid "Config Settings"
 msgstr "Parámetros de configuración"
 
@@ -1422,8 +1537,7 @@ msgstr "Resultados de búsquedas (elementos por página):"
 msgid "Customize your site"
 msgstr "Personalice la aplicación"
 
-#: install/wizard.php:346
-#: install/wizard.php:475
+#: install/wizard.php:346 install/wizard.php:475
 msgid "Admin Data"
 msgstr "Datos del administrador"
 
@@ -1441,8 +1555,12 @@ msgstr "Última verificación antes de instalar"
 
 #: install/wizard.php:446
 #, php-format
-msgid "Here are the values you entered. %s to remember your admin password and other settings."
-msgstr "A continuación se exponen los valores que ha introducido. %s para recordar su contraseña de administrador y los demás parámetros."
+msgid ""
+"Here are the values you entered. %s to remember your admin password and "
+"other settings."
+msgstr ""
+"A continuación se exponen los valores que ha introducido. %s para recordar "
+"su contraseña de administrador y los demás parámetros."
 
 #: install/wizard.php:447
 msgid "Print this page"
@@ -1454,7 +1572,9 @@ msgstr "Instalar"
 
 #: install/wizard.php:497
 msgid "If you are not sure in any value, go back before install"
-msgstr "Si no está seguro de haber puesto correctamente todos los datos, vuelva atrás antes de instalar"
+msgstr ""
+"Si no está seguro de haber puesto correctamente todos los datos, vuelva "
+"atrás antes de instalar"
 
 #: install/wizard.php:518
 #, php-format
@@ -1473,14 +1593,9 @@ msgstr "El servidor MySQL no funciona o la contraseña no es válida."
 msgid "Please check these values and if any is wrong back to step 2:"
 msgstr "Verifique estos valores y si hay alguno incorrecto vuelva al paso 2:"
 
-#: install/wizard.php:600
-#: install/wizard.php:602
-#: install/wizard.php:604
-#: install/wizard.php:633
-#: install/wizard.php:634
-#: install/wizard.php:645
-#: install/wizard.php:654
-#: install/wizard.php:661
+#: install/wizard.php:600 install/wizard.php:602 install/wizard.php:604
+#: install/wizard.php:633 install/wizard.php:634 install/wizard.php:645
+#: install/wizard.php:654 install/wizard.php:661
 #, php-format
 msgid "Instruction: %s Error: %s"
 msgstr "Instrucción: %s Error: %s"
@@ -1488,7 +1603,9 @@ msgstr "Instrucción: %s Error: %s"
 #: install/wizard.php:665
 #, php-format
 msgid "%s: To protect your site, make %s and %s files read only (chmod 400)."
-msgstr "%s: Para proteger su sitio, modifique los permisos del fichero %s y de %s y póngalos de sólo lectura (chmod 400)."
+msgstr ""
+"%s: Para proteger su sitio, modifique los permisos del fichero %s y de %s y "
+"póngalos de sólo lectura (chmod 400)."
 
 #: install/wizard.php:666
 msgid "Security advice"
@@ -1509,12 +1626,19 @@ msgstr "Requisitos"
 #: install/wizard.php:689
 #, php-format
 msgid "This script will configure OpenClinic database and %s file."
-msgstr "Este script configurará la base de datos de OpenClinic y el fichero %s."
+msgstr ""
+"Este script configurará la base de datos de OpenClinic y el fichero %s."
 
 #: install/wizard.php:695
 #, php-format
-msgid "The file %s already exists in your system! This script INSTALLS and DOES NOT UPGRADE. It will remove all OpenClinic data. If this is what you want, you can go on. If you want upgrade go to the %s."
-msgstr "El fichero %s ya existe en su sistema. Este script INSTALA, no ACTUALIZA. Borrará todos los datos actuales de OpenClinic. Si es esto lo que quiere, puede continuar. Si lo que quiere es actualizar, vaya al %s."
+msgid ""
+"The file %s already exists in your system! This script INSTALLS and DOES NOT "
+"UPGRADE. It will remove all OpenClinic data. If this is what you want, you "
+"can go on. If you want upgrade go to the %s."
+msgstr ""
+"El fichero %s ya existe en su sistema. Este script INSTALA, no ACTUALIZA. "
+"Borrará todos los datos actuales de OpenClinic. Si es esto lo que quiere, "
+"puede continuar. Si lo que quiere es actualizar, vaya al %s."
 
 #: install/wizard.php:697
 msgid "upgrade script"
@@ -1526,7 +1650,8 @@ msgstr "Lea atentamente"
 
 #: install/wizard.php:703
 msgid "For OpenClinic to work, you need the following on the server:"
-msgstr "Para que OpenClinic pueda funcionar, necesita lo siguiente en el servidor:"
+msgstr ""
+"Para que OpenClinic pueda funcionar, necesita lo siguiente en el servidor:"
 
 #: install/wizard.php:706
 #, php-format
@@ -1538,9 +1663,7 @@ msgstr "Servidor web (tiene %s)"
 msgid "PHP >= %s (you have PHP %s)"
 msgstr "PHP >= %s (tiene PHP %s)"
 
-#: install/wizard.php:713
-#: install/wizard.php:760
-#: install/wizard.php:867
+#: install/wizard.php:713 install/wizard.php:760 install/wizard.php:867
 msgid "ok"
 msgstr "correcto"
 
@@ -1554,8 +1677,14 @@ msgid "Write access to %s file"
 msgstr "Permiso de escritura para el archivo %s"
 
 #: install/wizard.php:740
-msgid "This file is still not web writeable. This is good in normal time, for security reasons. However, during this installation, you need to set this file with writing permissions. You will have to do it manually."
-msgstr "No es posible escribir en este fichero. Esto es lo correcto normalmente por razones de seguridad. Sin embargo, durante la instalación, necesita poner a este archivo permisos de escritura. Tendrá que hacerlo manualmente."
+msgid ""
+"This file is still not web writeable. This is good in normal time, for "
+"security reasons. However, during this installation, you need to set this "
+"file with writing permissions. You will have to do it manually."
+msgstr ""
+"No es posible escribir en este fichero. Esto es lo correcto normalmente por "
+"razones de seguridad. Sin embargo, durante la instalación, necesita poner a "
+"este archivo permisos de escritura. Tendrá que hacerlo manualmente."
 
 #: install/wizard.php:743
 #, php-format
@@ -1573,8 +1702,12 @@ msgstr "Una vez hecho esto, pulse en el botón Siguiente."
 
 #: install/wizard.php:770
 #, php-format
-msgid "To install OpenClinic on a Windows machine for test, you just need to install %s before."
-msgstr "Para instalar OpenClinic en un ordenador con Windows para hacer pruebas, sólo necesita haber instalado %s."
+msgid ""
+"To install OpenClinic on a Windows machine for test, you just need to "
+"install %s before."
+msgstr ""
+"Para instalar OpenClinic en un ordenador con Windows para hacer pruebas, "
+"sólo necesita haber instalado %s."
 
 #: install/wizard.php:777
 #, php-format
@@ -1617,43 +1750,6 @@ msgstr "La contraseña del administrador debe tener como mínimo 4 caracteres."
 msgid "There were some errors"
 msgstr "Hay errores en los datos"
 
-#: install/upgrade.php:30
-#, php-format
-msgid "The connection to the database failed with the following error: %s"
-msgstr "Se produjo el siguiente error en la conexión con la base de datos: %s"
-
-#: install/upgrade.php:48
-#, php-format
-msgid "Version field doesn't have a valid format (%s)."
-msgstr "El campo de la versión no tiene un formato válido (%s)."
-
-#: install/upgrade.php:60
-msgid "There aren't upgrade files."
-msgstr "No hay ficheros de actualización."
-
-#: install/upgrade.php:65
-msgid "Upgrade Database"
-msgstr "Actualización de la base de datos"
-
-#: install/upgrade.php:70
-#, php-format
-msgid "Finded version: %s"
-msgstr "Versión encontrada: %s"
-
-#: install/upgrade.php:80
-#, php-format
-msgid "Aplying %s file..."
-msgstr "Aplicando fichero %s..."
-
-#: install/upgrade.php:95
-#, php-format
-msgid "Upgraded to version: %s"
-msgstr "Actualizada a la versión: %s"
-
-#: install/upgrade.php:101
-msgid "Database upgrade finished correctly!"
-msgstr "La actualización de la base de datos se ha completado correctamente."
-
 #: js/password.php:66
 #, php-format
 msgid "Password must be at least %d characters."
@@ -1664,91 +1760,32 @@ msgstr "La contraseña debe tener como mínimo %d caracteres."
 msgid "Confirmation password must be at least %d characters."
 msgstr "La confirmación de la contraseña debe tener como mínimo %d caracteres."
 
-#: layout/admin.php:22
-#: layout/home.php:22
-#: layout/medical.php:24
+#: layout/admin.php:22 layout/home.php:22 layout/medical.php:24
 msgid "Summary"
 msgstr "Resumen"
 
-#: layout/admin.php:39
-#: layout/home.php:45
-#: layout/medical.php:80
-#: layout/component.php:307
-msgid "Help"
-msgstr "Ayuda"
-
-#: layout/admin.php:45
-#: layout/home.php:51
-#: layout/medical.php:86
-#: layout/component.php:313
-#: layout/component.php:330
-msgid "Opens a new window"
-msgstr "Abre una nueva ventana"
-
-#: layout/home.php:35
-#: layout/component.php:286
-msgid "Logout"
-msgstr "Salir"
-
-#: layout/home.php:39
-#: layout/component.php:299
-msgid "Log in"
-msgstr "Entrar"
-
-#: layout/medical.php:28
-msgid "Search Patient"
-msgstr "Buscar Paciente"
-
-#: layout/medical.php:75
-msgid "New Patient"
-msgstr "Nuevo Paciente"
-
-#: layout/xhtml_start.php:114
-msgid "Error occurred"
-msgstr "Ha ocurrido un error"
-
-#: layout/footer.php:47
-#: layout/component.php:119
+#: layout/component.php:119 layout/footer.php:47
 msgid "Powered by OpenClinic"
 msgstr "Powered by OpenClinic"
 
-#: layout/footer.php:50
-msgid "version"
-msgstr "versión"
-
-#: layout/footer.php:64
-#, php-format
-msgid "Under the %s"
-msgstr "Bajo la %s"
-
-#: layout/footer.php:71
-#: layout/header.php:112
-msgid "This is a demo version"
-msgstr "Esta es una versión de demostración"
-
-#: layout/footer.php:81
-#, php-format
-msgid "Page generation: %s seconds"
-msgstr "Tiempo de generación de la página: %s segundos"
-
-#: layout/header.php:26
-msgid "Clinic Home"
-msgstr "Inicio"
-
-#: layout/header.php:92
-msgid "Skip over navigation"
-msgstr "Saltar enlaces de navegación"
-
-#: layout/component.php:211
+#: layout/component.php:211 medical/patient_view.php:82
+#: medical/relative_del_confirm.php:62 medical/relative_list.php:65
+#: medical/relative_search.php:94
 msgid "View Relatives"
 msgstr "Ver Familiares"
 
-#: layout/component.php:214
+#: layout/component.php:214 medical/connection_del_confirm.php:72
+#: medical/connection_list.php:67 medical/connection_new_form.php:70
+#: medical/patient_view.php:90 medical/problem_del_confirm.php:71
+#: medical/problem_edit_form.php:88 medical/problem_list.php:47
+#: medical/problem_new_form.php:69 medical/problem_view.php:79
+#: medical/test_del_confirm.php:81 medical/test_edit_form.php:83
+#: medical/test_list.php:67 medical/test_new_form.php:74
 msgid "Medical Problems Report"
 msgstr "Listado de Problemas"
 
-#: layout/component.php:227
-#: layout/component.php:228
+#: layout/component.php:227 layout/component.php:228
+#: medical/patient_view.php:94
 msgid "Print Medical Record"
 msgstr "Imprimir Historia"
 
@@ -1768,9 +1805,17 @@ msgstr "Informar de errores"
 msgid "Forums"
 msgstr "Foros"
 
+#: layout/component.php:286 layout/home.php:35
+msgid "Logout"
+msgstr "Salir"
+
 #: layout/component.php:293
 msgid "manage your user account"
 msgstr "modifique su cuenta de usuario"
+
+#: layout/component.php:299 layout/home.php:39
+msgid "Log in"
+msgstr "Entrar"
 
 #: layout/component.php:303
 msgid "OpenClinic Readme"
@@ -1779,6 +1824,10 @@ msgstr "OpenClinic Léeme"
 #: layout/component.php:325
 msgid "View source code"
 msgstr "Ver código fuente"
+
+#: layout/component.php:330
+msgid "Opens a new window"
+msgstr "Abre una nueva ventana"
 
 #: layout/component.php:338
 msgid "Demo version features"
@@ -1799,46 +1848,48 @@ msgstr "Dirección: %s"
 msgid "Clinic phone: %s"
 msgstr "Teléfono de atención: %s"
 
+#: layout/footer.php:50
+msgid "version"
+msgstr "versión"
+
+#: layout/footer.php:64
+#, php-format
+msgid "Under the %s"
+msgstr "Bajo la %s"
+
+#: layout/footer.php:71 layout/header.php:112
+msgid "This is a demo version"
+msgstr "Esta es una versión de demostración"
+
+#: layout/footer.php:81
+#, php-format
+msgid "Page generation: %s seconds"
+msgstr "Tiempo de generación de la página: %s segundos"
+
+#: layout/header.php:26
+msgid "Clinic Home"
+msgstr "Inicio"
+
+#: layout/header.php:92
+msgid "Skip over navigation"
+msgstr "Saltar enlaces de navegación"
+
 #: layout/install.php:26
 msgid "Install Wizard"
 msgstr "Asistente de instalación"
 
-#: lib/I18n.php:269
-#: lib/I18n.php:295
-msgid "Y-m-d H:i:s"
-msgstr "d-m-Y H:i:s"
+#: layout/medical.php:28 medical/index.php:39 medical/patient_search.php:95
+#: medical/patient_search_form.php:33 medical/problem_search.php:98
+msgid "Search Patient"
+msgstr "Buscar Paciente"
 
-#: lib/I18n.php:281
-msgid "Y-m-d"
-msgstr "d-m-Y"
+#: layout/medical.php:75 medical/index.php:71 medical/patient_new_form.php:44
+msgid "New Patient"
+msgstr "Nuevo Paciente"
 
-#: lib/File.php:159
-msgid "Neither text nor html part present"
-msgstr "No se encuentra la parte en texto del mensaje ni la de HTML"
-
-#: lib/File.php:164
-msgid "Sender address missing"
-msgstr "No se encuentra la dirección de correo del remitente"
-
-#: lib/File.php:169
-msgid "Recipient address missing"
-msgstr "No se encuentra la dirección de correo del destinatario"
-
-#: lib/Search.php:184
-msgid "prev"
-msgstr "anterior"
-
-#: lib/Search.php:189
-msgid "next"
-msgstr "siguiente"
-
-#: lib/Search.php:197
-msgid "Result Pages"
-msgstr "Páginas de resultados"
-
-#: lib/Form.php:725
-msgid "ERROR: Some fields have been incorrectly filled. Please fix the fields and send the form again. Each incorrectly filled field is marked with specific error message."
-msgstr "ERROR: Algunos campos no están correctamente rellenados. Arréglelos y envíe el formulario de nuevo. Cada campo incorrecto está marcado con un mensaje sobre el error."
+#: layout/xhtml_start.php:119
+msgid "Error occurred"
+msgstr "Ha ocurrido un error"
 
 #: lib/Dump.php:283
 msgid "Create Time"
@@ -1851,6 +1902,36 @@ msgstr "Fecha y hora de última actualización"
 #: lib/Dump.php:293
 msgid "Check Time"
 msgstr "Fecha y hora de última comprobación"
+
+#: lib/File.php:160
+msgid "Neither text nor html part present"
+msgstr "No se encuentra la parte en texto del mensaje ni la de HTML"
+
+#: lib/File.php:165
+msgid "Sender address missing"
+msgstr "No se encuentra la dirección de correo del remitente"
+
+#: lib/File.php:170
+msgid "Recipient address missing"
+msgstr "No se encuentra la dirección de correo del destinatario"
+
+#: lib/Form.php:725
+msgid ""
+"ERROR: Some fields have been incorrectly filled. Please fix the fields and "
+"send the form again. Each incorrectly filled field is marked with specific "
+"error message."
+msgstr ""
+"ERROR: Algunos campos no están correctamente rellenados. Arréglelos y envíe "
+"el formulario de nuevo. Cada campo incorrecto está marcado con un mensaje "
+"sobre el error."
+
+#: lib/I18n.php:269 lib/I18n.php:295 medical/print_medical_record.php:100
+msgid "Y-m-d H:i:s"
+msgstr "d-m-Y H:i:s"
+
+#: lib/I18n.php:281
+msgid "Y-m-d"
+msgstr "d-m-Y"
 
 #: lib/LogStats.php:80
 msgid "January"
@@ -1905,11 +1986,8 @@ msgstr "Diciembre"
 msgid "Yearly Stats: %d hits"
 msgstr "Estadísticas anuales: %d entradas"
 
-#: lib/LogStats.php:117
-#: lib/LogStats.php:179
-#: lib/LogStats.php:249
-#: lib/LogStats.php:328
-#: lib/LogStats.php:389
+#: lib/LogStats.php:117 lib/LogStats.php:179 lib/LogStats.php:249
+#: lib/LogStats.php:328 lib/LogStats.php:389
 msgid "There are not statistics"
 msgstr "No hay estadísticas"
 
@@ -1917,11 +1995,8 @@ msgstr "No hay estadísticas"
 msgid "Year"
 msgstr "Año"
 
-#: lib/LogStats.php:124
-#: lib/LogStats.php:186
-#: lib/LogStats.php:256
-#: lib/LogStats.php:337
-#: lib/LogStats.php:397
+#: lib/LogStats.php:124 lib/LogStats.php:186 lib/LogStats.php:256
+#: lib/LogStats.php:337 lib/LogStats.php:397
 msgid "Hits"
 msgstr "Entradas"
 
@@ -1976,30 +2051,48 @@ msgstr "Día más concurrido: %d de %s de %d (%d entradas)"
 msgid "Busiest Hour: %s on %s %d, %d (%d hits)"
 msgstr "Hora más concurrida: %1$s el día %3$d de %2$s de %4$d (%5$d entradas)"
 
+#: lib/Search.php:184
+msgid "prev"
+msgstr "anterior"
+
+#: lib/Search.php:189
+msgid "next"
+msgstr "siguiente"
+
+#: lib/Search.php:197
+msgid "Result Pages"
+msgstr "Páginas de resultados"
+
 #: medical/connection_del.php:78
 #, php-format
 msgid "Connection with medical problem, %s, has been deleted."
 msgstr "La relación con el problema médico, %s, ha sido borrada."
 
-#: medical/connection_del_confirm.php:43
-#: medical/connection_list.php:41
-#: medical/connection_new_form.php:41
-#: medical/history_family_edit_form.php:39
-#: medical/history_family_edit_form.php:52
-#: medical/history_family_view.php:39
-#: medical/history_family_view.php:52
-#: medical/history_list.php:39
+#: medical/connection_del_confirm.php:43 medical/connection_list.php:41
+#: medical/connection_new_form.php:41 medical/history_family_edit_form.php:39
+#: medical/history_family_edit_form.php:52 medical/history_family_view.php:39
+#: medical/history_family_view.php:52 medical/history_list.php:39
 #: medical/history_personal_edit_form.php:39
 #: medical/history_personal_edit_form.php:52
-#: medical/history_personal_view.php:39
-#: medical/history_personal_view.php:52
-#: medical/patient_del.php:90
+#: medical/history_personal_view.php:39 medical/history_personal_view.php:52
+#: medical/patient_del.php:90 medical/patient_del_confirm.php:40
+#: medical/patient_edit_form.php:44 medical/patient_view.php:40
+#: medical/print_medical_record.php:78 medical/problem_del_confirm.php:42
+#: medical/problem_edit_form.php:40 medical/problem_list.php:39
+#: medical/problem_new_form.php:40 medical/problem_view.php:41
+#: medical/relative_del_confirm.php:41 medical/relative_list.php:40
+#: medical/relative_search.php:54 medical/test_del_confirm.php:44
+#: medical/test_edit_form.php:42 medical/test_list.php:41
+#: medical/test_new_form.php:40
 msgid "That patient does not exist."
 msgstr "Ese paciente no existe."
 
-#: medical/connection_del_confirm.php:51
-#: medical/connection_list.php:49
-#: medical/connection_new_form.php:49
+#: medical/connection_del_confirm.php:51 medical/connection_list.php:49
+#: medical/connection_new_form.php:49 medical/problem_del.php:85
+#: medical/problem_del_confirm.php:50 medical/problem_edit_form.php:48
+#: medical/problem_view.php:49 medical/test_del_confirm.php:52
+#: medical/test_edit_form.php:50 medical/test_list.php:49
+#: medical/test_new_form.php:48
 msgid "That medical problem does not exist."
 msgstr "Ese problema médico no existe."
 
@@ -2007,19 +2100,19 @@ msgstr "Ese problema médico no existe."
 msgid "Delete Connection with Medical Problem"
 msgstr "Borrar Relación con Problema Médico"
 
-#: medical/connection_del_confirm.php:74
-#: medical/connection_list.php:57
-#: medical/connection_new_form.php:72
+#: medical/connection_del_confirm.php:74 medical/connection_list.php:57
+#: medical/connection_new_form.php:72 medical/problem_view.php:111
 msgid "View Connection Problems"
 msgstr "Ver Problemas Relacionados"
 
 #: medical/connection_del_confirm.php:92
 #, php-format
 msgid "Are you sure you want to delete connection, %s, from list?"
-msgstr "¿Está seguro de querer borrar el problema médico relacionado, %s, de la lista?"
+msgstr ""
+"¿Está seguro de querer borrar el problema médico relacionado, %s, de la "
+"lista?"
 
-#: medical/connection_list.php:80
-#: medical/connection_new_form.php:57
+#: medical/connection_list.php:80 medical/connection_new_form.php:57
 msgid "Add New Connection Problems"
 msgstr "Añadir Problemas Relacionados"
 
@@ -2031,19 +2124,26 @@ msgstr "No hay problemas relacionados para este problema médico."
 msgid "Connection Problems List:"
 msgstr "Lista de problemas médicos relacionados:"
 
-#: medical/connection_list.php:115
-#: medical/history_list.php:92
+#: medical/connection_list.php:115 medical/history_list.php:92
+#: medical/print_medical_record.php:253 medical/print_medical_record.php:470
+#: medical/problem_fields.php:27 medical/problem_list.php:96
+#: medical/problem_search.php:223 medical/problem_view.php:146
+#: model/Problem.php:523
 msgid "Opening Date"
 msgstr "Fecha de apertura"
 
-#: medical/connection_list.php:116
-#: medical/connection_new_form.php:110
-#: medical/history_list.php:91
+#: medical/connection_list.php:116 medical/connection_new_form.php:110
+#: medical/history_list.php:91 medical/print_medical_record.php:271
+#: medical/print_medical_record.php:488 medical/problem_fields.php:66
+#: medical/problem_list.php:95 medical/problem_search.php:120
+#: medical/problem_search_fields.php:29 medical/problem_view.php:167
+#: model/Problem.php:521
 msgid "Wording"
 msgstr "Enunciado"
 
-#: medical/connection_list.php:143
-#: medical/history_list.php:109
+#: medical/connection_list.php:143 medical/history_list.php:109
+#: medical/problem_list.php:134 medical/relative_list.php:149
+#: medical/test_list.php:116
 msgid "view"
 msgstr "ver"
 
@@ -2051,16 +2151,19 @@ msgstr "ver"
 msgid "Connection problems have been added."
 msgstr "Las relaciones con el problema médico han sido añadidas."
 
-#: medical/connection_new_form.php:93
+#: medical/connection_new_form.php:93 medical/print_medical_record.php:227
+#: medical/problem_list.php:87
 msgid "No medical problems defined for this patient."
 msgstr "No hay problemas médicos para este paciente."
 
-#: medical/connection_new_form.php:98
+#: medical/connection_new_form.php:98 medical/print_medical_record.php:222
+#: medical/problem_list.php:81
 msgid "Medical Problems List:"
 msgstr "Lista de problemas médicos:"
 
-#: medical/connection_new_form.php:109
-#: medical/history_list.php:89
+#: medical/connection_new_form.php:109 medical/history_list.php:89
+#: medical/print_medical_record.php:232 medical/print_medical_record.php:449
+#: medical/problem_fields.php:23 medical/problem_list.php:93
 msgid "Order Number"
 msgstr "Número de orden"
 
@@ -2072,64 +2175,63 @@ msgstr "Añadir los marcados a la lista de relaciones"
 msgid "Family Antecedents have been updated."
 msgstr "Los Antecedentes Familiares han sido actualizados."
 
-#: medical/history_family_edit_form.php:78
-#: medical/history_family_view.php:92
+#: medical/history_family_edit_form.php:78 medical/history_family_view.php:92
 msgid "Edit Family Antecedents"
 msgstr "Editar Antecedentes Familiares"
 
-#: medical/history_family_edit_form.php:93
-#: medical/history_family_view.php:71
+#: medical/history_family_edit_form.php:93 medical/history_family_view.php:71
 #: medical/history_list.php:69
 msgid "View Family Antecedents"
 msgstr "Ver Antecedentes Familiares"
 
-#: medical/history_family_fields.php:21
-#: medical/history_family_view.php:105
+#: medical/history_family_fields.php:21 medical/history_family_view.php:105
+#: medical/print_medical_record.php:411
 msgid "Parents Status Health"
 msgstr "Estado de salud de los padres"
 
-#: medical/history_family_fields.php:31
-#: medical/history_family_view.php:111
+#: medical/history_family_fields.php:31 medical/history_family_view.php:111
+#: medical/print_medical_record.php:417
 msgid "Brothers and Sisters Status Health"
 msgstr "Estado de salud de los hermanos"
 
-#: medical/history_family_fields.php:41
-#: medical/history_family_view.php:117
+#: medical/history_family_fields.php:41 medical/history_family_view.php:117
+#: medical/print_medical_record.php:423
 msgid "Spouse and Childs Status Health"
 msgstr "Estado de salud del cónyuge e hijos"
 
-#: medical/history_family_fields.php:51
-#: medical/history_family_view.php:123
+#: medical/history_family_fields.php:51 medical/history_family_view.php:123
+#: medical/print_medical_record.php:429
 msgid "Family Illness"
 msgstr "Enfermedades acumuladas de la familia"
 
-#: medical/history_family_view.php:101
+#: medical/history_family_view.php:101 medical/print_medical_record.php:407
 msgid "Family Antecedents"
 msgstr "Antecedentes Familiares"
 
-#: medical/history_list.php:65
-#: medical/history_personal_edit_form.php:100
+#: medical/history_list.php:65 medical/history_personal_edit_form.php:100
 #: medical/history_personal_view.php:71
 msgid "View Personal Antecedents"
 msgstr "Ver Antecedentes Personales"
 
-#: medical/history_list.php:76
+#: medical/history_list.php:76 medical/print_medical_record.php:438
 msgid "Closed Medical Problems List:"
 msgstr "Lista de problemas médicos cerrados:"
 
-#: medical/history_list.php:83
+#: medical/history_list.php:83 medical/print_medical_record.php:443
 msgid "No closed medical problems defined for this patient."
 msgstr "No hay problemas médicos cerrados para este paciente."
 
-#: medical/history_list.php:93
+#: medical/history_list.php:93 medical/print_medical_record.php:261
+#: medical/print_medical_record.php:478 medical/problem_search.php:226
+#: medical/problem_view.php:157
 msgid "Closing Date"
 msgstr "Fecha de cierre"
 
-#: medical/history_list.php:132
+#: medical/history_list.php:132 medical/problem_list.php:144
 msgid "tests"
 msgstr "pruebas"
 
-#: medical/history_list.php:142
+#: medical/history_list.php:142 medical/problem_list.php:154
 msgid "connect"
 msgstr "relaciones"
 
@@ -2143,71 +2245,76 @@ msgid "Edit Personal Antecedents"
 msgstr "Editar Antecedentes Personales"
 
 #: medical/history_personal_fields.php:21
-#: medical/history_personal_view.php:105
+#: medical/history_personal_view.php:105 medical/print_medical_record.php:327
 msgid "Birth and Growth"
 msgstr "Nacimiento y Crecimiento"
 
 #: medical/history_personal_fields.php:31
-#: medical/history_personal_view.php:111
+#: medical/history_personal_view.php:111 medical/print_medical_record.php:333
 msgid "Growth and Sexuality"
 msgstr "Desarrollo y Sexualidad"
 
 #: medical/history_personal_fields.php:41
-#: medical/history_personal_view.php:117
+#: medical/history_personal_view.php:117 medical/print_medical_record.php:339
 msgid "Feed"
 msgstr "Alimentación"
 
 #: medical/history_personal_fields.php:51
-#: medical/history_personal_view.php:123
+#: medical/history_personal_view.php:123 medical/print_medical_record.php:345
 msgid "Habits"
 msgstr "Hábitos"
 
 #: medical/history_personal_fields.php:61
-#: medical/history_personal_view.php:129
+#: medical/history_personal_view.php:129 medical/print_medical_record.php:351
 msgid "Peristaltic Conditions"
 msgstr "Condiciones Peristálticas"
 
 #: medical/history_personal_fields.php:71
-#: medical/history_personal_view.php:135
+#: medical/history_personal_view.php:135 medical/print_medical_record.php:357
 msgid "Psychological Conditions"
 msgstr "Condiciones Psicológicas"
 
 #: medical/history_personal_fields.php:81
-#: medical/history_personal_view.php:141
+#: medical/history_personal_view.php:141 medical/print_medical_record.php:363
 msgid "Children Complaint"
 msgstr "Enfermedades de la Infancia"
 
 #: medical/history_personal_fields.php:91
-#: medical/history_personal_view.php:147
+#: medical/history_personal_view.php:147 medical/print_medical_record.php:369
 msgid "Venereal Disease"
 msgstr "Enfermedades de Transmisión Sexual"
 
 #: medical/history_personal_fields.php:101
-#: medical/history_personal_view.php:153
+#: medical/history_personal_view.php:153 medical/print_medical_record.php:375
 msgid "Accidents and Surgical Operations"
 msgstr "Accidentes e Intervenciones Quirúrgicas"
 
 #: medical/history_personal_fields.php:111
-#: medical/history_personal_view.php:159
+#: medical/history_personal_view.php:159 medical/print_medical_record.php:381
 msgid "Medicinal Intolerance"
 msgstr "Intolerancia Medicamentosa"
 
 #: medical/history_personal_fields.php:121
-#: medical/history_personal_view.php:165
+#: medical/history_personal_view.php:165 medical/print_medical_record.php:387
 msgid "Mental Illness"
 msgstr "Enfermedades Mentales y Neuróticas"
 
-#: medical/history_personal_view.php:101
+#: medical/history_personal_view.php:101 medical/print_medical_record.php:323
 msgid "Personal Antecedents"
 msgstr "Antecedentes Personales"
 
 #: medical/index.php:37
-msgid "Use the following functions located in the left hand navigation area to manage your medical records."
-msgstr "Use las opciones que están en el área de navegación de la izquierda para manejar las historias clínicas de sus pacientes."
+msgid ""
+"Use the following functions located in the left hand navigation area to "
+"manage your medical records."
+msgstr ""
+"Use las opciones que están en el área de navegación de la izquierda para "
+"manejar las historias clínicas de sus pacientes."
 
 #: medical/index.php:42
 msgid "Search and view patients. Once a patient is selected you can:"
-msgstr "Buscar y ver pacientes. Una vez que haya seleccionado a un paciente podrá:"
+msgstr ""
+"Buscar y ver pacientes. Una vez que haya seleccionado a un paciente podrá:"
 
 #: medical/index.php:45
 msgid "manage social data"
@@ -2238,8 +2345,7 @@ msgstr "Introducir un nuevo paciente en el sistema de historias clínicas."
 msgid "Patient, %s, has been deleted."
 msgstr "El paciente, %s, ha sido borrado."
 
-#: medical/patient_del_confirm.php:48
-#: medical/patient_view.php:76
+#: medical/patient_del_confirm.php:48 medical/patient_view.php:76
 msgid "Delete Patient"
 msgstr "Borrar Paciente"
 
@@ -2248,11 +2354,11 @@ msgstr "Borrar Paciente"
 msgid "Are you sure you want to delete patient, %s?"
 msgstr "¿Está seguro de querer borrar el paciente, %s?"
 
-#: medical/patient_edit.php:68
-#: medical/patient_new.php:66
+#: medical/patient_edit.php:68 medical/patient_new.php:66
 #, php-format
 msgid "Patient name, %s, is already in use. The changes have no effect."
-msgstr "El nombre, %s, ya existe en otro paciente. Los cambios no han tenido lugar."
+msgstr ""
+"El nombre, %s, ya existe en otro paciente. Los cambios no han tenido lugar."
 
 #: medical/patient_edit.php:97
 msgid "Patient has been updated."
@@ -2262,99 +2368,80 @@ msgstr "El paciente ha sido actualizado."
 msgid "Edit Patient Social Data"
 msgstr "Editar Datos Sociales del Paciente"
 
-#: medical/patient_fields.php:88
-#: medical/patient_view.php:127
-#: medical/print_medical_record.php:132
+#: medical/patient_fields.php:88 medical/patient_view.php:127
+#: medical/print_medical_record.php:132 model/Patient.php:828
 msgid "Male"
 msgstr "Varón"
 
-#: medical/patient_fields.php:89
-#: medical/patient_view.php:127
-#: medical/print_medical_record.php:132
+#: medical/patient_fields.php:89 medical/patient_view.php:127
+#: medical/print_medical_record.php:132 model/Patient.php:828
 msgid "Female"
 msgstr "Hembra"
 
-#: medical/patient_fields.php:91
-#: medical/patient_view.php:126
-#: medical/print_medical_record.php:131
+#: medical/patient_fields.php:91 medical/patient_view.php:126
+#: medical/print_medical_record.php:131 model/Patient.php:828
 msgid "Sex"
 msgstr "Sexo"
 
-#: medical/patient_fields.php:96
-#: medical/patient_view.php:131
-#: medical/print_medical_record.php:136
-#: medical/print_medical_record.php:142
+#: medical/patient_fields.php:96 medical/patient_view.php:131
+#: medical/print_medical_record.php:136 medical/print_medical_record.php:142
 msgid "Race"
 msgstr "Raza"
 
-#: medical/patient_fields.php:107
-#: medical/patient_view.php:137
+#: medical/patient_fields.php:107 medical/patient_view.php:137
+#: model/Patient.php:198
 msgid "Birth Date"
 msgstr "Fecha de nacimiento"
 
-#: medical/patient_fields.php:123
-#: medical/patient_fields.php:157
+#: medical/patient_fields.php:123 medical/patient_fields.php:157
 msgid "(yyyy-mm-dd)"
 msgstr "(aaaa-mm-dd)"
 
-#: medical/patient_fields.php:131
-#: medical/patient_search.php:144
-#: medical/patient_search_fields.php:34
-#: medical/patient_view.php:146
-#: medical/print_medical_record.php:151
+#: medical/patient_fields.php:131 medical/patient_search.php:144
+#: medical/patient_search_fields.php:34 medical/patient_view.php:146
+#: medical/print_medical_record.php:151 medical/relative_search.php:130
 msgid "Birth Place"
 msgstr "Lugar de nacimiento"
 
-#: medical/patient_fields.php:141
-#: medical/patient_view.php:152
-#: medical/print_medical_record.php:157
+#: medical/patient_fields.php:141 medical/patient_view.php:152
+#: medical/print_medical_record.php:157 model/Patient.php:198
 msgid "Decease Date"
 msgstr "Fecha de defunción"
 
-#: medical/patient_fields.php:165
-#: medical/patient_search.php:134
-#: medical/patient_search_fields.php:32
-#: medical/patient_view.php:158
-#: medical/print_medical_record.php:163
+#: medical/patient_fields.php:165 medical/patient_search.php:134
+#: medical/patient_search_fields.php:32 medical/patient_view.php:158
+#: medical/print_medical_record.php:163 medical/relative_search.php:120
 msgid "Sanitary Card Number (SCN)"
 msgstr "Número de Tarjeta Sanitaria (NTS)"
 
-#: medical/patient_fields.php:175
-#: medical/patient_search.php:139
-#: medical/patient_search_fields.php:33
-#: medical/patient_view.php:164
-#: medical/print_medical_record.php:169
+#: medical/patient_fields.php:175 medical/patient_search.php:139
+#: medical/patient_search_fields.php:33 medical/patient_view.php:164
+#: medical/print_medical_record.php:169 medical/relative_search.php:125
 msgid "National Health Service Number (NHSN)"
 msgstr "Número de la Seguridad Social (NSS)"
 
-#: medical/patient_fields.php:185
-#: medical/patient_view.php:170
+#: medical/patient_fields.php:185 medical/patient_view.php:170
 #: medical/print_medical_record.php:175
 msgid "Family Situation"
 msgstr "Situación Familiar"
 
-#: medical/patient_fields.php:195
-#: medical/patient_view.php:176
+#: medical/patient_fields.php:195 medical/patient_view.php:176
 #: medical/print_medical_record.php:181
 msgid "Labour Situation"
 msgstr "Situación Laboral"
 
-#: medical/patient_fields.php:205
-#: medical/patient_view.php:182
+#: medical/patient_fields.php:205 medical/patient_view.php:182
 #: medical/print_medical_record.php:187
 msgid "Education"
 msgstr "Educación"
 
-#: medical/patient_fields.php:215
-#: medical/patient_search.php:159
-#: medical/patient_search_fields.php:37
-#: medical/patient_view.php:188
-#: medical/print_medical_record.php:193
+#: medical/patient_fields.php:215 medical/patient_search.php:159
+#: medical/patient_search_fields.php:37 medical/patient_view.php:188
+#: medical/print_medical_record.php:193 medical/relative_search.php:145
 msgid "Insurance Company"
 msgstr "Compañía de Seguros"
 
-#: medical/patient_fields.php:240
-#: medical/patient_view.php:200
+#: medical/patient_fields.php:240 medical/patient_view.php:200
 #: medical/print_medical_record.php:205
 msgid "Doctor you are assigned to"
 msgstr "Médico al que está asignado por cupo"
@@ -2367,38 +2454,41 @@ msgstr "El paciente ha sido añadido."
 msgid "Add New Patient"
 msgstr "Añadir un Nuevo Paciente"
 
-#: medical/patient_search.php:66
+#: medical/patient_search.php:66 medical/problem_search.php:70
+#: medical/relative_search.php:73
 #, php-format
 msgid "No results found for '%s'."
 msgstr "No se han encontrado resultados para la búsqueda '%s'."
 
-#: medical/patient_search.php:104
+#: medical/patient_search.php:104 medical/problem_search.php:107
+#: medical/relative_search.php:105
 #, php-format
 msgid "%d matches found."
 msgstr "%d coincidencias encontradas."
 
-#: medical/patient_search.php:197
+#: medical/patient_search.php:197 medical/problem_search.php:178
+#: medical/relative_search.php:193
 #, php-format
 msgid "Search Results From Query: %s"
 msgstr "Resultados de la búsqueda: %s"
 
-#: medical/patient_search_fields.php:25
+#: medical/patient_search_fields.php:25 medical/problem_search_fields.php:26
 msgid "Field"
 msgstr "Campo"
 
-#: medical/patient_search_fields.php:46
+#: medical/patient_search_fields.php:46 medical/problem_search_fields.php:42
 msgid "Search"
 msgstr "Buscar"
 
-#: medical/patient_search_fields.php:50
+#: medical/patient_search_fields.php:50 medical/problem_search_fields.php:46
 msgid "Logical"
 msgstr "Lógica"
 
-#: medical/patient_search_fields.php:62
+#: medical/patient_search_fields.php:62 medical/problem_search_fields.php:57
 msgid "Limit"
 msgstr "Número máximo de resultados"
 
-#: medical/patient_search_fields.php:65
+#: medical/patient_search_fields.php:65 medical/problem_search_fields.php:60
 msgid "All"
 msgstr "Todos"
 
@@ -2406,21 +2496,23 @@ msgstr "Todos"
 msgid "Search Patient by Medical Problem"
 msgstr "Buscar Paciente por Problema Médico"
 
-#: medical/patient_search_form.php:68
+#: medical/patient_search_form.php:68 medical/relative_list.php:97
 msgid "Note: Empty search to see all results."
-msgstr "Nota: Si el campo de búsqueda está vacío, se mostrarán todos los resultados posibles."
+msgstr ""
+"Nota: Si el campo de búsqueda está vacío, se mostrarán todos los resultados "
+"posibles."
 
 #: medical/patient_view.php:72
 msgid "Edit Social Data"
 msgstr "Editar Datos Sociales"
 
-#: medical/patient_view.php:102
-#: medical/print_medical_record.php:110
+#: medical/patient_view.php:102 medical/print_medical_record.php:110
+#: model/Patient.php:827
 msgid "Patient"
 msgstr "Paciente"
 
-#: medical/patient_view.php:140
-#: medical/print_medical_record.php:145
+#: medical/patient_view.php:140 medical/print_medical_record.php:145
+#: model/Patient.php:829
 msgid "Age"
 msgstr "Edad"
 
@@ -2428,43 +2520,49 @@ msgstr "Edad"
 msgid "No patient selected."
 msgstr "No se ha seleccionado ningún paciente."
 
-#: medical/print_medical_record.php:243
-#: medical/print_medical_record.php:460
+#: medical/print_medical_record.php:243 medical/print_medical_record.php:460
+#: medical/problem_fields.php:35 medical/problem_view.php:136
 msgid "Attending Physician"
 msgstr "Médico que le atendió"
 
-#: medical/print_medical_record.php:256
-#: medical/print_medical_record.php:473
+#: medical/print_medical_record.php:256 medical/print_medical_record.php:473
+#: medical/problem_fields.php:31 medical/problem_list.php:97
+#: medical/problem_view.php:151 model/Problem.php:527
 msgid "Last Update Date"
 msgstr "Última modificación"
 
-#: medical/print_medical_record.php:267
-#: medical/print_medical_record.php:484
+#: medical/print_medical_record.php:267 medical/print_medical_record.php:484
+#: medical/problem_fields.php:56 medical/problem_view.php:163
 msgid "Meeting Place"
 msgstr "Lugar de encuentro"
 
-#: medical/print_medical_record.php:276
-#: medical/print_medical_record.php:493
+#: medical/print_medical_record.php:276 medical/print_medical_record.php:493
+#: medical/problem_fields.php:77 medical/problem_search.php:125
+#: medical/problem_search_fields.php:30 medical/problem_view.php:172
 msgid "Subjective"
 msgstr "Subjetivo"
 
-#: medical/print_medical_record.php:282
-#: medical/print_medical_record.php:499
+#: medical/print_medical_record.php:282 medical/print_medical_record.php:499
+#: medical/problem_fields.php:87 medical/problem_search.php:130
+#: medical/problem_search_fields.php:31 medical/problem_view.php:178
 msgid "Objective"
 msgstr "Objetivo"
 
-#: medical/print_medical_record.php:288
-#: medical/print_medical_record.php:505
+#: medical/print_medical_record.php:288 medical/print_medical_record.php:505
+#: medical/problem_fields.php:97 medical/problem_search.php:135
+#: medical/problem_search_fields.php:32 medical/problem_view.php:184
 msgid "Appreciation"
 msgstr "Valoración"
 
-#: medical/print_medical_record.php:294
-#: medical/print_medical_record.php:511
+#: medical/print_medical_record.php:294 medical/print_medical_record.php:511
+#: medical/problem_fields.php:107 medical/problem_search.php:140
+#: medical/problem_search_fields.php:33 medical/problem_view.php:190
 msgid "Action Plan"
 msgstr "Plan de actuación"
 
-#: medical/print_medical_record.php:300
-#: medical/print_medical_record.php:517
+#: medical/print_medical_record.php:300 medical/print_medical_record.php:517
+#: medical/problem_fields.php:117 medical/problem_search.php:145
+#: medical/problem_search_fields.php:34 medical/problem_view.php:196
 msgid "Prescription"
 msgstr "Prescripción"
 
@@ -2473,7 +2571,7 @@ msgstr "Prescripción"
 msgid "Medical problem, %s, has been deleted."
 msgstr "El problema médico, %s, ha sido borrado."
 
-#: medical/problem_del_confirm.php:58
+#: medical/problem_del_confirm.php:58 medical/problem_view.php:103
 msgid "Delete Medical Problem"
 msgstr "Borrar Problema Médico"
 
@@ -2482,10 +2580,12 @@ msgstr "Borrar Problema Médico"
 msgid "Are you sure you want to delete medical problem, %s, from list?"
 msgstr "¿Está seguro de querer borrar el problema médico, %s, de la lista?"
 
-#: medical/problem_edit.php:71
+#: medical/problem_edit.php:71 medical/problem_new.php:68
 #, php-format
 msgid "Medical problem, %s, has been added to closed medical problems list."
-msgstr "El problema médico, %s, ha sido añadido a la lista de problemas médicos cerrados."
+msgstr ""
+"El problema médico, %s, ha sido añadido a la lista de problemas médicos "
+"cerrados."
 
 #: medical/problem_edit.php:77
 #, php-format
@@ -2500,8 +2600,7 @@ msgstr "Editar Problema Médico"
 msgid "Closed Problem"
 msgstr "Problema cerrado"
 
-#: medical/problem_list.php:70
-#: medical/problem_new_form.php:55
+#: medical/problem_list.php:70 medical/problem_new_form.php:55
 msgid "Add New Medical Problem"
 msgstr "Añadir un nuevo problema médico"
 
@@ -2514,8 +2613,9 @@ msgstr "El problema médico, %s, ha sido añadido."
 msgid "Edit Medical Problem Data"
 msgstr "Editar datos del problema médico"
 
-#: medical/problem_view.php:118
-#: medical/test_del_confirm.php:83
+#: medical/problem_view.php:118 medical/test_del_confirm.php:83
+#: medical/test_edit_form.php:85 medical/test_list.php:57
+#: medical/test_new_form.php:76
 msgid "View Medical Tests"
 msgstr "Ver Pruebas Médicas"
 
@@ -2562,7 +2662,7 @@ msgstr "Añadir los marcados a la lista de familiares"
 msgid "Medical test, %s, has been deleted."
 msgstr "La prueba médica, %s, ha sido borrada."
 
-#: medical/test_del_confirm.php:60
+#: medical/test_del_confirm.php:60 medical/test_edit_form.php:58
 msgid "That medical test does not exist"
 msgstr "Esa prueba médica no existe."
 
@@ -2584,8 +2684,7 @@ msgstr "La prueba médica, %s, ha sido actualizada."
 msgid "Edit Medical Test"
 msgstr "Editar Prueba Médica"
 
-#: medical/test_fields.php:21
-#: medical/test_list.php:104
+#: medical/test_fields.php:21 medical/test_list.php:104
 msgid "Document Type"
 msgstr "Tipo de documento"
 
@@ -2610,62 +2709,60 @@ msgstr "La prueba médica, %s, ha sido añadida."
 msgid "Add Medical Test"
 msgstr "Nueva Prueba Médica"
 
-#: model/Patient.php:195
+#: model/Patient.php:198
 #, php-format
 msgid "%s must be greater or equal than %s."
 msgstr "%s debe ser mayor o igual que %s."
 
-#: model/Setting.php:88
-#: model/Setting.php:104
+#: model/Setting.php:89 model/Setting.php:105
 msgid "This field must be numeric."
 msgstr "Este campo debe contener sólo números."
 
-#: model/Setting.php:93
-#: model/Setting.php:109
+#: model/Setting.php:94 model/Setting.php:110
 msgid "This field must not contain a decimal point."
 msgstr "Este campo no debe contener decimales."
 
-#: model/Setting.php:98
+#: model/Setting.php:99
 msgid "This field must be greater than zero."
 msgstr "Este campo debe ser mayor que cero."
 
-#: model/Staff.php:121
+#: model/Staff.php:122 model/User.php:92
 #, php-format
 msgid "This field must be at least %d characters."
 msgstr "Este campo debe tener al menos %d caracteres."
 
-#: model/Staff.php:126
+#: model/Staff.php:127 model/User.php:97
 msgid "This field must not contain any spaces."
 msgstr "Este campo no debe contener espacios."
 
-#: model/Staff.php:131
+#: model/Staff.php:132 model/User.php:102
 #, php-format
 msgid "This field can't contain the symbols %s"
 msgstr "Este campo no puede contener los símbolos %s"
 
-#: model/Theme.php:94
+#: model/Theme.php:95
 msgid "That filename is reserved for internal use."
 msgstr "Ese nombre de archivo está reservado para uso interno."
 
-#: model/User.php:109
+#: model/User.php:110
 msgid "Invalid email, no @ symbol in string."
 msgstr "Dirección no válida, no hay un símbolo @ en ella."
 
-#: model/User.php:118
+#: model/User.php:119
 #, php-format
 msgid "Missing data [%s]@[%s]"
 msgstr "Falta algún dato en [%s]@[%s]"
 
-#: model/User.php:124
+#: model/User.php:125
 #, php-format
 msgid "Whitespace in [%s]@[%s]"
 msgstr "Hay espacios en blanco en [%s]@[%s]"
 
-#: model/User.php:145
+#: model/User.php:146
 msgid "This field can't be empty if you want to change password."
 msgstr "Este campo no puede estar vacío si desea cambiar la contraseña."
 
-#: model/User.php:160
+#: model/User.php:161
 msgid "Passwords do not match."
 msgstr "Las contraseñas no coinciden."
 
@@ -2678,14 +2775,20 @@ msgstr "Código fuente del fichero: %s"
 msgid "No file found."
 msgstr "Fichero no encontrado."
 
+#~ msgid "Help"
+#~ msgstr "Ayuda"
+
 #~ msgid "Add 'DROP table' sentence"
 #~ msgstr "Añadir sentencia 'DROP tabla'"
+
 #~ msgid "OpenClinic web site"
 #~ msgstr "Sitio web de OpenClinic"
+
 #~ msgid "OpenClinic Installation:"
 #~ msgstr "Instalación de OpenClinic:"
+
 #~ msgid "Create OpenClinic tables"
 #~ msgstr "Crear las tablas de OpenClinic"
+
 #~ msgid "Sample Help Page:"
 #~ msgstr "Página de ayuda de ejemplo:"
-
