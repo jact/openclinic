@@ -1,0 +1,2797 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenClinic 0.8\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-01-20 14:29+0100\n"
+"PO-Revision-Date: 2013-01-20 14:35+0100\n"
+"Last-Translator: jact <jachavar@terra.es>\n"
+"Language-Team: senz <senzhk@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=BIG5\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#: admin/dump_optimize_db.php:49 admin/dump_view_form.php:76
+msgid "Optimize Database"
+msgstr "最優化資料庫"
+
+#: admin/dump_optimize_db.php:56 admin/dump_process.php:58
+#: admin/dump_view_form.php:67 admin/index.php:31 admin/log_list.php:64
+#: admin/log_stats.php:39 admin/setting_edit_form.php:72
+#: admin/staff_del_confirm.php:60 admin/staff_edit_form.php:101
+#: admin/staff_edit_form.php:114 admin/staff_list.php:45
+#: admin/staff_new_form.php:56 admin/theme_del_confirm.php:57
+#: admin/theme_edit_form.php:98 admin/theme_list.php:41
+#: admin/theme_new_form.php:79 admin/theme_preload_css.php:75
+#: admin/user_access_log.php:76 admin/user_del_confirm.php:57
+#: admin/user_edit_form.php:102 admin/user_list.php:51
+#: admin/user_new_form.php:71 admin/user_pwd_reset_form.php:94
+#: admin/user_record_log.php:76 home/index.php:58 layout/component.php:71
+#: shared/view_source.php:67
+msgid "Admin"
+msgstr "管理員"
+
+#: admin/dump_optimize_db.php:57 admin/dump_process.php:59
+#: admin/dump_view_form.php:60 admin/index.php:84 home/index.php:66
+#: layout/admin.php:28
+msgid "Dumps"
+msgstr "輸出"
+
+#: admin/dump_optimize_db.php:63
+#, php-format
+msgid "Optimizing Database: %s"
+msgstr "資籵庫 (%s) 優化中 "
+
+#: admin/dump_optimize_db.php:70
+msgid "Database is empty."
+msgstr "空的資料庫"
+
+#: admin/dump_optimize_db.php:76
+msgid "Table Name"
+msgstr "資料表"
+
+#: admin/dump_optimize_db.php:77
+msgid "Size"
+msgstr "容量"
+
+#: admin/dump_optimize_db.php:78
+msgid "Status"
+msgstr "狀態"
+
+#: admin/dump_optimize_db.php:79
+msgid "Space Saved"
+msgstr "空間節省"
+
+#: admin/dump_optimize_db.php:126
+msgid "Already optimized"
+msgstr "已經優化"
+
+#: admin/dump_optimize_db.php:132
+msgid "Optimized!"
+msgstr "優化完成"
+
+#: admin/dump_optimize_db.php:146
+msgid "Optimization Results"
+msgstr "優化結果"
+
+#: admin/dump_optimize_db.php:148
+#, php-format
+msgid "Total Database Size: %d KB"
+msgstr "資料庫總容量為: %d KB"
+
+#: admin/dump_optimize_db.php:149
+#, php-format
+msgid "Total Space Saved: %d KB"
+msgstr "容量總共節省了: %d KB"
+
+#: admin/dump_optimize_db.php:151 admin/dump_process.php:371
+msgid "Back return"
+msgstr "返回"
+
+#: admin/dump_process.php:51
+msgid "Dump result"
+msgstr "輸出結果"
+
+#: admin/dump_process.php:140
+msgid "No tables found in database."
+msgstr "資料表不存在"
+
+#: admin/dump_process.php:151 admin/dump_view_form.php:116
+msgid "Structure and data"
+msgstr "結構與資料"
+
+#: admin/dump_process.php:155 admin/dump_view_form.php:119
+msgid "Structure only"
+msgstr "只含結構"
+
+#: admin/dump_process.php:159 admin/dump_view_form.php:122
+msgid "Data only"
+msgstr "只含資料"
+
+#: admin/dump_process.php:167 admin/staff_list.php:135
+msgid "Type"
+msgstr "類型"
+
+#: admin/dump_process.php:168 admin/dump_process.php:269
+msgid "Host"
+msgstr "主機"
+
+#: admin/dump_process.php:169 admin/dump_process.php:270
+msgid "Generation Time"
+msgstr "產生時間"
+
+#: admin/dump_process.php:170 admin/dump_process.php:271
+msgid "Server Version"
+msgstr "伺服器版本"
+
+#: admin/dump_process.php:171 admin/dump_process.php:272
+msgid "PHP Version"
+msgstr "PHP 版本"
+
+#: admin/dump_process.php:172 admin/dump_process.php:273
+msgid "Database"
+msgstr "資料庫"
+
+#: admin/dump_process.php:182 admin/dump_process.php:283
+msgid "All Tables"
+msgstr "所有資料表"
+
+#: admin/dump_process.php:184 admin/dump_process.php:285
+#, php-format
+msgid "Table Summary: %s"
+msgstr "資料表總結: %s"
+
+#: admin/dump_process.php:212
+#, php-format
+msgid "Table structure for table %s"
+msgstr "資料表結構: %s"
+
+#: admin/dump_process.php:227
+#, php-format
+msgid "Dumping data for table %s"
+msgstr "輪出資料表 %s 之資料"
+
+#: admin/dump_view_form.php:74
+msgid "Install dump from file"
+msgstr "從檔案輸入"
+
+#: admin/dump_view_form.php:106 medical/relative_search.php:224
+msgid "Select all"
+msgstr "全選"
+
+#: admin/dump_view_form.php:108 medical/relative_search.php:226
+msgid "Unselect all"
+msgstr "全部取消"
+
+#: admin/dump_view_form.php:111
+msgid "View dump of database"
+msgstr "檢視資料庫備份"
+
+#: admin/dump_view_form.php:125
+msgid "Export to XML format"
+msgstr "輸出 XML 類型"
+
+#: admin/dump_view_form.php:128
+msgid "Export to CSV format (data only)"
+msgstr "輸出 CSV 類型 (只含資料)"
+
+#: admin/dump_view_form.php:130
+#, fuzzy
+msgid "Options"
+msgstr "操作"
+
+#: admin/dump_view_form.php:133
+msgid "Add 'DROP TABLE'"
+msgstr "加入 '刪除資料庫' 語法"
+
+#: admin/dump_view_form.php:134
+msgid "Complete 'INSERTs'"
+msgstr "完整 加入 (INSERTS)"
+
+#: admin/dump_view_form.php:135
+msgid "Extended 'INSERTs'"
+msgstr "額外 加入 (INSERTS)"
+
+#: admin/dump_view_form.php:136
+msgid "Enclose table and field names with backquotes"
+msgstr "以分號分隔資料表和欄目"
+
+#: admin/dump_view_form.php:137
+msgid "Add 'DELETE * FROM __table__'"
+msgstr "加入 '刪除資料表' 語法"
+
+#: admin/dump_view_form.php:138
+msgid "Add 'USE __dbname__'"
+msgstr "加入 'Use __dbname__'"
+
+#: admin/dump_view_form.php:139
+msgid "Add 'CREATE DATABASE __dbname__'"
+msgstr "加入 'CREATE DATABASE __dbname__'"
+
+#: admin/dump_view_form.php:140
+msgid "Save as file"
+msgstr "另存新檔"
+
+#: admin/dump_view_form.php:143
+msgid "Extended options"
+msgstr ""
+
+#: admin/dump_view_form.php:146 admin/staff_fields.php:106
+#: admin/theme_fields.php:53 admin/theme_preload_css.php:108
+#: admin/user_fields.php:112 admin/user_pwd_reset_form.php:145
+#: medical/patient_fields.php:246 medical/problem_fields.php:134
+#: medical/test_fields.php:51
+msgid "Submit"
+msgstr "提交"
+
+#: admin/dump_view_form.php:151
+msgid "Note: Some check options are exclusive. Be carefully!"
+msgstr "Note: Some check options are exclusive. Be carefully!"
+
+#: admin/index.php:35
+msgid ""
+"Use the following functions located in the left hand navigation area to "
+"manage your clinic's staff and administrative records."
+msgstr "請使用左表邊之功能表來管理醫務所員工資料及經營項目"
+
+#: admin/index.php:37 admin/setting_edit_form.php:64 home/index.php:63
+#: layout/admin.php:23
+msgid "Config settings"
+msgstr "設定"
+
+#: admin/index.php:40
+msgid "Update config settings."
+msgstr "更新設定"
+
+#: admin/index.php:44 admin/staff_del_confirm.php:61
+#: admin/staff_edit_form.php:115 admin/staff_list.php:38
+#: admin/staff_list.php:70 admin/staff_new_form.php:57 layout/admin.php:24
+msgid "Staff Members"
+msgstr "職員"
+
+#: admin/index.php:45
+msgid "View the clinic staff member list."
+msgstr "檢視職員"
+
+#: admin/index.php:45 admin/index.php:58 admin/index.php:72
+msgid "From this list you can:"
+msgstr "在此頁你可以:"
+
+#: admin/index.php:48
+msgid "build a new staff member"
+msgstr "新增職員"
+
+#: admin/index.php:49 admin/index.php:63
+msgid "edit the staff member information"
+msgstr "更新職員"
+
+#: admin/index.php:50
+msgid "build or edit the clinic user associated"
+msgstr "建立/更新使用者關聯"
+
+#: admin/index.php:51
+msgid "delete a staff member"
+msgstr "刪除職員"
+
+#: admin/index.php:57 admin/user_access_log.php:77
+#: admin/user_del_confirm.php:58 admin/user_edit_form.php:103
+#: admin/user_list.php:44 admin/user_new_form.php:72
+#: admin/user_pwd_reset_form.php:95 admin/user_record_log.php:77
+#: layout/admin.php:25
+msgid "Users"
+msgstr "使用者"
+
+#: admin/index.php:58
+msgid "View the list of clinic users."
+msgstr "檢視使用者"
+
+#: admin/index.php:61
+msgid "build a new clinic user"
+msgstr "新增使用者"
+
+#: admin/index.php:62
+msgid "edit a existing clinic user"
+msgstr "更新使用者"
+
+#: admin/index.php:64
+msgid "reset a user's password"
+msgstr "重置使用者密碼"
+
+#: admin/index.php:65
+msgid "delete a clinic user"
+msgstr "刪除使用者"
+
+#: admin/index.php:71 admin/theme_del_confirm.php:58
+#: admin/theme_edit_form.php:99 admin/theme_list.php:34
+#: admin/theme_new_form.php:80 admin/theme_preload_css.php:76
+#: layout/admin.php:27
+msgid "Themes"
+msgstr "主題"
+
+#: admin/index.php:72
+msgid "View the list of site look and feel themes."
+msgstr "顯示可用之主題"
+
+#: admin/index.php:75
+msgid "set the theme in use by default for your site"
+msgstr "將此主題設定為預設值"
+
+#: admin/index.php:76
+msgid "build a new site theme"
+msgstr "新建主題"
+
+#: admin/index.php:77
+msgid "edit an existing theme"
+msgstr "更新主題"
+
+#: admin/index.php:78
+msgid "delete a theme"
+msgstr "刪除主題"
+
+#: admin/index.php:85
+msgid "From this option you can:"
+msgstr "此處可以選擇:"
+
+#: admin/index.php:88
+msgid "install dump from file"
+msgstr "輸入備份檔案"
+
+#: admin/index.php:89 admin/index.php:90 admin/index.php:91
+#, php-format
+msgid "export database dump to %s format"
+msgstr "輸出資料庫以 %s 方式"
+
+#: admin/index.php:92
+msgid "optimize database"
+msgstr "優化資料庫"
+
+#: admin/index.php:98 home/index.php:67
+msgid "Logs"
+msgstr "日誌"
+
+#: admin/index.php:99
+msgid "View logs generated by the program:"
+msgstr "程序日誌"
+
+#: admin/index.php:102
+msgid "user's accesses logs"
+msgstr "使用者日誌"
+
+#: admin/index.php:103
+msgid "operations with medical records logs"
+msgstr "有關醫護服務之日誌"
+
+#: admin/index.php:104
+msgid "statistics for years, months, days and hours"
+msgstr "年月日時之統計"
+
+#: admin/log_list.php:55 admin/log_stats.php:54 admin/user_record_log.php:69
+msgid "Record Logs"
+msgstr "記錄日誌"
+
+#: admin/log_list.php:59 admin/log_stats.php:45 admin/user_access_log.php:69
+msgid "Access Logs"
+msgstr "進出日誌"
+
+#: admin/log_list.php:65 admin/log_stats.php:32 layout/admin.php:29
+msgid "Log Statistics"
+msgstr "日誌統計"
+
+#: admin/log_list.php:70
+#, fuzzy, php-format
+msgid "Year %d"
+msgstr "年"
+
+#: admin/log_list.php:82
+#, php-format
+msgid "Day %d"
+msgstr ""
+
+#: admin/log_list.php:122 admin/user_access_log.php:99
+#: admin/user_fields.php:96 admin/user_list.php:91
+msgid "Administrator"
+msgstr "管理員"
+
+#: admin/log_list.php:123 admin/staff_list.php:219
+#: admin/user_access_log.php:100 admin/user_fields.php:97
+#: admin/user_list.php:92
+msgid "Administrative"
+msgstr "管理人員"
+
+#: admin/log_list.php:124 admin/staff_list.php:223
+#: admin/user_access_log.php:101 admin/user_fields.php:98
+#: admin/user_list.php:93
+msgid "Doctor"
+msgstr "醫生"
+
+#: admin/log_list.php:132
+msgid "No logs in this date."
+msgstr "沒有日誌"
+
+#: admin/log_list.php:138 admin/staff_list.php:125 admin/theme_list.php:84
+#: admin/user_list.php:97 medical/connection_list.php:113
+#: medical/relative_list.php:112
+msgid "#"
+msgstr ""
+
+#: admin/log_list.php:139 admin/user_access_log.php:105
+#: admin/user_record_log.php:99
+msgid "Access Date"
+msgstr "登入日期"
+
+#: admin/log_list.php:140 admin/staff_fields.php:95 admin/staff_list.php:130
+#: admin/user_access_log.php:106 admin/user_fields.php:21
+#: admin/user_list.php:99 admin/user_pwd_reset_form.php:123
+#: admin/user_record_log.php:100 auth/login_form.php:92 install/wizard.php:394
+#: install/wizard.php:483
+msgid "Login"
+msgstr "登入"
+
+#: admin/log_list.php:144 admin/user_record_log.php:101
+msgid "Table"
+msgstr "資料表"
+
+#: admin/log_list.php:145 admin/user_record_log.php:102
+msgid "Operation"
+msgstr "操作"
+
+#: admin/log_list.php:146 admin/user_record_log.php:103
+msgid "Data"
+msgstr "資料"
+
+#: admin/log_list.php:150 admin/user_access_log.php:107
+#: admin/user_fields.php:101 admin/user_list.php:102
+msgid "Profile"
+msgstr "個人資料"
+
+#: admin/setting_edit.php:99
+msgid "Data has been updated."
+msgstr "資料更新完成"
+
+#: admin/setting_edit_form.php:87 admin/staff_edit_form.php:135
+#: admin/staff_new_form.php:76 admin/theme_edit_form.php:150
+#: admin/theme_new_form.php:129 admin/theme_preload_css.php:115
+#: admin/user_edit_form.php:144 admin/user_new_form.php:100
+#: medical/patient_edit_form.php:119 medical/patient_new_form.php:62
+#: medical/problem_edit_form.php:112 medical/problem_new_form.php:95
+#: medical/test_edit_form.php:117 medical/test_new_form.php:109
+msgid "Note: The fields with * are required."
+msgstr "注意: 欄目有 '*' 為必要填寫"
+
+#: admin/setting_edit_form.php:88
+msgid "Note: If zero, searchs return all results without pagination."
+msgstr "注意: 如果不輸入任何字完, 將會輸出所有資料"
+
+#: admin/setting_fields.php:23 install/wizard.php:470
+msgid "Session Timeout"
+msgstr "Session Timeout"
+
+#: admin/setting_fields.php:30
+msgid "minutes"
+msgstr "分"
+
+#: admin/setting_fields.php:33 install/wizard.php:471 layout/medical.php:35
+#: medical/patient_search.php:87 medical/problem_search.php:90
+#: medical/relative_search.php:81
+msgid "Search Results"
+msgstr "搜尋結果"
+
+#: admin/setting_fields.php:40
+msgid "items per page"
+msgstr "一頁列之數目"
+
+#: admin/setting_fields.php:45 install/wizard.php:252 install/wizard.php:465
+msgid "Language"
+msgstr "語言"
+
+#: admin/setting_fields.php:56 install/wizard.php:323 install/wizard.php:472
+msgid "Theme by default"
+msgstr "預設之主題"
+
+#: admin/setting_fields.php:60
+#, fuzzy
+msgid "Application"
+msgstr "被程序"
+
+#: admin/setting_fields.php:64 install/wizard.php:257 install/wizard.php:466
+msgid "Clinic Name"
+msgstr "醫務所名稱"
+
+#: admin/setting_fields.php:75 install/wizard.php:268 install/wizard.php:467
+msgid "Clinic Hours"
+msgstr "診症時間"
+
+#: admin/setting_fields.php:86 install/wizard.php:279 install/wizard.php:468
+msgid "Clinic Address"
+msgstr "醫務所地址"
+
+#: admin/setting_fields.php:96 install/wizard.php:290 install/wizard.php:469
+msgid "Clinic Phone"
+msgstr "醫務所電話"
+
+#: admin/setting_fields.php:106
+msgid "Clinic URL"
+msgstr "醫務所網址"
+
+#: admin/setting_fields.php:117
+#, fuzzy
+msgid "Clinic"
+msgstr "醫務所網址"
+
+#: admin/setting_fields.php:122 admin/theme_list.php:71
+#: medical/history_family_fields.php:62
+#: medical/history_personal_fields.php:132
+msgid "Update"
+msgstr "更新"
+
+#: admin/staff_del.php:55 admin/staff_edit_form.php:58
+msgid "That staff member does not exist."
+msgstr "這個職員不存在"
+
+#: admin/staff_del.php:70
+#, php-format
+msgid "Staff member, %s, has been deleted."
+msgstr "職員, %s, 刪除完成."
+
+#: admin/staff_del_confirm.php:53
+msgid "Delete Staff Member"
+msgstr "刪除職員"
+
+#: admin/staff_del_confirm.php:74
+#, php-format
+msgid "Are you sure you want to delete staff member, %s %s %s?"
+msgstr "你確定要刪除此職員: %s %s %s?"
+
+#: admin/staff_del_confirm.php:79 admin/theme_del_confirm.php:77
+#: admin/user_del_confirm.php:77 medical/connection_del_confirm.php:101
+#: medical/patient_del_confirm.php:80 medical/problem_del_confirm.php:95
+#: medical/relative_del_confirm.php:88 medical/test_del_confirm.php:110
+msgid "Delete"
+msgstr "刪除"
+
+#: admin/staff_del_confirm.php:89
+msgid "Note: The del function will delete the related user too (if exists)."
+msgstr "注意: 會刪除有聯繫之使用者"
+
+#: admin/staff_del_confirm.php:91 admin/staff_edit_form.php:137
+#: admin/staff_new_form.php:78 admin/theme_del_confirm.php:87
+#: admin/theme_edit_form.php:152 admin/theme_new_form.php:131
+#: admin/theme_preload_css.php:117 admin/user_del_confirm.php:87
+#: admin/user_edit_form.php:151 admin/user_new_form.php:102
+#: admin/user_pwd_reset_form.php:152 medical/connection_del_confirm.php:111
+#: medical/history_family_edit_form.php:114
+#: medical/history_personal_edit_form.php:121
+#: medical/patient_del_confirm.php:90 medical/patient_new_form.php:64
+#: medical/problem_del_confirm.php:105 medical/problem_edit_form.php:114
+#: medical/problem_new_form.php:97 medical/relative_del_confirm.php:98
+#: medical/test_del_confirm.php:120 medical/test_edit_form.php:119
+#: medical/test_new_form.php:111
+msgid "Return"
+msgstr "返回"
+
+#: admin/staff_edit.php:59 admin/staff_new.php:59 admin/user_edit.php:64
+#: admin/user_new.php:56
+#, php-format
+msgid "Login, %s, already exists. The changes have no effect."
+msgstr "登入, %s, 已經存在. 更改放棄"
+
+#: admin/staff_edit.php:67
+#, php-format
+msgid "Staff member, %s, has been updated."
+msgstr "職員, %s, 更新完成."
+
+#: admin/staff_edit_form.php:93
+msgid "Edit Administrative Information"
+msgstr "更改管理人員資料"
+
+#: admin/staff_edit_form.php:97
+msgid "Edit Doctor Information"
+msgstr "更改醫生資料"
+
+#: admin/staff_edit_form.php:101 shared/view_source.php:67
+#, php-format
+msgid "You are not authorized to use %s tab."
+msgstr "你不准予使用 %s "
+
+#: admin/staff_fields.php:21 medical/patient_fields.php:27
+#: medical/patient_search.php:129 medical/patient_search_fields.php:31
+#: medical/patient_view.php:110 medical/print_medical_record.php:115
+#: medical/relative_search.php:115
+msgid "Tax Identification Number (TIN)"
+msgstr "號碼"
+
+#: admin/staff_fields.php:34 medical/patient_search.php:164
+#: medical/patient_search_fields.php:38 medical/relative_search.php:150
+msgid "Collegiate Number"
+msgstr "學院號碼"
+
+#: admin/staff_fields.php:45 admin/staff_list.php:127 install/wizard.php:351
+#: install/wizard.php:478 medical/patient_fields.php:37
+#: medical/patient_search.php:125 medical/patient_search_fields.php:30
+#: medical/relative_list.php:116
+msgid "First Name"
+msgstr "名字"
+
+#: admin/staff_fields.php:55 admin/staff_list.php:128 install/wizard.php:362
+#: install/wizard.php:479 medical/patient_fields.php:47
+#: medical/patient_search.php:117 medical/patient_search_fields.php:28
+#: medical/relative_list.php:114
+msgid "Surname 1"
+msgstr "姓氏"
+
+#: admin/staff_fields.php:65 admin/staff_list.php:129 install/wizard.php:368
+#: install/wizard.php:480 medical/patient_fields.php:57
+#: medical/patient_search.php:121 medical/patient_search_fields.php:29
+#: medical/relative_list.php:115
+msgid "Surname 2"
+msgstr "姓氏"
+
+#: admin/staff_fields.php:75 install/wizard.php:374 install/wizard.php:481
+#: medical/patient_fields.php:67 medical/patient_search.php:149
+#: medical/patient_search_fields.php:35 medical/patient_view.php:116
+#: medical/print_medical_record.php:121 medical/relative_search.php:135
+msgid "Address"
+msgstr "地址"
+
+#: admin/staff_fields.php:85 install/wizard.php:384 install/wizard.php:482
+#: medical/patient_fields.php:77 medical/patient_search.php:154
+#: medical/patient_search_fields.php:36 medical/patient_view.php:122
+#: medical/print_medical_record.php:127 medical/relative_search.php:140
+msgid "Phone Contact"
+msgstr "電話"
+
+#: admin/staff_list.php:58
+msgid "Administratives:"
+msgstr "管理人員:"
+
+#: admin/staff_list.php:62
+msgid "Doctors:"
+msgstr "醫生:"
+
+#: admin/staff_list.php:77
+msgid "Add New Administrative"
+msgstr "新增管理人員"
+
+#: admin/staff_list.php:79
+msgid "Add New Doctor"
+msgstr "新增醫生"
+
+#: admin/staff_list.php:89 admin/staff_list.php:93
+msgid "View all staff members"
+msgstr "檢視所有職員"
+
+#: admin/staff_list.php:98 admin/staff_list.php:102
+msgid "View only administratives"
+msgstr "檢視管理人員"
+
+#: admin/staff_list.php:107 admin/staff_list.php:111
+msgid "View only doctors"
+msgstr "檢視醫生"
+
+#: admin/staff_list.php:119 admin/theme_list.php:57 admin/user_list.php:85
+msgid "No results found."
+msgstr "沒有資料"
+
+#: admin/staff_list.php:126 admin/theme_list.php:85 admin/user_list.php:98
+#: medical/connection_list.php:114 medical/history_list.php:90
+#: medical/problem_list.php:94 medical/relative_list.php:113
+#: medical/test_list.php:103
+msgid "Function"
+msgstr "功能"
+
+#: admin/staff_list.php:152 admin/theme_list.php:112 admin/user_list.php:135
+#: medical/problem_list.php:113 medical/test_list.php:126
+msgid "edit"
+msgstr "更改"
+
+#: admin/staff_list.php:165 admin/theme_list.php:151 admin/user_list.php:152
+#: medical/connection_list.php:155 medical/history_list.php:121
+#: medical/problem_list.php:123 medical/relative_list.php:158
+#: medical/test_list.php:137
+#, fuzzy
+msgid "delete"
+msgstr "刪除"
+
+#: admin/staff_list.php:184
+msgid "create user"
+msgstr "新增使用者"
+
+#: admin/staff_list.php:195
+msgid "edit user"
+msgstr "刪除使用者"
+
+#: admin/staff_list.php:244
+msgid "Note: To the create user function must have a correct login."
+msgstr "注意: 新增之使用者必須有正確登入名稱."
+
+#: admin/staff_list.php:245 admin/user_list.php:204
+msgid "Note: The del function will not be applicated to the session user."
+msgstr "注意: 刪除功能未能刪除session user."
+
+#: admin/staff_new.php:67
+#, php-format
+msgid "Staff member, %s, has been added."
+msgstr "職員, %s, 加入完成."
+
+#: admin/staff_new_form.php:39
+msgid "Add New Administrative Information"
+msgstr "新增管理人員資料:"
+
+#: admin/staff_new_form.php:44
+msgid "Add New Doctor Information"
+msgstr "新增醫生資料"
+
+#: admin/theme_del.php:52 admin/theme_edit_form.php:58
+msgid "That theme does not exist."
+msgstr "此主題不存在."
+
+#: admin/theme_del.php:72
+#, php-format
+msgid "Theme, %s, has been deleted."
+msgstr "主題, %s, 刪除完成."
+
+#: admin/theme_del_confirm.php:50
+msgid "Delete Theme"
+msgstr "刪除主題"
+
+#: admin/theme_del_confirm.php:71
+#, php-format
+msgid "Are you sure you want to delete theme, %s?"
+msgstr "你確定要刪除此主題 , %s?"
+
+#: admin/theme_edit.php:59 admin/theme_new.php:56
+#, php-format
+msgid "Filename of theme, %s, already exists. The changes have no effect."
+msgstr "主題檔案名稱, %s, 已經存在."
+
+#: admin/theme_edit.php:64
+#, php-format
+msgid "Theme, %s, has been updated."
+msgstr "主題, %s, 更改完成."
+
+#: admin/theme_edit_form.php:90 admin/theme_preload_css.php:77
+msgid "Edit Theme"
+msgstr "更改主題"
+
+#: admin/theme_edit_form.php:128 admin/theme_new_form.php:109
+msgid "Preview Theme"
+msgstr "預覽主題"
+
+#: admin/theme_edit_form.php:130 admin/theme_new_form.php:111
+#: admin/theme_preload_css.php:67
+msgid "Preload CSS file"
+msgstr "Preload CSS file"
+
+#: admin/theme_fields.php:21 admin/theme_list.php:86
+msgid "Theme Name"
+msgstr "主題名稱"
+
+#: admin/theme_fields.php:31
+msgid "CSS File"
+msgstr "CSS 檔案"
+
+#: admin/theme_fields.php:41
+msgid "CSS Rules"
+msgstr "CSS Rules"
+
+#: admin/theme_list.php:47 admin/theme_new_form.php:71
+#: admin/theme_preload_css.php:77
+msgid "Add New Theme"
+msgstr "新增主題"
+
+#: admin/theme_list.php:64
+msgid "Change Theme by default in application"
+msgstr "設定此主題為預設值"
+
+#: admin/theme_list.php:66
+msgid "Choose a New Theme:"
+msgstr "選擇一個新主題"
+
+#: admin/theme_list.php:81
+msgid "Themes List:"
+msgstr "主題列表:"
+
+#: admin/theme_list.php:87
+msgid "Usage"
+msgstr "用法"
+
+#: admin/theme_list.php:120
+msgid "copy"
+msgstr "複製"
+
+#: admin/theme_list.php:127
+msgid "preview"
+msgstr "預覽"
+
+#: admin/theme_list.php:135
+msgid "validate"
+msgstr "確認"
+
+#: admin/theme_list.php:166 admin/theme_list.php:170
+msgid "in use"
+msgstr "使用中"
+
+#: admin/theme_list.php:166
+msgid "by application"
+msgstr "被程序"
+
+#: admin/theme_list.php:170
+#, php-format
+msgid "%d user(s)"
+msgstr "%d 使用者"
+
+#: admin/theme_list.php:196
+msgid ""
+"Note: The delete function is not available on the themes that are currently "
+"in use by some user or by the application."
+msgstr "注意: 刪除放棄因別的使用者正在使用此主題."
+
+#: admin/theme_list.php:197
+msgid ""
+"Note: The functions edit and delete are not available on the application "
+"themes."
+msgstr "注意: 更改/刪除功能不識用於此主題."
+
+#: admin/theme_new.php:61
+#, php-format
+msgid "Theme, %s, has been added."
+msgstr "主題, %s, 加入完成."
+
+#: admin/theme_preload_css.php:96 medical/test_fields.php:34
+#: medical/test_list.php:105
+msgid "Path Filename"
+msgstr "檔案路徑"
+
+#: admin/theme_preview.php:109
+#, php-format
+msgid "%s Theme Preview"
+msgstr "%s 主題預覽"
+
+#: admin/theme_preview.php:133 doc/index.php:57
+#: medical/print_medical_record.php:54 medical/print_medical_record.php:79
+#: shared/view_source.php:62
+msgid "Close Window"
+msgstr "關閉"
+
+#: admin/theme_preview.php:144
+#, php-format
+msgid "This is a preview of the %s theme."
+msgstr "此為 %s 主題之預覽"
+
+#: admin/theme_preview.php:146
+msgid "Sample Link"
+msgstr "連結樣本"
+
+#: admin/theme_preview.php:150
+msgid "Subtitle Sample:"
+msgstr "Subtitle 樣本:"
+
+#: admin/theme_preview.php:153
+msgid "Table Heading"
+msgstr "Table Heading"
+
+#: admin/theme_preview.php:158 admin/theme_preview.php:160
+#, php-format
+msgid "Sample data row %d"
+msgstr "Sample data row %d"
+
+#: admin/theme_preview.php:162
+msgid "Required Field"
+msgstr "Required Field"
+
+#: admin/theme_preview.php:164
+msgid "Sample Input Text"
+msgstr "Sample Input Text"
+
+#: admin/theme_preview.php:175
+msgid "Sample Button"
+msgstr "Sample Button"
+
+#: admin/theme_preview.php:180
+msgid "Sample Error"
+msgstr "Sample Error"
+
+#: admin/theme_preview.php:181
+msgid "Sample Warning"
+msgstr "Sample Warning"
+
+#: admin/theme_preview.php:182
+msgid "Sample Info"
+msgstr "Sample Info"
+
+#: admin/theme_preview.php:183
+#, fuzzy
+msgid "Sample Hint"
+msgstr "連結樣本"
+
+#: admin/theme_use.php:58
+#, fuzzy
+msgid "Default theme has been changed."
+msgstr "資料更新完成"
+
+#: admin/user_access_log.php:61 admin/user_record_log.php:61
+#, fuzzy, php-format
+msgid "No logs for user %s."
+msgstr "沒有使用者日誌."
+
+#: admin/user_access_log.php:83
+#, php-format
+msgid "Access Logs List for user %s"
+msgstr "使用者日誌: %s"
+
+#: admin/user_access_log.php:86
+#, php-format
+msgid "%d accesses."
+msgstr "%d 次登入"
+
+#: admin/user_access_log.php:140 admin/user_record_log.php:141
+msgid "Return to users list"
+msgstr "返回使用者列表"
+
+#: admin/user_del.php:56 admin/user_edit_form.php:63
+#: admin/user_pwd_reset_form.php:59
+msgid "That user does not exist."
+msgstr "使用者不存在"
+
+#: admin/user_del.php:71
+#, php-format
+msgid "User, %s, has been deleted."
+msgstr "使用者, %s, 刪除完成."
+
+#: admin/user_del_confirm.php:50
+msgid "Delete User"
+msgstr "刪除使用者"
+
+#: admin/user_del_confirm.php:71
+#, php-format
+msgid "Are you sure you want to delete user, %s?"
+msgstr "你確定要刪除使用者, %s?"
+
+#: admin/user_edit.php:71
+#, php-format
+msgid "User, %s, has been updated."
+msgstr "使用者, %s, 更新完成."
+
+#: admin/user_edit.php:91 auth/login.php:44 auth/login.php:57
+#: model/Description.php:60 model/Patient.php:160 model/Patient.php:166
+#: model/Problem.php:132 model/Staff.php:104 model/Staff.php:110
+#: model/Staff.php:139 model/Test.php:95 model/Theme.php:84 model/Theme.php:90
+#: model/Theme.php:101 model/User.php:86
+msgid "This is a required field."
+msgstr "此欄為必須"
+
+#: admin/user_edit.php:92 model/Patient.php:181 model/Patient.php:191
+msgid "This field is not correct."
+msgstr "此欄錯誤"
+
+#: admin/user_edit_form.php:92
+msgid "Change User Data"
+msgstr "更改使用者資料"
+
+#: admin/user_edit_form.php:92
+msgid "Edit User"
+msgstr "更改使用者"
+
+#: admin/user_edit_form.php:110 auth/login_form.php:45 home/license.php:48
+#: layout/component.php:68
+msgid "Home"
+msgstr "首頁"
+
+#: admin/user_edit_form.php:148
+msgid "Fill password fields only if you want to change it."
+msgstr "輸入密碼如要更改"
+
+#: admin/user_fields.php:35
+msgid "Current Password"
+msgstr "現時的密碼"
+
+#: admin/user_fields.php:49 admin/user_pwd_reset_form.php:128
+#: auth/login_form.php:102 install/wizard.php:399 install/wizard.php:484
+msgid "Password"
+msgstr "密碼"
+
+#: admin/user_fields.php:60 admin/user_pwd_reset_form.php:136
+msgid "Re-enter Password"
+msgstr "重複建入密碼"
+
+#: admin/user_fields.php:72 admin/user_list.php:100 install/wizard.php:410
+#: install/wizard.php:485
+msgid "Email"
+msgstr "電郵地址"
+
+#: admin/user_fields.php:84 admin/user_list.php:101
+msgid "Actived"
+msgstr "使用"
+
+#: admin/user_fields.php:107 install/wizard.php:420 install/wizard.php:486
+msgid "Theme"
+msgstr "主題"
+
+#: admin/user_list.php:57
+msgid "Create New User"
+msgstr "新增使用者"
+
+#: admin/user_list.php:61
+msgid ""
+"There no more users to create. You must create more staff members first."
+msgstr "請加入新的職員"
+
+#: admin/user_list.php:65
+msgid "Select a login to create a new user"
+msgstr "請選擇登入名稱"
+
+#: admin/user_list.php:67
+msgid "Create"
+msgstr "新增"
+
+#: admin/user_list.php:79
+msgid "Users List:"
+msgstr "使用者列表:"
+
+#: admin/user_list.php:140
+#, fuzzy
+msgid "password"
+msgstr "密碼"
+
+#: admin/user_list.php:162
+msgid "edit member"
+msgstr "更改使用者"
+
+#: admin/user_list.php:168
+msgid "accesses"
+msgstr "登入"
+
+#: admin/user_list.php:177
+msgid "transactions"
+msgstr "工作"
+
+#: admin/user_list.php:189
+msgid "yes"
+msgstr "是"
+
+#: admin/user_list.php:189
+msgid "no"
+msgstr "不是"
+
+#: admin/user_new.php:63
+#, php-format
+msgid "User, %s, has been added."
+msgstr "使用者, %s, 加入完成."
+
+#: admin/user_new_form.php:63
+msgid "Add New User"
+msgstr "新增使用者"
+
+#: admin/user_pwd_reset.php:76
+#, php-format
+msgid "Password of user, %s, has been reset."
+msgstr "使用者, %s, 密碼重置完成."
+
+#: admin/user_pwd_reset_form.php:86
+msgid "Reset User Password"
+msgstr "重置使用者密碼"
+
+#: admin/user_record_log.php:83
+#, php-format
+msgid "Record Logs List for user %s"
+msgstr "記錄使用者日誌: %s"
+
+#: admin/user_record_log.php:86
+#, php-format
+msgid "%d transactions."
+msgstr "%d 工作"
+
+#: auth/login.php:71
+msgid "Login unknown."
+msgstr "登入名稱不明"
+
+#: auth/login.php:83 auth/login.php:132 auth/login.php:166
+#, fuzzy
+msgid ""
+"Your user account has been suspended. Contact with administrator to resolve "
+"this problem."
+msgstr "請聯絡管理員."
+
+#: auth/login.php:103
+msgid "Invalid sign on."
+msgstr "登入錯誤"
+
+#: auth/login_check.php:44
+msgid "This function is not available in this demo version of OpenClinic."
+msgstr "這功能不在 demo 版本"
+
+#: auth/login_check.php:114
+#, fuzzy
+msgid "Session timeout"
+msgstr "Session Timeout"
+
+#: auth/login_check.php:139
+msgid "Invalid profile page"
+msgstr ""
+
+#: auth/login_check.php:148
+#, fuzzy
+msgid "You are not authorized to use this page."
+msgstr "你不准予使用 %s "
+
+#: auth/login_form.php:37
+msgid "User Login"
+msgstr "登入"
+
+#: auth/login_form.php:56
+msgid ""
+"No session support. Authentication process will fail. Check your PHP "
+"configuration."
+msgstr ""
+
+#: auth/login_form.php:64
+msgid "You must have cookies enabled to access your account."
+msgstr ""
+
+#: auth/login_form.php:73
+msgid "Last attempt to type correct password before suspend this user account."
+msgstr ""
+
+#: auth/login_form.php:113
+msgid "Enter"
+msgstr "輸入"
+
+#: doc/index.php:32
+msgid "OpenClinic Help"
+msgstr "OpenClinic 說明"
+
+#: home/index.php:36
+msgid "Welcome to OpenClinic"
+msgstr "觀迎使用 OpenClinic"
+
+#: home/index.php:41
+msgid "OpenClinic is an easy to use, open source, medical records system."
+msgstr "OpenClinic 是一個簡單易用, 開於源碼 之醫務所系統."
+
+#: home/index.php:42
+msgid ""
+"When you select any of the following tabs you will be prompted to login."
+msgstr "你進行任何功能必須登入系統"
+
+#: home/index.php:44 layout/component.php:69
+#: medical/connection_del_confirm.php:70 medical/connection_list.php:65
+#: medical/connection_new_form.php:68 medical/history_family_edit_form.php:90
+#: medical/history_family_view.php:79 medical/history_list.php:55
+#: medical/history_personal_edit_form.php:97
+#: medical/history_personal_view.php:79 medical/index.php:33
+#: medical/patient_del_confirm.php:59 medical/patient_edit_form.php:98
+#: medical/patient_new_form.php:43 medical/patient_search.php:94
+#: medical/patient_search_form.php:44 medical/patient_view.php:61
+#: medical/problem_del_confirm.php:69 medical/problem_edit_form.php:86
+#: medical/problem_list.php:55 medical/problem_new_form.php:67
+#: medical/problem_search.php:97 medical/problem_view.php:76
+#: medical/relative_del_confirm.php:60 medical/relative_list.php:73
+#: medical/relative_search.php:92 medical/test_del_confirm.php:79
+#: medical/test_edit_form.php:81 medical/test_list.php:65
+#: medical/test_new_form.php:72
+msgid "Medical Records"
+msgstr "病歷"
+
+#: home/index.php:45
+msgid "Use this tab to manage your patient's medical records."
+msgstr "用此項目管理病歷"
+
+#: home/index.php:46
+msgid "Patient's Administration:"
+msgstr "病人管理:"
+
+#: home/index.php:49
+msgid "Search, new, delete, edit"
+msgstr "搜尋, 新增, 刪除, 更改"
+
+#: home/index.php:50 medical/patient_view.php:67
+#: medical/print_medical_record.php:109
+msgid "Social Data"
+msgstr "背景資料"
+
+#: home/index.php:51 layout/component.php:213
+#: medical/history_family_edit_form.php:92 medical/history_family_view.php:81
+#: medical/history_list.php:47 medical/history_personal_edit_form.php:99
+#: medical/history_personal_view.php:81 medical/patient_view.php:86
+#: medical/problem_view.php:80
+msgid "Clinic History"
+msgstr "病歷"
+
+#: home/index.php:52
+msgid "Problem Reports"
+msgstr "問題報告"
+
+#: home/index.php:59
+msgid "Use this tab to manage administrative options."
+msgstr "用此項目去更改管理功能"
+
+#: home/index.php:62
+msgid "Staff members"
+msgstr "職員"
+
+#: home/index.php:64
+msgid "Clinic themes editor"
+msgstr "主題編輯器"
+
+#: home/index.php:65
+msgid "System users"
+msgstr "系統使用者"
+
+#: home/license.php:41 install/wizard.php:147 layout/home.php:26
+msgid "License"
+msgstr "證書"
+
+#: install/index.php:26 layout/install.php:23
+msgid "OpenClinic Install"
+msgstr "OpenClinic 安裝"
+
+#: install/index.php:50
+msgid "Parse failed."
+msgstr ""
+
+#: install/index.php:51
+msgid "Back to installation main page"
+msgstr "返回安裝主頁"
+
+#: install/index.php:61
+msgid "File installed correctly."
+msgstr "檔案安裝完成"
+
+#: install/index.php:62 install/upgrade.php:109
+msgid "Go to OpenClinic"
+msgstr "返回 OpenClinic"
+
+#: install/index.php:87 install/index.php:91
+msgid "Install file"
+msgstr ""
+
+#: install/index.php:94 install/install.php:85
+msgid "Cancel"
+msgstr ""
+
+#: install/index.php:106
+msgid "The connection to the database failed with the following error:"
+msgstr ""
+
+#: install/index.php:110
+msgid ""
+"Please make sure the following has been done before running this install "
+"script."
+msgstr ""
+
+#: install/index.php:113
+#, php-format
+msgid "Create OpenClinic database (%s of the install instructions)"
+msgstr ""
+
+#: install/index.php:114 install/index.php:117 install/index.php:121
+#, php-format
+msgid "step %d"
+msgstr ""
+
+#: install/index.php:116
+#, php-format
+msgid "Create OpenClinic database user (%s of the install instructions)"
+msgstr ""
+
+#: install/index.php:119
+#, php-format
+msgid ""
+"Update %s with your new database username and password (%s of the install "
+"instructions)"
+msgstr ""
+
+#: install/index.php:126
+#, php-format
+msgid "See %s for more details."
+msgstr ""
+
+#: install/index.php:126 install/wizard.php:778 layout/install.php:27
+msgid "Install Instructions"
+msgstr "安裝程序"
+
+#: install/index.php:133 install/install.php:44
+msgid "Database connection is good."
+msgstr ""
+
+#: install/index.php:146
+msgid "View file"
+msgstr ""
+
+#: install/index.php:148
+#, fuzzy
+msgid "Install a SQL file"
+msgstr "從檔案輸入"
+
+#: install/install.php:26 layout/install.php:24
+#, fuzzy
+msgid "Database Creation"
+msgstr "資料庫"
+
+#: install/install.php:53
+msgid "Building OpenClinic tables..."
+msgstr ""
+
+#: install/install.php:66
+#, php-format
+msgid "OpenClinic (version %s) is already installed."
+msgstr ""
+
+#: install/install.php:69
+msgid ""
+"Are you sure you want to delete all clinic data and create new OpenClinic "
+"tables?"
+msgstr ""
+
+#: install/install.php:70
+msgid "If you continue all data will be lost."
+msgstr ""
+
+#: install/install.php:80
+msgid "Continue"
+msgstr ""
+
+#: install/install.php:106 install/wizard.php:618
+#, php-format
+msgid "Table %s dropped."
+msgstr ""
+
+#: install/install.php:107 install/wizard.php:619
+#, php-format
+msgid "Table %s created."
+msgstr ""
+
+#: install/install.php:113 install/wizard.php:624
+msgid "Last instruction failed"
+msgstr ""
+
+#: install/install.php:119 install/wizard.php:663
+msgid "OpenClinic tables have been created successfully!"
+msgstr ""
+
+#: install/install.php:121 install/wizard.php:507
+msgid "Start using OpenClinic"
+msgstr ""
+
+#: install/parse_sql_file.php:136
+#, php-format
+msgid "Process sql [%s]"
+msgstr ""
+
+#: install/parse_sql_file.php:139
+#, php-format
+msgid "Error: %s"
+msgstr ""
+
+#: install/upgrade.php:36
+#, php-format
+msgid "The connection to the database failed with the following error: %s"
+msgstr ""
+
+#: install/upgrade.php:54
+#, php-format
+msgid "Version field doesn't have a valid format (%s)."
+msgstr ""
+
+#: install/upgrade.php:66
+msgid "There aren't upgrade files."
+msgstr ""
+
+#: install/upgrade.php:71 layout/install.php:25
+#, fuzzy
+msgid "Upgrade Database"
+msgstr "最優化資料庫"
+
+#: install/upgrade.php:76
+#, php-format
+msgid "Finded version: %s"
+msgstr ""
+
+#: install/upgrade.php:86
+#, php-format
+msgid "Aplying %s file..."
+msgstr ""
+
+#: install/upgrade.php:90
+#, php-format
+msgid "Error processing file: %s"
+msgstr ""
+
+#: install/upgrade.php:101
+#, php-format
+msgid "Upgraded to version: %s"
+msgstr ""
+
+#: install/upgrade.php:107
+msgid "Database upgrade finished correctly!"
+msgstr ""
+
+#: install/wizard.php:88 install/wizard.php:136
+msgid "OpenClinic Install Wizard"
+msgstr ""
+
+#: install/wizard.php:147 install/wizard.php:176 install/wizard.php:245
+#: install/wizard.php:346 install/wizard.php:443 install/wizard.php:507
+#: install/wizard.php:686
+#, php-format
+msgid "Step %d of %d: "
+msgstr ""
+
+#: install/wizard.php:149
+msgid ""
+"OpenClinic is free software, distributed under GNU General Public License "
+"(GPL). Please read the license and, if you agree, click on 'I accept' button."
+msgstr ""
+
+#: install/wizard.php:162 install/wizard.php:231 install/wizard.php:332
+#: install/wizard.php:429 install/wizard.php:490
+msgid "Back"
+msgstr ""
+
+#: install/wizard.php:163
+msgid "I accept"
+msgstr ""
+
+#: install/wizard.php:166
+msgid "Read the license before continue"
+msgstr ""
+
+#: install/wizard.php:176 install/wizard.php:453
+msgid "MySQL Database Settings"
+msgstr ""
+
+#: install/wizard.php:178
+#, php-format
+msgid ""
+"Install script create OpenClinic database. These following values will be "
+"written in %s file. All fields are required."
+msgstr ""
+
+#: install/wizard.php:183 install/wizard.php:456 install/wizard.php:588
+msgid "Database Host:"
+msgstr ""
+
+#: install/wizard.php:190 install/wizard.php:201 install/wizard.php:212
+#: install/wizard.php:223 install/wizard.php:264 install/wizard.php:275
+#: install/wizard.php:286 install/wizard.php:297 install/wizard.php:308
+#: install/wizard.php:319 install/wizard.php:358 install/wizard.php:364
+#: install/wizard.php:370
+msgid "e. g."
+msgstr ""
+
+#: install/wizard.php:194 install/wizard.php:457 install/wizard.php:589
+msgid "Database User:"
+msgstr ""
+
+#: install/wizard.php:205 install/wizard.php:458 install/wizard.php:590
+msgid "Database Password:"
+msgstr ""
+
+#: install/wizard.php:216 install/wizard.php:459
+msgid "Database Name:"
+msgstr ""
+
+#: install/wizard.php:232 install/wizard.php:333 install/wizard.php:430
+#: install/wizard.php:785
+msgid "Next"
+msgstr ""
+
+#: install/wizard.php:235
+msgid "Check data before continue"
+msgstr ""
+
+#: install/wizard.php:245 install/wizard.php:462
+msgid "Config Settings"
+msgstr ""
+
+#: install/wizard.php:247
+msgid "These are OpenClinic config settings."
+msgstr ""
+
+#: install/wizard.php:301
+msgid "Session Timeout (minutes):"
+msgstr ""
+
+#: install/wizard.php:312
+msgid "Search Results (items per page):"
+msgstr ""
+
+#: install/wizard.php:336
+msgid "Customize your site"
+msgstr ""
+
+#: install/wizard.php:346 install/wizard.php:475
+msgid "Admin Data"
+msgstr ""
+
+#: install/wizard.php:406
+msgid "required"
+msgstr ""
+
+#: install/wizard.php:433
+msgid "Password is the most important field"
+msgstr ""
+
+#: install/wizard.php:443
+msgid "Last Check before Install"
+msgstr ""
+
+#: install/wizard.php:446
+#, php-format
+msgid ""
+"Here are the values you entered. %s to remember your admin password and "
+"other settings."
+msgstr ""
+
+#: install/wizard.php:447
+msgid "Print this page"
+msgstr ""
+
+#: install/wizard.php:493
+msgid "Install"
+msgstr ""
+
+#: install/wizard.php:497
+msgid "If you are not sure in any value, go back before install"
+msgstr ""
+
+#: install/wizard.php:518
+#, php-format
+msgid "Incorrect permissions of %s file. Continue is impossible."
+msgstr ""
+
+#: install/wizard.php:558
+msgid "Error in writing proccess. Continue is impossible."
+msgstr ""
+
+#: install/wizard.php:584
+msgid "The MySQL server does not work or login pass is false."
+msgstr ""
+
+#: install/wizard.php:585
+msgid "Please check these values and if any is wrong back to step 2:"
+msgstr ""
+
+#: install/wizard.php:600 install/wizard.php:602 install/wizard.php:604
+#: install/wizard.php:633 install/wizard.php:634 install/wizard.php:645
+#: install/wizard.php:654 install/wizard.php:661
+#, php-format
+msgid "Instruction: %s Error: %s"
+msgstr ""
+
+#: install/wizard.php:665
+#, php-format
+msgid "%s: To protect your site, make %s and %s files read only (chmod 400)."
+msgstr ""
+
+#: install/wizard.php:666
+msgid "Security advice"
+msgstr ""
+
+#: install/wizard.php:673
+msgid "Start OpenClinic"
+msgstr "啟動 OpenClinic"
+
+#: install/wizard.php:676
+msgid "That's folks!!!"
+msgstr ""
+
+#: install/wizard.php:686
+msgid "Requirements"
+msgstr ""
+
+#: install/wizard.php:689
+#, php-format
+msgid "This script will configure OpenClinic database and %s file."
+msgstr ""
+
+#: install/wizard.php:695
+#, php-format
+msgid ""
+"The file %s already exists in your system! This script INSTALLS and DOES NOT "
+"UPGRADE. It will remove all OpenClinic data. If this is what you want, you "
+"can go on. If you want upgrade go to the %s."
+msgstr ""
+
+#: install/wizard.php:697
+#, fuzzy
+msgid "upgrade script"
+msgstr "藥單"
+
+#: install/wizard.php:701
+msgid "Read Thouroughly"
+msgstr ""
+
+#: install/wizard.php:703
+msgid "For OpenClinic to work, you need the following on the server:"
+msgstr ""
+
+#: install/wizard.php:706
+#, php-format
+msgid "Webserver (you have %s)"
+msgstr ""
+
+#: install/wizard.php:709
+#, php-format
+msgid "PHP >= %s (you have PHP %s)"
+msgstr ""
+
+#: install/wizard.php:713 install/wizard.php:760 install/wizard.php:867
+msgid "ok"
+msgstr ""
+
+#: install/wizard.php:718
+msgid "error"
+msgstr ""
+
+#: install/wizard.php:737
+#, php-format
+msgid "Write access to %s file"
+msgstr ""
+
+#: install/wizard.php:740
+msgid ""
+"This file is still not web writeable. This is good in normal time, for "
+"security reasons. However, during this installation, you need to set this "
+"file with writing permissions. You will have to do it manually."
+msgstr ""
+
+#: install/wizard.php:743
+#, php-format
+msgid "Deactivate read-only mode in the file properties of %s."
+msgstr ""
+
+#: install/wizard.php:749
+#, php-format
+msgid "Open a shell, go to %s directory and type %s."
+msgstr ""
+
+#: install/wizard.php:755
+msgid "Once made it, click in Next button."
+msgstr ""
+
+#: install/wizard.php:770
+#, php-format
+msgid ""
+"To install OpenClinic on a Windows machine for test, you just need to "
+"install %s before."
+msgstr ""
+
+#: install/wizard.php:777
+#, php-format
+msgid "For more details, see %s."
+msgstr ""
+
+#: install/wizard.php:788
+msgid "Press Next button to continue"
+msgstr ""
+
+#: install/wizard.php:873
+msgid "is missing!!"
+msgstr ""
+
+#: install/wizard.php:893
+msgid "Database Host is empty."
+msgstr ""
+
+#: install/wizard.php:897
+msgid "Database User is empty."
+msgstr ""
+
+#: install/wizard.php:901
+msgid "Database Name is empty."
+msgstr ""
+
+#: install/wizard.php:905
+msgid "Session Timeout must be great than zero."
+msgstr ""
+
+#: install/wizard.php:909
+msgid "Items per page must be great than zero."
+msgstr ""
+
+#: install/wizard.php:913
+msgid "Admin password must be at least 4 characters."
+msgstr ""
+
+#: install/wizard.php:918
+msgid "There were some errors"
+msgstr ""
+
+#: js/password.php:66
+#, php-format
+msgid "Password must be at least %d characters."
+msgstr "密碼至少要有 %d 字元"
+
+#: js/password.php:72
+#, php-format
+msgid "Confirmation password must be at least %d characters."
+msgstr "確認密碼至少要有 %d 字元"
+
+#: layout/admin.php:22 layout/home.php:22 layout/medical.php:24
+msgid "Summary"
+msgstr "總結"
+
+#: layout/component.php:119 layout/footer.php:47
+msgid "Powered by OpenClinic"
+msgstr "Powered by OpenClinic"
+
+#: layout/component.php:211 medical/patient_view.php:82
+#: medical/relative_del_confirm.php:62 medical/relative_list.php:65
+#: medical/relative_search.php:94
+msgid "View Relatives"
+msgstr "檢視"
+
+#: layout/component.php:214 medical/connection_del_confirm.php:72
+#: medical/connection_list.php:67 medical/connection_new_form.php:70
+#: medical/patient_view.php:90 medical/problem_del_confirm.php:71
+#: medical/problem_edit_form.php:88 medical/problem_list.php:47
+#: medical/problem_new_form.php:69 medical/problem_view.php:79
+#: medical/test_del_confirm.php:81 medical/test_edit_form.php:83
+#: medical/test_list.php:67 medical/test_new_form.php:74
+msgid "Medical Problems Report"
+msgstr "病患報告"
+
+#: layout/component.php:227 layout/component.php:228
+#: medical/patient_view.php:94
+msgid "Print Medical Record"
+msgstr "列印病歷"
+
+#: layout/component.php:247
+msgid "Project Page"
+msgstr ""
+
+#: layout/component.php:249
+msgid "Downloads"
+msgstr "下載"
+
+#: layout/component.php:250
+msgid "Report Bugs"
+msgstr ""
+
+#: layout/component.php:252
+msgid "Forums"
+msgstr "討論區"
+
+#: layout/component.php:286 layout/home.php:35
+#, fuzzy
+msgid "Logout"
+msgstr "登出"
+
+#: layout/component.php:293
+msgid "manage your user account"
+msgstr "用戶管理"
+
+#: layout/component.php:299 layout/home.php:39
+msgid "Log in"
+msgstr ""
+
+#: layout/component.php:303
+msgid "OpenClinic Readme"
+msgstr "OpenClinic Readme"
+
+#: layout/component.php:325
+msgid "View source code"
+msgstr "檢視原始碼"
+
+#: layout/component.php:330
+msgid "Opens a new window"
+msgstr "開新視窗"
+
+#: layout/component.php:338
+msgid "Demo version features"
+msgstr "Demo 版本功能"
+
+#: layout/component.php:414
+#, php-format
+msgid "Clinic hours: %s"
+msgstr "診症時間: %s"
+
+#: layout/component.php:424
+#, php-format
+msgid "Clinic address: %s"
+msgstr "地址: %s"
+
+#: layout/component.php:431
+#, php-format
+msgid "Clinic phone: %s"
+msgstr "電話: %s"
+
+#: layout/footer.php:50
+msgid "version"
+msgstr "版本"
+
+#: layout/footer.php:64
+#, fuzzy, php-format
+msgid "Under the %s"
+msgstr "以下"
+
+#: layout/footer.php:71 layout/header.php:112
+msgid "This is a demo version"
+msgstr "此為 demo 版本"
+
+#: layout/footer.php:81
+#, php-format
+msgid "Page generation: %s seconds"
+msgstr ""
+
+#: layout/header.php:26
+msgid "Clinic Home"
+msgstr "主頁"
+
+#: layout/header.php:92
+msgid "Skip over navigation"
+msgstr "跳過功能表"
+
+#: layout/install.php:26
+msgid "Install Wizard"
+msgstr ""
+
+#: layout/medical.php:28 medical/index.php:39 medical/patient_search.php:95
+#: medical/patient_search_form.php:33 medical/problem_search.php:98
+msgid "Search Patient"
+msgstr "搜尋病人"
+
+#: layout/medical.php:75 medical/index.php:71 medical/patient_new_form.php:44
+msgid "New Patient"
+msgstr "新增病人"
+
+#: layout/xhtml_start.php:119
+msgid "Error occurred"
+msgstr ""
+
+#: lib/Dump.php:283
+msgid "Create Time"
+msgstr ""
+
+#: lib/Dump.php:288
+msgid "Update Time"
+msgstr ""
+
+#: lib/Dump.php:293
+msgid "Check Time"
+msgstr ""
+
+#: lib/File.php:160
+msgid "Neither text nor html part present"
+msgstr ""
+
+#: lib/File.php:165
+msgid "Sender address missing"
+msgstr ""
+
+#: lib/File.php:170
+msgid "Recipient address missing"
+msgstr ""
+
+#: lib/Form.php:725
+msgid ""
+"ERROR: Some fields have been incorrectly filled. Please fix the fields and "
+"send the form again. Each incorrectly filled field is marked with specific "
+"error message."
+msgstr "錯誤: 有些欄目資料有錯誤!"
+
+#: lib/I18n.php:269 lib/I18n.php:295 medical/print_medical_record.php:100
+msgid "Y-m-d H:i:s"
+msgstr "Y-m-d H:i:s"
+
+#: lib/I18n.php:281
+msgid "Y-m-d"
+msgstr "Y-m-d"
+
+#: lib/LogStats.php:80
+msgid "January"
+msgstr "一月"
+
+#: lib/LogStats.php:81
+msgid "February"
+msgstr "二月"
+
+#: lib/LogStats.php:82
+msgid "March"
+msgstr "三月"
+
+#: lib/LogStats.php:83
+msgid "April"
+msgstr "四月"
+
+#: lib/LogStats.php:84
+msgid "May"
+msgstr "五月"
+
+#: lib/LogStats.php:85
+msgid "June"
+msgstr "六月"
+
+#: lib/LogStats.php:86
+msgid "July"
+msgstr "七月"
+
+#: lib/LogStats.php:87
+msgid "August"
+msgstr "八月"
+
+#: lib/LogStats.php:88
+msgid "September"
+msgstr "九月"
+
+#: lib/LogStats.php:89
+msgid "October"
+msgstr "十月"
+
+#: lib/LogStats.php:90
+msgid "November"
+msgstr "十一月"
+
+#: lib/LogStats.php:91
+msgid "December"
+msgstr "十二月"
+
+#: lib/LogStats.php:112
+#, fuzzy, php-format
+msgid "Yearly Stats: %d hits"
+msgstr "年統計"
+
+#: lib/LogStats.php:117 lib/LogStats.php:179 lib/LogStats.php:249
+#: lib/LogStats.php:328 lib/LogStats.php:389
+msgid "There are not statistics"
+msgstr "沒有統計"
+
+#: lib/LogStats.php:123
+msgid "Year"
+msgstr "年"
+
+#: lib/LogStats.php:124 lib/LogStats.php:186 lib/LogStats.php:256
+#: lib/LogStats.php:337 lib/LogStats.php:397
+msgid "Hits"
+msgstr "點"
+
+#: lib/LogStats.php:174
+#, fuzzy, php-format
+msgid "Monthly Stats for %d: %d hits"
+msgstr "月統計 %s"
+
+#: lib/LogStats.php:185
+msgid "Month"
+msgstr "月"
+
+#: lib/LogStats.php:242
+#, fuzzy, php-format
+msgid "Daily Stats for %s, %d: %d hits"
+msgstr "日統計 : %s, %d"
+
+#: lib/LogStats.php:255
+msgid "Day"
+msgstr "日"
+
+#: lib/LogStats.php:321
+#, fuzzy, php-format
+msgid "Hourly Stats for %s %d, %d: %d hits"
+msgstr "時統計 %s, %d, %d"
+
+#: lib/LogStats.php:336
+msgid "Hour"
+msgstr "時"
+
+#: lib/LogStats.php:397
+msgid "Total"
+msgstr ""
+
+#: lib/LogStats.php:405
+#, fuzzy, php-format
+msgid "Busiest Year: %d (%d hits)"
+msgstr "最忙碌之日: %d %s %d (%d hits)"
+
+#: lib/LogStats.php:414
+#, php-format
+msgid "Busiest Month: %s %d (%d hits)"
+msgstr "最忙碌之月份: %s %d (%d hits)"
+
+#: lib/LogStats.php:422
+#, php-format
+msgid "Busiest Day: %d %s %d (%d hits)"
+msgstr "最忙碌之日: %d %s %d (%d hits)"
+
+#: lib/LogStats.php:433
+#, php-format
+msgid "Busiest Hour: %s on %s %d, %d (%d hits)"
+msgstr "最忙碌之時: %s on %s %d, %d (%d hits)"
+
+#: lib/Search.php:184
+msgid "prev"
+msgstr "前一頁"
+
+#: lib/Search.php:189
+msgid "next"
+msgstr "後一頁"
+
+#: lib/Search.php:197
+msgid "Result Pages"
+msgstr "結果"
+
+#: medical/connection_del.php:78
+#, php-format
+msgid "Connection with medical problem, %s, has been deleted."
+msgstr "相關病歷, %s, 已經刪除"
+
+#: medical/connection_del_confirm.php:43 medical/connection_list.php:41
+#: medical/connection_new_form.php:41 medical/history_family_edit_form.php:39
+#: medical/history_family_edit_form.php:52 medical/history_family_view.php:39
+#: medical/history_family_view.php:52 medical/history_list.php:39
+#: medical/history_personal_edit_form.php:39
+#: medical/history_personal_edit_form.php:52
+#: medical/history_personal_view.php:39 medical/history_personal_view.php:52
+#: medical/patient_del.php:90 medical/patient_del_confirm.php:40
+#: medical/patient_edit_form.php:44 medical/patient_view.php:40
+#: medical/print_medical_record.php:78 medical/problem_del_confirm.php:42
+#: medical/problem_edit_form.php:40 medical/problem_list.php:39
+#: medical/problem_new_form.php:40 medical/problem_view.php:41
+#: medical/relative_del_confirm.php:41 medical/relative_list.php:40
+#: medical/relative_search.php:54 medical/test_del_confirm.php:44
+#: medical/test_edit_form.php:42 medical/test_list.php:41
+#: medical/test_new_form.php:40
+msgid "That patient does not exist."
+msgstr "沒有此病人"
+
+#: medical/connection_del_confirm.php:51 medical/connection_list.php:49
+#: medical/connection_new_form.php:49 medical/problem_del.php:85
+#: medical/problem_del_confirm.php:50 medical/problem_edit_form.php:48
+#: medical/problem_view.php:49 medical/test_del_confirm.php:52
+#: medical/test_edit_form.php:50 medical/test_list.php:49
+#: medical/test_new_form.php:48
+msgid "That medical problem does not exist."
+msgstr "此病歷不存在."
+
+#: medical/connection_del_confirm.php:59
+msgid "Delete Connection with Medical Problem"
+msgstr "刪除病症"
+
+#: medical/connection_del_confirm.php:74 medical/connection_list.php:57
+#: medical/connection_new_form.php:72 medical/problem_view.php:111
+msgid "View Connection Problems"
+msgstr ""
+
+#: medical/connection_del_confirm.php:92
+#, php-format
+msgid "Are you sure you want to delete connection, %s, from list?"
+msgstr "你是否確定刪除關聯, %s?"
+
+#: medical/connection_list.php:80 medical/connection_new_form.php:57
+msgid "Add New Connection Problems"
+msgstr "增加新相關病歷"
+
+#: medical/connection_list.php:105
+msgid "No connections defined for this medical problem."
+msgstr "沒有相關病歷"
+
+#: medical/connection_list.php:110
+msgid "Connection Problems List:"
+msgstr "相關病歷:"
+
+#: medical/connection_list.php:115 medical/history_list.php:92
+#: medical/print_medical_record.php:253 medical/print_medical_record.php:470
+#: medical/problem_fields.php:27 medical/problem_list.php:96
+#: medical/problem_search.php:223 medical/problem_view.php:146
+#: model/Problem.php:523
+msgid "Opening Date"
+msgstr "開始日期"
+
+#: medical/connection_list.php:116 medical/connection_new_form.php:110
+#: medical/history_list.php:91 medical/print_medical_record.php:271
+#: medical/print_medical_record.php:488 medical/problem_fields.php:66
+#: medical/problem_list.php:95 medical/problem_search.php:120
+#: medical/problem_search_fields.php:29 medical/problem_view.php:167
+#: model/Problem.php:521
+msgid "Wording"
+msgstr "字意"
+
+#: medical/connection_list.php:143 medical/history_list.php:109
+#: medical/problem_list.php:134 medical/relative_list.php:149
+#: medical/test_list.php:116
+msgid "view"
+msgstr "檢視"
+
+#: medical/connection_new.php:98
+msgid "Connection problems have been added."
+msgstr "關聯問題加入完成"
+
+#: medical/connection_new_form.php:93 medical/print_medical_record.php:227
+#: medical/problem_list.php:87
+msgid "No medical problems defined for this patient."
+msgstr "沒有病歷"
+
+#: medical/connection_new_form.php:98 medical/print_medical_record.php:222
+#: medical/problem_list.php:81
+msgid "Medical Problems List:"
+msgstr "病歷:"
+
+#: medical/connection_new_form.php:109 medical/history_list.php:89
+#: medical/print_medical_record.php:232 medical/print_medical_record.php:449
+#: medical/problem_fields.php:23 medical/problem_list.php:93
+msgid "Order Number"
+msgstr "號碼"
+
+#: medical/connection_new_form.php:131
+msgid "Add selected to Connection Problems List"
+msgstr "將選擇之問題加入關聯列"
+
+#: medical/history_family_edit.php:116
+msgid "Family Antecedents have been updated."
+msgstr "家族先更改完成."
+
+#: medical/history_family_edit_form.php:78 medical/history_family_view.php:92
+msgid "Edit Family Antecedents"
+msgstr "更改家族先例"
+
+#: medical/history_family_edit_form.php:93 medical/history_family_view.php:71
+#: medical/history_list.php:69
+msgid "View Family Antecedents"
+msgstr "檢視家族先例"
+
+#: medical/history_family_fields.php:21 medical/history_family_view.php:105
+#: medical/print_medical_record.php:411
+msgid "Parents Status Health"
+msgstr "父母健康狀況"
+
+#: medical/history_family_fields.php:31 medical/history_family_view.php:111
+#: medical/print_medical_record.php:417
+msgid "Brothers and Sisters Status Health"
+msgstr "兄弟姊妹健康狀況"
+
+#: medical/history_family_fields.php:41 medical/history_family_view.php:117
+#: medical/print_medical_record.php:423
+msgid "Spouse and Childs Status Health"
+msgstr "兒女健康狀況"
+
+#: medical/history_family_fields.php:51 medical/history_family_view.php:123
+#: medical/print_medical_record.php:429
+msgid "Family Illness"
+msgstr "家族病患"
+
+#: medical/history_family_view.php:101 medical/print_medical_record.php:407
+msgid "Family Antecedents"
+msgstr "家族先例"
+
+#: medical/history_list.php:65 medical/history_personal_edit_form.php:100
+#: medical/history_personal_view.php:71
+msgid "View Personal Antecedents"
+msgstr "檢視個人先例"
+
+#: medical/history_list.php:76 medical/print_medical_record.php:438
+msgid "Closed Medical Problems List:"
+msgstr "已康復病患:"
+
+#: medical/history_list.php:83 medical/print_medical_record.php:443
+msgid "No closed medical problems defined for this patient."
+msgstr "沒有已康復病患記錄."
+
+#: medical/history_list.php:93 medical/print_medical_record.php:261
+#: medical/print_medical_record.php:478 medical/problem_search.php:226
+#: medical/problem_view.php:157
+msgid "Closing Date"
+msgstr "康服日期"
+
+#: medical/history_list.php:132 medical/problem_list.php:144
+msgid "tests"
+msgstr "測試"
+
+#: medical/history_list.php:142 medical/problem_list.php:154
+msgid "connect"
+msgstr "關聯"
+
+#: medical/history_personal_edit.php:136
+msgid "Personal Antecedents have been updated."
+msgstr "個人先例更改完成."
+
+#: medical/history_personal_edit_form.php:85
+#: medical/history_personal_view.php:92
+msgid "Edit Personal Antecedents"
+msgstr "更改個人先例"
+
+#: medical/history_personal_fields.php:21
+#: medical/history_personal_view.php:105 medical/print_medical_record.php:327
+msgid "Birth and Growth"
+msgstr "成長"
+
+#: medical/history_personal_fields.php:31
+#: medical/history_personal_view.php:111 medical/print_medical_record.php:333
+msgid "Growth and Sexuality"
+msgstr "生長與性徵"
+
+#: medical/history_personal_fields.php:41
+#: medical/history_personal_view.php:117 medical/print_medical_record.php:339
+msgid "Feed"
+msgstr "飲食習慣"
+
+#: medical/history_personal_fields.php:51
+#: medical/history_personal_view.php:123 medical/print_medical_record.php:345
+msgid "Habits"
+msgstr "習慣"
+
+#: medical/history_personal_fields.php:61
+#: medical/history_personal_view.php:129 medical/print_medical_record.php:351
+msgid "Peristaltic Conditions"
+msgstr ""
+
+#: medical/history_personal_fields.php:71
+#: medical/history_personal_view.php:135 medical/print_medical_record.php:357
+msgid "Psychological Conditions"
+msgstr "心理狀況"
+
+#: medical/history_personal_fields.php:81
+#: medical/history_personal_view.php:141 medical/print_medical_record.php:363
+msgid "Children Complaint"
+msgstr "兒時疾病"
+
+#: medical/history_personal_fields.php:91
+#: medical/history_personal_view.php:147 medical/print_medical_record.php:369
+msgid "Venereal Disease"
+msgstr "性病"
+
+#: medical/history_personal_fields.php:101
+#: medical/history_personal_view.php:153 medical/print_medical_record.php:375
+msgid "Accidents and Surgical Operations"
+msgstr "意外及手術"
+
+#: medical/history_personal_fields.php:111
+#: medical/history_personal_view.php:159 medical/print_medical_record.php:381
+msgid "Medicinal Intolerance"
+msgstr "藥物排斥"
+
+#: medical/history_personal_fields.php:121
+#: medical/history_personal_view.php:165 medical/print_medical_record.php:387
+msgid "Mental Illness"
+msgstr "精神病"
+
+#: medical/history_personal_view.php:101 medical/print_medical_record.php:323
+msgid "Personal Antecedents"
+msgstr "個人先例"
+
+#: medical/index.php:37
+msgid ""
+"Use the following functions located in the left hand navigation area to "
+"manage your medical records."
+msgstr "請使用左邊之功能表來管理病歷."
+
+#: medical/index.php:42
+msgid "Search and view patients. Once a patient is selected you can:"
+msgstr "搜尋和檢視病人. 當找到你的病人後, 你可以:"
+
+#: medical/index.php:45
+msgid "manage social data"
+msgstr "管理社交資訊"
+
+#: medical/index.php:46
+msgid "manage clinic history"
+msgstr "管理醫務所歷史"
+
+#: medical/index.php:47
+msgid "manage problems report"
+msgstr "管理問題報告"
+
+#: medical/index.php:48
+msgid "print medical record"
+msgstr "列印病歷"
+
+#: medical/index.php:57
+#, fuzzy
+msgid "Last Viewed Patients"
+msgstr "新增病人"
+
+#: medical/index.php:74
+msgid "Build a new patient information in medical records system."
+msgstr "增加一個新病人到系統"
+
+#: medical/patient_del.php:246
+#, php-format
+msgid "Patient, %s, has been deleted."
+msgstr "病人, %s, 已經刪除"
+
+#: medical/patient_del_confirm.php:48 medical/patient_view.php:76
+msgid "Delete Patient"
+msgstr "刪除病人"
+
+#: medical/patient_del_confirm.php:73
+#, php-format
+msgid "Are you sure you want to delete patient, %s?"
+msgstr ""
+
+#: medical/patient_edit.php:68 medical/patient_new.php:66
+#, php-format
+msgid "Patient name, %s, is already in use. The changes have no effect."
+msgstr "病人名稱, %s, 已使用中."
+
+#: medical/patient_edit.php:97
+msgid "Patient has been updated."
+msgstr "病人更改完成"
+
+#: medical/patient_edit_form.php:85
+msgid "Edit Patient Social Data"
+msgstr "更改病人資料"
+
+#: medical/patient_fields.php:88 medical/patient_view.php:127
+#: medical/print_medical_record.php:132 model/Patient.php:828
+msgid "Male"
+msgstr "男"
+
+#: medical/patient_fields.php:89 medical/patient_view.php:127
+#: medical/print_medical_record.php:132 model/Patient.php:828
+msgid "Female"
+msgstr "女"
+
+#: medical/patient_fields.php:91 medical/patient_view.php:126
+#: medical/print_medical_record.php:131 model/Patient.php:828
+msgid "Sex"
+msgstr "性別"
+
+#: medical/patient_fields.php:96 medical/patient_view.php:131
+#: medical/print_medical_record.php:136 medical/print_medical_record.php:142
+msgid "Race"
+msgstr "種族"
+
+#: medical/patient_fields.php:107 medical/patient_view.php:137
+#: model/Patient.php:198
+msgid "Birth Date"
+msgstr "出生日期"
+
+#: medical/patient_fields.php:123 medical/patient_fields.php:157
+msgid "(yyyy-mm-dd)"
+msgstr "(年-月-日)"
+
+#: medical/patient_fields.php:131 medical/patient_search.php:144
+#: medical/patient_search_fields.php:34 medical/patient_view.php:146
+#: medical/print_medical_record.php:151 medical/relative_search.php:130
+msgid "Birth Place"
+msgstr "出生地"
+
+#: medical/patient_fields.php:141 medical/patient_view.php:152
+#: medical/print_medical_record.php:157 model/Patient.php:198
+msgid "Decease Date"
+msgstr "死亡日期"
+
+#: medical/patient_fields.php:165 medical/patient_search.php:134
+#: medical/patient_search_fields.php:32 medical/patient_view.php:158
+#: medical/print_medical_record.php:163 medical/relative_search.php:120
+msgid "Sanitary Card Number (SCN)"
+msgstr ""
+
+#: medical/patient_fields.php:175 medical/patient_search.php:139
+#: medical/patient_search_fields.php:33 medical/patient_view.php:164
+#: medical/print_medical_record.php:169 medical/relative_search.php:125
+msgid "National Health Service Number (NHSN)"
+msgstr ""
+
+#: medical/patient_fields.php:185 medical/patient_view.php:170
+#: medical/print_medical_record.php:175
+msgid "Family Situation"
+msgstr "家庭狀況"
+
+#: medical/patient_fields.php:195 medical/patient_view.php:176
+#: medical/print_medical_record.php:181
+msgid "Labour Situation"
+msgstr "職業"
+
+#: medical/patient_fields.php:205 medical/patient_view.php:182
+#: medical/print_medical_record.php:187
+msgid "Education"
+msgstr ""
+
+#: medical/patient_fields.php:215 medical/patient_search.php:159
+#: medical/patient_search_fields.php:37 medical/patient_view.php:188
+#: medical/print_medical_record.php:193 medical/relative_search.php:145
+msgid "Insurance Company"
+msgstr "保險公司"
+
+#: medical/patient_fields.php:240 medical/patient_view.php:200
+#: medical/print_medical_record.php:205
+msgid "Doctor you are assigned to"
+msgstr "醫生編排給你"
+
+#: medical/patient_new.php:96
+msgid "Patient has been added."
+msgstr "病人加入完成"
+
+#: medical/patient_new_form.php:35
+msgid "Add New Patient"
+msgstr "增加病人"
+
+#: medical/patient_search.php:66 medical/problem_search.php:70
+#: medical/relative_search.php:73
+#, fuzzy, php-format
+msgid "No results found for '%s'."
+msgstr "沒有資料"
+
+#: medical/patient_search.php:104 medical/problem_search.php:107
+#: medical/relative_search.php:105
+#, php-format
+msgid "%d matches found."
+msgstr "找到了 %d 個."
+
+#: medical/patient_search.php:197 medical/problem_search.php:178
+#: medical/relative_search.php:193
+#, php-format
+msgid "Search Results From Query: %s"
+msgstr "搜尋結果 (%s):"
+
+#: medical/patient_search_fields.php:25 medical/problem_search_fields.php:26
+msgid "Field"
+msgstr "欄目"
+
+#: medical/patient_search_fields.php:46 medical/problem_search_fields.php:42
+msgid "Search"
+msgstr "搜尋"
+
+#: medical/patient_search_fields.php:50 medical/problem_search_fields.php:46
+msgid "Logical"
+msgstr "邏輯"
+
+#: medical/patient_search_fields.php:62 medical/problem_search_fields.php:57
+msgid "Limit"
+msgstr "限制數目"
+
+#: medical/patient_search_fields.php:65 medical/problem_search_fields.php:60
+msgid "All"
+msgstr "所有結果"
+
+#: medical/patient_search_form.php:37
+msgid "Search Patient by Medical Problem"
+msgstr "用病歷搜尋病人"
+
+#: medical/patient_search_form.php:68 medical/relative_list.php:97
+msgid "Note: Empty search to see all results."
+msgstr "注意: 不鍵入搜尋字元會顯示所有記錄"
+
+#: medical/patient_view.php:72
+msgid "Edit Social Data"
+msgstr "更改資料"
+
+#: medical/patient_view.php:102 medical/print_medical_record.php:110
+#: model/Patient.php:827
+msgid "Patient"
+msgstr "病人"
+
+#: medical/patient_view.php:140 medical/print_medical_record.php:145
+#: model/Patient.php:829
+msgid "Age"
+msgstr "年齡"
+
+#: medical/print_medical_record.php:53
+msgid "No patient selected."
+msgstr "沒有選擇病人"
+
+#: medical/print_medical_record.php:243 medical/print_medical_record.php:460
+#: medical/problem_fields.php:35 medical/problem_view.php:136
+msgid "Attending Physician"
+msgstr ""
+
+#: medical/print_medical_record.php:256 medical/print_medical_record.php:473
+#: medical/problem_fields.php:31 medical/problem_list.php:97
+#: medical/problem_view.php:151 model/Problem.php:527
+msgid "Last Update Date"
+msgstr "最後更神日期"
+
+#: medical/print_medical_record.php:267 medical/print_medical_record.php:484
+#: medical/problem_fields.php:56 medical/problem_view.php:163
+msgid "Meeting Place"
+msgstr "會面地點"
+
+#: medical/print_medical_record.php:276 medical/print_medical_record.php:493
+#: medical/problem_fields.php:77 medical/problem_search.php:125
+#: medical/problem_search_fields.php:30 medical/problem_view.php:172
+msgid "Subjective"
+msgstr "主觀"
+
+#: medical/print_medical_record.php:282 medical/print_medical_record.php:499
+#: medical/problem_fields.php:87 medical/problem_search.php:130
+#: medical/problem_search_fields.php:31 medical/problem_view.php:178
+msgid "Objective"
+msgstr "客觀"
+
+#: medical/print_medical_record.php:288 medical/print_medical_record.php:505
+#: medical/problem_fields.php:97 medical/problem_search.php:135
+#: medical/problem_search_fields.php:32 medical/problem_view.php:184
+msgid "Appreciation"
+msgstr "判斷"
+
+#: medical/print_medical_record.php:294 medical/print_medical_record.php:511
+#: medical/problem_fields.php:107 medical/problem_search.php:140
+#: medical/problem_search_fields.php:33 medical/problem_view.php:190
+msgid "Action Plan"
+msgstr "診斷計劃"
+
+#: medical/print_medical_record.php:300 medical/print_medical_record.php:517
+#: medical/problem_fields.php:117 medical/problem_search.php:145
+#: medical/problem_search_fields.php:34 medical/problem_view.php:196
+msgid "Prescription"
+msgstr "藥單"
+
+#: medical/problem_del.php:126
+#, php-format
+msgid "Medical problem, %s, has been deleted."
+msgstr "病歷, %s, 刪除完成"
+
+#: medical/problem_del_confirm.php:58 medical/problem_view.php:103
+msgid "Delete Medical Problem"
+msgstr "刪除病歷"
+
+#: medical/problem_del_confirm.php:88
+#, php-format
+msgid "Are you sure you want to delete medical problem, %s, from list?"
+msgstr "你確定要刪除病歷, %s ?"
+
+#: medical/problem_edit.php:71 medical/problem_new.php:68
+#, php-format
+msgid "Medical problem, %s, has been added to closed medical problems list."
+msgstr "病歷, %s, 已經加入康服項"
+
+#: medical/problem_edit.php:77
+#, php-format
+msgid "Medical problem, %s, has been updated."
+msgstr "病歷, %s, 更改完成"
+
+#: medical/problem_edit_form.php:74
+msgid "Edit Medical Problem"
+msgstr "更改病歷"
+
+#: medical/problem_fields.php:127
+msgid "Closed Problem"
+msgstr "已康服病歷"
+
+#: medical/problem_list.php:70 medical/problem_new_form.php:55
+msgid "Add New Medical Problem"
+msgstr "新增病歷"
+
+#: medical/problem_new.php:74
+#, php-format
+msgid "Medical problem, %s, has been added."
+msgstr "病歷, %s, 加入完成"
+
+#: medical/problem_view.php:95
+msgid "Edit Medical Problem Data"
+msgstr "更改病歷"
+
+#: medical/problem_view.php:118 medical/test_del_confirm.php:83
+#: medical/test_edit_form.php:85 medical/test_list.php:57
+#: medical/test_new_form.php:76
+msgid "View Medical Tests"
+msgstr "檢視醫療測試"
+
+#: medical/problem_view.php:126
+msgid "Medical Problem Data"
+msgstr "病歷資料"
+
+#: medical/relative_del.php:77
+#, php-format
+msgid "Relative, %s, has been deleted."
+msgstr ""
+
+#: medical/relative_del_confirm.php:49
+msgid "Delete Relative from list"
+msgstr ""
+
+#: medical/relative_del_confirm.php:78
+#, php-format
+msgid "Are you sure you want to delete relative, %s, from list?"
+msgstr ""
+
+#: medical/relative_list.php:84
+msgid "Search Relatives to add to list"
+msgstr ""
+
+#: medical/relative_list.php:102
+msgid "No relatives defined for this patient."
+msgstr ""
+
+#: medical/relative_list.php:109
+msgid "Relatives List:"
+msgstr ""
+
+#: medical/relative_new.php:97
+msgid "Relatives have been added."
+msgstr ""
+
+#: medical/relative_search.php:227
+msgid "Add selected to Relatives List"
+msgstr ""
+
+#: medical/test_del.php:79
+#, php-format
+msgid "Medical test, %s, has been deleted."
+msgstr "醫療測試, %s, 刪除完成"
+
+#: medical/test_del_confirm.php:60 medical/test_edit_form.php:58
+msgid "That medical test does not exist"
+msgstr "醫療測試資料不存在"
+
+#: medical/test_del_confirm.php:68
+msgid "Delete Medical Test"
+msgstr "刪除醫療測試"
+
+#: medical/test_del_confirm.php:99
+#, php-format
+msgid "Are you sure you want to delete medical test, %s, from list?"
+msgstr "你確定要刪除醫療測試, %s?"
+
+#: medical/test_edit.php:69
+#, php-format
+msgid "Medical test, %s, has been updated."
+msgstr "醫療測試, %s, 更改完成"
+
+#: medical/test_edit_form.php:69
+msgid "Edit Medical Test"
+msgstr "更改醫療測試"
+
+#: medical/test_fields.php:21 medical/test_list.php:104
+msgid "Document Type"
+msgstr "資料格式"
+
+#: medical/test_list.php:80
+msgid "Add New Medical Test"
+msgstr "增加醫療測試"
+
+#: medical/test_list.php:95
+msgid "No medical tests defined for this medical problem."
+msgstr "醫療測試不存在"
+
+#: medical/test_list.php:100
+msgid "Medical Tests List:"
+msgstr "醫療測試:"
+
+#: medical/test_new.php:67
+#, php-format
+msgid "Medical test, %s, has been added."
+msgstr "醫療測試, %s, 加入完成"
+
+#: medical/test_new_form.php:60
+msgid "Add Medical Test"
+msgstr "增加醫療測試"
+
+#: model/Patient.php:198
+#, php-format
+msgid "%s must be greater or equal than %s."
+msgstr "%s 要等於或大於 %s"
+
+#: model/Setting.php:89 model/Setting.php:105
+msgid "This field must be numeric."
+msgstr "此欄必須為數值"
+
+#: model/Setting.php:94 model/Setting.php:110
+msgid "This field must not contain a decimal point."
+msgstr "此欄必須為整數"
+
+#: model/Setting.php:99
+msgid "This field must be greater than zero."
+msgstr "此欄必須大於零"
+
+#: model/Staff.php:122 model/User.php:92
+#, php-format
+msgid "This field must be at least %d characters."
+msgstr "此欄必須有 %d 個字元"
+
+#: model/Staff.php:127 model/User.php:97
+msgid "This field must not contain any spaces."
+msgstr "此欄不能有空格"
+
+#: model/Staff.php:132 model/User.php:102
+#, php-format
+msgid "This field can't contain the symbols %s"
+msgstr "此欄不能有:%s"
+
+#: model/Theme.php:95
+msgid "That filename is reserved for internal use."
+msgstr "此欄為內部使用"
+
+#: model/User.php:110
+msgid "Invalid email, no @ symbol in string."
+msgstr "電郵錯誤, 沒有@"
+
+#: model/User.php:119
+#, php-format
+msgid "Missing data [%s]@[%s]"
+msgstr "資料不足 [%s]@[%s]"
+
+#: model/User.php:125
+#, php-format
+msgid "Whitespace in [%s]@[%s]"
+msgstr "空格 於 [%s]@[%s]"
+
+#: model/User.php:146
+msgid "This field can't be empty if you want to change password."
+msgstr "如要設定密碼, 請題寫此欄"
+
+#: model/User.php:161
+msgid "Passwords do not match."
+msgstr "密碼不同"
+
+#: shared/view_source.php:32
+#, php-format
+msgid "Source file: %s"
+msgstr ""
+
+#: shared/view_source.php:60
+msgid "No file found."
+msgstr "找不到檔案"
+
+#~ msgid "table"
+#~ msgstr "資料表"
+
+#~ msgid "end of table"
+#~ msgstr "資料表完結"
+
+#~ msgid "Access Logs List:"
+#~ msgstr "日誌列表:"
+
+#~ msgid "Record Logs List:"
+#~ msgstr "記錄列表"
+
+#~ msgid "Not Authorization"
+#~ msgstr "認證錯誤"
+
+#~ msgid "Edit Config Settings"
+#~ msgstr "更新設定"
+
+#~ msgid "Clinic Image"
+#~ msgstr "醫務所相片"
+
+#~ msgid "(must be in /images/ directory)"
+#~ msgstr "(must be in /images/ directory)"
+
+#~ msgid "Use Image in place of Name"
+#~ msgstr "使用相片不用名字"
+
+#~ msgid "Reset"
+#~ msgstr "取消"
+
+#~ msgid "del"
+#~ msgstr "刪除"
+
+#~ msgid "Information"
+#~ msgstr "資料"
+
+#~ msgid "Theme Preview"
+#~ msgstr "主題預覽"
+
+#~ msgid "pwd"
+#~ msgstr "密碼"
+
+#~ msgid "Help"
+#~ msgstr "說明"
+
+#~ msgid "Help Topic"
+#~ msgstr "說明主題"
+
+#~ msgid "Sample Help Page:"
+#~ msgstr "說明頁:"
+
+#~ msgid "OpenClinic Installation:"
+#~ msgstr "OpenClinic 安裝:"
+
+#~ msgid "OpenClinic install process has been cancelled."
+#~ msgstr "OpenClinic 安裝程序取消."
+
+#~ msgid "View Install Instructions"
+#~ msgstr "檢視安裝程序"
+
+#~ msgid "Back to Main Statistics"
+#~ msgstr "返回統計主頁"
+
+#~ msgid "View Medical Problem"
+#~ msgstr "檢視病歷"
+
+#~ msgid "Return to Patient Social Data"
+#~ msgstr "返回病人資料"
+
+#~ msgid "Clear Search"
+#~ msgstr "取消"
+
+#~ msgid "login"
+#~ msgstr "登入"
+
+#~ msgid "Today's date: %s"
+#~ msgstr "今日是: %s"
+
+#~ msgid "User account suspended"
+#~ msgstr "使用者帳戶暫停使用"
+
+#~ msgid "Your user account has been suspended."
+#~ msgstr "你的帳戶被暫停"
