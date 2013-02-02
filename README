@@ -1,4 +1,4 @@
-$Id: README,v 1.9 2013/01/13 14:12:48 jact Exp $
+$Id: README,v 1.10 2013/02/02 19:06:07 jact Exp $
 
 OpenClinic: Web Medical Records System
 ======================================
@@ -33,15 +33,15 @@ Currently OpenClinic has the following options:
           o Theme editor
           o Staff members
           o System Users
-          o Dumps
+          o Database Dumps
           o Log Statistics
 
 Requirements
 ============
 
-    * PHP5 >= 5.3.1 (incompatible with PHP4) compiled with MySQL support (tested with versions 5.3.1);
+    * PHP5 >= 5.3.1 (incompatible with PHP4) compiled with MySQL support (tested with 5.3.1 and 5.3.6 versions);
 
-    * MySQL (tested with versions 5.1);
+    * MySQL (tested with 5.1 version);
 
     * a web server prepared to execute PHP code (recommended Apache);
 
@@ -56,7 +56,7 @@ Features
 
     * License: GNU General Public License (GPL)
 
-    * Natural Language: English, Spanish, Bulgarian, Dutch, Traditional Chinese
+    * Natural Language: English, Spanish, Dutch, Traditional Chinese
 
     * Operating System: OS Independent
 
