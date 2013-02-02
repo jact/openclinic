@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: global_constants.php,v 1.9 2013/01/07 18:12:16 jact Exp $
+ * @version   CVS: $Id: global_constants.php,v 1.10 2013/02/02 18:25:09 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -34,6 +34,7 @@
   define("OPEN_DEMO",               false);
   define("OPEN_SQL_DEBUG",          false && OPEN_DEBUG); // if true, trace of SQL sentences
   define("OPEN_BUFFER",             false && !OPEN_DEBUG); // if true, use ob_start(), ob_end_flush() functions
+  define("OPEN_DB_SCHEMA_VERSION",  "0.8.20130107"); // expected database schema version
   define("OPEN_XML_ACTIVED",        false); // if true and is possible, application/xhtml+xml, otherwise text/html
   define("OPEN_MAX_LOGIN_ATTEMPTS", 3); // if zero, no limit login attempts
 
