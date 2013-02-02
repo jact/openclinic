@@ -6,9 +6,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2006 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.css,v 1.7 2006/10/13 19:59:24 jact Exp $
+ * @version   CVS: $Id: wizard.css,v 1.8 2013/02/02 18:33:24 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -86,11 +86,12 @@ html>body #buttons .back, html>body #buttons .next {
   padding: 0 5px;
 }
 a, a:link {
-  color: #8f8fbd;
+  color: #3299CC;
   background: #dcdcdc;
+  font-weight: bold;
 }
 a:hover {
-  background: #8f8fbd;
+  background: #3299CC;
   color: #dcdcdc;
 }
 button {
