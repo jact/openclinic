@@ -1,4 +1,4 @@
-$Id: README,v 1.2 2005/07/28 19:04:00 jact Exp $
+$Id: README,v 1.3 2013/02/02 19:09:12 jact Exp $
 
 This README gives you a very short view how to make your own translation
 
@@ -24,4 +24,4 @@ This README gives you a very short view how to make your own translation
   use poEdit and create a language_COUNTRY-openclinic.mo file from your .po file
   copy this .mo into locale/language_COUNTRY/LC_MESSAGES/
 
-- Add your new language to getNLS in lib/I18n.php
+- Add your new language to getNLS in lib/I18n.php if not exists
