@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2007 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: environment.php,v 1.7 2007/12/15 12:50:16 jact Exp $
+ * @version   CVS: $Id: environment.php,v 1.8 2013/02/02 18:26:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -77,6 +77,11 @@
   define("OPEN_LANGUAGE",         $set->getLanguage());
 
   unset($set);
+
+  if (OPEN_VERSION != OPEN_DB_SCHEMA_VERSION)
+  {
+    header("Location: ../install/upgrade.php"); // try upgrade database
+  }
 
   /**
    * i18n l10n (after OPEN_LANGUAGE is defined)
