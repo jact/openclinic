@@ -7,9 +7,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_del.php,v 1.19 2007/12/07 16:50:50 jact Exp $
+ * @version   CVS: $Id: staff_del.php,v 1.20 2013/05/01 08:30:31 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -66,7 +66,7 @@
 
   $staffQ->delete($staff->getIdMember(), $staff->getIdUser());
 
-  $info = $staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2();
+  $info = trim($staff->getFirstName() . " " . $staff->getSurname1() . " " . $staff->getSurname2());
   FlashMsg::add(sprintf(_("Staff member, %s, has been deleted."), $info));
 
   $staffQ->close();
