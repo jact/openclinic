@@ -9,7 +9,7 @@
  * @package   OpenClinic
  * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.38 2013/01/13 14:17:56 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.39 2013/08/31 09:21:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -171,7 +171,7 @@
    */
   elseif (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next2" || $_POST['buttonPressed'] == "back3"))
   {
-    $focusFormField = "dbHost[1]";
+    $focusFormField = "dbHost";
 
     echo HTML::section(2, sprintf(_("Step %d of %d: "), 3, 7) . _("MySQL Database Settings"));
 
@@ -240,7 +240,7 @@
    */
   elseif (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next3" || $_POST['buttonPressed'] == "back4"))
   {
-    $focusFormField = "clinicLanguage[1]";
+    $focusFormField = "clinicLanguage";
 
     echo HTML::section(2, sprintf(_("Step %d of %d: "), 4, 7) . _("Config Settings"));
 
@@ -341,7 +341,7 @@
    */
   elseif (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next4" || $_POST['buttonPressed'] == "back5"))
   {
-    $focusFormField = "firstName[1]";
+    $focusFormField = "firstName";
 
     echo HTML::section(2, sprintf(_("Step %d of %d: "), 5, 7) . _("Admin Data"));
 
@@ -533,7 +533,7 @@
  * @package   OpenClinic
  * @copyright 2002-' . date('Y') . ' jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.38 2013/01/13 14:17:56 jact Exp $
+ * @version   CVS: $Id: wizard.php,v 1.39 2013/08/31 09:21:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
