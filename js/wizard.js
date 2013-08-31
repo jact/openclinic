@@ -6,9 +6,9 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2013 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.js,v 1.6 2007/10/03 19:35:57 jact Exp $
+ * @version   CVS: $Id: wizard.js,v 1.7 2013/08/31 09:23:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -30,15 +30,15 @@ function validateInstall()
     // MySQL settings
     case "back2":
     case "next3":
-      if (f.dbHost[1].value.replace(/\s+/, "") == "")
+      if (document.getElementById("dbHost").value.replace(/\s+/, "") == "")
       {
         msg += "Database Host is empty.\n";
       }
-      if (f.dbUser[1].value.replace(/\s+/, "") == "")
+      if (document.getElementById("dbUser").value.replace(/\s+/, "") == "")
       {
         msg += "Database User is empty.\n";
       }
-      if (f.dbName[1].value.replace(/\s+/, "") == "")
+      if (document.getElementById("dbName").value.replace(/\s+/, "") == "")
       {
         msg += "Database Name is empty.\n";
       }
@@ -47,11 +47,11 @@ function validateInstall()
     // Config settings
     case "back3":
     case "next4":
-      if (f.timeout[1].value <= 0)
+      if (document.getElementById("timeout").value <= 0)
       {
         msg += "Session Timeout must be great than zero.\n";
       }
-      if (f.itemsPage[1].value <= 0)
+      if (document.getElementById("itemsPage").value <= 0)
       {
         msg += "Items per page must be great than zero.\n";
       }
@@ -60,7 +60,7 @@ function validateInstall()
     // Admin data
     case "back4":
     case "next5":
-      if (f.passwd[1].value.replace(/\s+/, "").length < 4)
+      if (document.getElementById("passwd").value.replace(/\s+/, "").length < 4)
       {
         msg += "Admin password must be at least 4 characters.\n";
       }
@@ -72,8 +72,6 @@ function validateInstall()
     alert(msg);
     return false;
   }
-  else
-  {
-    return true;
-  }
+
+  return true;
 } // end of the 'validateInstall()' function
