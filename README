@@ -1,5 +1,3 @@
-$Id: README,v 1.10 2013/02/02 19:06:07 jact Exp $
-
 OpenClinic: Web Medical Records System
 ======================================
 
@@ -72,7 +70,7 @@ OpenClinic offers multilingual support, so anyone who wants to contribute a lang
 Download
 ========
 
-You can get the newest version at http://sourceforge.net/projects/showfiles.php?group_id=70742
+You can get the newest version at http://sourceforge.net/projects/showfiles.php?group_id=70742 and view source code at https://github.com/jact/openclinic.
 
 Farewell
 ========
