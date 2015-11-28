@@ -8,7 +8,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2015 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @version   CVS: $Id: login_check.php,v 1.14 2007/12/15 15:02:49 jact Exp $
  * @author    jact <jachavar@gmail.com>
@@ -91,7 +91,6 @@ function loginCheck($profilePage = OPEN_PROFILE_FREE, $inDemo = true)
    */
   $chk = md5(
     isset($_SERVER['HTTP_ACCEPT_CHARSET']) ? $_SERVER['HTTP_ACCEPT_CHARSET'] : $_SERVER['HTTP_ACCEPT']
-    . $_SERVER['HTTP_ACCEPT_ENCODING']
     . $_SERVER['HTTP_ACCEPT_LANGUAGE']
     . $_SERVER['HTTP_USER_AGENT']
   );
