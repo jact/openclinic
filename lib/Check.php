@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Check.php,v 1.11 2013/01/07 18:32:04 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -211,17 +210,24 @@ class Check
   {
     if ($allowTags)
     {
-      $value = trim(htmlspecialchars(strip_tags($text, CHK_ALLOWED_HTML_TAGS)));
+      $value = strip_tags($text, CHK_ALLOWED_HTML_TAGS);
     }
     else
     {
-      $value = trim(htmlspecialchars(strip_tags($text)));
+      $value = strip_tags($text);
     }
+    $value = trim(htmlspecialchars(
+      $value,
+      ENT_COMPAT | ENT_XHTML,
+      "ISO-8859-1"
+    ));
 
     if ($includeEvents)
     {
       $events = array(
-        "onmousedown", "onmouseup", "onclick", "ondblclick", "onmouseover", "onmouseout", "onselect",
+        "onmousedown", "onmouseup",
+        "onclick", "ondblclick",
+        "onmouseover", "onmouseout", "onselect",
         "onkeydown", "onkeypress", "onkeyup",
         "onblur", "onfocus",
         "onreset", "onsubmit",
