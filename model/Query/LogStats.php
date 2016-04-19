@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.2 2007/11/02 20:39:00 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -77,7 +76,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    list($hits) = $this->fetchRow(MYSQL_NUM);
+    list($hits) = $this->fetchRow(MYSQLI_NUM);
 
     return $hits;
   }
@@ -102,7 +101,7 @@ class Query_LogStats extends Query
     }
 
     $array = null;
-    while (list($year, $hits) = $this->fetchRow(MYSQL_NUM))
+    while (list($year, $hits) = $this->fetchRow(MYSQLI_NUM))
     {
       $array[$year] = $hits;
     }
@@ -131,7 +130,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    list($hits) = $this->fetchRow(MYSQL_NUM);
+    list($hits) = $this->fetchRow(MYSQLI_NUM);
 
     return $hits;
   }
@@ -158,7 +157,7 @@ class Query_LogStats extends Query
     }
 
     $array = null;
-    while (list($month, $hits) = $this->fetchRow(MYSQL_NUM))
+    while (list($month, $hits) = $this->fetchRow(MYSQLI_NUM))
     {
       $array[$month] = $hits;
     }
@@ -189,7 +188,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    list($hits) = $this->fetchRow(MYSQL_NUM);
+    list($hits) = $this->fetchRow(MYSQLI_NUM);
 
     return $hits;
   }
@@ -218,7 +217,7 @@ class Query_LogStats extends Query
     }
 
     $array = null;
-    while (list($day, $hits) = $this->fetchRow(MYSQL_NUM))
+    while (list($day, $hits) = $this->fetchRow(MYSQLI_NUM))
     {
       $array[$day] = $hits;
     }
@@ -250,7 +249,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    list($hits) = $this->fetchRow(MYSQL_NUM);
+    list($hits) = $this->fetchRow(MYSQLI_NUM);
 
     return $hits;
   }
@@ -282,7 +281,7 @@ class Query_LogStats extends Query
     }
 
     $array = null;
-    while (list($hour, $hits) = $this->fetchRow(MYSQL_NUM))
+    while (list($hour, $hits) = $this->fetchRow(MYSQLI_NUM))
     {
       $array[$hour] = $hits;
     }
@@ -311,7 +310,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    return $this->fetchRow(MYSQL_NUM); // 0 => $year, 1 => $hits
+    return $this->fetchRow(MYSQLI_NUM); // 0 => $year, 1 => $hits
   }
 
   /**
@@ -335,7 +334,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    return $this->fetchRow(MYSQL_NUM); // 0 => $year, 1 => $month, 2 => $hits
+    return $this->fetchRow(MYSQLI_NUM); // 0 => $year, 1 => $month, 2 => $hits
   }
 
   /**
@@ -359,7 +358,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    return $this->fetchRow(MYSQL_NUM); // 0 => $year, 1 => $month, 2 => $day, 3 => $hits
+    return $this->fetchRow(MYSQLI_NUM); // 0 => $year, 1 => $month, 2 => $day, 3 => $hits
   }
 
   /**
@@ -383,7 +382,7 @@ class Query_LogStats extends Query
       return false;
     }
 
-    return $this->fetchRow(MYSQL_NUM); // 0 => $year, 1 => $month, 2 => $day, 3 => $hour, 4 => $hits
+    return $this->fetchRow(MYSQLI_NUM); // 0 => $year, 1 => $month, 2 => $day, 3 => $hour, 4 => $hits
   }
 } // end class
 ?>

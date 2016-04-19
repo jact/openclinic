@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.4 2013/01/07 18:04:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -314,7 +313,7 @@ class Query_Page_Patient extends Query_Page
       return false;
     }
 
-    $array = parent::fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQLI_NUM);
 
     return ($array[0] > 0);
   }

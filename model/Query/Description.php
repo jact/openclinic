@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Description.php,v 1.2 2013/01/07 18:02:32 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -70,7 +69,7 @@ class Query_Description extends Query
    */
   function fetch()
   {
-    $array = parent::fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQLI_NUM);
     if ($array == false)
     {
       return false;

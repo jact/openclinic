@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.39 2013/08/31 09:21:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
  */
@@ -23,8 +22,8 @@
 
   define("OPEN_PHP_VERSION", '5.3.1'); // @fixme in global_constants.php
 
-  error_reporting(E_ALL & ~E_NOTICE); // normal mode
-  //error_reporting(E_ALL); // debug mode
+  //error_reporting(E_ALL & ~E_NOTICE); // normal mode
+  error_reporting(E_ALL); // debug mode
 
   /**
    * Step 8: If we have concluded...
@@ -533,7 +532,6 @@
  * @package   OpenClinic
  * @copyright 2002-' . date('Y') . ' jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: wizard.php,v 1.39 2013/08/31 09:21:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -571,14 +569,11 @@
     /**
      * Database connection
      */
-    $db = @mysql_connect($_POST['dbHost'], $_POST['dbUser'], $_POST['dbPasswd']);
-    if (mysql_errno() > 0) // problem with server
+    $conn = new mysqli($_POST['dbHost'], $_POST['dbUser'], $_POST['dbPasswd']);
+    if ($conn->connect_errno)  // problem with server
     {
-      $no = mysql_errno();
-      $msg = mysql_error();
-
       echo HTML::rule();
-      echo HTML::para($no . PHP_EOL . $msg);
+      echo HTML::para($conn->connect_errno . PHP_EOL . $conn->connect_error);
       echo HTML::rule();
 
       echo HTML::para(_("The MySQL server does not work or login pass is false."));
@@ -597,11 +592,14 @@
     /**
      * Database creation
      */
-    mysql_query('DROP DATABASE IF EXISTS ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
-    //mysql_create_db($_POST['dbName']);
-    mysql_query('CREATE DATABASE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
-    //mysql_select_db($_POST['dbName']);
-    mysql_query('USE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
+    $sql = 'DROP DATABASE IF EXISTS ' . $_POST['dbName'];
+    mysqli_query($conn, $sql)
+      or die(sprintf(_("Instruction: %s Error: %s"), $sql, $conn->error));
+    $sql = 'CREATE DATABASE ' . $_POST['dbName'];
+    mysqli_query($conn, $sql)
+      or die(sprintf(_("Instruction: %s Error: %s"), $sql, $conn->error));
+    mysqli_select_db($conn, $_POST['dbName'])
+      or die(sprintf(_("Instruction: %s Error: %s"), 'USE DATABASE', $conn->error));
 
     /**
      * Database tables creation
@@ -629,10 +627,6 @@
     /**
      * Database tables update (setting_tbl, staff_tbl, user_tbl)
      */
-    //mysql_select_db($_POST['dbName']);
-    mysql_connect($_POST['dbHost'], $_POST['dbUser'], $_POST['dbPasswd']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
-    mysql_query('USE ' . $_POST['dbName']) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
-
     $sql = "UPDATE setting_tbl SET ";
     $sql .= "clinic_name='" . $_POST['clinicName'] . "', ";
     $sql .= "clinic_hours='" . $_POST['clinicHours'] . "', ";
@@ -642,7 +636,8 @@
     $sql .= "session_timeout=" . intval($_POST['timeout']) . ", ";
     $sql .= "items_per_page=" . intval($_POST['itemsPage']) . ", ";
     $sql .= "id_theme=" . intval($_POST['clinicTheme']) . ";";
-    mysql_query($sql) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
+    mysqli_query($conn, $sql)
+      or die(sprintf(_("Instruction: %s Error: %s"), $sql, $conn->error));
 
     $sql = "UPDATE staff_tbl SET ";
     $sql .= "first_name='" . $_POST['firstName'] . "', ";
@@ -651,14 +646,16 @@
     $sql .= "address=" . (($_POST['adminAddress'] == "") ? "NULL, " : "'" . $_POST['adminAddress'] . "', ");
     $sql .= "phone_contact=" . (($_POST['adminPhone'] == "") ? "NULL " : "'" . $_POST['adminPhone'] . "' ");
     $sql .= " WHERE login='admin';";
-    mysql_query($sql) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
+    mysqli_query($conn, $sql)
+      or die(sprintf(_("Instruction: %s Error: %s"), $sql, $conn->error));
 
     $sql = "UPDATE user_tbl SET ";
     $sql .= "email=" . (($_POST['email'] == "") ? "NULL," : "'" . $_POST['email'] . "', ");
     $sql .= "id_theme=" . intval($_POST['adminTheme']) . ", ";
     $sql .= "pwd=md5('" . $_POST['passwd'] . "')";
     $sql .= " WHERE id_user=2;";
-    mysql_query($sql) or die(sprintf(_("Instruction: %s Error: %s"), $sql, mysql_error()));
+    mysqli_query($conn, $sql)
+      or die(sprintf(_("Instruction: %s Error: %s"), $sql, $conn->error));
 
     echo HTML::para(_("OpenClinic tables have been created successfully!"));
     echo HTML::para(
@@ -722,7 +719,7 @@
     $extArray = array(
       _warnIfExtNotLoaded("standard", true),
       _warnIfExtNotLoaded("session", true),
-      _warnIfExtNotLoaded("mysql", true),
+      _warnIfExtNotLoaded("mysqli", true),
       _warnIfExtNotLoaded("pcre", true),
       _warnIfExtNotLoaded("gettext", true)
     );

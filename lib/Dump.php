@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Dump.php,v 1.5 2013/01/13 14:22:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -38,7 +37,7 @@ if ( !defined('DUMP_MYSQL_INT_VERSION') )
       $result = $auxConn->exec("SELECT VERSION() AS version;");
       if ($result != false && $auxConn->numRows() > 0)
       {
-        $row   = $auxConn->fetchRow(MYSQL_ASSOC);
+        $row   = $auxConn->fetchRow(MYSQLI_ASSOC);
         define('DUMP_MYSQL_VERSION', $row['version']);
         $match = explode('.', $row['version']);
       }
@@ -47,7 +46,7 @@ if ( !defined('DUMP_MYSQL_INT_VERSION') )
         $result = $auxConn->exec("SHOW VARIABLES LIKE 'version';");
         if ($result != false && $auxConn->numRows() > 0)
         {
-          $row   = $auxConn->fetchRow(MYSQL_NUM);
+          $row   = $auxConn->fetchRow(MYSQLI_NUM);
           define('DUMP_MYSQL_VERSION', $row[1]);
           $match = explode('.', $row[1]);
         }
@@ -276,7 +275,7 @@ class Dump
       $result = $localConn->exec('SHOW TABLE STATUS FROM ' . $db . ' LIKE "' . self::addSlashes($table) . '"');
       if ($result != false && $localConn->numRows() > 0)
       {
-        $tmpRes = $localConn->fetchRow(MYSQL_ASSOC);
+        $tmpRes = $localConn->fetchRow(MYSQLI_ASSOC);
 
         if (isset($tmpRes['Create_time']) && !empty($tmpRes['Create_time']))
         {
@@ -303,7 +302,7 @@ class Dump
       $result = $localConn->exec($localQuery);
       if ($result != false && $localConn->numRows() > 0)
       {
-        $tmpRes    = $localConn->fetchRow(MYSQL_NUM);
+        $tmpRes    = $localConn->fetchRow(MYSQLI_NUM);
         $pos       = strpos($tmpRes[1], ' (');
         $tmpRes[1] = substr($tmpRes[1], 0, 13) // strlen('CREATE TABLE ') = 13
                    . ($useBackquote ? self::backQuote($tmpRes[0]) : $tmpRes[0])
@@ -475,7 +474,7 @@ class Dump
     set_time_limit(OPEN_EXEC_TIME_LIMIT);
 
     $buffer = '';
-    while ($row = $localConn->fetchRow(MYSQL_NUM))
+    while ($row = $localConn->fetchRow(MYSQLI_NUM))
     {
       $currentRow++;
       for ($j = 0; $j < $numFields; $j++)
@@ -647,7 +646,7 @@ class Dump
 
     // Format the data
     $i = 0;
-    while ($row = $localConn->fetchRow(MYSQL_NUM))
+    while ($row = $localConn->fetchRow(MYSQLI_NUM))
     {
       $dataTable = '';
       for ($j = 0; $j < $numFields; $j++)
@@ -714,7 +713,7 @@ class Dump
       return false;
     }
 
-    for ($i = 0; $row = $localConn->fetchRow(MYSQL_ASSOC); $i++)
+    for ($i = 0; $row = $localConn->fetchRow(MYSQLI_ASSOC); $i++)
     {
       $fields[$i] = $row['Field'];
       $types[$i] = $row['Type'];
@@ -741,7 +740,7 @@ class Dump
     }
 
     $buffer = '  <table name="' . $table . '">' . DUMP_CRLF;
-    while ($record = $localConn->fetchRow(MYSQL_ASSOC))
+    while ($record = $localConn->fetchRow(MYSQLI_ASSOC))
     {
       $buffer .= '    <row>' . DUMP_CRLF;
       for ($i = 0; $i < $numFields; $i++)

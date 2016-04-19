@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Connection.php,v 1.2 2007/11/02 20:38:46 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -81,7 +80,7 @@ class Query_Connection extends Query
    */
   function fetch()
   {
-    $array = parent::fetchRow(MYSQL_NUM);
+    $array = parent::fetchRow(MYSQLI_NUM);
 
     return $array; // false or array
   }

@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Query.php,v 1.18 2013/01/13 14:29:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -23,8 +22,8 @@ require_once(dirname(__FILE__) . "/../lib/Error.php");
  *  bool Query(array $dsn = null)
  *  bool close(void)
  *  bool exec(string $sql, array $params = null)
- *  mixed fetchRow(int $arrayType = MYSQL_ASSOC)
- *  mixed fetchAll(int $arrayType = MYSQL_ASSOC)
+ *  mixed fetchRow(int $arrayType = MYSQLI_ASSOC)
+ *  mixed fetchAll(int $arrayType = MYSQLI_ASSOC)
  *  int numRows(void)
  *  bool resetResult(void)
  *  bool freeResult(void)
@@ -166,7 +165,7 @@ class Query
   }
 
   /**
-   * mixed fetchRow(int $arrayType = MYSQL_ASSOC)
+   * mixed fetchRow(int $arrayType = MYSQLI_ASSOC)
    *
    * Returns a resulting array
    *
@@ -175,26 +174,13 @@ class Query
    * @access public
    * @since 0.4
    */
-  public function fetchRow($arrayType = MYSQL_ASSOC)
+  public function fetchRow($arrayType = MYSQLI_ASSOC)
   {
-    $result = $this->_conn->fetchRow($arrayType);
-    /*if ($result === false)
-    {
-      $this->_isError = true;
-      $this->_error = $this->_conn->getError();
-
-      if ( !$this->_captureError )
-      {
-        $this->close();
-        Error::query($this);
-      }
-    }*/
-
-    return $result;
+    return $this->_conn->fetchRow($arrayType);
   }
 
   /**
-   * mixed fetchAll(int $arrayType = MYSQL_ASSOC)
+   * mixed fetchAll(int $arrayType = MYSQLI_ASSOC)
    *
    * Returns all records in an array
    *
@@ -203,24 +189,9 @@ class Query
    * @access public
    * @since 0.4
    */
-  public function fetchAll($arrayType = MYSQL_ASSOC)
+  public function fetchAll($arrayType = MYSQLI_ASSOC)
   {
-    $result = $this->_conn->fetchAll($arrayType);
-    /*if ($result === false)
-    {
-      $this->_isError = true;
-      $this->_error = $this->_conn->getError();
-      $this->_dbErrno = $this->_conn->getDbErrno();
-      $this->_dbError = $this->_conn->getDbError();
-
-      if ( !$this->_captureError )
-      {
-        $this->close();
-        Error::query($this);
-      }
-    }*/
-
-    return $result;
+    return $this->_conn->fetchAll($arrayType);
   }
 
   /**

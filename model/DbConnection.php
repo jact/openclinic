@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: DbConnection.php,v 1.20 2013/01/19 10:25:15 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -28,6 +27,12 @@ if ( !defined("OPEN_SQL_DEBUG") )
   define("OPEN_SQL_DEBUG", false);
 }
 
+function mysqli_field_name($result, $field_offset)
+{
+    $properties = mysqli_fetch_field_direct($result, $field_offset);
+    return is_object($properties) ? $properties->name : null;
+}
+
 /**
  * DbConnection encapsulates all database specific functions for the project
  *
@@ -36,8 +41,8 @@ if ( !defined("OPEN_SQL_DEBUG") )
  *  bool connect(bool $persistency = OPEN_PERSISTENT)
  *  bool close(void)
  *  bool exec(string $sql, array $params = null)
- *  mixed fetchRow(int $arrayType = MYSQL_ASSOC)
- *  mixed fetchAll(int $arrayType = MYSQL_ASSOC)
+ *  mixed fetchRow(int $arrayType = MYSQLI_ASSOC)
+ *  mixed fetchAll(int $arrayType = MYSQLI_ASSOC)
  *  mixed affectedRows(void)
  *  mixed lastInsertId(void)
  *  bool resetResult(void)
@@ -177,27 +182,23 @@ class DbConnection
    */
   public function connect($persistency = OPEN_PERSISTENT)
   {
-    $this->_link = ($persistency)
-      ? mysql_pconnect($this->_host . ":" . $this->_port, $this->_userName, $this->_passwd)
-      : mysql_connect($this->_host . ":" . $this->_port, $this->_userName, $this->_passwd, true); // always open new link
-    if ($this->_link == false)
+    $this->_link = new mysqli(
+      $this->_host,
+      $this->_userName,
+      $this->_passwd,
+      $this->_dbName,
+      $this->_port
+    );
+    if ($this->_link->connect_errno)
     {
-      $this->_error = "Unable to connect to host.";
-      $this->_dbErrno = mysql_errno();
-      $this->_dbError = mysql_error();
+      $this->_error = "Failed to connect to database server.";
+      $this->_dbErrno = $this->_link->connect_errno;
+      $this->_dbError = $this->_link->connect_error;
 
       return false;
     }
 
-    $this->_result = mysql_select_db($this->_dbName, $this->_link);
-    if ($this->_result == false)
-    {
-      $this->_error = "Unable to select database.";
-      $this->_dbErrno = mysql_errno();
-      $this->_dbError = mysql_error();
-    }
-
-    return $this->_result;
+    return true;
   }
 
   /**
@@ -210,12 +211,12 @@ class DbConnection
    */
   public function close()
   {
-    $this->_result = mysql_close($this->_link);
+    $this->_result = mysqli_close($this->_link);
     if ($this->_result == false)
     {
       $this->_error = "Unable to close database.";
-      $this->_dbErrno = mysql_errno();
-      $this->_dbError = mysql_error();
+      $this->_dbErrno = $this->_link->errno;
+      $this->_dbError = $this->_link->error;
     }
 
     return $this->_result;
@@ -277,7 +278,7 @@ class DbConnection
               }
               else
               {
-                $sql .= "'" . mysql_real_escape_string($params[$i]) . "'"; // PHP >= 4.3.0
+                $sql .= "'" . mysqli_real_escape_string($this->_link, $params[$i]) . "'"; // PHP >= 4.3.0
               }
               break;
           }
@@ -292,19 +293,19 @@ class DbConnection
       Error::trace($sql);
     }
 
-    $this->_result = mysql_query($sql, $this->_link);
+    $this->_result = mysqli_query($this->_link, $sql);
     if ($this->_result == false)
     {
       $this->_error = "Unable to execute query.";
-      $this->_dbErrno = mysql_errno();
-      $this->_dbError = mysql_error();
+      $this->_dbErrno = $this->_link->errno;
+      $this->_dbError = $this->_link->error;
     }
 
     return $this->_result;
   }
 
   /**
-   * mixed fetchRow(int $arrayType = MYSQL_ASSOC)
+   * mixed fetchRow(int $arrayType = MYSQLI_ASSOC)
    *
    * Returns a resulting array
    *
@@ -312,7 +313,7 @@ class DbConnection
    * @return array resulting array. Returns false, if no more rows to fetch.
    * @access public
    */
-  public function fetchRow($arrayType = MYSQL_ASSOC)
+  public function fetchRow($arrayType = MYSQLI_ASSOC)
   {
     if ($this->_result == false)
     {
@@ -320,12 +321,12 @@ class DbConnection
       return false;
     }
 
-    if ($arrayType != MYSQL_ASSOC && $arrayType != MYSQL_NUM && $arrayType != MYSQL_BOTH)
+    if ($arrayType != MYSQLI_ASSOC && $arrayType != MYSQLI_NUM && $arrayType != MYSQLI_BOTH)
     {
-      $arrayType = MYSQL_ASSOC; // default value
+      $arrayType = MYSQLI_ASSOC; // default value
     }
 
-    $array = mysql_fetch_array($this->_result, $arrayType);
+    $array = mysqli_fetch_array($this->_result, $arrayType);
     if ($array == false)
     {
       $this->_error = "Empty row. No more rows.";
@@ -335,7 +336,7 @@ class DbConnection
   }
 
   /**
-   * mixed fetchAll(int $arrayType = MYSQL_ASSOC)
+   * mixed fetchAll(int $arrayType = MYSQLI_ASSOC)
    *
    * Returns all records in an array
    *
@@ -344,7 +345,7 @@ class DbConnection
    * @see fetchRow
    * @access public
    */
-  public function fetchAll($arrayType = MYSQL_ASSOC)
+  public function fetchAll($arrayType = MYSQLI_ASSOC)
   {
     if ($this->_result == false)
     {
@@ -378,7 +379,7 @@ class DbConnection
    */
   public function affectedRows()
   {
-    return ($this->_link ? mysql_affected_rows($this->_link) : false);
+    return ($this->_link ? mysqli_affected_rows($this->_link) : false);
   }
 
   /**
@@ -392,7 +393,7 @@ class DbConnection
    */
   public function lastInsertId()
   {
-    return ($this->_link ? mysql_insert_id($this->_link) : false);
+    return ($this->_link ? mysqli_insert_id($this->_link) : false);
   }
 
   /**
@@ -405,7 +406,7 @@ class DbConnection
    */
   public function resetResult()
   {
-    return ($this->_result ? (mysql_data_seek($this->_result, 0) != 0) : false);
+    return ($this->_result ? (mysqli_data_seek($this->_result, 0) != 0) : false);
   }
 
   /**
@@ -420,7 +421,7 @@ class DbConnection
    */
   public function rowSeek($row = 0)
   {
-    return ($this->_result ? (mysql_data_seek($this->_result, $row) != 0) : false);
+    return ($this->_result ? (mysqli_data_seek($this->_result, $row) != 0) : false);
   }
 
   /**
@@ -433,7 +434,7 @@ class DbConnection
    */
   public function numRows()
   {
-    return mysql_num_rows($this->_result);
+    return mysqli_num_rows($this->_result);
   }
 
   /**
@@ -446,7 +447,7 @@ class DbConnection
    */
   public function numFields()
   {
-    return mysql_num_fields($this->_result);
+    return mysqli_num_fields($this->_result);
   }
 
   /**
@@ -460,7 +461,39 @@ class DbConnection
    */
   public function fieldType($index = 0)
   {
-    return mysql_field_type($this->_result, $index);
+    $types = array(
+      MYSQLI_TYPE_DECIMAL => 'decimal',
+      MYSQLI_TYPE_NEWDECIMAL => 'numeric',
+      MYSQLI_TYPE_BIT => 'bit',
+      MYSQLI_TYPE_TINY => 'tinyint',
+      MYSQLI_TYPE_SHORT => 'smallint',
+      MYSQLI_TYPE_LONG => 'long',
+      MYSQLI_TYPE_FLOAT => 'float',
+      MYSQLI_TYPE_DOUBLE => 'double',
+      MYSQLI_TYPE_NULL => 'default_null',
+      MYSQLI_TYPE_TIMESTAMP => 'timestamp',
+      MYSQLI_TYPE_LONGLONG => 'bigint',
+      MYSQLI_TYPE_INT24 => 'mediumint',
+      MYSQLI_TYPE_DATE => 'date',
+      MYSQLI_TYPE_TIME => 'time',
+      MYSQLI_TYPE_DATETIME => 'datetime',
+      MYSQLI_TYPE_YEAR => 'year',
+      MYSQLI_TYPE_NEWDATE => 'date',
+      MYSQLI_TYPE_INTERVAL => 'interval',
+      MYSQLI_TYPE_ENUM => 'enum',
+      MYSQLI_TYPE_SET => 'set',
+      MYSQLI_TYPE_TINY_BLOB => 'tinyblob',
+      MYSQLI_TYPE_MEDIUM_BLOB => 'mediumblob',
+      MYSQLI_TYPE_LONG_BLOB => 'longblob',
+      MYSQLI_TYPE_BLOB => 'blob',
+      MYSQLI_TYPE_VAR_STRING => 'varchar',
+      MYSQLI_TYPE_STRING => 'char',
+      MYSQLI_TYPE_CHAR => 'tinyint',
+      MYSQLI_TYPE_GEOMETRY => 'geometry'
+    );
+
+    $metadata = mysqli_fetch_field_direct($this->_result, $index);
+    return $types[$metadata->type];
   }
 
   /**
@@ -473,7 +506,8 @@ class DbConnection
    */
   public function listTables()
   {
-    return (($this->_result = mysql_query("SHOW TABLES", $this->_link)) != 0);
+    $this->_result = mysqli_query($this->_link, "SHOW TABLES");
+    return ($this->_link->error == '');
   }
 
   /**
@@ -487,7 +521,10 @@ class DbConnection
    */
   public function tableName($index = 0)
   {
-    return mysql_tablename($this->_result, $index);
+    $this->listTables();
+    $this->rowSeek($index);
+    $this->_result = $this->fetchRow(MYSQLI_NUM);
+    return $this->_result[0];
   }
 
   /**
@@ -501,7 +538,8 @@ class DbConnection
    */
   public function listFields($table)
   {
-    return (($this->_result = mysql_query("SHOW COLUMNS FROM " . $table, $this->_link)) != 0);
+    $this->_result = mysqli_query($this->_link, "SHOW COLUMNS FROM " . $table);
+    return ($this->_link->error == '');
   }
 
   /**
@@ -515,7 +553,7 @@ class DbConnection
    */
   public function fieldName($index = 0)
   {
-    return mysql_field_name($this->_result, $index);
+    return mysqli_field_name($this->_result, $index);
   }
 
   /**
@@ -584,7 +622,7 @@ class DbConnection
    */
   public function freeResult()
   {
-    return ($this->_result ? (mysql_free_result($this->_result) != 0) : false);
+    return ($this->_result ? (mysqli_free_result($this->_result) != 0) : false);
   }
 
   /**
