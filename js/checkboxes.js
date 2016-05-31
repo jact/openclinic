@@ -6,15 +6,31 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: checkboxes.js,v 1.5 2007/10/09 19:31:33 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
-if (typeof addLoadEvent == 'function')
+/**
+ * bool setCheckboxes(int indexForm, string elementName, bool doCheck)
+ *
+ * Checks/unchecks all checkboxes of a form
+ *
+ * @param string the element name
+ * @param bool whether to check or to uncheck the element
+ * @return bool always true
+ */
+function setCheckboxes(elementName, doCheck)
 {
-  addLoadEvent(initRelativeForm); // event.js included!
+  var selectedObject = document.getElementsByName(elementName);
+  var selectedCount  = selectedObject.length;
+
+  for (var i = 0; i < selectedCount; i++)
+  {
+    selectedObject[i].checked = doCheck;
+  }
+
+  return true;
 }
 
 /**
@@ -27,48 +43,30 @@ if (typeof addLoadEvent == 'function')
  */
 function initRelativeForm()
 {
-  var element = document.getElementById('select_all_checks');
+  var element = document.getElementById("select_all_checks");
   if (element != null)
   {
     element.onclick = function()
     {
-      setCheckboxes(1, 'check[]', true);
+      setCheckboxes("check[]", true);
 
       return false;
     };
   }
 
-  element = document.getElementById('unselect_all_checks');
+  element = document.getElementById("unselect_all_checks");
   if (element != null)
   {
     element.onclick = function()
     {
-      setCheckboxes(1, 'check[]', false);
+      setCheckboxes("check[]", false);
 
       return false;
     };
   }
 }
 
-/**
- * bool setCheckboxes(int indexForm, string elementName, bool doCheck)
- *
- * Checks/unchecks all checkboxes of a form
- *
- * @param int the form index
- * @param string the element name
- * @param bool whether to check or to uncheck the element
- * @return bool always true
- */
-function setCheckboxes(indexForm, elementName, doCheck)
+if (typeof addLoadEvent == "function")
 {
-  var selectedObject = document.forms[indexForm].elements[elementName];
-  var selectedCount  = selectedObject.length;
-
-  for (var i = 0; i < selectedCount; i++)
-  {
-    selectedObject[i].checked = doCheck;
-  } // end for
-
-  return true;
-} // end of the 'setCheckboxes()' function
+  addLoadEvent(initRelativeForm); // event.js included!
+}
