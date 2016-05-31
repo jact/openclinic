@@ -12,7 +12,7 @@
  */
 
 /**
- * bool setCheckboxes(int indexForm, string elementName, bool doCheck)
+ * bool setCheckboxes(string elementName, bool doCheck)
  *
  * Checks/unchecks all checkboxes of a form
  *
