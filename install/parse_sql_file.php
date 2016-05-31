@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: parse_sql_file.php,v 1.24 2008/03/23 11:59:27 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -74,7 +73,7 @@ function parseSqlFile($file, $table = '', $drop = true)
     $installQ->captureError(true);
 
     $sql = "DROP TABLE IF EXISTS " . $table;
-    $result = $installQ->exec($sql);
+    $installQ->exec($sql);
     if ($installQ->isError())
     {
       Error::query($installQ, false);
@@ -130,7 +129,7 @@ function parseSql($text)
 
     if ($char == ";" && $outBracket)
     {
-      $result = $installQ->exec($sqlSentence);
+      $installQ->exec($sqlSentence);
       if ($installQ->isError() && !in_array($installQ->getDbErrno(), $controlledErrors))
       {
         echo HTML::para(sprintf(_("Process sql [%s]"), $sqlSentence));
