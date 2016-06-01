@@ -4,7 +4,6 @@
  * Contains functions to add and remove JS events
  * Cross-browser event handling for IE5+, NS6 and Mozilla
  *
- * @version   CVS: $Id: event.js,v 1.1 2006/12/28 16:32:48 jact Exp $
  * @author:   Scott Andrew LePera <scottandrew.com>
  * @author    Simon Willison <http://simon.incutio.com/archive/2004/05/26/addLoadEvent>
  * @author    Dean Edwards <http://dean.edwards.name/weblog/2005/12/js-tip1/>
@@ -54,7 +53,7 @@ function removeEvent(elm, evType, fn, useCapture)
 function addLoadEvent(func)
 {
   var oldonload = window.onload;
-  if (typeof window.onload != 'function')
+  if (typeof window.onload != "function")
   {
     window.onload = func;
   }
@@ -64,7 +63,7 @@ function addLoadEvent(func)
     {
       oldonload();
       func();
-    }
+    };
   }
 }
 
