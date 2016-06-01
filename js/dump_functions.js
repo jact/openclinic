@@ -49,7 +49,7 @@ function updateChecks(indexForm, array)
 
   for (var i = 0; i < selectedObject.elements.length; i++)
   {
-    if (selectedObject.elements[i].type == "checkbox")
+    if (selectedObject.elements[i].type === "checkbox")
     {
       selectedObject.elements[i].disabled = array[j];
       j++;
