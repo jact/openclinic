@@ -446,8 +446,6 @@ class Dump
     }
 
     $numFields = $localConn->numFields();
-    $numRows   = $localConn->numRows();
-
     // Checks whether the field is an integer or not
     for ($j = 0; $j < $numFields; $j++)
     {
@@ -456,7 +454,7 @@ class Dump
 
       $fieldNum[$j] = ($type == 'tinyint' || $type == 'smallint' || $type == 'mediumint' ||
                        $type == 'int' || $type == 'bigint' ||$type == 'timestamp');
-    } // end for
+    }
 
     // Sets the scheme
     $schemaInsert = 'INSERT INTO ' . self::backQuote($table, $useBackquote);
