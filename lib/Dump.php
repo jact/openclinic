@@ -212,10 +212,7 @@ class Dump
       }
       return $result;
     }
-    else
-    {
-      return '`' . $mixedVar . '`';
-    }
+    return '`' . $mixedVar . '`';
   }
 
   /**
