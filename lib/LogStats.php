@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: LogStats.php,v 1.13 2013/01/07 18:36:03 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @todo static class
  * @todo methods only return string (not echos)
@@ -390,9 +389,6 @@ class LogStats
 
       return;
     }
-
-    $today = date("Y-m-d"); // calculated date
-    $arrToday = explode("-", $today);
 
     $sectionTitle = _("Total") . ': ' . $total . ' ' . strtolower(_("Hits"));
     echo HTML::section(3, $sectionTitle);
