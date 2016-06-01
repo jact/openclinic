@@ -6,9 +6,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2016 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: openclinic.css,v 1.4 2013/01/20 12:19:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -87,7 +86,7 @@ html, body {
   text-decoration: none;
 }
 
-#tabs a.first.selected {
+#tabs .first.selected {
   border-right: 1px solid #ebf3fa;
 }
 
@@ -194,6 +193,7 @@ html, body {
   visibility: visible;
   height: 1px;
   margin: 0.5em;
+  box-sizing: border-box;
   border: 1px solid #3a5266;
   background: #3a5266;
   color: #3a5266;
@@ -277,6 +277,7 @@ fieldset label {
   width: 40%;
   float: left;
   text-align: right;
+  box-sizing: border-box;
   padding-right: 5px;
   cursor: pointer;
 }
@@ -343,23 +344,23 @@ input.error, textarea.error, select.error {
   color: #fff;
 }
 
-fieldset#dump_tables {
+#dump_tables {
   width: 35%;
   float: left;
   margin-right: 1em;
 }
 
-fieldset#dump_options label,
-fieldset#dump_extended label {
+#dump_options label,
+#dump_extended label {
   display: inline;
   float: none;
 }
 
-fieldset#new_user label {
+#new_user label {
   width: 55%;
 }
 
-fieldset.large_area label {
+.large_area label {
   text-align: left;
 }
 
@@ -394,8 +395,8 @@ tr {
   color: #000;
 }
 
-tr.odd:hover,
-tr.even:hover {
+.odd:hover,
+.even:hover {
   background: #FAF2EB;
   color: #000;
 }
@@ -421,7 +422,7 @@ tr.even:hover {
   margin-top: 5px;
   padding: 10px 0 10px 40px;
   background-repeat: no-repeat;
-  background-position: 0% 50%;
+  background-position: 0 50%;
 }
 
 .icon_dump {
@@ -495,6 +496,7 @@ tr.even:hover {
   float: left;
   width: 38%;
   margin: 0;
+  box-sizing: border-box;
   padding: 2px 5px;
 }
 
@@ -559,13 +561,15 @@ tr.even:hover {
   display: block;
   width: 125px;
   height: 37px;
+  box-sizing: border-box;
   border: 1px solid #fff;
   background: url(../img/sf-logo.png) no-repeat;
+  direction: ltr;
   text-indent: -5000px;
   text-decoration: none;
 }
 
-#footer a#xhtml11, #footer a#xhtml11:hover { /* variation of phark ir method */
+#footer #xhtml11, #footer #xhtml11:hover { /* variation of phark ir method */
   display: block;
   width: 80px;
   height: 15px;
@@ -574,7 +578,7 @@ tr.even:hover {
   text-decoration: none;
 }
 
-html>body a#xhtml11 { /* gecko browsers */
+html>body #xhtml11 { /* gecko browsers */
   margin-left: 46%;
   border: 1px solid #000;
 }
