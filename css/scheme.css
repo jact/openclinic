@@ -1,5 +1,4 @@
 /* Feel free and change all what you want */
-/* $Id: scheme.css,v 1.12 2007/12/15 12:53:17 jact Exp $ */
 
 * {
   margin: 0;
@@ -107,6 +106,7 @@ html, body {
   visibility: visible;
   height: 1px;
   margin: 0.5em;
+  box-sizing: border-box;
   border: 1px solid #000;
   background: #000;
   color: #000;
@@ -179,6 +179,7 @@ fieldset label {
   width: 40%;
   float: left;
   text-align: right;
+  box-sizing: border-box;
   padding-right: 5px;
   cursor: pointer;
 }
@@ -207,23 +208,23 @@ fieldset span.error {
   font-weight: bold;
 }
 
-fieldset#dump_tables {
+#dump_tables {
   width: 35%;
   float: left;
   margin-right: 1em;
 }
 
-fieldset#dump_options label,
-fieldset#dump_extended label {
+#dump_options label,
+#dump_extended label {
   display: inline;
   float: none;
 }
 
-fieldset#new_user label {
+#new_user label {
   width: 55%;
 }
 
-fieldset.large_area label {
+.large_area label {
   text-align: left;
 }
 
@@ -254,8 +255,8 @@ tr {
   color: #000;
 }
 
-tr.odd:hover,
-tr.even:hover {
+.odd:hover,
+.even:hover {
   background: #BEBEBE;
   color: #fff;
 }
