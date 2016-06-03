@@ -574,6 +574,7 @@ tr {
   width: 80px;
   height: 15px;
   background: url(../img/valid-xhtml11.png) no-repeat;
+  direction: ltr;
   text-indent: -5000px;
   text-decoration: none;
 }
