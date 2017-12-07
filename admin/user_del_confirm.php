@@ -23,7 +23,7 @@
   /**
    * Checking for query string. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["id_user"]) || empty($_GET["login"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_user"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -38,11 +38,37 @@
   require_once("../lib/Form.php");
   require_once("../lib/Check.php");
 
+  
   /**
    * Retrieving get vars
    */
   $idUser = intval($_GET["id_user"]);
-  $login = Check::safeText($_GET["login"]);
+  
+  if( $idUser == $_SESSION['auth']['user_id'] )
+  {
+	FlashMsg::add(_("You can't delete yourself!"), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
+    exit(); 
+  }
+  
+  require_once("../model/Query/User.php");
+  $userQ = new Query_User();
+  
+  if ( !$userQ->select($idUser) )
+  {
+    $userQ->close();
+
+    FlashMsg::add(_("That user does not exist."), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
+    exit();
+  }
+
+  $user = $userQ->fetch();
+  $userQ->close();
+  unset($userQ);
+
+  $login = $user->getLogin();
+  unset($user);
 
   /**
    * Show page
@@ -68,7 +94,7 @@
 
   $tbody = array();
 
-  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete user, %s?"), $login));
+  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete user: %s?"), $login));
 
   $row = Form::hidden("id_user", $idUser);
   $tbody[] = $row;

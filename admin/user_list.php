@@ -152,8 +152,7 @@
         HTML::image('../img/action_delete.png', _("delete")),
         '../admin/user_del_confirm.php',
         array(
-          'id_user' => $user->getIdUser(),
-          'login' => $user->getLogin()
+          'id_user' => $user->getIdUser()
         )
       );
     }

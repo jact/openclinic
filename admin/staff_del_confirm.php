@@ -23,8 +23,7 @@
   /**
    * Checking for query string. Go back to $returnLocation if none found.
    */
-  if (count($_GET) == 0 || !is_numeric($_GET["id_member"])
-    || empty($_GET["surname1"]) || empty($_GET["first_name"]))
+  if (count($_GET) == 0 || !is_numeric($_GET["id_member"]))
   {
     header("Location: " . $returnLocation);
     exit();
@@ -43,10 +42,35 @@
    * Retrieving get vars
    */
   $idMember = intval($_GET["id_member"]);
-  $surname1 = Check::safeText($_GET["surname1"]);
-  $surname2 = Check::safeText($_GET["surname2"]);
-  $firstName = Check::safeText($_GET["first_name"]);
 
+  if( $idMember == $_SESSION['auth']['member_user'] )
+  {
+	FlashMsg::add(_("You can't delete yourself!"), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
+    exit(); 
+  }
+  
+  require_once("../model/Query/Staff.php");
+  $staffQ = new Query_Staff();
+  
+  if ( !$staffQ->select($idMember) )
+  {
+    $staffQ->close();
+
+    FlashMsg::add(_("That staff member does not exist."), OPEN_MSG_ERROR);
+    header("Location: " . $returnLocation);
+    exit();
+  }
+
+  $staff = $staffQ->fetch();
+  $staffQ->close();
+  unset($staffQ);
+
+  $firstName = $staff->getFirstName();
+  $surname1 = $staff->getSurname1();
+  $surname2 = $staff->getSurname2();
+  unset($staff);
+  
   /**
    * Show page
    */
@@ -71,7 +95,7 @@
 
   $tbody = array();
 
-  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete staff member, %s %s %s?"), $firstName, $surname1, $surname2));
+  $tbody[] = Msg::warning(sprintf(_("Are you sure you want to delete staff member: %s %s %s?"), $firstName, $surname1, $surname2));
 
   $tbody[] = Form::hidden("id_member", $idMember);
 

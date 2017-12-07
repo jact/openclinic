@@ -165,10 +165,7 @@
         HTML::image('../img/action_delete.png', _("delete")),
         '../admin/staff_del_confirm.php',
         array(
-          'id_member' => $staff->getIdMember(),
-          'surname1' => $staff->getSurname1(),
-          'surname2' => $staff->getSurname2(),
-          'first_name' => $staff->getFirstName()
+          'id_member' => $staff->getIdMember()
         )
       );
     } // end if
