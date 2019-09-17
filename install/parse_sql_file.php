@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -76,7 +76,7 @@ function parseSqlFile($file, $table = '', $drop = true)
     $installQ->exec($sql);
     if ($installQ->isError())
     {
-      Error::query($installQ, false);
+      AppError::query($installQ, false);
       $installQ->clearErrors();
     }
     $installQ->close();
@@ -134,7 +134,7 @@ function parseSql($text)
       {
         echo HTML::para(sprintf(_("Process sql [%s]"), $sqlSentence));
         $installQ->close();
-        Error::query($installQ, false);
+        AppError::query($installQ, false);
         echo Msg::error(sprintf(_("Error: %s"), $installQ->getDbError()));
 
         return false;
@@ -150,4 +150,3 @@ function parseSql($text)
 
   return true;
 }
-?>
