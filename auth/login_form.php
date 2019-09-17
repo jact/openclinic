@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: login_form.php,v 1.12 2008/03/23 11:59:02 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -122,7 +121,6 @@
    */
   Form::unsetSession();
 
-  //Error::debug($_SESSION, "session variables", true);
+  //AppError::debug($_SESSION, "session variables", true);
 
   require_once("../layout/footer.php");
-?>
