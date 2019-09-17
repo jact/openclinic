@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: install.php,v 1.28 2013/01/13 16:24:48 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -58,7 +57,7 @@
     if ( !$set )
     {
       $setQ->close();
-      Error::fetch($setQ);
+      AppError::fetch($setQ);
     }
 
     if ( !isset($_GET["confirm"]) || ($_GET["confirm"] != "yes") )
@@ -121,4 +120,3 @@
   echo HTML::section(1, HTML::link(_("Start using OpenClinic"), '../home/index.php'));
 
   require_once("../layout/footer.php");
-?>
