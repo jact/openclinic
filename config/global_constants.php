@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -25,7 +25,7 @@
 
   ini_set('display_errors', OPEN_SCREEN_ERRORS ? 'On' : 'Off');
   require_once("../lib/Error.php");
-  set_error_handler(array("Error", "customHandler")); // Error::customHandler // PHP >= 4.3.0
+  set_error_handler(array("AppError", "customHandler")); // AppError::customHandler // PHP >= 4.3.0
 
   /**
    * Application constants
@@ -85,4 +85,3 @@
   define("OPEN_EXEC_TIME_LIMIT", 300); // (in seconds) used in dump proccesses
   define("OPEN_SEPARATOR",       "|"); // separation character in explode() implode() functions
   define("OPEN_TIME_ZONE",       "Europe/Madrid"); // date_default_timezone_set() function
-?>
