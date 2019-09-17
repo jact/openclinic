@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Access.php,v 1.3 2007/11/05 15:56:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -41,11 +40,11 @@ class Query_Page_Access extends Query_Page
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Page_Access($dsn = null)
+  function __construct($dsn = null)
   {
     $this->_table = "access_log_tbl";
 
-    return parent::Query($dsn);
+    return parent::__construct($dsn);
   }
 
   /**
@@ -123,9 +122,9 @@ class Query_Page_Access extends Query_Page
       $sql .= " LIMIT " . $offset . "," . $limitTo . ";";
     }
 
-    //Error::debug($limitFrom, "limitFrom"); // debug
-    //Error::debug($offset, "offset"); // debug
-    //Error::debug($sql, "sql"); // debug
+    //AppError::debug($limitFrom, "limitFrom"); // debug
+    //AppError::debug($offset, "offset"); // debug
+    //AppError::debug($sql, "sql"); // debug
 
     // Running row count sql statement
     if ( !$this->exec($sqlCount) )
@@ -192,4 +191,3 @@ class Query_Page_Access extends Query_Page
     return $this->exec($sql);
   }
 } // end class
-?>
