@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Record.php,v 1.4 2007/11/05 15:56:58 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,11 +41,11 @@ class Query_Page_Record extends Query_Page
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Page_Record($dsn = null)
+  function __construct($dsn = null)
   {
     $this->_table = "record_log_tbl";
 
-    return parent::Query($dsn);
+    return parent::__construct($dsn);
   }
 
   /**
@@ -124,9 +123,9 @@ class Query_Page_Record extends Query_Page
       $sql .= " LIMIT " . $offset . "," . $limitTo . ";";
     }
 
-    //Error::debug($limitFrom, "limitFrom"); // debug
-    //Error::debug($offset, "offset"); // debug
-    //Error::debug($sql, "sql"); // debug
+    //AppError::debug($limitFrom, "limitFrom"); // debug
+    //AppError::debug($offset, "offset"); // debug
+    //AppError::debug($sql, "sql"); // debug
 
     // Running row count sql statement
     if ( !$this->exec($sqlCount) )
@@ -235,7 +234,7 @@ class Query_Page_Record extends Query_Page
     if ( !$data )
     {
       $queryQ->close();
-      Error::fetch($queryQ);
+      AppError::fetch($queryQ);
 
       return;
     }
@@ -249,4 +248,3 @@ class Query_Page_Record extends Query_Page
     $this->insert($_SESSION['auth']['user_id'], $_SESSION['auth']['login_session'], $table, $operation, $data);
   }
 } // end class
-?>
