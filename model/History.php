@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: History.php,v 1.10 2013/01/16 19:04:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -82,7 +81,7 @@ class History
 
   private $_trans; // to translate htmlspecialchars()
 
-  public function History()
+  public function __construct()
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
   }
@@ -480,4 +479,3 @@ class History
     return __CLASS__;
   }
 } // end class
-?>
