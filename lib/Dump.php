@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -206,7 +206,7 @@ class Dump
     {
       $result = array();
       reset($mixedVar);
-      while (list($key, $val) = each($mixedVar))
+      foreach ($mixedVar as $key => $val)
       {
         $result[$key] = '`' . $val . '`';
       }
@@ -380,7 +380,7 @@ class Dump
     } // end while
     $localConn->close();
 
-    while (list($x, $columns) = @each($index))
+    foreach ($index as $x => $columns)
     {
       $schemaCreate     .= ',' . DUMP_CRLF;
       if ($x == 'PRIMARY')
@@ -765,4 +765,3 @@ class Dump
     return $buffer;
   }
 } // end class
-?>
