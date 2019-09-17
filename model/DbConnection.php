@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -37,7 +37,7 @@ function mysqli_field_name($result, $field_offset)
  * DbConnection encapsulates all database specific functions for the project
  *
  * Methods:
- *  void DbConnection(array $dsn = null)
+ *  void __construct(array $dsn = null)
  *  bool connect(bool $persistency = OPEN_PERSISTENT)
  *  bool close(void)
  *  bool exec(string $sql, array $params = null)
@@ -135,7 +135,7 @@ class DbConnection
   private $_SQL;
 
   /**
-   * void DbConnection(array $dsn = null)
+   * void __construct(array $dsn = null)
    *
    * Constructor function
    *
@@ -151,7 +151,7 @@ class DbConnection
    * @access public
    * @since 0.7
    */
-  public function DbConnection($dsn = null)
+  public function __construct($dsn = null)
   {
     if ( !isset($dsn['db']) )
     {
@@ -290,7 +290,7 @@ class DbConnection
     $this->_SQL = $sql;
     if (OPEN_SQL_DEBUG)
     {
-      Error::trace($sql);
+      AppError::trace($sql);
     }
 
     $this->_result = mysqli_query($this->_link, $sql);
@@ -637,4 +637,3 @@ class DbConnection
     return __CLASS__;
   }
 } // end class
-?>
