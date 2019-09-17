@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: staff_list.php,v 1.31 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -71,7 +70,7 @@
     $viewType = true;
   }
 
-  //Error::debug($_SESSION);
+  //AppError::debug($_SESSION);
 
   echo HTML::para(
     HTML::link(_("Add New Administrative"), '../admin/staff_new_form.php', array('type' => 'A'))
@@ -242,4 +241,3 @@
   echo Msg::hint('** ' . _("Note: The del function will not be applicated to the session user."));
 
   require_once("../layout/footer.php");
-?>
