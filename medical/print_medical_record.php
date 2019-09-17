@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: print_medical_record.php,v 1.35 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -87,7 +86,7 @@
   if ( !$pat )
   {
     $patQ->close();
-    Error::fetch($patQ);
+    AppError::fetch($patQ);
   }
   $patQ->freeResult();
   $patQ->close();
@@ -317,7 +316,7 @@
   $history = $historyQ->fetch();
   if ( !$history )
   {
-    Error::fetch($historyQ);
+    AppError::fetch($historyQ);
   }
 
   echo HTML::section(2, _("Personal Antecedents"));
@@ -398,7 +397,7 @@
   $history = $historyQ->fetch();
   if ( !$history )
   {
-    Error::fetch($historyQ);
+    AppError::fetch($historyQ);
   }
   $historyQ->freeResult();
   $historyQ->close();
@@ -542,4 +541,3 @@
    */
   echo HTML::end('body');
   echo HTML::end('html');
-?>
