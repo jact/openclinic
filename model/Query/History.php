@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: History.php,v 1.3 2013/01/07 18:02:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -42,7 +41,7 @@ class Query_History extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_History($dsn = null)
+  function __construct($dsn = null)
   {
     $this->_table = "history_tbl";
     $this->_primaryKey = array("id_patient");
@@ -66,7 +65,7 @@ class Query_History extends Query
       'family_illness' => array('mutator' => 'setFamilyIllness')
     );
 
-    return parent::Query($dsn);
+    return parent::__construct($dsn);
   }
 
   /**
@@ -229,4 +228,3 @@ class Query_History extends Query
     return $this->exec($sql, $params);
   }
 } // end class
-?>
