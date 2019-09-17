@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @version   CVS: $Id: Problem.php,v 1.21 2013/01/19 10:25:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
@@ -94,7 +94,7 @@ class Problem
    * @return mixed void if not argument, null if not exists problem, object otherwise
    * @access public
    */
-  function Problem($id = 0)
+  function __construct($id = 0)
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
 
@@ -544,4 +544,3 @@ class Problem
     return $this->getWording();
   }
 } // end class
-?>
