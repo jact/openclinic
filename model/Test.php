@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Test.php,v 1.13 2013/01/19 10:28:37 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -57,7 +56,7 @@ class Test
    * @return mixed void if not argument, null if not exists problem, object otherwise
    * @access public
    */
-  public function Test($idProblem = 0, $idTest = 0)
+  public function __construct($idProblem = 0, $idTest = 0)
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
 
@@ -235,4 +234,3 @@ class Test
     return $this->getPathFilename();
   }
 } // end class
-?>
