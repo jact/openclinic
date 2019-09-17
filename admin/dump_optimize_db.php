@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: dump_optimize_db.php,v 1.18 2008/03/23 11:58:56 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,14 +32,14 @@
   if ( !$auxConn->connect() )
   {
     $auxConn->close();
-    Error::connection($auxConn);
+    AppError::connection($auxConn);
   }
 
   $localQuery = 'SHOW TABLE STATUS FROM ' . Dump::backQuote(OPEN_DATABASE);
   if ( !$auxConn->exec($localQuery) )
   {
     $auxConn->close();
-    Error::connection($auxConn);
+    AppError::connection($auxConn);
   }
 
   /**
@@ -114,7 +113,7 @@
     if ( !$auxConn->exec($localQuery) )
     {
       $auxConn->close();
-      Error::connection($auxConn);
+      AppError::connection($auxConn);
     }
 
     $content = $row['Name'];
@@ -151,4 +150,3 @@
   echo HTML::para(HTML::link(_("Back return"), '../admin/dump_view_form.php'));
 
   require_once("../layout/footer.php");
-?>
