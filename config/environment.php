@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: environment.php,v 1.8 2013/02/02 18:26:13 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -54,7 +53,7 @@
   if ( !$set )
   {
     $setQ->close();
-    Error::fetch($setQ);
+    AppError::fetch($setQ);
   }
 
   $setQ->freeResult();
@@ -98,7 +97,7 @@
   if ( !$theme )
   {
     $themeQ->close();
-    Error::fetch($themeQ);
+    AppError::fetch($themeQ);
   }
 
   /**
@@ -121,4 +120,3 @@
   $formVar = (isset($formSession['var'])) ? $formSession['var'] : null;
   $formError = (isset($formSession['error'])) ? $formSession['error'] : null;
   unset($formSession);
-?>
