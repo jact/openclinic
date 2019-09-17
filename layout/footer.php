@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: footer.php,v 1.10 2008/03/23 11:59:38 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -18,8 +17,8 @@
 
   require_once("../lib/Msg.php");
 
-  //Error::debug($_SESSION);
-  //Error::debug($_SERVER);
+  //AppError::debug($_SESSION);
+  //AppError::debug($_SERVER);
 
   echo HTML::end('div'); // #content
   echo HTML::end('div'); // #main
@@ -54,7 +53,7 @@
   echo HTML::para(
     sprintf('Copyright &copy; 2002-%d %s',
       date("Y"),
-      HTML::link('Jose Antonio Chavarría', 'mailto:CUT-THIS.openclinic&#64;gmail.com', null,
+      HTML::link('Jose Antonio Chavarr&iacute;a', 'mailto:CUT-THIS.openclinic&#64;gmail.com', null,
         array('accesskey' => 9)
       )
     )
@@ -93,4 +92,3 @@
     ob_end_flush();
     flush();
   }
-?>
