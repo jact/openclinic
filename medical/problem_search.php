@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_search.php,v 1.42 2013/01/13 14:24:39 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.4
  */
@@ -207,7 +206,7 @@
       if ( !$pat )
       {
         $patQ->close();
-        Error::fetch($patQ);
+        AppError::fetch($patQ);
       }
 
       $row = $array[0] . '.';
@@ -240,4 +239,3 @@
   echo $pageLinks;
 
   require_once("../layout/footer.php");
-?>
