@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preview.php,v 1.39 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,7 +42,7 @@
   if ( !$set )
   {
     $setQ->close();
-    Error::fetch($setQ);
+    AppError::fetch($setQ);
   }
 
   $setQ->freeResult();
@@ -72,7 +71,7 @@
     if ( !$theme )
     {
       $themeQ->close();
-      Error::fetch($themeQ);
+      AppError::fetch($themeQ);
     }
 
     $themeQ->freeResult();
@@ -183,4 +182,3 @@
   echo Msg::hint(_("Sample Hint"));
 
   require_once("../layout/footer.php");
-?>
