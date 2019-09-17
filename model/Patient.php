@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Patient.php,v 1.21 2013/01/19 10:25:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -122,7 +121,7 @@ class Patient
    * @return mixed void if not argument, null if not exists patient, object otherwise
    * @access public
    */
-  public function Patient($id = 0)
+  public function __construct($id = 0)
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
 
@@ -509,7 +508,7 @@ class Patient
    */
   public function getBirthDate()
   {
-    return $this->_birthDate;
+    return $this->_birthDate != '0000-00-00' ? $this->_birthDate : '';
   }
 
   /**
@@ -607,7 +606,7 @@ class Patient
    */
   public function getDeceaseDate()
   {
-    return $this->_deceaseDate;
+    return $this->_deceaseDate != '0000-00-00' ? $this->_deceaseDate : '';
   }
 
   /**
@@ -844,4 +843,3 @@ class Patient
     return $this->getName();
   }
 } // end class
-?>
