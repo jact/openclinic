@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -48,7 +48,7 @@ class Query_LogStats extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_LogStats($table, $dsn = null)
+  function __construct($table, $dsn = null)
   {
     if ($table != 'access' && $table != 'record')
     {
@@ -56,7 +56,7 @@ class Query_LogStats extends Query
     }
     $this->_table = $table . '_log_tbl';
 
-    return parent::Query($dsn);
+    return parent::__construct($dsn);
   }
 
   /**
@@ -149,7 +149,7 @@ class Query_LogStats extends Query
     $sql = "SELECT MONTH(access_date), COUNT(*)";
     $sql .= " FROM " . $this->_table;
     $sql .= " WHERE YEAR(access_date)='" . sprintf('%04d', $year) . "'";
-    $sql .= " GROUP BY DATE_FORMAT(access_date, '%Y-%m')";
+    $sql .= "GROUP BY 1";
 
     if ( !$this->exec($sql) || !$this->numRows() )
     {
@@ -385,4 +385,3 @@ class Query_LogStats extends Query
     return $this->fetchRow(MYSQLI_NUM); // 0 => $year, 1 => $month, 2 => $day, 3 => $hour, 4 => $hits
   }
 } // end class
-?>
