@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Setting.php,v 1.5 2013/01/13 14:25:55 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -33,7 +32,7 @@ require_once(dirname(__FILE__) . "/../Setting.php");
 class Query_Setting extends Query
 {
   /**
-   * bool Query_Setting(array $dsn = null)
+   * bool __construct(array $dsn = null)
    *
    * Constructor function
    *
@@ -41,7 +40,7 @@ class Query_Setting extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  public function Query_Setting($dsn = null)
+  public function __construct($dsn = null)
   {
     $this->_table = "setting_tbl";
     $this->_primaryKey = null;
@@ -59,7 +58,7 @@ class Query_Setting extends Query
       'id_theme' => array('mutator' => 'setIdTheme')
     );
 
-    return parent::Query($dsn);
+    return parent::__construct($dsn);
   }
 
   /**
@@ -164,4 +163,3 @@ class Query_Setting extends Query
     return $this->exec($sql);
   }
 } // end class
-?>
