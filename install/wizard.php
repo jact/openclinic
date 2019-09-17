@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  * @since     0.5
@@ -102,7 +102,7 @@
       'onsubmit' => 'return validateInstall();'
     )
   );
-  //Error::debug($_POST);
+  //AppError::debug($_POST);
   $_POST = Check::safeArray($_POST);
 
   echo Form::hidden("alreadyVisited", 1, array('id' => 'h_alreadyVisited'));
@@ -141,7 +141,7 @@
   if (isset($_POST['buttonPressed']) && ($_POST['buttonPressed'] == "next1" || $_POST['buttonPressed'] == "back2"))
   {
     $focusFormField = "license";
-    //Error::debug(OPEN_LANGUAGE);
+    //AppError::debug(OPEN_LANGUAGE);
 
     echo HTML::section(2, sprintf(_("Step %d of %d: "), 2, 7) . _("License"));
 
@@ -918,4 +918,3 @@ function _validateSettings()
 
   return empty($error);
 }
-?>
