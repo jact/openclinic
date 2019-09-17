@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_preload_css.php,v 1.27 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  * @since     0.7
  */
@@ -51,7 +50,7 @@
     $cssRules = fread(fopen($_FILES['css_filename']['tmp_name'], 'r'), $_FILES['css_filename']['size']);
     $cssRules = Check::safeText($cssRules, false);
 
-    //Error::debug($cssRules);
+    //AppError::debug($cssRules);
     $_POST['css_file'] = $_FILES['css_filename']['name'];
     $_POST['css_rules'] = $cssRules;
 
@@ -117,4 +116,3 @@
   echo HTML::para(HTML::link(_("Return"), $returnLocation));
 
   require_once("../layout/footer.php");
-?>
