@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_personal_view.php,v 1.26 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -58,7 +57,7 @@
   if ( !$history )
   {
     $historyQ->close();
-    Error::fetch($historyQ);
+    AppError::fetch($historyQ);
   }
 
   $historyQ->freeResult();
@@ -167,4 +166,3 @@
   }
 
   require_once("../layout/footer.php");
-?>
