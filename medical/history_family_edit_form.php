@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: history_family_edit_form.php,v 1.32 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -65,7 +64,7 @@
   }
   else
   {
-    Error::fetch($historyQ, false);
+    AppError::fetch($historyQ, false);
   }
   $historyQ->freeResult();
   $historyQ->close();
@@ -119,4 +118,3 @@
   Form::unsetSession();
 
   require_once("../layout/footer.php");
-?>
