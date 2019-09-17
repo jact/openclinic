@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: theme_edit_form.php,v 1.37 2008/03/23 11:58:57 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -76,7 +75,7 @@
     }
     else
     {
-      Error::fetch($themeQ, false);
+      AppError::fetch($themeQ, false);
     }
     $themeQ->freeResult();
     $themeQ->close();
@@ -157,4 +156,3 @@ function editTheme()
   Form::unsetSession();
 
   require_once("../layout/footer.php");
-?>
