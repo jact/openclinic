@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2007 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_del.php,v 1.29 2007/12/15 15:05:01 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -91,7 +90,7 @@
     if ( !$problem )
     {
       $problemQ->close();
-      Error::fetch($problemQ);
+      AppError::fetch($problemQ);
     }
     $wording = $problem->getWording();
 
@@ -125,4 +124,3 @@
    */
   FlashMsg::add(sprintf(_("Medical problem, %s, has been deleted."), $wording));
   header("Location: " . $returnLocation);
-?>
