@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Test.php,v 1.3 2013/01/07 18:03:50 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -43,7 +42,7 @@ class Query_Test extends Query
    * @return boolean returns false, if error occurs
    * @access public
    */
-  function Query_Test($dsn = null)
+  function __construct($dsn = null)
   {
     $this->_table = "medical_test_tbl";
     $this->_primaryKey = array("id_test");
@@ -55,7 +54,7 @@ class Query_Test extends Query
       'path_filename' => array('mutator' => 'setPathFilename')
     );
 
-    return parent::Query($dsn);
+    return parent::__construct($dsn);
   }
 
   /**
@@ -210,4 +209,3 @@ class Query_Test extends Query
     return $this->exec($sql);
   }
 } // end class
-?>
