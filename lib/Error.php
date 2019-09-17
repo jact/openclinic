@@ -2,14 +2,13 @@
 /**
  * Error.php
  *
- * Contains the class Error
+ * Contains the class AppError
  *
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Error.php,v 1.16 2013/01/13 14:22:36 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -19,7 +18,7 @@ if ( !defined("PHP_EOL") ) // PHP >= 4.3.10
 }
 
 /**
- * Error set of show error and debug functions
+ * AppError set of show error and debug functions
  *
  * Methods:
  *  void query(Query $query, bool $goOut = true)
@@ -38,7 +37,7 @@ if ( !defined("PHP_EOL") ) // PHP >= 4.3.10
  * @access public
  * @since 0.8
  */
-class Error
+class AppError
 {
   /**
    * void query(Query $query, bool $goOut = true)
@@ -477,4 +476,3 @@ class Error
     }
   }
 } // end class
-?>
