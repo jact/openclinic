@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_list.php,v 1.37 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -125,7 +124,7 @@
     $problemQ->select($connArray[$i]);
     if ($problemQ->isError())
     {
-      Error::query($problemQ, false);
+      AppError::query($problemQ, false);
       continue;
     }
 
@@ -133,7 +132,7 @@
     if ( !$problem )
     {
       $problemQ->close();
-      Error::fetch($problemQ);
+      AppError::fetch($problemQ);
     }
 
     $row = $i + 1 . '.';
@@ -182,4 +181,3 @@
   echo HTML::table($thead, $tbody, null, $options);
 
   require_once("../layout/footer.php");
-?>
