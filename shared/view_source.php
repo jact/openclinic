@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: view_source.php,v 1.16 2008/03/23 12:00:28 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -20,6 +19,8 @@
   loginCheck(OPEN_PROFILE_ADMINISTRATOR);
 
   require_once("../lib/Msg.php"); // include HTML.php
+
+  $_blackListPatterns = array('config');
 
   /**
    * Retrieving get var
@@ -49,7 +50,11 @@
   }
   echo HTML::start('body', $array);
 
-  if (isset($_SESSION['auth']['is_admin']))
+  if (0 < count(array_intersect(array_map('strtolower', explode('/', $_file)), $_blackListPatterns)))
+  {
+    echo Msg::warning(sprintf(_("You are not authorized view file %s."), $_file));
+  }
+  elseif (isset($_SESSION['auth']['is_admin']))
   {
     if (is_file($_file))
     {
