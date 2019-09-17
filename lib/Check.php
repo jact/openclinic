@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -167,7 +167,7 @@ class Check
       return false;
     }
 
-    while (list($key, $val) = each($chars))
+    foreach ($chars as $file => $info)
     {
       if ( !empty($val) )
       {
@@ -605,4 +605,3 @@ class Check
     return $_value;
   }
 } // end class
-?>
