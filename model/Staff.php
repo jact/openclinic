@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Staff.php,v 1.15 2013/01/20 12:48:10 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -77,7 +76,7 @@ class Staff
 
   private $_trans; // to translate htmlspecialchars()
 
-  public function Staff()
+  public function __construct()
   {
     $this->_trans = array_flip(get_html_translation_table(HTML_SPECIALCHARS));
   }
@@ -132,7 +131,7 @@ class Staff
       $this->_loginError = sprintf(_("This field can't contain the symbols %s"), "'\\");
     }
 
-    //Error::debug($this, "", true); // debug
+    //AppError::debug($this, "", true); // debug
     if ($this->_memberType == "Doctor" && $this->_collegiateNumber == "")
     {
       $valid = false;
@@ -475,4 +474,3 @@ class Staff
     return trim($this->getFirstName() . ' ' . $this->getSurname1() . ' ' . $this->getSurname2());
   }
 } // end class
-?>
