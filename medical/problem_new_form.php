@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: problem_new_form.php,v 1.32 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -44,7 +43,7 @@
 
   // after clean form vars
   $formVar["id_patient"] = $idPatient;
-  //$formVar["id_member"] = ???; // @fixme si no está vacía y es la primera vez que se accede aquí es igual al médico que le corresponde por cupo?
+  //$formVar["id_member"] = ???; // @fixme si no estï¿½ vacï¿½a y es la primera vez que se accede aquï¿½ es igual al mï¿½dico que le corresponde por cupo?
   $formVar["order_number"] = $orderNumber + 1;
   $formVar["opening_date"] = date("Y-m-d"); // automatic date (ISO format) without getText
   $formVar["last_update_date"] = date("Y-m-d"); // automatic date (ISO format) without getText
@@ -74,7 +73,7 @@
 
   echo $patient->getHeader();
 
-  //Error::debug($formVar);
+  //AppError::debug($formVar);
 
   echo Form::errorMsg();
 
@@ -102,4 +101,3 @@
   Form::unsetSession();
 
   require_once("../layout/footer.php");
-?>
