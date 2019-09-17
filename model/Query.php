@@ -7,7 +7,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -19,7 +19,7 @@ require_once(dirname(__FILE__) . "/../lib/Error.php");
  * Query parent data access component class for all data access components
  *
  * Methods:
- *  bool Query(array $dsn = null)
+ *  bool __construct(array $dsn = null)
  *  bool close(void)
  *  bool exec(string $sql, array $params = null)
  *  mixed fetchRow(int $arrayType = MYSQLI_ASSOC)
@@ -58,7 +58,7 @@ class Query
   private $_map = null; // to extends classes
 
   /**
-   * bool Query(array $dsn = null)
+   * bool __construct(array $dsn = null)
    *
    * Constructor function
    * Instantiates private connection var and connects to the database
@@ -75,7 +75,7 @@ class Query
    * @access public
    * @since 0.8
    */
-  public function Query($dsn = null)
+  public function __construct($dsn = null)
   {
     if ( !isset($dsn) )
     {
@@ -96,7 +96,7 @@ class Query
 
       if ( !$this->_captureError )
       {
-        Error::query($this);
+        AppError::query($this);
       }
     }
 
@@ -123,7 +123,7 @@ class Query
 
       if ( !$this->_captureError )
       {
-        Error::query($this);
+        AppError::query($this);
       }
     }
     unset($this->_conn);
@@ -157,7 +157,7 @@ class Query
       if ( !$this->_captureError )
       {
         $this->close();
-        Error::query($this);
+        AppError::query($this);
       }
     }
 
@@ -432,4 +432,3 @@ class Query
     return __CLASS__;
   }
 } // end class
-?>
