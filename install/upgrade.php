@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: upgrade.php,v 1.13 2013/01/16 20:58:07 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -45,7 +44,7 @@
   if ( !$set )
   {
     $setQ->close();
-    Error::fetch($setQ);
+    AppError::fetch($setQ);
   }
 
   $version = $set->getVersion();
@@ -86,7 +85,7 @@
       echo HTML::para(sprintf(_("Aplying %s file..."), HTML::tag('strong', $file)));
       if ( !parseSqlFile('./upgrades/' . $file) )
       {
-        //Error::debug($file); // debug
+        //AppError::debug($file); // debug
         echo Msg::error(sprintf(_("Error processing file: %s"), $file));
 
         include_once("../layout/footer.php");
@@ -109,4 +108,3 @@
   echo HTML::para(HTML::link(_("Go to OpenClinic"), '../home/index.php'));
 
   require_once("../layout/footer.php");
-?>
