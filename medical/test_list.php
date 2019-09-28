@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: test_list.php,v 1.37 2008/03/23 12:00:18 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -110,7 +109,7 @@
   {
     $temp = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
     $temp = substr($temp, 0, strrpos($temp, "/")) . "/tests/"
-      . String::translateBrowser($test->getPathFilename(false));
+      . StringLib::translateBrowser($test->getPathFilename(false));
 
     $row = HTML::link(
       HTML::image('../img/action_view.png', _("view")),
