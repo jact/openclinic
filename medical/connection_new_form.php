@@ -7,9 +7,8 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2008 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: connection_new_form.php,v 1.33 2008/03/23 12:00:17 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -115,7 +114,7 @@
   {
     $row = $problem->getOrderNumber() . '.';
     $row .= Form::checkBox("check[]", $problem->getIdProblem(),
-      array('id' => String::numberToAlphabet($problem->getOrderNumber()))
+      array('id' => StringLib::numberToAlphabet($problem->getOrderNumber()))
     );
     $row .= OPEN_SEPARATOR;
     $row .= $problem->getWording();
