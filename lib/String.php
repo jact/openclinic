@@ -2,21 +2,20 @@
 /**
  * String.php
  *
- * Contains the class String
+ * Contains the class StringLib
  *
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2013 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: String.php,v 1.2 2013/01/07 18:37:35 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
 define("OPEN_FIELD_PREVIEW_LIMIT", 30);  // max length to preview text fields
 
 /**
- * String set of text functions
+ * StringLib set of text functions
  *
  * Methods:
  *  string fieldPreview(string $field)
@@ -29,7 +28,7 @@ define("OPEN_FIELD_PREVIEW_LIMIT", 30);  // max length to preview text fields
  * @access public
  * @since 0.8
  */
-class String
+class StringLib
 {
   /**
    * string fieldPreview(string $field)
