@@ -9,7 +9,6 @@
  * @package   OpenClinic
  * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
- * @version   CVS: $Id: Problem.php,v 1.21 2013/01/19 10:25:52 jact Exp $
  * @author    jact <jachavar@gmail.com>
  */
 
@@ -503,7 +502,7 @@ class Problem
    */
   function getWordingPreview()
   {
-    return String::fieldPreview($this->_wording);
+    return StringLib::fieldPreview($this->_wording);
   }
 
   /**
