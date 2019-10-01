@@ -6,7 +6,7 @@
  * Licensed under the GNU GPL. For full terms see the file LICENSE.
  *
  * @package   OpenClinic
- * @copyright 2002-2016 jact
+ * @copyright 2002-2019 jact
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL
  * @author    jact <jachavar@gmail.com>
  */
@@ -16,13 +16,13 @@
  *
  * Checks/unchecks all options of a <select> element
  *
- * @param  string  the element name
+ * @param  string  the element ID
  * @param  boolean whether to check or to uncheck the element
  * @return boolean always true
  */
 function setSelectOptions(elementSelect, doCheck)
 {
-  var selectObject = document.getElementsByName(elementSelect);
+  var selectObject = document.getElementById(elementSelect);
   var selectCount  = selectObject.length;
 
   for (var i = 0; i < selectCount; i++)
@@ -74,7 +74,7 @@ function initDumpForm()
   {
     element.onclick = function()
     {
-      setSelectOptions("table_select[]", true);
+      setSelectOptions("table_select", true);
 
       return false;
     };
@@ -85,7 +85,7 @@ function initDumpForm()
   {
     element.onclick = function()
     {
-      setSelectOptions("table_select[]", false);
+      setSelectOptions("table_select", false);
 
       return false;
     };
